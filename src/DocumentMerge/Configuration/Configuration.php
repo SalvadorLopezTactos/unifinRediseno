@@ -50,12 +50,11 @@ class Configuration implements ConfigurationInterface
      */
     protected function getRegion() : string
     {
-        $config = [];
-        $region = '';
+        $region = 'default';
         $idmConfig = new IdmConfig($this->config);
         $modeConfig = $idmConfig->getIDMModeConfig();
 
-        if (!empty($config['tid'])) {
+        if (!empty($modeConfig['tid'])) {
             $tenantSrn = SrnConverter::fromString($modeConfig['tid']);
 
             if ($tenantSrn) {

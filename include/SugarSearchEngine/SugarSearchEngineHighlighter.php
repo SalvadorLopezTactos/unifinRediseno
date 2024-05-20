@@ -97,12 +97,12 @@ class SugarSearchEngineHighlighter
             return $field;
         } else {
             $field_defs = $this->getFieldDefs($this->module);
-            $field_def = isset($field_defs[$field]) ? $field_defs[$field] : false;
+            $field_def = $field_defs[$field] ?? false;
             if ($field_def === false || (!isset($field_def['vname']) && !isset($field_def['label']))) {
                 return $field;
             }
 
-            return (isset($field_def['label'])) ? $field_def['label'] : $field_def['vname'];
+            return $field_def['label'] ?? $field_def['vname'];
         }
     }
 

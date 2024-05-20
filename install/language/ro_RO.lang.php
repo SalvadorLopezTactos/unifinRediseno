@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Pentru o experienta optima in utilizarea IIS/FastCGI sapi, setati fastcgi.logging la valoarea 0 in fisierul dumneavoastrà php.ini',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalarea versiunii PHP nu este acceptata:(ver',
     'LBL_DB_UNAVAILABLE'                => 'Baza de date indisponibila',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Asistență baze de date nu s-a găsit.  Asiguraţi-vă că aveți driverele necesare pentru unul dintre următoarele tipuri de baze de date acceptate: MySQL, MS SQLServer, Oracle sau DB2. S-ar putea fie nevoie să eliminați extensia din fişierul php.ini sau să recompilaţi cu fişierul binar corect, în funcţie de versiunea dumneavoastră PHP. Consultaţi Manualul PHP pentru mai multe informaţii despre cum să activaţi Asistență baze de date.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Asistența pentru baze de date nu s-a găsit. Asigurați-vă că aveți driverele necesare pentru unul dintre următoarele tipuri de baze de date acceptate: MySQL, MS SQLServer, Oracle sau DB2. S-ar putea fie nevoie să eliminați extensia din fişierul php.ini sau să recompilați cu fişierul binar corect, în funcție de versiunea dvs. PHP. Consultați Manualul PHP pentru mai multe informații despre cum să activați Asistența pentru baze de date.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Functiile asociate cu Librariile de parsare XML care sunt necesare aplicatiei Sugar nu au fost gasite. S-ar putea sa fie nevoie sa scoateti extensia in fisierul php.ini, sau sa recompilati cu fisierul binar corect, in functie de versiunea dumneavoastra de PHP. Va rugam sa reveniti la manualul PHP pentru mai multe informatii.',
     'LBL_CHECKSYS_CSPRNG' => 'Generator de numere aleatorii',
     'ERR_CHECKSYS_MBSTRING'             => 'Functii asociate cu extensia "Multibyte Strings" (mbstring) care sunt necesare pentru Sugar nu au fost gasite pe server. <br />In general modulul mbstring nu este activat in mod implicit si trebuie activat cu directiva --enable-mbstring cand binarul Php este construit. Va rugam consultati manualul Php pentru mai multe informatii asupra modului in care poate fi activat suportul pentru mbstring',
@@ -559,32 +559,15 @@ Refuză acest apel:
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Mesaje e-mail de notificare de alocare',
-        'subject' => 'SugarCRM - $module_name alocat ',
-        'description' => 'Acest model este utilizat atunci când sistemul trimite o notificare de alocare unui utilizator.',
-        'body' => '<div>
-<p>$assigned_by_user i-a alocat un modul&nbsp;$module_name lui&nbsp;$assigned_user.</p>
-
-<p>Poți să verifici acest modul&nbsp;$module_name la:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user i-a alocat un modul$module_name lui$assigned_user.
-
-Poți să verifici acest modul$module_name la:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Mesaje e-mail de raportare programate',
         'subject' => 'Raport programat: $report_name la $report_time',
         'description' => 'Acest model este utilizat atunci când sistemul trimite un raport programat unui utilizator.',
         'body' => '<div>
-<p>Bună $assigned_user,</p>
-<p>Ai primit în atașament un raport generat automat care a fost programat pentru a-ți fi trimis.</p>
-<p>Denumire raport: $report_name</p>
-<p>Data și ora raportului: $report_time</p>
+<p>Bună $assigned_user,<br></p>
+<p>Ați primit în atașament un raport generat automat care a fost programat pentru a vă fi trimis.<br></p>
+<p>Denumire raport: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Data și ora raportului: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Bună $assigned_user,
@@ -610,14 +593,6 @@ Data și ora raportului: $report_time',
             Autentifică-te în Sugar pentru a vizualiza comentariul.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informatii de cont noi',
-        'description' => 'Acest şablon este folosit când administratorul de sistem trimite o nouă parolă pentru un utilizator',
-        'body' => 'ici este numele dvs. de cont şi parola temporară:<br /><br />Nume de utilizator: $ contact_user_user_name<br /><br />Parola: $ contact_user_user_hash<br /><br />$ config_site_url<br /><br />După ce vă conectaţi utilizand parola de mai sus, vi se poate cere pentru a reseta parola, o parola aleasa de dvs',
-        'txt_body' =>
-'Aici este numele de utilizator şi parola contului temporar: Nume de utilizator: $ contact_user_user_name Parola: $ $ contact_user_user_hash config_site_url După ce vă conectaţi utilizând parola de mai sus, vi se poate cere pentru a reseta parola o parola aleasa de dvs',
-        'name' => 'Specifica Nume',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Resetaţi parola contului dvs.',
         'description' => "Acest şablon este folosit pentru a trimite utilizatorului un link să faceţi clic pentru a reseta parola pentru contul de utilizator.",

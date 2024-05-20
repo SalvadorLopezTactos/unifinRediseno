@@ -60,6 +60,6 @@ final class Oracle extends Db
              DBMS_STATS.GATHER_INDEX_STATS(NULL, '$tmpTargetIdIndexName', NULL, DBMS_STATS.AUTO_SAMPLE_SIZE);
             END;";
 
-        $this->connection->executeQuery($sql);
+        $this->connection->executeStatement($sql);
     }
 }

@@ -13,7 +13,8 @@
 
 
 class JsChart extends SugarChart {
-	protected $ss;
+    public $id;
+    protected $ss;
 	var $xmlFile;
 	var $jsonFilename;
 	var $chartId;
@@ -694,8 +695,9 @@ class JsChart extends SugarChart {
 
 
 	function getXMLChartProperties($xmlStr) {
+        $xmlstr = null;
 		$props = array();
-        $xml = new SimpleXMLElement($xmlStr);
+		$xml = new SimpleXMLElement($xmlstr);
 		foreach($xml->properties->children() as $properties) {
 			$props[$properties->getName()] = $properties;
 		}

@@ -25,6 +25,19 @@ use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
  */
 class Manager implements LoggerAwareInterface
 {
+    /**
+     * @var mixed[]|array<string, mixed>|mixed
+     */
+    public $buildConfig;
+    public $serviceUrl;
+    public $issServiceUrl;
+    public $notificationsServiceUrl;
+    public $instanceId;
+    /**
+     * @var string|mixed
+     */
+    public $licenseKey;
+    public $sugarVersion;
     use LoggerAwareTrait;
 
     //
@@ -33,31 +46,31 @@ class Manager implements LoggerAwareInterface
     /**
      * @var string Configuration key for endpoint.
      */
-    const CONFIG_KEY_SERVICE_URL = 'service-url';
+    public const CONFIG_KEY_SERVICE_URL = 'service-url';
 
     /**
      * @var string ISS service URL
      */
-    const ISS_SERVICE_URL = 'hint-iss-service-url';
+    public const ISS_SERVICE_URL = 'hint-iss-service-url';
     /**
      * @var string notifications service URL
      */
-    const NOTIFICATIONS_SERVICE_URL = 'hint-notifications-service-url';
+    public const NOTIFICATIONS_SERVICE_URL = 'hint-notifications-service-url';
 
     /**
      * @var string US geo region prefix
      */
-    const US_GEO = 'US';
+    public const US_GEO = 'US';
 
     /**
      * @var string EU geo region prefix
      */
-    const EU_GEO = 'EU';
+    public const EU_GEO = 'EU';
 
     /**
      * @var string APSE geo region prefix
      */
-    const APSE_GEO = 'APSE';
+    public const APSE_GEO = 'APSE';
 
     /**
      * @var string Configuration key for Stage2 obfuscation salt. This salt value is used whenever
@@ -65,33 +78,33 @@ class Manager implements LoggerAwareInterface
      * (e.g. user's analytic's ID) It is both random and unknown to Stage2 service to prevent
      * reversing obfuscation.
      */
-    const CONFIG_KEY_OBFUSCATION_SALT = 'obfuscation-salt';
+    public const CONFIG_KEY_OBFUSCATION_SALT = 'obfuscation-salt';
 
     /**
      * @var string IS module name.
      */
-    const MODULE = 'Stage2';
+    public const MODULE = 'Stage2';
 
     /**
      * @var string IS platform.
      */
-    const PLATFORM = 'base';
+    public const PLATFORM = 'base';
 
     /**
      * @var string Key for access token in Stage2 and Notifications Service authentication response.
      */
-    const KEY_ACCESS_TOKEN = 'token';
+    public const KEY_ACCESS_TOKEN = 'token';
 
-    const KEY_PRIVILEGE_TOKEN = 'privToken';
+    public const KEY_PRIVILEGE_TOKEN = 'privToken';
 
-    const KEY_TIME_TO_LIVE_MILLISECONDS = 'ttlMs';
+    public const KEY_TIME_TO_LIVE_MILLISECONDS = 'ttlMs';
 
-    const KEY_MAX_REQUESTS_PER_SECOND = 'maxReqPerSec';
+    public const KEY_MAX_REQUESTS_PER_SECOND = 'maxReqPerSec';
 
     /**
      * @var string Key for subscription type in Stage2 authentication response.
      */
-    const SUBSCRIPTION_TYPE = 'subscriptionType';
+    public const SUBSCRIPTION_TYPE = 'subscriptionType';
 
 
     public $obfuscationSalt;

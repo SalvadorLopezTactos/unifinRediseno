@@ -15,9 +15,9 @@ use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 // Product is used to store customer information.
 class RevenueLineItem extends SugarBean
 {
-    const STATUS_CONVERTED_TO_QUOTE = 'Converted to Quote';
+    public const STATUS_CONVERTED_TO_QUOTE = 'Converted to Quote';
 
-    const STATUS_QUOTED = 'Quotes';
+    public const STATUS_QUOTED = 'Quotes';
 
     // Stored fields
     public $id;
@@ -154,6 +154,7 @@ class RevenueLineItem extends SugarBean
         'support_title', 'support_expires', 'support_starts',
         'support_contact', 'support_desc', 'product_template_id',
         'product_template_name', 'currency_id', 'renewal',
+        'catalog_service_duration_value' , 'catalog_service_duration_unit',
     ];
 
     /** Fields to map when generating a Purchased Line Item */
@@ -237,9 +238,7 @@ class RevenueLineItem extends SugarBean
 
         $this->setDiscountPrice();
 
-        if ($this->probability === '') {
-            $this->mapProbabilityFromSalesStage();
-        }
+        $this->setCommitStage();
 
         $this->mapFieldsFromProductTemplate();
         $this->mapFieldsFromOpportunity();
@@ -255,6 +254,25 @@ class RevenueLineItem extends SugarBean
         $this->updateRelatedAccount($this->account_id);
 
         return $id;
+    }
+
+    /**
+     * Enforces that the RevenueLineItem has the correct commit stage if its
+     * sales stage is in a closed won or closed lost state
+     */
+    protected function setCommitStage()
+    {
+        $settings = Forecast::getSettings();
+        if ($settings['is_setup']) {
+            $won = $settings['sales_stage_won'];
+            $lost = $settings['sales_stage_lost'];
+
+            if (in_array($this->sales_stage, $won)) {
+                $this->commit_stage = 'include';
+            } elseif (in_array($this->sales_stage, $lost)) {
+                $this->commit_stage = 'exclude';
+            }
+        }
     }
 
 
@@ -442,20 +460,6 @@ class RevenueLineItem extends SugarBean
     }
 
     /**
-     * Handling mapping the probability from the sales stage.
-     */
-    protected function mapProbabilityFromSalesStage()
-    {
-        global $app_list_strings;
-        if (!empty($this->sales_stage)) {
-            $prob_arr = $app_list_strings['sales_probability_dom'];
-            if (isset($prob_arr[$this->sales_stage])) {
-                $this->probability = $prob_arr[$this->sales_stage];
-            }
-        }
-    }
-
-    /**
      * Save the updated product to the worksheet, this will create one if one does not exist
      * this will also update one if a draft version exists
      *
@@ -501,7 +505,7 @@ class RevenueLineItem extends SugarBean
     protected function mapFieldsFromProductTemplate()
     {
         if ($this->product_template_id && (
-            $this->fetched_row === false || $this->fetched_row['product_template_id'] != $this->product_template_id
+            empty($this->fetched_row) || $this->fetched_row['product_template_id'] != $this->product_template_id
         )) {
             /* @var $pt ProductTemplate */
             $pt = BeanFactory::getBean('ProductTemplates', $this->product_template_id);

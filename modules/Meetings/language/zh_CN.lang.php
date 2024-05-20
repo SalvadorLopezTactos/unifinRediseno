@@ -222,4 +222,10 @@ $mod_strings = array (
     －点击 "选择参加者" 以添加现有用户、联系人或潜在客户至 {{meetings_singular_module}}。
     －点击“选择参加者”右侧的加号图标创建 {{meetings_singular_module}} 参加者，建立 Sugar 新记录。
 3. 点击“保存”以完成新纪录，并返回至上一页。',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => '是智能指南会议',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => '子任务',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => '子呼叫',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => '子会议',
 );

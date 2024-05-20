@@ -144,7 +144,7 @@ class VardefManager{
                 // file_exists here is only for custom/Extension since loadExtension already checks
                 // the file map and will return false if something's wrong
                 if(!empty($path) && file_exists($path)) {
-                    require($path);
+                    require $path;
                 }
             }
         }
@@ -177,7 +177,7 @@ class VardefManager{
     {
         // Grab a cleaned up version of all templates, grouped by core and
         // implementations
-        list($core, $impl) = self::getAllTemplates($templates, $module, $object, $objectName);
+        [$core, $impl] = self::getAllTemplates($templates, $module, $object, $objectName);
 
         // Now send back the list with the core templates reversed and up front,
         // followed by the added templates
@@ -383,6 +383,7 @@ class VardefManager{
      * @return  null
      */
     public static function setCustomAllowedForModule($module, $enable) {
+        $custom_disabled_modules = [];
         if ($enable && isset($custom_disabled_modules[$module])) {
               unset($custom_disabled_modules[$module]);
         } else if (!$enable) {

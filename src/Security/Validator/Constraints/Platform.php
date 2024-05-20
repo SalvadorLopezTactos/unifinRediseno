@@ -21,8 +21,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class Platform extends Constraint
 {
-    const ERROR_INVALID_PLATFORM_FORMAT = 0;
-    const ERROR_INVALID_PLATFORM = 1;
+    public const ERROR_INVALID_PLATFORM_FORMAT = 0;
+    public const ERROR_INVALID_PLATFORM = 1;
 
     /**
      * {@inheritdoc}

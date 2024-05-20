@@ -56,6 +56,11 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      * Expects one of the next params: max_determinized_states - defaults to 10000,
      * flags are ALL (default), ANYSTRING, COMPLEMENT, EMPTY, INTERSECTION, INTERVAL, or NONE.
      *
+     * @phpstan-param array{
+     *     max_determinized_states?: int,
+     *     flags: 'ALL'|'ANYSTRING'|'COMPLEMENT'|'EMPTY'|'INTERSECTION'|'INTERVAL'|'NONE'
+     * } $value
+     *
      * @return $this
      */
     public function setRegexOptions(array $value): self
@@ -101,7 +106,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      */
     public function setName(string $name): self
     {
-        if (empty($name)) {
+        if ('' === $name) {
             throw new InvalidException('Suggest name has to be set');
         }
         $this->_name = $name;

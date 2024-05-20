@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Dashboard elenco casi',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashboard record casi',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Dettagli reclami',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Dashboard focus casi - Console',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Casi Focus Drawer',
 
 	'ERR_DELETE_RECORD'					=> 'Per eliminare l´azienda deve essere specificato il numero del record.',
@@ -156,4 +156,29 @@ Per creare un {{module_name}}:
     'LBL_SLA_DETAILS' => 'Dettagli SLA',
     'LBL_HOURS' => 'Ore',
     'LBL_WIDGET_STATUS' => 'Stato',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizza',
+    'LBL_CREATE_NEW' => 'Crea Nuovo',
+    'LBL_MANAGE' => 'Gestisci',
+    'LBL_SEE_DETAILS' => 'Mostra Dettagli',
+    'LBL_HIDE_NEW' => 'Nascondi',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Reclami',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Reclamo',
+    'LBL_KIOSK_CREATE' => 'Crea Reclamo',
+    'LBL_KIOSK_SUBJECT' => 'Oggetto',
+    'LBL_KIOSK_CASE_ID' => 'ID Reclamo',
+    'LBL_KIOSK_STATUS' => 'Stato',
+    'LBL_KIOSK_CATEGORY' => 'Categoria',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Inviato il {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Priorità',
+    'LBL_KIOSK_CREATE_CASE' => 'Contattaci',
+    'LBL_KIOSK_DESCRIPTION' => 'Descrizione',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'La richiesta è stata inviata con successo.',
+    'LBL_KIOSK_ATTACHED' => 'Tutto allegato',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Utenti esterni',
 );

@@ -67,7 +67,7 @@ class Audit extends SugarBean
     {
     }
 
-    public function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
     }
 

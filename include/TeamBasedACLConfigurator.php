@@ -13,7 +13,7 @@
 
 class TeamBasedACLConfigurator
 {
-    const CONFIG_KEY = 'team_based_acl';
+    public const CONFIG_KEY = 'team_based_acl';
 
     /**
      * @var boolean $stateCache TBA availability.
@@ -153,7 +153,7 @@ class TeamBasedACLConfigurator
     public function getFallbackByAccess($access)
     {
         $combArray = $this->fallbackAsAccess();
-        return isset($combArray[$access]) ? $combArray[$access] : false;
+        return $combArray[$access] ?? false;
     }
 
     /**
@@ -446,7 +446,7 @@ class TeamBasedACLConfigurator
         $admin = BeanFactory::newBean('Administration');
         // Uses json_decode().
         $settings = $admin->getConfigForModule(self::CONFIG_KEY, 'base', true);
-        return isset($settings['fallback']) ? $settings['fallback'] : null;
+        return $settings['fallback'] ?? null;
     }
 
     /**
@@ -663,7 +663,7 @@ class TeamBasedACLConfigurator
             $objName = BeanFactory::getObjectName($name);
             VardefManager::loadVardef($name, $objName);
             // $objName might be false, e.g. custom module is disabled.
-            $dictionary = isset($GLOBALS['dictionary'][$objName]) ? $GLOBALS['dictionary'][$objName] : null;
+            $dictionary = $GLOBALS['dictionary'][$objName] ?? null;
             if ($dictionary && ((!empty($dictionary['hidden_to_role_assignment'])
                         && $dictionary['hidden_to_role_assignment']) || !self::implementsTBA($name))) {
                 unset($actionsList[$name]);

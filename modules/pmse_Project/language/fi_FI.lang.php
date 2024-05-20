@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Lomakkeen painikkeet',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Hyväksy/hylkää',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Reititä',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Lähetä DocuSign-palveluun',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Muut reititysvalinnat',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Muuta tietueen omistajaa',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Tiimi',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Asiakirjojen yhdistäminen',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Valitse...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Asiakirjan yhdistäminen PDF-asiakirjaan',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Lähetä yhdistetty asiakirja sähköpostitse',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Asiakirjojen yhdistäminen',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Konvergoivan yhdyskäytävän tyyppi ei vastaa saapuvan työnkulun yhdyskäytävän tyyppiä',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Divergoivat yhdyskäytävät laajentavat prosessit useisiin haaroihin. Käytettäessä konvergoivaa yhdyskäytävää näiden haarojen konvergoimiseen uudelleen yhdeksi poluksi on käytettävä oikeaa konvergoivan yhdyskäytävän tyyppiä riippuen haarojen luontiin käytetyn divergoivan yhdyskäytävän tyypistä. Jos konvergoit uudelleen haaroja, jotka on luotu eksklusiivisilla tai tapahtumaperustaisilla divergoivilla yhdyskäytävillä, käytä eksklusiivista konvergoivaa yhdyskäytävää. Jos konvergoit uudelleen haaroja, jotka on luotu paralleeleilla tai inklusiivisilla divergoivilla yhdyskäytävillä, käytä paralleelia konvergoivaa yhdyskäytävää.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Moduulikenttä',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Moduulin suhde',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Käyttäjä',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Rooli',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Tiimi',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Lomaketoiminta',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Yrityssääntö',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Yrityssäännön toiminta',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Sähköpostimalli',
 );

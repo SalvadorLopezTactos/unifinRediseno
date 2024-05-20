@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Shabllon?',
     'LBL_DET_TEMPLATE_TYPE'=>'lloji i dokumentacionit',
     'LBL_TEAM'=> 'Grupi',
+    'LBL_IS_SHARED' => 'Ofrohet jashtë:',
     'LBL_DOC_DESCRIPTION'=>'përshkrimi',
     'LBL_DOC_ACTIVE_DATE'=> 'data e publikimit',
     'LBL_DOC_EXP_DATE'=> 'data e skadimit',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Dërgo te DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Sinkronizo në Google Drive',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Sinkronizo të gjitha në Google Drive',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Sinkronizo të gjitha në OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Sinkronizo në OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Sinkronizo të gjitha në Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Sinkronizo në Dropbox',
 );

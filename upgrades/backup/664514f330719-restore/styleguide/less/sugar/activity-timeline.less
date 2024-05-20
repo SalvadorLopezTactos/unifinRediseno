@@ -1,0 +1,339 @@
+/* NEW SKIN START */
+
+.activity-card {
+  display: flex;
+  position: relative;
+
+  .activity-card-detail {
+    background: @secondaryContentBackground;
+    padding: 10px 7px;
+    text-align: center;
+    flex: 0 0 60px;
+    font-size: 10px;
+    line-height: 14px;
+    color: @textColor;
+
+    .record-icon {
+      .center-content();
+
+      width: 32px;
+      height: 32px;
+      background-color: @ocean;
+      border-radius: 50%;
+
+      .sicon {
+        color: @lightOcean;
+      }
+    }
+
+    .panel-header {
+      margin-top: 6px;
+      font-weight: 600;
+    }
+  }
+
+  .activity-card-main {
+    border-bottom: @borderWidget;
+    padding: 17px 12px 16px;
+    width: 100%;
+    color: @textColor;
+
+    .activity-card-header {
+      .panel-header {
+        font-weight: 600;
+        font-size: 14px;
+        margin-top: 8px;
+        display: inline-flex;
+
+        .activity-card-header {
+          &.email-state {
+            color: @textColor;
+            font-size: 12px;
+            font-weight: normal;
+            padding-left: 12px;
+          }
+        }
+
+        span {
+          .ellipsis_inline {
+            white-space: normal;
+          }
+        }
+      }
+
+      .panel-users {
+        .sicon-user {
+          font-size: 10px;
+        }
+      }
+
+      a {
+        display: inline;
+      }
+
+      .panel-users {
+        .header-user {
+          display: flex;
+          align-items: center;
+
+          .avatar {
+            .center-content();
+
+            background-color: @gray30;
+            height: 16px;
+            width: 16px;
+          }
+
+          .user-value {
+            display: inline-flex;
+            padding-left: 4px;
+            color: @gray70;
+          }
+        }
+
+        .header-user-to-user {
+          display: flex;
+          align-items: center;
+
+          .arrow {
+            margin: 0 11px;
+          }
+        }
+
+        .header-user-list {
+          display: flex;
+          flex-wrap: wrap;
+          margin: -6px -6px 0;
+
+          .header-user {
+            margin: 6px 6px 0;
+          }
+
+          .header-more-users {
+            margin-left: 6px;
+            color: @gray70;
+            align-self: flex-end;
+          }
+        }
+      }
+    }
+
+    .activity-card-content {
+      .activity-date-modified {
+        text-align: left;
+        font-size: 10px;
+        line-height: 14px;
+        color: @labelColor;
+        margin-top: 8px;
+      }
+
+      .btn {
+        &.activity-card-show-more {
+          padding-left: 0;
+          margin-left: 0;
+        }
+
+        &.activity-card-show-less {
+          padding-left: 0;
+          margin-left: 0;
+        }
+      }
+
+      .activity-card-content-body {
+        &.collapsed-timeline {
+          max-height: 300px;
+          overflow: hidden;
+        }
+
+        &.expanded-timeline {
+          max-height: none;
+        }
+
+        .panel-header {
+          margin-top: 8px;
+          display: flex;
+          align-items: baseline;
+
+          span {
+            .ellipsis_inline {
+              white-space: normal;
+            }
+          }
+        }
+
+        .label {
+          &.label-pending,
+          &.label-important,
+          &.label-success {
+            margin-left: 12px;
+          }
+        }
+
+        .panel-change {
+          margin-top: 8px;
+        }
+
+        .panel-body {
+          margin-top: 8px;
+        }
+
+        .panel-attachments {
+          margin-top: 8px;
+        }
+      }
+
+      [class^="panel"] {
+        margin-top: 8px;
+      }
+
+      .panel-attachments {
+        ul.select2-choices {
+          border: none;
+        }
+
+        > .detail {
+          a.multi-attachment-link-type {
+            position: relative;
+            z-index: 1;
+          }
+        }
+      }
+
+      .activity-card-status,
+      .activity-card-text {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .activityCardDetail(@background, @color) {
+    .activity-card-detail {
+      .record-icon {
+        background: @background;
+
+        .sicon {
+          color: @color;
+          font: normal normal normal 16px 'SugarIcons';
+        }
+      }
+    }
+  }
+
+  &.activity-card-messages {
+    .activityCardDetail(@army, @lightArmy);
+  }
+
+  &.activity-card-emails {
+    .activityCardDetail(@ocean, @lightOcean);
+  }
+
+  &.activity-card-notes {
+    .activityCardDetail(@green, @lightGreen);
+
+    .activity-card-main .activity-card-content-body {
+      &.collapsed-timeline {
+        max-height: none;
+      }
+
+      .panel-body {
+        max-height: 300px;
+        overflow: hidden;
+      }
+
+      .panel-attachments {
+        .attachment-preview img {
+          max-height: 300px;
+        }
+      }
+    }
+  }
+
+  &.activity-card-cases {
+    .activityCardDetail(@orange, @lightOrange);
+
+    .cabmenu {
+      display: none !important;
+    }
+  }
+
+  &.activity-card-contacts {
+    .activityCardDetail(@pink, @lightPink);
+  }
+
+  &.activity-card-accounts {
+    .activityCardDetail(@green, @lightGreen);
+  }
+
+  &.activity-card-leads {
+    .activityCardDetail(@purple, @lightPurple);
+  }
+
+  &.activity-card-opportunities {
+    .activityCardDetail(@red, @lightRed);
+  }
+
+  &.activity-card-quotes {
+    .activityCardDetail(@pacific, @lightPacific);
+  }
+
+  &.activity-card-tasks {
+    .activityCardDetail(@purple, @lightPurple);
+  }
+
+  .cabmenu {
+    right: 12px;
+    top: 11px;
+
+    &:not(.open) {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .cabmenu {
+      display: flex;
+      border-radius: 15px;
+    }
+  }
+
+  &.activity-card-meetings {
+    .activityCardDetail(@teal, @lightTeal);
+  }
+
+  &.activity-card-calls {
+    .activityCardDetail(@pacific, @lightPacific);
+  }
+
+  &.activity-card-escalations {
+    .activityCardDetail(@red, @lightRed);
+  }
+
+  &.activity-card-audit {
+    .change-container {
+      display: flex;
+      align-items: center;
+
+      div[class$="-container"] {
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+      }
+
+      .change-field-name {
+        font-weight: 600;
+      }
+
+      .change-before-value {
+        font-style: italic;
+        color: @gray70;
+        text-decoration: line-through;
+      }
+
+      .change-after-value-container {
+        padding: 2px 6px;
+      }
+    }
+  }
+}
+
+/* NEW SKIN END */

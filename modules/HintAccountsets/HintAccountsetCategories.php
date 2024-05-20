@@ -13,10 +13,10 @@ namespace Sugarcrm\Sugarcrm\modules\HintAccountsets;
 
 class HintAccountsetCategories
 {
-    const CATEGORY_ALL = 'All';
-    const CATEGORY_FINANCE = 'Finance';
-    const CATEGORY_PEOPLE = 'People';
-    const CATEGORY_GENERAL = 'General';
-    const CATEGORY_PRESS_RELEASES = 'Press releases';
-    const CATEGORY_OTHER = 'Other';
+    public const CATEGORY_ALL = 'All';
+    public const CATEGORY_FINANCE = 'Finance';
+    public const CATEGORY_PEOPLE = 'People';
+    public const CATEGORY_GENERAL = 'General';
+    public const CATEGORY_PRESS_RELEASES = 'Press releases';
+    public const CATEGORY_OTHER = 'Other';
 }

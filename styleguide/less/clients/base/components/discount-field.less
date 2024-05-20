@@ -1,7 +1,8 @@
 @currencyFieldElement: ~'div[class*="currency-field"]';
 @discountFieldElement: ~'div[class*="discount-amount-field"]';
 
-[data-type=fieldset] {
+[data-type=fieldset],
+.dataTable [data-type=fieldset] {
   min-width: 155px;
 
   span[class*="discount-field"]:not(.overflow-visible) {

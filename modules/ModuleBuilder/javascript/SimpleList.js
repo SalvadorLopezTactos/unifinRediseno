@@ -349,8 +349,6 @@ if(typeof(SimpleList) == 'undefined'){
         }
     },
     setDropDownValue : function(id, val, record){
-        val = YAHOO.lang.escapeHTML(val);
-
         if(record){
             SimpleList.jstransaction.record('changeDropDownValue', {'id':id, 'new':val, 'old':document.getElementById('value_'+ id).value});
         }
@@ -360,7 +358,7 @@ if(typeof(SimpleList) == 'undefined'){
 
         dispSpan.style.display = 'inline';
         editSpan.style.display = 'none';
-        dispSpan.innerHTML = "["+val+"]";
+        dispSpan.textContent = '[' + val + ']';
         document.getElementById('value_'+ id).value = val;
 
         textbox.focus();

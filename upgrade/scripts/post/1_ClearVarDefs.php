@@ -505,7 +505,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
     {
         if (empty($rel_name) && !empty($field_name)) {
             $tmpRelName = $seed->getFieldDefinition($field_name);
-            $tmpRelName = isset($tmpRelName['relationship']) ? $tmpRelName['relationship'] : '';
+            $tmpRelName = $tmpRelName['relationship'] ?? '';
         } else {
             $tmpRelName = $rel_name;
         }
@@ -795,48 +795,52 @@ class DefinitionObject implements Iterator, ArrayAccess, Countable
         return $this->wrongDefs;
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->defs[$this->key()];
     }
 
-    public function next()
+    public function next(): void
     {
         ++$this->current_offset;
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return ($this->current_offset < $this->count()) ? $this->offsets[$this->current_offset]: null;
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->defs[$this->key()]);
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->current_offset = 0;
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->defs[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        return isset($this->defs[$offset]) ? $this->defs[$offset] : null;
+        return $this->defs[$offset] ?? null;
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->defs[$offset] = $value;
         return $this->offsetGet($offset);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $index = array_search($offset, $this->offsets);
         if ($index === $this->current_offset) {
@@ -851,7 +855,7 @@ class DefinitionObject implements Iterator, ArrayAccess, Countable
         $this->offsets = $offsets;
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->defs);
     }

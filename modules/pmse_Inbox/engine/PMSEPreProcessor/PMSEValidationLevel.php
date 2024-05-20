@@ -18,9 +18,9 @@
  */
 abstract class PMSEValidationLevel
 {
-    const NoValidation = 0;
-    const Simple = 1;
-    const Complex = 2;
+    public const NoValidation = 0;
+    public const Simple = 1;
+    public const Complex = 2;
 }
 
 

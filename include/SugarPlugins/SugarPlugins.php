@@ -33,17 +33,15 @@ class SugarPlugins
      */
     public function __construct()
     {
-        $params = array(
+        $params = [
             'soap_version' => SOAP_1_1,
             'exceptions' => 0,
-        );
-        $client = new \SoapClient(self::SUGAR_PLUGIN_SERVER . '?wsdl', $params);
-
-        if (is_soap_fault($client)) {
-            return;
+        ];
+        try {
+            $this->client = new \SoapClient(self::SUGAR_PLUGIN_SERVER . '?wsdl', $params);
+        } catch (SoapFault $e) {
+            // don't assign client
         }
-
-        $this->client = $client;
     }
 
     /**

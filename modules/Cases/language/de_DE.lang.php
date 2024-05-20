@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Falllisten-Dashboard',
     'LBL_CASES_RECORD_DASHBOARD' => 'Fallbericht-Dashboard',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Details zu dem Fall',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Fokus-Drawer für Fälle - Konsole',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Tickets',
 
 	'ERR_DELETE_RECORD'					=> 'Zum Löschen der Firma muss eine Datensatznummer angegeben werden.',
@@ -162,4 +162,29 @@ So erstellen Sie ein {{module_name}}:
     'LBL_SLA_DETAILS' => 'SLA-Details',
     'LBL_HOURS' => 'Stunden',
     'LBL_WIDGET_STATUS' => 'Status',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organisieren',
+    'LBL_CREATE_NEW' => 'Neu erstellen',
+    'LBL_MANAGE' => 'Verwalten',
+    'LBL_SEE_DETAILS' => 'Details anzeigen',
+    'LBL_HIDE_NEW' => 'Ausblenden',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Fälle',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Fall',
+    'LBL_KIOSK_CREATE' => 'Fall erstellen',
+    'LBL_KIOSK_SUBJECT' => 'Betreff',
+    'LBL_KIOSK_CASE_ID' => 'Fall-ID',
+    'LBL_KIOSK_STATUS' => 'Status',
+    'LBL_KIOSK_CATEGORY' => 'Kategorie',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Abgesendet am {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Priorität',
+    'LBL_KIOSK_CREATE_CASE' => 'Kontaktieren Sie uns',
+    'LBL_KIOSK_DESCRIPTION' => 'Beschreibung',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Ihre Anfrage wurde erfolgreich übermittelt.',
+    'LBL_KIOSK_ATTACHED' => 'Alles beigefügt',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Externe Benutzer',
 );

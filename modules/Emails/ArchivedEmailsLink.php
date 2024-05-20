@@ -119,7 +119,7 @@ class ArchivedEmailsLink extends Link2
      */
     public function buildJoinSugarQuery($sugar_query, $options = array())
     {
-        $joinParams = array('joinType' => isset($options['joinType']) ? $options['joinType'] : 'INNER');
+        $joinParams = array('joinType' => $options['joinType'] ?? 'INNER');
         $jta = 'emails';
         if (!empty($options['joinTableAlias'])) {
             $jta = $joinParams['alias'] = $options['joinTableAlias'];
@@ -286,7 +286,7 @@ SQL;
             $query .= "ORDER BY {$params['orderby']}";
         }
         if (!empty($params['limit']) && $params['limit'] > 0) {
-            $offset = isset($params['offset']) ? $params['offset'] : 0;
+            $offset = $params['offset'] ?? 0;
             $query = $this->db->limitQuery($query, $offset, $params['limit'], false, "", false);
         }
         return $query;

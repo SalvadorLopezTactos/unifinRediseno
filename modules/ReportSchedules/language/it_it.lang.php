@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Dashboard record Pianificazioni report',
     'LBL_FILE_TYPE' => 'Tipo File',
+    'LBL_EMBED_REPORT' => 'Incorpora report in e-mail',
+    'LBL_EMBED_REPORT_INFO' => 'Nota: se il report supera le 200 righe, verrà allegato il report come file CSV.',
 );

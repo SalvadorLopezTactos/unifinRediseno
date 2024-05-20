@@ -16,6 +16,14 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 class StudioModule
 {
     /**
+     * @var array<int, array<string, mixed>>|array<mixed, array<string, mixed>>|mixed
+     */
+    public $sources;
+    /**
+     * @var mixed[]|string[][]|string[]|mixed|array<string, string>
+     */
+    public $providedSubpanels;
+    /**
      * modules which are not supported by mobile app
      * @var array
      */
@@ -28,6 +36,14 @@ class StudioModule
         'pmse_Project', // Process Definitions
         'pmse_Emails_Templates', // Process Emails Templates
         'pmse_Inbox', // Processes
+        // Sugar Automate related modules are not yet ready for Mobile
+        'CJ_Forms',
+        'CJ_WebHooks',
+        'DRI_SubWorkflow_Templates',
+        'DRI_SubWorkflows',
+        'DRI_Workflow_Task_Templates',
+        'DRI_Workflow_Templates',
+        'DRI_Workflows',
     );
 
     /**
@@ -72,7 +88,7 @@ class StudioModule
     {
         $moduleList = $GLOBALS['app_list_strings']['moduleList'] ?? [];
         $moduleNames = array_change_key_case($moduleList);
-        $this->name = isset($moduleNames[strtolower($module)]) ? $moduleNames[strtolower($module)] : strtolower($module);
+        $this->name = $moduleNames[strtolower($module)] ?? strtolower($module);
         $this->module = $module;
         if (!$seed) {
             $this->seed = BeanFactory::newBean($this->module);
@@ -697,13 +713,23 @@ class StudioModule
      */
     public function removeFieldFromLayouts($fieldName)
     {
+        if (empty($fieldName || empty($this->module))) {
+            return;
+        }
         $GLOBALS ['log']->info(get_class($this) . "->removeFieldFromLayouts($fieldName)");
-        $sources = $this->getViewMetadataSources();
+
+        // don't need portal metadata if this module is not portal
+        $isPortal = true;
+        if (class_exists('SugarPortalBrowser')) {
+            $portalBrowser = new SugarPortalBrowser();
+            $isPortal = $portalBrowser->isPortalModule($this->module);
+        }
+
+        $sources = $this->getViewMetadataSources($isPortal);
         $sources[] = array('type'  => MB_BASICSEARCH);
         $sources[] = array('type'  => MB_ADVANCEDSEARCH);
         $sources[] = array('type'  => MB_POPUPSEARCH);
         $sources = array_merge($sources, $this->getWirelessLayouts());
-        $sources = array_merge($sources, $this->getPortalLayoutSources());
 
         $GLOBALS['log']->debug(print_r($sources, true));
 
@@ -753,16 +779,19 @@ class StudioModule
      * Gets a list of source metadata view types. Used in resetting a module and
      * for the field removal process.
      *
+     * @param bool $includingPortal flag to include portal source
      * @return array
      */
-    public function getViewMetadataSources()
+    public function getViewMetadataSources(bool $includingPortal = true) : array
     {
         $sources = $this->getViews();
         $sources[] = array('type'  => MB_BASICSEARCH);
         $sources[] = array('type'  => MB_ADVANCEDSEARCH);
         $sources[] = array('type'  => MB_POPUPLIST);
         $sources = array_merge($sources, $this->getWirelessLayouts());
-        $sources = array_merge($sources, $this->getPortalLayoutSources());
+        if ($includingPortal) {
+            $sources = array_merge($sources, $this->getPortalLayoutSources());
+        }
         return $sources;
     }
 

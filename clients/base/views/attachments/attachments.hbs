@@ -22,7 +22,7 @@
             {{#if attributes.filename}}
                 <span class="filetype-thumbnail pull-left" data-mime="{{attributes.file_mime_type}}"></span>
             {{else}}
-                <div class="label label-module label-module-md label-{{../module}} pull-left">{{moduleIconLabel ../module}}</div>
+                {{moduleLabel ../module 'lg' class='pull-left'}}
             {{/if}}
             <p>
                 {{#if fields.name}}

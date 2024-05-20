@@ -14,14 +14,15 @@ namespace Sugarcrm\Sugarcrm\Cache\Backend;
 
 use Memcached as Client;
 use Sugarcrm\Sugarcrm\Cache\Exception;
-use Symfony\Component\Cache\Simple\MemcachedCache;
+use Symfony\Component\Cache\Adapter\MemcachedAdapter;
+use Symfony\Component\Cache\Psr16Cache;
 
 /**
  * Memcached implementation of the cache backend
  *
  * @link http://pecl.php.net/package/memcached
  */
-final class Memcached extends MemcachedCache
+final class Memcached extends Psr16Cache
 {
     /**
      * @param string|null $host
@@ -45,6 +46,6 @@ final class Memcached extends MemcachedCache
             throw new Exception('Unable to connect to memcached server');
         }
 
-        parent::__construct($client);
+        parent::__construct(new MemcachedAdapter($client));
     }
 }

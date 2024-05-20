@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Formulär Knappar',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Godkänn/Avvisa',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Dirigera',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Skicka till DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Andra dirigeringsval',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Change Record Owner',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Lag',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Doc Merge',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Välj ...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Doc Merge till PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Skicka sammanslaget dokument via e-post',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Doc Merge',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Konvergerande gateway-typ matchar int gateway-typen för det inkommande flödet',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Divergerande gateways expanderar processer till ett flertal grenar. När man använder en konvergerande gateway för att omkonvergera dessa grenar tillbaka till en väg måste rätt typ av konvergerande gateway användas, beroende på typen av divergerande gateway som använts för att skapa grenarna. För grenar som skapats med exklusiva eller händelsebaserade gateways, använd en exklusiv konvergerande gateway för att omkonvergera dem. För grenar skapade med parallella eller inkluderande divergerande gateways, använd en parallell konvergerande gateway för att omkonvergera dem.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Modulfält',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Modulförhållande',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Användare',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Roll',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Team',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Formuläraktivitet',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Affärsregel',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Affärsregelåtgärd',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-postmall',
 );

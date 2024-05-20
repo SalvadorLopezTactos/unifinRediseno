@@ -61,6 +61,10 @@
   min-width: 0 !important;
 }
 
+.break-words {
+  word-wrap: break-word;
+}
+
 /*
  * An ode to functional CSS. We aim to transform this file to make lives easier with reuse and composition.
 */
@@ -238,11 +242,23 @@
 .generate-utility-class(flex-direction; flex; @flexDirectionOptions);
 
 /**
+ * Flex short hand utility classes
+ */
+.flex-1 { flex: 1; }
+
+/**
  * Flex grow utility classes
  */
 
 .flex-grow-0 { flex-grow: 0; }
 .flex-grow { flex-grow: 1; }
+
+/**
+ * Flex shrink utility classes
+ */
+
+.flex-shrink-0 { flex-shrink: 0; }
+.flex-shrink { flex-shrink: 1; }
 
 /**
  * Flex justify utility classes
@@ -255,8 +271,15 @@
 .justify-evenly { justify-content: space-evenly; }
 
 /**
+ * Flex wrap utility classes
+ */
+.flex-wrap { flex-wrap: wrap; }
+.flex-wrap-reverse { flex-wrap: wrap-reverse; }
+.flex-wrap-no { flex-wrap: nowrap; }
+
+/**
  * Generate text-align: _ utility class variations
- * The classes available are: text-align-{alignment}
+ * The classes available are: text-{alignment}
  */
 
 @textAlignOptions: left, center, right, justify, initial;
@@ -268,6 +291,7 @@
  */
 .text-default { color: @textColor; }
 .text-label { color: @labelColor; }
+.text-white { color: @white; }
 
 /**
  * font-weight: _ utility class variations
@@ -295,10 +319,10 @@
 .items-end { align-items: flex-end; }
 
 // Array of values used to populate a subset of width, height and spacing utility classes
-@sizingOptionDecimals: ~"0", ~"0\.5", ~"0\.75", ~"1", ~"1\.5", ~"2", ~"2\.5", ~"3", ~"3\.5", ~"4", ~"5", ~"6", ~"7", ~"7\.5", ~"8", ~"9", ~"10", ~"11", ~"12", ~"15", ~"22\.5", ~"47\.5", ~"50", ~"92", ~"150";
-@sizingOptionValues: 0, 0.5, 0.75, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 7.5, 8, 9, 10, 11, 12, 15, 22.5, 47.5, 50, 92, 150;
-@layoutOptionFractions: ~"1\/2", ~"1\/3", ~"2\/3", ~"1\/4", ~"2\/4", ~"3\/4", ~"1\/5", ~"2\/5", ~"3\/5", ~"4\/5", ~"1\/6", ~"2\/6", ~"3\/6", ~"4\/6", ~"5\/6", ~"1\/12", ~"2\/12", ~"3\/12", ~"4\/12", ~"5\/12", ~"6\/12", ~"7\/12", ~"8\/12", ~"9\/12", ~"10\/12", ~"11\/12";
-@layoutOptionValues: 1/2, 1/3, 2/3, 1/4, 2/4, 3/4, 1/5, 2/5, 3/5, 4/5, 1/6, 2/6, 3/6, 4/6, 5/6, 1/12, 2/12, 3/12, 4/12, 5/12, 6/12, 7/12, 8/12, 9/12, 10/12, 11/12;
+@sizingOptionDecimals: ~"0", ~"0\.25", ~"0\.5", ~"0\.75", ~"1", ~"1\.25", ~"1\.5", ~"2", ~"2\.5", ~"3", ~"3\.5", ~"4", ~"4\.5", ~"5", ~"5\.5", ~"6", ~"7", ~"7\.5", ~"8", ~"9", ~"10", ~"11", ~"12", ~"12\.5", ~"13\.75", ~"15", ~"20", ~"22\.5", ~"25", ~"30", ~"35", ~"40", ~"45", ~"47\.5", ~"50", ~"55", ~"60", ~"62\.5", ~"65", ~"70", ~"75", ~"80", ~"85", ~"90", ~"92", ~"95", ~"100", ~"150";
+@sizingOptionValues: 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 7, 7.5, 8, 9, 10, 11, 12, 12.5, 13.75, 15, 20, 22.5, 25, 30, 35, 40, 45, 47.5, 50, 55, 60, 62.5, 65, 70, 75, 80, 85, 90, 92, 95, 100, 150;
+@layoutOptionFractions: ~"1\/2", ~"1\/3", ~"2\/3", ~"1\/4", ~"2\/4", ~"3\/4", ~"1\/5", ~"2\/5", ~"3\/5", ~"4\/5", ~"1\/6", ~"2\/6", ~"3\/6", ~"4\/6", ~"5\/6", ~"1\/12", ~"2\/12", ~"3\/12", ~"4\/12", ~"5\/12", ~"6\/12", ~"7\/12", ~"8\/12", ~"9\/12", ~"10\/12", ~"11\/12", ~"12\/12";
+@layoutOptionValues: 1/2, 1/3, 2/3, 1/4, 2/4, 3/4, 1/5, 2/5, 3/5, 4/5, 1/6, 2/6, 3/6, 4/6, 5/6, 1/12, 2/12, 3/12, 4/12, 5/12, 6/12, 7/12, 8/12, 9/12, 10/12, 11/12, 12/12;
 
 /**
  * Generate width: n utility class variations
@@ -348,6 +372,13 @@
 .generate-rem-utility-class(max-height; max-h; @sizingOptionDecimals; @sizingOptionValues; 0);
 .max-h-full { max-height: 100%; }
 .max-h-screen { max-height: 100vh; }
+
+/**
+ * Generate min-height: n utility class variations
+ * The classes available are: min-h-{size}
+ */
+
+.generate-rem-utility-class(min-height; min-h; @sizingOptionDecimals; @sizingOptionValues; 0);
 
 /**
  * Generate margin: n utility class variations
@@ -409,13 +440,22 @@
 .generate-utility-class(padding-top, padding-bottom; py; auto);
 
 /**
+ * Generate {top|right} positioning classes
+ */
+
+.generate-percent-utility-class(top; top; @layoutOptionFractions; @layoutOptionValues);
+.generate-rem-utility-class(top; top; @sizingOptionDecimals; @sizingOptionValues; true);
+.generate-rem-utility-class(right; right; @sizingOptionDecimals; @sizingOptionValues; true);
+
+/**
  * Border color utility class variations.
  * The classes available are: border-{color}
  */
 .border-default { border-color: @borderColor; }
 .border-light { border-color: @borderColorLight; }
-.border-separator { border-color: @separatorColor; }
 .border-active-tab { border-color: @activeTabBorderColor; }
+.border-btn-secondary { border-color: @btnSecondaryBorder; }
+.border-separator { border-color: @separatorColor; }
 
 /**
  * Border width utility class variations.
@@ -483,6 +523,11 @@
   border-bottom-right-radius: 0.425rem;
 }
 
+.rounded-t-md {
+  border-top-left-radius: 0.425rem;
+  border-top-right-radius: 0.425rem;
+}
+
 /**
  * Border widget utility class variations
  */
@@ -529,7 +574,14 @@
   line-height: 2rem;
 }
 
-@bg-color-options: none, alert-background, btn-background, btn-active-background, btn-secondary-background, content-background, config-pill-background, pill-background, content-loading-background, dashlet-background, dropdown-background, dropdown-link-background-hover, footer-background, headerpane-background, headerpane-side-toggle-background, input-background, input-disabled-background, label-background, navbar-background, primary-content-background, progress-bar-background, secondary-content-background, select2-background, subpanel-background, tab-background-hover-color;
+/**
+ * Cursor utility class variations
+ */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@bg-color-options: none, alert-background, btn-background, btn-active-background, btn-secondary-background, content-background, config-pill-background, pill-background, content-loading-background, dashlet-background, dropdown-background, dropdown-link-background-hover, footer-background, headerpane-background, headerpane-side-toggle-background, input-background, input-disabled-background, label-background, navbar-background, primary-content-background, progress-bar-background, secondary-content-background, searchbar-background, select2-background, sidebar-nav-background, sidebar-nav-background-hover, subpanel-background, tab-background-hover-color, metric-badge-background;
 
 /**
  * Background color utility class variations.
@@ -538,9 +590,14 @@
 
 .generate-color-utility-class(background-color; bg; @bg-color-options);
 .bg-transparent { background-color: transparent; }
+.bg-overlay { background-color: @overlayBackground; }
 .bg-impersonation-banner { background-color: @darkPurple; }
+.bg-sidebar-nav { background-color: @sidebarNavBackground; }
+.hover\:bg-sidebar-nav-hover:hover { background-color: @sidebarNavBackgroundHover; }
 .hover\:bg-dashlet-background-hover:hover { background-color: @dashletBackgroundHover; }
 .hover\:bg-content-container-background-hover:hover { background-color: @contentContainerBackgroundHover; }
+.hover\:bg-dropdown-link-background-hover:hover { background-color: @dropdownLinkBackgroundHover; }
+.hover\:color-sicon-hover-color:hover { color: @sicon-hover-color; }
 
 /**
  * Box shadow utility class variations.
@@ -549,6 +606,12 @@
 
 .shadow {
   --sugar-box-shadow: @boxShadow;
+
+  box-shadow: var(--sugar-box-shadow);
+}
+
+.shadow-md {
+  --sugar-box-shadow: @boxShadowMd;
 
   box-shadow: var(--sugar-box-shadow);
 }
@@ -645,3 +708,6 @@
 .stick-first.no-border::after {
   display: none;
 }
+
+// Box Sizing
+.box-border { box-sizing: border-box; }

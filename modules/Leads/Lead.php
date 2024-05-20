@@ -199,7 +199,7 @@ class Lead extends Person {
 		$lead->save();
     }
 
-	function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
 	{
 		$temp_array = parent::get_list_view_data();
 		if(!empty($temp_array['ACC_NAME_FROM_ACCOUNTS'])) {

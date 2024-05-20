@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Kliensek listája műszerfal',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Kliensek bejegyzés műszerfal',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Fiókok figyelemfelhívás',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Fiókadatok',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Fiókfókusz vezérlőpult - konzol',
     'LBL_NEXT_RENEWAL_DATE' => 'Következő megújítása dátuma',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Következő megújítása dátuma',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Fiók neve/ipar',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Hely',
     'LBL_PURCHASES' => 'Vásárlások',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Fiók idővonal',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Rendezés',
+    'LBL_CREATE_NEW' => 'Új létrehozása',
+    'LBL_MANAGE' => 'Kezelés',
+    'LBL_SEE_DETAILS' => 'Részletek megtekintése',
+    'LBL_HIDE_NEW' => 'Elrejt',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagramok',
@@ -206,4 +213,7 @@ $mod_strings = array (
 2. Kattintson a "Mentés" gombra a rekord mentéséhez és a korábbi nézetre való visszatéréshez.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Kliensek jelentései',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Külső felhasználók',
 );

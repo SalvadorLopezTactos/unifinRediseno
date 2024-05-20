@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Ιστορικό',
     'LBL_PMSE_LABEL_NOTES' => 'Σημειώσεις',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Προσθήκη Σημειώσεων',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Αποστολή στο DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Επιλέξτε...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Χρήστης',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Είστε βέβαιος ότι θέλετε να εγκρίνετε τη συγκεκριμένη διαδικασία;',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Είστε βέβαιος ότι θέλετε να απορρίψετε τη συγκεκριμένη διαδικασία;',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Είστε βέβαιος ότι θέλετε να δρομολογήσετε τη συγκεκριμένη διαδικασία;',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Είστε βέβαιοι ότι θέλετε να στείλετε στο DocuSign αυτή τη διαδικασία;',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Η διαδικασία εγκρίθηκε επιτυχώς',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Η διαδικασία απορρίφθηκε επιτυχώς',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Η διαδικασία δρομολογήθηκε επιτυχώς',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Η διαδικασία έχει σταλεί με επιτυχία στο DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'Η διαδικασία που προσπαθείτε να προβάλετε είναι κλειστή.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Η διαδικασία που προσπαθείτε να προβάλετε δεν είναι διαθέσιμη αυτή τη στιγμή.',
 

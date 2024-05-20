@@ -90,7 +90,7 @@ $mod_strings = array (
     'LBL_INFO_RELATED_TO' => 'Gerelateerd aan',
 
     'LBL_NO_USER' => 'Geen overeenkomst gevonden voor veld: Toegewezen aan',
-    'LBL_SUBJECT' => 'Subject',
+    'LBL_SUBJECT' => 'Onderwerp',
     'LBL_DURATION' => 'Duur',
     'LBL_STATUS' => 'Status',
     'LBL_DATE_TIME' => 'Datum en tijd',
@@ -164,7 +164,7 @@ $mod_strings = array (
     'LBL_TIMELINE_EVENT_TEMPLATE' => 'Tijdlijn evenement',
     'LBL_SCHEDULERMONTH_EVENT_TEMPLATE' => 'Planning evenement',
     'LBL_ICAL_EVENT_TEMPLATE' => 'iCal evenement',
-    'LBL_SUBJECT' => 'Subject',
+    'LBL_SUBJECT' => 'Onderwerp',
     'LBL_CALENDAR_TYPE' => 'Type agenda',
     'LBL_COLOR' => 'Kleur',
     'LBL_DURATION_MINUTES' => 'Duur in minuten',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Okt',
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Dec',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Agenda is al toegevoegd',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} is geselecteerd',
+    'LBL_NO_USER_SELECTED' => 'Selecteer een gebruiker of een team',
+    'LBL_NO_CALENDAR_SELECTED' => 'Selecteer een agenda',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Laden van agenda&#39;s is mislukt.',
 
 );
 

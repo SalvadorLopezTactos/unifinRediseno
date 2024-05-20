@@ -76,6 +76,12 @@ class SugarFieldPassword extends SugarFieldBase
      */
     public function apiValidate(SugarBean $bean, array $params, $field, $properties)
     {
+        //if the portal password is true it means that it is setup and validated at create time
+        //see apiFormatField
+        if ($params[$field] === true) {
+            return true;
+        }
+
         // We only enforce portal password here. Free form passwords are still used in other areas,
         // enforcing all of them would cause existing behaviors change and test failures.
         if (!empty($params[$field]) &&
@@ -83,6 +89,7 @@ class SugarFieldPassword extends SugarFieldBase
             $properties['group'] === 'portal') {
             return BeanFactory::getBean('Users')->check_password_rules($params[$field]);
         }
+
         return parent::apiValidate($bean, $params, $field, $properties);
     }
 }

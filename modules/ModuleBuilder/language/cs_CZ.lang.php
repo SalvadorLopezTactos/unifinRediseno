@@ -818,11 +818,8 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Vytvořte vzorec a určete, zda je toto pole v rozvržení povinné.<br/>"
-    . "Povinná pole se budou řídit vzorcem v mobilním zobrazení s využitím prohlížeče, <br/>"
-    . "nebudou se ale řídit vzorcem v nativních aplikacích, jako je Sugar Mobile pro iPhone. <br/>"
-    . "Nebudou se řídit vzorcem v samoobslužném portálu Sugar.",
-'LBL_POPHELP_READONLY'=>"Vytvořte vzorec a určete, zda je toto pole v rozvržení pouze pro čtení.<br/>"
+    'LBL_POPHELP_REQUIRED'=>'Pole, která jsou podmíněně povinná, nelze použít v následujících typech akcí SugarBPM: Přidat související záznam, Změnit pole. Chcete-li toto pole použít v těchto akcích definice procesu, odstraňte „Povinné, pokud“.',
+'LBL_POPHELP_READONLY'=>"Vytvořte vzorec pro určení, zda je toto pole v rozvržení určeno pouze pro čtení.<br/>"
         . "Pole určená pouze pro čtení se budou řídit vzorcem v mobilním zobrazení s využitím prohlížeče, <br/>"
         . "nebudou se ale řídit vzorcem v nativních aplikacích, jako je Sugar Mobile pro iPhone. <br/>"
         . "Nebudou se řídit vzorcem v samoobslužném portálu Sugar.",
@@ -863,6 +860,7 @@ $mod_strings = array(
                 'decimal'=>'Desetinný',
                 'autoincrement' => 'Automatický přírůstek',
                 'actionbutton' => 'Tlačítko akce',
+                'geocodestatus' => 'Stav geokódování',
 ),
 'labelTypes' => array(
     "" => "Často používané popisky",

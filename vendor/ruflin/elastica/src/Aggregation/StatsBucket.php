@@ -9,35 +9,22 @@ use Elastica\Exception\InvalidException;
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-stats-bucket-aggregation.html
  */
-class StatsBucket extends AbstractAggregation
+class StatsBucket extends AbstractAggregation implements GapPolicyInterface
 {
+    use Traits\BucketsPathTrait;
+    use Traits\GapPolicyTrait;
+
     public function __construct(string $name, ?string $bucketsPath = null)
     {
         parent::__construct($name);
 
         if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
+        } elseif (\func_num_args() >= 2) {
+            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Passing null as 2nd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
+        } else {
+            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Not passing a 2nd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
         }
-    }
-
-    /**
-     * Set the buckets_path for this aggregation.
-     *
-     * @return $this
-     */
-    public function setBucketsPath(string $bucketsPath): self
-    {
-        return $this->setParam('buckets_path', $bucketsPath);
-    }
-
-    /**
-     * Set the gap policy for this aggregation.
-     *
-     * @return $this
-     */
-    public function setGapPolicy(string $gapPolicy): self
-    {
-        return $this->setParam('gap_policy', $gapPolicy);
     }
 
     /**

@@ -747,12 +747,18 @@
                         _.each(resp.records, function(user) {
                             selectedUser.reportees.push({id: user.id, name: user.full_name});
                         });
-                        this.set("selectedUser", selectedUser)
+                        this.set({
+                            selectedUser: selectedUser,
+                            forecastType: app.utils.getForecastType(selectedUser.is_manager, selectedUser.showOpps)
+                        });
                     }, context);
                     app.api.call("create", url, post_args, options);
                 } else {
                     // update context with selected user which will trigger checkRender
-                    context.set("selectedUser", selectedUser);
+                    context.set({
+                        selectedUser: selectedUser,
+                        forecastType: app.utils.getForecastType(selectedUser.is_manager, selectedUser.showOpps)
+                    });
                 }
             },
 
@@ -1442,6 +1448,109 @@
             },
 
             /**
+             * Utils for map
+             */
+            reports: {
+                /**
+                 * Get data series meta for chart
+                 *
+                 * @param {string} dataSeries
+                 * @return {Object|boolean}
+                 */
+                getDataSeries: function(dataSeries) {
+                    if (!_.isString(dataSeries)) {
+                        return false;
+                    }
+
+                    const dataSeriesParts = dataSeries.split(':');
+
+                    if (!dataSeriesParts || dataSeriesParts.length <= 1) {
+                        return false;
+                    }
+
+                    const groupFunction = dataSeriesParts.pop();
+                    let fieldName;
+                    let tableKey;
+
+                    if (groupFunction === 'count') {
+                        // function format for count table_key:count
+                        fieldName = 'id';
+                    } else {
+                        // function format for others table_key:field_name:function_name(ex: avg)
+                        fieldName = dataSeriesParts.pop();
+                    }
+
+                    tableKey = dataSeriesParts.join(':');
+
+                    return {
+                        fieldName,
+                        tableKey,
+                        groupFunction,
+                    };
+                },
+
+                /**
+                 * Check if the current user has access to all the report fields/modules
+                 *
+                 * @param {Data.Bean|Object} model
+                 * @param {string} typeOfAction
+                 *
+                 * @return {boolean}
+                 */
+                hasAccessToAllReport: function(model, typeOfAction = 'view') {
+                    if (!_.isObject(model)) {
+                        return true;
+                    }
+
+                    let hasAccess = true;
+
+                    const content = model.get ? model.get('content') : model.content;
+                    const reportDef = app.utils.tryParseJSONObject(content);
+
+                    if (!reportDef) {
+                        return hasAccess;
+                    }
+
+                    if (!app.acl.hasAccess(typeOfAction, reportDef.module)) {
+                        hasAccess = false;
+
+                        return hasAccess;
+                    }
+
+                    const displayColumnsKey = 'display_columns';
+                    const summaryColumnsKey = 'summary_columns';
+                    const tableListKey = 'full_table_list';
+                    const tableKey = 'table_key';
+
+                    const tables = reportDef[tableListKey];
+                    const displayColumns = reportDef[displayColumnsKey] || [];
+                    const summaryColumns = reportDef[summaryColumnsKey] || [];
+
+                    if (!tables) {
+                        return hasAccess;
+                    }
+
+                    const fields = displayColumns.concat(summaryColumns);
+
+                    _.each(fields, function checkACL(fieldData) {
+                        const tableName = fieldData[tableKey];
+                        const fieldName = fieldData.name;
+                        const module = tables[tableName].module;
+                        const bean = app.data.createBean(module);
+
+                        const accessToField = app.acl.hasAccessToModel(typeOfAction, bean, fieldName);
+                        const accessToModule = app.acl.hasAccess(typeOfAction, module);
+
+                        if (!accessToField || !accessToModule) {
+                            hasAccess = false;
+                        }
+                    }, this);
+
+                    return hasAccess;
+                },
+            },
+
+            /**
              * Check if field is always readonly
              * @param {Object} fieldDef field definition
              * @param {Object} viewDef (optional) view defintion of the field
@@ -1565,8 +1674,13 @@
                         !app.utils.isTruthy(getValue('lock_duration'));
                 }
 
-                // Forecast is valid to cascade if the RLI is not in a closed sales stage
+                // Forecast is valid to cascade if the user has access to Forecasts and the RLI is not in a
+                // closed sales stage
                 if (fieldName === 'commit_stage') {
+                    if (!app.acl.hasAccess('access', 'Forecasts')) {
+                        return false;
+                    }
+
                     let forecastConfig = app.metadata.getModule('Forecasts', 'config');
                     let closedSalesStages = [...forecastConfig.sales_stage_won, ...forecastConfig.sales_stage_lost];
                     return !closedSalesStages.includes(getValue('sales_stage'));
@@ -2064,8 +2178,46 @@
                 }
 
                 return bodyHasDarkModeClass || localStorage.getItem('last_appearance_preference') === 'dark';
-            }
+            },
 
+            /**
+             * Get color approach to white or to black
+             *
+             * @param {string} color Hex color
+             * @return {boolean}
+             */
+            isWhiteColor: function(color) {
+                color = color.substring(1); // strip #
+                var rgb = parseInt(color, 16); // convert rrggbb to decimal
+                var r = (rgb >> 16) & 0xff; // extract red
+                var g = (rgb >> 8) & 0xff; // extract green
+                var b = (rgb >> 0) & 0xff; // extract blue
+
+                var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+
+                if (luma < 100) {
+                    return false;
+                }
+                return true;
+            },
+
+            /**
+             * Safe parse JSON string
+             *
+             * @param {string} jsonString
+             */
+            tryParseJSONObject: function(jsonString) {
+                try {
+                    const response = JSON.parse(jsonString);
+
+                    if (response && _.isObject(response)) {
+                        return response;
+                    }
+                }
+                catch (e) { }
+
+                return false;
+            },
         });
     });
 })(SUGAR.App);

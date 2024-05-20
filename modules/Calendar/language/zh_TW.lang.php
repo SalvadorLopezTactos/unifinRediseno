@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => '11 月',
     'LBL_DEC' => '12 月',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => '行事曆已新增',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} 已選取',
+    'LBL_NO_USER_SELECTED' => '請選取使用者或小組',
+    'LBL_NO_CALENDAR_SELECTED' => '請選取行事曆',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => '無法儲存行事曆。',
+
 );
 
 $mod_list_strings = array(

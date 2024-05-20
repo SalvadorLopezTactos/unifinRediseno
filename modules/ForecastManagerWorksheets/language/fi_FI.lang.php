@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Kelpaamaton arvo: {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Arvon on oltava välillä {{min}} – {{max}}',
-    'LBL_HISTORY_LOG' => 'Edellinen commit',
+    'LBL_HISTORY_LOG' => 'Edellinen sitoumus',
     'LBL_NO_COMMIT' => 'Ei edellisestä committia',
 
     'LBL_MANGER_SAVED' => 'Manager tallennettu'

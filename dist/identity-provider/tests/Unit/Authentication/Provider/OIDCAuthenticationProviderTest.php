@@ -12,9 +12,8 @@
 
 namespace Unit\Authentication\Provider;
 
-use Jose\Loader as JWTLoader;
-use Jose\LoaderInterface;
-use Jose\Object\JWEInterface;
+use Jose\Component\Signature\Serializer\CompactSerializer;
+use Jose\Component\Signature\Serializer\JWSSerializerManager;
 use League\OAuth2\Client\Token\AccessToken;
 use Sugarcrm\IdentityProvider\Authentication\Provider\OIDC;
 use Sugarcrm\IdentityProvider\Authentication\Provider\OIDCAuthenticationProvider;
@@ -22,6 +21,7 @@ use Sugarcrm\IdentityProvider\Authentication\Token\OIDC\OIDCCodeToken;
 use Sugarcrm\IdentityProvider\Authentication\Token\SAML\ResultToken;
 use Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\Authentication\UserMapping\OIDCUserMapping;
+use Sugarcrm\IdentityProvider\Authentication\UserProvider\BaseUserProvider;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
@@ -36,11 +36,6 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
      * @var OIDC\ExternalServiceInterface | \PHPUnit_Framework_MockObject_MockObject
      */
     private $oidcService;
-
-    /**
-     * @var JWTLoader | \PHPUnit_Framework_MockObject_MockObject
-     */
-    private $jwtLoader;
 
     /**
      * @var UserProviderInterface | \PHPUnit_Framework_MockObject_MockObject
@@ -68,11 +63,6 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
     private $provider;
 
     /**
-     * @var JWEInterface
-     */
-    private $jwt;
-
-    /**
      * @var User
      */
     private $user;
@@ -84,8 +74,7 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->oidcService = $this->createMock(OIDC\ExternalServiceInterface::class);
-        $this->jwtLoader = $this->createMock(LoaderInterface::class);
-        $this->userProvider = $this->createMock(UserProviderInterface::class);
+        $this->userProvider = $this->createMock(BaseUserProvider::class);
         $this->mapper = new OIDCUserMapping(
             [
                 'given_name' => 'attributes.given_name',
@@ -95,7 +84,6 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         );
         $this->userChecker = $this->getMockBuilder(UserCheckerInterface::class)->getMock();
         $this->accessToken = $this->createMock(AccessToken::class);
-        $this->jwt = $this->createMock(JWEInterface::class);
         $this->user = new User();
 
         $this->provider = new OIDCAuthenticationProvider(
@@ -113,7 +101,7 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             $this->mapper,
             $this->userChecker,
             $this->oidcService,
-            $this->jwtLoader
+            new JWSSerializerManager([new CompactSerializer()])
         );
     }
 
@@ -170,8 +158,9 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             ->with(['code' => 'code'])
             ->willReturn($this->accessToken);
 
-        $this->accessToken->method('getValues')->willReturn(['id_token' => 'id_token']);
-        $this->jwtLoader->method('load')->with('id_token')->willReturn($this->jwt);
+        $idToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.hqWGSaFpvbrXkOWc6lrnffhNWR19W_S1YKFBx2arWBk';
+
+        $this->accessToken->method('getValues')->willReturn(['id_token' => $idToken]);
 
         $this->provider->authenticate(new OIDCCodeToken('code', []));
     }
@@ -189,7 +178,9 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
                     'family_name' => 'name',
                     'email' => 'test1@email',
                 ],
-                'jwtClaims' => [],
+                'token' => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                            eyJzdWIiOiJzdWJqZWN0IiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.
+                            wsXX7idVT8tby-bBKeutZEOlTyq-MWS6p9RBquz1Lb4',
                 'claimsToSet' => [
                     'sub' => 'subject1',
                     'given_name' => 'test',
@@ -210,11 +201,9 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             ],
             'emptyUserInfoNameClaimsInJWT' => [
                 'userInfoClaims' => [],
-                'jwtClaims' => [
-                    'sub' => 'subject',
-                    'name' => 'test name',
-                    'email' => 'test@email',
-                ],
+                'token' => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                            eyJzdWIiOiJzdWJqZWN0IiwibmFtZSI6InRlc3QgbmFtZSIsImVtYWlsIjoidGVzdEBlbWFpbCJ9.
+                            p28dGBRncj15J28-EyC_sUV6KPyaZZS7x6SzVsDs_9M',
                 'claimsToSet' => [
                     'sub' => 'subject',
                     'family_name' => 'test name',
@@ -236,7 +225,7 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param array $userInfoClaims
-     * @param array $jwtClaims
+     * @param string $token
      * @param array $claimsToSet
      * @param array $expectedAttributes
      *
@@ -245,7 +234,7 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticate(
         array $userInfoClaims,
-        array $jwtClaims,
+        string $token,
         array $claimsToSet,
         array $expectedAttributes
     ): void {
@@ -259,13 +248,10 @@ class OIDCAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             ->with($this->accessToken)
             ->willReturn($userInfoClaims);
 
-        $this->accessToken->method('getValues')->willReturn(['id_token' => 'id_token']);
-
-        $this->jwtLoader->method('load')->with('id_token')->willReturn($this->jwt);
-        $this->jwt->method('getClaims')->willReturn($jwtClaims);
+        $this->accessToken->method('getValues')->willReturn(['id_token' => $token]);
 
         $this->userProvider->expects($this->once())
-            ->method('loadUserByUsername')
+            ->method('loadUserByIdentifier')
             ->with($claimsToSet['sub'])
             ->willReturn($this->user);
 

@@ -193,7 +193,7 @@ class ListViewMerge extends EditViewMerge{
 		//if orignal and custom match always take the new value or if new and custom match
 		if($orig_custom || $new_custom){
 			$this->log($new);
-			$new['default'] = isset($custom['default']) ? $custom['default'] : false;
+            $new['default'] = $custom['default'] ?? false;
 			return $new;
 		}
 		//if original and new match always take the custom
@@ -217,7 +217,7 @@ class ListViewMerge extends EditViewMerge{
 		}
 		
 		//default to returning the New version of the field 
-		$new['default'] = isset($custom['default']) ? $custom['default'] : false;
+        $new['default'] = $custom['default'] ?? false;
 		return $new; 
 	}	
 }

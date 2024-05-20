@@ -39,7 +39,7 @@ class TagKeys extends \Google\Service\Resource
   /**
    * Creates a new TagKey. If another request with the same parameters is sent
    * while the original request is in process, the second request will receive an
-   * error. A maximum of 300 TagKeys can exist under a parent at any given time.
+   * error. A maximum of 1000 TagKeys can exist under a parent at any given time.
    * (tagKeys.create)
    *
    * @param TagKey $postBody
@@ -99,8 +99,9 @@ class TagKeys extends \Google\Service\Resource
    * specified TagKey. (tagKeys.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param GetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -162,8 +163,9 @@ class TagKeys extends \Google\Service\Resource
    * permission on the identified tagValue. (tagKeys.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -181,8 +183,9 @@ class TagKeys extends \Google\Service\Resource
    * (tagKeys.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse

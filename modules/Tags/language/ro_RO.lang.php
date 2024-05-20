@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare Etichete',
     'LBL_MY_TAGS' => 'Etichetele mele',
     'LBL_MY_FAVORITE_TAGS' => 'Etichetele mele favorite',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} etichete',
 );

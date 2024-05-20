@@ -145,7 +145,7 @@ FROM tags INNER JOIN tag_bean_rel tbr ON tags.id=tbr.tag_id
 WHERE tbr.bean_module = ? AND tbr.bean_id IN (?) AND tbr.deleted=0
 ORDER BY tags.name_lower ASC
 SQL;
-        $stmt = $this->db->getConnection()
+        $rows = $this->db->getConnection()
             ->executeQuery(
                 $sql,
                 [$focus->module_name, is_array($ids) ? $ids : [$ids]],
@@ -153,7 +153,7 @@ SQL;
             );
         $returnArray = [];
 
-        foreach ($stmt as $data) {
+        foreach ($rows->iterateAssociative() as $data) {
             $returnArray[$data['bean_id']][] = ['id' => $data['id'], 'name' => $data['name']];
         }
 
@@ -199,7 +199,7 @@ SQL;
         $sql .= " WHERE tag_id= ? ";
         $db = DBManagerFactory::getInstance();
         $conn = $db->getConnection();
-        $conn->executeQuery($sql, array($date_modified, $id));
+        $conn->executeStatement($sql, array($date_modified, $id));
         parent::mark_deleted($id);
     }
 

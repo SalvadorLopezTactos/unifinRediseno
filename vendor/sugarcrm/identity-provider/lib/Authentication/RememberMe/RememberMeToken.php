@@ -47,9 +47,9 @@ class RememberMeToken implements RememberMeTokenInterface
     /**
      * @inheritDoc
      */
-    public function getRoles()
+    public function getRoleNames(): array
     {
-        return $this->token->getRoles();
+        return $this->token->getRoleNames();
     }
 
     /**
@@ -77,11 +77,20 @@ class RememberMeToken implements RememberMeTokenInterface
     }
 
     /**
+     * Only for backward compatibility
      * @inheritDoc
      */
-    public function getUsername()
+    public function getUsername(): string
     {
-        return $this->token->getUsername();
+        return $this->getUserIdentifier();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUserIdentifier(): string
+    {
+        return $this->token->getUserIdentifier();
     }
 
     /**
@@ -240,17 +249,17 @@ class RememberMeToken implements RememberMeTokenInterface
     /**
      * @inheritDoc
      */
-    public function serialize()
+    public function serialize(): ?string
     {
-        return serialize($this->token);
+        return serialize($this->__serialize());
     }
 
     /**
      * @inheritDoc
      */
-    public function unserialize($serialized)
+    public function unserialize($data): void
     {
-        $this->token = unserialize($serialized);
+        $this->__unserialize($data);
     }
 
     /**
@@ -259,5 +268,15 @@ class RememberMeToken implements RememberMeTokenInterface
     public function getTenantId(): string
     {
         return SRNConverter::fromString($this->getSRN())->getTenantId();
+    }
+
+    public function __serialize(): array
+    {
+        return $this->token->__serialize();
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->token = unserialize($data, false);
     }
 }

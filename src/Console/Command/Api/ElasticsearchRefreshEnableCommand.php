@@ -116,6 +116,7 @@ class ElasticsearchRefreshEnableCommand extends Command implements InstanceModeI
         }
 
         $table->render();
+        return 0;
     }
 
     /**

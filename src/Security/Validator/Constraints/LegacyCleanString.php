@@ -22,19 +22,19 @@ use Symfony\Component\Validator\Constraint;
 class LegacyCleanString extends Constraint
 {
     // Available filters
-    const STANDARD = 'STANDARD';
-    const STANDARDSPACE = 'STANDARDSPACE';
-    const FILE = 'FILE';
-    const NUMBER = 'NUMBER';
-    const SQL_COLUMN_LIST = 'SQL_COLUMN_LIST';
-    const PATH_NO_URL = 'PATH_NO_URL';
-    const SAFED_GET = 'SAFED_GET';
-    const UNIFIED_SEARCH = 'UNIFIED_SEARCH';
-    const AUTO_INCREMENT = 'AUTO_INCREMENT';
-    const ALPHANUM = 'ALPHANUM';
+    public const STANDARD = 'STANDARD';
+    public const STANDARDSPACE = 'STANDARDSPACE';
+    public const FILE = 'FILE';
+    public const NUMBER = 'NUMBER';
+    public const SQL_COLUMN_LIST = 'SQL_COLUMN_LIST';
+    public const PATH_NO_URL = 'PATH_NO_URL';
+    public const SAFED_GET = 'SAFED_GET';
+    public const UNIFIED_SEARCH = 'UNIFIED_SEARCH';
+    public const AUTO_INCREMENT = 'AUTO_INCREMENT';
+    public const ALPHANUM = 'ALPHANUM';
 
     // Error codes
-    const FILTER_ERROR = 1;
+    public const FILTER_ERROR = 1;
 
     protected static $errorNames = array(
         self::FILTER_ERROR => 'FILTER_ERROR',

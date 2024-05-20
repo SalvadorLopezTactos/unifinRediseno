@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => '報表計劃紀錄儀表板',
     'LBL_FILE_TYPE' => '文件類型',
+    'LBL_EMBED_REPORT' => '在電子郵件中嵌入報告',
+    'LBL_EMBED_REPORT_INFO' => '注意：如果報告超過200行，我們會將報告附加為CSV文件。',
 );

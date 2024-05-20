@@ -133,6 +133,10 @@ class IBMDB2Manager  extends DBManager
 	public  $schema = '';
 
 	protected $ignoreErrors = false;
+    /**
+     * @var string
+     */
+    public $lastsql;
 
 	/**~
 	 * Parses and runs queries
@@ -443,7 +447,7 @@ WHERE TABSCHEMA = ?
 	{
 		if ($db = $this->getDatabase()) {
 			$tables = array();
-			$result = db2_tables ($db, null, '%', strtoupper($namepattern), 'TABLE');
+            $result = db2_tables($db, '', '%', strtoupper($namepattern), 'TABLE');
 			if (!empty($result)) {
 				while ($row = $this->fetchByAssoc($result)) {
 					if(preg_match('/^sys/i', $row['table_schem']) == 0) // Since we don't know the default schema name
@@ -474,9 +478,15 @@ WHERE TABSCHEMA = ?
 	 */
 	public function version()
 	{
-		$dbinfo = db2_server_info($this->getDatabase());
-		if($dbinfo) return $dbinfo->DBMS_VER;
-		else return false;
+        if (!isset(static::$version)) {
+            $dbInfo = db2_server_info($this->getDatabase());
+            if (!empty($dbInfo->DBMS_VER)) {
+                static::$version = $dbInfo->DBMS_VER;
+            } else {
+                return false;
+            }
+        }
+        return static::$version;
 	}
 
     /**
@@ -652,7 +662,7 @@ WHERE TABSCHEMA = ?
 		if ($persistConnection) {
 			$this->database = db2_pconnect($dsn, '', '', $configOptions['db_options']);
 			if (!$this->database) {
-                $this->logger->alert(__CLASS__ . ": Persistent connection specified, but failed. Error: "
+                $this->logger->alert(self::class . ": Persistent connection specified, but failed. Error: "
                     . db2_conn_error() . ": " . db2_conn_errormsg());
 			}
 		}
@@ -666,7 +676,7 @@ WHERE TABSCHEMA = ?
 			}
 			if (!$this->database) {
                 $this->logger->alert(
-                    __CLASS__ . ": Could not connect to Database with non-persistent connection. Error "
+                    self::class . ": Could not connect to Database with non-persistent connection. Error "
                     . db2_conn_error() . ": " . db2_conn_errormsg()
                 );
 			}
@@ -685,7 +695,7 @@ WHERE TABSCHEMA = ?
             } else {
                 $this->logger->error("failed to turn autocommit off!");
             }
-
+            static::$version = null;
 		}
 		$this->ignoreErrors = false;
         $this->logger->info("Connect:".$this->database);
@@ -728,7 +738,7 @@ public function convert($string, $type, array $additional_parameters = array())
 		array_unshift($all_parameters, $string);
 	}
 
-	switch (strtolower($type)) {
+        switch (strtolower($type ?? '')) {
 		case 'date':
 			return "to_date($string, 'YYYY-MM-DD')";
 		case 'time':
@@ -902,7 +912,7 @@ public function convert($string, $type, array $additional_parameters = array())
      */
     protected function alterBlobToClob($tablename, $oldColumn, $newColumn, $ignoreRequired)
     {
-        $newColumn['name'] = 'tmp_' . mt_rand();
+        $newColumn['name'] = 'tmp_' . random_int(0, mt_getrandmax());
         $sql = array();
         $sql[] = $this->alterTableSQL($tablename,
             $this->changeOneColumnSQL($tablename, $newColumn, 'ADD', $ignoreRequired));
@@ -1404,7 +1414,7 @@ INNER JOIN SYSCAT."INDEXCOLUSE" c
      */
     public function isBlobType($type)
     {
-        $type = strtolower($type);
+        $type = strtolower($type ?? '');
         return strncmp($type, 'blob', 4) === 0
             || strncmp($this->getColumnType($type), 'blob', 4) === 0;
     }
@@ -1899,7 +1909,7 @@ INNER JOIN SYSCAT."INDEXCOLUSE" c
 
         // Deal with values that would exceed the 32k constant limit of DB2
         //Note we assume DB2 counts bytes and not characters
-        if (strpos($ctype, 'clob') !== false && strlen($val) > 32000 && !$forPrepared) {
+        if (strpos((string)$ctype, 'clob') !== false && strlen((string)$val) > 32000 && !$forPrepared) {
             $chunk = '';
             // Incrementing with number of bytes of chunk to not loose any characters
             for ($pos = 0, $i = 0; $pos < strlen($val) && $i < 5; $pos += strlen($chunk), $i++) {

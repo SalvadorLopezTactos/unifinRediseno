@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Vytvoril',
   'LBL_EDIT_LAYOUT' => 'Upraviť rozloženie' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Len pre správcov',
-  'LBL_CURRENCY_DEFAULT' => 'Americký dolár (predvolené)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Mena systému (predvolená)',
 );
 ?>

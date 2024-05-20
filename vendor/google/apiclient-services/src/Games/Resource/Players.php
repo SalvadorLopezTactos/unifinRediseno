@@ -19,6 +19,7 @@ namespace Google\Service\Games\Resource;
 
 use Google\Service\Games\Player;
 use Google\Service\Games\PlayerListResponse;
+use Google\Service\Games\ScopedPlayerIds;
 
 /**
  * The "players" collection of methods.
@@ -40,6 +41,9 @@ class Players extends \Google\Service\Resource
    *
    * @opt_param string language The preferred language to use for strings returned
    * by this method.
+   * @opt_param string playerIdConsistencyToken Consistency token of the player
+   * id. The call returns a 'not found' result when the token is present and
+   * invalid. Empty value is ignored. See also GlobalPlayerIdConsistencyTokenProto
    * @return Player
    */
   public function get($playerId, $optParams = [])
@@ -47,6 +51,19 @@ class Players extends \Google\Service\Resource
     $params = ['playerId' => $playerId];
     $params = array_merge($params, $optParams);
     return $this->call('get', [$params], Player::class);
+  }
+  /**
+   * Retrieves scoped player identifiers for currently authenticated user.
+   * (players.getScopedPlayerIds)
+   *
+   * @param array $optParams Optional parameters.
+   * @return ScopedPlayerIds
+   */
+  public function getScopedPlayerIds($optParams = [])
+  {
+    $params = [];
+    $params = array_merge($params, $optParams);
+    return $this->call('getScopedPlayerIds', [$params], ScopedPlayerIds::class);
   }
   /**
    * Get the collection of players for the currently authenticated user.

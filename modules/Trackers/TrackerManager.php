@@ -217,7 +217,7 @@ public function save() {
  */
 public function unsetMonitor($monitor) {
    if(!empty($monitor)) {
-      unset($this->monitors[strtolower($monitor->name)]);
+            unset($this->monitors[strtolower((string)$monitor->name)]);
    }
 }
 

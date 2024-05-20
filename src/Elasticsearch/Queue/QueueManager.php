@@ -28,18 +28,18 @@ class QueueManager
 {
     use MemoryUsageRecorderTrait;
 
-    const FTS_QUEUE = 'fts_queue';
-    const PROCESSED_NEW = '0';
-    const DEFAULT_BUCKET_ID = -1;
+    public const FTS_QUEUE = 'fts_queue';
+    public const PROCESSED_NEW = '0';
+    public const DEFAULT_BUCKET_ID = -1;
 
     /**
      * memory check interval
      */
-    const MEMORY_CHECK_INTERVAL = 100;
+    public const MEMORY_CHECK_INTERVAL = 100;
     /**
      * max percentage of memory usage before stopping iteration
      */
-    const MEMORY_USAGE_MAX_PERCENTAGE = 80;
+    public const MEMORY_USAGE_MAX_PERCENTAGE = 80;
 
     /**
      * config key name for enabling caching teamset Ids, this is for performance gain for those
@@ -49,7 +49,7 @@ class QueueManager
      * $sugar_config['perfProfile']['TeamSecurity']['gs_use_normalized_teams'] = true;
      *
      */
-    const CONFIG_PERF_GS_TEAM_KEY = 'perfProfile.TeamSecurity.gs_use_normalized_teams';
+    public const CONFIG_PERF_GS_TEAM_KEY = 'perfProfile.TeamSecurity.gs_use_normalized_teams';
 
     /**
      * cached teamset Ids
@@ -199,7 +199,7 @@ class QueueManager
      */
     public function createScheduler()
     {
-        $schedulerClass = \SugarAutoLoader::customClass('Sugarcrm\\Sugarcrm\\Elasticsearch\\Queue\\Scheduler');
+        $schedulerClass = \SugarAutoLoader::customClass(\Sugarcrm\Sugarcrm\Elasticsearch\Queue\Scheduler::class);
         $schedulerExec = "class::\\{$schedulerClass}";
         $scheduler = $this->getNewBean('Schedulers');
 
@@ -233,7 +233,7 @@ class QueueManager
      */
     public function createConsumer($module)
     {
-        $jobClass = \SugarAutoLoader::customClass('Sugarcrm\\Sugarcrm\\Elasticsearch\\Queue\\ConsumerJob');
+        $jobClass = \SugarAutoLoader::customClass(\Sugarcrm\Sugarcrm\Elasticsearch\Queue\ConsumerJob::class);
         $jobExec = "class::\\{$jobClass}";
         $job = $this->getNewBean('SchedulersJobs');
 
@@ -907,7 +907,7 @@ class QueueManager
     {
         $total = 0;
         foreach ($this->getQueuedModules($bucketId) as $module) {
-            list($sucess, $processed, $duration, $errorMsg) = $this->consumeModuleFromQueue($module, $bucketId);
+            [$sucess, $processed, $duration, $errorMsg] = $this->consumeModuleFromQueue($module, $bucketId);
             $total += $processed;
         }
 
@@ -923,16 +923,16 @@ class QueueManager
      * @param $bucketId
      * @return boolean
      */
-    protected function hasMoreRecords(int $bucketId) : bool
+    public function hasMoreRecords(int $bucketId): bool
     {
-        // check the count for each module
-        foreach ($this->getQueuedModules($bucketId) as $module) {
-            if ($this->getQueueCountModule($module, $bucketId) > 0) {
-                return true;
-            }
-        }
+        // check if there is at least one record to be indexed
+        $sql = sprintf(
+            'SELECT 1 FROM %s WHERE processed = %s',
+            self::FTS_QUEUE,
+            $this->isDefaultBucketId($bucketId) ? self::PROCESSED_NEW : $bucketId,
+        );
 
-        return false;
+        return (bool)$this->db->getOne($sql);
     }
 
     /**

@@ -13,10 +13,8 @@
 $module_name = 'Cases';
 $viewdefs[$module_name]['base']['menu']['quickcreate'] = [
     'layout' => 'create',
-    'label' => 'LNK_NEW_CASE',
     'visible' => true,
     'order' => 2,
-    'icon' => 'sicon-plus',
     'related' => [
         [
             'module' => 'Contacts',

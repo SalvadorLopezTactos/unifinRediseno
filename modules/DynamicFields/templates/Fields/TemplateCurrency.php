@@ -13,6 +13,10 @@
 
 class TemplateCurrency extends TemplateRange
 {
+    /**
+     * @var mixed[]
+     */
+    public $related_fields;
     public $max_size = 25;
     public $len = 26;
     public $precision = 6;

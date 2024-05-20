@@ -31,7 +31,7 @@ interface Service
      * @param string $newDeviceId The device's new ID.
      * @return bool
      */
-    public function update(string $platform, string $oldDeviceId, string $newDeviceId) : bool;
+    public function update(string $platform, string $oldDeviceId, string $newDeviceId = '') : bool;
 
     /**
      * Removes a user's device.

@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'로고',
 	'LBL_ADMIN_WIZARD' => '관리 마법사',
-	'LBL_ALLOW_USER_TABS' => '사용자가 탭을 숨기도록 허용',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => '시스템 설정',
 	'LBL_ENABLE_MAILMERGE' => '메일 통합을 실행하시겠습니까?',
 	'LBL_LOGVIEW' => '일지 보기',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => '무료정보 전화와 회의가 발표되는 현재 날짜에 앞서 달의 숫자를 결정하려면 이 설정을 사용하십시오. 무료 발표기능을 없애려면 0을 입력하시면 됩니다. 최소 1달에서 최대 12달까지 허용됩니다.',
     'LBL_PDFMODULE_NAME' => 'PDF 템플릿 보고서',
     'SUGARPDF_BASIC_SETTINGS' => '문서 소유권',
-    'SUGARPDF_ADVANCED_SETTINGS' => '고급 설정',
     'SUGARPDF_LOGO_SETTINGS' => '이미지',
-
-    'PDF_CREATOR' => 'PDF 만들기',
-    'PDF_CREATOR_INFO' => '신규 문서 만들기를 정의하십시오. 이것은 보통 PDF를 만드는 어플리케이션의 이름입니다.',
 
     'PDF_AUTHOR' => '필자',
     'PDF_AUTHOR_INFO' => '필자는 문서 소유권에 나타납니다.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => '인용구를 위한 새 이미지를 선택하십시오.',
     'PDF_NEW_HEADER_LOGO_INFO' => '파일 형식은 .jpg 또는 .png.입니다. (EZPDF는.jpg만  )<br />권장 크기는 867x60 px.입니다.',
 
-    'PDF_HEADER_LOGO_WIDTH' => '인용 이미지 너비',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'PDF 문서 인용구에 나타나는 전송된 이미지 축적비율을 변경하십시오.',
+    'PDF_TITLE' => '제목',
+    'PDF_TITLE_INFO' => '제목을 문서 소유권에 나타납니다.',
+
+    'PDF_SUBJECT' => '제목',
+    'PDF_SUBJECT_INFO' => '제목은 문서 소유권에 나타납니다..',
 
     'PDF_SMALL_HEADER_LOGO' => '현재 이미지',
     'PDF_SMALL_HEADER_LOGO_INFO' => '이 이미지는 PDF문서 페이지의 머리글에 나타납니다.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => '새 이미지를 선택하십시오',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => '현재 이미지를 대체할 이미지를 선택하십시오. 이 파일 형식은 .jpg 또는 .png.입니다. (EZPDF는.jpg만)<br />권장 크기는 212x40 px.입니다.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => '보고서 이미지 너비',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'PDF 문서 보고서에 나타나는 전송된 이미지 축적비율을 변경하십시오.(TCPDF만)',
-
-
-    'PDF_HEADER_STRING' => '머리글열',
-    'PDF_HEADER_STRING_INFO' => '머리글과 설명 줄',
-
-    'PDF_HEADER_TITLE' => '머리말 제목',
-    'PDF_HEADER_TITLE_INFO' => '제목이 문서 머리글에 있으므로 출력에 연결',
-
-    'PDF_FILENAME' => '파일명 초기설정',
-    'PDF_FILENAME_INFO' => '만들어진 PDF파일을 위한 초기설정 파일명',
-
-    'PDF_TITLE' => '제목',
-    'PDF_TITLE_INFO' => '제목을 문서 소유권에 나타납니다.',
-
-    'PDF_SUBJECT' => '제목',
-    'PDF_SUBJECT_INFO' => '제목은 문서 소유권에 나타납니다..',
-
     'PDF_KEYWORDS' => '키워드',
     'PDF_KEYWORDS_INFO' => '문서 관련 키워드는 보통 키워드1 키워드2..."형식입니다.',
 
-    'PDF_COMPRESSION' => '압축',
-    'PDF_COMPRESSION_INFO' => '페이지 압출 실행 또는 정지<br />실행시 내부 페이지 표시는 압축되며 결과 문서의 약 2 압축비율로 연결됩니다.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG 해상도(1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'JPEG 압축 해상도 초기 설정하기(1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF 버전',
-    'PDF_PDF_VERSION_INFO' => 'PDF번전 설정(유효한 가치의 PDF 참조 확인).',
-
-    'PDF_PROTECTION' => '문서 보호',
-    'PDF_PROTECTION_INFO' => '문서보호 설정<br />-복사:클립보드로 문자와 이미지 복사<br />-출력:문서 출력하기<br />-수정:수정하기(주석과 양식 제외)<br />-주석 양식:주석과 양식 추가<br />노트:수정으로부터의 보호는 전체Acrobat 상품 소지자를 위해서입니다.',
-
-    'PDF_USER_PASSWORD' => '사용자 비밀번호',
-    'PDF_USER_PASSWORD_INFO' => '비밀번호를 설정하지 않았다면 문서는 바로 열립니다.<br />비밀번호를 설정했다면 PDF보기는 문서를 보이기전 비밀번호를 필요로합니다. <br />일반 비밀번호와 다른 마스터 비밀번호는 전체 접속에 사용될수 있습니다.',
-
-    'PDF_OWNER_PASSWORD' => '소유자 비밀번호',
-    'PDF_OWNER_PASSWORD_INFO' => '비밀번호를 설정하지 않았다면 문서는 바로 열립니다.<br />비밀번호를 설정했다면 PDF보기는 문서를 보이기전 비밀번호를 필요로합니다. <br />일반 비밀번호와 다른 마스터 비밀번호는 전체 접속에 사용될수 있습니다.',
-
-    'PDF_ACL_ACCESS' => '접속 통제',
-    'PDF_ACL_ACCESS_INFO' => 'PDF생성을 위한 접속 통제 초기설정',
-
-    'K_CELL_HEIGHT_RATIO' => '셀 높이 비율',
-    'K_CELL_HEIGHT_RATIO_INFO' => '셀 높이가 (글자높이 x 셀 높이비율) 보다 작으면 (글자높이 x 셀 높이비율)가 셀 높이로 사용됩니다. <br />(글자높이 x 셀 높이비율)는 또한 높이가 정의되지 않았을때 사용될수도 있습니다.',
-
-    'K_TITLE_MAGNIFICATION' => '제목 확대',
-    'K_TITLE_MAGNIFICATION_INFO' => '제목 확대는 본문 글자크리를 바꾸지 않습니다.',
-
-    'K_SMALL_RATIO' => '작은 글자 요소',
-    'K_SMALL_RATIO_INFO' => '작은 글자의 축소요소',
-
-    'HEAD_MAGNIFICATION' => '머리글 확대',
-    'HEAD_MAGNIFICATION_INFO' => '제목 확대요소',
-
-    'PDF_IMAGE_SCALE_RATIO' => '이미지 축소비율',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => '이미지 축적을 위해 사용되는 비율',
-
-    'PDF_UNIT' => '단위',
-    'PDF_UNIT_INFO' => '문서 측정 단위',
 	'PDF_GD_WARNING'=>'PHP설치를 위한 GD library가 없습니다.  GD library를 설치하지 않으면 PDF문서에 JPEG로고만을 진열할수 있습니다.',
     'ERR_EZPDF_DISABLE'=>'경고 : EZPDF 종류는 형성된 테이블에서 사용중지 되었으며 PDF 종류로 설정 되었습니다. 이 TCPDF형식을 PDF종류에 설정해 저장하여 알맞은 상태로 복귀하십시오.',
     'LBL_IMG_RESIZED'=>"크기조정",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'PDF글자체 추가',
     'LBL_PDF_PATCH' => '조각',
-    'LBL_PDF_PATCH_INFO' => '코드화 고객 수정, PHP정렬을 작성하십시오 <br />예 :ISO-8859-1 유로기호를 포함하지 않습니다.. 추가하려면 164, 에  "array(164=>\\&#39;Euro\\&#39;)".를 작성하십시오',
     'LBL_PDF_ENCODING_TABLE' => '코드화 테이블',
     'LBL_PDF_ENCODING_TABLE_INFO' => '코드화 테이블명<br />이 항목은 TrueType Unicode에 의해 무시됩니다. 열린형식의 유니코드와 기호 글꼴입니다. <br />코드화는 코드(0 부터 255까지) 와 글자체를 포함하는 문자와의 연결을 정의합니다. <br />첫 128은 고정되어 있으며 ASCII에 부합합니다.',
     'LBL_PDF_FONT_FILE' => '글자체 파일',

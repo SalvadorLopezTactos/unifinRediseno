@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'URL de Seguiment:',
   'LBL_TRACKER_TEXT' => 'Text de Enllaç de Seguiment:',
   'LBL_TRACKER_COUNT' => 'Comptador de Seguiment:',
-  'LBL_REFER_URL' => 'URL de Redirecció de Seguiment:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Campanyes',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Campanyes per Correu',
   'LBL_NEW_FORM_TITLE' => 'Nova campanya',

@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Für optimale Leistung oder Ergebnisse mit IIS/FastCGI sapi sollte fastcgi.logging in der php.ini auf 0 gesetzt sein.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nicht unterstützte PHP-Version installiert: (Ver.',
     'LBL_DB_UNAVAILABLE'                => 'Die Datenbank ist nicht verfügbar',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Die Datenbankunterstützung wurde nicht gefunden.  Bitte vergewissern Sie sich, dass Sie die erforderlichen Treiber für einen der folgenden unterstützten Datenbanktypen haben: MySQL, MS SQLServer, Oracle oder DB2. Je nach PHP-Version müssen Sie möglicherweise die Erweiterung in der Datei php.ini deaktivieren oder mit der richtigen Binärdatei neu kompilieren.  Weitere Informationen über die Aktivierung der Datenbankunterstützung finden Sie in Ihrem PHP-Handbuch.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Datenbankunterstützung wurde nicht gefunden.  Bitte vergewissern Sie sich, dass Sie die erforderlichen Treiber für einen der folgenden unterstützten Datenbanktypen haben: MySQL, MS SQLServer, Oracle oder DB2.  Je nach PHP-Version müssen Sie möglicherweise die Erweiterung in der Datei php.ini auskommentieren oder mit der richtigen Binärdatei neu kompilieren.  Weitere Informationen über die Aktivierung der Datenbankunterstützung finden Sie in Ihrem PHP-Handbuch.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Die Funktionen verbunden mit XML Parser-Bibliotheken, die von SugarCRM gebraucht werden, wurden nicht gefunden. Sie können versuchen, die Kommentare in php.ini zu löschen, oder mit der richtigen Binary-Datei wieder zu kompilieren, abhängig von Ihrer PHP-Version. Nähere Informationen hierzu finden Sie in Ihrem PHP-Handbuch.',
     'LBL_CHECKSYS_CSPRNG' => 'Zufallszahlengenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Die Multibyte Strings PHP-Erweiterung (mbstring) scheint zu fehlen. <br/><br/>Dieses Modul ist normalerweise nicht aktiviert und muss mit --enable-mbstring aktiviert werden. In Ihrem PHP-Handbuch finden Sie mehr Informationen hierzu.',
@@ -630,32 +630,15 @@ Diesem Anruf absagen
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Benachrichtigungs-E-Mails über Zuweisungen',
-        'subject' => 'SugarCRM - $module_name zugewiesen',
-        'description' => 'Diese Vorlage wird verwendet, wenn das System die Zuweisung einer Aufgabe an einen Benutzer sendet.',
-        'body' => '<div>
-<p>$assigned_by_user hat dem&nbsp;$assigned_user einen&nbsp;$module_name zugewiesen.</p>
-
-<p>Sie können diesen&nbsp;$module_name überprüfen unter:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user hat dem $assigned_user einen $module_name zugewiesen.
-
-Sie können diesen $module_name überprüfen unter:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'E-Mails über geplante Berichte',
         'subject' => 'Geplanter Bericht: $report_name ab $report_time',
         'description' => 'Diese Vorlage wird verwendet, wenn das System einen geplanten Bericht an einen Benutzer sendet.',
         'body' => '<div>
-<p>Hallo $assigned_user,</p>
-<p>anbei ein automatisch generierter Bericht, der für Sie geplant wurde.</p>
-<p>Name des Berichts: $report_name</p>
-<p>Ausführungsdatum und -uhrzeit des Berichts: $report_time</p>
+<p>Hallo $assigned_user,<br></p>
+<p>anbei ein automatisch generierter Bericht, der für Sie geplant wurde.<br></p>
+<p>Name des Berichts: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Ausführungsdatum und -uhrzeit des Berichts: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Hallo $assigned_user,
@@ -681,21 +664,6 @@ Ausführungsdatum und -uhrzeit des Berichts: $report_time',
             Bite melden Sie sich bei Sugar an, um den Kommentar anzuzeigen.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Neue Firmeninformation',
-        'description' => 'Diese Vorlage wird verwendet, wenn der Systemadministrator ein Passwort an den Benutzer schickt.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Dies sind Ihr Benutzername und ihr temporäres Passwort:</p><p>Benutzername: $contact_user_user_name<br/><br />Passwort: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url<br /><br/>Wenn Sie sich angemeldet haben, müssen Sie ein neues Passwort definieren.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Hier sind Ihr Benutzername und temporäres Kennwort:
-Benutzername: $contact_user_user_name
-Passwort: $contact_user_user_hash
-
-$config_site_url
-
-Nach der ersten Anmeldung mit dem temporären Passwort müssen SIe das Passwort möglicherweise ändern.',
-        'name' => 'Systemgenerierte Passwort-E-Mail',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Kontopasswort zurücksetzen',
         'description' => "Diese Vorlage wird verwendet, um einem Benutzer einen Link zum Zurücksetzen des Kontopassworts zu senden.",

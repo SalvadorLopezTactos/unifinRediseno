@@ -18,9 +18,9 @@
 ({
 
     /**
-     * Tracking the type of totals we are seeing
+     * Boolean track if current user is manager
      */
-    previous_type: '',
+    isManager: '',
 
     /**
      * Arrow Colors
@@ -31,6 +31,16 @@
      * The total we want to display
      */
     total: 0,
+
+    /**
+     * The total for RLIs to display
+     */
+    rliTotal: 0,
+
+    /**
+     * The last committed value for this datapoint
+     */
+    lastCommit: 0,
 
     /**
      * Can we actually display this field and have the data binding on it
@@ -126,10 +136,11 @@
      * @inheritdoc
      */
     _render: function() {
+        this.isManager = ('manager' === this.getUserCurrentRole());
+
         // Set the correct arrow style depending on the current Forecast state
         this.arrow = this._getArrowIconColorClass(this.model.get(this.name), this.model.getSynced(this.name));
-        this.commitmentLabel = this.previous_type === 'manager' ? 'LBL_TEAM_COMMITMENT' : 'LBL_COMMITMENT';
-        this.totalLabel = this.previous_type === 'manager' ? 'LBL_ADJUSTED_TOTAL' : 'LBL_FORECASTED';
+        this.isRLIMode = (app.metadata.getModule('Opportunities', 'config').opps_view_by === 'RevenueLineItems');
         this.checkEditAccess();
 
         this._super('_render');
@@ -247,7 +258,9 @@
         }
 
         this.listenTo(this.context, 'change:selectedUser change:selectedTimePeriod', function() {
+            this.lastCommit = 0;
             this.total = 0;
+            this.rliTotal = 0;
             this.arrow = '';
         });
 
@@ -255,6 +268,20 @@
         this.listenTo(this.context, 'forecasts:worksheet:totals', this._onWorksheetTotals);
         this.listenTo(this.context, 'forecasts:worksheet:committed', this._onWorksheetCommit);
         this.listenTo(this.model, `change:${this.name}`, this._handleValueChanged);
+    },
+
+    /**
+     * Updates the last commited value for this datapoint when the last
+     * commit model is loaded
+     *
+     * @private
+     */
+    _handleCommitModelsLoaded: function() {
+        let lastCommitModel = this.context.get('lastCommitModel');
+        if (lastCommitModel instanceof Backbone.Model) {
+            this.lastCommit = lastCommitModel.get(this.name) || 0;
+        }
+        this.render();
     },
 
     /**
@@ -311,7 +338,7 @@
             field = field.split('_')[0] + '_adjusted';
         }
         this.total = totals[field];
-        this.previous_type = type;
+        this.rliTotal = totals['rli_' + field];
         this.render();
     },
 
@@ -356,6 +383,18 @@
             arrowIconClass = newValueBig.gt(oldValueBig) ? ' sicon-arrow-up font-green' : ' sicon-arrow-down font-red';
         }
         return arrowIconClass;
+    },
+
+    /**
+     * Gets user current role (the role under which the user is viewing the worksheet at the moment)
+     * @return {string} "manager" or "seller"
+     *
+     */
+    getUserCurrentRole: function() {
+        let user = this.context.get('selectedUser') || app.user.toJSON();
+        let forecastType = app.utils.getForecastType(user.is_manager, user.showOpps);
+
+        return (forecastType === 'Direct') ? 'seller' : 'manager';
     },
 
     /**

@@ -14,9 +14,7 @@
     <a{{#if route}} href="{{route}}" data-route="{{route}}" track="click:sweetspot-action-{{route}}"{{/if}}
       {{#if openwindow}} data-openwindow="true"{{/if}}
       {{#if callback}} data-callback="{{callback}}"{{/if}}>
-        {{#if label}}
-        <span class="label label-module label-module-md label-{{module}}" rel="tooltip" data-title="{{module}}">{{label}}</span>
-        {{/if}}
+        {{moduleLabel module 'lg' rel='tooltip' title=(getModuleName module plural=true)}}
         <div class="result-text">
             {{#each keyword}}
             <div class="result-keyword label">{{this}}</div>

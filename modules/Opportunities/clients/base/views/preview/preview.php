@@ -75,23 +75,27 @@ $viewdefs['Opportunities']['base']['view']['preview'] = array(
                         'account_id',
                     ),
                 ),
-                array(
+                [
                     'name' => 'date_closed',
                     'type' => 'date-cascade',
                     'label' => 'LBL_LIST_DATE_CLOSED',
-                    'disable_field' => array(
+                    'disable_field' => [
                         'total_revenue_line_items',
                         'closed_revenue_line_items',
-                    ),
-                ),
+                    ],
+                    'related_fields' => [
+                        'date_closed_timestamp',
+                    ],
+                ],
                 [
                     'name' => 'service_start_date',
                     'type' => 'date-cascade',
                     'label' => 'LBL_SERVICE_START_DATE',
                     'disable_field' => 'service_open_revenue_line_items',
-                    'related_fields' => [
-                        'service_open_revenue_line_items',
-                    ],
+                    'related_fields' =>
+                        [
+                            0 => 'service_open_revenue_line_items',
+                        ],
                 ],
                 [
                     'name' => 'service_duration',
@@ -117,11 +121,6 @@ $viewdefs['Opportunities']['base']['view']['preview'] = array(
                     ],
                     'disable_field' => 'service_open_flex_duration_rlis',
                 ],
-                'probability',
-                array(
-                    'name' => 'commit_stage',
-                    'span' => 6,
-                ),
                 array(
                     'name' => 'amount',
                     'type' => 'currency',
@@ -136,32 +135,10 @@ $viewdefs['Opportunities']['base']['view']['preview'] = array(
                     'base_rate_field' => 'base_rate',
                 ),
                 array(
-                    'name' => 'best_case',
-                    'type' => 'currency',
-                    'label' => 'LBL_BEST',
-                    'related_fields' => array(
-                        'best_case',
-                        'currency_id',
-                        'base_rate',
-                    ),
-                    'currency_field' => 'currency_id',
-                    'base_rate_field' => 'base_rate',
-                ),
-                array(
-                    'name' => 'worst_case',
-                    'type' => 'currency',
-                    'label' => 'LBL_WORST',
-                    'related_fields' => array(
-                        'worst_case',
-                        'currency_id',
-                        'base_rate',
-                    ),
-                    'currency_field' => 'currency_id',
-                    'base_rate_field' => 'base_rate',
+                    'name' => 'commit_stage',
                 ),
                 array(
                     'name' => 'tag',
-                    'span' => 12,
                 ),
                 [
                     'name' => 'sales_status',
@@ -178,6 +155,28 @@ $viewdefs['Opportunities']['base']['view']['preview'] = array(
                         'total_revenue_line_items',
                         'closed_revenue_line_items',
                     ),
+                ],
+                [
+                    'name' => 'forecasted_likely',
+                    'comment' => 'Rollup of included RLIs on the Opportunity',
+                    'readonly' => true,
+                    'related_fields' =>
+                        [
+                            0 => 'currency_id',
+                            1 => 'base_rate',
+                        ],
+                    'label' => 'LBL_FORECASTED_LIKELY',
+                ],
+                [
+                    'name' => 'lost',
+                    'comment' => 'Rollup of lost RLIs on the Opportunity',
+                    'readonly' => true,
+                    'related_fields' =>
+                        [
+                            0 => 'currency_id',
+                            1 => 'base_rate',
+                        ],
+                    'label' => 'LBL_LOST',
                 ],
             ),
         ),

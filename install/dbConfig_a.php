@@ -14,7 +14,7 @@ global $sugar_version, $js_custom_version;
 
 
 if(empty($_SESSION['setup_db_host_name'])){
-      $_SESSION['setup_db_host_name'] = (isset($sugar_config['db_host_name']))  ? $sugar_config['db_host_name'] :  $_SERVER['SERVER_NAME'];
+      $_SESSION['setup_db_host_name'] = $sugar_config['db_host_name'] ?? $_SERVER['SERVER_NAME'];
 }
 
 if( !isset( $install_script ) || !$install_script ){
@@ -521,6 +521,9 @@ $sugar_smarty = new Sugar_Smarty();
 
 $sugar_smarty->assign('icon', $icon);
 $sugar_smarty->assign('css', $css);
+/**
+ * @psalm-suppress UndefinedGlobalVariable
+ */
 $sugar_smarty->assign('loginImage', $loginImage);
 $sugar_smarty->assign('APP', $app_strings);
 $sugar_smarty->assign('MOD', $mod_strings);

@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Firmenlisten-Dashboard',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Firmendatensatz-Dashboard',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Konten',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Firmendaten',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Fokus-Drawer für Konten - Konsole',
     'LBL_NEXT_RENEWAL_DATE' => 'Datum der nächsten Erneuerung',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Datum der nächsten Erneuerung',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Firmenname/Branche',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Ort',
     'LBL_PURCHASES' => 'Einkäufe',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Kontozeitleiste',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organisieren',
+    'LBL_CREATE_NEW' => 'Neu erstellen',
+    'LBL_MANAGE' => 'Verwalten',
+    'LBL_SEE_DETAILS' => 'Details anzeigen',
+    'LBL_HIDE_NEW' => 'Ausblenden',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagramme',
@@ -207,4 +214,7 @@ Um eine {{module_name}} zu erstellen:
 2. Klicken Sie auf "Speichern", um den Datensatz fertigzustellen und auf die letzte Seite zurück zu kommen.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Firmenberichte',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Externe Benutzer',
 );

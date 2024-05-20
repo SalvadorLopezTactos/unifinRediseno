@@ -71,7 +71,7 @@ class RelatedValueApi extends SugarApi
         if (is_array($args['fields'])) {
             $fields = $args['fields'];
         } else {
-            $fields = json_decode(html_entity_decode($args['fields']), true);
+            $fields = json_decode(html_entity_decode($args['fields'], ENT_COMPAT), true);
         }
         $focus = $this->loadBean($api, $args);
         foreach ($fields as $rfDef) {
@@ -137,8 +137,7 @@ class RelatedValueApi extends SugarApi
                     break;
                 case "count":
                     if ($focus->load_relationship($link)) {
-                        $linkValue = $focus->$link->get();
-                        $ret[$link][$type] = is_countable($linkValue) ? count($linkValue) : 0;
+                        $ret[$link][$type] = is_countable($focus->$link->get()) ? count($focus->$link->get()) : 0;
                     } else {
                         $ret[$link][$type] = 0;
                     }
@@ -247,7 +246,7 @@ class RelatedValueApi extends SugarApi
                         } else {
                             $condition_values = array($rfDef['condition_expr']);
                         }
-                        $toRate = isset($focus->base_rate) ? $focus->base_rate : null;
+                        $toRate = $focus->base_rate ?? null;
                         $relBeans = $focus->$link->getBeansForSugarLogic();
                         $sum = '0';
                         $isCurrency = null;
@@ -323,6 +322,8 @@ class RelatedValueApi extends SugarApi
                                     if (is_int($bean->$rField)) {
                                         // if we have a timestamp field, just set the value
                                         $value = $bean->relfield;
+                                    } elseif (empty($bean->$rField)) {
+                                        continue;
                                     } else {
                                         // more than likely this is a date field, so try and un-format based on the users preferences
                                         // we pass false to asDbDate as we want the value that would be stored in the DB

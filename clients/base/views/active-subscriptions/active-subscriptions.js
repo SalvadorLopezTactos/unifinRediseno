@@ -54,6 +54,10 @@
      * @inheritdoc
      */
     initialize: function(options) {
+        this.plugins = _.union(this.plugins, [
+            'FocusDrawer'
+        ]);
+
         this._super('initialize', [options]);
 
         this.currentModule = this._currentModule();
@@ -186,7 +190,7 @@
             var configDashboard = app.omniConsoleConfig.getComponent('omnichannel-dashboard-config');
             var activeTab = configDashboard.tabModels[configDashboard.activeTab];
             return activeTab.module;
-        } else if (app.omniConsole && app.omniConsole.isExpanded()) {
+        } else if (app.omniConsole && app.omniConsole.isExpandedAndMaximized() && !app.sideDrawer.isOpen()) {
             var activeContact = app.omniConsole.getComponent('omnichannel-ccp').getActiveContact();
             if (activeContact) {
                 var dashboard = app.omniConsole.getComponent('omnichannel-dashboard-switch')
@@ -194,6 +198,12 @@
                 var tabs = dashboard.context.get('tabs');
                 var activeTab = tabs[dashboard.context.get('activeTab')];
                 return activeTab.module;
+            }
+        }
+        if (app.sideDrawer && app.sideDrawer.isOpen()) {
+            let currentTab = app.sideDrawer.getActiveTab();
+            if (currentTab) {
+                return currentTab.context.module;
             }
         }
         return this.context.get('module');
@@ -300,11 +310,16 @@
         }
 
         // Normally, we get the field from the context's model. On focus drawer or
-        // console dashboards or from SugarLive, we need to get the field from the parent context's rowModel
+        // console dashboards or from SugarLive, we need to get the field from the parent context's rowModel/model
         var rowModelLayouts = ['focus', 'multi-line', 'omnichannel'];
-        var linkField = _.contains(rowModelLayouts, this.context.get('layout')) ?
-            this.context.parent.get('rowModel').get(linkedAccountField) :
-            this.context.get('model').get(linkedAccountField);
+        let linkField = '';
+        let layout = this.context.get('layout') || this.context.parent.get('layout');
+        if (_.contains(rowModelLayouts, layout)) {
+            let model = this.context.parent.get('rowModel') || this.context.parent.get('model');
+            linkField = model.get(linkedAccountField);
+        } else {
+            linkField = this.context.get('model').get(linkedAccountField);
+        }
         return linkField || '';
     },
 
@@ -376,6 +391,10 @@
                 'convertToBase': true,
                 'currency_field': 'currency_id',
                 'base_rate_field': 'base_rate'
+            },
+            'purchase': {
+                'name': 'name',
+                'link': true
             }
         };
     },
@@ -400,6 +419,8 @@
             this.template = app.template.get(this.name + '.unavailable');
             this._super('_render', [options]);
         }
+
+        this.enableFocusDrawer();
     },
 
     /**

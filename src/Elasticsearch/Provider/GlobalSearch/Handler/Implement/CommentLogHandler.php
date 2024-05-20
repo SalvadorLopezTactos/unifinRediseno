@@ -35,7 +35,7 @@ class CommentLogHandler extends AbstractHandler implements
     SearchFieldsHandlerInterface,
     ProcessDocumentHandlerInterface
 {
-    const COMMENTLOG_FIELD = 'commentlog';
+    public const COMMENTLOG_FIELD = 'commentlog';
 
     /**
      * Multi field definitions

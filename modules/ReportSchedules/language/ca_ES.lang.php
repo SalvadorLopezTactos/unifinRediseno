@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de programes d&#39;informe',
     'LBL_FILE_TYPE' => 'Tipus de fitxer',
+    'LBL_EMBED_REPORT' => 'Informe incrustat al correu electrònic',
+    'LBL_EMBED_REPORT_INFO' => 'Nota: Si l&#39;informe supera les 200 files, adjuntarem l&#39;informe com a fitxer CSV.',
 );

@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\Encoder;
 
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+
 /**
  * Supports legacy SOAP integrations with MD5 passwords
  */
@@ -27,7 +29,7 @@ class BCryptLegacyMD5PasswordEncoder extends BCryptPasswordEncoder
      *
      * @throws BadCredentialsException when the given password is too long
      */
-    public function encodePassword($raw, $salt)
+    public function encodePassword(string $raw, ?string $salt): string
     {
         return parent::encodePassword(md5($raw), $salt);
     }

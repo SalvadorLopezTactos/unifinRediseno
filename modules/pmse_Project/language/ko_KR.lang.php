@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => '양식 버튼',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => '승인 / 거부',
     'LBL_PMSE_FORM_OPTION_ROUTE' => '노선',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'DocuSign에 전송',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => '다른 라우팅 옵션',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => '변경 기록 소유자',
     'LBL_PMSE_FORM_LABEL_TEAM' => '팀:',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => '문서 병합',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => '선택...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'PDF로 문서 병합',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => '병합된 문서를 이메일로 전송',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => '문서 병합',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => '수렴 게이트웨이 유형이 들어오는 흐름 게이트웨이 유형과 일치하지 않습니다.',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => '분기 게이트웨이는 프로세스를 여러 개의 분기로 확장합니다. 이러한 분기들을 하나의 경로로 다시 수렴하기 위해 수렴 게이트웨이를 사용할 때 분기를 생성할 때 사용한 분기 게이트웨이 유형에 따라 올바른 수렴 게이트웨이 유형을 사용해야 합니다. 전용 또는 이벤트 기반 분기 게이트웨이로 생성된 분기의 경우 전용 분기 게이트웨이를 사용하여 다시 수렴하십시오. 병렬 또는 포함 분기 게이트웨이로 생성된 분기의 경우 병렬 수렴 게이트웨이를 사용하여 다시 수렴하십시오.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => '모듈 필드',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => '모듈 관계',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => '사용자',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => '역할',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => '담당부서',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => '폼 활동',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => '비즈니스 규칙',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => '비즈니스 규칙 액션',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => '이메일 템플릿',
 );

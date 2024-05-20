@@ -14,7 +14,7 @@ if(is_admin($current_user)) {
     global $mod_strings;
 
     //echo out processing message
-    echo '<br>' . htmlspecialchars($mod_strings['LBL_REPAIR_FIELD_CASING_PROCESSING']);
+    echo '<br>' . htmlspecialchars($mod_strings['LBL_REPAIR_FIELD_CASING_PROCESSING'], ENT_COMPAT);
 
     //store the affected entries
     $database_entries = array();
@@ -40,7 +40,7 @@ if(is_admin($current_user)) {
        	   $table_name = strtolower($module) . '_cstm';
 
            foreach($entries as $original_col_name=>$entry) {
-                echo '<br>' . htmlspecialchars(string_format($mod_strings['LBL_REPAIR_FIELD_CASING_SQL_FIELD_META_DATA'], array($entry['name'])));
+                echo '<br>' . htmlspecialchars(string_format($mod_strings['LBL_REPAIR_FIELD_CASING_SQL_FIELD_META_DATA'], array($entry['name'])), ENT_COMPAT);
                 $GLOBALS['db']->getConnection()
                     ->update(
                         'fields_meta_data',
@@ -50,7 +50,7 @@ if(is_admin($current_user)) {
                         ],
                         ['id' => $entry['id']]
                     );
-                 echo '<br>' . htmlspecialchars(string_format($mod_strings['LBL_REPAIR_FIELD_CASING_SQL_CUSTOM_TABLE'], array($entry['name'], $table_name)));
+                 echo '<br>' . htmlspecialchars(string_format($mod_strings['LBL_REPAIR_FIELD_CASING_SQL_CUSTOM_TABLE'], array($entry['name'], $table_name)), ENT_COMPAT);
 
       		   $GLOBALS['db']->query($GLOBALS['db']->renameColumnSQL($table_name, $entry['name'], strtolower($entry['name'])));
            }
@@ -118,12 +118,12 @@ if(is_admin($current_user)) {
 
 	    } //foreach
 
-        echo '<br>' . htmlspecialchars($mod_strings['LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE']);
+        echo '<br>' . htmlspecialchars($mod_strings['LBL_CLEAR_VARDEFS_DATA_CACHE_TITLE'], ENT_COMPAT);
         $repair = new RepairAndClear();
         $repair->show_output = false;
         $repair->module_list = array($class_names);
         $repair->clearVardefs();
     }
 
-    echo '<br>' . htmlspecialchars($mod_strings['LBL_DIAGNOSTIC_DONE']);
+    echo '<br>' . htmlspecialchars($mod_strings['LBL_DIAGNOSTIC_DONE'], ENT_COMPAT);
 }

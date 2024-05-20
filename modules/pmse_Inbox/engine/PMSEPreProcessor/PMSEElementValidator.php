@@ -127,7 +127,7 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
     {
         $msg = sprintf(
             '%s::%s is deprecated and will be removed in a future release.',
-            __CLASS__,
+            self::class,
             __METHOD__
         );
         LoggerManager::getLogger()->deprecated($msg);
@@ -283,6 +283,39 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
     }
 
     /**
+     * Checks if a flow is duplicated.
+     * @param type $bean
+     * @param type $flowData
+     * @return boolean
+     */
+    public function isFlowDuplicated($bean, $flowData)
+    {
+        $q = $this->getSugarQueryObject();
+        $q->select('cas_flow_status');
+        $q->from($this->getBeanFlow(), array('add_deleted' => true));
+
+        if (empty($flowData['id'])) {
+            $q->where()
+                ->equals('cas_sugar_object_id', $bean->id)
+                ->equals('cas_sugar_module', $bean->module_name)
+                ->equals('cas_id', $flowData['cas_id'])
+                ->equals('cas_index', $flowData['cas_index']);
+        } else {
+            $q->where()
+                ->equals('id', $flowData['id']);
+        }
+
+        $result = $q->getOne();
+
+        if ($result && !in_array($result, $this->getStates('open'))) {
+            $this->getLogger()->error("Flow {$flowData['cas_id']}:{$flowData['cas_index']} already exists in $result status");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Checks if the user updated the bean from PMSE_Inbox
      *
      * @param type $bean
@@ -294,7 +327,7 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
             $url = $_REQUEST['module'];
         } else {
             // In most cases __sugar_url will be set, but if it isn't, handle it
-            $url = isset($_REQUEST['__sugar_url']) ? $_REQUEST['__sugar_url'] : '';
+            $url = $_REQUEST['__sugar_url'] ?? '';
         }
 
         if (strpos($url, 'pmse') === false) {
@@ -371,7 +404,12 @@ class PMSEElementValidator extends PMSEBaseValidator implements PMSEValidate
      */
     public function validateIntermediateEvent($bean, $flowData, $request)
     {
-        $request->validate();
+        if ($this->isFlowDuplicated($bean, $flowData)) {
+            $request->invalidate();
+        } else {
+            $request->validate();
+        }
+
         return $request;
     }
 

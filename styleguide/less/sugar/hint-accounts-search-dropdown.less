@@ -1,14 +1,16 @@
 .search-dropdown-list {
+  display: none;
   margin-left: 0;
   z-index: 1000;
   position: absolute;
-  width: calc(100% - 2px);
+  width: 99.5%;
   min-width: 160px;
   list-style: none;
   border-radius: 4px;
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  border-color: @gray30;
 }
 
 .search-dropdown-list li {
@@ -19,6 +21,7 @@
   align-items: center;
   background-color: var(--input-background);
   color: var(--text-color);
+  border: solid 1px @gray30;
 }
 
 .search-dropdown-list li:not(:first-child) {
@@ -54,8 +57,7 @@
 }
 
 #accounts {
-  border-color: #06c !important;
-  min-width: 400px;
+  border-color: @activeTabBorderColor;
   color: var(--text-color);
 }
 

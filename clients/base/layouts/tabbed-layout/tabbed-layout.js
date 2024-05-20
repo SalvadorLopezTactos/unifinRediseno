@@ -19,6 +19,11 @@
     $overflowTabs: undefined,
 
     /**
+     * Current active tab
+     */
+    activeTab: 0,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -113,7 +118,17 @@
             lblKey = 'LBL_' + compDef.toUpperCase();
         }
 
-        var label = app.lang.get(lblKey, this.module) || lblKey;
+        let label = lblKey;
+        if (!_.isUndefined(compDef.context) && compDef.context.loadModuleLabel) {
+            let module = compDef.context.listViewModule || compDef.context.module;
+            label = app.lang.get(
+                lblKey,
+                module,
+                {module: app.lang.getModuleName(module, {plural: false})}
+            ) || lblKey;
+        } else {
+            label = app.lang.get(lblKey, this.module) || lblKey;
+        }
         const anchorTag = document.createElement('a');
         anchorTag.classList = 'font-bold p-0 text-center';
         anchorTag.dataset.toggle = 'tab';
@@ -142,7 +157,8 @@
             .attr('data-tab-index', tabIndex);
         $nav.data('tab-name', lblName);
 
-        if (!this.firstIsActive) {
+        if ((!this.firstIsActive && !this.activeTab) ||
+            (!!this.activeTab && this.activeTab === tabIndex)) {
             $nav.addClass('active');
             $content.addClass('active');
 

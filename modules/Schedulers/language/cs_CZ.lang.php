@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Aktualizujte definici produktu',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Zpracovat časově orientované plány',
 'LBL_OOTB_DATA_ARCHIVER' => 'Spustit archivování/vymazání aktivních dat',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Použít nároky na předplatné při změně',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geokodér záznamů',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Rozšířené volby',
 'LBL_TOGGLE_ADV' => 'Rozšířené volby',
 'LBL_TOGGLE_BASIC' => 'Základní volby',
+'LBL_UPDATEMOMENTUMCJ' => 'Aktualizace hybnosti rozpracovaných chytrých průvodců',
 // Links
 'LNK_LIST_SCHEDULER' => 'Plánovač',
 'LNK_NEW_SCHEDULER' => 'Vytvořit plán',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Spustit archivování/vymazání aktivních dat',
 'LBL_PMSEENGINECRON' => 'Plánovač SugarBPM',
 );
-

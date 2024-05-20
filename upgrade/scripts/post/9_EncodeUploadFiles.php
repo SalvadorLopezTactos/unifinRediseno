@@ -16,10 +16,6 @@ class SugarUpgradeEncodeUploadFiles extends UpgradeScript
 {
     public function run()
     {
-        if (version_compare(phpversion(), '7.4.16', '<')) {
-            return;
-        }
-
         $settings = Administration::getSettings('upgrade', true);
 
         if (!empty($settings->settings['upgrade_skip_files_encoding'])) {

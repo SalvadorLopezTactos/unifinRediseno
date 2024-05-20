@@ -339,6 +339,7 @@ SUGAR.util.doWhen("typeof($) != 'undefined'", function()
     //Get mapping is used to get the final output for saving to the vardefs
     SUGAR.ddd.getMapping = function()
     {
+        var mapping = {};
         var getlistValues = function(list)
         {
             var c = list.children();

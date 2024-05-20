@@ -194,7 +194,7 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
         } // if
         $seed = BeanFactory::newBean($module_name);
         foreach($name_value_list as $name=>$value){
-            if(is_array($value) &&  $value['name'] == 'id'){
+            if (($value['name'] ?? '') === 'id') {
                 $seed->retrieve($value['value']);
                 break;
             }else if($name === 'id' ){
@@ -222,8 +222,8 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
             }
 
             if (is_array($value)) {
-                $name = $value['name'];
-                $value = $value['value'];
+                $name = $value['name'] ?? null;
+                $value = $value['value'] ?? null;
             }
 
             if (self::$helperObject->isIDMMode()
@@ -308,7 +308,6 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
      * @exception 'SoapFault' -- The SOAP error, if any
      */
     public function login($user_auth, $application, $name_value_list = array()){
-        $availModuleNames = [];
         $user_auth = object_to_array_deep($user_auth);
         $name_value_list = object_to_array_deep($name_value_list);
         $this->getLogger()->info('Begin: SugarWebServiceImpl->login');
@@ -588,7 +587,7 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
     	$contents = '';
     	if($saved_report->id != null)
     	{
-    	    $reporter = new Report(html_entity_decode($saved_report->content));
+            $reporter = new Report(html_entity_decode($saved_report->content, ENT_COMPAT));
     	    $reporter->layout_manager->setAttribute("no_sort",1);
     	    //Translate pdf to correct language
     	    $module_for_lang = $reporter->module;
@@ -804,7 +803,6 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
      * @exception 'SoapFault' -- The SOAP error, if any
      */
     function search_by_module($session, $search_string, $modules, $offset, $max_results,$assigned_user_id = '', $select_fields = array(), $unified_search_only = TRUE){
-        $unified_search_modules = [];
         $modules = object_to_array_deep($modules);
         $select_fields = object_to_array_deep($select_fields);
         $this->getLogger()->info('Begin: SugarWebServiceImpl->search_by_module');

@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Pro optimální vzužití pomocí IIS / FastCGI SAPI, nastavte fastcgi.logging na 0 v souboru php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nepodporovaná PHP verze nainstalovaná: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Databáze není k dispozici',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podpora databáze nenalezena. Zkontrolujte, zda máte potřebné ovladače pro jeden z následujících podporovaných typů databáze: MySQL, MS SQLServer, Oracle nebo DB2. Možná budete muset v závislosti na verzi PHP odkomentovat rozšíření v souboru php.ini, nebo překompilovat správný binární soubor. Více informací o tom, jak povolit podporu databáze, naleznete v příručce PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podpora databáze nebyla nalezena. Ujistěte se, že máte nezbytné ovladače pro jeden z následujících podporovaných typů databáze: MySQL, MS SQLServer, Oracle nebo DB2. Možná bude nutné odstranit komentář přípony v souboru php.ini nebo rekompilovat se správným binárním souborem, v závislosti na vaší verzi PHP. Další informace o povolení podpory databáze najdete v příručce k PHP.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funkce spojené s XML Parser Knihovami, které jsou potřebné pro aplikaci Sugar nebyly nalezeny. Možná bude nutné odkomentovat rozšíření v souboru php.ini, nebo překompilovat s právami binární soubor, v závislosti na verzi PHP. Podívejte se do vašeho PHP Manuálu pro více informací.',
     'LBL_CHECKSYS_CSPRNG' => 'Generátor náhodných čísel',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkce spojené s Multibyte Strings PHP rozšířením (mbstring), které jsou potřebné pro aplikaci Sugar nebyly nalezeny.<br /><br />Obecně platí, že je modul mbstring není povolen ve výchozím nastavení v PHP a musí být aktivován pomocí - enable-mbstring, když je compilovaný binární PHP. Podívejte se do vašeho PHP Manuálu pro více informací o tom, jak povolit mbstring podporu.',
@@ -561,32 +561,15 @@ Odmítnout tento hovor
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Zasílání e-mailů s oznámením o přiřazení',
-        'subject' => 'SugarCRM – přiřazen $module_name ',
-        'description' => 'Tato šablona se používá, když systém zasílá uživateli přiřazení úkolu.',
-        'body' => '<div>
-<p>$assigned_by_user přiřadil(a) &nbsp;$module_name k &nbsp;$assigned_user.</p>
-
-<p>Tento &nbsp;$module_name si můžete prohlédnout zde:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user přiřadil(a) $module_name k $assigned_user.
-
-Tento $module_name si můžete prohlédnout zde:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Zasílání e-mailů s naplánovanou sestavou',
         'subject' => 'Naplánovaná sestava: $report_name s platností k $report_time',
         'description' => 'Tato šablona se používá, když systém zasílá uživateli naplánovanou sestavu.',
         'body' => '<div>
-<p>Dobrý den $assigned_user,</p>
-<p>zasíláme připojenou automaticky generovanou sestavu, která pro vás byla naplánována.</p>
-<p>Název sestavy: $report_name</p>
-<p>Datum a čas spuštění sestavy: $report_time</p>
+<p>Dobrý den, $assigned_user,<br></p>
+<p>v příloze najdete automaticky vygenerovanou sestavu, která pro vás byla naplánována.<br></p>
+<p>Název sestavy: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Datum a čas spuštění sestavy: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Dobrý den $assigned_user,
@@ -612,14 +595,6 @@ Datum a čas spuštění sestavy: $report_time',
             Chcete-li si komentář přečíst, přihlaste se prosím do systému Sugar.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informace o novém účtu',
-        'description' => 'Tato šablona se používá, když správce systému pošle nové heslo uživateli.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Zde je Vaše uživatelské jméno a dočasné heslo:</p><p>Uživatelské jméno: $contact_user_user_name </p><p>Heslo: $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Poté co se přihlásíte s heslem uvedeným výše, budete požádán o změnu hesla dle Vašeho uvážení</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'Zde je Vaše uživatelské jméno a dočasné heslo:<br />Uživatelské jméno: $contact_user_user_name<br />Heslo: $contact_user_user_hash<br /><br />$config_site_url<br /><br />Poté co se přihlásíte s heslem uvedeným výše, budete požádán o změnu hesla dle Vašeho uvážení.',
-        'name' => 'Systémem vytvořené heslo mailu',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Resetujte si vlastní heslo',
         'description' => "Tato šablona se využívá v momentě, kdy je uživateli obnoveno heslo.",

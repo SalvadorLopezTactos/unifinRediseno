@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Registerdashbord for rapportkalendere',
     'LBL_FILE_TYPE' => 'Filtype(r)',
+    'LBL_EMBED_REPORT' => 'Bygg inn rapport i e-post',
+    'LBL_EMBED_REPORT_INFO' => 'Merk: hvis rapporten overstiger 200 rader, legger vi ved rapporten som CSV-fil.',
 );

@@ -4,6 +4,7 @@ namespace Elastica\Node;
 
 use Elastica\Node as BaseNode;
 use Elastica\Response;
+use Elasticsearch\Endpoints\Nodes\Info as NodesInfo;
 
 /**
  * Elastica cluster node object.
@@ -71,11 +72,11 @@ class Info
      *
      * @return mixed Data array entry or null if not found
      */
-    public function get()
+    public function get(...$args)
     {
         $data = $this->getData();
 
-        foreach (\func_get_args() as $arg) {
+        foreach ($args as $arg) {
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
@@ -95,7 +96,7 @@ class Info
     {
         // Returns string in format: inet[/192.168.1.115:9201]
         $data = $this->get('http_address');
-        $data = \substr($data, 6, \strlen($data) - 7);
+        $data = \substr($data, 6, -1);
         $data = \explode(':', $data);
 
         return $data[1];
@@ -110,7 +111,7 @@ class Info
     {
         // Returns string in format: inet[/192.168.1.115:9201]
         $data = $this->get('http_address');
-        $data = \substr($data, 6, \strlen($data) - 7);
+        $data = \substr($data, 6, -1);
         $data = \explode(':', $data);
 
         return $data[0];
@@ -126,7 +127,7 @@ class Info
     public function getPlugins(): array
     {
         if (!\in_array('plugins', $this->_params, true)) {
-            //Plugin data was not retrieved when refresh() was called last. Get it now.
+            // Plugin data was not retrieved when refresh() was called last. Get it now.
             $this->_params[] = 'plugins';
             $this->refresh($this->_params);
         }
@@ -209,10 +210,11 @@ class Info
     {
         $this->_params = $params;
 
-        $endpoint = new \Elasticsearch\Endpoints\Cluster\Nodes\Info();
-        $endpoint->setNodeID($this->getNode()->getId());
+        // TODO: Use only NodesInfo when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(NodesInfo::class) ? new NodesInfo() : new \Elasticsearch\Endpoints\Cluster\Nodes\Info();
+        $endpoint->setNodeId($this->getNode()->getId());
 
-        if (!empty($params)) {
+        if ($params) {
             $endpoint->setMetric($params);
         }
 

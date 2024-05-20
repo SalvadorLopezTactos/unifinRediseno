@@ -15,6 +15,10 @@
 
 class SugarWidgetSubPanelTopButton extends SugarWidget
 {
+    /**
+     * @var mixed|bool
+     */
+    public $asUrl;
     public $module;
     public $title;
     public $access_key;
@@ -88,8 +92,8 @@ class SugarWidgetSubPanelTopButton extends SugarWidget
 
     public function getWidgetId()
     {
-        $isUTF8 = mb_detect_encoding($this->form_value) == 'UTF-8';
-        $formValue = $isUTF8 ? mb_strtolower($this->form_value, 'UTF-8') : strtolower($this->form_value);
+        $isUTF8 = mb_detect_encoding((string)$this->form_value) == 'UTF-8';
+        $formValue = $isUTF8 ? mb_strtolower((string)$this->form_value, 'UTF-8') : strtolower((string)$this->form_value);
     	$widgetID = parent::getWidgetId() . '_'.preg_replace('[ ]', '', $formValue);
         if ($this->buttonSuffix) {
             $widgetID .= $this->buttonSuffix;
@@ -257,8 +261,7 @@ class SugarWidgetSubPanelTopButton extends SugarWidget
 
         $formValues['return_id'] = $defines['focus']->id;
         $formValues['return_relationship'] = $relationship_name;
-        switch ( strtolower( $currentModule ) )
-        {
+        switch (strtolower((string)$currentModule)) {
             case 'prospects' :
                 $name = $defines['focus']->account_name ;
                 break ;
@@ -270,7 +273,7 @@ class SugarWidgetSubPanelTopButton extends SugarWidget
                 $name = $defines['focus']->first_name . " " .$defines['focus']->last_name ;
                 break ;
             default :
-               $name = (isset($defines['focus']->name)) ? $defines['focus']->name : "";
+                $name = $defines['focus']->name ?? "";
         }
         $formValues['return_name'] = $name;
 
@@ -414,7 +417,7 @@ class SugarWidgetSubPanelTopButton extends SugarWidget
 	function get_subpanel_relationship_name($defines) {
 		 $relationship_name = '';
 		 if(!empty($defines)) {
-		 	$relationship_name = isset($defines['module']) ? $defines['module'] : '';
+             $relationship_name = $defines['module'] ?? '';
 	     	$dataSource = $defines['subpanel_definition']->get_data_source_name(true);
          	if (!empty($dataSource)) {
 				$relationship_name = $dataSource;

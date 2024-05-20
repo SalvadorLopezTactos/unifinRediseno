@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Paneli i listës së shanseve',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të shanseve',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Detajet e mundësisë',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Përqendruesi i fokusit te mundësitë - Paneli',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te mundësitë',
     'LBL_RENEWAL_OPPORTUNITY' => 'Mundësia e rinovimit',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Drejtuar',
     'LBL_FORECAST' => 'Parashikim',
     'LBL_COMMIT_STAGE' => 'Faza e perkushtimit',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Parashikim',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Faza e parashikimit',
     'LBL_WORKSHEET' => 'Fletë pune',
     'LBL_PURCHASED_LINE_ITEMS' => 'Artikujt e blerë të rreshtit',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizo',
+    'LBL_CREATE_NEW' => 'Krijo të re',
+    'LBL_MANAGE' => 'Menaxho',
+    'LBL_SEE_DETAILS' => 'Shiko detajet',
+    'LBL_HIDE_NEW' => 'Fshih',
+
     'LBL_FORECASTED_LIKELY' => 'Parashikuar si të mundshme',
+    'LBL_LOST' => 'Humbur',
     'LBL_RENEWAL' => 'Rinovimi',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Mundësitë e rinovimit',
     'LBL_RENEWAL_PARENT' => 'Mundësia kryesore',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Roli i mundësisë',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Shënime',
+    'LBL_TAB_OPPORTUNITY' => 'Rishiko {{module}}',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Duke klikuar Konfirmo, ju do të fshini të gjitha të dhënat e parashikimeve dhe do të ndërroni shikimin e mundësive. Nëse nuk e keni këtë për qëllim, klikoni anulo për të kthyer konfigurimet e mëparshme.',
@@ -211,25 +220,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Pas fillimit të ndryshimit, raportet e artikujve të linjës të së ardhurave do të krijohen për çdo modul {{module_name}} ekzistues në sfond. Kur artikujt e linjës të së ardhurave të plotësohen dhe të disponohen, në adresën e emailit në profilin e përdoruesit do të dërgohet një njoftim. Ki parasysh se shembulli yt duhet të konfigurohet për të dërguar email nëpërmjet "Admin > Cilësimet e emailit" në mënyrë që të dërgohet njoftimi.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale nga fillimi në fund. Secili regjistrim në {{module_name}} përfaqëson një shitje prospektive dhe përfshin të dhëna që lidhen me shitjen, si dhe regjistrime të tjera të rëndësishme, si p.sh. {{quotes_module}}, {{contacts_module}} etj. Një {{module_name}} do të kalojë zakonisht në disa faza shitjesh, derisa të shënohet si "Fitim i mbyllur" ose "Humbje e mbyllur". {{plural_module_name}} mund të shfrytëzohet edhe më tej duke përdorur modulin {{forecasts_singular_module}} të Sugar për të kuptuar dhe për të parashikuar tendencat e shitjeve, si dhe për të fokusuar punën në arritjen e kuotave të shitjeve.',
+    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale nga fillimi deri në fund. Secili regjistrim i {{module_name}} përfaqëson një shitje potenciale dhe përfshin të dhëna përkatëse për shitjen dhe në lidhje me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.. Një {{module_name}} zakonisht do të kalojë nëpër disa faza të shitjes derisa të shënohet si "Fitim i mbyllur" ose "Humbje e mbyllur". {{plural_module_name}} mund të përdoret edhe më tej duke përdorur modulin {{forecasts_singular_module}} për të kuptuar dhe parashikuar tendencat e shitjeve, si dhe për t&#39;u përqendruar në arritjen e kuotave të shitjeve.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt e linjës që i përkasin atyre shitjeve nga fillimi në fund. Secili regjistrim në {{module_name}} përfaqëson një shitje prospektive dhe përfshin të dhëna që lidhen me shitjen, si dhe regjistrime të tjera të rëndësishme, si p.sh. {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt në rresht që u përkasin atyre shitjeve nga fillimi deri në fund. Secili regjistrim i {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhëna përkatëse për shitjen dhe në lidhje me regjistrime të tjera të rëndësishme, si {{quotes_module}}, {{contacts_module}} etj..
 
-- Modifiko fushat e regjistrimit duke klikuar një fushë individuale ose butonin "Modifiko".
-- Shiko ose modifiko lidhjet në regjistrime të tjera në nënpanele duke ndryshuar panelin poshtë majtas në "Pamja e të dhënave".
-- Bëj komente dhe shiko komentet e përdoruesve, si dhe regjistro historikun e ndryshimeve në {{activitystream_singular_module}} duke ndryshuar butonin poshtë majtas në "Rrjedha e aktivitetit".
-- Ndiq ose bëj të preferuar këtë regjistrim duke përdorur ikonën në të djathtë të emrit të regjistrimit.
-- Veprimet e tjera ofrohen në menynë me lëshim poshtë "Veprimet", në të djathtë të butonit "Modifiko".',
+- Modifiko fushat e këtij regjistrimi duke klikuar një fushë individuale ose butonin "Modifiko".
+- Shiko ose modifiko lidhjet për te regjistrimet e tjera në nënpanelet duke lëvizur panelin e poshtëm majtas te "Pamja e të dhënave".
+- Bëj komente, shiko komentet e përdoruesve dhe regjistro historikun e ndryshimeve në {{activitystream_singular_module}} duke lëvizur panelin e poshtëm majtas te "Transmetimi i aktiviteteve".
+- Ndiq ose bëje të preferuar këtë regjistrim duke përdorur ikonat në të djathtë të emrit të regjistrimit.
+- Veprime shtesë disponohen në menynë me zbritje të veprimeve në të djathë të butonit "Modifiko".',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt e linjës që i përkasin atyre shitjeve nga fillimi në fund. Secili regjistrim në {{module_name}} përfaqëson një shitje prospektive dhe përfshin të dhëna që lidhen me shitjen, si dhe regjistrime të tjera të rëndësishme, si p.sh. {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale artikujt në rresht që u përkasin atyre shitjeve nga fillimi deri në fund. Secili regjistrim i {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhëna përkatëse për shitjen dhe në lidhje me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj..
 
 Për të krijuar një {{module_name}}:
-1. Jep vlerat për fushat sipas dëshirës.
- - Fushat e shënuara me "E domosdoshme" duhet të plotësohen përpara ruajtjes.
- - Kliko "Shfaq më shumë" për të shfaqur fusha të tjera nëse është e nevojshme.
-2. Kliko "Ruaj" për të përfunduar një regjistrim të ri dhe rikthehu te faqja e mëparshme.',
+1. Jep vlerat për fushat sipas dëshirës. 
+ - Fushat e shënuara me "E nevojshme" duhet të plotësohen para se të ruhen. 
+ - Kliko "Shfaq më shumë" për të paraqitur fusha shtesë sipas nevojës.
+2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
 // END ENT/ULT
 

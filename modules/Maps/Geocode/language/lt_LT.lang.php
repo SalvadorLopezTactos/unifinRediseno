@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'Platuma',
     'LBL_LONGITUDE' => 'Ilguma',
     'LBL_GEOCODED' => 'Geokoduotas',
+    'LBL_ERROR_MESSAGE' => 'Geokodo klaidos pranešimas',
 ];

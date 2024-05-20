@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Birku ierakstu instrumentu panelis',
     'LBL_MY_TAGS' => 'Manas birkas',
     'LBL_MY_FAVORITE_TAGS' => 'Manas izvēlētās birkas',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} birkas',
 );

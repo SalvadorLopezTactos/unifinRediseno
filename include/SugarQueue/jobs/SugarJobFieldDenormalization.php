@@ -239,6 +239,7 @@ final class SugarJobFieldDenormalization implements RunnableSchedulerJob, JsonSe
         $this->updateJobData();
     }
 
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $data = [];

@@ -21,6 +21,8 @@ use Google\Service\Compute\BackendService;
 use Google\Service\Compute\BackendServiceGroupHealth;
 use Google\Service\Compute\BackendServiceList;
 use Google\Service\Compute\Operation;
+use Google\Service\Compute\Policy;
+use Google\Service\Compute\RegionSetPolicyRequest;
 use Google\Service\Compute\ResourceGroupReference;
 
 /**
@@ -95,6 +97,24 @@ class RegionBackendServices extends \Google\Service\Resource
     return $this->call('getHealth', [$params], BackendServiceGroupHealth::class);
   }
   /**
+   * Gets the access control policy for a resource. May be empty if no such policy
+   * or resource exists. (regionBackendServices.getIamPolicy)
+   *
+   * @param string $project Project ID for this request.
+   * @param string $region The name of the region for this request.
+   * @param string $resource Name or id of the resource for this request.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param int optionsRequestedPolicyVersion Requested IAM Policy version.
+   * @return Policy
+   */
+  public function getIamPolicy($project, $region, $resource, $optParams = [])
+  {
+    $params = ['project' => $project, 'region' => $region, 'resource' => $resource];
+    $params = array_merge($params, $optParams);
+    return $this->call('getIamPolicy', [$params], Policy::class);
+  }
+  /**
    * Creates a regional BackendService resource in the specified project using the
    * data included in the request. For more information, see Backend services
    * overview. (regionBackendServices.insert)
@@ -132,21 +152,36 @@ class RegionBackendServices extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string filter A filter expression that filters resources listed in
-   * the response. The expression must specify the field name, a comparison
-   * operator, and the value that you want to use for filtering. The value must be
-   * a string, a number, or a boolean. The comparison operator must be either `=`,
-   * `!=`, `>`, or `<`. For example, if you are filtering Compute Engine
-   * instances, you can exclude instances named `example-instance` by specifying
-   * `name != example-instance`. You can also filter nested fields. For example,
-   * you could specify `scheduling.automaticRestart = false` to include instances
-   * only if they are not scheduled for automatic restarts. You can use filtering
-   * on nested fields to filter based on resource labels. To filter on multiple
-   * expressions, provide each separate expression within parentheses. For
-   * example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel
-   * Skylake") ``` By default, each expression is an `AND` expression. However,
-   * you can include `AND` and `OR` expressions explicitly. For example: ```
-   * (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND
-   * (scheduling.automaticRestart = true) ```
+   * the response. Most Compute resources support two types of filter expressions:
+   * expressions that support regular expressions and expressions that follow API
+   * improvement proposal AIP-160. If you want to use AIP-160, your expression
+   * must specify the field name, an operator, and the value that you want to use
+   * for filtering. The value must be a string, a number, or a boolean. The
+   * operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example,
+   * if you are filtering Compute Engine instances, you can exclude instances
+   * named `example-instance` by specifying `name != example-instance`. The `:`
+   * operator can be used with string fields to match substrings. For non-string
+   * fields it is equivalent to the `=` operator. The `:*` comparison can be used
+   * to test whether a key has been defined. For example, to find all objects with
+   * `owner` label use: ``` labels.owner:* ``` You can also filter nested fields.
+   * For example, you could specify `scheduling.automaticRestart = false` to
+   * include instances only if they are not scheduled for automatic restarts. You
+   * can use filtering on nested fields to filter based on resource labels. To
+   * filter on multiple expressions, provide each separate expression within
+   * parentheses. For example: ``` (scheduling.automaticRestart = true)
+   * (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND`
+   * expression. However, you can include `AND` and `OR` expressions explicitly.
+   * For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel
+   * Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a
+   * regular expression, use the `eq` (equal) or `ne` (not equal) operator against
+   * a single un-parenthesized expression with or without quotes or against
+   * multiple parenthesized expressions. Examples: `fieldname eq unquoted literal`
+   * `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"`
+   * `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is
+   * interpreted as a regular expression using Google RE2 library syntax. The
+   * literal value must match the entire field. For example, to filter for
+   * instances that do not end with name "instance", you would use `name ne
+   * .*instance`.
    * @opt_param string maxResults The maximum number of results per page that
    * should be returned. If the number of available results is larger than
    * `maxResults`, Compute Engine returns a `nextPageToken` that can be used to
@@ -203,6 +238,23 @@ class RegionBackendServices extends \Google\Service\Resource
     $params = ['project' => $project, 'region' => $region, 'backendService' => $backendService, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('patch', [$params], Operation::class);
+  }
+  /**
+   * Sets the access control policy on the specified resource. Replaces any
+   * existing policy. (regionBackendServices.setIamPolicy)
+   *
+   * @param string $project Project ID for this request.
+   * @param string $region The name of the region for this request.
+   * @param string $resource Name or id of the resource for this request.
+   * @param RegionSetPolicyRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Policy
+   */
+  public function setIamPolicy($project, $region, $resource, RegionSetPolicyRequest $postBody, $optParams = [])
+  {
+    $params = ['project' => $project, 'region' => $region, 'resource' => $resource, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('setIamPolicy', [$params], Policy::class);
   }
   /**
    * Updates the specified regional BackendService resource with the data included

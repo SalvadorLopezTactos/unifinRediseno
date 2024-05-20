@@ -16,6 +16,10 @@ class DeployedRelationships extends AbstractRelationships implements Relationshi
 {
 
 
+    /**
+     * @var bool
+     */
+    public $activitiesToAdd;
     protected static $subpanelDefs = array();
 
     function __construct ($moduleName, $relationshipName = "")
@@ -191,9 +195,7 @@ class DeployedRelationships extends AbstractRelationships implements Relationshi
         if (!isset(static::$subpanelDefs[$module])) {
             static::$subpanelDefs[$module] = array();
             $spd = new SubPanelDefinitions ($bean);
-            static::$subpanelDefs[$module] = isset($spd->layout_defs['subpanel_setup'])
-                ? $spd->layout_defs['subpanel_setup']
-                : array();
+            static::$subpanelDefs[$module] = $spd->layout_defs['subpanel_setup'] ?? array();
         }
         return static::$subpanelDefs[$module];
     }
@@ -340,7 +342,6 @@ class DeployedRelationships extends AbstractRelationships implements Relationshi
             $mi->install_layoutdefs () ;
             $mi->install_extensions();
             $mi->install_client_files();
-
         }
 
         $GLOBALS [ 'mod_strings' ] = $MBModStrings ; // finally, restore the ModuleBuilder mod_strings

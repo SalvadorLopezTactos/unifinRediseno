@@ -85,6 +85,7 @@ class PasswordResetCommand extends Command implements InstanceModeInterface
 
         $user->setNewPassword($password);
         $output->writeln('<info>New password set</info>');
+        return 0;
     }
 
     /**

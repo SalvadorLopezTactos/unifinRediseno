@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrements de calendriers de rapports',
     'LBL_FILE_TYPE' => 'Type(s) de fichier',
+    'LBL_EMBED_REPORT' => 'Intégrer le rapport dans un e-mail',
+    'LBL_EMBED_REPORT_INFO' => 'Remarque : si le rapport dépasse 200 lignes, nous le joindrons en tant que fichier CSV.',
 );

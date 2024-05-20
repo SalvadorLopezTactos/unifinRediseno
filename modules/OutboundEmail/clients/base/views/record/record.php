@@ -103,6 +103,12 @@ $viewdefs['OutboundEmail']['base']['view']['record'] = array(
                     'span' => 12,
                 ),
                 [
+                    'name' => 'email_authorize',
+                    'type' => 'email-authorize',
+                    'label' => 'LBL_EMAIL_AUTHORIZE',
+                    'span' => 12,
+                ],
+                [
                     'name' => 'auth_status',
                     'type' => 'auth-status',
                     'label' => 'LBL_STATUS',

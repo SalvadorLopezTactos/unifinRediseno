@@ -69,6 +69,17 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    _getTabFieldDefs: function(tab) {
+        let tabFieldDefs = this._super('_getTabFieldDefs', [tab]);
+        if (tabFieldDefs && tabFieldDefs.assigned_user_name) {
+            tabFieldDefs.assigned_user_name.enableFocusIcon = false;
+        }
+        return tabFieldDefs;
+    },
+
+    /**
      * Completes the selected task.
      *
      * Shows a confirmation alert and sets the task as `Completed` on confirm.

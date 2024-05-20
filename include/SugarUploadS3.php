@@ -28,7 +28,7 @@ class SugarUploadS3 extends UploadStream
     protected $bucket;
     protected $metadata;
 
-    const S3_STREAM_NAME='uploads3';
+    public const S3_STREAM_NAME='uploads3';
 
     public function __construct()
     {
@@ -173,6 +173,7 @@ class SugarUploadS3 extends UploadStream
 
     public function rename($path_from, $path_to)
     {
+        $path = null;
         parent::rename($path_from, $path_to);
         $this->init(); // because of php bug not calling stream ctor
         if($this->isUploadUrl($path_to)) {

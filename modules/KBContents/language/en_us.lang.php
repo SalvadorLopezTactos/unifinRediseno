@@ -13,7 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Knowledge Base List Dashboard',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Knowledge Base Record Dashboard',
-    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Knowledge Base Focus Drawer',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Knowledge Base Focus Dashboard',
 
     'LBL_MODULE_NAME' => 'Knowledge Base',
     'LBL_MODULE_NAME_SINGULAR' => 'Knowledge Base Article',

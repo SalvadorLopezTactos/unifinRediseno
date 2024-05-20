@@ -46,6 +46,7 @@ class IdentityAwareServiceAccount implements Subject
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

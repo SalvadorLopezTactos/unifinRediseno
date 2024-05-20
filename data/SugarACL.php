@@ -22,9 +22,9 @@ class SugarACL
 
     // Access levels for field
     // matches ACLField::hasAccess returns for compatibility
-    const ACL_NO_ACCESS = 0;
-    const ACL_READ_ONLY = 1;
-    const ACL_READ_WRITE = 4;
+    public const ACL_NO_ACCESS = 0;
+    public const ACL_READ_ONLY = 1;
+    public const ACL_READ_WRITE = 4;
 
     /**
      * Load bean from context
@@ -91,13 +91,19 @@ class SugarACL
                 }
                 VardefManager::loadVardef($module, $name);
             }
-            $acl_list = isset($GLOBALS['dictionary'][$name]['acls'])?$GLOBALS['dictionary'][$name]['acls']:array();
+            $acl_list = $GLOBALS['dictionary'][$name]['acls'] ?? array();
             $acl_list = array_merge($acl_list, SugarBean::getDefaultACL());
 
             $GLOBALS['log']->debug("ACLS for $module: ".var_export($acl_list, true));
 
             foreach($acl_list as $klass => $args) {
-                if($args === false) continue;
+                if ($args === false) {
+                    continue;
+                }
+                if (!class_exists($klass)) {
+                    $GLOBALS['log']->debug("ACL class $klass for $module doesn't exist.");
+                    continue;
+                }
                 self::$acls[$module][] = new $klass($args);
             }
         }

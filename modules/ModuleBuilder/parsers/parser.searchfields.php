@@ -13,6 +13,11 @@
 class ParserSearchFields extends ModuleBuilderParser
 {
 
+    /**
+     * @var mixed|mixed[]
+     */
+    public $moduleName;
+    public $packageName;
 	var $searchFields;
 	var $packageKey; 
 	

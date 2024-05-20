@@ -80,7 +80,8 @@ class ForecastOpportunities extends SugarBean {
         //get adjustment amount for the opportunity.
     }
 
-    function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 
         /* amounts here are in base currency we need to convert them to user default
          * currency.

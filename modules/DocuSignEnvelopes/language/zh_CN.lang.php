@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => '未设置客户端密码',
     'LBL_RESEND_BUTTON_LABEL' => '重新发送',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => '获取信封',
+    'LBL_CLOUD_SERVICE_TYPE' => '云服务类型',
+    'LBL_CLOUD_PATH' => '云路径',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign 信封列表仪表板',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => '最近使用的 DocuSign 信封',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign 信封焦点抽屉',
 
-    'LBL_DOCUMENT_FROM' => '文档来自 ',
+    'LBL_NEW_ENVELOPE' => '新信封',
     'LBL_DOCUMENT_IS_NOW' => ' 现在 ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign 错误。无法获取基于访问令牌的帐户编号',
     'LBL_ERROR_RESEND' => '无法进行 DocuSign 重新发送。信封状态必须为“已发送”',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => '更新失败',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign 规则不允许在 15 分钟内对同一信封发出多个请求',
     'LBL_ERROR_UPDATING_ENVLOPE' => '发生错误。无法更新信封。请查看日志！',
+    'LBL_ERROR_LISTING_TEMPLATES' => '发生错误。无法列出模板。请检查日志！',
+    'LBL_ERROR_FETCHING_TEMPLATE' => '发生错误。 无法获取模板。 请检查日志！',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => '信封未完成',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'DocuSign 中的信封状态现在为 ',
     'LBL_OVERVIEW' => '概述',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => '添加文档',
     'LBL_BUTTON_SEND' => '发送',
     'LBL_BUTTON_CLEAR' => '清除',
-    'LBL_MISSING_OBJECT' => 'DocuSign 对象不在窗口上',
+    'LBL_BUTTON_SELECT_TEMPLATE' => '使用模板',
     'LBL_PLEASE_LOG_IN' => '请先登录 DocuSign！',
     'LBL_DOWNLOAD_NOT_ALLOWED' => '您无法下载此文档。它已由其他用户创建！',
     'LBL_SEND_NOT_ALLOWED' => '您无法寄出此信封。它已由其他用户创建！',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => '已签署',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => '无法下载文档。请查看日志！',
     'LBL_DOCUMENT_COMPLETED' => '已完成',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign 信息',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => '现在',
+    'LBL_SETTINGS_TITLE' => 'DocuSign设置',
+    'LBL_RECIPIENT_SELECTION' => '收件人选择行为',
+    'LBL_RECIPIENT_NAME' => '姓名',
+    'LBL_RECIPIENT_EMAIL' => '电子邮件',
+    'LBL_RECIPIENT_TYPE' => '类型',
+    'LBL_TEMPLATE_NAME' => '姓名',
+    'LBL_RECIPIENT_SELECT' => '选择...',
+    'LBL_RECIPIENT_ROLE' => '角色',
+    'LBL_SELECT_BUTTON_LABEL' => '选择',
+    'LBL_BACK_BUTTON_LABEL' => '返回',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => '未能找到潜在的收件人！',
+    'LBL_FAILED_FETCH_TEMPLATES' => '未能获取模板！',
 ];

@@ -10,8 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Sugarcrm\Sugarcrm\DbArchiver\DbArchiver;
+use Doctrine\DBAL\Exception\DriverException;
 
 class SugarJobDataArchiver implements RunnableSchedulerJob
 {
@@ -63,7 +62,7 @@ class SugarJobDataArchiver implements RunnableSchedulerJob
 
                     // update the number of successful archives
                     $numSuccessfulArchives++;
-                } catch (UniqueConstraintViolationException $e) {
+                } catch (DriverException $e) {
                     // Job fails when API throws this exception
                     $this->job->failJob("Unable to perform archive/delete definition. {$numSuccessfulArchives} 
                     successful archives before failure");

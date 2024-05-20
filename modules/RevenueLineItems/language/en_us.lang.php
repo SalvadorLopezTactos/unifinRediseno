@@ -14,7 +14,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Revenue Line Items List Dashboard',
     'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Revenue Line Items Record Dashboard',
-    'LBL_REVENUE_LINE_ITEMS_FOCUS_DRAWER_DASHBOARD' => 'Revenue Line Items Focus Drawer',
+    'LBL_REVENUE_LINE_ITEMS_FOCUS_DRAWER_DASHBOARD' => 'Revenue Line Items Focus Dashboard',
     'LBL_CAMPAIGN_PRODUCT' => 'Campaign Product',
     'LBL_MODULE_NAME' => 'Revenue Line Items',
     'LBL_MODULE_NAME_SINGULAR' => 'Revenue Line Item',
@@ -164,7 +164,7 @@ $mod_strings = array(
     'LBL_DATE_CLOSED' => 'Expected Close Date',
     'LBL_DATE_CLOSED_TIMESTAMP' => 'Expected Close Date Timestamp',
     'LBL_COMMIT_STAGE' => 'Commit Stage',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Forecast',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Forecast Stage',
     'LBL_PROBABILITY' => 'Probability (%)',
     'LBL_SALES_STAGE' => 'Sales Stage',
     'LBL_SALES_STATUS' => 'Revenue Line Status',

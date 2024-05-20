@@ -62,8 +62,8 @@
 	$ss->assign('selected_dropdown', $selected_dropdown);
 	$ss->assign('show', $show);
 	$ss->assign('selected_options', $selected_options);
-	$ss->assign('multi', isset($multi) ? $multi: false);
-    $ss->assign('radio', isset($radio) ? $radio: false);
+     $ss->assign('multi', $multi ?? false);
+    $ss->assign('radio', $radio ?? false);
 	$ss->assign('dropdown_name',(!empty($vardef['options']) ? $vardef['options'] : ''));
 
 	$ss->assign('app_list_strings', "''");

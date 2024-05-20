@@ -13,7 +13,8 @@
         app.plugins.register('DocumentMergeActions', ['view'], {
             events: {
                 'click .send-email': 'openEmailDrawer',
-                'click .send-link': 'openUsersDrawer'
+                'click .send-link': 'openUsersDrawer',
+                'click .send-docusign': 'sendToDocuSign'
             },
 
             /**
@@ -228,14 +229,23 @@
                     for (var index = 0; index < selectedUsers.length; index++) {
                         var user = selectedUsers[index];
 
-                        var notification = app.data.createBean('Notifications', {
+                        const options = {
                             name: documentName,
                             assigned_user_id: user.id,
                             created_by: app.user.id,
                             description: documentLink,
                             severity: 'Document Widget List',
                             is_read: false
+                        };
+
+                        const mergedRecord = _.find(this.merges, function(merge) {
+                            return merge.generated_document_id === generatedDocumentModel.get('id');
                         });
+                        if (!_.isUndefined(mergedRecord)) {
+                            options.parent_id = mergedRecord.parent_id;
+                            options.parent_type = mergedRecord.parent_type;
+                        }
+                        const notification = app.data.createBean('Notifications', options);
 
                         notification.save();
                     }
@@ -247,6 +257,34 @@
                         title: app.lang.getModString('LBL_NO_USERS_SELECTED', 'DocumentMerges'),
                     });
                 }
+            },
+
+            /**
+             * Send document to DocuSign
+             * @param {Event} evt
+             */
+            sendToDocuSign: function(evt) {
+                const clickedMergeId = this._getMergeId(evt);
+                const mergeObject = _.find(this.merges, function(merge) {
+                    return merge.id === clickedMergeId;
+                });
+                if (_.isUndefined(mergeObject)) {
+                    return;
+                }
+
+                const parentModule = mergeObject.parent.type;
+                const parentId = mergeObject.parent.id;
+                const documentId = this._getDocumentId(evt);
+                const documents = [documentId];
+
+                app.events.trigger('docusign:send:initiate', {
+                    returnUrlParams: {
+                        parentRecord: parentModule,
+                        parentId: parentId,
+                        token: app.api.getOAuthToken()
+                    },
+                    documents: documents,
+                }, 'openEnvelope');
             },
 
             /**
@@ -284,6 +322,21 @@
                 if (downloadElement instanceof jQuery) {
                     var generatedDocumentId = downloadElement.attr('document-id');
                     return generatedDocumentId;
+                }
+
+                return null;
+            },
+
+            /**
+             * Returns the merge id
+             *
+             * @param {jQuery} evt
+             * @return {?string}
+             */
+            _getMergeId: function(evt) {
+                var rowElement = $(evt.target).closest('.merge-row');
+                if (rowElement instanceof jQuery) {
+                    return rowElement.attr('merge-id');
                 }
 
                 return null;

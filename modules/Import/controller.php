@@ -165,7 +165,7 @@ class ImportController extends SugarController
 
 	function action_Step1()
     {
-        $fromAdminView = isset($_REQUEST['from_admin_wizard']) ? $_REQUEST['from_admin_wizard'] : FALSE;
+        $fromAdminView = $_REQUEST['from_admin_wizard'] ?? false;
         if( $this->importModule == 'Administration' || $fromAdminView
             || $this->bean instanceof Person
         )

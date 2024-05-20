@@ -126,6 +126,10 @@ class RetryHttpClientBuilder
             $options['verify'] = $config['verify'];
         }
 
+        if (isset($config['headers'])) {
+            $options['headers'] = $config['headers'];
+        }
+
         return new Client($options);
     }
 }

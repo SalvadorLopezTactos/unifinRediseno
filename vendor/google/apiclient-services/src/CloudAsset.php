@@ -34,13 +34,15 @@ use Google\Client;
  */
 class CloudAsset extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
   public $assets;
+  public $effectiveIamPolicies;
   public $feeds;
   public $operations;
+  public $savedQueries;
   public $v1;
 
   /**
@@ -94,6 +96,36 @@ class CloudAsset extends \Google\Service
                 'readTime' => [
                   'location' => 'query',
                   'type' => 'string',
+                ],
+                'relationshipTypes' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->effectiveIamPolicies = new CloudAsset\Resource\EffectiveIamPolicies(
+        $this,
+        $this->serviceName,
+        'effectiveIamPolicies',
+        [
+          'methods' => [
+            'batchGet' => [
+              'path' => 'v1/{+scope}/effectiveIamPolicies:batchGet',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'scope' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'names' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
                 ],
               ],
             ],
@@ -180,6 +212,86 @@ class CloudAsset extends \Google\Service
           ]
         ]
     );
+    $this->savedQueries = new CloudAsset\Resource\SavedQueries(
+        $this,
+        $this->serviceName,
+        'savedQueries',
+        [
+          'methods' => [
+            'create' => [
+              'path' => 'v1/{+parent}/savedQueries',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'savedQueryId' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'delete' => [
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'get' => [
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'list' => [
+              'path' => 'v1/{+parent}/savedQueries',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'patch' => [
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
     $this->v1 = new CloudAsset\Resource\V1(
         $this,
         $this->serviceName,
@@ -245,6 +357,10 @@ class CloudAsset extends \Google\Service
                   'location' => 'query',
                   'type' => 'string',
                 ],
+                'savedAnalysisQuery' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
               ],
             ],'analyzeIamPolicyLongrunning' => [
               'path' => 'v1/{+scope}:analyzeIamPolicyLongrunning',
@@ -299,6 +415,11 @@ class CloudAsset extends \Google\Service
                 'readTimeWindow.startTime' => [
                   'location' => 'query',
                   'type' => 'string',
+                ],
+                'relationshipTypes' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
                 ],
               ],
             ],'exportAssets' => [

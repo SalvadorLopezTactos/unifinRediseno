@@ -13,6 +13,11 @@
 
 class SugarPortalModule
 {
+    public $module;
+    /**
+     * @var mixed[]|mixed
+     */
+    public $views;
     public $name;
 
     public function __construct($module)
@@ -39,7 +44,7 @@ class SugarPortalModule
             foreach($this->views as $file=>$def){
           			   $file = str_replace($file, '.php', '');
           			   $viewType = ($def['type'] == 'list')?"ListView":ucfirst($def['type']);
-          			   $layouts[] = array('name'=>$def['name'], 'module'=>$this->module, 'action'=>"module=ModuleBuilder&action=editPortal&view=${viewType}&view_module=".$this->module);
+                $layouts[] = ['name' => $def['name'], 'module' => $this->module, 'action' => "module=ModuleBuilder&action=editPortal&view={$viewType}&view_module=" . $this->module];
           		}
         }
 

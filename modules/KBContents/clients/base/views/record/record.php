@@ -178,8 +178,8 @@ $viewdefs['KBContents']['base']['view']['record'] = array(
                     'fieldSelector' => 'kbdocument_body',
                     'tinyConfig' => [
                         'toolbar' => 'code | bold italic underline strikethrough | alignleft aligncenter alignright ' .
-                            'alignjustify | forecolor backcolor |  styleselect formatselect fontselect ' .
-                            'fontsizeselect | cut copy paste pastetext | search searchreplace | bullist numlist | ' .
+                            'alignjustify | forecolor backcolor | fontfamily fontsize blocks | ' .
+                            'cut copy paste pastetext | search searchreplace | bullist numlist | ' .
                             'outdent indent | ltr rtl | undo redo | link unlink anchor image | subscript ' .
                             'superscript | charmap | table | hr removeformat | insertdatetime | ' .
                             'kbtemplate',

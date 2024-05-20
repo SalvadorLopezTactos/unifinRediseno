@@ -218,4 +218,10 @@ Da bi {{meetings_singular_module}} bio kreiran:
 - Kliknite "Odaberi saučesnika" da dodate postojećeg korisnika, kontakt ili rukovodioca u {{meetings_singular_module}}.
 - Kliknite na ikonu plus sa desne strane "Odaberi saučesnika" da kreirate {{meetings_singular_module}} saučesnika kao nov Sugar zapis.
 3. Kliknite na "Sačuvaj" da dovršite nov zapis i povratak na predhodnu stranu.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'je Smart Guide sastanak',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Podređeni zadaci',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Podređeni pozivi',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Podređeni sastanci',
 );

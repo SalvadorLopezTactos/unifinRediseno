@@ -24,7 +24,7 @@ class OAuth2Exception extends Exception {
 	public function __construct($result) {
 		$this->result = $result;
 		
-		$code = isset($result['code']) ? $result['code'] : 0;
+		$code = $result['code'] ?? 0;
 		
 		if (isset($result['error'])) {
 			// OAuth 2.0 Draft 10 style

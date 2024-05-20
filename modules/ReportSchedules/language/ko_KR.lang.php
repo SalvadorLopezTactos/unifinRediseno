@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => '기록 일정 기록 대시보드',
     'LBL_FILE_TYPE' => '파일 형식',
+    'LBL_EMBED_REPORT' => '이메일에 보고서 삽입',
+    'LBL_EMBED_REPORT_INFO' => '참고: 보고서가 200행을 초과하면 보고서를 CSV 파일로 첨부합니다.',
 );

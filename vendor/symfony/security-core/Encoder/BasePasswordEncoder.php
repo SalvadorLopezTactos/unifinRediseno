@@ -11,23 +11,35 @@
 
 namespace Symfony\Component\Security\Core\Encoder;
 
+use Symfony\Component\PasswordHasher\Hasher\CheckPasswordLengthTrait;
+
+trigger_deprecation('symfony/security-core', '5.3', 'The "%s" class is deprecated, use "%s" instead.', BasePasswordEncoder::class, CheckPasswordLengthTrait::class);
+
 /**
  * BasePasswordEncoder is the base class for all password encoders.
  *
  * @author Fabien Potencier <fabien@symfony.com>
+ *
+ * @deprecated since Symfony 5.3, use CheckPasswordLengthTrait instead
  */
 abstract class BasePasswordEncoder implements PasswordEncoderInterface
 {
-    const MAX_PASSWORD_LENGTH = 4096;
+    public const MAX_PASSWORD_LENGTH = 4096;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function needsRehash(string $encoded): bool
+    {
+        return false;
+    }
 
     /**
      * Demerges a merge password and salt string.
      *
-     * @param string $mergedPasswordSalt The merged password and salt string
-     *
      * @return array An array where the first element is the password and the second the salt
      */
-    protected function demergePasswordAndSalt($mergedPasswordSalt)
+    protected function demergePasswordAndSalt(string $mergedPasswordSalt)
     {
         if (empty($mergedPasswordSalt)) {
             return ['', ''];
@@ -48,14 +60,11 @@ abstract class BasePasswordEncoder implements PasswordEncoderInterface
     /**
      * Merges a password and a salt.
      *
-     * @param string      $password The password to be used
-     * @param string|null $salt     The salt to be used
-     *
-     * @return string a merged password and salt
+     * @return string
      *
      * @throws \InvalidArgumentException
      */
-    protected function mergePasswordAndSalt($password, $salt)
+    protected function mergePasswordAndSalt(string $password, ?string $salt)
     {
         if (empty($salt)) {
             return $password;
@@ -74,12 +83,9 @@ abstract class BasePasswordEncoder implements PasswordEncoderInterface
      * This method implements a constant-time algorithm to compare passwords to
      * avoid (remote) timing attacks.
      *
-     * @param string $password1 The first password
-     * @param string $password2 The second password
-     *
-     * @return bool true if the two passwords are the same, false otherwise
+     * @return bool
      */
-    protected function comparePasswords($password1, $password2)
+    protected function comparePasswords(string $password1, string $password2)
     {
         return hash_equals($password1, $password2);
     }
@@ -87,11 +93,9 @@ abstract class BasePasswordEncoder implements PasswordEncoderInterface
     /**
      * Checks if the password is too long.
      *
-     * @param string $password The password to check
-     *
-     * @return bool true if the password is too long, false otherwise
+     * @return bool
      */
-    protected function isPasswordTooLong($password)
+    protected function isPasswordTooLong(string $password)
     {
         return \strlen($password) > static::MAX_PASSWORD_LENGTH;
     }

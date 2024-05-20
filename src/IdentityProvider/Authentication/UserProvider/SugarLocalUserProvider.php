@@ -14,10 +14,13 @@ namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\UserProvider;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\InactiveUserException;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\InvalidUserException;
 
+use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\Subject\IdentityAwareJITProvisioning;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -148,6 +151,12 @@ class SugarLocalUserProvider implements UserProviderInterface
      */
     public function createUser($username, array $additionalFields = [])
     {
+        $subject = new IdentityAwareJITProvisioning();
+        $securityContext = $this->getSecurityContext();
+        $securityContext->activateSubject($subject);
+        $savedCurrentUser = $GLOBALS['current_user'];
+        $GLOBALS['current_user'] = $this->createUserBean()->getSystemUser();
+
         $sugarUser = $this->createUserBean();
         $sugarUser->populateFromRow(array_merge($additionalFields, ['user_name' => $username]));
 
@@ -164,6 +173,9 @@ class SugarLocalUserProvider implements UserProviderInterface
             $sugarUser->emailAddress->addAddress($additionalFields['email'], true);
             $sugarUser->emailAddress->save($sugarUser->id, $sugarUser->module_dir);
         }
+
+        $GLOBALS['current_user'] = $savedCurrentUser;
+        $securityContext->deactivateSubject($subject);
 
         return $sugarUser;
     }
@@ -186,5 +198,10 @@ class SugarLocalUserProvider implements UserProviderInterface
     protected function getSugarQuery()
     {
         return new \SugarQuery();
+    }
+
+    private function getSecurityContext(): Context
+    {
+        return Container::getInstance()->get(Context::class);
     }
 }

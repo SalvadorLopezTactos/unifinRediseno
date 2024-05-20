@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Form Buttons',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Approve/Reject',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Route',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Saada DocuSigni',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Other Routing Options',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Change Assigned To User',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Meeskond',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumentide mestimine',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Valimine...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumendi mestimine PDF-vormingusse',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Saada mestitud dokument e-kirjaga',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumentide mestimine',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Koonduv värava tüüp ei vasta sissetuleva voo värava tüübile',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Hargnevad väravad laiendavad protsessid mitmele harule. Kasutades koonduvat väravat nende harude uuesti üheks koondamiseks, tuleb kasutada õiget tüüpi koondavat väravat, selle hargneva värava tüübi kohaselt, mida neid harusid luues kasutati. Eksklusiivsete või sündmusepõhiste koondavate väravatega loodud harude korral kasutage eksklusiivset koondavat väravat nende uuesti koondamiseks. Paralleelsete või kaasavate hargnevate väravatega loodud harude korral kasutage nende uuesti koondamiseks paralleelset koondavat väravat.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Mooduli väli',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Mooduli seos',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Kasutaja',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Roll',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Tiim',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Vormi tegevus',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Ärireegel',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Ärireegli tegevus',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Meilimall',
 );

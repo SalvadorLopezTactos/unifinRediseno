@@ -15,6 +15,9 @@ namespace Sugarcrm\Sugarcrm\SugarConnect\Event;
 use Sugarcrm\Sugarcrm\SugarConnect\Publisher;
 use Sugarcrm\Sugarcrm\SugarConnect\Configuration\ConfigurationInterface;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 final class Event
 {
     /**

@@ -24,15 +24,15 @@ class Formatter extends LineFormatter
      *
      * @param string $dateFormat Date format
      */
-    public function __construct($dateFormat)
+    public function __construct(string $dateFormat)
     {
-        $this->dateFormat = $dateFormat;
+        parent::__construct(null, $dateFormat);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function format(array $record)
+    public function format(array $record): string
     {
         global $current_user;
 
@@ -42,7 +42,9 @@ class Formatter extends LineFormatter
             $userId = '-none-';
         }
 
-        return strftime($this->dateFormat)
+        // mute deprecation
+        $time = @strftime($this->dateFormat);
+        return $time
             . ' '
             . '[' . getmypid() . ']'
             . '[' . $userId . ']'
@@ -55,7 +57,7 @@ class Formatter extends LineFormatter
     /**
      * {@inheritdoc}
      */
-    protected function replaceNewlines($str)
+    protected function replaceNewlines($str): string
     {
         if ($this->allowInlineLineBreaks) {
             return $str;

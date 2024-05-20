@@ -71,6 +71,7 @@ class User extends Person {
 	//adding a property called team_id so we can populate it for use in the team widget
 	var $team_id;
     public $sudoer = null;
+    public $isIdmUserManager = null;
 
     public $receive_notifications;
     public $send_email_on_mention;
@@ -106,7 +107,7 @@ class User extends Person {
      */
     protected $oldLicenseType;
 
-    const DEFAULT_LICENSE_TYPE = 'CURRENT';
+    public const DEFAULT_LICENSE_TYPE = 'CURRENT';
 
     static protected $demoUsers = array(
         'jim',
@@ -121,15 +122,15 @@ class User extends Person {
     /**
      * support user names
      */
-    const SUPPORT_USER_NAME = 'SugarCRMSupport';
-    const SUPPORT_PROVISION_USER_NAME = 'SugarCRMProvisionUser';
-    const SUPPORT_UPGRADE_USER_NAME = 'SugarCRMUpgradeUser';
-    const SUPPORT_PORTAL_USER = 'SugarCustomerSupportPortalUser';
+    public const SUPPORT_USER_NAME = 'SugarCRMSupport';
+    public const SUPPORT_PROVISION_USER_NAME = 'SugarCRMProvisionUser';
+    public const SUPPORT_UPGRADE_USER_NAME = 'SugarCRMUpgradeUser';
+    public const SUPPORT_PORTAL_USER = 'SugarCustomerSupportPortalUser';
 
     /**
      * array of well known support users
      */
-    const SUPPORT_USERS = [
+    public const SUPPORT_USERS = [
         self::SUPPORT_USER_NAME,
         self::SUPPORT_PROVISION_USER_NAME,
         self::SUPPORT_UPGRADE_USER_NAME,
@@ -240,7 +241,7 @@ class User extends Person {
     {
         $query = new SugarQuery();
         $query->select(['id']);
-        $query->from(BeanFactory::newBean('MobileDevices'), ['team_security' => false, 'add_deleted' => true]);
+        $query->from(BeanFactory::newBean('MobileDevices'), ['team_security' => false, 'add_deleted' => false]);
         $query->where()->queryAnd()
             ->equals('assigned_user_id', $this->id);
         $id = $query->getOne();
@@ -268,7 +269,7 @@ class User extends Person {
 	{
 	    $signatures = $this->getSignaturesArray();
 
-	    return isset($signatures[$id]) ? $signatures[$id] : false;
+        return $signatures[$id] ?? false;
 	}
 
 	function getSignaturesArray() {
@@ -718,11 +719,12 @@ class User extends Person {
         }
 
         // validate license type
+        $licenseTypeWasModified = false;
         if (isset($this->license_type)) {
             $licenseTypes = $this->getTopLevelLicenseTypes();
             if ($this->isLicenseTypeModified($licenseTypes)) {
                 if (!$this->validateLicenseTypes($licenseTypes)) {
-                    throw new SugarApiExceptionInvalidParameter('Invalid license_type in module: Users');
+                    throw new SugarApiExceptionInvalidParameter('User::save: Invalid license_type in module: Users');
                 }
 
                 // make sure only admin can modify the license type
@@ -730,6 +732,7 @@ class User extends Person {
                 if (!$current_user->isAdmin()) {
                     throw new SugarApiExceptionNotAuthorized('Not authorized to modify license_type in module: Users');
                 }
+                $licenseTypeWasModified = true;
             }
             $this->setLicenseType($licenseTypes);
         }
@@ -745,7 +748,8 @@ class User extends Person {
             if ($this->portal_only != 1 && $this->is_group != 1 && $this->status == 'Active'
                   && (empty($this->fetched_row)
                       || $this->fetched_row['status'] == 'Inactive'
-                      || $this->fetched_row['status'] == '')) {
+                      || $this->fetched_row['status'] == ''
+                      || $licenseTypeWasModified)) {
                 $exceededLicenseTypes = SubscriptionManager::instance()->getUserExceededLicenseTypes($this);
                 if (count($exceededLicenseTypes)) {
                     $GLOBALS['log']->error(
@@ -777,7 +781,7 @@ class User extends Person {
                         $sv->renderJavascript();
                         $sv->displayHeader();
                         $sv->errors[] = $msg;
-                        $sv->displayErrors();
+                        $sv->displayErrors([], true);
                         $msg = '';
                     }
                     // When action is not set, we're coming from the installer or non-UI source.
@@ -809,7 +813,7 @@ class User extends Person {
         }
 
         // track the current reports to id to be able to use it if it has changed
-        $old_reports_to_id = isset($this->fetched_row['reports_to_id']) ? $this->fetched_row['reports_to_id'] : '';
+        $old_reports_to_id = $this->fetched_row['reports_to_id'] ?? '';
 
         if (empty($this->site_user_id)) {
             if (!$this->id) {
@@ -1055,9 +1059,7 @@ class User extends Person {
         $ret = parent::retrieve($id, $encode, $deleted);
 
         //CurrentUserApi needs a consistent timestamp/format of the data modified for hash purposes.
-        if ($this->fetched_row !== false) {
-            $this->hashTS = $this->fetched_row['date_modified'];
-        }
+        $this->hashTS = $this->fetched_row['date_modified'] ?? null;
 
 		if ($ret) {
 			if (isset($_SESSION)) {
@@ -1447,12 +1449,30 @@ class User extends Person {
         if (!empty($licenseType)
             && $this->validateLicenseTypes($licenseType)
             && !$this->hasMangoLicenseTypes($this->license_type)) {
-            if (isFromApi()) {
-                throw new SugarApiExceptionMissingParameter('ERR_USER_MISSING_LICENSE_TYPE');
+            $types = [];
+            foreach ($licenseType as $type) {
+                $types[] = static::getLicenseTypeDescription($type);
             }
-            $this->error_string .= translate('ERR_USER_MISSING_LICENSE_TYPE', $this->module_name);
+            $errorMessage = string_format(
+                translate('ERR_USER_MISSING_LICENSE_TYPE', $this->module_name),
+                [implode(', ', $types)]
+            );
+            if (isFromApi()) {
+                throw new SugarApiExceptionMissingParameter($errorMessage);
+            }
+            $this->error_string .= $errorMessage;
             $verified = false;
         }
+
+        // check non CRM license types if are already offered in a Bundle
+        if (!empty($this->getNonCrmTypesArePartOfSelectedBundle($licenseType))) {
+            if (isFromApi()) {
+                throw new SugarApiExceptionInvalidParameter('ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES');
+            }
+            // dot set $verified to false, we still need to save the value
+            $_SESSION['user_save_error'] = translate('ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES', $this->module_name);
+        }
+
 		if (is_admin($current_user)) {
             $query = 'SELECT COUNT(*) AS c FROM users WHERE is_admin = 1 AND deleted = 0';
             $remaining_admins = $conn->fetchOne($query);
@@ -1473,7 +1493,8 @@ class User extends Person {
 		return $verified;
 	}
 
-	function get_list_view_data() {
+    public function get_list_view_data($filter_fields = [])
+    {
 		$user_fields = parent::get_list_view_data();
 
 		if ($this->is_admin)
@@ -2670,13 +2691,20 @@ class User extends Person {
         return $body;
     }
 
+    /**
+     * Returns a hash value of the User
+     *
+     * @return string The User hash value
+     */
     public function getUserMDHash() {
-        //Add the tab hash to include the change of tabs (e.g. module order) as a part of the user hash
+        // Add the tab hash to include the change of tabs (e.g. module order) as a part of the user hash
         $tabs = new TabController();
         $tabHash = $tabs->getMySettingsTabHash();
-        // User hash must depends on user wizard completion
+        // User hash must depend on user wizard completion and ability for
+        // users to set their number of pinned modules
         $isUserWizardCompleted = intval($this->shouldUserCompleteWizard());
-        return md5($this->id . $isUserWizardCompleted . $this->hashTS . $tabHash);
+        $pinnedModulesAllowed = intval($tabs->get_users_pinned_modules());
+        return md5($this->id . $isUserWizardCompleted . $pinnedModulesAllowed . $this->hashTS . $tabHash);
     }
 
     public function setupSession() {
@@ -2918,13 +2946,16 @@ class User extends Person {
      * @param array $types array of types to pass in
      * @param bool $buildCache flag to rebuild metadata cache
      */
-    public function setLicenseType(array $types = [], bool $buildCache = true)
+    public function setLicenseType(array $types = [], bool $buildCache = true, bool $removeDupes = true)
     {
         global $current_user;
         if (is_admin($current_user) || $this->id == '1') {
             if (empty($types)) {
                 $this->license_type = null;
             } else {
+                if ($removeDupes) {
+                    $types = $this->removeDuplicates($types);
+                }
                 $this->license_type = json_encode(array_values($types));
             }
             if ($this->isLicenseTypeModified($types) && !($GLOBALS['installing'] ?? false) && $buildCache) {
@@ -2940,7 +2971,7 @@ class User extends Person {
                     $current_user->preferred_language : $default_language;
                 foreach (array_unique([$this->id, $current_user->id]) as $id) {
                     foreach (['modules/modules_def_', 'modules/modules_def_fiscal_'] as $prefix) {
-                        $cacheFile = sugar_cached($prefix . $current_language . '_' . md5($id) . '.js');
+                        $cacheFile = sugar_cached($prefix . $current_language . '_' . md5((string)$id) . '.js');
                         if (file_exists($cacheFile)) {
                             unlink($cacheFile);
                         }
@@ -2948,6 +2979,26 @@ class User extends Person {
                 }
             }
         }
+    }
+
+    /**
+     * remove duplicates from license type
+     * @param array $licenseTypes
+     * @return array
+     */
+    protected function removeDuplicates(array $licenseTypes) : array
+    {
+        if (count($licenseTypes) <= 1) {
+            return $licenseTypes;
+        }
+
+        $duplicates = $this->getNonCrmTypesArePartOfSelectedBundle($licenseTypes);
+        if (empty($duplicates)) {
+            return $licenseTypes;
+        }
+        return array_filter($licenseTypes, function (string $type) use ($duplicates) : bool {
+            return !in_array($type, $duplicates);
+        });
     }
 
     /**
@@ -3004,12 +3055,12 @@ class User extends Person {
         // support user has the full privilidge to access all flavors
         if (in_array($this->user_name, [self::SUPPORT_USER_NAME, self::SUPPORT_PORTAL_USER])) {
             if ($getAll) {
-                return $this->getAllSystemSubscriptionKeys();
+                return $this->removeDuplicates($this->getAllSystemSubscriptionKeys());
             }
-            return $this->getTopLevelSystemSubscriptionKeys();
+            return $this->removeDuplicates($this->getTopLevelSystemSubscriptionKeys());
         }
 
-        return $this->processLicenseTypes($this->license_type, $getAll);
+        return $this->removeDuplicates($this->processLicenseTypes($this->license_type, $getAll));
     }
 
     /**
@@ -3021,7 +3072,7 @@ class User extends Person {
     {
         return $this->getLicenseTypes(true);
     }
-    
+
     /**
      * get top level license types
      *
@@ -3031,7 +3082,7 @@ class User extends Person {
     {
         return $this->getLicenseTypes(false);
     }
-    
+
     /**
      * get license types' description in string
      *
@@ -3043,10 +3094,16 @@ class User extends Person {
             // inactive user with empty license type
             $desc = 'No License Assigned';
         } else {
-            $userSubscriptions = Subscription::getOrderedLicenseTypes(SubscriptionManager::instance()->getTopLevelUserSubscriptions($this));
+            $userSubscriptions = SubscriptionManager::instance()->getTopLevelUserSubscriptions($this);
             $desc = implode('<br>', array_map(function (string $type): string {
-                return htmlspecialchars(self::getLicenseTypeDescription($type));
+                return htmlspecialchars(self::getLicenseTypeDescription($type), ENT_COMPAT);
             }, $userSubscriptions));
+            $invalidLicenseTypes = SubscriptionManager::instance()->getUserInvalidSubscriptions($this);
+            if (!empty($invalidLicenseTypes)) {
+                $desc .= '<p class="error">' . implode('<br>', array_map(function (string $type): string {
+                        return htmlspecialchars(self::getLicenseTypeDescription($type), ENT_COMPAT);
+                }, $invalidLicenseTypes)) . '</p>';
+            }
         }
         return $desc;
     }
@@ -3074,8 +3131,8 @@ class User extends Person {
                     $types[] = $type;
                     if ($getAll && Subscription::isBundleKey($type)) {
                         $foundBundles = SubscriptionManager::instance()->getBundledSubscriptionsByKey($type);
-                        if (!empty($foundSubs)) {
-                            $types = array_merge($types, array_key($foundBundles));
+                        if (!empty($foundBundles)) {
+                            $types = array_merge($types, array_keys($foundBundles));
                         }
                     }
                 }
@@ -3111,11 +3168,58 @@ class User extends Person {
 
         foreach ($licenseTypes as $type) {
             if (!in_array($type, $this->getTopLevelSystemSubscriptionKeys())) {
+                if (!empty($GLOBALS['log'])) {
+                    $GLOBALS['log']->fatal("invalid license type : $type");
+                    $GLOBALS['log']->fatal("system license keys: " . json_encode($this->getTopLevelSystemSubscriptionKeys()));
+                    $GLOBALS['log']->fatal("user license keys: " . json_encode($licenseTypes));
+                }
                 return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * get CRM license types
+     * @param array $licenseTypes
+     * @return array
+     */
+    protected function getCrmBundleLicenseTypes(array $licenseTypes) : array
+    {
+        $ret = [];
+        if (empty($licenseTypes)) {
+            return [];
+        }
+
+        foreach ($licenseTypes as $type) {
+            if (Subscription::isMangoKey($type) && Subscription::isBundleKey($type)) {
+                $ret[] = $type;
+            }
+        }
+
+        return $ret;
+    }
+
+    /**
+     * get CRM license types
+     * @param array $licenseTypes
+     * @return array
+     */
+    protected function getNonCrmLicenseTypes(array $licenseTypes) : array
+    {
+        $ret = [];
+        if (empty($licenseTypes)) {
+            return [];
+        }
+
+        foreach ($licenseTypes as $type) {
+            if (!Subscription::isMangoKey($type)) {
+                $ret[] = $type;
+            }
+        }
+
+        return $ret;
     }
 
     /**
@@ -3216,6 +3320,26 @@ class User extends Person {
             }
         }
         return false;
+    }
+
+    /**
+     * get non CRM types which already offered in Bundles
+     * @return array
+     */
+    public function getNonCrmTypesArePartOfSelectedBundle(array $licenseTypes) : array
+    {
+        $crmBundleKeys = $this->getCrmBundleLicenseTypes($licenseTypes);
+        $nonCrmKeys = $this->getNonCrmLicenseTypes($licenseTypes);
+        $ret = [];
+        foreach ($nonCrmKeys as $nonCrmKey) {
+            foreach ($crmBundleKeys as $crmKey) {
+                $bundled = SubscriptionManager::instance()->getBundledSubscriptionsByKey($crmKey);
+                if (!empty($bundled) && array_key_exists($nonCrmKey, $bundled)) {
+                    $ret[] = $nonCrmKey;
+                }
+            }
+        }
+        return $ret;
     }
 
     /**
@@ -3576,7 +3700,7 @@ class User extends Person {
     public function updateLastStates($changes, $platform = 'base')
     {
         // Get the last state data currently stored in the DB for the user
-        $lastStates = $this->retrieveLastStates();
+        $lastStates = $this->retrieveLastStates($platform);
         $dataExists = $lastStates !== null;
         if (!$dataExists) {
             $lastStates = [];

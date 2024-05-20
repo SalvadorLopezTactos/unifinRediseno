@@ -50,6 +50,7 @@
  	}
 
  	function build(){
+        $listViewDefs = [];
  		//we will assume that if the ListView.html file exists we will want to use that one
         if (file_exists('modules/'.$this->module.'/ListView.html')) {
  			$this->type = 1;

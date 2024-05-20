@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logod',
 	'LBL_ADMIN_WIZARD' => 'Admini viisard',
-	'LBL_ALLOW_USER_TABS' => 'Luba kasutajatel vahekaartide peitmine',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Süsteemi sätted',
 	'LBL_ENABLE_MAILMERGE' => 'Kas lubada kirja mestimine?',
 	'LBL_LOGVIEW' => 'Vaata logi',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Kasutage seda sätet määratlemaks, mitu kuud enne praegust kuupäeva kõnede ja koosolekute vaba/hõivatud teavet avaldatakse. <BR>Vaba/hõivatud avaldamise väljalülitamiseks sisestage 0.  Miinimum on 1 kuu, maksimum 12 kuud.',
     'LBL_PDFMODULE_NAME' => 'Aruande PDF-mall',
     'SUGARPDF_BASIC_SETTINGS' => 'Dokumendi atribuudid',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Täpsemad sätted',
     'SUGARPDF_LOGO_SETTINGS' => 'Pildid',
-
-    'PDF_CREATOR' => 'PDF-i koostaja',
-    'PDF_CREATOR_INFO' => 'Määratleb dokumendi koostaja. <br>Selleks on üldjuhul PDF-i loova rakenduse nimi.',
 
     'PDF_AUTHOR' => 'Autor',
     'PDF_AUTHOR_INFO' => 'Autor kuvatakse dokumendi atribuutides.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Vali pakkumuste puhul uus pilt',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Failivorming võib olla kas .jpg või .png. (Ainult .jpg EZPDF-i puhul)<BR>Soovitatav suurus on 867 x 60 pikslit.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Pakkumuste pildi laius',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Muutke üleslaaditud pildi skaalat, mida kuvatakse pakkumuste PDF-dokumentides (ainult TCPDF).',
+    'PDF_TITLE' => 'Pealkiri',
+    'PDF_TITLE_INFO' => 'Pealkiri kuvatakse dokumendi atribuutides.',
+
+    'PDF_SUBJECT' => 'Teema',
+    'PDF_SUBJECT_INFO' => 'Teema kuvatakse dokumendi atribuutides.',
 
     'PDF_SMALL_HEADER_LOGO' => 'Praegune pilt',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'See pilt kuvatakse PDF-dokumendi lehekülgede päises.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Vali uus pilt',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Valige pilt praeguse pildi asendamiseks. Failivorming võib olla kas jpg või .png. (Ainult .jpg EZPDF-i puhul.) Soovitatav suurus on 212 x 40 pikslit.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Aruannete pildi laius',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Muutke üleslaaditud pildi skaalat, mida kuvatakse aruannete PDF-dokumentides (ainult TCPDF).',
-
-
-    'PDF_HEADER_STRING' => 'Päise string',
-    'PDF_HEADER_STRING_INFO' => 'Päise kirjelduse string',
-
-    'PDF_HEADER_TITLE' => 'Päise pealkiri',
-    'PDF_HEADER_TITLE_INFO' => 'Dokumendi päises pealkirjana prinditav string',
-
-    'PDF_FILENAME' => 'Vaikimisi faili nimi',
-    'PDF_FILENAME_INFO' => 'Loodud PDF-failide vaikimisi failinimi',
-
-    'PDF_TITLE' => 'Pealkiri',
-    'PDF_TITLE_INFO' => 'Pealkiri kuvatakse dokumendi atribuutides.',
-
-    'PDF_SUBJECT' => 'Teema',
-    'PDF_SUBJECT_INFO' => 'Teema kuvatakse dokumendi atribuutides.',
-
     'PDF_KEYWORDS' => 'Märksõna(d)',
     'PDF_KEYWORDS_INFO' => 'Seostage märksõnad dokumendiga, üldjuhul kujul märksõna1 märksõna2 ...',
 
-    'PDF_COMPRESSION' => 'Tihendus',
-    'PDF_COMPRESSION_INFO' => 'Aktiveerib või inaktiveerib lehe tihenduse. <br>Aktiveerituna tihendatakse iga lehe sisu, mis annab tulemuseks saadava dokumendi tihendussuhteks ligikaudu 2.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG kvaliteet (1–100)',
-    'PDF_JPEG_QUALITY_INFO' => 'JPEG tihenduse vaikekvaliteedi määramine (1–100)',
-
-    'PDF_PDF_VERSION' => 'PDF-i versioon',
-    'PDF_PDF_VERSION_INFO' => 'PDF-i versiooni määramine (kontrolli PDF-i viidet kehtivate väärtuste osas).',
-
-    'PDF_PROTECTION' => 'Dokumendi kaitse',
-    'PDF_PROTECTION_INFO' => 'Seadista dokumendi kaitse<br>- kopeeri: kopeeri tekst ja pildid lõikelauale<br>- prindi: prindi dokument<br>- muuda: muuda seda (välja arvatud kommentare ja vorme)<br>- komment.-vormid: lisa kommentaare ja vorme<br>Märkus: muutmiskaitse on inimeste jaoks, kellel on täielik Acrobati toode.',
-
-    'PDF_USER_PASSWORD' => 'Kasutaja parool',
-    'PDF_USER_PASSWORD_INFO' => 'Kui te ei seadista ühtegi parooli, avaneb dokument tavapäraselt. <br>Kui seadistate kasutaja parooli, küsib PDF.-vaatur seda enne dokumendi kuvamist. <br>Kui ülemparool erineb kasutaja omast, saab seda kasutada täieliku juurdepääsu saamiseks.',
-
-    'PDF_OWNER_PASSWORD' => 'Omanku parool',
-    'PDF_OWNER_PASSWORD_INFO' => 'Kui te ei seadista ühtegi parooli, avaneb dokument tavapäraselt. <br>Kui seadistate kasutaja parooli, küsib PDF.-vaatur seda enne dokumendi kuvamist. <br>Kui ülemparool erineb kasutaja omast, saab seda kasutada täieliku juurdepääsu saamiseks.',
-
-    'PDF_ACL_ACCESS' => 'Juurdepääsu kontroll',
-    'PDF_ACL_ACCESS_INFO' => 'Vaikimisi juurdepääsu kontroll PDF-i loomisel.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Lahtri kõrguse suhe',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Kui lahtri kõrgus on alla (fondi kõrguse x lahtri kõrguse suhe), kasutatakse lahtri kõrgusena (fondi kõrguse x lahtri kõrguse suhe).<br>(Fondi kõrguse x lahtri kõrguse suhet) kasutatakse ka lahtri kõrgusena, kui kõrgust pole määratletud.',
-
-    'K_TITLE_MAGNIFICATION' => 'Pealkirja suurendus',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Pealkirja suurenduse suhte põhifondi suurus.',
-
-    'K_SMALL_RATIO' => 'Väikese fondi tegur',
-    'K_SMALL_RATIO_INFO' => 'Väikese fondi vähendustegur.',
-
-    'HEAD_MAGNIFICATION' => 'Pealkirja suurendus',
-    'HEAD_MAGNIFICATION_INFO' => 'Pealkirjade suurendustegur.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Pildimastaabi suhe',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Piltide mastaapimiseks kasutatav suhe',
-
-    'PDF_UNIT' => 'Ühik',
-    'PDF_UNIT_INFO' => 'dokumendi mõõtühik',
 	'PDF_GD_WARNING'=>'Teil pole PHP puhul installitud GD teeki. Installimata GD teegita saab PDF-dokumentides kuvada ainult JPEG logosid.',
     'ERR_EZPDF_DISABLE'=>'Hoiatus: EZPDF-klass on tabelis config keelatud ja on seatud PDF-klassina. Salvestage see vorm, et seada TCPDF PDF-klassina ja naasta stabiilsesse olekusse.',
     'LBL_IMG_RESIZED'=>"(suurust muudetud kuvamiseks)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Lisa PDF-font',
     'LBL_PDF_PATCH' => 'Paik',
-    'LBL_PDF_PATCH_INFO' => 'Kodeeringu kohandatud muutmine. Kirjutage PHP massiiv.<br>Näide: <br>ISO-8859-1 ei sisalda euro sümbolit. Selle lisamiseks kohas 164 kirjutage array(164=>\\\'Euro\\\').',
     'LBL_PDF_ENCODING_TABLE' => 'Tabeli kodeerimine',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Kodeerimistabeli nimi.<br>Seda suvandit eiratakse TrueType Unicode&#39;i puhul, OpenType Unicode&#39;i ja sümbolifontide puhul.<br>Kodeerimine määratleb seose koodi (vahemikus 0 kuni 255) ja fondis oleva märgi vahel.<br>Esimesed 128 on fikseeritud ja on kooskõlas ASCII-ga.',
     'LBL_PDF_FONT_FILE' => 'Fondi fail',

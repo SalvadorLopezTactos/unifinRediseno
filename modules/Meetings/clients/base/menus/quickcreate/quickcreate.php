@@ -15,5 +15,4 @@ $viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
     'label' => 'LNK_NEW_MEETING',
     'visible' => true,
     'order' => 8,
-    'icon' => 'sicon-calendar',
 );

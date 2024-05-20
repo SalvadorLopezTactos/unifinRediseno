@@ -28,6 +28,11 @@ abstract class AbstractScript extends AbstractUpdateAction
     private $_lang;
 
     /**
+     * @var bool|null
+     */
+    private $scriptedUpsert;
+
+    /**
      * @param string|null $lang       Script language, see constants
      * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
      */
@@ -53,7 +58,7 @@ abstract class AbstractScript extends AbstractUpdateAction
      *
      * @throws InvalidException
      *
-     * @return Script|ScriptId
+     * @return Script|ScriptId|self
      */
     public static function create($data)
     {
@@ -66,7 +71,7 @@ abstract class AbstractScript extends AbstractUpdateAction
         }
 
         if (\is_string($data)) {
-            $class = self::class === \get_called_class() ? Script::class : \get_called_class();
+            $class = self::class === static::class ? Script::class : static::class;
 
             return new $class($data);
         }
@@ -93,7 +98,7 @@ abstract class AbstractScript extends AbstractUpdateAction
     {
         $array = $this->getScriptTypeArray();
 
-        if (!empty($this->_params)) {
+        if ($this->_params) {
             $array['params'] = $this->_convertArrayable($this->_params);
         }
 
@@ -135,5 +140,15 @@ abstract class AbstractScript extends AbstractUpdateAction
         }
 
         throw new InvalidException('Failed to create script. Invalid data passed.');
+    }
+
+    public function setScriptedUpsert(bool $scriptedUpsert): void
+    {
+        $this->scriptedUpsert = $scriptedUpsert;
+    }
+
+    public function getScriptedUpsert(): ?bool
+    {
+        return $this->scriptedUpsert;
     }
 }

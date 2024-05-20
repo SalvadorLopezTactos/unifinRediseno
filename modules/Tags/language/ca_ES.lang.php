@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;etiquetes',
     'LBL_MY_TAGS' => 'Les meves etiquetes',
     'LBL_MY_FAVORITE_TAGS' => 'Les meves etiquetes preferides',
+    'LBL_MORE_TAGS' => 'Etiquetes {{tagsNumber}}',
 );

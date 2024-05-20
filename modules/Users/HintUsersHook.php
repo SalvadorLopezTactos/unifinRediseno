@@ -55,29 +55,9 @@ class HintUsersHook extends LogicHook
         // a contradiction).
         $removeLicense = false;
 
-        // User status change. Particularly, checking for a user going inactive. With Hint 5.4.0 and
-        // Sugar 10.3.0+, if a user is going inactive, we remove their hint license so that it may be assigned to
-        // another active user.
-        if (!empty($arguments['dataChanges']['status'])) {
-            $status = $arguments['dataChanges']['status'];
-            $statusPrev = $status['before'] ?: '';
-            $statusChange = $status['after'] ?: '';
-            $inactive = 'Inactive';
-
-            if ($statusChange === $inactive && $statusPrev !== $inactive) {
-                $removeLicense = true;
-            }
-        }
-
-        $dataChanges = $arguments['dataChanges'];
-
         // user becomes Hint licensed, unlicensed, or has become inactive post 5.4.0
-        if ((!empty($dataChanges) && array_key_exists('license_type', $dataChanges)
-                && isset($dataChanges['license_type'])) || $removeLicense) {
-            $license = isset($dataChanges['license_type']) ? $dataChanges['license_type'] : null;
-            if (!isset($license)) {
-                return;
-            }
+        if (!empty($arguments['dataChanges']['license_type']) || $removeLicense) {
+            $license = $arguments['dataChanges']['license_type'];
 
             $oldData = json_decode(($license['before'] ?: '[]'), true);
             $oldLicensedUser = $this->isHintUser($oldData);

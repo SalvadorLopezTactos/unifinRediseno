@@ -83,11 +83,13 @@
 
         if (app.hint && app.user.hasLicense('HINT')) {
             _.each(options.meta.components, function(def) {
-                _.each(def.layout.components, function(comp) {
-                    if (comp.layout.name === 'preview-pane') {
-                        comp.layout.components.push(previewPane);
-                    }
-                });
+                if (def.layout && def.layout.components) {
+                    _.each(def.layout.components, function(comp) {
+                        if (comp.layout.name === 'preview-pane') {
+                            comp.layout.components.push(previewPane);
+                        }
+                    });
+                }
             });
         }
     },

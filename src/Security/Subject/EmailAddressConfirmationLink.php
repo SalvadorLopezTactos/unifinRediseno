@@ -22,6 +22,7 @@ final class EmailAddressConfirmationLink implements Subject
      * @test
      * @covers ::jsonSerialize
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

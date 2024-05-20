@@ -35,7 +35,7 @@ use Google\Client;
  */
 class ServiceNetworking extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
   /** Manage your Google API service configuration. */
@@ -335,6 +335,10 @@ class ServiceNetworking extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'includeUsedIpRanges' => [
+                  'location' => 'query',
+                  'type' => 'boolean',
                 ],
               ],
             ],'updateConsumerConfig' => [

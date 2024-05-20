@@ -86,9 +86,9 @@ class Currency extends SugarBean
     /**
      * convert amount to base currency
      *
-     * @param  float $amount    amount to convert to US Dollars
+     * @param  float $amount    amount to convert to System Currency
      * @param  int   $precision rounding precision scale
-     * @return float  currency  value in US Dollars from conversion
+     * @return float  currency  value in System Currency from conversion
      */
     function convertToBase($amount, $precision = 6) {
         $amount = ($amount == null) ? 0 : $amount;
@@ -98,9 +98,9 @@ class Currency extends SugarBean
     /**
      * convert amount from base currency
      *
-     * @param  float $amount    currency amount in US Dollars
+     * @param  float $amount    currency amount in System Currency
      * @param  int   $precision rounding precision scale
-     * @return float  currency  value from US Dollar conversion
+     * @return float  currency  value from System Currency conversion
      */
     function convertFromBase($amount, $precision = 6) {
         $amount = ($amount == null) ? 0 : $amount;
@@ -118,7 +118,7 @@ class Currency extends SugarBean
     function getDefaultCurrencyName()
     {
         global $sugar_config;
-        return isset($sugar_config['default_currency_name'])?$sugar_config['default_currency_name']:'';
+        return $sugar_config['default_currency_name'] ?? '';
     }
 
     /**
@@ -131,7 +131,7 @@ class Currency extends SugarBean
     function getDefaultCurrencySymbol()
     {
         global $sugar_config;
-        return isset($sugar_config['default_currency_symbol'])?$sugar_config['default_currency_symbol']:'';
+        return $sugar_config['default_currency_symbol'] ?? '';
     }
 
     /**
@@ -144,7 +144,7 @@ class Currency extends SugarBean
     function getDefaultISO4217()
     {
         global $sugar_config;
-        return isset($sugar_config['default_currency_iso4217'])?$sugar_config['default_currency_iso4217']:'';
+        return $sugar_config['default_currency_iso4217'] ?? '';
     }
 
     /**
@@ -314,7 +314,7 @@ class Currency extends SugarBean
     /**
      * @return array $data list view
      */
-    function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
         $this->conversion_rate = format_number($this->conversion_rate, 10, 10);
         $data = parent::get_list_view_data();
@@ -496,6 +496,7 @@ function currency_format_number($amount, $params = array())
  * @see include/Localization/Localization.php
  */
 function format_number($amount, $round = null, $decimals = null, $params = array()) {
+    $checkAmount = null;
     global $app_strings, $current_user, $sugar_config, $locale;
     static $current_users_currency = null;
     static $last_override_currency = null;
@@ -626,10 +627,30 @@ function unformat_number($string, $useBaseCurrency = false)
         $currency = BeanFactory::getBean('Currencies', $currency_id);
     }
 
+    $currencySymbol = $currency->symbol;
+
     $seps = get_number_seperators();
+    if (!is_string($string)) {
+        LoggerManager::getLogger()->fatal(sprintf('string expected, "%s" given', gettype($string)) . PHP_EOL . (new Exception())->getTraceAsString());
+    } elseif (isset($currency, $string, $currencySymbol) && strpos($string, (string) $currencySymbol) === false) {
+        $tmpSymbol = preg_replace('/[0-9]+/', '', $string);
+        if (isset($seps[0])) {
+            $tmpSymbol = str_replace($seps[0], '', $tmpSymbol);
+        }
+        $tmpSymbol = str_replace($seps[1], '', $tmpSymbol);
+
+        if ($currency->retrieveIDBySymbol($tmpSymbol) !== '') {
+            $currencySymbol = $tmpSymbol;
+        }
+    }
+
     // remove num_grp_sep and replace decimal separator with decimal
-    $string = trim(str_replace(array($seps[0], $seps[1], $currency->symbol), array('', '.', ''), $string));
-    if(preg_match('/^[+-]?\d(\.\d+)?[Ee]([+-]?\d+)?$/', $string)) $string = sprintf("%.0f", $string);//for scientific number format. After round(), we may get this number type.
+    $string = trim(str_replace(array($seps[0], $seps[1], $currencySymbol), array('', '.', ''), (string)$string));
+
+    if (preg_match('/^[+-]?\d(\.\d+)?[Ee]([+-]?\d+)?$/', $string)) {
+        $string = sprintf("%.0f", $string);//for scientific number format. After round(), we may get this number type.
+    }
+
     preg_match('/[\-\+]?[0-9\.]*/', $string, $string);
 
     $out_number = trim($string[0]);
@@ -719,6 +740,11 @@ function get_number_seperators($reset_sep = false)
  */
 function toString($echo = true)
 {
+    $m_currency_round = null;
+    $m_currency_decimal = null;
+    $m_currency_symbol = null;
+    $m_currency_iso = null;
+    $m_currency_name = null;
     $s = "\$m_currency_round=$m_currency_round \n" .
          "\$m_currency_decimal=$m_currency_decimal \n" .
          "\$m_currency_symbol=$m_currency_symbol \n" .

@@ -18,16 +18,16 @@ class MetaDataFiles
     /**
      * Constants for this class, used for pathing metadata files
      */
-    const PATHBASE    = '';
-    const PATHCUSTOM  = 'custom/';
-    const PATHWORKING = 'custom/working/';
-    const PATHHISTORY = 'custom/history/';
+    public const PATHBASE    = '';
+    public const PATHCUSTOM  = 'custom/';
+    public const PATHWORKING = 'custom/working/';
+    public const PATHHISTORY = 'custom/history/';
 
     /**
      * Constant for component types... in our case, layouts and views
      */
-    const COMPONENTVIEW   = 'view';
-    const COMPONENTLAYOUT = 'layout';
+    public const COMPONENTVIEW   = 'view';
+    public const COMPONENTLAYOUT = 'layout';
 
     /**
      * Path prefixes for metadata files
@@ -341,7 +341,7 @@ class MetaDataFiles
         }
 
         if (!is_array($path)) {
-            return (isset($arr[$path]) ? $arr[$path] : null);
+            return ($arr[$path] ?? null);
         }
 
         // traverse the array for our path
@@ -709,7 +709,7 @@ class MetaDataFiles
             $view = substr($view,0,-4);
         }
 
-        return isset($map[$client][$view]) ? $map[$client][$view] : $view;
+        return $map[$client][$view] ?? $view;
     }
 
     /**
@@ -730,7 +730,7 @@ class MetaDataFiles
         if ( is_string($modules) ) {
             // They just want one module
             $modules = array($modules);
-        } elseif ( count($modules) == 0 ) {
+        } elseif (is_null($modules) || count($modules) == 0) {
             // They want all of the modules, so get them if they are already set
             $modules = empty($GLOBALS['app_list_strings']['moduleList']) ? array() : array_keys($GLOBALS['app_list_strings']['moduleList']);
         }
@@ -960,7 +960,7 @@ class MetaDataFiles
                 if (!$bean) {
                     $bean = BeanFactory::newBean($module);
                 }
-                $module_path  = isset($bean->module_dir) ? $bean->module_dir : $module;
+                $module_path  = $bean->module_dir ?? $module;
                 if ($type === 'dropdownViews') {
                     $type = 'view';
                     $dropdownViews = true;
@@ -1015,8 +1015,10 @@ class MetaDataFiles
                 // So it should pull up list.js, list.php, list.hbs
                 $filesInDir = SugarAutoLoader::getDirFiles($fullSubPath, false, null, true);
                 foreach ($filesInDir as $fullFile) {
-                    // If this file is an excluded file, skip it
-                    if (self::isExcludedClientFile($fullFile)) {
+                    // If this file is an excluded file, or its type does not
+                    // match the file types we are looking for, skip it
+                    if (self::isExcludedClientFile($fullFile) ||
+                        (empty(self::getDropdownViewFileAttributes($fullFile)) === $dropdownViews)) {
                         continue;
                     }
 
@@ -1036,12 +1038,32 @@ class MetaDataFiles
             }
 
             if ($context) {
-                $fileList = self::filterClientFiles($fileList, $context, $dropdownViews);
+                $fileList = self::filterClientFiles($fileList, $context);
             }
             $fileLists[] = $fileList;
         }
 
         return call_user_func_array('array_merge', $fileLists);
+    }
+
+    /**
+     * Returns any attributes related to dropdown-based views contained in
+     * the structure of the filename
+     *
+     * @param string $path the path to the file
+     * @return array|false the dropdown-based view attributes, or false if the
+     *                     file does not represent a valid dropdown-based view
+     */
+    public static function getDropdownViewFileAttributes(string $path)
+    {
+        if (preg_match('/\/views\/([^\/]+)\/dropdowns\/([^\/]+)\/([^\/]+)\//', $path, $matches)) {
+            return [
+                'view' => $matches[1],
+                'dropdownField' => $matches[2],
+                'dropdownValue' => $matches[3],
+            ];
+        }
+        return false;
     }
 
     /**
@@ -1059,15 +1081,6 @@ class MetaDataFiles
                 'role' => $matches[1],
             );
         }
-        if (preg_match('/\/dropdowns\/([^\/]+)\//', $path, $dropdownField)) {
-            if (preg_match('/\/'.$dropdownField[1].'\/([^\/]+)\//', $path, $dropdownValue)) {
-                return [
-                    'dropdownField' => $dropdownField[1],
-                    'dropdownValue' => $dropdownValue[1],
-                ];
-            }
-        }
-
         return array();
     }
     /**
@@ -1257,12 +1270,14 @@ class MetaDataFiles
                                     if($fileInfo['subPath'] == 'subpanels') {
                                         $results[$fileInfo['subPath']]['meta'] = self::mergeSubpanels($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']], array('components' => array()));
                                     } else {
+                                        $meta = $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']];
                                         if ($dropdownView) {
-                                            if (isset($fileInfo['params']['dropdownField']) && isset($fileInfo['params']['dropdownValue'])) {
-                                                $results[$fileInfo['subPath']][$fileInfo['params']['dropdownField']][$fileInfo['params']['dropdownValue']]['meta'] = $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']];
+                                            $dropdownSettings = self::getDropdownViewFileAttributes($fileInfo['path']);
+                                            if (!empty($dropdownSettings['dropdownField']) && !empty($dropdownSettings['dropdownValue'])) {
+                                                $results[$fileInfo['subPath']][$dropdownSettings['dropdownField']][$dropdownSettings['dropdownValue']]['meta'] = $meta;
                                             }
                                         } else {
-                                            $results[$fileInfo['subPath']]['meta'] = $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']];
+                                            $results[$fileInfo['subPath']]['meta'] = $meta;
                                         }
                                     }
                                 }
@@ -1477,23 +1492,14 @@ class MetaDataFiles
      *
      * @param array $files Files to be filtered
      * @param MetaDataContextInterface $context Metadata context
-     * @param bool $dropdownViews True for dropdown based views
      *
      * @return array Filtered set of files
      */
-    protected static function filterClientFiles(array $files, MetaDataContextInterface $context, bool $dropdownViews = false)
+    protected static function filterClientFiles(array $files, MetaDataContextInterface $context)
     {
-        if ($dropdownViews) {
-            $dropdownViewsContext = new MetaDataContextDropdownViews();
-            $files = array_filter($files, function (array $file) use ($dropdownViewsContext) {
-                return $dropdownViewsContext->isValid($file);
-            });
-        } else {
-            $files = array_filter($files, function (array $file) use ($context) {
-                return $context->isValid($file);
-            });
-        }
-
+        $files = array_filter($files, function (array $file) use ($context) {
+            return $context->isValid($file);
+        });
 
         uasort($files, function ($a, $b) use ($context) {
             return $context->compare($a, $b);

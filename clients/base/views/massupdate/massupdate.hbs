@@ -22,40 +22,44 @@
         </div>
     </div>
 </div>
-{{#each fieldValues}}
-<div class="filter-body clearfix border-t border-dashed border-separator">
-    <div class="row-fluid">
-        <div class="filter-field controls span4">
-            <select class="select2 mu_attribute inherit-width" data-index="{{@index}}">
-                {{#if name}}
-                <option value="{{name}}" selected>{{str label ../../this.model.module}}</option>
-                {{else}}
-                <option value="{{../../defaultOption.name}}" selected>{{str ../../defaultOption.label ../../this.model.module}}</option>
-                {{/if}}
-                {{#each ../fieldOptions}}
-                <option value="{{name}}" {{#eq name ../name}}selected{{/eq}}>{{str label ../../this.model.module}}</option>
-                {{/each}}
-            </select>
-        </div>
-        <div class="filter-value controls span8">
-            <span name="fieldPlaceHolder" index="{{@index}}">
-            </span>
-        </div>
-        <div class="filter-actions btn-group">
-            {{#notEq ../fieldValues.length 1}}
-                <button data-action="remove" class="btn btn-invisible btn-dark" data-index="{{@index}}" rel="tooltip" data-placement="bottom" title="{{str "LBL_MASS_UPDATE_REMOVE_FIELD"}}"
+
+<div class="massupdate-fields-container">
+    {{#each fieldValues}}
+        <div class="filter-body clearfix border-t border-dashed border-separator">
+        <div class="row-fluid">
+            <div class="filter-field controls span4">
+                <select class="select2 mu_attribute inherit-width" data-index="{{@index}}">
+                    {{#if name}}
+                    <option value="{{name}}" selected>{{str label ../../this.model.module}}</option>
+                    {{else}}
+                    <option value="{{../../defaultOption.name}}" selected>{{str ../../defaultOption.label ../../this.model.module}}</option>
+                    {{/if}}
+                    {{#each ../fieldOptions}}
+                    <option value="{{name}}" {{#eq name ../name}}selected{{/eq}}>{{str label ../../this.model.module}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="filter-value controls span8">
+                <span name="fieldPlaceHolder" index="{{@index}}">
+                </span>
+            </div>
+            <div class="filter-actions btn-group">
+                {{#notEq ../fieldValues.length 1}}
+                    <button data-action="remove" class="btn btn-invisible btn-dark" data-index="{{@index}}" rel="tooltip" data-placement="bottom" title="{{str "LBL_MASS_UPDATE_REMOVE_FIELD"}}"
+                    >
+                        <i class="sicon sicon-minus"></i>
+                    </button>
+                {{/notEq}}
+                <button data-action="add" class="btn btn-invisible btn-dark {{#eq ../fieldOptions.length 0}}disabled{{/eq}}" rel="tooltip" data-placement="bottom" title="{{str "LBL_MASS_UPDATE_ADD_FIELD"}}"
                 >
-                    <i class="sicon sicon-minus"></i>
+                    <i class="sicon sicon-plus"></i>
                 </button>
-            {{/notEq}}
-            <button data-action="add" class="btn btn-invisible btn-dark {{#eq ../fieldOptions.length 0}}disabled{{/eq}}" rel="tooltip" data-placement="bottom" title="{{str "LBL_MASS_UPDATE_ADD_FIELD"}}"
-            >
-                <i class="sicon sicon-plus"></i>
-            </button>
+            </div>
         </div>
     </div>
+    {{/each}}
 </div>
-{{/each}}
+
 <div id="fieldPlaceHolders" class="hide">
     {{#each meta.panels}}
         {{#each fields}}

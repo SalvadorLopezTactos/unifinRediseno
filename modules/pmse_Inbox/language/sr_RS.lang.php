@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Istorija',
     'LBL_PMSE_LABEL_NOTES' => 'Prikažu beleške',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Dodaj beleške',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Pošalji u DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Izaberi...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Korisnik',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Da li ste sigurni da želite da odobrite ovaj proces?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Da li ste sigurni da želite da odbijete ovaj proces?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Da li ste sigurni da želite da usmerite ovaj proces?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Da li ste sigurni da želite da ovaj proces pošaljete u DocuSign?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Proces je uspešno odobren',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Proces je uspešno odbijen',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Proces je uspešno usmeren',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Proces je uspešno poslat u DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'Proces koji pokušavate da pogledate je zatvoren.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Proces koji pokušavate d pogledate nije trenutno dostupan.',
 

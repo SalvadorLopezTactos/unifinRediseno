@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Ažuriraj definiciju proizvoda',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Planeri procesa koji se odnose na vreme',
 'LBL_OOTB_DATA_ARCHIVER' => 'Pokreni arhiviranje/brisanje aktivnih podataka',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Primeni prava pretplate kada se promene',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geokoder za zapise',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Napredne opcije',
 'LBL_TOGGLE_ADV' => 'Prikaži Napredne Opcije',
 'LBL_TOGGLE_BASIC' => 'Prikaži osnovne opcije',
+'LBL_UPDATEMOMENTUMCJ' => 'Ažuriranje servisa Momentum za Smart Guides koji su u toku',
 // Links
 'LNK_LIST_SCHEDULER' => 'Planeri',
 'LNK_NEW_SCHEDULER' => 'Kreiraj Planera',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Pokreni arhiviranje/brisanje aktivnih podataka',
 'LBL_PMSEENGINECRON' => 'SugarBPM planer',
 );
-

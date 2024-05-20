@@ -222,4 +222,10 @@ Per creare una {{meetings_singular_module}}:
     - Clicca "Seleziona un invitato" per aggiungere un utente esistente, contatto e lead alla {{meetings_singular_module}}
     - Clicca l´icona Più a destra del pulsante "Seleziona un invitato" per inserire l´invitato della {{meetings_singular_module}} come nuovo record in Sugar.
 3. Cliccare "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'È una riunione della Guida Intelligente',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Compiti figli',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Chiamate figlie',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Riunioni figlie',
 );

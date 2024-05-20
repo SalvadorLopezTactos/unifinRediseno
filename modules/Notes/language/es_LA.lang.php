@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Tablero de Lista de Notas',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Tablero de Registro de Notas',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Notas',
+    'LBL_EXTERNAL_USER' => 'Usuario externo',
+    'LBL_EXTERNAL_USER_NAME' => 'Usuario externo',
 
     'LBL_RELATED_CONTACT' => 'Contenido Relacionado',
     'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar la cuenta.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Tipo de Correo Electrónico',
     'LBL_EMAIL_ID' => 'ID de Correo Electrónico',
     'LBL_PHONE' => 'Teléfono:',
-    'LBL_PORTAL_FLAG' => '¿Mostrar en el Portal?',
+    'LBL_PORTAL_FLAG' => 'Disponible de forma externa',
     'LBL_EMBED_FLAG' => '¿Incluir en Correo Electrónico?',
     'LBL_PRODUCT_ID' => 'ID del Producto:',
     'LBL_QUOTE_ID' => 'ID de la Cotización:',

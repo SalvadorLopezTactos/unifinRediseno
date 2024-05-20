@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Historial',
     'LBL_PMSE_LABEL_NOTES' => 'Mostrar notas',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Añadir Notas',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Enviar a DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Seleccionar...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Usuario',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => '¿Está seguro de que desea aprobar este proceso?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => '¿Está seguro de que desea rechazar este proceso?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => '¿Está seguro de que desea rutear este proceso?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => '¿Está seguro de que desea enviar este proceso a DocuSign?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'El proceso se ha aprobado con éxito',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Process has been rejected con éxito',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'El proceso se ruteó con éxito',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'El proceso se envió correctamente a DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'El proceso que está intentando ver está cerrado.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'El proceso que intenta ver no está disponible en este momento.',
 

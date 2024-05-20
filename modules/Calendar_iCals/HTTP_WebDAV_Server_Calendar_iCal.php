@@ -21,6 +21,15 @@ require_once 'modules/Calendar_iCals/Calendar_iCal.php';
 class HTTP_WebDAV_Server_Calendar_iCal extends HTTP_WebDAV_Server_iCal
 {
     /**
+     * @var string|mixed
+     */
+    public $ical_publish_key;
+    /**
+     * @var string|mixed
+     */
+    public $calendars_uid;
+
+    /**
      * {@inheritDoc}
      */
     public function __construct()

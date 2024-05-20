@@ -298,7 +298,7 @@ class SugarApplication
         // If we're authenticating, do not redirect
         $module = $this->request->getValidInputRequest('module');
         $action = $this->request->getValidInputRequest('action');
-        if ($module === 'Users' && in_array(strtolower($action), ['authenticate', 'oauth2codeexchange'], true)) {
+        if ($module === 'Users' && in_array(strtolower((string)$action), ['authenticate', 'oauth2codeexchange'], true)) {
             return false;
         }
 
@@ -406,8 +406,8 @@ EOF;
         $sess = SessionStorage::getInstance();
 
         // Double check the server's unique key is in the session.  Make sure this is not an attempt to hijack a session
-        $user_unique_key = (isset($_SESSION['unique_key'])) ? $_SESSION['unique_key'] : '';
-        $server_unique_key = (isset($sugar_config['unique_key'])) ? $sugar_config['unique_key'] : '';
+        $user_unique_key = $_SESSION['unique_key'] ?? '';
+        $server_unique_key = $sugar_config['unique_key'] ?? '';
         if(!empty($this->controller->allowed_actions)) {
             $allowed_actions =  $this->controller->allowed_actions;
         } else {
@@ -441,15 +441,6 @@ EOF;
             exit ();
         }
 
-        //If there was a login error, we should not allow the further code execution and destroy the session
-        if (isset($_SESSION['login_error'])) {
-            if ($sess->getId()) {
-                $sess->destroy();
-            };
-            header('Location: ' . $this->getUnauthenticatedHomeUrl(true));
-            exit();
-        }
-
 		$authController = AuthenticationController::getInstance();
 		$GLOBALS['current_user'] = BeanFactory::newBean('Users');
 		if(isset($_SESSION['authenticated_user_id'])){
@@ -463,13 +454,21 @@ EOF;
 				SugarApplication::redirect($this->getUnauthenticatedHomeUrl());
 				die();
             } else {
-                $this->trackSession();
+                static::trackSession();
             }
         }
         $GLOBALS['log']->debug('Current user is: ' . $GLOBALS['current_user']->user_name);
         $GLOBALS['logic_hook']->call_custom_logic('', 'after_load_user');
         // Reset ACLs in case after_load_user hook changed ACL setups
         SugarACL::resetACLs();
+
+        //If there was a login error, we should not allow the further code execution and destroy the session
+        if (isset($_SESSION['login_error']) && translate('ERR_INVALID_PASSWORD', 'Users') === $_SESSION['login_error']) {
+            if ($sess->getId()) {
+                $sess->destroy();
+            }
+            static::redirect($this->getUnauthenticatedHomeUrl());
+        }
     }
 
     public function ACLFilter()
@@ -666,10 +665,11 @@ EOF;
 
     function loadLicense()
     {
+        $sugar_config = [];
         loadLicense();
         global $user_unique_key, $server_unique_key;
-        $user_unique_key = (isset($_SESSION['unique_key'])) ? $_SESSION['unique_key'] : '';
-        $server_unique_key = (isset($sugar_config['unique_key'])) ? $sugar_config['unique_key'] : '';
+        $user_unique_key = $_SESSION['unique_key'] ?? '';
+        $server_unique_key = $sugar_config['unique_key'] ?? '';
     }
 
     function loadGlobals()
@@ -780,6 +780,7 @@ EOF;
         'historyContactsEmails',
         'GoogleOauth2Redirect',
         'MicrosoftOauth2Redirect',
+        'DropboxOauth2Redirect',
         'OAuth2CodeExchange',
         'impersonation',
         'TrackerSettings',
@@ -881,7 +882,7 @@ EOF;
     function startSession()
     {
         $sess = SessionStorage::getInstance();
-        $sessionIdCookie = isset($_COOKIE['PHPSESSID']) ? $_COOKIE['PHPSESSID'] : null;
+        $sessionIdCookie = $_COOKIE['PHPSESSID'] ?? null;
         if (can_start_session()) {
             if ($sessionIdCookie) {
                 $sess->setId($sessionIdCookie);
@@ -1021,7 +1022,7 @@ EOF;
         }
 
         if (!headers_sent()) {
-            setcookie($name, $value, $expire, $path, $domain, $secure, $httponly);
+            setcookie($name, $value, ['expires' => $expire, 'path' => $path, 'domain' => $domain, 'secure' => $secure, 'httponly' => $httponly]);
         }
 
         $_COOKIE[$name] = $value;

@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => '帳號列表儀表板',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => '帳號記錄儀表板',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => '帳戶焦點抽屜',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => '帳戶詳細訊息',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => '帳戶焦點儀表板 - 控制台',
     'LBL_NEXT_RENEWAL_DATE' => '下次續訂日期',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => '下次續訂日期',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => '帳戶名稱/行業',
     'LBL_RENEWALS_CONSOLE_LOCATION' => '地點',
     'LBL_PURCHASES' => '購買',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => '帳戶時間軸',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => '組織',
+    'LBL_CREATE_NEW' => '建立新的',
+    'LBL_MANAGE' => '管理',
+    'LBL_SEE_DETAILS' => '檢視詳細資料',
+    'LBL_HIDE_NEW' => '隱藏',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => '圖表',
@@ -208,4 +215,7 @@ $mod_strings = array (
 2. 按一下「儲存」完成新記錄並返回至上一頁。',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => '帳戶報表',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => '外部使用者',
 );

@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Оновити визначення продукту',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Графіки процесів із прив’язкою в часі',
 'LBL_OOTB_DATA_ARCHIVER' => 'Запустити активні архіви даних/видалення',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Застосувати права на використання підписки в разі їх змінення',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Геокодер записів',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Додаткові параметри',
 'LBL_TOGGLE_ADV' => 'Показати додаткові налаштування',
 'LBL_TOGGLE_BASIC' => 'Показати основні налаштування',
+'LBL_UPDATEMOMENTUMCJ' => 'Оновити темп для завдань Smart Guides, які ще виконуються',
 // Links
 'LNK_LIST_SCHEDULER' => 'Планувальники',
 'LNK_NEW_SCHEDULER' => 'Створити планувальника',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Запустити активні архіви даних/видалення',
 'LBL_PMSEENGINECRON' => 'Планувальник SugarBPM',
 );
-

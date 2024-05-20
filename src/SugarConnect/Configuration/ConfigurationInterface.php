@@ -14,6 +14,9 @@ namespace Sugarcrm\Sugarcrm\SugarConnect\Configuration;
 
 use Sugarcrm\Sugarcrm\SugarConnect\Client\Client;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 interface ConfigurationInterface
 {
     /**

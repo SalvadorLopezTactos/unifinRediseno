@@ -105,8 +105,7 @@ class vCardApi extends SugarApi
         $this->checkPostRequestBody();
 
         if (isset($_FILES) && count($_FILES) === 1) {
-            reset($_FILES);
-            $first_key = key($_FILES);
+            $first_key = array_key_first($_FILES);
             if (isset($_FILES[$first_key]['tmp_name'])
                 && $this->isUploadedFile($_FILES[$first_key]['tmp_name'])
                 && isset($_FILES[$first_key]['size'])

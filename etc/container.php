@@ -33,9 +33,12 @@ use Sugarcrm\Sugarcrm\Cache\Backend\Redis as RedisCache;
 use Sugarcrm\Sugarcrm\Cache\Backend\WinCache;
 use Sugarcrm\Sugarcrm\Cache\Exception as SugarCacheException;
 use Sugarcrm\Sugarcrm\Cache\Middleware\DefaultTTL;
+use Sugarcrm\Sugarcrm\Cache\Middleware\GZCompressed;
 use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant as MultiTenantCache;
 use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage\Configuration as ConfigurationKeyStorage;
 use Sugarcrm\Sugarcrm\Cache\Middleware\Replicate;
+use Sugarcrm\Sugarcrm\Clock\Clock;
+use Sugarcrm\Sugarcrm\Clock\Timer;
 use Sugarcrm\Sugarcrm\CSP\AdministrationSettingsCSPStorage;
 use Sugarcrm\Sugarcrm\CSP\CSPStorage;
 use Sugarcrm\Sugarcrm\CSP\RefreshMetaDataCache;
@@ -56,8 +59,22 @@ use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\State;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\State\Storage\AdminSettingsStorage;
 use Sugarcrm\Sugarcrm\DependencyInjection\Exception\ServiceUnavailable;
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionPrefetcher;
+use Sugarcrm\Sugarcrm\FeatureToggle\FeatureFlag;
+use Sugarcrm\Sugarcrm\FeatureToggle\Features;
+use Sugarcrm\Sugarcrm\FeatureToggle\Features\EnhancedModuleChecks;
+use Sugarcrm\Sugarcrm\FeatureToggle\FeaturesContext;
+use Sugarcrm\Sugarcrm\FeatureToggle\FeatureToggler;
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
+use Sugarcrm\Sugarcrm\PubSub\Buffer\PushSubscriptionBufferInterface as PubSubPushSubscriptionBufferInterface;
+use Sugarcrm\Sugarcrm\PubSub\Buffer\InMemory\PushSubscriptionBuffer as PubSubPushSubscriptionBuffer;
+use Sugarcrm\Sugarcrm\PubSub\Client\Batch\PushClient as PubSubBatchPushClient;
+use Sugarcrm\Sugarcrm\PubSub\Client\Http\PushClient as PubSubHttpPushClient;
+use Sugarcrm\Sugarcrm\PubSub\Client\PushClientInterface as PubSubPushClientInterface;
+use Sugarcrm\Sugarcrm\PubSub\Module\Event\PushSubscriptionPublisher as PubSubModuleEventPushSubscriptionPublisher;
+use Sugarcrm\Sugarcrm\PubSub\PublisherInterface as PubSubPublisherInterface;
+use Sugarcrm\Sugarcrm\PubSub\Settings\PushSubscription as PubSubPushSubscriptionSettings;
 use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\HttpClient\ExternalResourceClient;
 use Sugarcrm\Sugarcrm\Security\Subject\Formatter as SubjectFormatter;
 use Sugarcrm\Sugarcrm\Security\Subject\Formatter\BeanFormatter;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
@@ -208,11 +225,19 @@ return new Container([
 
         if ($config->get('cache.multi_tenant')) {
             $backend = new MultiTenantCache(
-                $config->get('unique_key'),
+                substr($config->get('unique_key'), 0, -1)
+                . (int) $config->get('cache.disable_gz', 0),
                 new ConfigurationKeyStorage($config),
                 $backend,
                 $container->get(LoggerInterface::class)
             );
+            if ($config->get('cache.disable_gz', false) !== true) {
+                $backend = new GZCompressed(
+                    $backend,
+                    $container->get(LoggerInterface::class),
+                    $config->get('cache.gz_level')
+                );
+            }
         }
 
         return new Replicate(
@@ -329,5 +354,74 @@ return new Container([
             \Administration::getSettings('license'),
             $container->get(LoggerInterface::class)
         );
+    },
+    FeatureFlag::class => function (ContainerInterface $container): FeatureFlag {
+        return $container->get(Features::class);
+    },
+    FeatureToggler::class => function (ContainerInterface $container): FeatureToggler {
+        return $container->get(Features::class);
+    },
+    FeaturesContext::class => function (ContainerInterface $container): FeaturesContext {
+        return $container->get(Features::class);
+    },
+    Features::class => function (): Features {
+        require 'sugar_version.php';
+        /**
+         * @var string $sugar_version
+         */
+        return new Features($sugar_version);
+    },
+    Clock::class => function (ContainerInterface $container): Clock {
+        return new Clock();
+    },
+    PubSubModuleEventPushSubscriptionPublisher::class => function (ContainerInterface $container): PubSubPublisherInterface {
+        $client = $container->get(PubSubPushClientInterface::class);
+        $logger = $container->get(LoggerInterface::class);
+
+        $publisher = new PubSubModuleEventPushSubscriptionPublisher($client);
+        $publisher->setLogger($logger);
+
+        return $publisher;
+    },
+    PubSubPushClientInterface::class => function (ContainerInterface $container): PubSubPushClientInterface {
+        $httpClient = $container->get(PubSubHttpPushClient::class);
+        $buffer = $container->get(PubSubPushSubscriptionBufferInterface::class);
+        $logger = $container->get(LoggerInterface::class);
+
+        $batchClient = new PubSubBatchPushClient($httpClient);
+        $batchClient->setBuffer($buffer);
+        $batchClient->setLogger($logger);
+
+        return $batchClient;
+    },
+    PubSubHttpPushClient::class => function (ContainerInterface $container): PubSubHttpPushClient {
+        $config = $container->get(SugarConfig::class);
+        $settings = new PubSubPushSubscriptionSettings($config);
+        $maxRetries = $settings->getSetting('max_retries');
+        $timeout = $settings->getSetting('request_timeout');
+
+        $client = new ExternalResourceClient();
+        $client->setMaxRetries($maxRetries);
+        $client->setTimeout($timeout);
+        $client->useStrictRedirects();
+
+        return new PubSubHttpPushClient($client);
+    },
+    PubSubPushSubscriptionBufferInterface::class => function (ContainerInterface $container): PubSubPushSubscriptionBufferInterface {
+        $config = $container->get(SugarConfig::class);
+        $settings = new PubSubPushSubscriptionSettings($config);
+        $bufferCapacity = $settings->getSetting('buffer_capacity');
+        $bufferTimeout = $settings->getSetting('buffer_timeout');
+
+        $clock = $container->get(Clock::class);
+        $timer = new Timer();
+        $timer->setClock($clock);
+
+        $buffer = new PubSubPushSubscriptionBuffer();
+        $buffer->setCapacity($bufferCapacity);
+        $buffer->setTimeout($bufferTimeout);
+        $buffer->setTimer($timer);
+
+        return $buffer;
     },
 ]);

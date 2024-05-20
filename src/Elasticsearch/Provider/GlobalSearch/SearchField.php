@@ -118,11 +118,33 @@ class SearchField
     }
 
     /**
+     * getter method for $this->>path
+     * @return array
+     */
+    public function getPath() : array
+    {
+        return $this->path;
+    }
+
+    /**
      * Set boost value
      * @param float $boost
      */
     public function setBoost($boost)
     {
         $this->boost = $boost;
+    }
+
+    /**
+     * getter method for $this->>boost
+     * @return float
+     */
+    public function getBoost() : float
+    {
+        if (isset($this->boost)) {
+            return $this->boost;
+        }
+        // default value is 1.0
+        return 1.0;
     }
 }

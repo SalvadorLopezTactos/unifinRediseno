@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logot',
 	'LBL_ADMIN_WIZARD' => 'Eksperti i administratorit',
-	'LBL_ALLOW_USER_TABS' => 'Lejon përdoruesit të fshehin lidhëset',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Parametrat e sistemit',
 	'LBL_ENABLE_MAILMERGE' => 'Mundëso bashkim të maileve?',
 	'LBL_LOGVIEW' => 'Shih logon',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Përdoreni këtë vendosje për të përcaktuar numrin e muajve përpara datës aktuale të informacionit të Lirë/Zënët për telefonatat dhe takimet që janë publikuar.<br />Për ta kthyer publikimin e lirë/zënët në off, shkruani "0".Minimumi është 1 muaj; maksimumi është 12 muaj.',
     'LBL_PDFMODULE_NAME' => 'Parametrat e PDF',
     'SUGARPDF_BASIC_SETTINGS' => 'Vetitë e dokumentacionit',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Parametra të avancuar',
     'SUGARPDF_LOGO_SETTINGS' => 'Figurat',
-
-    'PDF_CREATOR' => 'Krijues PDF',
-    'PDF_CREATOR_INFO' => 'Përcaktoni krijuesin e dokumentit.<br />Kjo është zakonisht emri i aplikimit që gjeneron PDF',
 
     'PDF_AUTHOR' => 'Autori',
     'PDF_AUTHOR_INFO' => 'Autori paraqitet në vetitë e dokumentacionit.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Selekto një figurë të nga kuotat',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Formati i dosjes mund të jetë ose .jpg ose .png. (Vetëm. jpg për EZPDF)<br />Madhësia e rekomanduar është 867x60 px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Gjerësia e figurës së kuotës',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Ndryshoni shkallën e imazhit të ngarkuar që shfaqet në kuotat e dokumentave PDF. (vetëm TCPDF)',
+    'PDF_TITLE' => 'Titulli',
+    'PDF_TITLE_INFO' => 'Titullii shfaqet në pronat dokumentit.',
+
+    'PDF_SUBJECT' => 'subjekti',
+    'PDF_SUBJECT_INFO' => 'Subjekti shfaqet në pronat dokumentit.',
 
     'PDF_SMALL_HEADER_LOGO' => 'Për raportet e PDF Dokumentave',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Ky imazh shfaqet në Kryefaqe të albumit në Raportet e PDF dokumentave.<br />Ky imazh gjithashtu shfaqet në këndin e lartë- të anës së majtë të aplikimit Sugar.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Selektoni imazhin e ri për raportet',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Formati i dosjes mund të jetë ose .jpg ose .png. (Vetëm. jpg për EZPDF)<br />Madhësia e rekomanduar është 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Gjerësia e figurës së raporteve',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Ndryshoni shkallën e imazhit të ngarkuar që shfaqet në Raportet e dokumentave PDF. (vetëm TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Vargu i kryefaqës',
-    'PDF_HEADER_STRING_INFO' => 'Përshkrimi i Kryefaqës të vargut',
-
-    'PDF_HEADER_TITLE' => 'Titulli i kryefaqës',
-    'PDF_HEADER_TITLE_INFO' => 'Vargu për të printuar si titull në dokumentin e kryefaqës',
-
-    'PDF_FILENAME' => 'Emri i dosjes së albumit',
-    'PDF_FILENAME_INFO' => 'Emri i albumit për dosjet të krijuara PDF',
-
-    'PDF_TITLE' => 'Titulli',
-    'PDF_TITLE_INFO' => 'Titullii shfaqet në pronat dokumentit.',
-
-    'PDF_SUBJECT' => 'subjekti',
-    'PDF_SUBJECT_INFO' => 'Subjekti shfaqet në pronat dokumentit.',
-
     'PDF_KEYWORDS' => 'Fjala(ët) kyçe',
     'PDF_KEYWORDS_INFO' => 'Lidhni fjalët kyçë me dokumentin, përgjithësisht në formën e "fjalës kyçe1 fjalës kyçe2 ..."',
 
-    'PDF_COMPRESSION' => 'Ngjeshja',
-    'PDF_COMPRESSION_INFO' => 'Aktivizoni ose Çaktivizoni faqën e ngjeshjes.<br />Kur aktivizohet, përfaqësimi i brendshëm çdo faqe është e ngjeshur, e cila udhëheqet në një raport të ngjeshur rreth 2 për dokumentin që rezulton.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG Kualiteti (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Vendosni cilësinë e ngjeshjes JPEG të parazgjedhur  (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF Versioni',
-    'PDF_PDF_VERSION_INFO' => 'Përcakto PDF verzionin (kontrollo PDF referencat për vlera valide)',
-
-    'PDF_PROTECTION' => 'Mbrotja e dokumenteve',
-    'PDF_PROTECTION_INFO' => 'Vendosni mbrojtjen për dokumentit<br />- Kopjoni: kopja e tekstit dhe imazhet në memorizues<br />- Printoni: printoni dokumentin<br />- Modifikoni: modifikoni atë (me përjashtim të shënimeve dhe formave)<br />- Format-e shënimit: shtoni shënimet dhe format<br />Shënim: mbrojtja kundër modifikimit është për njerëzit që kanë produkt të plotë Acrobat.',
-
-    'PDF_USER_PASSWORD' => 'Fjalëkalimi i përdoruesit',
-    'PDF_USER_PASSWORD_INFO' => 'Nëse ju nuk vendosni ndonjë fjalëkalim, dokumenti do të hapet si zakonisht.<br />Nëse keni vendosur fjalëkalimin e përdoruesit, shikuesit PDF do të pyesin për atë përpara se të shfaqni dokumentin.<br />Fjalëkalimi master, nëse është i ndryshëm nga përdoruesit, mund të përdoret për të marrë qasje të plotë.',
-
-    'PDF_OWNER_PASSWORD' => 'Fjalëkalimi i pronarit',
-    'PDF_OWNER_PASSWORD_INFO' => 'Nëse ju nuk vendosni ndonjë fjalëkalim, dokumenti do të hapet si zakonisht.<br />Nëse keni vendosur fjalëkalimin e përdoruesit, shikuesit e PDF do të pyesin për atë përpara se të shfaqni dokumentin.<br />Fjalëkalimi master, nëse është i ndryshëm nga përdoruesit, mund të përdoret për të marrë qasje të plotë.',
-
-    'PDF_ACL_ACCESS' => 'Kontrolli i qasur',
-    'PDF_ACL_ACCESS_INFO' => 'Qasja e parazgjedhur të kontrollit për gjeneratën PDF.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Lartësia celulare e Shkallës',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Nëse lartësia e një celulari është më e vogël se (Lartësia e shkronjës x Lartësia celulare e Shkallës), atëherë (Lartësisë e shkronjës x Lartësia celulare e Shkallës) është përdorur si lartësi celulare.<br />(Lartësia e shkronjës x Lartësia celulare e Shkallës) është përdorur edhe si lartësia e celularit kur lartësia nuk është definuar.',
-
-    'K_TITLE_MAGNIFICATION' => 'Zmadhimi i titullit',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Zmadhimi i titullit respekton madhësinë e shkronjave kryesore.',
-
-    'K_SMALL_RATIO' => 'Faktor i vogël i shkronjës',
-    'K_SMALL_RATIO_INFO' => 'Faktor për reduktimin e shkronjës së vogël.',
-
-    'HEAD_MAGNIFICATION' => 'Kreu i zmadhimit',
-    'HEAD_MAGNIFICATION_INFO' => 'Zmadhimi i faktorit për titujt.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Imazhi i shkallës të raportit',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Raporti i përdorur për shkallën e imazheve',
-
-    'PDF_UNIT' => 'Njesi',
-    'PDF_UNIT_INFO' => 'Njësia e dokumentit të masës',
 	'PDF_GD_WARNING'=>'Ju nuk keni të instaluar bibliotekën GD për PHP. Pa bibliotekën GD të instaluar, vetëm JPEG logot mund të shfaqen në dokumentat PDF.',
     'ERR_EZPDF_DISABLE'=>'Paralajmërim: Klasa EZPDF është disaktivizuar nga tabela e konfigurimit dhe kjo është vendosur si klasa PDF. Ju lutemi të "Ruani" këtë formular për të vendosur TCPDF si një Klasë PDF dhe kthimin në një shtet të qëndrueshëm.',
     'LBL_IMG_RESIZED'=>"(madhësia e shfaqjes)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Shto PDF font',
     'LBL_PDF_PATCH' => 'Pjesë',
-    'LBL_PDF_PATCH_INFO' => 'Modifikimi me porosi të kodimit. Shkruani një koleksion të PHP.<br />Shembull:<br />ISO-8859-1 nuk përmban simbolin euro. Për të shtuar atë në pozitën e 164, shkruaj "array (164 => \\ $#39;Euro \\$#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'Enkodimi i tabelës',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Emri i tabelës të kodimit.<br />Ky opsion është injoruar për llojin e vërtetë të unikodit, llojin e hapur të unikodit  dhe shkronjave simbolike.<br />Kodimi përcakton lidhjen ndërmjet kodit (nga 0 deri në 255) dhe një karakteri të përmbajtur në shkronjën.<br />Të parat 128 janë të fiksuara dhe korrespondojnë për ASCII.',
     'LBL_PDF_FONT_FILE' => 'Dosja e Fontit',

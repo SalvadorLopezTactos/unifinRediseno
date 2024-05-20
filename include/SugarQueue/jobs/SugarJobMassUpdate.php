@@ -18,6 +18,10 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
 {
 
     /**
+     * @var \SchedulersJob|mixed
+     */
+    public $job;
+    /**
      * the ids of the child jobs
      */
     protected $workJobIds = array();
@@ -245,6 +249,7 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
      */
     public function runUpdate($data)
     {
+        $success = null;
         // Get the data down to just the list of fields
         $module = $data['module'];
         unset($data['module']);
@@ -254,7 +259,7 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
         unset($data['uid']);
         unset($data['filter']);
         unset($data['entire']);
-        $prospectLists = isset($data['prospect_lists'])?$data['prospect_lists']:array();
+        $prospectLists = $data['prospect_lists'] ?? array();
         unset($data['prospect_lists']);
 
         $seed = BeanFactory::newBean($module);
@@ -295,8 +300,7 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
             }
         }
 
-        if (count($prospectLists) > 0) {
-
+        if ((is_countable($prospectLists) ? count($prospectLists) : 0) > 0) {
             $massupdate = new MassUpdate();
 
             foreach ($prospectLists as $listId) {

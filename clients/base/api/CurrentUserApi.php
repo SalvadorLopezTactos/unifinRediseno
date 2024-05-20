@@ -52,10 +52,11 @@ class CurrentUserApi extends SugarApi
         'mobile_notification_on_assignment' => 'mobile_notification_on_assignment',
         'mobile_notification_on_mention' => 'mobile_notification_on_mention',
         'appearance' => 'appearance',
+        'number_pinned_modules' => 'number_pinned_modules',
     );
 
-    const TYPE_ADMIN = "admin";
-    const TYPE_USER = "user";
+    public const TYPE_ADMIN = "admin";
+    public const TYPE_USER = "user";
 
     public function registerApiRest()
     {
@@ -196,6 +197,27 @@ class CurrentUserApi extends SugarApi
                 'longHelp' => 'include/api/help/me_last_states_put_help.html',
                 'ignoreSystemStatusError' => true,
             ],
+            'retrieveLastStatesByPlatform' => [
+                'reqType' => 'GET',
+                'path' => ['me', 'last_states', '?'],
+                'pathVars' => ['', '', 'platform'],
+                'method' => 'retrieveLastStatesByPlatform',
+                'minVersion' => '11.20',
+                'ignoreMetaHash' => true,
+                'shortHelp' => 'Retrieve the set of last state data for the current user for a specific platform',
+                'longHelp' => 'include/api/help/me_last_states_by_platform_get_help.html',
+                'ignoreSystemStatusError' => true,
+            ],
+            'updateLastStatesByPlatform' => [
+                'reqType' => 'PUT',
+                'path' => ['me', 'last_states', '?'],
+                'pathVars' => ['', '', 'platform'],
+                'method' => 'updateLastStatesByPlatform',
+                'minVersion' => '11.20',
+                'shortHelp' => 'Perform an update to the set of last state data for the current user for a platform',
+                'longHelp' => 'include/api/help/me_last_states_by_platform_put_help.html',
+                'ignoreSystemStatusError' => true,
+            ],
         );
     }
 
@@ -278,12 +300,12 @@ class CurrentUserApi extends SugarApi
         );
         foreach ($keys as $key => $labelKey) {
             if (!empty($passwordSettings[$key])) {
-                $settings[$key] = isset($administrationModStrings[$labelKey]) ? $administrationModStrings[$labelKey] : '';
+                $settings[$key] = $administrationModStrings[$labelKey] ?? '';
             }
         }
         //custom regex
         if (!empty($passwordSettings['customregex'])) {
-            $settings['regex'] = isset($passwordSettings['regexcomment']) ? $passwordSettings['regexcomment'] : '';
+            $settings['regex'] = $passwordSettings['regexcomment'] ?? '';
         }
 
         //Handles min/max password length messages
@@ -617,6 +639,24 @@ class CurrentUserApi extends SugarApi
     }
 
     /**
+     * Gets the stored number_pinned_modules preference value for the user.
+     * Should return the value as empty if an admin has configured the instance
+     * to not allow users to set their own number of pinned modules
+     *
+     * @param User $user The current user object
+     * @return array the mapping for the preference setting
+     */
+    protected function getUserPrefNumber_pinned_modules(User $user)
+    {
+        $value = null;
+        $tabController = new TabController();
+        if ($tabController->get_users_pinned_modules()) {
+            $value = $user->getPreference('number_pinned_modules');
+        }
+        return ['number_pinned_modules' => $value];
+    }
+
+    /**
      * Returns all the user data to be sent in the REST API call for a normal
      * `/me` call.
      *
@@ -634,7 +674,7 @@ class CurrentUserApi extends SugarApi
         $current_user = $this->getUserBean();
 
         // Get the basics
-        $category = isset($options['category']) ? $options['category'] : 'global';
+        $category = $options['category'] ?? 'global';
         $user_data = $this->getBasicUserInfo($platform, $category);
 
         // Fill in the rest
@@ -652,6 +692,7 @@ class CurrentUserApi extends SugarApi
         $user_data['picture'] = $current_user->picture;
         $user_data['acl'] = $this->getAcls($platform);
         $user_data['is_manager'] = User::isManager($current_user->id);
+        $user_data['is_idm_user_manager'] = $current_user->isIdmUserManager;
         $user_data['is_top_level_manager'] = false;
         $user_data['reports_to_id'] = $current_user->reports_to_id;
         $user_data['reports_to_name'] = $current_user->reports_to_name;
@@ -884,7 +925,7 @@ class CurrentUserApi extends SugarApi
             );
         }
         //Legacy change_password populates user bean with an error_string on error
-        $errorMessage = isset($bean->error_string) ? $bean->error_string : $GLOBALS['app_strings']['LBL_PASSWORD_UPDATE_GENERIC_ISSUE'];
+        $errorMessage = $bean->error_string ?? $GLOBALS['app_strings']['LBL_PASSWORD_UPDATE_GENERIC_ISSUE'];
         return array(
             'valid' => false,
             'message' => $errorMessage,
@@ -926,9 +967,7 @@ class CurrentUserApi extends SugarApi
         }
         $this->forceUserPreferenceReload($current_user);
 
-        $prefs = (isset($current_user->user_preferences[$category])) ?
-                        $current_user->user_preferences[$category] :
-                        array();
+        $prefs = $current_user->user_preferences[$category] ?? array();
 
         // Handle filtration of requested preferences
         $data = $this->filterResults($prefs, $pref_filter);
@@ -1014,7 +1053,7 @@ class CurrentUserApi extends SugarApi
 
         // Handle special cases if there are any
         $prefKey = array_search($pref, $this->userPrefMeta);
-        $alias   = $prefKey ? $prefKey : $pref;
+        $alias   = $prefKey ?: $pref;
         $data = $this->getUserPref($current_user, $alias, $pref, $category);
 
         // If the value of the user pref is not an array, or is an array but does
@@ -1170,7 +1209,7 @@ class CurrentUserApi extends SugarApi
         $userSrn = Srn\Converter::toString($srnManager->createUserSrn($tenantSrn->getTenantId(), $user->id));
 
         $container = $this->getDIContainer();
-        $httpClient = new Client();
+        $httpClient = new Client(['headers' => $idmModeConfig['http_client']['headers'] ?? []]);
         $discovery = new Discovery($idmModeConfig, $container, $httpClient);
         $userApi = new UserApi($httpClient, $discovery, $container);
 
@@ -1208,6 +1247,35 @@ class CurrentUserApi extends SugarApi
 
         global $current_user;
         return $current_user->updateLastStates($args['values'], $api->platform);
+    }
+
+    /**
+     * Retrieves the last state data for the current user for a specific platform
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     */
+    public function retrieveLastStatesByPlatform(ServiceBase $api, array $args)
+    {
+        $this->requireArgs($args, ['platform']);
+
+        global $current_user;
+        $lastStates = $current_user->retrieveLastStates($args['platform']);
+        return !empty($lastStates) ? $lastStates : [];
+    }
+
+    /**
+     * Updates the last state data for the current user for a specific platform
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     */
+    public function updateLastStatesByPlatform(ServiceBase $api, array $args)
+    {
+        $this->requireArgs($args, ['values', 'platform']);
+
+        global $current_user;
+        return $current_user->updateLastStates($args['values'], $args['platform']);
     }
 
     /**

@@ -18,13 +18,6 @@ namespace Sugarcrm\Sugarcrm\UserUtils\Invoker\payloads;
 class InvokerDashboardsPayload extends InvokerBasePayload
 {
     /**
-     * The dashboards in the command
-     *
-     * @var array
-     */
-    protected $dashboards;
-
-    /**
      * The modules in the command
      *
      * @var mixed

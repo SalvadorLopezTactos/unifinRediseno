@@ -19,9 +19,9 @@ class registerConfigJob implements \RunnableSchedulerJob
 {
     use ConfigTrait;
 
-    const NAME = 'Hint Register Config Job';
+    public const NAME = 'Hint Register Config Job';
     //  Postpones the Job if bean not found by 60 secs.
-    const JOB_POSTPONE_TIMEOUT_SECS = 1 * 60;
+    public const JOB_POSTPONE_TIMEOUT_SECS = 1 * 60;
 
     protected $job;
 

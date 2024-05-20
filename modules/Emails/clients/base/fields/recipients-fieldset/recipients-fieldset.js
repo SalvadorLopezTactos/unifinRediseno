@@ -26,15 +26,67 @@
     initialize: function(options) {
         this.events = _.extend({}, this.events, {
             'click [data-toggle-field]': '_handleToggleButtonClick',
-            'click .fieldset-field': '_focus'
+            'click .fieldset-field': '_showEditField'
         });
         this._super('initialize', [options]);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    bindDataChange: function() {
+        this._super('bindDataChange');
 
         this.listenTo(this.view, 'address-book-state', function(state) {
             this._addressBookState = state;
         });
-        this.listenTo(this.view, 'tinymce:focus', this._blur);
-        $(document).on('click.email-recipients', _.bind(this._blur, this));
+        this.listenTo(this.view, 'tinymce:focus', this._hideEditField);
+        this.listenTo(this, 'recipients:edit:hide', this._hideEditField);
+    },
+
+    /**
+     * Toggles whether the editable subfields are shown in edit mode
+     *
+     * @param {bool} show whether or not the editable subfields should be shown
+     * @private
+     */
+    _handleFieldEditToggle: function(show) {
+        if (this.disposed || this.action !== 'edit') {
+            return;
+        }
+
+        // Always show the subfields if there are no recipients selected
+        let to = this.model.get('to_collection');
+        let cc = this.model.get('cc_collection');
+        let bcc = this.model.get('bcc_collection');
+        let hasRecipients = to.length > 0 || cc.length > 0 || bcc.length > 0;
+        if (this.view.createMode && !hasRecipients) {
+            show = true;
+        }
+
+        this.$el.toggleClass('edit-toggled', show);
+    },
+
+    /**
+     * Shows the editable subfields
+     *
+     * @private
+     */
+    _showEditField: function() {
+        this._handleFieldEditToggle(true);
+    },
+
+    /**
+     * Hides the editable subfields
+     *
+     * @private
+     */
+    _hideEditField: function() {
+        // Don't hide if the address book is open.
+        if (this._addressBookState === 'open') {
+            return;
+        }
+        this._handleFieldEditToggle(false);
     },
 
     /**
@@ -122,68 +174,6 @@
     },
 
     /**
-     * Cannot switch to detail mode if in create mode and there are no
-     * recipients. The mode is set to edit.
-     *
-     * @inheritdoc
-     */
-    setMode: function(name) {
-        var to = this.model.get('to_collection');
-        var cc = this.model.get('cc_collection');
-        var bcc = this.model.get('bcc_collection');
-        var hasRecipients = to.length > 0 || cc.length > 0 || bcc.length > 0;
-
-        if (this.view.createMode && name === 'detail' && !hasRecipients) {
-            name = 'edit';
-        }
-
-        this._super('setMode', [name]);
-    },
-
-    /**
-     * Switches the field to edit mode when the user clicks on the fieldset.
-     *
-     * @param {Event} [event]
-     * @public
-     */
-    _focus: function(event) {
-        if (this.disposed) {
-            return;
-        }
-
-        // Stop the event from triggering _blur to be called.
-        if (event) {
-            event.stopPropagation();
-        }
-
-        if (this.action !== 'edit') {
-            this.setMode('edit');
-        }
-    },
-
-    /**
-     * Switches the field to detail mode when the user clicks outside the
-     * fieldset.
-     *
-     * @param {Event} [event]
-     * @public
-     */
-    _blur: function(event) {
-        if (this.disposed) {
-            return;
-        }
-
-        // Don't change modes if the address book is open.
-        if (this._addressBookState === 'open') {
-            return;
-        }
-
-        if (this.action !== 'detail') {
-            this.setMode('detail');
-        }
-    },
-
-    /**
      * Add CC and BCC toggle buttons to the field.
      *
      * @param {string} fieldName The name of the field where the buttons are
@@ -255,7 +245,6 @@
      * @inheritdoc
      */
     _dispose: function() {
-        $(document).off('click.email-recipients');
         this._super('_dispose');
     }
 })

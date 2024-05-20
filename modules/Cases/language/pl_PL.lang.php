@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Pulpit listy zgłoszeń',
     'LBL_CASES_RECORD_DASHBOARD' => 'Pulpit listy zgłoszeń',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Szczegóły zgłoszenia',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Widok szczegółowy zgłoszeń — konsola',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy zgłoszeń',
 
 	'ERR_DELETE_RECORD'					=> 'Aby usunąć Kontrahenta, musisz podać numer rekordu.',
@@ -162,4 +162,29 @@ Aby utworzyć moduł {{module_name}}:
     'LBL_SLA_DETAILS' => 'Szczegóły umowy SLA',
     'LBL_HOURS' => 'Godziny',
     'LBL_WIDGET_STATUS' => 'Status',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizuj',
+    'LBL_CREATE_NEW' => 'Utwórz nowe',
+    'LBL_MANAGE' => 'Zarządzaj',
+    'LBL_SEE_DETAILS' => 'Wyświetl szczegóły',
+    'LBL_HIDE_NEW' => 'Ukryj',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Zgłoszenia',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Zgłoszenie',
+    'LBL_KIOSK_CREATE' => 'Utwórz zgłoszenie',
+    'LBL_KIOSK_SUBJECT' => 'Temat',
+    'LBL_KIOSK_CASE_ID' => 'ID zgłoszenia',
+    'LBL_KIOSK_STATUS' => 'Status',
+    'LBL_KIOSK_CATEGORY' => 'Kategoria',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Data wysłania: {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Priorytet',
+    'LBL_KIOSK_CREATE_CASE' => 'Kontakt z nami',
+    'LBL_KIOSK_DESCRIPTION' => 'Opis',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Żądanie zostało przesłane pomyślnie.',
+    'LBL_KIOSK_ATTACHED' => 'Wszystkie załączone',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Zewnętrzni użytkownicy',
 );

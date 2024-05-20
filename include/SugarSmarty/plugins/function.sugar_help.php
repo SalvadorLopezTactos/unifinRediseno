@@ -81,7 +81,7 @@ Pushed code for help popups into smarty function sugar_help.
  */
 function smarty_function_sugar_help($params, &$smarty)
 {
-    $text = str_replace("'", "\'", htmlspecialchars($params['text'], ENT_QUOTES));
+    $text = str_replace("'", "\'", htmlspecialchars($params['text'], ENT_COMPAT));
 	//append any additional parameters.
 	$click  = "return SUGAR.util.showHelpTips(this,'$text'";
 

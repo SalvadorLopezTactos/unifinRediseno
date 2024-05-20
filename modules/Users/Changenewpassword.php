@@ -55,11 +55,11 @@ if ($guid)
                         $usr = new User();
 						$usr_id=$usr->retrieve_user_id($_POST['user_name']);
 	    				$usr->retrieve($usr_id);
-                        $usr->setNewPassword(html_entity_decode($_POST['new_password']));
+                        $usr->setNewPassword(html_entity_decode($_POST['new_password'], ENT_COMPAT));
 					    $query2 = "UPDATE users_password_link SET deleted='1' where id=".$GLOBALS['db']->quoted($guid);
 				   		$GLOBALS['db']->query($query2, true, "Error setting link for $usr->user_name: ");
 				   		$_POST['user_name'] = $_REQUEST['user_name'];
-                        $_POST['user_password'] = html_entity_decode($_REQUEST['new_password']);
+                        $_POST['user_password'] = html_entity_decode($_REQUEST['new_password'], ENT_COMPAT);
 						$_POST['module'] = 'Users';
 						$_POST['action'] = 'Authenticate';
 						$_POST['login_module'] = 'Home';
@@ -116,7 +116,6 @@ $sugar_smarty->assign("INSTRUCTION", $app_strings['NTC_LOGIN_MESSAGE']);
 $sugar_smarty->assign("USERNAME_FIELD", '<td scope="row" width="30%">'.$mod_strings['LBL_USER_NAME'].':</td><td width="70%"><input type="text" size="20" tabindex="1" id="user_name" name="user_name"  value=""</td>');
 $sugar_smarty->assign('PWDSETTINGS', $GLOBALS['sugar_config']['passwordsetting']);
 $sugar_smarty->assign('SITE_URL', $GLOBALS['sugar_config']['site_url']);
-
 
 $rules = "'" . $GLOBALS["sugar_config"]["passwordsetting"]["minpwdlength"]
 	   . "','" . $GLOBALS['sugar_config']['passwordsetting']['maxpwdlength']

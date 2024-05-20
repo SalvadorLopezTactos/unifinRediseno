@@ -17,6 +17,12 @@ use Doctrine\DBAL\Exception as DBALException;
  * @api
  */
 class Localization {
+    private $deprecatedEncodings = [
+        'BASE64',
+        'HTML-ENTITIES',
+        'Quoted-Printable',
+        'UUENCODE',
+    ];
 	var $availableCharsets = array(
 		'BIG-5',        //Taiwan and Hong Kong
 		/*'CP866'			  // ms-dos Cyrillic */
@@ -97,7 +103,7 @@ class Localization {
      */
     public static function getObject()
     {
-        $class = __CLASS__;
+        $class = self::class;
         if (SugarAutoLoader::load('custom/include/Localization/Localization.php')) {
             $class = SugarAutoLoader::customClass($class);
         }
@@ -136,12 +142,13 @@ class Localization {
 	 * @return string pref Most significant preference
 	 */
 	function getPrecedentPreference($prefName, $user=null, $sugarConfigPrefName = '') {
+        $emailSettings = [];
 		global $current_user;
 		global $sugar_config;
 
 		$userPref = '';
 		$coreDefaults = $this->getLocaleConfigDefaults();
-		$pref = isset($coreDefaults[$prefName]) ? $coreDefaults[$prefName] : ''; // defaults, even before config.php
+        $pref = $coreDefaults[$prefName] ?? ''; // defaults, even before config.php
 
 		if($user != null) {
 			$userPref = $user->getPreference($prefName);
@@ -209,7 +216,7 @@ class Localization {
         $query = "SELECT id, name, symbol, conversion_rate FROM currencies WHERE status = 'Active' AND deleted = 0";
         $stmt = $db->getConnection()->executeQuery($query);
 
-        foreach ($stmt as $row) {
+        foreach ($stmt->iterateAssociative() as $row) {
             $currencies[$row['id']] = $row;
         }
 
@@ -446,6 +453,9 @@ class Localization {
             // for faster lookup
             $encodings = [];
             foreach (mb_list_encodings() as $encoding) {
+                if (in_array($encoding, $this->deprecatedEncodings)) {
+                    continue;
+                }
                 $encodings[sugarStrToUpper($encoding)] = true;
                 foreach (mb_encoding_aliases($encoding) as $alias) {
                     $encodings[sugarStrToUpper($alias)] = true;
@@ -520,7 +530,7 @@ class Localization {
 	function getDecimalSeparator($user=null) {
         // Bug50887 this is purposefully misspelled as ..._seperator to match the way it's defined throughout the app.
 		$dec = $this->getPrecedentPreference('dec_sep', $user);
-        $dec = $dec ? $dec : $this->getPrecedentPreference('default_decimal_seperator', $user);
+        $dec = $dec ?: $this->getPrecedentPreference('default_decimal_seperator', $user);
 		return $dec;
 	}
 
@@ -537,7 +547,7 @@ class Localization {
 
 	function getCurrencySymbol($user=null) {
         $currencyId = $this->getPrecedentPreference('currency', $user);
-        $currencyId = $currencyId ? $currencyId : '-99';
+        $currencyId = $currencyId ?: '-99';
 		$currency = SugarCurrency::getCurrencyByID($currencyId);
 		return $currency->symbol;
 	}

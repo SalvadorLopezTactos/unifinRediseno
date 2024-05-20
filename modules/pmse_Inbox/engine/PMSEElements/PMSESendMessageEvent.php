@@ -125,7 +125,7 @@ class PMSESendMessageEvent extends PMSEIntermediateEvent
     {
         $this->eventDefinitionBean->retrieve($flowData['bpmn_id']);
         $templateId = $this->eventDefinitionBean->evn_criteria;
-        $json = htmlspecialchars_decode($this->eventDefinitionBean->evn_params);
+        $json = htmlspecialchars_decode($this->eventDefinitionBean->evn_params, ENT_COMPAT);
         $bean = $this->caseFlowHandler->retrieveBean($flowData['cas_sugar_module'], $flowData['cas_sugar_object_id']);
         $addresses = $this->emailHandler->processEmailsFromJson($bean, $json, $flowData);
         $result = $this->emailHandler->sendTemplateEmail($flowData['cas_sugar_module'],

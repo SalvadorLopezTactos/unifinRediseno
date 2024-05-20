@@ -22,9 +22,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 class SugarEmailAddress extends SugarBean
 {
     // max number of legacy emails
-    const MAX_LEGACY_EMAILS = 10;
+    public const MAX_LEGACY_EMAILS = 10;
 
-    const EMAIL_CACHE_PREFIX = 'email_addresses_by_guid_';
+    public const EMAIL_CACHE_PREFIX = 'email_addresses_by_guid_';
 
     var $table_name = 'email_addresses';
     var $module_name = "EmailAddresses";
@@ -234,8 +234,8 @@ class SugarEmailAddress extends SugarBean
                             && $this->boolVal($bean->email[$i-1]['invalid_email']);
                         $opt_out_field = $email . '_opt_out';
                         $invalid_field = $email . '_invalid';
-                        $field_optOut = (isset($bean->$opt_out_field)) ? $bean->$opt_out_field : $optOut;
-                        $field_invalid = (isset($bean->$invalid_field)) ? $bean->$invalid_field : $invalid;
+                        $field_optOut = $bean->$opt_out_field ?? $optOut;
+                        $field_invalid = $bean->$invalid_field ?? $invalid;
                         $this->addAddress($bean->$email, $isPrimary, false, $field_invalid, $field_optOut);
                         $isPrimary = false;
                     }
@@ -354,11 +354,10 @@ class SugarEmailAddress extends SugarBean
         global $dictionary;
 
         if (func_num_args() <= 1) {
-            // calling SugarBean::save()
-            return call_user_func_array(array('parent', __FUNCTION__), func_get_args());
+            return parent::save(...func_get_args());
         }
         $defaultValues = array(null, null, array(), '', '', '', '', false);
-        list($id, $module, $new_addrs, $primary, $replyTo, $invalid, $optOut, $in_workflow)
+        [$id, $module, $new_addrs, $primary, $replyTo, $invalid, $optOut, $in_workflow]
             = array_replace($defaultValues, func_get_args());
 
         if (empty($this->addresses) || $in_workflow) {
@@ -601,6 +600,7 @@ class SugarEmailAddress extends SugarBean
      */
     function populateAddresses($id, $module, $new_addrs = array(), $primary = '', $replyTo = '', $invalid = '', $optOut = '')
     {
+        $widget_id = null;
         $module = $this->getCorrectedModule($module);
         //One last check for the ConvertLead action in which case we need to change $module to 'Leads'
         $module = (isset($_REQUEST) && isset($_REQUEST['action']) && $_REQUEST['action'] == 'ConvertLead') ? 'Leads' : $module;
@@ -767,7 +767,7 @@ class SugarEmailAddress extends SugarBean
      * @return bool result
      */
     public function addAddress($addr, $primary=false, $replyTo=false, $invalid=false, $optOut=false, $email_id = null, $validate = true) {
-        $addr = trim(html_entity_decode($addr, ENT_QUOTES));
+        $addr = trim(html_entity_decode((string)$addr, ENT_QUOTES));
 
         if ($validate && !SugarEmailAddress::isValidEmail($addr)) {
             $GLOBALS['log']->fatal("SUGAREMAILADDRESS: email address is not valid [ {$addr} ]");
@@ -903,7 +903,7 @@ class SugarEmailAddress extends SugarBean
         if(!empty($this->addresses)) {
             foreach($this->addresses as $addressMeta) {
                 if(isset($addressMeta['email_address']) && !empty($addressMeta['email_address'])) {
-                    $address = $this->db->quote($this->_cleanAddress($addressMeta['email_address']));
+                    $address = $this->db->quote(static::_cleanAddress($addressMeta['email_address']));
                     $q = "SELECT * FROM " . $this->table_name . " WHERE email_address = '{$address}'";
                     $r = $this->db->query($q);
                     $a = $this->db->fetchByAssoc($r);
@@ -921,7 +921,7 @@ class SugarEmailAddress extends SugarBean
 
     public function splitEmailAddress($addr)
     {
-        $email = $this->_cleanAddress($addr);
+        $email = static::_cleanAddress($addr);
         if (!SugarEmailAddress::isValidEmail($email)) {
             $email = ''; // remove bad email addr
         }
@@ -937,7 +937,7 @@ class SugarEmailAddress extends SugarBean
      */
     static function _cleanAddress($addr)
     {
-        $addr = trim(from_html($addr));
+        $addr = trim((string)from_html($addr));
 
         if (strpos($addr, "<") !== false && strpos($addr, ">") !== false) {
             $address = trim(substr($addr, strrpos($addr, "<") + 1, strrpos($addr, ">") - strrpos($addr, "<") - 1));
@@ -958,7 +958,7 @@ class SugarEmailAddress extends SugarBean
         $guid = $this->getGuid($addr);
 
         if (empty($guid)) {
-            $address = $this->db->quote($this->_cleanAddress($addr));
+            $address = $this->db->quote(static::_cleanAddress($addr));
             $addressCaps = sugarStrToUpper($address);
 
             if (!empty($address)) {
@@ -989,7 +989,7 @@ class SugarEmailAddress extends SugarBean
      */
     public function getGuid($address)
     {
-        $address = $this->db->quote($this->_cleanAddress($address));
+        $address = $this->db->quote(static::_cleanAddress($address));
         $addressCaps = sugarStrToUpper($address);
 
         //use email address in captial letters for query
@@ -1280,7 +1280,7 @@ class SugarEmailAddress extends SugarBean
             if (empty($prefillDataArr) && $module == "Contacts")
                 $prefillDataArr = $this->getAddressesByGUID($id, "Leads");
         } else if (isset($_REQUEST['full_form']) && !empty($_REQUEST['emailAddressWidget'])) {
-            $widget_id = isset($_REQUEST[$module . '_email_widget_id']) ? $_REQUEST[$module . '_email_widget_id'] : '0';
+            $widget_id = $_REQUEST[$module . '_email_widget_id'] ?? '0';
             $count = 0;
             $key = $module . $widget_id . 'emailAddress' . $count;
             while (isset($_REQUEST[$key])) {
@@ -1440,6 +1440,9 @@ class SugarEmailAddress extends SugarBean
      */
     function getEmailAddressWidgetDuplicatesView($focus)
     {
+        $verified = [];
+        $replyTo = [];
+        $delete = [];
         // SugarBean shouldn't rely on any request parameters, needs refactoring ...
         $request = InputValidation::getService();
 

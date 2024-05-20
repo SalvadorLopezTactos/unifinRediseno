@@ -125,4 +125,13 @@ $viewdefs['Accounts']['base']['view']['multi-line-list'] = [
             '$owner' => '',
         ],
     ],
+    'defaults' => [
+        'order_by_primary' => 'next_renewal_date:asc',
+        'order_by_secondary' => '',
+        'freeze_first_column' => true,
+    ],
+    'orderBy' => [
+        'field' => 'next_renewal_date',
+        'direction' => 'asc',
+    ],
 ];

@@ -124,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Advanced Options',
 'LBL_TOGGLE_ADV' => 'Show Advanced Options',
 'LBL_TOGGLE_BASIC' => 'Show Basic Options',
+'LBL_UPDATEMOMENTUMCJ' => 'Update Momentum of In-Progress Smart Guides',
 // Links
 'LNK_LIST_SCHEDULER' => 'Schedulers',
 'LNK_NEW_SCHEDULER' => 'Create Scheduler',
@@ -176,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Run Active Data Archives/Deletions',
 'LBL_PMSEENGINECRON' => 'SugarBPM Scheduler',
 );
-

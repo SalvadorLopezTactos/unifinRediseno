@@ -21,17 +21,17 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
     /**
      * @var string composer.json file name
      */
-    const COMPOSER_JSON = 'composer.json';
+    public const COMPOSER_JSON = 'composer.json';
 
     /**
      * @var string composer.lock file name
      */
-    const COMPOSER_LOCK = 'composer.lock';
+    public const COMPOSER_LOCK = 'composer.lock';
 
     /**
      * @var string files.md5 file name
      */
-    const FILES_MD5 = 'files.md5';
+    public const FILES_MD5 = 'files.md5';
 
     /**
      * {@inheritDoc}

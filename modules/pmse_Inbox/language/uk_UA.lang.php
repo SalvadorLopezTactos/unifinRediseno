@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Історія',
     'LBL_PMSE_LABEL_NOTES' => 'Примітки',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Додати примітки',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Надіслати в DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Вибрати...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Користувач',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Are you sure you want to approve this process?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Are you sure you want to reject this process?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Are you sure you want to route this process?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Справді надіслати цей процес у DocuSign?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Process has been approved successfully',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Process has been rejected successfully',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Process has been routed successfully',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Процес успішно надіслано в DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'Процес, який ви намагаєтеся переглянути, закрито.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Процес, який ви намагаєтеся переглянути, зараз недоступний.',
 

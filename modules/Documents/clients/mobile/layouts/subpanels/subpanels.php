@@ -11,6 +11,13 @@
  */
 $viewdefs['Documents']['mobile']['layout']['subpanels'] = array(
     'components' => array(
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'contracts',
+            ],
+        ],
         array(
             'layout' => 'subpanel',
             'label' => 'LBL_ACCOUNTS_SUBPANEL_TITLE',

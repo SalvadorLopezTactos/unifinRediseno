@@ -83,7 +83,7 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
         'sales_status' => array(
             'studio' => true,
             'reportable' => true,
-            'audited' => false,
+            'audited' => true,
             'massupdate' => true,
             'importable' => true,
         ),
@@ -113,6 +113,12 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'reportable' => true,
             'workflow' => true,
             'calculated' => false,
+        ],
+        'lost' => [
+            'formula' => 'rollupConditionalSum($revenuelineitems, "likely_case", "sales_stage", forecastOnlySalesStages(false,true,false))',
+            'reportable' => true,
+            'workflow' => true,
+            'studio' => true,
         ],
     );
 
@@ -153,7 +159,7 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
                 'renewal' => true,
                 'renewal_parent_name' => true,
                 'service_duration' => true,
-                'commit_stage' => false,
+                'commit_stage' => true,
             )
         );
 
@@ -165,7 +171,7 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
                 'sales_status' => true,
                 'probability' => false,
                 'service_duration' => true,
-                'commit_stage' => false,
+                'commit_stage' => true,
             )
         );
 
@@ -176,6 +182,7 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
                 'service_start_date' => true,
                 'probability' => false,
                 'service_duration' => true,
+                'lost' => true,
             )
         );
 

@@ -17,6 +17,11 @@ use Sugarcrm\Sugarcrm\Maps\FilterUtils as MapsFilterUtils;
 
 class FilterApi extends SugarApi
 {
+    /**
+     * Registers endpoints for the FilterApi
+     *
+     * @return array[] the endpoint data
+     */
     public function registerApiRest()
     {
         return array(
@@ -712,7 +717,7 @@ class FilterApi extends SugarApi
 
         $fetched = $seed->fetchFromQuery($q, $fields, $queryOptions);
 
-        list($beans, $rows, $distinctCompensation) = $this->parseQueryResults($fetched);
+        [$beans, $rows, $distinctCompensation] = $this->parseQueryResults($fetched);
 
         $data = array();
         $data['next_offset'] = -1;
@@ -854,7 +859,7 @@ class FilterApi extends SugarApi
         $ret = array();
         if (strpos($field, '.')) {
             // It looks like it's a related field that it's searching by
-            list($linkName, $field) = explode('.', $field);
+            [$linkName, $field] = explode('.', $field);
 
             $q->from->load_relationship($linkName);
             if (empty($q->from->$linkName)) {
@@ -1231,6 +1236,10 @@ class FilterApi extends SugarApi
         if (array_key_exists('$in_radius_from_zip', $filter)) {
             self::applyMapsDistanceZipFilter($q, $where, $filter);
         }
+
+        if (array_key_exists('$in_radius_from_coords', $filter)) {
+            self::applyMapsDistanceCoordsFilter($q, $where, $filter);
+        }
     }
 
     /**
@@ -1264,6 +1273,57 @@ class FilterApi extends SugarApi
             return;
         }
 
+        self::applyMapDistance($q, $coords, $radius, $unitType);
+    }
+
+    /**
+     * Add a Maps Distance Filter by Coords
+     *
+     * @param SugarQuery $q
+     * @param SugarQuery_Builder_Where $where
+     * @param $filter
+     */
+    protected static function applyMapsDistanceCoordsFilter(SugarQuery $q, SugarQuery_Builder_Where $where, $filter)
+    {
+        if (!hasMapsLicense()) {
+            return;
+        }
+
+        $filterData = $filter['$in_radius_from_coords'];
+
+        $radius = $filterData['radius'];
+        $unitType = $filterData['unitType'];
+
+        if (!$radius) {
+            return;
+        }
+
+        if (!array_key_exists('latitude', $filterData) || !array_key_exists('longitude', $filterData)) {
+            $q->whereRaw('1 = 0');
+            return;
+        }
+
+        $latitude = $filterData['latitude'];
+        $longitude = $filterData['longitude'];
+
+        $coords = [
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+        ];
+
+        self::applyMapDistance($q, $coords, $radius, $unitType);
+    }
+
+    /**
+     * Apply map distance as filter
+     *
+     * @param SugarQuery $q
+     * @param array $coords
+     * @param mixed $radius
+     * @param mixed $unitType
+     */
+    public static function applyMapDistance(SugarQuery $q, array $coords, $radius, $unitType)
+    {
         $admin = BeanFactory::getBean('Administration');
         $mapsConfig = $admin->retrieveSettings('maps', true)->settings;
 
@@ -1517,7 +1577,8 @@ class FilterApi extends SugarApi
         ]);
         $join->on()->queryAnd()
             ->equalsField($tableName . '.id', $joinTable . '.' . $joinKeys[$tableName])
-            ->notEquals($joinTable . '.' . 'accept_status', 'decline');
+            ->notEquals($joinTable . '.' . 'accept_status', 'decline')
+            ->equals($joinTable . '.' . 'deleted', 0);
 
         $where->equals($joinTable . '.user_id', self::$current_user->id);
     }
@@ -1720,11 +1781,7 @@ class FilterApi extends SugarApi
         if (empty($beans) || !is_array($beans)) {
             return $options;
         }
-
-        // Get the first member of the beans array since we only need to test
-        // one bean for a relate_collection field
-        reset($beans);
-        $bean = $beans[key($beans)];
+        $bean = $beans[array_key_first($beans)];
 
         // Do some sanity checking, since some tests might send this array as a
         // simple array of values

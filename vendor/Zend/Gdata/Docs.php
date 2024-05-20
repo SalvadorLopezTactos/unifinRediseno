@@ -57,9 +57,9 @@ require_once 'vendor/Zend/Gdata/Docs/DocumentListEntry.php';
 class Zend_Gdata_Docs extends Zend_Gdata
 {
 
-    const DOCUMENTS_LIST_FEED_URI = 'https://docs.google.com/feeds/default/private/full';
-    const AUTH_SERVICE_NAME = 'writely';
-    const DEFAULT_MAJOR_PROTOCOL_VERSION = 3;
+    public const DOCUMENTS_LIST_FEED_URI = 'https://docs.google.com/feeds/default/private/full';
+    public const AUTH_SERVICE_NAME = 'writely';
+    public const DEFAULT_MAJOR_PROTOCOL_VERSION = 3;
 
     protected $_defaultPostUri = self::DOCUMENTS_LIST_FEED_URI;
 

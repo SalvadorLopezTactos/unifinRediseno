@@ -92,6 +92,7 @@ $mod_strings = array (
     'ERR_UW_PACKAGE_NEWER_VERSION_EXISTS'       => 'Ekziston një version më i ri i paketës: {0}, hiqe atë përpara se të provosh të ngarkosh një të ri.',
     'ERR_UW_PACKAGE_ALREADY_INSTALLED'          => 'Paketa është instaluar tashmë.',
     'ERR_UW_PACKAGE_NOT_INSTALLED'              => 'Paketa nuk është instaluar.',
+    'ERR_UW_PACKAGE_INSTALLED_WITH_ERROR'       => 'Ndodhi një gabim gjatë instalimit të paketës. Ndryshimet nuk u ruajtën',
     'ERR_UW_PACKAGE_IS_UNINSTALLABLE'           => 'Paketa është e paçinstalueshme. Ajo nuk mund të çinstalohet.',
     'ERR_UW_PACKAGE_ALREADY_ENABLED'            => 'Paketa është aktivizuar tashmë.',
     'ERR_UW_PACKAGE_ALREADY_DISABLED'           => 'Paketa është çaktivizuar tashmë.',
@@ -130,7 +131,12 @@ $mod_strings = array (
     'LBL_ADMIN_WIZARD' => 'Themelimi i lehtë i sistemit tuaj SugarCRM',
     'LBL_ADMINISTRATION_HOME_TITLE' => 'Sistemi',
     'LBL_ADMINISTRATION_HOME_DESC' =>'Konfiguro paramertat e gjëra të sistemit sipas specifikimeve të organizimit tuaj. Përdoruesit mund të refuzojnë disa nga parametrat lokal të çaktivizuar në faqen e parametrave tyre të përdorimit.',
-    'LBL_ALLOW_USER_TABS' => 'Lejon përdoruesit të fshehin lidhëset',
+    'LBL_ALLOW_USERS_PINNED_MODULES' => 'Lejo përdoruesit të përcaktojnë numrin e moduleve të ngulitura',
+    'LBL_ALLOW_USERS_AVAILABLE_MODULES' => 'Lejo përdoruesit të zgjedhin nga modulet e disponueshme',
+    'LBL_NUMBER_PINNED_MODULES' => 'Numri i moduleve të ngulitura',
+    'LBL_NUMBER_PINNED_MODULES_TOOLTIP' => 'Rekomandojmë ta caktosh këtë në një numër real të moduleve të përdorura ' .
+        'më shpesh, pasi ka të ngjarë që një numër i madh të mos jetë i dukshëm në shumicën e madhësive të shfletuesit. Velerat mbi ' .
+        '100 nuk do të respektohen',
     'LBL_ALREADY_RUNNING'                  => 'Ky server punon si Klient jashtë linje.',
     'LBL_APPLY_DST_FIX_DESC' => 'Ky hap i detyrueshëm do të rifreskoj kohën për të dorëzimin e funksionimit (MYSQL vetëm).',
     'LBL_APPLY_DST_FIX' => 'Apliko ruatje ditore të ndreqjes së kohës.',
@@ -145,7 +151,7 @@ $mod_strings = array (
     'LBL_IMPORT_METADATA_BUTTON_TITLE' => 'Importo skedarin e metadatave IdP',
     'LBL_IMPORT_METADATA_BUTTON_LABEL' => 'Importo skedarin e metadatave IdP',
     'LBL_CAT_VIEW'            => 'Kategoritë',
-    'LBL_CHANGE_NAME_MODULES'=>'Ndrysho emrat e moduleve që shfaqen në kuadër të aplikacionit',
+    'LBL_CHANGE_NAME_MODULES'=> 'Ndrysho emrat e moduleve që shfaqen në kuadër të aplikacionit',
     'LBL_CHECK_FOR_UPDATES'  => 'Kontrollo për rinovime',
     'LBL_CHECK_NOW_LABEL' =>'Kontrollo tani',
     'LBL_CHECK_NOW_TITLE' =>'Kontrollo tani',
@@ -171,17 +177,20 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'Fshierja e dosjes së kopjuar përdoret për të ruajtur të dhënat e shkronjave PDF',
     'LBL_CONFIG_CHECK' =>'Kontrolloni konfigurimin',
     'LBL_CONFIG_FTS' => 'Konfiguro kërkimin e tekstit të plotë të makinës',
-    'LBL_CONFIG_TABS'=>'Shfaqja e moduleve dhe nënpanelet',
-	'LBL_CONFIG_TABS_DESC'=>'Tërhiqi emrat e moduleve më poshtë për t$#39;i vendosur ato të shfaqen apo të fshehen në krye të shtyllës së navigacionit, ose si nënpanelet. Për të kontrolluar qasjen në module, përdorni Rolin e  Menaxhimit.',
-	'LBL_CONFIG_LANGS_DESC'=>'Tërhiqi emrat e gjuhëve më poshtë për t$#39;i aktivizuar dhe çaktivizuar ato.',
-	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'Selektoni këtë opsion për t$#39;i lejuar përdoruesit të zgjedhin se cilat skeda të modulit ata mund të shikojnë. Kur selektohen, përdoruesit do të jenë në gjendje të zgjedhin se cilat skeda të modulit janë të dukshme duke menaxhuar skedat brenda parametrave të përdoruesit.',
-	'LBL_CONFIGURATOR_DESC'=>'Vendosni konfigurimin.php',
+    'LBL_CONFIG_TABS'=>'Shiriti i navigimit dhe nënpanelet',
+    'LBL_CONFIG_TABS_DESC_BRIEFLY'=>'Zgjidh modulet që janë të disponueshme për përdoruesit në shiritin e navigimit dhe si nënpanele. Për të kontrolluar aksesin e përdoruesve në module, përdor <a href="?module=ACLRoles&action=index">Menaxhimi i rolit.</a>',
+    'LBL_CONFIG_TABS_DESC_DETAILED'=>'Zvarrit dhe lësho modulet për t&#39;i vendosur si të disponueshme në shiritin e navigimit ose të fshehura. <br>
+        Numri i moduleve të ngulitura përcakton se sa nga modulet e disponueshme shfaqen kur shiriti i navigimit është i palosur
+        (p.sh., nëse vendoset 5, pesë modulet e para në listë janë të ngulitura). Kur fushat e kutisë së zgjedhjes 
+        janë të aktivizuara, përdoruesit mund të modifikojnë cilësimet e shiritit të tyre të navigimit nëpërmjet profilit të përdoruesit.',
+    'LBL_CONFIG_LANGS_DESC'=>'Tërhiqi emrat e gjuhëve më poshtë për t$#39;i aktivizuar dhe çaktivizuar ato.',
+    'LBL_CONFIGURATOR_DESC'=>'Vendosni konfigurimin.php',
     'LBL_CONFIGURATOR_TITLE'=>'Konfigurues',
     'LBL_CONFIGURE_GROUP_TABS_DESC' => 'Krijo dhe ndrysho filtra të menysë së modulit',
     'LBL_CONFIGURE_GROUP_TABS' => 'Konfiguro modulet e grupuara',
     'LBL_CONFIGURE_SETTINGS_TITLE' => 'Parametrat e sistemit',
     'LBL_CONFIGURE_SETTINGS' => 'Konfiguro parametrat e sistemit-të gjërë',
-    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Shfaqja e moduleve dhe nënpanelet',
+    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Shiriti i navigimit dhe nënpanelet',
     'LBL_CONFIGURE_UPDATER'=>'Konfiguro rinovimet e Sugar',
     'LBL_CONTRACT_TITLE'=>'Kontratat',
     'LBL_CONTRACT_DESC'=>'Definimi i llojeve të kontratës për modulin e kontratave. Kur përdoruesit krijojnë kontratë, Llojet e mënysë së tërheqjes shfaqin llojet e kontratës për selektimin.',
@@ -226,6 +235,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_GETMYSQLTS' => 'Skema e Bazës së të dhënave',
     'LBL_DIAGNOSTIC_GETPHPINFO' => 'Marrja e phpinformacioneve()',
     'LBL_DIAGNOSTIC_GETSUGARLOG' => 'Marrje e sugarcrm.log',
+    'LBL_DIAGNOSTIC_GETMLPLOG' => 'Po merret package_install.log',
     'LBL_DIAGNOSTIC_GETTING' => 'marrje...',
     'LBL_DIAGNOSTIC_MD5'=>'Info MD5',
     'LBL_DIAGNOSTIC_MYSQLDUMPS'=>'Konfigurimi i tabelës së deponive',
@@ -234,6 +244,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_NO_MYSQL' => 'Ju nuk keni MySQL. Funksionet në MySQL kanë qenë të joaktivizuara.',
     'LBL_DIAGNOSTIC_PHPINFO'=>'phpinfo()',
     'LBL_DIAGNOSTIC_SUGARLOG'=>'Identifikimi i dosjes SugarCRM',
+    'LBL_DIAGNOSTIC_MLPLOG'=>'Skedari i evidencës së instalimit të paketës',
     'LBL_DIAGNOSTIC_TITLE'=>'Mjetë Diagnostike',
     'LBL_DIAGNOSTIC_VARDEFS'=>'Sugar skema e prodhimit (VARDEFS)',
 	'LBL_DISABLED' => 'e çaktivizuar',
@@ -361,11 +372,11 @@ $mod_strings = array (
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Për Lidhjen e përdoruesit LDAP <br />Shembuj: AD: userPrincipalName, OpenLDAP: user: userPrincipalName, Mac OS X: uid',
     'LBL_LDAP_LOGIN_ATTRIBUTE_DESC'=>'Për kërkimin e përdoruesit LDAP <br />Shembuj:AD: Emrikryesor i përdoruesi, hapjaLDAP: dn, Mac OS X:dn',
     'LBL_LDAP_ENCRYPTION_TYPE_DESC'=> 'Lloji i enkriptimit ndikon në faktin nëse lidhja me serverin LDAP do të ' .
-        'jetë apo jo e sigurt. Përdor "Asnjë" për një lidhje të rregullt të pasigurt. Përdor TLS për të detyruar që ' .
-        'lidhja të jetë e sigurt. Përdor SSL për një lidhje të sigurt nëpërmjet ldaps://',
+        'jetë apo jo e sigurt. Përdor "Asnjë" për një lidhje të rregullt të pasigurt. Përdor StartTLS për të siguruar ' .
+        'një lidhje të sigurt. Përdor LDAPS për një lidhje të sigurt në vend të Idaps://',
     'LBL_LDAP_SERVER_HOSTNAME_DESC'=> 'Specifiko vetëm emrin e pritësit të LDAP të adresës së IP. ' .
         'Shembull: ldap.example.com, 10.11.45.75',
-    'LBL_LDAP_SERVER_PORT_DESC'=>'Shembull: 389 për lidhje të pasigurt dhe TLS. 636 për SSL',
+    'LBL_LDAP_SERVER_PORT_DESC'=>'Shembull: 389 për lidhje të pasigurt dhe StartTLS. 636 për LDAPS',
     'LBL_LDAP_GROUP_NAME'=>'Emri grupit:',
 	'LBL_LDAP_GROUP_NAME_DESC'=>'Shembull cn=sugarcrm',
     'LBL_LDAP_USER_DN_DESC'=>'Shembull: ou= njerëz.dc=shembull.dc=com',
@@ -472,6 +483,8 @@ $mod_strings = array (
     'LBL_MANAGE_RELATE_DENORMALIZATION_PRE_CHECK_RESULTS' => 'Rezultatet e kontrollit paraprak',
     'LBL_MANAGE_RELATE_DENORMALIZATION_FIELDS_FOR' => 'Fushat për',
     'LBL_MANAGE_RELATE_DENORMALIZATION_JOB_TITLE' => 'Punë e planifikuar',
+    'LBL_SUGAR_OUTFITTER' => 'SugarOutfitters',
+    'LBL_SUGAR_OUTFITTER_TOOLTIP' => 'Shfleto SugarOutfitters, tregun e SugarCRM, për shtesa që mund të shtojnë aftësi të reja në këtë instancë Sugar',
 
     'LBL_MANUAL_VALIDATION_TXT' => 'Vlefshmëria Manuale',
     'LBL_MANUAL_VALIDATION'=>'Nëse keni probleme të vazhdueshme me vlefshmërinë automatike, ju lutemi kontrolloni konfigurimin tuaj Proxy në sistemin e parametrave të panelit admin. Nëse sistemi i mjedisit tuaj ndalon sistemin nga komunikimi në licencën e vlefshmërisë së serverit nëpërmjet internetit, ju duhet të vazhdoni hapat manuale të vlefshmërisë.',
@@ -552,6 +565,9 @@ $mod_strings = array (
     'LBL_MODULE_LICENSE'                        => 'Ju lutemi lexoni në vijim Marrëveshjen e Licencës:',
     'LBL_MODULE_LOADER_TITLE' => 'Ngarkuesi i modulës',
     'LBL_MODULE_LOADER' => 'Shtoni ose hiqni modulet e Sugarit, temat, paketat gjuhësore dhe zgjerimet tjera',
+    'LBL_MODULE_LOADER_LICENSE_WARNING' => 'Funksionaliteti për të <a href="{0}">ngarkuar</a> paketat e skedarëve të personalizuar nuk '
+        . 'ofrohet për {1}. Për të parë se cilat lloje të licencës përfshijnë këtë funksionalitet të Ngarkuesit të modulit, shih '
+        . 'dokumentacionin <a href="{2}">Matrica e llojeve të licencës</a>.',
     'LBL_MODULE_NAME' => 'Administrimi',
     'LBL_MODULE_NAME_SINGULAR' => 'Administrim',
     'LBL_MODULE_TITLE' => 'Administrimi: Ballina',
@@ -666,8 +682,6 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Rindërtoni grupimin e dosjeve JS',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Ri-lidhni dhe mbishkruani dosjet ekzistuese të grupit me versionet e fundit të dosjeve të grupit',
-    'LBL_REPAIR_JS_FILES_TITLE' => 'Riparo skedarët javascript',
-    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Riparo skedarët JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Përpunimi i dosjeve. Kjo mund të zgjasë disa minuta. Duke u larguar nga kjo faqë nuk do të anuloni procesin, në mënyrë që të ndjeheni të lirë për të lëvizur ose të prisni për konfirmimin ...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Dosjet e bëra të përpunimit.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Riparimi i fushave më të vogla',
@@ -909,7 +923,7 @@ $mod_strings = array (
     'LBL_VALIDATION_FILE'=>'Dosja e vlefshmërisë kryesore',
     'LBL_VALIDATION_SUCCESS_DATE'=>'Vlefshmëria e fundit e sukseshme :',
 	'LBL_VISIBLE_PANELS'=>'Shfaqja e nënpaneleve',
-    'LBL_VISIBLE_TABS'=>'Shfaqja e moduleve',
+    'LBL_AVAILABLE_MODULES' => 'Modulet e disponueshme',
     'LBL_WORKFLOW_DESC'                     => 'Menaxhoni kushtet e rrjedhjes së punës, alarme dhe veprimet',
     'LBL_WORKFLOW_TITLE'                    => 'Menaxhimi i Rrjedhjes së punës',
     'LBL_WORKBENCH' => 'Tavolina e punës',
@@ -954,12 +968,10 @@ $mod_strings = array (
     'WARN_LICENSE_SEATS'=>  "<b>Paralajmërim:</b> Ka ",
     'WARN_LICENSE_SEATS2' => " përdorues aktivë ndërkohë që abonimi juaj lejon vetëm ",
     'WARN_LICENSE_SEATS3' =>
-        ". <p class=\"error\">Çaktivizoni disa përdorues, kontaktoni partnerin apo përfaqësuesin e shitjeve,"
-        . " ose dërgoni një email në <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
-        . "<p class=\"error\">Për më shumë informacion, shihni "
-        . "<a target=\"_blank\" "
-        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
-        . "Kuptimi i </a> artikullit</p> për llojet e përdoruesve dhe licencat e \"Sugar\".",
+        ". <p class=\"error\">Çaktivizo disa përdorues ose <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>na kontakto</a> për të shtuar licensa të tjera.</p>",
+    'WARN_LICENSE_SEATS3_IDM' =>
+        ". <p class=\"error\">Please deactivate some users in <a target=\"_blank\" href='%s'>SugarCloud Settings</a> "
+        . "ose <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>na kontakto</a> për të shtuar licensa të tjera.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Paralajmërim: Numri i përdoruesve aktivë tashmë është numri maksimal i licencave të lejuara:",
     'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Paralajmërim:</b> Nuk do të mund të krijoni përdorues të tjerë aktivë."
         . " Blini abonime të tjera.",
@@ -967,7 +979,7 @@ $mod_strings = array (
     'WARN_LICENSE_TYPE_SEATS_EDIT_MAXED' => 'Nuk mund të krijosh %s përdorues të tjerë. Bli më shumë abonime.',
     'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Paralajmërim:</b> Nuk do të mund të krijoni përdorues të tjerë aktivë."
         . " Blini abonime të tjera.",
-    'WARN_REPAIR_CONFIG' => '<b>Paralajmërim:</b> Skedari config.php duhet të riparohet.  Përdorni <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>skriptën Rindërto konfigurimin e skedarit</a> në faqen e Riparimit në zonën e Administratorit për të riparuar skedarin e konfigurimit.',
+    'WARN_REPAIR_CONFIG' => '<b>Paralajmërim:</b> Skedari config.php duhet të riparohet. Përdor skriptin <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rindërto skedarin e konfigurimit</a> te faqja e riparimit në zonën e administratorit për të riparuar skedarin e konfigurimit.',
     'WARN_UPGRADE_APP'=> "Një version i azhurnuar i aplikacionit tani është në dispozicion.",
     'WARN_UPGRADE' => 'Paralajmërim: Ju lutemi azhurnoni',
     'WARN_UPGRADENOTE' => 'Shënim:',
@@ -1041,11 +1053,11 @@ $mod_strings = array (
 
 'ML_PACKAGE_SCANNING'=> 'Skanimi {PACKAGE}',
 'ML_INSTALLATION_FAILED'=> 'Instalimi dështoi!',
-'ML_PACKAGE_NOT_CONFIRM'=> 'Paketa që ju jeni duke u përpjekur për ta instaluar nuk përputhet me politikat e vendosura brenda Sugarit të hapur ose nga administratori i sistemit tuaj.',
+    'ML_PACKAGE_NOT_CONFIRM' => 'Paketa që po përpiqesh të instalosh nuk përputhet me politikat e vendosura nga SugarCloud ose nga administratori i sistemit.',
 'ML_TO_RESOLVE'=>'Për të zgjidhur këtë çështje:',
-'ML_OBTAIN_NEW_PACKAGE'=>'Klientët e Sugarit të hapur duhet të marrin një paketë të re nga ofruesi i paketës që trajton çështjet e përshkruara më poshtë.',
+    'ML_OBTAIN_NEW_PACKAGE' => 'Klientët e SugaritCloud duhet të marrin një paketë të re nga ofruesi i paketave që trajton çështjet e përshkruara më poshtë.',
 'ML_RELAX_LOCAL'=>'Nëse jeni duke drejtuar Sugarin në vend, ju mund të relaksoni kufizimet e ngarkuesit të Modulit tuaj për të lejuar që paketa të jetë e instaluar.',
-'ML_SUGAR_LOADING_POLICY'=>'Sugar i hapur i paketës së ngarkimit të politikave janë të detajuara në',
+    'ML_SUGAR_LOADING_POLICY'=>'Politikat e SugarCloud janë të detajuara në',
 'ML_SUGAR_KB'=>'SugarCRM Baza e njohurisë',
 'ML_SUGAR_DZ'=>'SugarCRM Zona e Zhvillimit',
 'ML_PKG_SCAN_GUIDE'=>'Udhëzuesi i politikës së skanimit të paketës',
@@ -1249,6 +1261,7 @@ Për më shumë informacion, referojuni dokumentacionit për<a href="https://www
     'LBL_ASYNC_CALL_FAILED' => 'Thirrja akronime dështoi',
     'LBL_REPAIRXSSEXECUTE_FAILED' => 'Dështim: ID nuk është definuar',
     'LBL_DIAGNOSTICS_ERROR_SUGARLOG' => 'Nuk mund të kopjohet sugarcrm.log to {0}',
+    'LBL_DIAGNOSTICS_ERROR_MLPLOG' => 'Nuk mund të kopjohej package_install.log në {0}<br>',
     'LBL_DIAGNOSTICS_ERROR_PHPINFO' => 'Nuk mund të shkruhet fajli {0}phpinfo.html',
     'LBL_DIAGNOSTICS_ERROR_LISTBEANFILES' => 'Nuk mund të shkruhet fajli {0}beanFiles.html',
     'LBL_DIAGNOSTICS_ERROR_MD5' => 'Nuk mund të kopjohet files.md5 to {0}<br />Kalimi i md5',
@@ -1360,10 +1373,28 @@ Për më shumë informacion, referojuni dokumentacionit për<a href="https://www
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT' => 'Këto cilësime përfaqësojnë direktivat standarde për Politikën e Sigurisë së Përmbajtjes (CSP) të përdorur nga shfletuesit e internetit për të kontrolluar se cilat burime lejohen të ngarkojnë në faqe interneti. Për më shumë informacion mbi vlerat e fushave dhe formatet e pranueshme, referojuni dokumentacionit <a href={{linkToDocumentation}} target="_blank">Sistemi</a>. Pasi të jenë përditësuar cilësimet e CSP-së, përdoruesit do të duhet të rifreskojnë shfletuesin në mënyrë që ndryshimet të zbatohen.',
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT_ADVANCED' => 'Këto cilësime synohen për përdoruesit me njohuri të avancuara të direktivave individuale për Politikën e Sigurisë së Përmbajtjes (CSP). Direktiva e CSP-së "img-src" është përcaktuar në Sugar si parazgjedhje dhe mundëson ngarkimin e të gjithë skedarëve përmes HTTP ose HTTPS. Për më shumë informacion mbi vlerat e fushave dhe formatet e pranueshme, referojuni dokumentacionit <a href={{linkToDocumentation}} target="_blank">Sistemi</a>. Pasi të jenë përditësuar cilësimet e CSP-së, përdoruesit do të duhet të rifreskojnë shfletuesin në mënyrë që ndryshimet të zbatohen.',
     //Maps
+    'LBL_MAPS_LOGGER_START_DATE' => 'Data e nisjes së evidencave:',
+    'LBL_MAPS_LOGGER_DETAILED_LOGS' => 'Evidencat e detajuara',
+    'LBL_MAPS_LOGGER_NO_LOGS_AVAILABLE' => 'Nuk disponohet asnjë evidencë.',
+    'LBL_MAPS_LOGGER_ENABLE_MODULES_FOR_LOG' => 'Aktivizo evidencat për modulet:',
+    'LBL_MAPS_LOGGER_LOG_LEVEL' => 'Zgjidh nivelin e evidencës...',
+    'LBL_MAPS_LOGGER_LOG_TYPE' => 'Niveli i evidencës:',
+    'LBL_MAPS_LOGGER_LOG_ALL_MESSAGES' => 'Të gjitha mesazhet',
+    'LBL_MAPS_LOGGER_LOG_ERROR' => 'Gabime',
+    'LBL_MAPS_LOGGER_LOG_SUCCESS' => 'Me sukses',
+    'LBL_MAPS_LOGGER_LBL_MODULE' => 'Moduli',
+    'LBL_MAPS_LOGGER_LBL_NAME' => 'Emri',
+    'LBL_MAPS_LOGGER_LBL_STATUS' => 'Statusi',
+    'LBL_MAPS_LOGGER_LBL_GEOCODE' => 'Gjeokoduar',
+    'LBL_MAPS_LOGGER_YES' => 'Po',
+    'LBL_MAPS_LOGGER_NO' => 'Jo',
+    'LBL_MAPS_LOGGER_OF' => 'nga',
     'LBL_MAPS_ADMIN_CONFIG_TITLE' => 'Harta',
+    'LBL_MAPS_ADMIN_LOG_VIEWER' => 'Paraqitësi i evidencës',
     'LBL_MAPS_ADD_NEW_MODULE_TO_GEOCODE' => 'Shto një modul të ri për gjeokodimin',
     'LBL_MAPS_SELECT_NEW_MODULE_TO_GEOCODE' => 'Zgjidh një modul...',
     'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION' => 'Konfiguro hartat',
+    'LBL_MAPS_ADMIN_CONFIG_LOG_VIEWER_DESCRIPTION' => 'Qasje tek evidencat e gjeokodimit',
     'LBL_MAPS_LOG_LEVEL_TITLE' => 'Niveli i regjistrit',
     'LBL_MAPS_LOG_LVL_FATAL' => 'Fatal',
     'LBL_MAPS_LOG_LVL_DEBUG' => 'Korrigjo',
@@ -1425,9 +1456,12 @@ Për më shumë informacion, referojuni dokumentacionit për<a href="https://www
     'LBL_CLOUD_DRIVE_DESCRIPTION' => 'Konfiguro cilësimet e shtegut të parazgjedhur për njësitë e diskut të resë kompjuterike.',
     'LBL_GOOGLE_DRIVE_NAME' => 'Google Drive',
     'LBL_GOOGLE_DRIVE_TOOLTIP' => 'Konfiguro shtigjet e parazgjedhura të Google Drive',
+    'LBL_DROPBOX_DRIVE' => 'Dropbox Drive',
+    'LBL_DROPBOX_DRIVE_TOOLTIP' => 'Konfiguro shtigjet e parazgjedhura të Dropbox Drive',
     'LBL_GOOGLE_DRIVE_SAVE_BUTTON' => 'Ruaj',
     'LBL_SELECT_ROOT_PATH' => 'Zgjidh shtegun e direktorisë rrënjë',
     'LBL_REMOVE_ROOT_PATH' => 'Hiq shtegun e direktorisë rrënjë',
+    'LBL_ROOT_PATH_REMOVED' => 'Shtegu i direktorisë rrënjë është hequr.',
     'LBL_VALIDATE_ROOT_PATH' => 'Verifiko shtegun e direktorisë rrënjë',
     'LBL_PATHS_FOR_RECORD_VIEW' => 'Shtigjet për pamjen e regjistrimit',
     'LBL_DEFAULT_STARTING_PATH' => 'Shtegu fillestar i parazgjedhur',
@@ -1441,14 +1475,16 @@ Për më shumë informacion, referojuni dokumentacionit për<a href="https://www
     'LBL_MICROSOFT_ONEDRIVE_TOOLTIP' => 'Konfiguro shtigjet e parazgjedhura të Microsoft Onedrive',
     'LBL_DRIVE_PATH_CONFIG' => 'Konfigurimi i shtegut të njësisë së diskut',
     'LBL_DRIVE_ROOT_PATH' => 'Shtegu i direktorisë rrënjë',
+    'LBL_FIELDS_VARIABLE' => 'Ndryshorja e fushave',
+    'LBL_UNABLE_TO_RETRIEVE_ROOT_PATH' => 'Shtegu i direktorisë rrënjë nuk mund të merret',
     'LBL_HINT_NAME' => 'Fushat e "Hint"',
     'LBL_HINT_DESCRIPTION' => 'Konfiguro se cilat fusha shfaqen në panelin "Hint", të cilat plotësohen nga "Hint".',
-    'LBL_HINT_SECTION_HEADER' => 'Hint',
-    'LBL_HINT_SECTION_DESCRIPTION' => 'Konfiguro cilësimet për "Hint"',
+    'LBL_HINT_SECTION_HEADER' => 'Sugar Hint',
+    'LBL_HINT_SECTION_DESCRIPTION' => 'Konfiguro cilësimet për Sugar Hint',
 
-    'LBL_HINT_CONFIG' => 'Konfigurimi i "Hint"',
+    'LBL_HINT_CONFIG' => 'Konfigurimi Sugar Hint',
     'LBL_HINT_CONFIG_NAME' => 'Konfigurimi i "Hint"',
-    'LBL_HINT_CONFIG_SAVED' => 'Cilësimet e konfigurimit të "Hint" janë ruajtur.',
+    'LBL_HINT_CONFIG_SAVED' => 'Cilësimet e konfigurimit të Sugar Hint janë ruajtur.',
     'LBL_HINT_CONFIG_DESCRIPTION' => 'Përditëso cilësimet e "Hint".',
     'LBL_HINT_CONFIG_LOGGER_SECTION_HEADER' => 'Regjistruesi i "Hint"',
 
@@ -1456,7 +1492,24 @@ Për më shumë informacion, referojuni dokumentacionit për<a href="https://www
     'LBL_HINT_RESYNC_DESCRIPTION' => 'Risinkronizo me shërbimin "Hint Insights" për të korrigjuar problemet lidhur me njoftimet, duke përfshirë ndryshimet ndaj preferencave dhe adresave të emailit që nuk funksionojnë.',
 
     'LBL_HINT_UNINSTALL' => 'Çinstalo',
-    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Çinstalo "Hint", duke përfshirë çaktivizimin e njoftimeve nga "Hint Insights".',
+    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Çinstalo Sugar Hint, duke përfshirë çaktivizimin e njoftimeve nga "Hint Insights".',
 
     'LBL_HINT_CONFIG_NOTIFICATIONS_HEADER' => 'Njoftimet',
+
+    'LBL_DOCUSIGN_GROUP' => 'DocuSign',
+    'LBL_DOCUSIGN_NAME' => 'Cilësimet',
+    'LBL_DOCUSIGN_TOOLTIP' => 'Konfigurimi i DocuSign',
+    'LBL_DOCUSIGN_DESCRIPTION' => 'Konfiguro veçoritë e DocuSign',
+    'LBL_SUGAR_MAPS' => 'Hartat e Sugar',
+    'LBL_CLOUD_DRIVE' => 'Njësia e resë',
+
+    // Sugar Automate
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_TITLE' => 'Parametrat automatikë të Sugar',
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_DESC' => 'Konfigurimi për paketën automatike të Sugar',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'Shabllonet',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'Menaxho shabllonet',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_NAME' => 'Konfiguro modulet',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_DESC' => 'Konfiguro modulet e aktivizuara',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'Shabllonet',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'Menaxho shabllonet',
 );

@@ -45,6 +45,7 @@ class InputValidation
      */
     public static function initService()
     {
+        $request = null;
         if (self::$service) {
             throw new InputValidationException('Service already initialized');
         }

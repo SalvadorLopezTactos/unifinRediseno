@@ -160,7 +160,7 @@ class SugarForecasting_ReportingUsers extends SugarForecasting_AbstractForecast
                 // set all users to rep by default
                 'rel' => $rel,
                 // adding id tag for QA's voodoo tests
-                'id' => $qa_id . $user->user_name
+                'id' => $qa_id . $user->id,
             )
         );
     }

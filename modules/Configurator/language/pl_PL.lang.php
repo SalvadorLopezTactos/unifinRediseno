@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logo',
 	'LBL_ADMIN_WIZARD' => 'Kreator administracyjny',
-	'LBL_ALLOW_USER_TABS' => 'Zezwól użytkownikom na ukrywanie zakładek',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Ustawienia systemowe',
 	'LBL_ENABLE_MAILMERGE' => 'Włączyć scalanie poczty?',
 	'LBL_LOGVIEW' => 'Przeglądaj dziennik logów',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Użyj tego ustawienia, aby określić, ile miesięcy naprzód (od aktualnej daty) system będzie podawał informacje o statusie Wolny/Zajęty. <BR>Aby wyłączyć ten status, zaznacz 0. Możliwa liczba miesięcy od 1 do 12.',
     'LBL_PDFMODULE_NAME' => 'Szablon raportu PDF',
     'SUGARPDF_BASIC_SETTINGS' => 'Właściwości dokumentu',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Ustawienia zaawansowane',
     'SUGARPDF_LOGO_SETTINGS' => 'Obrazy',
-
-    'PDF_CREATOR' => 'Kreator PDF',
-    'PDF_CREATOR_INFO' => 'Określa kreator dokumentu. <br>Zwykle jest to nazwa aplikacji, która generuje PDF.',
 
     'PDF_AUTHOR' => 'Autor',
     'PDF_AUTHOR_INFO' => 'Autor wyświetlany w dokumencie.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Wybierz nowy obraz dla ofert',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Plik może mieć format .jpg lub .png. (Tylko .jpg dla EZPDF)<BR>Zalecany rozmiar to 867x60 pikseli.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Szerokość obrazu dla oferty',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Zmień skalę dla załadowanego obrazu wyświetlanego w dokumentach PDF oferty. (tylko TCPDF)',
+    'PDF_TITLE' => 'Tytuł',
+    'PDF_TITLE_INFO' => 'Tytuł wyświetlany we właściwościach dokumentu.',
+
+    'PDF_SUBJECT' => 'Temat',
+    'PDF_SUBJECT_INFO' => 'Temat wyświetlany we właściwościach dokumentu.',
 
     'PDF_SMALL_HEADER_LOGO' => 'Bieżący obraz',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Ten obraz jest wyświetlany w nagłówku stron dokumentów PDF.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Wybierz nowy obraz',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Wybierz plik do zastąpienia bieżącego pliku. Plik może mieć format .jpg lub .png (tylko .jpg dla EZPDF). Zalecany rozmiar to 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Szerokość obrazu dla raportu',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Zmień skalę dla załadowanego obrazu wyświetlanego w dokumentach PDF raportu. (tylko TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Nagłówek',
-    'PDF_HEADER_STRING_INFO' => 'Opis nagłówka',
-
-    'PDF_HEADER_TITLE' => 'Tytuł nagłówka',
-    'PDF_HEADER_TITLE_INFO' => 'Ciąg znaków drukowany jako tytuł w nagłówku dokumentu',
-
-    'PDF_FILENAME' => 'Domyślna nazwa pliku',
-    'PDF_FILENAME_INFO' => 'Domyślna nazwa pliku dla wygenerowanych plików PDF',
-
-    'PDF_TITLE' => 'Tytuł',
-    'PDF_TITLE_INFO' => 'Tytuł wyświetlany we właściwościach dokumentu.',
-
-    'PDF_SUBJECT' => 'Temat',
-    'PDF_SUBJECT_INFO' => 'Temat wyświetlany we właściwościach dokumentu.',
-
     'PDF_KEYWORDS' => 'Słowa kluczowe',
     'PDF_KEYWORDS_INFO' => 'Powiąż słowa kluczowe z dokumentem, zazwyczaj w formie „słowo kluczowe1 słowo kluczowe2...”',
 
-    'PDF_COMPRESSION' => 'Kompresja',
-    'PDF_COMPRESSION_INFO' => 'Aktywuje/dezaktywuje kompresję strony. <br>W przypadku aktywacji, wewnętrzna reprezentacja każdej strony jest skompresowana, co prowadzi do współczynnika konwersji ok. 2 w wynikowym dokumencie.',
-
-    'PDF_JPEG_QUALITY' => 'Jakość JPEG (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Ustaw jakość kompresji JPEG (1-100)',
-
-    'PDF_PDF_VERSION' => 'Wersja PDF',
-    'PDF_PDF_VERSION_INFO' => 'Ustaw wersję PDF (sprawdź referencję PDF w celu określenia prawidłowych wartości).',
-
-    'PDF_PROTECTION' => 'Ochrona dokumentu',
-    'PDF_PROTECTION_INFO' => 'Ustaw ochronę dokumentu<br>- kopiowanie: umożliwia kopiowanie tekstu i obrazków do schowka<br>- drukowanie: umożliwia drukowanie dokumentu<br>-modyfikowanie: umożliwia edycję dokumentu (z wyłączeniem adnotacji)<br>- adnotacje: umożliwia dodawanie adnotacji<br>Uwaga: modyfikacje są możliwe dla użytkowników posiadających pełną wersję produktów Acrobat.',
-
-    'PDF_USER_PASSWORD' => 'Hasło użytkownika',
-    'PDF_USER_PASSWORD_INFO' => 'W przypadku braku hasła dokument będzie dostępny dla innych użytkowników. <br>Jeżeli podasz hasło użytkownika, przeglądarka PDF będzie go wymagać przed wyświetleniem. <br>Jeśli hasło nadrzędne jest inne niż hasło użytkownika, można go użyć w celu uzyskania pełnego dostępu.',
-
-    'PDF_OWNER_PASSWORD' => 'Hasło właściciela',
-    'PDF_OWNER_PASSWORD_INFO' => 'W przypadku braku hasła dokument będzie dostępny dla innych użytkowników. <br>Jeżeli podasz hasło użytkownika, przeglądarka PDF będzie go wymagać przed wyświetleniem. <br>Jeśli hasło nadrzędne jest inne niż hasło użytkownika, można go użyć w celu uzyskania pełnego dostępu.',
-
-    'PDF_ACL_ACCESS' => 'Kontrola dostępu',
-    'PDF_ACL_ACCESS_INFO' => 'Domyśla kontrola dostępu generowania dokumentów PDF.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Współczynnik wysokości komórki',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Jeżeli wysokość komórki jest mniejsza niż (Wysokość czcionki x Współczynnik wysokości komórki), to wartość (Wysokość czcionki x Współczynnik wysokości komórki) jest używana jako wysokość komórki.<br>Wartość (Wysokość czcionki x Współczynnik wysokości komórki) jest także używana jako wysokość komórki, gdy wysokość nie jest zdefiniowana.',
-
-    'K_TITLE_MAGNIFICATION' => 'Powiększenie tytułu',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Powiększenie tytułu uwzględnia główny rozmiar czcionki.',
-
-    'K_SMALL_RATIO' => 'Współczynnik małej czcionki',
-    'K_SMALL_RATIO_INFO' => 'Współczynnik zmniejszenie rozmiaru małej czcionki.',
-
-    'HEAD_MAGNIFICATION' => 'Powiększenie nagłówka',
-    'HEAD_MAGNIFICATION_INFO' => 'Współczynnik powiększenia tytułów.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Współczynnik skalowalności obrazu',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Współczynnik stosowany do skalowania obrazu',
-
-    'PDF_UNIT' => 'Jednostka',
-    'PDF_UNIT_INFO' => 'Jednostka miary dokumentu',
 	'PDF_GD_WARNING'=>'Biblioteka GD dla PHP nie jest zainstalowana. Bez zainstalowanej biblioteki GD tylko logo w formacie JPEG mogą być wyświetlane w dokumentach PDF.',
     'ERR_EZPDF_DISABLE'=>'Ostrzeżenie: Klasa EZPDF jest wyłączona w tabeli config i jest ustawiona jako klasa PDF. Naciśnij Zapisz, aby ustawić TCPDF jako klasę PDF i powrócić do stanu stabilnego.',
     'LBL_IMG_RESIZED'=>"(zmień rozmiar przy wyświetlaniu)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Dodaj czcionkę PDF',
     'LBL_PDF_PATCH' => 'Poprawka',
-    'LBL_PDF_PATCH_INFO' => 'Własne modyfikacje kodowania. Zapisz w tablicy PDF.<br>Przykład:<br>ISO-8859-1 nie zawiera symbolu euro. Aby go dodać jako pozycję 164, wpisz „array(164=>\\\'Euro\\\')”.',
     'LBL_PDF_ENCODING_TABLE' => 'Tabela kodowania',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Nazwa tabeli kodowania.<br>Opcja ta jest ignorowana dla TrueType Unicode, OpenType Unicode i symboli.<br>Kodowanie określa powiązania pomiędzy kodem (od 0 do 255) a znakiem zawartym w czcionce.<br>Pierwsze 128 odpowiadają kodowi ASCII.',
     'LBL_PDF_FONT_FILE' => 'Plik czcionki',

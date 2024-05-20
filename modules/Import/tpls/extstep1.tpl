@@ -84,7 +84,7 @@
     <td valign="top" align="left" id="row_{$smarty.foreach.rows.index|escape:'html':'UTF-8'}_col_0">
         <select class='fixedwidth' name="colnum_{$smarty.foreach.rows.index|escape:'html':'UTF-8'}" id="colnum_{$smarty.foreach.rows.index|escape:'html':'UTF-8'}" >
             <option value="-1">{$MOD.LBL_DONT_MAP}</option>
-            {$item.field_choices|escape:'html':'UTF-8'}
+            {$item.field_choices}
         </select>
         <input type="hidden" name="extkey_{$smarty.foreach.rows.index|escape:'html':'UTF-8'}" value="{$item.ext_key|escape:'html':'UTF-8'}">
     </td>

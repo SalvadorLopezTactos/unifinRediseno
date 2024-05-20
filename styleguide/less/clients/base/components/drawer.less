@@ -1,14 +1,22 @@
 /* Drawer Layout */
 #drawers > .drawer {
-  top: 45px;
-  z-index: 1;
+  top: 0;
+  bottom: 0;
+  z-index: @zindexFixedNavbar + 3;
+  left: @sidebarNavWidth;
+}
+
+#content {
+  .drawer {
+    .w-full();
+  }
 }
 
 .drawer {
   position: absolute;
   top: 0;
   height: 100%;
-  width: 100%;
+  width: calc(100% ~"-" @sidebarNavWidth);
 
   /* backdrop cover */
   .drawer-backdrop {
@@ -17,7 +25,6 @@
     height: 100%;
     width: 100%;
     z-index: (@zindexFixedNavbar - 2);
-    border-top: 4px solid @gray60;
     opacity: 0.5;
     .user-select(none);
   }
@@ -34,6 +41,15 @@
     border-radius: 0 0 4px 4px;
   }
 
+  .main-pane {
+    top: 3.1rem;
+  }
+
+  .headerpane {
+    top: 0;
+    .pt-0\.5();
+  }
+
   /* set drawer transitions */
   &.transition {
     transition: top 300ms;
@@ -47,6 +63,17 @@
       position: relative;
       top: 0;
       width: 100%;
+      left: 0;
+    }
+  }
+}
+
+.banner-shifted {
+  #drawers > .drawer {
+    top: @bannerHeightREM;
+
+    .headerpane {
+      top: @bannerHeightREM;
     }
   }
 }
@@ -65,11 +92,11 @@ body.noscroll {
   overflow: hidden;
 
   .main-pane {
-    top: 5px;
+    top: 2px;
   }
 
   .dashboard {
-    top: 5px;
+    top: 2px;
     padding-top: 0;
 
     .dfab-icon {
@@ -146,6 +173,14 @@ body.noscroll {
 
   .selected-records {
     width: 100%;
+
+    &.select2-choices-pills-close.same-size-pills.select2-container.select2-container-multi.select2 {
+      & ul.select2-choices {
+        max-height: 44px;
+        min-height: 44px;
+        overflow-y: auto;
+      }
+    }
   }
 
   .label-selected-records {

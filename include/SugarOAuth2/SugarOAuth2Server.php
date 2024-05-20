@@ -26,7 +26,7 @@ class SugarOAuth2Server extends OAuth2
 
     // Maximum length of the session after which new login if required
     // and refresh tokens are not allowed
-    const CONFIG_MAX_SESSION = 'max_session_lifetime';
+    public const CONFIG_MAX_SESSION = 'max_session_lifetime';
 
     /**
      * @var SugarOAuth2Server

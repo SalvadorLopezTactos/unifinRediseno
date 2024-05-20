@@ -62,7 +62,7 @@ class ProrateValueExpression extends NumericExpression
     {
         foreach ($units as $unit) {
             if (!in_array($unit, $this->validDurationUnits)) {
-                throw new Exception($this->getOperationName() .
+                throw new Exception(static::getOperationName() .
                     ': Attempt to prorate value with invalid duration unit "' . $unit . '" ');
             }
         }

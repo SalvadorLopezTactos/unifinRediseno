@@ -102,10 +102,10 @@ class PMSEBusinessRuleParser extends PMSEAbstractDataParser implements PMSEDataP
         while (is_array($row)) {
             $uidStr = '{::_form_::' . $row['act_uid'] . '::}';
             $idStr = '{::_form_::' . $row['act_id'] . '::}';
-            $existsUID = stristr($uidStr, (string) $criteriaToken->expField);
-            $existsID = stristr($idStr, (string) $criteriaToken->expField);
+            $existsUID = stristr($uidStr, $criteriaToken->expField);
+            $existsID = stristr($idStr, $criteriaToken->expField);
             if ($existsUID || $existsID) {
-                $row['frm_action'] = html_entity_decode($row['frm_action']);
+                $row['frm_action'] = html_entity_decode($row['frm_action'], ENT_COMPAT);
                 $resultToken = json_decode($row['frm_action']);
                 $valType = strtolower($resultToken->type);
                 //settype($resultToken->value,$valType);

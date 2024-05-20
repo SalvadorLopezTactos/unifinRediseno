@@ -23,6 +23,13 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 abstract class AbstractMetaDataImplementation
 {
+    //@codingStandardsIgnoreStart
+    public $_history;
+    /**
+     * @var array<string, mixed>|mixed[]|mixed
+     */
+    public $_variables;
+    //@codingStandardsIgnoreEnd
     /**
      * Flag for deployed state of this implementation, used by the parsers for
      * determining cache clearing and other stuff
@@ -164,7 +171,7 @@ abstract class AbstractMetaDataImplementation
         $client = $this->_viewClient;
 
         // We need all of the panels for this implementation
-        $panels = isset($defs[$client]['view'][$view]['panels']) ? $defs[$client]['view'][$view]['panels'] : [];
+        $panels = $defs[$client]['view'][$view]['panels'] ?? [];
 
         // Now we need to loop over each panel, and within each panel...
         foreach ($panels as $pKey => $panel) {
@@ -382,13 +389,13 @@ abstract class AbstractMetaDataImplementation
             $variables = [];
             foreach ($moduleVariables as $name) {
                 if (isset(${$name})) {
-                    $variables [ $name ] = ${$name} ;
+                    $variables[$name] = ${$name};
                 }
             }
     
             // Extract the layout definition from the loaded file - the layout definition is held under a variable name that varies between the various layout types (e.g., listviews hold it in listViewDefs, editviews in viewdefs)
             $viewVariable = $this->_fileVariables[$this->_view];
-            $defs = ${$viewVariable} ;
+            $defs = ${$viewVariable};
     
             // Now tidy up the module name in the viewdef array
             // MB created definitions store the defs under packagename_modulename and later methods that expect to find them under modulename will fail
@@ -414,6 +421,11 @@ abstract class AbstractMetaDataImplementation
             }
     
             $GLOBALS['log']->debug(get_class($this) . '->_loadFromFile: returning ' . print_r($value, true));
+        } catch (\TypeError $e) {
+            LoggerManager::getLogger()->warn(
+                sprintf('%s->_loadFromFile(): file: %s. Error: $%s', get_class($this), $filename, $e->getMessage())
+            );
+            return null;
         } catch (\Throwable $e) {
             LoggerManager::getLogger()->warn(get_class($this) . "->_loadFromFile(): require " . $filename . "failed!");
             return null;

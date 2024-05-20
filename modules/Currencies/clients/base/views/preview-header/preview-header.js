@@ -29,17 +29,6 @@
     },
 
     /**
-     *
-     * @inheritdoc
-     * @override
-     * @private
-     */
-    _delegateEvents: function() {
-        this._super('_delegateEvents');
-        app.events.on('list:preview:decorate', this.isBaseCurrency, this);
-    },
-
-    /**
      * Checks to see if the model is the base currency
      * @param model
      */
@@ -49,5 +38,14 @@
         } else {
             this.isBase = false;
         }
+    },
+
+    /**
+     *  @inheritdoc
+     */
+    _render: function() {
+        this.isBaseCurrency(this.context.get('model'));
+
+        this._super('_render');
     }
 })

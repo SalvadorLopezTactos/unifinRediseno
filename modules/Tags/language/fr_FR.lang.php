@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de balises',
     'LBL_MY_TAGS' => 'Mes balises',
     'LBL_MY_FAVORITE_TAGS' => 'Mes balises favorites',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} balises',
 );

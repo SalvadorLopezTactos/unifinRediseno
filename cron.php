@@ -16,7 +16,7 @@ if (!defined('sugarEntry')) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 //change directories to where this file is located.
-chdir(dirname(__FILE__));
+chdir(__DIR__);
 define('ENTRY_POINT_TYPE', 'api');
 require_once('include/entryPoint.php');
 

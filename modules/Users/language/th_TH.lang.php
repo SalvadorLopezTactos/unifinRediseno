@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'ไม่พบข้อมูลของผู้ใช้',
     'ERR_USER_NAME_EXISTS'              => 'มีชื่อผู้ใช้ {0} แล้ว ระบบไม่อนุญาตให้มีชื่อผู้ใช้ซ้ำกัน โปรดเปลี่ยนชื่อผู้ใช้เป็นชื่อที่ไม่ซ้ำกัน',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'จะต้องบันทึกใบอนุญาต "Sugar Hint" ไว้กับใบอนุญาตอื่นเพิ่มเติมในประเภทที่เข้ากัน',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'ความสามารถนี้มีอยู่ใน Sugar Sell Premier แล้ว',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'ผู้ใช้นี้ถูกล็อคออกจากแอปพลิเคชัน Sugar แล้วและไม่สามารถล็อกอินโดยใช้รหัสผ่านปัจจุบันได้',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'การรับรองความถูกต้องภายนอกเพียงผู้ใช้เท่านั้นจะไม่ได้รับอนุญาตให้ลงชื่อเข้าใช้ด้วยทะเบียน Sugar',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'รหัสผ่าน',
     'LBL_CHOOSE_A_KEY'					=> 'เลือกคีย์เพื่อป้องกันการเผยแพร่ข้อมูลปฏิทินของคุณโดยไม่ได้รับอนุญาต',
     'LBL_NO_KEY'                        => 'ไม่ได้ตั้งค่าคีย์ไว้ โปรดตั้งค่าคีย์เพื่อเปิดใช้งานการเผยแพร่',
-	'LBL_CHOOSE_WHICH'					=> 'เลือกโมดูลที่สามารถเข้าถึงได้ภายในแถบการนำทางด้านบน กำหนดลำดับที่ต้องการให้โมดูลปรากฏ',
+    'LBL_CHOOSE_WHICH'                  => 'เลือกโมดูลที่สามารถเข้าถึงได้ภายในแถบการนำทางด้านข้าง กำหนดลำดับที่ต้องการให้โมดูลปรากฏ',
+    'LBL_NUMBER_PINNED_MODULES'         => 'จำนวนโมดูลที่ปักหมุด',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'เขียนจำนวนโมดูลที่มีอยู่เพื่อตรึงเมื่อแถบนำทางถูกยุบ (เช่น หากป้อน 5 โมดูลห้ารายการแรกในรายการของคุณจะถูกตรึง) เราขอแนะนำตัวเลขที่แสดงถึงโมดูลที่คุณใช้บ่อยที่สุด ค่าที่มากกว่า 100 จะไม่ได้รับการเคารพ',
 	'LBL_CITY'							=> 'เมือง',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'ล้าง',
@@ -545,6 +548,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'ชื่อผู้ใช้ SMTP:',
 	'LBL_MAIL_SMTPTYPE'                => 'ประเภทเซิร์ฟเวอร์ SMTP:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'ข้อมูลจำเพาะของเซิร์ฟเวอร์ SMTP',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'บัญชีอีเมลที่ได้รับอนุญาต',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'เลือกผู้ให้บริการอีเมลของคุณ:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'รหัสผ่าน Yahoo! Mail:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail ID:',
@@ -700,4 +704,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'ผู้ใช้/ทีม/บทบาท',
     'LBL_LOADING_ITEMS' => 'กำลังโหลดข้อมูล...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'คู่มืออัจฉริยะ การเข้าถึง',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'คู่มืออัจฉริยะ การใช้งานล่าสุด',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'สูญเสียการเข้าถึงคู่มืออัจฉริยะ',
 ); // END STRINGS DEFS

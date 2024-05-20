@@ -28,7 +28,9 @@ class SugarUpgradePreCloudDriveMigrate extends UpgradeScript
     protected function shouldRun()
     {
         $upgradeHistory = (new UpgradeHistory())->retrieveByIdName('wDrive');
-        return $upgradeHistory instanceof SugarBean && version_compare($this->from_version, '12.0.0', '<');
+        return $upgradeHistory instanceof SugarBean &&
+            $upgradeHistory->status === 'installed' &&
+            version_compare($this->from_version, '12.0.0', '<');
     }
 
     /**

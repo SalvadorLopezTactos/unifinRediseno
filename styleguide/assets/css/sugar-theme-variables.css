@@ -4,6 +4,7 @@ body.sugar-light-theme,
 
   --active-tab-border-color: #0679c8;
   --tab-background-hover-color: #d6eeff;
+  --selected-tab-background-hover-color: #bedef4;
   --alert-background: #ffffff;
   --alert-border: transparent;
   --border-color: #e5eaed;
@@ -33,6 +34,7 @@ body.sugar-light-theme,
   --content-loading-background: #f1f3f4;
   --dashlet-background: #ffffff;
   --dashlet-background-hover: #ffffff;
+  --data-skeleton-loader: url('../../../assets/img/skeleton-loaders/data-skeleton-loader.svg');
   --dropdown-background: #ffffff;
   --dropdown-submenu-background: #f1f3f4;
   --dropdown-disabled-background: #e5eaed;
@@ -69,12 +71,16 @@ body.sugar-light-theme,
   --secondary-content-background: #f1f3f4;
   --select2-background: #f8fafc;
   --select2-background-hover: #f1f3f4;
-  --separator-color: #d9dddf;
+  --resizer-color: #d9dddf;
+  --drag-handle-color: #ffffff;
   --shadow-color: #d9dddf;
   --shadow-color-hover: #b8bcbe;
   --sicon-color: #6f777b;
   --sicon-active-color: #2b2d2e;
   --sicon-hover-color: #0679c8;
+  --sidebar-nav-background: #0679c8;
+  --sidebar-nav-background-hover: #005d9c;
+  --sidebar-nav-group-divider-color: rgba(214, 238, 255, 0.8);
   --stack-logo: url('../../../assets/img/stack-light.svg');
   --stack-logo-about: url('../../../assets/img/stack-light.svg');
   --subpanel-background: #f1f3f4;
@@ -84,6 +90,20 @@ body.sugar-light-theme,
   --text-color-inverse: #e5eaed;
   --text-color-light: #6f777b;
   --text-disabled-color: #6f777b;
+  --metric-badge-background: #e5eaed;
+  --subheader-content-background: #f1f3f4;
+  --activity-base-color: #00ba83;
+  --activity-background-color: #f1f3f4;
+  --activity-border-top-color: #9ba1a6;
+  --activity-color: #2b2d2e;
+  --activity-base-cancellation-color: #fa374f;
+  --activity-base-not-color: #fbc02d;
+  --tempalte-card-color: #e5eaed;
+  --activity-base-icon-color: #6f777b;
+  --activity-row-fluid-color: #f1f3f4;
+  --activity-row-fluid-border-color: #cfcfcf;
+  --activity-progress-color: #9ba1a6;
+  --activity-info-color: #2b2d2e;
 }
 
 body.sugar-dark-theme,
@@ -92,6 +112,7 @@ body.sugar-dark-theme,
 
   --active-tab-border-color: #79ade0;
   --tab-background-hover-color: #002e4e;
+  --selected-tab-background-hover-color: #002036;
   --alert-background: #16191d;
   --alert-border: #2b2d2e;
   --border-color: #4d5154;
@@ -121,6 +142,7 @@ body.sugar-dark-theme,
   --content-loading-background: #16191d;
   --dashlet-background: #000000;
   --dashlet-background-hover: #16191d;
+  --data-skeleton-loader: url('../../../assets/img/skeleton-loaders/data-skeleton-loader-dark.svg');
   --dropdown-background: #000000;
   --dropdown-submenu-background: #0f1215;
   --dropdown-disabled-background: #16191d;
@@ -158,12 +180,16 @@ body.sugar-dark-theme,
   --secondary-content-background: #2b2d2e;
   --select2-background: #16191d;
   --select2-background-hover: #2b2d2e;
-  --separator-color: #4d5154;
+  --resizer-color: #9ba1a6;
+  --drag-handle-color: #f1f3f4;
   --shadow-color: #0f1215;
   --shadow-color-hover: #0f1215;
   --sicon-color: #9ba1a6;
   --sicon-hover-color: #ffffff;
   --sicon-active-color: #e5eaed;
+  --sidebar-nav-background: #0679c8;
+  --sidebar-nav-background-hover: #005d9c;
+  --sidebar-nav-group-divider-color: rgba(214, 238, 255, 0.8);
   --stack-logo: url('../../../assets/img/stack-dark-opacity50.svg');
   --stack-logo-about: url('../../../assets/img/stack-dark-opacity70.svg');
   --subpanel-background: #2b2d2e;
@@ -173,4 +199,18 @@ body.sugar-dark-theme,
   --text-color-inverse: #2b2d2e;
   --text-color-light: #d9dddf;
   --text-disabled-color: #9ba1a6;
+  --metric-badge-background: #6f777b;
+  --subheader-content-background: #000000;
+  --activity-base-color: #00ba83;
+  --activity-background-color: #2b2d2e;
+  --activity-border-top-color: #6f777b;
+  --activity-color: #9ba1a6;
+  --activity-base-cancellation-color: #e61718;
+  --activity-base-not-color: #fbc02d;
+  --tempalte-card-color: #4d5154;
+  --activity-base-icon-color: #6f777b;
+  --activity-row-fluid-color: transparent;
+  --activity-row-fluid-border-color: transparent;
+  --activity-progress-color: #6f777b;
+  --activity-info-color: #9ba1a6;
 }

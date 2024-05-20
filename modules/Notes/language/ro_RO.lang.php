@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Tabloul de bord Listă note',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare Notițe',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare note',
+    'LBL_EXTERNAL_USER' => 'Utilizator extern',
+    'LBL_EXTERNAL_USER_NAME' => 'Utilizator extern',
 
     'LBL_RELATED_CONTACT' => 'Contact corelat',
     'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge contul.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Tip e-mail',
     'LBL_EMAIL_ID' => 'ID e-mail',
     'LBL_PHONE' => 'Telefon',
-    'LBL_PORTAL_FLAG' => 'Arata in portal?',
+    'LBL_PORTAL_FLAG' => 'Disponibil extern',
     'LBL_EMBED_FLAG' => 'Incorporat in email?',
     'LBL_PRODUCT_ID' => 'Identitate produs:',
     'LBL_QUOTE_ID' => 'ID ofertă:',

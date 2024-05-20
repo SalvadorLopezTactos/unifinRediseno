@@ -33,6 +33,12 @@ class GenericProvider extends BasicGenericProvider
      */
     protected $logger;
 
+    public function __construct(array $options = [], array $collaborators = [])
+    {
+        $collaborators['optionProvider'] = new HttpBasicAuthOptionProviderUrlEncoded();
+        parent::__construct($options, $collaborators);
+    }
+
     /**
      * Reads access token from the local file and returns it if found.
      *
@@ -76,22 +82,6 @@ class GenericProvider extends BasicGenericProvider
     /**
      * @inheritdoc
      */
-    protected function getAccessTokenOptions(array $params)
-    {
-        $encodedCredentials = base64_encode(
-            sprintf('%s:%s', urlencode($params['client_id']), urlencode($params['client_secret']))
-        );
-        unset($params['client_id'], $params['client_secret']);
-
-        $options = parent::getAccessTokenOptions($params);
-        $options['headers']['Authorization'] = 'Basic ' . $encodedCredentials;
-
-        return $options;
-    }
-
-    /**
-     * @inheritdoc
-     */
     protected function getRequiredOptions()
     {
         return array_merge(
@@ -108,12 +98,13 @@ class GenericProvider extends BasicGenericProvider
      */
     public function introspectToken(AccessToken $token)
     {
-        $options = $this->getAccessTokenOptions([
+        $params = [
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
-        ]);
+            'token' => $token->getToken(),
+        ];
+        $options = $this->optionProvider->getAccessTokenOptions(self::METHOD_POST, $params);
         $options['headers']['Accept'] = 'application/json';
-        $options['body'] = $this->buildQueryString(['token' => $token->getToken()]);
 
         $request = $this->getRequestFactory()->getRequestWithOptions(
             self::METHOD_POST,
@@ -129,12 +120,13 @@ class GenericProvider extends BasicGenericProvider
      */
     public function revokeToken(AccessToken $token)
     {
-        $options = $this->getAccessTokenOptions([
-            'client_id' => $this->getClientID(),
-            'client_secret' => $this->getClientSecret(),
-        ]);
+        $params = [
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'token' => $token->getToken(),
+        ];
+        $options = $this->optionProvider->getAccessTokenOptions(self::METHOD_POST, $params);
         $options['headers']['Accept'] = 'application/json';
-        $options['body'] = $this->buildQueryString(['token' => $token->getToken()]);
 
         $request = $this->getRequestFactory()->getRequestWithOptions(
             self::METHOD_POST,

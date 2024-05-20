@@ -37,6 +37,7 @@
         this._matchedAddresses = [];
         this._geocodeRecord = null;
         this._mapController = null;
+        this._loadingAlertId = 'loading-geocode-address';
     },
 
     /**
@@ -55,6 +56,114 @@
         }
 
         this._createMap();
+    },
+
+    /**
+     * Create the address from record based on maps config if the record is not geocoded
+     *
+     * @return {string}
+     */
+    _getRecordAddressFromFields: function() {
+        const moduleData = app.config.maps.modulesData[this.module];
+        let address = '';
+
+        if (!moduleData) {
+            return address;
+        }
+
+        const mappings = moduleData.mappings;
+        const targetFields = [
+            'addressLine',
+            'locality',
+            'adminDistrict',
+            'postalCode',
+            'countryRegion',
+        ];
+
+        address = _.chain(targetFields)
+                    .map(function each(fieldKey) {
+                        return this._getSanitizedFieldAddress(fieldKey, mappings);
+                    }, this)
+                    .filter(function each(address) {
+                        return !!address;
+                    })
+                    .value()
+                    .join(', ');
+
+        return address;
+    },
+
+    /**
+     * Get field value from model based on mapping configuration
+     *
+     * @param {string} key
+     * @param {Array} mappings
+     *
+     * @return {string}
+     */
+    _getSanitizedFieldAddress: function(key, mappings) {
+        let fieldValue = '';
+
+        if (!_.has(mappings, key) || !mappings[key]) {
+            return fieldValue;
+        }
+
+        let fieldKey = mappings[key];
+
+        if (this.model.get(fieldKey)) {
+            fieldValue = this.model.get(fieldKey);
+        }
+
+        return fieldValue;
+    },
+
+    /**
+     * If the current record is not geocoded but it has an address then we will
+     * use that value to set the map point
+     */
+    _updateLocationByRecordAddress: function() {
+        const address = this._getRecordAddressFromFields();
+
+        if (!address) {
+            app.alert.dismiss(this._loadingAlertId);
+
+            return;
+        }
+
+        this._mapController.searchByAddress(
+            address,
+            _.bind(this._successGetRecordAddresses, this),
+            _.bind(this._failedGetRecordAddressesFailed, this)
+        );
+    },
+
+    /**
+     * Set location data from record address when the record is not geocoded
+     *
+     * @param {Object} geocodeResult
+     */
+    _successGetRecordAddresses: function(geocodeResult) {
+        if (!geocodeResult) {
+            return;
+        }
+
+        this._matchedAddresses = geocodeResult.results;
+
+        if (this._matchedAddresses && this._matchedAddresses.length > 0) {
+            this._onAddressSelected({id: 0});
+            this._mapController.centerMap({zoom: 10});
+        }
+
+        app.alert.dismiss(this._loadingAlertId);
+    },
+
+    /**
+     * Unable to get the geocode for the field(s) address
+     */
+    _failedGetRecordAddressesFailed: function() {
+        app.alert.dismiss(this._loadingAlertId);
+
+        this.updateGeocodeFailed();
     },
 
     /**
@@ -146,6 +255,16 @@
      * Called when Map is loaded
      */
     onMapReady: function() {
+        const geocoded = this._geocodeRecord.get('geocoded');
+
+        if (!geocoded) {
+            const delay = 500;
+
+            this._loadingAlert(this._loadingAlertId);
+
+            setTimeout(_.bind(this._updateLocationByRecordAddress, this), delay);
+        }
+
         this._createLocation();
         this._mapController.centerMap();
     },
@@ -361,6 +480,8 @@
 
         if (savedButtonFieldController) {
             savedButtonFieldController.setDisabled(false);
+
+            this._mapController.centerMap({zoom: 10});
         }
     },
 
@@ -413,6 +534,19 @@
 
         this._geocodeRecord.save({}, {showAlerts: true});
         this.cancelConfig();
+    },
+
+    /**
+     * Show loading alert
+     *
+     * @param {string} id
+     */
+    _loadingAlert: function(id) {
+        app.alert.show(id, {
+            level: 'process',
+            messages: app.lang.get('LBL_LOADING'),
+            autoClose: false,
+        });
     },
 
     /**

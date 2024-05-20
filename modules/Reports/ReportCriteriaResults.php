@@ -63,7 +63,7 @@ if (isset($_REQUEST['id']) && !isset($_REQUEST['record'])) {
 
 	if ( isset($_REQUEST['filter_key']) && isset($_REQUEST['filter_value'])) {
 		$new_filter = array();
-		list($new_filter['table_name'],$new_filter['name']) = explode(':',$_REQUEST['filter_key']);
+        [$new_filter['table_name'], $new_filter['name']] = explode(':', $_REQUEST['filter_key']);
 		$new_filter['qualifier_name'] = 'is';
 		$new_filter['input_name0'] = array($_REQUEST['filter_value']);
 
@@ -154,8 +154,8 @@ else if (isset($_REQUEST['record'])){
 } else {
 	$report_def = InputValidation::getService()->getValidInputRequest('report_def', null, array());
 	if (!empty($report_def)) {
-		$panels_def = html_entity_decode($_REQUEST['panels_def']);
-		$filters_def = html_entity_decode($_REQUEST['filters_defs']);
+        $panels_def = html_entity_decode($_REQUEST['panels_def'], ENT_COMPAT);
+        $filters_def = html_entity_decode($_REQUEST['filters_defs'], ENT_COMPAT);
        	$args['reporter'] =  new Report($report_def, $filters_def, $panels_def);
 
     	if (!empty($reporterName)) {
@@ -177,7 +177,7 @@ control($args);
 
 $params = array();
 if (!empty($_REQUEST['favorite'])) {
-    $params[] = '<a href="index.php?module=Reports&action=index&favorite=1">' . htmlspecialchars($mod_strings['LBL_FAVORITES_TITLE']) . '</a>';
+    $params[] = '<a href="index.php?module=Reports&action=index&favorite=1">' . htmlspecialchars($mod_strings['LBL_FAVORITES_TITLE'], ENT_COMPAT) . '</a>';
 }
 $star = '';
 if (!empty($args['reporter']->saved_report->id)) {
@@ -188,16 +188,26 @@ if (!empty($args['reporter']->saved_report->id)) {
     );
 }
 if (!empty($args['reporter']->name)) {
-    $params[] = htmlspecialchars($args['reporter']->name) . '&nbsp;' . $star;
+    $params[] = htmlspecialchars($args['reporter']->name, ENT_COMPAT) . '&nbsp;' . $star;
 }
 
 //Override the create url
 $createURL = 'index.php?module=Reports&report_module=&action=index&page=report&Create+Custom+Report=Create+Custom+Report';
-echo getClassicModuleTitle("Reports", $params, true, '', $createURL);
-
+if (isset($_REQUEST['legacyBwc']) && $_REQUEST['legacyBwc'] === '1') {
+    echo getClassicModuleTitle("Reports", $params, true, '', $createURL);
+}
 // show report interface
-$viewMode = (($_REQUEST['mode'] ?? '') == 'edit') ? 'edit' : '';
-echo '<script>var viewMode = "' . $viewMode . '";</script>';
+$viewMode = $_REQUEST['mode'] ?? '';
+
+if ($viewMode === 'edit' || $viewMode === '') {
+    echo '<script>var viewMode = ' . json_encode($viewMode, JSON_HEX_TAG) . ';</script>';
+} elseif ($viewMode === 'copyAs') {
+    $newReportType = $_REQUEST['newReportType'] ?? '';
+
+    echo '<script>var viewMode = ' . json_encode($viewMode, JSON_HEX_TAG) .
+    '; var newReportType = ' . json_encode($newReportType, JSON_HEX_TAG) . ';</script>';
+}
+
 
 if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'report') {
     checkSavedReportACL($args['reporter'], $args);

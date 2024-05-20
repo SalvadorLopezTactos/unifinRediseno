@@ -357,7 +357,7 @@ class TreeApi extends FilterApi
     public function moveBefore(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record', 'target'));
-        list ($bean, $target) = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
+        [$bean, $target] = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
         $bean->moveBefore($target);
         return $this->formatBean($api, $args, $bean);
     }
@@ -371,7 +371,7 @@ class TreeApi extends FilterApi
     public function moveAfter(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record', 'target'));
-        list ($bean, $target) = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
+        [$bean, $target] = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
         $bean->moveAfter($target);
         return $this->formatBean($api, $args, $bean);
     }
@@ -385,7 +385,7 @@ class TreeApi extends FilterApi
     public function moveFirst(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record', 'target'));
-        list ($bean, $target) = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
+        [$bean, $target] = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
         $bean->moveAsFirst($target);
         return $this->formatBean($api, $args, $bean);
     }
@@ -399,7 +399,7 @@ class TreeApi extends FilterApi
     public function moveLast(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record', 'target'));
-        list ($bean, $target) = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
+        [$bean, $target] = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
         $bean->moveAsLast($target);
         return $this->formatBean($api, $args, $bean);
     }

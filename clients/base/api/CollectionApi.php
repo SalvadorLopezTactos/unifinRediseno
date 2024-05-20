@@ -533,7 +533,7 @@ abstract class CollectionApi extends SugarApi
             $map = array();
             foreach ($sourceData as $source => $data) {
                 /** @var SugarBean $bean */
-                list($bean, $fieldMap) = $data;
+                [$bean, $fieldMap] = $data;
 
                 if (isset($fieldMap[$alias])) {
                     $field = $fieldMap[$alias];

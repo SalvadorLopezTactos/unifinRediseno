@@ -11,6 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdpConfig;
 
 function displayAdminError($errorString){
 	$output = '<p class="error">' . $errorString .'</p>';
@@ -26,7 +27,7 @@ function getLicenseUsers()
 {
     global $db;
     $focus = Administration::getSettings();
-    $license_users = isset($focus->settings['license_users'])?$focus->settings['license_users']:'';
+    $license_users = $focus->settings['license_users'] ?? '';
     $activeUsers = $db->getOne("SELECT count(id) as total from users WHERE " . User::getLicensedUsersWhere());
 
     return ['license_users' => $license_users, 'active_users' => $activeUsers];
@@ -49,8 +50,6 @@ if (empty($license)){
 	$license = Administration::getSettings('license');
 }
 
-
-
 // This section of code is a portion of the code referred
 // to as Critical Control Software under the End User
 // License Agreement.  Neither the Company nor the Users
@@ -71,7 +70,6 @@ if (isset($_SESSION['VALIDATION_EXPIRES_IN']) && $_SESSION['VALIDATION_EXPIRES_I
     }
 }
 //END REQUIRED CODE DO NOT MODIFY
-
 
 if(!empty($_SESSION['HomeOnly'])){
 	displayAdminError(translate('FATAL_LICENSE_ALTERED', 'Administration'));
@@ -125,7 +123,6 @@ if($smtp_error) {
         	displayAdminError(translate('WARN_INSTALLER_LOCKED', 'Administration'));
 		}
 
-
 // This section of code is a portion of the code referred
 // to as Critical Control Software under the End User
 // License Agreement.  Neither the Company nor the Users
@@ -176,27 +173,39 @@ if($smtp_error) {
     if ($_SESSION['license_seats_needed'] > 0) {
         $seatNeeded = 0;
         $exceededLicenseTypes = SubscriptionManager::instance()->getSystemLicenseTypesExceededLimit($seatNeeded);
-
-        $msg = '';
-        $i = 0;
-        foreach ($exceededLicenseTypes as $type => $extraNumbers) {
-            if ($extraNumbers > 0) {
-                $totalPurchased = SubscriptionManager::instance()->getSystemSubscriptionSeatsByType($type);
-                $totalUsersByType = $extraNumbers + $totalPurchased;
-                if ($i > 0) {
-                    $msg .= ' and ';
+        if (empty($exceededLicenseTypes)) {
+            $_SESSION['license_seats_needed'] = 0;
+        } else {
+            $msg = '';
+            $i = 0;
+            foreach ($exceededLicenseTypes as $type => $extraNumbers) {
+                if ($extraNumbers > 0) {
+                    $totalPurchased = SubscriptionManager::instance()->getSystemSubscriptionSeatsByType($type);
+                    $totalUsersByType = $extraNumbers + $totalPurchased;
+                    if ($i > 0) {
+                        $msg .= ' and ';
+                    }
+                    $msg .= ' ' . $totalUsersByType . ' ' . User::getLicenseTypeDescription($type) . ' '
+                        . translate('WARN_LICENSE_SEATS2', 'Administration') . ' '
+                        . $totalPurchased;
+                    $i++;
                 }
-                $msg .= ' ' . $totalUsersByType . ' ' . User::getLicenseTypeDescription($type) . ' '
-                    . translate('WARN_LICENSE_SEATS2', 'Administration') . ' '
-                    . $totalPurchased;
-                $i++;
             }
-        }
 
-        displayAdminError(translate('WARN_LICENSE_SEATS', 'Administration')
-            . $msg . translate('WARN_LICENSE_SEATS3', 'Administration'));
+            $errorMsg = translate('WARN_LICENSE_SEATS', 'Administration') . $msg;
+            $idpConfig = new IdpConfig(\SugarConfig::getInstance());
+            if ($idpConfig->isIDMModeEnabled()) {
+                $sugarCloudLink = $idpConfig->buildCloudConsoleUrl('/', [], $GLOBALS['current_user'] ? $GLOBALS['current_user']->id : '');
+                $errorMsg .= sprintf(translate('WARN_LICENSE_SEATS3_IDM', 'Administration'), $sugarCloudLink);
+            } else {
+                $errorMsg .= translate('WARN_LICENSE_SEATS3', 'Administration');
+            }
+
+            displayAdminError($errorMsg);
+        }
     }
         //END REQUIRED CODE DO NOT MODIFY
+
         if(empty($GLOBALS['sugar_config']['admin_access_control'])){
 			if (isset($_SESSION['available_version'])){
 				if($_SESSION['available_version'] != $sugar_version)
@@ -214,4 +223,9 @@ if($smtp_error) {
 		}
 
 		unset($_SESSION['administrator_error']);
+
+    if (isset($_SESSION['user_save_error'])) {
+        displayAdminError($_SESSION['user_save_error']);
+        unset($_SESSION['user_save_error']);
+    }
 }

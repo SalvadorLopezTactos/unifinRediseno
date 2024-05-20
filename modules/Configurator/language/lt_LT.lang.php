@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Firmos logotipas',
 	'LBL_ADMIN_WIZARD' => 'Administratoriaus vedlys',
-	'LBL_ALLOW_USER_TABS' => 'Leisti vartotojams paslėpti korteles',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Sistemos nustatymai',
 	'LBL_ENABLE_MAILMERGE' => 'Įjungti laiškų susijungimą',
 	'LBL_LOGVIEW' => 'Nustatyti įrašų parametrus',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Naudoti šį nustatymą, kad nurodyti kiek mėnesių į priekį bus rodoma darbuotojo užimtumo informacija susijusi su skambučiais ir susitikimais.</BR>jei norite visai užimtumo paskelbimą, įveskite "0".  Minimalus yra 1 mėnesis; maksimalus 12 mėnesių.',
     'LBL_PDFMODULE_NAME' => 'PDF nustatymai',
     'SUGARPDF_BASIC_SETTINGS' => 'Dokumento nustatymai',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Išplėstiniai nustatymai',
     'SUGARPDF_LOGO_SETTINGS' => 'Paveiksliukai',
-
-    'PDF_CREATOR' => 'PDF kūrėjas',
-    'PDF_CREATOR_INFO' => 'Nurodo dokumento kūrėją. Dažniausiai tai programa, kuri generuoją PDF dokumentą.',
 
     'PDF_AUTHOR' => 'Autorius:',
     'PDF_AUTHOR_INFO' => 'Autorius matysis dokumento aprašyme',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Pasirinkite pasiūlymams naują paveiksliuką',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Failas gali būti .jpg arba .png formato. (Tik .jpg jei naudojamas EZPDF) Rekomenduojamas dydis 867x74 pikseliai.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Pasiūlymo paveiksliuko plotis',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Pakeisti užkrauto paveiksliuko mastelį. (tik TCPDF)',
+    'PDF_TITLE' => 'Pavadinimas',
+    'PDF_TITLE_INFO' => 'Pavadinimas matysis dokumento aprašyme.',
+
+    'PDF_SUBJECT' => 'Tema:',
+    'PDF_SUBJECT_INFO' => 'Tema matysis dokumento aprašyme.',
 
     'PDF_SMALL_HEADER_LOGO' => 'PDF ataskaitoms',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Šis paveiksliukas matysis PDF ataskaitų antraštėse. Taip pat šis paveiksliukas matysis Sugar programos viršutiniame kairiniame krašte.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Pasirinkite ataskaitoms naują paveiksliuką',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Failas gali būti .jpg arba .png formato. (Tik .jpg jei naudojamas EZPDF) Rekomenduojamas dydis 212x40 pikseliai.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Ataskaitos paveiksliuko plotis',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Pakeisti užkrauto paveiksliuko mastelį. (tik TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Antraštės tekstas',
-    'PDF_HEADER_STRING_INFO' => 'Antraštės aprašymo tekstas',
-
-    'PDF_HEADER_TITLE' => 'Atraštės pavadinimas',
-    'PDF_HEADER_TITLE_INFO' => 'Tekstas kuris matysis dokumento antraštėje',
-
-    'PDF_FILENAME' => 'Numatytas failas',
-    'PDF_FILENAME_INFO' => 'Numatytas failo pavadinimas sugeneruotiems PDF dokumentams',
-
-    'PDF_TITLE' => 'Pavadinimas',
-    'PDF_TITLE_INFO' => 'Pavadinimas matysis dokumento aprašyme.',
-
-    'PDF_SUBJECT' => 'Tema:',
-    'PDF_SUBJECT_INFO' => 'Tema matysis dokumento aprašyme.',
-
     'PDF_KEYWORDS' => 'Raktažodžiai',
     'PDF_KEYWORDS_INFO' => 'Susieti raktažodžius su dokumentu (pvz.: raktas1 raktas2)',
 
-    'PDF_COMPRESSION' => 'Kompresija',
-    'PDF_COMPRESSION_INFO' => 'Įjungia arba išjungia puslapio kompresiją.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG kokybė (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Nurodykite numatytą JPEG suspaudimo kokybę (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF versija',
-    'PDF_PDF_VERSION_INFO' => 'Nurodykite PDF versiją',
-
-    'PDF_PROTECTION' => 'Dokumento apsauga',
-    'PDF_PROTECTION_INFO' => 'Nurodykite dokumento apsaugą <br><br />- kopijuoti <br><br />- spausdinti <br><br />- redaguoti <br><br />- komentarai - formos <br>',
-
-    'PDF_USER_PASSWORD' => 'Vartotojo slaptažodis',
-    'PDF_USER_PASSWORD_INFO' => 'Jei Jūs nenurodysite slaptažodžio, dokumentą visi galės peržiūrėti.',
-
-    'PDF_OWNER_PASSWORD' => 'Savininko slaptažodis',
-    'PDF_OWNER_PASSWORD_INFO' => 'Jei Jūs nenurodysite slaptažodžio, dokumentą visi galės peržiūrėti.',
-
-    'PDF_ACL_ACCESS' => 'Priėjimo teisės',
-    'PDF_ACL_ACCESS_INFO' => 'Sugeneruotų PDF dokumentų numatytos priėjimo teisės',
-
-    'K_CELL_HEIGHT_RATIO' => 'Elemento aukščio santykis',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Jeigu elemento aukštis yra mažesnis už (Šrifto aukštis x Elemento aukščio santykis), tada (Šrifto aukštis x Elemento aukščio santykis) yra naudojamas kaip elemento aukštis. (Šrifto aukštis x Elemento aukščio santykis) taip pat naudojamas, kai nėra nurodytas lemento aukštis.',
-
-    'K_TITLE_MAGNIFICATION' => 'Pavadinimo išdidinimas',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Pavadinimo išdidinimas lyginant su pagrindiniu šriftu.',
-
-    'K_SMALL_RATIO' => 'Mažo šrifto faktorius',
-    'K_SMALL_RATIO_INFO' => 'Mažų šriftų mažinimo faktorius.',
-
-    'HEAD_MAGNIFICATION' => 'Antraštės išdidinimas',
-    'HEAD_MAGNIFICATION_INFO' => 'Pavadinimų išdidinimo faktorius',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Paveiksliuko mastelio santykis',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Santykis naudojamas paveiksliukų masteliui nustatyti.',
-
-    'PDF_UNIT' => 'Vienetas',
-    'PDF_UNIT_INFO' => 'dokumento matavimo vienetas',
 	'PDF_GD_WARNING'=>'Jūsų PHP neturi instaliuotos GD bibliotekos. Be GD biliotekos, tik JPEG logotipai gali būti atvaizduojami PDF dokumentuose.',
     'ERR_EZPDF_DISABLE'=>'Įspėjimas: EZPDF klasė yra išjungta. Prašome spausti Išsaugoti, kad nustatyti TCPDF kaip numatytą PDF klasę.',
     'LBL_IMG_RESIZED'=>"(sumažintas atvaizdavimui)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Įdėti PDF šriftą',
     'LBL_PDF_PATCH' => 'Patch',
-    'LBL_PDF_PATCH_INFO' => 'Kodavimo modifikavimas. Rašyti kaip PHP masyvą<br />Pavyzdys:<br />ISO-8859-1 neturi Euro simbolio. Kad įtraukti į poziciją 164, rašome "array(164=>\\&#39;Euro\\&#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'Kodavimo lentelė',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Kodavimo lentelės pavadinimas',
     'LBL_PDF_FONT_FILE' => 'Šrifto failas',

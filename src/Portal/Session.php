@@ -139,7 +139,7 @@ class Session
     public function getVisibilityContext(\SugarBean $bean) : \Sugarcrm\Sugarcrm\Visibility\Portal\Context
     {
         \SugarAutoLoader::requireWithCustom('data/visibility/portal/Context.php');
-        $contextClass = \SugarAutoLoader::customClass('Sugarcrm\\Sugarcrm\\Visibility\\Portal\\Context');
+        $contextClass = \SugarAutoLoader::customClass(\Sugarcrm\Sugarcrm\Visibility\Portal\Context::class);
 
         $visContext = new $contextClass($this->getContactId(), $this->getBeanVisibilityLinks($bean));
         $visContext->setBean($bean);

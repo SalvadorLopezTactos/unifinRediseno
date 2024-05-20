@@ -74,7 +74,7 @@ class SavedReport extends Basic
         string $report_type,
         string $content,
         string $is_published,
-        string $team_id,
+        ?string $team_id,
         string $chart_type = 'none',
         ?string $teamSetSelectedId = null,
         string $description = '',
@@ -93,8 +93,7 @@ class SavedReport extends Basic
 			}
 		}
 
-		// cn: SECURITY bug 12272
-		$name = filter_var($name, FILTER_SANITIZE_STRIPPED, FILTER_FLAG_NO_ENCODE_QUOTES);
+        $name = SugarCleaner::stripTags($name, false);
         if (empty($name))
         {
             $name = translate('LBL_UNTITLED', 'Reports');
@@ -129,6 +128,8 @@ class SavedReport extends Basic
         }
 
 		$this->save();
+
+        $this->removeReportPanelsConfig();
 		return $result;
 	}
 
@@ -233,6 +234,69 @@ class SavedReport extends Basic
 	}
 
 
+    /**
+     * Retrieve Saved Schedules from DB
+     *
+     * @return array
+     */
+    public function getSchedules(): array
+    {
+        global $current_user, $timedate;
+
+        $savedScheduleBean = BeanFactory::newBean('ReportSchedules');
+        $sq = new SugarQuery();
+
+        $sq->select->fieldRaw(
+            "{$this->schedules_table}.id",
+            'schedule_id'
+        );
+
+        $sq->select->fieldRaw(
+            "{$this->schedules_table}.active",
+            'active'
+        );
+
+        $sq->select->fieldRaw(
+            "{$this->schedules_table}.next_run",
+            'next_run'
+        );
+
+        $sq->select->fieldRaw(
+            "{$this->schedules_table}.name",
+            'name'
+        );
+
+        $sq->from($savedScheduleBean)
+            ->where()
+            ->equals(
+                "{$this->schedules_table}.report_id",
+                $this->id
+            )
+            ->equals(
+                "{$this->schedules_table}.user_id",
+                $current_user->id
+            );
+
+        $scheduledReports = $sq->execute();
+
+        if (count($scheduledReports) < 1) {
+            return [];
+        }
+
+        foreach ($scheduledReports as $key => $scheduledReport) {
+            $nextRun = $scheduledReport['next_run'];
+
+            if (!$nextRun) {
+                continue;
+            }
+
+            $date = $timedate->fromDb($nextRun);
+            $scheduledReports[$key]['next_run'] = $timedate->asIso($date);
+        }
+
+        return $scheduledReports;
+    }
+
 	function get_scheduled_query(){
 		global $current_user;
 		$query = "	SELECT
@@ -314,7 +378,8 @@ class SavedReport extends Basic
 *
 */
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
         $temp_array = $this->get_list_view_array();
 		global $timedate;
 		global $app_strings;
@@ -455,6 +520,21 @@ class SavedReport extends Basic
             }
         }
         return $records;
+    }
+
+    /**
+     * Remove layout configurations for this report
+     */
+    public function removeReportPanelsConfig()
+    {
+        $reportsPanelsTable = 'reports_panels';
+
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+
+        $qb->delete($reportsPanelsTable)
+            ->where($qb->expr()->eq("{$reportsPanelsTable}.report_id", $qb->createPositionalParameter($this->id)));
+
+        $qb->execute();
     }
 }
 

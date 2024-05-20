@@ -63,6 +63,7 @@ class ExternalAPIFactory
      * @return array
      */
     public static function loadFullAPIList($forceRebuild=false, $ignoreDisabled = false) {
+        $fullAPIList = null;
         if (inDeveloperMode()) {
             static $beenHereBefore = false;
             if ( !$beenHereBefore ) {
@@ -73,7 +74,7 @@ class ExternalAPIFactory
         $cached=sugar_cached('include/externalAPI.cache.php');
         if (!$forceRebuild && file_exists($cached) ) {
             // Already have a cache file built, no need to rebuild
-            require $cached;
+            include $cached;
 
             return $ignoreDisabled?$fullAPIList:self::filterAPIList($fullAPIList);
         }
@@ -171,6 +172,7 @@ class ExternalAPIFactory
      */
     public static function loadAPI($apiName, $ignoreAuth=false)
     {
+        $eapmBean = null;
         $apiList = self::loadFullAPIList();
         if ( ! isset($apiList[$apiName]) ) {
             return false;

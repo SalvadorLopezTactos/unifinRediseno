@@ -80,23 +80,12 @@ class Importer
 
     public function __construct($importSource, $bean)
     {
-        global $mod_strings, $sugar_config;
-
         $this->request = InputValidation::getService();
 
         $this->importSource = $importSource;
 
         //Vanilla copy of the bean object.
         $this->bean = $bean;
-
-        // use our own error handler
-        set_error_handler(array('Importer','handleImportErrors'), E_ALL & ~E_STRICT & ~E_DEPRECATED);
-
-         // Increase the max_execution_time since this step can take awhile
-        ini_set("max_execution_time", strval(max($sugar_config['import_max_execution_time'], 3600)));
-
-        // stop the tracker
-        TrackerManager::getInstance()->pause();
 
         // set the default locale settings
         $this->ifs = $this->getFieldSanitizer();
@@ -109,9 +98,44 @@ class Importer
         $this->isUpdateOnly = ( isset($_REQUEST['import_type']) && $_REQUEST['import_type'] == 'update' );
     }
 
+    /**
+     * Set up dependencies and modify the system before each import.
+     *
+     * @return void
+     */
+    protected function beforeImport(): void
+    {
+        global $sugar_config;
+
+        // use our own error handler
+        set_error_handler(array('Importer','handleImportErrors'), E_ALL & ~E_STRICT & ~E_DEPRECATED);
+
+        // Increase the max_execution_time since this step can take awhile
+        $this->maxExecutionTime = ini_get('max_execution_time');
+        ini_set("max_execution_time", strval(max($sugar_config['import_max_execution_time'], 3600)));
+
+        // stop the tracker
+        TrackerManager::getInstance()->pause();
+
+        Activity::disable();
+    }
+
+    /**
+     * Restore the system after each import.
+     *
+     * @return void
+     */
+    protected function afterImport(): void
+    {
+        Activity::restoreToPreviousState();
+        TrackerManager::getInstance()->unPause();
+        set_time_limit($this->maxExecutionTime);
+        restore_error_handler();
+    }
+
     public function import()
     {
-        Activity::disable();
+        $this->beforeImport();
 
         // do we have a currency_id field
         $this->currencyFieldPosition = array_search('currency_id', $this->importColumns);
@@ -144,7 +168,7 @@ class Importer
         }
 
         $this->importSource->writeStatus();
-        Activity::restoreToPreviousState();
+        $this->afterImport();
         //All done, remove file.
     }
 
@@ -247,7 +271,7 @@ class Importer
             $this->correctRealNameFieldDef($focus, array($field));
             $importFields[] = $field;
             $fieldDef        = $focus->getFieldDefinition($field);
-            $fieldTranslated = translate((isset($fieldDef['vname'])?$fieldDef['vname']:$fieldDef['name']), $focus->module_dir)." (".$fieldDef['name'].")";
+            $fieldTranslated = translate(($fieldDef['vname'] ?? $fieldDef['name']), $focus->module_dir)." (".$fieldDef['name'].")";
             $defaultRowValue = '';
             // Bug 37241 - Don't re-import over a field we already set during the importing of another field
             if ( !empty($focus->$field) )
@@ -560,6 +584,63 @@ class Importer
             }
         }
 
+        if (!empty($focus->sync_key)) {
+            $query = new SugarQuery();
+            $options  = [
+                'add_deleted' => false,
+                'team_security' => false,
+            ];
+            $query->from(BeanFactory::newBean($focus->module_name), $options);
+            $query->select(['id', 'sync_key', 'deleted']);
+            $query->where()->equals('sync_key', $focus->sync_key);
+            $results = $query->execute();
+
+            if (count($results) > 0) {
+                // if it exists but was deleted, just remove it
+                // if you import a record, and specify the ID,
+                // and the record ID already exists and is deleted... the "old" deleted record
+                // should be removed and replaced with the new record you are importing.
+                $deletedDBRecord = false;
+                foreach ($results as $record) {
+                    if ($record['deleted']) {
+                        $bean = BeanFactory::getBean($focus->module_name, $record['id'], null, false);
+                        $this->removeDeletedBean($bean);
+                        $deletedDBRecord = true;
+                    } elseif ($record['id'] !== $focus->id) {
+                        $this->importSource->writeError(
+                            $mod_strings['LBL_SYNC_KEY_EXISTS_ALREADY'],
+                            'SYNC_KEY',
+                            $focus->sync_key
+                        );
+                        $this->_undoCreatedBeans($this->ifs->createdBeans);
+                        return;
+                    }
+                }
+                if (!$deletedDBRecord) {
+                    if (!$this->isUpdateOnly) {
+                        $this->importSource->writeError(
+                            $mod_strings['LBL_SYNC_KEY_EXISTS_ALREADY'],
+                            'SYNC_KEY',
+                            $focus->sync_key
+                        );
+                        $this->_undoCreatedBeans($this->ifs->createdBeans);
+                        return;
+                    }
+
+                    $clonedBean = $this->cloneExistingBean($focus);
+                    if ($clonedBean === false) {
+                        $this->importSource->writeError(
+                            $mod_strings['LBL_RECORD_CANNOT_BE_UPDATED'],
+                            'SYNC_KEY',
+                            $focus->sync_key
+                        );
+                        $this->_undoCreatedBeans($this->ifs->createdBeans);
+                        return;
+                    }
+                }
+            }
+        }
+
         try {
             // Update e-mails here, because we're calling retrieve, and it overwrites the emailAddress object
             if ($focus->hasEmails()) {
@@ -858,6 +939,10 @@ class Importer
 
         if ( $focus->object_name == "Contact" && isset($list_of_users) )
             $focus->process_sync_to_outlook($list_of_users);
+
+        if ($focus->object_name === "Note" && !empty($focus->deleted) && $this->isUpdateOnly) {
+            $focus->mark_deleted($focus->id);
+        }
         // Before calling save, we need to clear out any existing registered AWF
         // triggered start events so they can continue to trigger.
         Registry\Registry::getInstance()->drop('triggered_starts');
@@ -1113,7 +1198,7 @@ class Importer
         {
             $tmp = BeanFactory::newBean($moduleName);
             if (!empty($tmp->importable) && AccessControlManager::instance()->allowModuleAccess($moduleName)) {
-                $label = isset($GLOBALS['app_list_strings']['moduleList'][$moduleName]) ? $GLOBALS['app_list_strings']['moduleList'][$moduleName] : $moduleName;
+                $label = $GLOBALS['app_list_strings']['moduleList'][$moduleName] ?? $moduleName;
                 $importableModules[$moduleName] = $label;
             }
         }

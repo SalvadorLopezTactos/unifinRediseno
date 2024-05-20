@@ -38,7 +38,7 @@ if(!empty($_REQUEST['record'])) {
 }
 
 $dateStartFormatted = ViewDateFormatter::format('datetime', $focus->date_start);
-list($dateStart, $timeStart) = TimeDate::getInstance()->split_date_time($dateStartFormatted);
+[$dateStart, $timeStart] = TimeDate::getInstance()->split_date_time($dateStartFormatted);
 
 global $theme;
 
@@ -113,10 +113,10 @@ $href = 'index.php?' . http_build_query(
     ]
 );
 
-echo getClassicModuleTitle(htmlspecialchars($focus->module_dir), [
-    sprintf('<a href="index.php?module=Campaigns&action=index">%s</a>', htmlspecialchars($mod_strings['LNK_CAMPAIGN_LIST'])),
-    sprintf('<a href="%s">%s</a>', $href, htmlspecialchars($campaign_name)),
-    htmlspecialchars($focus->name),
+echo getClassicModuleTitle(htmlspecialchars($focus->module_dir, ENT_COMPAT), [
+    sprintf('<a href="index.php?module=Campaigns&action=index">%s</a>', htmlspecialchars($mod_strings['LNK_CAMPAIGN_LIST'], ENT_COMPAT)),
+    sprintf('<a href="%s">%s</a>', $href, htmlspecialchars($campaign_name, ENT_COMPAT)),
+    htmlspecialchars($focus->name, ENT_COMPAT),
 ], true);
 
 if (!empty($focus->all_prospect_lists)) {

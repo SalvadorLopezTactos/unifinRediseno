@@ -43,10 +43,10 @@ function get_message_scope_dom($campaign_id): array
         . " AND campaign_id=? "
         . " AND prospect_lists.list_type NOT LIKE 'exempt%'";
 
-    $stmt = $bean->db->getConnection()
+    $result = $bean->db->getConnection()
         ->executeQuery($query, [$campaign_id]);
     $list = [];
-    foreach ($stmt as $row) {
+    foreach ($result->iterateAssociative() as $row) {
         $list[$row['prospect_list_id']] = $row['name'];
     }
     return $list;
@@ -60,6 +60,7 @@ function get_message_scope_dom($campaign_id): array
  * @return $get_name=true, bounce handling mailboxes' name; $get_name=false, bounce handling mailboxes' from name.
  */
 function get_campaign_mailboxes(&$emails, $get_name=true) {
+    $return_array = [];
     if (!class_exists('InboundEmail')) {
         require('modules/InboundEmail/InboundEmail.php');
     }
@@ -139,6 +140,8 @@ function hasSentCampaignEmail($track)
 
 function log_campaign_activity($identifier, $activity, $update=true, $clicked_url_key=null) {
 
+    $sugar_config = [];
+    $data = [];
     $return_array = array();
 
     $db = DBManagerFactory::getInstance();
@@ -404,6 +407,7 @@ function get_subscription_lists_query($focus, $additional_fields = null) {
  *
  * */
 function get_subscription_lists($focus, $descriptions = false) {
+    $return_array = [];
     $subs_arr = array();
     $unsubs_arr = array();
 
@@ -466,6 +470,7 @@ function get_subscription_lists($focus, $descriptions = false) {
  * same function as get_subscription_lists, but with the data separated in an associated array
  */
 function get_subscription_lists_keyed($focus) {
+    $return_array = [];
     $subs_arr = array();
     $unsubs_arr = array();
 
@@ -575,6 +580,7 @@ function process_subscriptions($subscription_string_to_parse) {
  */
 function subscribe($campaign, $prospect_list, SugarBean $focus, $default_list = false)
 {
+    $exempt_array = [];
     $relationship = strtolower($focus->getObjectName()) . 's';
 
     $prospectListsQuery = <<<SQL
@@ -587,9 +593,8 @@ WHERE id IN (
 ) AND deleted = 0 
 SQL;
 
-    $prospectsList = $focus->db->getConnection()
-        ->executeQuery($prospectListsQuery, [$campaign])
-        ->fetchAllAssociative();
+    $prospectsListResult = $focus->db->getConnection()
+        ->executeQuery($prospectListsQuery, [$campaign]);
 
     //retrieve lists that this user belongs to
     $userProspectsListQuery = <<<SQL
@@ -604,7 +609,7 @@ SQL;
 
     //search through prospect lists for this campaign and identifiy the "unsubscription list"
     $exempt_id = '';
-    foreach ($prospectsList as $subscription_list) {
+    foreach ($prospectsListResult->iterateAssociative() as $subscription_list) {
         if (strpos($subscription_list['list_type'], 'exempt') !== false) {
             $exempt_id = $subscription_list['id'];
         }
@@ -678,6 +683,7 @@ SQL;
  */
 function unsubscribe($campaign, SugarBean $focus)
 {
+    $exempt_list = null;
     $relationship = strtolower($focus->getObjectName()) . 's';
     //--grab all the list for this campaign id
     $prospectListsQuery = <<<SQL
@@ -701,15 +707,14 @@ FROM prospect_lists_prospects
 WHERE related_id = ?  AND deleted = 0 
 SQL;
 
-    $userProspectsList = $focus->db->getConnection()
-        ->executeQuery($userProspectsListQuery, [$focus->id])
-        ->fetchAllAssociative();
+    $userProspectsListResult = $focus->db->getConnection()
+        ->executeQuery($userProspectsListQuery, [$focus->id]);
 
     //check to see if user is already there in prospect list
     $already_here = false;
     $exempt_id = '';
 
-    foreach ($userProspectsList as $user_list) {
+    foreach ($userProspectsListResult->iterateAssociative() as $user_list) {
         foreach ($prospectsList as $v) {
             //if list is exempt list
             if ($v['list_type'] == 'exempt') {
@@ -960,9 +965,7 @@ function write_mail_merge_log_entry($campaign_id,$pl_row) {
             $target_ids = $focus->$rel_name->get();
 
         }
-        if(count($target_ids)>0){
-
-
+    if ((is_countable($target_ids) ? count($target_ids) : 0) > 0) {
             //retrieve the target beans and create campaign log entry
             foreach($target_ids as $id){
                  //perform duplicate check

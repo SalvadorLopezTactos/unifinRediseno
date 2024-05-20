@@ -1,5 +1,5 @@
 <?php
-// created: 2020-09-03 01:00:24
+// created: 2024-05-20 10:35:04
 $viewdefs['Opportunities']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -38,6 +38,9 @@ $viewdefs['Opportunities']['base']['filter']['default'] = array (
     array (
     ),
     'sales_status' => 
+    array (
+    ),
+    'lost' => 
     array (
     ),
   ),

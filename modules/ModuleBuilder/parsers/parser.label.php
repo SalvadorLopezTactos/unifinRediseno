@@ -16,6 +16,8 @@ use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 
 class ParserLabel extends ModuleBuilderParser
 {
+    public $moduleName;
+    public $packageName;
     /**
      * A ModuleInstaller instance
      * 
@@ -107,7 +109,7 @@ class ParserLabel extends ModuleBuilderParser
             include $file;
         }
 
-        return isset($mod_strings) ? $mod_strings : array();
+        return $mod_strings ?? array();
     }
 
     /**

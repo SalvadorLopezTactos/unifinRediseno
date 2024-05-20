@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 class TemplateIFrame extends TemplateURL{
+    public $height;
 	var $type='iframe';
 	
 function get_html_edit(){

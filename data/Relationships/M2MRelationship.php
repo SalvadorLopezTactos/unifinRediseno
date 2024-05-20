@@ -64,7 +64,6 @@ class M2MRelationship extends SugarRelationship
         //Multiple links with same relationship name
         else if( is_array($results) )
         {
-            $GLOBALS['log']->error("Warning: Multiple links found for relationship {$this->name} within module {$module}");
             return $this->getMostAppropriateLinkedDefinition($results);
         }
         else
@@ -99,7 +98,7 @@ class M2MRelationship extends SugarRelationship
             }
         }
         //Unable to find an appropriate link, guess and use the first one
-        $GLOBALS['log']->error("Unable to determine best appropriate link for relationship {$this->name}");
+        $GLOBALS['log']->info("Unable to determine best appropriate link for relationship {$this->name}");
         return $links[0];
     }
 
@@ -521,7 +520,7 @@ class M2MRelationship extends SugarRelationship
             $query = "SELECT $select FROM $from WHERE $where AND $rel_table.deleted=$deleted $orderby";
             //Limit is not compatible with return_as_array
             if (!empty($params['limit']) && $params['limit'] > 0) {
-                $offset = isset($params['offset']) ? $params['offset'] : 0;
+                $offset = $params['offset'] ?? 0;
                 $query = $db->limitQuery($query, $offset, $params['limit'], false, "", false);
             }
             return $query;
@@ -665,7 +664,7 @@ class M2MRelationship extends SugarRelationship
         $targetTable = $linkIsLHS ? $this->def['rhs_table'] : $this->def['lhs_table'];
         $targetTableWithAlias = $targetTable;
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
-        $join_type= isset($params['join_type']) ? $params['join_type'] : ' INNER JOIN ';
+        $join_type= $params['join_type'] ?? ' INNER JOIN ';
 
         $join = '';
 
@@ -742,7 +741,7 @@ class M2MRelationship extends SugarRelationship
         $targetTable = $linkIsLHS ? $this->def['rhs_table'] : $this->def['lhs_table'];
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
         $targetModule = $linkIsLHS ? $this->def['rhs_module'] : $this->def['lhs_module'];
-        $join_type= isset($options['joinType']) ? $options['joinType'] : 'INNER';
+        $join_type= $options['joinType'] ?? 'INNER';
 
         $joinTable_alias = DBManagerFactory::getInstance()
             ->getValidDBName($this->def['name'], true, 'alias');
@@ -805,7 +804,7 @@ class M2MRelationship extends SugarRelationship
         $joinTableWithAlias = $joinTable;
         $joinKey = $targetIsLHS ? $this->def['join_key_rhs'] : $this->def['join_key_lhs'];
         $targetKey = $targetIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
-        $join_type= isset($params['join_type']) ? $params['join_type'] : ' INNER JOIN ';
+        $join_type= $params['join_type'] ?? ' INNER JOIN ';
 
         $query = '';
 

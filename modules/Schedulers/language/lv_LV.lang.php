@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Atjaunināt produkta definīciju',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Apstrādes laiks - grafiki',
 'LBL_OOTB_DATA_ARCHIVER' => 'Ieslēgt aktīvos datu arhīvus/izdzēšanas',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Lietojiet abonementa tiesības, kad tās tiek mainītas',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Ierakstu ģeokodētājs',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Paplašinātas iespējas',
 'LBL_TOGGLE_ADV' => 'Parādīt paplašinātas iespējas',
 'LBL_TOGGLE_BASIC' => 'Parādīt standarta iespējas',
+'LBL_UPDATEMOMENTUMCJ' => 'Atjaunināt aktuālo Smart Guides impulsu',
 // Links
 'LNK_LIST_SCHEDULER' => 'Plānotāji',
 'LNK_NEW_SCHEDULER' => 'Jauns plānotājs',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Ieslēgt aktīvos datu arhīvus/izdzēšanas',
 'LBL_PMSEENGINECRON' => 'SugarBPM Plānotājs',
 );
-

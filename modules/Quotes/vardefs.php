@@ -11,6 +11,8 @@
  */
 $dictionary['Quote'] = array(
     'table' => 'quotes',
+    'color' => 'pacific',
+    'icon' => 'sicon-quote-lg',
     'audited' => true,
     'unified_search' => true,
     'full_text_search' => true,
@@ -747,6 +749,15 @@ $dictionary['Quote'] = array(
             'vname' => 'LBL_MESSAGES',
             'source' => 'non-db',
         ],
+        'external_users' => [
+            'name' => 'external_users',
+            'type' => 'link',
+            'relationship' => 'external_users_quotes',
+            'module' => 'ExternalUsers',
+            'bean_name' => 'ExternalUser',
+            'source' => 'non-db',
+            'vname' => 'LBL_EXTERNAL_USERS',
+        ],
         'meetings' => array(
             'name' => 'meetings',
             'type' => 'link',
@@ -927,6 +938,30 @@ $dictionary['Quote'] = array(
             'readonly' => true,
             'comment' => 'Indicates whether this quote is a renewal',
         ],
+        'geocode_status' => [
+            'studio' => hasMapsLicense() ? [
+                'editField' => true,
+                'recordview' => true,
+                'previewview' => false,
+                'recorddashletview' => false,
+                'listview' => false,
+                'wirelesseditview' => false,
+                'wirelesslistview' => false,
+                'wirelessdetailview' => false,
+                'wireless_basic_search' => false,
+                'wireless_advanced_search' => false,
+            ] : false,
+            'name' => 'geocode_status',
+            'vname' => 'LBL_MAPS_GEOCODE_STATUS',
+            'label' => 'LBL_MAPS_GEOCODE_STATUS',
+            'type' => 'geocodestatus',
+            'len' => 255,
+            'comment' => '',
+            'dbType' => 'varchar',
+            'licenseFilter' => ['MAPS'],
+            'readonly' => true,
+            'reportable' => false,
+        ],
     ),
     'indices' => array(
         array(
@@ -1069,6 +1104,7 @@ $dictionary['Quote'] = array(
         // FIXME: Disable commentlog on Quotes until we can handle collection resets of bundles
         'commentlog',
     ),
+    'optimistic_locking' => true,
 );
 VardefManager::createVardef(
     'Quotes',

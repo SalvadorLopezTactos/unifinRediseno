@@ -36,6 +36,9 @@ $viewdefs['Opportunities']['mobile']['view']['detail'] = array(
                 'tag',
                 'assigned_user_name',
                 'team_name',
+                'forecasted_likely',
+                'commit_stage',
+                'lost',
             )
         )
     ),

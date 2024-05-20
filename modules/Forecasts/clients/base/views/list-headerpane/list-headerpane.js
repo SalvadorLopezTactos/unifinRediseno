@@ -19,64 +19,10 @@
     plugins: ['FieldErrorCollection'],
 
     /**
-     * If the Save button should be hidden or not
-     * @type Boolean
-     */
-    saveBtnDisabled: true,
-
-    /**
-     * If the Commit button should be disabled or not
-     * @type Boolean
-     */
-    commitBtnDisabled: true,
-
-    /**
-     * Flag for if the Cancel button should be hidden or not
-     * @type Boolean
-     */
-    cancelBtnHidden: true,
-
-    /**
-     * If any fields in the view have errors or not
-     * @type Boolean
-     */
-    fieldHasErrorState: false,
-
-    /**
-     * The Save Draft Button Field
-     * @type View.Fields.Base.ButtonField
-     */
-    saveDraftBtnField: null,
-
-    /**
-     * The Commit Button Field
-     * @type View.Fields.Base.ButtonField
-     */
-    commitBtnField: null,
-
-    /**
-     * Cancel button
-     * @type View.Fields.Base.ButtonField
-     */
-    cancelBtnField: null,
-
-    /**
      * If Forecasts' data sync is complete and we can render buttons
      * @type Boolean
      */
     forecastSyncComplete: false,
-
-    /**
-     * Commit button tooltip labels
-     * @type Object
-     */
-    commitBtnTooltips: {},
-
-    /**
-     * Save button labels
-     * @type Object
-     */
-    saveBtnLabels: {},
 
     /**
      * Holds the prefix string that is rendered before the same of the user
@@ -85,22 +31,25 @@
     forecastWorksheetLabel: '',
 
     /**
+     * Timeperiod model
+     */
+    tpModel: undefined,
+
+    /**
+     * Current quarter label id
+     *
+     * @type String
+     */
+    currentTimePeriodId: undefined,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
+        this.tpModel = new Backbone.Model();
         this._super('initialize', [options]);
-
-        this.commitBtnTooltips = {
-            'Rollup': app.lang.get('LBL_COMMIT_TOOLTIP_MGR', this.module),
-            'Direct': app.lang.get('LBL_COMMIT_TOOLTIP_REP', this.module),
-        };
-
-        let moduleName = app.metadata.getModule('Opportunities', 'config').opps_view_by;
-        let translatedModule = app.lang.get('LBL_MODULE_NAME', moduleName);
-        this.saveBtnLabels = {
-            'Rollup': app.lang.get('LBL_SAVE_LABEL_MGR', this.module),
-            'Direct': `${app.lang.get('LBL_SAVE_LABEL_REP', this.module)}${translatedModule}`,
-        };
+        this.currentTimePeriodId = this.context.get('selectedTimePeriod');
+        this.resetSelection(this.currentTimePeriodId);
 
         // Update label for worksheet
         let selectedUser = this.context.get('selectedUser');
@@ -113,31 +62,28 @@
      * @inheritdoc
      */
     bindDataChange: function() {
+        this.tpModel.on('change', function(model) {
+            let selectedTimePeriodId = model.get('selectedTimePeriod');
+            this.context.trigger(
+                'forecasts:timeperiod:changed',
+                model,
+                this.getField('selectedTimePeriod').tpTooltipMap[selectedTimePeriodId]);
+        }, this);
+
+        this.context.on('forecasts:timeperiod:canceled', function() {
+            this.resetSelection(this.tpModel.previous('selectedTimePeriod'));
+        }, this);
+
         this.layout.context.on('forecasts:sync:start', function() {
             this.forecastSyncComplete = false;
-            this.setButtonStates();
         }, this);
+
         this.layout.context.on('forecasts:sync:complete', function() {
             this.forecastSyncComplete = true;
-            this.setButtonStates();
-        }, this);
-
-        this.on('render', function() {
-            // switching from mgr to rep leaves $el null, so make sure we grab a fresh reference
-            // to the field if it's there but $el is null in the current reference
-            if (!this.commitBtnField || (this.commitBtnField && _.isNull(this.commitBtnField.$el))) {
-                // get reference to the Commit button Field
-                this.commitBtnField = this.getField('commit_button');
-            }
-            this.saveDraftBtnField = this.getField('save_draft_button');
-            this.cancelBtnField = this.getField('cancel_button');
-
-            this.saveDraftBtnField.hide();
-            this.commitBtnField.setDisabled();
-            this.cancelBtnField.hide();
         }, this);
 
         this.context.on('change:selectedUser', function(model, changed) {
+            app.user.lastState.set('Forecasts:selected-user', changed);
             this._title = this._getForecastWorksheetLabel(changed);
             if (!this.disposed) {
                 this.render();
@@ -147,7 +93,6 @@
         this.context.on('plugin:fieldErrorCollection:hasFieldErrors', function(collection, hasErrors) {
             if(this.fieldHasErrorState !== hasErrors) {
                 this.fieldHasErrorState = hasErrors;
-                this.setButtonStates();
             }
         }, this);
 
@@ -155,108 +100,7 @@
             window.print();
         }, this);
 
-        this.context.on('forecasts:worksheet:is_dirty', (worksheetType, isDirty) => {
-            isDirty = !isDirty;
-            if (this.saveBtnDisabled !== isDirty ||
-                this.commitBtnDisabled !== isDirty ||
-                this.cancelBtnHidden !== isDirty
-            ) {
-                this.saveBtnDisabled = isDirty;
-                this.commitBtnDisabled = isDirty && this.context.get('lastCommitModel') instanceof Backbone.Model;
-                this.cancelBtnHidden = isDirty;
-                this.setButtonStates();
-            }
-        });
-
-        let allBtnEvents = 'button:commit_button:click button:save_draft_button:click button:cancel_button:click';
-        this.context.on(allBtnEvents, () => {
-            if (!this.saveBtnDisabled || !this.commitBtnDisabled || !this.cancelBtnHidden) {
-                this.saveBtnDisabled = true;
-                this.commitBtnDisabled = this.context.get('lastCommitModel') instanceof Backbone.Model;
-                this.cancelBtnHidden = true;
-                this.setButtonStates();
-            }
-        });
-
-        this.context.on('forecasts:worksheet:saved', function(totalSaved, worksheet_type, wasDraft) {
-            if(wasDraft === true && this.commitBtnDisabled) {
-                this.commitBtnDisabled = false;
-                this.setButtonStates();
-            }
-        }, this);
-
-        this.context.on('forecasts:worksheet:needs_commit', function(worksheet_type) {
-            if (this.commitBtnDisabled) {
-                this.commitBtnDisabled = false;
-                this.setButtonStates();
-            }
-        }, this);
-
-        // When a forecast datapoint value is changed, we want to enable/show
-        // the cancel and commit buttons, but not the save draft button.
-        this.listenTo(this.context, 'forecasts:datapoint:changed', function() {
-            if (this.cancelBtnHidden || this.commitBtnDisabled) {
-                this.cancelBtnHidden = false;
-                this.commitBtnDisabled = false;
-                this.setButtonStates();
-            }
-        });
-
         this._super('bindDataChange');
-    },
-
-    /**
-     * Sets the appropriate button states
-     */
-    setButtonStates: function() {
-        // make sure all data sync has finished before updating button states
-        if(this.forecastSyncComplete) {
-            // fieldHasErrorState trumps the disabled flags, but when it's cleared
-            // revert back to whatever states the buttons were in
-            if (this.fieldHasErrorState) {
-                this.cancelBtnField.hide();
-                this.saveDraftBtnField.hide();
-                this.commitBtnField.setDisabled(true);
-                this.commitBtnField.$('.commit-button').tooltip();
-            } else {
-                this.commitBtnField.setDisabled(this.commitBtnDisabled);
-
-                if (this.cancelBtnHidden) {
-                    this.cancelBtnField.hide();
-                } else {
-                    this.cancelBtnField.show();
-                }
-
-                if (this.saveBtnDisabled) {
-                    this.saveDraftBtnField.hide();
-                } else {
-                    this.saveDraftBtnField.show();
-                }
-
-                if (!this.commitBtnDisabled) {
-                    this.commitBtnField.$('.commit-button').tooltip('destroy');
-                } else {
-                    this.commitBtnField.$('.commit-button').tooltip();
-                }
-            }
-        } else {
-            // disable buttons while syncing
-            if (this.saveDraftBtnField) {
-                this.saveDraftBtnField.hide();
-            }
-            if (this.commitBtnField) {
-                this.commitBtnField.setDisabled(true);
-            }
-            if (this.cancelBtnField) {
-                this.cancelBtnField.hide();
-            }
-        }
-
-        let worksheetType = this._getWorksheetType();
-        if (worksheetType) {
-            this.$('.commit-button').attr('title', this.commitBtnTooltips[worksheetType]);
-            this.$('.save-draft-button').text(this.saveBtnLabels[worksheetType]);
-        }
     },
 
     /**
@@ -297,6 +141,10 @@
         }
 
         this._super('_renderHtml');
+
+        this.listenTo(this.getField('selectedTimePeriod'), 'render', function() {
+            this.markCurrentTimePeriod(this.tpModel.get('selectedTimePeriod'));
+        }, this);
     },
 
     /**
@@ -309,5 +157,72 @@
         }
         this.stopListening();
         this._super('_dispose');
+    },
+
+    /**
+     * Sets the timeperiod to the selected timeperiod, used primarily for resetting
+     * the dropdown on nav cancel
+     *
+     * @param String timeperiodId
+     */
+    resetSelection: function(timeperiodId) {
+        this.tpModel.set({selectedTimePeriod: timeperiodId}, {silent: true});
+        _.find(this.fields, function(field) {
+            if (_.isEqual(field.name, 'selectedTimePeriod')) {
+                field.render();
+                return true;
+            }
+        });
+    },
+
+    /**
+     * Get year and quarter
+     *
+     * @param {Object} d  timeperiodId
+     * @return array
+     */
+    getQuarter: function(d) {
+        d = d || app.date();
+        const month = parseInt(d.format('MM'));
+        let q = Math.floor((month - 1) / 3) + 1;
+        let y = d.format('YYYY');
+        return [y, q];
+    },
+
+    /**
+     * Get month and year
+     *
+     * @param {Object} d  timeperiodId
+     * @return string
+     */
+    getMonth: function(d) {
+        d = d || app.date();
+        return d.format('MMMM YYYY');
+    },
+
+    /**
+     * Mark the current time period with 'Current' label
+     *
+     * @param String selectedTimePeriodId
+     */
+    markCurrentTimePeriod: function(selectedTimePeriodId) {
+        let listTimePeriods = this.getField('selectedTimePeriod') ? this.getField('selectedTimePeriod').items : null;
+        if (!listTimePeriods) {
+            return;
+        }
+
+        let timePeriodInterval = app.metadata.getModule('Forecasts', 'config').timeperiod_leaf_interval;
+        let currentTimePeriod = timePeriodInterval === 'Quarter' ? this.getQuarter().join(' Q') : this.getMonth();
+        let currentTimePeriodId = _.findKey(listTimePeriods, item => item === currentTimePeriod);
+        if (!currentTimePeriodId) {
+            return;
+        }
+
+        let currentTimePeriodText = app.lang.get('LBL_CURRENT', this.module) +
+            ' (' + listTimePeriods[currentTimePeriodId] + ')';
+        listTimePeriods[currentTimePeriodId] = currentTimePeriodText;
+        if (selectedTimePeriodId === currentTimePeriodId) {
+            this.$('.quarter-picker .forecastsTimeperiod .select2-chosen').text(currentTimePeriodText);
+        }
     }
 })

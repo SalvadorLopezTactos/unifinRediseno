@@ -21,6 +21,7 @@ use Sugarcrm\Sugarcrm\Security\Csrf\CsrfTokenStorage;
  * on as a stable API for any other sources.
  */
 class SugarOAuth2Storage implements IOAuth2GrantUser, IOAuth2RefreshTokens, SugarOAuth2StorageInterface, IOAuth2GrantExtension {
+    public $isDownloadToken;
     /**
      * The client platform
      *
@@ -61,11 +62,11 @@ class SugarOAuth2Storage implements IOAuth2GrantUser, IOAuth2RefreshTokens, Suga
      */
     public $refreshToken;
 
-    const SAML_GRANT_TYPE = 'urn:ietf:params:oauth:grant-type:saml2-bearer';
+    public const SAML_GRANT_TYPE = 'urn:ietf:params:oauth:grant-type:saml2-bearer';
 
-    const SEAMLESS_GRANT_TYPE = 'urn:ietf:params:oauth:grant-type:seamless-bearer';
+    public const SEAMLESS_GRANT_TYPE = 'urn:ietf:params:oauth:grant-type:seamless-bearer';
 
-    const TOKEN_CHECK_TIME = 120;
+    public const TOKEN_CHECK_TIME = 120;
 
     // BEGIN METHOD FROM SugarOAuth2StorageInterface
     /**

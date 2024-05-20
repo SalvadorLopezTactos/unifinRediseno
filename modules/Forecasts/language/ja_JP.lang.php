@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => '売上予測履歴の表示',
     'LBL_FORECAST_HISTORY' => '売上予測: 履歴',
     'LBL_FORECAST_HISTORY_TITLE' => '履歴',
+    'LBL_TAB_COMMITMENT' => 'コミットメント',
+    'LBL_CURRENT' => '現在の',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => '期間名',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'更新者',
     'LBL_WK_VERSION' => 'バージョン',
     'LBL_WK_REVISION' => '版',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'メトリクスAPIにアクセスするには、Sugar Sell Premierが必要です',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => '期間:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'この金額を確定しますか？',
     'ERR_FORECAST_AMOUNT' => '確定金額は必須であり、数値である必要があります。',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => '含まれるパイプライン',
+    'LBL_UPSIDE_PIPELINE' => '上部パイプライン',
+    'LBL_EXCLUDED_PIPELINE' => '除外されるパイプライン',
+    'LBL_WON' => '受注',
+    'LBL_LOST' => '失注',
+    'LBL_ALL' => 'すべて',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'フィルターのガイド',
+    'LBL_HELP_MAIN_BODY' => 'すべてのメトリクスには、選択したユーザー、期間、追加で適用したフィルターに属する商談のみが含まれます。',
+    'LBL_FORECAST_HELP' => 'すでに受注されている、または {{{forecastStage}}} に含まれている商談',
+    'LBL_INCLUDED_PIPELINE_HELP' => '{{{commitStageValue}}} の {{{forecastStage}}} で、オープン中の商談',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => '{{{forecastStage}}} に含まれているオープン中の商談',
+    'LBL_UPSIDE_PIPELINE_HELP' => '{{{commitStageValue}}} の {{{forecastStage}}} で、オープン中の商談',
+    'LBL_EXCLUDED_PIPELINE_HELP' => '{{{commitStageValue}}} の {{{forecastStage}}} で、オープン中の商談',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => '{{{forecastStage}}} に除外されているオープン中の商談',
+    'LBL_WON_HELP' => 'すでに受注されている商談',
+    'LBL_LOST_HELP' => 'すでに失注されている商談',
+    'LBL_ALL_HELP' => 'すべての商談',
+
+
     // js error strings
     'LBL_FC_START_DATE' => '実施日',
     'LBL_FC_USER' => 'スケジュール',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'コミットメント',
     'LBL_TEAM_COMMITMENT' => 'チームコミットメント',
     'LBL_FORECASTED' => '予測済み',
+    'LBL_OPPORTUNITY_FORECAST' => '商談の売上予測',
+    'LBL_REVENUELINEITEM_FORECAST' => '商談品目売上予測',
+    'LBL_LAST_COMMITMENT' => '最終コミットメント',
     'LBL_ADJUSTED_TOTAL' => '調整済み合計',
     'LBL_COMMIT_STAGE' => 'コミットステージ',
     'LBL_SALES_STAGE' => 'ステージ',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '（調整済）',
     'LBL_SAVE_DRAFT' => '保存',
     'LBL_CHANGES_BY' => '{0}による変更',
-    'LBL_FORECAST_SETTINGS' => '設定',
+    'LBL_FORECAST_SETTINGS' => '売上予測設定',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => '売上予測設定',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '会計年度開始日:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '売上予測モジュールで使われる期間を設定してください。<br />会計年度の開始日を選択することから始めてください。そして売上予測を設定したい期間のタイプを選択してください。その選択により、期間の日にちの範囲は自動的に計算されます。サブ期間は売上予測ワークシートに基づいています。<br />閲覧できる将来と過去の期間は売上予測モジュールのサブ期間の数を決定します。ユーザーは売上予測の数値をサブ期間で閲覧したり編集したりすることができます。',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} の分類方法を設定します。<br><br>範囲設定は、最初のコミット後は変更できません。アップグレードされたインスタンスでは、範囲設定は既存の予測データに固定されます。<br><br>確率の範囲に基づいて2つ以上のカテゴリーを選択することも、確率に基づかないカテゴリーを作成することも可能です。<br><br>カスタムカテゴリーの左側にはチェックボックスがあります。これらを使用して、どの範囲をコミットされた予測量に含め、マネージャーに報告するかを決定します。<br><br>ユーザは、ワークシートから {{forecastByModule}} の包含/除外ステータスおよびカテゴリーを手動で変更できます。',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} の分類方法を設定します。<br><br>範囲設定は、最初のコミット後は変更できません。アップグレードされたインスタンスでは、範囲設定は既存の予測データに固定されます。<br><br>確率の範囲に基づいて2つ以上のカテゴリーを選択するか、確率に基づかないカテゴリーを作成することも可能です。<br><br>カスタムカテゴリーの左側にはチェックボックスがあります。これらを使用して、どの範囲をコミットされた予測量に含め、マネージャーに報告するかを決定します。<br><br>ユーザーは、ワークシートから {{forecastByModule}} の包含/除外ステータスおよびカテゴリーを手動で変更できます。',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'ユーザに記入させたいそれぞれの {{forecastByModuleSingular}} の売上予測のカラムを選択してください。達成可能の金額は、{{forecastByModule}} で表示される金額と結びついていますので注意してください。その理由で、達成可能のカラムは隠すことはできません。',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '売上予測モジュールで閲覧したいカラムを選択してください。フィールドのリストがワークシートを組み合わせて、ユーザがビューをどのように設定するかを選ぶことができます。',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => '私はhow-to textによる売上予測の代理人です!',

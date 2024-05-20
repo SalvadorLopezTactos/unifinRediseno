@@ -24,6 +24,15 @@ $viewdefs['Meetings']['base']['view']['recordlist'] = array(
                     'click' => 'list:massupdate:fire',
                 ),
             ),
+            [
+                'name' => 'calc_field_button',
+                'type' => 'button',
+                'label' => 'LBL_UPDATE_CALC_FIELDS',
+                'events' => [
+                    'click' => 'list:updatecalcfields:fire',
+                ],
+                'acl_action' => 'massupdate',
+            ],
             array(
                 'name' => 'massdelete_button',
                 'type' => 'button',

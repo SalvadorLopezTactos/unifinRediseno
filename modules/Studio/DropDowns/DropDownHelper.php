@@ -71,8 +71,9 @@ class DropDownHelper
      * them for the save.
      *
      * @param array $params Request parameters
+     * @param bool $postponeQRR Skip QRR inside save_custom_dropdown_strings call
      */
-    public static function saveDropDown($params)
+    public static function saveDropDown($params, $postponeQRR = false)
     {
         global $locale;
         $count = 0;
@@ -101,7 +102,14 @@ class DropDownHelper
             }
             $count++;
         }
-
-        return save_custom_dropdown_strings(array($dropdown_name => $dropdown), $selected_lang);
+        if ($dropdown == $my_list_strings[$dropdown_name]) {
+            return false;
+        }
+        return save_custom_dropdown_strings(
+            array($dropdown_name => $dropdown),
+            $selected_lang,
+            false,
+            $postponeQRR
+        );
     }
 }

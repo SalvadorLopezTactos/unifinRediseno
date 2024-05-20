@@ -31,7 +31,7 @@ class FavoritesHandler extends AbstractHandler implements
     /**
      * Favorites field used in index
      */
-    const FAVORITE_FIELD = 'user_favorites';
+    public const FAVORITE_FIELD = 'user_favorites';
 
     /**
      * {@inheritdoc}

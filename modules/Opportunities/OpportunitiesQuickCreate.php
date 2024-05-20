@@ -25,7 +25,7 @@ class OpportunitiesQuickCreate extends QuickCreate {
         
         parent::process();
         
-        list($num_grp_sep, $dec_sep) = get_number_seperators();
+        [$num_grp_sep, $dec_sep] = get_number_seperators();
         $this->ss->assign('NUM_GRP_SEP', $num_grp_sep);
         $this->ss->assign('DEC_SEP', $dec_sep);
         $this->ss->assign('CURRENCY_ID', $current_user->getPreference('currency'));

@@ -61,7 +61,7 @@ class contextMenu {
     function loadFromFile($name) {
         global $menuDef;
     	clean_string($name, 'FILE');
-        require_once('include/contextMenus/menuDefs/' . $name . '.php');
+        require_once 'include/contextMenus/menuDefs/' . $name . '.php';
         $this->loadFromDef($name, $menuDef[$name]);
     }
     

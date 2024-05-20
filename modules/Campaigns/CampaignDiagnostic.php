@@ -30,8 +30,8 @@ global $current_user;
 //account for use within wizards
 if (!isset($_REQUEST['inline']) || $_REQUEST['inline'] != 'inline') {
     echo getClassicModuleTitle('Campaigns', [
-        sprintf('<a href="index.php?module=Campaigns&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'])),
-        htmlspecialchars($mod_strings['LBL_CAMPAIGN_DIAGNOSTICS']),
+        sprintf('<a href="index.php?module=Campaigns&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT)),
+        htmlspecialchars($mod_strings['LBL_CAMPAIGN_DIAGNOSTICS'], ENT_COMPAT),
     ], true);
 }
 

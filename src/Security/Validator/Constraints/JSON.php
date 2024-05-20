@@ -25,7 +25,7 @@ class JSON extends Constraint implements ConstraintReturnValueInterface
 {
     use ConstraintReturnValueTrait;
 
-    const ERROR_JSON_DECODE = 1;
+    public const ERROR_JSON_DECODE = 1;
 
     protected static $errorNames = array(
         self::ERROR_JSON_DECODE => 'ERROR_JSON_DECODE',

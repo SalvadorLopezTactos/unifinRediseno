@@ -561,8 +561,7 @@ class PMSEImporter
      */
     protected function validateLockedFieldGroups($project)
     {
-        $lockedFields =
-            html_entity_decode($project['definition']['pro_locked_variables'], ENT_QUOTES);
+        $lockedFields = html_entity_decode((string)$project['definition']['pro_locked_variables'], ENT_QUOTES);
         $project['definition']['pro_locked_variables'] = $lockedFields;
 
         $lockedFields = json_decode($lockedFields);
@@ -572,7 +571,7 @@ class PMSEImporter
             $locked = [];
             foreach ($lockedFields as $lockedField) {
                 $def = $bean->field_defs[$lockedField];
-                $group = isset($def['group']) ? $def['group'] : $lockedField;
+                $group = $def['group'] ?? $lockedField;
                 if (isset($locked[$group])) {
                     $locked[$group][] = $lockedField;
                 } else {
@@ -582,7 +581,7 @@ class PMSEImporter
             // tally the number of fields in each group
             $total = [];
             foreach ($bean->field_defs as $def) {
-                $group = isset($def['group']) ? $def['group'] : $def['name'];
+                $group = $def['group'] ?? $def['name'];
                 if (isset($total[$group])) {
                     $total[$group] += 1;
                 } else {

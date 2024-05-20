@@ -267,7 +267,8 @@ class ProspectList extends SugarBean {
 	}
 
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
         $mod_strings = [];
 		$temp_array = $this->get_list_view_array();
 		$temp_array["ENTRY_COUNT"] = $this->get_entry_count();
@@ -278,7 +279,7 @@ class ProspectList extends SugarBean {
         if(count($teams) > 1) {
       	   $temp_array['TEAM_NAME'] .= "<span id='div_{$this->id}_teams'>
 						<a href=\"#\" onMouseOver=\"javascript:toggleMore('div_{$this->id}_teams','img_{$this->id}_teams', 'Teams', 'DisplayInlineTeams', 'team_set_id={$this->team_set_id}&team_id={$this->team_id}');\"  onFocus=\"javascript:toggleMore('div_{$this->id}_teams','img_{$this->id}_teams', 'Teams', 'DisplayInlineTeams', 'team_set_id={$this->team_set_id}');\" id='more_feather' class=\"utilsLink\">
-					  ".SugarThemeRegistry::current()->getImage(MoreDetail, "style='padding: 0px 0px 0px 0px' border='0'", 8, 7, ".gif", $mod_strings['LBL_MORE_DETAIL'])."
+					  ".SugarThemeRegistry::current()->getImage('MoreDetail', "style='padding: 0px 0px 0px 0px' border='0'", 8, 7, ".gif", $mod_strings['LBL_MORE_DETAIL'])."
 						</a>
 						</span>";
         }

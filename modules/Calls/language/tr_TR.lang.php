@@ -194,4 +194,10 @@ Sugar kullanıcıları, kontaklar ve potansiyeller, toplantı davetlisi olarak e
  - "Katılımcı Seçin" ile mevcut kullanıcı, kontak, potansiyel {{calls_singular_module}} modülüne ekleyin.
  - "Katılımcı Seçin" seçeneğinin yanındaki artı işaretine tıklayarak yeni bir {{calls_singular_module}} katılımcısını Sugar kaydı olarak ekleyin.
 3. "Kaydet" tuşuna basarak yeni kaydı sona erdirin ve önceki sayfaya dönün.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Akıllı Rehber Çağrısıdır",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Alt Görevler',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Alt Toplantılar',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Alt Aramalar',
 );

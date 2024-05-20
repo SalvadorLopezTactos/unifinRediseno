@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o oznakama',
     'LBL_MY_TAGS' => 'Moje oznake',
     'LBL_MY_FAVORITE_TAGS' => 'Moje omiljene oznake',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} oznake/a',
 );

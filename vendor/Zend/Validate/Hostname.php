@@ -46,16 +46,16 @@ require_once 'vendor/Zend/Validate/Ip.php';
  */
 class Zend_Validate_Hostname extends Zend_Validate_Abstract
 {
-    const INVALID                 = 'hostnameInvalid';
-    const IP_ADDRESS_NOT_ALLOWED  = 'hostnameIpAddressNotAllowed';
-    const UNKNOWN_TLD             = 'hostnameUnknownTld';
-    const INVALID_DASH            = 'hostnameDashCharacter';
-    const INVALID_HOSTNAME_SCHEMA = 'hostnameInvalidHostnameSchema';
-    const UNDECIPHERABLE_TLD      = 'hostnameUndecipherableTld';
-    const INVALID_HOSTNAME        = 'hostnameInvalidHostname';
-    const INVALID_LOCAL_NAME      = 'hostnameInvalidLocalName';
-    const LOCAL_NAME_NOT_ALLOWED  = 'hostnameLocalNameNotAllowed';
-    const CANNOT_DECODE_PUNYCODE  = 'hostnameCannotDecodePunycode';
+    public const INVALID                 = 'hostnameInvalid';
+    public const IP_ADDRESS_NOT_ALLOWED  = 'hostnameIpAddressNotAllowed';
+    public const UNKNOWN_TLD             = 'hostnameUnknownTld';
+    public const INVALID_DASH            = 'hostnameDashCharacter';
+    public const INVALID_HOSTNAME_SCHEMA = 'hostnameInvalidHostnameSchema';
+    public const UNDECIPHERABLE_TLD      = 'hostnameUndecipherableTld';
+    public const INVALID_HOSTNAME        = 'hostnameInvalidHostname';
+    public const INVALID_LOCAL_NAME      = 'hostnameInvalidLocalName';
+    public const LOCAL_NAME_NOT_ALLOWED  = 'hostnameLocalNameNotAllowed';
+    public const CANNOT_DECODE_PUNYCODE  = 'hostnameCannotDecodePunycode';
 
     /**
      * @var array
@@ -83,22 +83,22 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
     /**
      * Allows Internet domain names (e.g., example.com)
      */
-    const ALLOW_DNS   = 1;
+    public const ALLOW_DNS   = 1;
 
     /**
      * Allows IP addresses
      */
-    const ALLOW_IP    = 2;
+    public const ALLOW_IP    = 2;
 
     /**
      * Allows local network names (e.g., localhost, www.localdomain)
      */
-    const ALLOW_LOCAL = 4;
+    public const ALLOW_LOCAL = 4;
 
     /**
      * Allows all types of hostnames
      */
-    const ALLOW_ALL   = 7;
+    public const ALLOW_ALL   = 7;
 
     /**
      * Array of valid top-level-domains
@@ -324,6 +324,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      */
     public function __construct($options = array())
     {
+        $temp = [];
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
@@ -658,6 +659,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      */
     protected function decodePunycode($encoded)
     {
+        $decoded = [];
         $found = preg_match('/([^a-z0-9\x2d]{1,10})$/i', $encoded);
         if (empty($encoded) || ($found > 0)) {
             // no punycode encoded string, return as is

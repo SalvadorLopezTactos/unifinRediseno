@@ -14,6 +14,11 @@
 class SugarMin {
 
     /**
+     * @var string|mixed
+     */
+    public $text;
+    public $compression;
+    /**
      * jsParser will take javascript source code and minify it.
      *
      * Note: There is a lot of redundant code since both passes

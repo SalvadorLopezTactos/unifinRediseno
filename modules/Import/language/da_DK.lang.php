@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Obligatorisk værdi mangler',
     'LBL_ERROR_SYNC_USERS' => 'Ugyldig værdi at synkronisere med Outlook:',
     'LBL_ID_EXISTS_ALREADY' => 'Id findes allerede i denne tabel',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY findes allerede i denne tabel',
     'LBL_ASSIGNED_USER' => 'Hvis brugeren ikke findes, skal du bruge den aktuelle bruger',
     'LBL_SHOW_HIDDEN' => 'Vis felter, der normalt ikke kan importeres',
     'LBL_UPDATE_RECORDS' => 'Opdater eksisterende poster i stedet for at importere dem "ikke Fortryd"',

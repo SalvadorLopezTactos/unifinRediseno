@@ -19,7 +19,7 @@ namespace Sugarcrm\Sugarcrm\Security\Password;
  */
 class Hash
 {
-    const DEFAULT_BACKEND = 'native';
+    public const DEFAULT_BACKEND = 'native';
 
     /**
      * @var Hash

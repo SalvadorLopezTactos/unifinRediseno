@@ -194,4 +194,10 @@ Jako uczestników rozmowy można dodać użytkowników Sugar, kontakty oraz nami
     - Kliknij Wybierz uczestnika, aby dodać istniejącego użytkownika, kontakt lub namiar do modułu {{calls_singular_module}}.
     - Kliknij ikonę z plusem po prawej stronie Wybierz uczestnika, aby utworzyć uczestnika modułu {{calls_singular_module}} jako nowy rekord Sugar.
 3. Kliknij Zapisz, aby zapisać nowy rekord i powrócić do poprzedniej strony.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Jest połączeniem Smart Guide",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Zadania podrzędne',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Spotkania podrzędne',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Połączenia podrzędne',
 );

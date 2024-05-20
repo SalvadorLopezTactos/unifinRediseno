@@ -121,4 +121,13 @@ $mod_strings = array (
 - Saat esille lisää kenttiä tarvittaessa napsauttamalla "Näytä lisää".
 2. Paina ‘Tallenna’ luodaksesi tietueen. Tämän jälkeen palaat edelliselle sivulle.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Älykkään oppaan tehtävä',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Onko Älykäs opas -tehtävä',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Älykkään oppaan toiminnan alkamispäivä',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Älykkään oppaan aktiviteetin suorituspäivä',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Älykäs opas - päiviä valmistumiseen',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Lapsi palaverit',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Lapsi kutsut',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Lapsi toiminnot',
 );

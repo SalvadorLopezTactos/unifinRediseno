@@ -293,6 +293,15 @@ $dictionary['email_addr_bean_rel'] = array(
                 'bean_id',
             ),
         ),
+        [
+            'name' => 'idx_primary_address_bean',
+            'type' => 'index',
+            'fields' => [
+                'primary_address',
+                'deleted',
+                'bean_id',
+            ],
+        ],
     ),
     'relationships' => array(
     ),

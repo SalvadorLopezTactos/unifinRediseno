@@ -14,11 +14,11 @@ require_once('modules/Campaigns/utils.php');
 
 class LeadConvert
 {
-    const TRANSFERACTION_NONE = 'donothing';
-    const TRANSFERACTION_COPY = 'copy';
-    const TRANSFERACTION_MOVE = 'move';
+    public const TRANSFERACTION_NONE = 'donothing';
+    public const TRANSFERACTION_COPY = 'copy';
+    public const TRANSFERACTION_MOVE = 'move';
 
-    const STATUS_CONVERTED = 'Converted';
+    public const STATUS_CONVERTED = 'Converted';
     protected $fileName = "modules/Leads/clients/base/layouts/convert-main/convert-main.php";
     protected $modules;
     protected $lead;
@@ -42,7 +42,7 @@ class LeadConvert
 
         if (empty($this->lead)) {
             $errorMessage = string_format('Could not find record: {0} in module: Leads', $leadId);
-            throw new Exception($errorMessage);
+            throw new Exception((string)$errorMessage);
         }
     }
 
@@ -267,7 +267,7 @@ class LeadConvert
             if (!empty($fieldDef['id_name'])) {
                 $this->contact->{$fieldDef['id_name']} = $this->modules[$moduleName]->id;
                 if ($fieldDef['id_name'] != $relate) {
-                    $rname = isset($fieldDef['rname']) ? $fieldDef['rname'] : "";
+                    $rname = $fieldDef['rname'] ?? "";
                     if (!empty($rname) && isset($this->modules[$moduleName]->$rname))
                         $this->contact->$relate = $this->modules[$moduleName]->$rname;
                     else

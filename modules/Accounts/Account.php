@@ -149,17 +149,8 @@ class Account extends Company {
 		return $this->get_linked_beans('contacts','Contact');
 	}
 
-
-
-	function clear_account_case_relationship($account_id='', $case_id='')
-	{
-		if (empty($case_id)) $where = '';
-		else $where = " and id = '$case_id'";
-		$query = "UPDATE cases SET account_name = '', account_id = '' WHERE account_id = '$account_id' AND deleted = 0 " . $where;
-		$this->db->query($query,true,"Error clearing account to case relationship: ");
-	}
-
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 
 		$temp_array = parent::get_list_view_data();
 

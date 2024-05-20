@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג תזמוני דוחות',
     'LBL_FILE_TYPE' => 'סוגי קבצים',
+    'LBL_EMBED_REPORT' => 'הטמע דוח בדוא"ל',
+    'LBL_EMBED_REPORT_INFO' => 'הערה: אם הדוח ארוך מ-200 שורות, אנו נצרף את הדוח כקובץ CSV.',
 );

@@ -11,20 +11,26 @@
 
 namespace Symfony\Component\Security\Core\Authentication\Provider;
 
+use Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\AccountStatusException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\Role\SwitchUserRole;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+
+trigger_deprecation('symfony/security-core', '5.3', 'The "%s" class is deprecated, use the new authenticator system instead.', UserAuthenticationProvider::class);
 
 /**
  * UserProviderInterface retrieves users for UsernamePasswordToken tokens.
  *
  * @author Fabien Potencier <fabien@symfony.com>
+ *
+ * @deprecated since Symfony 5.3, use the new authenticator system instead
  */
 abstract class UserAuthenticationProvider implements AuthenticationProviderInterface
 {
@@ -33,13 +39,9 @@ abstract class UserAuthenticationProvider implements AuthenticationProviderInter
     private $providerKey;
 
     /**
-     * @param UserCheckerInterface $userChecker                An UserCheckerInterface interface
-     * @param string               $providerKey                A provider key
-     * @param bool                 $hideUserNotFoundExceptions Whether to hide user not found exception or not
-     *
      * @throws \InvalidArgumentException
      */
-    public function __construct(UserCheckerInterface $userChecker, $providerKey, $hideUserNotFoundExceptions = true)
+    public function __construct(UserCheckerInterface $userChecker, string $providerKey, bool $hideUserNotFoundExceptions = true)
     {
         if (empty($providerKey)) {
             throw new \InvalidArgumentException('$providerKey must not be empty.');
@@ -59,18 +61,18 @@ abstract class UserAuthenticationProvider implements AuthenticationProviderInter
             throw new AuthenticationException('The token is not supported by this authentication provider.');
         }
 
-        $username = $token->getUsername();
+        $username = method_exists($token, 'getUserIdentifier') ? $token->getUserIdentifier() : $token->getUsername();
         if ('' === $username || null === $username) {
             $username = AuthenticationProviderInterface::USERNAME_NONE_PROVIDED;
         }
 
         try {
             $user = $this->retrieveUser($username, $token);
-        } catch (UsernameNotFoundException $e) {
+        } catch (UserNotFoundException $e) {
             if ($this->hideUserNotFoundExceptions) {
                 throw new BadCredentialsException('Bad credentials.', 0, $e);
             }
-            $e->setUsername($username);
+            $e->setUserIdentifier($username);
 
             throw $e;
         }
@@ -83,15 +85,23 @@ abstract class UserAuthenticationProvider implements AuthenticationProviderInter
             $this->userChecker->checkPreAuth($user);
             $this->checkAuthentication($user, $token);
             $this->userChecker->checkPostAuth($user);
-        } catch (BadCredentialsException $e) {
-            if ($this->hideUserNotFoundExceptions) {
+        } catch (AccountStatusException|BadCredentialsException $e) {
+            if ($this->hideUserNotFoundExceptions && !$e instanceof CustomUserMessageAccountStatusException) {
                 throw new BadCredentialsException('Bad credentials.', 0, $e);
             }
 
             throw $e;
         }
 
-        $authenticatedToken = new UsernamePasswordToken($user, $token->getCredentials(), $this->providerKey, $this->getRoles($user, $token));
+        if ($token instanceof SwitchUserToken) {
+            $roles = $user->getRoles();
+            $roles[] = 'ROLE_PREVIOUS_ADMIN';
+
+            $authenticatedToken = new SwitchUserToken($user, $token->getCredentials(), $this->providerKey, $roles, $token->getOriginalToken());
+        } else {
+            $authenticatedToken = new UsernamePasswordToken($user, $token->getCredentials(), $this->providerKey, $user->getRoles());
+        }
+
         $authenticatedToken->setAttributes($token->getAttributes());
 
         return $authenticatedToken;
@@ -102,40 +112,17 @@ abstract class UserAuthenticationProvider implements AuthenticationProviderInter
      */
     public function supports(TokenInterface $token)
     {
-        return $token instanceof UsernamePasswordToken && $this->providerKey === $token->getProviderKey();
-    }
-
-    /**
-     * Retrieves roles from user and appends SwitchUserRole if original token contained one.
-     *
-     * @return array The user roles
-     */
-    private function getRoles(UserInterface $user, TokenInterface $token)
-    {
-        $roles = $user->getRoles();
-
-        foreach ($token->getRoles() as $role) {
-            if ($role instanceof SwitchUserRole) {
-                $roles[] = $role;
-
-                break;
-            }
-        }
-
-        return $roles;
+        return $token instanceof UsernamePasswordToken && $this->providerKey === $token->getFirewallName();
     }
 
     /**
      * Retrieves the user from an implementation-specific location.
      *
-     * @param string                $username The username to retrieve
-     * @param UsernamePasswordToken $token    The Token
-     *
-     * @return UserInterface The user
+     * @return UserInterface
      *
      * @throws AuthenticationException if the credentials could not be validated
      */
-    abstract protected function retrieveUser($username, UsernamePasswordToken $token);
+    abstract protected function retrieveUser(string $username, UsernamePasswordToken $token);
 
     /**
      * Does additional checks on the user and token (like validating the

@@ -266,7 +266,7 @@ class ActionButtonApi extends SugarApi
                     );
                 }
 
-                $result[$key]['name'] = $parentBean->name ? $parentBean->name : $parentBean->full_name;
+                $result[$key]['name'] = $parentBean->name ?: $parentBean->full_name;
             }
         }
 
@@ -427,6 +427,16 @@ class ActionButtonApi extends SugarApi
             $bean->field_defs[$paramsData['targetField']]['enforced'] = true;
             $bean->field_defs[$paramsData['targetField']]['calculated'] = true;
             $bean->field_defs[$paramsData['targetField']]['formula'] = $paramsData['formula'];
+        }
+
+        $formattedBeanData = $this->formatBean($api, $args, $bean);
+
+        foreach ($formattedBeanData as $fieldName => $fieldValue) {
+            if (array_key_exists($fieldName, $bean->field_defs) && $bean->field_defs[$fieldName]['type'] === 'link') {
+                continue;
+            }
+
+            $bean->{$fieldName} = $fieldValue;
         }
 
         $bean->updateCalculatedFields();

@@ -20,6 +20,10 @@ require_once 'vendor/HTTP_WebDAV_Server/Server.php';
  */
 class HTTP_WebDAV_Server_vCal extends HTTP_WebDAV_Server
 {
+    /**
+     * @var \SugarBean|null|mixed
+     */
+    public $user_focus;
         /**
          * Root directory for WebDAV access
          *

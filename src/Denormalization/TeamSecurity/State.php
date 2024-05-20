@@ -26,14 +26,14 @@ class State implements SplObserver, SplSubject
      * $sugar_config to determine if use of denormalized table is enabled
      * @var string
      */
-    const CONFIG_KEY = "perfProfile.TeamSecurity";
+    public const CONFIG_KEY = "perfProfile.TeamSecurity";
 
     /**#@+
      * State parameters
      */
-    const STATE_UP_TO_DATE = 'up_to_date';
-    const STATE_REBUILD_RUNNING = 'rebuild_running';
-    const STATE_ACTIVE_TABLE = 'active_table';
+    public const STATE_UP_TO_DATE = 'up_to_date';
+    public const STATE_REBUILD_RUNNING = 'rebuild_running';
+    public const STATE_ACTIVE_TABLE = 'active_table';
     /**#@-*/
 
     /**#@+
@@ -59,7 +59,7 @@ class State implements SplObserver, SplSubject
     private $logger;
 
     /**
-     * @var State
+     * @var Storage
      */
     private $storage;
 
@@ -285,7 +285,7 @@ class State implements SplObserver, SplSubject
      *
      * Handles configuration update
      */
-    public function update(SplSubject $config)
+    public function update(SplSubject $config): void
     {
         $this->isEnabled = null;
         $this->notify();
@@ -294,7 +294,7 @@ class State implements SplObserver, SplSubject
     /**
      * {@inheritDoc}
      */
-    public function attach(SplObserver $observer)
+    public function attach(SplObserver $observer): void
     {
         $this->observers->attach($observer);
     }
@@ -302,7 +302,7 @@ class State implements SplObserver, SplSubject
     /**
      * {@inheritDoc}
      */
-    public function detach(SplObserver $observer)
+    public function detach(SplObserver $observer): void
     {
         $this->observers->detach($observer);
     }
@@ -310,7 +310,7 @@ class State implements SplObserver, SplSubject
     /**
      * {@inheritDoc}
      */
-    public function notify()
+    public function notify(): void
     {
         foreach ($this->observers as $observer) {
             $observer->update($this);

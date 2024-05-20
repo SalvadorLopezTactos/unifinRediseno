@@ -70,11 +70,12 @@ class TeamNotice extends SugarBean {
 				$this->url_title = $this->url;
 			}
 		}
-		$this->status = ( isset($mod_strings['dom_status'][$this->status]) ? $mod_strings['dom_status'][$this->status] : '');
+        $this->status = ($mod_strings['dom_status'][$this->status] ?? '');
 		$this->fill_in_additional_detail_fields();
 	}
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
         global $mod_strings;
 	  $temp_array = $this->get_list_view_array();
       $temp_array['ENCODED_NAME']=$this->name;

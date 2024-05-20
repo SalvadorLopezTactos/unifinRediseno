@@ -16,6 +16,10 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 class ViewRelationships extends SugarView
 {
     /**
+     * @var bool|mixed
+     */
+    public $fromModuleBuilder;
+    /**
 	 * @see SugarView::_getModuleTitleParams()
 	 */
 	protected function _getModuleTitleParams($browserTitle = false)

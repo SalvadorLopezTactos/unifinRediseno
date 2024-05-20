@@ -24,9 +24,25 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
  * @property bool $from_studio
  * @property string $relationship_type
  */
+#[AllowDynamicProperties]
 class AbstractRelationship
 {
 
+    public $readonly;
+    /**
+     * @var bool
+     */
+    public $deleted;
+    /**
+     * @var mixed
+     */
+    public $rhs_label;
+    /**
+     * @var mixed
+     */
+    public $lhs_label;
+    public $joinKeyLHS;
+    public $joinKeyRHS;
     protected $definition ; // enough information to rebuild this relationship
 
 
@@ -96,7 +112,7 @@ class AbstractRelationship
 
         foreach ( self::$definitionKeys as $key )
         {
-            $this->$key = isset ( $definition [ $key ] ) ? $definition [ $key ] : '' ;
+            $this->$key = $definition [ $key ] ?? '' ;
         }
         $this->definition = $definition ;
     }
@@ -107,7 +123,7 @@ class AbstractRelationship
      */
     public function getName ()
     {
-        return isset ( $this->definition [ 'relationship_name' ] ) ? $this->definition [ 'relationship_name' ] : null ;
+        return $this->definition [ 'relationship_name' ] ?? null ;
     }
 
     public function setName ($relationshipName)
@@ -770,7 +786,7 @@ class AbstractRelationship
     function getJoinKeyLHS()
     {
         if (!isset($this->joinKeyLHS))
-            $this->joinKeyLHS = static::getValidDBName($this->relationship_name . $this->lhs_module . "_ida", true) ;
+            $this->joinKeyLHS = static::getValidDBName($this->relationship_name . $this->lhs_module . "_ida", true);
 
         return $this->joinKeyLHS;
     }
@@ -778,7 +794,7 @@ class AbstractRelationship
     function getJoinKeyRHS()
     {
         if (!isset($this->joinKeyRHS))
-            $this->joinKeyRHS = static::getValidDBName($this->relationship_name . $this->rhs_module . "_idb", true) ;
+            $this->joinKeyRHS = static::getValidDBName($this->relationship_name . $this->rhs_module . "_idb", true);
 
         return $this->joinKeyRHS;
     }

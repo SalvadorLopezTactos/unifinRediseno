@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'สร้างโดย',
   'LBL_EDIT_LAYOUT' => 'แก้ไขเลย์เอาต์' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'ผู้ดูแลระบบเท่านั้น',
-  'LBL_CURRENCY_DEFAULT' => 'ดอลลาร์สหรัฐ(ค่าเริ่มต้น)',
-
+  'LBL_CURRENCY_DEFAULT' => 'สกุลเงินของระบบ (ค่าเริ่มต้น)',
 );
 ?>

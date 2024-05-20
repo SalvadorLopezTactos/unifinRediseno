@@ -14,6 +14,7 @@ use Sugarcrm\Sugarcrm\Security\Password\Utilities;
 
 class PasswordApi extends SugarApi
 {
+    public $usr;
     public function registerApiRest()
     {
         return array(
@@ -87,7 +88,7 @@ class PasswordApi extends SugarApi
                 throw new SugarApiExceptionRequestMethodFailure(translate('ERR_EMAIL_INCORRECT', 'Users'), $args);
             }
 
-            $isLink = !$GLOBALS['sugar_config']['passwordsetting']['SystemGeneratedPasswordON'];
+            $isLink = true; //Due to GDPR restrictions, sys generated passwords are forbidden. User must get the link to set the password
             // if i need to generate a password (not a link)
             $password = $isLink ? '' : User::generatePassword();
 
@@ -112,7 +113,7 @@ class PasswordApi extends SugarApi
             if ($isLink && isset($res['lostpasswordtmpl'])) {
                 $emailTemp_id = $res['lostpasswordtmpl'];
             } else {
-                $emailTemp_id = $res['generatepasswordtmpl'];
+                throw new SugarApiExceptionRequestMethodFailure('LBL_EMAIL_NOT_SENT', $args);
             }
 
             $additionalData = array(

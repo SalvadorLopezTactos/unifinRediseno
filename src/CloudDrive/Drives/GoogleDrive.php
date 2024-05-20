@@ -46,6 +46,12 @@ class GoogleDrive extends Drive
      */
     public function listFolders(array $options)
     {
+        $client = $this->getClient();
+
+        if (is_array($client) && !$client['success']) {
+            return $client;
+        }
+
         $orderBy = $options['orderBy'] ?? 'modifiedTime desc';
         $folderName = $options['folderName'];
         $folderParent = $options['folderParent'];
@@ -120,10 +126,16 @@ class GoogleDrive extends Drive
     {
         global $sugar_config;
 
+        $client = $this->getClient();
+
+        if (is_array($client) && !$client['success']) {
+            return $client;
+        }
+
         $folderId = $options['folderId'] ?? 'root';
         $nextPageToken = $options['nextPageToken'] ?? null;
-        $sortOptions = $options['sortOptions'];
-        $sharedWithMe = $options['sharedWithMe'];
+        $sortOptions = $options['sortOptions'] ?? false;
+        $sharedWithMe = $options['sharedWithMe'] ?? false;
 
         $q = "'{$folderId}' in parents and trashed = false";
 
@@ -166,7 +178,10 @@ class GoogleDrive extends Drive
             $files = $drive->files->listFiles($options);
         } catch (Google_Exception $e) {
             $GLOBALS['log']->fatal($e);
-            return false;
+            return [
+                'success' => false,
+                'message' => 'LBL_CHECK_GOOGLE_CONNECTION',
+            ];
         }
 
         $mapper = new DriveItemMapper($files->getFiles(), DriveType::GOOGLE);
@@ -192,7 +207,7 @@ class GoogleDrive extends Drive
         $fileId = $options['fileId'];
         $fileInfo = $googleApi->retrieveFileInfo($fileId);
         $mimeType = $fileInfo->getMimeType();
-        $usableMimeType = $this->usableMimeTypes[$mimeType];
+        $usableMimeType = $this->usableMimeTypes[$mimeType] ?? '';
 
         try {
             $contentData = $googleApi->downloadDoc($fileId, $mimeType);
@@ -219,7 +234,7 @@ class GoogleDrive extends Drive
     {
         $googleApi = new ExtAPIGoogle();
 
-        if ($options['data']) {
+        if (isset($options['data']) && $options['data']) {
             $fileName = $options['fileName'];
             $parentId = $options['parentId'];
             $data = $options['data'];
@@ -227,7 +242,6 @@ class GoogleDrive extends Drive
         }
 
         $documentBean = $options['documentBean'];
-        $filePath = $options['filePath'];
         $pathId = $options['pathId'];
         $parent = $pathId ?? 'root';
 
@@ -320,7 +334,7 @@ class GoogleDrive extends Drive
         $drive = new GDrive($client);
 
         $folderMimeType = 'application/vnd.google-apps.folder';
-        $q = "mimeType = '${folderMimeType}'";
+        $q = "mimeType = '{$folderMimeType}'";
 
         if ($sharedWithMe) {
             $includeItemsFromAllDrives = true;
@@ -331,7 +345,7 @@ class GoogleDrive extends Drive
             if ($sharedWithMe && $parentId === 'root') {
                 $q .= " and sharedWithMe";
             } else {
-                $q .= " and '${parentId}' in parents";
+                $q .= " and '{$parentId}' in parents";
             }
         } else {
             if (!$sharedWithMe && $folderParent === 'root') {
@@ -340,7 +354,7 @@ class GoogleDrive extends Drive
         }
 
         if ($folderName && $parentId !== 'root') {
-            $q .= " and name = '${folderName}'";
+            $q .= " and name = '{$folderName}'";
         }
 
         $q .= ' and trashed = false';
@@ -417,6 +431,17 @@ class GoogleDrive extends Drive
     }
 
     /**
+     * Uploads a larget file to the drive
+     *
+     * @param array $options
+     * @return null||array
+     */
+    public function uploadLargeFile(array $options): ?array
+    {
+        return $this->uploadFile($options);
+    }
+
+    /**
      * Get the file extension of a google file
      *
      * @param array $options
@@ -451,7 +476,7 @@ class GoogleDrive extends Drive
         $client = $googleApi->getClient();
         $eapm = \EAPM::getLoginInfo('Google');
 
-        if (empty($eapm->api_data)) {
+        if (empty($eapm->api_data) || (isset($client->token) && !isset($client->token->access_token))) {
             return [
                 'success' => false,
                 'message' => 'LBL_CHECK_GOOGLE_CONNECTION',

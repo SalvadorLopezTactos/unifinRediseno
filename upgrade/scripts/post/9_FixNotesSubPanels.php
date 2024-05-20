@@ -36,8 +36,7 @@ class SugarUpgradeFixNotesSubpanels extends UpgradeScript
                 if (1 != count($viewdefsWrite)) {
                     break;
                 }
-                reset($viewdefsWrite);
-                $keyNames[] = key($viewdefsWrite);
+                $keyNames[] = array_key_first($viewdefsWrite);
                 $viewdefsWrite = $viewdefsWrite[key($viewdefsWrite)];
             }
 

@@ -17,8 +17,10 @@ namespace Symfony\Component\Security\Core\User;
  * This should not be used for anything else.
  *
  * @author Fabien Potencier <fabien@symfony.com>
+ *
+ * @deprecated since Symfony 5.3, use {@link InMemoryUser} instead
  */
-final class User implements AdvancedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, EquatableInterface
 {
     private $username;
     private $password;
@@ -27,9 +29,14 @@ final class User implements AdvancedUserInterface
     private $credentialsNonExpired;
     private $accountNonLocked;
     private $roles;
+    private $extraFields;
 
-    public function __construct($username, $password, array $roles = [], $enabled = true, $userNonExpired = true, $credentialsNonExpired = true, $userNonLocked = true)
+    public function __construct(?string $username, ?string $password, array $roles = [], bool $enabled = true, bool $userNonExpired = true, bool $credentialsNonExpired = true, bool $userNonLocked = true, array $extraFields = [])
     {
+        if (InMemoryUser::class !== static::class) {
+            trigger_deprecation('symfony/security-core', '5.3', 'The "%s" class is deprecated, use "%s" instead.', self::class, InMemoryUser::class);
+        }
+
         if ('' === $username || null === $username) {
             throw new \InvalidArgumentException('The username cannot be empty.');
         }
@@ -41,17 +48,18 @@ final class User implements AdvancedUserInterface
         $this->credentialsNonExpired = $credentialsNonExpired;
         $this->accountNonLocked = $userNonLocked;
         $this->roles = $roles;
+        $this->extraFields = $extraFields;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getUsername();
+        return $this->getUserIdentifier();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRoles()
+    public function getRoles(): array
     {
         return $this->roles;
     }
@@ -59,7 +67,7 @@ final class User implements AdvancedUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -67,7 +75,7 @@ final class User implements AdvancedUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getSalt()
+    public function getSalt(): ?string
     {
         return null;
     }
@@ -75,39 +83,69 @@ final class User implements AdvancedUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getUsername()
+    public function getUsername(): string
+    {
+        trigger_deprecation('symfony/security-core', '5.3', 'Method "%s()" is deprecated, use getUserIdentifier() instead.', __METHOD__);
+
+        return $this->username;
+    }
+
+    /**
+     * Returns the identifier for this user (e.g. its username or email address).
+     */
+    public function getUserIdentifier(): string
     {
         return $this->username;
     }
 
     /**
-     * {@inheritdoc}
+     * Checks whether the user's account has expired.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw an AccountExpiredException and prevent login.
+     *
+     * @see AccountExpiredException
      */
-    public function isAccountNonExpired()
+    public function isAccountNonExpired(): bool
     {
         return $this->accountNonExpired;
     }
 
     /**
-     * {@inheritdoc}
+     * Checks whether the user is locked.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a LockedException and prevent login.
+     *
+     * @see LockedException
      */
-    public function isAccountNonLocked()
+    public function isAccountNonLocked(): bool
     {
         return $this->accountNonLocked;
     }
 
     /**
-     * {@inheritdoc}
+     * Checks whether the user's credentials (password) has expired.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a CredentialsExpiredException and prevent login.
+     *
+     * @see CredentialsExpiredException
      */
-    public function isCredentialsNonExpired()
+    public function isCredentialsNonExpired(): bool
     {
         return $this->credentialsNonExpired;
     }
 
     /**
-     * {@inheritdoc}
+     * Checks whether the user is enabled.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a DisabledException and prevent login.
+     *
+     * @see DisabledException
      */
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
@@ -117,5 +155,64 @@ final class User implements AdvancedUserInterface
      */
     public function eraseCredentials()
     {
+    }
+
+    public function getExtraFields(): array
+    {
+        return $this->extraFields;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEqualTo(UserInterface $user): bool
+    {
+        if (!$user instanceof self) {
+            return false;
+        }
+
+        if ($this->getPassword() !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->getSalt() !== $user->getSalt()) {
+            return false;
+        }
+
+        $currentRoles = array_map('strval', (array) $this->getRoles());
+        $newRoles = array_map('strval', (array) $user->getRoles());
+        $rolesChanged = \count($currentRoles) !== \count($newRoles) || \count($currentRoles) !== \count(array_intersect($currentRoles, $newRoles));
+        if ($rolesChanged) {
+            return false;
+        }
+
+        if ($this->getUserIdentifier() !== $user->getUserIdentifier()) {
+            return false;
+        }
+
+        if (self::class === static::class) {
+            if ($this->isAccountNonExpired() !== $user->isAccountNonExpired()) {
+                return false;
+            }
+
+            if ($this->isAccountNonLocked() !== $user->isAccountNonLocked()) {
+                return false;
+            }
+
+            if ($this->isCredentialsNonExpired() !== $user->isCredentialsNonExpired()) {
+                return false;
+            }
+        }
+
+        if ($this->isEnabled() !== $user->isEnabled()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
     }
 }

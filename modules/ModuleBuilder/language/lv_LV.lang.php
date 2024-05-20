@@ -801,17 +801,14 @@ $mod_strings = array(
 'LBL_POPHELP_CALCULATED'=>"Izveidojiet formulu, lai noteiktu vērtību šajā laukā.<br>"
    . "Darbplūsmas definīcijas, kas satur darbību un ir iestatītas, lai atjauninātu šo lauku, vairs nepildīs šo darbību.<br>"
    . "Lauki, kuros izmantotas formulas, netiks aprēķināti reāllaikā "
-   . "sugar pašapkalpošanās portālā vai "
+   . "Sugar pašapkalpošanās portālā vai "
    . "Mobilās rediģēšanas skatījuma izkārtojumos.",
 
 'LBL_POPHELP_DEPENDENT'=>"Izveidojiet formulu, lai noteiktu, vai šis lauks ir redzams izkārtojumos.<br/>"
         . "Atkarīgiem laukiem uz pārlūku balstītā mobilajā skatā tiks piemērota atkarības formula, <br/>"
         . "bet oriģinālajās lietotnēs, tādās kā Sugar Mobile for iPhone, šī formula netiks piemērota. <br/>"
         . "Sugar pašapkalpošanās portālā tiem šī formula netiks piemērota.",
-'LBL_POPHELP_REQUIRED'=>"Izveidojiet formulu, lai noteiktu, vai šis lauks ir obligāts izkārtojumos.<br/>"
-    . "Obligātajiem laukiem uz pārlūku balstītā mobilajā skatā tiks piemērota formula, <br/>"
-    . "bet oriģinālajās lietotnēs, tādās kā Sugar Mobile for iPhone, šī formula netiks piemērota. <br/>"
-    . "Sugar pašapkalpošanās portālā tiem šī formula netiks piemērota.",
+    'LBL_POPHELP_REQUIRED'=>'Lauki, kas ir nosacīti obligāti, nav pieejami lietošanai šādos SugarBPM darbību veidos: Pievienot saistīto ierakstu, Mainīt lauku. Lai izmantotu šo lauku šajās procesa definīcijas darbībās, noņemiet tekstu “Obligāts, ja”',
 'LBL_POPHELP_READONLY'=>"Izveidojiet formulu, lai noteiktu, vai šis lauks ir tikai lasāms izkārtojumos.<br/>"
         . "Tikai lasāmajiem laukiem uz pārlūku balstītā mobilajā skatā tiks piemērota formula, <br/>"
         . "bet oriģinālajās lietotnēs, tādās kā Sugar Mobile for iPhone, šī formula netiks piemērota. <br/>"
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Decimālais',
                 'autoincrement' => 'Automātiskā palielināšana',
                 'actionbutton' => 'Darbības poga',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Biežāk izmantotās etiķetes",

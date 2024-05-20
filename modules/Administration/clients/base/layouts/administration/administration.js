@@ -59,5 +59,14 @@
      */
     getAdminPanelDefs: function() {
         return this.adminPanelDefs || [];
-    }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _render: function() {
+        this._super('_render');
+
+        this.$('input[data-action="search"]').focus();
+    },
 })

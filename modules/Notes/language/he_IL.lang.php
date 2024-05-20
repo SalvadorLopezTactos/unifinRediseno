@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת הערות',
     'LBL_NOTES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות הערות',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס פתקים',
+    'LBL_EXTERNAL_USER' => 'משתמש חיצוני',
+    'LBL_EXTERNAL_USER_NAME' => 'משתמש חיצוני',
 
     'LBL_RELATED_CONTACT' => 'איש קשר קשור',
     'ERR_DELETE_RECORD' => 'You must specify a record number to delete the account.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'סוג דוא"ל',
     'LBL_EMAIL_ID' => 'מזהה דוא"ל',
     'LBL_PHONE' => 'טלפון:',
-    'LBL_PORTAL_FLAG' => 'להתיג בפורטל?',
+    'LBL_PORTAL_FLAG' => 'זמין חיצונית',
     'LBL_EMBED_FLAG' => 'לשבץ בהודעת דואר?',
     'LBL_PRODUCT_ID' => 'זהות מוצר:',
     'LBL_QUOTE_ID' => 'זהות הצעת מחיר:',

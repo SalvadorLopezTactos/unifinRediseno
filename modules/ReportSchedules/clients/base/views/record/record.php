@@ -118,6 +118,11 @@ $viewdefs['ReportSchedules']['base']['view']['record'] = array(
                     'span' => 12,
                 ),
                 'file_type',
+                [
+                    'name' => 'embed_report',
+                    'label' => 'LBL_EMBED_REPORT',
+                    'help' => 'LBL_EMBED_REPORT_INFO',
+                ],
             ),
         ),
         array(

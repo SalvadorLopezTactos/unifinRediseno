@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'ไม่มีชุดลับของไคลเอ็นต์',
     'LBL_RESEND_BUTTON_LABEL' => 'ส่งอีกครั้ง',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'เรียกซอง',
+    'LBL_CLOUD_SERVICE_TYPE' => 'ประเภทบริการคลาวด์',
+    'LBL_CLOUD_PATH' => 'เส้นทางคลาวด์',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'แดชบอร์ดรายการซอง DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'ซอง DocuSign ล่าสุด',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'ระบบลิ้นชักซอง DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'เอกสารจาก ',
+    'LBL_NEW_ENVELOPE' => 'ซองใหม่',
     'LBL_DOCUMENT_IS_NOW' => ' ขณะนี้ ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'มีข้อผิดพลาดใน DocuSign ไม่สามารถรับ ID บัญชีตามโทเค่นที่เข้าถึงได้',
     'LBL_ERROR_RESEND' => 'ไม่สามารถส่ง DocuSign อีกครั้งได้ สถานะซองจะต้องเป็น "ส่งแล้ว"',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'การอัปเดตล้มเหลว',
     'LBL_ERROR_FETCH_TIME' => 'กฎของ DocuSign ไม่อนุญาตให้ทำคำขอหลายรายการในซองภายใน 15 นาที',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'มีข้อผิดพลาดเกิดขึ้น ไม่สามารถอัปเดตซองได้ โปรดตรวจสอบบันทึกล็อกของคุณ!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'มีข้อผิดพลาดเกิดขึ้น ไม่สามารถทำรายการเทมเพลตได้ โปรดตรวจสอบบันทึก!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'มีข้อผิดพลาดเกิดขึ้น ไม่สามารถเรียกเทมเพลตได้ โปรดตรวจสอบบันทึก!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'ซองไม่สมบูรณ์',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'สถานะซองใน DocuSign คือ ขณะนี้ ',
     'LBL_OVERVIEW' => 'ภาพรวม',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'เพิ่มเอกสาร',
     'LBL_BUTTON_SEND' => 'ส่ง',
     'LBL_BUTTON_CLEAR' => 'ล้าง',
-    'LBL_MISSING_OBJECT' => 'วัตถุ DocuSign ไม่อยู่ในหน้าต่าง',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'ใช้เทมเพลต',
     'LBL_PLEASE_LOG_IN' => 'โปรดเข้าระบบ DocuSign ก่อน!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'คุณไม่สามารถดาวน์โหลดเอกสารนี้ได้ เพราะผู้ใช้คนอื่นเป็นคนสร้างเอกสาร!',
     'LBL_SEND_NOT_ALLOWED' => 'คุณไม่สามารถส่งเอกสารนี้ได้ เพราะผู้ใช้คนอื่นเป็นคนสร้างเอกสาร!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'ลงชื่อแล้ว',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'ไม่สามารถดาวน์โหลดเอกสารได้ โปรดตรวจสอบบันทึกล็อก!',
     'LBL_DOCUMENT_COMPLETED' => 'เสร็จสมบูรณ์',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'ข้อมูล DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'ขณะนี้',
+    'LBL_SETTINGS_TITLE' => 'การตั้งค่า DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'พฤติกรรมการเลือกของผู้รับ',
+    'LBL_RECIPIENT_NAME' => 'ชื่อ',
+    'LBL_RECIPIENT_EMAIL' => 'อีเมล',
+    'LBL_RECIPIENT_TYPE' => 'ประเภท',
+    'LBL_TEMPLATE_NAME' => 'ชื่อ',
+    'LBL_RECIPIENT_SELECT' => 'เลือก...',
+    'LBL_RECIPIENT_ROLE' => 'บทบาท',
+    'LBL_SELECT_BUTTON_LABEL' => 'เลือก',
+    'LBL_BACK_BUTTON_LABEL' => 'ย้อนกลับ',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'เรียกผู้รับที่มีศักยภาพไม่สำเร็จ!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'เรียกเทมเพลตไม่สำเร็จ!',
 ];

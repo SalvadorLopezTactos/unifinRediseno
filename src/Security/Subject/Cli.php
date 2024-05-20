@@ -22,6 +22,7 @@ final class Cli implements Subject
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

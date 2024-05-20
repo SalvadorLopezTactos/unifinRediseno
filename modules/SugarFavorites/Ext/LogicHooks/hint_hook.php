@@ -13,7 +13,7 @@ $hook_array['after_restore'][] = [
     1,
     'Hook description',
     null,
-    'Sugarcrm\\Sugarcrm\\modules\\SugarFavorites\\HintSugarFavoritesHook',
+    \Sugarcrm\Sugarcrm\modules\SugarFavorites\HintSugarFavoritesHook::class,
     'afterRestore',
 ];
 
@@ -21,7 +21,7 @@ $hook_array['after_save'][] = [
     1,
     'Hook description',
     null,
-    'Sugarcrm\\Sugarcrm\\modules\\SugarFavorites\\HintSugarFavoritesHook',
+    \Sugarcrm\Sugarcrm\modules\SugarFavorites\HintSugarFavoritesHook::class,
     'afterSave',
 ];
 
@@ -29,6 +29,6 @@ $hook_array['before_delete'][] = [
     1,
     'Hook description',
     null,
-    'Sugarcrm\\Sugarcrm\\modules\\SugarFavorites\\HintSugarFavoritesHook',
+    \Sugarcrm\Sugarcrm\modules\SugarFavorites\HintSugarFavoritesHook::class,
     'beforeDelete',
 ];

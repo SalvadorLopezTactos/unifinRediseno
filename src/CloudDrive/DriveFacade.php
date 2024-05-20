@@ -15,6 +15,10 @@ namespace Sugarcrm\Sugarcrm\CloudDrive;
 class DriveFacade implements DriveInterface
 {
     /**
+     * @var \Sugarcrm\Sugarcrm\CloudDrive\Drives\GoogleDrive|\Sugarcrm\Sugarcrm\CloudDrive\Drives\OneDrive|\Sugarcrm\Sugarcrm\CloudDrive\Dropbox|void|mixed
+     */
+    public $drive;
+    /**
      * @constructor
      *
      * @param string $type
@@ -96,7 +100,7 @@ class DriveFacade implements DriveInterface
      */
     public function uploadFile(array $options): ?array
     {
-        if ($options['largeFile']) {
+        if (isset($options['largeFile']) && $options['largeFile']) {
             return $this->drive->uploadLargeFile($options);
         }
 
@@ -111,6 +115,16 @@ class DriveFacade implements DriveInterface
     public function deleteFile(array $options)
     {
         return $this->drive->deleteFile($options);
+    }
+
+    /**
+     * Gets a shared link from drive
+     *
+     * @param array $options
+     */
+    public function getSharedLink(array $options)
+    {
+        return $this->drive->getSharedLink($options);
     }
 
     /**

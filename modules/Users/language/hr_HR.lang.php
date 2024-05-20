@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Podaci o korisniku nisu pronađeni',
     'ERR_USER_NAME_EXISTS'              => 'Korisničko ime {0} već postoji. Duplikati korisničkih imena nisu dozvoljeni. Promijenite korisničko ime da bi bilo jedinstveno.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licencu za „Sugar Hint” potrebno je spremiti s dodatnom kompatibilnom vrstom licence',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Ova je mogućnost već uključena u Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Korisniku je blokiran pristup aplikaciji Sugar i ne može se prijaviti s pomoću svoje postojeće lozinke.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Korisniku sa samo vanjskom provjerom autentičnosti nije dozvoljena prijava korištenjem Sugar vjerodajnica',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Lozinka',
     'LBL_CHOOSE_A_KEY'					=> 'Odaberite šifru da biste spriječili neovlašteno objavljivanje vašeg kalendara',
     'LBL_NO_KEY'                        => 'Šifra nije postavljena. Odaberite šifru da biste omogućili objavljivanje.',
-	'LBL_CHOOSE_WHICH'					=> 'Odaberite kojim je modulima moguće pristupiti unutar gornje navigacijske trake. Odredite redoslijed pojavljivanja modula.',
+    'LBL_CHOOSE_WHICH'                  => 'Odaberite kojim je modulima moguće pristupiti unutar bočne navigacijske trake. Odredite redoslijed pojavljivanja modula.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Broj prikvačenih modula',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Napišite broj dostupnih modula za prikvačivanje kada je navigacijska traka sažeta (npr. ako je uneseno 5, prvih pet modula na popisu je prikvačeno). Preporučujemo broj koji predstavlja vaše najčešće korištene module. Vrijednosti veće od 100 neće se uzimati u obzir.',
 	'LBL_CITY'							=> 'Grad',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Ukloni',
@@ -545,6 +548,7 @@ Kliknite na Odustani da biste izašli sa stranice bez preraspodjele zapisa.',
 	'LBL_MAIL_SMTPUSER'					=> 'Korisničko ime za SMTP:',
 	'LBL_MAIL_SMTPTYPE'                => 'Vrsta poslužitelja za SMTP:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'Specifikacije poslužitelja za SMTP',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Autorizirani račun za e-poštu',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Odaberite davatelja usluge e-pošte:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Lozinka za Yahoo! Mail:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'ID za Yahoo! Mail:',
@@ -700,4 +704,9 @@ Kliknite na Odustani da biste izašli sa stranice bez preraspodjele zapisa.',
     'LBL_UTILS_USER_TEAMS_ROLES' => 'korisnici/timovi/uloge',
     'LBL_LOADING_ITEMS' => 'Učitavanje podataka...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Pristup pametnom vodiču',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Zadnji aktivni pametni vodič',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Nedostaje pristup pametnom vodiču',
 ); // END STRINGS DEFS

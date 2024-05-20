@@ -62,7 +62,7 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
     {
         $defaultFields = array();
         foreach ($this->_viewdefs['fields'] as $name => $details) {
-            $def = isset($this->_fielddefs[$name]) ? $this->_fielddefs[$name] : $details;
+            $def = $this->_fielddefs[$name] ?? $details;
             if ($this->isValidField($name, $def)) {
                 $defaultFields[$name] = $def;
             }
@@ -230,7 +230,7 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
                     $newPaneldefs[$fieldname] = $this->_viewdefs['fields'][$fieldname];
                 } elseif ((!empty($comboFieldDefs[$fieldname]) &&
                         isset($comboFieldDefs[$fieldname]['dbFields']))
-                        || $fieldname === '$favorite' || (hasMapsLicense() && $fieldName === '$distance')
+                        || $fieldname === '$favorite' || (hasMapsLicense() && $fieldname === '$distance')
                 ) {
                     // combo fields such as address_street
                     // Or condition is for special field found that should be added too

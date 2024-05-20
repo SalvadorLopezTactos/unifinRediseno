@@ -9,10 +9,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Document'] = array('table' => 'documents',
+$dictionary['Document'] = array(
+    'table' => 'documents',
+    'color' => 'coral',
+    'icon' => 'sicon-document-lg',
     'unified_search' => true,
     'full_text_search' => true,
     'unified_search_default_enabled' => true,
+    'audited' => true,
     'fields' => array(
 
         'document_name' =>
@@ -125,6 +129,14 @@ $dictionary['Document'] = array('table' => 'documents',
             'len' => 100,
             'options' => 'document_subcategory_dom',
             'reportable' => true,
+        ),
+        
+        'is_shared' =>
+        array(
+            'name' => 'is_shared',
+            'vname' => 'LBL_IS_SHARED',
+            'type' => 'bool',
+            'audited' => true,
         ),
 
         'status_id' =>

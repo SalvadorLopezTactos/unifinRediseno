@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Värskenda toote määratlust',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Protsessi ajateadlikud ajakavad',
 'LBL_OOTB_DATA_ARCHIVER' => 'Käita aktiivsete andmete arhiivimis-/kustutamistoiminguid',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Rakendage tellimuse õigusi, kui neid muudetakse',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Kirjete geokooder',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Täpsemad suvandid',
 'LBL_TOGGLE_ADV' => 'Kuva täpsemad suvandid',
 'LBL_TOGGLE_BASIC' => 'Kuva põhisuvandid',
+'LBL_UPDATEMOMENTUMCJ' => 'Värskenda käimasolevate nutikate juhiste impulssi',
 // Links
 'LNK_LIST_SCHEDULER' => 'Planeerijad',
 'LNK_NEW_SCHEDULER' => 'Loo planeerija',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Käita aktiivsete andmete arhiivimis-/kustutamistoiminguid',
 'LBL_PMSEENGINECRON' => 'SugarBPM-i planeerija',
 );
-

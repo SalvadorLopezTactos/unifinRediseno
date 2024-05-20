@@ -18,7 +18,7 @@ class HintNotificationTarget extends \Basic implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    const MODULE_NAME = 'HintNotificationTargets';
+    public const MODULE_NAME = 'HintNotificationTargets';
 
     public $id;
     public $assigned_user_id;

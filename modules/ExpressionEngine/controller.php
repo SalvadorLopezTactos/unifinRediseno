@@ -130,7 +130,7 @@ class ExpressionEngineController extends SugarController
         if (empty($_REQUEST['tmodule']) || empty($_REQUEST['fields']))
             return;
 
-        $fields = json_decode(html_entity_decode($_REQUEST['fields']), true);
+        $fields = json_decode(html_entity_decode($_REQUEST['fields'], ENT_COMPAT), true);
         if (!is_array($fields)) {
             $log->fatal('"fields" is not a valid JSON string');
             $this->display($ret);
@@ -208,8 +208,7 @@ class ExpressionEngineController extends SugarController
                 case "count":
                     if(!empty($id) && $focus->load_relationship($link))
                     {
-                        $linkValue = $focus->$link->get();
-                        $ret[$link][$type] = is_countable($linkValue) ? count($linkValue) : 0;
+                        $ret[$link][$type] = is_countable($focus->$link->get()) ? count($focus->$link->get()) : 0;
                     } else
                     {
                         $ret[$link][$type] = 0;

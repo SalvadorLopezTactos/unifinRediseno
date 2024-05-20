@@ -93,8 +93,7 @@ class PMSEProjectImportExportApi extends vCardApi
         }
 
         if (isset($_FILES) && count($_FILES) === 1) {
-            reset($_FILES);
-            $first_key = key($_FILES);
+            $first_key = array_key_first($_FILES);
             if (isset($_FILES[$first_key]['tmp_name'])
                 && $this->isUploadedFile($_FILES[$first_key]['tmp_name'])
                 && isset($_FILES[$first_key]['size'])
@@ -136,7 +135,7 @@ class PMSEProjectImportExportApi extends vCardApi
     private function getOptions()
     {
         $options = [];
-        $sids = isset($_POST['selectedIds']) ? $_POST['selectedIds'] : '';
+        $sids = $_POST['selectedIds'] ?? '';
         $violations = Validator::getService()->validate($sids, new JSONConstraint());
         if (count($violations) === 0) {
             $options['selectedIds'] = json_decode($sids, true);

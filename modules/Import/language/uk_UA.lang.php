@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Необхідне значення відсутнє',
     'LBL_ERROR_SYNC_USERS' => 'Недійсне значення для синхронізація з Outlook:',
     'LBL_ID_EXISTS_ALREADY' => 'ID  вже присутній в даній таблиці',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'Ця таблиця вже містить SYNC_KEY',
     'LBL_ASSIGNED_USER' => 'Якщо користувач не існує - використовуйте поточного користувача',
     'LBL_SHOW_HIDDEN' => 'Показати поля, які не можуть бути коректно імпортовані',
     'LBL_UPDATE_RECORDS' => 'Оновлення існуючих записів (операцію не можна скасувати)',

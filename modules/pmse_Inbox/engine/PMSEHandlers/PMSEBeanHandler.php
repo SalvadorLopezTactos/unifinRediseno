@@ -264,6 +264,15 @@ class PMSEBeanHandler
                     // We'll need these for later
                     $def = $newBean->field_defs[$fieldName];
 
+                    $relField = $def['id_name'] ?? null;
+
+                    // Fetch the related bean data when the related field value is empty
+                    // but has an id reference to the related bean
+                    if ($relField && $def['type'] === 'relate' && empty($value) && !empty($newBean->$relField)) {
+                        $relBean = $this->retrieveBean($def['module'], $newBean->$relField);
+                        $value = $relBean->name;
+                    }
+
                     // If we are looking for a "from" value, and we have one...
                     if ($data['value_type'] === 'old' && array_key_exists($fieldName, (array) $newBean->dataChanges)) {
                         $value = $newBean->dataChanges[$fieldName]['before'];
@@ -731,8 +740,8 @@ class PMSEBeanHandler
                 case 'UNIT_TIME':
                     switch ($evn->expUnit) {
                         case 'minutes':
-                            $arrayUnitPos['minutes'] = isset($arrayUnitPos['minutes']) ? $arrayUnitPos['minutes'] : 0;
-                            $arrayUnitNeg['minutes'] = isset($arrayUnitNeg['minutes']) ? $arrayUnitNeg['minutes'] : 0;
+                            $arrayUnitPos['minutes'] = $arrayUnitPos['minutes'] ?? 0;
+                            $arrayUnitNeg['minutes'] = $arrayUnitNeg['minutes'] ?? 0;
                             if ($expre[$keyevn - 1]->expValue == '+') {
                                 $arrayUnitPos['minutes'] = $arrayUnitPos['minutes'] + $evn->expValue;
                             } else {
@@ -740,8 +749,8 @@ class PMSEBeanHandler
                             }
                             break;
                         case 'hours':
-                            $arrayUnitPos['hours'] = isset($arrayUnitPos['hours']) ? $arrayUnitPos['hours'] : 0;
-                            $arrayUnitNeg['hours'] = isset($arrayUnitNeg['hours']) ? $arrayUnitNeg['hours'] : 0;
+                            $arrayUnitPos['hours'] = $arrayUnitPos['hours'] ?? 0;
+                            $arrayUnitNeg['hours'] = $arrayUnitNeg['hours'] ?? 0;
                             if ($expre[$keyevn - 1]->expValue == '+') {
                                 $arrayUnitPos['hours'] = $arrayUnitPos['hours'] + $evn->expValue;
                             } else {
@@ -749,8 +758,8 @@ class PMSEBeanHandler
                             }
                             break;
                         case 'days':
-                            $arrayUnitPos['days'] = isset($arrayUnitPos['days']) ? $arrayUnitPos['days'] : 0;
-                            $arrayUnitNeg['days'] = isset($arrayUnitNeg['days']) ? $arrayUnitNeg['days'] : 0;
+                            $arrayUnitPos['days'] = $arrayUnitPos['days'] ?? 0;
+                            $arrayUnitNeg['days'] = $arrayUnitNeg['days'] ?? 0;
                             if ($expre[$keyevn - 1]->expValue == '+') {
                                 $arrayUnitPos['days'] = $arrayUnitPos['days'] + $evn->expValue;
                             } else {
@@ -758,8 +767,8 @@ class PMSEBeanHandler
                             }
                             break;
                         case 'months':
-                            $arrayUnitPos['months'] = isset($arrayUnitPos['months']) ? $arrayUnitPos['months'] : 0;
-                            $arrayUnitNeg['months'] = isset($arrayUnitNeg['months']) ? $arrayUnitNeg['months'] : 0;
+                            $arrayUnitPos['months'] = $arrayUnitPos['months'] ?? 0;
+                            $arrayUnitNeg['months'] = $arrayUnitNeg['months'] ?? 0;
                             if ($expre[$keyevn - 1]->expValue == '+') {
                                 $arrayUnitPos['months'] = $arrayUnitPos['months'] + $evn->expValue;
                             } else {
@@ -767,8 +776,8 @@ class PMSEBeanHandler
                             }
                             break;
                         case 'years':
-                            $arrayUnitPos['year'] = isset($arrayUnitPos['year']) ? $arrayUnitPos['year'] : 0;
-                            $arrayUnitNeg['year'] = isset($arrayUnitNeg['year']) ? $arrayUnitNeg['year'] : 0;
+                            $arrayUnitPos['year'] = $arrayUnitPos['year'] ?? 0;
+                            $arrayUnitNeg['year'] = $arrayUnitNeg['year'] ?? 0;
                             if ($expre[$keyevn - 1]->expValue == '+') {
                                 $arrayUnitPos['year'] = $arrayUnitPos['year'] + $evn->expValue;
                             } else {

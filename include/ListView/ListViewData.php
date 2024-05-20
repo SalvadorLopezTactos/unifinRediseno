@@ -21,6 +21,35 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 class ListViewData {
 
     /**
+     * @var string|mixed[]
+     */
+    public $limitName;
+    /**
+     * @var \DBManager|mixed
+     */
+    public $db;
+    /**
+     * @var mixed|array<mixed, array<string, mixed>>|mixed[]|string|string[]
+     */
+    public $var_order_by;
+    /**
+     * @var mixed|string
+     */
+    public $var_name;
+    /**
+     * @var mixed[]|mixed|string|int[]|string[]
+     */
+    public $var_offset;
+    /**
+     * @var string|mixed
+     */
+    public $stamp;
+    /**
+     * @var mixed|\SugarBean
+     */
+    public $seed;
+    public $additionalDetailsFunction;
+    /**
      * @var Request 
      */
     protected $request;
@@ -235,6 +264,9 @@ class ListViewData {
 	 * @return array('data'=> row data, 'pageData' => page data information, 'query' => original query string)
 	 */
 	function getListViewData($seed, $where, $offset=-1, $limit = -1, $filter_fields=array(),$params=array(),$id_field = 'id',$singleSelect=true) {
+        $seedACL = [];
+        $tempACL = [];
+        $pageData = [];
         global $current_user;
         SugarVCR::erase($seed->module_dir);
         $this->seed = $seed;
@@ -505,11 +537,11 @@ class ListViewData {
             'objectName' => $seed->object_name,
             'moduleDir' => $seed->module_dir,
             'moduleName' => strtr($seed->module_dir, $module_names),
-            'moduleTitle' => isset($seed->module_title) ? $seed->module_title : null,
-            'parentTitle' => isset($seed->parent_title) ? $seed->parent_title : null,
-            'parentModuleDir' => isset($seed->parent_module_dir) ? $seed->parent_module_dir : null,
-            'createAction' => isset($seed->create_action) ? $seed->create_action : 'EditView',
-            'showLink' => isset($seed->show_link) ? $seed->show_link : null,
+            'moduleTitle' => $seed->module_title ?? null,
+            'parentTitle' => $seed->parent_title ?? null,
+            'parentModuleDir' => $seed->parent_module_dir ?? null,
+            'createAction' => $seed->create_action ?? 'EditView',
+            'showLink' => $seed->show_link ?? null,
             'importable' => $seed->importable
         );
         $pageData['stamp'] = $this->stamp;
@@ -521,10 +553,11 @@ class ListViewData {
 
         $searchString = '';
 
-        if( isset($_REQUEST["searchFormTab"]) && $_REQUEST["searchFormTab"] == "advanced_search" ||
-        	isset($_REQUEST["type_basic"]) && (count($_REQUEST["type_basic"] > 1) || $_REQUEST["type_basic"][0] != "") ||
-        	isset($_REQUEST["module"]) && $_REQUEST["module"] == "MergeRecords")
-        {
+        if (isset($_REQUEST["searchFormTab"]) && $_REQUEST["searchFormTab"] == "advanced_search" || isset($_REQUEST["type_basic"]) && ((is_countable(
+            $_REQUEST["type_basic"] > 1
+        ) ? count(
+            $_REQUEST["type_basic"] > 1
+        ) : 0) || $_REQUEST["type_basic"][0] != "") || isset($_REQUEST["module"]) && $_REQUEST["module"] == "MergeRecords") {
             $searchString = "-advanced_search";
         }
         else if (isset($_REQUEST["searchFormTab"]) && $_REQUEST["searchFormTab"] == "basic_search")

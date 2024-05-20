@@ -124,7 +124,7 @@ class SugarBeanApiHelper
         }
 
         if (!empty($options['args']['erased_fields'])) {
-            $data['_erased_fields'] = $bean->erased_fields ? $bean->erased_fields : [];
+            $data['_erased_fields'] = $bean->erased_fields ?: [];
         }
 
         return $data;

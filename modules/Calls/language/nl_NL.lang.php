@@ -190,4 +190,10 @@ Om een {{calls_singular_module}} aan te maken:
 3. Klik op "Opslaan" om het nieuwe record af te ronden en terug te keren naar de voorgaande pagina. 
 - Selecteer "Bewaar en bekijk" om het nieuwe {{calls_singular_module}} record te openen in record view. 
 - Selecteer "Bewaar en maak een nieuw record" om direct een nieuw {{calls_singular_module}} aan te maken.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Is slimme gids-gesprek",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Onderliggende taken',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Onderliggende afspraken',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Onderliggende gesprekken',
 );

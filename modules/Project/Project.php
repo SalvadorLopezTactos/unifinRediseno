@@ -176,7 +176,7 @@ class Project extends SugarBean {
 		return $the_where;
 	}
 
-	function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
 	{
 		$field_list = $this->get_list_view_array();
 		$field_list['USER_NAME'] = empty($this->user_name) ? '' : $this->user_name;

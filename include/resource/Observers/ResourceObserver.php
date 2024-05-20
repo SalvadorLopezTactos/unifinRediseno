@@ -18,6 +18,7 @@
  */
 class ResourceObserver {
 
+    public $dieOnError;
 var $module;
 var $limit;
 

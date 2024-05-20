@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Falta un valor requerido',
     'LBL_ERROR_SYNC_USERS' => 'Valor no válido para sincronizar con el cliente de email: ',
     'LBL_ID_EXISTS_ALREADY' => 'ID ya existente en esta tabla',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY ya existe en esta tabla',
     'LBL_ASSIGNED_USER' => 'Si el usuario no existe, utilice el usuario actual',
     'LBL_SHOW_HIDDEN' => 'Mostrar campos que no son normalmente importables',
     'LBL_UPDATE_RECORDS' => 'Actualizar registros actuales en lugar de importarlos (No se puede Deshacer)',

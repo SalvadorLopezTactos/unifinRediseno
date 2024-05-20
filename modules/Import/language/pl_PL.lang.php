@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Brak wymaganej wartości',
     'LBL_ERROR_SYNC_USERS' => 'Nieprawidłowa wartość do synchronizacji z klientem poczty: ',
     'LBL_ID_EXISTS_ALREADY' => 'To ID już istnieje w tej tabeli',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'Klucz SYNC_KEY już istnieje w tej tabeli',
     'LBL_ASSIGNED_USER' => 'Jeśli ten użytkownik nie istnieje, użyj bieżącego',
     'LBL_SHOW_HIDDEN' => 'Pokaż pola, które nie są normalnie importowane',
     'LBL_UPDATE_RECORDS' => 'Aktualizuj istniejące rekordy, zamiast importować je (cofnięcie operacji nie będzie możliwe)',

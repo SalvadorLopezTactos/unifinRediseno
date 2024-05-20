@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> '未找到使用者資訊',
     'ERR_USER_NAME_EXISTS'              => '使用者名稱 {0} 已存在。使用者名稱不允許重複。變更使用者名稱，使其為唯一的名稱。',
     'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” 許可證必須與其他相容的許可證類型一起保存',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => '這種功能已經包含在Sugar Sell Premier中。',
 	'ERR_USER_IS_LOCKED_OUT'			=> '此使用者已鎖定，無法存取 Sugar 應用程式，使用其現有密碼無法登入。',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => '僅允許使用者使用Sugar憑證登錄',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => '密碼',
     'LBL_CHOOSE_A_KEY'					=> '選擇金鑰，防止未經授權發佈您的行事曆',
     'LBL_NO_KEY'                        => '沒有設定金鑰。請設定金鑰以啟用發佈。',
-	'LBL_CHOOSE_WHICH'					=> '選取上方導覽列中可存取的模組。指定所需模組顯示順序。',
+    'LBL_CHOOSE_WHICH'                  => '選取側導覽列中可存取的模組。指定所需模組顯示順序。',
+    'LBL_NUMBER_PINNED_MODULES'         => '固定模組的數量',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => '寫下導覽列摺疊時要固定的可用模組數（例如，如果輸入 5，則固定清單中的前五個模組）。我們推荐一個代表您最常用模組的數字。不允許超過 100 的值。',
 	'LBL_CITY'							=> '城市',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> '清除',
@@ -545,6 +548,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP 使用者名稱：',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP 伺服器類型：',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP 伺服器規格',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => '授權的電子郵件帳戶',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => '選擇您的電子郵件提供者：',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo！郵件密碼：',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo！郵件 ID：',
@@ -701,4 +705,9 @@ SugarCRM 支援部提供的有關在 Sugar 中執行常見工作和流程的提�
     'LBL_UTILS_USER_TEAMS_ROLES' => '使用者/團隊/角色',
     'LBL_LOADING_ITEMS' => '正在載入......',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => '智慧指南存取權限',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => '智慧指南上次啟用',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => '缺少智慧指南存取權限',
 ); // END STRINGS DEFS

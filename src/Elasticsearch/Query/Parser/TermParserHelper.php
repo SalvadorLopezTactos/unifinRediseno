@@ -24,9 +24,9 @@ class TermParserHelper
     /**
      * consts definition for operators
      */
-    const OPERATOR_AND = 'AND';
-    const OPERATOR_OR = 'OR';
-    const OPERATOR_NOT = 'NOT';
+    public const OPERATOR_AND = 'AND';
+    public const OPERATOR_OR = 'OR';
+    public const OPERATOR_NOT = 'NOT';
 
     /**
      * list of valid operators

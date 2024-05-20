@@ -24,8 +24,8 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
     /**
      * User-agent settings
      */
-    const USER_AGENT = 'SugarCRM';
-    const VERSION_UNKNOWN = 'unknown';
+    public const USER_AGENT = 'SugarCRM';
+    public const VERSION_UNKNOWN = 'unknown';
 
     /**
      * ES supported versions. Same as the version checking in src/Elasticsearch/Adapter/Client.php.
@@ -40,7 +40,7 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
     {
         global $sugar_config;
 
-        $ftsConfig = isset($sugar_config['full_text_engine']) ? $sugar_config['full_text_engine'] : null;
+        $ftsConfig = $sugar_config['full_text_engine'] ?? null;
         // Check that Elastic info is set (only currently supported search engine)
         if (empty($ftsConfig) || empty($ftsConfig['Elastic']) ||
             empty($ftsConfig['Elastic']['host']) || empty($ftsConfig['Elastic']['port'])

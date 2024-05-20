@@ -116,7 +116,7 @@ class SugarUpgradeNullifyEmptyDurationMinutes extends UpgradeScript
     protected function getColumnType()
     {
         $columns = $this->getColumns();
-        return isset($columns[$this->columnName]['type']) ? $columns[$this->columnName]['type'] : '';
+        return $columns[$this->columnName]['type'] ?? '';
     }
 
     /**

@@ -19,6 +19,9 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 use Psr\SimpleCache\CacheInterface;
 use Sugarcrm\Sugarcrm\SugarConnect\Client\Client as ClientInterface;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 final class Client implements ClientInterface
 {
     /**

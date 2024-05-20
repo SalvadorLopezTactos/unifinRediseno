@@ -72,7 +72,7 @@ class SugarRelationshipFactory {
             return new $class($def);
         }
 
-        $type = isset($def['true_relationship_type']) ? $def['true_relationship_type'] : $def['relationship_type'];
+        $type = $def['true_relationship_type'] ?? $def['relationship_type'];
         switch($type) {
             case "many-to-many":
                 if (isset($def['rhs_module']) && $def['rhs_module'] == 'EmailAddresses') {

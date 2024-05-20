@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Előzmény',
     'LBL_PMSE_LABEL_NOTES' => 'Megjegyzések megjelenítése',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Megjegyzések hozzáadása',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Küldés a DocuSignnak',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Kiválasztás...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Felhasználó',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Biztosan jóváhagyja ezt a folyamatot?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Biztosan elutasítja ezt a folyamatot?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Biztosan irányítja ezt a folyamatot?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Biztosan el szeretné küldeni ezt a folyamatot a DocuSignnak?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'A folyamat sikeresen jóváhagyva',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'A folyamat sikeresen elutasítva',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'A folyamat sikeresen irányítva',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'A folyamat sikeresen elküldve a DocuSignnak',
     'LBL_PA_PROCESS_CLOSED' => 'A folyamat, melyet próbál megtekinteni le van zárva.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'A folyamat, melyet próbál megtekinteni pillanatnyilag nem erélhető.',
 

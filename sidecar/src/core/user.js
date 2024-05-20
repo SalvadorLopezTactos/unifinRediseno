@@ -260,6 +260,8 @@ function makeLastState() {
                     }
                 };
 
+                SUGAR.App.user.syncTimezone();
+
                 SUGAR.App.api.call('update', SUGAR.App.api.buildURL('me/last_states'), args, callbacks);
             } else {
                 // A save is already in progress. Since another change has been made,
@@ -346,6 +348,56 @@ var User = Backbone.Model.extend({
         });
     },
 
+    /**
+     * Update timezone in user's preferences.
+     *
+     * @return {void}
+     */
+    syncTimezone: function() {
+        if (!this.attributes ||
+            !this.attributes.preferences) {
+            return;
+        }
+
+        const clientPref = this.getClientTimezonePref();
+        const serverPref = _.pick(this.get('preferences'), [
+            'timezone',
+            'tz_offset',
+            'tz_offset_sec',
+        ]);
+
+        if (!_.isEqual(clientPref, serverPref)) {
+            const updateCallback = () => {
+                if (this.isSetupCompleted()) {
+                    SUGAR.App.alert.show('success-timezone-update', {
+                        level: 'success',
+                        messages: SUGAR.App.lang.get('LBL_TIMEZONE_UPDATED'),
+                    });
+                }
+            }
+
+            this.updatePreferences(clientPref, updateCallback);
+        }
+    },
+
+    /**
+     * Return client's timezone params.
+     *
+     * @return {Object}
+     **/
+    getClientTimezonePref: function() {
+        const secOffset = new Date().getTimezoneOffset() * 60;
+        const tzOffsetSec = (secOffset === 0) ? secOffset : -secOffset;
+        const tzOffset = (new Date()).toString().match(/([-\+][0-9]+)\s/)[1];
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        return {
+            timezone: timezone,
+            tz_offset: tzOffset,
+            tz_offset_sec: tzOffsetSec,
+        };
+    },
+
     // Fixme This doesn't belong in user. See TY-526.
     /**
      * Loads the current user's locale.
@@ -419,7 +471,7 @@ var User = Backbone.Model.extend({
                     }
                     //Immediately update our user's preferences to reflect latest changes
                     _.each(attributes, function(val, key) {
-                        if (data[key]) {
+                        if (!_.isUndefined(data[key])) {
                             self.setPreference(key, data[key]);
                         }
                     });
@@ -621,6 +673,14 @@ var User = Backbone.Model.extend({
      */
     hasHintLicense: function() {
         return this.hasLicense('HINT');
+    },
+
+    /**
+     * Checks if the user has a Sugar Automate license.
+     * @return {boolean}
+     */
+     hasAutomateLicense: function() {
+        return this.hasLicense('AUTOMATE');
     },
 
     /**

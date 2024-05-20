@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => '2 月',
     'LBL_MARCH' => '3 月',
     'LBL_APRIL' => '4 月',
-    'LBL_MAY' => '5 月',
+    'LBL_MAY' => '五月',
     'LBL_JUNE' => '6 月',
     'LBL_JULY' => '7 月',
     'LBL_AUGUST' => '8 月',
@@ -318,7 +318,7 @@ $mod_strings = array (
     'LBL_FEB' => '2 月',
     'LBL_MAR' => '3 月',
     'LBL_APR' => '4 月',
-    'LBL_MAY' => '5 月',
+    'LBL_MAY' => '五月',
     'LBL_JUN' => '6 月',
     'LBL_JUL' => '7 月',
     'LBL_AUG' => '8 月',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => '10 月',
     'LBL_NOV' => '11 月',
     'LBL_DEC' => '12 月',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => '日程已添加',
+    'LBL_CALENDAR_IS_SELECTED' => '已选择 {{calendar}}',
+    'LBL_NO_USER_SELECTED' => '请选择用户或团队',
+    'LBL_NO_CALENDAR_SELECTED' => '请选择日程',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => '无法保存日程。',
 
 );
 

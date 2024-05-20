@@ -40,12 +40,12 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
    * Creates a new Data Fusion instance in the specified project and location.
    * (instances.create)
    *
-   * @param string $parent The instance's project and location in the format
-   * projects/{project}/locations/{location}.
+   * @param string $parent Required. The instance's project and location in the
+   * format projects/{project}/locations/{location}.
    * @param Instance $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string instanceId The name of the instance to create.
+   * @opt_param string instanceId Required. The name of the instance to create.
    * @return Operation
    */
   public function create($parent, Instance $postBody, $optParams = [])
@@ -57,7 +57,7 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
   /**
    * Deletes a single Date Fusion instance. (instances.delete)
    *
-   * @param string $name The instance resource name in the format
+   * @param string $name Required. The instance resource name in the format
    * projects/{project}/locations/{location}/instances/{instance}
    * @param array $optParams Optional parameters.
    * @return Operation
@@ -71,7 +71,7 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
   /**
    * Gets details of a single Data Fusion instance. (instances.get)
    *
-   * @param string $name The instance resource name in the format
+   * @param string $name Required. The instance resource name in the format
    * projects/{project}/locations/{location}/instances/{instance}.
    * @param array $optParams Optional parameters.
    * @return Instance
@@ -87,16 +87,21 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
    * resource exists and does not have a policy set. (instances.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int options.requestedPolicyVersion Optional. The policy format
-   * version to be returned. Valid values are 0, 1, and 3. Requests specifying an
-   * invalid value will be rejected. Requests for policies with any conditional
-   * bindings must specify version 3. Policies without any conditional bindings
-   * may specify any valid value or leave the field unset. To learn which
-   * resources support conditions in their IAM policies, see the [IAM
+   * @opt_param int options.requestedPolicyVersion Optional. The maximum policy
+   * version that will be used to format the policy. Valid values are 0, 1, and 3.
+   * Requests specifying an invalid value will be rejected. Requests for policies
+   * with any conditional role bindings must specify version 3. Policies with no
+   * conditional role bindings may specify any valid value or leave the field
+   * unset. The policy in the response might use the policy version that you
+   * specified, or it might use a lower policy version. For example, if you
+   * specify version 3, but the policy has no conditional role bindings, the
+   * response uses version 1. To learn which resources support conditions in their
+   * IAM policies, see the [IAM
    * documentation](https://cloud.google.com/iam/help/conditions/resource-
    * policies).
    * @return Policy
@@ -111,10 +116,11 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
    * Lists Data Fusion instances in the specified project and location.
    * (instances.listProjectsLocationsInstances)
    *
-   * @param string $parent The project and location for which to retrieve instance
-   * information in the format projects/{project}/locations/{location}. If the
-   * location is specified as '-' (wildcard), then all regions available to the
-   * project are queried, and the results are aggregated.
+   * @param string $parent Required. The project and location for which to
+   * retrieve instance information in the format
+   * projects/{project}/locations/{location}. If the location is specified as '-'
+   * (wildcard), then all regions available to the project are queried, and the
+   * results are aggregated.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string filter List filter.
@@ -143,8 +149,7 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
    * the update will overwrite in an instance resource. The fields specified in
    * the update_mask are relative to the resource, not the full request. A field
    * will be overwritten if it is in the mask. If the user does not provide a
-   * mask, all the supported fields (labels, options, and version currently) will
-   * be overwritten.
+   * mask, the label field will be overwritten.
    * @return Operation
    */
   public function patch($name, Instance $postBody, $optParams = [])
@@ -157,8 +162,8 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
    * Restart a single Data Fusion instance. At the end of an operation instance is
    * fully restarted. (instances.restart)
    *
-   * @param string $name Name of the Data Fusion instance which need to be
-   * restarted in the form of
+   * @param string $name Required. Name of the Data Fusion instance which need to
+   * be restarted in the form of
    * projects/{project}/locations/{location}/instances/{instance}
    * @param RestartInstanceRequest $postBody
    * @param array $optParams Optional parameters.
@@ -176,8 +181,9 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
    * `PERMISSION_DENIED` errors. (instances.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -197,8 +203,9 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
    * (instances.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse

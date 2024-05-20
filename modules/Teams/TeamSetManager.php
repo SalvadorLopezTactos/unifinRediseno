@@ -171,7 +171,7 @@ class TeamSetManager {
                 $excludeId === null ? 1 : 2
             );
             $ids = $connection->executeQuery($query, [$teamSetId, 0])
-                ->fetchFirstColumn();
+                ->iterateColumn();
 
             foreach ($ids as $id) {
                 if ($excludeId === null || $id != $excludeId) {
@@ -329,7 +329,7 @@ class TeamSetManager {
         $result = array();
         $isTBAEnabled = TeamBasedACLConfigurator::isEnabledForModule($focus->module_dir);
 
-        $team_set_id = $focus->team_set_id ? $focus->team_set_id : $focus->team_id;
+        $team_set_id = $focus->team_set_id ?: $focus->team_id;
         $teams = self::getTeamsFromSet($team_set_id);
 
         $selectedTeamIds = array();
@@ -374,7 +374,7 @@ class TeamSetManager {
 	 * @return string
 	 */
 	public static function getCommaDelimitedTeams($team_set_id, $primary_team_id = '', $for_display = false){
-        $team_set_id = $team_set_id?$team_set_id:$primary_team_id;
+        $team_set_id = $team_set_id ?: $primary_team_id;
 		$teams = self::getTeamsFromSet($team_set_id);
 		$value = '';
 	    $primary = '';
@@ -635,7 +635,7 @@ SQL
         // find affected users
         $query = 'SELECT id FROM users WHERE default_team = ?';
         $userIds = $conn->executeQuery($query, array($oldTeam->id))
-            ->fetchFirstColumn();
+            ->iterateColumn();
 
         // for User bean team_id is default_team
         $logger->debug(sprintf(

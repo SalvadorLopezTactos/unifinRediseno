@@ -26,10 +26,10 @@ class File extends Constraint implements ConstraintReturnValueInterface
 {
     use ConstraintReturnValueTrait;
 
-    const ERROR_NULL_BYTES = 1;
-    const ERROR_FILE_NOT_FOUND = 2;
-    const ERROR_OUTSIDE_BASEDIR = 3;
-    const ERROR_DIR_TRAVERSAL = 4;
+    public const ERROR_NULL_BYTES = 1;
+    public const ERROR_FILE_NOT_FOUND = 2;
+    public const ERROR_OUTSIDE_BASEDIR = 3;
+    public const ERROR_DIR_TRAVERSAL = 4;
 
     protected static $errorNames = array(
         self::ERROR_NULL_BYTES => 'ERROR_NULL_BYTES',
@@ -64,7 +64,7 @@ class File extends Constraint implements ConstraintReturnValueInterface
 
             $options['baseDirs'][$key] = $baseDir;
             // add additional base directory when shadow is enabled
-            if (defined('SHADOW_INSTANCE_DIR') && strpos($baseDir, (string) $instanceRealPath) === 0) {
+            if (defined('SHADOW_INSTANCE_DIR') && strpos($baseDir, $instanceRealPath) === 0) {
                 $shadowInstancePaths[] = str_replace($instanceRealPath, SHADOW_INSTANCE_DIR, $baseDir);
             }
         }

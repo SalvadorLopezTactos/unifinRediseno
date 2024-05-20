@@ -816,15 +816,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Opprett en formel for å fastslå om dette feltet er nødvendig i oppsett.<br/>"
-    . "Obligatoriske felt vil følge formelen i den nettleserbaserte mobilvisningen, <br/>"
-    . "men vil ikke følge formelen i de innebygde applikasjonene, som Sugar Mobile for iPhone. <br/>"
-    . "De vil ikke følge formelen i Sugars selvbetjeningsportal.",
-'LBL_POPHELP_READONLY'=>"Opprett en formel for å fastslå om dette feltet skal være skrivebeskyttet i layouter.<br/>"
-        . "Skrivebeskyttede felt vil følge formelen i den nettleserbaserte mobile visningen, <br/>"
+    'LBL_POPHELP_REQUIRED'=>'Felt som er betinget obligatoriske er ikke tilgjengelige for bruk i følgende SugarBPM-handlingstyper: Legg til relatert post, endre felt. Fjern "Påkrevd hvis"-tekst for å bruke denne feltet i disse prosessdefinisjonshandlingene',
+'LBL_POPHELP_READONLY'=>"Opprett en formel for å fastslå om dette feltet er skrivebeskyttet i oppsett.<br/>"
+        . "Skrivebeskyttede felt vil følge formelen i den nettleserbaserte mobilvisningen, <br/>"
         . "men vil ikke følge formelen i de innebygde applikasjonene, som Sugar Mobile for iPhone. <br/>"
         . "De vil ikke følge formelen i Sugars selvbetjeningsportal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Velg for å bruke dette feltet når du søker etter oppføringer med globalt søk på denne modulen.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Velg for å bruke dette feltet ved søk etter poster ved bruk av det globale søket på denne modulen.',
 //Revert Module labels
 'LBL_RESET' => 'Tilbakestill',
 'LBL_RESET_MODULE' => 'Reset modul',
@@ -861,6 +858,7 @@ $mod_strings = array(
                 'decimal'=>'Desimal',
                 'autoincrement' => 'Automatisk økning',
                 'actionbutton' => 'ActionButton',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Ofte brukte etiketter",

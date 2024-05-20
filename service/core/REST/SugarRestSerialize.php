@@ -21,7 +21,9 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
  */
 class SugarRestSerialize extends SugarRest{
 
-	/**
+    public $faultObject;
+
+    /**
 	 * It will serialize the input object and echo's it
 	 *
 	 * @param array $input - assoc array of input values: key = param name, value = param type

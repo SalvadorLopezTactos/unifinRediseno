@@ -17,10 +17,10 @@ use Symfony\Component\Ldap\Exception\ConnectionException;
 use Symfony\Component\Ldap\LdapInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\User as StandardUser;
 use Symfony\Component\Ldap\Entry;
-use Symfony\Component\Security\Core\User\LdapUserProvider as StandardLdapUserProvider;
+use Symfony\Component\Ldap\Security\LdapUserProvider as StandardLdapUserProvider;
 
 /**
  * LdapUserProvider is a simple user provider on top of ldap.
@@ -85,7 +85,7 @@ class LdapUserProvider extends StandardLdapUserProvider
         $standardUser = parent::loadUser($username, $entry);
 
         return new User(
-            $standardUser->getUsername(),
+            $standardUser->getUserIdentifier(),
             $standardUser->getPassword(),
             ['entry' => $entry]
         );
@@ -95,15 +95,15 @@ class LdapUserProvider extends StandardLdapUserProvider
      * Loads the user for the given username from token.
      * Used token username and password for binding.
      *
-     * This method must throw UsernameNotFoundException if the user is not
+     * This method must throw UserNotFoundException if the user is not
      * found.
      * @param TokenInterface $token
      * @return User
-     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     * @throws \Symfony\Component\Security\Core\Exception\UserNotFoundException
      */
     public function loadUserByToken(TokenInterface $token)
     {
-        $username = $token->getUsername();
+        $username = $token->getUserIdentifier();
         $password = $token->getCredentials();
         try {
             $this->ldap->bind($username, $password);
@@ -111,18 +111,18 @@ class LdapUserProvider extends StandardLdapUserProvider
             $query = str_replace('{username}', $username, $this->defaultSearch);
             $search = $this->ldap->query($this->baseDn, $query);
         } catch (ConnectionException $e) {
-            throw new UsernameNotFoundException(sprintf('User "%s" not found.', $username), 0, $e);
+            throw new UserNotFoundException(sprintf('User "%s" not found.', $username), 0, $e);
         }
 
         $entries = $search->execute();
         $count = count($entries);
 
         if (!$count) {
-            throw new UsernameNotFoundException(sprintf('User "%s" not found.', $username));
+            throw new UserNotFoundException(sprintf('User "%s" not found.', $username));
         }
 
         if ($count > 1) {
-            throw new UsernameNotFoundException('More than one user found');
+            throw new UserNotFoundException('More than one user found');
         }
 
         $entry = $entries[0];

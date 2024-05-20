@@ -66,14 +66,14 @@ SELECT id, date_start, seconds
 FROM {$monitor->table_name} 
 WHERE user_id = ? AND active = 1 AND deleted = 0
 SQL;
-        $stmt = $db->getConnection()
+        $result = $db->getConnection()
             ->executeQuery(
                 $query,
                 [$monitor->getValue('user_id')]
             );
         $dateEnd = TimeDate::getInstance()->nowDb();
 
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             if (empty($row['seconds'])) {
                 $db->getConnection()
                     ->executeUpdate(

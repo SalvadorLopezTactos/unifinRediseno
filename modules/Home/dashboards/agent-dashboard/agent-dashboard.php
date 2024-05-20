@@ -136,10 +136,13 @@ return [
                                 ],
                             ], [
                                 'width' => 4,
+                                'context' => [
+                                    'module' => 'Tasks',
+                                ],
                                 'view' => [
                                     'label' => 'LBL_REPORT_DASHLET_TITLE_139',
                                     'type' => 'saved-reports-chart',
-                                    'module' => null,
+                                    'module' => 'Tasks',
                                     'saved_report_id' => 'c290b0da-7606-11e9-81f9-f218983a1c3e',
                                 ],
                             ],
@@ -151,73 +154,72 @@ return [
             // TAB 2
             [
                 'name' => 'LBL_CASES',
-                'badges' => [
-                    [
-                        'type' => 'record-count',
-                        'module' => 'Cases',
-                        // TODO: use new filter operators in CS-86
-                        'filter' => [
-                            [
-                                'follow_up_datetime' => [
-                                    '$lt' => '$nowTime',
-                                ],
-                            ],
-                            [
-                                'status' => [
-                                    '$not_in' => ['Closed', 'Rejected', 'Duplicate'],
-                                ],
-                            ],
-                            [
-                                '$owner' => '',
-                            ],
-                        ],
-                        'cssClass' => 'case-expired',
-                        'tooltip' => 'LBL_CASE_OVERDUE',
-                    ],
-                    [
-                        'type' => 'record-count',
-                        'module' => 'Cases',
-                        'filter' => [
-                            [
-                                'follow_up_datetime' => [
-                                    '$between' => ['$nowTime', '$tomorrowTime'],
-                                ],
-                            ],
-                            [
-                                'status' => [
-                                    '$not_in' => ['Closed', 'Rejected', 'Duplicate'],
-                                ],
-                            ],
-                            [
-                                '$owner' => '',
-                            ],
-                        ],
-                        'cssClass' => 'case-soon',
-                        'tooltip' => 'LBL_CASE_DUE_SOON',
-                    ],
-                    [
-                        'type' => 'record-count',
-                        'module' => 'Cases',
-                        'filter' => [
-                            [
-                                'follow_up_datetime' => [
-                                    '$gt' => '$tomorrowTime',
-                                ],
-                            ],
-                            [
-                                'status' => [
-                                    '$not_in' => ['Closed', 'Rejected', 'Duplicate'],
-                                ],
-                            ],
-                            [
-                                '$owner' => '',
-                            ],
-                        ],
-                        'cssClass' => 'case-future',
-                        'tooltip' => 'LBL_CASE_DUE_LATER',
-                    ],
-                ],
                 'components' => [
+                    [
+                        'layout' => [
+                            'name' => 'kpi-metrics',
+                            'type' => 'base',
+                            'css_class' => 'kpi-metrics',
+                            "metric_module" => "Cases",
+                            "metric_context" => "service_console",
+                            "order_by_primary" => "follow_up_datetime",
+                            'badges' => [
+                                [
+                                    'type' => 'record-count',
+                                    'module' => 'Cases',
+                                    'filter' => [
+                                        [
+                                            'follow_up_datetime' => [
+                                                '$lt' => '$nowTime',
+                                            ],
+                                        ],
+                                    ],
+                                    'cssClass' => 'case-expired',
+                                    'tooltip' => 'LBL_CASE_OVERDUE',
+                                ],
+                                [
+                                    'type' => 'record-count',
+                                    'module' => 'Cases',
+                                    'filter' => [
+                                        [
+                                            'follow_up_datetime' => [
+                                                '$between' => ['$nowTime', '$tomorrowTime'],
+                                            ],
+                                        ],
+                                    ],
+                                    'cssClass' => 'case-soon',
+                                    'tooltip' => 'LBL_CASE_DUE_SOON',
+                                ],
+                                [
+                                    'type' => 'record-count',
+                                    'module' => 'Cases',
+                                    'filter' => [
+                                        [
+                                            'follow_up_datetime' => [
+                                                '$gt' => '$tomorrowTime',
+                                            ],
+                                        ],
+                                    ],
+                                    'cssClass' => 'case-future',
+                                    'tooltip' => 'LBL_CASE_DUE_LATER',
+                                ],
+                            ],
+                            'components' => [
+                                [
+                                    'context' => [
+                                        'module' => 'Cases',
+                                    ],
+                                    'layout' => 'kpi-metrics-tabs',
+                                ],
+                                [
+                                    'context' => [
+                                        'module' => 'Cases',
+                                    ],
+                                    'view' => 'kpi-metrics-tools',
+                                ],
+                            ],
+                        ],
+                    ],
                     [
                         'context' => [
                             'module' => 'Cases',

@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Nedostaje obavezno polje',
     'LBL_ERROR_SYNC_USERS' => 'Neispravna vrijednost za sinkronizaciju s klijentom pošte: ',
     'LBL_ID_EXISTS_ALREADY' => 'ID već postoji u ovoj tablici',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY već postoji u ovoj tablici',
     'LBL_ASSIGNED_USER' => 'Ako korisnik ne postoji, upotrijebite trenutačnog korisnika',
     'LBL_SHOW_HIDDEN' => 'Prikaži polja koja se inače ne mogu uvoziti',
     'LBL_UPDATE_RECORDS' => 'Ažuriraj postojeće zapise umjesto uvoza (nema poništenja)',

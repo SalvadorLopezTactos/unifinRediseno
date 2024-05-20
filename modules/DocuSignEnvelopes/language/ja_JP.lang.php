@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'クライアントシークレット設定なし',
     'LBL_RESEND_BUTTON_LABEL' => '再送信',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'エンベロープを取得',
+    'LBL_CLOUD_SERVICE_TYPE' => 'クラウドサービスタイプ',
+    'LBL_CLOUD_PATH' => 'クラウドパス',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSignエンベロープリストダッシュボード',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => '最近のDocuSignエンベロープ',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSignエンベロープフォーカスドロワー',
 
-    'LBL_DOCUMENT_FROM' => 'ドキュメント元 ',
+    'LBL_NEW_ENVELOPE' => '新しい封筒',
     'LBL_DOCUMENT_IS_NOW' => ' は現在 ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSignエラー。アクセストークンに基づいてアカウントIDを取得できませんでした',
     'LBL_ERROR_RESEND' => 'DocuSignを再送信できませんでした。エンベロープのステータスは「送信済み」である必要があります',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => '更新失敗',
     'LBL_ERROR_FETCH_TIME' => 'DocuSignのルールでは、15分以内に複数の要求を同じエンベロープに送信できません',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'エラーが発生しました。エンベロープを更新できませんでした。ログを確認してください。',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'エラーが発生しました。テンプレートを一覧表示できませんでした。ログを確認してください。',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'エラーが発生しました。テンプレートを取り込めませんでした。ログを確認してください。',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'エンベロープは完成していません',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'DocuSign のエンベロープのステータスは現在',
     'LBL_OVERVIEW' => '概要',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'ドキュメントを追加',
     'LBL_BUTTON_SEND' => '送信',
     'LBL_BUTTON_CLEAR' => '消去',
-    'LBL_MISSING_OBJECT' => 'DocuSignオブジェクトがウィンドウにありません',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'テンプレートの利用',
     'LBL_PLEASE_LOG_IN' => 'まずDocuSignにログインしてください。',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'このドキュメントはダウンロードできません。他のユーザによって作成されたものです。',
     'LBL_SEND_NOT_ALLOWED' => 'このドキュメントは送信できません。他のユーザによって作成されたものです。',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'サイン済み',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'ドキュメントをダウンロードできませんでした。ログを確認してください。',
     'LBL_DOCUMENT_COMPLETED' => '完了',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign情報',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'は現在',
+    'LBL_SETTINGS_TITLE' => 'DocuSignの設定',
+    'LBL_RECIPIENT_SELECTION' => '受信者の選択動作',
+    'LBL_RECIPIENT_NAME' => '名前',
+    'LBL_RECIPIENT_EMAIL' => 'Eメール',
+    'LBL_RECIPIENT_TYPE' => 'タイプ',
+    'LBL_TEMPLATE_NAME' => '名前',
+    'LBL_RECIPIENT_SELECT' => '選択...',
+    'LBL_RECIPIENT_ROLE' => '役割',
+    'LBL_SELECT_BUTTON_LABEL' => '選択',
+    'LBL_BACK_BUTTON_LABEL' => '戻る',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => '潜在的な受信者の取得に失敗しました！',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'テンプレートの取り込みに失敗しました！',
 ];

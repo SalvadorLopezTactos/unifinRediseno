@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once dirname(__FILE__) . '/Scanner.php';
+require_once __DIR__ . '/Scanner.php';
 
 /**
  *
@@ -49,7 +49,7 @@ class HealthCheckScannerCli extends HealthCheckScanner
             // generic properties
             if ($argv[$i] == '-d') {
                 while (strpos($argv[++$i], '=')) {
-                    list($property, $value) = $this->parsePropertyValuePair($argv[$i]);
+                    [$property, $value] = $this->parsePropertyValuePair($argv[$i]);
                     if (property_exists($this, $property)) {
                         $this->$property = $value;
                     }

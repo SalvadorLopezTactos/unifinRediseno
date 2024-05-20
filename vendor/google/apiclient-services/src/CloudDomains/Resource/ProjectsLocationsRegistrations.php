@@ -22,17 +22,21 @@ use Google\Service\CloudDomains\ConfigureContactSettingsRequest;
 use Google\Service\CloudDomains\ConfigureDnsSettingsRequest;
 use Google\Service\CloudDomains\ConfigureManagementSettingsRequest;
 use Google\Service\CloudDomains\ExportRegistrationRequest;
+use Google\Service\CloudDomains\ImportDomainRequest;
 use Google\Service\CloudDomains\ListRegistrationsResponse;
 use Google\Service\CloudDomains\Operation;
 use Google\Service\CloudDomains\Policy;
 use Google\Service\CloudDomains\RegisterDomainRequest;
 use Google\Service\CloudDomains\Registration;
 use Google\Service\CloudDomains\ResetAuthorizationCodeRequest;
+use Google\Service\CloudDomains\RetrieveImportableDomainsResponse;
 use Google\Service\CloudDomains\RetrieveRegisterParametersResponse;
+use Google\Service\CloudDomains\RetrieveTransferParametersResponse;
 use Google\Service\CloudDomains\SearchDomainsResponse;
 use Google\Service\CloudDomains\SetIamPolicyRequest;
 use Google\Service\CloudDomains\TestIamPermissionsRequest;
 use Google\Service\CloudDomains\TestIamPermissionsResponse;
+use Google\Service\CloudDomains\TransferDomainRequest;
 
 /**
  * The "registrations" collection of methods.
@@ -96,9 +100,18 @@ class ProjectsLocationsRegistrations extends \Google\Service\Resource
     return $this->call('configureManagementSettings', [$params], Operation::class);
   }
   /**
-   * Deletes a `Registration` resource. This method only works on resources in one
-   * of the following states: * `state` is `EXPORTED` with `expire_time` in the
-   * past * `state` is `REGISTRATION_FAILED` (registrations.delete)
+   * Deletes a `Registration` resource. This method works on any `Registration`
+   * resource using [Subscription or Commitment billing](/domains/pricing#billing-
+   * models), provided that the resource was created at least 1 day in the past.
+   * For `Registration` resources using [Monthly billing](/domains/pricing
+   * #billing-models), this method works if: * `state` is `EXPORTED` with
+   * `expire_time` in the past * `state` is `REGISTRATION_FAILED` * `state` is
+   * `TRANSFER_FAILED` When an active registration is successfully deleted, you
+   * can continue to use the domain in [Google Domains](https://domains.google/)
+   * until it expires. The calling user becomes the domain's sole owner in Google
+   * Domains, and permissions for the domain are subsequently managed there. The
+   * domain does not renew automatically unless the new owner sets up billing in
+   * Google Domains. (registrations.delete)
    *
    * @param string $name Required. The name of the `Registration` to delete, in
    * the format `projects/locations/registrations`.
@@ -112,16 +125,13 @@ class ProjectsLocationsRegistrations extends \Google\Service\Resource
     return $this->call('delete', [$params], Operation::class);
   }
   /**
-   * Exports a `Registration` that you no longer want to use with Cloud Domains.
-   * You can continue to use the domain in [Google
-   * Domains](https://domains.google/) until it expires. If the export is
-   * successful: * The resource's `state` becomes `EXPORTED`, meaning that it is
-   * no longer managed by Cloud Domains * Because individual users can own domains
-   * in Google Domains, the calling user becomes the domain's sole owner.
-   * Permissions for the domain are subsequently managed in Google Domains. *
-   * Without further action, the domain does not renew automatically. The new
-   * owner can set up billing in Google Domains to renew the domain if needed.
-   * (registrations.export)
+   * Exports a `Registration` resource, such that it is no longer managed by Cloud
+   * Domains. When an active domain is successfully exported, you can continue to
+   * use the domain in [Google Domains](https://domains.google/) until it expires.
+   * The calling user becomes the domain's sole owner in Google Domains, and
+   * permissions for the domain are subsequently managed there. The domain does
+   * not renew automatically unless the new owner sets up billing in Google
+   * Domains. (registrations.export)
    *
    * @param string $name Required. The name of the `Registration` to export, in
    * the format `projects/locations/registrations`.
@@ -154,16 +164,21 @@ class ProjectsLocationsRegistrations extends \Google\Service\Resource
    * resource exists and does not have a policy set. (registrations.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int options.requestedPolicyVersion Optional. The policy format
-   * version to be returned. Valid values are 0, 1, and 3. Requests specifying an
-   * invalid value will be rejected. Requests for policies with any conditional
-   * bindings must specify version 3. Policies without any conditional bindings
-   * may specify any valid value or leave the field unset. To learn which
-   * resources support conditions in their IAM policies, see the [IAM
+   * @opt_param int options.requestedPolicyVersion Optional. The maximum policy
+   * version that will be used to format the policy. Valid values are 0, 1, and 3.
+   * Requests specifying an invalid value will be rejected. Requests for policies
+   * with any conditional role bindings must specify version 3. Policies with no
+   * conditional role bindings may specify any valid value or leave the field
+   * unset. The policy in the response might use the policy version that you
+   * specified, or it might use a lower policy version. For example, if you
+   * specify version 3, but the policy has no conditional role bindings, the
+   * response uses version 1. To learn which resources support conditions in their
+   * IAM policies, see the [IAM
    * documentation](https://cloud.google.com/iam/help/conditions/resource-
    * policies).
    * @return Policy
@@ -173,6 +188,25 @@ class ProjectsLocationsRegistrations extends \Google\Service\Resource
     $params = ['resource' => $resource];
     $params = array_merge($params, $optParams);
     return $this->call('getIamPolicy', [$params], Policy::class);
+  }
+  /**
+   * Imports a domain name from [Google Domains](https://domains.google/) for use
+   * in Cloud Domains. To transfer a domain from another registrar, use the
+   * `TransferDomain` method instead. Since individual users can own domains in
+   * Google Domains, the calling user must have ownership permission on the
+   * domain. (registrations.import)
+   *
+   * @param string $parent Required. The parent resource of the Registration. Must
+   * be in the format `projects/locations`.
+   * @param ImportDomainRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Operation
+   */
+  public function import($parent, ImportDomainRequest $postBody, $optParams = [])
+  {
+    $params = ['parent' => $parent, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('import', [$params], Operation::class);
   }
   /**
    * Lists the `Registration` resources in a project.
@@ -219,7 +253,7 @@ class ProjectsLocationsRegistrations extends \Google\Service\Resource
    *
    * @opt_param string updateMask Required. The field mask describing which fields
    * to update as a comma-separated list. For example, if only the labels are
-   * being updated, the `update_mask` would be `"labels"`.
+   * being updated, the `update_mask` is `"labels"`.
    * @return Operation
    */
   public function patch($name, Registration $postBody, $optParams = [])
@@ -288,6 +322,28 @@ class ProjectsLocationsRegistrations extends \Google\Service\Resource
     return $this->call('retrieveAuthorizationCode', [$params], AuthorizationCode::class);
   }
   /**
+   * Lists domain names from [Google Domains](https://domains.google/) that can be
+   * imported to Cloud Domains using the `ImportDomain` method. Since individual
+   * users can own domains in Google Domains, the list of domains returned depends
+   * on the individual user making the call. Domains already managed by Cloud
+   * Domains are not returned. (registrations.retrieveImportableDomains)
+   *
+   * @param string $location Required. The location. Must be in the format
+   * `projects/locations`.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param int pageSize Maximum number of results to return.
+   * @opt_param string pageToken When set to the `next_page_token` from a prior
+   * response, provides the next page of results.
+   * @return RetrieveImportableDomainsResponse
+   */
+  public function retrieveImportableDomains($location, $optParams = [])
+  {
+    $params = ['location' => $location];
+    $params = array_merge($params, $optParams);
+    return $this->call('retrieveImportableDomains', [$params], RetrieveImportableDomainsResponse::class);
+  }
+  /**
    * Gets parameters needed to register a new domain name, including price and up-
    * to-date availability. Use the returned values to call `RegisterDomain`.
    * (registrations.retrieveRegisterParameters)
@@ -305,6 +361,27 @@ class ProjectsLocationsRegistrations extends \Google\Service\Resource
     $params = ['location' => $location];
     $params = array_merge($params, $optParams);
     return $this->call('retrieveRegisterParameters', [$params], RetrieveRegisterParametersResponse::class);
+  }
+  /**
+   * Gets parameters needed to transfer a domain name from another registrar to
+   * Cloud Domains. For domains already managed by [Google
+   * Domains](https://domains.google/), use `ImportDomain` instead. Use the
+   * returned values to call `TransferDomain`.
+   * (registrations.retrieveTransferParameters)
+   *
+   * @param string $location Required. The location. Must be in the format
+   * `projects/locations`.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string domainName Required. The domain name. Unicode domain names
+   * must be expressed in Punycode format.
+   * @return RetrieveTransferParametersResponse
+   */
+  public function retrieveTransferParameters($location, $optParams = [])
+  {
+    $params = ['location' => $location];
+    $params = array_merge($params, $optParams);
+    return $this->call('retrieveTransferParameters', [$params], RetrieveTransferParametersResponse::class);
   }
   /**
    * Searches for available domain names similar to the provided query.
@@ -332,8 +409,9 @@ class ProjectsLocationsRegistrations extends \Google\Service\Resource
    * `PERMISSION_DENIED` errors. (registrations.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -353,8 +431,9 @@ class ProjectsLocationsRegistrations extends \Google\Service\Resource
    * (registrations.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse
@@ -364,6 +443,36 @@ class ProjectsLocationsRegistrations extends \Google\Service\Resource
     $params = ['resource' => $resource, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('testIamPermissions', [$params], TestIamPermissionsResponse::class);
+  }
+  /**
+   * Transfers a domain name from another registrar to Cloud Domains. For domains
+   * already managed by [Google Domains](https://domains.google/), use
+   * `ImportDomain` instead. Before calling this method, go to the domain's
+   * current registrar to unlock the domain for transfer and retrieve the domain's
+   * transfer authorization code. Then call `RetrieveTransferParameters` to
+   * confirm that the domain is unlocked and to get values needed to build a call
+   * to this method. A successful call creates a `Registration` resource in state
+   * `TRANSFER_PENDING`. It can take several days to complete the transfer
+   * process. The registrant can often speed up this process by approving the
+   * transfer through the current registrar, either by clicking a link in an email
+   * from the registrar or by visiting the registrar's website. A few minutes
+   * after transfer approval, the resource transitions to state `ACTIVE`,
+   * indicating that the transfer was successful. If the transfer is rejected or
+   * the request expires without being approved, the resource can end up in state
+   * `TRANSFER_FAILED`. If transfer fails, you can safely delete the resource and
+   * retry the transfer. (registrations.transfer)
+   *
+   * @param string $parent Required. The parent resource of the `Registration`.
+   * Must be in the format `projects/locations`.
+   * @param TransferDomainRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Operation
+   */
+  public function transfer($parent, TransferDomainRequest $postBody, $optParams = [])
+  {
+    $params = ['parent' => $parent, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('transfer', [$params], Operation::class);
   }
 }
 

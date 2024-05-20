@@ -11,12 +11,14 @@
  */
 $dictionary['PurchasedLineItem'] = [
     'table' => 'purchased_line_items',
+    'color' => 'army',
+    'icon' => 'sicon-purchased-line-items-lg',
     'optimistic_locking' => true,
     'audited' => true,
     'activity_enabled' => true,
     'unified_search' => true,
     'full_text_search' => true,
-    'comment' => 'The user (not Admin) view of a Purchcased Item; an instance of a purchase.',
+    'comment' => 'The user (not Admin) view of a Purchased Item; an instance of a purchase.',
     'recalculations' => [
         [
             'field' => 'service_start_date',
@@ -901,6 +903,14 @@ $dictionary['PurchasedLineItem'] = [
                 'deleted',
                 'manufacturer_id',
                 'id',
+            ],
+        ],
+        [
+            'name' => 'idx_pli_del_accountid',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'account_id',
             ],
         ],
     ],

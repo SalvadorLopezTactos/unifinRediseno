@@ -125,6 +125,38 @@ td {
   }
 }
 
+// Multi-line list view styling
+div {
+  &[data-fieldname="name"],
+  &[data-type="fullname"],
+  &[data-type="name"],
+  &[data-type="parent"],
+  &[data-type="quote-data-relate"],
+  &[data-type="relate"] {
+    .relate-field-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .parent_avatar {
+        margin-right: 2px;
+      }
+
+      .focus-icon-container {
+        margin-left: 10px;
+        position: static;
+      }
+
+      &:hover {
+        .focus-icon-container:not(.hide) {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
 // Preview styling
 .preview-data {
   .field-row {

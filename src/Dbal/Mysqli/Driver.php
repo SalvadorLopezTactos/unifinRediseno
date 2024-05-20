@@ -12,17 +12,18 @@
 
 namespace Sugarcrm\Sugarcrm\Dbal\Mysqli;
 
-use Doctrine\DBAL\Driver\Mysqli\Driver as BaseDriver;
+use Doctrine\DBAL\Driver\AbstractMySQLDriver;
+use Doctrine\DBAL\Driver\Mysqli\Connection;
 
 /**
  * MySQLi driver
  */
-class Driver extends BaseDriver
+class Driver extends AbstractMySQLDriver
 {
     /**
      * {@inheritdoc}
      */
-    public function connect(array $params, $username = null, $password = null, array $driverOptions = array())
+    public function connect(array $params)
     {
         return new Connection($params['connection']);
     }

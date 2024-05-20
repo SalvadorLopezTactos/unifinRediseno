@@ -44,7 +44,7 @@ class HealthCheckController extends SugarController
 
         // initialize scanner
         $scanner = $this->getHelper()->getScanner('web');
-        $scanner->setInstanceDir(dirname(__FILE__) . '/../..');
+        $scanner->setInstanceDir(__DIR__ . '/../..');
 
         $hc = $this->bean->run($scanner);
         if (!empty($hc->error)) {

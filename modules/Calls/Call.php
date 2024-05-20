@@ -341,7 +341,8 @@ class Call extends SugarBean {
 	}
 
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		$call_fields = $this->get_list_view_array();
 		global $app_list_strings, $focus, $action, $currentModule;
 		if (isset($focus->id)) $id = $focus->id;

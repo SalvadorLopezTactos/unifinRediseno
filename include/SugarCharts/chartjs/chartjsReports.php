@@ -12,6 +12,10 @@
 
 class chartjsReports extends chartjs
 {
+    /**
+     * @var mixed[]
+     */
+    public $super_set_data;
     private $processed_report_keys = array();
 
     /**
@@ -70,7 +74,7 @@ class chartjsReports extends chartjs
         if ($first) {
             $temp_dataset = array();
             foreach ($this->super_set as $key) {
-                $temp_dataset[$key] = (isset($dataset[$key])) ? $dataset[$key] : array();
+                $temp_dataset[$key] = $dataset[$key] ?? array();
             }
             $dataset = $temp_dataset;
         }
@@ -106,7 +110,7 @@ class chartjsReports extends chartjs
             foreach ($groups as $group => $groupData) {
                 $super_set_data[$group] = $groupData;
             }
-            if (count($groups) > count($super_set)) {
+            if ((is_countable($groups) ? count($groups) : 0) > count($super_set)) {
                 $super_set = array_keys($groups);
                 foreach ($prev_super_set as $prev_group) {
                     if (!in_array($prev_group, $groups)) {
@@ -147,9 +151,33 @@ class chartjsReports extends chartjs
 
         if ($this->isDateSort($lastgroupfield)) {
             usort($super_set, array($this, "runDateSort"));
+        } elseif (is_string($lastgroupfield) && $this->isEnumSort($lastgroupfield)) {
+            $this->sortDropdownData($lastgroupfield, $super_set);
         } else {
-            asort($super_set);
+            $sortDir = $this->getGroupSortDir();
+            if ($sortDir === 'a') {
+                asort($super_set, SORT_NATURAL | SORT_FLAG_CASE);
+            }
+            if ($sortDir === 'd') {
+                rsort($super_set, SORT_NATURAL | SORT_FLAG_CASE);
+            }
         }
+    }
+
+    /**
+     * Check if the field is an enum to be sorted
+     *
+     * @param string field
+     * @return bool
+     */
+    protected function isEnumSort(string $field): bool
+    {
+        if (isset($this->reporter->focus->field_defs[$field])
+            && $this->reporter->focus->field_defs[$field]['type'] === 'enum') {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -168,6 +196,54 @@ class chartjsReports extends chartjs
     }
 
     /**
+     * Sort the superSet based on the order of dropdown from studio
+     *
+     * @param string $fieldName
+     * @param array $superSet
+     * @return void
+     */
+    protected function sortDropdownData(string $fieldName, array &$superSet)
+    {
+        global $app_list_strings;
+
+        if (!array_key_exists($fieldName, $this->reporter->focus->field_defs)) {
+            return;
+        }
+
+        if (!array_key_exists('options', $this->reporter->focus->field_defs[$fieldName])) {
+            return;
+        }
+
+        $dropdownOptionsKey = $this->reporter->focus->field_defs[$fieldName]['options'];
+
+        if (!array_key_exists($dropdownOptionsKey, $app_list_strings)) {
+            return;
+        }
+
+        $dropdownOptions = $app_list_strings[$dropdownOptionsKey];
+
+        if (!$dropdownOptions) {
+            return;
+        }
+
+        //here we have the values from studio with original positions
+        //we are keeping the same pattenr as in the function processReportGroup,
+        //where the elements are stored directly based on label not the key
+        $dropdown = array_unique(array_values($dropdownOptions));
+
+        usort($superSet, function ($a, $b) use ($dropdown) {
+            if ($a == $b) {
+                return 0;
+            }
+
+            $aPosition = array_search($a, $dropdown);
+            $bPosition = array_search($b, $dropdown);
+
+            return ($aPosition > $bPosition) ? 1 : -1;
+        });
+    }
+
+    /**
      * Helper function for sorting dates.
      *
      * @param DateTime $a Date 1
@@ -176,14 +252,48 @@ class chartjsReports extends chartjs
      */
     protected function runDateSort($a, $b)
     {
-        $a = new DateTime($this->super_set_data[$a]['raw_value']);
-        $b = new DateTime($this->super_set_data[$b]['raw_value']);
-
         if ($a == $b) {
             return 0;
         }
 
-        return ($a < $b) ? -1 : 1;
+        $aSuperSet = $this->super_set_data[$a];
+        $bSuperSet = $this->super_set_data[$b];
+        // fix the Week date format to be acceptable for DateTime
+        if (preg_match('/^W\d{2}\s+\d{4}$/i', $aSuperSet['group_base_text'])) {
+            $aSuperSet['raw_value'][4] = 'W';
+        }
+        if (preg_match('/^W\d{2}\s+\d{4}$/i', $bSuperSet['group_base_text'])) {
+            $bSuperSet['raw_value'][4] = 'W';
+        }
+
+        $aRawValueTime = strtotime($aSuperSet['raw_value']);
+        $bRawValueTime = strtotime($bSuperSet['raw_value']);
+        if ($aRawValueTime === false && $bRawValueTime !== false) {
+            return -1;
+        }
+        if ($aRawValueTime !== false && $bRawValueTime === false) {
+            return 1;
+        }
+
+        return ($aRawValueTime < $bRawValueTime) ? -1 : 1;
+    }
+
+    /**
+     * Get groups sort direction
+     *
+     * @return string
+     */
+    protected function getGroupSortDir()
+    {
+        $sortDir = 'a';
+        if (isset($this->reporter->report_def['summary_order_by'])) {
+            $lastSummaryOrderBy = end($this->reporter->report_def['summary_order_by']);
+            if (isset($lastSummaryOrderBy['sort_dir']) && !empty($lastSummaryOrderBy['sort_dir'])) {
+                $sortDir = $lastSummaryOrderBy['sort_dir'];
+            }
+        }
+
+        return $sortDir;
     }
 
     private function xmlDataReportSingleValue()
@@ -239,7 +349,7 @@ class chartjsReports extends chartjs
 
             $data .= $this->tab('<subgroups>', 3);
 
-            if ((isset($dataset[$total]) && $total != $dataset[$total]['numerical_value'])
+            if ((!is_float($total) && isset($dataset[$total]) && $total != $dataset[$total]['numerical_value'])
                 || !array_key_exists($key, $dataset) || $key == "") {
                 $data .= $this->processReportData($dataset, 4, $first);
             } elseif (count($this->data_set) == 1 && $first) {
@@ -278,7 +388,7 @@ class chartjsReports extends chartjs
         $single_value = false;
 
         foreach ($this->data_set as $key => $dataset) {
-            if ((isset($dataset[$key]) && count($this->data_set[$key]) == 1)) {
+            if ((isset($dataset[$key]) && (is_countable($this->data_set[$key]) ? count($this->data_set[$key]) : 0) == 1)) {
                 $single_value = true;
             } else {
                 $single_value = false;

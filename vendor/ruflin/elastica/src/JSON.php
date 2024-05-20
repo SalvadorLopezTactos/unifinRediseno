@@ -15,24 +15,21 @@ class JSON
      * @see http://php.net/manual/en/function.json-decode.php
      * @see http://php.net/manual/en/function.json-last-error.php
      *
-     * @param string $args,... JSON string to parse
+     * @param mixed $args,... JSON string to parse
      *
      * @throws JSONParseException
      *
      * @return array PHP array representation of JSON string
      */
-    public static function parse($args/* inherit from json_decode */)
+    public static function parse(...$args/* inherit from json_decode */)
     {
-        // extract arguments
-        $args = \func_get_args();
-
         // default to decoding into an assoc array
         if (1 === \count($args)) {
             $args[] = true;
         }
 
         // run decode
-        $array = \call_user_func_array('json_decode', $args);
+        $array = \json_decode(...$args);
 
         // turn errors into exceptions for easier catching
         if ($error = self::getJsonLastErrorMsg()) {
@@ -55,16 +52,13 @@ class JSON
      *
      * @return string Valid JSON representation of $input
      */
-    public static function stringify($args/* inherit from json_encode */)
+    public static function stringify(...$args/* inherit from json_encode */)
     {
-        // extract arguments
-        $args = \func_get_args();
-
         // set defaults
-        isset($args[1]) ? $args[1] |= JSON_PRESERVE_ZERO_FRACTION : $args[1] = JSON_PRESERVE_ZERO_FRACTION;
+        isset($args[1]) ? $args[1] |= \JSON_PRESERVE_ZERO_FRACTION : $args[1] = \JSON_PRESERVE_ZERO_FRACTION;
 
         // run encode and output
-        $string = \call_user_func_array('json_encode', $args);
+        $string = \json_encode(...$args);
 
         // turn errors into exceptions for easier catching
         if ($error = self::getJsonLastErrorMsg()) {
@@ -86,6 +80,6 @@ class JSON
      */
     private static function getJsonLastErrorMsg()
     {
-        return JSON_ERROR_NONE !== \json_last_error() ? \json_last_error_msg() : false;
+        return \JSON_ERROR_NONE !== \json_last_error() ? \json_last_error_msg() : false;
     }
 }

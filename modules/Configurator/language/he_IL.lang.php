@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'סמלי לוגו',
 	'LBL_ADMIN_WIZARD' => 'אשף ניהול מערכת',
-	'LBL_ALLOW_USER_TABS' => 'הרשה למשתמשים להסתיר לשוניות',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'הגדרות מערכת',
 	'LBL_ENABLE_MAILMERGE' => 'להפעיל מיזוג דואר?',
 	'LBL_LOGVIEW' => 'Configure Log Settings',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'השתמש בהגדרה זו כדי לקבוע את מספר החודשים לפני התאריך הנוכחי שבו פרטי חופשי/עסוק עבור שיחות ופגישות יפורסם.<BR>כדי לכבות פרסום של חופשי/עסוק, הזן "0". חודש אחד לפחות, ו-12 חודשים לכל היותר.',
     'LBL_PDFMODULE_NAME' => 'PDF Settings',
     'SUGARPDF_BASIC_SETTINGS' => 'ערכי מסמך',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'הגדרות מתקדמות',
     'SUGARPDF_LOGO_SETTINGS' => 'תמונות',
-
-    'PDF_CREATOR' => 'יוצר PDF',
-    'PDF_CREATOR_INFO' => 'מגדיר את היוצר של המסמך. <br>זה בדרך כלל שם היישום שיוצר את ה-PDF.',
 
     'PDF_AUTHOR' => 'Author',
     'PDF_AUTHOR_INFO' => 'המחבר מופיע בערכי המסמך.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'בחר תמונה חדשה למחירים',
     'PDF_NEW_HEADER_LOGO_INFO' => 'The file format can be either .jpg or .png. (Only .jpg for EZPDF)<BR>The recommended size is 867x74 px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'רוחב תמונת מחירים',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'שנה את גודל התמונה שהועלתה שמופיעה במסמכי PDF של מחירים. (TCPDF בלבד)',
+    'PDF_TITLE' => 'כותרת',
+    'PDF_TITLE_INFO' => 'הכותרת שמופיעה בערכי המסמך.',
+
+    'PDF_SUBJECT' => 'Subject',
+    'PDF_SUBJECT_INFO' => 'הנושא מופיע בערכי המסמך.',
 
     'PDF_SMALL_HEADER_LOGO' => 'For Reports PDF Documents',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'This image appears in the default Header in Reports PDF Documents.<br> This image also appears in the top left-hand corner of the Sugar application.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Select New Image for Reports',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'The file format can be either .jpg or .png. (Only .jpg for EZPDF)<BR>The recommended size is 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'מדווח רוחב תמונה',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'שנה את גודל התמונה שהועלתה שמופיעה במסמכי PDF של דו"חות. (TCPDF בלבד)',
-
-
-    'PDF_HEADER_STRING' => 'מחרוזת כותרת עליונה',
-    'PDF_HEADER_STRING_INFO' => 'מחרוזת תיאור כותרת עליונה',
-
-    'PDF_HEADER_TITLE' => 'Header Title',
-    'PDF_HEADER_TITLE_INFO' => 'מחרוזת להדפסה בתור כותרת בכותרת העליונה של המסמך',
-
-    'PDF_FILENAME' => 'שם קובץ ברירת מחדל',
-    'PDF_FILENAME_INFO' => 'שם קובץ ברירת מחדל עבור קבצי ה-PDF שנוצרים',
-
-    'PDF_TITLE' => 'כותרת',
-    'PDF_TITLE_INFO' => 'הכותרת שמופיעה בערכי המסמך.',
-
-    'PDF_SUBJECT' => 'Subject',
-    'PDF_SUBJECT_INFO' => 'הנושא מופיע בערכי המסמך.',
-
     'PDF_KEYWORDS' => 'Keyword(s)',
     'PDF_KEYWORDS_INFO' => 'שייך מילות מפתח למסמך באופן כללי בצורה של "מילת מפתח1 מילת מפתח2..."',
 
-    'PDF_COMPRESSION' => 'דחיסה',
-    'PDF_COMPRESSION_INFO' => 'מפעיל או משבית את הדחיסה של הדף. <br>כאשר האפשרות מופעלת, הייצוג הפנימי של כל דף נדחס, מה שמוביל ליחס דחיסה של כ-2 עבור מסמך הפלט.',
-
-    'PDF_JPEG_QUALITY' => 'איכות JPEG (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'קבע את איכות דחיסת ה-JPEG ברירת המחדל (1-100)',
-
-    'PDF_PDF_VERSION' => 'גרסת PDF',
-    'PDF_PDF_VERSION_INFO' => 'הגדר את גרסת ה-PDF (בודק הפניית PDF עבור ערכים חוקיים).',
-
-    'PDF_PROTECTION' => 'הגנת מסמכים',
-    'PDF_PROTECTION_INFO' => 'הגדר את הגנת המסמכים<br>- העתק: העתק טקסט ותמונות ללוח<br>- הדפסה: הדפס את המסמך<br>- ערוך: ערוך אותו (מלבד הערות וטפסים)<br>- הערות-טפסים: הוסף הערות וטפסים<br>הערה: ההגנה נגד עריכה נועד לאנשים שיש להם את מוצר Acrobat המלא.',
-
-    'PDF_USER_PASSWORD' => 'סיסמת משתמש',
-    'PDF_USER_PASSWORD_INFO' => 'If you don\\&#39;t set any password, the document will open as usual. <br>If you set a user password, the PDF viewer will ask for it before displaying the document. <br>The master password, if different from the user one, can be used to get full access.',
-
-    'PDF_OWNER_PASSWORD' => 'סיסמת בעלים',
-    'PDF_OWNER_PASSWORD_INFO' => 'If you don\\&#39;t set any password, the document will open as usual. <br>If you set a user password, the PDF viewer will ask for it before displaying the document. <br>The master password, if different from the user one, can be used to get full access.',
-
-    'PDF_ACL_ACCESS' => 'בקרת גישה',
-    'PDF_ACL_ACCESS_INFO' => 'בקרת גישה ברירת מחדל עבור יצירת ה-PDF.',
-
-    'K_CELL_HEIGHT_RATIO' => 'יחס גובה תא',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'במידה והגובה של תא קטן מ(גובה גופן x יחס גובה תא), אזי (גובה גופן x יחס גובה תא) משמש בתור גובה התא. <br>(גובה גופן x יחס גובה תא) משמש גם בתור גובה התא כאשר לא הוגדר גובה.',
-
-    'K_TITLE_MAGNIFICATION' => 'הגדלת כותרת',
-    'K_TITLE_MAGNIFICATION_INFO' => 'הגדלת כותרת ביחס לגודל הגופן הראשי.',
-
-    'K_SMALL_RATIO' => 'גורם גופן קטן',
-    'K_SMALL_RATIO_INFO' => 'גורם הפחתה עבור גופן קטן.',
-
-    'HEAD_MAGNIFICATION' => 'הגדלת ראש',
-    'HEAD_MAGNIFICATION_INFO' => 'גורם הגדלה עבור כותרות.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'יחס ממדי תמונה',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'יחס שנועד לשינוי ממדי התמונות',
-
-    'PDF_UNIT' => 'יחידה',
-    'PDF_UNIT_INFO' => 'יחידת מדידה של המסמך',
 	'PDF_GD_WARNING'=>'לא מותקנת ספריית GD עבור PHP. ללא ספריית GD מותקנת, ניתן להציג סמלי לוגו JPEG בלבד במסמכי PDF.',
     'ERR_EZPDF_DISABLE'=>'אזהרה: הקלאס EZPDF מושבת מטבלת הגדרות התצורה ומוגדר בתור הקלאס PDF. אנא "שמור" טופס זה כדי להגדיר את TCPDF בתור הקלאס PDF ולחזור למצב יציב.',
     'LBL_IMG_RESIZED'=>"(הגודל שונה עבור התצוגה)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'הוסף גופן PDF',
     'LBL_PDF_PATCH' => 'טלאי',
-    'LBL_PDF_PATCH_INFO' => 'Custom modification of the encoding. Write a PHP array.<br>Example :<br>ISO-8859-1 does not contain the euro symbol. To add it at position 164, write "array(164=>\\&#39;Euro\\&#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'טבלת קידוד',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'שם טבלת הקידוד.<br>אפשרות זו מבוטלת עבור TrueType Unicode, OpenType Unicode וגופני סמלים.<br>הקידוד מגדיר את הזיקה בין קוד (מ-0 עד 255) ותו שמוכל בגופן.<br>128 הראשונים קבועים ותואמים ל-ASCII.',
     'LBL_PDF_FONT_FILE' => 'קובץ גופן',

@@ -11,11 +11,14 @@
  */
 *}
 <!-- END METADATA GENERATED CONTENT -->
-
 {{if $useTabs}}
     <!-- include a closing div if the useTabs variable is set to true -->
     </div>
 {{/if}}
+            <input type="hidden" name="eapm_id" id="eapm_id" value="{$eapm_id}" />
+            <input type="hidden" name="mail_authtype" id="mail_authtype" value="{$mail_authtype}" />
+            <input type="hidden" name="mail_smtptype" id="mail_smtptype" value="{$mail_smtptype}" />
+            <input type="hidden" name="authorized_account" id="authorized_account" value="{$authorized_account}" />
             <div id="email_options">
             <table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
                             <tr>
@@ -50,6 +53,24 @@
                             </tr>
                              {if !empty($mail_smtpauth_req) }
 
+                             {if $mail_authtype === 'oauth2'}
+                             <tr id="authorized_account_tr">
+                                 <td width="20%" scope="row" nowrap="nowrap"><span id="authorized_account_label">{$MOD.LBL_MAIL_AUTHORIZED_ACCOUNT}</span></td>
+                                 <td width="30%" ><span id="authorized_account_value">{$authorized_account}</span></slot></td>
+                                 <td></td>
+                                 <td ></td>
+                             </tr>
+                             <tr id="auth_block_tr">
+                                 <td width="20%" scope="row" nowrap="nowrap"></td>
+                                 <td width=30%>
+                                     <div id="auth_warning"></div>
+                                     <button type="button" id="auth_button" name="auth_button" style="padding:5px;" onclick="authorize();">{$APP.LBL_EMAIL_AUTHORIZE}</button>
+                                 </td>
+                             </tr>
+                             <input type="hidden" name="mail_smtpuser" id="mail_smtpuser" value="{$mail_smtpuser}" />
+
+                             {else}
+
                             <tr id="mail_smtpuser_tr">
                                 <td width="20%" scope="row" nowrap="nowrap"><span id="mail_smtpuser_label">{$MOD.LBL_MAIL_SMTPUSER}</span></td>
                                 <td width="30%" ><slot><input type="text" id="mail_smtpuser" name="mail_smtpuser" size="25" maxlength="64" value="{$mail_smtpuser}" tabindex='1' ></slot></td>
@@ -65,6 +86,7 @@
                                 <td>&nbsp;</td>
                                 <td >&nbsp;</td>
                             </tr>
+                            {/if}
                             {/if}
 
                             <tr id="test_outbound_settings_tr">
@@ -273,27 +295,29 @@
                 <tr>
                     <th align="left" scope="row" colspan="4"><h4>{$MOD.LBL_LAYOUT_OPTIONS}</h4></th>
                 </tr>
-                            <tr>
-                                <td colspan="2" width="50%">
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td scope="row" align="left" style="padding-bottom: 2em;">{$TAB_CHOOSER}</td>
-                                            <td width="90%" valign="top"><BR>&nbsp;</td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td colspan="2" width="50%">
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td scope="row" width="17%">
-                                            <slot>{$MOD.LBL_FIELD_NAME_PLACEMENT}:</slot>&nbsp;{sugar_help text=$MOD.LBL_FIELD_NAME_PLACEMENT_TEXT}
-                                            </td>
-                                            <td width="33%"><slot><select tabindex='12' name="field_name_placement">{$FIELD_NAME_PLACEMENT}</select></slot></td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
+                <tr>
+                    <td colspan="2" scope="row">
+                        {$TAB_CHOOSER}
+                    </td>
+                    <td width="17%" scope="row">
+                        <slot>{$MOD.LBL_FIELD_NAME_PLACEMENT}:</slot>&nbsp;{sugar_help text=$MOD.LBL_FIELD_NAME_PLACEMENT_TEXT}
+                    </td>
+                    <td width="33%">
+                        <slot><select tabindex='12' name="field_name_placement">{$FIELD_NAME_PLACEMENT}</select></slot>
+                    </td>
+                </tr>
+                {if empty($DISABLE_NUMBER_PINNED_MODULES)}
+                    <tr>
+                        <td width="17%" scope="row">
+                            <slot>{$MOD.LBL_NUMBER_PINNED_MODULES}:</slot>&nbsp;{sugar_help text=$MOD.LBL_NUMBER_PINNED_MODULES_DESC}
+                        </td>
+                        <td width="33%">
+                            <slot><input name='number_pinned_modules' value="{$NUMBER_PINNED_MODULES}"></slot>
+                        </td>
+                    </tr>
+                {/if}
+            </tbody>
+        </table>
         </div>
         <div id="locale" style="display:{$HIDE_FOR_GROUP_AND_PORTAL}">
         <table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
@@ -349,7 +373,13 @@
                         </tr>
                         <tr>
                             <td scope="row"><slot>{$MOD.LBL_TIMEZONE}:</slot>&nbsp;{sugar_help text=$MOD.LBL_TIMEZONE_TEXT }</td>
-                            <td ><slot><select tabindex='14' name='timezone'>{html_options options=$TIMEZONEOPTIONS selected=$TIMEZONE_CURRENT}</select></slot></td>
+                            <td>
+                                <slot>
+                                    <select tabindex="14" name="timezone" disabled="">
+                                        {html_options options=$TIMEZONEOPTIONS selected=$TIMEZONE_CURRENT}
+                                    </select>
+                                </slot>
+                            </td>
                             <!-- BEGIN: currency -->
                             <td width="17%" scope="row"><slot>
                                 <i>{$MOD.LBL_LOCALE_EXAMPLE_NAME_FORMAT}</i>:
@@ -508,6 +538,77 @@ $(document).ready(function() {
 
 });
 
+/**
+ * Opens a window for the user to authorize their account through OAuth2
+ */
+function authorize() {
+    {if !empty($js_authinfo)}
+    let authInfo = {$js_authinfo};
+    let smtpType = document.getElementById('mail_smtptype').value;
+    if (authInfo[smtpType]['auth_url']) {
+        window.addEventListener('message', handleOauthComplete);
+        let height = 600;
+        let width = 600;
+        let left = (window.parent.screen.width - width) / 2;
+        let top = (window.parent.screen.height - height) / 4;
+        let submitWindow = window.open('/', "_blank", 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top + ',resizable=1');
+        submitWindow.location.href = 'about:blank';
+        submitWindow.location.href = authInfo[smtpType]['auth_url'];
+    }
+    {/if}
+}
+
+/**
+ * Handles when the user has completed the OAuth2 authorization process
+ */
+function handleOauthComplete(result) {
+    {if !empty($js_authinfo)}
+    let authInfo = {$js_authinfo};
+    let smtpType = document.getElementById('mail_smtptype').value;
+    let data = JSON.parse(result.data);
+    if (!data.dataSource || !authInfo[smtpType] || data.dataSource !== authInfo[smtpType]['dataSource']) {
+        return;
+    }
+    if (data.eapmId && data.emailAddress && data.userName) {
+        document.getElementById('eapm_id').value = data.eapmId;
+        document.getElementById('authorized_account').value = data.emailAddress;
+        document.getElementById('authorized_account_value').innerHTML = data.emailAddress;
+        document.getElementById('mail_smtpuser').value = data.userName;
+    } else {
+        alert('{$APP.LBL_EMAIL_AUTH_FAILURE}');
+    }
+    window.removeEventListener('message', handleOauthComplete);
+    {/if}
+}
+
+/**
+* Displays the appropriate OAuth2 authentication options when applicable
+*/
+function setOAuthOptions() {
+    {if !empty($js_authinfo)}
+    let authInfo = {$js_authinfo};
+    let isOAuth2 = '{$mail_authtype}' === 'oauth2';
+    if (isOAuth2) {
+        let smtpType = '{$mail_smtptype}';
+
+        // Set the appropriate authentication warning text
+        if (authInfo[smtpType] && authInfo[smtpType]['auth_warning']) {
+            document.getElementById('auth_warning').innerHTML = authInfo[smtpType]['auth_warning'];
+        }
+
+        // If the appropriate connector is not set up, display the
+        // authentication warning and disable the authorize button
+        if (!(authInfo[smtpType] && authInfo[smtpType]['auth_url'])) {
+            document.getElementById('auth_warning').style.display = 'block';
+            document.getElementById('auth_button').disabled = true;
+        } else {
+            document.getElementById('auth_warning').style.display = 'none';
+            document.getElementById('auth_button').disabled = false;
+        }
+    }
+    {/if}
+}
+
 </script>
 {$JAVASCRIPT}
 
@@ -521,7 +622,7 @@ themeGroupList = {$themeGroupListJSON};
 {{/if}}
 
 onUserEditView();
-
+setOAuthOptions();
 </script>
 
 </form>

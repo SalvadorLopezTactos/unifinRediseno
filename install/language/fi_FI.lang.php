@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Jotta saisit optimaalisen kokemuksen käyttäessäsi IIS/FastCGI sapi:a, aseta <code>fastcgi.logging</code> arvoon <code>0</code> <code>php.ini</code>-tiedostossa.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Tukematon PHP versio asennettuna: (versio&nbsp;',
     'LBL_DB_UNAVAILABLE'                => 'Tietokanta ei ole käytettävissä',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Tietokantatukea ei löytynyt. Varmista, että sinulla on tarvittavat ajurit jollekin seuraavista tuetuista tietokantatyypeistä: MySQL, MS SQLServer, Oracle tai DB2. Joudut mahdollisesti poistamaan kommenttimerkinnän PHP.ini-tiedoston laajennuksesta tai kääntää uudelleen oikealla binääritiedostolla riippuen käyttämästäsi PHP-versiosta. Katso PHP-oppaasta lisätietoja tietokantatuen käyttöönotosta.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Tietokantatukea ei löytynyt.  Varmista, että käytössä on tarvittavat ohjaimet yhdelle seuraavista tuetuista tietokantatyypeistä: MySQL, MS SQLServer, Oracle tai DB2.  Sinun pitää ehkä poistaa kommenttimerkintä php.ini-tiedoston laajennuksesta tai koostaa tiedosto uudelleen oikealla binääritiedostolla, riippuen PHP-versiostasi.  Katso lisätietoja tietokantatuen ottamisesta käyttöön PHP-käyttöohjeista.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'XML-jäsenninkirjastoja käyttäviä Sugarin tarvitsemia funktioita ei löydetty. Sinun pitää ehkä poistaa kommenttimerkintä lisäosan edestä <code>php.ini</code>-tiedostossa, tai kääntää uudelleen oikealla binääritiedostolla, PHP-versiostasi riippuen. Katso lisätietoja PHP-manuaalista.',
     'LBL_CHECKSYS_CSPRNG' => 'Satunnaislukugeneraattori',
     'ERR_CHECKSYS_MBSTRING'             => 'Multibyte Strings PHP -lisäosaan (<code>mbstring</code>) liittyviä Sugarin tarvitsemia funktioita ei löydetty.<br /><br />Usein mbstring-moduuli ei ole käytössä oletuksena ja pitää aktivoida --enable-mbstring -komennolla kun PHPn binääritiedostoa käännetään. Katso PHP-manuaalista lisätietoja miten mbstring-tuki saadaan käyttöön.',
@@ -561,32 +561,15 @@ Hylkää tämä puhelu:
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Sähköposti-ilmoitukset tehtävistä',
-        'subject' => 'SugarCRM - Osoitettu vastuuhenkilöksi moduulille $module_name ',
-        'description' => 'Tätä mallia käytetään, kun järjestelmä lähettää käyttäjälle osoitetun tehtävän.',
-        'body' => '<div>
-<p>$assigned_by_user on osoittanut moduulin &nbsp;$module_name vastuuhenkilöksi käyttäjän&nbsp;$assigned_user.</p>
-
-<p>Voit tarkastella tätä moduulia&nbsp;$module_name osoitteessa:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user on osoittanut moduulin $module_name käyttäjälle $assigned_user.
-
-Voit tarkastella tätä moduulia $module_name osoitteessa:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Sähköpostiviestit aikataulutetuista raporteista',
         'subject' => 'Aikataulutettu raportti: $report_name alkaen ajankohdasta $report_time',
         'description' => 'Tätä mallia käytetään, kun järjestelmä lähettää käyttäjälle raportin määritetyn aikataulun mukaisesti.',
         'body' => '<div>
-<p>Hei $assigned_user</p>
-<p>Ohessa automaattisesti luotu raportti, joka lähetetään määritetyn aikataulun mukaisesti sinulle.</p>
-<p>Raportin nimi: $report_name</p>
-<p>Raportin ajopäivä- ja -aika: $report_time</p>
+<p>Hei $assigned_user<br></p>
+<p>Ohessa automaattisesti luotu raportti, joka lähetetään määritetyn aikataulun mukaisesti sinulle.<br></p>
+<p>Raportin nimi: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Raportin ajopäivä- ja -aika: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Hei $assigned_user
@@ -612,14 +595,6 @@ Raportin ajopäivä- ja -aika: $report_time',
             Näet kommentin, kun kirjaudut Sugariin.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Uudet asiakastiedot',
-        'description' => 'Tätä mallia käytetään, kun järjestelmänvalvoja lähettää uuden salasanan käyttäjälle.',
-        'body' => '<div><table border=\'0\' cellspacing=\'0\' cellpadding=\'0\' width=\'550\' align=\'center\'><tbody><tr><td colspan=\'2\'><p>Tässä on käyttäjänimesi ja tilapäinen salasanasi:</p><p>Käyttäjänimi : <code>$contact_user_user_name</code> </p><p>Salasana :<code> $contact_user_user_hash </code></p><br /><p>$config_site_url</p><br /><p>Kun kirjaudut sisään yllä olevalla salasanalla, sinua pyydetään muuttamaan salasana.</p> </td> </tr><tr><td colspan=\'2\'></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'Tässä on käyttäjänimesi ja tilapäinen salasanasi:<br />Käyttäjänimi : $contact_user_user_name<br />Salasana     : $contact_user_user_hash<br /><br />$config_site_url<br /><br />Kun kirjaudut sisään yllä olevalla sanasanalla, sinua saatetaan pyytää muutamaan salasana.',
-        'name' => 'Määrittele nimi',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Palauta tilisi salasana',
         'description' => "Tällä mallilla lähetetään käyttäjälle linkki, jolla käyttäjä voi asettaa salasanansa uudelleen.",

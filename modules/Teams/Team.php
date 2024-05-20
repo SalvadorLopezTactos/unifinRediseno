@@ -101,9 +101,10 @@ class Team extends SugarBean
 	function fill_in_additional_detail_fields() {
 	}
 
-	function get_list_view_data() {
-		$yes_label = isset($GLOBALS['app_list_strings']['dom_int_bool'][1]) ? $GLOBALS['app_list_strings']['dom_int_bool'][1] : 1;
-		$no_label = isset($GLOBALS['app_list_strings']['dom_int_bool'][0]) ? $GLOBALS['app_list_strings']['dom_int_bool'][0] : 0;
+    public function get_list_view_data($filter_fields = [])
+    {
+        $yes_label = $GLOBALS['app_list_strings']['dom_int_bool'][1] ?? 1;
+        $no_label = $GLOBALS['app_list_strings']['dom_int_bool'][0] ?? 0;
 
 		$team_fields = $this->get_list_view_array();
 		$team_fields['NAME'] = self::getDisplayName($team_fields['NAME'], $team_fields['NAME_2']);
@@ -121,7 +122,7 @@ class Team extends SugarBean
 			{
 			    $list_form->parse($xTemplateSection.".row.admin_team");
 			    $list_form->parse($xTemplateSection.".row.admin_edit");
-                $record = isset($_REQUEST['record']) ? $_REQUEST['record'] : '';
+                $record = $_REQUEST['record'] ?? '';
 			    if ($this->associated_user_id == $record) {
                     $list_form->parse($xTemplateSection.".row.user_rem");
 				} else if ( isset($this->implicit_assign) && $this->implicit_assign == '1' ) {
@@ -237,7 +238,7 @@ class Team extends SugarBean
      */
 	function get_team_members($active_users = false, $filter = null, $active_employees = false) {
         $where = sprintf('team_id = %s and explicit_assign = 1', $this->db->quoted($this->id));
-        $filter = trim($filter);
+        $filter = trim((string)$filter);
         $filter = is_string($filter) && !empty($filter) ? $filter : null;
 
         // Get the list of members
@@ -321,7 +322,7 @@ class Team extends SugarBean
 		// Update team_memberships table and set deleted = 1
         $query = "UPDATE team_memberships SET deleted = 1 WHERE team_id = ?";
         $conn = $this->db->getConnection();
-        $conn->executeQuery($query, array($this->id));
+        $conn->executeStatement($query, array($this->id));
 
 		// Update teams and set deleted = 1
 		$this->deleted = 1;

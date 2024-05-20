@@ -14,6 +14,9 @@ namespace Sugarcrm\Sugarcrm\SugarConnect;
 
 use Sugarcrm\Sugarcrm\SugarConnect\Configuration\ConfigurationInterface;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 interface Publisher
 {
     /**

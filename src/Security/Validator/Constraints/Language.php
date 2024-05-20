@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class Language extends Constraint
 {
-    const ERROR_LANGUAGE_NOT_FOUND = 1;
+    public const ERROR_LANGUAGE_NOT_FOUND = 1;
 
     protected static $errorNames = array(
         self::ERROR_LANGUAGE_NOT_FOUND => 'ERROR_LANGUAGE_NOT_FOUND',

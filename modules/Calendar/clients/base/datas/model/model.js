@@ -216,11 +216,13 @@
         }
 
         const fieldModule = this.get('calendar_module');
-        let fieldName = fieldDef.name.replace(/_/g, '');
+        let fieldName = fieldDef.name;
 
-        if (fieldName.substr(fieldName.length - 2) == '_c') {
+        if (fieldName.substr(fieldName.length - 2) === '_c') {
             fieldName = fieldName.substr(0, fieldName.length - 2);
         }
+
+        fieldName = fieldName.replace(/_/g, '');
 
         let fieldLabel = fieldDef.vname || '';
         if (!_.isEmpty(fieldLabel)) {

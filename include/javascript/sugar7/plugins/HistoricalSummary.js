@@ -26,11 +26,14 @@
              * Handles the click event, and open the historical-summary-list view
              */
             historicalSummaryClicked: function() {
+                let context = this.context.getChildContext({
+                    name: 'history',
+                    module: this.module,
+                    model: this.model
+                });
                 app.drawer.open({
                     layout: 'history-summary',
-                    context: {
-                        name: 'history'
-                    }
+                    context: context
                 });
             },
 

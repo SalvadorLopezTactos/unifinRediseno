@@ -20,7 +20,7 @@ $subpanel_layout = array(
 	'list_fields' => array(
 		'name'			=> array (
 			'vname'		=> 'LBL_NAME',
-			'width'		=> '50%',
+            'width' => '20%',
 			'sortable'	=> false,
 		),
 		'status'		=> array (
@@ -28,6 +28,16 @@ $subpanel_layout = array(
 			 'width'	=> '10%',
 			 'sortable'	=> true,
 		),
+        'resolution' => [
+            'vname' => 'LBL_RESOLUTION',
+            'width' => '10%',
+            'sortable' => true,
+        ],
+        'message' => [
+            'vname' => 'LBL_MESSAGE',
+            'width' => '30%',
+            'sortable' => false,
+        ],
 		'execute_time'	=> array (
 			 'vname'	=> 'LBL_EXECUTE_TIME',
 			 'width'	=> '10%',
@@ -41,4 +51,3 @@ $subpanel_layout = array(
 		),
 );
 
-?>

@@ -10,7 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 }}
-<div data-toggle="true" class="label label-module label-{{module}} pull-left">{{moduleIconLabel 'KBLocalizations'}}</div> <h4 data-toggle="true" class="pull-left">{{str layout.label parentModule}}</h4>
+<div data-toggle="true" class="{{moduleLabelContainer module 'sm'}} pull-left">{{moduleIconLabel 'KBLocalizations'}}</div>
+<h4 data-toggle="true" class="pull-left">{{str layout.label parentModule}}</h4>
 {{#each meta.fields}}
     <span class="pull-left panel-field">
         {{field ../this model=../model}}

@@ -100,6 +100,10 @@ $dictionary['pmse_EmailMessage'] = array(
             'type' => 'id',
             'vname' => 'LBL_OUTBOUND_EMAIL_ID',
         ],
+        'doc_merge_attach_id' => [
+            'name' => 'doc_merge_attach_id',
+            'type' => 'id',
+        ],
     ),
     'relationships' => array(),
     'optimistic_locking' => true,

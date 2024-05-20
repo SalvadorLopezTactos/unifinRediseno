@@ -18,16 +18,24 @@
  */
 class ServiceDictionaryRest extends ServiceDictionary
 {
+    /**
+     * @var mixed[]
+     */
+    public $dict;
+    /**
+     * @var mixed[]|mixed
+     */
+    public $endpointBuffer;
     // definition of score weight
-    const SCORE_WILDCARD = 0.75;
-    const SCORE_MODULE = 1;
-    const SCORE_EXACTMATCH = 1.75;
-    const SCORE_CUSTOMEXTRA = 0.5;
+    public const SCORE_WILDCARD = 0.75;
+    public const SCORE_MODULE = 1;
+    public const SCORE_EXACTMATCH = 1.75;
+    public const SCORE_CUSTOMEXTRA = 0.5;
 
-    const WEIGHT_MINVERSION = 0.02;
-    const WEIGHT_MAXVERSION = 0.02;
-    const WEIGHT_MINMAXVERSION_MATCH = 0.02;
-    const WEIGHT_BASE = 100000;
+    public const WEIGHT_MINVERSION = 0.02;
+    public const WEIGHT_MAXVERSION = 0.02;
+    public const WEIGHT_MINMAXVERSION_MATCH = 0.02;
+    public const WEIGHT_BASE = 100000;
 
     /**
      * Loads the dictionary so it can be searche

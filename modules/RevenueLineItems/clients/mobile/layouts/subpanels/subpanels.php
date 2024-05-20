@@ -55,5 +55,12 @@ $viewdefs['RevenueLineItems']['mobile']['layout']['subpanels'] = array(
                 'link' => 'documents',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PARENT_RLIS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'parent_rlis_link',
+            ],
+        ],
     ),
 );

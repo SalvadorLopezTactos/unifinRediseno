@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'เทมเพลท? :',
     'LBL_DET_TEMPLATE_TYPE'=>'ประเภทเอกสาร:',
     'LBL_TEAM'=> 'ทีม:',
+    'LBL_IS_SHARED' => 'ใช้งานได้ภายนอก:',
     'LBL_DOC_DESCRIPTION'=>'คำอธิบาย:',
     'LBL_DOC_ACTIVE_DATE'=> 'วันที่เผยแพร่:',
     'LBL_DOC_EXP_DATE'=> 'วันที่หมดอายุ:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'ส่งไปยัง DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'ซิงค์ไปยัง Google Drive',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'ซิงค์ทั้งหมดไปยัง Google Drive',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'ซิงค์ทั้งหมดไปยัง OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'ซิงค์ไปยัง OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'ซิงค์ทั้งหมดไปยัง Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'ซิงค์ไปยัง Dropbox',
 );

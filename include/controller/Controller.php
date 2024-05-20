@@ -44,7 +44,9 @@ class Controller extends SugarBean {
 	}	
 
 	function change_component_order($magnitude, $direction, $parent_id=""){
-		
+        $affected_id = null;
+        $affected_x = null;
+        $affected_y = null;
 		if(!empty($this->type) && $this->type=="Save"){
 			
 			//safety check

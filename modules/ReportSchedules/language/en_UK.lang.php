@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Report Schedules Record Dashboard',
     'LBL_FILE_TYPE' => 'File Type(s)',
+    'LBL_EMBED_REPORT' => 'Embed report in Email',
+    'LBL_EMBED_REPORT_INFO' => 'Note: If the report exceeds 200 rows, we will attach the report as a CSV file.',
 );

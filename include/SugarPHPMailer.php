@@ -17,6 +17,10 @@
  */
 class SugarPHPMailer extends PHPMailerProxy
 {
+    /**
+     * @var string
+     */
+    public $PluginDir;
     var $oe; // OutboundEmail
     var $protocol = "tcp://";
     var $preppedForOutbound = false;
@@ -63,7 +67,6 @@ class SugarPHPMailer extends PHPMailerProxy
 
         // allow for empty messages to go out
         $this->AllowEmpty = true;
-
     }
 
 

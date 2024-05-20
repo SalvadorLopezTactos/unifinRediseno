@@ -13,14 +13,15 @@
 namespace Sugarcrm\Sugarcrm\Cache\Backend;
 
 use Sugarcrm\Sugarcrm\Cache\Exception;
-use Symfony\Component\Cache\Simple\ApcuCache;
+use Symfony\Component\Cache\Adapter\ApcuAdapter;
+use Symfony\Component\Cache\Psr16Cache;
 
 /**
  * APCu implementation of the cache backend
  *
  * @link http://pecl.php.net/package/APCu
  */
-final class APCu extends ApcuCache
+final class APCu extends Psr16Cache
 {
     /**
      * @throws Exception
@@ -28,10 +29,9 @@ final class APCu extends ApcuCache
      */
     public function __construct()
     {
-        parent::__construct();
-
         if (PHP_SAPI === 'cli' && !ini_get('apc.enable_cli')) {
             throw new Exception('The APCu extension is disabled for CLI');
         }
+        parent::__construct(new ApcuAdapter());
     }
 }

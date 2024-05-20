@@ -12,6 +12,19 @@
 
 class ViewValidateRelatedField extends ViewAjax
 {
+    /**
+     * @var string|\MBPackage|mixed
+     */
+    public $package;
+    /**
+     * @var mixed
+     */
+    public $link;
+    public $tmodule;
+    /**
+     * @var mixed[]|mixed
+     */
+    public $related;
     var $vars = array("tmodule", "link", "related");
 
     public function __construct()

@@ -16,6 +16,8 @@
  * @api
  */
 class OAuthPluginBase extends ExternalAPIBase implements ExternalOAuthAPIPlugin {
+    public $oauth_token;
+    public $oauth_secret;
     public $authMethod = 'oauth';
     protected $oauthParams = array();
     protected $oauth_keys_initialized = false;

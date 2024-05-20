@@ -21,7 +21,7 @@ class SugarACLSupportPortal extends SugarACLPortal
     {
         $msg = sprintf(
             '%s::%s is deprecated and will be removed in a future release.',
-            __CLASS__,
+            self::class,
             __METHOD__
         );
         LoggerManager::getLogger()->deprecated($msg);

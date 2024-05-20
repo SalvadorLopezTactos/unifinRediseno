@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Actualitza la definició de producte',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Programes sensibles al temps del procés',
 'LBL_OOTB_DATA_ARCHIVER' => 'Executa arxiu/esborrat de dades actives',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Aplica els drets de la subscripció quan canviïn',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geocodificador de registres',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Opcions Avançades',
 'LBL_TOGGLE_ADV' => 'Opcions Avançades',
 'LBL_TOGGLE_BASIC' => 'Opcions Bàsiques',
+'LBL_UPDATEMOMENTUMCJ' => 'Actualització de l&#39;impuls de les Smart Guides en curs',
 // Links
 'LNK_LIST_SCHEDULER' => 'Planificadors',
 'LNK_NEW_SCHEDULER' => 'Nou Planificador',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Executa arxiu/esborrat de dades actives',
 'LBL_PMSEENGINECRON' => 'Planificador de SugarBPM',
 );
-

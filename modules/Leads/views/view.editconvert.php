@@ -14,6 +14,11 @@
 
 class ViewEditConvert extends SugarView
 {
+    /**
+     * @var \ConvertLayoutMetadataParser|mixed
+     */
+    public $parser;
+    public $defs;
     // @codingStandardsIgnoreStart
     protected $_viewdefs = array();
     // @codingStandardsIgnoreEnd
@@ -118,16 +123,16 @@ class ViewEditConvert extends SugarView
             $moduleDefs = [
                 "module" => $def['module'],
                 "moduleName" => $app_list_strings['moduleList'][$def['module']],
-                "required" => isset($def['required']) ? $def['required'] : false,
-                "copyData" => isset($def['copyData']) ? $def['copyData'] : false,
-                "duplicateCheckOnStart" => isset($def['duplicateCheckOnStart']) ? $def['duplicateCheckOnStart'] : false,
+                "required" => $def['required'] ?? false,
+                "copyData" => $def['copyData'] ?? false,
+                "duplicateCheckOnStart" => $def['duplicateCheckOnStart'] ?? false,
             ];
 
             if ($def['module'] === 'Opportunities') {
                 $additionalDefs = [
-                    'enableRlis' => isset($def['enableRlis']) ? $def['enableRlis'] : false,
-                    'requireRlis' => isset($def['requireRlis']) ? $def['requireRlis'] : false,
-                    'copyDataToRlis' => isset($def['copyDataToRlis']) ? $def['copyDataToRlis'] : false,
+                    'enableRlis' => $def['enableRlis'] ?? false,
+                    'requireRlis' => $def['requireRlis'] ?? false,
+                    'copyDataToRlis' => $def['copyDataToRlis'] ?? false,
                 ];
 
                 $moduleDefs = array_merge($moduleDefs, $additionalDefs);

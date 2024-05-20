@@ -271,17 +271,6 @@ ul.megamenu div.megacolumn-content ul li a {
 	left: 0px;
 }
 
-#footer img {
-	float: right;
-}
-
-#footer img.logo {
-	margin-right: 5px;
-	max-width:450px;
-    max-height:17px;	
-}
-
-
 .list tr.pagination td table td a:link,
 .list tr.pagination td table td a:visited,
 .reportGroupByDataChildTablelistViewThS1 a:link,
@@ -477,11 +466,6 @@ direction: rtl;
 	direction: rtl;	
 }
 
-#footer #partner {
-    float: left;
-    border-right: 0;
-}
-
 .buttons {
 	text-align: right;
 }
@@ -512,26 +496,8 @@ ul.clickMenu li ul.subnav, ul.clickMenu ul.subnav-sub, ul.SugarActionMenuIESub {
     display:none;
 }
 
-#footer #help {
-    float: left;
-}
-
-#footer #buffer {
-    float: left;
-}
-
-
 #arrow.up i.icon-chevron-down {
     margin-left: 8px;
-}
-
-#footer .copyright {
-  direction: rtl;
-}
-
-#footer #productTour {
-    float: left;
-    border-left: 0px none;
 }
 
 #pageContainer > div > table td:first-child {

@@ -190,8 +190,17 @@
      * @protected
      */
     _getAppendToTarget: function() {
-        var component = this.closestComponent('main-pane') ||
+        // On record view dashlets and record list view, we need to attach the datepicker to the scrolling body
+        if (this.view && this.view.type === 'dashablerecord') {
+            return this.$el.closest('.tab-content');
+        } else if (this.view && this.view.type === 'recordlist') {
+            return this.$el.closest('.flex-list-view-content');
+        }
+
+        let component = this.closestComponent('side-drawer') ||
+            this.closestComponent('main-pane') ||
             this.closestComponent('drawer') ||
+            this.closestComponent('omnichannel-detail') ||
             this.closestComponent('preview-pane');
 
         if (component) {
@@ -249,13 +258,6 @@
             var $field = this.$(this.fieldTag);
 
             $field.on('focus', _.bind(this.handleFocus, this));
-
-            $('.main-pane, .flex-list-view-content').on('scroll.' + this.cid, _.bind(function() {
-                // make sure the dom element exists before trying to place the datepicker
-                if (this._getAppendToTarget()) {
-                    $field.datepicker('place');
-                }
-            }, this));
         }
     },
 
@@ -280,8 +282,6 @@
         }
 
         if (this.action === 'edit') {
-            $('.main-pane, .flex-list-view-content').off('scroll.' + this.cid);
-
             var $field = this.$(this.fieldTag),
                 datePicker = $field.data('datepicker');
             if (datePicker && !datePicker.hidden) {

@@ -21,6 +21,7 @@ use InvalidArgumentException;
 use Sugarcrm\Sugarcrm\Maps\Constants;
 use SugarQuery;
 use SugarQueryException;
+use Sugarcrm\Sugarcrm\Maps\FilterUtils as MapsFilterUtils;
 
 /**
  *
@@ -74,7 +75,23 @@ class HookHandler
             if (count($changedAddressFields) > 0) {
                 $geocodeBean->geocoded = false;
                 $geocodeBean->address = $this->getFormattedAddress($bean, $currentModule);
-                $geocodeBean->status = Constants::GEOCODE_SCHEDULER_STATUS_REQUEUE;
+                $rawAddress = str_replace(', ', '', $geocodeBean->address);
+                $isEmptyAddress = false;
+
+                if (strlen($rawAddress) < Constants::MIN_CHARS_NR_FOR_VALID_ADDRESS) {
+                    $isEmptyAddress = true;
+                }
+
+                if ($isEmptyAddress) {
+                    $geocodeBean->geocoded = 1;
+                    $geocodeBean->status = Constants::GEOCODE_SCHEDULER_STATUS_NOT_FOUND;
+                } else {
+                    $geocodeBean->status = Constants::GEOCODE_SCHEDULER_STATUS_REQUEUE;
+                    $geocodeBean->error_message = '';
+                }
+
+                MapsFilterUtils::updateGeocodeStatuses([$geocodeBean->id], $geocodeBean->status);
+
                 $saveGeocodeBean = true;
             }
 

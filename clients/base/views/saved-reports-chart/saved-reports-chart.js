@@ -12,6 +12,7 @@
  * @class View.Views.Base.SavedReportsChartView
  * @alias SUGAR.App.view.views.BaseSavedReportsChartView
  * @extends View.View
+ * @deprecated Use {@link View.Views.Base.ReportDashletView} instead.
  */
 ({
     plugins: ['Dashlet'],
@@ -94,11 +95,11 @@
     editSavedReport: function() {
         app.logger.warn('View.Views.Base.SavedReportsChartView#editSavedReport' +
             'has been deprecated since 8.0.0.0 and will be removed in a future release');
-        var currentTargetId = this.dashModel.get('saved_report_id'),
-            params = {
+        var currentTargetId = this.dashModel.get('saved_report_id');
+        var params = {
                 dashletEdit: 1
-            },
-            route = app.bwc.buildRoute('Reports', currentTargetId, 'ReportsWizard', params);
+            };
+        var route = app.bwc.buildRoute('Reports', currentTargetId, 'ReportsWizard', params);
 
         //If this button was clicked too early, the saved_report_id may not be populated. Then we want to return
         //because moving on will result in a php error
@@ -117,7 +118,8 @@
 
                 //Once we've successfully routed to the dashletEdit location,
                 //any successive route should be checked. If the user moves away from the edit without
-                //either cancelling or finishing the edit, we should forget that we have to come back to the current location
+                //either cancelling or finishing the edit, we should forget that we have to come
+                //back to the current location
                 var dashletEditVisited = false;
                 app.router.on('route', function() {
                     var routeLocation = Backbone.history.getFragment();
@@ -203,8 +205,8 @@
         app.logger.warn('View.Views.Base.SavedReportsChartView#updateEditLink' +
             'has been deprecated since 8.0.0.0 and will be removed in a future release');
 
-        var acls = this.reportAcls[reportId || this.settings.get('saved_report_id')],
-            showEditLink = !acls || acls['edit'] !== 'no';
+        var acls = this.reportAcls[reportId || this.settings.get('saved_report_id')];
+        var showEditLink = !acls || acls.edit !== 'no';
         this.$('[name="editReport"]').toggle(showEditLink);
     },
 
@@ -230,6 +232,11 @@
         // By default, settings only has: label, type, config, module
         // Module is normally null so we want to rehit that
         var settings = _.clone(this.settings.attributes);
+
+        // we have to delete the context as there is no need for it
+        // context causes a circular reference which makes json parse to crash
+        delete settings.context;
+
         var defaults = {
                 allowScroll:     true,
                 auto_refresh:    0,
@@ -273,6 +280,9 @@
             }
             return;
         }
+
+        serverData = this._sanitizeData(serverData);
+
         updated = _.isUndefined(update) ? false : update;
         data = serverData.reportData;
         properties = serverData.chartData.properties[0];
@@ -328,6 +338,36 @@
 
         // toggle display of chart display option controls based on chart type
         this._toggleChartFields();
+    },
+
+    /**
+     * Remove broken data
+     *
+     * @param {Object} data
+     * @return {Object}
+     */
+    _sanitizeData: function(data) {
+        if (_.isEmpty(data.chartData.values)) {
+            return data;
+        }
+
+        const props = data.chartData.properties;
+        const title = _.first(props).title.split(' ');
+
+        if (_.last(title) === _.last(data.chartData.values).label) {
+            data.chartData.values.pop();
+
+            const labelIdx = data.chartData.label.indexOf('');
+            data.chartData.label.splice(labelIdx, 1);
+
+            _.each(data.chartData.values, function cleanValues(barData) {
+                barData.links.splice(labelIdx, 1);
+                barData.valuelabels.splice(labelIdx, 1);
+                barData.values.splice(labelIdx, 1);
+            });
+        }
+
+        return data;
     },
 
     /**
@@ -633,6 +673,14 @@
             this.context.set('chartLabels', chartLabels);
             this._handleFilter(chart, params, null, reportDef, wrapper.rawData);
         }
+
+        // make sure we update the settings in case the user wants to refresh the chart
+        this.settings.set({
+            groupIndex: params.groupIndex,
+            seriesIndex: params.seriesIndex,
+            groupLabel: params.groupLabel,
+            seriesLabel: params.seriesLabel,
+        });
     },
 
     /**
@@ -762,8 +810,8 @@
                 filter: [{chart_type: {$not_equals: 'none'}}],
                 // get all reports with charts
                 max_num: -1
-            },
-            url = app.api.buildURL('Reports', null, null, params);
+            };
+        var url = app.api.buildURL('Reports', null, null, params);
 
         app.api.call('read', url, null, {
             success: _.bind(this.parseAllSavedReports, this)
@@ -825,9 +873,37 @@
             // manually set the icon class to spiny
             this.$('[data-action=loading]').removeClass(dt.cssIconDefault).addClass(dt.cssIconRefresh);
         }
-        var useSavedFilters = this.context && this.context.get('useSavedFilters') ? 'true' : 'false';
-        var url = app.api.buildURL('Reports/' + reportId + '/chart?use_saved_filters=' + useSavedFilters);
-        app.api.call('read', url, null, {
+
+        const useSavedFilters = this.context && this.context.get('useSavedFilters') ? 'true' : 'false';
+
+        let chartType = '';
+        let requestType = 'read';
+        let params = null;
+        let reportDef = false;
+
+        if (!_.isEmpty(this.settings.get('chart_type'))) {
+            chartType += '&chartType=' + this.settings.get('chart_type');
+        }
+
+        let url = app.api.buildURL('Reports/' + reportId + '/chart?use_saved_filters=' + useSavedFilters + chartType);
+
+        // as long as this controller is used for the new reports dashlet
+        // we need to point it to a new endpoint as well as take into account runtime filters
+        const useCustomReportDef = this.context.get('useCustomReportDef');
+
+        if (useCustomReportDef) {
+            reportDef = this.context.get('reportData');
+            requestType = 'create';
+
+            params = {
+                filtersDef: reportDef.filters_def,
+                intelligent: reportDef.intelligent,
+            };
+
+            url = app.api.buildURL('Reports/' + reportId + '/chart');
+        }
+
+        app.api.call(requestType, url, params, {
             success: _.bind(function(serverData) {
                 if (options && options.success) {
                     // options.success is usually setChartParams()
@@ -1023,7 +1099,6 @@
         // hang on to a reference to the chart field
         if (_.isUndefined(this.chartField) && field.name === 'chart') {
             this.chartField = field;
-            this.chartField.$('[data-content="chart"]').removeClass('overflow-hidden');
         }
     }
 })

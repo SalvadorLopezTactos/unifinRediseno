@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => '履歴',
     'LBL_PMSE_LABEL_NOTES' => 'メモを見る',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'メモを追加',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'DocuSignに送信',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => '選択',
     'LBL_PMSE_FORM_LABEL_USER' => 'アサイン先',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => '本当にこのプロセスを承認しますか？',
     'LBL_PA_PROCESS_REJECT_QUESTION' => '本当にこのプロセスを却下しますか？',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => '本当にこのプロセスをルーティングしますか？',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => '本当にこのプロセスをDocuSignに送信しますか？',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'プロセスは承認されました',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'プロセスは却下されました',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'プロセスはルーティングされました',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'プロセスはDocuSignに正常に送信されました',
     'LBL_PA_PROCESS_CLOSED' => '表示しようとしているプロセスは完了しています。',
     'LBL_PA_PROCESS_UNAVAILABLE' => '表示しようとしているプロセスは現時点で利用できません。',
 

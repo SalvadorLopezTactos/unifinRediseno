@@ -102,11 +102,11 @@
      */
     setPreviewFields: function(module, fields) {
         var tab = this.tabs[module];
-        var meta = app.metadata.getModule(module);
-        var metaField = app.metadata.getField({module: module});
+        var metaField = app.utils.deepCopy(app.metadata.getField({module: module}));
         // convert from vardefs field type to widget field type, this also patches labels
         app.metadata._patchFields(module, app.metadata.getModule(module), metaField);
         tab.fields = [];
+        tab.model = app.data.createBean(module);
         _.each(fields, function(fieldName) {
             tab.fields.push({
                 name: fieldName,

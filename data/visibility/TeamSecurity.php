@@ -63,8 +63,7 @@ class TeamSecurity extends NormalizedTeamSecurity
         parent::setOptions($options);
 
         $this->preferDenormalized = !empty($this->options['use_denorm']);
-        $this->table = isset($this->options['table_alias'])
-            ? $this->options['table_alias'] : $this->bean->getTableName();
+        $this->table = $this->options['table_alias'] ?? $this->bean->getTableName();
         $this->strategy = null;
 
         return $this;

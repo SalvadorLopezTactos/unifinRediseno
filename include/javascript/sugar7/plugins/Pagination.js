@@ -69,7 +69,12 @@
                                 this.render();
                             }
 
-                            if (_.includes(['recordlist', 'selection-list', 'multi-selection-list-link'], this.type)) {
+                            if (_.includes([
+                                'recordlist',
+                                'selection-list',
+                                'multi-selection-list-link',
+                                'subpanel-list'
+                            ], this.type)) {
                                 this.$('.flex-list-view-content .no-data-available')
                                     .toggleClass('hidden', !!collection.models.length);
                             }

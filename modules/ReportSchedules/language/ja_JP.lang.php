@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'レポートスケジュールのレコードダッシュボード',
     'LBL_FILE_TYPE' => 'ファイルタイプ',
+    'LBL_EMBED_REPORT' => 'Eメールにレポートを埋め込む',
+    'LBL_EMBED_REPORT_INFO' => '注意: レポートが200行を超える場合は、レポートをCSVファイルとして添付します。',
 );

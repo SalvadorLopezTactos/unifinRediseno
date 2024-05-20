@@ -61,11 +61,11 @@ function addWorkflowIdToActionArray(array $array)
     // Execute the query and get our results
     $stmt = DBManagerFactory::getInstance()
             ->getConnection()
-            ->executeQuery($sql, [':action_id' => $array['action_id']]);
+            ->executeQuery($sql, ['action_id' => $array['action_id']]);
     $data = $stmt->fetchAllAssociative();
 
     // Get the id from the result
-    $id = isset($data[0]['id']) ? $data[0]['id'] : '';
+    $id = $data[0]['id'] ?? '';
 
     // Cache it and write it to our array, then send it back
     $array['workflow_id'] = $workflowIdMap[$array['action_id']] = $id;

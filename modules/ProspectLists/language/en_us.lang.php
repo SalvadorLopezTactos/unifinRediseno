@@ -14,7 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Target Lists List Dashboard',
   'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Target Lists Record Dashboard',
-  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Target Lists Focus Drawer',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Target Lists Focus Dashboard',
   'LBL_RELATED_ACCOUNTS' => 'Related Accounts',
   'LBL_RELATED_CONTACTS' => 'Related Contacts',
   'LBL_RELATED_LEADS_TARGETS' => 'Related Leads and Targets',

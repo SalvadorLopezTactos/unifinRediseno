@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Paneli i listës së rasteve',
     'LBL_CASES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të rasteve',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detajet e rastit',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Përqendruesi i fokusit te rastet - Paneli',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te rastet',
 
 	'ERR_DELETE_RECORD'					=> 'Duhet përcaktuar numrin e regjistrimit për të fshirë llogarinë',
@@ -156,4 +156,29 @@ Për të krijuar një {{module_name}}:
     'LBL_SLA_DETAILS' => 'Detajet e Marrëveshjes së Nivelit të Shërbimit (SLA)',
     'LBL_HOURS' => 'Orë',
     'LBL_WIDGET_STATUS' => 'Statusi',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizo',
+    'LBL_CREATE_NEW' => 'Krijo të re',
+    'LBL_MANAGE' => 'Menaxho',
+    'LBL_SEE_DETAILS' => 'Shiko detajet',
+    'LBL_HIDE_NEW' => 'Fshih',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Rastet',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Rasti',
+    'LBL_KIOSK_CREATE' => 'Krijo rast',
+    'LBL_KIOSK_SUBJECT' => 'Subjekti',
+    'LBL_KIOSK_CASE_ID' => 'ID e Rastit',
+    'LBL_KIOSK_STATUS' => 'Statusi',
+    'LBL_KIOSK_CATEGORY' => 'Kategoria',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Dorëzuar më {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioriteti',
+    'LBL_KIOSK_CREATE_CASE' => 'Na kontakto',
+    'LBL_KIOSK_DESCRIPTION' => 'Përshkrimi',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Kërkesa jote u dorëzua me sukses.',
+    'LBL_KIOSK_ATTACHED' => 'Të gjitha të bashkëngjitura',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Përdoruesit e jashtëm',
 );

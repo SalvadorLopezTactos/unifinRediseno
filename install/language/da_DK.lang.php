@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Du kan få den optimale oplevelse med IIS/FastCGI sapi ved at angive fastcgi.logging til 0 i filen php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'En ikke-understøttet PHP-version er installeret: "ver.',
     'LBL_DB_UNAVAILABLE'                => 'Databasen er ikke tilgængelig',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databasesupport blev ikke fundet. Sørg for, at du har de nødvendige drivere til en af følgende understøttede databasetyper: MySQL, MS SQLServer, Oracle eller DB2. Du skal muligvis fjerne kommentaren fra filtypen i filen php.ini eller genkompilere med den rigtige binære fil alt efter din version af PHP. Find flere oplysninger om, hvordan Databasesupport aktiveres, i din vejledning til PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databasesupport blev ikke fundet.  Sørg venligst for at du har de nødvendige drivere til en af de følgende, understøttede databasetyper: MySQL, MS SQLServer, Oracle, eller DB2.  Du skal muligvis udkommentere udvidelsen i php.ini-filen, eller rekompilere med den korrekte binære fil, afhængigt af din version af PHP.  Se venligst din PHP-manual for yderligere informationer om, hvordan man aktiverer databasesupport.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funktioner knyttet til XML-parserbiblioteker, som skal bruges af Sugar-programmet, blev ikke fundet. Du skal måske fjerne kommentaren fra udvidelsen i filen php.ini eller genkompilere med den korrekte binære fil afhængigt af din version af PHP. Du kan finde flere oplysninger i PHP-vejledningen.',
     'LBL_CHECKSYS_CSPRNG' => 'Tilfældigt talgenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Funktioner knyttet til udvidelsen Multibyte Strings PHP "mbstring", som skal bruges af Sugar-programmet, blev ikke fundet. <br/><br/>Normalt er mbstring-modulet ikke aktiveret som standard i PHP og skal aktiveres med -aktivér-mbstring, når den binære PHP-fil bygges. Du kan finde flere oplysninger om, hvordan du aktiverer mbstring-understøttelse, i PHP-vejledningen.',
@@ -629,32 +629,15 @@ Afslå dette opkald
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'E-mails med tildelingsnotifikationer',
-        'subject' => 'SugarCRM - tildelt $module_name ',
-        'description' => 'Denne skabelon bliver brugt, når systemet sender en opgavetildeling til en bruger.',
-        'body' => '<div>
-<p>$assigned_by_user har tildelt en&nbsp;$module_name til&nbsp;$assigned_user.</p>
-
-<p>Du kan gennemse dette&nbsp;$module_name her:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user har tildelt en$module_name til$assigned_user.
-
-Du kan gennemse dette$module_name her:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Skemalagte rapporterings-e-mails',
         'subject' => 'Skemalagt rapport: $report_name fra den $report_time',
         'description' => 'Denne skabelon bliver brugt, når systemet sender en skemalagt rapport til en bruger.',
         'body' => '<div>
-<p>Hej $assigned_user,</p>
-<p>Vedhæftet er en automatisk genereret rapport, som er blevet planlagt for dig.</p>
-<p>Rapportnavn: $report_name</p>
-<p>Rapportens kørselsdato og -tid: $report_time</p>
+<p>Hej $assigned_user,<br></p>
+<p>Vedhæftet er en autogenereret rapport, som er blevet planlagt til dig.<br></p>
+<p>Rapports navn: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Rapports kørselsdato og -tid: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Hej $assigned_user,
@@ -680,23 +663,6 @@ Rapportens kørselsdato og -tid: $report_time',
             Log på Sugar for at se kommentaren.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Ny kontoinformation',
-        'description' => 'Denne skabelon bruges når systemadministratoren sender en nyt adgangskode til en bruger.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p> Her er din kontos brugernavn og midlertidige adgangskode:</p><p>Brugernavn : 
-$contact_user_user_name </p><p>Adgangskode : 
-$contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Efter du er logged på ved brug af ovenstående adgangskode, kan systemet kræve at du laver en selvvalgt adgangskode.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Her er dit brugernavn og midlertidige adgangskode: 
-Brugernavn: $contact_user_user_name 
-Adgangskode: $contact_user_user_hash 
-
-$config_site_url 
-
-Når du logger på ved hjælp af ovenstående adgangskode, kan du blive bedt om at ændre adgangskoden til en du selv vælger.',
-        'name' => 'Systemgenereret adgangskode e-mail',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Nulstil din adgangskode',
         'description' => "Denne skabelon bruges til at sende en bruger et link til at klikke på for at nulstille brugerens adgangskode.",

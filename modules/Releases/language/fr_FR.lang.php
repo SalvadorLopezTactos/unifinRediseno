@@ -35,7 +35,7 @@ $mod_strings = array (
   'NTC_DELETE_CONFIRMATION' => 'Êtes-vous sûr de vouloir supprimer cet enregistrement ?',
   'ERR_DELETE_RECORD' => 'Un ID doit être spécifié pour toute suppression.',
   'NTC_STATUS' => 'Passer le statut à inactif pour supprimer cette distribution de la liste de choix',
-  'NTC_LIST_ORDER' => 'Établir l&amp;#39;ordre dans lequel cette distribution va apparaitre dans la liste des distributions',
+  'NTC_LIST_ORDER' => 'Établir l´ordre dans lequel cette distribution va apparaitre dans la liste des distributions',
   'LBL_ACTIVE_RELEASES' => 'Versions actives',
   'release_status_dom' =>
   array (

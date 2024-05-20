@@ -28,47 +28,6 @@
         </h1>
     {{else}}
         {{#each meta.panels}}
-            <h1 class="breadcrumbs">
-                {{#each ../breadcrumbModels}}
-                    <span class="sep"><i class="sicon sicon-chevron-right"></i></span>
-                    <div class="bread {{#if ../../singleBreadcrumb}}single{{/if}}" data-index="{{id}}">
-                        {{#each ../breadcrumbs}}
-                            <span class="record-cell {{#if ../../../singleBreadcrumb}}single{{/if}}"
-                                  data-type="{{type}}"
-                                  data-name="{{name}}"
-                                  rel="tooltip"
-                            >
-                                {{field ../../../this model=../this.context.model template="detail"}}
-                            </span>
-                        {{/each}}
-                    </div>
-                {{/each}}
-                {{#if ../truncatedBreadcrumbs.length}}
-                    <span class="sep"><i class="sicon sicon-chevron-right"></i></span>
-                    <div class="trim-menu dropdown" data-mode="init">
-                        <i class="sicon sicon-kebab toggle dropdown-toggle" data-toggle="dropdown"></i>
-                        <div class="option-layout-open dropdown-menu">
-                            <ul data-menu="dropdown" class="dropdown-menu" role="menu">
-                                {{#each ../../truncatedBreadcrumbs}}
-                                    <li class="bread" data-index="{{id}}"><a id="{{this.context.modelId}}" title="{{this.context.model.attributes.name}}" href="javascript:void(0);" role="button">
-                                        {{str "LBL_MODULE_NAME_SINGULAR" this.context.module}} - {{this.context.model.attributes.name}}
-                                    </a></li>
-                                {{/each}}
-                            </ul>
-                        </div>
-                    </div>
-                {{/if}}
-                {{#each ../breadcrumbLastModels}}
-                    <span class="sep"><i class="sicon sicon-chevron-right"></i></span>
-                    <div class="bread" data-index="{{id}}">
-                        {{#each ../breadcrumbs}}
-                            <span class="record-cell" data-type="{{type}}" data-name="{{name}}" rel="tooltip">
-                                {{field ../../../this model=../this.context.model template="detail"}}
-                            </span>
-                        {{/each}}
-                    </div>
-                {{/each}}
-            </h1>
             {{#if ../../dashboardTitle}}
                 <h1 class="dashboardtitle">
                     {{#each ../fields}}
@@ -80,5 +39,4 @@
             {{/if}}
         {{/each}}
     {{/if}}
-
 </div>

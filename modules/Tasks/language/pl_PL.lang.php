@@ -117,4 +117,13 @@ Aby utworzyć {{module_name}}:
 - Kliknij opcję Pokaż więcej, aby w razie konieczności wyświetlić dodatkowe pola.
 2. Kliknij opcję Zapisz, aby zapisać nowy rekord i powrócić do poprzedniej strony.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Zadanie Smart Guide',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Jest zadaniem Smart Guide',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Data rozpoczęcia działania Smart Guide',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Data ukończenia działania Smart Guide',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Smart Guide – liczba dni do ukończenia',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Spotkania podrzędne',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Połączenia podrzędne',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Zadania podrzędne',
 );

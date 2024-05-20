@@ -229,7 +229,8 @@ SQL;
 	}
 
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $app_strings, $mod_strings;
 		global $app_list_strings;
 
@@ -301,8 +302,8 @@ SQL;
         }
 
         $url = 'index.php?' . http_build_query($params);
-        return '<a class="listViewTdToolsS1" href="' . htmlspecialchars($url) . '">'
-            . $image . htmlspecialchars(translate($label)) . '</a>&nbsp;&nbsp;';
+        return '<a class="listViewTdToolsS1" href="' . htmlspecialchars($url, ENT_COMPAT) . '">'
+            . $image . htmlspecialchars(translate($label), ENT_COMPAT) . '</a>&nbsp;&nbsp;';
     }
 
 	/**

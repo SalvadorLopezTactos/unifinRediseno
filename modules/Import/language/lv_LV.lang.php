@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Nepieciešama obligātā vērtība',
     'LBL_ERROR_SYNC_USERS' => 'Nederīga vērtība, lai sinhronizētos ar Outlook:',
     'LBL_ID_EXISTS_ALREADY' => 'Šajā tabulā tāds ID jau eksistē',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY jau eksistē šajā tabulā',
     'LBL_ASSIGNED_USER' => 'Ja lietotājs neeksistē, tad izmanto pašreizējo lietotāju',
     'LBL_SHOW_HIDDEN' => 'Parādīt laukus, kuri nav normāli importējami',
     'LBL_UPDATE_RECORDS' => 'Atjaunināt esošos ierakstus nevis importēt (nav atceļams)',

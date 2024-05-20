@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => '클라이언트 시크릿 설정 없음',
     'LBL_RESEND_BUTTON_LABEL' => '재전송',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => '봉투 가져오기',
+    'LBL_CLOUD_SERVICE_TYPE' => '클라우드 서비스 유형',
+    'LBL_CLOUD_PATH' => '클라우드 경로',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign 봉투 목록 대시보드',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => '최근 DocuSign 봉투',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign 봉투 포커스 서랍',
 
-    'LBL_DOCUMENT_FROM' => '문서 출처',
+    'LBL_NEW_ENVELOPE' => '새 봉투',
     'LBL_DOCUMENT_IS_NOW' => ' 은 지금 ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign 오류입니다. 액세스 토큰을 기반으로 계정 ID를 가져올 수 없습니다',
     'LBL_ERROR_RESEND' => 'DocuSign 재전송을 할 수 없습니다. 봉투 상태가 &#39;전송 완료&#39;여야 합니다',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => '업데이트 실패함',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign 규칙은 15분 이내에 동일한 봉투에 대한 중복 요청을 허용하지 않습니다.',
     'LBL_ERROR_UPDATING_ENVLOPE' => '오류가 발생했습니다. 봉투를 업데이트할 수 없습니다. 로그를 확인해주세요!',
+    'LBL_ERROR_LISTING_TEMPLATES' => '오류가 발생했습니다. 템플릿을 표시할 수 없습니다. 로그를 확인해 주세요!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => '오류가 발생했습니다. 템플릿이 없습니다. 로그를 확인해주세요!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => '봉투가 완성되지 않았습니다',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'DocuSign의 봉투 상태는 현재',
     'LBL_OVERVIEW' => '개요',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => '문서 추가하기',
     'LBL_BUTTON_SEND' => '전송',
     'LBL_BUTTON_CLEAR' => '지우기',
-    'LBL_MISSING_OBJECT' => 'DocuSign 개체가 창에 없습니다',
+    'LBL_BUTTON_SELECT_TEMPLATE' => '템플릿 사용',
     'LBL_PLEASE_LOG_IN' => '먼저 DocuSign에 로그인하세요!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => '이 문서를 다운로드할 수 없습니다. 다른 사용자가 만들었습니다!',
     'LBL_SEND_NOT_ALLOWED' => '이 봉투를 보낼 수 없습니다. 다른 사용자가 만들었습니다!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => '서명함',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => '문서를 다운로드할 수 없습니다. 로그를 확인해주세요!',
     'LBL_DOCUMENT_COMPLETED' => '완료',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign 정보',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => '은 지금',
+    'LBL_SETTINGS_TITLE' => 'DocuSign 설정',
+    'LBL_RECIPIENT_SELECTION' => '수신자 선택 동작',
+    'LBL_RECIPIENT_NAME' => '이름',
+    'LBL_RECIPIENT_EMAIL' => '이메일',
+    'LBL_RECIPIENT_TYPE' => '유형',
+    'LBL_TEMPLATE_NAME' => '이름',
+    'LBL_RECIPIENT_SELECT' => '선택...',
+    'LBL_RECIPIENT_ROLE' => '역할',
+    'LBL_SELECT_BUTTON_LABEL' => '선택',
+    'LBL_BACK_BUTTON_LABEL' => '뒤로',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => '가능한 수신자를 가져오지 못했습니다!',
+    'LBL_FAILED_FETCH_TEMPLATES' => '템플릿을 가져오지 못했습니다!',
 ];

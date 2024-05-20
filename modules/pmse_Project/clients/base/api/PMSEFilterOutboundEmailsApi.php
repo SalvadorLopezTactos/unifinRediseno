@@ -23,7 +23,7 @@ class PMSEFilterOutboundEmailsApi extends FilterApi
      */
     public function filterListSetup(ServiceBase $api, array $args, $acl = 'list')
     {
-        list($args, $q, $options, $seed) = parent::filterListSetup($api, $args, $acl);
+        [$args, $q, $options, $seed] = parent::filterListSetup($api, $args, $acl);
         $usersAlias = $q->getJoinTableAlias('users', false, false);
         $q->joinTable('users', ['alias' => $usersAlias])
             ->on()

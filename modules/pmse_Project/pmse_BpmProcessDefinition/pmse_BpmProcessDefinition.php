@@ -82,7 +82,7 @@ class pmse_BpmProcessDefinition extends pmse_BpmProcessDefinition_sugar
             }
 
             // If there is an existing ID to merge, merge that
-            $merge = isset($rows[$row[$alias]]) ? $rows[$row[$alias]] : [];
+            $merge = $rows[$row[$alias]] ?? [];
 
             // Merge the mergeable and current row defs, and unique them
             $rows[$row[$alias]] = array_unique(array_merge($merge, $def));

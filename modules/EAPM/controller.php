@@ -257,6 +257,9 @@ class EAPMController extends SugarController
         if ($this->bean->application == 'Google') {
             $api = new ExtAPIGoogle();
             $api->revokeToken();
+        } elseif ($this->bean->application == 'Dropbox') {
+            $api = new ExtAPIDropbox();
+            $api->revokeToken();
         } else {
             parent::action_delete();
         }
@@ -275,6 +278,11 @@ class EAPMController extends SugarController
     public function action_DocuSignOauth2Redirect()
     {
         $this->view = 'docusignoauth2redirect';
+    }
+
+    public function action_DropboxOauth2Redirect()
+    {
+        $this->view = 'dropboxoauth2redirect';
     }
 
     protected function post_QuickSave(){

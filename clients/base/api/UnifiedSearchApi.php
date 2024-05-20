@@ -101,7 +101,7 @@ class UnifiedSearchApi extends SugarListApi
             foreach ( $orderBys as $order ) {
                 if ( strpos($order,':') ) {
                     // It has a :, it's specifying ASC / DESC
-                    list($column,$direction) = explode(':',$order);
+                    [$column, $direction] = explode(':', $order);
                     if ( strtolower($direction) == 'desc' ) {
                         $direction = 'DESC';
                     } else {
@@ -342,7 +342,6 @@ class UnifiedSearchApi extends SugarListApi
 
             // add additional parameters expected to be returned
             $formattedRecord['_search']['score'] = $result->getScore();
-            $formattedRecord['_search']['highlighted'] = $result->getHighlightedHitText();
 
             $returnedRecords[] = $formattedRecord;
         }
@@ -393,16 +392,14 @@ class UnifiedSearchApi extends SugarListApi
         }
 
         $multiModule = false;
-        if (isset($options['moduleList']) && is_countable($options['moduleList'])) {
-            $cntOptionModuleList = count($options['moduleList']);
-        } else {
-            $cntOptionModuleList = 0;
-        }
-        if (empty($options['moduleList']) || $cntOptionModuleList == 0 || $cntOptionModuleList > 1) {
+        if (empty($options['moduleList']) || (is_countable($options['moduleList']) ? count(
+            $options['moduleList']
+        ) : 0) == 0 || (is_countable($options['moduleList']) ? count($options['moduleList']) : 0) > 1) {
             $multiModule = true;
         }
 
-        if (empty($options['moduleList'])) {
+        if(empty($options['moduleList']))
+        {
             $usa = new UnifiedSearchAdvanced();
             $moduleList = $usa->getUnifiedSearchModules();
 

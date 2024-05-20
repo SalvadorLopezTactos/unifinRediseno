@@ -12,10 +12,10 @@ namespace Elastica;
  */
 class Util
 {
-    /** @var array */
+    /** @var list<string> */
     protected static $dateMathSymbols = ['<', '>', '/', '{', '}', '|', '+', ':', ','];
 
-    /** @var array */
+    /** @var list<string> */
     protected static $escapedDateMathSymbols = ['%3C', '%3E', '%2F', '%7B', '%7D', '%7C', '%2B', '%3A', '%2C'];
 
     /**
@@ -165,9 +165,7 @@ class Util
      */
     public static function toSnakeCase($string)
     {
-        $string = \preg_replace('/([A-Z])/', '_$1', $string);
-
-        return \strtolower(\substr($string, 1));
+        return \strtolower(\preg_replace('/[A-Z]/', '_\\0', \lcfirst($string)));
     }
 
     /**
@@ -208,20 +206,21 @@ class Util
      * Tries to guess the name of the param, based on its class
      * Example: \Elastica\Query\MatchAll => match_all.
      *
-     * @param object|string Object or class name
-     * @param mixed $class
+     * @param object|string $class Object or class name
      *
      * @return string parameter name
      */
     public static function getParamName($class)
     {
+        \trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated. It will be removed in 8.0.', __METHOD__);
+
         if (\is_object($class)) {
             $class = \get_class($class);
         }
 
         $parts = \explode('\\', $class);
         $last = \array_pop($parts);
-        $last = \preg_replace('/Query$/', '', $last); // for BoolQuery
+        $last = \preg_replace('/Query$/', '', $last); // for BoolQuery and MatchQuery
 
         return self::toSnakeCase($last);
     }

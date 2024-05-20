@@ -130,7 +130,7 @@ class _parse_proppatch
     function _startElement($parser, $name, $attrs) 
     {
         if (strstr($name, " ")) {
-            list($ns, $tag) = explode(" ", $name);
+            [$ns, $tag] = explode(" ", $name);
             if ($ns == "")
                 $this->success = false;
         } else {
@@ -174,7 +174,7 @@ class _parse_proppatch
     function _endElement($parser, $name) 
     {
         if (strstr($name, " ")) {
-            list($ns, $tag) = explode(" ", $name);
+            [$ns, $tag] = explode(" ", $name);
             if ($ns == "")
                 $this->success = false;
         } else {

@@ -16,7 +16,12 @@ require_once('include/SubPanel/registered_layout_defs.php');
  */
 class SubPanel
 {
-	var $hideNewButton = false;
+    public $bean_list;
+    /**
+     * @var mixed|\ListView
+     */
+    public $listview;
+    public $hideNewButton = false;
 	var $subpanel_id;
 	var $parent_record_id;
 	var $parent_module;  // the name of the parent module
@@ -295,8 +300,8 @@ class SubPanel
 	 */
 	function getSubPanelDefine($module, $subpanel_id)
 	{
-		$default_subpanel_define = SubPanel::_get_default_subpanel_define($module, $subpanel_id);
-		$custom_subpanel_define = SubPanel::_get_custom_subpanel_define($module, $subpanel_id);
+        $default_subpanel_define = self::getDefaultSubpanelDefine($module, $subpanel_id);
+        $custom_subpanel_define = self::getCustomSubpanelDefine($module, $subpanel_id);
 
 		$subpanel_define = array_merge($default_subpanel_define, $custom_subpanel_define);
 
@@ -308,7 +313,7 @@ class SubPanel
 		return $subpanel_define;
 	}
 
-	function _get_custom_subpanel_define($module, $subpanel_id)
+    public static function getCustomSubpanelDefine($module, $subpanel_id)
 	{
 		$ret_val = array();
 
@@ -325,7 +330,7 @@ class SubPanel
 		return $ret_val;
 	}
 
-	function _get_default_subpanel_define($module, $subpanel_id)
+    public static function getDefaultSubpanelDefine($module, $subpanel_id)
 	{
 		$ret_val = array();
 

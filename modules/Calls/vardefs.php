@@ -11,6 +11,8 @@
  */
 $dictionary['Call'] = array(
     'table' => 'calls',
+    'color' => 'pacific',
+    'icon' => 'sicon-phone-lg',
     'audited' => true,
     'comment' => 'A Call is an activity representing a phone call',
     'activity_enabled'=>true,
@@ -877,7 +879,7 @@ VardefManager::createVardef('Calls', 'Call', array(
     'default',
     'assignable',
     'team_security',
+    'customer_journey_activity',
 ));
 
 $dictionary['Call']['fields']['description']['full_text_search']['boost'] = 0.54;
-

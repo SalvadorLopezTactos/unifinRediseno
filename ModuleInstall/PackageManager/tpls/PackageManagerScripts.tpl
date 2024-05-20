@@ -921,16 +921,19 @@ PackageManagerGrid = function(){
                 {
                     key: 'type',
                     label: '{$ML_FILEGRID_COLUMN.Type}',
+					sortable: true,
                     minWidth: Math.round(patch_downloads_minWidth / 1.5)
                 },
                 {
                     key: 'version',
                     label: '{$ML_FILEGRID_COLUMN.Version}',
+					sortable: true,
                     minWidth: Math.round(patch_downloads_minWidth)
                 },
                 {
                     key: 'date',
                     label: '{$ML_FILEGRID_COLUMN.Published}',
+					sortable: true,
                     minWidth: Math.round(patch_downloads_minWidth)
                 },
                 {
@@ -1002,16 +1005,19 @@ PackageManagerGrid = function(){
             {
                 key: 'type',
                 label: '{$ML_FILEGRIDINSTALLED_COLUMN.Type}',
+				sortable: true,
                 'minWidth': Math.round(minWidth / 1.5)
             },
             {
                 key: 'version',
                 label: '{$ML_FILEGRIDINSTALLED_COLUMN.Version}',
+				sortable: true,
                 'minWidth': Math.round(minWidth)
             },
             {
                 key: 'date',
                 label: '{$ML_FILEGRIDINSTALLED_COLUMN.Date_Installed}',
+				sortable: true,
                 'minWidth': Math.round(minWidth)
             },
             {

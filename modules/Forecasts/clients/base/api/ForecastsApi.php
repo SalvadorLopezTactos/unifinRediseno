@@ -144,7 +144,7 @@ class ForecastsApi extends ModuleApi
             $defaultSelections["timeperiod_id"]["end"] = '';
         }
 
-        $returnInitData["initData"]['forecasts_setup'] = (isset($forecastsSettings['is_setup'])) ? $forecastsSettings['is_setup'] : 0;
+        $returnInitData["initData"]['forecasts_setup'] = $forecastsSettings['is_setup'] ?? 0;
 
         $defaultSelections["ranges"] = $forecastsSettings['commit_stages_included'];
         $defaultSelections["group_by"] = 'forecast';
@@ -225,7 +225,7 @@ class ForecastsApi extends ModuleApi
      */
     public function getReportees(ServiceBase $api, array $args)
     {
-        $args['user_id'] = isset($args["user_id"]) ? $args["user_id"] : $GLOBALS["current_user"]->id;
+        $args['user_id'] = $args["user_id"] ?? $GLOBALS["current_user"]->id;
         $args['level'] = isset($args['level']) ? (int) $args['level'] : 1;
 
         // base file and class name
@@ -243,7 +243,7 @@ class ForecastsApi extends ModuleApi
 
         if (($args['level'] < 0 || $args['level'] > 1)) {
             // may contain parent
-            $children = isset($reportees['children']) ? $reportees['children'] : $reportees[1]['children'];
+            $children = $reportees['children'] ?? $reportees[1]['children'];
 
             foreach ($children as &$child) {
                 if ($child['metadata']['id'] != $args['user_id']) {
@@ -251,7 +251,7 @@ class ForecastsApi extends ModuleApi
                     $childArgs['user_id'] = $child['metadata']['id'];
                     $childArgs['level'] = $args['level'] - 1;
                     $childReportees = $this->getReportees($api, $childArgs);
-                    $child['children'] = isset($childReportees['children']) ? $childReportees['children'] : $childReportees[1]['children'];
+                    $child['children'] = $childReportees['children'] ?? $childReportees[1]['children'];
                 }
             }
 
@@ -270,7 +270,7 @@ class ForecastsApi extends ModuleApi
      */
     public function getOrgTree(ServiceBase $api, array $args)
     {
-        $args['user_id'] = isset($args["user_id"]) ? $args["user_id"] : $GLOBALS["current_user"]->id;
+        $args['user_id'] = $args["user_id"] ?? $GLOBALS["current_user"]->id;
         $args['level'] = isset($args['level']) ? (int) $args['level'] : 1;
 
         // base file and class name
@@ -326,7 +326,7 @@ class ForecastsApi extends ModuleApi
 
                     $childReportees = $this->getOrgTree($api, $childArgs);
 
-                    $child['children'] = isset($childReportees['children']) ? $childReportees['children'] : $childReportees[1]['children'];
+                    $child['children'] = $childReportees['children'] ?? $childReportees[1]['children'];
                 }
             }
 

@@ -19,6 +19,10 @@ namespace Sugarcrm\Sugarcrm\modules\Reports\Exporters;
 class ReportExporter
 {
     /**
+     * @var \Report|mixed
+     */
+    public $reporter;
+    /**
      * @var ReportExporterInterface
      */
     protected $exporter;
@@ -60,8 +64,8 @@ class ReportExporter
      */
     protected function getExporter(string $type, string $format) : ReportExporterInterface
     {
-        $type = isset($this->typeMapping[$type]) ? $this->typeMapping[$type] : '';
-        $format = isset($this->formatMapping[$format]) ? $this->formatMapping[$format] : '';
+        $type = $this->typeMapping[$type] ?? '';
+        $format = $this->formatMapping[$format] ?? '';
 
         $class = "Sugarcrm\\Sugarcrm\\modules\\Reports\\Exporters\\" . 'Report' . $format . 'Exporter' . $type;
         if (!class_exists($class)) {

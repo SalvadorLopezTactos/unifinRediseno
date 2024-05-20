@@ -56,12 +56,16 @@ class PMSERoundRobin extends PMSEScriptTask
 
         $act_assignment_method = $bpmnElement['act_assignment_method'];
         if (isset($bean->team_id) && isset($teamBean->id) && ($teamBean->id == $act_assign_team)) {
+            $beanChanged = false;
             if (strtolower($act_assignment_method) == 'balanced') {
                 $nextUser = $this->userAssignmentHandler->getNextAvailableUser($bpmnElement, $bean, $flowData);
                 if (isset($bpmnElement['act_update_record_owner']) && $bpmnElement['act_update_record_owner'] == 1) {
                     $historyData = $this->retrieveHistoryData($flowData['cas_sugar_module']);
                     $historyData->savePreData('assigned_user_id', $bean->assigned_user_id);
-                    $bean->assigned_user_id = $nextUser;
+                    if ($nextUser !== $bean->assigned_user_id) {
+                        $bean->assigned_user_id = $nextUser;
+                        $beanChanged = true;
+                    }
                     $historyData->savePostData('assigned_user_id', $nextUser);
 
                     /** @var TeamSet $teamSetBean */
@@ -72,14 +76,18 @@ class PMSERoundRobin extends PMSEScriptTask
                         $teamSet[] = $act_assign_team;
                         $teamSetId = $teamSetBean->addTeams($teamSet);
                         $historyData->savePreData('team_set_id', $bean->team_set_id);
-                        $bean->team_set_id = $teamSetId;
+                        if ($teamSetId !== $bean->team_set_id) {
+                            $bean->team_set_id = $teamSetId;
+                            $beanChanged = true;
+                        }
                         $historyData->savePostData('team_set_id', $teamSetId);
                     }
                 }
                 $flowData['cas_user_id'] = $nextUser;
             }
-
-            PMSEEngineUtils::saveAssociatedBean($bean);
+            if ($beanChanged) {
+                PMSEEngineUtils::saveAssociatedBean($bean);
+            }
 
             $params = array();
             $params['cas_id'] = $flowData['cas_id'];

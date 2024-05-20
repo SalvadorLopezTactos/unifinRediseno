@@ -143,7 +143,7 @@ class AssignToAction extends AbstractAction
     public function getDefinition()
     {
         return array(
-            'action' => $this->getActionName(),
+            'action' => static::getActionName(),
             'params' => array(
                 'value' => $this->expression,
             )

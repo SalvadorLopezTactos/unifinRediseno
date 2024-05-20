@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Pulpit listy kont',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Pulpit rekordów kont',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy kont',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Szczegóły konta',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Widok szczegółowy kont – konsola',
     'LBL_NEXT_RENEWAL_DATE' => 'Data następnego odnowienia',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Data następnego odnowienia',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Nazwa kontrahenta/branża',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Lokalizacja',
     'LBL_PURCHASES' => 'Zakupy',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Oś czasu kontrahenta',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizuj',
+    'LBL_CREATE_NEW' => 'Utwórz nowe',
+    'LBL_MANAGE' => 'Zarządzaj',
+    'LBL_SEE_DETAILS' => 'Wyświetl szczegóły',
+    'LBL_HIDE_NEW' => 'Ukryj',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Wykresy',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. Kliknij Zapisz, aby zapisać nowy rekord i powrócić do poprzedniej strony.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Raporty Kontrahentów',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Użytkownicy zewnętrzni',
 );

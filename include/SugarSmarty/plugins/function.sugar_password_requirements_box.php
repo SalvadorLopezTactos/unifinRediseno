@@ -66,6 +66,7 @@ r45859 - 2009-04-03 12:26:29 -0700 (Fri, 03 Apr 2009) - faissah - Now using Smar
  */
 function smarty_function_sugar_password_requirements_box($params, &$smarty)
 {
+    $DIVFLAGS = [];
 global $current_language;
 $administration_module_strings = return_module_language($current_language, 'Administration');
 $pwd_settings=$GLOBALS['sugar_config']['passwordsetting'];

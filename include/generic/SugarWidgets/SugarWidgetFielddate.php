@@ -25,6 +25,28 @@ class SugarWidgetFieldDate extends SugarWidgetFieldDateTime
 		return $content;
     }
 
+    /**
+     * Get date value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        if (!empty($layoutDef['column_function'])) {
+            $func_name = 'displayList'.$layoutDef['column_function'];
+            if (method_exists($this, $func_name)) {
+                $display = $this->$func_name($layoutDef);
+                return $display;
+            }
+        }
+
+        $value = parent::getFieldControllerData($layoutDef);
+
+        return $value;
+    }
+
     function queryFilterBefore($layout_def)
     {
         return $this->queryDateOp($this->_get_column_select($layout_def), $layout_def['input_name0'], "<", "date");

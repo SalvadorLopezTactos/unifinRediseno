@@ -37,7 +37,7 @@ class pmse_Emails_Templates extends pmse_Emails_Templates_sugar {
      */
     public static function restoreRecordLinks($html)
     {
-        preg_match_all('/%7B::(.*?)::%7D/', $html, $match);
+        preg_match_all('/%7B::(.*?)::%7D/', (string)$html, $match);
         foreach ($match[1] as $value) {
             $html = str_replace('%7B::'.$value.'::%7D', '{::'.$value.'::}', $html);
         }

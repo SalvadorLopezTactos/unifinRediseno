@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Електронно табло на списъка на профилите',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Електронно табло на записа на профилите',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на акаунти',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Подробна информация за профила',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Чекмедже Фокус на акаунти – Конзола',
     'LBL_NEXT_RENEWAL_DATE' => 'Дата на следващо обновяване',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Дата на следващо обновяване',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Име на профила/Отрасъл',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Местоположение',
     'LBL_PURCHASES' => 'Покупки',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Хронология на профила на потребителя',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Организирай',
+    'LBL_CREATE_NEW' => 'Създай нов',
+    'LBL_MANAGE' => 'Управлявай',
+    'LBL_SEE_DETAILS' => 'Виж подробности',
+    'LBL_HIDE_NEW' => 'Скрий',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Графики',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. Натиснете "Съхрани", за да запазите новия запис и да се върнете в предходната страница.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Справки за организации',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Външни потребители',
 );

@@ -55,6 +55,9 @@ class DocuSignEnvelope extends Basic
 
     public $importable = true;
 
+    public $cloud_service_type;
+    public $cloud_path;
+
     /**
      * @inheritDoc
      */

@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class FunctionName extends Constraint
 {
-    const ERROR_INVALID_FUNCTION_NAME = 1;
+    public const ERROR_INVALID_FUNCTION_NAME = 1;
 
     protected static $errorNames = array(
         self::ERROR_INVALID_FUNCTION_NAME => 'ERROR_INVALID_FUNCTION_NAME',

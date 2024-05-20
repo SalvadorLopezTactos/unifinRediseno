@@ -60,7 +60,8 @@
             this.populateModules();
             // If there is a module preference stored in local storage,
             // default selection to those modules.
-            var previousModuleSelection = app.user.lastState.get(this.stateKey);
+            var previousModuleSelection = this.collection.selectedModules ||
+                app.user.lastState.get(this.stateKey);
             if (_.isEmpty(previousModuleSelection) || _.isUndefined(previousModuleSelection[0])) {
                 this.searchModuleFilter.allSelected = true;
             } else {
@@ -260,7 +261,9 @@
             // If there are more than 3 modules selected, display the
             // "Multiple Modules" icon
         } else {
-            moduleIconObj.push({multiple: true});
+            moduleIconObj.push({
+                multipleLabel: app.lang.get('LBL_COUNT_MODULES', null, {count: this.collection.selectedModules.length}),
+            });
         }
         return moduleIconObj;
     },

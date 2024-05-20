@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Lietotāja informācija nav atrasta',
     'ERR_USER_NAME_EXISTS'              => 'Lietotājvārds {0} jau pastāv. Vienādi lietotājvārdi nav pieļaujami. Mainiet lietotājvārdu, lai tas būtu unikāls.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” licence ir jāsaglabā ar papildu saderīgu licences veidu',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Šī iespēja jau ir iekļauta Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Lietotājs ir nobloķēts Sugar programmā un nevar pieteikties ar savu esošo paroli.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Lietotājam ar tikai ārēju autentifikāciju nav ļauts pieteikties, izmantojot Sugar akreditācijas datus',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Parole',
     'LBL_CHOOSE_A_KEY'					=> 'Lai nepieļautu neautorizētu Jūsu kalendāra publicēšanu, izvēlieties atslēgu',
     'LBL_NO_KEY'                        => 'Nav norādīta atslēga. Norādiet atslēgu lai iespējotu publicēšanu.',
-	'LBL_CHOOSE_WHICH'					=> 'Norādiet, kuri moduļi ir pieejami augšējā navigācijas joslā. Norādot vēlamo moduļu attēlošanas secību.',
+    'LBL_CHOOSE_WHICH'                  => 'Norādiet, kuri moduļi ir pieejami sānu navigācijas joslā. Norādot vēlamo moduļu attēlošanas secību.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Piesprausto moduļu skaits',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Ierakstiet pieejamo moduļu skaitu, ko piespraust, kad navigācijas josla ir savērsta (piemēram, ja tiek ievadīts 5, tiek piesprausti pirmie pieci moduļi jūsu sarakstā). Iesakām skaitu, kas apzīmē jūsu visbiežāk izmantotos moduļus. Vērtības virs 100 netiks ņemtas vērā.',
 	'LBL_CITY'							=> 'Pilsēta',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Dzēst',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP lietotāja vārds:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP Servera Tips:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP Servera specifikācija',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Autorizēts e-pasta konts',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Izvēlieties e-pasta pakalpojumu sniedzēju:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Pasta parole:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Pasta ID:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'lietotāji/darba grupas/lomas',
     'LBL_LOADING_ITEMS' => 'Ielādē datus...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Smart Guide piekļuve',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Smart Guide pēdējais aktīvais',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Nav Smart Guide piekļuves',
 ); // END STRINGS DEFS

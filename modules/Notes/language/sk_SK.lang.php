@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Informačný panel so zoznamom poznámok',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Informačný panel so záznamom poznámok',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na poznámky',
+    'LBL_EXTERNAL_USER' => 'Externý používateľ',
+    'LBL_EXTERNAL_USER_NAME' => 'Externý používateľ',
 
     'LBL_RELATED_CONTACT' => 'Súvisiaci kontakt',
     'ERR_DELETE_RECORD' => 'K odstráneniu verzie musíte zadať číslo záznamu.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Typ e-mailu',
     'LBL_EMAIL_ID' => 'ID e-mailu',
     'LBL_PHONE' => 'Telefón:',
-    'LBL_PORTAL_FLAG' => 'Zobraziť na portáli?',
+    'LBL_PORTAL_FLAG' => 'Dostupné externe',
     'LBL_EMBED_FLAG' => 'Vložiť do emailu?',
     'LBL_PRODUCT_ID' => 'Číslo produktu:',
     'LBL_QUOTE_ID' => 'Číslo citátu',

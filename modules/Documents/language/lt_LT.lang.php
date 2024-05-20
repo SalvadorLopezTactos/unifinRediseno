@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Šablonas? :',
     'LBL_DET_TEMPLATE_TYPE'=>'Dokumento tipas:',
     'LBL_TEAM'=> 'Komanda:',
+    'LBL_IS_SHARED' => 'Prieinama išorėje:',
     'LBL_DOC_DESCRIPTION'=>'Aprašymas:',
     'LBL_DOC_ACTIVE_DATE'=> 'Paskelbimo data:',
     'LBL_DOC_EXP_DATE'=> 'Pasibaigimo data:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Siųsti į „DocuSign“',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Sinchronizuoti su „Google“ disku',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Sinchronizuoti viską su „Google“ disku',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Sinchronizuoti viską su „OneDrive“',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Sinchronizuoti su „OneDrive“',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Sinchronizuoti viską su „Dropbox“',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Sinchronizuoti su „Dropbox“',
 );

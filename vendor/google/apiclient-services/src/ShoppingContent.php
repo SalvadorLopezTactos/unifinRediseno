@@ -60,9 +60,11 @@ class ShoppingContent extends \Google\Service
   public $orders;
   public $ordertrackingsignals;
   public $pos;
+  public $productdeliverytime;
   public $products;
   public $productstatuses;
   public $productstatuses_repricingreports;
+  public $promotions;
   public $pubsubnotificationsettings;
   public $regionalinventory;
   public $regions;
@@ -626,6 +628,25 @@ class ShoppingContent extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+              ],
+            ],'patch' => [
+              'path' => '{merchantId}/buyongoogleprograms/{regionCode}',
+              'httpMethod' => 'PATCH',
+              'parameters' => [
+                'merchantId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'regionCode' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],'pause' => [
@@ -1568,6 +1589,21 @@ class ShoppingContent extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'captureOrder' => [
+              'path' => '{merchantId}/orders/{orderId}/captureOrder',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'merchantId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'orderId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'createtestorder' => [
               'path' => '{merchantId}/testorders',
               'httpMethod' => 'POST',
@@ -1969,6 +2005,56 @@ class ShoppingContent extends \Google\Service
           ]
         ]
     );
+    $this->productdeliverytime = new ShoppingContent\Resource\Productdeliverytime(
+        $this,
+        $this->serviceName,
+        'productdeliverytime',
+        [
+          'methods' => [
+            'create' => [
+              'path' => '{merchantId}/productdeliverytime',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'merchantId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'delete' => [
+              'path' => '{merchantId}/productdeliverytime/{productId}',
+              'httpMethod' => 'DELETE',
+              'parameters' => [
+                'merchantId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'productId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'get' => [
+              'path' => '{merchantId}/productdeliverytime/{productId}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'merchantId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'productId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
     $this->products = new ShoppingContent\Resource\Products(
         $this,
         $this->serviceName,
@@ -2164,6 +2250,41 @@ class ShoppingContent extends \Google\Service
                 'startDate' => [
                   'location' => 'query',
                   'type' => 'string',
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->promotions = new ShoppingContent\Resource\Promotions(
+        $this,
+        $this->serviceName,
+        'promotions',
+        [
+          'methods' => [
+            'create' => [
+              'path' => '{merchantId}/promotions',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'merchantId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'get' => [
+              'path' => '{merchantId}/promotions/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'merchantId' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'id' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
                 ],
               ],
             ],

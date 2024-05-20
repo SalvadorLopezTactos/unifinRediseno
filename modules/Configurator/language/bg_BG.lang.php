@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Лога',
 	'LBL_ADMIN_WIZARD' => 'Електронен помощник',
-	'LBL_ALLOW_USER_TABS' => 'На потребителите е разрешено да конфигурират табулатори',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Системни настройки',
 	'LBL_ENABLE_MAILMERGE' => 'Разрешаване сливането на електронни писма?',
 	'LBL_LOGVIEW' => 'Конфигуриране настройките на регистъра',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Използвайте тази настройка за определяне на броя на месеците преди текущата дата, че безплатна/ запазена информацията за разговори и срещи се публикува.<BR>За да включите/ изключите, натиснете "0". Минималното е 1 месец, а максималната е 12 месеца.',
     'LBL_PDFMODULE_NAME' => 'PDF настройки',
     'SUGARPDF_BASIC_SETTINGS' => 'Реквизити на документите',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Разширени настройки',
     'SUGARPDF_LOGO_SETTINGS' => 'Изображения',
-
-    'PDF_CREATOR' => 'Програма за създаване на PDF файлове',
-    'PDF_CREATOR_INFO' => 'Дефинира лицето, създало документа. <br>Това обикновено е името на приложението, което генерира PDF файла.',
 
     'PDF_AUTHOR' => 'Автор',
     'PDF_AUTHOR_INFO' => 'Посоченият автор ще бъде поставен в реквизитите на генерираните PDF документи.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Изберете ново изображение за Оферти',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Форматът на файла може да бъде .jpg или .png. (Само .jpg за EZPDF)<BR>Препоръчителният размер на изображението е 867x74 точки.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Ширина на изображението на цитатите',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Промени мащаба на зареденото изображение, което се появява в Цитати в PDF документи. (Само за TCPDF)',
+    'PDF_TITLE' => 'Заглавие',
+    'PDF_TITLE_INFO' => 'Посоченото заглавие ще бъде поставено в реквизитите на генерираните документи.',
+
+    'PDF_SUBJECT' => 'Относно',
+    'PDF_SUBJECT_INFO' => 'Съдържанието на полето Относно ще бъде поставено в реквизитите на генерираните документи.',
 
     'PDF_SMALL_HEADER_LOGO' => 'За Справки в PDF формат',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Това изображение се използва при генериране на стандартен "Header" на Справките в PDF формат.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Изберете ново изображение за Справки',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Изберете изображение, с което да заместите текущото изображение. Форматът на файла може да бъде .jpg или .png. (Само .jpg за EZPDF.) Препоръчителният размер на изображението е 212x40 точки.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Ширина на изображението на отчетите',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Променете мащаба на зареденото изображение, което се появява в Отчети на PDF документи. (Само за TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Стринг на заглавието',
-    'PDF_HEADER_STRING_INFO' => 'Стринг на описанието на заглавието',
-
-    'PDF_HEADER_TITLE' => 'Header Title',
-    'PDF_HEADER_TITLE_INFO' => 'Стрингът ще се отпечата като заглавие в заглавната лента на документа',
-
-    'PDF_FILENAME' => 'Име на файла по подразбиране',
-    'PDF_FILENAME_INFO' => 'Стандартно име на генерираните PDF файлове',
-
-    'PDF_TITLE' => 'Заглавие',
-    'PDF_TITLE_INFO' => 'Посоченото заглавие ще бъде поставено в реквизитите на генерираните документи.',
-
-    'PDF_SUBJECT' => 'Относно',
-    'PDF_SUBJECT_INFO' => 'Съдържанието на полето Относно ще бъде поставено в реквизитите на генерираните документи.',
-
     'PDF_KEYWORDS' => 'Ключови думи',
     'PDF_KEYWORDS_INFO' => 'Избройте ключови думи, асоциирани с документа във формат "ключова_дума_1 ключова_дума_2..."',
 
-    'PDF_COMPRESSION' => 'Компресия',
-    'PDF_COMPRESSION_INFO' => 'Активира или деактивира компресията на страницата. <br>Когато е активирано, вътрешното представяне на всяка страница е компресирано, което води до съотношение на компресия около 2 за получения документ.',
-
-    'PDF_JPEG_QUALITY' => 'Качество на JPEG изображението (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Задаване на качество на компресиране на JPEG изображението (1-100)',
-
-    'PDF_PDF_VERSION' => 'Версия на PDF',
-    'PDF_PDF_VERSION_INFO' => 'Задаване на PDF версия (проверете PDF документацията за валидни стойности).',
-
-    'PDF_PROTECTION' => 'Защита на документа',
-    'PDF_PROTECTION_INFO' => 'Задай защита на документа<br>- copy: копирай текста и изображенията върху клипборда<br>- print: отпечатай документа<br>- modify: промени го (с изключение на анотациите и формулярите)<br>- annot-forms: добави анотации и формуляри<br>Забележка: защитата срещу промяна е за хора, които притежават пълния продукт Acrobat.',
-
-    'PDF_USER_PASSWORD' => 'Потребителска парола',
-    'PDF_USER_PASSWORD_INFO' => 'If you don&#39;t set any password, the document will open as usual. <br>If you set a user password, the PDF viewer will ask for it before displaying the document. <br>The master password, if different from the user one, can be used to get full access.',
-
-    'PDF_OWNER_PASSWORD' => 'Парола на собственика',
-    'PDF_OWNER_PASSWORD_INFO' => 'If you don&#39;t set any password, the document will open as usual. <br>If you set a user password, the PDF viewer will ask for it before displaying the document. <br>The master password, if different from the user one, can be used to get full access.',
-
-    'PDF_ACL_ACCESS' => 'Контрол на достъпа',
-    'PDF_ACL_ACCESS_INFO' => 'Стандартен контрол на достъпа за генериране на PDF файлове.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Съотношение на височината на клетката',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Ако височината на клетката е по-малка от (Font Height x Cell Height Ratio), тогава (Font Height x Cell Height Ratio) се използва като височина за клетката.<br>(Font Height x Cell Height Ratio) се използва също и за височина на клетката когато няма дефинирана височина.',
-
-    'K_TITLE_MAGNIFICATION' => 'Увеличение на заглавието',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Увеличение на заглавието със запазване на размера на основния шрифт.',
-
-    'K_SMALL_RATIO' => 'Коефициент на малкия шрифт',
-    'K_SMALL_RATIO_INFO' => 'Коефициент на намаление за малкия шрифт.',
-
-    'HEAD_MAGNIFICATION' => 'Увеличение на горната част',
-    'HEAD_MAGNIFICATION_INFO' => 'Коефициент на увеличение за заглавия.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Съотношение на мащаба на изображението',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Съотношение, използвано за мащабиране на изображенията',
-
-    'PDF_UNIT' => 'Единица',
-    'PDF_UNIT_INFO' => 'единица за измерване',
 	'PDF_GD_WARNING'=>'Библиотеката "GD" не е инсталирана в PHP. Без тази библиотека единствено лога в "JPEG" формат могат да бъдат визуализирани в "PDF" документи.',
     'ERR_EZPDF_DISABLE'=>'Предупреждение: Класът EZPDF е деактивиран от таблицата за конфигуриране и е настроен като PDF клас. Моля, "Запазате" този формуляр, за да настроите TCPDF като PDF клас и да се върнете в стабилно състояние.',
     'LBL_IMG_RESIZED'=>"(с адаптиран размер за визуализацията)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Добави PDF шрифт',
     'LBL_PDF_PATCH' => 'Patch',
-    'LBL_PDF_PATCH_INFO' => 'Custom modification of the encoding. Write a PHP array.<br>Example :<br>ISO-8859-1 does not contain the euro symbol. To add it at position 164, write "array(164=>&#39;Euro&#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'Кодировка',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Име на кодировката. <br>Тази опция се игнорира за TrueType Unicode, OpenType Unicode и символни шрифтове. <br>Кодирането дефинира и връзката между код (от 0 до 255) и знак, съдържащи се в шрифта. <br>Първите 128 са фиксирани и съответстват на ASCII.',
     'LBL_PDF_FONT_FILE' => 'Файл с шрифт',

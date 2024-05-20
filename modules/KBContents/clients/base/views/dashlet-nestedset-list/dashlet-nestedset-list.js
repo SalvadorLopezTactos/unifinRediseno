@@ -196,7 +196,28 @@
                 if (_.isEmpty(this.extraModule.module)) {
                     break;
                 }
-                if (!this.$el.find('[data-id=' + data.id +']').data('disabled')) {
+                let $selected = this.$el.find('[data-id=' + data.id + ']');
+                if (!$selected.data('disabled')) {
+                    if (this.closestComponent('side-drawer')) {
+                        let recordName = $selected.find('a').text();
+                        let recordContext = {
+                            layout: 'record',
+                            dashboardName: recordName,
+                            context: {
+                                layout: 'record',
+                                name: 'record-drawer',
+                                contentType: 'record',
+                                module: this.extraModule.module,
+                                modelId: data.id,
+                                dataTitle: app.sideDrawer.getDataTitle(
+                                    this.extraModule.module,
+                                    'LBL_RECORD',
+                                    recordName)
+                            }
+                        };
+                        app.sideDrawer.open(recordContext, null, true);
+                        break;
+                    }
                     this._openDocument(this.extraModule.module, data.id);
                 }
                 break;

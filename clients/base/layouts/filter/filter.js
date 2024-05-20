@@ -62,6 +62,11 @@
             }, this);
         }
 
+        // if listViewModule is defined in the metadata, then get that
+        if (!_.isUndefined(this.layout.meta) && !_.isUndefined(this.layout.meta.context)) {
+            this.listViewModule = this.layout.meta.context.listViewModule || '';
+        }
+
         /**
          * bind events
          */
@@ -82,7 +87,12 @@
         }, this);
 
         this.on('filter:create:open', function(filterModel) {
-            this.context.editingFilter = filterModel;
+            // set the filterModel on the right context while editing/building a filter
+            if (!_.isEmpty(this.listViewModule) && !_.isUndefined(this.layout.context)) {
+                this.layout.context.editingFilter = filterModel;
+            } else {
+                this.context.editingFilter = filterModel;
+            }
             this.layout.trigger('filter:create:open', filterModel);
         }, this);
 
@@ -109,7 +119,12 @@
         this.layout.on('filter:remove', this.removeFilter, this);
 
         this.layout.on('filter:reinitialize', function() {
-            this.initializeFilterState(this.layout.currentModule, this.layout.currentLink);
+            // if listViewModule is defined then initialize filter based on that module
+            if (!_.isEmpty(this.listViewModule)) {
+                this.initializeFilterState(this.listViewModule, this.layout.currentLink);
+            } else {
+                this.initializeFilterState(this.layout.currentModule, this.layout.currentLink);
+            }
         }, this);
 
         this.listenTo(app.events, 'dashlet:filter:save', this.refreshDropdown);
@@ -452,8 +467,12 @@
      * Applies filter on current contexts
      * @param {String} query search string
      * @param {Object} dynamicFilterDef(optional)
+     * @param {Object} opts
      */
-    applyFilter: function(query, dynamicFilterDef) {
+    applyFilter: function(query, dynamicFilterDef, opts) {
+        opts = opts || {};
+        opts.showAlerts = !_.isUndefined(opts.showAlerts) ? opts.showAlerts  : true;
+
         // TODO: getRelevantContextList needs to be refactored to handle filterpanels in drawer layouts,
         // as it will return the global context instead of filtering a list view within the drawer context.
         // As a result, this flag is needed to prevent filtering on the global context.
@@ -489,7 +508,7 @@
             var filterDef = self.buildFilterDef(origFilterDef, query, ctx);
             var options = {
                 //Show alerts for this request
-                showAlerts: true,
+                showAlerts: opts.showAlerts,
                 apiOptions: {
                     bulk: batchId
                 }
@@ -535,9 +554,11 @@
                 origFilterDef.concat(ctxCollection.defaultFilterDef) : origFilterDef;
 
             var filterDef = self.buildFilterDef(updatedFilterDef, query, ctx);
+            let optionParams = this._getCollectionParams();
+            ctxCollection.setOption('params', optionParams);
             var options = {
                 //Show alerts for this request
-                showAlerts: true,
+                showAlerts: opts.showAlerts,
                 apiOptions: {
                     bulk: batchId
                 },
@@ -547,6 +568,9 @@
                     app.events.trigger('preview:close');
 
                     ctx.trigger('filter:fetch:success');
+                },
+                complete: function() {
+                    ctx.trigger('filter:fetch:complete');
                 }
             };
 
@@ -556,10 +580,22 @@
             ctx.resetLoadFlag({recursive: false});
             ctx.set('skipFetch', false);
             ctx.loadData(options);
-        });
+        }, this);
         if (batchId) {
             app.api.triggerBulkCall(batchId);
         }
+    },
+
+    /**
+     * When the collection is fetched, any additional parameters to pass in to
+     * the API can be defined here. Adds no additional parameters by default,
+     * but can be overridden by modules that need to add their own
+     *
+     * @return {Object} the key/value parameters to pass in to the API
+     * @protected
+     */
+    _getCollectionParams() {
+        return {};
     },
 
     /**

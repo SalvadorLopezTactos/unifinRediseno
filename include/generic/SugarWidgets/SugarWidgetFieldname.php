@@ -44,14 +44,65 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
 		$record = $layout_def['fields'][$key];
 		$layout_def['name'] = $name;
 		global $current_user;
-		if ($module == 'Users' && !is_admin($current_user))
-        	$module = 'Employees';
-		$str = "<a target='_blank' href=\"index.php?action=DetailView&module=$module&record=$record\">";
+        if ($module == 'Users' && !is_admin($current_user)) {
+            $module = 'Employees';
+        }
+
+        $href = htmlspecialchars("#{$module}/{$record}");
+        $str = <<<HTML
+            <a target="_blank" href="$href">
+        HTML;
+
 		$str .= $this->displayListPlain($layout_def);
-		$str .= "</a>";
+        $str .= <<<HTML
+            </a>
+        HTML;
 
 		return $str;
 	}
+
+    /**
+     * Get name value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return array
+     */
+    public function getFieldControllerData(array $layoutDef): array
+    {
+        global $current_user;
+
+        $currentModule = $layoutDef['module'];
+        $id = '';
+        $module = '';
+
+        $value = $this->displayListPlain($layoutDef);
+
+        $copyLayoutDef = $layoutDef;
+        $copyLayoutDef['name'] = 'id';
+
+        $key = $this->_get_column_alias($copyLayoutDef);
+
+        if ($key) {
+            $key = strtoupper($key);
+
+            if (array_key_exists('fields', $layoutDef) && array_key_exists($key, $layoutDef['fields'])) {
+                $id = $layoutDef['fields'][$key];
+            }
+
+            if ($currentModule == 'Users' && !is_admin($current_user)) {
+                $module = 'Employees';
+            } else {
+                $module = $currentModule;
+            }
+        }
+
+        return [
+            'id' => $id,
+            'value' => $value,
+            'module' => $module,
+        ];
+    }
 
 	function _get_normal_column_select($layout_def)
 	{

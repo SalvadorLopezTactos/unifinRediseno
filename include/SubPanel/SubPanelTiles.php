@@ -17,7 +17,9 @@
  */
 class SubPanelTiles
 {
-	var $id;
+    public $show_tabs;
+    public $xTemplate;
+    public $id;
 	var $module;
 	var $focus;
 	var $start_on_field;

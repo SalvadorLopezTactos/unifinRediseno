@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'ロゴ',
 	'LBL_ADMIN_WIZARD' => '管理ウィザード',
-	'LBL_ALLOW_USER_TABS' => 'ユーザがタブを非表示に設定できる',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'システム設定',
 	'LBL_ENABLE_MAILMERGE' => 'メールマージを有効化',
 	'LBL_LOGVIEW' => 'ログを閲覧',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'この設定は、現在の日付から何カ月先までの電話および会議の空き状況を公開するかを決定する際に利用されます。</BR>空き状況を公開しない場合は、「0」を入力してください。最短期間は1カ月、最長期間は12カ月です。',
     'LBL_PDFMODULE_NAME' => 'PDF設定',
     'SUGARPDF_BASIC_SETTINGS' => 'ドキュメントプロパティ',
-    'SUGARPDF_ADVANCED_SETTINGS' => '詳細設定',
     'SUGARPDF_LOGO_SETTINGS' => '画像',
-
-    'PDF_CREATOR' => 'PDF作成者',
-    'PDF_CREATOR_INFO' => 'ドキュメントの作成者を設定します。<br>通常はPDFドキュメントを生成するアプリケーションの名前になります。',
 
     'PDF_AUTHOR' => '作成者',
     'PDF_AUTHOR_INFO' => 'ドキュメントプロパティに表示される作成者',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => '見積用の画像を選択してください。',
     'PDF_NEW_HEADER_LOGO_INFO' => 'ファイルフォーマットは、.jpgもしくは.pngである必要があります。（EZPDFの場合は.jpgのみ）<BR>推奨サイズは867x74pxです。',
 
-    'PDF_HEADER_LOGO_WIDTH' => '見積用画像の幅',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => '見積PDF用にアップロードした画像の大きさを変更してください。（TCPDFのみ）',
+    'PDF_TITLE' => 'タイトル',
+    'PDF_TITLE_INFO' => 'ドキュメントプロパティにセットされるタイトル',
+
+    'PDF_SUBJECT' => 'サブジェクト',
+    'PDF_SUBJECT_INFO' => 'ドキュメントプロパティにセットされるサブジェクト名',
 
     'PDF_SMALL_HEADER_LOGO' => 'レポートのPDFドキュメント用',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'この画像は、レポートPDFドキュメントのデフォルトヘッダ領域に表示されます。<br>この画像はまた、Sugarアプリケーションの左上にも表示されます。',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'レポート用の画像を選択してください。',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'ファイルフォーマットは、.jpgもしくは.pngである必要があります。（EZPDFの場合は.jpgのみ）<BR>推奨サイズは212x40pxです。',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'レポート画像の幅',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'レポートPDF用にアップロードした画像の大きさを変更してください。（TCPDFのみ）',
-
-
-    'PDF_HEADER_STRING' => 'ヘッダ文字列',
-    'PDF_HEADER_STRING_INFO' => 'ヘッダ部の詳細文字列',
-
-    'PDF_HEADER_TITLE' => 'ヘッダタイトル',
-    'PDF_HEADER_TITLE_INFO' => 'ドキュメントヘッダとして印字される文字列',
-
-    'PDF_FILENAME' => 'デフォルトファイル名',
-    'PDF_FILENAME_INFO' => '生成されるPDFファイルのデフォルトファイル名',
-
-    'PDF_TITLE' => 'タイトル',
-    'PDF_TITLE_INFO' => 'ドキュメントプロパティにセットされるタイトル',
-
-    'PDF_SUBJECT' => 'サブジェクト',
-    'PDF_SUBJECT_INFO' => 'ドキュメントプロパティにセットされるサブジェクト名',
-
     'PDF_KEYWORDS' => 'キーワード',
     'PDF_KEYWORDS_INFO' => 'ドキュメントに付加されるキーワード。一般的に「キーワード1 キーワード2...」のように表記します。',
 
-    'PDF_COMPRESSION' => '圧縮',
-    'PDF_COMPRESSION_INFO' => 'ページの圧縮を有効化/無効化します。<br>有効にした場合、各ページは圧縮率2で圧縮されたドキュメントを作成します。',
-
-    'PDF_JPEG_QUALITY' => 'JPEG品質（1-100）',
-    'PDF_JPEG_QUALITY_INFO' => 'デフォルトのJPEG圧縮率を指定します（1-100）',
-
-    'PDF_PDF_VERSION' => 'PDFバージョン',
-    'PDF_PDF_VERSION_INFO' => 'PDFバージョンを指定してください。（指定可能な値についてはPDF関連ドキュメントを参照ください）',
-
-    'PDF_PROTECTION' => 'ドキュメントのセキュリティ',
-    'PDF_PROTECTION_INFO' => 'ドキュメントのセキュリティを設定してください。<br>- 内容のコピー: テキストや画像をクリップボードにコピーできます。<br>- 印刷: ドキュメントを印刷できます。<br>- 編集: ドキュメントの編集ができます。（注釈とフォームを除きます）<br>- 注釈-フォーム: 注釈やフォームを追加できます。<br>注: 編集に対するセキュリティは、Acrobat製品を所有しているユ－ザ向けです。',
-
-    'PDF_USER_PASSWORD' => 'ユーザパスワード',
-    'PDF_USER_PASSWORD_INFO' => 'パスワードを設定しない場合、通常通りにドキュメントを開くことができます。<br>パスワードを設定した場合、PDFを開く際にパスワードの入力を求められます。<br>マスターパスワードは、ユーザパスワードと異なる場合にフルアクセスを与えることができます。',
-
-    'PDF_OWNER_PASSWORD' => '所有者パスワード',
-    'PDF_OWNER_PASSWORD_INFO' => 'パスワードを設定しない場合、通常通りにドキュメントを開くことができます。<br>パスワードを設定した場合、PDFを開く際にパスワードの入力を求められます。<br>マスターパスワードは、ユーザパスワードと異なる場合にフルアクセスを与えることができます。',
-
-    'PDF_ACL_ACCESS' => 'アクセスコントロール',
-    'PDF_ACL_ACCESS_INFO' => 'PDF生成のためのデフォルトのアクセスコントロール',
-
-    'K_CELL_HEIGHT_RATIO' => 'セルの高さの割合',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'セルの高さが「フォントの高さ×セルの高さの割合」より小さい場合、「フォントの高さ×セルの高さの割合」がセルの高さとして用いられます。<br>「フォントの高さ×セルの高さの割合」は、高さの指定がない時にも高さとして用いられます。',
-
-    'K_TITLE_MAGNIFICATION' => 'タイトルの拡大',
-    'K_TITLE_MAGNIFICATION_INFO' => 'タイトルの拡大はフォントサイズに依存します。',
-
-    'K_SMALL_RATIO' => '小サイズのフォント縮小率',
-    'K_SMALL_RATIO_INFO' => '小サイズのフォント縮小率',
-
-    'HEAD_MAGNIFICATION' => 'ヘッダの拡大率',
-    'HEAD_MAGNIFICATION_INFO' => 'ヘッダの拡大率',
-
-    'PDF_IMAGE_SCALE_RATIO' => '画像の拡大縮小率',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => '画像を拡大縮小する場合の率',
-
-    'PDF_UNIT' => '単位',
-    'PDF_UNIT_INFO' => 'ドキュメントの単位',
 	'PDF_GD_WARNING'=>'PHPのGDライブラリがインストールされていません。GDライブラリがない場合、PDFドキュメントにはJPEGのロゴだけが表示されます。',
     'ERR_EZPDF_DISABLE'=>'警告: EZPDFクラスはconfigテーブルで無効にされています。このフォームを保存してTCPDFをPDFクラスとし、安定な状態に戻してください。',
     'LBL_IMG_RESIZED'=>"（表示用にリサイズされています）",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'PDFフォントを追加',
     'LBL_PDF_PATCH' => 'パッチ',
-    'LBL_PDF_PATCH_INFO' => 'エンコーディングをカスタム修正します。PHPの配列を記述してください。<br>例 :<br>ISO-8859-1はユーロシンボルを含みません。 ポジション164に追加するには、「array(164=>\\&#39;Euro\\&#39;)」と記述します。',
     'LBL_PDF_ENCODING_TABLE' => 'エンコーディングテーブル',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'エンコーディングテーブル名<br>このオプションは、TrueType Unicode、OpenType Unicode、シンボリックフォントの場合は無視されます。<br>エンコーディングは、コード（0から255まで）とフォントに含まれる文字との関連を定義します。<br>最初の128は固定でASCIIに対応します。',
     'LBL_PDF_FONT_FILE' => 'フォントファイル',

@@ -20,7 +20,7 @@ strtolower($object_name).'_category_dom' =>
     array (
     '' => '',
     'Marketing' => '行銷',
-    'Knowledege Base' => '知識庫',
+    'Knowledge Base' => '知識庫',
     'Sales' => '銷售',
   ),
 

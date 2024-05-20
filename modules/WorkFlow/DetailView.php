@@ -47,8 +47,8 @@ if(isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
 
 
 echo getClassicModuleTitle("WorkFlow", [
-    sprintf('<a href="index.php?module=WorkFlow&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'])),
-    htmlspecialchars($focus->get_summary_text()),
+    sprintf('<a href="index.php?module=WorkFlow&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT)),
+    htmlspecialchars($focus->get_summary_text(), ENT_COMPAT),
 ], true);
 
 $GLOBALS['log']->info("WorkFlow detail view");

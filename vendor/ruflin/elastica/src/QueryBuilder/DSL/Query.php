@@ -20,11 +20,11 @@ use Elastica\Query\GeoPolygon;
 use Elastica\Query\HasChild;
 use Elastica\Query\HasParent;
 use Elastica\Query\Ids;
-use Elastica\Query\Match;
 use Elastica\Query\MatchAll;
 use Elastica\Query\MatchNone;
 use Elastica\Query\MatchPhrase;
 use Elastica\Query\MatchPhrasePrefix;
+use Elastica\Query\MatchQuery;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Nested;
@@ -45,8 +45,10 @@ use Elastica\Query\SpanTerm;
 use Elastica\Query\SpanWithin;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
+use Elastica\Query\TermsSet;
 use Elastica\Query\Wildcard;
 use Elastica\QueryBuilder\DSL;
+use Elastica\Script\AbstractScript;
 
 /**
  * elasticsearch query DSL.
@@ -72,9 +74,9 @@ class Query implements DSL
      *
      * @param mixed $values
      */
-    public function match(?string $field = null, $values = null): Match
+    public function match(?string $field = null, $values = null): MatchQuery
     {
-        return new Match($field, $values);
+        return new MatchQuery($field, $values);
     }
 
     /**
@@ -111,11 +113,14 @@ class Query implements DSL
      * common terms query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
+     * @deprecated since version 7.1.3, use the "match()" method instead.
      *
      * @param float $cutoffFrequency percentage in decimal form (.001 == 0.1%)
      */
     public function common_terms(string $field, string $query, float $cutoffFrequency): Common
     {
+        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated, use "match()" instead. It will be removed in 8.0.', __METHOD__);
+
         return new Common($field, $query, $cutoffFrequency);
     }
 
@@ -166,7 +171,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html
      *
-     * @param string $value String to search for
+     * @param string|null $value String to search for
      */
     public function fuzzy(?string $fieldName = null, ?string $value = null): Fuzzy
     {
@@ -211,7 +216,7 @@ class Query implements DSL
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
      *
      * @param AbstractQuery|BaseQuery|string $query
-     * @param string                         $type  Parent document type
+     * @param string|null                    $type  Parent document type
      */
     public function has_child($query, ?string $type = null): HasChild
     {
@@ -469,6 +474,17 @@ class Query implements DSL
     public function terms(string $field, array $terms = []): Terms
     {
         return new Terms($field, $terms);
+    }
+
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-set-query.html
+     *
+     * @param array<bool|float|int|string> $terms
+     * @param AbstractScript|string        $minimumShouldMatch
+     */
+    public function terms_set(string $field, array $terms, $minimumShouldMatch): TermsSet
+    {
+        return new TermsSet($field, $terms, $minimumShouldMatch);
     }
 
     /**

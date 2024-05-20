@@ -196,4 +196,10 @@ Sugar 用户、联系人、及潜在客户可以被加为电话受邀者。可�
     －点击 "选择参加者" 以新增现有用户、联系人或潜在客户至{{calls_singular_module}}。
     －单击“选择参加者”右侧的加号图标创建{{calls_singular_module}} 参加者，建立 Sugar 的新记录。
 3. 点击“保存”以完成新纪录，并返回至上一页。',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "是智能指南呼叫",
+    'LBL_PARENT_CALL_OF_TASK_REL' => '子任务',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => '子会议',
+    'LBL_PARENT_CALL_OF_CALL_REL' => '子呼叫',
 );

@@ -30,23 +30,23 @@ class Client extends BaseClient
     /**
      * Administration config settings
      */
-    const STATUS_CATEGORY = 'info';
-    const STATUS_KEY = 'fts_down';
+    public const STATUS_CATEGORY = 'info';
+    public const STATUS_KEY = 'fts_down';
 
     /**
      * Connection status
      */
-    const CONN_SUCCESS = 1;
-    const CONN_ERROR = -1;
-    const CONN_VERSION_NOT_SUPPORTED = -2;
-    const CONN_NO_VERSION_AVAILABLE = -3;
-    const CONN_FAILURE = -99;
+    public const CONN_SUCCESS = 1;
+    public const CONN_ERROR = -1;
+    public const CONN_VERSION_NOT_SUPPORTED = -2;
+    public const CONN_NO_VERSION_AVAILABLE = -3;
+    public const CONN_FAILURE = -99;
 
     /**
      * User-agent settings
      */
-    const USER_AGENT = 'SugarCRM';
-    const VERSION_UNKNOWN = 'unknown';
+    public const USER_AGENT = 'SugarCRM';
+    public const VERSION_UNKNOWN = 'unknown';
 
     /**
      * @var string, current installed elastic version

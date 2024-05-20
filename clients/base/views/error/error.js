@@ -14,7 +14,7 @@
  * @extends View.View
  */
 ({
-    className: 'error-page',
+    className: 'error-page flex absolute h-full w-full',
 
     cubeOptions: {spin: false},
 

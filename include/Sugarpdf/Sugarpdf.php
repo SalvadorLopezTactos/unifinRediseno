@@ -22,11 +22,11 @@ class Sugarpdf extends TCPDF
     /**
      * Stretch options constants
      */
-    const STRETCH_NONE = 0;
-    const STRETCH_SCALE = 1;
-    const STRETCH_SCALE_FORCED = 2;
-    const STRETCH_SPACING = 3;
-    const STRETCH_SPACING_FORCED = 4;
+    public const STRETCH_NONE = 0;
+    public const STRETCH_SCALE = 1;
+    public const STRETCH_SCALE_FORCED = 2;
+    public const STRETCH_SPACING = 3;
+    public const STRETCH_SPACING_FORCED = 4;
 
     /**
      * This array is meant to hold an objects/data that we would like to pass between

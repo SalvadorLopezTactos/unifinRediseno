@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Prognozės istorija',
     'LBL_FORECAST_HISTORY' => 'Prognozės: Istorija',
     'LBL_FORECAST_HISTORY_TITLE' => 'Istorija',
+    'LBL_TAB_COMMITMENT' => 'Atsakingas',
+    'LBL_CURRENT' => 'Esamas',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Laukio periodas',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Redagavo',
     'LBL_WK_VERSION' => 'Versija',
     'LBL_WK_REVISION' => 'Revizija',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Norint pasiekti metrikos API, reikia „Sugar Sell Premier“',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Laiko periodas:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Ar Jūs norite pavesti šias sumas?',
     'ERR_FORECAST_AMOUNT' => 'Pavesta suma yra privaloma ir turi būti skaičius.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Įtrauktos pardavimo galimybės',
+    'LBL_UPSIDE_PIPELINE' => 'Viršaus pardavimo galimybės',
+    'LBL_EXCLUDED_PIPELINE' => 'Neįtrauktos pardavimo galimybės',
+    'LBL_WON' => 'Laimėta',
+    'LBL_LOST' => 'Nelaimėta',
+    'LBL_ALL' => 'Visi',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Filtrų vadovas',
+    'LBL_HELP_MAIN_BODY' => 'Visa metrika apima tik pasirinktam (-iems) vartotojui (-ams) priklausančias galimybes, laikotarpį ir visus papildomus filtrus, kuriuos taikėte',
+    'LBL_FORECAST_HELP' => 'Galimybės, kurios jau buvo laimėtos arba įtrauktos į {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Atidarykite galimybes su {{{forecastStage}}} iš {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Atidarykite galimybes įtrauktoje {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Atidarykite galimybes su {{{forecastStage}}} iš {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Atidarykite galimybes su {{{forecastStage}}} iš {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Atidarykite galimybes išskirtoje {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Jau laimėtos galimybės',
+    'LBL_LOST_HELP' => 'Jau pralaimėtos galimybės',
+    'LBL_ALL_HELP' => 'Visos galimybės',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Pradžios data',
     'LBL_FC_USER' => 'Suplanuota',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Atsakingas',
     'LBL_TEAM_COMMITMENT' => 'Komandos įsipareigojimas',
     'LBL_FORECASTED' => 'Prognozuojama',
+    'LBL_OPPORTUNITY_FORECAST' => 'Galimybės prognozė',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Pajamų eilutės elemento prognozė',
+    'LBL_LAST_COMMITMENT' => 'Paskutinis įsipareigojimas',
     'LBL_ADJUSTED_TOTAL' => 'Adjusted Total',
     'LBL_COMMIT_STAGE' => 'Įsipareigojimo stadija',
     'LBL_SALES_STAGE' => 'Etapas',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Koreguotas)',
     'LBL_SAVE_DRAFT' => 'Išsaugoti',
     'LBL_CHANGES_BY' => 'Changes by {0}',
-    'LBL_FORECAST_SETTINGS' => 'Nustatymai',
+    'LBL_FORECAST_SETTINGS' => 'Prognozės nustatymai',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Forecasts Setup',

@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Řídicí panel záznamů plánů sestav',
     'LBL_FILE_TYPE' => 'Typ(y) souboru',
+    'LBL_EMBED_REPORT' => 'Vložit sestavu do e-mailu',
+    'LBL_EMBED_REPORT_INFO' => 'Poznámka: Pokud sestava obsahuje více než 200 řádků, připojíme sestavu jako soubor CSV.',
 );

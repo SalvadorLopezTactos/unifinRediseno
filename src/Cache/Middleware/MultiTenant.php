@@ -14,7 +14,7 @@ namespace Sugarcrm\Sugarcrm\Cache\Middleware;
 
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
-use Psr\SimpleCache\InvalidArgumentException;
+use Ramsey\Uuid\UuidInterface;
 use Ramsey\Uuid\Uuid;
 use RuntimeException;
 use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage;
@@ -35,7 +35,7 @@ final class MultiTenant implements CacheInterface
     /**
      * Encryption key
      *
-     * @var Uuid
+     * @var UuidInterface
      */
     private $key;
 
@@ -49,7 +49,7 @@ final class MultiTenant implements CacheInterface
     /**
      * Namespace for hashing cache keys
      *
-     * @var Uuid
+     * @var UuidInterface
      */
     private $namespace;
 
@@ -184,16 +184,16 @@ final class MultiTenant implements CacheInterface
      */
     private function initializeKey() : void
     {
-        $this->namespace = Uuid::uuid5($this->instanceKey, $this->key);
+        $this->namespace = Uuid::uuid5($this->instanceKey, (string)$this->key);
         $this->crypto = new AES256GCM($this->key->toString());
     }
 
     /**
      * Generates a new key and stores it in the storage
      *
-     * @return Uuid
+     * @return UuidInterface
      */
-    private function generateKey() : Uuid
+    private function generateKey() : UuidInterface
     {
         $key = Uuid::uuid4();
         $this->keyStorage->updateKey($key);
@@ -220,7 +220,7 @@ final class MultiTenant implements CacheInterface
      */
     private function encrypt($value) : string
     {
-        return $this->crypto->encrypt(gzcompress(serialize($value), 9));
+        return $this->crypto->encrypt(serialize($value));
     }
 
     /**
@@ -238,22 +238,13 @@ final class MultiTenant implements CacheInterface
         }
 
         try {
-            try {
-                $uncompressed = gzuncompress($this->crypto->decrypt($value));
-                if ($uncompressed === false) {
-                    $this->logger->critical(sprintf('Failed to decrypt key "%s"', $key));
-                    // delete the key
-                    $this->delete($key);
-                    return $default;
-                }
-                return unserialize($uncompressed, ['allowed_classes' => false]);
-            } catch (RuntimeException $e) {
-                $this->logger->warning(sprintf('Failed to decrypt key "%s": %s', $key, $e->getMessage()));
-                $this->delete($key);
-            }
-        } catch (InvalidArgumentException $invEx) {
-            $this->logger->warning(sprintf('Failed to decrypt key (invalid argument) "%s": %s', $key, $invEx->getMessage()));
+            return unserialize($this->crypto->decrypt($value), [
+                'allowed_classes' => false,
+            ]);
+        } catch (RuntimeException $e) {
+            $this->logger->warning(sprintf('Failed to decrypt key "%s": %s', $key, $e->getMessage()));
+
+            return $default;
         }
-        return $default;
     }
 }

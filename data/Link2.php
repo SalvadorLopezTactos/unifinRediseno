@@ -562,6 +562,22 @@ class Link2 {
         return $result;
     }
 
+    /**
+     * Updates a bean in the SugarLogicCache, if the bean already cached. This
+     * is stop the cache from being outdates if a record is saved but already
+     * cached for use in SugarLogic.
+     *
+     * @param SugarBean $bean A Sugar Bean that has been recently saved.
+     */
+
+    public function updateBeanForSugarLogic(SugarBean $bean)
+    {
+        $id = $bean->id;
+        if (!empty($this->sugarLogicCache[$id])) {
+            $this->sugarLogicCache[$id] = $bean;
+        }
+    }
+
     /***
      * refresh relationship data to a related Bean
      * @param $relBean SugarBean

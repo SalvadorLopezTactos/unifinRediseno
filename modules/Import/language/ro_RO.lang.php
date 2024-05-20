@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Valoare necesara lipsa',
     'LBL_ERROR_SYNC_USERS' => 'Valoare invalidă pentru a sincroniza cu Outlook:',
     'LBL_ID_EXISTS_ALREADY' => 'ID-ul exista deja in acest tabel',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY există deja în acest tabel',
     'LBL_ASSIGNED_USER' => 'Daca utilizatorul nu exista, folositi utilizatorul curent',
     'LBL_SHOW_HIDDEN' => 'Arata campurile care nu sunt in mod normal importabile',
     'LBL_UPDATE_RECORDS' => 'Actualizeaza înregistrările existente în loc sa importi acestea (Nu Anulare)',

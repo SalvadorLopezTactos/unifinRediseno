@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Pour une utilisation optimale du SAPI IIS/FastCGI, positionnez fastcgi.logging à 0 dans votre fichier php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Version de PHP installée non prise en charge : ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Base de données indisponible',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Le support de base de données n\'a pas été trouvé. Veuillez vous assurer d\'avoir les pilotes nécessaires pour un des types de bases de données pris en charge suivants : MySQL, MS SQLServer, Oracle, ou DB2. Il se peut que vous deviez décommenter l\'extension dans le fichier php.ini, ou recompiler avec le fichier binaire correct, selon votre version de PH. Veuillez consulter votre manuel PHP pour plus d\'informations sur la façon d\'activer le support de base de données.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'La prise en charge de la base de données n\'a pas été trouvée. Veuillez vous assurer que vous disposez des pilotes nécessaires pour l\'un des types de base de données pris en charge suivants : MySQL, MS SQLServer, Oracle, ou DB2. Vous devrez peut-être décommenter l\'extension dans le fichier php.ini, ou effectuer une recompilation avec le fichier binaire correspondant, en fonction de votre version de PHP. Veuillez vous référer à votre manuel PHP pour plus d\'informations sur la façon d\'activer la prise en charge des bases de données.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Les fonctions associées aux bibliothèques de parsing XML qui sont nécessaires à Sugar n\'ont pas été retrouvées. Vous pourriez avoir besoin de décommenter l\'extension dans le fichier php.ini, ou recompiler avec le bon fichier binaire, en fonction de votre version de PHP. Veuillez vous référer à votre manuel PHP pour plus d\'informations.',
     'LBL_CHECKSYS_CSPRNG' => 'Générateur de nombres aléatoires',
     'ERR_CHECKSYS_MBSTRING'             => 'Les fonctions associées avec l\'extension Multibyte de PHP (mbstring) qui sont nécessaires pour Sugar n\'ont pas été trouvées. <br/><br/>En général, le module mbstring n\'est pas activé par défaut dans PHP et doit être activé avec --enable-mbstring quand le binaire PHP est constitué. Veuillez vous référer au manuel PHP pour plus d\'informations sur l\'activation de mbstring.',
@@ -106,7 +106,7 @@ $mod_strings = array(
 	'ERR_DB_NAME2'						=> "Le nom de la base de données ne peut pas contenir les caractères '', '/', ou '.'",
     'ERR_DB_MYSQL_DB_NAME_INVALID'      => "Le nom de la base de données ne peut pas contenir les caractères '', '/', ou '.'",
     'ERR_DB_MSSQL_DB_NAME_INVALID'      => "Le nom de la base de données ne peut pas commencer par le chiffre '#', ou '@' et ne peut contenir les caractères e, '\"', \"'\", '*', '/', '\\', '?', ' :', '<', '>', '&', '!', ou '-'",
-    'ERR_DB_OCI8_DB_NAME_INVALID'       => "Le nom de la base de données peut se composer uniquement de caractères alphanumériques et des symboles « # », « _ », « - », « : », « . », « / » ou « $ »",
+    'ERR_DB_OCI8_DB_NAME_INVALID'       => "Le nom de la base de données peut se composer uniquement de caractères alphanumériques et des symboles '#', '_', '-', ':', '.', '/' ou '$'",
 	'ERR_DB_PASSWORD'					=> 'Les mots de passe pour SugarCRM ne correspondent pas. Veuillez renseigner des mots de passe identiques dans les champs requis.',
 	'ERR_DB_PRIV_USER'					=> 'L\'identifiant Admin de la base de données est nécessaire.',
 	'ERR_DB_USER_EXISTS'				=> 'L\'utilisateur pour SugarCRM existe déjà--Impossible d\'en créer un second avec le même identifiant. Veuillez entrer un nouveau nom d\'utilisateur.',
@@ -641,32 +641,15 @@ Refuser cet appel
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'E-mails de notification d\'assignation',
-        'subject' => 'SugarCRM : $module_name assigné',
-        'description' => 'Ce modèle est utilisé lorsque le système envoie une assignation de tâche à un utilisateur.',
-        'body' => '<div>
-<p>$assigned_by_user a assigné un&nbsp;$module_name à&nbsp;$assigned_user.</p>
-
-<p>Vous pouvez consulter ce&nbsp;$module_name sur :<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user a assigné un $module_name à $assigned_user.
-
-Vous pouvez consulter ce $module_name sur :
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'E-mails de rapport planifié',
         'subject' => 'Rapport planifié : $report_name à partir de $report_time',
         'description' => 'Ce modèle est utilisé lorsque le système envoie un rapport planifié à un utilisateur.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Vous trouverez ci-joint un rapport généré automatiquement et planifié pour vous.</p>
-<p>Nom du rapport : $report_name</p>
-<p>Date et heure d\'exécution du rapport : $report_time</p>
+<p>Bonjour $assigned_user,<br></p>
+<p>Vous trouverez ci-joint un rapport généré automatiquement et planifié pour vous.<br></p>
+<p>Nom du rapport : <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Date et heure d\'exécution du rapport : $report_time<br></p>
 </div>',
         'txt_body' =>
             'Bonjour $assigned_user,
@@ -692,21 +675,6 @@ Date et heure d\'exécution du rapport : $report_time',
             Veuillez vous connecter à Sugar pour voir le commentaire.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Information de votre compte utilisateur',
-        'description' => 'Ce modèle est utilisé quand l\'administrateur envoi un nouveau mot de passe à un utilisateur.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Voici votre login utilisateur et mot de passe temporaire :</p><p>Login : $contact_user_user_name </p><p>Mot de passe : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Une fois identifié sur l\'application avec les identifiants ci-dessus, vous devrez réinitialiser votre mot de passe à une valeur de votre choix.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Voici votre login utilisateur et mot de passe temporaire :
-Login : $contact_user_user_name
-Mot de passe : $contact_user_user_hash
-
-$config_site_url
-
-Une fois identifié sur l\'application avec les identifiants ci-dessus, vous devrez réinitialiser votre mot de passe à une valeur de votre choix.',
-        'name' => 'Email mot de passe auto généré',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Réinitialiser le mot de passe de votre compte utilisateur',
         'description' => "Ce modèle est utilisé pour transmettre à un utilisateur un lien à cliquer pour réinitialiser le mot de passe de son compte.",

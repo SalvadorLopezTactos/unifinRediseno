@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Paneli i listës së llogarive',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të llogarive',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te llogaritë',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Detajet e llogarisë',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Përqendruesi i fokusit te llogaritë - Paneli',
     'LBL_NEXT_RENEWAL_DATE' => 'Data e rinovimit tjetër',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Data e rinovimit tjetër',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Emri i llogarisë/industria',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Vendndodhja',
     'LBL_PURCHASES' => 'Blerjet',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vija kohore e llogarisë',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizo',
+    'LBL_CREATE_NEW' => 'Krijo të re',
+    'LBL_MANAGE' => 'Menaxho',
+    'LBL_SEE_DETAILS' => 'Shiko detajet',
+    'LBL_HIDE_NEW' => 'Fshih',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafiket',
@@ -201,4 +208,7 @@ Për të krijuar një {{module_name}}:
 2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Raportet e llogaritarit',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Përdoruesit e jashtëm',
 );

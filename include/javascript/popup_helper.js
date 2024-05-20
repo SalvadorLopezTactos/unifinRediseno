@@ -91,7 +91,7 @@ function send_back(module, id)
     // jscs:disable
     var call_back_function = window.opener[request_data.call_back_function];
 
-	//we have to use toString.call since here we have not access to "_" library
+    //we have to use toString.call since here we have not access to "_" library
     //alo we can't use typeof request_data.call_back_function to be equal with string
     //since typeof new String(...) will return object
     //I know that new String(...) is not used very offen but we have to be sure

@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'צפה בהסטוריה של התחזית',
     'LBL_FORECAST_HISTORY' => 'תחזיות: הסטוריה',
     'LBL_FORECAST_HISTORY_TITLE' => 'הסטוריה',
+    'LBL_TAB_COMMITMENT' => 'התחייבות',
+    'LBL_CURRENT' => 'נוכחית',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'שמכי זמן',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'נערך על ידי',
     'LBL_WK_VERSION' => 'גרסה',
     'LBL_WK_REVISION' => 'שכתוב',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'הגישה אל ה-API של המדדים דורשת שימוש ב-Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'משך זמן:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'האם ברצונך לחייב סכומים אלה?',
     'ERR_FORECAST_AMOUNT' => 'Commit Amount is required and must be a number.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'צבר כלול',
+    'LBL_UPSIDE_PIPELINE' => 'צבר בעליה',
+    'LBL_EXCLUDED_PIPELINE' => 'צבר לא כלול',
+    'LBL_WON' => 'זכייה',
+    'LBL_LOST' => 'הפסד',
+    'LBL_ALL' => 'הכול',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'מדריך לגבי המסננים',
+    'LBL_HELP_MAIN_BODY' => 'כל המדדים כוללים רק את האפשרויות ששייכות למשתמש(ים) שנבחרו, לתקופת הזמן ולכל מסנן נוסף שהחלת',
+    'LBL_FORECAST_HELP' => 'הזדמנויות שבהן כבר זכית או שנכללות בשלב {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'הזדמנויות פתוחות עם {{{forecastStage}}} מתוך {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'הזדמנויות פתוחות שנמצאות בשלב {{{forecastStage}}} כלול',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'הזדמנויות פתוחות עם {{{forecastStage}}} מתוך {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'הזדמנויות פתוחות עם {{{forecastStage}}} מתוך {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'הזדמנויות פתוחות שנמצאות בשלב {{{forecastStage}}} שאינו כלול',
+    'LBL_WON_HELP' => 'הזדמנויות שבהן כבר זכית',
+    'LBL_LOST_HELP' => 'הזדמנויות שאותן כבר הפסדת',
+    'LBL_ALL_HELP' => 'כל ההזדמנויות',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'תאריך התחלה',
     'LBL_FC_USER' => 'מתוזמן עבור',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'התחייבות',
     'LBL_TEAM_COMMITMENT' => 'התחייבות צוות',
     'LBL_FORECASTED' => 'נראה בתחזיות',
+    'LBL_OPPORTUNITY_FORECAST' => 'תחזית הזדמנויות',
+    'LBL_REVENUELINEITEM_FORECAST' => 'תחזית לפריט שורת הכנסות',
+    'LBL_LAST_COMMITMENT' => 'התחייבות אחרונה',
     'LBL_ADJUSTED_TOTAL' => 'סכום כולל מותאם',
     'LBL_COMMIT_STAGE' => 'שלב חיוב',
     'LBL_SALES_STAGE' => 'שלב',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(התאם)',
     'LBL_SAVE_DRAFT' => 'שמירה',
     'LBL_CHANGES_BY' => 'שינויים על ידי  {0}',
-    'LBL_FORECAST_SETTINGS' => 'הגדרות',
+    'LBL_FORECAST_SETTINGS' => 'הגדרות תחזית',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'הגדרת תחזית',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'תאריך תחילת שנת כספים',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'הגדר את תקופת הזמן שתבוא לשימוש במודול תחזיות.<br><br>אנא שים לב כי לא ניתן לשנות את ההגדרות של תקופת זמן לאחר ההגדרה הראשונית.<br><br>התחל בבחירת תאריך ההתחלה של שנת הכספים שלך. לאחר מכן, בחר את סוג תקופת הזמן עבור התחזית. טווח התאריכים עבור תקופות הזמן יחושב אוטומטית לפי הבחירות שלך. תקופת זמן המשנה היא הבסיס לגיליון התחזית.<br><br>תקופות הזמן העתידיות והקודמות שניתן לצפות בהן יקבעו את מספר תקופות-המשנה הגלויות במודול תחזיות. המשתמשים יכולים להציג ולערוך מספרי תחזיות בתקופות-המשנה הגלויות.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'הגדר כיצד לסווג את {{forecastByModule}}. <br><br>קח בחשבון שלא ניתן לשנות את הגדרות הטווח לאחר ההתחייבות הראשונה. עבור מופעים משודרגים, הגדרת הטווח נעולה על נתוני התחזית הקיימים.<br><br>באפשרותך לבחור שתי קטגוריות או יותר על סמך טווחי ההסתברות או ליצור קטגוריות שאינן מבוססות על הסתברות. <br><br>לצד הקטגוריות שהתאמת אישית, יש תיבות סימון; השתמש בהן כדי לקבוע אילו טווחים ייכללו בסכום התחזית שעליו התחייבת ושדווח למנהלים. <br><br>המשתמשים יוכלו לשנות את הסטטוס &#39;כלול/אל תכלול&#39; ואת הקטגוריה של {{forecastByModule}} באופן ידני מגיליון העבודה שלהם.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'כאן אפשר להגדיר איך לסווג {{forecastByModule}}. <br><br>לידיעתך, אי אפשר לשנות הגדרות &#39;טווח&#39; אחרי ההתחייבות הראשונה. בסביבות משודרגות, הגדרת ה&#39;טווח&#39; נעולה עם נתוני &#39;תחזית&#39; קיימים.<br><br>אפשר לבחור שתי קטגוריות או יותר, לפי טווחי ההסתברות, או ליצור קטגוריות שלא מבוססות על הסתברות. <br><br>ליד הקטגוריות המותאמות שלך יש תיבות סימון, שבאמצעותן אפשר לקבוע אילו טווחים לכלול בסכום ההתחייבות של התחזית ולדווח למנהלים. <br><br>משתמש יכול לשנות סטטוס של כלילה/אי כלילה ואת הקטגוריה של {{forecastByModule}} באופן ידני מגיליון העבודה שלו.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'בחר את העמודות שתרצה שהמשתמש ימלא עבור התחזיות שלו לכל {{forecastByModuleSingular}}. אנא שים לב שהסכום הצפוי קשור לסכום שמופיע ב{{forecastByModule}}; מסיבה זו, לא ניתן להסתיר עמודה זו.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'בחר אילו עמודות תרצה להציג במודול התחזיות. רשימת השדות תשלב את גיליון העבודה ותאפשר למשתמש לבחור כיצד להגדיר את התצוגה שלו.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'אני מציין מקום עבור תחזית על ידי תוכן how-to',

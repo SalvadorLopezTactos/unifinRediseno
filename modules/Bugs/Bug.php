@@ -216,7 +216,8 @@ SQL;
 	}
 
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $current_language;
 		$the_array = parent::get_list_view_data();
 		$app_list_strings = return_app_list_strings_language($current_language);

@@ -27,7 +27,7 @@ class BackwardCompatibleFormatter extends Formatter
      *
      * @see SugarPsrLogger::log()
      */
-    public function format(array $record)
+    public function format(array $record): string
     {
         $record['message'] = preg_replace_callback('/^\[LEVEL:([^\]]+)\] (.*)/', function ($matches) use (&$record) {
             $record['level_name'] = $matches[1];

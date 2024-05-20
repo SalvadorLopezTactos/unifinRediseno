@@ -38,7 +38,7 @@ class UsersViewOAuth2Authenticate extends SidecarView
         if (!$code || !$scope || !$state) {
             $this->redirect();
         }
-        list($this->platform, $state) = explode('_', $state);
+        [$this->platform, $state] = explode('_', $state);
 
         $stateRegistry = $this->getStateRegistry();
         $isStateRegistered = $stateRegistry->isStateRegistered($state);

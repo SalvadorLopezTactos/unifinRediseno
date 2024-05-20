@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'アカウント一覧のダッシュボード',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'アカウントレコードのダッシュボード',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'アカウントフォーカスドロワー',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'アカウント詳細',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'アカウントフォーカスダッシュボード - コンソール',
     'LBL_NEXT_RENEWAL_DATE' => '次回更新日',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => '次回更新日',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'アカウント名/業種',
     'LBL_RENEWALS_CONSOLE_LOCATION' => '場所',
     'LBL_PURCHASES' => '購入',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'アカウントのタイムライン',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => '編成',
+    'LBL_CREATE_NEW' => '新規作成',
+    'LBL_MANAGE' => '管理',
+    'LBL_SEE_DETAILS' => 'レポートの詳細',
+    'LBL_HIDE_NEW' => '非表示',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'チャート',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => '取引先のレポート',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => '外部ユーザー',
 );

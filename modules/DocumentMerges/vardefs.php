@@ -223,6 +223,12 @@ $dictionary['DocumentMerge'] = [
             'duplicate_on_record_copy' => 'always',
             'readonly' => true,
         ],
+        'flow_data' => [
+            'name' => 'flow_data',
+            'type' => 'text',
+            'dbtype' => 'longtext',
+            'help' => 'Flow Data used for bpm',
+        ],
     ],
     'duplicate_check' => [
         'enabled' => false,

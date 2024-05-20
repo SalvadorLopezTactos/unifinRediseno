@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Mall?:',
     'LBL_DET_TEMPLATE_TYPE'=>'Dokument typ:',
     'LBL_TEAM'=> 'Lag:',
+    'LBL_IS_SHARED' => 'Tillgänglig externt:',
     'LBL_DOC_DESCRIPTION'=>'Beskrivning',
     'LBL_DOC_ACTIVE_DATE'=> 'Publiceringsdatum:',
     'LBL_DOC_EXP_DATE'=> 'Utgångsdatum:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Skicka till DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Synkronisera till Google Drive',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Synkronisera allt till Google Drive',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Synkronisera allt till OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Synkronisera till OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Synkronisera allt till Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Synkronisera till Dropbox',
 );

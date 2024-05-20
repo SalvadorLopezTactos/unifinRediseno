@@ -46,7 +46,7 @@ class ShadowUpgrader extends CliUpgrader
      */
     protected static function usage()
     {
-		list($version, $build) = static::getVersion();
+        [$version, $build] = static::getVersion();
     	$usage =<<<eoq2
 Shadow Upgrader v.$version (build $build)
 php ShadowUpgrader.php -f oldTemplate -t newTemplate -s pathToSugarInstance -l logFile -u admin-user
@@ -200,7 +200,7 @@ eoq2;
     public function getManifest()
     {
         // load target data
-        list($to_version, $to_flavor) = $this->getToVersion();
+        [$to_version, $to_flavor] = $this->getToVersion();
         // return fake manifest
         return array(
             'description' => 'Shadow Upgrade from {$this->from_version}/{$this->from_flavor} to $to_version/$to_flavor',

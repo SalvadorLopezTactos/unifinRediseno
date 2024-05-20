@@ -64,5 +64,6 @@ class CleanupQueueCommand extends Command implements InstanceModeInterface
         } else {
             $engine->getContainer()->queueManager->resetQueue($modules);
         }
+        return 0;
     }
 }

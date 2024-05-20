@@ -26,6 +26,9 @@ use Sugarcrm\Sugarcrm\SugarConnect\Client\Http\Client as HttpClient;
 use Sugarcrm\Sugarcrm\SugarConnect\Client\Http\ProxyMiddleware;
 use Sugarcrm\Sugarcrm\SugarConnect\Client\Http\RetryMiddleware;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 final class Configuration implements ConfigurationInterface
 {
     /**
@@ -33,7 +36,7 @@ final class Configuration implements ConfigurationInterface
      *
      * @var string
      */
-    const CATEGORY = 'sugar_connect';
+    public const CATEGORY = 'sugar_connect';
 
     /**
      * The name of the Sugar Connect webhook service. It is used to obtain the
@@ -41,7 +44,7 @@ final class Configuration implements ConfigurationInterface
      *
      * @var string
      */
-    const WEBHOOK = 'connect-webhook:v1';
+    public const WEBHOOK = 'connect-webhook:v1';
 
     /**
      * Configuration API.
@@ -213,7 +216,7 @@ final class Configuration implements ConfigurationInterface
         $key = static::CATEGORY . '_' . $key;
         $settings = static::$admin->settings;
 
-        return isset($settings[$key]) ? $settings[$key] : $default;
+        return $settings[$key] ?? $default;
     }
 
     /**

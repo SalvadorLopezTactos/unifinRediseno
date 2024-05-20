@@ -13,6 +13,7 @@ namespace Sugarcrm\Sugarcrm\CloudDrive\Constants;
 
 abstract class DriveType
 {
-    const GOOGLE = 'google';
-    const ONEDRIVE = 'onedrive';
+    public const GOOGLE = 'google';
+    public const ONEDRIVE = 'onedrive';
+    public const DROPBOX = 'dropbox';
 }

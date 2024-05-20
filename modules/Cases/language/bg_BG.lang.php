@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Електронно табло със списък на казусите',
     'LBL_CASES_RECORD_DASHBOARD' => 'Електронно табло със запис на казусите',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Подробни данни за случай',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Чекмедже Фокус на случаи – Конзола',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на случаи',
 
 	'ERR_DELETE_RECORD'					=> 'Трябва да определите номер, за да изтриете този запис.',
@@ -162,4 +162,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'Подробна информация за SLA',
     'LBL_HOURS' => 'Часове',
     'LBL_WIDGET_STATUS' => 'Статус',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Организирайте',
+    'LBL_CREATE_NEW' => 'Създай нов',
+    'LBL_MANAGE' => 'Управлявай',
+    'LBL_SEE_DETAILS' => 'Виж подробности',
+    'LBL_HIDE_NEW' => 'Скрий',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Казуси',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Казус',
+    'LBL_KIOSK_CREATE' => 'Създай казус',
+    'LBL_KIOSK_SUBJECT' => 'Тема',
+    'LBL_KIOSK_CASE_ID' => 'Идентификатор на казус',
+    'LBL_KIOSK_STATUS' => 'Статус',
+    'LBL_KIOSK_CATEGORY' => 'Категория',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Изпратено на {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Приоритет',
+    'LBL_KIOSK_CREATE_CASE' => 'Свържете се с нас',
+    'LBL_KIOSK_DESCRIPTION' => 'Описание',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Вашата заявка е изпратена успешно.',
+    'LBL_KIOSK_ATTACHED' => 'Всички прикачени',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Външни потребители',
 );

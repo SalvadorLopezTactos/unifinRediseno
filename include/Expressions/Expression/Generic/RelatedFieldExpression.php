@@ -16,7 +16,7 @@
  */
 class RelatedFieldExpression extends GenericExpression
 {
-	/**
+ /**
 	 * Returns the entire enumeration bare.
 	 */
 	function evaluate() {
@@ -31,8 +31,15 @@ class RelatedFieldExpression extends GenericExpression
         
         foreach($linkField as $id => $bean)
         {
-            if (!empty($bean->field_defs[$relfield]) && isset($bean->$relfield))
-            {
+            if (!empty($bean->field_defs[$relfield])) {
+                if (!empty($bean->field_defs[$relfield]['use_formula'])) {
+                    $relfield = $bean->field_defs[$relfield]['use_formula'];
+                }
+
+                if (empty($bean->field_defs[$relfield]) || !isset($bean->$relfield)) {
+                    continue;
+                }
+
                 if (!empty($bean->field_defs[$relfield]['type']))
                 {
                     global $timedate;

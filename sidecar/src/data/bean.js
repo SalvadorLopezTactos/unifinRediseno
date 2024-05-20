@@ -523,7 +523,7 @@ const Bean = Backbone.Model.extend({
             self.trigger('validation:complete', self._processValidationErrors(errors));
 
             if (_.isFunction(callback)) {
-                callback(isValid);
+                callback(isValid, errors);
             }
         });
     },

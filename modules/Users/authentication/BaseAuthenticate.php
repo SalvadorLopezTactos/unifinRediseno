@@ -29,7 +29,7 @@ class BaseAuthenticate
      */
     public function postSessionAuthenticate()
     {
-        $user_unique_key = (isset($_SESSION['unique_key'])) ? $_SESSION['unique_key'] : '';
+        $user_unique_key = $_SESSION['unique_key'] ?? '';
         $server_unique_key = \SugarConfig::getInstance()->get('unique_key', '');
         $authenticated = true;
 
@@ -111,6 +111,11 @@ class BaseAuthenticate
             $GLOBALS['current_user'] = BeanFactory::newBean('Users');
             if ($GLOBALS['current_user']->retrieve($_SESSION['authenticated_user_id'])) {
                 $GLOBALS['current_user']->sudoer = $cu->sudoer;
+                if (is_null($cu->isIdmUserManager) && isset($_SESSION['is_idm_user_manager'])) {
+                    $GLOBALS['current_user']->isIdmUserManager = $_SESSION['is_idm_user_manager'];
+                } else {
+                    $GLOBALS['current_user']->isIdmUserManager = $cu->isIdmUserManager;
+                }
                 return true;
             }
         }

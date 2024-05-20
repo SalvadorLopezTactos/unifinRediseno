@@ -48,6 +48,25 @@
                                     {{field ../../../this model=../this template='list'}}
                                 </td>
                             {{/each}}
+                            {{#if hasEditAccess}}
+                                <td class="edit-td sticky right-0">
+                                    <div class="flex flex-row items-center absolute h-full top-0 right-0 pr-1.5">
+                                        <div class="btn-group detail flex flex-row items-center rounded-full shadow-lg bg-dashlet-background">
+                                            <button type="button" class="btn btn-invisible" data-action="edit-list-row">
+                                                <i class="sicon sicon-edit"></i>
+                                            </button>
+                                        </div>
+                                        <div class="btn-group edit flex flex-row items-center rounded-full shadow-lg bg-dashlet-background w-15 h-7.5">
+                                            <button type="button" class="btn btn-invisible pr-0" data-action="cancel-list-row">
+                                                <i class="sicon sicon-close"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-invisible pl-0" data-action="save-list-row">
+                                                <i class="sicon sicon-check-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            {{/if}}
                         </tr>
                     {{/each}}
                 </tbody>

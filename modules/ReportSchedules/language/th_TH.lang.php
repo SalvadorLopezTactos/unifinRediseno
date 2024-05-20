@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนกำหนดการรายงาน',
     'LBL_FILE_TYPE' => 'ประเภทไฟล์',
+    'LBL_EMBED_REPORT' => 'ฝังรายงานในอีเมล',
+    'LBL_EMBED_REPORT_INFO' => 'หมายเหตุ: หากรายงานมีจำนวนแถวมากกว่า 200 แถว เราจะแนบรายงานเป็นไฟล์ CSV',
 );

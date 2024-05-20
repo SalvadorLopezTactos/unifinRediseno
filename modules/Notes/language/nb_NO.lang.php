@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Dashbord for notatliste',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Registerdashbord for merknader',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Notater fokusskuff',
+    'LBL_EXTERNAL_USER' => 'Ekstern bruker',
+    'LBL_EXTERNAL_USER_NAME' => 'Ekstern bruker',
 
     'LBL_RELATED_CONTACT' => 'Relatert kontakt',
     'ERR_DELETE_RECORD' => 'Du må oppgi et registernummer for å slette denne bedriften.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'E-posttype',
     'LBL_EMAIL_ID' => 'E-post-ID',
     'LBL_PHONE' => 'Telfonnummer:',
-    'LBL_PORTAL_FLAG' => 'Vis i portal?',
+    'LBL_PORTAL_FLAG' => 'Tilgjengelig eksternt',
     'LBL_EMBED_FLAG' => 'Kapsle inn i e-post?',
     'LBL_PRODUCT_ID' => 'Produkt-ID:',
     'LBL_QUOTE_ID' => 'Tilbuds-ID:',

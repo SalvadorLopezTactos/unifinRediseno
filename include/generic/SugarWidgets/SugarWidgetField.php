@@ -14,6 +14,15 @@
 
 
 class SugarWidgetField extends SugarWidget {
+    public $local_current_module;
+    /**
+     * @var bool
+     */
+    public $is_dynamic;
+    /**
+     * @var mixed|string
+     */
+    public $base_URL;
     public function display(array $layout_def)
     {
         $context = $this->layout_manager->getAttribute('context');
@@ -132,6 +141,28 @@ class SugarWidgetField extends SugarWidget {
 		}
 		return $value;
 	}
+
+    /**
+     * Get value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        $value = $this->_get_list_value($layoutDef);
+
+        if (isset($layoutDef['widget_type']) && $layoutDef['widget_type'] === 'checkbox') {
+            if ($value !== '' &&  ($value === 'on' || intval($value) === 1 || $value === 'yes')) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+        return $value;
+    }
 
 	function _get_list_value(& $layout_def) 
 	{

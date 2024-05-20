@@ -399,6 +399,9 @@
             // is empty.
         } else {
             this._renderEmptyTemplate();
+            if (this.context && this.context.children[0]) {
+                this.context.children[0].trigger('side-drawer-headerpane:empty-tab-title');
+            }
         }
     },
 

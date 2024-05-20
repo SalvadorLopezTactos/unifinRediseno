@@ -83,7 +83,7 @@ class ListViewSmarty extends ListViewDisplay{
 		$this->ss->assign('APP',$app_strings);
 
 		$this->ss->assign('bgHilite', $hilite_bg);
-		$this->ss->assign('colCount', count($this->displayColumns) + 10);
+        $this->ss->assign('colCount', (is_countable($this->displayColumns) ? count($this->displayColumns) : 0) + 10);
 		$this->ss->assign('htmlVar', strtoupper($htmlVar));
 		$this->ss->assign('moduleString', $this->moduleString);
         $this->ss->assign('editLinkString', $app_strings['LBL_EDIT_BUTTON']);
@@ -107,7 +107,7 @@ class ListViewSmarty extends ListViewDisplay{
 		{
             $action_menu = $this->buildActionsLink();
 			$this->ss->assign('actionsLinkTop', $action_menu);
-            if(count($action_menu['buttons']) > 0) {
+            if ((is_countable($action_menu['buttons']) ? count($action_menu['buttons']) : 0) > 0) {
                 $firstButton = reset($action_menu['buttons']);
                 $this->ss->assign('actionDisabledLink', preg_replace("/id\\s*\\=(\"\\w+\"|w+)/i", "", $firstButton));
             }
@@ -162,7 +162,7 @@ class ListViewSmarty extends ListViewDisplay{
     {
 		$pathParts = pathinfo(SugarThemeRegistry::current()->getImageURL('arrow.gif',false));
 
-        list($width,$height) = getimagesize($pathParts['dirname'].'/'.$pathParts['basename']);
+        [$width, $height] = getimagesize($pathParts['dirname'].'/'.$pathParts['basename']);
 
 		$this->ss->assign('arrowExt', $pathParts['extension']);
 		$this->ss->assign('arrowWidth', $width);
@@ -188,7 +188,9 @@ class ListViewSmarty extends ListViewDisplay{
         $this->ss->assign('query', $this->data['query']);
         $this->ss->assign('sugar_info', array("sugar_version" => $sugar_version, 
 											  "sugar_flavor" => $sugar_flavor));
-		$this->data['pageData']['offsets']['lastOffsetOnPage'] = $this->data['pageData']['offsets']['current'] + count($this->data['data']);
+        $this->data['pageData']['offsets']['lastOffsetOnPage'] = $this->data['pageData']['offsets']['current'] + (is_countable(
+            $this->data['data']
+        ) ? count($this->data['data']) : 0);
 		$this->ss->assign('pageData', $this->data['pageData']);
 
         $navStrings = array('next' => $app_strings['LNK_LIST_NEXT'],

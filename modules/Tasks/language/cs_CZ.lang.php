@@ -111,4 +111,13 @@ Vytvoření modulu {{module_name}}:
  - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí.
 2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Úloha chytrého průvodce',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Je úloha chytrého průvodce',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Datum zahájení aktivity chytrého průvodce',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Datum dokončení aktivity chytrého průvodce',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Chytrý průvodce – dny do dokončení',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Podřízené schůzky',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Podřízená volání',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Podřízené úkoly',
 );

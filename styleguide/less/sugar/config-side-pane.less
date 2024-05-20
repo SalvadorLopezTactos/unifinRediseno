@@ -1,4 +1,43 @@
 /* side pane */
+.record-side-pane-group {
+  display: none;
+
+  #list-layout-side {
+    display: flex;
+    overflow-x: unset;
+
+    nav ul.field-list {
+      overflow-y: auto;
+    }
+
+    .column {
+      padding: 10px 2%;
+      width: 45%;
+    }
+
+    .columns nav {
+      ul.field-list {
+        width: auto;
+      }
+
+      .outer {
+        margin-left: 3%;
+        margin-right: 5%;
+      }
+    }
+
+    .fields nav {
+      ul.field-list {
+        width: auto;
+      }
+
+      li {
+        padding: 0 4%;
+      }
+    }
+  }
+}
+
 .config-side-pane {
   display: flex;
   border-bottom: @borderWidget;

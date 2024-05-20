@@ -130,6 +130,9 @@
          *   consistently with the view state (`edit` or `detail`)
          */
         options.meta = _.extend({}, app.metadata.getView(null, 'record'), options.meta);
+
+        this.initCustomerJourneyMeta(options);
+
         this.inlineEditModeFields = [];
         options.meta.hashSync = _.isUndefined(options.meta.hashSync) ? true : options.meta.hashSync;
         if (options.meta.hasExternalFields) {
@@ -396,9 +399,13 @@
                 // Replace the view metadata with the dropdown-based view meta
                 this.dbvCurrentKey = newDropdownViewKey;
                 this._setDbvMeta(this.dbvCurrentKey);
-
+                if (_.isFunction(this.stopSugarLogic)) {
+                    this.stopSugarLogic();
+                }
                 this.render();
-
+                if (_.isFunction(this.startSugarLogic)) {
+                    this.startSugarLogic();
+                }
                 // If necessary, display a warning message that the view is
                 // changing
                 let hideDbvWarning = options && options.hideDbvWarning;
@@ -1089,8 +1096,9 @@
     },
 
     duplicateClicked: function() {
-        var self = this,
-            prefill = app.data.createBean(this.model.module);
+        let self = this;
+        let module = this.model.module || this.module;
+        let prefill = app.data.createBean(module);
 
         prefill.copy(this.model);
         this._copyNestedCollections(this.model, prefill);
@@ -1102,11 +1110,28 @@
             layout: 'create',
             context: {
                 create: true,
+                module: module,
                 model: prefill,
                 copiedFromModelId: this.model.get('id')
             }
         }, function(context, newModel) {
             if (newModel && newModel.id) {
+                if (self.closestComponent('side-drawer')) {
+                    let recordContext = {
+                        layout: 'record',
+                        dashboardName: newModel.get('name'),
+                        context: {
+                            layout: 'record',
+                            name: 'record-drawer',
+                            contentType: 'record',
+                            module: module,
+                            modelId: newModel.id,
+                            dataTitle: app.sideDrawer.getDataTitle(module, 'LBL_RECORD', newModel.get('name'))
+                        }
+                    };
+                    app.sideDrawer.open(recordContext, null, true);
+                    return;
+                }
                 app.router.navigate(self.model.module + '/' + newModel.id, {trigger: true});
             }
         });
@@ -1418,7 +1443,7 @@
 
         // If the focus drawer icon was clicked, open the focus drawer instead
         // of entering edit mode
-        if (target && target.hasClass('focus-icon') && field && field.focusEnabled) {
+        if (target && target.hasClass('focus-icon') && field && field.focusIconEnabled) {
             field.handleFocusClick();
             return;
         }
@@ -1703,6 +1728,10 @@
                 }
             },
             success: function() {
+                if (self.closestComponent('side-drawer')) {
+                    app.sideDrawer.closeTab(app.sideDrawer.activeTabIndex);
+                    return;
+                }
                 var redirect = self._targetUrl !== self._currentUrl;
 
                 self.context.trigger('record:deleted', self._modelToDelete);
@@ -1713,6 +1742,11 @@
                     self.unbindBeforeRouteDelete();
                     //Replace the url hash back to the current staying page
                     app.router.navigate(self._targetUrl, {trigger: true});
+                    return;
+                }
+
+                if (self.context.get('navigateBack')) {
+                    app.router.navigate(app.router.getFragment(), {trigger: true});
                     return;
                 }
 
@@ -2324,7 +2358,16 @@
      * @private
      */
     _getCellToEllipsify: function($cells) {
-        var fieldTypesToEllipsify = ['fullname', 'name', 'text', 'base', 'enum', 'url', 'dashboardtitle'];
+        let fieldTypesToEllipsify = [
+            'fullname',
+            'name',
+            'text',
+            'base',
+            'enum',
+            'url',
+            'dashboardtitle',
+            'hint-accounts-search-dropdown'
+        ];
 
         return _.find($cells, function(cell) {
             return (_.indexOf(fieldTypesToEllipsify, $(cell).data('type')) !== -1);
@@ -2560,6 +2603,10 @@
                 if ($cancelButton.is(':visible') && !$cancelButton.hasClass('disabled')) {
                     $cancelButton.click();
                 }
+                let sideDrawer = this.closestComponent('side-drawer');
+                if (sideDrawer.isOpen()) {
+                    sideDrawer.close();
+                }
             }
         });
 
@@ -2685,6 +2732,62 @@
             $element.val('').val(elementVal);
         }
     },
+
+    /**
+     * Add the Customer Journey Meta to module meta
+     *
+     * @param {Object} options
+     */
+    initCustomerJourneyMeta: function(options) {
+
+        if (
+            _.isEmpty(options) ||
+            _.isEmpty(options.meta) ||
+            _.isEmpty(options.meta.panels) ||
+            _.isEmpty(options.module) ||
+            _.isEmpty(app.config.customer_journey)
+        ) {
+            return;
+        }
+
+        let cjEnabledModules = app.CJBaseHelper.getCJEnabledModules();
+
+        if (_.isEmpty(cjEnabledModules) || !_.contains(cjEnabledModules, options.module)) {
+            return;
+        }
+
+        this.plugins = _.union([], this.plugins, ['CJAsPanelOrTab']);
+        let moduleRecordView = app.metadata.getView(this.options.module, 'record');
+        let currentModuleDisplaySetting = app.CJBaseHelper.getCJRecordViewSettings(options.module);
+        let loadView = 'cj-panel';
+
+        if (currentModuleDisplaySetting.includes('tab')) {
+            // set loadView to tab if recordview uses tabs else set settings to panel_bottom
+            if (!_.isEmpty(moduleRecordView.templateMeta) && moduleRecordView.templateMeta.useTabs) {
+                loadView = 'cj-tab';
+            } else {
+                currentModuleDisplaySetting = 'panel_bottom';
+            }
+        }
+
+        let cjPanelMeta = app.metadata.getView(null, loadView);
+
+        /**
+         * Add CJ panel at index # 1 if display settings is panel_top / tab_first
+         * Else push at last index if display settings is panel_bottom / tab_last
+         */
+        if (app.user.hasAutomateLicense()) {
+            if ((_.include(['panel_top', 'tab_first'], currentModuleDisplaySetting)) &&
+                (!((_.include(['panel_top'], currentModuleDisplaySetting) &&
+                    !_.isEmpty(moduleRecordView.templateMeta) &&
+                    moduleRecordView.templateMeta.useTabs)))) {
+                options.meta.panels.splice(1, 0, _.first(cjPanelMeta.panels));
+            } else if (_.include(['tab_last'], currentModuleDisplaySetting)) {
+                options.meta.panels.push(_.first(cjPanelMeta.panels));
+            }
+        }
+    },
+
 
     /**
      * @inheritdoc

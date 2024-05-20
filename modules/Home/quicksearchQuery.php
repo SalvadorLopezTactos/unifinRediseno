@@ -20,7 +20,7 @@ else
 }
 
 $json = getJSONobj();
-$data = $json->decode(html_entity_decode($_REQUEST['data']));
+$data = $json->decode(html_entity_decode($_REQUEST['data'], ENT_COMPAT));
 if(isset($_REQUEST['query']) && !empty($_REQUEST['query'])){
     foreach($data['conditions'] as $k=>$v){
         if (empty($data['conditions'][$k]['value'])

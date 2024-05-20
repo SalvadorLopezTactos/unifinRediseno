@@ -161,7 +161,7 @@ class MapsGenerator
             $pushPins = $this->bingGeneratePushPins($recordsMeta, false, true);
         }
 
-        $pushPins = implode('', $pushPins);
+        $pushPins = implode($pushPins);
 
         $mapType = $this->bingGetMapType($mapMeta);
         $baseUrl = $this->bingMapUrl();
@@ -295,7 +295,7 @@ class MapsGenerator
             $step = [];
             $itineraryItem = $itineraryItems[$i];
 
-            $step['text'] = htmlspecialchars($itineraryItem['preIntersectionHints'][0]);
+            $step['text'] = htmlspecialchars($itineraryItem['preIntersectionHints'][0], ENT_COMPAT);
             $step['maneuver'] = $itineraryItem['maneuver'];
             $step['travelDistance'] =  $this->formatDirectionsTravelDistance($itineraryItem['distance']);
             $step['travelDuration'] = $this->formatSecondsToTime($itineraryItem['durationInSeconds']);
@@ -321,7 +321,7 @@ class MapsGenerator
                     $stepHint['hintType'] = $hint['hintType'];
                     $stepHint['text'] = $hint['text'];
 
-                    $step['hints'][] = $stepWarning;
+                    $step['hints'][] = $stepHint;
                 }
             }
 

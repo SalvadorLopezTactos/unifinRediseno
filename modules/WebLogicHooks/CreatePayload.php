@@ -12,9 +12,47 @@
 
 class CreatePayload
 {
+    public const TYPE_CHANGELIST = 'changelist';
+    public const TYPE_BOOL = 'bool';
+    public const TYPE_STRING = 'string';
 
     /** @var WebLogicHook */
     private $current_hook;
+
+    /** @var array fields from regular hook arguments which will be passed to webhook */
+    private $eventFields = [
+        'after_save' => [
+            'isUpdate' => self::TYPE_BOOL,
+            'dataChanges' => self::TYPE_CHANGELIST,
+            'stateChanges' => self::TYPE_CHANGELIST,
+        ],
+        'after_delete' => [
+            'id' => self::TYPE_STRING,
+        ],
+        'after_relationship_add' => [
+            'id' => self::TYPE_STRING,
+            'related_id' => self::TYPE_STRING,
+            'name' => self::TYPE_STRING,
+            'related_name' => self::TYPE_STRING,
+            'module' => self::TYPE_STRING,
+            'related_module' => self::TYPE_STRING,
+            'link' => self::TYPE_STRING,
+            'relationship' => self::TYPE_STRING,
+        ],
+        'after_relationship_delete' => [
+            'id' => self::TYPE_STRING,
+            'related_id' => self::TYPE_STRING,
+            'name' => self::TYPE_STRING,
+            'related_name' => self::TYPE_STRING,
+            'module' => self::TYPE_STRING,
+            'related_module' => self::TYPE_STRING,
+            'link' => self::TYPE_STRING,
+            'relationship' => self::TYPE_STRING,
+        ],
+        'after_login' => [],
+        'after_logout' => [],
+        'after_login_failed' => [],
+    ];
 
     public function __construct(WebLogicHook $hook)
     {
@@ -65,6 +103,26 @@ class CreatePayload
         return $returnData;
     }
 
+    private function convertChangeList(array $data): array
+    {
+        /* All linked beans convert to array */
+        $tmp = array_map(
+            function (array $field) {
+                if ($field['data_type'] === 'link') {
+                    if ($field['before'] instanceof Link2) {
+                        $field['before'] = $this->link2ToArray($field['before']);
+                    }
+                    if ($field['after'] instanceof Link2) {
+                        $field['after'] = $this->link2ToArray($field['after']);
+                    }
+                };
+                return $field;
+            },
+            $data
+        );
+        return $this->decodeHTML($tmp);
+    }
+
     /**
      * Create data to be serialized in JSON format
      *
@@ -103,25 +161,22 @@ class CreatePayload
             }
         }
 
-        /* All linked beans convert to array */
-        $data_changes = array_map(
-            function (array $field) {
-                if ($field['data_type'] == 'link') {
-                    if ($field['before'] instanceof Link2) {
-                        $field['before'] = $this->link2ToArray($field['before']);
-                    }
-                    if ($field['after'] instanceof Link2) {
-                        $field['after'] = $this->link2ToArray($field['after']);
-                    }
-                };
-                return $field;
-            },
-            $arguments['dataChanges']
-        );
-
         $result['data'] = $this->decodeHTML($data);
-        $result['dataChanges'] = $this->decodeHTML($data_changes);
         $result['event'] = $event;
+
+        foreach (($this->eventFields[$event] ?? []) as $fieldName => $fieldType) {
+            if (isset($arguments[$fieldName])) {
+                switch ($fieldType) {
+                    case self::TYPE_CHANGELIST:
+                        $result[$fieldName] = $this->convertChangeList($arguments[$fieldName]);
+                        break;
+                    case self::TYPE_BOOL:
+                    case self::TYPE_STRING:
+                    default:
+                        $result[$fieldName] = $arguments[$fieldName];
+                }
+            }
+        }
 
         return $result;
     }

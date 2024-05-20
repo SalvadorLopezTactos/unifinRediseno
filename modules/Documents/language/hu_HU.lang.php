@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Sablon?:',
     'LBL_DET_TEMPLATE_TYPE'=>'Dokumentum típusa:',
     'LBL_TEAM'=> 'Csoport:',
+    'LBL_IS_SHARED' => 'Előrhető külső forrásból:',
     'LBL_DOC_DESCRIPTION'=>'Leírás:',
     'LBL_DOC_ACTIVE_DATE'=> 'Közzététel dátuma:',
     'LBL_DOC_EXP_DATE'=> 'Lejárat dátuma:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Küldés a DocuSignnak',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Szinkronizálás a Google Drive-ra',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Mind szinkronizálása a Google Drive-ra',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Mind szinkronizálása a OneDrive-ra',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Szinkronizálás a OneDrive-ra',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Mind szinkronizálása a Dropboxra',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Szinkronizálás a Dropboxra',
 );

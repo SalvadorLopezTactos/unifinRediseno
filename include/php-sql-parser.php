@@ -6,7 +6,8 @@
  */
 class PHPSQLParser
 {
-		var $reserved = array();
+    public $parsed;
+    public $reserved = array();
 		var $functions = array();
 		function __construct($sql = false) {
 			#LOAD THE LIST OF RESERVED WORDS
@@ -54,7 +55,7 @@ class PHPSQLParser
 
 				if(strtoupper($token) == "UNION") {
 					$union = 'UNION';
-					for($i=$key+1;$i<count($in);++$i) {
+                for ($i = $key + 1; $i < (is_countable($in) ? count($in) : 0); ++$i) {
 						if(trim($in[$i]) == '') continue;
 						if(strtoupper($in[$i]) == 'ALL')  {
 							$skip_until = 'ALL';
@@ -178,7 +179,7 @@ EOREGEX
 ;
 
 		        $tokens = preg_split($regex, $sql,-1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-			$token_count = count($tokens);
+            $token_count = is_countable($tokens) ? count($tokens) : 0;
 
 			/* The above regex has one problem, because the parenthetical match is not greedy.
 			   Thus, when matching grouped expressions such as ( (a and b) or c) the
@@ -220,7 +221,7 @@ EOREGEX
 						#echo "LOOKING FORWARD TO $n [ " . $tokens[$n] . "]\n";
 						$token2 = $tokens[$n];
 						$info2 = $this->count_paren($token2);
-						$closes = count($info2['close']);
+                        $closes = is_countable($info2['close']) ? count($info2['close']) : 0;
 						if($closes != $needed) {
 							$tokens[$i] .= $tokens[$n];
 							unset($tokens[$n]);
@@ -230,7 +231,7 @@ EOREGEX
 						#	echo "CLOSES LESS THAN NEEDED (still need $needed)\n";
 						} else {
 							/*get the string pos of the last close parenthesis we need*/
-							$pos = $info2['close'][count($info2['close'])-1];
+                            $pos = $info2['close'][(is_countable($info2['close']) ? count($info2['close']) : 0) - 1];
 							$str1 = $str2 = "";
 							if($pos == 0) {
 								$str1 = ')';
@@ -259,7 +260,7 @@ EOREGEX
 			/* reset the array if we deleted any tokens above */
 		        if ($reset) $tokens = array_values($tokens);
 
-			$token_count=count($tokens);
+            $token_count = is_countable($tokens) ? count($tokens) : 0;
 			for($i=0;$i<$token_count;++$i) {
 				if(empty($tokens[$i])) continue;
 				$token=$tokens[$i];
@@ -301,13 +302,13 @@ EOREGEX
 			$token_category = "";
 
 			$skip_next=false;
-			$token_count = count($tokens);
+            $token_count = is_countable($tokens) ? count($tokens) : 0;
 
 			if(!$stop_at) {
 				$stop_at = $token_count;
 			}
 
-			$out = false;
+            $out = [];
 
 			for($token_number = $start_at;$token_number<$stop_at;++$token_number) {
 				$token = trim($tokens[$token_number]);
@@ -552,7 +553,9 @@ EOREGEX
 				$prev_category = $token_category;
 			}
 
-			if(!$out) return false;
+        if (empty($out)) {
+            return false;
+        }
 
 
 			#process the SELECT clause
@@ -586,6 +589,7 @@ EOREGEX
 		This function produces a list of the key/value expressions.
 		*/
 		private function process_set_list($tokens) {
+            $expr = [];
 			$column="";
 			$expression="";
 			foreach($tokens as $token) {
@@ -634,7 +638,7 @@ EOREGEX
 				$pos = 0;
 			}
 
-			for($i=$pos;$i<count($tokens);++$i) {
+        for ($i = $pos; $i < (is_countable($tokens) ? count($tokens) : 0); ++$i) {
 				if($tokens[$i] != '') {
 					$end = $tokens[$i];
 					break;
@@ -681,7 +685,7 @@ EOREGEX
 			}
 
 			$tokens = $this->split_sql($expression);
-			$token_count = count($tokens);
+            $token_count = is_countable($tokens) ? count($tokens) : 0;
 
 			/* Determine if there is an explicit alias after the AS clause.
 			If AS is found, then the next non-whitespace token is captured as the alias.
@@ -759,7 +763,7 @@ EOREGEX
 				$processed = $this->process_expr_list($tokens);
 			}
 
-			if(count($processed) == 1) {
+        if ((is_countable($processed) ? count($processed) : 0) == 1) {
 				$type = $processed[0]['expr_type'];
 				$processed = false;
 			}
@@ -898,9 +902,9 @@ EOREGEX
 
 						if($first_join) {
 							$join_type = 'JOIN';
-							$saved_join_type = ($modifier ? $modifier : 'JOIN');
+                            $saved_join_type = ($modifier ?: 'JOIN');
 						}  else {
-							$new_join_type = ($modifier ? $modifier : 'JOIN');
+                            $new_join_type = ($modifier ?: 'JOIN');
 							$join_type = $saved_join_type;
 							$saved_join_type = $new_join_type;
 							unset($new_join_type);
@@ -1065,6 +1069,8 @@ EOREGEX
 	           processes these sections.  Recursive.
 		*/
 		private function process_expr_list($tokens) {
+            $processed = [];
+            $expr_type = null;
 			$expr = array();
 			$type = "";
 			$prev_token = "";
@@ -1110,7 +1116,7 @@ EOREGEX
 	                               elseif($prev_token == 'AGAINST') {
 	                                       $type = "match-arguments";
 	                                       $list = $this->split_sql(substr($token,1,-1));
-	                                       if(count($list) > 1){
+                    if ((is_countable($list) ? count($list) : 0) > 1) {
 	                                               $match_mode = implode('',array_slice($list,1));
 	                                               $processed = array($list[0], $match_mode);
 	                                       }

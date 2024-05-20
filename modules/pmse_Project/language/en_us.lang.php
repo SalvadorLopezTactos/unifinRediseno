@@ -16,7 +16,7 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Process Definitions',
   'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
 
-  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Process Definitions Focus Drawer',
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Process Definitions Focus Dashboard',
 
   'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Process Definitions Record Dashboard',
   'LNK_LIST' => 'View Process Definitions',
@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Form Buttons',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Approve/Reject',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Route',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Send to DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Other Routing Options',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Change Assigned To User',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Team',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Doc Merge',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Select...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Doc Merge to PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Send merged document via email',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Doc Merge',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Converging gateway type does not match gateway type of an incoming flow',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Diverging gateways expand processes into multiple branches. When using a converging gateway to re-converge these branches back into one path, the correct type of converging gateway must be used, depending on the type of diverging gateway that was used to create the branches. For branches created with exclusive or event-based diverging gateways, use an exclusive converging gateway to re-converge them. For branches created with parallel or inclusive diverging gateways, use a parallel converging gateway to re-converge them.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Module field',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Module relationship',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'User',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Role',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Team',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Form activity',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Business rule',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Business rule action',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Email template',
 );

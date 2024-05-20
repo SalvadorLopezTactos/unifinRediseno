@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Päivitä tuotemääritelmä',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Suorita ajastetut toiminnot',
 'LBL_OOTB_DATA_ARCHIVER' => 'Suorita aktiivisten tietojen arkistointi/poisto',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Sovella tilausoikeuksia, kun niitä muutetaan',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Tietueiden geokoodaus',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Lisäasetukset',
 'LBL_TOGGLE_ADV' => 'Näytä lisäasetukset',
 'LBL_TOGGLE_BASIC' => 'Näytä perusasetukset',
+'LBL_UPDATEMOMENTUMCJ' => 'Päivitä käynnissä olevien Älykkäiden oppaiden vauhti',
 // Links
 'LNK_LIST_SCHEDULER' => 'Ajastetut tehtävät',
 'LNK_NEW_SCHEDULER' => 'Ajasta tehtävä',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Suorita aktiivisten tietojen arkistointi/poisto',
 'LBL_PMSEENGINECRON' => 'SugarBPM-vuorontaja',
 );
-

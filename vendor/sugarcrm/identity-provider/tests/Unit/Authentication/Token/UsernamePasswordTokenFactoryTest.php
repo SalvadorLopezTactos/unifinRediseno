@@ -37,20 +37,20 @@ class UsernamePasswordTokenFactoryTest extends \PHPUnit_Framework_TestCase
         $token = $tokenFactory->createAuthenticationToken();
 
         $this->assertInstanceOf(MixedUsernamePasswordToken::class, $token);
-        $this->assertEquals('username', $token->getUsername());
+        $this->assertEquals('username', $token->getUserIdentifier());
         $this->assertEquals('password', $token->getCredentials());
-        $this->assertEquals(Providers::PROVIDER_KEY_MIXED, $token->getProviderKey());
+        $this->assertEquals(Providers::PROVIDER_KEY_MIXED, $token->getFirewallName());
 
         $authTokens = $token->getTokens();
 
         $this->assertInstanceOf(UsernamePasswordToken::class, $authTokens[0]);
-        $this->assertEquals('username', $authTokens[0]->getUsername());
+        $this->assertEquals('username', $authTokens[0]->getUserIdentifier());
         $this->assertEquals('password', $authTokens[0]->getCredentials());
-        $this->assertEquals(Providers::PROVIDER_KEY_LDAP, $authTokens[0]->getProviderKey());
+        $this->assertEquals(Providers::PROVIDER_KEY_LDAP, $authTokens[0]->getFirewallName());
 
-        $this->assertEquals('username', $authTokens[1]->getUsername());
+        $this->assertEquals('username', $authTokens[1]->getUserIdentifier());
         $this->assertEquals('password', $authTokens[1]->getCredentials());
-        $this->assertEquals(Providers::PROVIDER_KEY_LOCAL, $authTokens[1]->getProviderKey());
+        $this->assertEquals(Providers::PROVIDER_KEY_LOCAL, $authTokens[1]->getFirewallName());
     }
 
     /**
@@ -67,9 +67,9 @@ class UsernamePasswordTokenFactoryTest extends \PHPUnit_Framework_TestCase
         $token = $tokenFactory->createAuthenticationToken();
 
         $this->assertInstanceOf(UsernamePasswordToken::class, $token);
-        $this->assertEquals('username', $token->getUsername());
+        $this->assertEquals('username', $token->getUserIdentifier());
         $this->assertEquals('password', $token->getCredentials());
-        $this->assertEquals(Providers::PROVIDER_KEY_LOCAL, $token->getProviderKey());
+        $this->assertEquals(Providers::PROVIDER_KEY_LOCAL, $token->getFirewallName());
     }
 
     /**
@@ -86,8 +86,8 @@ class UsernamePasswordTokenFactoryTest extends \PHPUnit_Framework_TestCase
         $token = $tokenFactory->createAuthenticationToken();
 
         $this->assertInstanceOf(UsernamePasswordToken::class, $token);
-        $this->assertEquals('username', $token->getUsername());
+        $this->assertEquals('username', $token->getUserIdentifier());
         $this->assertEquals('password', $token->getCredentials());
-        $this->assertEquals(Providers::PROVIDER_KEY_LDAP, $token->getProviderKey());
+        $this->assertEquals(Providers::PROVIDER_KEY_LDAP, $token->getFirewallName());
     }
 }

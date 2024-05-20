@@ -29,7 +29,7 @@ class UserSignature extends Basic
     /**
      * Override's SugarBean's
      */
-    public function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
         $temp_array = $this->get_list_view_array();
         $temp_array['MAILBOX_TYPE_NAME'] = $GLOBALS['app_list_strings']['dom_mailbox_type'][$this->mailbox_type];

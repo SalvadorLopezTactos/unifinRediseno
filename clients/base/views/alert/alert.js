@@ -367,7 +367,7 @@
         if (this.level === 'confirmation') {
             // make sure we don't wipe out any other components' shortcut session
             var currentShortcutSession = app.shortcuts.getCurrentSession();
-            if (currentShortcutSession.layout === this) {
+            if (currentShortcutSession && currentShortcutSession.layout === this) {
                 app.shortcuts.restoreSession();
             }
         }

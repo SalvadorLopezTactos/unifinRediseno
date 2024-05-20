@@ -92,6 +92,7 @@ $mod_strings = array (
     'ERR_UW_PACKAGE_NEWER_VERSION_EXISTS'       => 'パッケージの新しいバージョンが存在します: {0}、 新しいもののアップロードを試行する前に削除してください。',
     'ERR_UW_PACKAGE_ALREADY_INSTALLED'          => 'パッケージはインストール済みです。',
     'ERR_UW_PACKAGE_NOT_INSTALLED'              => 'パッケージはインストールされていません。',
+    'ERR_UW_PACKAGE_INSTALLED_WITH_ERROR'       => 'パッケージのインストールでエラーが発生しました。変更はそのままにします',
     'ERR_UW_PACKAGE_IS_UNINSTALLABLE'           => 'パッケージはアンインストール不可のため、アンインストールできません。',
     'ERR_UW_PACKAGE_ALREADY_ENABLED'            => 'パッケージは有効になっています。',
     'ERR_UW_PACKAGE_ALREADY_DISABLED'           => 'パッケージは無効になっています。',
@@ -130,7 +131,12 @@ $mod_strings = array (
     'LBL_ADMIN_WIZARD' => '簡単にSugarCRMシステムをセットアップします。',
     'LBL_ADMINISTRATION_HOME_TITLE' => 'システム管理',
     'LBL_ADMINISTRATION_HOME_DESC' =>'あなたの組織の要件にあわせてシステム全体の基本設定を行います。各ユーザは自身の設定ページにて、デフォルトロケール設定を一部自分用に変更することができます。',
-    'LBL_ALLOW_USER_TABS' => 'ユーザがタブを隠すことを許可',
+    'LBL_ALLOW_USERS_PINNED_MODULES' => 'ピン留めされるモジュールの数を、ユーザーが設定できるようにします',
+    'LBL_ALLOW_USERS_AVAILABLE_MODULES' => '利用可能なモジュールからユーザーが選択できるようにします',
+    'LBL_NUMBER_PINNED_MODULES' => 'ピン留めされるモジュールの数',
+    'LBL_NUMBER_PINNED_MODULES_TOOLTIP' => 'ほとんどのブラウザサイズでは、あまりに多くのモジュールは表示されない可能性があるため、' .
+        '最も頻繁に使用されるモジュールの現実的な数を設定することをお勧めします。100以上の値は' .
+        '考慮されません',
     'LBL_ALREADY_RUNNING'                  => 'このサーバはオフラインクライアントとして作動しています',
     'LBL_APPLY_DST_FIX_DESC' => '時間が正しく表示されるよう設定を更新(必須・MySQLのみ)',
     'LBL_APPLY_DST_FIX' => '夏時間修正の適用',
@@ -145,7 +151,7 @@ $mod_strings = array (
     'LBL_IMPORT_METADATA_BUTTON_TITLE' => 'IdPメタデータ ファイルのインポート',
     'LBL_IMPORT_METADATA_BUTTON_LABEL' => 'IdPメタデータ ファイルのインポート',
     'LBL_CAT_VIEW'            => 'カテゴリ',
-    'LBL_CHANGE_NAME_MODULES'=>'アプリケーションで表示されるモジュールの名前を変更',
+    'LBL_CHANGE_NAME_MODULES'=> 'アプリケーションで表示されるモジュールの名前を変更',
     'LBL_CHECK_FOR_UPDATES'  => '更新のチェック',
     'LBL_CHECK_NOW_LABEL' =>'今すぐチェック',
     'LBL_CHECK_NOW_TITLE' =>'今すぐチェック',
@@ -171,17 +177,20 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'PDFフォントデータを格納したキャッシュファイルを削除します',
     'LBL_CONFIG_CHECK' =>'Configチェック',
     'LBL_CONFIG_FTS' => 'フルテキスト検索エンジン設定',
-    'LBL_CONFIG_TABS'=>'タブの設定',
-	'LBL_CONFIG_TABS_DESC'=>'以下のモジュールの名前をドラッグ＆ドロップしてサブパネルを表示または非表示に設定してください。',
-	'LBL_CONFIG_LANGS_DESC'=>'言語をドラッグ＆ドロップして有効・無効にします。',
-	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'このオプションを選択すると、個々のユーザが表示するタブを設定できます。',
-	'LBL_CONFIGURATOR_DESC'=>'config.phpをセットアップ',
+    'LBL_CONFIG_TABS'=>'ナビゲーションバーとサブパネル',
+    'LBL_CONFIG_TABS_DESC_BRIEFLY'=>'ナビゲーションバーとサブパネルで、ユーザーがどのモジュールを使用できるかを選択します。ユーザーのモジュールへのアクセスを制御するには、<a href="?module=ACLRoles&action=index">役割管理</a>を使用します。',
+    'LBL_CONFIG_TABS_DESC_DETAILED'=>'モジュールをドラッグアンドドロップして、ナビゲーションバーで使用可能にするか、または非表示に設定します。<br>
+        [ピン留めされるモジュールの数] フィールドでは、ナビゲーションバーを折りたたんだときに、使用可能なモジュールのうちいくつ
+       表示するかを決定します（例えば、5と入力すると、リスト内の最初の5つのモジュールがピン留めされます）。チェックボックス
+        フィールドを有効にすると、ユーザーはユーザープロフィールからナビゲーションバーの設定を変更することができます。',
+    'LBL_CONFIG_LANGS_DESC'=>'言語をドラッグ＆ドロップして有効・無効にします。',
+    'LBL_CONFIGURATOR_DESC'=>'config.phpをセットアップ',
     'LBL_CONFIGURATOR_TITLE'=>'コンフィグレータ',
     'LBL_CONFIGURE_GROUP_TABS_DESC' => 'タブグループを作成または編集',
     'LBL_CONFIGURE_GROUP_TABS' => 'グループタブの設定',
     'LBL_CONFIGURE_SETTINGS_TITLE' => 'システム設定',
     'LBL_CONFIGURE_SETTINGS' => 'システム全体の設定',
-    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'モジュールとサブパネルの表示設定',
+    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'ナビゲーションバーとサブパネル',
     'LBL_CONFIGURE_UPDATER'=>'Sugarアップデートの設定',
     'LBL_CONTRACT_TITLE'=>'契約',
     'LBL_CONTRACT_DESC'=>'契約モジュールの契約タイプを定義します。契約の作成時には、タイプのドロップダウンメニューに契約タイプの選択肢が表示されます。',
@@ -226,6 +235,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_GETMYSQLTS' => 'MySQLのテーブルのスキーマ',
     'LBL_DIAGNOSTIC_GETPHPINFO' => 'phpinfo()を実行した結果を取得しています...',
     'LBL_DIAGNOSTIC_GETSUGARLOG' => 'SugarCRMログファイルを取得しています...',
+    'LBL_DIAGNOSTIC_GETMLPLOG' => 'package_install.log の取得',
     'LBL_DIAGNOSTIC_GETTING' => '取得中...',
     'LBL_DIAGNOSTIC_MD5'=>'MD5情報',
     'LBL_DIAGNOSTIC_MYSQLDUMPS'=>'MySQL - コンフィギュレーションテーブルのダンプ',
@@ -234,6 +244,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_NO_MYSQL' => 'MySQLが存在しません。MySQL機能が有効に設定されている必要があります。',
     'LBL_DIAGNOSTIC_PHPINFO'=>'phpinfo()',
     'LBL_DIAGNOSTIC_SUGARLOG'=>'SugarCRMログファイル',
+    'LBL_DIAGNOSTIC_MLPLOG'=>'パッケージインストールのログファイル',
     'LBL_DIAGNOSTIC_TITLE'=>'診断ツール',
     'LBL_DIAGNOSTIC_VARDEFS'=>'SugarCRM - モジュールのスキーマ',
 	'LBL_DISABLED' => '無効',
@@ -361,11 +372,11 @@ $mod_strings = array (
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'LDAPユーザのバインド用<br>例: <b>AD:</b> userPrincipalName <b>openLDAP:</b> userPrincipalName <b>Mac OS X:</b> uid',
     'LBL_LDAP_LOGIN_ATTRIBUTE_DESC'=>'LDAPユーザの検索用<br>例:<b>AD:</b> userPrincipalName, <b>openLDAP:</b> dn, <b>Mac OS X:</b> dn',
     'LBL_LDAP_ENCRYPTION_TYPE_DESC'=> '暗号化タイプは、LDAPサーバーへの接続が' .
-        '安全かどうかに影響します。 通常の安全でない接続にはNoneを使用してください。 通常の接続を安全にするために、' .
-        'TLSを使用してください。ldaps:// 上の接続を安全にするためにSSLを使用します',
+        'が安全かどうか。通常の安全でない接続には、「なし」を使用します。StartTLSを使用して、通常の' .
+        '接続を安全に実行します。LDAPSを使用して、ldaps://を介した安全な接続を行います。',
     'LBL_LDAP_SERVER_HOSTNAME_DESC'=> 'IPアドレスのLDAPホスト名のみを指定してください。' .
         '例: ldap.example.com, 10.11.45.75',
-    'LBL_LDAP_SERVER_PORT_DESC'=>'例: 無保護の389およびSSLのTLS. 636 ',
+    'LBL_LDAP_SERVER_PORT_DESC'=>'例: 安全でない場合、およびStartTLSの場合は389。LDAPSの場合は636',
     'LBL_LDAP_GROUP_NAME'=>'グループ名:',
 	'LBL_LDAP_GROUP_NAME_DESC'=>'例 cn=sugarcrm',
     'LBL_LDAP_USER_DN_DESC'=>'例: ou=people,dc=example,dc=com',
@@ -472,6 +483,8 @@ $mod_strings = array (
     'LBL_MANAGE_RELATE_DENORMALIZATION_PRE_CHECK_RESULTS' => '先行チェック結果',
     'LBL_MANAGE_RELATE_DENORMALIZATION_FIELDS_FOR' => '以下のフィールド:',
     'LBL_MANAGE_RELATE_DENORMALIZATION_JOB_TITLE' => 'スケジュール済のジョブ',
+    'LBL_SUGAR_OUTFITTER' => 'SugarOutfitters',
+    'LBL_SUGAR_OUTFITTER_TOOLTIP' => 'Sugar インスタンスに新しい機能を追加できるアドオンは、SugarCRM のマーケットプレイスである SugarOutfitters で閲覧できます',
 
     'LBL_MANUAL_VALIDATION_TXT' => '手動認証',
     'LBL_MANUAL_VALIDATION'=>'自動認証がうまく実行できない場合は、管理画面の<a href="index.php?module=Configurator&action=EditView">システム設定</a>でプロキシ設定を確認してください。<br /> お使いのシステムがインターネット経由でライセンス認証サーバとの通信を禁止している場合は<a href="javascript:void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">手動認証</a>を実行してください。',
@@ -552,6 +565,9 @@ $mod_strings = array (
     'LBL_MODULE_LICENSE'                        => '以下のライセンス契約をお読みください。:',
     'LBL_MODULE_LOADER_TITLE' => 'モジュールローダー',
     'LBL_MODULE_LOADER' => 'Sugar モジュール、テーマ、言語パック、その他の拡張を追加/削除',
+    'LBL_MODULE_LOADER_LICENSE_WARNING' => 'カスタムファイルパッケージを<a href="{0}">アップロード</a>する機能は、'
+        . '{1} では使用できません。このモジュールローダー機能を含むライセンスタイプを確認するには、 '
+        . '<a href="{2}">License Types Matrix（ライセンスタイプのマトリックス）</a>のドキュメントを参照してください。',
     'LBL_MODULE_NAME' => '管理',
     'LBL_MODULE_NAME_SINGULAR' => '管理',
     'LBL_MODULE_TITLE' => '管理: ホーム',
@@ -666,8 +682,6 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'JavaScriptグルーピングファイルを再構築',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => '既存のJavaScriptファイルを結合してグルーピングファイルを再構築します。',
-    'LBL_REPAIR_JS_FILES_TITLE' => 'Javascriptファイルを修復',
-    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'JSファイルを修復',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'ファイルを処理しています。この処理には数分かかることがあります。このページから移動してもプロセスはキャンセルされません。ページを移動してもこのまま待機しても構いません。',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'ファイルの更新が完了しました。',
     'LBL_REPAIR_FIELD_CASING_TITLE' => '小文字化していないフィールドのリペア',
@@ -909,7 +923,7 @@ $mod_strings = array (
     'LBL_VALIDATION_FILE'=>'認証キーファイル',
     'LBL_VALIDATION_SUCCESS_DATE'=>'最終認証日時',
 	'LBL_VISIBLE_PANELS'=>'表示されるサブパネル',
-    'LBL_VISIBLE_TABS'=>'表示されるタブ',
+    'LBL_AVAILABLE_MODULES' => '利用可能なモジュール',
     'LBL_WORKFLOW_DESC'                     => 'ワークフローの条件、通知、アクションを管理',
     'LBL_WORKFLOW_TITLE'                    => 'ワークフロー管理',
     'LBL_WORKBENCH' => 'ワークベンチ',
@@ -954,12 +968,10 @@ $mod_strings = array (
     'WARN_LICENSE_SEATS'=>  "<b>警告：</b> 次が存在します： ",
     'WARN_LICENSE_SEATS2' => "お使いのサブスクリプションで次のみが許可される際のアクティブユーザー",
     'WARN_LICENSE_SEATS3' =>
-        "。<p class=\"error\">一部のユーザーを非アクティベートするか、パートナーあるいは営業担当者に連絡するか、"
-        . " <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>にメールをお送りください。</p>"
-        . "<p class=\"error\">詳細についてはこちらをご覧ください："
-        . "<a target=\"_blank\" "
-        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
-        . "ユーザータイプとSugarのライセンスを理解する</a> の記事。</p>",
+        "。<p class=\"error\">一部のユーザーを非アクティブにするか、またはライセンスを追加するために、<a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>当社までお問い合わせください</a>。</p>",
+    'WARN_LICENSE_SEATS3_IDM' =>
+        "。 <p class=\"error\"><a target=\"_blank\" href='%s'>SugarCloud設定</a>で一部のユーザーを非アクティブにするか、"
+        . "またはライセンスを追加するために、<a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>当社までお問い合わせください</a>。</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "警告:アクティブユーザがライセンスの上限に達しました。",
     'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>警告：</b>これ以上アクティブユーザーを作成することができません。"
         . "サブスクリプションをさらにご購入ください。",
@@ -967,7 +979,7 @@ $mod_strings = array (
     'WARN_LICENSE_TYPE_SEATS_EDIT_MAXED' => '追加の %s ユーザーを作成できません。サブスクリプションを追加購入してください。',
     'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>警告：</b>これ以上アクティブユーザーを作成することができません。"
         . "サブスクリプションをさらにご購入ください。",
-    'WARN_REPAIR_CONFIG' => '<b>警告:</b>config.phpファイルを修復する必要があります。管理領域の修復ページにある <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a> スクリプトを使用して、設定ファイルを修復してください。',
+    'WARN_REPAIR_CONFIG' => '<b>警告：</b>config.phpファイルを修復する必要があります。  管理画面の[Repair（修復）]ページにある<a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Configファイルの再構築</a>スクリプトを使用して、configファイルを修復してください。',
     'WARN_UPGRADE_APP'=> "アプリケーションの新バージョンがリリースされました。",
     'WARN_UPGRADE' => '警告: <a href="index.php?module=Administration&action=Upgrade">管理パネル</a>でアップグレードをしてください。',
     'WARN_UPGRADENOTE' => 'メモ:',
@@ -1041,11 +1053,11 @@ $mod_strings = array (
 
 'ML_PACKAGE_SCANNING'=> '{PACKAGE}をスキャン中',
 'ML_INSTALLATION_FAILED'=> 'インストール失敗!',
-'ML_PACKAGE_NOT_CONFIRM'=> 'インストールしようとしているパッケージは、Sugar Open Cloudもしくはシステム管理者が規定したポリシーに合致しません。',
+    'ML_PACKAGE_NOT_CONFIRM' => 'インストールしようとしているパッケージは、SugarCloudもしくはシステム管理者によって規定されたポリシーに合致しません。',
 'ML_TO_RESOLVE'=>'この問題を解決:',
-'ML_OBTAIN_NEW_PACKAGE'=>'Sugar Open Cloudの利用者は、パッケージプロバイダーから以下に記載された問題に対処した新しいパッケージを取得する必要があります。',
+    'ML_OBTAIN_NEW_PACKAGE' => 'SugarCloudの利用者は、パッケージプロバイダーから以下に記載された問題に対処した新しいパッケージを取得する必要があります。',
 'ML_RELAX_LOCAL'=>'Sugarをローカルで稼働中の場合は、パッケージのインストールを許可するためにモジュールローダーの制限を緩和することができます。',
-'ML_SUGAR_LOADING_POLICY'=>'Sugar Open Cloudパッケージのポリシーの詳細は次にあります。',
+    'ML_SUGAR_LOADING_POLICY'=>'SugarCloudポリシーの詳細は次にあります。',
 'ML_SUGAR_KB'=>'SugarCRMナレッジベース',
 'ML_SUGAR_DZ'=>'SugarCRMデベロッパーゾーン',
 'ML_PKG_SCAN_GUIDE'=>'パッケージ スキャン ポリシー ガイド',
@@ -1249,6 +1261,7 @@ SugarCRM モバイルおよびSugar ポータルでグローバル検索を有�
     'LBL_ASYNC_CALL_FAILED' => '非同期呼び出しは失敗しました',
     'LBL_REPAIRXSSEXECUTE_FAILED' => '失敗:BeanもしくはIDが定義されていません',
     'LBL_DIAGNOSTICS_ERROR_SUGARLOG' => 'sugarcrm.logを{0}にコピーできませんでした',
+    'LBL_DIAGNOSTICS_ERROR_MLPLOG' => 'package_install.logを{0}にコピーできませんでした<br>',
     'LBL_DIAGNOSTICS_ERROR_PHPINFO' => 'ファイル {0}にphpinfo.htmlを書き込みできません',
     'LBL_DIAGNOSTICS_ERROR_LISTBEANFILES' => 'ファイル{0}を beanFiles.htmlに書き込みできません。',
     'LBL_DIAGNOSTICS_ERROR_MD5' => 'ファイル.md5 を {0}に書き込みできませんでした。<br />md5 checksをスキップします。',
@@ -1360,10 +1373,28 @@ SugarCRM モバイルおよびSugar ポータルでグローバル検索を有�
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT' => 'これらの設定は、ウェブブラウザで制御のために使用される標準の Content Security Policy (CSP) 指令を提示するものであり、そのリソースはウェブページ上で読み込むことが許可されています。受け入れ可能なフィールド値とフォーマットの詳細については、 <a href={{linkToDocumentation}} target="_blank">システム</a> ドキュメントを参照してください。CSP 設定が更新されたら、変更内容を反映させるために、ユーザーは自分のブラウザを更新する必要がります。',
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT_ADVANCED' => 'これらの設定は、個々の Content Security Policy (CSP) 指令を高度に理解しているユーザーを対象としています。img-src&#39; CSP 指令は、デフォルトで Sugar に定義されており、すべての画像を HTTP または HTTPS で読み込むことが許可されています。受け入れ可能なフィールド値とフォーマットの詳細については、 <a href={{linkToDocumentation}} target="_blank">システム</a> ドキュメントを参照してください。CSP 設定が更新されたら、変更内容を反映させるために、ユーザーは自分のブラウザを更新する必要がります。',
     //Maps
+    'LBL_MAPS_LOGGER_START_DATE' => 'ログ開始日：',
+    'LBL_MAPS_LOGGER_DETAILED_LOGS' => '詳細なログ',
+    'LBL_MAPS_LOGGER_NO_LOGS_AVAILABLE' => '利用可能なログはありません。',
+    'LBL_MAPS_LOGGER_ENABLE_MODULES_FOR_LOG' => 'モジュールのログを有効にします：',
+    'LBL_MAPS_LOGGER_LOG_LEVEL' => 'ログレベルを選択...',
+    'LBL_MAPS_LOGGER_LOG_TYPE' => 'ログレベル：',
+    'LBL_MAPS_LOGGER_LOG_ALL_MESSAGES' => 'すべてのメッセージ',
+    'LBL_MAPS_LOGGER_LOG_ERROR' => 'エラー',
+    'LBL_MAPS_LOGGER_LOG_SUCCESS' => '成功',
+    'LBL_MAPS_LOGGER_LBL_MODULE' => 'モジュール',
+    'LBL_MAPS_LOGGER_LBL_NAME' => '名前',
+    'LBL_MAPS_LOGGER_LBL_STATUS' => 'ステータス',
+    'LBL_MAPS_LOGGER_LBL_GEOCODE' => 'ジオコーディング済み',
+    'LBL_MAPS_LOGGER_YES' => 'はい',
+    'LBL_MAPS_LOGGER_NO' => 'いいえ',
+    'LBL_MAPS_LOGGER_OF' => 'の',
     'LBL_MAPS_ADMIN_CONFIG_TITLE' => '地図',
+    'LBL_MAPS_ADMIN_LOG_VIEWER' => 'ログビューア',
     'LBL_MAPS_ADD_NEW_MODULE_TO_GEOCODE' => 'ジオコーディング用の新しいモジュールを追加する',
     'LBL_MAPS_SELECT_NEW_MODULE_TO_GEOCODE' => 'モジュールの選択...',
     'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION' => '地図を設定',
+    'LBL_MAPS_ADMIN_CONFIG_LOG_VIEWER_DESCRIPTION' => 'ジオコーディングログへのアクセス',
     'LBL_MAPS_LOG_LEVEL_TITLE' => 'ログレベル',
     'LBL_MAPS_LOG_LVL_FATAL' => '致命的',
     'LBL_MAPS_LOG_LVL_DEBUG' => 'デバッグ',
@@ -1425,9 +1456,12 @@ SugarCRM モバイルおよびSugar ポータルでグローバル検索を有�
     'LBL_CLOUD_DRIVE_DESCRIPTION' => 'クラウドドライブのデフォルトのパス設定を構成します。',
     'LBL_GOOGLE_DRIVE_NAME' => 'Google ドライブ',
     'LBL_GOOGLE_DRIVE_TOOLTIP' => 'Google ドライブのデフォルトパスを設定',
+    'LBL_DROPBOX_DRIVE' => 'Dropboxドライブ',
+    'LBL_DROPBOX_DRIVE_TOOLTIP' => 'Dropboxドライブのデフォルトパスを設定',
     'LBL_GOOGLE_DRIVE_SAVE_BUTTON' => '保存',
     'LBL_SELECT_ROOT_PATH' => 'ルートパスを選択',
     'LBL_REMOVE_ROOT_PATH' => 'ルートパスを削除',
+    'LBL_ROOT_PATH_REMOVED' => 'ルートパスが削除されました。',
     'LBL_VALIDATE_ROOT_PATH' => 'ルートパスを検証',
     'LBL_PATHS_FOR_RECORD_VIEW' => 'レコードビューのパス',
     'LBL_DEFAULT_STARTING_PATH' => 'デフォルトの開始パス',
@@ -1441,14 +1475,16 @@ SugarCRM モバイルおよびSugar ポータルでグローバル検索を有�
     'LBL_MICROSOFT_ONEDRIVE_TOOLTIP' => 'Microsoft Onedriveのデフォルトパスを設定',
     'LBL_DRIVE_PATH_CONFIG' => 'ドライブパスの設定',
     'LBL_DRIVE_ROOT_PATH' => 'ルートパス',
+    'LBL_FIELDS_VARIABLE' => 'フィールド変数',
+    'LBL_UNABLE_TO_RETRIEVE_ROOT_PATH' => 'ルートパスを取得できません',
     'LBL_HINT_NAME' => 'Hintフィールド',
     'LBL_HINT_DESCRIPTION' => 'Hintパネルに表示され、Hintでエンリッチ化されるフィールドを設定します。',
-    'LBL_HINT_SECTION_HEADER' => 'Hint',
-    'LBL_HINT_SECTION_DESCRIPTION' => 'Hintの設定を構成',
+    'LBL_HINT_SECTION_HEADER' => 'Sugar Hint',
+    'LBL_HINT_SECTION_DESCRIPTION' => 'Sugar Hintの設定を構成する',
 
-    'LBL_HINT_CONFIG' => 'Hint設定',
+    'LBL_HINT_CONFIG' => 'Sugar Hintの設定',
     'LBL_HINT_CONFIG_NAME' => 'Hint設定',
-    'LBL_HINT_CONFIG_SAVED' => 'Hint設定は保存されました。',
+    'LBL_HINT_CONFIG_SAVED' => 'Sugar Hintの構成設定が保存されました。',
     'LBL_HINT_CONFIG_DESCRIPTION' => 'Hint設定を更新します。',
     'LBL_HINT_CONFIG_LOGGER_SECTION_HEADER' => 'Hintロガー',
 
@@ -1456,7 +1492,24 @@ SugarCRM モバイルおよびSugar ポータルでグローバル検索を有�
     'LBL_HINT_RESYNC_DESCRIPTION' => 'Hint Insightsサービスと再同期して、初期設定やメールアドレスの変更が有効にならないなど、通知に関する問題を修正します。',
 
     'LBL_HINT_UNINSTALL' => 'アンインストール',
-    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Hint Insightsからの通知を無効にするなど、Hintをアンインストールします。',
+    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Sugar Hint Insightsからの通知の停止を含め、Sugar Hintをアンインストールします。',
 
     'LBL_HINT_CONFIG_NOTIFICATIONS_HEADER' => '通知',
+
+    'LBL_DOCUSIGN_GROUP' => 'DocuSign',
+    'LBL_DOCUSIGN_NAME' => '設定',
+    'LBL_DOCUSIGN_TOOLTIP' => 'DocuSign設定',
+    'LBL_DOCUSIGN_DESCRIPTION' => 'DocuSign機能の設定',
+    'LBL_SUGAR_MAPS' => 'Sugar Maps',
+    'LBL_CLOUD_DRIVE' => 'クラウドドライブ',
+
+    // Sugar Automate
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_TITLE' => 'Sugar Automateの設定',
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_DESC' => 'Sugar Automateパッケージのセットアップ',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'テンプレート',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'テンプレートを管理',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_NAME' => 'モジュールを構成',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_DESC' => '有効なモジュールを構成',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'テンプレート',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'テンプレートを管理',
 );

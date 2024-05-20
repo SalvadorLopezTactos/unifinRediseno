@@ -7,22 +7,16 @@ namespace Elastica\Aggregation;
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-extended-stats-bucket-aggregation.html
  */
-class ExtendedStatsBucket extends AbstractAggregation
+class ExtendedStatsBucket extends AbstractAggregation implements GapPolicyInterface
 {
+    use Traits\BucketsPathTrait;
+    use Traits\GapPolicyTrait;
+
     public function __construct(string $name, string $bucketsPath)
     {
         parent::__construct($name);
+
         $this->setBucketsPath($bucketsPath);
-    }
-
-    public function setBucketsPath(string $bucketsPath): self
-    {
-        return $this->setParam('buckets_path', $bucketsPath);
-    }
-
-    public function setGapPolicy(string $gapPolicy): self
-    {
-        return $this->setParam('gap_policy', $gapPolicy);
     }
 
     public function setFormat(string $format): self

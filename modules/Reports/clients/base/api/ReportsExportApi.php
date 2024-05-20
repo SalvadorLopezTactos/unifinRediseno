@@ -66,6 +66,22 @@ class ReportsExportApi extends SugarApi {
             throw new SugarApiExceptionNotAuthorized('No access to view records for module: Reports');
         }
 
+        if (isset($args['shouldHaveChartCanvas'])) {
+            $saved_report->shouldHaveChartCanvas = true;
+        }
+
+        if (array_key_exists('orderBy', $args)) {
+            $savedReportContent = json_decode($saved_report->content, true);
+
+            if (array_key_exists('summary_order_by', $savedReportContent)) {
+                $savedReportContent['summary_order_by'] = $args['orderBy'];
+            } else {
+                $savedReportContent['order_by'] = $args['orderBy'];
+            }
+
+            $saved_report->content = json_encode($savedReportContent);
+        }
+
         return $this->$method($api, $saved_report);
 
     }
@@ -85,11 +101,18 @@ class ReportsExportApi extends SugarApi {
         if($report->id != null)
         {
             //Translate pdf to correct language
-            $reporter = new Report(html_entity_decode($report->content), '', '');
+            $reporter = new Report(html_entity_decode($report->content, ENT_COMPAT), '', '');
             $reporter->layout_manager->setAttribute("no_sort",1);
             $reporter->fromApi = true;
+
+            if ($report->shouldHaveChartCanvas) {
+                $reporter->is_saved_report = true;
+                $reporter->saved_report_id = $report->id;
+            }
             //Translate pdf to correct language
             $mod_strings = return_module_language($current_language, 'Reports');
+
+            $this->updateFiltersFromCache($reporter, $report->id);
 
             //Generate actual pdf
             $report_filename = template_handle_pdf($reporter, false);
@@ -120,13 +143,15 @@ class ReportsExportApi extends SugarApi {
         if($report->id != null)
         {
             //Translate pdf to correct language
-            $reporter = new Report(html_entity_decode($report->content), '', '');
+            $reporter = new Report(html_entity_decode($report->content, ENT_COMPAT), '', '');
             $reporter->layout_manager->setAttribute("no_sort",1);
             $reporter->fromApi = true;
             $reporter->saved_report_id = $report->id;
             $reporter->is_saved_report = true;
             //Translate pdf to correct language
             $mod_strings = return_module_language($current_language, 'Reports');
+
+            $this->updateFiltersFromCache($reporter, $report->id);
 
             //Generate actual pdf
             $report_filename = template_handle_pdf($reporter, false);
@@ -173,14 +198,16 @@ class ReportsExportApi extends SugarApi {
     protected function getResult(SugarBean $report, string $format): string
     {
         if ($report->id != null) {
-            $reporter = new Report(html_entity_decode($report->content), '', '');
+            $reporter = new Report(html_entity_decode($report->content, ENT_COMPAT), '', '');
             $reporter->layout_manager->setAttribute('no_sort', 1);
             $reporter->fromApi = true;
             $reporter->saved_report_id = $report->id;
             $reporter->is_saved_report = true;
             $reporter->plain_text_output = true;
             $reporter->enable_paging = false;
-            
+
+            $this->updateFiltersFromCache($reporter, $report->id);
+
             try {
                 $exporter = new ReportExporter($reporter, $format);
                 return $exporter->export();
@@ -189,6 +216,18 @@ class ReportsExportApi extends SugarApi {
             }
         } else {
             throw new SugarApiExceptionNotFound('Report not found');
+        }
+    }
+
+    /**
+     * Update filters from cache, if existing
+     */
+    protected function updateFiltersFromCache(Report &$reporter, string $reportId)
+    {
+        $reportCache = new ReportCache();
+
+        if ($reportCache->retrieve($reportId) && $reportCache->contents_array) {
+            $reporter->report_def['filters_def'] = $reportCache->contents_array['filters_def'];
         }
     }
 }

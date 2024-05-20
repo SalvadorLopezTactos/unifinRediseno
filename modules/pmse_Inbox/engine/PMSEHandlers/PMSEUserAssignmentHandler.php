@@ -216,7 +216,7 @@ class PMSEUserAssignmentHandler
         $newFlowRow->cas_index = $maxIndexFlow['rowList'][0]['max_index'] + 1;
         //$this->setCloseStatusInCaseFlow($caseData['cas_id'], $caseData['cas_index']);
         $newFlowRow->cas_previous = $caseData['cas_index'];
-        $newFlowRow->cas_adhoc_type = isset($caseData['cas_adhoc_type']) ? $caseData['cas_adhoc_type'] : $flowRow->cas_adhoc_type;
+        $newFlowRow->cas_adhoc_type = $caseData['cas_adhoc_type'] ?? $flowRow->cas_adhoc_type;
         $newFlowRow->cas_task_start_date = !isset($flowRow->cas_task_start_date) ? $flowRow->cas_delegate_date : $flowRow->cas_task_start_date;
         $newFlowRow->cas_delegate_date = $today;
         if ($newFlowRow->cas_adhoc_type == 'ONE_WAY') {
@@ -726,11 +726,11 @@ class PMSEUserAssignmentHandler
                 $this->getLogger()->info("[{$flowData['cas_id']}][{$flowData['cas_index']}] no default user " .
                     "is defined from Round Robin action");
             }
+        } else {
+            //updating last user selected only if its from assigned team
+            $beanBpmActivity->act_last_user_assigned = $nextUserId;
+            $beanBpmActivity->save();
         }
-
-        //updating last user selected
-        $beanBpmActivity->act_last_user_assigned = $nextUserId;
-        $beanBpmActivity->save();
 
         return $nextUserId;
     }

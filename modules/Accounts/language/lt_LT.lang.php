@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Paskyrų sąrašo ataskaitų sritis',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Paskyrų duomenų ataskaitų sritis',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Paskyrų „Focus“ stalčius',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Kliento informacija',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Paskyrų „Focus“ stalčius – konsolė',
     'LBL_NEXT_RENEWAL_DATE' => 'Kito atnaujinimo data',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Kito atnaujinimo data',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Kliento pavadinimas / pramonės šaka',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Vieta',
     'LBL_PURCHASES' => 'Pirkimai',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Kliento laiko juosta',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizuoti',
+    'LBL_CREATE_NEW' => 'Sukurti naują',
+    'LBL_MANAGE' => 'Valdyti',
+    'LBL_SEE_DETAILS' => 'Ataskaita išsamiau',
+    'LBL_HIDE_NEW' => 'Slėpti',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikai',
@@ -207,4 +214,7 @@ To create an {{module_name}}:
 2. Click "Save" to finalize the new record and return to the previous page.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Accounts&#39; reports',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Išoriniai vartotojai',
 );

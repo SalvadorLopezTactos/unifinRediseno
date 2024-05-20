@@ -20,6 +20,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
 require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class MBPackage{
+    public $path;
     var $name;
     var $is_uninstallable = true;
     var $description = '';
@@ -335,9 +336,9 @@ function buildInstall($path){
     }
 
     function populateFromPost(){
-        $this->description = trim($this->request->getValidInputRequest('description'));
-        $this->author = trim($this->request->getValidInputRequest('author'));
-        $this->key = trim($this->request->getValidInputRequest('key'));
+        $this->description = trim((string)$this->request->getValidInputRequest('description'));
+        $this->author = trim((string)$this->request->getValidInputRequest('author'));
+        $this->key = trim((string)$this->request->getValidInputRequest('key'));
 
         $constraintBuilder = new ConstraintBuilder();
         $constraints = $constraintBuilder->build('Assert\ComponentName');
@@ -357,7 +358,7 @@ function buildInstall($path){
                 $GLOBALS['log']->warn("InputValidation: Violation for REQUEST -> key");
             }
         }
-        $this->readme = trim($this->request->getValidInputRequest('readme'));
+        $this->readme = trim((string)$this->request->getValidInputRequest('readme'));
     }
 
     function rename($new_name){
@@ -1195,7 +1196,12 @@ function buildInstall($path){
         $tmppath="custom/modulebuilder/projectTMP/";
         if(file_exists($this->getPackageDir())){
             if(mkdir_recursive($tmppath)){
-                copy_recursive($this->getPackageDir(), $tmppath ."/". $this->name);
+                $packageName = basename($this->name);
+                copy_recursive($this->getPackageDir(), $tmppath . DIRECTORY_SEPARATOR . $packageName);
+                $zipsDir = $tmppath . DIRECTORY_SEPARATOR . $packageName . DIRECTORY_SEPARATOR . 'zips';
+                if (file_exists($zipsDir)) {
+                    rmdir_recursive($zipsDir);
+                }
                 $manifest = $this->getManifest(true, true).$this->exportProjectInstall();
                 $fp = sugar_fopen($tmppath .'/manifest.php', 'w');
                 fwrite($fp, $manifest);
@@ -1310,7 +1316,8 @@ function buildInstall($path){
                 foreach ($relationships as $k => $v)
                 {
 
-                    if (strpos($fileInfo->getFilename(), (string)$k) !== false) {   //filter by modules being exported
+                    if (strpos($fileInfo->getFilename(), $k) !== false)
+                    {   //filter by modules being exported
                         if ($this->filterExportedRelationshipFile($fileInfo->getFilename(),$moduleName,$exportedModulesFilter) ){
                             $result[] = $fileInfo->getPathname();
                             break;

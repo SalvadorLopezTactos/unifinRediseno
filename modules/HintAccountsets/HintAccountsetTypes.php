@@ -13,7 +13,7 @@ namespace Sugarcrm\Sugarcrm\modules\HintAccountsets;
 
 class HintAccountsetTypes
 {
-    const OWNER = 'owner';
-    const FAVORITES = 'favorites';
-    const TAGS = 'tags';
+    public const OWNER = 'owner';
+    public const FAVORITES = 'favorites';
+    public const TAGS = 'tags';
 }

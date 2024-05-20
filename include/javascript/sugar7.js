@@ -148,17 +148,19 @@
                 route: "Forecasts",
                 callback: function() {
 
-                    var acls = app.user.getAcls().Forecasts,
-                        hasAccess = (!_.has(acls, 'access') || acls.access == 'yes'),
-                        forecastBy = app.metadata.getModule('Forecasts', 'config'),
-                        forecastByAcl = app.user.getAcls()[forecastBy ? forecastBy.forecast_by : {}],
-                        hasForecastByAccess = (!_.has(forecastByAcl, 'access') || forecastByAcl.access === 'yes'),
-                        title = '',
-                        msg = '';
+                    let acls = app.user.getAcls().Forecasts;
+                    let hasAccess = (!_.has(acls, 'access') || acls.access == 'yes');
+                    let opportunitiesAcl = app.user.getAcls().Opportunities;
+                    let hasOppAccess = (!_.has(opportunitiesAcl, 'access') || opportunitiesAcl.access === 'yes');
+                    let forecastBy = app.metadata.getModule('Forecasts', 'config');
+                    let forecastByAcl = app.user.getAcls()[forecastBy ? forecastBy.forecast_by : {}];
+                    let hasForecastByAccess = (!_.has(forecastByAcl, 'access') || forecastByAcl.access === 'yes');
+                    let title = '';
+                    let msg = '';
 
                     //check for access, set error messages if none
                     if (hasAccess) {
-                        if (hasForecastByAccess) {
+                        if (hasOppAccess && hasForecastByAccess) {
                             if (!app.utils.checkForecastConfig()) {
                                 title = 'LBL_FORECASTS_MISSING_STAGE_TITLE';
                                 msg = 'LBL_FORECASTS_MISSING_SALES_STAGE_VALUES';
@@ -284,7 +286,7 @@
                     // Trigger an event on the quicksearch in the header. The
                     // header cannot rely on the context, since it is
                     // initialized once for the whole app.
-                    var header = app.additionalComponents.header;
+                    var header = app.additionalComponents['header-nav'];
                     var quicksearch = header && header.getComponent('quicksearch');
                     if (quicksearch) {
                         quicksearch.trigger('route:search');
@@ -681,7 +683,7 @@
                     modelId: app.user.get('id'),
                     callbacks: callbacks
                 });
-                app.additionalComponents.header.hide();
+                app.additionalComponents['header-nav'].hide();
                 return false;
             }
 
@@ -731,7 +733,7 @@
                 // FIXME: Should be event-driven, see:
                 // https://github.com/sugarcrm/Mango/pull/18722#discussion_r11782561
                 // Will be addressed in SC-2761.
-                app.additionalComponents.header.hide();
+                app.additionalComponents['header-nav'].hide();
                 return false;
             }
 
@@ -748,7 +750,7 @@
                     },
                     modelId: app.user.get('id')
                 });
-                app.additionalComponents.header.hide();
+                app.additionalComponents['header-nav'].hide();
 
                 return false;
             }

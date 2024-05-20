@@ -40,9 +40,9 @@ class DocuSignEnvelopesFilterApi extends FilterApi
     public function filterListSetup(ServiceBase $api, array $args, $acl = 'list')
     {
         if (isset($args['layout'])) {
-            $recordModule = isset($args['recordModule']) ? $args['recordModule'] : '';
+            $recordModule = $args['recordModule'] ?? '';
             
-            list($args, $q, $options, $seed) = parent::filterListSetup($api, $args, $acl);
+            [$args, $q, $options, $seed] = parent::filterListSetup($api, $args, $acl);
             
             if (isset($options['id_query'])) {
                 $query = $options['id_query'];

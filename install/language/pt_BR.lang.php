@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Para uma utilização otimizada do sapi IIS/FastCGI, defina fastcgi.logging para 0 no seu arquivo php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versão de PHP instalada não suportada: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Banco de dados indisponível',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Não foi encontrado suporte para o banco de dados. Certifique-se de que você possui os drivers necessários para um dos seguintes tipos de banco de dados: MySQL, MS SQLServer, Oracle ou DB2. Talvez seja necessário remover o comentário da extensão no arquivo php.ini, ou recompilar com o arquivo binário correto, dependendo da sua versão do PHP. Consulte o seu manual do PHP para mais informações sobre como habilitar o suporte para o banco de dados.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'O suporte ao banco de dados não foi encontrado. Verifique se você tem os drivers necessários para um dos seguintes tipos de banco de dados suportados: MySQL, MS SQLServer, Oracle ou DB2. Talvez seja necessário remover o comentário da extensão no arquivo php.ini ou recompilar com o arquivo binário correto, dependendo da versão do PHP. Consulte o manual do PHP para obter mais informações sobre como ativar o suporte a banco de dados.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funções associadas às XML Parser Libraries que são necessárias para executar o aplicativo Sugar não foram encontradas. Talvez seja necessário remover comentário da extensão no arquivo php.ini ou recompilar com arquivo binário correto, dependendo da sua versão de PHP. Consulte o Manual do PHP para obter mais informações sobre como ativar o Suporte do Banco de Dados.',
     'LBL_CHECKSYS_CSPRNG' => 'Gerador de números aleatórios',
     'ERR_CHECKSYS_MBSTRING'             => 'Funções associadas com a extensão Multibyte Strings PHP (mbstring) que são necessárias para executar o aplicativo Sugar não foram encontradas. <br/><br/>Geralmente, o módulo mbstring não está ativado por defeito no PHP e deve ser ativado com --enable-mbstring quando o binário PHP é construído. Consulte o Manual do PHP para obter mais informações sobre como ativar o suporte mbstring.',
@@ -561,32 +561,15 @@ Rejeitar esta chamada
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'E-mails de notificação de atribuição',
-        'subject' => 'SugarCRM - $module_name atribuído ',
-        'description' => 'Este modelo é usado quando o sistema envia uma atribuição de tarefa a um usuário.',
-        'body' => '<div>
-<p>$assigned_by_user atribuiu um&nbsp;$module_name a&nbsp;$assigned_user.</p>
-
-<p>Revise este&nbsp;$module_name em:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user atribuiu um $module_name a $assigned_user.
-
-Revise este $module_name em:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'E-mails de relatórios agendados',
         'subject' => 'Relatório agendado: $report_name de $report_time',
         'description' => 'Este modelo é usado quando o sistema envia um relatório agendado para um usuário.',
         'body' => '<div>
-<p>Olá, $assigned_user</p>
-<p>O arquivo anexo é um relatório gerado automaticamente agendado para você.</p>
-<p>Nome do relatório: $report_name</p>
-<p>Data e hora de geração do relatório: $report_time</p>
+<p>Olá, $assigned_user,<br></p>
+<p>O arquivo anexo é um relatório gerado automaticamente agendado para você.<br></p>
+<p>Nome do relatório: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Data e hora de geração do relatório: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Olá, $assigned_user
@@ -612,14 +595,6 @@ Data e hora de geração do relatório: $report_time',
             Faça login no Sugar para ver o comentário.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informação de Nova Conta',
-        'description' => 'Este template é usado quando o Administrador de Sistema envia a nova senha para um usuário.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Aqui está o nome de usuário e senha temporária da sua conta:</p><p>Nome de usuário : $contact_user_user_name </p><p>senha: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Depois de efectuar a autenticação com a senha indicada acima, poderá ser pedido para alterar a senha por uma à sua escolha.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'Aqui está o nome de usuário senha da sua conta: Nome de usuário: $contact_user_user_name senha: $contact_user_user_hash $config_site_url. Depois de se autenticar com a senha indicada, poderá ser necessário indicar uma nova senha.',
-        'name' => 'Email de senha gerada pelo sistema',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Indicar uma nova senha',
         'description' => "Este template é usado para enviar para o usuário um link para clicar e indicar uma nova senha da conta do usuário.",

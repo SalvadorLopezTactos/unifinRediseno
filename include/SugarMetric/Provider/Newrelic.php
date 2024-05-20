@@ -97,7 +97,7 @@ class SugarMetric_Provider_Newrelic implements SugarMetric_Provider_Interface
      * @param Exception $exception
      * @return null
      */
-    public function handleException(Exception $exception)
+    public function handleException(\Throwable $exception)
     {
         newrelic_notice_error($exception->getMessage(), $exception);
     }

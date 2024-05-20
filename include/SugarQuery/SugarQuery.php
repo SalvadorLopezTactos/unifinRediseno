@@ -247,7 +247,7 @@ class SugarQuery
             $options = array('alias' => $options);
         }
 
-        $alias = (isset($options['alias'])) ? $options['alias'] : false;
+        $alias = $options['alias'] ?? false;
 
         if (!empty($alias)) {
             $newAlias = $this->db->getValidDBName($alias, false, 'alias');
@@ -256,7 +256,7 @@ class SugarQuery
             }
         }
 
-        $team_security = (isset($options['team_security'])) ? $options['team_security'] : true;
+        $team_security = $options['team_security'] ?? true;
         $this->from = $bean;
         if (!empty($alias)) {
             $this->from = array($bean, $alias);
@@ -1003,7 +1003,7 @@ class SugarQuery
     {
         $alias = (!empty($options['alias'])) ? $options['alias'] : $this->getJoinTableAlias($join);
         $joinType = (!empty($options['joinType'])) ? $options['joinType'] : 'INNER';
-        $team_security = (isset($options['team_security'])) ? $options['team_security'] : true;
+        $team_security = $options['team_security'] ?? true;
         $ignoreRole = (!empty($options['ignoreRole'])) ? $options['ignoreRole'] : false;
 
         $bean = !empty($options['relatedJoin']) ? $this->join[$options['relatedJoin']]->bean : $this->from;
@@ -1098,7 +1098,7 @@ class SugarQuery
     public function getJoinAlias($name, $isLink = true)
     {
         if ($isLink) {
-            return isset($this->joinLinkToKey[$name]) ? $this->joinLinkToKey[$name] : false;
+            return $this->joinLinkToKey[$name] ?? false;
         }
         if (isset($this->joinLinkToKey[$name])) {
             return $this->joinLinkToKey[$name];

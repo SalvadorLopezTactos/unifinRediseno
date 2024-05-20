@@ -57,7 +57,8 @@ class ProjectsSnapshots extends \Google\Service\Resource
    * @param string $name Required. User-provided name for this snapshot. If the
    * name is not provided in the request, the server will assign a random name for
    * this snapshot on the same project as the subscription. Note that for REST API
-   * requests, you must specify a name. See the resource name rules. Format is
+   * requests, you must specify a name. See the [resource name
+   * rules](https://cloud.google.com/pubsub/docs/admin#resource_names). Format is
    * `projects/{project}/snapshots/{snap}`.
    * @param CreateSnapshotRequest $postBody
    * @param array $optParams Optional parameters.
@@ -92,10 +93,11 @@ class ProjectsSnapshots extends \Google\Service\Resource
     return $this->call('delete', [$params], PubsubEmpty::class);
   }
   /**
-   * Gets the configuration details of a snapshot. Snapshots are used in Seek
-   * operations, which allow you to manage message acknowledgments in bulk. That
-   * is, you can set the acknowledgment state of messages in an existing
-   * subscription to the state captured by a snapshot. (snapshots.get)
+   * Gets the configuration details of a snapshot. Snapshots are used in
+   * [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+   * which allow you to manage message acknowledgments in bulk. That is, you can
+   * set the acknowledgment state of messages in an existing subscription to the
+   * state captured by a snapshot. (snapshots.get)
    *
    * @param string $snapshot Required. The name of the snapshot to get. Format is
    * `projects/{project}/snapshots/{snap}`.
@@ -113,16 +115,21 @@ class ProjectsSnapshots extends \Google\Service\Resource
    * resource exists and does not have a policy set. (snapshots.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int options.requestedPolicyVersion Optional. The policy format
-   * version to be returned. Valid values are 0, 1, and 3. Requests specifying an
-   * invalid value will be rejected. Requests for policies with any conditional
-   * bindings must specify version 3. Policies without any conditional bindings
-   * may specify any valid value or leave the field unset. To learn which
-   * resources support conditions in their IAM policies, see the [IAM
+   * @opt_param int options.requestedPolicyVersion Optional. The maximum policy
+   * version that will be used to format the policy. Valid values are 0, 1, and 3.
+   * Requests specifying an invalid value will be rejected. Requests for policies
+   * with any conditional role bindings must specify version 3. Policies with no
+   * conditional role bindings may specify any valid value or leave the field
+   * unset. The policy in the response might use the policy version that you
+   * specified, or it might use a lower policy version. For example, if you
+   * specify version 3, but the policy has no conditional role bindings, the
+   * response uses version 1. To learn which resources support conditions in their
+   * IAM policies, see the [IAM
    * documentation](https://cloud.google.com/iam/help/conditions/resource-
    * policies).
    * @return Policy
@@ -158,10 +165,11 @@ class ProjectsSnapshots extends \Google\Service\Resource
     return $this->call('list', [$params], ListSnapshotsResponse::class);
   }
   /**
-   * Updates an existing snapshot. Snapshots are used in Seek operations, which
-   * allow you to manage message acknowledgments in bulk. That is, you can set the
-   * acknowledgment state of messages in an existing subscription to the state
-   * captured by a snapshot. (snapshots.patch)
+   * Updates an existing snapshot. Snapshots are used in
+   * [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+   * which allow you to manage message acknowledgments in bulk. That is, you can
+   * set the acknowledgment state of messages in an existing subscription to the
+   * state captured by a snapshot. (snapshots.patch)
    *
    * @param string $name The name of the snapshot.
    * @param UpdateSnapshotRequest $postBody
@@ -180,8 +188,9 @@ class ProjectsSnapshots extends \Google\Service\Resource
    * `PERMISSION_DENIED` errors. (snapshots.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -201,8 +210,9 @@ class ProjectsSnapshots extends \Google\Service\Resource
    * (snapshots.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse

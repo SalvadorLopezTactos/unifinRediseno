@@ -19,14 +19,14 @@ class RestRequest
     /**
      * request version pattern, for getting the API version
      */
-    const VERSION_PATTERN = '/^\d\d(\.\d{1,2})?$/';
-    const PATH_VERSION_PATTERN = '/^v\d\d(_\d{1,2})?$/';
+    public const VERSION_PATTERN = '/^\d\d(\.\d{1,2})?$/';
+    public const PATH_VERSION_PATTERN = '/^v\d\d(_\d{1,2})?$/';
 
     /**
      * request version pattern in Accept header
      * sample accept header: application/vnd.sugarcrm.core+json; version=11.3
      */
-    const ACCEPT_HEADER_VERSION_PATTERN =
+    public const ACCEPT_HEADER_VERSION_PATTERN =
         '/^application\/vnd\.sugarcrm\.core(\+?(xml|json))?\s*\;\s*version=([^;,\s]+)/';
 
     /**
@@ -301,7 +301,7 @@ class RestRequest
         $this->parseRequestHeaders();
         $this->rawPath = $this->getRawPath();
         $this->parsePath($this->rawPath);
-        $this->method = isset($server['REQUEST_METHOD'])?$server['REQUEST_METHOD']:'GET';
+        $this->method = $server['REQUEST_METHOD'] ?? 'GET';
     }
 
     /**
@@ -473,7 +473,7 @@ class RestRequest
         if (isset($this->request['__sugar_url'])
             && (empty($this->server['REQUEST_URI'])
                 || empty($this->server['SCRIPT_NAME'])
-                || strpos($this->server['REQUEST_URI'], (string) $this->server['SCRIPT_NAME']) === false)) {
+                || strpos($this->server['REQUEST_URI'], $this->server['SCRIPT_NAME']) === false)) {
             // This is a forwarded rewritten URL
             $apiBase = '/rest/';
         }

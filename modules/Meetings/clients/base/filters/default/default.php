@@ -30,5 +30,9 @@ $viewdefs['Meetings']['base']['filter']['default'] = array(
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
         ),
+        'cj_activity_tpl_name' => [],
+        'dri_subworkflow_template_name' => [],
+        'dri_workflow_template_name' => [],
+        'is_customer_journey_activity' => [],
     ),
 );

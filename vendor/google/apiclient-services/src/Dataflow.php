@@ -34,7 +34,7 @@ use Google\Client;
  */
 class Dataflow extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
   /** View and manage your Google Compute Engine resources. */
@@ -143,6 +143,10 @@ class Dataflow extends \Google\Service
                   'location' => 'query',
                   'type' => 'string',
                 ],
+                'name' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
                 'pageSize' => [
                   'location' => 'query',
                   'type' => 'integer',
@@ -238,6 +242,10 @@ class Dataflow extends \Google\Service
                   'type' => 'string',
                 ],
                 'location' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'name' => [
                   'location' => 'query',
                   'type' => 'string',
                 ],
@@ -591,6 +599,10 @@ class Dataflow extends \Google\Service
                   'required' => true,
                 ],
                 'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'name' => [
                   'location' => 'query',
                   'type' => 'string',
                 ],

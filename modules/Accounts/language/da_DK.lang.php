@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Kontiliste-dashboard',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Kontioptegnelser-dashboard',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Konti',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Virksomhedsoplysninger',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Dashboard Fokus Konti',
     'LBL_NEXT_RENEWAL_DATE' => 'Dato for næste fornyelse',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Dato for næste fornyelse',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Virksomhedsnavn/branche',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Placering',
     'LBL_PURCHASES' => 'Køb',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Konto Tidslinje',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiser',
+    'LBL_CREATE_NEW' => 'Opret ny',
+    'LBL_MANAGE' => 'Administrer',
+    'LBL_SEE_DETAILS' => 'Vis oplysninger',
+    'LBL_HIDE_NEW' => 'Skjul',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagrammer',
@@ -207,4 +214,7 @@ Hvis du vil oprette en {{module_name}}:
 2. Klik på "Gem" for at færdiggøre den nye post og vende tilbage til den forrige side.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Virksomheds rapporter',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Eksterne brugere',
 );

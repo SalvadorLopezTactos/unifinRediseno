@@ -260,7 +260,7 @@ class One2MBeanRelationship extends One2MRelationship
                 $orderby = !empty($params['orderby']) ? "ORDER BY $rhsTable.{$params['orderby']}" : "";
                 $query = "SELECT {$this->def['rhs_table']}.id FROM $from $where $orderby";
                 if (!empty($params['limit']) && $params['limit'] > 0) {
-                    $offset = isset($params['offset']) ? $params['offset'] : 0;
+                    $offset = $params['offset'] ?? 0;
                     $query = DBManagerFactory::getInstance()->limitQuery(
                         $query,
                         $offset,
@@ -350,7 +350,7 @@ class One2MBeanRelationship extends One2MRelationship
         $targetTable = $linkIsLHS ? $this->def['rhs_table'] : $this->def['lhs_table'];
         $targetTableWithAlias = $targetTable;
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
-        $join_type = isset($params['join_type']) ? $params['join_type'] : ' INNER JOIN ';
+        $join_type = $params['join_type'] ?? ' INNER JOIN ';
         $join = '';
 
         //Set up any table aliases required
@@ -406,7 +406,7 @@ class One2MBeanRelationship extends One2MRelationship
         $targetModule = $linkIsLHS ? $this->def['rhs_module'] : $this->def['lhs_module'];
 
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
-        $join_type = isset($options['joinType']) ? $options['joinType'] : 'INNER';
+        $join_type = $options['joinType'] ?? 'INNER';
 
         $joinParams = array(
             'joinType' => $join_type,
@@ -451,7 +451,7 @@ class One2MBeanRelationship extends One2MRelationship
         $startingKey = $linkIsLHS ? $this->def['lhs_key'] : $this->def['rhs_key'];
         $targetTable = $linkIsLHS ? $this->def['rhs_table'] : $this->def['lhs_table'];
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
-        $join_type = isset($params['join_type']) ? $params['join_type'] : ' INNER JOIN ';
+        $join_type = $params['join_type'] ?? ' INNER JOIN ';
         $query = '';
 
         $alias = empty($params['join_table_alias']) ? "{$link->name}_rel" : $params['join_table_alias'];

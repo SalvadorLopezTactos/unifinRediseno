@@ -175,7 +175,7 @@
                 this._onProductDashletAddComplete, this);
         }
 
-        $(window).on('resize', _.bind(_.debounce(this._resizePhaserCanvas, 200), this));
+        $(window).on(`resize.${this.cid}`, _.bind(_.debounce(this._resizePhaserCanvas, 200), this));
 
         sidebarLayout = this.closestComponent('sidebar');
         if (sidebarLayout) {
@@ -1943,6 +1943,10 @@
      * @protected
      */
     _resizePhaserCanvas: function() {
+        if (this.disposed) {
+            return;
+        }
+
         var $el = this.$('.product-catalog-container-' + this.cid);
 
         if (this.phaser && $el.length && this.phaser.scale) {
@@ -1988,7 +1992,7 @@
         // any cleanup
         this.$('.product-catalog-container-' + this.cid).off(this.wheelEventName);
         // remove window resize event
-        $(window).off('resize');
+        $(window).off(`resize.${this.cid}`);
         if (app.controller && app.controller.context) {
             if (this.isConfig) {
                 this._super('_dispose');

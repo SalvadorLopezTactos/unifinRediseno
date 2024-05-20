@@ -16,6 +16,10 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 class ImportView extends SugarView
 {
+    /**
+     * @var mixed|string|mixed[]
+     */
+    public $importModule;
     use IdmModeLimitationTrait;
 
     protected $currentStep;
@@ -36,13 +40,13 @@ class ImportView extends SugarView
 
         parent::__construct($bean, $view_object_map);
 
-        if (isset($_REQUEST['button']) && trim($_REQUEST['button']) == htmlentities($mod_strings['LBL_BACK'])) {
+        if (isset($_REQUEST['button']) && trim($_REQUEST['button']) == htmlentities($mod_strings['LBL_BACK'], ENT_COMPAT)) {
             // if the request comes from the "Back" button, decrease the step count
             $this->currentStep = isset($_REQUEST['current_step']) ? ($_REQUEST['current_step'] - 1) : 1;
         } else {
             $this->currentStep = isset($_REQUEST['current_step']) ? ($_REQUEST['current_step'] + 1) : 1;
         }
-        $this->importModule = isset($_REQUEST['import_module']) ? $_REQUEST['import_module'] : '';
+        $this->importModule = $_REQUEST['import_module'] ?? '';
         $this->defaultDelimiter = SugarConfig::getInstance()->get('export_delimiter', ',');
     }
 
@@ -99,6 +103,7 @@ class ImportView extends SugarView
                 ),
                 'Assert\Length' => array(
                     'max' => 1,
+                    'allowEmptyString' => true,
                 ),
             ),
             $this->getDefaultDelimiter()

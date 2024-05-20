@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Stvorio/la',
   'LBL_EDIT_LAYOUT' => 'Uredi izgled' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Samo administratori',
-  'LBL_CURRENCY_DEFAULT' => 'Američki dolari (zadano)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Valuta sustava (zadana)',
 );
 ?>

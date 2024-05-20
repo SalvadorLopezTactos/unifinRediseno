@@ -29,9 +29,9 @@ class SAMLUserProviderTest extends \PHPUnit_Framework_TestCase
     public function testLoadUserByUsername()
     {
         $provider = new SAMLUserProvider();
-        $user = $provider->loadUserByUsername('onelogin@onelogin.com');
+        $user = $provider->loadUserByIdentifier('onelogin@onelogin.com');
         $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals('onelogin@onelogin.com', $user->getUsername());
+        $this->assertEquals('onelogin@onelogin.com', $user->getUserIdentifier());
     }
 
     public function testRefreshUser()
@@ -40,6 +40,6 @@ class SAMLUserProviderTest extends \PHPUnit_Framework_TestCase
         $user = new User('onelogin@onelogin.com');
         $user = $provider->refreshUser($user);
         $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals('onelogin@onelogin.com', $user->getUsername());
+        $this->assertEquals('onelogin@onelogin.com', $user->getUserIdentifier());
     }
 }

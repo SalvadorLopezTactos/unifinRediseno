@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'แดชลอร์ดรายการบัญชี',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกบัญชี',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'บัญชีระบบลิ้นชัก',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'รายละเอียดบัญชี',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'บัญชีระบบลิ้นชัก - คอนโซล',
     'LBL_NEXT_RENEWAL_DATE' => 'วันที่การต่ออายุครั้งต่อไป',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'วันที่การต่ออายุครั้งต่อไป',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'ชื่อบัญชี/อุตสาหกรรม',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'ตำแหน่ง',
     'LBL_PURCHASES' => 'ซื้อ',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ไทม์ไลน์บัญชี',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'จัดระเบียบ',
+    'LBL_CREATE_NEW' => 'สร้างใหม่',
+    'LBL_MANAGE' => 'จัดการ',
+    'LBL_SEE_DETAILS' => 'ดูรายละเอียด',
+    'LBL_HIDE_NEW' => 'ซ่อน',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'แผนภูมิ',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. คลิก "บันทึก" เพื่อสิ้นสุดการสร้างระเบียนใหม่ และกลับสู่เพจก่อนหน้า',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'รายงานของบัญชี',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'ผู้ใช้จากภายนอก',
 );

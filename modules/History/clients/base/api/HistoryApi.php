@@ -97,11 +97,12 @@ class HistoryApi extends RelateApi
 
     public function filterModuleList(ServiceBase $api, array $args, $acl = 'list')
     {
+        $options = [];
         $orderByKeys = [];
         if (!empty($args['order_by'])) {
             $args['order_by'] = $this->getOrderByFromArgs($args);
             foreach ($args['order_by'] as $parsedOrderBy) {
-                list($parsedOrderByFieldName, $parsedOrderByDirection) = $parsedOrderBy;
+                [$parsedOrderByFieldName, $parsedOrderByDirection] = $parsedOrderBy;
                 $orderByKeys[] = $parsedOrderByFieldName;
             }
         }
@@ -147,7 +148,7 @@ class HistoryApi extends RelateApi
         $removedModuleDirection = false;
         if (!empty($args['order_by'])) {
             foreach ($args['order_by'] as $parsedOrderByKey => $parsedOrderBy) {
-                list($parsedOrderByFieldName, $parsedOrderByDirection) = $parsedOrderBy;
+                [$parsedOrderByFieldName, $parsedOrderByDirection] = $parsedOrderBy;
                 // `picture` is considered the same field as `module` because it
                 // corresponds to the module icon.
                 if ($parsedOrderByFieldName === 'module' || $parsedOrderByFieldName === 'picture') {
@@ -195,7 +196,7 @@ class HistoryApi extends RelateApi
 
             /** @var SugarQuery $q */
             try {
-                list($args, $q, $options) = $this->filterRelatedSetup($api, $args);
+                [$args, $q, $options] = $this->filterRelatedSetup($api, $args);
                 $q->select()->selectReset();
                 $q->orderByReset(); // ORACLE doesn't allow order by in UNION queries
                 if (!empty($args['placeholder_fields'][$module])) {

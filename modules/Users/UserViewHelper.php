@@ -58,6 +58,26 @@ class UserViewHelper {
      */
     public $usertype;
 
+    /**
+     * SMTP providers requiring OAuth2.
+     *
+     * @var array
+     */
+    private $oauth2Types = [
+        'google_oauth2' => [
+            'application' => 'GoogleEmail',
+            'auth_warning' => '',
+            'auth_url' => null,
+            'dataSource' => 'googleEmailRedirect',
+        ],
+        'exchange_online' => [
+            'application' =>'MicrosoftEmail',
+            'auth_warning' => '',
+            'auth_url' => null,
+            'dataSource' => 'microsoftEmailRedirect',
+        ],
+    ];
+
 
     /**
      * Constructor, pass in the smarty template, the bean and the viewtype
@@ -336,11 +356,11 @@ class UserViewHelper {
         } else {
             // display invalid license types in red
             foreach ($userLicenseType as $type) {
-                $licenseTypesInString .= htmlspecialchars(User::getLicenseTypeDescription($type)) . '<br />';
+                $licenseTypesInString .= htmlspecialchars(User::getLicenseTypeDescription($type), ENT_COMPAT) . '<br />';
             }
             $invalidLicenseTypes = SubscriptionManager::instance()->getUserInvalidSubscriptions($this->bean);
             foreach ($invalidLicenseTypes as $type) {
-                $licenseTypesInString .= '<p class="error">' . htmlspecialchars(User::getLicenseTypeDescription($type)) . '</p>';
+                $licenseTypesInString .= '<p class="error">' . htmlspecialchars(User::getLicenseTypeDescription($type), ENT_COMPAT) . '</p>';
             }
         }
 
@@ -360,7 +380,7 @@ class UserViewHelper {
     protected function setupPasswordTab() {
         global $current_user;
 
-        $this->ss->assign('PWDSETTINGS', isset($GLOBALS['sugar_config']['passwordsetting']) ? $GLOBALS['sugar_config']['passwordsetting'] : array());
+        $this->ss->assign('PWDSETTINGS', $GLOBALS['sugar_config']['passwordsetting'] ?? array());
         if ( isset($GLOBALS['sugar_config']['passwordsetting']) && isset($GLOBALS['sugar_config']['passwordsetting']['customregex']) ) {
             $pwd_regex=str_replace( "\\","\\\\",$GLOBALS['sugar_config']['passwordsetting']['customregex']);
             $this->ss->assign("REGEX",$pwd_regex);
@@ -576,7 +596,6 @@ class UserViewHelper {
     }
 
     protected function setupAdvancedTabNavSettings() {
-        $ss = null;
         global $app_list_strings;
 
         /* Module Tab Chooser */
@@ -638,6 +657,21 @@ class UserViewHelper {
             'FIELD_NAME_PLACEMENT',
             get_select_options_with_id($field_name_placement_options, $field_name_placement)
         );
+
+        // Determine whether the user can edit the number of pinned modules
+        $tabController = new TabController();
+        $allowNumberPinned = $tabController->get_users_pinned_modules();
+        $this->ss->assign('DISABLE_NUMBER_PINNED_MODULES', !$allowNumberPinned);
+
+        // Load the number of pinned modules setting if necessary
+        if ($allowNumberPinned) {
+            $currNumberPinned = $this->bean->getPreference('number_pinned_modules');
+            if (empty($currNumberPinned)) {
+                $config = SugarConfig::getInstance();
+                $currNumberPinned = $config->get('maxPinnedModules') ?? $config->get('default_max_pinned_modules');
+            }
+            $this->ss->assign('NUMBER_PINNED_MODULES', $currNumberPinned);
+        }
     }
 
     protected function setupAdvancedTabLocaleSettings() {
@@ -868,6 +902,9 @@ class UserViewHelper {
             $mail_smtpdisplay = $systemOutboundEmail->mail_smtpdisplay;
             $mail_smtpauth_req=true;
             $mail_haspass  = empty($systemOutboundEmail->mail_smtppass)?0:1;
+            $mailAuthType = $systemOutboundEmail->mail_authtype;
+            $eapmId = $systemOutboundEmail->eapm_id;
+            $authorizedAccount = $systemOutboundEmail->authorized_account;
 
             if( !$systemOutboundEmail->isAllowUserAccessToSystemDefaultOutbound() ) {
                 $mail_smtpauth_req = $systemOutboundEmail->mail_smtpauth_req;
@@ -876,6 +913,8 @@ class UserViewHelper {
                     $mail_smtpuser = $userOverrideOE->mail_smtpuser;
                     $mail_smtppass = $userOverrideOE->mail_smtppass;
                     $mail_haspass  = empty($userOverrideOE->mail_smtppass)?0:1;
+                    $eapmId = $userOverrideOE->eapm_id;
+                    $authorizedAccount = $userOverrideOE->authorized_account;
                 }
 
                 if(!$mail_smtpauth_req && (empty($systemOutboundEmail->mail_smtpserver) || empty($systemOutboundEmail->mail_smtpuser) || empty($systemOutboundEmail->mail_smtppass))) {
@@ -893,6 +932,11 @@ class UserViewHelper {
             $this->ss->assign("mail_smtpauth_req", $mail_smtpauth_req);
             $this->ss->assign('MAIL_SMTPPORT',$mail_smtpport);
             $this->ss->assign('MAIL_SMTPSSL',$mail_smtpssl);
+            $this->ss->assign('mail_authtype', $mailAuthType);
+            $this->ss->assign('mail_smtptype', $mail_smtptype);
+            $this->ss->assign('eapm_id', $eapmId);
+            $this->ss->assign('authorized_account', $authorizedAccount);
+            $this->ss->assign('js_authinfo', $this->getAuthInfo());
         }
 
         if ($mailerPreferenceStatus === OutboundEmailConfigurationPeer::STATUS_INVALID_SYSTEM_CONFIG) {
@@ -901,6 +945,28 @@ class UserViewHelper {
         }
         $this->ss->assign('DISABLE_SUGAR_CLIENT', $disableSugarClient);
         $this->ss->assign('HIDE_IF_CAN_USE_DEFAULT_OUTBOUND', $hide_if_can_use_default);
+    }
+
+    /**
+     * Gets auth info for oauth2 providers.
+     *
+     * @return string the JSON-encoded auth info to pass to the frontend
+     */
+    protected function getAuthInfo(): string
+    {
+        $authApi = new AuthApi();
+        $api = new RestService();
+        $authInfo = $this->oauth2Types;
+        foreach ($authInfo as $key => $value) {
+            try {
+                $info = $authApi->getAuthInfo($api, ['module' => 'EAPM', 'application' => $value['application']]);
+            } catch (SugarApiExceptionNotFound $e) {
+                $info = [];
+            }
+            $authInfo[$key] = array_merge($value, $info);
+        }
+        // convert to json string
+        return json_encode($authInfo);
     }
 
     /**

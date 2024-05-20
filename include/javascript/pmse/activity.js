@@ -1758,7 +1758,17 @@ AdamActivity.prototype.createConfigurateAction = function () {
 
 
                 var aForms = [/*{text: translate('LBL_PMSE_FORM_OPTION_MODULE_ORIGINAL_DETAIL_VIEW'), value: 'DetailView'}, {text: translate('LBL_PMSE_FORM_OPTION_MODULE_ORIGINAL_EDIT_VIEW'), value: 'EditView'}*/],
-                    rButtons = [{text: translate('LBL_PMSE_FORM_OPTION_APPROVE_REJECT'), value: 'APPROVE'}, {text: translate('LBL_PMSE_FORM_OPTION_ROUTE'), value: 'ROUTE'}],
+                    rButtons = [
+                        {
+                            text: translate('LBL_PMSE_FORM_OPTION_APPROVE_REJECT'), value: 'APPROVE'
+                        },
+                        {
+                            text: translate('LBL_PMSE_FORM_OPTION_ROUTE'), value: 'ROUTE'
+                        },
+                        {
+                            text: translate('LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING'), value: 'SEND_TO_DOCUSIGN'
+                        }
+                    ],
                     aType = [{text: translate('LBL_PMSE_FORM_OPTION_ONE_WAY'), value: 'ONE_WAY'}, {text: translate('LBL_PMSE_FORM_OPTION_ROUND_TRIP'), value: 'ROUND_TRIP'}],
                     readOnlyFieldsMatrix = f2.items[0],
                     requiredFieldsMatrix = requiredForm.items[0],
@@ -3387,6 +3397,7 @@ AdamActivity.prototype.getAction = function(type, w) {
             break;
 
         case 'DOCUMENT_MERGE':
+            // document template select
             var searchUrl = 'DocumentTemplates?filter[0][name][$starts]=' +
             '{%TERM%}&filter[0][template_module][$equals]=' +
             PROJECT_MODULE + '&fields=id,name&max_num={%PAGESIZE%}&offset={%OFFSET%}';
@@ -3398,9 +3409,11 @@ AdamActivity.prototype.getAction = function(type, w) {
                 searchValue: 'id',
                 searchLabel: 'name',
                 required: true,
-                placeholder: translate('LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT')
+                placeholder: translate('LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT'),
+                fieldWidth: 380,
             });
 
+            // checkbox for pdf conversion
             var convertToPdfCheckbox = new CheckboxField({
                 name: 'act_convert_to_pdf',
                 label: translate('LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF'),
@@ -3412,6 +3425,18 @@ AdamActivity.prototype.getAction = function(type, w) {
                 }
             });
 
+            //checkbox to send the document via email
+            var sendEmailCheckbox = new CheckboxField({
+                name: 'act_send_email',
+                label: translate('LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL'),
+                required: false,
+                value: false,
+                options: {
+                    labelAlign: 'right',
+                    marginLeft: 80,
+                },
+            });
+
             var hiddenModule = new HiddenField({
                 name: 'act_field_module',
                 initialValue: PROJECT_MODULE
@@ -3420,8 +3445,132 @@ AdamActivity.prototype.getAction = function(type, w) {
             var actionText = translate('LBL_PMSE_CONTEXT_MENU_SETTINGS');
             var actionCSS = 'adam-menu-icon-configure';
 
+            var hiddenParams = new HiddenField({name: 'evn_params'});
+            //function to handle the email selectors
+            var hiddenFn = function() {
+                let parentForm = this.parent;
+                let address = {};
+                let currentIndex = 5; //index of first email field
+
+                if (parentForm.items[currentIndex]) {
+                    address.from = {
+                        'name': parentForm.items[currentIndex].getSelectedText(),
+                        'id': parentForm.items[currentIndex].value || ''
+                    };
+                    address.replyTo = {
+                        'name': parentForm.items[currentIndex].getSelectedText(),
+                        'id': parentForm.items[currentIndex].value || ''
+                    };
+
+                    currentIndex++;
+                }
+                if (parentForm.items[currentIndex]) {
+                    address.to = parentForm.items[currentIndex].getObject();
+                }
+                currentIndex++;
+
+                if (parentForm.items[currentIndex]) {
+                    address.cc = parentForm.items[currentIndex].getObject();
+                }
+                currentIndex++;
+                if (parentForm.items[currentIndex]) {
+                    address.bcc = parentForm.items[currentIndex].getObject();
+                }
+
+                hiddenParams.setValue(JSON.stringify(address));
+            };
+
+            var createEmailFromField = function(changeFunction) {
+                var emailFromField = new SearchableCombobox({
+                    label: 'From',
+                    name: 'address_from',
+                    submit: false,
+                    required: true,
+                    change: changeFunction,
+                    searchURL: 'pmse_Project/CrmData/outboundEmailsAccounts?filter[0][name][$starts]={%TERM%}' +
+                        '&fields=id,name&max_num={%PAGESIZE%}&offset={%OFFSET%}',
+                    searchValue: 'id',
+                    searchLabel: 'name',
+                    searchMore: {
+                        module: 'OutboundEmail',
+                        fields: ['id', 'name'],
+                        filterOptions: null
+                    },
+                    _searchMoreLayout: 'selection-list-for-bpm',
+                    options: [
+                        {'text': translate('LBL_PMSE_FORM_OPTION_CREATED_BY_USER'), 'value': 'created_by'},
+                        {'text': translate('LBL_PMSE_FORM_OPTION_CURRENT_USER'), 'value': 'currentuser'},
+                        {'text': translate('LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER'), 'value': 'modified_user_id'},
+                        {'text': translate('LBL_PMSE_FORM_OPTION_RECORD_OWNER'), 'value': 'owner'},
+                        {'text': translate('LBL_PMSE_FORM_OPTION_SUPERVISOR'), 'value': 'supervisor'},
+                        {'text': translate('LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL'), 'value': 'system_email'}
+                    ]
+                });
+                return emailFromField;
+            };
+
+            var emailTemplateCombobox = new ComboboxField({
+                jtype: 'combobox',
+                required: true,
+                name: 'evn_criteria',
+                label: translate('LBL_PMSE_FORM_LABEL_EMAIL_TEMPLATE'),
+                proxy: new SugarProxy({
+                    url: 'pmse_Project/CrmData/emailtemplates/' + PROJECT_MODULE,
+                    uid: '',
+                    callback: null,
+                }),
+            });
+
+            var fromSelector = createEmailFromField(hiddenFn);
+
+            var addressTo = {
+                jtype: 'emailpicker',
+                label: translate('LBL_PMSE_FORM_LABEL_EMAIL_TO'),
+                name: 'address_to',
+                required: false,
+                submit: false,
+                change: hiddenFn,
+                suggestionItemName: 'fullName',
+                suggestionItemAddress: 'emailAddress',
+                suggestionDataURL: 'pmse_Project/CrmData/emails/{$0}',
+                suggestionDataRoot: 'result',
+                teams: project.getMetadata('teams') || [],
+                fieldWidth: 380,
+            };
+
+            var addressCC = {
+                jtype: 'emailpicker',
+                label: translate('LBL_PMSE_FORM_LABEL_EMAIL_CC'),
+                name: 'address_cc',
+                required: false,
+                submit: false,
+                change: hiddenFn,
+                suggestionItemName: 'fullName',
+                suggestionItemAddress: 'emailAddress',
+                suggestionDataURL: 'pmse_Project/CrmData/emails/{$0}',
+                suggestionDataRoot: 'result',
+                teams: project.getMetadata('teams') || [],
+                fieldWidth: 380,
+            };
+
+            var addressBCC = {
+                jtype: 'emailpicker',
+                label: translate('LBL_PMSE_FORM_LABEL_EMAIL_BCC'),
+                name: 'address_bcc',
+                required: false,
+                submit: false,
+                change: hiddenFn,
+                suggestionItemName: 'fullName',
+                suggestionItemAddress: 'emailAddress',
+                suggestionDataURL: 'pmse_Project/CrmData/emails/{$0}',
+                suggestionDataRoot: 'result',
+                teams: project.getMetadata('teams') || [],
+                fieldWidth: 380,
+            };
+
             // items displayed in action config
-            var items = [comboDocumentTemplates, convertToPdfCheckbox, hiddenModule,];
+            var items = [comboDocumentTemplates, convertToPdfCheckbox, hiddenModule, sendEmailCheckbox,
+                emailTemplateCombobox, fromSelector, addressTo, addressCC, addressBCC, hiddenParams];
 
             var proxy = new SugarProxy({
                 url: 'pmse_Project/ActivityDefinition/' + this.id,
@@ -3438,6 +3587,7 @@ AdamActivity.prototype.getAction = function(type, w) {
 
                     // intialize checkbox value
                     let nValue = false;
+                    let eValue = false;
                     self.canvas.emptyCurrentSelection();
 
                     // set value for document template
@@ -3450,10 +3600,182 @@ AdamActivity.prototype.getAction = function(type, w) {
                         nValue = true;
                     }
 
+                    //set value for the send email checkbox
+                    if (fieldData && fieldData.act_send_email && fieldData.act_send_email == 1) {
+                        eValue = true;
+                    }
+
                     convertToPdfCheckbox.setValue(nValue);
+                    sendEmailCheckbox.setValue(eValue);
                     $(convertToPdfCheckbox.html).children('input').prop('checked', nValue);
+                    $(sendEmailCheckbox.html).children('input').prop('checked', eValue);
+
                     App.alert.dismiss('upload');
                     w.html.style.display = 'inline';
+
+                    var emailPickerFields = [];
+                    // setup values for the email pickers
+                    for (index = 0; index < this.items.length; index += 1) {
+                        switch (this.items[index].name) {
+                            case 'address_from':
+                                if (fieldData && fieldData.from && fieldData.from.name && fieldData.from.id) {
+                                    this.items[index].setValue({
+                                        text: fieldData.from.name,
+                                        value: fieldData.from.id
+                                    });
+                                }
+                                break;
+                            case 'address_to':
+                                if (fieldData && fieldData.to) {
+                                    if (this.items[index].value === null) {
+                                        this.items[index].setValue(fieldData.to, true);
+                                    }
+                                }
+                                emailPickerFields.push(index);
+                                break;
+                            case 'address_cc':
+                                if (fieldData && fieldData.cc) {
+                                    if (this.items[index].value === null) {
+                                        this.items[index].setValue(fieldData.cc, true);
+                                    }
+                                }
+                                emailPickerFields.push(index);
+                                break;
+                            case 'address_bcc':
+                                if (fieldData && fieldData.bcc) {
+                                    if (this.items[index].value === null) {
+                                        this.items[index].setValue(fieldData.bcc, true);
+                                    }
+                                }
+                                emailPickerFields.push(index);
+                                break;
+                        }
+                    }
+
+                    //setup data for email pickers
+                    project.addMetadata('teams', {
+                        dataURL: project.getMetadata('teamsDataSource').url,
+                        dataRoot: project.getMetadata('teamsDataSource').root,
+                        success: function(data) {
+                            if (emailPickerFields.length) {
+                                for (let i = 0; i < emailPickerFields.length; i += 1) {
+                                    if (emailPickerFields[i] && this.items[emailPickerFields[i]] &&
+                                        this.items[emailPickerFields[i]].setTeamTextField) {
+                                        this.items[emailPickerFields[i]].setTeamTextField('text');
+                                        this.items[emailPickerFields[i]].setTeams(data);
+                                    }
+                                }
+                            } else {
+                                for (let i = 0; i < f.items.length; i += 1) {
+                                    switch (this.items[i].name) {
+                                        case 'address_to':
+                                        case 'address_cc':
+                                        case 'address_bcc':
+                                            this.items[i].setTeamTextField('text');
+                                            this.items[i].setTeams(data);
+                                            break;
+                                    }
+                                }
+                            }
+
+                        }.bind(this)
+                    });
+                    //setup data for email pickers
+                    project.addMetadata('roles', {
+                        dataURL: 'pmse_Project/CrmData/rolesList',
+                        dataRoot: 'result',
+                        success: function(data) {
+                            if (emailPickerFields.length) {
+                                for (let i = 0; i < emailPickerFields.length; i += 1) {
+                                    if (emailPickerFields[i] && this.items[emailPickerFields[i]] &&
+                                        this.items[emailPickerFields[i]].setRoleTextField) {
+                                        this.items[emailPickerFields[i]].setRoleTextField('text');
+                                        this.items[emailPickerFields[i]].setRoles(data);
+                                    }
+                                }
+                            } else {
+                                for (let i = 0; i < f.items.length; i += 1) {
+                                    switch (f.items[i].name) {
+                                        case 'address_to':
+                                        case 'address_cc':
+                                        case 'address_bcc':
+                                            this.items[i].setRoleTextField('text');
+                                            this.items[i].setRoles(data);
+                                            break;
+                                    }
+                                }
+                            }
+                        }.bind(this)
+                    });
+
+                    //used inside email pickers
+                    const auxProxy = new SugarProxy({
+                        url: 'pmse_Project/CrmData/related/' + PROJECT_MODULE
+                    });
+                    auxProxy.getData({cardinality: 'all'}, {
+                        success: function(data) {
+                            data = data.result;
+                            data.unshift({value: '', text: 'Select...'});
+
+                            if (emailPickerFields.length) {
+                                for (let i = 0; i < emailPickerFields.length; i += 1) {
+                                    if (emailPickerFields[i] && this.items[emailPickerFields[i]] &&
+                                        this.items[emailPickerFields[i]].setModules) {
+                                        this.items[emailPickerFields[i]].setModules(data);
+                                    }
+                                }
+                            } else {
+                                for (let i = 0; i < this.items.length; i += 1) {
+                                    switch (this.items[i].name) {
+                                        case 'address_to':
+                                        case 'address_cc':
+                                        case 'address_bcc':
+                                            this.items[i].setModules(data);
+                                            break;
+                                    }
+                                }
+                            }
+                        }.bind(this)
+                    });
+
+                    //retrieve email
+                    emailTemplateCombobox.proxy.getData(null, {
+                        success: function(emailTemplates) {
+                            let options = [{'text': translate('LBL_PMSE_FORM_OPTION_SELECT'), 'value': ''}];
+                            options = options.concat(emailTemplates.result);
+                            emailTemplateCombobox.setOptions(options);
+                            if (fieldData.evn_criteria) {
+                                emailTemplateCombobox.setValue(fieldData.evn_criteria);
+                            }
+                        }
+                    });
+
+                    var setEmailFieldsVisibility = function(display, itemData) {
+                        let emailFieldsIndex = 4;
+                        if (!itemData) {
+                            itemData = fromSelector.parent.items;
+                        }
+                        for (let index = emailFieldsIndex; index < itemData.length; index++) {
+                            itemData[index].html.style.display = display;
+                        }
+                    };
+
+                    // toggle visibility for email fields
+                    sendEmailCheckbox.onChange = function changeSendEmailCheckbox() {
+                        let display = 'none';
+
+                        if (this.value) {
+                            display = 'block';
+                        }
+
+                        setEmailFieldsVisibility(display, this.parent.items);
+                    };
+
+                    if (sendEmailCheckbox.value) {
+                        setEmailFieldsVisibility('block');
+                    } else {
+                        setEmailFieldsVisibility('none');
+                    }
 
                     this.submit = function() {
                         var convert = convertToPdfCheckbox.value;
@@ -3461,13 +3783,47 @@ AdamActivity.prototype.getAction = function(type, w) {
                         var templateId = comboDocumentTemplates.value;
                         var templateName = comboDocumentTemplates.getSelectedText();
 
+                        var sendEmail = sendEmailCheckbox.value;
+
+                        var emailTemplateId = emailTemplateCombobox.value;
+
                         var params = {
                             act_convert_to_pdf: convert,
                             act_document_template: {
                                 text: templateName,
                                 value: templateId,
                             },
+                            act_send_email: sendEmail,
+                            evn_criteria: emailTemplateId
                         };
+
+                        if (fromSelector) {
+                            var from = {
+                                id: fromSelector.value,
+                                name: fromSelector.getSelectedText(),
+                            };
+                            if (sendEmail) {
+                                params = _.extend(params, {from: from});
+                            } else {
+                                params = _.extend(params, {from: null});
+                            }
+                        }
+                        var emailPickerIndex = 6;
+                        var to = this.items[emailPickerIndex].value;
+                        emailPickerIndex++;
+                        var cc = this.items[emailPickerIndex].value;
+                        emailPickerIndex++;
+                        var bcc = this.items[emailPickerIndex].value;
+
+                        if (sendEmail) {
+                            params = _.extend(params, {
+                                to: to, cc: cc, bcc: bcc,
+                            });
+                        } else {
+                            params = _.extend(params, {
+                                to: null, cc: null, bcc: null,
+                            });
+                        }
 
                         var data = {
                             act_fields: JSON.stringify(params),
@@ -3543,8 +3899,8 @@ AdamActivity.prototype.getWindowDef = function(type) {
             break;
 
         case 'DOCUMENT_MERGE':
-            wWidth = 500;
-            wHeight = 160;
+            wWidth = 600;
+            wHeight = 360;
             wTitle = 'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE';
             break;
 
@@ -3738,30 +4094,47 @@ AdamActivity.prototype.callbackFunctionForChangeFieldAction = function(data, ele
  * @param {Object} validationTools is a collection of utility functions for validating element data
  */
 AdamActivity.prototype.callbackFunctionForAddRelatedRecordAction = function(data, element, validationTools) {
-    var actModule = data.act_field_module;
-    var actParams = data.act_params ? JSON.parse(data.act_params) : null;
-    if (actParams && actParams.chainedRelationship) {
-        actModule = actParams.chainedRelationship.module;
-    }
-    var url = App.api.buildURL('pmse_Project/CrmData/addRelatedRecord/' +
-        actModule + '?base_module=' + validationTools.getTargetModule());
-    var options = {
-        'bulk': 'validate_element_settings'
-    };
-
     // Validate the number of incoming and outgoing edges
     validationTools.validateNumberOfEdges(1, null, 1, null, element);
 
-    // Validate the module field settings against the current instance
+    // Validate the selected relationship(s)
+    let params = data.act_params ? JSON.parse(data.act_params) : null;
+    if (params && params.module) {
+        // First level relationship to base/target module
+        let baseModule = validationTools.getTargetModule();
+        let criteria = {
+            type: 'link',
+            module: baseModule,
+            value: params.module
+        };
+        validationTools.validateAtom(criteria, element, validationTools);
+
+        if (params.chainedRelationship && params.chainedRelationship.module) {
+            // Second level relationship to first level relationship module
+            criteria.module = App.data.getRelatedModule(baseModule, params.module);
+            criteria.value = params.chainedRelationship.module;
+            validationTools.validateAtom(criteria, element, validationTools);
+        }
+    }
+
+    // Validate the related record fields
+    let fieldsModule = data.act_field_module;
+    if (params && params.chainedRelationship && params.chainedRelationship.module) {
+        fieldsModule = params.chainedRelationship.module;
+    }
+    let url = App.api.buildURL('pmse_Project/CrmData/addRelatedRecord/' +
+        fieldsModule + '?base_module=' + validationTools.getTargetModule());
+    let options = {
+        'bulk': 'validate_element_settings'
+    };
     validationTools.progressTracker.incrementTotalValidations();
     App.api.call('read', url, null, {
         success: function(form) {
             element.validateAddRelatedRecordForm(form, data, element, validationTools);
         },
-        error: function(data) {
-            validationTools.createWarning(element, 'LBL_PMSE_ERROR_DATA_NOT_FOUND', 'Module relationship');
+        error: function() {
         },
-        complete: function(data) {
+        complete: function() {
             validationTools.progressTracker.incrementValidated();
         }
     }, options);
@@ -3776,9 +4149,9 @@ AdamActivity.prototype.callbackFunctionForAddRelatedRecordAction = function(data
  * @param {Object} validationTools is a collection of utility functions for validating element data
  */
 AdamActivity.prototype.validateAddRelatedRecordForm = function(form, data, element, validationTools) {
-    var i;
-    var requiredFields;
-    var critera = [];
+    let i;
+    let requiredFields;
+    let criteria = [];
 
     // Parse the list of field settings for the new record
     if (data.act_fields) {

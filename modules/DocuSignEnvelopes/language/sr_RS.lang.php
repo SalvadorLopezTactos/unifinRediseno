@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Nije podešen nijedan tajni ključ klijenta',
     'LBL_RESEND_BUTTON_LABEL' => 'Pošalji ponovo',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Preuzmi kovertu',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Tip usluge u oblaku',
+    'LBL_CLOUD_PATH' => 'Putanja u oblaku',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Kontrolna tabla sa listom DocuSign koverti',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Nedavne DocuSign koverte',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za DocuSign koverte',
 
-    'LBL_DOCUMENT_FROM' => 'Dokument od ',
+    'LBL_NEW_ENVELOPE' => 'Nove koverte',
     'LBL_DOCUMENT_IS_NOW' => ' je sada ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign greška. Preuzimanje ID-a naloga na osnovu pristupnog tokena nije uspelo',
     'LBL_ERROR_RESEND' => 'Nije moguće ponovno slanje u okviru usluge DocuSign. Status koverte mora biti „poslato”',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Ažuriranje nije uspelo',
     'LBL_ERROR_FETCH_TIME' => 'Prema pravilima usluge DocuSign, nije dozvoljen veći broj zahteva za istu kovertu u roku od 15 minuta',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Došlo je do greške. Ažuriranje koverte nije uspelo. Proverite evidencije!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Došlo je do greške. Prikaz šablona nije moguć. Proverite evidencije!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Došlo je do greške. Dobavljanje šablona nije moguće. Proverite evidencije!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Koverta nije dovršena',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Status koverte u okviru usluge DocuSign sada je ',
     'LBL_OVERVIEW' => 'Pregled',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Dodaj dokument',
     'LBL_BUTTON_SEND' => 'Pošalji',
     'LBL_BUTTON_CLEAR' => 'Obriši',
-    'LBL_MISSING_OBJECT' => 'DocuSign objekat nije na prozoru',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Upotrebi šablon',
     'LBL_PLEASE_LOG_IN' => 'Prvo se prijavite na DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Ne možete da preuzmete ovaj dokument. Kreirao ga je drugi korisnik!',
     'LBL_SEND_NOT_ALLOWED' => 'Ne možete da pošaljete ovu kovertu. Kreirao ju je drugi korisnik!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Potpisano',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Preuzimanje dokumenta nije uspelo. Proverite evidencije!',
     'LBL_DOCUMENT_COMPLETED' => 'Dovršeno',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign Info',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'je sada',
+    'LBL_SETTINGS_TITLE' => 'DocuSign podešavanja',
+    'LBL_RECIPIENT_SELECTION' => 'Ponašanje pri odabiru primaoca',
+    'LBL_RECIPIENT_NAME' => 'Naziv',
+    'LBL_RECIPIENT_EMAIL' => 'E-adresa',
+    'LBL_RECIPIENT_TYPE' => 'Tip',
+    'LBL_TEMPLATE_NAME' => 'Ime',
+    'LBL_RECIPIENT_SELECT' => 'Izaberite...',
+    'LBL_RECIPIENT_ROLE' => 'Uloga',
+    'LBL_SELECT_BUTTON_LABEL' => 'Izaberite',
+    'LBL_BACK_BUTTON_LABEL' => 'Nazad',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Dobavljanje potencijalnih primalaca nije uspelo!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Dobavljanje šablona nije uspelo!',
 ];

@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Atnaujinti produkto apibrėžimą',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Proceso laiko tvarkaraščiai',
 'LBL_OOTB_DATA_ARCHIVER' => 'Vykdyti aktyvių duomenų archyvus / ištrynimus',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Taikykite prenumeratos teises, kai jos bus pakeistos',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Įrašų geokoderis',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Sudėtingesni nustatymai',
 'LBL_TOGGLE_ADV' => 'Sudėtingesni nustatymai',
 'LBL_TOGGLE_BASIC' => 'Baziniai nustatymai',
+'LBL_UPDATEMOMENTUMCJ' => 'Vykdomų „Smart Guide“ atnaujinimas „Momentum“',
 // Links
 'LNK_LIST_SCHEDULER' => 'Planuotojai',
 'LNK_NEW_SCHEDULER' => 'Sukurti planuotoją',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Vykdyti aktyvių duomenų archyvus / ištrynimus',
 'LBL_PMSEENGINECRON' => '„SugarBPM“ planuoklė',
 );
-

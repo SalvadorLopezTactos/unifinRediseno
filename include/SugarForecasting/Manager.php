@@ -15,6 +15,14 @@ class SugarForecasting_Manager extends SugarForecasting_AbstractForecast impleme
 {
 
     /**
+     * @var bool
+     */
+    public $isManager;
+    /**
+     * @var array<string, string>
+     */
+    public $defaultData;
+    /**
      * Class Constructor
      *
      * @param array $args       Service Arguments

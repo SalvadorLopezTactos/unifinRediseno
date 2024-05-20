@@ -65,9 +65,8 @@ class SugarJobHeartbeat implements RunnableSchedulerJob
     protected function sendHeartbeat($info)
     {
         $license = Administration::getSettings('license');
-        $client = $this->getClient();
-        $client->sugarHome($license->settings['license_key'], $info);
-        return !$client->getError();
+        $result = $this->getClient()->sugarHome($license->settings['license_key'], $info);
+        return !is_soap_fault($result);
     }
 
     /**

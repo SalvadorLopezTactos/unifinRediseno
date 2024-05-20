@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'ประวัติ',
     'LBL_PMSE_LABEL_NOTES' => 'แสดงบันทึก',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'เพิ่มบันทึก',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'ส่งไปยัง DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'เลือก...',
     'LBL_PMSE_FORM_LABEL_USER' => 'ผู้ใช้',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'คุณแน่ใจหรือไม่ว่าต้องการอนุมัติกระบวนการนี้',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'คุณแน่ใจหรือไม่ว่าต้องการปฏิเสธกระบวนการนี้',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'คุณแน่ใจหรือไม่ว่าต้องการกำหนดเส้นทางของกระบวนการนี้',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'คุณแน่ใจหรือว่าต้องการส่งขั้นตอนนี้ไป DocuSign',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'อนุมัติกระบวนการสำเร็จแล้ว',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'ปฏิเสธกระบวนการสำเร็จแล้ว',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'กำหนดเส้นทางของกระบวนการสำเร็จแล้ว',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'ขั้นตอนถูกส่งไปยัง DocuSign สำเร็จแล้ว',
     'LBL_PA_PROCESS_CLOSED' => 'กระบวนการที่คุณต้องการดูมีสถานะปิดแล้ว',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'กระบวนการที่คุณต้องการดูไม่สามารถใช้ได้ในขณะนี้',
 

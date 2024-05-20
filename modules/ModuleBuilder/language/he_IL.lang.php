@@ -809,15 +809,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"צור נוסחה כדי לקבוע אם שדה זה דרוש בתצורות.<br/>"
-    . "שדות החובה יפעלו לפי הנוסחה בתצוגת נייד מבוססת-דפדפן, <br/>"
-    . "אבל לא יפעלו לפי הנוסחה באפליקציות המקוריות, כמו Sugar Mobile ל-iPhone. <br/>"
-    . "הם לא יפעלו לפי הנוסחה בפורטל לשירות עצמי של Sugar.",
-'LBL_POPHELP_READONLY'=>"צור נוסחה כדי לקבוע אם שדה זה מוגדר לקריאה בלבד בתצורות.<br/>"
-        . "שדות המוגדרים לקריאה בלבד יפעלו לפי הנוסחה בתצוגה מבוססת-דפדפן בנייד, <br/>"
-        . "אבל לא יפעלו לפי הנוסחה באפליקציות המקוריות, כמו Sugar Mobile ל-iPhone. <br/>"
-        . "הם לא יפעלו לפי הנוסחה בפורטל לשירות עצמי של Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'בחר להשתמש בשדה זה בעת חיפוש רשומות באמצעות חיפוש גלובלי במודול זה.',
+    'LBL_POPHELP_REQUIRED'=>'שדות בדרישה מותנית אינם זמינים לשימוש בסוגי הפעולה הבאים של SugarBPM: הוסף רשומה מקושרת, שנה שדה. כדי להשתמש בשדה זה באותן הגדרות תהליך, נא להסיר את הטקסט "נדרש אם"',
+'LBL_POPHELP_READONLY'=>"צור נוסחה כדי לקבוע אם שדה זה מיועד לקריאה בלבד בתצורות.<br/>"
+        . "שדות לקריאה בלבד יפעלו לפי הנוסחה בתצוגת הדפדפן בנייד, <br/>"
+        . "אבל לא לפי הנוסחה באפליקציות המקוריות, למשל Sugar Mobile ל-iPhone. <br/>"
+        . "הם לא יפעלו לפי הנוסחה בפורטל השירות העצמי של Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'אם אפשרות זו נבחרה, המערכת תשתמש בשדה זה לחיפוש רשומות באמצעות החיפוש הגלובלי במודול זה.',
 //Revert Module labels
 'LBL_RESET' => 'איפוס',
 'LBL_RESET_MODULE' => 'אפס מודול',
@@ -854,6 +851,7 @@ $mod_strings = array(
                 'decimal'=>'עשרונים',
                 'autoincrement' => 'תוספת אוטומטית',
                 'actionbutton' => 'ActionButton',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "תוויות נפוצות",

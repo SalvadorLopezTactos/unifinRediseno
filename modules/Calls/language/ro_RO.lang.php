@@ -187,4 +187,10 @@ Pentru a crea {{calls_singular_module}}:
 - Faceţi clic pe "Selectaţi un participant" pentru a adăuga un utilizator, contact sau responsabil existent la {{calls_singular_module}}.
 - Faceţi clic pe pictograma plus din dreapta opţiunii "Selectaţi un participant" pentru a crea un participant {{calls_singular_module}} ca nouă înregistrare Sugar.
 3. Faceţi clic pe "Salvare" pentru a finaliza noua înregistrare şi pentru a reveni la pagina anterioară.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Este apel de ghid inteligent",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Sarcini copii',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Întâlniri copii',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Apeluri copii',
 );

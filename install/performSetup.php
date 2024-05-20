@@ -93,7 +93,7 @@ $setup_db_sugarsales_password = $_SESSION['setup_db_sugarsales_password'];
 $setup_db_sugarsales_user = $_SESSION['setup_db_sugarsales_user'];
 $setup_site_admin_user_name = $_SESSION['setup_site_admin_user_name'];
 $setup_site_admin_password = $_SESSION['setup_site_admin_password'];
-$setup_site_admin_email = isset($_SESSION['setup_site_admin_email']) ? $_SESSION['setup_site_admin_email'] : '';
+$setup_site_admin_email = $_SESSION['setup_site_admin_email'] ?? '';
 $setup_site_guid = (isset($_SESSION['setup_site_specify_guid']) && $_SESSION['setup_site_specify_guid'] != '') ? $_SESSION['setup_site_guid'] : '';
 $setup_site_url = $_SESSION['setup_site_url'];
 $parsed_url = parse_url($setup_site_url);
@@ -173,7 +173,7 @@ if ($setup_db_create_sugarsales_user) {
 }
 
 foreach ($beanFiles as $bean => $file) {
-    require_once($file);
+    require_once $file;
 }
 
 // load up the config_override.php file.
@@ -209,6 +209,10 @@ Registry\Registry::getInstance()->set('setup:disable_processes', true);
 installLog("looping through all the Beans and create their tables");
 //start by clearing out the vardefs
 VardefManager::clearVardef();
+
+// Create default relationships for Sugar Automate
+require 'install/CustomerJourney/CreateDefaultRelationships.php';
+
 //Initialize languages as some Beans need app_strings to be loaded in constructor
 $app_strings = return_application_language('en_us');
 installerHook('pre_createAllModuleTables');
@@ -233,7 +237,7 @@ foreach ($beanFiles as $bean => $file) {
             continue;
         }
         if (!in_array($bean, $nonStandardModules)) {
-            require_once("modules/" . $focus->module_dir . "/vardefs.php"); // load up $dictionary
+            require_once "modules/" . $focus->module_dir . "/vardefs.php"; // load up $dictionary
             if ($dictionary[$focus->object_name]['table'] == 'does_not_exist') {
                 continue; // support new vardef definitions
             }
@@ -300,7 +304,7 @@ foreach ($rel_dictionary as $rel_name => $rel_data) {
         $db->createTableParams(
             $table,
             $rel_data['fields'],
-            isset($rel_data['indices']) ? $rel_data['indices'] : array()
+            $rel_data['indices'] ?? array()
         );
     }
 }
@@ -352,6 +356,9 @@ $opps_config = OpportunitiesDefaults::setupOpportunitiesSettings();
 
 unset($opps_config);
 
+//Install Home config
+HomeDefaults::setupHomeSettings();
+
 //Install Tile View configuration
 $visualPipelineConfig = VisualPipelineDefaults::setupPipelineSettings();
 
@@ -384,6 +391,9 @@ if ($new_report) {
     echo $mod_strings['LBL_PERFORM_DONE'];
 }
 
+// OOTB metrics
+require_once 'modules/Metrics/SeedMetrics.php';
+createDefaultMetrics();
 
 // default OOB schedulers
 
@@ -461,6 +471,7 @@ $disabledTabs = array(
     "contracts",
     "revenuelineitems",
     "dataprivacy",
+    "externalusers",
     'changetimers',
 );
 
@@ -503,6 +514,8 @@ $enabled_tabs[] = 'Shifts';
 $enabled_tabs[] = 'Purchases';
 $enabled_tabs[] = 'PurchasedLineItems';
 $enabled_tabs[] = 'Messages';
+$enabled_tabs[] = 'DRI_Workflows';
+$enabled_tabs[] = 'DRI_SubWorkflows';
 
 if ($_SESSION['demoData'] != 'no') {
     $enabled_tabs[] = 'Bugs';
@@ -607,6 +620,15 @@ installLog('Installing Business Process Management designs');
 require 'install/installBusinessProcesses.php';
 require 'install/Hint/AddSchedulers.php';
 
+// Make sure that columns created by CreateDefaultRelationships.php exists in database
+require 'install/CustomerJourney/SyncDatabase.php';
+
+// Make sure Customer Journey OOTB scheduler is created
+require 'install/CustomerJourney/CreateDefaultScheduler.php';
+
+// Make sure Customer Journey OOTB Templates are created
+require 'install/CustomerJourney/CreateDefaultTemplates.php';
+
 installLog('Completed installation of Business Process Management designs');
 
 if ((!empty($_SESSION['fts_type']) || !empty($_SESSION['setup_fts_type'])) &&
@@ -619,6 +641,12 @@ if ((!empty($_SESSION['fts_type']) || !empty($_SESSION['setup_fts_type'])) &&
 
 $endTime = microtime(true);
 $deltaTime = $endTime - $startTime;
+
+installLog('Converting all the saved-reports-chart dashlets to the newly added report-dashlet');
+require_once 'install/Reports/ConvertToReportDashlet.php';
+$converter = new ConvertToReportDashlet();
+$converter->run();
+installLog('Done converting all the saved-reports-chart dashlets to the newly added report-dashlet');
 
 ///////////////////////////////////////////////////////////////////////////
 ////    FINALIZE LANG PACK INSTALL
@@ -722,50 +750,65 @@ installerHook('pre_handleMissingSmtpServerSettingsNotifications');
 handleMissingSmtpServerSettingsNotifications();
 installerHook('post_handleMissingSmtpServerSettingsNotifications');
 
-// Adds the jobs related to the denormalized fields in 4 modules
+// Adds the jobs related to the denormalized fields in 6 modules
 $updateRelateDenormalizationState = function () {
     $modules = [
-        'Contacts',
-        'Opportunities',
-        'RevenueLineItems',
-        'Cases',
+        'Contacts' => [
+            'account_name',
+        ],
+        'Opportunities' => [
+            'account_name',
+        ],
+        'RevenueLineItems' => [
+            'account_name',
+        ],
+        'Cases' => [
+            'account_name',
+        ],
+        'PurchasedLineItems' => [
+            'account_name',
+        ],
+        'Quotes' => [
+            'billing_account_name',
+        ],
     ];
-    $fieldName = 'account_name';
 
     $jobsAdded = [];
     $adminUser = BeanFactory::newBean('Users')->getSystemUser();
-    foreach ($modules as $module) {
-        $bean = BeanFactory::newBean($module);
-        $def = $bean->getFieldDefinition($fieldName);
-        if (!empty($def['is_denormalized'])) {
-            continue;
+    foreach ($modules as $module => $fieldNames) {
+        foreach ($fieldNames as $fieldName) {
+            $bean = BeanFactory::newBean($module);
+            $def = $bean->getFieldDefinition($fieldName);
+            if (!empty($def['is_denormalized'])) {
+                continue;
+            }
+            $entity = new Entity($bean, $fieldName);
+
+            $config = new FieldConfig();
+            $config->markFieldAsDenormalized($entity, true);
+
+            $options = [
+                'module_name' => $entity->getTargetModuleName(),
+                'field_name' => $entity->fieldName,
+                'tmp_table_name' => 'denorm_tmp_' . $module,
+            ];
+
+            /* @var $job SchedulersJob */
+            $job = BeanFactory::newBean('SchedulersJobs');
+            $job->name = 'Upgrade_Denormalization_' . $module . '_' . $fieldName;
+            $job->target = 'class::' . SugarJobFieldDenormalization::class;
+            $job->data = json_encode($options);
+            $job->retry_count = 0;
+            $job->job_group = 'install';
+            $job->assigned_user_id = $adminUser->id;
+
+            $queue = new SugarJobQueue();
+            $queue->submitJob($job);
+            // mark as deleted to disable execution from cron.php. It will be enabled by the Watcher Job added below
+            $job->deleted = 1;
+            $job->save();
+            $jobsAdded[$job->id] = false;
         }
-        $entity = new Entity($bean, $fieldName);
-
-        $config = new FieldConfig();
-        $config->markFieldAsDenormalized($entity, true);
-
-        $options = [
-            'module_name' => $entity->getTargetModuleName(),
-            'field_name' => $entity->fieldName,
-            'tmp_table_name' => 'denorm_tmp_' . $module,
-        ];
-
-        /* @var $job SchedulersJob */
-        $job = BeanFactory::newBean('SchedulersJobs');
-        $job->name = 'Upgrade_Denormalization_' . $module . '_' . $fieldName;
-        $job->target = 'class::' . SugarJobFieldDenormalization::class;
-        $job->data = json_encode($options);
-        $job->retry_count = 0;
-        $job->job_group = 'install';
-        $job->assigned_user_id = $adminUser->id;
-
-        $queue = new SugarJobQueue();
-        $queue->submitJob($job);
-        // mark as deleted to disable execution from cron.php. It will be enabled by the Watcher Job added below
-        $job->deleted = 1;
-        $job->save();
-        $jobsAdded[$job->id] = false;
     }
 
     if (!empty($jobsAdded)) {

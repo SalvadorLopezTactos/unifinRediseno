@@ -56,12 +56,12 @@ class RememberMeTokenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::getRoles
+     * @covers ::getRoleNames
      */
-    public function testGetRoles(): void
+    public function testGetRoleNames(): void
     {
-        $this->assertCount(2, $this->rememberMeToken->getRoles());
-        $this->assertEquals($this->userToken->getRoles(), $this->rememberMeToken->getRoles());
+        $this->assertCount(2, $this->rememberMeToken->getRoleNames());
+        $this->assertEquals($this->userToken->getRoleNames(), $this->rememberMeToken->getRoleNames());
     }
 
     /**
@@ -89,12 +89,12 @@ class RememberMeTokenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::getUsername
+     * @covers ::getUserIdentifier
      */
     public function testGetUsername(): void
     {
-        $this->assertEquals('username', $this->rememberMeToken->getUsername());
-        $this->assertEquals($this->userToken->getUsername(), $this->rememberMeToken->getUsername());
+        $this->assertEquals('username', $this->rememberMeToken->getUserIdentifier());
+        $this->assertEquals($this->userToken->getUserIdentifier(), $this->rememberMeToken->getUserIdentifier());
     }
 
     /**
@@ -173,7 +173,7 @@ class RememberMeTokenTest extends \PHPUnit_Framework_TestCase
     public function testGetProviderKey(): void
     {
         $this->assertEquals('provider', $this->rememberMeToken->getProviderKey());
-        $this->assertEquals($this->userToken->getProviderKey(), $this->rememberMeToken->getProviderKey());
+        $this->assertEquals($this->userToken->getFirewallName(), $this->rememberMeToken->getProviderKey());
     }
 
     /**

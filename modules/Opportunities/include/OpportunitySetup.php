@@ -16,6 +16,10 @@
 abstract class OpportunitySetup
 {
     /**
+     * @var mixed[]
+     */
+    protected $reportchange;
+    /**
      * @var Opportunity
      */
     protected $bean;
@@ -146,8 +150,6 @@ abstract class OpportunitySetup
 
             // get the field defs
             $field_defs = $this->bean->getFieldDefinition($field);
-            // load the field type up
-            $f = get_widget($field_defs['type']);
 
             $diff = array();
             foreach ($new_defs as $k => $v) {
@@ -180,27 +182,37 @@ abstract class OpportunitySetup
                 $diff['default'] = null;
             }
 
-            // populate the row from the vardefs that were loaded and the new_defs
-            $f->populateFromRow(array_merge($field_defs, $diff));
-
-            // now lets save, since these are OOB field, we use StandardField
-            $df = new StandardField($this->bean->module_name);
-            $df->setup($this->bean);
-            $f->module = $this->bean;
-
-            // StandardField considers only the attributes which can be edited in Studio,
-            // while the "studio" attribute is not one of them. we need to change the vardef map temporarily here,
-            // because changing it permanently will make the "studio" attribute always overridden with empty value,
-            // after the field has been saved in Studio
-            if (!isset($f->vardef_map['studio'])) {
-                $f->vardef_map['studio'] = 'studio';
-            }
-            if (!isset($f->vardef_map['convertToBase'])) {
-                $f->vardef_map['convertToBase'] = 'convertToBase';
-            }
-
-            $f->save($df);
+            $this->updateFieldVardef($field, $diff);
         }
+    }
+
+    /**
+     * Updates a single field's vardefs with the given properties
+     *
+     * @param string $field
+     * @param array $properties
+     */
+    public function updateFieldVardef(string $field, array $properties)
+    {
+        $fieldDef = $this->bean->getFieldDefinition($field);
+        $fieldTemplate = get_widget($fieldDef['type']);
+        $fieldTemplate->populateFromRow(array_merge($fieldDef, $properties));
+        $fieldTemplate->module = $this->bean;
+        $field = new StandardField($this->bean->module_name);
+        $field->setup($this->bean);
+
+        // StandardField considers only the attributes which can be edited in Studio,
+        // while the "studio" attribute is not one of them. we need to change the vardef map temporarily here,
+        // because changing it permanently will make the "studio" attribute always overridden with empty value,
+        // after the field has been saved in Studio
+        if (!isset($f->vardef_map['studio'])) {
+            $fieldTemplate->vardef_map['studio'] = 'studio';
+        }
+        if (!isset($f->vardef_map['convertToBase'])) {
+            $fieldTemplate->vardef_map['convertToBase'] = 'convertToBase';
+        }
+
+        $fieldTemplate->save($field);
     }
 
     /**
@@ -393,7 +405,7 @@ abstract class OpportunitySetup
      */
     private function shouldAddForecastFields($enabledOverride)
     {
-        return $enabledOverride !== null ? $enabledOverride : $this->isForecastSetup();
+        return $enabledOverride ?? $this->isForecastSetup();
     }
 
     /**
@@ -535,13 +547,9 @@ AND name = ?
 AND (platform = 'base' OR platform IS NULL OR platform = '')
 SQL;
 
-        $stmt = $db->getConnection()
-            ->executeQuery(
-                $sql,
-                [$setting]
-            );
+        $result = $db->getConnection()->executeQuery($sql, [$setting]);
 
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $tabArray = unserialize(base64_decode($row['value']), ['allowed_classes' => false]);
 
             // in the setup, this might not be set yet.
@@ -879,7 +887,7 @@ EOL;
                 }
 
                 $query = 'UPDATE saved_reports SET content = ? WHERE name = ? AND date_entered = date_modified';
-                $db->getConnection()->executeQuery($query, [$value, $key]);
+                $db->getConnection()->executeStatement($query, [$value, $key]);
             }
         }
     }

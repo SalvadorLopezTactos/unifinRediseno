@@ -36,4 +36,17 @@ class SugarWidgetFieldEncrypt extends SugarWidgetReportField
             return $value;
     }
        
+    /**
+     * Get encrypt value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        $value = $this->displayListPlain($layoutDef);
+
+        return $value;
+    }
 }

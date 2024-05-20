@@ -74,18 +74,12 @@ class EncoderBuilder
                     case PASSWORD_DEFAULT:
                     case PASSWORD_BCRYPT:
                         if ($legacy_md5_support) {
-                            if ($strict_verify) {
-                                $encoder = new BCryptLegacyMD5StrictPasswordEncoder(
-                                    isset($options['cost']) ? $options['cost'] : self::DEFAULT_BCRYPT_COST
-                                );
-                            } else {
-                                $encoder = new BCryptLegacyMD5PasswordEncoder(
-                                    isset($options['cost']) ? $options['cost'] : self::DEFAULT_BCRYPT_COST
-                                );
-                            }
+                            $encoder = new BCryptLegacyMD5PasswordEncoder(
+                                $options['cost'] ?? self::DEFAULT_BCRYPT_COST
+                            );
                         } else {
                             $encoder = new BCryptPasswordEncoder(
-                                isset($options['cost']) ? $options['cost'] : self::DEFAULT_BCRYPT_COST
+                                $options['cost'] ?? self::DEFAULT_BCRYPT_COST
                             );
                         }
                         break;

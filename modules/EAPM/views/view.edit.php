@@ -72,15 +72,15 @@ class EAPMViewEdit extends ViewEdit {
         $params = array();
         if (!empty($iconPath) && !$browserTitle) {
             $params[] = '<a href="index.php?module=Users&action=index"><!--not_in_theme!-->
-                            <img src="' . htmlspecialchars($iconPath) . '"  alt="' . htmlspecialchars(translate('LBL_MODULE_NAME', 'Users')) . '" 
-                                title="' . htmlspecialchars(translate('LBL_MODULE_NAME', 'Users')) . '" align="absmiddle" />
+                            <img src="' . htmlspecialchars($iconPath, ENT_COMPAT) . '"  alt="' . htmlspecialchars(translate('LBL_MODULE_NAME', 'Users'), ENT_COMPAT) . '" 
+                                title="' . htmlspecialchars(translate('LBL_MODULE_NAME', 'Users'), ENT_COMPAT) . '" align="absmiddle" />
                         </a>';
         } else {
-            $params[] = htmlspecialchars(translate('LBL_MODULE_NAME', 'Users'));
+            $params[] = htmlspecialchars(translate('LBL_MODULE_NAME', 'Users'), ENT_COMPAT);
         }
         $href = 'index.php?' . http_build_query(['module' => $returnModule, 'action' => 'EditView', 'record' => $returnId]);
-        $params[] = '<a href="' . htmlspecialchars($href) . '">' . htmlspecialchars($returnName).'</a>';
-        $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL']);
+        $params[] = '<a href="' . htmlspecialchars($href, ENT_COMPAT) . '">' . htmlspecialchars($returnName, ENT_COMPAT).'</a>';
+        $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL'], ENT_COMPAT);
 
         return $params;
     }

@@ -69,6 +69,17 @@
                     if (!_.isFunction(this.hasChartData)) {
                         this.hasChartData = this._hasChartData;
                     }
+
+                    const sidebarLayout = this.closestComponent('sidebar');
+                    if (sidebarLayout) {
+                        this.listenTo(sidebarLayout, 'sidebar:state:changed', (state) => {
+                            if (state === 'open') {
+                                this.render();
+                            }
+                        });
+                    }
+
+                    this.listenTo(this.layout, 'dashlet:expand', this.render);
                 }, this);
 
                 this.on('render', function() {
@@ -111,6 +122,7 @@
                 }
                 $(window).off('resize.' + this.cid);
                 this.handlePrinting('off');
+                this.stopListening();
             },
 
             /**

@@ -12,8 +12,8 @@
 
 class SugarForecasting_Committed extends SugarForecasting_AbstractForecast implements SugarForecasting_ForecastSaveInterface
 {
-    const BASE_WORKSHEET_FIELD_EXTENSION = '_case';
-    const MANAGER_WORKSHEET_FIELD_EXTENSION = '_adjusted';
+    public const BASE_WORKSHEET_FIELD_EXTENSION = '_case';
+    public const MANAGER_WORKSHEET_FIELD_EXTENSION = '_adjusted';
 
     /**
      * No longer used but the class parent implements SugarForecasting_ForecastProcessInterface

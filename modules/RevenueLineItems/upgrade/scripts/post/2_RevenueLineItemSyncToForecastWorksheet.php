@@ -75,8 +75,7 @@ class SugarUpgradeRevenueLineItemSyncToForecastWorksheet extends UpgradeScript
         foreach ($fields as $field) {
             $key = $field;
             if (is_array($field)) {
-                reset($field);
-                $key = key($field);
+                $key = array_key_first($field);
                 $field = array_shift($field);
             }
 

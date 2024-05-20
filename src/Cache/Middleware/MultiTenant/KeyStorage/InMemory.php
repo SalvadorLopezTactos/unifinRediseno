@@ -12,7 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage;
 
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage;
 
 /**
@@ -21,14 +21,14 @@ use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage;
 final class InMemory implements KeyStorage
 {
     /**
-     * @var Uuid|null
+     * @var UuidInterface|null
      */
     private $key;
 
     /**
      * {@inheritDoc}
      */
-    public function getKey() : ?Uuid
+    public function getKey() : ?UuidInterface
     {
         return $this->key;
     }
@@ -36,7 +36,7 @@ final class InMemory implements KeyStorage
     /**
      * {@inheritDoc}
      */
-    public function updateKey(Uuid $key) : void
+    public function updateKey(UuidInterface $key) : void
     {
         $this->key = $key;
     }

@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'חסר ערך נדרש',
     'LBL_ERROR_SYNC_USERS' => 'Invalid value to sync to Outlook:',
     'LBL_ID_EXISTS_ALREADY' => 'מזהה כבר קיים בטבלה זאת',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY כבר קיים בטבלה זו',
     'LBL_ASSIGNED_USER' => 'במידה והמשתמש לא קיים השתמש במשתמש הנוכחי',
     'LBL_SHOW_HIDDEN' => 'הצג שדות שבדרך כלל לא ניתן לייבא אותם',
     'LBL_UPDATE_RECORDS' => 'עדכן רישומים קיימים במקום ייבוא (אל תבטל)',

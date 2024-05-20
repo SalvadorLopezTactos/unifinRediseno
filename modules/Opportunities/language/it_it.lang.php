@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashboard elenco opportunità',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashboard record opportunità',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Dettagli opportunità',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Dashboard focus opportunità - Console',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Opportunità Focus Drawer',
     'LBL_RENEWAL_OPPORTUNITY' => 'Opportunità di rinnovo',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Confermato',
     'LBL_FORECAST' => 'Includi nella Previsione',
     'LBL_COMMIT_STAGE' => 'Fase di Conferma',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Previsione',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Fase di Previsione',
     'LBL_WORKSHEET' => 'Matrice',
     'LBL_PURCHASED_LINE_ITEMS' => 'Prodotti acquistati',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizza',
+    'LBL_CREATE_NEW' => 'Crea Nuovo',
+    'LBL_MANAGE' => 'Gestisci',
+    'LBL_SEE_DETAILS' => 'Mostra Dettagli',
+    'LBL_HIDE_NEW' => 'Nascondi',
+
     'LBL_FORECASTED_LIKELY' => 'Probabilmente previsto',
+    'LBL_LOST' => 'Persa',
     'LBL_RENEWAL' => 'Rinnovo',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Opportunità di rinnovo',
     'LBL_RENEWAL_PARENT' => 'Opportunità padre',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Ruolo Opportunità',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
+    'LBL_TAB_OPPORTUNITY' => 'Revisione {{module}}',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Cliccando Conferma, cancellerai TUTTI i dati delle previsioni e modificherai la Vista Opportunità. Se non  è questo che intendi fare, clicca annulla per ritornare alle impostazioni precedenti.',
@@ -211,24 +220,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Dopo aver avviato questa modifica, gli Elementi dell´Opportunità saranno creati per ogni {{module_name}} esistente in background. Quando gli Elementi dell´Opportunità sono completi e disponibili, sarà inviata una notifica all´indirizzo email del tuo profilo utente. Si prega di notare che la tua istanza deve essere configurata per inviare email via Admin > Impostazioni Email in modo tale che le notifiche vengano inviate.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} ti consente di monitorare le singole vendite dall&#39;inizio alla fine. Ogni record {{module_name}} rappresenta una vendita potenziale e include dati di vendita rilevanti, nonché relativi ad altri record importanti come {{quotes_module}}, {{contacts_module}}, ecc. Un {{module_name}} in genere progredirà attraverso diverse fasi di vendita fino a quando non viene contrassegnato come "Chiuso vinto" o "Chiuso perso". {{plural_module_name}} può essere ulteriormente sfruttato utilizzando il modulo {{forecasts_singular_module}}ing di Sugar per comprendere e prevedere le tendenze di vendita, nonché concentrare il lavoro per raggiungere le quote di vendita.',
+    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} consente di monitorare le singole vendite dall&#39;inizio alla fine. Ogni record {{module_name}} rappresenta una vendita potenziale e include dati di vendita pertinenti e relativi ad altri record importanti come {{quotes_module}}, {{contacts_module}} ecc. Un {{module_name}} in genere progredisce attraverso diverse fasi di vendita fino a quando non viene contrassegnato come "Chiuso vinto" o "Chiuso perso". {{plural_module_name}} può essere sfruttato ulteriormente utilizzando il modulo di {{forecasts_singular_module}}ing di Sugar per comprendere e prevedere le tendenze di vendita e concentrare il lavoro per raggiungere le quote di vendita.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} ti consente di tenere traccia delle singole vendite e degli elementi pubblicitari appartenenti a tali vendite dall&#39;inizio alla fine. Ogni record {{module_name}} rappresenta una vendita potenziale e include dati di vendita rilevanti, nonché relativi ad altri record importanti come {{quotes_module}}, {{contacts_module}}, ecc.
+    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} consente di tenere traccia delle singole vendite e degli elementi appartenenti a tali vendite dall&#39;inizio alla fine. Ogni record {{module_name}} rappresenta una vendita potenziale e include i dati di vendita pertinenti e relativi ad altri record importanti come {{quotes_module}}, {{contacts_module}} ecc.
 
-- Modifica i campi di questo record facendo clic su un singolo campo o sul pulsante Modifica.
-- Visualizza o modifica i collegamenti ad altri record nei sottopannelli spostando il riquadro in basso a sinistra su "Visualizzazione dati".
-- Crea e visualizza i commenti degli utenti e registra la cronologia delle modifiche nel {{activitystream_singular_module}} spostando il riquadro in basso a sinistra su "Activity Stream".
-- Segui o aggiungi ai preferiti questo record utilizzando le icone a destra del nome del record.
+- Modificare i campi di questo record facendo clic su un singolo campo o sul pulsante Modifica.
+- Visualizzare o modificare i collegamenti ad altri record nei pannelli secondari commutando il riquadro in basso a sinistra su "Vista dati".
+- Creare e visualizzare i commenti degli utenti e registrare la cronologia delle modifiche nel {{activitystream_singular_module}} commutando il riquadro in basso a sinistra su "Flusso di attività".
+- Seguire o rendere preferito questo record utilizzando le icone a destra del nome del record.
 - Ulteriori azioni sono disponibili nel menu a discesa Azioni a destra del pulsante Modifica.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Il modulo {{plural_module_name}} ti consente di tenere traccia delle singole vendite e degli elementi pubblicitari appartenenti a tali vendite dall&#39;inizio alla fine. Ogni record {{module_name}} rappresenta una vendita potenziale e include dati di vendita rilevanti, nonché relativi ad altri record importanti come {{quotes_module}}, {{contacts_module}}, ecc.
+    'LBL_HELP_CREATE' => 'Il modulo {{plural_module_name}} consente di tenere traccia delle singole vendite e degli elementi appartenenti a tali vendite dall&#39;inizio alla fine. Ogni record {{module_name}} rappresenta una vendita potenziale e include i dati di vendita pertinenti e relativi ad altri record importanti come {{quotes_module}}, {{contacts_module}} ecc.
 
 Per creare un {{module_name}}:
 1. Fornire i valori per i campi come desiderato.
- - I campi contrassegnati come "Obbligatorio" devono essere compilati prima del salvataggio.
- - Fare clic su "Mostra altro" per visualizzare campi aggiuntivi, se necessario.
+ - I campi contrassegnati con "Obbligatorio" devono essere compilati prima del salvataggio.
+ - Fare clic su "Mostra altro" per esporre campi aggiuntivi, se necessario.
 2. Fare clic su "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
 
 // END ENT/ULT

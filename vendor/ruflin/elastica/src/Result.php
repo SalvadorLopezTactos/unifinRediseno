@@ -19,8 +19,6 @@ class Result
     protected $_hit = [];
 
     /**
-     * Constructs a single results object.
-     *
      * @param array $hit Hit data
      */
     public function __construct(array $hit)
@@ -69,11 +67,7 @@ class Result
      */
     public function getParam($name)
     {
-        if (isset($this->_hit[$name])) {
-            return $this->_hit[$name];
-        }
-
-        return [];
+        return $this->_hit[$name] ?? [];
     }
 
     /**
@@ -103,6 +97,8 @@ class Result
      */
     public function getType()
     {
+        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated. It will be removed in 8.0.', __METHOD__);
+
         return $this->getParam('_type');
     }
 
@@ -140,6 +136,21 @@ class Result
     public function getScore()
     {
         return $this->getParam('_score');
+    }
+
+    /**
+     * Returns the sort values of the result.
+     * Null is returned in case no sorting has been defined for the query.
+     *
+     * @return mixed[]|null
+     */
+    public function getSort(): ?array
+    {
+        if (!$this->hasParam('sort')) {
+            return null;
+        }
+
+        return $this->getParam('sort');
     }
 
     /**

@@ -24,6 +24,7 @@ use SugarBean;
 use Sugarcrm\Sugarcrm\Maps\Constants;
 use SugarJobQueue;
 use SugarQuery;
+use Sugarcrm\Sugarcrm\Maps\FilterUtils as MapsFilterUtils;
 
 /**
  *
@@ -53,6 +54,12 @@ class QueueManager
      * @var integer
      */
     protected $maxBulkQueryThreshold = 1000;
+
+    /**
+     * Maximum amount of records we will queue in database
+     * @var integer
+     */
+    protected $maxQueueRecords = 2000;
 
     /**
      * number of beans to batch retrieve related data
@@ -146,6 +153,10 @@ class QueueManager
             $modules = $this->getContainer()->client->getEnabledModules();
         }
 
+        if (!$batchSize) {
+            $batchSize = $this->maxQueueRecords;
+        }
+
         foreach ($modules as $module) {
             if ($this->canAddModuleToQueue($module)) {
                 $this->insertModuleToQueue($module, $batchSize);
@@ -170,12 +181,15 @@ class QueueManager
         $geocodeBeans = [];
         $targetBeans = [];
         $mapsIds = [];
+        $queuedRecordsToBeDeleted = [];
 
         foreach ($data as $row) {
             $geocodeBean = BeanFactory::retrieveBean(Constants::GEOCODE_MODULE, $row['geocode_id']);
             $targetBean = BeanFactory::retrieveBean($module, $row['target_id']);
 
-            if (is_null($geocodeBean) && is_null($targetBean)) {
+            if (is_null($geocodeBean) || is_null($targetBean)) {
+                $queuedRecordsToBeDeleted[] = $row['maps_id'];
+
                 continue;
             }
 
@@ -183,6 +197,10 @@ class QueueManager
 
             $geocodeBeans[$geocodeBean->id] = $geocodeBean;
             $targetBeans[$targetBean->id] = $targetBean;
+        }
+
+        if (!empty($queuedRecordsToBeDeleted)) {
+            $this->deleteQueuedGeocodeRecords($queuedRecordsToBeDeleted);
         }
 
         $this->geocodeBeans($targetBeans, $geocodeBeans, $mapsIds, $module);
@@ -194,6 +212,30 @@ class QueueManager
         $duration = time() - $start;
 
         return [$success, $this->maxBulkQueryThreshold, $duration, $errorMsg];
+    }
+
+    /**
+     * Delete a bucket of queued geocode records
+     *
+     * @param string $id
+     */
+    private function deleteQueuedGeocodeRecords(array $ids)
+    {
+        $queryBuilder = DBManagerFactory::getConnection()->createQueryBuilder();
+
+        $whereCondition = $queryBuilder->expr()->in(
+            'id',
+            $queryBuilder->createPositionalParameter(
+                (array) $ids,
+                \Doctrine\DBAL\Connection::PARAM_STR_ARRAY
+            )
+        );
+
+        $queryBuilder
+            ->delete($this->getContainer()->utils::QUEUE_TABLE)
+            ->where($whereCondition);
+
+        $queryBuilder->execute();
     }
 
     /**
@@ -363,12 +405,7 @@ class QueueManager
         if ($batchSize && $batchSize > 0) {
             $queryBuilder->setMaxResults($batchSize);
         }
-        $compiled = $queryBuilder;
-        $sql = $compiled->getSQL();
-        $parameters = $compiled->getParameters();
-        foreach ($parameters as $value) {
-            $sql = preg_replace("/\?/", "'{$value}'", $sql, 1);
-        }
+
         $queryBuilderResult = $queryBuilder->execute();
 
         if (!$queryBuilderResult) {
@@ -388,14 +425,22 @@ class QueueManager
             'geocode_id',
         ];
 
-        $moduleRecords = $queryBuilderResult->fetchAllAssociative();
-
-        foreach ($moduleRecords as $record) {
+        foreach ($queryBuilderResult->iterateAssociative() as $record) {
             if (is_null($record['geocoded'])) {
-                $record['geocode_id'] = $this->createGeocodeBean($record);
-                $collectedGeocodeRecords[] = $record['geocode_id'];
+                $this->createGeocodeBean($record);
+
+                // we have no id for the empty addresses
+                if (array_key_exists('geocode_id', $record) && $record['geocode_id']) {
+                    $collectedGeocodeRecords[] = $record['geocode_id'];
+                }
             } elseif ($record['status'] === Constants::GEOCODE_SCHEDULER_STATUS_REQUEUE) {
                 $collectedGeocodeRecords[] = $record['geocode_id'];
+            }
+
+            // we have an invalid address
+            // so we have to prevent it from being sent to the server
+            if ($record['status'] === Constants::GEOCODE_SCHEDULER_STATUS_NOT_FOUND) {
+                continue;
             }
 
             foreach ($insertQueueFields as $index => $column) {
@@ -434,6 +479,8 @@ class QueueManager
         ));
 
         $qb->execute();
+
+        MapsFilterUtils::updateGeocodeStatuses($records, Constants::GEOCODE_SCHEDULER_STATUS_QUEUED);
     }
 
     /**
@@ -443,7 +490,7 @@ class QueueManager
      *
      * @return string
      */
-    protected function createGeocodeBean(array $record): string
+    protected function createGeocodeBean(array &$record): string
     {
         $targetRecordId = $record['bean_id'];
         $targetRecordModule = $record['bean_module'];
@@ -464,13 +511,21 @@ class QueueManager
         foreach ($mappingTable as $clientKey => $sugarKey) {
             $value = null;
 
-            if (property_exists($targetBean !== null ? get_class($targetBean) : self::class, $sugarKey)) {
+            if ($targetBean !== null && property_exists(get_class($targetBean), $sugarKey)) {
                 $value = $targetBean->{$sugarKey};
             }
 
             if ($value) {
                 $address[$clientKey] = $value;
             }
+        }
+
+        $isEmptyAddress = false;
+
+        $rawAddress = implode('', $address);
+
+        if (strlen($rawAddress) < Constants::MIN_CHARS_NR_FOR_VALID_ADDRESS) {
+            $isEmptyAddress = true;
         }
 
         $addressString = implode(', ', $address);
@@ -482,7 +537,22 @@ class QueueManager
         $geocodeBean->address = $addressString;
         $geocodeBean->geocoded = 0;
 
-        return $geocodeBean->save();
+        //if address is empty
+        if ($isEmptyAddress === true) {
+            $geocodeBean->geocoded = 1;
+            $geocodeBean->status = Constants::GEOCODE_SCHEDULER_STATUS_NOT_FOUND;
+
+            $record['status'] = Constants::GEOCODE_SCHEDULER_STATUS_NOT_FOUND;
+        }
+
+        $geocodeId = $geocodeBean->save();
+
+        // add record to be queued for geocoding process
+        if ($isEmptyAddress === false) {
+            $record['geocode_id'] = $geocodeId;
+        }
+
+        return $geocodeId;
     }
 
     /**

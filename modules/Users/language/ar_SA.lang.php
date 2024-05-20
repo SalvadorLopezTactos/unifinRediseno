@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'معلومات المستخدم ليست موجودة',
     'ERR_USER_NAME_EXISTS'              => 'اسم المستخدم {0} موجود بالفعل. غير مسموح بأسماء المستخدم المتكررة. قم بتغيير اسم المستخدم لكي يصبح فريدًا من نوعه.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'يجب حفظ ترخيص “Sugar Hint” مع نوع ترخيص متوافق إضافي',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'تم تضمين هذه الإمكانية بالفعل في Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'تم حظر هذا المستخدم من استخدام تطبيق Sugar ويتعذر تسجيل الدخول باستخدام كلمة مروره/ مرورها الحالية.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'المستخدم بتصديق خارجي هو فقط غير المسموح له بتسجيل الدخول باستخدام بيانات اعتماد Sugar',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'كلمة المرور',
     'LBL_CHOOSE_A_KEY'					=> 'اختر مفتاحاً لمنع النشر غير المصرح به للتقويم الخاص بك',
     'LBL_NO_KEY'                        => 'لم يتم تعيين المفتاح. يُرجى تعيين مفتاح لتمكين النشر.',
-	'LBL_CHOOSE_WHICH'					=> 'حدد الوحدات التي يمكن الوصول إليها في شريط التنقل العلوي. حدد الترتيب الذي ترغب في ظهور الوحدات به.',
+    'LBL_CHOOSE_WHICH'                  => 'حدد الوحدات التي يمكن الوصول إليها من داخل شريط التنقل الجانبي. حدد الترتيب الذي ترغب في ظهور الوحدات به.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'عدد الوحدات المثبتة',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'اكتب عدد الوحدات المتاحة للتثبيت عند طي شريط التنقل (مثال في حالة إدخال 5 يتم تثبيت أول خمس وحدات في قائمتك). نوصي بعدد يمثل وحداتك الأكثر استخدامًا. القيم أكبر من 100 سيتم تجاهلها.',
 	'LBL_CITY'							=> 'المدينة',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'مسح',
@@ -545,6 +548,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'اسم مستخدم SMTP:',
 	'LBL_MAIL_SMTPTYPE'                => 'نوع خادم SMTP:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'مواصفات خادم SMTP',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'حساب البريد الإلكتروني المصرح له',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'اختر موفر البريد الإلكتروني الخاص بك:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! كلمة مرور البريد:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! معرّف البريد الإلكتروني:',
@@ -700,4 +704,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'المستخدمون/الفرق/الأدوار',
     'LBL_LOADING_ITEMS' => 'يتم الآن تحميل البيانات...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'الوصول إلى الدليل الذكي',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'آخر نشاط للدليل الذكي',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'الوصول إلى الدليل الذكي مفقود',
 ); // END STRINGS DEFS

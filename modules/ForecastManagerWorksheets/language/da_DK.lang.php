@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Ugyldig redigering',
     'LBL_EDITABLE_INVALID_RANGE' => 'Ugyldig redigering rækkevidde',
-    'LBL_HISTORY_LOG' => 'Sidst forpligtet',
+    'LBL_HISTORY_LOG' => 'Seneste forpligtelse',
     'LBL_NO_COMMIT' => 'Ingen tidligere forpligtet',
 
     'LBL_MANGER_SAVED' => 'Manager gemt'

@@ -37,7 +37,7 @@ class QuickSearchDefaults
 
         foreach ($lookup as $file => $klass) {
             if (file_exists($file)) {
-                require_once($file);
+                require_once $file;
                 return new $klass();
             }
         }

@@ -127,11 +127,7 @@
      * @param {Boolean} silent
      */
     handleChange: function(linkModuleName, linkName, silent) {
-        if (linkName === "all_modules") {
-            this.layout.trigger("subpanel:change");
-        } else if (linkName) {
-            this.layout.trigger("subpanel:change", linkName);
-        }
+        this.layout.trigger('subpanel:change', linkName);
 
         // It is important to reset the `currentFilterId` in order to retrieve
         // the last filter from cache later.

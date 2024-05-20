@@ -115,7 +115,7 @@ class PMSEChangeField extends PMSEScriptTask
         $isRelated = false;
         $bpmnElement = $this->retrieveDefinitionData($flowData['bpmn_id']);
         $act_field_module = $bpmnElement['act_field_module'];
-        $act_fields = htmlspecialchars_decode($bpmnElement['act_fields']);
+        $act_fields = htmlspecialchars_decode($bpmnElement['act_fields'], ENT_COMPAT);
         $fields = json_decode($act_fields);
         $ifields = 0;
 

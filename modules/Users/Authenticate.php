@@ -23,11 +23,9 @@ global $mod_strings;
 $res = $GLOBALS['sugar_config']['passwordsetting'];
 $login_vars = $GLOBALS['app']->getLoginVars(false);
 
-$user_name = isset($_REQUEST['user_name'])
-    ? $_REQUEST['user_name'] : '';
+$user_name = $_REQUEST['user_name'] ?? '';
 
-$password = isset($_REQUEST['user_password'])
-    ? $_REQUEST['user_password'] : '';
+$password = $_REQUEST['user_password'] ?? '';
 
 $authController->login($user_name, $password);
 // authController will set the authenticated_user_id session variable

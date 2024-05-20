@@ -14,8 +14,6 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 {
     function get_module_view_defs($moduleName, $type, $view)
     {
-        $listViewDefs = [];
-        $viewdefs = [];
         $metadataFile = null;
         $results = array();
         if (empty($moduleName)) {
@@ -277,25 +275,25 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 	            $entry = array();
 	            $entry['name'] = $var['name'];
 	            $entry['type'] = $var['type'];
-	            $entry['group'] = isset($var['group']) ? $var['group'] : '';
-	            $entry['id_name'] = isset($var['id_name']) ? $var['id_name'] : '';
+                $entry['group'] = $var['group'] ?? '';
+                $entry['id_name'] = $var['id_name'] ?? '';
 
-	            if ($var['type'] == 'link') {
-		            $entry['relationship'] = (isset($var['relationship']) ? $var['relationship'] : '');
-		            $entry['module'] = (isset($var['module']) ? $var['module'] : '');
-		            $entry['bean_name'] = (isset($var['bean_name']) ? $var['bean_name'] : '');
+                if ($var['type'] == 'link') {
+                    $entry['relationship'] = ($var['relationship'] ?? '');
+                    $entry['module'] = ($var['module'] ?? '');
+                    $entry['bean_name'] = ($var['bean_name'] ?? '');
 					$link_fields[$var['name']] = $entry;
 	            } else {
 		            if($translate) {
 		            	$entry['label'] = isset($var['vname']) ? translate($var['vname'], $value->module_dir) : $var['name'];
 		            } else {
-		            	$entry['label'] = isset($var['vname']) ? $var['vname'] : $var['name'];
+                        $entry['label'] = $var['vname'] ?? $var['name'];
 		            }
 		            $entry['required'] = $required;
 		            $entry['options'] = $options_ret;
 		            $entry['related_module'] = (isset($var['id_name']) && isset($var['module'])) ? $var['module'] : '';
 		            $entry['calculated'] =  (isset($var['calculated']) && $var['calculated']) ? true : false;
-                    $entry['len'] =  isset($var['len']) ? $var['len'] : '';
+                    $entry['len'] =  $var['len'] ?? '';
 
 					if(isset($var['default'])) {
 					   $entry['default_value'] = $var['default'];

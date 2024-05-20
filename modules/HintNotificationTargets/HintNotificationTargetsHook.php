@@ -25,7 +25,7 @@ class HintNotificationTargetsHook extends LogicHook
     {
         // new record
         if (!$arguments['isUpdate']) {
-            $credentials = json_decode($bean->credentials, true);
+            $credentials = json_decode((string)$bean->credentials, true);
             $this->eventQueue->recordEvent(new TargetAddEvent([
                 'targetId' => $bean->id,
                 'type' => $bean->type,

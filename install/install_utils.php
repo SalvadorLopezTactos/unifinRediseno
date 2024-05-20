@@ -81,7 +81,9 @@ function parseAcceptLanguage() {
  * @param mode string Install or Uninstall
  */
 function updateUpgradeHistory() {
-    if (isset($_SESSION['INSTALLED_LANG_PACKS']) && (is_countable($_SESSION['INSTALLED_LANG_PACKS']) ? count($_SESSION['INSTALLED_LANG_PACKS']) : 0) > 0) {
+    if (isset($_SESSION['INSTALLED_LANG_PACKS']) && (is_countable($_SESSION['INSTALLED_LANG_PACKS']) ? count(
+        $_SESSION['INSTALLED_LANG_PACKS']
+    ) : 0) > 0) {
         foreach($_SESSION['INSTALLED_LANG_PACKS'] as $k => $zipFile) {
             // What was installed without source zip file?
             if (!file_exists($zipFile)) {
@@ -1084,6 +1086,8 @@ function create_default_users(){
         //           while installation is proceed.
         $GLOBALS['current_user'] = $user;
     }
+    // assign all system license types to this default admin user
+    $user->assignAllLicenseTypes();
     $user->save();
 
     if (!empty($setup_site_admin_email)) {
@@ -1465,14 +1469,14 @@ function pullSilentInstallVarsIntoSession() {
     }
 
     $config_subset = array (
-        'setup_site_url'                => isset($sugar_config['site_url']) ? $sugar_config['site_url'] : '',
-        'setup_db_host_name'            => isset($sugar_config['dbconfig']['db_host_name']) ? $sugar_config['dbconfig']['db_host_name'] : '',
-        'setup_db_host_instance'        => isset($sugar_config['dbconfig']['db_host_instance']) ? $sugar_config['dbconfig']['db_host_instance'] : '',
-        'setup_db_sugarsales_user'      => isset($sugar_config['dbconfig']['db_user_name']) ? $sugar_config['dbconfig']['db_user_name'] : '',
-        'setup_db_sugarsales_password'  => isset($sugar_config['dbconfig']['db_password']) ? $sugar_config['dbconfig']['db_password'] : '',
-        'setup_db_database_name'        => isset($sugar_config['dbconfig']['db_name']) ? $sugar_config['dbconfig']['db_name'] : '',
-        'setup_db_type'                 => isset($sugar_config['dbconfig']['db_type']) ? $sugar_config['dbconfig']['db_type'] : '',
-        'setup_db_port_num'             => isset($sugar_config['dbconfig']['db_port']) ? $sugar_config['dbconfig']['db_port'] : '',
+        'setup_site_url'                => $sugar_config['site_url'] ?? '',
+        'setup_db_host_name'            => $sugar_config['dbconfig']['db_host_name'] ?? '',
+        'setup_db_host_instance'        => $sugar_config['dbconfig']['db_host_instance'] ?? '',
+        'setup_db_sugarsales_user'      => $sugar_config['dbconfig']['db_user_name'] ?? '',
+        'setup_db_sugarsales_password'  => $sugar_config['dbconfig']['db_password'] ?? '',
+        'setup_db_database_name'        => $sugar_config['dbconfig']['db_name'] ?? '',
+        'setup_db_type'                 => $sugar_config['dbconfig']['db_type'] ?? '',
+        'setup_db_port_num'             => $sugar_config['dbconfig']['db_port'] ?? '',
         'setup_db_options'              => !empty($sugar_config['dbconfigoptions']) ? $sugar_config['dbconfigoptions'] : array(),
     );
     // third array of values derived from above values
@@ -1740,7 +1744,7 @@ function extractFile( $zip_file, $file_in_zip, $base_tmp_upgrade_dir){
 
 if ( !function_exists('extractManifest') ) {
 function extractManifest( $zip_file,$base_tmp_upgrade_dir ) {
-        return extractFile($zip_file, "manifest.php", $base_tmp_upgrade_dir);
+    return( extractFile( $zip_file, "manifest.php",$base_tmp_upgrade_dir ) );
 }
 }
 
@@ -1913,9 +1917,7 @@ function create_time($hr=null,$min=null,$sec=null)
     if ($min == null) {
         $min = (random_int(0, 3) * 15);
     }
-    if ($sec == null) {
-        $sec = 0;
-    }
+    if ($sec==null) $sec=0;
     return $timedate->asDbTime($date->setDate(2007, 10, 7)->setTime($hr, $min, $sec));
 }
 

@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Vai šī ir dokumenta veidne? :',
     'LBL_DET_TEMPLATE_TYPE'=>'Dokumenta tips:',
     'LBL_TEAM'=> 'Darba grupa:',
+    'LBL_IS_SHARED' => 'Pieejams ārēji:',
     'LBL_DOC_DESCRIPTION'=>'Apraksts:',
     'LBL_DOC_ACTIVE_DATE'=> 'Publicēšanas datums:',
     'LBL_DOC_EXP_DATE'=> 'Derīgs līdz:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Nosūtīt uz DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Sinhronizēt uz Google Drive',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Sinhronizēt visu uz Google Drive',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Sinhronizēt visu uz OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Sinhronizēt uz OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Sinhronizēt visu uz Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Sinhronizēt uz Dropbox',
 );

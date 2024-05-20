@@ -67,6 +67,40 @@
       width: 9vw;
     }
   }
+
+  .drawer-content .main-pane & {
+    margin-top: 40px;
+
+    .fieldset-field:last-child {
+      max-width: inherit !important;
+    }
+  }
+
+  .record-panel {
+    .btn-link {
+      cursor: pointer;
+
+      &.more {
+        display: none;
+      }
+    }
+
+    &.folded {
+      .record-panel-content {
+        display: none;
+      }
+
+      .btn-link {
+        &.more {
+          display: block;
+        }
+
+        &.less {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 .record-cell {
@@ -632,10 +666,14 @@
         margin-right: 8px;
         padding: 0;
       }
+
+      .record-panel-label {
+        color: var(--link-color);
+      }
     }
 
     &.panel-inactive:hover {
-      background: @primaryContentHover;
+      background-color: @primaryContentHoverBackground;
     }
   }
 
@@ -716,6 +754,26 @@
   &:not(.label-pill) {
     .label-plus {
       display: none;
+    }
+  }
+
+  .normal {
+    &[data-fieldname="date_entered_by"],
+    &[data-fieldname="date_modified_by"] {
+      > .fieldset-inline {
+        .flex();
+
+        .fieldset-field {
+          &[data-type="datetimecombo"] {
+            .overflow-hidden();
+          }
+
+          &[data-type="relate"]:last-child {
+            .w-auto();
+            .max-w-full();
+          }
+        }
+      }
     }
   }
 }
@@ -902,11 +960,6 @@
         .fa-pencil {
           margin-left: -10px;
         }
-      }
-
-      &[data-name="date_entered_by"],
-      &[data-name="date_modified_by"] {
-        overflow: hidden;
       }
     }
 

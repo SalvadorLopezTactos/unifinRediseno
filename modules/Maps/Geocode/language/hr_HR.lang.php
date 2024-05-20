@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'Zemljopisna širina',
     'LBL_LONGITUDE' => 'Zemljopisna dužina',
     'LBL_GEOCODED' => 'Geokodirano',
+    'LBL_ERROR_MESSAGE' => 'Poruka o pogrešci geokoda',
 ];

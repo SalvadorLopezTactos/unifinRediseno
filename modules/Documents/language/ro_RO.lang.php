@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Sablon?:',
     'LBL_DET_TEMPLATE_TYPE'=>'Tipul de document',
     'LBL_TEAM'=> 'Echipă:',
+    'LBL_IS_SHARED' => 'Disponibil extern:',
     'LBL_DOC_DESCRIPTION'=>'Descriere',
     'LBL_DOC_ACTIVE_DATE'=> 'Data Publicarii',
     'LBL_DOC_EXP_DATE'=> 'Data expirarii',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Trimitere către DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Sincronizare cu Google Drive',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Sincronizare toate cu Google Drive',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Sincronizare toate cu OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Sincronizare cu OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Sincronizare toate cu Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Sincronizare cu Dropbox',
 );

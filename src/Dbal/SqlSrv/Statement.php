@@ -12,30 +12,56 @@
 
 namespace Sugarcrm\Sugarcrm\Dbal\SqlSrv;
 
-use Doctrine\DBAL\Driver\SQLSrv\SQLSrvStatement as BaseStatement;
+use Doctrine\DBAL\Driver\Middleware\AbstractStatementMiddleware;
+use Doctrine\DBAL\Driver\Result;
+use Doctrine\DBAL\ParameterType;
 
 /**
  * SQL Server statement
+ *
+ * Explicitly cast numeric values to string since it's important for SQL Server,
+ * but Doctrine DBAL doesn't pass the "string" binding type to the DB driver
+ *
+ * until we get rid of numeric IDs, we have to cast integers to strings in order to avoid
+ * string to integer conversion errors on the database side
+ *
+ * @link https://github.com/doctrine/dbal/issues/2369
+ * @link https://msdn.microsoft.com/en-us/library/ms190309.aspx
  */
-class Statement extends BaseStatement
+class Statement extends AbstractStatementMiddleware
 {
     /**
      * {@inheritdoc}
-     *
-     * Explicitly cast numeric values to string since it's important for SQL Server,
-     * but Doctrine DBAL doesn't pass the "string" binding type to the DB driver
-     *
-     * @link https://github.com/doctrine/dbal/issues/2369
-     * @link https://msdn.microsoft.com/en-us/library/ms190309.aspx
      */
-    public function bindValue($param, $value, $type = null)
+    public function bindValue($param, $value, $type = ParameterType::STRING)
     {
-        // until we get rid of numeric IDs, we have to cast integers to strings in order to avoid
-        // string to integer conversion errors on the database side
         if (is_int($value)) {
-            $value = (string) $value;
+            $value = (string)$value;
         }
-
         return parent::bindValue($param, $value, $type);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function bindParam($param, &$variable, $type = ParameterType::STRING, $length = null)
+    {
+        $value = is_int($variable) ? (string)$variable : $variable;
+        return parent::bindParam($param, $value, $type, $length);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function execute($params = null): Result
+    {
+        if (is_array($params)) {
+            foreach ($params as $key => $value) {
+                if (is_int($value)) {
+                    $params[$key] = (string)$value;
+                }
+            }
+        }
+        return parent::execute($params);
     }
 }

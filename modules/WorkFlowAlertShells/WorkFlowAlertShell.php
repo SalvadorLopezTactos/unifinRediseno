@@ -118,7 +118,8 @@ class WorkFlowAlertShell extends SugarBean {
 
 
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $app_strings, $mod_strings;
 		global $app_list_strings;
 		global $current_module_strings;
@@ -230,7 +231,6 @@ class WorkFlowAlertShell extends SugarBean {
 
 
 	function retrieve_meta_information(){
-
         $process_dictionary = [];
 		require_once('modules/WorkFlowAlertShells/MetaArray.php');
 		$this->target_meta_array = $process_dictionary['AlertShellDetailView']['elements'][$this->alert_type];

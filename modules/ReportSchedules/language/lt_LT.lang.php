@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Ataskaitų planų įrašų ataskaitų sritis',
     'LBL_FILE_TYPE' => 'Failo tipas (-ai)',
+    'LBL_EMBED_REPORT' => 'Įterpti ataskaitą į el. laišką',
+    'LBL_EMBED_REPORT_INFO' => 'Pastaba: jei ataskaita viršija 200 eilučių, ją pridėsime kaip CSV failą.',
 );

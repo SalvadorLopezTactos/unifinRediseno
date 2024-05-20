@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Valor Inválido para {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'O valor tem que estar entre {{min}} e {{max}}',
-    'LBL_HISTORY_LOG' => 'Último Registo',
+    'LBL_HISTORY_LOG' => 'Último compromisso',
     'LBL_NO_COMMIT' => 'Sem Registo Prévio',
 
     'LBL_MANGER_SAVED' => 'Gestor Gravado'

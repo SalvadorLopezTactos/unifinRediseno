@@ -19,7 +19,7 @@ use Sugarcrm\Sugarcrm\Util\Uuid;
  */
 class Calendar_iCal extends iCal
 {
-    const DATE_FORMAT = 'Ymd';
+    public const DATE_FORMAT = 'Ymd';
 
     /**
      * {@inheritDoc}

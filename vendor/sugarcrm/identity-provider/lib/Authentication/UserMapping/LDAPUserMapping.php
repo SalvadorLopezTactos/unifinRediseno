@@ -61,7 +61,7 @@ class LDAPUserMapping implements MappingInterface
     {
         return [
             'field' => 'username',
-            'value' => $token->getUsername(),
+            'value' => $token->getUserIdentifier(),
         ];
     }
 
@@ -72,7 +72,7 @@ class LDAPUserMapping implements MappingInterface
      */
     public function getIdentityValue(User $user)
     {
-        return $user->getUsername();
+        return $user->getUserIdentifier();
     }
 
     /**

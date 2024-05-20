@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Nadzorna ploča za popis bilješki',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o bilješkama',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za bilješke',
+    'LBL_EXTERNAL_USER' => 'Vanjski korisnik',
+    'LBL_EXTERNAL_USER_NAME' => 'Vanjski korisnik',
 
     'LBL_RELATED_CONTACT' => 'Povezani kontakt',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da biste izbrisali račun.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Vrsta poruke e-pošte',
     'LBL_EMAIL_ID' => 'ID e-pošte',
     'LBL_PHONE' => 'Telefon:',
-    'LBL_PORTAL_FLAG' => 'Prikazati u portalu?',
+    'LBL_PORTAL_FLAG' => 'Dostupno izvana',
     'LBL_EMBED_FLAG' => 'Umetnuti u e-poštu?',
     'LBL_PRODUCT_ID' => 'ID prodane stavke:',
     'LBL_QUOTE_ID' => 'ID ponude:',

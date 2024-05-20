@@ -103,8 +103,7 @@
             _insertVariableHtml: function(text) {
                 var bodyField = this.getField('body_html');
                 var editor = bodyField._htmleditor;
-                editor.getWin().focus();
-                editor.execCommand('mceInsertRawHTML', false, text);
+                editor.insertContent(text, {format: 'raw'});
             },
 
             /**

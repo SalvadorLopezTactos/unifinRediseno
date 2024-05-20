@@ -32,22 +32,22 @@ class ExtAPIMicrosoftEmail extends ExternalAPIBase
 
     protected $provider = null;
 
-    const APP_STRING_ERROR_PREFIX = 'ERR_MICROSOFT_API_';
-    const URL_AUTHORIZE = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
-    const URL_ACCESS_TOKEN = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
-    const OUTLOOK_API_BASE_URL = 'https://outlook.office.com/api/';
-    const OUTLOOK_API_DEFAULT_VERSION = 'v2.0';
-    const SCOPES_AUTHORIZE = array(
+    public const APP_STRING_ERROR_PREFIX = 'ERR_MICROSOFT_API_';
+    public const URL_AUTHORIZE = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
+    public const URL_ACCESS_TOKEN = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
+    public const OUTLOOK_API_BASE_URL = 'https://outlook.office.com/api/';
+    public const OUTLOOK_API_DEFAULT_VERSION = 'v2.0';
+    public const SCOPES_AUTHORIZE = array(
         'offline_access',
         'https://graph.microsoft.com/User.Read',
         'https://outlook.office365.com/IMAP.AccessAsUser.All',
         'https://outlook.office365.com/SMTP.Send',
     );
-    const SCOPES_GRAPH_API = array(
+    public const SCOPES_GRAPH_API = array(
         'offline_access',
         'https://graph.microsoft.com/User.Read',
     );
-    const SCOPES_OUTLOOK_API = array(
+    public const SCOPES_OUTLOOK_API = array(
         'offline_access',
         'https://outlook.office365.com/IMAP.AccessAsUser.All',
         'https://outlook.office365.com/SMTP.Send',

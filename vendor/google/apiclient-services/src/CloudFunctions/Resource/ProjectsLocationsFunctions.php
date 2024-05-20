@@ -17,9 +17,7 @@
 
 namespace Google\Service\CloudFunctions\Resource;
 
-use Google\Service\CloudFunctions\CallFunctionRequest;
-use Google\Service\CloudFunctions\CallFunctionResponse;
-use Google\Service\CloudFunctions\CloudFunction;
+use Google\Service\CloudFunctions\CloudfunctionsFunction;
 use Google\Service\CloudFunctions\GenerateDownloadUrlRequest;
 use Google\Service\CloudFunctions\GenerateDownloadUrlResponse;
 use Google\Service\CloudFunctions\GenerateUploadUrlRequest;
@@ -42,37 +40,23 @@ use Google\Service\CloudFunctions\TestIamPermissionsResponse;
 class ProjectsLocationsFunctions extends \Google\Service\Resource
 {
   /**
-   * Synchronously invokes a deployed Cloud Function. To be used for testing
-   * purposes as very limited traffic is allowed. For more information on the
-   * actual limits, refer to [Rate
-   * Limits](https://cloud.google.com/functions/quotas#rate_limits).
-   * (functions.callProjectsLocationsFunctions)
-   *
-   * @param string $name Required. The name of the function to be called.
-   * @param CallFunctionRequest $postBody
-   * @param array $optParams Optional parameters.
-   * @return CallFunctionResponse
-   */
-  public function callProjectsLocationsFunctions($name, CallFunctionRequest $postBody, $optParams = [])
-  {
-    $params = ['name' => $name, 'postBody' => $postBody];
-    $params = array_merge($params, $optParams);
-    return $this->call('call', [$params], CallFunctionResponse::class);
-  }
-  /**
    * Creates a new function. If a function with the given name already exists in
    * the specified project, the long running operation will return
    * `ALREADY_EXISTS` error. (functions.create)
    *
-   * @param string $location Required. The project and location in which the
+   * @param string $parent Required. The project and location in which the
    * function should be created, specified in the format `projects/locations`
-   * @param CloudFunction $postBody
+   * @param CloudfunctionsFunction $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param string functionId The ID to use for the function, which will
+   * become the final component of the function's resource name. This value should
+   * be 4-63 characters, and valid characters are /a-z-/.
    * @return Operation
    */
-  public function create($location, CloudFunction $postBody, $optParams = [])
+  public function create($parent, CloudfunctionsFunction $postBody, $optParams = [])
   {
-    $params = ['location' => $location, 'postBody' => $postBody];
+    $params = ['parent' => $parent, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('create', [$params], Operation::class);
   }
@@ -94,13 +78,13 @@ class ProjectsLocationsFunctions extends \Google\Service\Resource
   }
   /**
    * Returns a signed URL for downloading deployed function source code. The URL
-   * is only valid for a limited period and should be used within minutes after
+   * is only valid for a limited period and should be used within 30 minutes of
    * generation. For more information about the signed URL usage see:
    * https://cloud.google.com/storage/docs/access-control/signed-urls
    * (functions.generateDownloadUrl)
    *
-   * @param string $name The name of function for which source code Google Cloud
-   * Storage signed URL should be generated.
+   * @param string $name Required. The name of function for which source code
+   * Google Cloud Storage signed URL should be generated.
    * @param GenerateDownloadUrlRequest $postBody
    * @param array $optParams Optional parameters.
    * @return GenerateDownloadUrlResponse
@@ -119,17 +103,16 @@ class ProjectsLocationsFunctions extends \Google\Service\Resource
    * provided in CreateFunction or UpdateFunction request as a reference to the
    * function source code. When uploading source code to the generated signed URL,
    * please follow these restrictions: * Source file type should be a zip file. *
-   * Source file size should not exceed 100MB limit. * No credentials should be
-   * attached - the signed URLs provide access to the target bucket using internal
-   * service identity; if credentials were attached, the identity from the
-   * credentials would be used, but that identity does not have permissions to
-   * upload files to the URL. When making a HTTP PUT request, these two headers
-   * need to be specified: * `content-type: application/zip` * `x-goog-content-
-   * length-range: 0,104857600` And this header SHOULD NOT be specified: *
-   * `Authorization: Bearer YOUR_TOKEN` (functions.generateUploadUrl)
+   * No credentials should be attached - the signed URLs provide access to the
+   * target bucket using internal service identity; if credentials were attached,
+   * the identity from the credentials would be used, but that identity does not
+   * have permissions to upload files to the URL. When making a HTTP PUT request,
+   * these two headers need to be specified: * `content-type: application/zip` And
+   * this header SHOULD NOT be specified: * `Authorization: Bearer YOUR_TOKEN`
+   * (functions.generateUploadUrl)
    *
-   * @param string $parent The project and location in which the Google Cloud
-   * Storage signed URL should be generated, specified in the format
+   * @param string $parent Required. The project and location in which the Google
+   * Cloud Storage signed URL should be generated, specified in the format
    * `projects/locations`.
    * @param GenerateUploadUrlRequest $postBody
    * @param array $optParams Optional parameters.
@@ -148,29 +131,34 @@ class ProjectsLocationsFunctions extends \Google\Service\Resource
    * @param string $name Required. The name of the function which details should
    * be obtained.
    * @param array $optParams Optional parameters.
-   * @return CloudFunction
+   * @return CloudfunctionsFunction
    */
   public function get($name, $optParams = [])
   {
     $params = ['name' => $name];
     $params = array_merge($params, $optParams);
-    return $this->call('get', [$params], CloudFunction::class);
+    return $this->call('get', [$params], CloudfunctionsFunction::class);
   }
   /**
-   * Gets the IAM access control policy for a function. Returns an empty policy if
-   * the function exists and does not have a policy set. (functions.getIamPolicy)
+   * Gets the access control policy for a resource. Returns an empty policy if the
+   * resource exists and does not have a policy set. (functions.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int options.requestedPolicyVersion Optional. The policy format
-   * version to be returned. Valid values are 0, 1, and 3. Requests specifying an
-   * invalid value will be rejected. Requests for policies with any conditional
-   * bindings must specify version 3. Policies without any conditional bindings
-   * may specify any valid value or leave the field unset. To learn which
-   * resources support conditions in their IAM policies, see the [IAM
+   * @opt_param int options.requestedPolicyVersion Optional. The maximum policy
+   * version that will be used to format the policy. Valid values are 0, 1, and 3.
+   * Requests specifying an invalid value will be rejected. Requests for policies
+   * with any conditional role bindings must specify version 3. Policies with no
+   * conditional role bindings may specify any valid value or leave the field
+   * unset. The policy in the response might use the policy version that you
+   * specified, or it might use a lower policy version. For example, if you
+   * specify version 3, but the policy has no conditional role bindings, the
+   * response uses version 1. To learn which resources support conditions in their
+   * IAM policies, see the [IAM
    * documentation](https://cloud.google.com/iam/help/conditions/resource-
    * policies).
    * @return Policy
@@ -185,14 +173,19 @@ class ProjectsLocationsFunctions extends \Google\Service\Resource
    * Returns a list of functions that belong to the requested project.
    * (functions.listProjectsLocationsFunctions)
    *
-   * @param string $parent The project and location from which the function should
-   * be listed, specified in the format `projects/locations` If you want to list
-   * functions in all locations, use "-" in place of a location. When listing
-   * functions in all locations, if one or more location(s) are unreachable, the
-   * response will contain functions from all reachable locations along with the
-   * names of any unreachable locations.
+   * @param string $parent Required. The project and location from which the
+   * function should be listed, specified in the format `projects/locations` If
+   * you want to list functions in all locations, use "-" in place of a location.
+   * When listing functions in all locations, if one or more location(s) are
+   * unreachable, the response will contain functions from all reachable locations
+   * along with the names of any unreachable locations.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string filter The filter for Functions that match the filter
+   * expression, following the syntax outlined in https://google.aip.dev/160.
+   * @opt_param string orderBy The sorting order of the resources returned. Value
+   * should be a comma separated list of fields. The default sorting oder is
+   * ascending. See https://google.aip.dev/132#ordering.
    * @opt_param int pageSize Maximum number of functions to return per call.
    * @opt_param string pageToken The value returned by the last
    * `ListFunctionsResponse`; indicates that this is a continuation of a prior
@@ -211,26 +204,28 @@ class ProjectsLocationsFunctions extends \Google\Service\Resource
    *
    * @param string $name A user-defined name of the function. Function names must
    * be unique globally and match pattern `projects/locations/functions`
-   * @param CloudFunction $postBody
+   * @param CloudfunctionsFunction $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string updateMask Required list of fields to be updated in this
-   * request.
+   * @opt_param string updateMask The list of fields to be updated. If no field
+   * mask is provided, all provided fields in the request will be updated.
    * @return Operation
    */
-  public function patch($name, CloudFunction $postBody, $optParams = [])
+  public function patch($name, CloudfunctionsFunction $postBody, $optParams = [])
   {
     $params = ['name' => $name, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('patch', [$params], Operation::class);
   }
   /**
-   * Sets the IAM access control policy on the specified function. Replaces any
-   * existing policy. (functions.setIamPolicy)
+   * Sets the access control policy on the specified resource. Replaces any
+   * existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and
+   * `PERMISSION_DENIED` errors. (functions.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -242,13 +237,17 @@ class ProjectsLocationsFunctions extends \Google\Service\Resource
     return $this->call('setIamPolicy', [$params], Policy::class);
   }
   /**
-   * Tests the specified permissions against the IAM access control policy for a
-   * function. If the function does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error. (functions.testIamPermissions)
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of permissions, not a
+   * `NOT_FOUND` error. Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization checking.
+   * This operation may "fail open" without warning.
+   * (functions.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse

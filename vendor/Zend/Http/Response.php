@@ -256,7 +256,7 @@ class Zend_Http_Response
         $body = '';
 
         // Decode the body if it was transfer-encoded
-        switch (strtolower($this->getHeader('transfer-encoding'))) {
+        switch (strtolower((string)$this->getHeader('transfer-encoding'))) {
 
             // Handle chunked body
             case 'chunked':
@@ -271,7 +271,7 @@ class Zend_Http_Response
         }
 
         // Decode any content-encoding (gzip or deflate) if needed
-        switch (strtolower($this->getHeader('content-encoding'))) {
+        switch (strtolower((string)$this->getHeader('content-encoding'))) {
 
             // Handle gzip encoding
             case 'gzip':
@@ -528,8 +528,7 @@ class Zend_Http_Response
                 $last_header = $h_name;
             } elseif (preg_match("|^\s+(.+)$|", $line, $m) && $last_header !== null) {
                 if (is_array($headers[$last_header])) {
-                    end($headers[$last_header]);
-                    $last_header_key = key($headers[$last_header]);
+                    $last_header_key = array_key_last($headers[$last_header]);
                     $headers[$last_header][$last_header_key] .= $m[1];
                 } else {
                     $headers[$last_header] .= $m[1];

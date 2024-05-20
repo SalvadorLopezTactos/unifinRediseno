@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS/FastCGI sapi kullanımının optimal performansı için, php.ini dosyasında fastcgi.logging değerini 0 olarak belirtin.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Desteklenmeyen PHP Versiyonu Yüklendi: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Veritabanı kullanılamaz',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Veri Tabanı Desteği bulunamadı.  Lütfen aşağıdaki desteklenen Veri Tabanı Türlerinden biri için gerekli sürücülere sahip olduğunuzdan emin olun: MySQL, MS SQLServer, Oracle, or DB2.  PHP sürümünüze bağlı olarak, php.ini dosyasındaki uzantının yorumunu kaldırmanız veya doğru ikili dosyayla yeniden derlemeniz gerekebilir.  Veri Tabanı Desteğinin nasıl etkinleştirileceği hakkında daha fazla bilgi için lütfen PHP Kılavuzunuza bakın.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Veri Tabanı Desteği bulunamadı.  Lütfen desteklenen şu Veri Tabanı Türlerinden biri için gerekli sürücülere sahip olduğunuzdan emin olun: MySQL, MS SQLServer, Oracle veya DB2.  Php.ini dosyasındaki uzantının yorumunu kaldırmanız veya PHP sürümünüze bağlı olarak doğru ikili dosyayla yeniden derlemeniz gerekebilir.  Veri Tabanı Desteğinin nasıl etkinleştirileceği hakkında daha fazla bilgi için lütfen PHP Kılavuzunuza bakın.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugar uygulaması tarafından ihtiyaç duyulan XML Ayrıştırıcı Kütüphaneleri fonksiyonları bulunamadı. PHP versiyonun bağlı olarak, php.ini dosyasında eklentileri aktive etmeniz veya doğru seçenekler ile tekrar derlemeniz gerekebilir. Daha fazla bilgi için PHP Kılavuzuna bakınız.',
     'LBL_CHECKSYS_CSPRNG' => 'Rasgele sayı üretici',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugar uygulaması tarafından ihtiyaç duyulan Multibyte Strings PHP eki (mbstring) ile ilişkili fonksiyonlar bulunamadı.<br/><br/><br />Genellikle mbstring modülü varsayılan olarak PHP içinde etkin olmayıp, PHP programı oluşturulurken --enable-mbstring seçeneği ile etkinleştirilmelidir. <br /> Mbstring desteğini etkinleştirmek ile ilgili daha fazla bilgi için PHP Kılavuzuna bakınız.',
@@ -561,32 +561,15 @@ Bu aramayı reddedin
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Atama Bildirimi E-postaları',
-        'subject' => 'SugarCRM - Atanan $module_name ',
-        'description' => 'Bu şablon, Sistem bir kullanıcıya görev ataması gönderdiğinde kullanılır.',
-        'body' => '<div>
-<p>$assigned_by_user, &nbsp;$assigned_user kullanıcısına bir&nbsp;$module_name atadı.</p>
-
-<p>Bu&nbsp;$module_name modülünü inceleyebileceğiniz yer:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user, $assigned_user kullanıcısına bir $module_name atadı.
-
-Bu $module_name modülünü inceleyebileceğiniz yer:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Planlanmış Rapor E-postaları',
         'subject' => 'Planlanan Rapor: $report_time itibarı ile $report_name',
         'description' => 'Bu şablon, Sistem bir kullanıcıya planlanmış rapor gönderdiğinde kullanılır.',
         'body' => '<div>
-<p>Merhaba $assigned_user,</p>
-<p>Ekte, sizin için planlanmış otomatik olarak oluşturulan bir raporu bulabilirsiniz.</p>
-<p>Rapor Adı: $report_name</p>
-<p>Rapor İşleme Tarihi ve Saati: $report_time</p>
+<p>Merhaba $assigned_user,<br></p>
+<p>Ekte, sizin için planlanmış otomatik olarak oluşturulan bir raporu bulabilirsiniz.<br></p>
+<p>Rapor Adı: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Rapor İşleme Tarihi ve Saati: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Merhaba $assigned_user,
@@ -612,14 +595,6 @@ Rapor İşleme Tarihi ve Saati: $report_time',
             Yorumu görmek için lütfen Sugar\'a giriş yapın.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Yeni hesap bilgileri',
-        'description' => 'Bu şablon, Sistem Yöneticisi bir kullanıcıya yeni bir şifre gönderirken kullanılır.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Kullanıcı İsminiz ve Geçici Şifreniz aşağıda paylaşılmaktadır: </p><p>Kullanıcı İsmi : $contact_user_user_name </p><p>Şifre : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Yukarıdaki şifreyi kullanarak uygulamaya bağlandıktan sonra, şifreyi değiştirmeniz gerekebilir.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'Aşağıda kullanıcı ismi ve geçici şifre bulunmaktadır:<br />Kullanıcı İsmi :  $contact_user_user_name<br />Şifre: $contact_user_user_hash<br /><br />$config_site_url<br /><br />Üstteki şifreyi kullanıp sisteme girdikten sonra, kendi seçtiğiniz bir parola ile sıfırlama gerekli olabilir.',
-        'name' => 'Sistem tarafından oluşturulan E-Posta şifresi',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Hesabınızın şifresini sıfırlayınız',
         'description' => "Bu şablon, kullanıcı hesabının şifresini sıfırlama linkini kullanıcıya göndermek için kullanılır.",

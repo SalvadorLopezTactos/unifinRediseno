@@ -78,7 +78,7 @@ $from_addr = '';
 $reply_to_name = '';
 $reply_to_addr = '';
 $distrib_method ='';
-$filterDomain = '';
+$filterDomains = '';
 $trashFolder = '';
 $sentFolder = '';
 $distributionMethod = '';
@@ -92,22 +92,22 @@ if(!empty($focus->stored_options)) {
 	// FROM NAME and Address
     $storedOptions = unserialize(base64_decode($focus->stored_options), ['allowed_classes' => false]);
 
-	$from_name = (isset($storedOptions['from_name']) ? $storedOptions['from_name'] : "");
-	$from_addr = (isset($storedOptions['from_addr']) ? $storedOptions['from_addr'] : "");
+    $from_name = ($storedOptions['from_name'] ?? "");
+    $from_addr = ($storedOptions['from_addr'] ?? "");
 
-	$reply_to_name = (isset($storedOptions['reply_to_name'])) ? $storedOptions['reply_to_name'] : "";
-	$reply_to_addr = (isset($storedOptions['reply_to_addr'])) ? $storedOptions['reply_to_addr'] : "";
+    $reply_to_name = $storedOptions['reply_to_name'] ?? "";
+    $reply_to_addr = $storedOptions['reply_to_addr'] ?? "";
 		// only-since option
 	if($storedOptions['only_since']) {
 		$onlySince = $mod_strings['LBL_ONLY_SINCE_YES'];
 	} else {
 		$onlySince = $mod_strings['LBL_ONLY_SINCE_NO'];
 	}
-	// filter-domain
-	if(isset($storedOptions['filter_domain']) && !empty($storedOptions['filter_domain'])) {
-		$filterDomain = $storedOptions['filter_domain'];
+    // filter-domains
+    if (isset($storedOptions['filter_domains']) && !empty($storedOptions['filter_domains'])) {
+        $filterDomains = $storedOptions['filter_domains'];
 	} else {
-		$filterDomain = $app_strings['NTC_NO_ITEMS_DISPLAY'];
+        $filterDomains = $app_strings['NTC_NO_ITEMS_DISPLAY'];
 	}
 	// Trash Folder
 	if(isset($storedOptions['trashFolder']) && !empty($storedOptions['trashFolder'])) {
@@ -132,9 +132,9 @@ if(!empty($focus->stored_options)) {
 	} else {
 		$leaveMessagesOnMailServer = $app_strings['LBL_EMAIL_NO'];
 	} // else
-	$distrib_method = (isset($storedOptions['distrib_method'])) ? $storedOptions['distrib_method'] : "";
-	$create_case_email_template = (isset($storedOptions['create_case_email_template'])) ? $storedOptions['create_case_email_template'] : "";
-	$email_num_autoreplies_24_hours = (isset($storedOptions['email_num_autoreplies_24_hours'])) ? $storedOptions['email_num_autoreplies_24_hours'] : $focus->defaultEmailNumAutoreplies24Hours;
+    $distrib_method = $storedOptions['distrib_method'] ?? "";
+    $create_case_email_template = $storedOptions['create_case_email_template'] ?? "";
+    $email_num_autoreplies_24_hours = $storedOptions['email_num_autoreplies_24_hours'] ?? $focus->defaultEmailNumAutoreplies24Hours;
     
 	if( isset($storedOptions['allow_outbound_group_usage']) && $storedOptions['allow_outbound_group_usage'] == 1) 
 	   $allow_outbound_group_usage = $app_list_strings['dom_email_bool']['bool_true'];
@@ -236,7 +236,7 @@ $xtpl->assign('DEFAULT_FROM_ADDR', $default_from_addr);
 $xtpl->assign('REPLY_TO_NAME', $reply_to_name);
 $xtpl->assign('REPLY_TO_ADDR', $reply_to_addr);
 $xtpl->assign('ONLY_SINCE', $onlySince);
-$xtpl->assign('FILTER_DOMAIN', $filterDomain);
+$xtpl->assign('FILTER_DOMAINS', $filterDomains);
 $xtpl->assign('EMAIL_NUM_AUTOREPLIES_24_HOURS', $email_num_autoreplies_24_hours);
 if(!empty($focus->port)) {
 	$xtpl->assign('PORT', $focus->port);

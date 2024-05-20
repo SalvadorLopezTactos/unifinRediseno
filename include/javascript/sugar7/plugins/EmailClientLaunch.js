@@ -55,7 +55,7 @@
         app.plugins.register('EmailClientLaunch', ['view', 'field'], {
 
             events: {
-                'click a[data-action="email"]': 'launchEmailClient'
+                'click a[data-action="email"], button[data-action="email"]': 'launchEmailClient'
             },
 
             /**
@@ -402,7 +402,8 @@
                 if (this.view && _.isFunction(this.view.getContextModel)) {
                     return this.view.getContextModel();
                 } else {
-                    var context = this.context.parent || this.context || {};
+                    var context = this.context.get('name') === 'record-drawer' ? this.context :
+                        (this.context.parent || this.context || {});
                     return context ? context.get('model') : {};
                 }
             },

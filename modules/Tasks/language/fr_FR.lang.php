@@ -117,4 +117,13 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
  - Cliquer sur "Voir plus" pour afficher plus de champs, si nécessaire.
 2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Tâche du guide intelligent',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Est une tâche du guide intelligent',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Date de début de l&#39;activité du guide intelligent',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Date d’achèvement de l’activité du guide intelligent',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Guide intelligent - Jours pour terminer',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Réunions enfants',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Appels enfants',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Tâches enfants',
 );

@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> '사용자 정보가 발견되지 않았습니다.',
     'ERR_USER_NAME_EXISTS'              => '사용자 이름 {0} 이미 존재합니다. 중복 사용자 이름이 허용되지 않습니다. 사용자 이름을 고유한 것으로 변경하십시오.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” 라이선스는 추가 호환 라이선스 유형과 함께 저장해야 합니다',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => '이 기능은 Sugar Sell Premier에 포함되어 있습니다.',
 	'ERR_USER_IS_LOCKED_OUT'			=> '이 사용자는 Sugar어플리케이션에 들어오지 못하며 기존의 비밀번호를 이용해 접속할수 없습니다.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => '외부 인증 전용 사용자는 Sugar 자격증명을 사용하여 로그인할 수 없습니다.',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => '비밀번호:',
     'LBL_CHOOSE_A_KEY'					=> '귀하의 달력에 인증되지 않은 발표를 막기위한 키를 선택하십시오',
     'LBL_NO_KEY'                        => '키가 설정되지 않았습니다. 배포를 하시려면 키를 설정해주세요.',
-	'LBL_CHOOSE_WHICH'					=> '상위 탐색바에 접속할수 있는 모듈을 선택하십시오. 어떤 모듈이 나타날지 순서를 지정하십시오',
+    'LBL_CHOOSE_WHICH'                  => '사이드 내비게이션 바에 접속할 수 있는 모듈을 선택하십시오. 모듈이 나타날 순서를 지정하십시오',
+    'LBL_NUMBER_PINNED_MODULES'         => '고정된 모듈 수',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => '내비게이션 바를 접었을 때 고정 가능한 모듈 수를 입력합니다(예: 5를 입력하면 목록 처음 5개 모듈이 고정됨). 가장 자주 사용하는 모듈을 대표하는 수를 사용하는 것을 권장합니다. 100을 초과하는 값은 무시됩니다.',
 	'LBL_CITY'							=> '시:',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> '비우기',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP 사용자명:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP 서버 형식:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP 서버내역',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => '인증된 이메일 계정',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => '이메일 공급자를 선택하십시오.',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! 메일 비밀번호',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! 메일 ID:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => '사용자/팀/역할',
     'LBL_LOADING_ITEMS' => '데이터 불러오는 중...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Smart Guide 액세스',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Smart Guide 마지막 활성',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Smart Guide 액세스 누락',
 ); // END STRINGS DEFS

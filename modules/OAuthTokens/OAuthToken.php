@@ -35,9 +35,9 @@ class OAuthToken extends SugarBean
     // so it's an extension point for the future
     public $authdata;
 
-    const REQUEST = 1;
-    const ACCESS = 2;
-    const INVALID = 3;
+    public const REQUEST = 1;
+    public const ACCESS = 2;
+    public const INVALID = 3;
 
     public function __construct($token='', $secret='')
 	{
@@ -258,12 +258,12 @@ SQL;
             $query .= '
 ORDER BY expire_ts DESC';
         }
-        $stmt = $conn->executeQuery(
+        $result = $conn->executeQuery(
             $query,
             $params
         );
 
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             if (count($skip) < $limit) {
                 $skip[$row['id']] = $row['id'];
             } else {
@@ -319,7 +319,7 @@ ORDER BY expire_ts DESC';
 	{
         $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
         $conn = $this->db->getConnection();
-        $conn->executeQuery($query, array($this->id));
+        $conn->executeStatement($query, array($this->id));
 	}
 
 	/**

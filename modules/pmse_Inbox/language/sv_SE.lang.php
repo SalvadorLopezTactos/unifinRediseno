@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Historik',
     'LBL_PMSE_LABEL_NOTES' => 'Visa Anteckningar',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Lägg till Anteckningar',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Skicka till DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Välj...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Användare',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Är du säker på att du vill godkänna denna process?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Är du säker på att du vill neka denna process?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Är du säker på att du vill dirigera om denna process?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Är du säker på att du vill skicka denna process till DocuSign?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Processen har godkänts',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Processen har nekats',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Processen har dirigerats',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Processen har skickats till DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'Processen du försöker visa är stängd.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Processen du försöker visa är inte tillgänglig just nu.',
 

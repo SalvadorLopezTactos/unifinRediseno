@@ -92,13 +92,15 @@ class RepairAndClear
      * @param bool $autoexecute
      * @param bool $show_output
      * @param bool $metadata_sections
+     * @param array $skipExtensionsSections
      */
     public function repairAndClearAll(
         $selected_actions,
         $modules,
         $autoexecute = false,
         $show_output = true,
-        $metadata_sections = false
+        $metadata_sections = false,
+        array $skipExtensionsSections = []
     ) {
         $systemProcessLock = new SystemProcessLock(__METHOD__);
 
@@ -112,7 +114,8 @@ class RepairAndClear
             $modules,
             $autoexecute,
             $show_output,
-            $metadata_sections
+            $metadata_sections,
+            $skipExtensionsSections
         ) {
             // if the lock was acquired immediately or if the current user is admin
             if ($attempt ==1
@@ -122,7 +125,8 @@ class RepairAndClear
                     $modules,
                     $autoexecute,
                     $show_output,
-                    $metadata_sections
+                    $metadata_sections,
+                    $skipExtensionsSections
                 );
             } else {
                 // otherwise ignore regular user QRR requests
@@ -144,13 +148,15 @@ class RepairAndClear
      * @param bool $autoexecute
      * @param bool $show_output
      * @param bool $metadata_sections
+     * @param array $skipExtensionsSections
      */
     public function repairAndClearAllUnsafe(
         $selected_actions,
         $modules,
         $autoexecute = false,
         $show_output = true,
-        $metadata_sections = false
+        $metadata_sections = false,
+        array $skipExtensionsSections = []
     ): void {
         // allow admin to access everything,
         // don't remove $adminWork until you don’t need the privilege anymore
@@ -194,11 +200,11 @@ class RepairAndClear
                 break;
             case 'rebuildExtensions':
                 if(in_array($mod_strings['LBL_ALL_MODULES'], $this->module_list)) {
-                    $this->rebuildExtensions();
+                    $this->rebuildExtensions([], $skipExtensionsSections);
                     // Mark this as called so it doesn't get ran again
                     $this->called[$current_action] = true;
                 } else {
-                    $this->rebuildExtensions($this->module_list);
+                    $this->rebuildExtensions($this->module_list, $skipExtensionsSections);
                 }
                 break;
             case 'clearTpls':
@@ -402,7 +408,11 @@ class RepairAndClear
 		}
 	}
 
-	public function rebuildExtensions($objects = array())
+    /**
+     * @param array $objects
+     * @param array $skipExtensionsSections
+     */
+    public function rebuildExtensions(array $objects = [], array $skipExtensionsSections = []) : void
 	{
         // allow admin to access everything,
         // don't remove $adminWork until you don’t need the privilege anymore
@@ -431,6 +441,9 @@ class RepairAndClear
 
         $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
         $mi = new $moduleInstallerClass();
+        foreach ($skipExtensionsSections as $skipExtensionsSection) {
+            unset($mi->extensions[$skipExtensionsSection]);
+        }
 		$mi->rebuild_all(!$this->show_output, $modules);
 
 		// Remove the "Rebuild Extensions" red text message on admin logins

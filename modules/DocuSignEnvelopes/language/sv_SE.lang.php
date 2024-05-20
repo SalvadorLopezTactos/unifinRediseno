@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Ingen klienthemlighet har ställts in',
     'LBL_RESEND_BUTTON_LABEL' => 'Skicka igen',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Hämta kuvert',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Typ av molntjänst',
+    'LBL_CLOUD_PATH' => 'Molnsökväg',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Panel DocuSign-kuvertlista',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Senaste DocuSign-kuvert',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda DocuSign-kuvert',
 
-    'LBL_DOCUMENT_FROM' => 'Dokument från ',
+    'LBL_NEW_ENVELOPE' => 'Nytt kuvert',
     'LBL_DOCUMENT_IS_NOW' => ' är nu ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign-fel. Det gick inte att hämta konto-id:t baserat på åtkomsttoken',
     'LBL_ERROR_RESEND' => 'DocuSign kunde inte skicka om. Kuvertstatusen måste vara ”skickad”',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Uppdateringen misslyckades',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign-reglerna tillåter inte flera förfrågningar till samma kuvert inom 15 minuter',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Ett fel uppstod. Kuvertet kunde inte uppdateras. Kontrollera loggarna!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Ett fel uppstod. Mallar kunde inte uppdateras. Kontrollera loggarna!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Ett fel uppstod. Mall kunde inte hämtas. Kontrollera loggarna!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Kuvertet har inte slutförts',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Kuvertstatus i Docusign är nu ',
     'LBL_OVERVIEW' => 'Översikt',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Lägg till dokument',
     'LBL_BUTTON_SEND' => 'Skicka',
     'LBL_BUTTON_CLEAR' => 'Rensa',
-    'LBL_MISSING_OBJECT' => 'DocuSign-objektet finns inte i fönstret',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Använd mall',
     'LBL_PLEASE_LOG_IN' => 'Logga in i DocuSign först!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Du kan inte ladda ner det här dokumentet. Det har skapats av en annan användare!',
     'LBL_SEND_NOT_ALLOWED' => 'Du kan inte skicka det här kuvertet. Det har skapats av en annan användare!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Signerad',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Det gick inte att ladda ner dokumentet. Kontrollera loggarna för mer information!',
     'LBL_DOCUMENT_COMPLETED' => 'Slutförd',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign Info',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'är nu',
+    'LBL_SETTINGS_TITLE' => 'DocuSign-inställningar',
+    'LBL_RECIPIENT_SELECTION' => 'Mottagarens valbeteende',
+    'LBL_RECIPIENT_NAME' => 'Name',
+    'LBL_RECIPIENT_EMAIL' => 'E-post',
+    'LBL_RECIPIENT_TYPE' => 'Typ',
+    'LBL_TEMPLATE_NAME' => 'Namn',
+    'LBL_RECIPIENT_SELECT' => 'Välj ...',
+    'LBL_RECIPIENT_ROLE' => 'Roll',
+    'LBL_SELECT_BUTTON_LABEL' => 'Välj',
+    'LBL_BACK_BUTTON_LABEL' => 'Tillbaka',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Kunde inte hämta potentiella mottagare!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Kunde inte hämta mallar!',
 ];

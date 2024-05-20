@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Formulierknoppen',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Goedkeuren/Weigeren',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Routeren',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Stuur naar DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Andere routeringsopties',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Change Record Owner',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Team',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Doc samenvoegen',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Selecteer...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Doc samenvoegen naar pdf',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Samengevoegd document verzenden via e-mail',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Doc samenvoegen',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Convergerend type gateway komt niet overeen met type gateway van inkomende flow',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Verschillende gateways breiden processen uit richting meerdere branches. Als u een convergerende gateway gebruikt om deze branches weer naar één pad te lijden, dan moet het juiste type convergerende gateway worden gebruikt, afhankelijk van het type divergerende gateway dat gebruikt is om de branches aan te maken. Voor branches die zijn aangemaakt met exclusieve of op gebeurtenissen gebaseerde divergerende gateways, gebruikt u een exclusieve convergerende gateway om deze opnieuw te convergeren. Voor branches die zijn aangemaakt met parallelle of inclusieve divergerende gateways, gebruikt u een parallelle convergerende gateway om ze opnieuw te convergeren.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Moduleveld',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Relatie module',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Gebruiker',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Rol',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Team',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Formulieractiviteit',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Zakelijke regel',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Actie zakelijke regel',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-mailsjabloon',
 );

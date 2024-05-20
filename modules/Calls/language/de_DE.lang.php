@@ -194,4 +194,10 @@ Um {{calls_singular_module}} zu erstellen:
     - Klicken Sie auf "Teilnehmer auswählen", um einen bestehenden Benutzer, Kontakt oder Interessent zu {{calls_singular_module}} hinzuzufügen.
     - Klicken Sie auf das Plus-Icon rechts von "Teilnehmer auswählen", um einen {{calls_singular_module}} Teilnehmer als neuen Sugar-Eintrag hinzuzufügen.
 3. Klicken Sie auf "Speichern", um den Datensatz fertigzustellen und auf die letzte Seite zurück zu kommen.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Ist Smart Guide Call",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Untergeordnete Aufgaben',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Untergeordnete Meetings',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Untergeordnete Anrufe',
 );

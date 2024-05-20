@@ -72,7 +72,7 @@ class ModuleCommand extends Command implements InstanceModeInterface
         }
 
         $settings = new AdminSettings();
-        list($enabled, $disabled) = $settings->getModules();
+        [$enabled, $disabled] = $settings->getModules();
 
         if ($action === 'enable') {
             if (!in_array($module, $disabled)) {
@@ -92,5 +92,6 @@ class ModuleCommand extends Command implements InstanceModeInterface
 
         $settings->saveFTSModuleListSettings($enabled, $disabled);
         MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_SERVERINFO, MetaDataManager::MM_MODULES));
+        return 0;
     }
 }

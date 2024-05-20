@@ -13,6 +13,12 @@
 
 class ACLJSController{
 
+    /**
+     * @var mixed|mixed[]
+     */
+    public $module;
+    public $is_owner;
+    public $form;
     public function __construct($module, $form = '', $is_owner = false)
     {
 

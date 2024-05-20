@@ -11,35 +11,48 @@
 
 namespace Symfony\Component\Security\Core\Encoder;
 
+use Symfony\Component\PasswordHasher\Hasher\MessageDigestPasswordHasher;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+
+trigger_deprecation('symfony/security-core', '5.3', 'The "%s" class is deprecated, use "%s" instead.', MessageDigestPasswordEncoder::class, MessageDigestPasswordHasher::class);
 
 /**
  * MessageDigestPasswordEncoder uses a message digest algorithm.
  *
  * @author Fabien Potencier <fabien@symfony.com>
+ *
+ * @deprecated since Symfony 5.3, use {@link MessageDigestPasswordHasher} instead
  */
 class MessageDigestPasswordEncoder extends BasePasswordEncoder
 {
     private $algorithm;
     private $encodeHashAsBase64;
-    private $iterations;
+    private $iterations = 1;
+    private $encodedLength = -1;
 
     /**
      * @param string $algorithm          The digest algorithm to use
      * @param bool   $encodeHashAsBase64 Whether to base64 encode the password hash
      * @param int    $iterations         The number of iterations to use to stretch the password hash
      */
-    public function __construct($algorithm = 'sha512', $encodeHashAsBase64 = true, $iterations = 5000)
+    public function __construct(string $algorithm = 'sha512', bool $encodeHashAsBase64 = true, int $iterations = 5000)
     {
         $this->algorithm = $algorithm;
         $this->encodeHashAsBase64 = $encodeHashAsBase64;
+
+        try {
+            $this->encodedLength = \strlen($this->encodePassword('', 'salt'));
+        } catch (\LogicException $e) {
+            // ignore algorithm not supported
+        }
+
         $this->iterations = $iterations;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function encodePassword($raw, $salt)
+    public function encodePassword(string $raw, ?string $salt)
     {
         if ($this->isPasswordTooLong($raw)) {
             throw new BadCredentialsException('Invalid password.');
@@ -63,8 +76,12 @@ class MessageDigestPasswordEncoder extends BasePasswordEncoder
     /**
      * {@inheritdoc}
      */
-    public function isPasswordValid($encoded, $raw, $salt)
+    public function isPasswordValid(string $encoded, string $raw, ?string $salt)
     {
+        if (\strlen($encoded) !== $this->encodedLength || str_contains($encoded, '$')) {
+            return false;
+        }
+
         return !$this->isPasswordTooLong($raw) && $this->comparePasswords($encoded, $this->encodePassword($raw, $salt));
     }
 }

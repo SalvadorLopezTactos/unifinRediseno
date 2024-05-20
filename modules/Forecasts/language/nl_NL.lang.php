@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Bekijk forecast historie',
     'LBL_FORECAST_HISTORY' => 'Forecasts: historie',
     'LBL_FORECAST_HISTORY_TITLE' => 'Geschiedenis',
+    'LBL_TAB_COMMITMENT' => 'Commitment',
+    'LBL_CURRENT' => 'Huidig',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Periode',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Gewijzigd door',
     'LBL_WK_VERSION' => 'Versie',
     'LBL_WK_REVISION' => 'Revisie:',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Voor toegang tot de API van de gegevens is Sugar Sell Premier nodig',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Periode:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Wilt u voor deze bedragen commitment vastleggen?',
     'ERR_FORECAST_AMOUNT' => 'Het commit bedrag is verplicht en moet numeriek zijn.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Inbegrepen pijplijn',
+    'LBL_UPSIDE_PIPELINE' => 'Bovenkant pijplijn',
+    'LBL_EXCLUDED_PIPELINE' => 'Uitgesloten pijplijn',
+    'LBL_WON' => 'Gewonnen',
+    'LBL_LOST' => 'Verloren',
+    'LBL_ALL' => 'Alle',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Begeleiding filters',
+    'LBL_HELP_MAIN_BODY' => 'Alle gegevens bevatten alleen Opportunity&#39;s die tot de geselecteerde gebruiker(s), periode en eventuele toegepaste filters behoren',
+    'LBL_FORECAST_HELP' => 'Opportunity&#39;s die al zijn gewonnen of in een {{{forecastStage}}} zijn',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Open opportunity&#39;s met een {{{forecastStage}}} van {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Open opportunity&#39;s in een inbegrepen {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Open opportunity&#39;s met een {{{forecastStage}}} van {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Open opportunity&#39;s met een {{{forecastStage}}} van {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Open opportunity&#39;s in een uitgesloten {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Opportunity&#39;s die reeds zijn gewonnen',
+    'LBL_LOST_HELP' => 'Opportunity&#39;s die reeds zijn verloren',
+    'LBL_ALL_HELP' => 'Alle opportunity&#39;s',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Startdatum',
     'LBL_FC_USER' => 'Gepland voor',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Commitment',
     'LBL_TEAM_COMMITMENT' => 'Teamcommitment',
     'LBL_FORECASTED' => 'Voorspeld',
+    'LBL_OPPORTUNITY_FORECAST' => 'Opportunityvoorspelling',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Voorspelling omzetregelitem',
+    'LBL_LAST_COMMITMENT' => 'Laatste commitment',
     'LBL_ADJUSTED_TOTAL' => 'Gewijzigd totaal',
     'LBL_COMMIT_STAGE' => 'Commitment stadium',
     'LBL_SALES_STAGE' => 'Stadium',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Bijgesteld)',
     'LBL_SAVE_DRAFT' => 'Opslaan',
     'LBL_CHANGES_BY' => 'Wijzigingen door {0}',
-    'LBL_FORECAST_SETTINGS' => 'Instellingen',
+    'LBL_FORECAST_SETTINGS' => 'Forecast instellingen',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'forecast instellingen',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Begindatum van fiscaal jaar:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configureer de periode die gebruikt zal worden in de forecast module.<br><br>Let op dat de gekozen instellingen voor de perioden niet gewijzigd kunnen worden.<br><br>Begin door de begindatum van uw fiscale jaar te kiezen. Kies vervolgens de periode voor de forecast. Het bereik van de perioden zal automatisch berekend worden op basis van uw selecties. De onderliggende periode is de basis voor het forecastwerkblad.<br><br>De zichtbare toekomstige en historische perioden zullen het aantal van zichtbare onderliggende perioden bepalen in de forecast module. Gebruikers zijn in staat om de waarden te tonen en aan te passen in de zichtbare onderliggende perioden.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureer hoe u {{forecastByModule}} wilt categoriseren. <br><br>Houd er rekening mee dat de Bereikinstellingen na de eerste bevestiging niet meer kunnen worden gewijzigd. Voor bijgewerkte exemplaren is de Bereikinstelling vergrendeld in de bestaande Voorspellingsgegevens.<br><br>U kunt twee of meer categorieën selecteren op basis van waarschijnlijkheidsbereik of u kunt categorieën aanmaken die niet zijn gebaseerd op waarschijnlijkheid. <br><br>Er zijn selectievakjes links van uw aangepaste categorieën. Gebruik deze om aan te geven welk bereik wordt opgenomen in het bevestigde Voorspelde aantal en aan managers wordt gerapporteerd. <br><br>Een gebruiker kan de status insluiten/uitsluiten en de categorie {{forecastByModule}} handmatig gebruiken vanuit het werkblad.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureer hoe u {{forecastByModule}} wilt categoriseren. <br><br>Houd er rekening mee dat de bereikinstellingen niet gewijzigd kunnen worden na de eerste toewijzing. Voor geüpgradede instanties zijn bestaande prognosegegevens opgenomen in de bereikinstelling.<br><br>U kunt twee of meer categorieën selecteren op basis van waarschijnlijkheidsbereik of categorieën maken die niet op waarschijnlijkheid zijn gebaseerd. <br><br>Er zijn selectievakjes links van uw aangepaste categorieën. Gebruik deze om te kiezen welk bereik opgenomen wordt in de bevestigde prognose en aan managers wordt gerapporteerd. <br><br>Een gebruiker kan de status en categorie Opnemen/Uitsluiten en de categorie van {{forecastByModule}} handmatig wijzigen vanuit het werkblad.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Kies de kolommen die de gebruiker in moet vullen voor elke forecast van elke bij het voorspellen van {{forecastByModuleSingular}}. Let hierbij op dat de "Meest waarschijnlijke" waarde gekoppeld is aan de getoonde waarde bij {{forecastByModule}}; Vandaar dat de "Meest waarschijnlijke" kolom niet verborgen kan worden.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Kies de kolommen die u wil zien in de forecast module. Het werkblad zal samengesteld worden uit de lijst met velden, waarbij de gebruiker kan kiezen hoe deze getoond wordt.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ik ben een placeholder voor "Hoe werkt &#39;Forecast door&#39;!"',

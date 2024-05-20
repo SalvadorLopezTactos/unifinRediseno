@@ -95,30 +95,23 @@
 	<tr>
 		<th align="left" scope="row" colspan="4"><h4>{$MOD.LBL_LOCALE_DEFAULT_CURRENCY}</h4></th>
 	</tr><tr>
-		<td  scope="row" width="200">{$MOD.LBL_LOCALE_DEFAULT_CURRENCY_NAME}: </td>
+		<td  scope="row" width="200">{$MOD.LBL_LOCALE_DEFAULT_CURRENCY_ISO4217}: </td>
 		<td  >
-			<input type='text' size='25' name='default_currency_name' value='{$config.default_currency_name}' >
+			<input type='text' size='4' name='default_currency_iso4217' value='{$config.default_currency_iso4217}'>
 		</td>
 		<td  scope="row" width="200">{$MOD.LBL_LOCALE_DEFAULT_CURRENCY_SYMBOL}: </td>
 		<td  >
 			<input type='text' size='4' name='default_currency_symbol'  value='{$config.default_currency_symbol}' >
 		</td>
 	</tr><tr>
-		<td  scope="row" width="200">{$MOD.LBL_LOCALE_DEFAULT_CURRENCY_ISO4217}: </td>
-		<td  >
-			<input type='text' size='4' name='default_currency_iso4217' value='{$config.default_currency_iso4217}'>
-		</td>
 		<td  scope="row">{$MOD.LBL_LOCALE_DEFAULT_NUMBER_GROUPING_SEP}: </td>
 		<td  >
 			<input type='text' size='3' maxlength='1' name='default_number_grouping_seperator' value='{$config.default_number_grouping_seperator}'>
 		</td>
-	</tr><tr>
 		<td  scope="row">{$MOD.LBL_LOCALE_DEFAULT_DECIMAL_SEP}: </td>
 		<td  >
 			<input type='text' size='3' maxlength='1' name='default_decimal_seperator'  value='{$config.default_decimal_seperator}'>
 		</td>
-		<td  scope="row"></td>
-		<td  ></td>
 	</tr>
 </table>
 

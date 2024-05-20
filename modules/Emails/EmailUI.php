@@ -185,7 +185,7 @@ class EmailUI {
 		$this->smarty->assign('MAIL_SSL_OPTIONS', get_select_options_with_id($app_list_strings['email_settings_for_ssl'], ''));
 		$this->smarty->assign('ie_mod_strings', return_module_language($current_language, 'InboundEmail'));
 
-		$charsetSelectedValue = isset($emailSettings['defaultOutboundCharset']) ? $emailSettings['defaultOutboundCharset'] : false;
+        $charsetSelectedValue = $emailSettings['defaultOutboundCharset'] ?? false;
 		if (!$charsetSelectedValue) {
 			$charsetSelectedValue = $current_user->getPreference('default_export_charset', 'global');
 			if (!$charsetSelectedValue) {
@@ -471,7 +471,7 @@ eoq;
 		$defaultSignature = $current_user->getDefaultSignature();
 		$sigJson = !empty($defaultSignature) ? json_encode(array($defaultSignature['id'] => from_html($defaultSignature['signature_html']))) : "new Object()";
 		$this->smarty->assign('defaultSignature', $sigJson);
-		$this->smarty->assign('signatureDefaultId', (isset($defaultSignature['id'])) ? $defaultSignature['id'] : "");
+        $this->smarty->assign('signatureDefaultId', $defaultSignature['id'] ?? "");
 		//User Preferences
 		$this->smarty->assign('userPrefs', json_encode($this->getUserPrefsJS()));
 
@@ -536,13 +536,13 @@ eoq;
     public function getContacts()
     {
         global $current_user;
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery(
                 'SELECT * FROM address_book WHERE assigned_user_id = ? ORDER BY bean DESC',
                 [$current_user->id]
             );
         $ret = [];
-        foreach ($stmt as $addressBookData) {
+        foreach ($result->iterateAssociative() as $addressBookData) {
             $ret[$addressBookData['bean_id']] = array(
                 'id' => $addressBookData['bean_id'],
                 'module' => $addressBookData['bean'],
@@ -749,23 +749,21 @@ eoq;
 		global $current_user;
 
         $ret = [];
-        $addressBookLists = $this->db->getConnection()
-            ->executeQuery(
-                'SELECT id, list_name FROM address_book_lists WHERE assigned_user_id = ? ORDER BY list_name',
-                [$current_user->id]
-            );
+        $listsResult = $this->db->getConnection()->executeQuery(
+            'SELECT id, list_name FROM address_book_lists WHERE assigned_user_id = ? ORDER BY list_name',
+            [$current_user->id]
+        );
 
-        foreach ($addressBookLists as $addressBookList) {
+        foreach ($listsResult->iterateAssociative() as $addressBookList) {
             $ret[$addressBookList['id']] = [
                 $addressBookList['list_name'] => [],
             ];
 
-            $addressBookListItems = $this->db->getConnection()
-                ->executeQuery(
-                    'SELECT * FROM address_book_list_items WHERE list_id = ?',
-                    [$addressBookList['id']]
-                );
-            foreach ($addressBookListItems as $addressBookListItem) {
+            $listItemsResult = $this->db->getConnection()->executeQuery(
+                'SELECT * FROM address_book_list_items WHERE list_id = ?',
+                [$addressBookList['id']]
+            );
+            foreach ($listItemsResult->iterateAssociative() as $addressBookListItem) {
                 $ret[$addressBookList['id']][$addressBookList['list_name']][] = $addressBookListItem['bean_id'];
             }
         }
@@ -1521,7 +1519,6 @@ EOQ;
      *
      */
     function getDetailViewForEmail2($emailId) {
-
         $meta = [];
 		global $app_strings, $app_list_strings;
 		global $mod_strings;
@@ -1616,7 +1613,7 @@ EOQ;
 		}
 
 		$attachments = '';
-        for ($i=0; $i<(is_countable($notes_list) ? count($notes_list) : 0); $i++) {
+        for ($i = 0; $i < (is_countable($notes_list) ? count($notes_list) : 0); $i++) {
 			$the_note = $notes_list[$i];
 			$attachments .= "<a href=\"index.php?entryPoint=download&id={$the_note->id}&type=Notes\">".$the_note->name."</a><br />";
 			$focus->cid2Link($the_note->id, $the_note->file_mime_type);
@@ -2012,7 +2009,6 @@ function setLastRobin($ie, $lastRobin) {
 	 * @return array
 	 */
 function getSingleMessage($ie) {
-
         $out = [];
 		global $timedate;
 		global $app_strings,$mod_strings;
@@ -2235,7 +2231,7 @@ eoq;
                 $myCaseMacro = $myCase->getEmailSubjectMacro();
                 $email->parent_name = $myCase->name;
                 $GLOBALS['log']->debug("****Case # : {$myCase->case_number} macro: $myCaseMacro");
-                if (!strpos($email->name, (string) str_replace('%1', $myCase->case_number, $myCaseMacro))) {
+				if(!strpos($email->name, str_replace('%1',$myCase->case_number,$myCaseMacro))) {
 		        	$GLOBALS['log']->debug("Replacing");
 		            $email->name = str_replace('%1',$myCase->case_number,$myCaseMacro) . ' '. $email->name;
 		        }
@@ -2422,8 +2418,8 @@ eoq;
         $personACLAccessList = $person->ACLAccess('list');
         $requireOwner = ACLController::requireOwner($module, 'list');
         if ($personACLAccessList) { // build query
-            if (empty($whereArr)) {
-                $whereAdd = '';
+            $whereAddList = $this->buildWhereAddList($whereArr);
+            foreach ($whereAddList as $whereAdd) {
                 $t = $this->buildQuery(
                     $relatedIDs,
                     $table,
@@ -2437,32 +2433,6 @@ eoq;
                 if (!empty($t)) {
                     $q[] = '(' . $t . ')';
                 }
-            } else {
-                foreach ($whereArr as $column => $clause) {
-                    $clause = $current_user->db->quote($clause);
-
-                    // Since full_name isn't a DB field, we need to query by the
-                    // concatenation of {first_name} + " " + {last_name}
-                    if ($column === 'full_name') {
-                        $db = DBManagerFactory::getInstance();
-                        $column = $db->concat($table, ['first_name', 'last_name']);
-                    }
-
-                    $whereAdd = "{$column} LIKE '{$clause}%'";
-                    $t = $this->buildQuery(
-                        $relatedIDs,
-                        $table,
-                        $whereAdd,
-                        $requireOwner,
-                        $current_user,
-                        $beanType,
-                        $module,
-                        $person
-                    );
-                    if (!empty($t)) {
-                        $q[] = '(' . $t . ')';
-                    }
-                }
             }
         }
 
@@ -2471,6 +2441,55 @@ eoq;
         }
 
         return $finalQuery;
+    }
+
+    /**
+     * @param array $terms
+     * @return string[]
+     */
+    protected function buildWhereAddList(array $terms): array
+    {
+        if ($terms === []) {
+            return [''];
+        }
+
+        $db = DBManagerFactory::getInstance();
+        $whereAddList = [];
+        foreach ($terms as $field => $term) {
+            if ($field !== 'full_name') {
+                $term = $db->quote($term);
+                $field = $db->getValidDBName($field);
+                $whereAddList[] = "{$field} LIKE '{$term}%'";
+                continue;
+            }
+
+            $words = preg_split('#\s#', $term, -1, PREG_SPLIT_NO_EMPTY);
+            // don't search if the search term is a single word and we already searched this term in first_name or last_name
+            if (count($words) < 2) {
+                $hasName = ($terms['first_name'] ?? '') === $term || ($terms['last_name'] ?? '') === $term;
+                if (!$hasName) {
+                    $term = $db->quote($term);
+                    $whereAddList[] = "first_name LIKE '{$term}%'";
+                    $whereAddList[] = "last_name LIKE '{$term}%'";
+                }
+                continue;
+            }
+
+            // Since full_name isn't a DB field, we need to query by the concatenation of
+            // {first_name} + " " + {last_name} with some tricks to utilize DB indexes
+            $head = [];
+            $tail = $words;
+            while (count($tail) > 1) {
+                $head[] = array_shift($tail);
+                $left = $db->quote(implode(' ', $head));
+                $right = $db->quote(implode(' ', $tail));
+                $whereAddList[] = "first_name = '{$left}' AND last_name LIKE '{$right}%'";
+                $whereAddList[] = "first_name LIKE '{$left}%' AND last_name = '{$right}'";
+                $whereAddList[] = "first_name = '{$right}' AND last_name LIKE '{$left}%'";
+                $whereAddList[] = "first_name LIKE '{$right}%' AND last_name = '{$left}'";
+            }
+        }
+        return $whereAddList;
     }
 
     private function buildQuery(
@@ -3211,7 +3230,7 @@ eoq;
 	function generateExpandableAddrs($str) {
 	    global $mod_strings;
 	    $tempStr = $str.',';
-        $tempStr = html_entity_decode($tempStr);
+        $tempStr = html_entity_decode($tempStr, ENT_COMPAT);
 	    $tempStr = $this->unifyEmailString($tempStr);
         $defaultNum = 2;
         $pattern = '/@.*,/U';
@@ -3219,11 +3238,11 @@ eoq;
         $totalCount = is_countable($matchs[0]) ? count($matchs[0]) : 0;
 
         if(!empty($matchs[0]) && $totalCount > $defaultNum) {
-            $position = strpos($tempStr, (string) $matchs[0][$defaultNum]);
+            $position = strpos($tempStr, $matchs[0][$defaultNum]);
             $hiddenCount = $totalCount - $defaultNum;
             $frontStr = substr($tempStr, 0, $position);
             $backStr = substr($tempStr, $position, -1);
-            $str = htmlentities($frontStr) . '<a class="utilsLink" onclick="javascript: SUGAR.email2.detailView.displayAllAddrs(this);">...['.$mod_strings['LBL_EMAIL_DETAIL_VIEW_SHOW'].$hiddenCount.$mod_strings['LBL_EMAIL_DETAIL_VIEW_MORE'].']</a><span style="display: none;">' .htmlentities($backStr).'</span>';
+            $str = htmlentities($frontStr, ENT_COMPAT) . '<a class="utilsLink" onclick="javascript: SUGAR.email2.detailView.displayAllAddrs(this);">...[' . $mod_strings['LBL_EMAIL_DETAIL_VIEW_SHOW'] . $hiddenCount . $mod_strings['LBL_EMAIL_DETAIL_VIEW_MORE'] . ']</a><span style="display: none;">' . htmlentities($backStr, ENT_COMPAT).'</span>';
         }
 
         return $str;

@@ -12,6 +12,8 @@
 
 class TemplateURL extends TemplateText{
 
+    public $gen;
+    public $link_target;
     var $supports_unified_search = true;
 
 	public function __construct()

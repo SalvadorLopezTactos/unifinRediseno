@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Asiakkaan salaisuutta ei ole luotu',
     'LBL_RESEND_BUTTON_LABEL' => 'Lähetä uudelleen',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Hae kirjekuori',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Pilvipalvelun tyyppi',
+    'LBL_CLOUD_PATH' => 'Pilviaseman polku',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign-kirjekuorten luettelon koontinäyttö',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Uusimmat DocuSign-kirjekuoret',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign-kirjekuorten Focus-laatikko',
 
-    'LBL_DOCUMENT_FROM' => 'Asiakirjan lähde: ',
+    'LBL_NEW_ENVELOPE' => 'Uusi kirjekuori',
     'LBL_DOCUMENT_IS_NOW' => ' on nyt ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign-virhe. Pääsytunnisteen perusteella ei löytynyt asiakkaan tunnusta',
     'LBL_ERROR_RESEND' => 'DocuSign-uudelleenlähetys ei onnistunut. Kirjekuoren tilan on oltava "lähetetty"',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Päivitys epäonnistui',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign-säännöt eivät salli useaa pyyntöä samaan kirjekuoreen 15 minuutin sisällä',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Ilmeni virhe. Kirjekuorta ei voitu päivittää. Tarkista lokit.',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Ilmeni virhe. Malleja ei voitu listata. Tarkista lokit.',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Ilmeni virhe. Mallia ei voitu hakea. Tarkista lokit.',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Kirjekuori ei ole valmis',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Kirjekuoren tila DocuSign-palvelussa on nyt ',
     'LBL_OVERVIEW' => 'Yleiskatsaus',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Lisää asiakirja',
     'LBL_BUTTON_SEND' => 'Lähetä',
     'LBL_BUTTON_CLEAR' => 'Tyhjennä',
-    'LBL_MISSING_OBJECT' => 'DocuSign-kohde ei ole ikkunassa',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Käytä mallia',
     'LBL_PLEASE_LOG_IN' => 'Kirjaudu ensin DocuSign-palveluun.',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Et voi ladata tätä asiakirjaa. Sen on luonut toinen käyttäjä.',
     'LBL_SEND_NOT_ALLOWED' => 'Et voi lähettää tätä kirjekuorta. Sen on luonut toinen käyttäjä.',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Allekirjoitettu',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Asiakirjan lataus ei onnistunut. Tarkista lokit.',
     'LBL_DOCUMENT_COMPLETED' => 'Valmis',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign-tiedot',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'on nyt',
+    'LBL_SETTINGS_TITLE' => 'DocuSign-asetukset',
+    'LBL_RECIPIENT_SELECTION' => 'Vastaanottajan valinnan vaihtoehdot',
+    'LBL_RECIPIENT_NAME' => 'Nimi',
+    'LBL_RECIPIENT_EMAIL' => 'Sähköpostiosoite',
+    'LBL_RECIPIENT_TYPE' => 'Tyyppi',
+    'LBL_TEMPLATE_NAME' => 'Nimi',
+    'LBL_RECIPIENT_SELECT' => 'Valitse...',
+    'LBL_RECIPIENT_ROLE' => 'Rooli',
+    'LBL_SELECT_BUTTON_LABEL' => 'Valitse',
+    'LBL_BACK_BUTTON_LABEL' => 'Takaisin',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Mahdollisten vastaanottajien haku ei onnistunut.',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Mallien haku ei onnistunut.',
 ];

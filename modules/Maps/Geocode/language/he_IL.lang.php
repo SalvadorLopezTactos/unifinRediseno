@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'קו רוחב',
     'LBL_LONGITUDE' => 'קו אורך',
     'LBL_GEOCODED' => 'עם קידוד גיאוגרפי',
+    'LBL_ERROR_MESSAGE' => 'הודעת שגיאה של קוד גאוגרפי',
 ];

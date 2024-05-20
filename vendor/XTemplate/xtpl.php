@@ -309,7 +309,7 @@ function rparse($bname) {
 	if (!empty($this->sub_blocks[$bname])) {
         foreach ($this->sub_blocks[$bname] as $k => $v) {
 			if (!empty($v))
-				$this->rparse($v,$indent."\t");
+				$this->rparse($v);
         }
 	}
 	$this->parse($bname);
@@ -333,7 +333,7 @@ function insert_loop($bname,$var,$value="") {
 function text($bname) {
 
     if(!empty($this->parsed_blocks)){
-	   return $this->parsed_blocks[isset($bname) ? $bname :$this->mainblock];
+	   return $this->parsed_blocks[$bname ?? $this->mainblock];
     }else{
         return '';
     }

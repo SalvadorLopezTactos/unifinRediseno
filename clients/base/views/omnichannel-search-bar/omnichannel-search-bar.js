@@ -43,7 +43,7 @@
         // Remove unneeded event from the parent quicksearch bar view
         this.layout.off('quicksearch:close');
 
-        app.events.on('omnichannelsearch:bar:search:term', this.fireSearch);
+        app.events.on('omnichannelsearch:bar:search:term', this.fireSearch, this);
         this.layout.on('omnichannelsearch:bar:clear:term', this.clearSearchTerm, this);
         this.layout.on('omnichannelsearch:quicksearch:viewallresults', this.fireSearch, this);
 
@@ -169,6 +169,16 @@
         var limit = this.layout.v2 ? this.limit : 20;
         limit = app.config && app.config.maxSearchQueryResult || limit;
         return limit;
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _render: function() {
+        this._super('_render');
+        if (this.searchTerm) {
+            this.fireSearch();
+        }
     },
 
     /**

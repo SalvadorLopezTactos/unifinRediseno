@@ -11,7 +11,9 @@
 
 namespace Symfony\Component\Security\Core\Encoder;
 
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\PasswordHasher\Hasher\Pbkdf2PasswordHasher;
+
+trigger_deprecation('symfony/security-core', '5.3', 'The "%s" class is deprecated, use "%s" instead.', Pbkdf2PasswordEncoder::class, Pbkdf2PasswordHasher::class);
 
 /**
  * Pbkdf2PasswordEncoder uses the PBKDF2 (Password-Based Key Derivation Function 2).
@@ -25,13 +27,12 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
  * @author Sebastiaan Stok <s.stok@rollerscapes.net>
  * @author Andrew Johnson
  * @author Fabien Potencier <fabien@symfony.com>
+ *
+ * @deprecated since Symfony 5.3, use {@link Pbkdf2PasswordHasher} instead
  */
 class Pbkdf2PasswordEncoder extends BasePasswordEncoder
 {
-    private $algorithm;
-    private $encodeHashAsBase64;
-    private $iterations;
-    private $length;
+    use LegacyEncoderTrait;
 
     /**
      * @param string $algorithm          The digest algorithm to use
@@ -39,39 +40,8 @@ class Pbkdf2PasswordEncoder extends BasePasswordEncoder
      * @param int    $iterations         The number of iterations to use to stretch the password hash
      * @param int    $length             Length of derived key to create
      */
-    public function __construct($algorithm = 'sha512', $encodeHashAsBase64 = true, $iterations = 1000, $length = 40)
+    public function __construct(string $algorithm = 'sha512', bool $encodeHashAsBase64 = true, int $iterations = 1000, int $length = 40)
     {
-        $this->algorithm = $algorithm;
-        $this->encodeHashAsBase64 = $encodeHashAsBase64;
-        $this->iterations = $iterations;
-        $this->length = $length;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \LogicException when the algorithm is not supported
-     */
-    public function encodePassword($raw, $salt)
-    {
-        if ($this->isPasswordTooLong($raw)) {
-            throw new BadCredentialsException('Invalid password.');
-        }
-
-        if (!\in_array($this->algorithm, hash_algos(), true)) {
-            throw new \LogicException(sprintf('The algorithm "%s" is not supported.', $this->algorithm));
-        }
-
-        $digest = hash_pbkdf2($this->algorithm, $raw, $salt, $this->iterations, $this->length, true);
-
-        return $this->encodeHashAsBase64 ? base64_encode($digest) : bin2hex($digest);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isPasswordValid($encoded, $raw, $salt)
-    {
-        return !$this->isPasswordTooLong($raw) && $this->comparePasswords($encoded, $this->encodePassword($raw, $salt));
+        $this->hasher = new Pbkdf2PasswordHasher($algorithm, $encodeHashAsBase64, $iterations, $length);
     }
 }

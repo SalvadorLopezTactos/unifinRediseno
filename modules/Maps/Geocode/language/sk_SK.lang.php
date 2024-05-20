@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'Zemepisná šírka',
     'LBL_LONGITUDE' => 'Zemepisná dĺžka',
     'LBL_GEOCODED' => 'Geokódované',
+    'LBL_ERROR_MESSAGE' => 'Chybové hlásenie geokódovania',
 ];

@@ -28,14 +28,14 @@ class SugarSearchEngineMetadataHelper
     /**
      * Cache key for enabled modules
      */
-    const ENABLE_MODULE_CACHE_KEY = 'ftsEnabledModules';
+    public const ENABLE_MODULE_CACHE_KEY = 'ftsEnabledModules';
 
     /**
      *
      * Cache key prefix for FTS enabled fields per module
      * @var string
      */
-    const FTS_FIELDS_CACHE_KEY_PREFIX = 'fts_fields_';
+    public const FTS_FIELDS_CACHE_KEY_PREFIX = 'fts_fields_';
 
     /**
      * Retrieve all FTS fields for all FTS enabled modules.
@@ -143,7 +143,7 @@ class SugarSearchEngineMetadataHelper
             $user = $GLOBALS['current_user'];
 
         $userDisabled = $user->getPreference('fts_disabled_modules');
-        $userDisabled = explode(",", $userDisabled);
+        $userDisabled = explode(",", (string)$userDisabled);
 
         $enabledModules = self::retrieveFtsEnabledFieldsForAllModules();
         $enabledModules = array_keys($enabledModules);

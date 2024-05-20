@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => '缺少所需的值',
     'LBL_ERROR_SYNC_USERS' => '同步到邮件客户端的值无效：',
     'LBL_ID_EXISTS_ALREADY' => 'ID 已存在于此表中',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => '此表中已存在 SYNC_KEY',
     'LBL_ASSIGNED_USER' => '如果用户不存在，则使用当前用户',
     'LBL_SHOW_HIDDEN' => '显示非正常导入的字段',
     'LBL_UPDATE_RECORDS' => '更新已存在记录而不导入它们（不能逆操作）',

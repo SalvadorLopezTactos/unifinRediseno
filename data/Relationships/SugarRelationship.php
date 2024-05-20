@@ -37,6 +37,15 @@ define('REL_TYPE_UNDEFINED', 'undefined');
  */
 abstract class SugarRelationship
 {
+    /**
+     * @var string
+     */
+    public $name;
+    /**
+     * @var bool
+     */
+    public $primaryOnly;
+
     protected $def;
     protected $lhsLink;
     protected $rhsLink;
@@ -107,7 +116,7 @@ abstract class SugarRelationship
      *
      * @return string|array the query to join against the related modules table for the given link.
      */
-    public abstract function getJoin($link);
+    abstract public function getJoin($link, $params = array(), $return_array = false);
 
     /**
      * @abstract
@@ -222,7 +231,7 @@ abstract class SugarRelationship
      */
     public function getFields()
     {
-        return isset($this->def['fields']) ? $this->def['fields'] : array();
+        return $this->def['fields'] ?? array();
     }
 
     /**

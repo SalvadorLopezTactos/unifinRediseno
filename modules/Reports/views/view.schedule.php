@@ -35,7 +35,7 @@ class ViewSchedule extends SugarView
             rtrim($GLOBALS['sugar_config']['cache_dir'], '/\\') : 'cache';
         $smarty->assign('CACHE_DIR', $cache_dir);
 
-        $refreshPage = (isset($_REQUEST['refreshPage']) ? $_REQUEST['refreshPage'] : 'true');
+        $refreshPage = ($_REQUEST['refreshPage'] ?? 'true');
         $refreshPage = strval($refreshPage);
         $smarty->assign('REFRESH_PAGE', $refreshPage);
         $time_interval_select = translate('DROPDOWN_SCHEDULE_INTERVALS', 'Reports');
@@ -54,7 +54,7 @@ class ViewSchedule extends SugarView
             }
 
             $smarty->assign('NEXT_RUN', $timedate->to_display_date_time($schedule['next_run']));
-            $smarty->assign('TIME_INTERVAL', htmlspecialchars($schedule['time_interval']));
+            $smarty->assign('TIME_INTERVAL', htmlspecialchars($schedule['time_interval'], ENT_COMPAT));
             $smarty->assign('SCHEDULE_TYPE', $schedule['schedule_type']);
         } else {
             $smarty->assign('NEXT_RUN', $mod_strings['LBL_NONE']);

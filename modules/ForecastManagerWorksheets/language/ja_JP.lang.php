@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => '{{field_name}}は無効な数値',
     'LBL_EDITABLE_INVALID_RANGE' => '数値は{{min}} から {{max}}の間であるべきです',
-    'LBL_HISTORY_LOG' => '最終確定',
+    'LBL_HISTORY_LOG' => '最終コミットメント',
     'LBL_NO_COMMIT' => '以前のコミットはありません',
 
     'LBL_MANGER_SAVED' => '保存されたマネージャー'

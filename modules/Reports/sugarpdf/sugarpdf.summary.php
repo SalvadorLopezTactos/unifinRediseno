@@ -40,7 +40,7 @@ class ReportsSugarpdfSummary extends ReportsSugarpdfReports
                 // check image size is not '0'
                 if (file_exists($imageFile) && getimagesize($imageFile) > 0) {
                     $this->AddPage();
-                    list($width, $height) = getimagesize($imageFile);
+                    [$width, $height] = getimagesize($imageFile);
                     $imageWidthAsUnits = $this->pixelsToUnits($width);
                     $imageHeightAsUnits = $this->pixelsToUnits($height);
 
@@ -86,7 +86,7 @@ class ReportsSugarpdfSummary extends ReportsSugarpdfReports
             $item[$count]['']='';
             $count++;
         }
-        if ((is_countable($this->bean->report_def['summary_columns']) && count($this->bean->report_def['summary_columns'])) > 0) {
+        if ((is_countable($this->bean->report_def['summary_columns']) ? count($this->bean->report_def['summary_columns']) : 0) > 0) {
             while ($row = $this->bean->get_summary_next_row()) {
                 for ($i= 0; $i < sizeof($header_row); $i++) {
                     $label = $header_row[$i];

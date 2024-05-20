@@ -17,6 +17,8 @@ class TemplateText extends TemplateField
 {
 	var $type='varchar';
     public $massupdate = 1;
+    /** @var string */
+    public $source;
 
     /**
      * {@inheritDoc}

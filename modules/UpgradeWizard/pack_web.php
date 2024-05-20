@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-include_once dirname(__FILE__).'/UpgradeDriver.php';
+include_once __DIR__.'/UpgradeDriver.php';
 
 function packUpgradeWizardWeb($zip, $manifest, $installdefs, $params) {
 
@@ -24,7 +24,7 @@ function packUpgradeWizardWeb($zip, $manifest, $installdefs, $params) {
 
     file_put_contents(__DIR__ . '/version.json', json_encode($params));
 
-    $chdir = dirname(__FILE__) . "/../..";
+    $chdir = __DIR__ . "/../..";
 
     $files = array(
         // UW
@@ -44,6 +44,8 @@ function packUpgradeWizardWeb($zip, $manifest, $installdefs, $params) {
         'include/SugarHeartbeat/SugarHeartbeatClient.php',
         'include/SugarHttpClient.php',
         'modules/HealthCheck/smarty.phar',
+        'modules/HealthCheck/Scanner/Checks/Dbal.php',
+        'modules/HealthCheck/Scanner/Checks/PasswordHashAlgo.php',
     );
 
     if (!is_array($params['from'])) {

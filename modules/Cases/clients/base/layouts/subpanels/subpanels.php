@@ -113,5 +113,13 @@ $viewdefs['Cases']['base']['layout']['subpanels'] = array (
               'link' => 'escalations',
           ],
       ],
+      [
+          'layout' => 'subpanel',
+          'label' => 'LBL_EXTERNAL_USERS_SUBPANEL_TITLE',
+          'override_paneltop_view' => 'panel-top-for-externalusers',
+          'context' => [
+              'link' => 'external_users',
+          ],
+      ],
   ),
 );

@@ -13,10 +13,8 @@
 $module_name = 'Documents';
 $viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
     'layout' => 'create',
-    'label' => 'LNK_NEW_DOCUMENT',
     'visible' => true,
     'order' => 5,
-    'icon' => 'sicon-plus',
     'related' => array(
         array(
             'module' => 'Accounts',

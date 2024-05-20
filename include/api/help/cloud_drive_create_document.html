@@ -58,7 +58,27 @@
 
 <h3>Response</h3>
 <pre class="pre-scrollable">
-Boolean
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>success</td>
+            <td>Boolean</td>
+            <td>Download result</td>
+        </tr>
+        <tr>
+            <td>documentId</td>
+            <td>String</td>
+            <td>The id of the document created</td>
+        </tr>
+        </tbody>
+    </table>
 </pre>
 
 <h2>Change Log</h2>
@@ -73,6 +93,14 @@ Boolean
         </td>
         <td>
             Added <code>/CloudDrive/createSugarDocument</code> POST endpoint.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            v11_18
+        </td>
+        <td>
+            Added documentId on response
         </td>
     </tr>
 </table>

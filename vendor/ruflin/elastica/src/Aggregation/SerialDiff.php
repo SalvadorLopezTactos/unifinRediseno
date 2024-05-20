@@ -9,9 +9,11 @@ use Elastica\Exception\InvalidException;
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
  */
-class SerialDiff extends AbstractAggregation
+class SerialDiff extends AbstractAggregation implements GapPolicyInterface
 {
-    public const DEFAULT_GAP_POLICY_VALUE = 'insert_zero';
+    use Traits\BucketsPathTrait;
+
+    public const DEFAULT_GAP_POLICY_VALUE = GapPolicyInterface::INSERT_ZEROS;
 
     public function __construct(string $name, ?string $bucketsPath = null)
     {
@@ -19,17 +21,11 @@ class SerialDiff extends AbstractAggregation
 
         if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
+        } elseif (\func_num_args() >= 2) {
+            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Passing null as 2nd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
+        } else {
+            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Not passing a 2nd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
         }
-    }
-
-    /**
-     * Set the buckets_path for this aggregation.
-     *
-     * @return $this
-     */
-    public function setBucketsPath(string $bucketsPath): self
-    {
-        return $this->setParam('buckets_path', $bucketsPath);
     }
 
     /**
@@ -47,7 +43,7 @@ class SerialDiff extends AbstractAggregation
      *
      * @return $this
      */
-    public function setGapPolicy(string $gapPolicy): self
+    public function setGapPolicy(string $gapPolicy = self::DEFAULT_GAP_POLICY_VALUE): self
     {
         return $this->setParam('gap_policy', $gapPolicy);
     }

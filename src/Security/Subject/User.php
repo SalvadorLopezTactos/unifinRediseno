@@ -40,6 +40,7 @@ final class User extends Bean
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return array_merge([

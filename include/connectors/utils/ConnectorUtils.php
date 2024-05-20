@@ -78,6 +78,7 @@ class ConnectorUtils
      */
     public static function getSearchDefs($refresh = false)
     {
+        $searchdefs = null;
         if($refresh || !file_exists('custom/modules/Connectors/metadata/searchdefs.php')) {
 
             require('modules/Connectors/metadata/searchdefs.php');
@@ -156,6 +157,7 @@ class ConnectorUtils
      */
     public static function getMergeViewDefs($refresh = false)
     {
+        $viewdefs = null;
         if($refresh || !file_exists('custom/modules/Connectors/metadata/mergeviewdefs.php')) {
 
             //Go through all connectors and get their mapping keys and merge them across each module
@@ -346,7 +348,7 @@ class ConnectorUtils
                 $source['name'] = !empty($config['name']) ? $config['name'] : $source['id'];
                 $source['enabled'] = true;
                 $source['directory'] = $directory . '/' . str_replace('_', '/', $source['id']);
-                $order = isset($config['order']) ? $config['order'] : 99; //default to end using 99 if no order set
+                $order = $config['order'] ?? 99; //default to end using 99 if no order set
 
                 $source['eapm'] = empty($config['eapm'])?false:$config['eapm'];
                 $mapping = $instance->getMapping();
@@ -361,7 +363,7 @@ class ConnectorUtils
                 $sources_ordering[$source['id']] = array('order'=>$order, 'source'=>$source);
             }
 
-            usort($sources_ordering, array(__CLASS__, 'sortSources'));
+            usort($sources_ordering, array(self::class, 'sortSources'));
             foreach ($sources_ordering as $entry) {
                 $sources[$entry['source']['id']] = $entry['source'];
             }
@@ -378,11 +380,7 @@ class ConnectorUtils
      */
     public static function sortSources($a, $b) {
         if(isset($a['order']) && isset($b['order'])) {
-           if($a['order'] == $b['order']) {
-              return 0;
-           }
-
-           return ($a['order'] < $b['order']) ? -1 : 1;
+            return $a['order'] <=> $b['order'];
         }
 
         return 0;
@@ -394,6 +392,7 @@ class ConnectorUtils
      */
     public static function getDisplayConfig($refresh = false)
     {
+        $modules_sources = null;
         if (!file_exists(CONNECTOR_DISPLAY_CONFIG_FILE) || $refresh) {
             $sources = self::getConnectors();
             $modules_sources = array();
@@ -900,6 +899,7 @@ class ConnectorUtils
      */
     protected static function removeConnectorMeta($source)
     {
+        $connectors = [];
         // The connector cache file
         $connectorsFile = 'custom/modules/Connectors/metadata/connectors.php';
 

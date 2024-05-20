@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => '历史记录',
     'LBL_PMSE_LABEL_NOTES' => '显示笔记',
     'LBL_PMSE_LABEL_ADD_NOTES' => '添加笔记',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => '发送到DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => '选择……',
     'LBL_PMSE_FORM_LABEL_USER' => '用户',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => '您是否确定要批准此流程？',
     'LBL_PA_PROCESS_REJECT_QUESTION' => '您是否确定要拒绝此流程？',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => '您是否确定要流转此流程？',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => '您确定要发送到DocuSign此进程吗？',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => '已成功批准流程',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => '已成功拒绝流程',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => '已成功流转流程',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => '进程已成功发送到DocuSign',
     'LBL_PA_PROCESS_CLOSED' => '您想要查看的流程已结束。',
     'LBL_PA_PROCESS_UNAVAILABLE' => '您想要查看的流程当前不可用。',
 

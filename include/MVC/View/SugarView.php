@@ -259,12 +259,15 @@ class SugarView
      *
      * @param array $params additional view paramters passed through from the controller
      */
-    public function displayErrors($params = array())
+    public function displayErrors($params = array(), bool $disableEscape = false)
     {
         $errors = '';
 
         foreach($this->errors as $error) {
-            $errors .= '<span class="error">' . htmlspecialchars($error) . '</span><br>';
+            if (!$disableEscape) {
+                $error = htmlspecialchars($error, ENT_COMPAT);
+            }
+            $errors .= '<span class="error">' . $error . '</span><br>';
         }
 
         if ( !$this->suppressDisplayErrors ) {
@@ -362,7 +365,7 @@ class SugarView
         $ss->assign("THEME_IE6COMPAT", $themeObject->ie6compat ? 'true':'false');
         $ss->assign("MODULE_NAME", $this->module);
         $ss->assign("langHeader", get_language_header());
-        $ss->assign('use_table_container', (isset($this->options['use_table_container']) ? $this->options['use_table_container'] : false));
+        $ss->assign('use_table_container', ($this->options['use_table_container'] ?? false));
 
         // set ab testing if exists
         $testing = $this->request->getValidInputRequest('testing', null, 'a');
@@ -422,7 +425,7 @@ class SugarView
             // Always need to md5 the file
             $ss->assign("COMPANY_LOGO_MD5", md5_file($companyLogoURL));
 
-            list($width,$height) = getimagesize($companyLogoURL);
+            [$width, $height] = getimagesize($companyLogoURL);
             if ( $width > 212 || $height > 40 ) {
                 $resizePctWidth  = ($width - 212)/212;
                 $resizePctHeight = ($height - 40)/40;
@@ -463,7 +466,7 @@ class SugarView
             // Always need to md5 the file
             $ss->assign("COMPANY_LOGO_MD5_DARK", md5_file($companyLogoDarkURL));
 
-            list($width,$height) = getimagesize($companyLogoDarkURL);
+            [$width, $height] = getimagesize($companyLogoDarkURL);
             if ($width > 212 || $height > 40) {
                 $resizePctWidth  = ($width - 212) / 212;
                 $resizePctHeight = ($height - 40) / 40;
@@ -614,7 +617,7 @@ class SugarView
         global $timedate, $login_error; // cn: bug 13855 - timedate not available to classic views.
         if (!empty($this->module))
             $currentModule = $this->module;
-        require_once ($file);
+        require_once $file;
     }
 
     protected function _displayLoginJS()
@@ -682,7 +685,7 @@ EOQ;
 
         // Add in the number formatting styles here as well, we have been handling this with individual modules.
         require_once ('modules/Currencies/Currency.php');
-        list ($num_grp_sep, $dec_sep) = get_number_seperators();
+        [$num_grp_sep, $dec_sep] = get_number_seperators();
 
         $the_script = "<script type=\"text/javascript\">\n" . "\tvar time_reg_format = '" .
              addslashes($timeFormat) . "';\n" . "\tvar date_reg_format = '" .

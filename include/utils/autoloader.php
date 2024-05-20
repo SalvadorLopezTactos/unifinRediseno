@@ -373,7 +373,7 @@ class SugarAutoLoader
     {
         foreach (self::$namespaceMap as $namespace => $paths) {
             foreach ($paths as $path) {
-                if (strpos($class, (string) $namespace) === 0) {
+                if (strpos($class, $namespace) === 0) {
                     $path = empty($path) ? '' : $path . '/';
                     if (false !== $pos = strrpos($class, '\\')) {
                         $path .= str_replace('\\', '/', substr($class, 0, $pos)) . '/';
@@ -400,7 +400,7 @@ class SugarAutoLoader
     {
         foreach (self::$namespaceMapPsr4 as $prefix => $paths) {
             foreach ($paths as $path) {
-                if (strpos($class, (string) $prefix) === 0) {
+                if (strpos($class, $prefix) === 0) {
                     $path = empty($path) ? '' : $path . '/';
                     $path .= str_replace('\\', '/', str_replace($prefix, '', $class)) . '.php';
                     if (file_exists($path)) {
@@ -874,7 +874,7 @@ class SugarAutoLoader
         $data = self::scanSubDir($dir);
 
         // remove leading . if present
-        $extension = ltrim($extension, ".");
+        $extension = ltrim((string)$extension, ".");
         $dir = rtrim($dir, "/");
         $parts = explode('/', $dir);
         foreach ($parts as $part) {

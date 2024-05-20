@@ -63,6 +63,7 @@ $dictionary['WebLogicHook'] = array(
     'acls' => array(
         'SugarACLAdminOnly' => array(
             'adminFor' => 'Users',
+            'allowUserRead' => true,
         ),
     ),
     // @TODO Fix the Default and Basic SugarObject templates so that Basic

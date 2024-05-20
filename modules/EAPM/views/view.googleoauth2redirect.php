@@ -88,12 +88,21 @@ class EAPMViewGoogleOauth2Redirect extends SugarView
 
         // Build a basic response object indicating authentication success
         $token = json_decode($tokenJSON, true);
+        $hasFreshAccessToken = isset($token['created']) &&
+            isset($token['expires_in']) &&
+            $this->isTokenExpired((int)$token['expires_in'], (int)$token['created']);
         $response = array(
             'result' => true,
+            'hasFreshAccessToken' => $hasFreshAccessToken,
             'hasRefreshToken' => isset($token['refresh_token']),
             'dataSource' => 'googleOauthRedirect',
         );
 
         return $response;
+    }
+
+    private function isTokenExpired(int $expiresIn, int $created): bool
+    {
+        return time() - $expiresIn < $created;
     }
 }

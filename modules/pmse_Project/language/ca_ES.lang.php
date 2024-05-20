@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Botons de formulari',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Aprova/rebutja',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Dirigeix',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Envia-ho a DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Altres opcions d&#39;encaminament',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Canvia el propietari del registre',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Equip',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Combinació de documents',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Selecciona...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Combinació de documents en PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Envia el document fusionat per correu electrònic',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Combinació de documents',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'El tipus de passarel·la convergent no coincideix amb el tipus de passarel·la del flux d&#39;entrada',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Les passarel·les divergents expandeixen els processos en diverses ramificacions. Quan utilitzeu una passarel·la convergent per fer tornar a convergir aquestes ramificacions en una ruta, s&#39;ha d&#39;utilitzar el tipus correcte de passarel·la convergent, segons el tipus de passarel·la divergent que s&#39;hagi utilitzat per crear les ramificacions. Per a ramificacions creades amb passarel·les divergents exclusives o basades en esdeveniments, utilitzeu una passarel·la convergent exclusiva per fer que tornin a convergir. Per a ramificacions creades amb passarel·les divergents paral·leles o inclusives, utilitzeu una passarel·la convergent paral·lela per fer que tornin a convergir.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Camp del mòdul',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Relació del mòdul',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Usuari',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Funció',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Equip',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Activitat del formulari',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Norma empresarial',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Acció de la norma empresarial',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Plantilla de correu',
 );

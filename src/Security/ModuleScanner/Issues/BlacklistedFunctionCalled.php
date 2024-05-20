@@ -26,6 +26,6 @@ final class BlacklistedFunctionCalled implements Issue
 
     public function getMessage(): string
     {
-        return sprintf('Code attempted to call blacklisted function "%s" on line %s', $this->function, $this->line);
+        return sprintf('Code attempted to call denylisted function "%s" on line %s', $this->function, $this->line);
     }
 }

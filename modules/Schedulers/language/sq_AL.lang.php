@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Përditëso përkufizimin e produktit',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Përpunoni programe ndërgjegjësimi për kohën',
 'LBL_OOTB_DATA_ARCHIVER' => 'Ekzekutoni arkiva të të dhënave/fshirje aktive',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Aplikoni të drejtat e abonimit kur ato ndryshohen',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Gjeokoduesi i regjistrave',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Opcionet e avancuara',
 'LBL_TOGGLE_ADV' => 'Trego opcionet e avancuara',
 'LBL_TOGGLE_BASIC' => 'Trego opcionet bazike',
+'LBL_UPDATEMOMENTUMCJ' => 'Përditëso shpejtësinë e udhëzuesve inteligjentë në progres',
 // Links
 'LNK_LIST_SCHEDULER' => 'Planifikuesit',
 'LNK_NEW_SCHEDULER' => 'Krijo planifikues',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Ekzekuto arkivat/fshirjet e të dhënave aktive',
 'LBL_PMSEENGINECRON' => 'Planifikuesi i SugarBPM',
 );
-

@@ -9,7 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['SavedReport'] = array ( 'table' => 'saved_reports',
+$dictionary['SavedReport'] = array (
+    'table' => 'saved_reports',
+    'color' => 'orange',
+    'icon' => 'sicon-add-dashlet-lg',
     'visibility' => array('ReportVisibility' => true),
     'favorites'=>true,
     'full_text_search' => false,

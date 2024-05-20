@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Mahdollisuusluettelon työpöytä',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Mahdollisuusluettelon työpöytä',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Myyntimahdollisuuden tiedot',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Mahdollisuuksien keskitetty koontinäyttö – konsoli',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Myyntimahdollisuudet-tietolaatikko',
     'LBL_RENEWAL_OPPORTUNITY' => 'Uusittu myyntimahdollisuus',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Commitoitu',
     'LBL_FORECAST' => 'Sisällytä ennusteeseen',
     'LBL_COMMIT_STAGE' => 'Commitin vaihe',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Ennuste',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Ennustetaso',
     'LBL_WORKSHEET' => 'Työkirja',
     'LBL_PURCHASED_LINE_ITEMS' => 'Ostojen tuoterivit',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Järjestä',
+    'LBL_CREATE_NEW' => 'Luo uusi',
+    'LBL_MANAGE' => 'Hallinnoi',
+    'LBL_SEE_DETAILS' => 'Näytä tiedot',
+    'LBL_HIDE_NEW' => 'Piilota',
+
     'LBL_FORECASTED_LIKELY' => 'Ennuste: todennäköinen',
+    'LBL_LOST' => 'Hävitty',
     'LBL_RENEWAL' => 'Uusinta',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Uusintamahdollisuudet',
     'LBL_RENEWAL_PARENT' => 'Päätason myyntimahdollisuus',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Myyntimahdollisuuden rooli',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Muistiot',
+    'LBL_TAB_OPPORTUNITY' => '{{module}} arvio',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Klikkaamalla "hyväksy", poistat -kaikki- ennustetiedot ja myytät myyntimahdollisuusnäkymääsi. Jos tämä ei ole mitä haluat, klikkaa "peruuta" palataksesi vanhoihin asetuksiin.',
@@ -211,25 +220,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Kun aloitat tämän muutosprosessin, jokaista {{module_name}}-tietuetta kohti luodaan tuoterivitietueita. Kun tuoterivit ovat valmiit ja saatavilla, sähköpostiosoiteeseesi lähetetään ilmoitus. [Instanssisi sähköpostiasetusten on oltava kunnossa, jotta sähköposti voidaan lähettää.].',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduulien {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä alusta loppuun. Kukin {{module_name}}-tietue edustaa potentiaalista myyntiä ja sisältää aiheeseen liittyvät myyntitiedot sekä muut aiheeseen liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne. {{module_name}} etenee yleensä useiden myyntivaiheiden kautta, kunnes se merkitään joko tilaan "Suljettu voitettu" tai "Suljettu menetetty". Moduuleja {{plural_module_name}} voidaan hyödyntää lisää käyttämällä Sugarin {{forecasts_singular_module}}-moduulia myyntitrendien ymmärtämiseen ja ennustamiseen sekä työn kohdistamiseen myyntitavoitteiden saavuttamiseen.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} -moduulin avulla voit seurata yksittäisiä myyntejä alusta loppuun. Jokainen {{module_name}} tietue edustaa mahdollista myyntiä ja sisältää asiaankuuluvia myyntitietoja sekä liittyy muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}}jne. {{module_name}} etenee yleensä useiden myyntivaiheiden läpi, kunnes se on merkitty joko "Suljettu voitettu" tai "Suljettu hävitty" tilaan. {{plural_module_name}} voidaan hyödyntää jopa paremmin käyttämällä Sugarin {{forecasts_singular_module}}ing -moduulia myyntitrendien ymmärtämiseen ja ennustamiseen sekä työn keskittämiseen myyntikiintiöiden saavuttamiseksi.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduulin {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue edustaa potentiaalista myyntiä ja sisältää aiheeseen liittyvät myyntitiedot sekä muut aiheeseen liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne.
+    'LBL_HELP_RECORD' => '{{plural_module_name}} -moduulin avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia rivinimikkeitä alusta loppuun. Jokainen {{module_name}} tietue edustaa mahdollista myyntiä ja sisältää asiaankuuluvia myyntitietoja sekä liittyy muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}}jne.
 
-- Muokkaa tämän tietueen kenttiä napsauttamalla yksittäistä kenttää tai Muokkaa-painiketta.
-- Katsele tai muokkaa linkkejä muihin tietueisiin alapaneeleissa vaihtamalla vasen alapaneeli "Tietonäkymään". 
-- Luo ja näytä käyttäjien kommentteja ja tallenna muutoshistoria {{activitystream_singular_module}}-moduulissa vaihtamalla vasen alapaneeli "Aktiviteettivirta"-näkymään. 
-- Seuraa tietuetta tai merkitse se suosikiksi käyttämällä tietueen nimen oikealla puolella olevia kuvakkeita. 
-- Muita toimintoja löytyy Muokkaa-painikkeen oikealla puolella olevasta Toiminnot-pudotusvalikosta.',
+- Muokkaa tämän tietueen kenttiä klikkaamalla yksittäistä kenttää tai Muokkaa-painiketta.
+- Tarkastele tai muokkaa linkkejä muihin alipaneelien tietueisiin vaihtamalla vasemmassa alakulmassa olevaan ruutuun "Data View".
+- Tee ja tarkastele käyttäjien kommentteja ja tallenna muutoshistoria {{activitystream_singular_module}} vaihtamalla vasemmassa alakulmassa olevaan ruutuun "Activity Stream".
+– Seuraa tai lisää tämä tietue suosikiksi käyttämällä tietueen nimen oikealla puolella olevia kuvakkeita.
+- Lisätoiminnot ovat käytettävissä Muokkaa-painikkeen oikealla puolella olevassa avattavassa Toiminnot-valikossa.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduulin {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue edustaa potentiaalista myyntiä ja sisältää aiheeseen liittyvät myyntitiedot sekä muut aiheeseen liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} -moduulin avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia rivinimikkeitä alusta loppuun. Jokainen {{module_name}} tietue edustaa mahdollista myyntiä ja sisältää asiaankuuluvia myyntitietoja sekä liittyy muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}}jne.,
 
-Luo {{module_name}} seuraavasti:
-1. Syötä kenttiin haluamasi arvot.
- - Kentät, joissa on merkintä "Pakollinen", tulee täyttää ennen tallentamista.
- - Tarvittaessa saat lisää kenttiä näkyviin napsauttamalla "Näytä lisää".
-2. Viimeistele uusi tietue ja palaa edelliselle sivulle napsauttamalla "Tallenna".',
+Luodaksesi {{module_name}}:
+1. Anna kentille arvot haluamallasi tavalla.
+ – Pakolliset kentät on täytettävä ennen tallentamista.
+ - Klikkaa "Näytä lisää" paljastaaksesi tarvittaessa lisää kenttiä.
+2. Klikkaa "Tallenna" viimeistelläksesi uuden tietueen ja palataksesi edelliselle sivulle.',
 
 // END ENT/ULT
 

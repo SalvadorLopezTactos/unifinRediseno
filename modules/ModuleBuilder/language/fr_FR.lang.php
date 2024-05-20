@@ -85,7 +85,7 @@ $mod_strings = array(
         'modify'	=> 'All of the fields that can be displayed in the <b>Subpanel</b> appear here.<br><br>The <b>Default</b> column contains the fields that are displayed in the Subpanel.<br/><br/>The <b>Hidden</b> column contains fields that can be added to the Default column.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Indicates a Dependent field that may or may not be visible based on the value of a formula.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Indicates a Calculated field whose value will be automatically determined based on a formula.'
     ,
-        'savebtn'	=> 'Cliquez sur <b>Sauvegarder &amp; Déployer</b> sauvegardera tous les changements et les rendra actifs dans le module.',
+        'savebtn'	=> 'Cliquez sur <b>Sauvegarder & Déployer</b> sauvegardera tous les changements et les rendra actifs dans le module.',
         'historyBtn'=> 'Cliquez sur <b>Afficher historique</b> pour afficher et restaurer une version précédente de la mise en page présente dans l&#39;historique.',
         'historyRestoreDefaultLayout'=> 'Cliquez sur <b>Rétablir la disposition par défaut</b> pour restaurer une vue sur son plan d&#39;origine.',
         'Hidden' 	=> 'Les champs cachés sont les champs qui ne seront pas affichés dans les sous-panels.',
@@ -96,7 +96,7 @@ $mod_strings = array(
         'modify'	=> 'All of the fields that can be displayed in the <b>ListView</b> appear here.<br><br>The <b>Default</b> column contains the fields that are displayed in the ListView by default.<br/><br/>The <b>Available</b> column contains fields that a user can select in the Search to create a custom ListView. <br/><br/>The <b>Hidden</b> column contains fields that can be added to the Default or Available column.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Indicates a Dependent field that may or may not be visible based on the value of a formula.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Indicates a Calculated field whose value will be automatically determined based on a formula.'
     ,
-        'savebtn'	=> 'Cliquez sur <b>Sauvegarder &amp; Déployer</b> sauvegardera tous les changements et les rendra actifs dans le module.',
+        'savebtn'	=> 'Cliquez sur <b>Sauvegarder & Déployer</b> sauvegardera tous les changements et les rendra actifs dans le module.',
         'historyBtn'=> 'Cliquez sur <b>Afficher l&#39;historique</b> pour afficher et restaurer une version précédemment sauvegardée de la mise en page.',
         'historyRestoreDefaultLayout'=> 'Cliquez sur <b>Rétablir la disposition par défaut</b> pour restaurer une vue sur son plan d&#39;origine. <br><br><b>Restaurer la disposition par défaut</b> rétablit uniquement le placement au sein de la disposition originale. Pour modifier les étiquettes de champ, cliquez sur l&#39;icône modifier en regard de chaque champ.',
         'Hidden' 	=> 'Les champs <b>cachés</b> sont des champs qui ne sont pas visibles par les utilisateurs et qui n&#39;apparaissent pas dans les vues liste.',
@@ -107,7 +107,7 @@ $mod_strings = array(
         'modify'	=> 'All of the fields that can be displayed in the <b>ListView</b> appear here.<br><br>The <b>Default</b> column contains the fields that are displayed in the ListView by default.<br/><br/>The <b>Hidden</b> column contains fields that can be added to the Default or Available column.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Indicates a Dependent field that may or may not be visible based on the value of a formula.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Indicates a Calculated field whose value will be automatically determined based on a formula.'
     ,
-        'savebtn'	=> 'Cliquez sur <b>Sauvegarder &amp; Déployer</b> sauvegardera tous les changements et les rendra actifs dans le module.',
+        'savebtn'	=> 'Cliquez sur <b>Sauvegarder & Déployer</b> sauvegardera tous les changements et les rendra actifs dans le module.',
         'historyBtn'=> 'Cliquez sur <b>Afficher l&#39;historique</b> pour afficher et restaurer une version précédemment sauvegardée de la mise en page.',
         'historyRestoreDefaultLayout'=> 'Cliquez sur <b>Rétablir la disposition par défaut</b> pour restaurer une vue sur son plan d&#39;origine. <br><br><b>Restaurer la disposition par défaut</b> rétablit uniquement le placement au sein de la disposition originale. Pour modifier les étiquettes de champ, cliquez sur l&#39;icône modifier en regard de chaque champ.',
         'Hidden' 	=> 'Les champs <b>cachés</b> sont des champs qui ne sont pas visibles par les utilisateurs et qui n&#39;apparaissent pas dans les vues liste.',
@@ -117,7 +117,7 @@ $mod_strings = array(
         'modify'	=> 'All of the fields that can be displayed in the <b>Search</b> form appear here.<br><br>The <b>Default</b> column contains the fields that will be displayed in the Search form.<br/><br/>The <b>Hidden</b> column contains fields available for you as an admin to add to the Search form.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Indicates a Dependent field that may or may not be visible based on the value of a formula.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Indicates a Calculated field whose value will be automatically determined based on a formula.'
     . '<br/><br/>This configuration applies to popup search layout in legacy modules only.',
-        'savebtn'	=> 'Cliquez sur <b>Sauvegarder &amp; Déployer</b> sauvegardera tous les changements et les rendra actifs',
+        'savebtn'	=> 'Cliquez sur <b>Sauvegarder & Déployer</b> sauvegardera tous les changements et les rendra actifs',
         'Hidden' 	=> 'Les champs <b>cachés</b> sont les champs qui ne seront pas affichés dans les vues de recherche.',
         'historyBtn'=> 'Cliquez sur <b>Afficher l&#39;historique</b> pour afficher et restaurer une version précédemment sauvegardée de la mise en page.',
         'historyRestoreDefaultLayout'=> 'Cliquez sur <b>Rétablir la disposition par défaut</b> pour restaurer une vue sur son plan d&#39;origine. <br><br><b>Restaurer la disposition par défaut</b> rétablit uniquement le placement au sein de la disposition originale. Pour modifier les étiquettes de champ, cliquez sur l&#39;icône modifier en regard de chaque champ.',
@@ -141,7 +141,7 @@ $mod_strings = array(
         'saveBtn'	=> 'Cliquez sur le bouton <b>Sauvegarder</b> permet d&#39;enregistrer les changements effectués depuis la dernière sauvegarde, ainsi vous préservez vos changements. Quand vous retournerez sur ce module vous aurez donc cette mise en page. Votre mise en page ne sera pas accessible par les utilisateurs tant que vous n&#39;avez pas cliquez sur le bouton "Sauvegarder et Publier".',
         'historyBtn'=> 'Cliquez sur <b>Afficher l&#39;historique</b> pour afficher et restaurer une version précédemment sauvegardée de la mise en page.',
         'historyRestoreDefaultLayout'=> 'Cliquez sur <b>Rétablir la disposition par défaut</b> pour restaurer une vue sur son plan d&#39;origine. <br><br><b>Restaurer la disposition par défaut</b> rétablit uniquement le placement au sein de la disposition originale. Pour modifier les étiquettes de champ, cliquez sur l&#39;icône modifier en regard de chaque champ.',
-        'publishBtn'=> 'Cliquez sur le bouton <b>Sauvegarder &amp; Publier</b> pour publier cette mise en page et la rendre ainsi immédiatement accessible par les utilisateurs de ce module.',
+        'publishBtn'=> 'Cliquez sur le bouton <b>Sauvegarder & Publier</b> pour publier cette mise en page et la rendre ainsi immédiatement accessible par les utilisateurs de ce module.',
         'toolbox'	=> 'La boite à outils contient de multiple fonctionnalités pour éditer votre mise en page, elle inclut une zone poubelle, une liste d&#39;éléments additionnels et une liste d’éléments disponibles. Tous ces éléments peuvent être glissés et déposés dans la mise en page.<br><br>Vous pouvez ainsi ajouter de nouveau <b>Panneau</> ainsi que de nouvelle <b>ligne</b> dans votre mise en page afin d&#39;avoir de nouveaux emplacements pour positionner vos champs. L’élément <b>Remplissage</b> permet de créer un espace vide dans la mise en page à l&#39;endroit où il est positionné.',
         'panels'	=> 'Cette zone montre comment votre mise en page apparaitra pour les utilisateurs de ce module quand il sera publié.<br /><br />Vous pouvez repositionner les éléments comme les champs, les lignes et les panneaux via un glisser-deposer, supprimer les éléments en les déplacent dans la zone poubelle présente dans la boite à outils, ou ajouter de nouveaux éléments via un glisser-deposer depuis la boite à outils vers la zone désirée dans la mise en page.',
         'delete'	=> 'Glisser / Déposer ici les éléments de votre mise en page à supprimer',
@@ -223,7 +223,7 @@ $mod_strings = array(
     'labelsHelp'=>array(
         'default'=> 'Les <b>Libellés</b> utilisés dans le module courant peuvent être personnalisés ici.<br><br>Si plusieurs packs de langue sont installés, vous pouvez personnaliser les libellés d&#39;une langue spécifique en la choisissant dans la liste déroulante "Langue".',
         'saveBtn'=>'Cliquez sur <b>Sauvegarder</b> pour sauvegarder tous les changements.',
-        'publishBtn'=>'Cliquez sur <b>Sauvegarder &amp; Publier</b> pour sauvegarder tous les changements et les rendre visibles par les utilisateurs.',
+        'publishBtn'=>'Cliquez sur <b>Sauvegarder & Publier</b> pour sauvegarder tous les changements et les rendre visibles par les utilisateurs.',
     ),
     'portalSync'=>array(
         'default' => 'Entrer l&#39;<b>URL du Portail Sugar</b> de l&#39;instance portail à mettre à jour, et cliquez sur <b>Aller</b>.<br /><br /> Enter une nom d&#39;utilisateur Sugar et un mot de passe valide, et cliquez sur <b>Commender la Syncrhonisation</b>.<br /><br />Les personnalisations faites pour la <b>Mise en page</b> du Portail Sugar, comme l&#39;upload d&#39;une <b>Feuille de Style</b>, seront envoyés aux instances portail spécifiées.',
@@ -269,7 +269,7 @@ $mod_strings = array(
 
     'searchViewEditor'=>array(
         'modify'	=> 'Il y a deux colonnes affichées sur la gauche. La colonne "Défaut" contient les champs qui seront affichés dans le vue recherche, et la colonne "Caché" contient les champs diponible pour vous an tant que admin que vous pouvez ajouter dans la vue.',
-        'savebtn'	=> 'Cliquez sur <b>Sauvegarder &amp; Déployer</b> sauvegardera tous les changements et les rendra actifs',
+        'savebtn'	=> 'Cliquez sur <b>Sauvegarder & Déployer</b> sauvegardera tous les changements et les rendra actifs',
         'Hidden' 	=> 'Les champs cachés sont les champs qui ne seront pas visibles dans la vue de recherche.',
         'Default'	=> 'Les champs par défauts seront affichés dans les vue de recherche.'
     ),
@@ -550,7 +550,7 @@ $mod_strings = array(
 'LBL_BTN_DONT_SAVE'=>'Annuler les modifications',
 'LBL_BTN_CANCEL'=>'Annuler/Fermer',
 'LBL_BTN_CLOSE'=>'Fermer',
-'LBL_BTN_SAVEPUBLISH'=>'Sauvegarder &amp; Publier',
+'LBL_BTN_SAVEPUBLISH'=>'Sauvegarder & Publier',
 'LBL_BTN_NEXT'=>'Suivant',
 'LBL_BTN_BACK'=>'Précédent',
 'LBL_BTN_CLONE'=>'Cloner',
@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Créez une formule pour déterminer si ce champ est nécessaire dans les mises en page.<br/>"
-    . "Les champs obligatoires suivront la formule de l'affichage mobile du navigateur, <br/>"
-    . "mais ne suivra pas la formule dans les applications natives, comme Sugar Mobile pour iPhone. <br/>"
-    . "Ils ne suivront pas la formule du portail libre-service Sugar.",
+    'LBL_POPHELP_REQUIRED'=>'Les champs qui sont requis de manière conditionnelle ne peuvent pas être utilisés dans les types d&#39;action SugarBPM suivants : Ajouter un enregistrement lié, Changer le champ. Veuillez supprimer le texte "Requis si" pour utiliser ce champ dans ces actions de définition de processus',
 'LBL_POPHELP_READONLY'=>"Créez une formule pour déterminer si ce champ est en lecture seule dans les mises en page.<br/>"
         . "Les champs en lecture seule suivront la formule de l'affichage mobile du navigateur, <br/>"
-        . "mais ne suivra pas la formule dans les applications natives, comme Sugar Mobile pour iPhone. <br/>"
+        . "mais ne suivront pas la formule dans les applications natives, comme Sugar Mobile pour iPhone. <br/>"
         . "Ils ne suivront pas la formule du portail libre-service Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Cochez cette case pour utiliser ce champ lorsque vous recherchez des enregistrements à l&#39;aide de la recherche globale de ce module.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Sélectionnez cette option pour utiliser ce champ lors de la recherche d&#39;enregistrements à l&#39;aide de la recherche globale sur ce module.',
 //Revert Module labels
 'LBL_RESET' => 'Réinitialiser',
 'LBL_RESET_MODULE' => 'Réinitialiser Module',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Décimal',
                 'autoincrement' => 'Incrément automatique',
                 'actionbutton' => 'Bouton Action',
+                'geocodestatus' => 'Étatgéocode',
 ),
 'labelTypes' => array(
     "" => "Libellés fréquemment utilisés",

@@ -86,7 +86,7 @@ abstract class NumericExpression extends AbstractExpression
         $def = $bean->getFieldDefinition($field);
         if (is_array($def)) {
             if (isset($def['len']) && strpos($def['len'], ",") !== false) {
-                list($len, $precision) = explode(",", $def['len']);
+                [$len, $precision] = explode(",", $def['len']);
             }
             if (isset($def['precision'])) {
                 $precision = $def['precision'];

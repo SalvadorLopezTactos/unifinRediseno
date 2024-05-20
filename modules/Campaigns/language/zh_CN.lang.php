@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => '跟踪器网址：',
   'LBL_TRACKER_TEXT' => '跟踪器链接文本：',
   'LBL_TRACKER_COUNT' => '跟踪器计数：',
-  'LBL_REFER_URL' => '跟踪器转向网址：',
   'LBL_DEFAULT_SUBPANEL_TITLE' => '市场活动',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'电子邮件市场活动',
   'LBL_NEW_FORM_TITLE' => '新增市场活动',

@@ -45,7 +45,11 @@ class PMSEDocumentMerge extends PMSEScriptTask
             try {
                 $definitionBean = $this->getDefinitionBean($flowData);
                 $data = json_decode($definitionBean->act_fields);
-                $this->merge($data, $bean);
+
+                // make sure the event definition bean exists
+                $this->buildEvnDefBean($flowData, $data);
+
+                $this->merge($data, $bean, $flowData);
             } catch (PMSEExpressionEvaluationException $e) {
                 throw new PMSEElementException("Document Merge: ".$e, $flowData, $this);
             }
@@ -83,8 +87,9 @@ class PMSEDocumentMerge extends PMSEScriptTask
      *
      * @param object $data
      * @param SugarBean $bean
+     * @param array $flowData
      */
-    public function merge($data, \SugarBean $bean): void
+    public function merge($data, \SugarBean $bean, $flowData): void
     {
         $convert = $data->act_convert_to_pdf ?? false;
         $templateId = $data->act_document_template->value;
@@ -103,6 +108,7 @@ class PMSEDocumentMerge extends PMSEScriptTask
                 'useRevision' => true,
                 'recordId' => $recordId,
                 'recordModule' => $recordModule,
+                'flowData' => json_encode($flowData),
             ]);
         } else {
             throw new PMSEElementException("Document Merge: No merge type", $mergeType, $this);
@@ -162,5 +168,49 @@ class PMSEDocumentMerge extends PMSEScriptTask
         }
 
         return $mergeType;
+    }
+
+    /**
+     * Creates the definition bean if it not exists
+     *
+     * @param array $flowData
+     * @param object $actFields
+     */
+    public function buildEvnDefBean(?array $flowData, $actFields)
+    {
+        $evnDefBean = BeanFactory::retrieveBean('pmse_BpmEventDefinition', $flowData['bpmn_id']);
+
+        if ($evnDefBean instanceof SugarBean) {
+            return $this->updateEvnDefBean($evnDefBean, $actFields);
+        }
+
+        $evnDefBean = BeanFactory::newBean('pmse_BpmEventDefinition');
+        $evnDefBean->id = $flowData['bpmn_id'];
+        $evnDefBean->new_with_id = true;
+        // check if it has a email template selected and if it should send the email
+        if ($actFields->evn_criteria && $actFields->act_send_email) {
+            $evnDefBean = $this->updateEvnDefBean($evnDefBean, $actFields);
+        }
+        return $evnDefBean;
+    }
+
+    /**
+     * update a event definition bean
+     *
+     * @param SugarBean $evnDefBean
+     * @param object $actFields
+     */
+    public function updateEvnDefBean($evnDefBean, $actFields)
+    {
+        $evnDefBean->evn_criteria = $actFields->evn_criteria;
+
+        $actFields->to = json_decode($actFields->to);
+        $actFields->cc = json_decode($actFields->cc);
+        $actFields->bcc = json_decode($actFields->bcc);
+
+        $evnDefBean->evn_params = json_encode($actFields);
+        $evnDefBean->save();
+
+        return $evnDefBean;
     }
 }

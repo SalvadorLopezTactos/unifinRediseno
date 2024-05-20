@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Nije postavljen klijentski tajni ključ',
     'LBL_RESEND_BUTTON_LABEL' => 'Ponovno pošalji',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Dohvati omotnicu',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Vrsta usluge u oblaku',
+    'LBL_CLOUD_PATH' => 'Put u oblaku',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Nadzorna ploča s popisom DocuSign omotnica',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Nedavne DocuSign omotnice',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za DocuSign omotnice',
 
-    'LBL_DOCUMENT_FROM' => 'Dokument od ',
+    'LBL_NEW_ENVELOPE' => 'Nova omotnica',
     'LBL_DOCUMENT_IS_NOW' => ' je sada ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'Pogreška usluge DocuSign. Nije moguće dohvatiti ID računa na temelju pristupnog tokena',
     'LBL_ERROR_RESEND' => 'Nije moguće ponovno slanje u okviru usluge DocuSign. Status omotnice mora biti „poslano”',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Ažuriranje nije uspjelo',
     'LBL_ERROR_FETCH_TIME' => 'Prema pravilima usluge DocuSign nije dopušten veći broj zahtjeva za istu omotnicu u roku od 15 minuta',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Došlo je do pogreške. Nije moguće ažurirati omotnicu. Provjerite zapisnike!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Došlo je do pogreške. Nije moguće prikazati popis predložaka. Provjerite zapisnike!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Došlo je do pogreške. Nije moguće dohvatiti predložak. Provjerite zapisnike!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Omotnica nije dovršena',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Status omotnice u okviru usluge DocuSign sada je ',
     'LBL_OVERVIEW' => 'Pregled',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Dodaj dokument',
     'LBL_BUTTON_SEND' => 'Pošalji',
     'LBL_BUTTON_CLEAR' => 'Očisti',
-    'LBL_MISSING_OBJECT' => 'Objekt u usluzi DocuSign nije na prozoru',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Upotrijebi predložak',
     'LBL_PLEASE_LOG_IN' => 'Prvo se prijavite na DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Ne možete preuzeti ovaj dokument. Izradio ga je drugi korisnik!',
     'LBL_SEND_NOT_ALLOWED' => 'Ne možete poslati ovu omotnicu. Izradio ju je drugi korisnik!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Potpisano',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Nije moguće preuzeti dokument. Provjerite zapisnike!',
     'LBL_DOCUMENT_COMPLETED' => 'Dovršeno',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Informacije za DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'je sada',
+    'LBL_SETTINGS_TITLE' => 'Postavke za DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'Ponašanje pri odabiru primatelja',
+    'LBL_RECIPIENT_NAME' => 'Ime',
+    'LBL_RECIPIENT_EMAIL' => 'E-adresa',
+    'LBL_RECIPIENT_TYPE' => 'Vrsta',
+    'LBL_TEMPLATE_NAME' => 'Ime',
+    'LBL_RECIPIENT_SELECT' => 'Odaberite...',
+    'LBL_RECIPIENT_ROLE' => 'Uloga',
+    'LBL_SELECT_BUTTON_LABEL' => 'Odaberi',
+    'LBL_BACK_BUTTON_LABEL' => 'Natrag',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Nije uspjelo dohvaćanje potencijalnih primatelja!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Nije uspjelo dohvaćanje predložaka!',
 ];

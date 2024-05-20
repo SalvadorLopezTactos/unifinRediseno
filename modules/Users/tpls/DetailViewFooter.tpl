@@ -44,6 +44,16 @@
                         </td>
                     </tr>
                     {if !empty($mail_smtpauth_req)}
+                    {if $mail_authtype === 'oauth2'}
+                    <tr>
+                        <td align="top"  scope="row">
+                            {$MOD.LBL_MAIL_AUTHORIZED_ACCOUNT|strip_semicolon}:
+                        </td>
+                        <td width="35%">
+                            {$authorized_account}
+                        </td>
+                    </tr>
+                    {else}
                     <tr>
                         <td align="top"  scope="row">
                             {$MOD.LBL_MAIL_SMTPUSER|strip_semicolon}:
@@ -52,6 +62,7 @@
                             {$mail_smtpuser}
                         </td>
                     </tr>
+                    {/if}
                     {/if}
                     {/if}
                 </table>

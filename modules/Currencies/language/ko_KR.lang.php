@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => '생성자',
   'LBL_EDIT_LAYOUT' => '지면 배치 편집하기' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => '관리자만 가능합니다.',
-  'LBL_CURRENCY_DEFAULT' => '미국 달러 (기본값)',
-
+  'LBL_CURRENCY_DEFAULT' => '시스템 통화(기본값)',
 );
 ?>

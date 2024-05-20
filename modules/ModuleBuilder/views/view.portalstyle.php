@@ -36,7 +36,7 @@ class ViewPortalStyle extends SugarView
         $smarty = new Sugar_Smarty();
         //$smarty->assign('welcome', $GLOBALS['mod_strings']['LBL_SP_UPLOADSTYLE']);
         $smarty->assign('mod', $GLOBALS['mod_strings']);
-        $label = isset($params['label']) ? $params['label'] : $this->request->getValidInputRequest('label');
+        $label = $params['label'] ?? $this->request->getValidInputRequest('label');
         if ($label !== null) {
             $GLOBALS['log']->debug('ViewPortalStyle->display(): label = ' . $label);
             $smarty->assign('label', $label);

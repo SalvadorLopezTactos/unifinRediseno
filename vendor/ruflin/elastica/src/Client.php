@@ -4,10 +4,13 @@ namespace Elastica;
 
 use Elastica\Bulk\Action;
 use Elastica\Bulk\ResponseSet;
+use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\ResponseException;
 use Elastica\Script\AbstractScript;
 use Elasticsearch\Endpoints\AbstractEndpoint;
+use Elasticsearch\Endpoints\ClosePointInTime;
 use Elasticsearch\Endpoints\Indices\ForceMerge;
 use Elasticsearch\Endpoints\Indices\Refresh;
 use Elasticsearch\Endpoints\Update;
@@ -27,7 +30,7 @@ class Client
     protected $_config;
 
     /**
-     * @var callback
+     * @var callable
      */
     protected $_callback;
 
@@ -60,7 +63,7 @@ class Client
      * Creates a new Elastica client.
      *
      * @param array|string  $config   OPTIONAL Additional config or DSN of options
-     * @param callback|null $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
+     * @param callable|null $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      *
      * @throws InvalidException
      */
@@ -114,7 +117,7 @@ class Client
      *
      * @throws InvalidException if the given key is not found in the configuration
      *
-     * @return array|string Config value
+     * @return array|bool|string
      */
     public function getConfig(string $key = '')
     {
@@ -153,8 +156,6 @@ class Client
 
     /**
      * Returns the index for the given connection.
-     *
-     * @param string $name Index name to create connection to
      */
     public function getIndex(string $name): Index
     {
@@ -200,13 +201,13 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|Document[] $docs Array of Elastica\Document
      *
      * @throws InvalidException If docs is empty
      */
     public function updateDocuments(array $docs, array $requestParams = []): ResponseSet
     {
-        if (empty($docs)) {
+        if (!$docs) {
             throw new InvalidException('Array has to consist of at least one element');
         }
 
@@ -229,13 +230,13 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|Document[] $docs Array of Elastica\Document
      *
      * @throws InvalidException If docs is empty
      */
     public function addDocuments(array $docs, array $requestParams = []): ResponseSet
     {
-        if (empty($docs)) {
+        if (!$docs) {
             throw new InvalidException('Array has to consist of at least one element');
         }
 
@@ -253,17 +254,17 @@ class Client
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
-     * @param int|string                                               $id      document id
-     * @param array|\Elastica\Document|\Elastica\Script\AbstractScript $data    raw data for request body
-     * @param string                                                   $index   index to update
-     * @param array                                                    $options array of query params to use for query. For possible options check es api
+     * @param int|string                    $id      document id
+     * @param AbstractScript|array|Document $data    raw data for request body
+     * @param string                        $index   index to update
+     * @param array                         $options array of query params to use for query. For possible options check es api
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      */
     public function updateDocument($id, $data, $index, array $options = []): Response
     {
         $endpoint = new Update();
-        $endpoint->setID($id);
+        $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         if ($data instanceof AbstractScript) {
@@ -277,15 +278,13 @@ class Client
 
             $docOptions = $data->getOptions(
                 [
-                    'version',
-                    'version_type',
-                    'routing',
-                    'percolate',
-                    'parent',
-                    'retry_on_conflict',
                     'consistency',
-                    'replication',
+                    'parent',
+                    'percolate',
                     'refresh',
+                    'replication',
+                    'retry_on_conflict',
+                    'routing',
                     'timeout',
                 ]
             );
@@ -294,7 +293,7 @@ class Client
             $requestData = $data;
         }
 
-        //If an upsert document exists
+        // If an upsert document exists
         if ($data instanceof AbstractScript || $data instanceof Document) {
             if ($data->hasUpsert()) {
                 $requestData['upsert'] = $data->getUpsert()->getData();
@@ -310,10 +309,7 @@ class Client
             && $data instanceof Document
             && ($data->isAutoPopulate() || $this->getConfigValue(['document', 'autoPopulate'], false))
         ) {
-            $responseData = $response->getData();
-            if (isset($responseData['_version'])) {
-                $data->setVersion($responseData['_version']);
-            }
+            $data->setVersionParams($response->getData());
         }
 
         return $response;
@@ -322,13 +318,13 @@ class Client
     /**
      * Bulk deletes documents.
      *
-     * @param array|\Elastica\Document[] $docs
+     * @param array|Document[] $docs
      *
      * @throws InvalidException
      */
     public function deleteDocuments(array $docs, array $requestParams = []): ResponseSet
     {
-        if (empty($docs)) {
+        if (!$docs) {
             throw new InvalidException('Array has to consist of at least one element');
         }
 
@@ -345,7 +341,7 @@ class Client
     /**
      * Returns the status object for all indices.
      *
-     * @return \Elastica\Status Status object
+     * @return Status
      */
     public function getStatus()
     {
@@ -355,7 +351,7 @@ class Client
     /**
      * Returns the current cluster.
      *
-     * @return \Elastica\Cluster Cluster object
+     * @return Cluster
      */
     public function getCluster()
     {
@@ -367,12 +363,10 @@ class Client
      */
     public function connect()
     {
-        return $this->_initConnections();
+        $this->_initConnections();
     }
 
     /**
-     * @param \Elastica\Connection $connection
-     *
      * @return $this
      */
     public function addConnection(Connection $connection)
@@ -393,9 +387,9 @@ class Client
     }
 
     /**
-     * @throws \Elastica\Exception\ClientException
+     * @throws ClientException
      *
-     * @return \Elastica\Connection
+     * @return Connection
      */
     public function getConnection()
     {
@@ -403,7 +397,7 @@ class Client
     }
 
     /**
-     * @return \Elastica\Connection[]
+     * @return Connection[]
      */
     public function getConnections()
     {
@@ -419,7 +413,7 @@ class Client
     }
 
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|Connection[] $connections
      *
      * @return $this
      */
@@ -435,15 +429,15 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array                  $ids     Document ids
-     * @param \Elastica\Index|string $index   Index name
-     * @param bool|string            $routing Optional routing key for all ids
+     * @param array        $ids     Document ids
+     * @param Index|string $index   Index name
+     * @param bool|string  $routing Optional routing key for all ids
      *
      * @throws InvalidException
      */
     public function deleteIds(array $ids, $index, $routing = false): ResponseSet
     {
-        if (empty($ids)) {
+        if (!$ids) {
             throw new InvalidException('Array has to consist of at least one id');
         }
 
@@ -482,12 +476,12 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      * @throws InvalidException
      */
     public function bulk(array $params): ResponseSet
     {
-        if (empty($params)) {
+        if (!$params) {
             throw new InvalidException('Array has to consist of at least one param');
         }
 
@@ -509,7 +503,9 @@ class Client
      * @param array        $query       OPTIONAL Query params
      * @param string       $contentType Content-Type sent with this request
      *
-     * @throws Exception\ClientException|Exception\ConnectionException
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function request(string $path, string $method = Request::GET, $data = [], array $query = [], string $contentType = Request::DEFAULT_CONTENT_TYPE): Response
     {
@@ -537,8 +533,8 @@ class Client
 
         $this->_logger->debug('Elastica Request', [
             'request' => $request->toArray(),
-            'response' => $this->_lastResponse ? $this->_lastResponse->getData() : null,
-            'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null,
+            'response' => $response->getData(),
+            'responseStatus' => $response->getStatus(),
         ]);
 
         return $response;
@@ -552,7 +548,7 @@ class Client
         return $this->request(
             \ltrim($endpoint->getURI(), '/'),
             $endpoint->getMethod(),
-            null === $endpoint->getBody() ? [] : $endpoint->getBody(),
+            $endpoint->getBody() ?? [],
             $endpoint->getParams()
         );
     }
@@ -568,6 +564,19 @@ class Client
     {
         $endpoint = new ForceMerge();
         $endpoint->setParams($args);
+
+        return $this->requestEndpoint($endpoint);
+    }
+
+    /**
+     * Closes the given PointInTime.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/point-in-time-api.html#close-point-in-time-api
+     */
+    public function closePointInTime(string $pointInTimeId): Response
+    {
+        $endpoint = new ClosePointInTime();
+        $endpoint->setBody(['id' => $pointInTimeId]);
 
         return $this->requestEndpoint($endpoint);
     }
@@ -623,7 +632,7 @@ class Client
         }
 
         // If no connections set, create default connection
-        if (empty($connections)) {
+        if (!$connections) {
             $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
         }
 

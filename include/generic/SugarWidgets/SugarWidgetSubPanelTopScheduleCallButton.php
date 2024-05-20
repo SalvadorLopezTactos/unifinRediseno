@@ -12,8 +12,13 @@
 
 class SugarWidgetSubPanelTopScheduleCallButton extends SugarWidgetSubPanelTopButtonQuickCreate
 {
+    /**
+     * @var string|mixed
+     */
+    public $subpanelDiv;
     function &_get_form($defines, $additionalFormFields = null)
     {
+        $button = null;
         global $app_strings;
         global $currentModule;
 

@@ -80,15 +80,13 @@
     /**
      * @inheritdoc
      *
-     * EmailsApi responds with a 451 HTTP status code to report custom errors
-     * related to sending email. Anytime a 451 code is encountered, the error
-     * is alerted to the user, which should provide more useful information
-     * than a standard HTTP error. Other errors in the 400-499 range are
+     * EmailsApi responds with a 500 HTTP status code to report custom errors
+     * related to sending email. Other errors in the 400-499 range are
      * handled normally in core.
      */
     saveModel: function(success, error) {
         var onError = _.bind(function(model, e) {
-            if (e && e.status == 451) {
+            if (e && e.status == 500) {
                 // Mark the error as having been handled
                 e.handled = true;
                 this.enableButtons();

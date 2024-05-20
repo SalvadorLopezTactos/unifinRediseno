@@ -79,7 +79,11 @@ class ViewModulefields extends SugarView
             global $dictionary;
             $f = array($mod_strings['LBL_HCUSTOM']=>array(), $mod_strings['LBL_HDEFAULT']=>array());
 
-            foreach ($dictionary[$objectName]['fields'] as $fieldName => $def) {
+            $fieldsDefs = $dictionary[$objectName]['fields'];
+            $mm = MetaDataManager::getManager('base', false);
+            $fieldsDefs = $mm->applyLicensesFilter($fieldsDefs);
+
+            foreach ($fieldsDefs as $fieldName => $def) {
                 if (!AccessControlManager::instance()->allowFieldAccess($module_name, $fieldName)) {
                     continue;
                 }
@@ -107,7 +111,7 @@ class ViewModulefields extends SugarView
                         $f[$mod_strings['LBL_HDEFAULT']][$def['name']] = $def;
                     }
                 } else {
-                    $def['type'] = isset($fieldTypes[$def['type']]) ? $fieldTypes[$def['type']] : ucfirst($def['type']);
+                    $def['type'] = $fieldTypes[$def['type']] ?? ucfirst($def['type']);
 
                     //Custom relate fields will have a non-db source, but custom_module set
                     if (isset($def['source']) && $def['source'] == 'custom_fields' || isset($def['custom_module'])) {
@@ -183,8 +187,11 @@ class ViewModulefields extends SugarView
                 }
             }
 
-            foreach($this->mbModule->mbvardefs->vardefs['fields'] as $k=>$v)
-            {
+            $fieldsDefs = $this->mbModule->mbvardefs->vardefs['fields'];
+            $mm = MetaDataManager::getManager('base', false);
+            $fieldsDefs = $mm->applyLicensesFilter($fieldsDefs);
+
+            foreach ($fieldsDefs as $k => $v) {
                 if($k != $module_name)
                 {
                     $titleLBL[$k]=translate("LBL_".strtoupper($k),'ModuleBuilder');
@@ -204,7 +211,9 @@ class ViewModulefields extends SugarView
                        $loadedFields[$field] = true;
 
                        $type = $this->mbModule->mbvardefs->vardefs['fields'][$k][$field]['type'];
-                       $this->mbModule->mbvardefs->vardefs['fields'][$k][$field]['type'] = isset($fieldTypes[$type]) ? $fieldTypes[$type] : ucfirst($type);
+                        $this->mbModule->mbvardefs->vardefs['fields'][$k][$field]['type'] = $fieldTypes[$type] ?? ucfirst(
+                            $type
+                        );
                         if (!AccessControlManager::instance()->allowFieldAccess($module_name, $field)) {
                             continue;
                         }

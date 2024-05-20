@@ -35,7 +35,7 @@ class SugarJobPerformActivityErasure implements RunnableSchedulerJob
     {
         try {
             if (!empty($data)) {
-                $data = json_decode(html_entity_decode($data), true);
+                $data = json_decode(html_entity_decode($data, ENT_COMPAT), true);
                 if (!empty($data) && !empty($data['dataPrivacyIds'])) {
                     $dataPrivacyIds = $data['dataPrivacyIds'];
 

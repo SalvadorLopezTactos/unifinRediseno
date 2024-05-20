@@ -145,6 +145,26 @@
   }
 }
 
+// Rule only for Safari browsers
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance:none) {
+    .dropup {
+      .dropdown-menu {
+        bottom: auto;
+      }
+    }
+  }
+}
+
+// Rule only for Chrome browsers
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+  .dropup {
+    .dropdown-menu {
+      bottom: auto;
+    }
+  }
+}
+
 // Sub menus
 // ---------------------------
 .dropdown-submenu {
@@ -290,6 +310,8 @@
   a,
   .menuitem-config > span,
   button {
+    .w-full();
+
     display: flex;
     align-items: center;
     padding: 8px 10px;
@@ -300,7 +322,6 @@
     background-color: @dropdownBackground;
     white-space: nowrap;
     margin: 0;
-    width: -moz-available !important;
 
     > .sicon {
       margin-right: 8px;
@@ -311,8 +332,13 @@
     }
   }
 
+  .menuitem-config > span {
+    .w-auto();
+  }
+
   .menuitem-config input {
     margin-left: auto;
+    margin-right: 20px;
   }
 
   // Gray out text and ensure the hover state remains gray
@@ -342,6 +368,7 @@
   li > button:focus,
   li > span > button:hover,
   li > span > button:focus,
+  li > div > span > a:hover,
   li > span > a:hover,
   li > span > a:focus,
   .active > a,
@@ -357,7 +384,7 @@
     background: @dropdownLinkBackgroundHover;
     filter: none;
 
-    .sicon {
+    .sicon:not(.label-module) {
       color: @sicon-active-color;
     }
   }

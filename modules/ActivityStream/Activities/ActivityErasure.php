@@ -12,7 +12,7 @@
 
 class ActivityErasure
 {
-    const ERASED_LABEL = 'LBL_VALUE_ERASED';
+    public const ERASED_LABEL = 'LBL_VALUE_ERASED';
 
     protected $referencedActivities = array();
     protected $entityNames = array();
@@ -103,7 +103,7 @@ class ActivityErasure
                     $updateTo = array();
                     $updateModules = array();
                     foreach ($references as $reference) {
-                        list($module, $moduleId, $name) = explode(':', $reference);
+                        [$module, $moduleId, $name] = explode(':', $reference);
                         if (isset($this->changedNames[$module][$moduleId])) {
                             $name = trim($name);
                             if (!$this->isErased($name) && $name !== $this->changedNames[$module][$moduleId]) {
@@ -231,7 +231,7 @@ class ActivityErasure
      */
     protected function updateCommentData($id, $updateModules, $updateFrom, $updateTo, $commentData)
     {
-        $cdata = json_decode(html_entity_decode($commentData), true);
+        $cdata = json_decode(html_entity_decode($commentData, ENT_COMPAT), true);
         if (isset($cdata['value'])) {
             $cdata['value'] = str_replace($updateFrom, $updateTo, $cdata['value']);
         }
@@ -271,10 +271,10 @@ class ActivityErasure
             $parentType = empty($activity['parent_type']) ? '' : $activity['parent_type'];
             $parentId = empty($activity['parent_id']) ? '' : $activity['parent_id'];
             if (!empty($activity['data'])) {
-                $activity['data'] = html_entity_decode($activity['data']);
+                $activity['data'] = html_entity_decode($activity['data'], ENT_COMPAT);
             };
             if (!empty($activity['last_comment'])) {
-                $activity['last_comment'] = html_entity_decode($activity['last_comment']);
+                $activity['last_comment'] = html_entity_decode($activity['last_comment'], ENT_COMPAT);
             }
 
             $activityData = empty($activity['data']) ? '' : $activity['data'];
@@ -325,7 +325,7 @@ class ActivityErasure
         $updateTo = array();
         if (!empty($references)) {
             foreach ($references as $reference) {
-                list($module, $moduleId, $name) = explode(':', $reference);
+                [$module, $moduleId, $name] = explode(':', $reference);
                 if (isset($this->changedNames[$module][$moduleId])) {
                     $name = trim($name);
                     if (!$this->isErased($name) && $name !== $this->changedNames[$module][$moduleId]) {

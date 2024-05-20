@@ -134,4 +134,13 @@ $viewdefs['Opportunities']['base']['view']['multi-line-list'] = [
             'nulls_last' => true,
         ],
     ],
+    'defaults' => [
+        'order_by_primary' => 'date_closed:asc',
+        'order_by_secondary' => '',
+        'freeze_first_column' => true,
+    ],
+    'orderBy' => [
+        'field' => 'date_closed',
+        'direction' => 'asc',
+    ],
 ];

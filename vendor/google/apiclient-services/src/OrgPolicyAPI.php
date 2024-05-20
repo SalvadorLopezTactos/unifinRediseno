@@ -23,7 +23,7 @@ use Google\Client;
  * Service definition for OrgPolicyAPI (v2).
  *
  * <p>
- * The Org Policy API allows users to configure governance ruleson their GCP
+ * The Org Policy API allows users to configure governance rules on their GCP
  * resources across the Cloud Resource Hierarchy.</p>
  *
  * <p>
@@ -35,13 +35,14 @@ use Google\Client;
  */
 class OrgPolicyAPI extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
   public $folders_constraints;
   public $folders_policies;
   public $organizations_constraints;
+  public $organizations_customConstraints;
   public $organizations_policies;
   public $projects_constraints;
   public $projects_policies;
@@ -190,6 +191,74 @@ class OrgPolicyAPI extends \Google\Service
                 'pageToken' => [
                   'location' => 'query',
                   'type' => 'string',
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->organizations_customConstraints = new OrgPolicyAPI\Resource\OrganizationsCustomConstraints(
+        $this,
+        $this->serviceName,
+        'customConstraints',
+        [
+          'methods' => [
+            'create' => [
+              'path' => 'v2/{+parent}/customConstraints',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'delete' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'get' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'list' => [
+              'path' => 'v2/{+parent}/customConstraints',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'patch' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
                 ],
               ],
             ],

@@ -16,6 +16,10 @@
  */
 class One2MRelationship extends M2MRelationship
 {
+    /**
+     * @var bool
+     */
+    protected $selfReferencing;
 
     public function __construct(array $def)
     {

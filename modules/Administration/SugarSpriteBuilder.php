@@ -585,7 +585,7 @@ class SpritePlacement
 				break;
 
 			default:
-				$GLOBALS['log']->warn(__CLASS__.": Unknown sprite placement algorithm -> {$this->config['type']}");
+                $GLOBALS['log']->warn(self::class . ": Unknown sprite placement algorithm -> {$this->config['type']}");
 				break;
 		}
 

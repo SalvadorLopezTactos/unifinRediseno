@@ -121,7 +121,7 @@ class aCase extends Issue
         $hours = $this->getHoursBetween(
             new \SugarDateTime($this->date_entered, new DateTimeZone('UTC')),
             new \SugarDateTime($now, new DateTimeZone('UTC')),
-            $this->business_center_id ? $this->business_center_id : ''
+            $this->business_center_id ?: ''
         );
         $this->hours_to_first_response = $hours['calendarHours'];
         $this->business_hrs_to_first_response = $hours['businessHours'];
@@ -173,7 +173,7 @@ class aCase extends Issue
             if (empty($this->resolved_datetime) && $this->isNewlyResolved()) {
                 $this->resolved_datetime = TimeDate::getInstance()->nowDb();
             }
-        } elseif ($this->fetched_row !== false
+        } elseif (isset($this->fetched_row['status'])
             && SugarConfig::getInstance()->get('clear_resolved_date')
             && $this->isResolvedStatus($this->fetched_row['status'])) {
             $this->resolved_datetime = '';
@@ -272,7 +272,7 @@ class aCase extends Issue
         return $this->build_related_list2($query, BeanFactory::newBean('Contacts'), $temp);
     }
 
-    function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
         global $current_language;
         $app_list_strings = return_app_list_strings_language($current_language);

@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Raporttiaikataulu-tietueiden työpöytä',
     'LBL_FILE_TYPE' => 'Tiedostotyyppi',
+    'LBL_EMBED_REPORT' => 'Upota raportti sähköpostiin',
+    'LBL_EMBED_REPORT_INFO' => 'Huomaathan, että jos raportissa on yli 200 riviä, liitämme raportin CSV-tiedostona.',
 );

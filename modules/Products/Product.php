@@ -13,9 +13,9 @@
 // Product is used to store customer information.
 class Product extends SugarBean
 {
-    CONST STATUS_CONVERTED_TO_QUOTE = 'Converted to Quote';
+    public const STATUS_CONVERTED_TO_QUOTE = 'Converted to Quote';
 
-    const STATUS_QUOTED = 'Quotes';
+    public const STATUS_QUOTED = 'Quotes';
 
     // Stored fields
     public $id;
@@ -179,7 +179,7 @@ class Product extends SugarBean
      * Returns a list view of the associated Products.  This view is used in the Subpanel
      * listings.
      */
-    public function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
         $support_expired = null;
         $support_coming_due = null;
@@ -303,7 +303,7 @@ class Product extends SugarBean
             if (!function_exists('pbQuotesArraySwap')) {
                 function pbQuotesArraySwap(&$array, $swapFirst, $swapSecond)
                 {
-                    list($array[$swapFirst], $array[$swapSecond]) = array($array[$swapSecond], $array[$swapFirst]);
+                    [$array[$swapFirst], $array[$swapSecond]] = array($array[$swapSecond], $array[$swapFirst]);
                 }
             }
             pbQuotesArraySwap($links, $quotesIndex, $pbIndex);

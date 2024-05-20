@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount;
 
+use Psr\Log\LoggerInterface;
 use Sugarcrm\IdentityProvider\Srn\Converter;
 use Sugarcrm\Sugarcrm\SugarCloud\AuthZ;
 
@@ -19,6 +20,11 @@ class Checker
 {
     protected $allowedSAs = [];
     protected $ownTenantSRN = '';
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     /**
      * @var array
@@ -30,7 +36,7 @@ class Checker
      */
     private $authZ;
 
-    public function __construct(array $idmModeConfig, AuthZ $authZ)
+    public function __construct(array $idmModeConfig, AuthZ $authZ, LoggerInterface $logger)
     {
         // @deprecated: allowedSAs and check against it will be removed in the future versions.
         $this->allowedSAs = $idmModeConfig['allowedSAs'] ?? [];
@@ -38,6 +44,8 @@ class Checker
         $this->serviceAccountPermissions = $idmModeConfig['serviceAccountPermissions'] ?? [];
 
         $this->authZ = $authZ;
+
+        $this->logger = $logger;
     }
 
     /**
@@ -59,6 +67,20 @@ class Checker
             $this->ownTenantSRN,
             $this->serviceAccountPermissions
         );
-        return $isAllowedByAuthZAndTenant || in_array($subjectSRN, $this->allowedSAs);
+
+        $isAllowed = $isAllowedByAuthZAndTenant || in_array($subjectSRN, $this->allowedSAs);
+
+        if (!$isAllowed && !$isTokenForThisTenant) {
+            $this->logger->error(
+                sprintf(
+                    'Service account with tenant (%s, %s) claims should be equal to %s',
+                    $saTokenSubjectTenantID,
+                    $tidFromClaims,
+                    $tenantID
+                )
+            );
+        }
+
+        return $isAllowed;
     }
 }

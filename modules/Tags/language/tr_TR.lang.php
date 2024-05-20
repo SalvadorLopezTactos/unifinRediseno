@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Etiketler Kaydı Panosu',
     'LBL_MY_TAGS' => 'Etiketlerim',
     'LBL_MY_FAVORITE_TAGS' => 'Favori Etiketlerim',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} Etiket',
 );

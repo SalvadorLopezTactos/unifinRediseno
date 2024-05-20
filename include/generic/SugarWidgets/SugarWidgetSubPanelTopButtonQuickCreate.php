@@ -17,6 +17,8 @@ class SugarWidgetSubPanelTopButtonQuickCreate extends SugarWidgetSubPanelTopButt
 {
     public function &_get_form($defines, $additionalFormFields = null)
 	{
+        $button = null;
+        $relationship_name = null;
 		global $app_strings;
 		global $currentModule;
 
@@ -160,7 +162,7 @@ class SugarWidgetSubPanelTopButtonQuickCreate extends SugarWidgetSubPanelTopButt
 	function get_subpanel_relationship_name($defines) {
 		 $relationship_name = '';
 		 if(!empty($defines)) {
-		 	$relationship_name = isset($defines['module']) ? $defines['module'] : '';
+             $relationship_name = $defines['module'] ?? '';
 	     	$dataSource = $defines['subpanel_definition']->get_data_source_name(true);
          	if (!empty($dataSource)) {
 				$relationship_name = $dataSource;

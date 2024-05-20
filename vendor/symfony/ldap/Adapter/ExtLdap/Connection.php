@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\Ldap\Adapter\ExtLdap;
 
+use LDAP\Connection as LDAPConnection;
 use Symfony\Component\Ldap\Adapter\AbstractConnection;
 use Symfony\Component\Ldap\Exception\AlreadyExistsException;
 use Symfony\Component\Ldap\Exception\ConnectionException;
@@ -28,11 +29,17 @@ class Connection extends AbstractConnection
     private const LDAP_INVALID_CREDENTIALS = 0x31;
     private const LDAP_TIMEOUT = 0x55;
     private const LDAP_ALREADY_EXISTS = 0x44;
+    private const PRECONNECT_OPTIONS = [
+        ConnectionOptions::DEBUG_LEVEL,
+        ConnectionOptions::X_TLS_CACERTDIR,
+        ConnectionOptions::X_TLS_CACERTFILE,
+        ConnectionOptions::X_TLS_REQUIRE_CERT,
+    ];
 
     /** @var bool */
     private $bound = false;
 
-    /** @var resource */
+    /** @var resource|LDAPConnection */
     private $connection;
 
     /**
@@ -66,17 +73,12 @@ class Connection extends AbstractConnection
      *
      * @param string $password WARNING: When the LDAP server allows unauthenticated binds, a blank $password will always be valid
      */
-    public function bind($dn = null, $password = null)
+    public function bind(string $dn = null, string $password = null)
     {
-        if(!empty($dn)){
-            $this->connect();
-            $dn = $dn.'@unifin.com.mx';
-        }
         if (!$this->connection) {
-            $this->connection = ldap_connect($this->config['connection_string']) ;
+            $this->connect();
         }
-        $dn = !empty($dn) ? $dn : 'x';
-        $password = !empty($password) ? $password : 'x';
+
         if (false === @ldap_bind($this->connection, $dn, $password)) {
             $error = ldap_error($this->connection);
             switch (ldap_errno($this->connection)) {
@@ -94,9 +96,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Returns a link resource.
-     *
-     * @return resource
+     * @return resource|LDAPConnection
      *
      * @internal
      */
@@ -105,14 +105,14 @@ class Connection extends AbstractConnection
         return $this->connection;
     }
 
-    public function setOption($name, $value)
+    public function setOption(string $name, $value)
     {
         if (!@ldap_set_option($this->connection, ConnectionOptions::getOption($name), $value)) {
             throw new LdapException(sprintf('Could not set value "%s" for option "%s".', $value, $name));
         }
     }
 
-    public function getOption($name)
+    public function getOption(string $name)
     {
         if (!@ldap_get_option($this->connection, ConnectionOptions::getOption($name), $ret)) {
             throw new LdapException(sprintf('Could not retrieve value for option "%s".', $name));
@@ -137,7 +137,7 @@ class Connection extends AbstractConnection
             }
 
             if (!isset($parent['network_timeout'])) {
-                $options->setDefault('network_timeout', ini_get('default_socket_timeout'));
+                $options->setDefault('network_timeout', \ini_get('default_socket_timeout'));
             }
 
             $options->setDefaults([
@@ -149,19 +149,26 @@ class Connection extends AbstractConnection
 
     private function connect()
     {
-        $this->connection = ldap_connect($this->config['connection_string']);
         if ($this->connection) {
             return;
         }
 
-        
-
         foreach ($this->config['options'] as $name => $value) {
-            $this->setOption($name, $value);
+            if (\in_array(ConnectionOptions::getOption($name), self::PRECONNECT_OPTIONS, true)) {
+                $this->setOption($name, $value);
+            }
         }
 
-        if (false === $this->connection) {
-            throw new LdapException('Could not connect to Ldap server: '.ldap_error($this->connection));
+        if (false === $connection = ldap_connect($this->config['connection_string'])) {
+            throw new LdapException('Invalid connection string: '.$this->config['connection_string']);
+        } else {
+            $this->connection = $connection;
+        }
+
+        foreach ($this->config['options'] as $name => $value) {
+            if (!\in_array(ConnectionOptions::getOption($name), self::PRECONNECT_OPTIONS, true)) {
+                $this->setOption($name, $value);
+            }
         }
 
         if ('tls' === $this->config['encryption'] && false === @ldap_start_tls($this->connection)) {
@@ -171,7 +178,7 @@ class Connection extends AbstractConnection
 
     private function disconnect()
     {
-        if ($this->connection && \is_resource($this->connection)) {
+        if ($this->connection) {
             ldap_unbind($this->connection);
         }
 

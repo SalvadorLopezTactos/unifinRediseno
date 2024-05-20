@@ -92,6 +92,7 @@ $mod_strings = array (
     'ERR_UW_PACKAGE_NEWER_VERSION_EXISTS'       => '패키지 새 버전인 {0}가 있습니다. 새 버전을 업로드하기 전 제거하십시오.',
     'ERR_UW_PACKAGE_ALREADY_INSTALLED'          => '패키지가 이미 설치되어 있습니다.',
     'ERR_UW_PACKAGE_NOT_INSTALLED'              => '패키지가 설치되어 있지 않습니다.',
+    'ERR_UW_PACKAGE_INSTALLED_WITH_ERROR'       => '패키지 설치 중 오류가 발생했습니다. 변경 사항이 적용되지 않습니다',
     'ERR_UW_PACKAGE_IS_UNINSTALLABLE'           => '패키지를 삭제할 수 없습니다. 삭제되지 않습니다.',
     'ERR_UW_PACKAGE_ALREADY_ENABLED'            => '패키지가 이미 작동 중입니다.',
     'ERR_UW_PACKAGE_ALREADY_DISABLED'           => '패키지가 이미 사용 정지되었습니다.',
@@ -130,7 +131,12 @@ $mod_strings = array (
     'LBL_ADMIN_WIZARD' => 'SugarCRM 시스템을 간단히 설치합니다.',
     'LBL_ADMINISTRATION_HOME_TITLE' => '시스템',
     'LBL_ADMINISTRATION_HOME_DESC' =>'현재 시스템 설정을 모든 사용자를 대상으로 적용합니다. 사용자 정의된 설정들이 현재 변경된 사항으로 덮어쓰기 될 수 있습니다.',
-    'LBL_ALLOW_USER_TABS' => '사용자가 탐색 바에 표시될 모듈을 선택하도록 허용합니다.',
+    'LBL_ALLOW_USERS_PINNED_MODULES' => '사용자가 고정된 모듈 수를 설정하도록 허용',
+    'LBL_ALLOW_USERS_AVAILABLE_MODULES' => '사용자가 사용 가능한 모듈을 선택하도록 허용',
+    'LBL_NUMBER_PINNED_MODULES' => '고정된 모듈 수',
+    'LBL_NUMBER_PINNED_MODULES_TOOLTIP' => '가장 자주 사용하는 모듈의 실제 숫자로 설정하는 것을 권장합니다.' .
+        '대부분의 브라우저 크기에서 많은 수가 보이지 않을 가능성이 있습니다.' .
+        '100이 넘는 값은 무시됩니다.',
     'LBL_ALREADY_RUNNING'                  => '이 서버는 오프라인 클라이언트로 실행됩니다.',
     'LBL_APPLY_DST_FIX_DESC' => '이 필수 단계는 일광시간 처리 항목을 갱신합니다. (MYSQL만 지원가능).',
     'LBL_APPLY_DST_FIX' => '일광 저장시간 수정을 적용합니다.',
@@ -145,7 +151,7 @@ $mod_strings = array (
     'LBL_IMPORT_METADATA_BUTTON_TITLE' => 'IdP 메타데이터 파일 가져오기',
     'LBL_IMPORT_METADATA_BUTTON_LABEL' => 'IdP 메타데이터 파일 가져오기',
     'LBL_CAT_VIEW'            => '분류',
-    'LBL_CHANGE_NAME_MODULES'=>'어플리케이션에 나타나는 모듈의 이름을 변경하십시오.',
+    'LBL_CHANGE_NAME_MODULES'=> '어플리케이션에 나타나는 모듈의 이름을 변경하십시오.',
     'LBL_CHECK_FOR_UPDATES'  => '업데이트 확인',
     'LBL_CHECK_NOW_LABEL' =>'지금 확인',
     'LBL_CHECK_NOW_TITLE' =>'지금 확인',
@@ -171,17 +177,20 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'PDF 글자체 데이타 저장에 사용된 캐시파일 제거하기',
     'LBL_CONFIG_CHECK' =>'구성 확인',
     'LBL_CONFIG_FTS' => '전문검색(FTS) 엔진 설정하기',
-    'LBL_CONFIG_TABS'=>'모듈과 서브패널 표시하기',
-	'LBL_CONFIG_TABS_DESC'=>'표시될 아래 모듈의 이름을 드래그 앤 드랍하여 탐색 바 또는 서브패널에 표시 또는 숨김으로 설정합니다. 모듈 접속을 관리하려면 <a href="?module=ACLRoles&action=index">역할 관리</a>를 이용합니다.',
-	'LBL_CONFIG_LANGS_DESC'=>'표시할 언어항목을 드래그 앤 드롭하여 활성화 혹은 비활성화해주세요.',
-	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'사용자가 어떤 모듈탭을 볼수 있을지의 선택을 허용하는 항목을 선택합니다. 선택시 사용자는 사용자 설정내 탭을 관리함으로써 어느 모듈이 모일지 선택할수 있습니다.',
-	'LBL_CONFIGURATOR_DESC'=>'Config.php 설정',
+    'LBL_CONFIG_TABS'=>'내비게이션 바 및 서브패널',
+    'LBL_CONFIG_TABS_DESC_BRIEFLY'=>'내비게이션 바 및 서브패널에서 사용자가 이용 가능한 모듈을 선택합니다. 사용자의 모듈 액세스를 제어하려면 <a href="?module=ACLRoles&action=index">역할 관리</a>를 사용하십시오.',
+    'LBL_CONFIG_TABS_DESC_DETAILED'=>'모듈을 드래그 앤 드롭하여 내비게이션 바에서 사용 가능하거나 숨김으로 설정합니다. <br>
+        고정된 모듈 수 필드는 내비게이션 바를 접었을 때 표시되는, 이용 가능한 모듈 수를
+        결정합니다(예: 5를 입력하면 목록 첫 5개 모듈이 고정). 체크박스 필드가
+        활성화되면 사용자는 사용자 프로필에서 내비게이션 바 설정을 수정할 수 있습니다.',
+    'LBL_CONFIG_LANGS_DESC'=>'표시할 언어항목을 드래그 앤 드롭하여 활성화 혹은 비활성화해주세요.',
+    'LBL_CONFIGURATOR_DESC'=>'Config.php 설정',
     'LBL_CONFIGURATOR_TITLE'=>'구성마법사',
     'LBL_CONFIGURE_GROUP_TABS_DESC' => '모듈 메뉴 필터 생성 및 수정하기',
     'LBL_CONFIGURE_GROUP_TABS' => '모듈 메뉴 필터 구성하기',
     'LBL_CONFIGURE_SETTINGS_TITLE' => '시스템 설정',
     'LBL_CONFIGURE_SETTINGS' => '시스템 전역 설정 구성하기',
-    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => '모듈과 하위패널 표시하기',
+    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => '내비게이션 바 및 서브패널',
     'LBL_CONFIGURE_UPDATER'=>'Sugar 업데이트 설정하기',
     'LBL_CONTRACT_TITLE'=>'계약및 수주',
     'LBL_CONTRACT_DESC'=>'계약 및 수주 모듈을 에 필요한 계약 방식을 설정해주세요. 사용자가 새 계약 및 수주를 생성할때 현재 구성된 옵션이 선택항목으로 표시됩니다.',
@@ -226,6 +235,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_GETMYSQLTS' => '데이타베이스 개요',
     'LBL_DIAGNOSTIC_GETPHPINFO' => 'phpinfo() 얻기중입니다.',
     'LBL_DIAGNOSTIC_GETSUGARLOG' => 'sugarcrm.일지 얻는중입니다.',
+    'LBL_DIAGNOSTIC_GETMLPLOG' => 'package_install.log 획득',
     'LBL_DIAGNOSTIC_GETTING' => '얻는중입니다.',
     'LBL_DIAGNOSTIC_MD5'=>'MD5 정보',
     'LBL_DIAGNOSTIC_MYSQLDUMPS'=>'테이블 Dumps 구성',
@@ -234,6 +244,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_NO_MYSQL' => 'MySQL이 없습니다. MySQL 기능이 중지되었습니다.',
     'LBL_DIAGNOSTIC_PHPINFO'=>'phpinfo()',
     'LBL_DIAGNOSTIC_SUGARLOG'=>'SugarCRM 일지 파일',
+    'LBL_DIAGNOSTIC_MLPLOG'=>'패키지 설치 로그 파일',
     'LBL_DIAGNOSTIC_TITLE'=>'진단 도구',
     'LBL_DIAGNOSTIC_VARDEFS'=>'Sugar 개요 출력자료(VARDEFS)',
 	'LBL_DISABLED' => '중지',
@@ -361,11 +372,11 @@ $mod_strings = array (
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'LDAP 사용자 결합 예시',
     'LBL_LDAP_LOGIN_ATTRIBUTE_DESC'=>'LDAP 사용자 검색 예시',
     'LBL_LDAP_ENCRYPTION_TYPE_DESC'=> '암호화 유형은 LDAP 서버 연결 상태에 영향을 줍니다.' .
-        '보안 상태이거나 아닙니다. 일반적인 비보안 연결에는 None을 사용하십시오. TLS를 사용하여 일반' .
-        '연결 보안을 강화하십시오. ldaps://에 SSL을 이용하여 보안 연결을 하십시오.',
+        '보안 상태이거나 아닙니다. 일반적인 비보안 연결에는 None을 사용하십시오. StartTLS를 사용하여 일반' .
+        '연결 보안을 강화하십시오. ldaps://에 LDAPS을 이용하여 보안 연결을 하십시오.',
     'LBL_LDAP_SERVER_HOSTNAME_DESC'=> 'IP 주소의 LDAP 호스트네임만을 특정해 주십시오. ' .
         '예: ldap.example.com, 10.11.45.75',
-    'LBL_LDAP_SERVER_PORT_DESC'=>'예: 비보안 및 TLS에는 389. SSL에는 636',
+    'LBL_LDAP_SERVER_PORT_DESC'=>'예: 비보안 및 StartTLS에는 389. LDAPS에는 636',
     'LBL_LDAP_GROUP_NAME'=>'그룹명',
 	'LBL_LDAP_GROUP_NAME_DESC'=>'예 <em>cn=sugarcrm</em>',
     'LBL_LDAP_USER_DN_DESC'=>'예: <em>ou=people,dc=example,dc=com</eM>',
@@ -472,6 +483,8 @@ $mod_strings = array (
     'LBL_MANAGE_RELATE_DENORMALIZATION_PRE_CHECK_RESULTS' => '미리 확인 결과',
     'LBL_MANAGE_RELATE_DENORMALIZATION_FIELDS_FOR' => '대상 필드',
     'LBL_MANAGE_RELATE_DENORMALIZATION_JOB_TITLE' => '예정된 작업',
+    'LBL_SUGAR_OUTFITTER' => 'SugarOutfitters',
+    'LBL_SUGAR_OUTFITTER_TOOLTIP' => 'SugarCRM 마켓플레이스인 SugarOutfitters에서 Sugar 인스턴스에 새 기능을 추가할 수 있는 애드온을 찾아보세요.',
 
     'LBL_MANUAL_VALIDATION_TXT' => '수동 확인',
     'LBL_MANUAL_VALIDATION'=>'자동인응의 계속적인 문제를 경험한다면 시스템 설정 관리자 패널의 대리 구성을 확인하십시오. 시스템환경이 인터넷을 통한 라이센스 확인 서버와의 소틍을 금지한다면 수동 확인단계로 진행하십시오.',
@@ -552,6 +565,9 @@ $mod_strings = array (
     'LBL_MODULE_LICENSE'                        => '다음 라이센스 계약을 보십시오,',
     'LBL_MODULE_LOADER_TITLE' => '모듈 올리기',
     'LBL_MODULE_LOADER' => 'Sugar모듈, 테마, 언어상자 추가 또는 제거하기와 기타 확장',
+    'LBL_MODULE_LOADER_LICENSE_WARNING' => '사용자 정의 파일 패키지 <a href="{0}">업로드</a> 기능은'
+        . '{1}에서 사용할 수 있습니다. 이 모듈 로더 기능이 포함된 라이선스 유형을 확인하려면'
+        . '<a href="{2}">라이선스 유형 매트릭스</a> 문서를 참조합니다.',
     'LBL_MODULE_NAME' => '관리자',
     'LBL_MODULE_NAME_SINGULAR' => '관리자',
     'LBL_MODULE_TITLE' => '관리자:홈',
@@ -666,8 +682,6 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'JS그룹파일 다시 만들기',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => '재연결하고 기존 그룹파일을 최신 그룹파일버전으로 덮어쓰기합니다.',
-    'LBL_REPAIR_JS_FILES_TITLE' => 'Javascript파일 수리하기',
-    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'JS 파일 수리하기',
     'LBL_REPAIR_JS_FILES_PROCESSING' => '파일 처리중입이며 수 분이 소요될수 있습니다. 이 페이지에서 나가도 처리를 취소하지 않으므로 자유롭게 이동하거나 확인을 기다리십시오.',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => '파일 처리가 완료되었습니다.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => '소문자 없는 파일을 수리합니다.',
@@ -909,7 +923,7 @@ $mod_strings = array (
     'LBL_VALIDATION_FILE'=>'확인키 파일',
     'LBL_VALIDATION_SUCCESS_DATE'=>'마지막 확인 성공',
 	'LBL_VISIBLE_PANELS'=>'전시된 하위패널',
-    'LBL_VISIBLE_TABS'=>'전시된 모듈',
+    'LBL_AVAILABLE_MODULES' => '사용 가능한 모듈',
     'LBL_WORKFLOW_DESC'                     => '작업흐름 조건, 알림과 액션을 관리합니다.',
     'LBL_WORKFLOW_TITLE'                    => '작업흐름 관리',
     'LBL_WORKBENCH' => '작업대',
@@ -954,12 +968,10 @@ $mod_strings = array (
     'WARN_LICENSE_SEATS'=>  "<b>경고:</b> ",
     'WARN_LICENSE_SEATS2' => " 구독이 다음 상황에만 가능한 활성 사용자가 있습니다 ",
     'WARN_LICENSE_SEATS3' =>
-        ". <p class=\"error\">일부 사용자를 비활성화하거나, 파트너 또는 판매 대리점에 연락하거나,"
-        . " <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>로 이메일을 보내십시오.</p>"
-        . "<p class=\"error\">자세한 정보는 다음을 참조하십시오. "
-        . "<a target=\"_blank\" "
-        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
-        . "사용자 종류 및 Sugar 라이선스 이해</a> 문서.</p>",
+        ". <p class=\"error\">일부 사용자를 비활성화하거나 <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>저희에게 연락</a>하여 추가 라이선스를 획득하십시오.</p>",
+    'WARN_LICENSE_SEATS3_IDM' =>
+        ". <p class=\"error\">일부 사용자를 <a target=\"_blank\" href='%s'>SugarCloud 설정</a>에서 비활성화하십시오"
+        . "또는 <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>저희에게 연락</a>하여 추가 라이선스를 획득하십시오.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "경고: 라이센스가 허용가능한 접속사용자를 초과하였습니다.",
     'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>경고:</b> 활성 사용자를 추가로 생성할 수 없습니다."
         . " 구독을 추가 구매하십시오.",
@@ -967,7 +979,7 @@ $mod_strings = array (
     'WARN_LICENSE_TYPE_SEATS_EDIT_MAXED' => '추가 사용자 %s명을 만들 수 없습니다. 구독을 추가 구매하십시오.',
     'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>경고:</b> 활성 사용자를 추가로 생성할 수 없습니다."
         . "구독을 추가 구매하십시오.",
-    'WARN_REPAIR_CONFIG' => '<b>경고:</b> config.php 파일이 수리되어야 합니다. 관리자 지역의 수리페이지의 <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>config 파일 다시 만들기</a> 스크립트를 사용하십시오.',
+    'WARN_REPAIR_CONFIG' => '<b>경고:</b> config.php 파일이 수리되어야 합니다. 관리자 지역의 수리 페이지의 <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>config 파일 다시 만들기</a> 스크립트를 사용하십시오.',
     'WARN_UPGRADE_APP'=> "어플리케이션의 업데이트 버전이 사용가능합니다.",
     'WARN_UPGRADE' => '경고:업그레이드 하십시오.',
     'WARN_UPGRADENOTE' => '노트',
@@ -1041,11 +1053,11 @@ $mod_strings = array (
 
 'ML_PACKAGE_SCANNING'=> '스캔중입니다.',
 'ML_INSTALLATION_FAILED'=> '설치가 실패했습니다.',
-'ML_PACKAGE_NOT_CONFIRM'=> '설치시도중인 패키지는  Sugar Open Cloud 나 귀하의 시스템관리자에 의해 확립된 정책을 따르지 않습니다.',
+    'ML_PACKAGE_NOT_CONFIRM' => '설치 시도 중인 패키지는 SugarCloud나 귀하의 시스템 관리자에 의해 확립된 정책을 따르지 않습니다.',
 'ML_TO_RESOLVE'=>'이 문제를 해결하려면:',
-'ML_OBTAIN_NEW_PACKAGE'=>'Sugar Open Cloud 고객은 아래 묘사된 사안 패키지 공급자로부터 새 패키지를 얻어야합니다.',
+    'ML_OBTAIN_NEW_PACKAGE' => 'SugarCloud 고객은 아래 묘사된 사안 패키지 공급자로부터 새 패키지를 얻어야 합니다.',
 'ML_RELAX_LOCAL'=>'Sugar를 현지에서 실행하려면 패키지가 설치되도록 모듈 적제 제한을 이완시킵니다.',
-'ML_SUGAR_LOADING_POLICY'=>'Sugar Open Cloud 패키지 적재 규정은 다음에 상세히 나타납니다.',
+    'ML_SUGAR_LOADING_POLICY'=>'SugarCloud 정책 세부 사항:',
 'ML_SUGAR_KB'=>'SugarCRM 지식 기반',
 'ML_SUGAR_DZ'=>'SugarCRM 개발자 지역',
 'ML_PKG_SCAN_GUIDE'=>'패키지 스캔 정책 안내',
@@ -1248,6 +1260,7 @@ SugarCRM Mobile 및 Sugar Portal에서 전역 검색에 모듈이 검색되도�
     'LBL_ASYNC_CALL_FAILED' => '비동시적 전화가 실패했습니다.',
     'LBL_REPAIRXSSEXECUTE_FAILED' => '실패:빈 또는 아이디가 정의되지 않았습니다.',
     'LBL_DIAGNOSTICS_ERROR_SUGARLOG' => 'sugarcrm.log를 복사하지 못했습니다.',
+    'LBL_DIAGNOSTICS_ERROR_MLPLOG' => 'package_install.log를 {0}에 복사하지 못함<br>',
     'LBL_DIAGNOSTICS_ERROR_PHPINFO' => 'phpinfo.html 파일을 쓸수 없습니다.',
     'LBL_DIAGNOSTICS_ERROR_LISTBEANFILES' => 'beanFiles.html 파일을 쓸수 없습니다.',
     'LBL_DIAGNOSTICS_ERROR_MD5' => 'md5 파일을 복사할수 없습니다. .md5 확인을 생략합니다.',
@@ -1359,10 +1372,28 @@ SugarCRM Mobile 및 Sugar Portal에서 전역 검색에 모듈이 검색되도�
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT' => '이 설정은 웹 페이지에 로드가 허용되는 리소스를 제어하기 위해 웹 브라우저에서 사용하는 vywns 콘텐츠 보안 정책(CSP) 지침을 나타냅니다. 허용되는 필드 값 및 형식에 대한 자세한 내용은 <a href={{linkToDocumentation}} target="_blank">시스템</a> 문서를 참조하십시오. CSP 설정이 업데이트되면, 사용자는 브라우저를 새로고침하여야 변경 사항이 반영됩니다.',
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT_ADVANCED' => '이 설정은 개별 콘텐츠 보안 정책(CSP) 지침에 대한 고급 이해를 지닌 사용자를 위한 것입니다. &#39;img-src&#39; CSP 지침은 Sugar에 의해 기본으로 설정되어 있으며 모든 이미지를 HTTP 또는 HTTPS로 불러오는 것을 허용합니다. 허용되는 필드 값 및 형식에 대한 자세한 내용은 <a href={{linkToDocumentation}} target="_blank">시스템</a> 문서를 참조하십시오. CSP 설정이 업데이트되면, 사용자는 브라우저를 새로고침하여야 변경 사항이 반영됩니다.',
     //Maps
+    'LBL_MAPS_LOGGER_START_DATE' => '로그 시작일:',
+    'LBL_MAPS_LOGGER_DETAILED_LOGS' => '상세 로그',
+    'LBL_MAPS_LOGGER_NO_LOGS_AVAILABLE' => '확인 가능한 로그 없음.',
+    'LBL_MAPS_LOGGER_ENABLE_MODULES_FOR_LOG' => '모듈에 대한 로그 활성화:',
+    'LBL_MAPS_LOGGER_LOG_LEVEL' => '로그 단계 선택...',
+    'LBL_MAPS_LOGGER_LOG_TYPE' => '로그 단계:',
+    'LBL_MAPS_LOGGER_LOG_ALL_MESSAGES' => '모든 메시지',
+    'LBL_MAPS_LOGGER_LOG_ERROR' => '오류',
+    'LBL_MAPS_LOGGER_LOG_SUCCESS' => '성공',
+    'LBL_MAPS_LOGGER_LBL_MODULE' => '모듈',
+    'LBL_MAPS_LOGGER_LBL_NAME' => '이름',
+    'LBL_MAPS_LOGGER_LBL_STATUS' => '상태',
+    'LBL_MAPS_LOGGER_LBL_GEOCODE' => '지오코드 완료',
+    'LBL_MAPS_LOGGER_YES' => '예',
+    'LBL_MAPS_LOGGER_NO' => '아니요',
+    'LBL_MAPS_LOGGER_OF' => '/',
     'LBL_MAPS_ADMIN_CONFIG_TITLE' => '맵',
+    'LBL_MAPS_ADMIN_LOG_VIEWER' => '로그 뷰어',
     'LBL_MAPS_ADD_NEW_MODULE_TO_GEOCODE' => '지오코딩을 위한 새 모듈 추가',
     'LBL_MAPS_SELECT_NEW_MODULE_TO_GEOCODE' => '모듈 선택...',
     'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION' => '맵 구성',
+    'LBL_MAPS_ADMIN_CONFIG_LOG_VIEWER_DESCRIPTION' => 'Geocoding Logs에 접근',
     'LBL_MAPS_LOG_LEVEL_TITLE' => '로그 단계',
     'LBL_MAPS_LOG_LVL_FATAL' => '치명적',
     'LBL_MAPS_LOG_LVL_DEBUG' => '디버그',
@@ -1424,9 +1455,12 @@ SugarCRM Mobile 및 Sugar Portal에서 전역 검색에 모듈이 검색되도�
     'LBL_CLOUD_DRIVE_DESCRIPTION' => '클라우드 드라이브의 기본 경로 설정을 구성합니다.',
     'LBL_GOOGLE_DRIVE_NAME' => 'Google 드라이브',
     'LBL_GOOGLE_DRIVE_TOOLTIP' => 'Google 드라이브 기본 경로 구성',
+    'LBL_DROPBOX_DRIVE' => 'Dropbox 드라이브',
+    'LBL_DROPBOX_DRIVE_TOOLTIP' => 'Dropbox 드라이브 기본 경로 구성',
     'LBL_GOOGLE_DRIVE_SAVE_BUTTON' => '저장',
     'LBL_SELECT_ROOT_PATH' => '루트 경로 선택',
     'LBL_REMOVE_ROOT_PATH' => '루트 경로 삭제',
+    'LBL_ROOT_PATH_REMOVED' => '루트 경로가 삭제되었습니다.',
     'LBL_VALIDATE_ROOT_PATH' => '루트 경로 유효성 검사',
     'LBL_PATHS_FOR_RECORD_VIEW' => '기록 보기 경로',
     'LBL_DEFAULT_STARTING_PATH' => '기본 시작 경로',
@@ -1440,14 +1474,16 @@ SugarCRM Mobile 및 Sugar Portal에서 전역 검색에 모듈이 검색되도�
     'LBL_MICROSOFT_ONEDRIVE_TOOLTIP' => 'Microsoft Onedrive 기본 경로 구성',
     'LBL_DRIVE_PATH_CONFIG' => '드라이브 경로 구성',
     'LBL_DRIVE_ROOT_PATH' => '루트 경로',
+    'LBL_FIELDS_VARIABLE' => '필드 변수',
+    'LBL_UNABLE_TO_RETRIEVE_ROOT_PATH' => '루트 경로 획득 실패',
     'LBL_HINT_NAME' => 'Hint 필드',
     'LBL_HINT_DESCRIPTION' => 'Hint 패널에 표시되고 Hint로 보강될 필드를 구성합니다.',
-    'LBL_HINT_SECTION_HEADER' => 'Hint',
-    'LBL_HINT_SECTION_DESCRIPTION' => 'Hint 설정 구성',
+    'LBL_HINT_SECTION_HEADER' => 'Sugar Hint',
+    'LBL_HINT_SECTION_DESCRIPTION' => 'Sugar Hint 설정 구성',
 
-    'LBL_HINT_CONFIG' => 'Hint 구성',
+    'LBL_HINT_CONFIG' => 'Sugar Hint 구성',
     'LBL_HINT_CONFIG_NAME' => 'Hint 구성',
-    'LBL_HINT_CONFIG_SAVED' => 'Hint 구성 설정이 저장되었습니다.',
+    'LBL_HINT_CONFIG_SAVED' => 'Sugar Hint 구성 설정이 저장되었습니다.',
     'LBL_HINT_CONFIG_DESCRIPTION' => 'Hint 설정을 업데이트합니다.',
     'LBL_HINT_CONFIG_LOGGER_SECTION_HEADER' => 'Hint 로거',
 
@@ -1455,7 +1491,24 @@ SugarCRM Mobile 및 Sugar Portal에서 전역 검색에 모듈이 검색되도�
     'LBL_HINT_RESYNC_DESCRIPTION' => 'Hint Insights 서비스와 다시 동기화하여 기본 설정 변경 및 이메일 주소가 적용되지 않는 등의 알림 관련 문제를 해결합니다.',
 
     'LBL_HINT_UNINSTALL' => '설치해제',
-    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Hint 삭제 중입니다. Hint Insights의 알림도 비활성화됩니다.',
+    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Sugar Hint 삭제 중입니다. Sugar Hint Insights의 알림도 비활성화됩니다.',
 
     'LBL_HINT_CONFIG_NOTIFICATIONS_HEADER' => '알림',
+
+    'LBL_DOCUSIGN_GROUP' => 'DocuSign',
+    'LBL_DOCUSIGN_NAME' => '설정',
+    'LBL_DOCUSIGN_TOOLTIP' => 'DocuSign 구성',
+    'LBL_DOCUSIGN_DESCRIPTION' => 'DocuSign 기능 구성',
+    'LBL_SUGAR_MAPS' => 'Sugar Maps',
+    'LBL_CLOUD_DRIVE' => '클라우드 드라이브',
+
+    // Sugar Automate
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_TITLE' => 'Sugar Automate 설정',
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_DESC' => 'Sugar Automate 패키지 설정',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => '템플릿',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => '템플릿 관리',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_NAME' => '모듈 구성',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_DESC' => '활성화 모듈 구성',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => '템플릿',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => '템플릿 관리',
 );

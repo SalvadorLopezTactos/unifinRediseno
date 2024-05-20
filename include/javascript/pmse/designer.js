@@ -108,11 +108,11 @@ function renderProject (prjCode) {
 
     //RESIZE OPTIONS
     if ($('#container').length) {
-        $('#container').height($(window).height() - $('#container').offset().top - $('#footer').height() - 46);
+        $('#container').height($(window).height() - $('#container').offset().top);
     }
     $(window).resize(function () {
         if ($('#container').length) {
-            $('#container').height($(window).height() - $('#content').offset().top - $('#footer').height() - 46);
+            $('#container').height($(window).height() - $('#content').offset().top);
         }
 
     });
@@ -1912,11 +1912,11 @@ var validateAtom = function(criteria, element, validationTools) {
  *          for the given data type
  */
 var getSearchInfo = function(criteria) {
-    var data = '';
-    var filter = '';
-    var text = '';
-    var args = {};
-    var backupSearchFunction = null;
+    let data = '';
+    let filter = '';
+    let text = '';
+    let args = {};
+    let backupSearchFunction = null;
     let type;
     let module;
     let field;
@@ -1939,6 +1939,12 @@ var getSearchInfo = function(criteria) {
     }
     type = type && type.toUpperCase();
     switch (type) {
+        case 'LINK':
+            data = 'related';
+            filter = module;
+            args.key = value;
+            text = 'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP';
+            break;
         case 'MODULE':
             // relationship change events don't need field level criteria
             if (['Added', 'Removed', 'AddedOrRemoved'].includes(relation) &&
@@ -1952,7 +1958,7 @@ var getSearchInfo = function(criteria) {
             filter = module;
             args.key = args.key || value;
             args.base_module = getTargetModule();
-            text = 'Module field';
+            text = 'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD';
             backupSearchFunction = function() {
                 var fields = App.metadata.getModule(module.charAt(0).toUpperCase() + module.slice(1)).fields;
                 for (var fieldName in fields) {
@@ -1966,13 +1972,13 @@ var getSearchInfo = function(criteria) {
         case 'USER_IDENTITY':
             data = 'users';
             args.key = value;
-            text = 'User';
+            text = 'LBL_PMSE_CRITERIA_TYPE_MODULE_USER';
             break;
         case 'USER_ROLE':
         case 'ROLE':
             data = 'rolesList';
             args.key = value;
-            text = 'Role';
+            text = 'LBL_PMSE_CRITERIA_TYPE_ROLE';
             break;
         case 'RELATIONSHIP':
             args.key = value;
@@ -1980,37 +1986,37 @@ var getSearchInfo = function(criteria) {
             args.key = args.key || module;
             data = 'related';
             filter = getTargetModule();
-            text = 'Module relationship';
+            text = 'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP';
             break;
         case 'TEAM':
             data = 'teams';
             filter = 'all';
             args.key = value;
-            text = 'Team';
+            text = 'LBL_PMSE_CRITERIA_TYPE_TEAM';
             break;
         case 'CONTROL':
             data = 'activities';
             filter = project.uid;
             args.key = field;
-            text = 'Form activity';
+            text = 'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY';
             break;
         case 'ALL_BUSINESS_RULES':
             data = 'rulesets';
             filter = project.uid;
             args.key = value;
-            text = 'Business rule';
+            text = 'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE';
             break;
         case 'BUSINESS_RULES':
             data = 'businessrules';
             filter = project.uid;
             args.key = field;
-            text = 'Business rule action';
+            text = 'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION';
             break;
         case 'TEMPLATE':
             data = 'emailtemplates';
             filter = getTargetModule();
             args.key = value;
-            text = 'Email template';
+            text = 'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE';
             break;
         default:
             return null;
@@ -2018,7 +2024,7 @@ var getSearchInfo = function(criteria) {
 
     return {
         url: App.api.buildURL('pmse_Project/validateCrmData/' + data + '/' + filter, null, null, args),
-        text: text,
+        text: App.lang.get(text, 'pmse_Project'),
         backupSearchFunction: backupSearchFunction
     };
 };

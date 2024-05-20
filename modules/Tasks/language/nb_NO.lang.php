@@ -111,4 +111,13 @@ For å opprette {{module_name}}:
 - Klikk "Vis mer" for å avsløre flere felt hvis det er nødvendig. 
 2. Klikk "Lagre" for å sluttføre den nye posten og gå tilbake til forrige side.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Smart guide-oppgave',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Er Smart Guide-oppgave',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Startdato for Smart Guide-aktivitet',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Fullføringsdato for Smart Guide-aktivitet',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Smart Guide - Dager å fullføre',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Underordnede møter',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Underordnede samtaler',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Underordnede oppgaver',
 );

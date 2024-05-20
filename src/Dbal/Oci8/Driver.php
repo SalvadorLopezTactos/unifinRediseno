@@ -13,35 +13,19 @@
 
 namespace Sugarcrm\Sugarcrm\Dbal\Oci8;
 
-use Doctrine\DBAL\Driver\DriverException;
-use Doctrine\DBAL\Driver\ExceptionConverterDriver;
-use Doctrine\DBAL\Driver\OCI8\Driver as BaseDriver;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAL\Driver\AbstractOracleDriver;
+use Doctrine\DBAL\Driver\OCI8\Connection;
 
 /**
  * Oci8 driver
  */
-class Driver extends BaseDriver implements ExceptionConverterDriver
+class Driver extends AbstractOracleDriver
 {
     /**
      * {@inheritdoc}
      */
-    public function connect(array $params, $username = null, $password = null, array $driverOptions = array())
+    public function connect(array $params)
     {
         return new Connection($params['connection']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function convertException($message, DriverException $exception)
-    {
-        switch ($exception->getErrorCode()) {
-            case 1: // ORA-00001 - Unique constraint violation
-                return new UniqueConstraintViolationException($message, $exception);
-        }
-
-        throw new Exception\DriverException($message, $exception);
     }
 }

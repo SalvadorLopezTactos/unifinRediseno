@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => 'Ное',
     'LBL_DEC' => 'Дек',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Вече беше добавен календар',
+    'LBL_CALENDAR_IS_SELECTED' => 'Избран е {{calendar}}',
+    'LBL_NO_USER_SELECTED' => 'Моля, изберете потребител или екип',
+    'LBL_NO_CALENDAR_SELECTED' => 'Моля, изберете календар',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Неуспешно запазване на календари.',
+
 );
 
 $mod_list_strings = array(

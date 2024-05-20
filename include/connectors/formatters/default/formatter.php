@@ -15,6 +15,7 @@
  */
 class default_formatter {
 
+    public $tplFileName;
    protected $_ss;
    protected $_component;
    protected $_tplFileName;
@@ -42,7 +43,7 @@ class default_formatter {
    	  	return  $this->_ss->fetch($tpl);
    	  }
 
-        if (strpos('_soap_', (string)$class) !== false) {
+   	  if(strpos('_soap_', $class) !== false) {
       	 return $this->_ss->fetch("include/connectors/formatters/ext/soap/tpls/default.tpl");
       } else {
       	 return $this->_ss->fetch("include/connectors/formatters/ext/rest/tpls/default.tpl");

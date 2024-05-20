@@ -113,7 +113,7 @@ final class StateAwareListener implements Listener, SplObserver
     /**
      * {@inheritDoc}
      */
-    public function update(SplSubject $state)
+    public function update(SplSubject $state): void
     {
         $this->listener = null;
     }

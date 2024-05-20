@@ -30,15 +30,15 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Client;
  */
 class IndexPool
 {
-    const DEFAULT_STRATEGY = 'static';
-    const SINGLE_MODULE_STRATEGY = 'single';
+    public const DEFAULT_STRATEGY = 'static';
+    public const SINGLE_MODULE_STRATEGY = 'single';
 
-    const MAX_ES_INDEX_NAME = 255;
+    public const MAX_ES_INDEX_NAME = 255;
 
     /**
      * default value for config entry 'enable_one_index'
      */
-    const CONFIG_ENABLE_ONE_INDEX = false;
+    public const CONFIG_ENABLE_ONE_INDEX = false;
 
     /**
      * @var string Prefix for every index

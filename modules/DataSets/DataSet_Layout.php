@@ -105,7 +105,8 @@ class DataSet_Layout extends SugarBean {
 
     }
 
-    function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 
     }
     /**

@@ -46,7 +46,7 @@ class FavoritesApi extends SugarApi
     public function getFavoriteRecords(ServiceBase $api, array $args)
     {
         $max_num = 8;
-        $pageNum = isset($args['pageNum']) ? $args['pageNum'] : 0;
+        $pageNum = $args['pageNum'] ?? 0;
 
         try {
             $favoriteProductIdQuery = new SugarQuery();

@@ -16,6 +16,8 @@
  */
 class BulkRestResponse extends RestResponse
 {
+    /** @var string */
+    public $statusText;
     /**
      * Current request name
      * @var string

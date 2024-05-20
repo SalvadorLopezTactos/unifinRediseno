@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'ユーザ情報が見つかりません',
     'ERR_USER_NAME_EXISTS'              => 'ユーザー名 {0} は既に存在します。重複するユーザー名は使用できません。一意のユーザー名に変更してください。',
     'ERR_USER_MISSING_LICENSE_TYPE'     => '「Sugar Hint」ライセンスは、互換性のある追加のライセンスタイプで保存する必要があります',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'この機能は、Sugar Sell Premierにすでに含まれています。',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'ユーザはロックアウトされていますので、既存のパスワードを用いてログインすることはできません。',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => '外部認証のみユーザは、Sugar認証情報を使ってログインすることは許可されません。',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'パスワードの変更',
     'LBL_CHOOSE_A_KEY'					=> '許可なしにカレンダーが公開されないようにキーを選択します。',
     'LBL_NO_KEY'                        => 'キーは設定しません。発行するにキーを設定する必要があります。',
-	'LBL_CHOOSE_WHICH'					=> 'ナビゲーションバーからアクセス可能なモジュールを選択してください。モジュールの表示順も設定することができます。',
+    'LBL_CHOOSE_WHICH'                  => 'サイドにあるナビゲーションバーからアクセス可能なモジュールを選択してください。モジュールの表示順も設定することができます。',
+    'LBL_NUMBER_PINNED_MODULES'         => 'ピン留めされるモジュールの数',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'ナビゲーションバーを折りたたんだときにピン留めされるモジュールの数を書き込みます（例えば、5と入力すると、リスト内の最初の5つのモジュールがピン留めされます）。最も頻繁に使用されるモジュールの数を設定することをお勧めします。100以上の値は考慮されません。',
 	'LBL_CITY'							=> '市区町村',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'クリア',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTPユーザ名:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTPサーバタイプ:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTPサーバ仕様',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => '認証済みのEメールアカウント',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Eメールプロバイダを選択:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo!メールパスワード:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo!メールID:',
@@ -690,4 +694,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'ユーザ/チーム/ロール',
     'LBL_LOADING_ITEMS' => 'データ読み込み中...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'スマートガイドアクセス',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'スマートガイド最終アクティブ',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'スマートガイドアクセスがない',
 ); // END STRINGS DEFS

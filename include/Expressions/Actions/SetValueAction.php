@@ -184,7 +184,7 @@ JS;
     public function getDefinition()
     {
         return array(
-            'action' => $this->getActionName(),
+            'action' => static::getActionName(),
             'params' => array(
                 'target' => $this->targetField,
                 'value' => $this->expression,

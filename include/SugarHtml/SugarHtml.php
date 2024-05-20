@@ -16,15 +16,15 @@
  *
  */
 class SugarHtml {
-    const SINGLE_QUOTE = "'";
-    const DOUBLE_QUOTE = '"';
-    const ASSIGN_SIGN = "=";
-    const HTML_TAG_BEGIN = "<";
-    const HTML_TAG_END = ">";
-    const SMARTY_TAG_BEGIN = "{";
-    const SMARTY_TAG_END = "}";
-    const CLAUSE_TAG_BEGIN = "(";
-    const CLAUSE_TAG_END = ")";
+    public const SINGLE_QUOTE = "'";
+    public const DOUBLE_QUOTE = '"';
+    public const ASSIGN_SIGN = "=";
+    public const HTML_TAG_BEGIN = "<";
+    public const HTML_TAG_END = ">";
+    public const SMARTY_TAG_BEGIN = "{";
+    public const SMARTY_TAG_END = "}";
+    public const CLAUSE_TAG_BEGIN = "(";
+    public const CLAUSE_TAG_END = ")";
 
     /**
      * @var integer the counter for generating automatic input field names.
@@ -115,6 +115,7 @@ class SugarHtml {
      */
     public static function createHtml($dom_tree = array()) {
 
+        $container = null;
         $out = "";
         if(isset($dom_tree[0])) { //dom contains sibling items
             foreach($dom_tree as $dom) {
@@ -207,7 +208,7 @@ class SugarHtml {
      */
     public static function parseHtmlTag($code, $appendTo = array()) {
         $code = ltrim($code);
-        $start_pos = strpos($code, ' ') ? strpos($code, ' ') : strpos($code, self::HTML_TAG_END);
+        $start_pos = strpos($code, ' ') ?: strpos($code, self::HTML_TAG_END);
         $output = array();
         if ($code === '') {
             // empty code, just pass
@@ -267,7 +268,7 @@ class SugarHtml {
         } else {
             preg_match_all('/\{( |)+'.substr($_str, 0, $_left).'/', substr($_str, 0, $_right), $matches);
 
-            $match_count = count($matches[0]);
+            $match_count = is_countable($matches[0]) ? count($matches[0]) : 0;
             while($match_count-- > 0) {
                 $_right = strpos($code, $_smarty_closing, $_right + strlen($_smarty_closing));
             }

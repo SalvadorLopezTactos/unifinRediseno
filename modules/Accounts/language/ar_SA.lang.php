@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'لوحة معلومات قائمة الحسابات',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل الحسابات',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم الحسابات',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'تفاصيل الحساب',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'لوحة معلومات تركيز الحسابات - وحدة التحكم',
     'LBL_NEXT_RENEWAL_DATE' => 'تاريخ التجديد التالي',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'تاريخ التجديد التالي',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'اسم الحساب/الصناعة',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'الموقع',
     'LBL_PURCHASES' => 'المشتريات',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'المخطط الزمني للحساب',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'تنظيم',
+    'LBL_CREATE_NEW' => 'إنشاء الآن',
+    'LBL_MANAGE' => 'إدارة',
+    'LBL_SEE_DETAILS' => 'عرض التفاصيل',
+    'LBL_HIDE_NEW' => 'إخفاء',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'المخططات',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. انقر فوق "حفظ" لإنهاء السجل الجديد والعودة إلى الصفحة السابقة.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'تقارير &#39; الحسابات',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'المستخدمون الخارجيون',
 );

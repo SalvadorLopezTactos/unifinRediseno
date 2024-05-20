@@ -50,6 +50,11 @@ $popupMeta = array('moduleMain' => 'Opportunity',
 												'width' => '5', 
 												'label' => 'LBL_LIST_ASSIGNED_USER',
 										        'default' => true),
+                                            'LOST' => [
+                                                'width' => '10',
+                                                'label' => 'LBL_LOST',
+                                                'default' => true,
+                                                ],
 											),
 						'searchdefs'   => array(
 										 	'name', 
@@ -58,5 +63,41 @@ $popupMeta = array('moduleMain' => 'Opportunity',
 											'sales_stage',
                                             'date_closed',
 											array('name' => 'assigned_user_id', 'type' => 'enum', 'label' => 'LBL_ASSIGNED_TO', 'function' => array('name' => 'get_user_array', 'params' => array(false))),
+                                            [
+                                                'name' => 'forecasted_likely',
+                                                'comment' => 'Rollup of included RLIs on the Opportunity',
+                                                'readonly' => true,
+                                                'related_fields' =>
+                                                    [
+                                                        0 => 'currency_id',
+                                                        1 => 'base_rate',
+                                                    ],
+                                                'label' => 'LBL_FORECASTED_LIKELY',
+                                                'span' => 6,
+                                            ],
+                                            [
+                                                'name' => 'commit_stage',
+                                                'type' => 'enum-cascade',
+                                                'disable_field' => 'closed_won_revenue_line_items',
+                                                'disable_positive' => true,
+                                                'related_fields' =>
+                                                    [
+                                                        0 => 'probability',
+                                                        1 => 'closed_won_revenue_line_items',
+                                                    ],
+                                                'span' => 6,
+                                            ],
+                                            [
+                                                'type' => 'currency',
+                                                'readonly' => true,
+                                                'related_fields' => [
+                                                    0 => 'currency_id',
+                                                    1 => 'base_rate',
+                                                ],
+                                                'label' => 'LBL_LOST',
+                                                'currency_format' => true,
+                                                'width' => 10,
+                                                'name' => 'lost',
+                                            ],
 										  )
 						);

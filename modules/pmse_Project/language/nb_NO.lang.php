@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Skjemaknapper',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Godkjenn/Avvis',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Videresend',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Send til DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Andre videresendingsalternativer',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Overfør Ejer',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Gruppe',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumentfletting',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Velg ...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumentfletting til PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Send flettede dokumenter via e-post',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumentfletting',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Konvergerende gatewaytype matcher ikke gatewaytype for en innkommende strøm',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Divergerende gatewayer utvider prosesser i flere grener. Ved bruk av en konvergeringsgateway for å konvergere disse grenene tilbake i en bane, må riktig type konvergerende gateway brukes, avhengig av type divergerende gateway som ble brukt for å opprette grenene. For grener opprettet med eksklusive eller hendelsesbaserte divergerende gatewayer, bruk en eksklusiv konvergerende gateway for å konvergere dem igjen. For grener opprettet med parallelle eller inklusive divergerende gatewayer, bruk en parallell konvergerende gateway for å konvergere dem igjen.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Modulfelt',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Modulforhold',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Bruker',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Rolle',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Gruppe',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Skjemaaktivitet',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Forretningsregel',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Forretningsregelhandling',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-postmal',
 );

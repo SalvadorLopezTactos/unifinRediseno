@@ -169,10 +169,10 @@ else {
 		} else if(isset(  $_REQUEST['tempName'] ) && isset($_REQUEST['isTempFile']) ){
 			// downloading a temp file (email 2.0)
 			$download_location = $local_location;
-			$name = isset($_REQUEST['tempName'])?$_REQUEST['tempName']:'';
+            $name = $_REQUEST['tempName'] ?? '';
 		} else if(isset($_REQUEST['isTempFile']) && ($_REQUEST['type']=="SugarFieldImage")) {
 			$download_location = $local_location;
-			$name = isset($_REQUEST['tempName'])?$_REQUEST['tempName']:'';
+            $name = $_REQUEST['tempName'] ?? '';
 		}
 
 		header("Pragma: public");

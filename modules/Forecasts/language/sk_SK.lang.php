@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Zobrazenie histórie prognóz',
     'LBL_FORECAST_HISTORY' => 'Prognózy: História',
     'LBL_FORECAST_HISTORY_TITLE' => 'História',
+    'LBL_TAB_COMMITMENT' => 'Záväzok',
+    'LBL_CURRENT' => 'Aktuálny',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Časové obdobie',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Upravené používateľom',
     'LBL_WK_VERSION' => 'Verzia',
     'LBL_WK_REVISION' => 'Revízia',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Na prístup k API metrík je potrebný Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Časové obdobie:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Chcete schváliť tieto čiastky?',
     'ERR_FORECAST_AMOUNT' => 'Vyžaduje sa schválená čiastka, ktorá musí byť vyjadrená číslom.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Zahrnutá pipeline',
+    'LBL_UPSIDE_PIPELINE' => 'Pipeline hore',
+    'LBL_EXCLUDED_PIPELINE' => 'Vylúčená pipeline',
+    'LBL_WON' => 'Získané',
+    'LBL_LOST' => 'Nezískané',
+    'LBL_ALL' => 'Všetko',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Sprievodca filtrami',
+    'LBL_HELP_MAIN_BODY' => 'Všetky metriky zahŕňajú len príležitosti patriace k vybratým používateľom, časovému obdobiu a akýmkoľvek ďalším filtrom, ktoré ste použili',
+    'LBL_FORECAST_HELP' => 'Príležitosti, ktoré už boli získané alebo sú v zahrnutej {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Otvorené príležitosti s {{{forecastStage}}} z {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Otvorené príležitosti v zahrnutej {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Otvorené príležitosti s {{{forecastStage}}} z {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Otvorené príležitosti s {{{forecastStage}}} z {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Otvorené príležitosti v nezahrnutej {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Príležitosti, ktoré už boli získané',
+    'LBL_LOST_HELP' => 'Príležitosti, ktoré už boli nezískané',
+    'LBL_ALL_HELP' => 'Všetky príležitosti',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Dátum začiatku:',
     'LBL_FC_USER' => 'Plán pre',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Záväzok',
     'LBL_TEAM_COMMITMENT' => 'Tímový záväzok',
     'LBL_FORECASTED' => 'Prognózované',
+    'LBL_OPPORTUNITY_FORECAST' => 'Prognóza príležitostí',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Prognóza riadkových položiek výnosov',
+    'LBL_LAST_COMMITMENT' => 'Posledný záväzok',
     'LBL_ADJUSTED_TOTAL' => 'Upravené celkom',
     'LBL_COMMIT_STAGE' => 'Fáza schválenia',
     'LBL_SALES_STAGE' => 'Fáza',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Upravený)',
     'LBL_SAVE_DRAFT' => 'Uložiť',
     'LBL_CHANGES_BY' => 'Zmeny vykonané používateľom {0}',
-    'LBL_FORECAST_SETTINGS' => 'Nastavenia',
+    'LBL_FORECAST_SETTINGS' => 'Nastavenia prognózy',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Nastavenia prognóz',

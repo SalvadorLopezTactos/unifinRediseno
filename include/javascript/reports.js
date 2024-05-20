@@ -675,7 +675,7 @@ SUGAR.reports = function() {
 				}
 			}
 	
-	 		if ( field.type == 'datetime' || field.type == 'date') {
+            if (['date', 'datetime', 'service-enddate'].includes(field.type)) {
 				if ( typeof(filter_def.input_name0) != 'undefined' && typeof(filter_def.input_name0) != 'array') {
                     var date_match = filter_def.input_name0.match(date_reg_format_rpt);
 					if ( date_match != null) {
@@ -839,7 +839,7 @@ SUGAR.reports = function() {
 						}
 					}
 			
-			 		if ( field.type == 'datetime' || field.type == 'date') {
+                    if (['date', 'datetime', 'service-enddate'].includes(field.type)) {
 						if ( typeof(filter_def.input_name0) != 'undefined' && typeof(filter_def.input_name0) != 'array') {
                             var date_match = filter_def.input_name0.match(date_reg_format_rpt);
 							if ( date_match != null) {
@@ -1303,7 +1303,22 @@ SUGAR.reports = function() {
 		},
 		setNumericalChartColumnType: function() {
 			for (var i = 0; i < summary_columns.length; i++) {
-				if (summary_columns[i].group_function && (summary_columns[i].table_key+":"+ summary_columns[i].name+ ":" +summary_columns[i].group_function == document.ReportsWizardForm.numerical_chart_column.value)) {
+                const colData = summary_columns[i];
+                const completeFnName = `${colData.table_key}:${colData.name}:${colData.group_function}`;
+                const partialFnName = `${colData.table_key}:${colData.group_function}`;
+                const numChart = document.ReportsWizardForm.numerical_chart_column.value;
+
+                if (
+                    colData.group_function &&
+                    (
+                        completeFnName === numChart ||
+                        (
+                            colData.name === colData.group_function &&
+                            colData.name === 'count' &&
+                            partialFnName === numChart
+                        )
+                    )
+                ) {
 					document.ReportsWizardForm.numerical_chart_column_type.value = summary_columns[i].field_type;
 					return;
 				}
@@ -1779,11 +1794,50 @@ SUGAR.reports = function() {
 		previewReport: function() {
 			if (!SUGAR.reports.saveCurrentStep())
 				return false;
-			document.ReportsWizardForm.run_query.value = 1;
-			SUGAR.reports.saveFilters();
-			if (SUGAR.reports.prepareReportForProcessing()) {
-				document.ReportsWizardForm.submit();
-			}
+
+            if (window.location.search.indexOf('legacyBwc=1') >= 0) {
+                document.ReportsWizardForm.run_query.value = 1;
+                SUGAR.reports.saveFilters();
+                if (SUGAR.reports.prepareReportForProcessing()) {
+                    document.ReportsWizardForm.submit();
+                }
+                return;
+            }
+
+            document.ReportsWizardForm.run_query.value = '0';
+            SUGAR.reports.saveFilters();
+            if (SUGAR.reports.prepareReportForProcessing()) {
+                const formData = new FormData(document.ReportsWizardForm);
+                const formValues = Object.fromEntries(formData);
+                const url = app.api.buildURL('Reports/retrieveReportPreviewData');
+
+                let reportDef = JSON.parse(formValues.report_def);
+
+                if (_.isUndefined(reportDef.layout_options)) {
+                    const reportTypeMapping = {
+                        'summation_with_details': 'detailed_summary',
+                        'summation': 'summary',
+                        'tabular': 'tabular',
+                    };
+
+                    reportDef.report_type = reportTypeMapping[report_type];
+                } else {
+                    reportDef.report_type = 'Matrix';
+                }
+
+                formValues.report_def = JSON.stringify(reportDef);
+
+                app.api.call('create', url, {
+                    previewData: formValues,
+                }, {
+                    success: function(previewData) {
+                        app.drawer.open({
+                            layout: 'report-preview',
+                            previewData
+                        });
+                    },
+                });
+            }
 		},
         cancelReport: function() {
             var dashletEdit = this.getWindowLocationParameterByName('dashletEdit', window.location.search);
@@ -2616,8 +2670,8 @@ SUGAR.reports = function() {
 			var filter_row = filters_arr[filters_count_map[current_filter_id]];
 			filter_row.input_field0 = new_input;
 			filter_row.input_field1 = null;
-		},	
-		timeValueUpdate: function(fname){
+        },
+        timeValueUpdate: function(fname, filterid) {
 			var fieldname = 'defaultTime';
 			if(fname){
 				fieldname =fname;
@@ -2627,14 +2681,27 @@ SUGAR.reports = function() {
 			var newtime = '';
 			
 			id = fieldname + '_hours';
-			h = window.document.getElementById(id).value;
+            let hours = window.document.getElementsByName(id);
+            h = _.find(hours, function(hourElement) {
+                return parseInt(hourElement.getAttribute('filterid')) === filterid;
+            }).value;
 			id = fieldname + '_minutes';
-			m = window.document.getElementById(id).value;
+            let minutes = window.document.getElementsByName(id);
+            m = _.find(minutes, function(minuteElement) {
+                return parseInt(minuteElement.getAttribute('filterid')) === filterid;
+            }).value;
 			id = fieldname + '_meridiem';
-			ampm = document.getElementById(id).value;
+            let ampmValues = window.document.getElementsByName(id);
+            ampm = _.find(ampmValues, function(ampmElement) {
+                return parseInt(ampmElement.getAttribute('filterid')) === filterid;
+            }).value;
 			newtime = h + timeseparator + m + ampm;
-		   
-			document.getElementById(fieldname).value = newtime;
+
+            let fieldNames = document.getElementsByName(fieldname + '_inputtime');
+            let fieldName = _.find(fieldNames, function(fieldNameElement) {
+                return parseInt(fieldNameElement.getAttribute('filterid')) === filterid;
+            });
+            fieldName.value = newtime;
 		},
 		addFilterInputDatetimecombo: function(row, filter) {
 			var cellInput = document.createElement("td");
@@ -2771,25 +2838,32 @@ SUGAR.reports = function() {
 			mins = parseInt(timevalue.substring(3,5));
 			meridiem = timevalue.substring(5,7);
 			
-			var text =  '<select tabindex="0" size="1" id="'+dname+'_hours" onchange="SUGAR.reports.timeValueUpdate(\''+dname+'\');">';
+            var text =  '<select tabindex="0" size="1" id="' + dname + '_hours" name="' + dname + '_hours" filterid="' +
+                current_filter_id + '" onchange="SUGAR.reports.timeValueUpdate(\'' + dname + '\', ' +
+                current_filter_id + ');">';
 			for(i=1; i <= 12; i++) {
 			    val = i < 10 ? "0" + i : i;
 			    text += '<option value="' + val + '" ' + (i == hrs ? "SELECTED" : "") +  '>' + val + '</option>';
 			}
 			text += '</select>';
 			text += ' : ';
-			text += '<select tabindex="0" size="1" id="'+dname+'_minutes" onchange="SUGAR.reports.timeValueUpdate(\''+dname+'\');">';
+            text += '<select tabindex="0" size="1" id="' + dname + '_minutes" name="' + dname + '_minutes" filterid="' +
+                current_filter_id + '" onchange="SUGAR.reports.timeValueUpdate(\'' + dname + '\', ' +
+                current_filter_id + ');">';
 			text += '\n<option value="00" ' + (mins == 0 ? "SELECTED" : "") + '>00</option>';
 			text += '\n<option value="15" ' + (mins == 15 ? "SELECTED" : "") + '>15</option>';
 			text += '\n<option value="30" ' + (mins == 30 ? "SELECTED" : "") + '>30</option>';
 			text += '\n<option value="45" ' + (mins == 45 ? "SELECTED" : "") + '>45</option>';
 			text += '\n</select>';
-			text += ' <select tabindex="0" size="1" id="'+dname+'_meridiem" onchange="SUGAR.reports.timeValueUpdate(\''+dname+'\');"> ';
+            text += ' <select tabindex="0" size="1" id="' + dname + '_meridiem" name="' + dname +
+                '_meridiem" filterid="' + current_filter_id + '" onchange="SUGAR.reports.timeValueUpdate(\'' +
+                dname + '\', ' + current_filter_id + ');"> ';
 			
 			text += '\n<option value="' + "am" + '" ' + (/am/i.test(meridiem) ? "SELECTED" : "") + '>' +  "am"  + '</option>';
 			text += '\n<option value="' +"pm"  + '" ' + (/pm/i.test(meridiem) ? "SELECTED" : "") + '>' +  "pm" + '</option>';
 			text += '\n</select>';
-			text += '<input type="hidden" name="'+dname+'_inputtime" id="'+dname+'" value="'+timevalue+'">';
+            text += '<input type="hidden" name="' + dname + '_inputtime" id="' + dname + '" filterid="' +
+            current_filter_id + '" value="' + timevalue + '">';
 			selectSpan.innerHTML = text;
 			return selectSpan;
 		},
@@ -2927,7 +3001,7 @@ SUGAR.reports = function() {
                 SUGAR.reports.addFilterInputText(row, filter);
                 SUGAR.reports.addRunTimeCheckBox(row, filter, rowId);
             }
-			else if (field_type == 'date' || field_type == 'datetime') {
+            else if (['date', 'datetime', 'service-enddate'].includes(field_type)) {
 				if (qualifier_name.indexOf('tp_') == 0) {
 					SUGAR.reports.addFilterInputEmpty(row,filter);
 					SUGAR.reports.addRunTimeCheckBox(row,filter,rowId);		

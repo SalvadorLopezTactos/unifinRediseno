@@ -12,6 +12,10 @@
 
 
 class PersonFilterApi extends FilterApi {
+    /**
+     * @var bool|mixed
+     */
+    public $useOnlyActiveUsers;
     public function registerApiRest() {
         return array(
             'UserSearch' => array(
@@ -72,7 +76,7 @@ class PersonFilterApi extends FilterApi {
         $args['module'] = $args['module_list'];
 
         $api->action = 'list';
-        list($args, $q, $options, $seed) = $this->filterListSetup($api, $args);
+        [$args, $q, $options, $seed] = $this->filterListSetup($api, $args);
 
         // To maintain the contract, set this as a property on this object
         $this->useOnlyActiveUsers = isset($args['filter']) && $this->useOnlyActiveUsers($args['filter']);

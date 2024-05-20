@@ -204,7 +204,15 @@
             if (_.isString(fieldData.value[fieldData.fieldName])) {
                 let value = {};
 
-                value[fieldData.fieldName] = app.date.utc(fieldData.value[fieldData.fieldName]).format();
+                const userDateTimeFormat = `${app.date.getUserDateFormat()} ${app.date.getUserTimeFormat()}`;
+                const dateValue = fieldData.value[fieldData.fieldName];
+                const date = app.date(dateValue, userDateTimeFormat);
+
+                if (date.isValid()) {
+                    value[fieldData.fieldName] = date.format();
+                } else {
+                    value[fieldData.fieldName] = app.date.utc(fieldData.value[fieldData.fieldName]).format();
+                }
 
                 return value;
             } else {

@@ -90,7 +90,7 @@ $mod_strings = array (
     'LBL_INFO_RELATED_TO' => 'Povezano sa',
 
     'LBL_NO_USER' => 'Nema rezultata za polje: Dodeljeno',
-    'LBL_SUBJECT' => 'Predmet',
+    'LBL_SUBJECT' => 'Naslov',
     'LBL_DURATION' => 'Trajanje',
     'LBL_STATUS' => 'Status',
     'LBL_DATE_TIME' => 'Datum i vreme',
@@ -164,7 +164,7 @@ $mod_strings = array (
     'LBL_TIMELINE_EVENT_TEMPLATE' => 'Vremenska linija događaja',
     'LBL_SCHEDULERMONTH_EVENT_TEMPLATE' => 'Događaj planera',
     'LBL_ICAL_EVENT_TEMPLATE' => 'iCal događaj',
-    'LBL_SUBJECT' => 'Predmet',
+    'LBL_SUBJECT' => 'Naslov',
     'LBL_CALENDAR_TYPE' => 'Tip kalendara',
     'LBL_COLOR' => 'Boja',
     'LBL_DURATION_MINUTES' => 'Trajanje u minutima',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Okt',
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Dec',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalendar je već dodat',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} je izabran',
+    'LBL_NO_USER_SELECTED' => 'izaberite korisnika ili tim',
+    'LBL_NO_CALENDAR_SELECTED' => 'Izaberite kalendar',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Čuvanje kalendara nije uspelo.',
 
 );
 

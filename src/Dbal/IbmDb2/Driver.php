@@ -13,35 +13,19 @@
 
 namespace Sugarcrm\Sugarcrm\Dbal\IbmDb2;
 
-use Doctrine\DBAL\Driver\DriverException;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Driver\ExceptionConverterDriver;
-use Doctrine\DBAL\Driver\IBMDB2\DB2Driver as BaseDriver;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAL\Driver\AbstractDB2Driver;
+use Doctrine\DBAL\Driver\IBMDB2\Connection;
 
 /**
  * IBM DB2 driver
  */
-class Driver extends BaseDriver implements ExceptionConverterDriver
+class Driver extends AbstractDB2Driver
 {
     /**
      * {@inheritdoc}
      */
-    public function connect(array $params, $username = null, $password = null, array $driverOptions = array())
+    public function connect(array $params)
     {
         return new Connection($params['connection']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function convertException($message, DriverException $exception)
-    {
-        switch ($exception->getSQLState()) {
-            case '23505':
-                return new UniqueConstraintViolationException($message, $exception);
-        }
-
-        throw new Exception\DriverException($message, $exception);
     }
 }

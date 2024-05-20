@@ -64,9 +64,9 @@ if(isset($_REQUEST['account_id']) && is_null($focus->parent_id)) {
 	$focus->parent_id = $_REQUEST['account_id'];
 }
 
-echo getClassicModuleTitle(htmlspecialchars($focus->module_dir), [
-    htmlspecialchars($focus->name),
-    htmlspecialchars($focus->module_dir),
+echo getClassicModuleTitle(htmlspecialchars($focus->module_dir, ENT_COMPAT), [
+    htmlspecialchars($focus->name, ENT_COMPAT),
+    htmlspecialchars($focus->module_dir, ENT_COMPAT),
 ], true);
 
 $GLOBALS['log']->info("EmailTemplate detail view");
@@ -101,8 +101,8 @@ if(isset($_REQUEST['return_action'])) $xtpl->assign("RETURN_ACTION", $_REQUEST['
 if(isset($_REQUEST['return_id'])) $xtpl->assign("RETURN_ID", $_REQUEST['return_id']);
 $xtpl->assign("GRIDLINE", $gridline);
 $xtpl->assign("ID", $focus->id);
-$xtpl->assign("CREATED_BY", htmlspecialchars($focus->created_by_name));
-$xtpl->assign("MODIFIED_BY", htmlspecialchars($focus->modified_by_name));
+$xtpl->assign("CREATED_BY", htmlspecialchars($focus->created_by_name, ENT_COMPAT));
+$xtpl->assign("MODIFIED_BY", htmlspecialchars($focus->modified_by_name, ENT_COMPAT));
 //if text only is set to true, then make sure input is checked and value set to 1
 if ($focus->text_only || $focus->isForgotPasswordTemplate()) {
     $xtpl->assign("TEXT_ONLY_CHECKED","CHECKED");
@@ -150,7 +150,7 @@ if(! isset($notes_list)) {
 }
 
 $attachments = '';
-for ($i=0; $i<(is_countable($notes_list) ? count($notes_list) : 0); $i++) {
+for ($i = 0; $i < (is_countable($notes_list) ? count($notes_list) : 0); $i++) {
 	$the_note = $notes_list[$i];
 	$attachments .= "<a href=\"index.php?entryPoint=download&id={$the_note->id}&type=Notes\">".$the_note->name."</a><br />";
 }

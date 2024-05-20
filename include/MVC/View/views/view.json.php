@@ -30,7 +30,7 @@ class ViewJson extends SugarView{
 				$js_fields_arr[$field] = addslashes($bean->$field);
 			}
 		}
-		$out = $json->encode($js_fields_arr, true);
+        $out = $json->encode($js_fields_arr);
 		ob_clean();
 		print($out);
 		sugar_cleanup(true);

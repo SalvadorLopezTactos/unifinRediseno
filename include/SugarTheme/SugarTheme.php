@@ -242,9 +242,9 @@ class SugarTheme
         // apply parent theme's properties first
         if ( isset($defaults['parentTheme']) ) {
             $themedef = array();
-            include("themes/{$defaults['parentTheme']}/themedef.php");
+            include "themes/{$defaults['parentTheme']}/themedef.php";
             foreach ( $themedef as $key => $value ) {
-                if ( property_exists(__CLASS__,$key) ) {
+                if (property_exists(self::class, $key)) {
                     // For all arrays ( except colors and fonts ) you can just specify the items
                     // to change instead of all of the values
                     if ( is_array($this->$key) && !in_array($key,array('colors','fonts')) )
@@ -255,7 +255,7 @@ class SugarTheme
             }
         }
         foreach ( $defaults as $key => $value ) {
-            if ( property_exists(__CLASS__,$key) ) {
+            if (property_exists(self::class, $key)) {
                 // For all arrays ( except colors and fonts ) you can just specify the items
                 // to change instead of all of the values
                 if ( is_array($this->$key) && !in_array($key,array('colors','fonts')) )
@@ -309,7 +309,7 @@ class SugarTheme
     public function __destruct()
     {
         // Set the current directory to one which we expect it to be (i.e. the root directory of the install
-        $dir = realpath(dirname(__FILE__) . '/../..');
+        $dir = realpath(__DIR__ . '/../..');
         static $includePathIsPatched = false;
         if ($includePathIsPatched == false)
         {
@@ -711,7 +711,7 @@ EOHTML;
 
 		$attr_width = (is_null($width)) ? "" : "width=\"$width\"";
 		$attr_height = (is_null($height)) ? "" : "height=\"$height\"";
-        $altText = htmlspecialchars($alt);
+        $altText = htmlspecialchars($alt, ENT_COMPAT);
         return $cached_results[$imageName] . " $attr_width $attr_height $other_attributes alt=\"$altText\" />";
     }
 
@@ -777,7 +777,7 @@ EOHTML;
 		}
 
         if ($title) {
-            $attr .= ' title="' . htmlspecialchars($title) . '"';
+            $attr .= ' title="' . htmlspecialchars($title, ENT_COMPAT) . '"';
         }
 
 		// use </span> instead of /> to prevent weird UI results
@@ -1271,7 +1271,7 @@ class SugarThemeRegistry
         foreach(SugarAutoLoader::getFilesCustom("themes", true) as $file) {
             if(SugarAutoLoader::existing("$file/themedef.php")) {
                 $themedef = array();
-                require("$file/themedef.php");
+                require "$file/themedef.php";
                 $themedef = array_merge($themedef,$themedefDefault);
                 $themedef['dirName'] = basename($file);
                 if ( self::exists($themedef['dirName']) ) {
@@ -1319,9 +1319,7 @@ class SugarThemeRegistry
             }
         }
 
-        end($availableThemes);
-
-        return key($availableThemes);
+        return array_key_last($availableThemes);
     }
 
     /**

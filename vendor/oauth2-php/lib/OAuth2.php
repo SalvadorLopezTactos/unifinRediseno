@@ -69,24 +69,24 @@ class OAuth2 {
 	 * @var int
 	 * @see OAuth2::setDefaultOptions()
 	 */
-	const DEFAULT_ACCESS_TOKEN_LIFETIME = 3600;
-	const DEFAULT_REFRESH_TOKEN_LIFETIME = 1209600;
-	const DEFAULT_AUTH_CODE_LIFETIME = 30;
-	const DEFAULT_WWW_REALM = 'Service';
+	public const DEFAULT_ACCESS_TOKEN_LIFETIME = 3600;
+	public const DEFAULT_REFRESH_TOKEN_LIFETIME = 1209600;
+	public const DEFAULT_AUTH_CODE_LIFETIME = 30;
+	public const DEFAULT_WWW_REALM = 'Service';
 
 	/**
 	 * Configurable options.
 	 *
 	 * @var string
 	 */
-	const CONFIG_ACCESS_LIFETIME = 'access_token_lifetime'; // The lifetime of access token in seconds.
-	const CONFIG_REFRESH_LIFETIME = 'refresh_token_lifetime'; // The lifetime of refresh token in seconds.
-	const CONFIG_AUTH_LIFETIME = 'auth_code_lifetime'; // The lifetime of auth code in seconds.
-	const CONFIG_SUPPORTED_SCOPES = 'supported_scopes'; // Array of scopes you want to support
-	const CONFIG_TOKEN_TYPE = 'token_type'; // Token type to respond with. Currently only "Bearer" supported.
-	const CONFIG_WWW_REALM = 'realm';
-	const CONFIG_ENFORCE_INPUT_REDIRECT = 'enforce_redirect'; // Set to true to enforce redirect_uri on input for both authorize and token steps.
-	const CONFIG_ENFORCE_STATE = 'enforce_state'; // Set to true to enforce state to be passed in authorization (see http://tools.ietf.org/html/draft-ietf-oauth-v2-21#section-10.12)
+	public const CONFIG_ACCESS_LIFETIME = 'access_token_lifetime'; // The lifetime of access token in seconds.
+	public const CONFIG_REFRESH_LIFETIME = 'refresh_token_lifetime'; // The lifetime of refresh token in seconds.
+	public const CONFIG_AUTH_LIFETIME = 'auth_code_lifetime'; // The lifetime of auth code in seconds.
+	public const CONFIG_SUPPORTED_SCOPES = 'supported_scopes'; // Array of scopes you want to support
+	public const CONFIG_TOKEN_TYPE = 'token_type'; // Token type to respond with. Currently only "Bearer" supported.
+	public const CONFIG_WWW_REALM = 'realm';
+	public const CONFIG_ENFORCE_INPUT_REDIRECT = 'enforce_redirect'; // Set to true to enforce redirect_uri on input for both authorize and token steps.
+	public const CONFIG_ENFORCE_STATE = 'enforce_state'; // Set to true to enforce state to be passed in authorization (see http://tools.ietf.org/html/draft-ietf-oauth-v2-21#section-10.12)
 
 
 	/**
@@ -98,7 +98,7 @@ class OAuth2 {
 	 *
 	 * Feel free to change.
 	 */
-	const CLIENT_ID_REGEXP = '/^[a-z0-9-_]{3,32}$/i';
+	public const CLIENT_ID_REGEXP = '/^[a-z0-9-_]{3,32}$/i';
 
 	/**
 	 * @defgroup oauth2_section_5 Accessing a Protected Resource
@@ -124,7 +124,7 @@ class OAuth2 {
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-06#section-2.2
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-06#section-2.3
 	 */
-	const TOKEN_PARAM_NAME = 'access_token';
+	public const TOKEN_PARAM_NAME = 'access_token';
 
 	/**
 	 * When using the bearer token type, there is a specifc Authorization header
@@ -132,7 +132,7 @@ class OAuth2 {
 	 *
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-bearer-04#section-2.1
 	 */
-	const TOKEN_BEARER_HEADER_NAME = 'Bearer';
+	public const TOKEN_BEARER_HEADER_NAME = 'Bearer';
 
 	/**
 	 * @}
@@ -161,8 +161,8 @@ class OAuth2 {
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.1.1
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.2.1
 	 */
-	const RESPONSE_TYPE_AUTH_CODE = 'code';
-	const RESPONSE_TYPE_ACCESS_TOKEN = 'token';
+	public const RESPONSE_TYPE_AUTH_CODE = 'code';
+	public const RESPONSE_TYPE_ACCESS_TOKEN = 'token';
 
 	/**
 	 * @}
@@ -183,19 +183,19 @@ class OAuth2 {
 	/**
 	 * Grant types support by draft 20
 	 */
-	const GRANT_TYPE_AUTH_CODE = 'authorization_code';
-	const GRANT_TYPE_IMPLICIT = 'token';
-	const GRANT_TYPE_USER_CREDENTIALS = 'password';
-	const GRANT_TYPE_CLIENT_CREDENTIALS = 'client_credentials';
-	const GRANT_TYPE_REFRESH_TOKEN = 'refresh_token';
-	const GRANT_TYPE_EXTENSIONS = 'extensions';
+	public const GRANT_TYPE_AUTH_CODE = 'authorization_code';
+	public const GRANT_TYPE_IMPLICIT = 'token';
+	public const GRANT_TYPE_USER_CREDENTIALS = 'password';
+	public const GRANT_TYPE_CLIENT_CREDENTIALS = 'client_credentials';
+	public const GRANT_TYPE_REFRESH_TOKEN = 'refresh_token';
+	public const GRANT_TYPE_EXTENSIONS = 'extensions';
 
 	/**
 	 * Regex to filter out the grant type.
 	 * NB: For extensibility, the grant type can be a URI
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.5
 	 */
-	const GRANT_TYPE_REGEXP = '#^(authorization_code|token|password|client_credentials|refresh_token|http://.*|urn:ietf:params:oauth:grant-type:.*)$#';
+	public const GRANT_TYPE_REGEXP = '#^(authorization_code|token|password|client_credentials|refresh_token|http://.*|urn:ietf:params:oauth:grant-type:.*)$#';
 
 	/**
 	 * @}
@@ -208,8 +208,8 @@ class OAuth2 {
 	 *
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-7.1
 	 */
-	const TOKEN_TYPE_BEARER = 'bearer';
-	const TOKEN_TYPE_MAC = 'mac'; // Currently unsupported
+	public const TOKEN_TYPE_BEARER = 'bearer';
+	public const TOKEN_TYPE_MAC = 'mac'; // Currently unsupported
 
 
 	/**
@@ -223,11 +223,11 @@ class OAuth2 {
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.1.2
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-5.2
 	 */
-	const HTTP_FOUND = '302 Found';
-	const HTTP_BAD_REQUEST = '400 Bad Request';
-	const HTTP_UNAUTHORIZED = '401 Unauthorized';
-	const HTTP_FORBIDDEN = '403 Forbidden';
-	const HTTP_UNAVAILABLE = '503 Service Unavailable';
+	public const HTTP_FOUND = '302 Found';
+	public const HTTP_BAD_REQUEST = '400 Bad Request';
+	public const HTTP_UNAUTHORIZED = '401 Unauthorized';
+	public const HTTP_FORBIDDEN = '403 Forbidden';
+	public const HTTP_UNAVAILABLE = '503 Service Unavailable';
 
 	/**
 	 * @}
@@ -249,14 +249,14 @@ class OAuth2 {
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.2.2.1
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-5.2
 	 */
-	const ERROR_INVALID_REQUEST = 'invalid_request';
+	public const ERROR_INVALID_REQUEST = 'invalid_request';
 
 	/**
 	 * The client identifier provided is invalid.
 	 *
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-5.2
 	 */
-	const ERROR_INVALID_CLIENT = 'invalid_client';
+	public const ERROR_INVALID_CLIENT = 'invalid_client';
 
 	/**
 	 * The client is not authorized to use the requested response type.
@@ -265,14 +265,14 @@ class OAuth2 {
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.2.2.1
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-5.2
 	 */
-	const ERROR_UNAUTHORIZED_CLIENT = 'unauthorized_client';
+	public const ERROR_UNAUTHORIZED_CLIENT = 'unauthorized_client';
 
 	/**
 	 * The redirection URI provided does not match a pre-registered value.
 	 *
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-3.1.2.4
 	 */
-	const ERROR_REDIRECT_URI_MISMATCH = 'redirect_uri_mismatch';
+	public const ERROR_REDIRECT_URI_MISMATCH = 'redirect_uri_mismatch';
 
 	/**
 	 * The end-user or authorization server denied the request.
@@ -282,7 +282,7 @@ class OAuth2 {
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.1.2.1
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.2.2.1
 	 */
-	const ERROR_USER_DENIED = 'access_denied';
+	public const ERROR_USER_DENIED = 'access_denied';
 
 	/**
 	 * The requested response type is not supported by the authorization server.
@@ -290,7 +290,7 @@ class OAuth2 {
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.1.2.1
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.2.2.1
 	 */
-	const ERROR_UNSUPPORTED_RESPONSE_TYPE = 'unsupported_response_type';
+	public const ERROR_UNSUPPORTED_RESPONSE_TYPE = 'unsupported_response_type';
 
 	/**
 	 * The requested scope is invalid, unknown, or malformed.
@@ -298,7 +298,7 @@ class OAuth2 {
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.1.2.1
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.2.2.1
 	 */
-	const ERROR_INVALID_SCOPE = 'invalid_scope';
+	public const ERROR_INVALID_SCOPE = 'invalid_scope';
 
 	/**
 	 * The provided authorization grant is invalid, expired,
@@ -307,14 +307,14 @@ class OAuth2 {
 	 *
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-5.2
 	 */
-	const ERROR_INVALID_GRANT = 'invalid_grant';
+	public const ERROR_INVALID_GRANT = 'invalid_grant';
 
 	/**
 	 * The authorization grant is not supported by the authorization server.
 	 *
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-5.2
 	 */
-	const ERROR_UNSUPPORTED_GRANT_TYPE = 'unsupported_grant_type';
+	public const ERROR_UNSUPPORTED_GRANT_TYPE = 'unsupported_grant_type';
 
 	/**
 	 * The request requires higher privileges than provided by the access token.
@@ -326,7 +326,7 @@ class OAuth2 {
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-4.2.2.1
 	 * @see http://tools.ietf.org/html/draft-ietf-oauth-v2-20#section-5.2
 	 */
-	const ERROR_INSUFFICIENT_SCOPE = 'invalid_scope';
+	public const ERROR_INSUFFICIENT_SCOPE = 'invalid_scope';
 
 	/**
 	 * @}
@@ -377,7 +377,7 @@ class OAuth2 {
 	public function getVariable($name, $default = NULL) {
 		$name = strtolower($name);
 
-		return isset($this->conf[$name]) ? $this->conf[$name] : $default;
+		return $this->conf[$name] ?? $default;
 	}
 
 	/**
@@ -597,7 +597,7 @@ class OAuth2 {
 		}
 
 		// Basic authorization header
-		$authHeaders = isset($authHeaders) ? $authHeaders : $this->getAuthorizationHeader();
+		$authHeaders = $authHeaders ?? $this->getAuthorizationHeader();
 
 		// Filter input data
 		$input = filter_var_array($inputData, $filters);
@@ -735,7 +735,7 @@ class OAuth2 {
 			throw new OAuth2ServerException(self::HTTP_BAD_REQUEST, self::ERROR_INVALID_SCOPE, 'An unsupported scope was requested.');
 		}
 
-		$user_id = isset($stored['user_id']) ? $stored['user_id'] : null;
+		$user_id = $stored['user_id'] ?? null;
 		$token = $this->createAccessToken($client[0], $user_id, $stored['scope']);
 
 		// Send response
@@ -838,7 +838,7 @@ class OAuth2 {
 		}
 
 		// Select the redirect URI
-		$input["redirect_uri"] = isset($input["redirect_uri"]) ? $input["redirect_uri"] : $stored["redirect_uri"];
+		$input["redirect_uri"] = $input["redirect_uri"] ?? $stored["redirect_uri"];
 
 		// type and client_id are required
 		if (!$input["response_type"]) {
@@ -895,6 +895,12 @@ class OAuth2 {
 	 */
 	public function finishClientAuthorization($is_authorized, $user_id = NULL, $params = array()) {
 
+		$state = null;
+  $result = [];
+  $redirect_uri = null;
+  $response_type = null;
+  $client_id = null;
+  $scope = null;
 		// We repeat this, because we need to re-validate. In theory, this could be POSTed
 		// by a 3rd-party (because we are not internally enforcing NONCEs, etc)
 		$params = $this->getAuthorizeParams($params);
@@ -971,9 +977,9 @@ class OAuth2 {
 			((isset($parse_url["scheme"])) ? $parse_url["scheme"] . "://" : "")
 			. ((isset($parse_url["user"])) ? $parse_url["user"]
 			. ((isset($parse_url["pass"])) ? ":" . $parse_url["pass"] : "") . "@" : "")
-			. ((isset($parse_url["host"])) ? $parse_url["host"] : "")
+			. ($parse_url["host"] ?? "")
 			. ((isset($parse_url["port"])) ? ":" . $parse_url["port"] : "")
-			. ((isset($parse_url["path"])) ? $parse_url["path"] : "")
+			. ($parse_url["path"] ?? "")
 			. ((isset($parse_url["query"])) ? "?" . $parse_url["query"] : "")
 			. ((isset($parse_url["fragment"])) ? "#" . $parse_url["fragment"] : "")
 		;
@@ -1056,9 +1062,9 @@ class OAuth2 {
 	protected function genAccessToken() {
 		$tokenLen = 40;
 		if (file_exists('/dev/urandom')) { // Get 100 bytes of random data
-			$randomData = file_get_contents('/dev/urandom', false, null, 0, 100) . uniqid(mt_rand(), true);
+			$randomData = file_get_contents('/dev/urandom', false, null, 0, 100) . uniqid(random_int(0, mt_getrandmax()), true);
 		} else {
-			$randomData = mt_rand() . mt_rand() . mt_rand() . mt_rand() . microtime(true) . uniqid(mt_rand(), true);
+			$randomData = random_int(0, mt_getrandmax()) . random_int(0, mt_getrandmax()) . random_int(0, mt_getrandmax()) . random_int(0, mt_getrandmax()) . microtime(true) . uniqid(random_int(0, mt_getrandmax()), true);
 		}
 		return substr(hash('sha512', $randomData), 0, $tokenLen);
 	}
@@ -1096,8 +1102,8 @@ class OAuth2 {
 	 */
 	protected function getAuthorizationHeader() {
 		return array(
-			'PHP_AUTH_USER' => isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '',
-			'PHP_AUTH_PW' => isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : ''
+			'PHP_AUTH_USER' => $_SERVER['PHP_AUTH_USER'] ?? '',
+			'PHP_AUTH_PW' => $_SERVER['PHP_AUTH_PW'] ?? ''
 		);
 	}
 

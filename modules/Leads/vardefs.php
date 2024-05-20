@@ -12,6 +12,8 @@
 
 $dictionary['Lead'] = array(
     'table' => 'leads',
+    'color' => 'purple',
+    'icon' => 'sicon-lead-lg',
     'audited' => true,
     'activity_enabled' => true,
     'unified_search' => true,
@@ -700,7 +702,7 @@ $dictionary['Lead'] = array(
             'default_value' => '',
             'reportable' => true,
             'audited' => false,
-            'importable' => true,
+            'importable' => false,
             'listview' => true,
             'readonly' => true,
             'massupdate' => false,
@@ -720,7 +722,7 @@ $dictionary['Lead'] = array(
             'default_value' => '',
             'reportable' => true,
             'audited' => false,
-            'importable' => true,
+            'importable' => false,
             'readonly' => true,
             'massupdate' => false,
             'duplicate_merge' => 'disabled',
@@ -753,6 +755,66 @@ $dictionary['Lead'] = array(
             'importable' => true,
             'duplicate_merge' => true,
             'enable_range_search' => true,
+        ],
+        'ai_conv_score_absolute' => [
+            'name' => 'ai_conv_score_absolute',
+            'vname' => 'LBL_AI_CONV_SCORE_ABSOLUTE',
+            'type' => 'decimal',
+            'reportable' => true,
+            'importable' => false,
+            'readonly' => true,
+            'duplicate_merge' => 'disabled',
+            'studio' => false,
+        ],
+        'ai_conv_bin_accuracy' => [
+            'name' => 'ai_conv_bin_accuracy',
+            'vname' => 'LBL_AI_CONV_BIN_ACCURACY',
+            'type' => 'decimal',
+            'reportable' => true,
+            'importable' => false,
+            'readonly' => true,
+            'duplicate_merge' => 'disabled',
+            'studio' => false,
+        ],
+        'ai_conv_multiplier' => [
+            'name' => 'ai_conv_multiplier',
+            'vname' => 'LBL_AI_CONV_MULTIPLIER',
+            'type' => 'decimal',
+            'reportable' => true,
+            'importable' => false,
+            'readonly' => true,
+            'duplicate_merge' => 'disabled',
+            'studio' => false,
+        ],
+        'ai_icp_fit_score_absolute' => [
+            'name' => 'ai_icp_fit_score_absolute',
+            'vname' => 'LBL_AI_ICP_FIT_SCORE_ABSOLUTE',
+            'type' => 'decimal',
+            'reportable' => true,
+            'importable' => false,
+            'readonly' => true,
+            'duplicate_merge' => 'disabled',
+            'studio' => false,
+        ],
+        'ai_icp_fit_bin_accuracy' => [
+            'name' => 'ai_icp_fit_bin_accuracy',
+            'vname' => 'LBL_AI_ICP_FIT_BIN_ACCURACY',
+            'type' => 'decimal',
+            'reportable' => true,
+            'importable' => false,
+            'readonly' => true,
+            'duplicate_merge' => 'disabled',
+            'studio' => false,
+        ],
+        'ai_icp_fit_multiplier' => [
+            'name' => 'ai_icp_fit_multiplier',
+            'vname' => 'LBL_AI_ICP_FIT_MULTIPLIER',
+            'type' => 'decimal',
+            'reportable' => true,
+            'importable' => false,
+            'readonly' => true,
+            'duplicate_merge' => 'disabled',
+            'studio' => false,
         ],
         'hint_account_size' => [
             'studio' => hasHintLicense() ? true : false,
@@ -995,6 +1057,30 @@ $dictionary['Lead'] = array(
             'studio' => false,
             'reportable' => false,
         ],
+        'geocode_status' => [
+            'studio' => hasMapsLicense() ? [
+                'editField' => true,
+                'recordview' => true,
+                'previewview' => false,
+                'recorddashletview' => false,
+                'listview' => false,
+                'wirelesseditview' => false,
+                'wirelesslistview' => false,
+                'wirelessdetailview' => false,
+                'wireless_basic_search' => false,
+                'wireless_advanced_search' => false,
+            ] : false,
+            'name' => 'geocode_status',
+            'vname' => 'LBL_MAPS_GEOCODE_STATUS',
+            'label' => 'LBL_MAPS_GEOCODE_STATUS',
+            'type' => 'geocodestatus',
+            'len' => 255,
+            'comment' => '',
+            'dbType' => 'varchar',
+            'licenseFilter' => ['MAPS'],
+            'readonly' => true,
+            'reportable' => false,
+        ],
     ),
     'indices' => array(
         array(
@@ -1196,6 +1282,7 @@ VardefManager::createVardef(
         'team_security',
         'person',
         'audit',
+        'customer_journey_parent',
     )
 );
 
@@ -1211,3 +1298,5 @@ $dictionary['Lead']['fields']['phone_fax']['full_text_search']['boost'] = 0.98;
 $dictionary['Lead']['fields']['description']['full_text_search']['boost'] = 0.70;
 $dictionary['Lead']['fields']['primary_address_street']['full_text_search']['boost'] = 0.31;
 $dictionary['Lead']['fields']['alt_address_street']['full_text_search']['boost'] = 0.30;
+
+$dictionary['Lead']['fields']['dri_workflow_template_id']['duplicate_on_record_copy'] = 'no';

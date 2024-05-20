@@ -15,8 +15,18 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
 class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
 
-    const HISTORYFILENAME = 'restored.php';
-    const HISTORYVARIABLENAME = 'viewdefs';
+    /**
+     * @var string|mixed
+     */
+    public $client;
+    /**
+     * @var string|mixed
+     */
+    public $historyPathname;
+    public $module;
+    public $sidecarFile;
+    public const HISTORYFILENAME = 'restored.php';
+    public const HISTORYVARIABLENAME = 'viewdefs';
 
     /**
      * The constructor

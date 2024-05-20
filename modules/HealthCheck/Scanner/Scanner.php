@@ -11,9 +11,18 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\PackageManager\VersionComparator;
+use PhpParser\Node;
+use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor;
+use PhpParser\NodeVisitor\NameResolver;
+use PhpParser\NodeVisitor\ParentConnectingVisitor;
+use PhpParser\ParserFactory;
+use Sugarcrm\Sugarcrm\modules\HealthCheck\Scanner\Checks\Dbal as DbalHealthCheck;
+use Sugarcrm\Sugarcrm\modules\HealthCheck\Scanner\Checks\PasswordHashAlgo as PasswordHashAlgoCheck;
+use Sugarcrm\Sugarcrm\Security\ModuleScanner\ForbiddenStatementVisitor;
+use Sugarcrm\Sugarcrm\Security\ModuleScanner\MethodSignatureVisitor;
 
-require_once dirname(__FILE__) . '/ScannerMeta.php';
+require_once __DIR__ . '/ScannerMeta.php';
 
 /**
  *
@@ -22,20 +31,36 @@ require_once dirname(__FILE__) . '/ScannerMeta.php';
  */
 class HealthCheckScanner
 {
-    const VERSION_FILE = 'version.json';
+    /**
+     * @var array<string, mixed>|mixed|mixed[]|array<class-string<\HealthCheck>, mixed>
+     */
+    public $beanList;
+    /**
+     * @var array<string, mixed>|mixed|mixed[]
+     */
+    public $objectList;
+    /**
+     * @var mixed[]
+     */
+    public $bwcModulesHash;
+    /**
+     * @var mixed[]
+     */
+    public $beanFiles;
+    public const VERSION_FILE = 'version.json';
 
     // failure status
-    const FAIL = 99;
+    public const FAIL = 99;
 
     /**
      * Constant for failure of unserialization because of data issues
      */
-    const UNSERIALIZE_FAIL_DATA = 1;
+    public const UNSERIALIZE_FAIL_DATA = 1;
 
     /**
      * Constant for failure of unserialization because of object or class references
      */
-    const UNSERIALIZE_FAIL_OBJECTS = 2;
+    public const UNSERIALIZE_FAIL_OBJECTS = 2;
 
     /**
      *
@@ -274,6 +299,7 @@ class HealthCheckScanner
         '/[^\w]SAMLAuthenticate[^\w]/i' => 'deprecatedAuthN',
         '/[^\w]SAMLAuthenticateUser[^\w]/i' => 'deprecatedAuthN',
         '/[^\w]SAMLRequestRegistry[^\w]/i' => 'deprecatedAuthN',
+        '/\bMonolog\\\\Handler\\\\(HipChatHandler|SlackbotHandler|RavenHandler)\b/i' => 'incompatibleMonologCustomization',
     );
 
     protected $deprecatedJsAPIPatterns = array(
@@ -299,6 +325,71 @@ class HealthCheckScanner
     // Deprecated patterns that could be in PHP, JS, or HBS files
     protected $deprecatedGenericPatterns = [
         '/(([\'"\s\.]|\b)fa-\w*?[\'"\s\.])/' => 'deprecatedFontAwesomeIcons',
+    ];
+
+    // Deprecated color variables found in LESS files
+    protected $deprecatedLESSColorVariables = [
+        "/[^\w]@grayDarker[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@grayDark[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@grayDarkish[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@gray[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@grayLight[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@grayLightish[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@grayMid[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@grayLighter[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@grayActive[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@slate[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@steel[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@rock[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@stone[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@lime[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@night[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@darkIndigo[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@indigo[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@lightIndigo[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@btnBackgroundHighlight[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@commentLogDashletTimeColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@commentLogDashletNoCommentsAvailable[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@commentLogDashletItemHeaderColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@dashletTabBorderColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@hrBorder[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@linkMore[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@loadingColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseBackground[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseBackgroundHighlight[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseBorder[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseText[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseLinkColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseLinkColorHover[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseLinkColorActive[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseLinkBackgroundHover[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseLinkBackgroundActive[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseSearchBackground[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseSearchBackgroundFocus[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseSearchBorder[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@navbarInverseBrandColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@panelBorderColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@panelInactiveHoverColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@previewDataBackground[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@previewFieldSeparator[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@previewHeaderBackground[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@select2LinkColorHover[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@tabBackgroundActive[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@tabBackgroundInactive[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@tableBorderColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@tableBorder[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@tableHeader[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@tableRowHighlighted[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@tableHeaderHighlighted[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@tableTbodyRowBorderColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@tableTheadRowBorderColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@tableFixedColumnsBorderColor[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@errorAlertText[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@infoAlertText[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@pendingAlertText[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@successAlertText[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@warningAlertText[^\w]/" => 'deprecatedLESSColorVariables',
+        "/[^\w]@wellBackground[^\w]/" => 'deprecatedLESSColorVariables',
     ];
 
     //Removed in 7.8
@@ -338,6 +429,10 @@ class HealthCheckScanner
     );
 
     protected $filesWithDeprecatedCode = array();
+
+    protected $filesWithIncompatibleInheritance = [];
+
+    protected $filesWithOutdatedDbal = [];
 
     /**
      * Array of warnings per upgrade method that is used for tracking possible
@@ -470,6 +565,25 @@ class HealthCheckScanner
      * @var array
      */
     protected $md5_files = array();
+
+    /**
+     * @return string[]
+     */
+    protected $inheritanceRules = [
+        \Sugarcrm\Sugarcrm\Logger\Formatter::class => ['format' => ['return' => 'string'], 'formatBatch' => ['return' => 'string']],
+        \Sugarcrm\Sugarcrm\Logger\Formatter\BackwardCompatibleFormatter::class => ['format' => ['return' => 'string'], 'formatBatch' => ['return' => 'string']],
+        \Monolog\Formatter\FlowdockFormatter::class => ['format' => ['return' => 'array'], 'formatBatch' => ['return' => 'array']],
+        \Monolog\Formatter\FluentdFormatter::class => ['format' => ['return' => 'string'], 'formatBatch' => ['return' => 'string']],
+        \Monolog\Formatter\GelfMessageFormatter::class => ['format' => ['return' => 'Gelf\Message'], 'formatBatch' => ['return' => 'Gelf\Message']],
+        \Monolog\Formatter\HtmlFormatter::class => ['format' => ['return' => 'string'], 'formatBatch' => ['return' => 'string']],
+        \Monolog\Formatter\JsonFormatter::class => ['format' => ['return' => 'string'], 'formatBatch' => ['return' => 'string']],
+        \Monolog\Formatter\LineFormatter::class => ['format' => ['return' => 'string'], 'formatBatch' => ['return' => 'string']],
+        \Monolog\Formatter\LogglyFormatter::class => ['format' => ['return' => 'string'], 'formatBatch' => ['return' => 'string']],
+        \Monolog\Formatter\LogstashFormatter::class => ['format' => ['return' => 'string'], 'formatBatch' => ['return' => 'string']],
+        \Monolog\Formatter\MongoDBFormatter::class => ['format' => ['return' => 'array'], 'formatBatch' => ['return' => 'array']],
+        \Monolog\Formatter\ScalarFormatter::class => ['format' => ['return' => 'array'], 'formatBatch' => ['return' => 'array']],
+        \Monolog\Formatter\WildfireFormatter::class => ['format' => ['return' => 'string'], 'formatBatch' => ['return' => 'string']],
+    ];
 
     /**
      *
@@ -627,7 +741,8 @@ class HealthCheckScanner
      */
     public function setLogFile($fileName)
     {
-        if (!check_file_name($fileName)) {
+        // function_exists check needed for upgrade path 11.0 -> 12.2, because the function does not exists in 11.0
+        if (function_exists('check_file_name') && !check_file_name($fileName)) {
             throw new \Exception('Path traversal attack vector detected');
         }
 
@@ -782,7 +897,7 @@ class HealthCheckScanner
             return $this->logMeta;
         }
 
-        list($sugar_version, $sugar_flavor) = $this->getVersionAndFlavor();
+        [$sugar_version, $sugar_flavor] = $this->getVersionAndFlavor();
         $this->log("Instance version: $sugar_version");
         $this->log("Instance flavor: $sugar_flavor");
 
@@ -858,6 +973,8 @@ class HealthCheckScanner
             $this->reportPhpError(E_ERROR, $error->getMessage(), $error->getFile(), $error->getLine());
         }
 
+        $this->checkPasswordHashAlgo();
+
         $this->finishScan();
         return $this->logMeta;
     }
@@ -876,7 +993,7 @@ class HealthCheckScanner
         $sql = "SELECT * FROM pdfmanager WHERE deleted='0'";
         $converter = new \SmartyConverter();
         $converter::muteExpectedErrors();
-        $templates = DBManagerFactory::getConnection()->executeQuery($sql)->fetchAll(\PDO::FETCH_ASSOC);
+        $templates = DBManagerFactory::getConnection()->fetchAllAssociative($sql);
         $dbErrors = [];
         foreach ($templates as $template) {
             $dbErrors = $converter->scanDatabaseTpl($template);
@@ -908,7 +1025,7 @@ class HealthCheckScanner
             $curFile = $match[0];
             if (defined('SUGAR_SHADOW_TEMPLATEPATH')) {
                 $realName = realpath(str_replace(SHADOW_INSTANCE_DIR . '/', '', $curFile));
-                if (0 === strpos($realName, (string) SUGAR_SHADOW_TEMPLATEPATH)) {
+                if (0 === strpos($realName, SUGAR_SHADOW_TEMPLATEPATH)) {
                     continue;
                 }
             } elseif (isset($this->md5_files[str_replace('\\', '/', $curFile)])) {// Stock file
@@ -998,7 +1115,7 @@ class HealthCheckScanner
     protected function checkPALockedFields()
     {
         // Make sure we need to run this first
-        list(, $flavor) = $this->getVersionAndFlavor();
+        [, $flavor] = $this->getVersionAndFlavor();
 
         // only run this for ENT or ULT flavors
         if (in_array(strtolower($flavor), array('ent', 'ult'))) {
@@ -1035,7 +1152,7 @@ class HealthCheckScanner
         // Loop and check now, making sure to send a false flag to fetchByAssoc
         // to ensure that the data in the row does not get html encoded on fetch
         while ($row = $this->db->fetchByAssoc($result, false)) {
-            $lockedFields = json_decode(html_entity_decode($row['pro_locked_variables']));
+            $lockedFields = json_decode(html_entity_decode($row['pro_locked_variables'], ENT_COMPAT));
             if ($lockedFields) {
                 $bean = BeanFactory::newBean($row['pro_module']);
                 $checkDuration = in_array($row['pro_module'], $durationModules);
@@ -1246,7 +1363,7 @@ class HealthCheckScanner
             $reason = self::UNSERIALIZE_FAIL_OBJECTS;
         } else {
             // Since we need to work on html decoded data, get that now
-            $decoded = $decode ? html_entity_decode($input) : $input;
+            $decoded = $decode ? html_entity_decode($input, ENT_COMPAT) : $input;
 
             // Now try to unserialize, suppressing errors in case of bad data
             $unserialized = @unserialize($decoded, ['allowed_classes' => false]);
@@ -1470,7 +1587,7 @@ ENDP;
      */
     protected function getValidationType($key)
     {
-        return isset($this->processFieldValidationTypes[$key]) ? $this->processFieldValidationTypes[$key] : '';
+        return $this->processFieldValidationTypes[$key] ?? '';
     }
 
     /**
@@ -2300,6 +2417,7 @@ ENDP;
         $this->checkCreateActions();
         $this->checkSidecarJSFiles();
         $this->checkSidecarTemplateFiles();
+        $this->checkCustomLessFiles(array("custom_themes_dir" => "themes"));
         $this->log("Checking custom directory for no longer valid code");
         $files = $this->getPhpFiles("custom/");
         foreach ($files as $name => $file) {
@@ -2308,6 +2426,30 @@ ENDP;
             $this->scanFileForInvalidReferences($file, $fileContents);
             $this->scanFileForSessionArrayReferences($file, $fileContents);
             $this->scanFileForDeprecatedCode($file, $fileContents);
+            $this->scanFileForIncompatibleInheritance($file, $fileContents);
+            $this->scanFileForOutdatedDbalUsage($file, $fileContents);
+        }
+    }
+
+    protected function checkPasswordHashAlgo()
+    {
+        // cannot put in src/ and rely on autoloader, because autoloader works in context of checked instance, not HC
+        require_once __DIR__ . '/Checks/PasswordHashAlgo.php';
+
+        $check = new PasswordHashAlgoCheck();
+
+        if (!$check->check($this->upgrader)) {
+            if ($check->isError) {
+                $this->updateStatus(
+                    'unsupportedConfigParameterPasswordHash',
+                    'passwordHash',
+                );
+            } else {
+                $this->updateStatus(
+                    'deprecatedConfigParameterPasswordHash',
+                    'passwordHash',
+                );
+            }
         }
     }
 
@@ -2435,6 +2577,57 @@ ENDP;
         }
     }
 
+    /**
+     * Check that customizations don't use known backward-incompatible interfaces
+     *
+     * @param $file
+     * @param $fileContents
+     * @return void
+     */
+    public function scanFileForIncompatibleInheritance($file, $fileContents): void
+    {
+        // check for usage of Monolog classes, changed in Sugar 12.3.0
+        [$version,] = $this->getVersionAndFlavor();
+        if (version_compare($version, '12.3.0', '>=')) {
+            return;
+        }
+
+        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+        try {
+            $stmts = $parser->parse($fileContents);
+        } catch (\PhpParser\Error $error) {
+            $this->updateStatus("phpError", 'E_UNKNOWN', $error->getMessage(), $file, $error->getLine());
+            return;
+        }
+
+        $traverser = new NodeTraverser;
+        $traverser->addVisitor(new NameResolver());
+        $traverser->addVisitor(new ParentConnectingVisitor());
+        $methodSignatureVisitor = $this->getMethodSignatureVisitor($this->inheritanceRules);
+        $traverser->addVisitor($methodSignatureVisitor);
+        $traverser->traverse($stmts);
+
+        if ((is_countable($methodSignatureVisitor->getIssues()) ? count($methodSignatureVisitor->getIssues()) : 0) > 0) {
+            $this->filesWithIncompatibleInheritance['incompatibleMonologCustomization'][] = $file;
+        }
+    }
+
+    public function scanFileForOutdatedDbalUsage($file, $fileContents): void
+    {
+        // 1. cannot put in src/ and rely on autoloader, because autoloader works in context of checked instance, not HC
+        // 2. cannot include at the beginning of the file, because at that point autoloader not yet registered, but we
+        // need it to load PHPParser classes
+        require_once __DIR__ . '/Checks/Dbal.php';
+
+        $check = new DbalHealthCheck;
+        $issues = $check->check($fileContents);
+        foreach ($issues as $issue) {
+            $message = $issue->getMessage();
+            $line = $issue->getLine();
+            $this->filesWithOutdatedDbal['outdatedDbalUsage'][] = $file . ':' . $line . ': ' . $message;
+        }
+    }
+
     protected function updateCustomDirScanStatus() {
         if (!empty($this->filesToFix)) {
             $files_to_fix = '';
@@ -2468,6 +2661,12 @@ ENDP;
             $this->updateStatus("arraySessionUsage", $filesWithSession);
         }
         foreach ($this->filesWithDeprecatedCode as $reportId => $files) {
+            $this->updateStatus($reportId, array_unique($files));
+        }
+        foreach ($this->filesWithIncompatibleInheritance as $reportId => $files) {
+            $this->updateStatus($reportId, array_unique($files));
+        }
+        foreach ($this->filesWithOutdatedDbal as $reportId => $files) {
             $this->updateStatus($reportId, array_unique($files));
         }
     }
@@ -2700,13 +2899,43 @@ ENDP;
     }
 
     /**
-     * Gets sidecar files of the given extension
+     * Gets the string to match LESS files in a certain custom directory.
+     * @param $themeDir string defines the path relative to custom/ where the LESS files will be. Ex. "themes" will
+     * search in custom/themes.
+     * @return string
+     */
+    protected function getPathForCustomLESSFile(string $themeDir): string
+    {
+        return $themeDir . DIRECTORY_SEPARATOR . '*.less';
+    }
+
+    /**
+     * Check custom LESS files for deprecated color variables.
+     * @param array $options
+     * @return void
+     */
+    protected function checkCustomLessFiles(array $options = [])
+    {
+        $files = $this->getSidecarFiles('less', $options);
+
+        foreach ($files as $file) {
+            $this->scanFileForDeprecatedLESSColorVariables($file, file_get_contents($file));
+        }
+    }
+
+    /**
+     * Gets sidecar files of the given extension. If the custom_themes_dir option is present, getCustomLESSFiles is
+     * given priority.
      * @param $ext
      * @param $options
      * @return array
      */
     protected function getSidecarFiles($ext, $options)
     {
+        if (!empty($options['custom_themes_dir'])) {
+            return $this->getCustomLESSFiles($options['custom_themes_dir']);
+        }
+
         $path = $this->getSidecarPathForExtension($ext);
         $extLabel = sugarStrToUpper($ext);
 
@@ -2742,6 +2971,20 @@ ENDP;
     }
 
     /**
+     * Returns the custom LESS files present at the custom_themes_dir location.
+     * @param $customThemesDir string defines a path for where the custom themes directory is.
+     * @return array|false
+     */
+    protected function getCustomLESSFiles(string $customThemesDir)
+    {
+        $this->log("Checking for deprecated/removed LESS variables in custom/$customThemesDir");
+        return glob(
+            'custom' . DIRECTORY_SEPARATOR . $this->getPathForCustomLESSFile($customThemesDir),
+            GLOB_BRACE
+        );
+    }
+
+    /**
      * Checks that we don't use classes deprecated/removed in sugar API
      * @param string $file
      * @param string $fileContents
@@ -2774,6 +3017,23 @@ ENDP;
             $matches = array();
             if ($val = preg_match($pattern, $fileContents, $matches)) {
                 $this->log("Found $matches[1] in $file");
+                $this->filesWithDeprecatedCode[$reportId][] = $file;
+            }
+        }
+    }
+
+    /**
+     * Check LESS files for deprecated color variables
+     * @param $file
+     * @param $fileContents
+     * @return void
+     */
+    public function scanFileForDeprecatedLESSColorVariables($file, $fileContents)
+    {
+        foreach ($this->getDeprecatedPatterns($this->deprecatedLESSColorVariables) as $pattern => $reportId) {
+            $matches = array();
+            if ($val = preg_match($pattern, $fileContents, $matches)) {
+                $this->log("Found $matches[0] in $file");
                 $this->filesWithDeprecatedCode[$reportId][] = $file;
             }
         }
@@ -3049,7 +3309,7 @@ ENDP;
     protected function glob($pattern)
     {
         $dirs = glob($pattern);
-        return ($dirs ? $dirs : array());
+        return ($dirs ?: array());
     }
 
     /**
@@ -3210,7 +3470,7 @@ ENDP;
 
         foreach ($definition as $key => $data) {
             if ($key !== $object) {
-                $foundName = isset($flippedModules[$key]) ? $flippedModules[$key] : $key;
+                $foundName = $flippedModules[$key] ?? $key;
                 $this->updateStatus("foundOtherModuleVardefs", $moduleName, $foundName, $file);
             }
         }
@@ -3504,7 +3764,7 @@ ENDP;
         $this->bwcModulesHash = array_flip($this->bwcModules);
 
         // turn on AdminWork
-        if (class_exists('Sugarcrm\Sugarcrm\AccessControl\AccessControlManager')) {
+        if (class_exists(\Sugarcrm\Sugarcrm\AccessControl\AccessControlManager::class)) {
             Sugarcrm\Sugarcrm\AccessControl\AccessControlManager::instance()->setAdminWork(true, true);
         }
 
@@ -3734,7 +3994,7 @@ ENDP;
         }
 
         if (in_array($phpfile, $this->ignoreMissingCustomFiles)) {
-            list($sugar_version, $sugar_flavor) = $this->getVersionAndFlavor();
+            [$sugar_version, $sugar_flavor] = $this->getVersionAndFlavor();
             if (version_compare($sugar_version, '7.0', '>')) {
                 return;
             }
@@ -4431,8 +4691,8 @@ ENDP;
     protected function getVersionFile()
     {
         $versionFile = null;
-        if (file_exists(dirname(__FILE__) . '/' . self::VERSION_FILE)) {
-            $versionFile = dirname(__FILE__) . '/' . self::VERSION_FILE;
+        if (file_exists(__DIR__ . '/' . self::VERSION_FILE)) {
+            $versionFile = __DIR__ . '/' . self::VERSION_FILE;
         } elseif ($this->upgrader && isset ($this->upgrader->context['upgrader_dir']) &&
             file_exists($this->upgrader->context['upgrader_dir'] . '/' . self::VERSION_FILE)
         ) {
@@ -4594,7 +4854,7 @@ ENDP;
         }
 
         // ignore errors in smarty cache
-        if (false !== strpos($errfile, (string) sugar_cached('smarty3/'))) {
+        if (false !== strpos($errfile, sugar_cached('smarty3/'))) {
             return false;
         }
 
@@ -4653,6 +4913,40 @@ ENDP;
         }
         $this->updateStatus("phpError", $e_type, $errstr, $errfile, $errline);
     }
+
+    private function getMethodSignatureVisitor(array $rules): NodeVisitor
+    {
+        if (class_exists(MethodSignatureVisitor::class)) {
+            return new MethodSignatureVisitor($rules);
+        }
+        // copy of MethodSignatureVisitor class, which is unavailable in HealthCheck context during upgrade to 12.3
+        return new class($rules) extends ForbiddenStatementVisitor {
+            private $rules = [];
+
+            public function __construct(array $rules)
+            {
+                $this->rules = $rules;
+            }
+
+            public function enterNode(Node $node)
+            {
+                if (count($this->rules) === 0) {
+                    return;
+                }
+                if (!$node instanceof Node\Stmt\ClassMethod) {
+                    return;
+                }
+                $class = $node->getAttribute('parent');
+                if (!$class instanceof Node\Stmt\Class_ || $class->extends === null || !isset($this->rules[$class->extends->toString()])) {
+                    return;
+                }
+                $rule = $this->rules[$class->extends->toString()][$node->name->toString()] ?? [];
+                if (isset($rule['return']) && (!isset($node->returnType) || $node->returnType->toString() !== $rule['return'])) {
+                    $this->issues[] = '';
+                }
+            }
+        };
+    }
 }
 
 /**
@@ -4703,27 +4997,28 @@ class BlackHole implements ArrayAccess, Countable, Iterator
         return '';
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return false;
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this;
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         // Nothing to do
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         // Nothing to do
     }
 
-    public function count()
+    public function count(): int
     {
         return 0;
     }
@@ -4734,27 +5029,29 @@ class BlackHole implements ArrayAccess, Countable, Iterator
         return $this;
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this;
     }
 
-    public function next()
+    public function next(): void
     {
         // Nothing to do
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return null;
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return false;
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         // Nothing to do
     }

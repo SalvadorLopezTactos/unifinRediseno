@@ -117,4 +117,13 @@ Da biste stvorili {{module_name}}:
  - Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno.
 2. Kliknite na „Spremi” da biste završili novi zapis i vratili se na prethodnu stranicu.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Zadatak pametnog vodiča',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Je zadatak pametnog vodiča',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Datum početka aktivnosti pametnog vodiča',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Datum dovršetka aktivnosti pametnog vodiča',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Pametni vodič – dani do dovršetka',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Podređeni sastanci',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Podređeni pozivi',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Podređeni zadaci',
 );

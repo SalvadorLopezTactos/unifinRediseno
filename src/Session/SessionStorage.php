@@ -50,7 +50,7 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
     public static function getInstance() {
         $className = \SugarConfig::getInstance()->get(
             'SessionStorageClass',
-            'Sugarcrm\Sugarcrm\Session\SessionStorage'
+            \Sugarcrm\Sugarcrm\Session\SessionStorage::class
         );
         if (!static::$instance) {
             $class = \SugarAutoLoader::customClass($className);
@@ -73,7 +73,7 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
         session_start();
         $this->populateFromArray($_SESSION);
         //keep session values
-        $previousUserId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
+        $previousUserId = $_SESSION['user_id'] ?? false;
 
         $this->lastId = $this->getId();
 

@@ -194,4 +194,10 @@ Para criar um {{calls_singular_module}}:
     - Clique em "Selecionar Participante" para adicionar um usuário, contato ou potencial existente ao {{calls_singular_module}}.
     - Clique no ícone de "mais" à direita de "Selecionar um Participante" para criar um participante do {{calls_singular_module}} como um novo registro do Sugar.
 3. Clique em "Salvar" para finalizar o novo registro e retornar à página anterior.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "É chamada do guia inteligente",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Tarefas secundárias',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Reuniões secundárias',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Chamadas secundárias',
 );

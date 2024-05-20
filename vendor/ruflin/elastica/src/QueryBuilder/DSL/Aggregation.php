@@ -7,14 +7,18 @@ use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\AvgBucket;
 use Elastica\Aggregation\BucketScript;
 use Elastica\Aggregation\Cardinality;
+use Elastica\Aggregation\Composite;
+use Elastica\Aggregation\CumulativeSum;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\DateRange;
+use Elastica\Aggregation\Derivative;
 use Elastica\Aggregation\DiversifiedSampler;
 use Elastica\Aggregation\ExtendedStats;
 use Elastica\Aggregation\Filter;
 use Elastica\Aggregation\Filters;
 use Elastica\Aggregation\GeoDistance;
 use Elastica\Aggregation\GeohashGrid;
+use Elastica\Aggregation\GeotileGridAggregation;
 use Elastica\Aggregation\GlobalAggregation;
 use Elastica\Aggregation\Histogram;
 use Elastica\Aggregation\IpRange;
@@ -22,7 +26,9 @@ use Elastica\Aggregation\Max;
 use Elastica\Aggregation\Min;
 use Elastica\Aggregation\Missing;
 use Elastica\Aggregation\Nested;
+use Elastica\Aggregation\NormalizeAggregation;
 use Elastica\Aggregation\Percentiles;
+use Elastica\Aggregation\PercentilesBucket;
 use Elastica\Aggregation\Range;
 use Elastica\Aggregation\ReverseNested;
 use Elastica\Aggregation\Sampler;
@@ -30,11 +36,13 @@ use Elastica\Aggregation\ScriptedMetric;
 use Elastica\Aggregation\SerialDiff;
 use Elastica\Aggregation\SignificantTerms;
 use Elastica\Aggregation\Stats;
+use Elastica\Aggregation\StatsBucket;
 use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\SumBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Aggregation\TopHits;
 use Elastica\Aggregation\ValueCount;
+use Elastica\Aggregation\WeightedAvg;
 use Elastica\Exception\NotImplementedException;
 use Elastica\Query\AbstractQuery;
 use Elastica\QueryBuilder\DSL;
@@ -127,6 +135,14 @@ class Aggregation implements DSL
     }
 
     /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-stats-bucket-aggregation.html
+     */
+    public function stats_bucket(string $name, ?string $bucketsPath = null): StatsBucket
+    {
+        return new StatsBucket($name, $bucketsPath);
+    }
+
+    /**
      * extended stats aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-extendedstats-aggregation.html
@@ -151,12 +167,25 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html
      *
-     * @param string $name  the name of this aggregation
-     * @param string $field the field on which to perform this aggregation
+     * @param string      $name  the name of this aggregation
+     * @param string|null $field the field on which to perform this aggregation
      */
     public function percentiles(string $name, ?string $field = null): Percentiles
     {
         return new Percentiles($name, $field);
+    }
+
+    /**
+     * percentiles_bucket aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-percentiles-bucket-aggregation.html
+     *
+     * @param string      $name        the name of this aggregation
+     * @param string|null $bucketsPath the field on which to perform this aggregation
+     */
+    public function percentiles_bucket(string $name, ?string $bucketsPath = null): PercentilesBucket
+    {
+        return new PercentilesBucket($name, $bucketsPath);
     }
 
     /**
@@ -167,6 +196,14 @@ class Aggregation implements DSL
     public function cardinality(string $name): Cardinality
     {
         return new Cardinality($name);
+    }
+
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-cumulative-sum-aggregation.html
+     */
+    public function cumulative_sum(string $name, string $bucketsPath): CumulativeSum
+    {
+        return new CumulativeSum($name, $bucketsPath);
     }
 
     /**
@@ -211,17 +248,25 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html
      */
-    public function global_agg(string $name): GlobalAggregation
+    public function global(string $name): GlobalAggregation
     {
         return new GlobalAggregation($name);
+    }
+
+    /**
+     * @deprecated since version 7.1.0, use the "global()" method instead.
+     */
+    public function global_agg(string $name): GlobalAggregation
+    {
+        \trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "global()" instead. It will be removed in 8.0.', __METHOD__);
+
+        return $this->global($name);
     }
 
     /**
      * filter aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
-     *
-     * @param AbstractQuery $filter
      */
     public function filter(string $name, ?AbstractQuery $filter = null): Filter
     {
@@ -265,8 +310,8 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html
      *
-     * @param string $name The name of this aggregation
-     * @param string $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
+     * @param string      $name The name of this aggregation
+     * @param string|null $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
      */
     public function reverse_nested(string $name, ?string $path = null): ReverseNested
     {
@@ -379,6 +424,19 @@ class Aggregation implements DSL
     }
 
     /**
+     * geotile grid aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geotilegrid-aggregation.html
+     *
+     * @param string $name  the name of this aggregation
+     * @param string $field the field on which to perform this aggregation
+     */
+    public function geotile_grid(string $name, string $field): GeotileGridAggregation
+    {
+        return new GeotileGridAggregation($name, $field);
+    }
+
+    /**
      * bucket script aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
@@ -408,15 +466,22 @@ class Aggregation implements DSL
         return new AdjacencyMatrix($name);
     }
 
-    /** sampler aggregation.
+    /**
+     * sampler aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-sampler-aggregation.html
-     *
-     * @param string $name
      */
-    public function sampler($name): Sampler
+    public function sampler(string $name): Sampler
     {
         return new Sampler($name);
+    }
+
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-derivative-aggregation.html
+     */
+    public function derivative(string $name, ?string $bucketsPath = null): Derivative
+    {
+        return new Derivative($name, $bucketsPath);
     }
 
     /**
@@ -427,5 +492,35 @@ class Aggregation implements DSL
     public function diversified_sampler(string $name): DiversifiedSampler
     {
         return new DiversifiedSampler($name);
+    }
+
+    /**
+     * weighted avg aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-weight-avg-aggregation.html
+     */
+    public function weighted_avg(string $name): WeightedAvg
+    {
+        return new WeightedAvg($name);
+    }
+
+    /**
+     * composite aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-composite-aggregation.html
+     */
+    public function composite(string $name): Composite
+    {
+        return new Composite($name);
+    }
+
+    /**
+     * normalize aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-normalize-aggregation.html
+     */
+    public function normalize(string $name, ?string $bucketsPath = null, ?string $method = null): NormalizeAggregation
+    {
+        return new NormalizeAggregation($name, $bucketsPath, $method);
     }
 }

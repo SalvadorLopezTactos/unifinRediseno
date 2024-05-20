@@ -143,7 +143,7 @@ class _parse_lockinfo
     {
 		// namespace handling
         if (strstr($name, " ")) {
-            list($ns, $tag) = explode(" ", $name);
+            [$ns, $tag] = explode(" ", $name);
         } else {
             $ns = "";
             $tag = $name;
@@ -207,7 +207,7 @@ class _parse_lockinfo
     {
 		// namespace handling
 		if (strstr($name, " ")) {
-			list($ns, $tag) = explode(" ", $name);
+			[$ns, $tag] = explode(" ", $name);
 		} else {
 			$ns = "";
 			$tag = $name;

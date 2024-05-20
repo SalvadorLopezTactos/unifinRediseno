@@ -17,7 +17,9 @@ require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class SubpanelMetaDataParser extends ListLayoutMetaDataParser
 {
-
+    //@codingStandardsIgnoreStart
+    public $_invisibleFields;
+    //@codingStandardsIgnoreEnd
     // Columns is used by the view to construct the listview - each column is built by calling the named function
     public $columns = array ( 'LBL_DEFAULT' => 'getDefaultFields' , 'LBL_HIDDEN' => 'getAvailableFields' ) ;
     protected $labelIdentifier = 'vname' ; // labels in the subpanel defs are tagged 'vname' =>
@@ -75,7 +77,7 @@ class SubpanelMetaDataParser extends ListLayoutMetaDataParser
 		        if(empty($selected_lang)){
 		            $selected_lang = $GLOBALS['sugar_config']['default_language'];
 		        }
-            	$labelParser = new ParserLabel ( $_REQUEST['view_module'] , isset ( $_REQUEST [ 'view_package' ] ) ? $_REQUEST [ 'view_package' ] : null ) ;
+                $labelParser = new ParserLabel($_REQUEST['view_module'], $_REQUEST ['view_package'] ?? null);
                 $viewModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
                 $labelParser->addLabels($selected_lang, array($_REQUEST['subpanel_title_key'] =>  remove_xss(from_html($_REQUEST['subpanel_title']))), $viewModule);
             }            
@@ -168,7 +170,7 @@ class SubpanelMetaDataParser extends ListLayoutMetaDataParser
             
             if (($typeCheck || $linkCheck) && $reqsCheck) {
                 $defs[$index]['widget_class'] = 'SubPanelDetailViewLink';
-                $defs[$index]['target_module'] = isset($this->_fielddefs[$index]['module']) ? $this->_fielddefs[$index]['module'] : $this->_moduleName;
+                $defs[$index]['target_module'] = $this->_fielddefs[$index]['module'] ?? $this->_moduleName;
                 $defs[$index]['target_record_key'] = $this->_fielddefs[$index]['id_name'];
             }
         }

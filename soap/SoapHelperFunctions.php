@@ -55,7 +55,7 @@ function get_field_list($value, $translate=true){
             if($translate) {
             $entry['label'] = isset($var['vname']) ? translate($var['vname'], $value->module_dir) : $var['name'];
             } else {
-            $entry['label'] = isset($var['vname']) ? $var['vname'] : $var['name'];
+                $entry['label'] = $var['vname'] ?? $var['name'];
             }
             $entry['required'] = $required;
             $entry['options'] = $options_ret;
@@ -67,14 +67,13 @@ function get_field_list($value, $translate=true){
 		} //foreach
 	} //if
 
-	if($value->module_dir == 'Bugs'){
-
+    if (($value->module_dir ?? '') === 'Bugs') {
 		$seedRelease = BeanFactory::newBean('Releases');
 		$options = $seedRelease->get_releases(TRUE, "Active");
 		$options_ret = array();
-		foreach($options as $name=>$value){
-			$options_ret[] =  array('name'=> $name , 'value'=>$value);
-		}
+        foreach ($options as $name => $val) {
+            $options_ret[] = ['name' => $name, 'value' => $val];
+        }
 		if(isset($list['fixed_in_release'])){
 			$list['fixed_in_release']['type'] = 'enum';
 			$list['fixed_in_release']['options'] = $options_ret;
@@ -88,7 +87,7 @@ function get_field_list($value, $translate=true){
 			$list['release_name']['options'] = $options_ret;
 		}
 	}
-    if($value->module_dir == 'Emails'){
+    if (($value->module_dir ?? '') === 'Emails') {
         $fields = array('from_addr_name', 'reply_to_addr', 'to_addrs_names', 'cc_addrs_names', 'bcc_addrs_names');
         foreach($fields as $field){
             $var = $value->field_defs[$field];
@@ -100,7 +99,7 @@ function get_field_list($value, $translate=true){
             if($translate) {
             $entry['label'] = isset($var['vname']) ? translate($var['vname'], $value->module_dir) : $var['name'];
             } else {
-            $entry['label'] = isset($var['vname']) ? $var['vname'] : $var['name'];
+                $entry['label'] = $var['vname'] ?? $var['name'];
             }
             $entry['required'] = $required;
             $entry['options'] = array();
@@ -165,15 +164,15 @@ function new_get_field_list($value, $translate=true) {
             $entry['name'] = $var['name'];
             $entry['type'] = $var['type'];
             if ($var['type'] == 'link') {
-	            $entry['relationship'] = (isset($var['relationship']) ? $var['relationship'] : '');
-	            $entry['module'] = (isset($var['module']) ? $var['module'] : '');
-	            $entry['bean_name'] = (isset($var['bean_name']) ? $var['bean_name'] : '');
+                $entry['relationship'] = ($var['relationship'] ?? '');
+                $entry['module'] = ($var['module'] ?? '');
+                $entry['bean_name'] = ($var['bean_name'] ?? '');
 				$link_fields[$var['name']] = $entry;
             } else {
 	            if($translate) {
 	            	$entry['label'] = isset($var['vname']) ? translate($var['vname'], $value->module_dir) : $var['name'];
 	            } else {
-	            	$entry['label'] = isset($var['vname']) ? $var['vname'] : $var['name'];
+                    $entry['label'] = $var['vname'] ?? $var['name'];
 	            }
 	            $entry['required'] = $required;
 	            $entry['options'] = $options_ret;
@@ -752,7 +751,7 @@ function get_report_value($seed){
     $result = [];
 	$field_list = array();
 	$output_list = array();
-	$report = new Report(html_entity_decode($seed->content));
+    $report = new Report(html_entity_decode($seed->content, ENT_COMPAT));
  	$report->enable_paging = false;
 	$next_row_fn = 'get_next_row';
  	$report->plain_text_output = true;
@@ -812,7 +811,7 @@ function get_name_value_xml($val, $module_name){
 			$xml .= '<name_value_list>';
 			foreach($val['name_value_list'] as $name=>$nv){
 				$xml .= '<name_value>';
-                $xml .= '<name>' . htmlspecialchars($nv['name']).'</name>';
+                $xml .= '<name>' . htmlspecialchars($nv['name'], ENT_COMPAT) . '</name>';
                 $xml .= get_encoded_Value($nv['value']);
 				$xml .= '</name_value>';
 			}
@@ -889,7 +888,7 @@ function filter_return_list(&$output_list, $select_fields, $module_name){
             if ($module_name === 'Contacts' || $module_name === 'Users') {
                 $entryList = array();
                 foreach ($select_fields as $fieldName) {
-                    $entryList[$fieldName] = isset($output_list[$sug]['name_value_list'][$fieldName]) ? $output_list[$sug]['name_value_list'][$fieldName] : '';
+                    $entryList[$fieldName] = $output_list[$sug]['name_value_list'][$fieldName] ?? '';
                 }
                 $output_list[$sug]['name_value_list'] = $entryList;
             }
@@ -1034,7 +1033,7 @@ WHERE c.first_name = ? AND c.last_name = ? AND c.deleted = 0 AND eabr.id IS NULL
 SQL;
 
         $id = $seed->db->getConnection()->executeQuery($query, [$trimmed_first, $trimmed_last])->fetchOne();
-        // fetchColumn returns FALSE for empty result but NULL is expected
+        // fetchOne returns FALSE for empty result but NULL is expected
         return $id ?: null;
     }
 }

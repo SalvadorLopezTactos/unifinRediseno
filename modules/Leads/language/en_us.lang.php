@@ -24,7 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Leads List Dashboard',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Leads Record Dashboard',
-    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Leads Focus Drawer',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Leads Focus Dashboard',
 
     'ERR_DELETE_RECORD' => 'A record number must be specified to delete the lead.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Account Description',

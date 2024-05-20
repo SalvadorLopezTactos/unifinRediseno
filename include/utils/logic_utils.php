@@ -18,7 +18,7 @@ function get_hook_array($module_name){
 
 			$hook_array = null;
 			// This will load an array of the hooks to process
-			include("custom/modules/$module_name/logic_hooks.php");
+    include "custom/modules/$module_name/logic_hooks.php";
 			return $hook_array;
 
 //end function return_hook_array

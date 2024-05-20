@@ -12,17 +12,17 @@
 
 class MailerException extends Exception
 {
-    const ResourceNotFound              = 1;
-    const InvalidConfiguration          = 2;
-    const InvalidHeader                 = 3;
-    const InvalidEmailAddress           = 4;
-    const FailedToSend                  = 5;
-    const FailedToConnectToRemoteServer = 6;
-    const FailedToTransferHeaders       = 7;
-    const InvalidMessageBody            = 8;
-    const InvalidAttachment             = 9;
-    const InvalidMailer                 = 10;
-    const ExecutableAttachment          = 11;
+    public const ResourceNotFound              = 1;
+    public const InvalidConfiguration          = 2;
+    public const InvalidHeader                 = 3;
+    public const InvalidEmailAddress           = 4;
+    public const FailedToSend                  = 5;
+    public const FailedToConnectToRemoteServer = 6;
+    public const FailedToTransferHeaders       = 7;
+    public const InvalidMessageBody            = 8;
+    public const InvalidAttachment             = 9;
+    public const InvalidMailer                 = 10;
+    public const ExecutableAttachment          = 11;
 
     static protected $errorMessageMappings = array(
         self::ResourceNotFound              => 'LBL_INTERNAL_ERROR',

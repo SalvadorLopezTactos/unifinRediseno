@@ -222,4 +222,10 @@ Sugar users, contacts, and leads may be added as meeting invitees. {{plural_modu
 - לחץ על "בחר נוכח" כדי להוסיף משתמש, איש קשר או ליד קיים ל-{{meetings_singular_module}}.
 - לחץ על סמל הפלוס לימין "בחר נוכח" כדי ליצור נוכח {{meetings_singular_module}} כרישום Sugar חדש.
 3. לחץ על "שמור" כדי להשלים את הרישום החדש ולחזור לדף הקודם.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'פגישה של מדריך חכם',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'משימות ילד',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'שיחות ילד',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'פגישות ילד',
 );

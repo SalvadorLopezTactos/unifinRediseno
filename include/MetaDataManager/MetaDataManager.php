@@ -43,32 +43,40 @@ SugarAutoLoader::requireWithCustom('include/MetaDataManager/MetaDataCache.php');
 */
 class MetaDataManager implements LoggerAwareInterface
 {
+    /**
+     * @var \DBManager|mixed
+     */
+    public $db;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $args;
     use LoggerAwareTrait;
     /**
      * Constants that define the sections of the metadata
      */
-    const MM_MODULES        = 'modules';
-    const MM_FULLMODULELIST = 'full_module_list';
-    const MM_MODULESINFO    = 'modules_info';
-    const MM_FIELDS         = 'fields';
-    const MM_LABELS         = 'labels';
-    const MM_ORDEREDLABELS  = 'ordered_labels';
-    const MM_VIEWS          = 'views';
-    const MM_LAYOUTS        = 'layouts';
-    const MM_RELATIONSHIPS  = 'relationships';
-    const MM_DATA           = 'datas';
-    const MM_CURRENCIES     = 'currencies';
-    const MM_JSSOURCE       = 'jssource';
-    const MM_SERVERINFO     = 'server_info';
-    const MM_CONFIG         = 'config';
-    const MM_LANGUAGES      = 'languages';
-    const MM_HIDDENSUBPANELS = 'hidden_subpanels';
-    const MM_MODULETABMAP   = 'module_tab_map';
-    const MM_LOGOURL        = 'logo_url';
-    const MM_LOGOURLDARK    = 'logo_url_dark';
-    const MM_OVERRIDEVALUES = '_override_values';
-    const MM_FILTERS        = 'filters';
-    const MM_EDITDDFILTERS  = 'editable_dropdown_filters';
+    public const MM_MODULES        = 'modules';
+    public const MM_FULLMODULELIST = 'full_module_list';
+    public const MM_MODULESINFO    = 'modules_info';
+    public const MM_FIELDS         = 'fields';
+    public const MM_LABELS         = 'labels';
+    public const MM_ORDEREDLABELS  = 'ordered_labels';
+    public const MM_VIEWS          = 'views';
+    public const MM_LAYOUTS        = 'layouts';
+    public const MM_RELATIONSHIPS  = 'relationships';
+    public const MM_DATA           = 'datas';
+    public const MM_CURRENCIES     = 'currencies';
+    public const MM_JSSOURCE       = 'jssource';
+    public const MM_SERVERINFO     = 'server_info';
+    public const MM_CONFIG         = 'config';
+    public const MM_LANGUAGES      = 'languages';
+    public const MM_HIDDENSUBPANELS = 'hidden_subpanels';
+    public const MM_MODULETABMAP   = 'module_tab_map';
+    public const MM_LOGOURL        = 'logo_url';
+    public const MM_LOGOURLDARK    = 'logo_url_dark';
+    public const MM_OVERRIDEVALUES = '_override_values';
+    public const MM_FILTERS        = 'filters';
+    public const MM_EDITDDFILTERS  = 'editable_dropdown_filters';
 
     /**
      * Collection of fields in the user metadata that can trigger a reauth when
@@ -526,9 +534,9 @@ class MetaDataManager implements LoggerAwareInterface
 
     protected static function newCache(DBManager $db = null, LoggerInterface $logger = null)
     {
-        $db = $db ? $db : DBManagerFactory::getInstance();
+        $db = $db ?: DBManagerFactory::getInstance();
         $cache = new MetaDataCache($db);
-        $logger = $logger ? $logger : LoggerFactory::getLogger('metadata');
+        $logger = $logger ?: LoggerFactory::getLogger('metadata');
         $cache->setLogger($logger);
 
         return $cache;
@@ -851,7 +859,7 @@ class MetaDataManager implements LoggerAwareInterface
     /**
      * The collector method for modules.  Gets metadata for all of the module specific data
      *
-     * @param $moduleName The name of the module to collect metadata about.
+     * @param string $moduleName The name of the module to collect metadata about.
      * @param MetaDataContextInterface|null $context Metadata context
      * @return array An array of hashes containing the metadata.  Empty arrays are
      * returned in the case of no metadata.
@@ -864,10 +872,10 @@ class MetaDataManager implements LoggerAwareInterface
             $vardefs['fields'] = MassUpdate::setMassUpdateFielddefs($vardefs['fields'], $moduleName);
         }
 
-        $data['fields'] = isset($vardefs['fields']) ? $vardefs['fields'] : array();
+        $data['fields'] = $vardefs['fields'] ?? array();
         // Add the _hash for the fields array
         $data['fields']['_hash'] = md5(serialize($data['fields']));
-        $data['nameFormat'] = isset($vardefs['name_format_map'])?$vardefs['name_format_map']:null;
+        $data['nameFormat'] = $vardefs['name_format_map'] ?? null;
         $data['views'] = $this->getModuleViews($moduleName, $context);
         $data['dropdownViews'] = $this->getModuleDropdownViews($moduleName, $context);
         $data['datas'] = $this->getModuleDatas($moduleName);
@@ -881,6 +889,17 @@ class MetaDataManager implements LoggerAwareInterface
         $deps = $this->getModuleDependencies($moduleName);
         if (!empty($deps) && !empty($deps['dependencies'])) {
             $data['dependencies'] = $deps['dependencies'];
+        }
+
+        // Items related to how modules are displayed
+        if ($moduleName === 'Home') {
+            $data['color'] = $data['config']['color'] ?? 'ocean';
+            $data['icon'] = $data['config']['icon'] ?? 'sicon-default-module-lg';
+            $data['display_type'] = $data['config']['display_type'] ?? 'icon';
+        } else {
+            $data['color'] = $vardefs['color'] ?? 'ocean';
+            $data['icon'] = $vardefs['icon'] ?? 'sicon-default-module-lg';
+            $data['display_type'] = $vardefs['display_type'] ?? 'icon';
         }
 
         // Archiving is always on unless we explicitly say it isn't
@@ -923,7 +942,10 @@ class MetaDataManager implements LoggerAwareInterface
         if (!empty($vardefs['default_relate_filter'])) {
             $data['defaultRelateFilter'] = $vardefs['default_relate_filter'];
         }
-
+    
+        // Indicate whether show KPI metric badges on console pages Module tab
+        $data['consoleTabBadges'] = $vardefs['console_tab_badges'] ?? false;
+        
         $data["_hash"] = $this->hashChunk($data);
 
         return $data;
@@ -1640,7 +1662,7 @@ class MetaDataManager implements LoggerAwareInterface
             $cache = $this->getMetadataCache(true, $context);
             if (empty($cache['jssource'])) {
                 $publicMM = MetaDataManager::getManager($this->platforms, true);
-                $args = isset($this->args) ? $this->args : array();
+                $args = $this->args ?? array();
                 $cache = $publicMM->getMetadata($args);
             }
             if ($cache && !empty($cache['jssource'])) {
@@ -2318,6 +2340,9 @@ class MetaDataManager implements LoggerAwareInterface
 
         $configs['maps'] = $mapsSettings;
 
+        // configs for reports thresholds
+        $configs['reports_complexity_display'] = $sugarConfig['reports_complexity_display'] ?? [];
+
         // Handle connectors
         $connectors = ConnectorUtils::getConnectors();
         $configs['connectors'] = $this->getFilteredConnectorList($connectors);
@@ -2355,16 +2380,15 @@ class MetaDataManager implements LoggerAwareInterface
         }
 
         // SugarBPM settings
-        $configs['autoValidateProcessesOnImport'] = isset($sugarConfig['processes_auto_validate_on_import']) ?
-            $sugarConfig['processes_auto_validate_on_import'] : true;
-        $configs['autoValidateProcessesOnAutosave'] = isset($sugarConfig['processes_auto_validate_on_autosave']) ?
-            $sugarConfig['processes_auto_validate_on_autosave'] : true;
-        $configs['processDesignerAutosaveInterval'] = isset($sugarConfig['processes_auto_save_interval']) ?
-            $sugarConfig['processes_auto_save_interval'] : 30000;
+        $configs['autoValidateProcessesOnImport'] = $sugarConfig['processes_auto_validate_on_import'] ?? true;
+        $configs['autoValidateProcessesOnAutosave'] = $sugarConfig['processes_auto_validate_on_autosave'] ?? true;
+        $configs['processDesignerAutosaveInterval'] = $sugarConfig['processes_auto_save_interval'] ?? 30000;
 
         //Allowed Link Schemes Setting
-        $configs['allowedLinkSchemes'] = isset($sugarConfig['allowed_link_schemes']) ?
-            $sugarConfig['allowed_link_schemes'] : ['http', 'https'];
+        $configs['allowedLinkSchemes'] = $sugarConfig['allowed_link_schemes'] ?? ['http', 'https'];
+
+        // Sidebar navigation settings
+        $configs['maxPinnedModules'] = $sugarConfig['maxPinnedModules'] ?? $sugarConfig['default_max_pinned_modules'];
 
         // Get AWS configs for Serve and Sell
         if ($administration->isLicensedForServe() || $administration->isLicensedForSell()) {
@@ -2380,6 +2404,7 @@ class MetaDataManager implements LoggerAwareInterface
             ->asString();
 
         $configs['versionMark'] = getVersionedPath('');
+        $configs['customer_journey'] = $this->getCustomerJourneyConfig($sugarConfig);
 
         return $configs;
     }
@@ -3576,7 +3601,7 @@ class MetaDataManager implements LoggerAwareInterface
             // Decode the json and get the hash. The hash should be there but
             // check for it just in case something went wrong somewhere.
             $array = json_decode($data, true);
-            $hash = isset($array['_hash']) ? $array['_hash'] : '';
+            $hash = $array['_hash'] ?? '';
 
             // Cleanup
             unset($array);
@@ -4634,5 +4659,21 @@ class MetaDataManager implements LoggerAwareInterface
         }
 
         return $result;
+    }
+
+    /**
+     * Gets the current config for Customer Journey
+     * base on license
+     *
+     * @param array $sugarConfig The current Sugar Config
+     * @return array
+     */
+    protected function getCustomerJourneyConfig($sugarConfig)
+    {
+        if (!isset($sugarConfig['customer_journey'])) {
+            return [];
+        }
+
+        return $sugarConfig['customer_journey'];
     }
 }

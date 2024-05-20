@@ -50,6 +50,7 @@ document.getElementById('progress_div').innerHTML = '{sugar_getimage name="bar_l
 	<input type="hidden" name='sort_dir' value ="{$sort_dir}">
 	<input type="hidden" name='summary_sort_by' value ="{$summary_sort_by}">
 	<input type="hidden" name='summary_sort_dir' value ="{$summary_sort_dir}">
+	<input type="hidden" name='legacyBwc' value ="{$legacyBwc}">
 	
 	<div id='wizard_outline_div' width='20%' >
 	</div>

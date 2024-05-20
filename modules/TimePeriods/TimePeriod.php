@@ -16,9 +16,9 @@ class TimePeriod extends SugarBean
 {
 
     //Constants used by this class
-    const ANNUAL_TYPE = 'Annual';
-    const QUARTER_TYPE = 'Quarter';
-    const MONTH_TYPE = 'Month';
+    public const ANNUAL_TYPE = 'Annual';
+    public const QUARTER_TYPE = 'Quarter';
+    public const MONTH_TYPE = 'Month';
 
     //time period stored fields.
     public $id;
@@ -153,7 +153,7 @@ class TimePeriod extends SugarBean
         }
     }
 
-    public function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
 
         $timeperiod_fields = $this->get_list_view_array();
@@ -261,7 +261,7 @@ class TimePeriod extends SugarBean
         $db = DBManagerFactory::getInstance();
         $sql = 'SELECT id, type FROM timeperiods WHERE parent_id = ? AND deleted = 0 ORDER BY start_date_timestamp ASC';
         $result = $db->getConnection()->executeQuery($sql, [$this->id]);
-        foreach ($result as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $leaves[] = TimePeriod::getByType($row['type'], $row['id']);
         }
         return $leaves;
@@ -275,7 +275,7 @@ class TimePeriod extends SugarBean
     public function hasLeaves()
     {
         $leaves = $this->getLeaves();
-        return is_countable($leaves) && count($leaves) > 0;
+        return (is_countable($leaves) ? count($leaves) : 0) > 0;
     }
 
     /**

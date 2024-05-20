@@ -124,6 +124,9 @@
         // This property is used by existing dashboards to apply legacy drag/drop
         // functionality that we no longer want.
         this.model.set('drag_and_drop', false);
+
+        // To prevent a race condition, only save after the last save-able event has arrived
+        this.debouncedSave = _.debounce(_.bind(this.handleSave, this), 100);
     },
 
     /**
@@ -144,7 +147,7 @@
      * @private
      */
     _render: function() {
-        this._super('render');
+        this._super('_render');
         // We load dashlets on render, because the DOM element holding the grid
         // needs to be in place before we add elements to it to properly size
         // and position the dashlets
@@ -195,18 +198,14 @@
             return;
         }
 
-        // to prevent a race condition, only save after the last save-able event has arrived
-        var debouncedSave = _.debounce(_.bind(this.handleSave, this), 100);
-
-        this.grid.on('removed', _.bind(function(event, items) {
-            debouncedSave();
-        }, this));
+        // Event fired when a dashlet is removed from a dashboard
+        this.grid.on('removed', _.bind(this.saveDashboard, this));
 
         // This event is fired on drag, drop, resize, or adding elements
         // from the grid
         this.grid.on('change', _.bind(function(event, items) {
             this._handleGridChange(event, items);
-            debouncedSave();
+            this.saveDashboard();
         }, this));
 
         this.grid.on('resizestop', _.bind(function(event, el) {
@@ -223,6 +222,16 @@
 
             const viewType = dashletView.type;
             const panelWrapper = _.find(this._components, function getPanel(panel) {
+                if (_.isArray(panel.meta.components) && panel.meta.components.length > 0) {
+                    const componentWithId = _.find(panel.meta.components, function(metaComponent) {
+                        return _.has(metaComponent, 'id');
+                    });
+
+                    if (!_.isUndefined(componentWithId)) {
+                        return componentWithId.id === dashletId;
+                    }
+                }
+
                 return panel.meta.type === viewType;
             }, this);
 
@@ -235,21 +244,36 @@
     },
 
     /**
+     * Saves the current dashboard metadata to the DB
+     */
+    saveDashboard: function() {
+        if (!this.preventSave) {
+            this.debouncedSave();
+        }
+    },
+
+    /**
      * Load dashlets from the metadata into the grid. If our metadata changed
      * during load due to an element being auto-positioned, save.
      */
     loadDashlets: function() {
-        var changed = false;
-        var oldmeta;
+        let changed = false;
+
+        // Add each of the dashlets from metadata to the grid. We need to
+        // do this as a batch update to the grid, so that the grid doesn't
+        // try to auto-position any dashlets until all of them have been added
+        this.grid.batchUpdate();
         _.each(this.dashlets, function(dashletMeta, index) {
-            oldmeta = this.dashlets[index];
+            let oldmeta = this.dashlets[index];
             _.extend(this.dashlets[index], this.addDashlet(dashletMeta));
             if (!_.isEqual(oldmeta, this.dashlets[index])) {
                 changed = true;
             }
         }, this);
+        this.grid.commit();
+
         if (changed) {
-            this.handleSave();
+            this.saveDashboard();
         }
     },
 
@@ -286,6 +310,9 @@
      */
     addDashletClicked: function(evt) {
         var self = this;
+        let targetLayout = (this.context.parent) ? this.context.parent.get('layout') : null;
+        app.controller.context.set('targetLayout', targetLayout);
+
         app.drawer.open({
             layout: 'dashletselect',
             context: this.context
@@ -326,7 +353,7 @@
         dashletDef = this.addDashlet(dashletDef);
         dashletDef.autoPosition = false;
         this.dashlets.push(dashletDef);
-        this.handleSave();
+        this.saveDashboard();
     },
 
     /**
@@ -352,17 +379,26 @@
         dashlet.model.unset('updated');
     },
 
-    collapseDashlet: function(dashlet) {
-        var grid = this.grid;
-        var el = dashlet.$el;
-        var isCollapsed = el.hasClass('collapsed');
-        var node = el.data('_gridstack_node');
+    /**
+     * Collapses/Expands the given dashlet
+     *
+     * @param {Object} dashlet the dashlet view object
+     * @param {bool} collapse true to collapse the dashlet; false to expand it
+     */
+    toggleCollapseDashlet: function(dashlet, collapse) {
+        // When we save a grid's metadata to the DB, we need to expand all
+        // dashlets temporarily. In order to prevent recursive save loops from
+        // occuring due to the event listeners from that, we need to set a flag
+        this.preventSave = true;
 
-        if (isCollapsed) {
+        let grid = this.grid;
+        let el = dashlet.$el;
+        let node = el.data('_gridstack_node');
+
+        if (collapse) {
             el
                 .data('expand-min-height', node.minHeight)
                 .data('expand-height', node.height);
-
             grid
                 .resizable(el, false)
                 .minHeight(el, null)
@@ -375,6 +411,20 @@
                 grid.resizable(el, true);
             }
         }
+
+        dashlet.trigger('dashlet:expand', !collapse);
+
+        this.preventSave = false;
+    },
+
+    /**
+     * Collapses the given dashlet
+     *
+     * @param {Object} dashlet the dashlet view object
+     * @deprecated since 12.1.0, use {@link #toggleCollapse} instead
+     */
+    collapseDashlet: function(dashlet) {
+        this.toggleCollapseDashlet(dashlet, true);
     },
 
     /**
@@ -390,17 +440,19 @@
             return dashletDef.id === id;
         });
         _.extend(this.dashlets[index], newDashletDef);
-        this.handleSave();
+        this.saveDashboard();
     },
 
     /**
      * Saves current model metadata
      */
     handleSave: function() {
+        // If the user doesn't have permission to edit the dashboard, don't save
         if (!app.acl.hasAccessToModel('edit', this.model)) {
             this.model.unset('updated');
             return;
         }
+
         _.each(this.dashlets, function(dashletDef, i) {
             if (dashletDef.view && dashletDef.view.type === 'dashablerecord') {
                 var newDef = app.utils.deepCopy(dashletDef);
@@ -414,6 +466,18 @@
                 this.dashlets[i] = newDef;
             }
         }, this);
+
+        // Temporarily expand the dashlets so that their correct sizes and
+        // positions are saved to the DB
+        let collapsedDashlets = [];
+        _.each(this._components, function(dashlet) {
+            if (dashlet.isDashletCollapsed()) {
+                collapsedDashlets.push(dashlet);
+                this.toggleCollapseDashlet(dashlet, false);
+            }
+        }, this);
+
+        // Save the dashboard metadata to the DB
         this.model.set('metadata', this._updateModelMeta(), {silent: true});
         this.model.save({}, {
             silent: true,
@@ -432,6 +496,11 @@
                 });
             }
         });
+
+        // Re-collapse any dashlets that were temporarily expanded
+        _.each(collapsedDashlets, function(dashlet) {
+            this.toggleCollapseDashlet(dashlet, true);
+        }, this);
     },
 
     /**
@@ -469,6 +538,7 @@
             var index = _.findIndex(this.dashlets, function(dashlet) {
                 return dashlet.id === item.id;
             });
+
             if (index !== -1) {
                 this.dashlets[index] = _.extend(this.dashlets[index], this._getItemAttributes(item));
             }
@@ -547,8 +617,6 @@
                         height: height,
                     });
                     dashlets.push(dashletDef);
-                    // increment y-value after every row
-                    y += height;
                 });
                 // increment y-value after every dashlet-row
                 y += height;

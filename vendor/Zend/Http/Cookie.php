@@ -126,7 +126,7 @@ class Zend_Http_Cookie
 
         $this->value = (string) $value;
         $this->expires = ($expires === null ? null : (int) $expires);
-        $this->path = ($path ? $path : '/');
+        $this->path = ($path ?: '/');
         $this->secure = $secure;
     }
 
@@ -300,7 +300,7 @@ class Zend_Http_Cookie
         if (strpos($parts[0], '=') === false) return false;
 
         // Get the name and value of the cookie
-        list($name, $value) = explode('=', trim(array_shift($parts)), 2);
+        [$name, $value] = explode('=', trim(array_shift($parts)), 2);
         $name  = trim($name);
         if ($encodeValue) {
             $value = urldecode(trim($value));
@@ -323,7 +323,7 @@ class Zend_Http_Cookie
 
             $keyValue = explode('=', $part, 2);
             if (count($keyValue) == 2) {
-                list($k, $v) = $keyValue;
+                [$k, $v] = $keyValue;
                 switch (strtolower($k))    {
                     case 'expires':
                         if(($expires = strtotime($v)) === false) {

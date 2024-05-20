@@ -49,7 +49,7 @@ function check_email_template_in_use($focus)
 		return true;
 	}
 	$system = $GLOBALS['sugar_config']['passwordsetting'];
-	if($focus->id == $system['generatepasswordtmpl'] || $focus->id == $system['lostpasswordtmpl']) {
+    if ($focus->id == $system['lostpasswordtmpl']) {
 	    return true;
 	}
     return false;

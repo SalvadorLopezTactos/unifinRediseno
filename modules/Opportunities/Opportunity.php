@@ -15,13 +15,13 @@ use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 // Opportunity is used to store customer information.
 class Opportunity extends SugarBean
 {
-    const STAGE_CLOSED_WON = 'Closed Won';
-    const STAGE_CLOSED_LOST = 'Closed Lost';
+    public const STAGE_CLOSED_WON = 'Closed Won';
+    public const STAGE_CLOSED_LOST = 'Closed Lost';
 
-    const STATUS_NEW = 'New';
-    const STATUS_IN_PROGRESS = 'In Progress';
-    const STATUS_CLOSED_WON = 'Closed Won';
-    const STATUS_CLOSED_LOST = 'Closed Lost';
+    public const STATUS_NEW = 'New';
+    public const STATUS_IN_PROGRESS = 'In Progress';
+    public const STATUS_CLOSED_WON = 'Closed Won';
+    public const STATUS_CLOSED_LOST = 'Closed Lost';
 
     // Stored fields
     public $id;
@@ -354,7 +354,7 @@ class Opportunity extends SugarBean
      *
      * @deprecated
      */
-    public function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
         $GLOBALS['log']->deprecated('Opportunity::get_list_view_data() has been deprecated in 7.8');
         global $locale, $current_language, $current_user, $mod_strings, $app_list_strings, $sugar_config;

@@ -19,15 +19,36 @@
     </div>
     {{#if this.hasDataAccess}}
         {{!-- TODO accessibility --}}
-        <div class="forecast-value flex justify-between items-center">
-            <span class="text-xs mr-4">{{str commitmentLabel module}}</span>
-            <span class="forecast-value-input text-base">
-                <input type="text" name="{{name}}" value="{{value}}" class="w-auto">
-            </span>
-        </div>
+        {{#if this.isManager}}
+            <div class="forecast-value flex justify-between items-center">
+                <span class="text-xs mr-4">{{str 'LBL_TEAM_COMMITMENT' module}}</span>
+                <span class="forecast-value-input text-base">
+                    <input type="text" name="{{name}}" value="{{value}}" class="w-auto">
+                </span>
+            </div>
+            <div class="sum-value flex justify-between items-center text-label py-1">
+                <span class="text-xs">{{str 'LBL_ADJUSTED_TOTAL' module}}</span>
+                <span class="text-xs">{{formatCurrency this.total}}</span>
+            </div>
+        {{else}}
+            <div class="forecast-value flex justify-between items-center">
+                <span class="text-xs mr-4">{{str 'LBL_COMMITMENT' module}}</span>
+                <span class="forecast-value-input text-base">
+                    <input type="text" name="{{name}}" value="{{value}}" class="w-auto">
+                </span>
+            </div>
+            <div class="sum-value flex justify-between items-center text-label py-1">
+                <span class="text-xs pr-4">{{str 'LBL_OPPORTUNITY_FORECAST' module}}</span>
+                <span class="text-xs">{{formatCurrency this.total}}</span>
+            </div>
+            <div class="sum-value flex justify-between items-center text-label py-1">
+                <span class="text-xs">{{str 'LBL_REVENUELINEITEM_FORECAST' module}}</span>
+                <span class="text-xs">{{formatCurrency this.total}}</span>
+            </div>
+        {{/if}}
         <div class="sum-value flex justify-between items-center text-label py-1">
-            <span class="text-xs">{{str totalLabel module}}</span>
-            <span class="text-xs">{{formatCurrency this.total}}</span>
+            <span class="text-xs">{{str 'LBL_LAST_COMMITMENT' module}}</span>
+            <span class="text-xs">{{formatCurrency this.lastCommit}}</span>
         </div>
     {{else}}
         {{{this.noDataAccessTemplate}}}

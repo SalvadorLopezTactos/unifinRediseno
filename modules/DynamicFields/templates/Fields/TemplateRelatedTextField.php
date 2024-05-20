@@ -14,9 +14,18 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 class TemplateRelatedTextField extends TemplateText{
+    /**
+     * @var mixed|string
+     */
+    public $id_name;
     var $type = 'relate';
     public $is_relationship_field = false;
     public $is_custom_relationship = false;
+    /** @var string */
+    public $rname;
+    /** @var string */
+    public $link;
+    public $quicksearch;
 
     public function __construct()
     {
@@ -365,7 +374,7 @@ class TemplateRelatedTextField extends TemplateText{
         }else{
             $GLOBALS['log']->fatal('Unsupported DynamicField type');
         }
-        $viewPackage = isset($df->package)?$df->package:null;
+        $viewPackage = $df->package ?? null;
 
         $idLabelValue = string_format(
             translate('LBL_RELATED_FIELD_ID_NAME_LABEL', 'ModuleBuilder'),

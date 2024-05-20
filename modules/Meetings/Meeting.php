@@ -183,7 +183,7 @@ class Meeting extends SugarBean {
 
         // Do any external API saving
         // Clear out the old external API stuff if we have changed types
-        if ($this->fetched_row !== false && $this->fetched_row['type'] != $this->type) {
+        if (isset($this->fetched_row['type']) && $this->fetched_row['type'] != $this->type) {
             $this->join_url = null;
             $this->host_url = null;
             $this->external_id = null;
@@ -283,13 +283,13 @@ class Meeting extends SugarBean {
 		}
 
 		if (!isset($this->time_hour_start)) {
-			$this->time_start_hour = intval(substr($this->time_start, 0, 2));
+            $this->time_start_hour = intval(substr((string)$this->time_start, 0, 2));
 		} //if-else
 
 		if (isset($this->time_minute_start)) {
 			$time_start_minutes = $this->time_minute_start;
 		} else {
-			$time_start_minutes = substr($this->time_start, 3, 5);
+            $time_start_minutes = substr((string)$this->time_start, 3, 5);
 			if ($time_start_minutes > 0 && $time_start_minutes < 15) {
 				$time_start_minutes = "15";
 			} else if ($time_start_minutes > 15 && $time_start_minutes < 30) {
@@ -306,7 +306,7 @@ class Meeting extends SugarBean {
 		if (isset($this->time_hour_start)) {
 			$time_start_hour = $this->time_hour_start;
 		} else {
-			$time_start_hour = intval(substr($this->time_start, 0, 2));
+            $time_start_hour = intval(substr((string)$this->time_start, 0, 2));
 		}
 
 		global $timedate;
@@ -411,7 +411,8 @@ class Meeting extends SugarBean {
         }
 	}
 
-	function get_list_view_data() {
+    public function get_list_view_data($filter_fields = [])
+    {
         $join_icon = null;
 		$meeting_fields = $this->get_list_view_array();
 

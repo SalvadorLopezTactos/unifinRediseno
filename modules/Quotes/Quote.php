@@ -379,7 +379,7 @@ class Quote extends SugarBean
         return $the_where;
     }
 
-    public function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
 
         global $current_language, $current_user, $mod_strings, $app_list_strings, $sugar_config;

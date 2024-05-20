@@ -422,7 +422,7 @@ class ForecastWorksheet extends SugarBean
         $settings = Forecast::getSettings();
 
         if ($settings['is_setup'] == false) {
-            $GLOBALS['log']->fatal("Forecast Module is not setup. " . __CLASS__ . " should not be running");
+            $GLOBALS['log']->fatal("Forecast Module is not setup. " . self::class . " should not be running");
             return false;
         }
         /* @var $tp TimePeriod */
@@ -533,7 +533,7 @@ class ForecastWorksheet extends SugarBean
         $returnVal = true;
 
         if ($settings['is_setup'] == false) {
-            $GLOBALS['log']->fatal("Forecast Module is not setup. " . __CLASS__ . " should not be running");
+            $GLOBALS['log']->fatal("Forecast Module is not setup. " . self::class . " should not be running");
             $returnVal = false;
         }
 

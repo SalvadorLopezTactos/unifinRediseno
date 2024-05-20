@@ -42,9 +42,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY_NAME' => 'Created By User Name',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Assigned User Name',
 
-    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Tags Focus Drawer',
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Tags Focus Dashboard',
 
     'LBL_TAGS_RECORD_DASHBOARD' => 'Tags Record Dashboard',
     'LBL_MY_TAGS' => 'My Tags',
     'LBL_MY_FAVORITE_TAGS' => 'My Favorite Tags',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} Tags',
 );

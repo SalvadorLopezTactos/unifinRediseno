@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o rasporedima izvješća',
     'LBL_FILE_TYPE' => 'Vrsta/vrste datoteke',
+    'LBL_EMBED_REPORT' => 'Umetni izvješće u e-poštu',
+    'LBL_EMBED_REPORT_INFO' => 'Napomena: ako je izvješće dulje od 200 redaka, priložit čemo izvješće u obliku CSV datoteke.',
 );

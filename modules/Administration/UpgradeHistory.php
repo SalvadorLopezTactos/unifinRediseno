@@ -20,12 +20,12 @@ use Doctrine\DBAL\Exception as DBALException;
  */
 class UpgradeHistory extends SugarBean
 {
-    const STATUS_STAGED = 'staged';
-    const STATUS_INSTALLED = 'installed';
+    public const STATUS_STAGED = 'staged';
+    public const STATUS_INSTALLED = 'installed';
 
     // Defence against the case where a package makes the whole application broken.
     // If a FATAL or PARSE error caught, the package with age below this timeout will be removed.
-    const PACKAGE_EMERGENCY_ROLLBACK_TIMEOUT_MIN = 5;
+    public const PACKAGE_EMERGENCY_ROLLBACK_TIMEOUT_MIN = 5;
 
     var $new_schema = true;
     var $module_dir = 'Administration';
@@ -221,7 +221,7 @@ class UpgradeHistory extends SugarBean
     {
         $query = new SugarQuery();
         $query->from($this);
-        $query->where()->equals('type', PackageManifest::PACKAGE_TYPE_MODULE);
+        $query->where()->in('type', [PackageManifest::PACKAGE_TYPE_MODULE, PackageManifest::PACKAGE_TYPE_LANGPACK]);
         $query->where()->equals('status', $status);
         return $this->fetchFromQuery($query);
     }
@@ -398,6 +398,7 @@ class UpgradeHistory extends SugarBean
             'description' => (string) $this->description,
             'version' => (string) $this->version,
             'published_data' => (string) $this->published_date,
+            'date_modified' => (string) $this->date_modified,
             'enabled' => $this->isPackageEnabled(),
             'uninstallable' => $this->isPackageUninstallable(),
             'file' => $this->id,
@@ -428,7 +429,7 @@ class UpgradeHistory extends SugarBean
             if (empty($dependency['id_name']) || empty($dependency['version'])) {
                 continue;
             }
-            $installedVersions = $conn->fetchFirstColumn($sql, [$dependency['id_name'], self::STATUS_INSTALLED]);
+            $installedVersions = $conn->iterateColumn($sql, [$dependency['id_name'], self::STATUS_INSTALLED]);
             $isRequiredVersionInstalled = false;
             foreach ($installedVersions as $installedVersion) {
                 if (VersionComparator::greaterThanOrEqualTo($installedVersion, $dependency['version'])) {

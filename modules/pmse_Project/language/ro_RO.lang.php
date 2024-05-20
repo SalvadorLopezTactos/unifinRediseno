@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Butoane formular',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Aprobă/Refuză',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Dirijează',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Trimitere către DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Alte opţiuni de dirijare',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Schimbă posesorul înregistrării',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Echipa:',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Îmbinare de documente',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Selectare...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Îmbinare de documente în PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Trimitere document îmbinat prin e-mail',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Îmbinare de documente',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Tipul convergent de gateway nu se potrivește cu tipul de gateway al unui flux de intrare.',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Elementele gateway divergente extind procesele în mai multe ramuri. Atunci când utilizați un element gateway convergent pentru a le regrupa spre o singură cale, trebuie să utilizați tipul corect de element gateway convergent, în funcție de tipul de element gateway divergent care este utilizat pentru a crea ramuri. Pentru ramurile create cu elemente gateway divergente, utilizați un element gateway convergent exclusiv pentru a le regrupa. Pentru ramurile create cu elemente gateway divergente paralele sau inclusive, utilizați un element gateway convergent paralel pentru a le regrupa.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Câmp modul',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Relație modul',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Utilizator',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Rol',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Echipă',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Activitate formular',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Regulă operativă',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Acțiune regulă operativă',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Șablon e-mail',
 );

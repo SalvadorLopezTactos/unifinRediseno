@@ -17,8 +17,6 @@
 
     commit_date: undefined,
 
-    data_points: [],
-
     points: [],
 
     events: {
@@ -32,7 +30,6 @@
         this._super('initialize', [options]);
 
         this.points = [];
-        this.data_points = [];
 
         // map what points we should display
         _.each(options.def.datapoints, function(point) {
@@ -55,8 +52,7 @@
      */
     bindDataChange: function() {
         this.collection.on('reset', function() {
-            // get the first line
-            this.data_points = [];
+            // Get the latest commit model
             var model = _.first(this.collection.models);
 
             if (!_.isUndefined(model)) {
@@ -69,14 +65,17 @@
                 if (currentTime.isBefore(commitDate)) {
                     this.commit_date = currentTime.format(commitDate._f);
                 }
-
-                this.data_points = this.processDataPoints(model);
             } else {
                 this.commit_date = undefined;
             }
 
             if (!this.disposed) {
                 this.render();
+            }
+            //Toggles the arrow to keep arrow consistent when switching type of
+            //worksheet
+            if (this.context.get('forecastType') === 'Direct') {
+                this.$('#show_hide_history_log').toggleClass('sicon-chevron-down').toggleClass('sicon-chevron-up');
             }
         }, this);
     },
@@ -85,6 +84,7 @@
      * Processes a Forecast collection's models into datapoints
      * @param {Bean} model
      * @returns {Array}
+     * @deprecated since 12.1.0, this is no longer used
      */
     processDataPoints: function(model) {
         var points = [],

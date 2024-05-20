@@ -58,6 +58,7 @@ class SugarFieldTime extends SugarFieldBase {
 
     public function save($bean, $params, $field, $properties, $prefix = '')
     {
+        $inputData = [];
         if ( !isset($inputData[$prefix.$field]) ) {
             $bean->$field = '';
             return;

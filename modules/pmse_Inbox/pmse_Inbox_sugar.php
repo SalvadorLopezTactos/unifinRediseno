@@ -57,11 +57,11 @@ class pmse_Inbox_sugar extends Basic
     var $cas_pin;
     var $cas_assigned_status;
 
-    const CAS_STATUS_COMPLETED = 'COMPLETED';
-    const CAS_STATUS_TERMINATED = 'TERMINATED';
-    const CAS_STATUS_IN_PROGRESS = 'IN PROGRESS';
-    const CAS_STATUS_CANCELLED = 'CANCELLED';
-    const CAS_STATUS_ERROR = 'ERROR';
+    public const CAS_STATUS_COMPLETED = 'COMPLETED';
+    public const CAS_STATUS_TERMINATED = 'TERMINATED';
+    public const CAS_STATUS_IN_PROGRESS = 'IN PROGRESS';
+    public const CAS_STATUS_CANCELLED = 'CANCELLED';
+    public const CAS_STATUS_ERROR = 'ERROR';
 
 
     public function __construct()

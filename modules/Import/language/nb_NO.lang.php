@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Påkrevd verdi mangler',
     'LBL_ERROR_SYNC_USERS' => 'Ugyldig verdi for synkronisering mot Outlook:',
     'LBL_ID_EXISTS_ALREADY' => 'ID eksisterer allerede i denne tabellen',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY finnes allerede i denne tabellen',
     'LBL_ASSIGNED_USER' => 'Hvis brukeren ikke eksisterer, bruk den gjeldende brukeren',
     'LBL_SHOW_HIDDEN' => 'Vis felt som normalt ikke er importerbare',
     'LBL_UPDATE_RECORDS' => 'Oppdater eksisterende oppføringer istedet for å importere dem (Ikke angre)',

@@ -39,7 +39,11 @@ use Google\Service\BigtableAdmin\TestIamPermissionsResponse;
 class ProjectsInstances extends \Google\Service\Resource
 {
   /**
-   * Create an instance within a project. (instances.create)
+   * Create an instance within a project. Note that exactly one of
+   * Cluster.serve_nodes and Cluster.cluster_config.cluster_autoscaling_config can
+   * be set. If serve_nodes is set to non-zero, then the cluster is manually
+   * scaled. If cluster_config.cluster_autoscaling_config is non-empty, then
+   * autoscaling is enabled. (instances.create)
    *
    * @param string $parent Required. The unique name of the project in which to
    * create the new instance. Values are of the form `projects/{project}`.
@@ -87,8 +91,9 @@ class ProjectsInstances extends \Google\Service\Resource
    * (instances.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param GetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -141,8 +146,9 @@ class ProjectsInstances extends \Google\Service\Resource
    * policy. (instances.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -158,8 +164,9 @@ class ProjectsInstances extends \Google\Service\Resource
    * (instances.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse

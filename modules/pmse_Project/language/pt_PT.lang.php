@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Botões do Formulário',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Aprovar/Rejeitar',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Rota',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Enviar para o DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Outras opções de Rota',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Alterar Atribuído ao Utilizador',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Equipa',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Fusão de documentos',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Seleccionar...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Fusão de documento para PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Enviar documento fundido por e-mail',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Fusão de documentos',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'O tipo de porta de entrada convergente não coincide com tipo de porta de entrada de um fluxo de entrada',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'As portas de entrada divergentes expandem os processos em vários ramos. Ao usar uma porta de entrada convergente para re-convergir estes ramos de volta para um caminho, deve ser usado o tipo correto de porta de entrada convergente, dependendo do tipo de porta de entrada divergente usado para criar os ramos. Para ramos criados com portas de entrada divergentes exclusivas ou baseadas em eventos, use uma porta de entrada convergente exclusiva para as re-convergir. Para ramos criados com portas de entrada divergentes paralelas ou inclusivas, use uma porta de entrada paralela convergente paralela para as re-convergir.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Campo do Módulo',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Relacionamento do módulo',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Utilizador',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Função',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Equipa',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Actividade de formulário',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Regra de negócio',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Acção da regra de negócio',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Modelo de E-mail',
 );

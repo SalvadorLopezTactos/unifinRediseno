@@ -179,6 +179,7 @@ class SqlsrvManager extends MssqlManager
         if ($this->checkError('Could Not Connect:', $dieOnError)) {
             $this->logger->info('connected to db');
         }
+        static::$version = null;
 
         sqlsrv_query($this->database, 'SET DATEFORMAT mdy');
 
@@ -432,8 +433,8 @@ EOSQL;
             if ( $sqlpos !== false || $sqlpos2 !== false || $sqlpos3 !== false ) {
                 continue;
             }
-            $sqlpos = strpos($sqlmsg, (string) $app_strings['ERR_MSSQL_DB_CONTEXT']);
-            $sqlpos2 = strpos($sqlmsg, (string) $app_strings['ERR_MSSQL_WARNING']);
+            $sqlpos = strpos($sqlmsg, $app_strings['ERR_MSSQL_DB_CONTEXT']);
+            $sqlpos2 = strpos($sqlmsg, $app_strings['ERR_MSSQL_WARNING']);
     		if ( $sqlpos !== false || $sqlpos2 !== false) {
                     continue;
             }

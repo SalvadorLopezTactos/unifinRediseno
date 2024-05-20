@@ -44,7 +44,7 @@ class TrackableArray extends \ArrayObject
      * {@inheritdoc} Also tracks sets to keys if tracking is currently enabled.
      * Array values are automatically converted to instances of TrackableArray
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if ($this->track) {
             //This is required to allow $array[] = 'val'; syntax to be tracked.
@@ -83,7 +83,7 @@ class TrackableArray extends \ArrayObject
     /**
      * {@inheritdoc} Also tracks unsets to keys if tracking is currently enabled.
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         if ($this->track) {
             if (isset($this[$offset])) {
@@ -103,6 +103,7 @@ class TrackableArray extends \ArrayObject
      * This is done to allow multidimensional array syntax. Ex. $arr['foo']['bar'] = 'baz';
      * Multidimensional arrays created this way are automatically converted to TrackableArray instances.
      */
+    #[\ReturnTypeWillChange]
     public function &offsetGet($offset)
     {
         //Required for direct deep syntax. Ex. $arr = array(); $arr['a']['b']['c'] = true;
@@ -219,7 +220,7 @@ class TrackableArray extends \ArrayObject
      * Instances of TrackableArray stored will also be converted to arrays recursively.
      * @return array
      */
-    public function getArrayCopy()
+    public function getArrayCopy(): array
     {
         $ret = parent::getArrayCopy();
         foreach ($ret as $key => $value) {

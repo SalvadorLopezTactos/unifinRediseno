@@ -272,7 +272,7 @@ $focus->load_relationship('tracked_urls');
 $trkr_lists = $focus->tracked_urls->get();
 $trkr_html ='';
 $ss->assign('TRACKER_COUNT', is_countable($trkr_lists) ? count($trkr_lists) : 0);
-if ((is_countable($trkr_lists) ? count($trkr_lists) : 0)>0) {
+if ((is_countable($trkr_lists) ? count($trkr_lists) : 0) > 0) {
 global $odd_bg, $even_bg, $hilite_bg;
 
     $trkr_count = 0;

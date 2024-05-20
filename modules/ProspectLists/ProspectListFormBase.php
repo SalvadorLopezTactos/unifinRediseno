@@ -43,10 +43,10 @@ function getForm($prefix, $mod='', $form=''){
 
 	$the_form = get_left_form_header($mod_strings['LBL_NEW_FORM_TITLE']);
 	$the_form .= <<<EOQ
-		<form name="${prefix}ProspectListSave" onSubmit="return check_form('${prefix}ProspectListSave');" method="POST" action="index.php">
-			<input type="hidden" name="${prefix}module" value="ProspectLists">
-			<input type="hidden" name="${prefix}action" value="Save">
-			<input type="hidden" name="assigned_user_id" value='${user_id}'>
+		<form name="{$prefix}ProspectListSave" onSubmit="return check_form('{$prefix}ProspectListSave');" method="POST" action="index.php">
+			<input type="hidden" name="{$prefix}module" value="ProspectLists">
+			<input type="hidden" name="{$prefix}action" value="Save">
+			<input type="hidden" name="assigned_user_id" value='{$user_id}'>
 EOQ;
 
 	$the_form .= $this->getFormBody($prefix, $mod, $prefix."ProspectListSave");

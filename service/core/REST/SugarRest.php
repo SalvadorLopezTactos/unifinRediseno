@@ -16,7 +16,13 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  */
 class SugarRest
 {
- 	/**
+    /**
+     * @var string|mixed
+     */
+    public $implementation;
+    public $faultServer;
+
+    /**
  	 * Constructor
  	 *
  	 * @param String $implementation - name of the implementation class

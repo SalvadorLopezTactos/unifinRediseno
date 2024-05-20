@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'لوحة معلومات سجل جداول التقرير',
     'LBL_FILE_TYPE' => 'نوع (أنواع) الملفات',
+    'LBL_EMBED_REPORT' => 'تضمين التقرير في البريد الإلكتروني',
+    'LBL_EMBED_REPORT_INFO' => 'ملاحظة: إذا تجاوز التقرير 200 صف، فسوف نرفق التقرير كملف CSV.',
 );

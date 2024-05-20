@@ -117,4 +117,13 @@ $mod_strings = array (
 - Gerek duyulursa ek alanları açmak için "Daha Fazlasına" tıklayın.
 2. "Kaydet" tuşuna basarak yeni kayıt oluşturma işlemini tamamlayın ve önceki sayfaya dönün.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Akıllı Kılavuz Görevi',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Akıllı Kılavuz Görevidir',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Akıllı Kılavuz Etkinlik Başlangıç Tarihi',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Akıllı Kılavuz Etkinlik Tamamlama Tarihi',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Akıllı Kılavuz - Tamamlanmaya Kalan Gün Sayısı',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Alt Toplantılar',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Alt Aramalar',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Alt Görevler',
 );

@@ -161,18 +161,15 @@ class PMSEGatewayDefinitionWrapper
         $data = array("success" => false);
 
         if (isset($args['record']) && count($args) > 0) {
-//        if (count($args['data']) > 0) {
             if ($this->gateway->retrieve_by_string_fields(array('gat_uid' => $args['record']))) {
-                if ($this->gateway->fetched_row != false) {
+                if (!empty($this->gateway->fetched_row)) {
                     $orderCounter = 0;
                     foreach ($args['data'] as $key => $value) {
-//                        if (is_array($value)) {
                         $this->flowBean->retrieve_by_string_fields(array('flo_uid' => $value['flo_uid']));
                         $this->flowBean->flo_condition = $value['flo_condition'];
                         $this->flowBean->flo_eval_priority = $orderCounter;
                         $this->flowBean->save();
                         $orderCounter++;
-//                        }
                     }
                     $data = array("success" => true);
                 }
@@ -180,6 +177,4 @@ class PMSEGatewayDefinitionWrapper
         }
         return $data;
     }
-
-
 }

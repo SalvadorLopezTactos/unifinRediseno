@@ -21,8 +21,8 @@ class ext_eapm_google extends source
     protected $_enable_in_hover = false;
     protected $_has_testing_enabled = false;
 
-    const CONTACTS_FEED = 'https://www.google.com/m8/feeds/contacts/default/full';
-    const GDATA_VERSION = '3.0';
+    public const CONTACTS_FEED = 'https://www.google.com/m8/feeds/contacts/default/full';
+    public const GDATA_VERSION = '3.0';
 
     /** {@inheritdoc} */
     public function getItem($args = array(), $module = null)
@@ -49,7 +49,7 @@ class ext_eapm_google extends source
         }
 
         $feed = new Zend_Gdata_Contacts_ListFeed();
-        list($major, $minor) = explode('.', self::GDATA_VERSION);
+        [$major, $minor] = explode('.', self::GDATA_VERSION);
         $feed->setMajorProtocolVersion($major);
         $feed->setMinorProtocolVersion($minor);
         $xml = $response->getBody()->getContents();

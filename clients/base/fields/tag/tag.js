@@ -105,7 +105,7 @@
                 return false;
             }
         }
-        
+
         // Check if input is empty after trim
         if (term === '') {
             return false;
@@ -332,7 +332,7 @@
                 }
             });
         }
-        this.model.set('tag', this.value);
+        this.model.set(this.name, this.value);
     },
 
     /**

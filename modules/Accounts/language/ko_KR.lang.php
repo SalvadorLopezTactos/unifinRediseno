@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => '계정 목록 대시보드',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => '계정 기록 대시보드',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => '계정 포커스 서랍',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => '계정 세부사항',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => '계정 포커스 서랍- 콘솔',
     'LBL_NEXT_RENEWAL_DATE' => '다음 갱신 날짜',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => '다음 갱신 날짜',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => '계정 이름/분야',
     'LBL_RENEWALS_CONSOLE_LOCATION' => '위치',
     'LBL_PURCHASES' => '구매',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => '계정 타임라인',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => '조직',
+    'LBL_CREATE_NEW' => '새로 만들기',
+    'LBL_MANAGE' => '관리',
+    'LBL_SEE_DETAILS' => '세부내용 보기',
+    'LBL_HIDE_NEW' => '숨김',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => '차트',
@@ -201,4 +208,7 @@ $mod_strings = array (
 2.“저장하기”를 클릭하여 새 기록을 완성하고 이전 페이지로 돌아갑니다.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => '계정의 보고서',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => '외부 사용자',
 );

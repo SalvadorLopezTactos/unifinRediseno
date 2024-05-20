@@ -47,16 +47,17 @@
                         return;
                     }
                     this.context.parent.set('rowModel', rowModelBean);
-                    _.each(app.sideDrawer._breadcrumbs, function(bread) {
-                        if (bread.context.modelId === rowModelBean.get('id')) {
-                            bread.context.model = rowModelBean;
+                    _.each(app.sideDrawer._tabs, function(tab) {
+                        if (tab.context.modelId === rowModelBean.get('id')) {
+                            tab.context.model = rowModelBean;
                         }
                     });
                     this._super('loadData', [options]);
                 }, this),
                 complete: function() {
                     app.alert.dismiss('load_row_data_model');
-                }
+                },
+                viewed: true,
             });
         } else {
             this._super('loadData', [options]);

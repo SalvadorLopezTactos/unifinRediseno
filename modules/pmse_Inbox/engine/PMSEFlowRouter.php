@@ -21,6 +21,8 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 class PMSEFlowRouter
 {
 
+    public $pmseElementRunner;
+    public $elementStack;
     /**
      * The case flow handler attribute manages all the Database operations
      * related to the pmse_bpm_flow table.
@@ -232,6 +234,9 @@ class PMSEFlowRouter
                 break;
             case 'NONE':
             default :
+                if ($resultData['close_flow'] ?? false) {
+                    $resultData['previous_closed_flow'] = $this->caseFlowHandler->closePreviousFlow($previousFlowData);
+                }
                 if (isset($resultData['close_thread']) && $resultData['close_thread']) {
                     $this->caseFlowHandler->closeThreadByThreadIndex($previousFlowData['cas_id'], $previousFlowData['cas_thread']);
                 }

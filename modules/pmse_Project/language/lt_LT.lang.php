@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Form Buttons',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Approve/Reject',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Route',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Siųsti į „DocuSign“',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Other Routing Options',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Change Assigned To User',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Komanda',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumentų sujungimas',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Pasirinkti...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumentų sujungimas į PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Siųsti sujungtą dokumentą el. paštu',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumentų sujungimas',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Sueinančio šliuzo tipas neatitinka gaunamo srauto šliuzo tipo',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Išsiskiriantys šliuzai išskaido procesus į keletą šakų. Naudojant sueinantį šliuzą ir norint, kad šakos būtų grąžintos į vieną kelią, reikia naudoti tinkamą sueinančio šliuzo tipą, kuris priklauso nuo išsiskiriančio šliuzo, naudoto kuriant šakas, tipo. Šakų, kurios buvo sukurtos naudojant išskirtinius arba įvykiu pagrįstus išsiskiriančius šliuzus, atveju naudokite išskirtinį sueinantį šliuzą, kad sulietumėte šakas iš naujo. Šakų, kurios buvo sukurtos naudojant lygiagrečius arba įtrauktinus išsiskiriančius šliuzus, atveju naudokite lygiagretų sueinantį šliuzą, kad sulietumėte šakas iš naujo.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Modulio laukas',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Modulio ryšys',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Vartotojas',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Rolė',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Komanda',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Formos veikla',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Verslo taisyklė',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Verslo taisyklės veiksmas',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Laiško šablonas',
 );

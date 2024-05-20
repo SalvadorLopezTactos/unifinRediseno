@@ -199,7 +199,8 @@ class WorkFlow extends SugarBean
         return  $ret['select'] . $ret['from'] . $ret['where']. $ret['order_by'];
     }
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $app_strings, $mod_strings;
 		global $app_list_strings;
 
@@ -422,7 +423,6 @@ function filter_base_modules(){
 
 	//only call this after the bean has been made and the vardef file exists
 	function display_label($focus, $field){
-
         $current_language = null;
 		global $dictionary;
 
@@ -484,7 +484,6 @@ function write_workflow(){
 
 
 function get_trigger_contents(){
-
         $opt = [];
         $eval = null;
         $timeArray = null;
@@ -843,14 +842,14 @@ AND frame_type = 'Secondary'
 ORDER BY rel_module, rel_module_type ASC
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery($sql, [$workflow_id]);
 
 		$secondary_count = 0;
         $secondary_triggers = array();
 			$eval .= "\t //Secondary Triggers \n";
 		// Get the id and the name.
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
 			$real_secondary = $secondary_count + 1;
 
 
@@ -970,11 +969,11 @@ WHERE deleted = 0
 AND parent_id = ?
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery($sql, [$workflow_id]);
 
     // Get the id and the name.
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $alert_string .= <<<'PHP'
     $alertshell_array = [];
 
@@ -1069,11 +1068,11 @@ WHERE deleted = 0
 AND parent_id = ?
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery($sql, [$workflow_id]);
 
     // Get the id and the name.
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $array_position_name = $alert_array_name."".$trigger_count."_alert".$alert_count;
             $eval_dump .= '\''.$array_position_name.'\',';
 
@@ -1156,11 +1155,11 @@ WHERE deleted = 0
 AND parent_id = ?
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery($sql, [$workflow_id]);
 
 		// Get the id and the name.
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
 			$process=true;
 
 			if($row['action_type']=="new" && ($row['action_module']=="Calls" || $row['action_module']=="Meetings" || $row['action_module']=="calls" || $row['action_module']=="meetings")){
@@ -1251,10 +1250,6 @@ return $action_string;
 ////////////////GETTING RELATED MODULE PULLDOWNS
 
 function get_field_value_array($base_module=false, $inclusion_type=false, $exclusion_type=false){
-
-
-
-
         $inclusion_array = null;
 	if($base_module==false){
 		$base_module = $this->base_module;
@@ -1324,7 +1319,7 @@ function get_rel_module($var_rel_name, $get_rel_name = false){
     if($get_rel_name)
     {
         //bug #46246: should set relationship name instead of related field name
-        $this->rel_name = isset($rel_name) ? $rel_name : $var_rel_name;
+            $this->rel_name = $rel_name ?? $var_rel_name;
     }
 	$rel_attribute_name = $module_bean->field_defs[$var_rel_name]['relationship'];
 	//use the vardef to retrive the relationship attribute

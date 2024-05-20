@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Vasaris',
     'LBL_MARCH' => 'Kovas',
     'LBL_APRIL' => 'Balandis',
-    'LBL_MAY' => 'Geg',
+    'LBL_MAY' => 'Gegužė',
     'LBL_JUNE' => 'Birželis',
     'LBL_JULY' => 'Liepa',
     'LBL_AUGUST' => 'Rugpjūtis',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Spa',
     'LBL_NOV' => 'Lap',
     'LBL_DEC' => 'Gru',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalendorius jau buvo pridėtas',
+    'LBL_CALENDAR_IS_SELECTED' => 'pasirinktas {{calendar}}',
+    'LBL_NO_USER_SELECTED' => 'Pasirinkite naudotoją arba komandą',
+    'LBL_NO_CALENDAR_SELECTED' => 'Pasirinkite kalendorių',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nepavyko išsaugoti kalendorių.',
 
 );
 

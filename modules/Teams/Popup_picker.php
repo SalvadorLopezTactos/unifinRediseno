@@ -90,6 +90,9 @@ class Popup_Picker
 	 */
 	function process_page()
 	{
+        $createButton = null;
+        $addformheader = null;
+        $addform = null;
 		global $theme;
 		global $mod_strings;
 		global $app_strings;

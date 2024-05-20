@@ -92,6 +92,7 @@ $mod_strings = array (
     'ERR_UW_PACKAGE_NEWER_VERSION_EXISTS'       => '存在程序包的较新版本：{0}，在尝试下载新的程序包前请先将其移除。',
     'ERR_UW_PACKAGE_ALREADY_INSTALLED'          => '文件包已安装。',
     'ERR_UW_PACKAGE_NOT_INSTALLED'              => '程序包未安装。',
+    'ERR_UW_PACKAGE_INSTALLED_WITH_ERROR'       => '软件包安装导致错误。保留更改',
     'ERR_UW_PACKAGE_IS_UNINSTALLABLE'           => '程序包可卸载。无法卸载。',
     'ERR_UW_PACKAGE_ALREADY_ENABLED'            => '文件包已启用。',
     'ERR_UW_PACKAGE_ALREADY_DISABLED'           => '文件包已禁用。',
@@ -130,7 +131,12 @@ $mod_strings = array (
     'LBL_ADMIN_WIZARD' => '轻松设置你的SugarCRM系统',
     'LBL_ADMINISTRATION_HOME_TITLE' => '系统',
     'LBL_ADMINISTRATION_HOME_DESC' =>'根据您企业的特殊需求配置全局设置。用户可以在用户设置页面覆盖一些默认本地化设置。',
-    'LBL_ALLOW_USER_TABS' => '允许用户在导览列隐藏标签',
+    'LBL_ALLOW_USERS_PINNED_MODULES' => '允许用户设置固定模块的数量',
+    'LBL_ALLOW_USERS_AVAILABLE_MODULES' => '允许用户从现有的模块中进行选择',
+    'LBL_NUMBER_PINNED_MODULES' => '固定模块的数量',
+    'LBL_NUMBER_PINNED_MODULES_TOOLTIP' => '我们建议将其设置为最经常使用的 ' .
+        '模块的实际数量，因为在大多数浏览器尺寸下，很可能看不到大量的模块。将 ' .
+        '不允许超过 100 的数值',
     'LBL_ALREADY_RUNNING'                  => '这台服务器正作为离线客户端运行。',
     'LBL_APPLY_DST_FIX_DESC' => '这个必要的步骤可以更新时间处理功能(只针对MySQL)。',
     'LBL_APPLY_DST_FIX' => '应用夏令时间修正',
@@ -146,7 +152,7 @@ $mod_strings = array (
     'LBL_IMPORT_METADATA_BUTTON_TITLE' => '导入 IdP 元数据文件',
     'LBL_IMPORT_METADATA_BUTTON_LABEL' => '导入 IdP 元数据文件',
     'LBL_CAT_VIEW'            => '类别',
-    'LBL_CHANGE_NAME_MODULES'=>'更改在程序中出现的模板名称',
+    'LBL_CHANGE_NAME_MODULES'=> '更改在程序中出现的模板名称',
     'LBL_CHECK_FOR_UPDATES'  => '检查更新',
     'LBL_CHECK_NOW_LABEL' =>'立即检查',
     'LBL_CHECK_NOW_TITLE' =>'立即检查',
@@ -172,17 +178,20 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'清除用于存储 PDF 字体数据的缓存文件',
     'LBL_CONFIG_CHECK' =>'配置检查',
     'LBL_CONFIG_FTS' => '设置全文搜索引擎',
-    'LBL_CONFIG_TABS'=>'显示模块和子面板',
-	'LBL_CONFIG_TABS_DESC'=>'拖放下面的模块名称，设置标签或子面板要显示或隐藏。 如要控制模块存取，使用<a href="?module=ACLRoles&action=index">角色管理。</a>',
-	'LBL_CONFIG_LANGS_DESC'=>'拖动或拉动以下语言名称以启用或禁用它们.',
-	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'这个选项允许用户设置可以查看哪些模块的标签。当被选中时，用户可以在用户设置中的管理标签中选择哪些模块标签可以显示。',
-	'LBL_CONFIGURATOR_DESC'=>'设置 Config.php',
+    'LBL_CONFIG_TABS'=>'导航栏和子面板',
+    'LBL_CONFIG_TABS_DESC_BRIEFLY'=>'选择哪些模块可以在导航栏和子面板供用户使用。要控制用户对模块的访问，请使用<a href="?module=ACLRoles&action=index">角色管理。</a>',
+    'LBL_CONFIG_TABS_DESC_DETAILED'=>'拖放模块，将其设置为在导航栏中可用或隐藏。<br>
+        固定模块的数量字段决定了当导航栏折叠时显示的可用模块数量
+        （例如，如果输入 5，则列表中的前五个模块将固定）。启用
+        复选框字段后，用户可以通过用户配置文件修改导航栏的设置。',
+    'LBL_CONFIG_LANGS_DESC'=>'拖动或拉动以下语言名称以启用或禁用它们.',
+    'LBL_CONFIGURATOR_DESC'=>'设置 Config.php',
     'LBL_CONFIGURATOR_TITLE'=>'配置器',
     'LBL_CONFIGURE_GROUP_TABS_DESC' => '创建或编辑导航标签的编组。',
     'LBL_CONFIGURE_GROUP_TABS' => '配置模块菜单过滤器',
     'LBL_CONFIGURE_SETTINGS_TITLE' => '系统设置',
     'LBL_CONFIGURE_SETTINGS' => '配置全局设置',
-    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => '显示模块和子面板',
+    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => '导航栏和子面板',
     'LBL_CONFIGURE_UPDATER'=>'配置 Sugar 更新',
     'LBL_CONTRACT_TITLE'=>'合同',
     'LBL_CONTRACT_DESC'=>'为合同模块定义合同类型。当用户创建合同时，类型下拉菜单将显示这些类型以供选择。',
@@ -228,6 +237,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_GETMYSQLTS' => 'mysql结构',
     'LBL_DIAGNOSTIC_GETPHPINFO' => '正获得phpinfo()',
     'LBL_DIAGNOSTIC_GETSUGARLOG' => '正获得sugarcrm.log',
+    'LBL_DIAGNOSTIC_GETMLPLOG' => 'Getting package_install.log',
     'LBL_DIAGNOSTIC_GETTING' => '正获得...',
     'LBL_DIAGNOSTIC_MD5'=>'MD5信息',
     'LBL_DIAGNOSTIC_MYSQLDUMPS'=>'MySQL - 配置表备份',
@@ -236,6 +246,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_NO_MYSQL' => '您没有MySQL。MySQL的功能已被禁用。',
     'LBL_DIAGNOSTIC_PHPINFO'=>'phpinfo()',
     'LBL_DIAGNOSTIC_SUGARLOG'=>'SugarCRM日志文件',
+    'LBL_DIAGNOSTIC_MLPLOG'=>'包安装日志文件',
     'LBL_DIAGNOSTIC_TITLE'=>'诊断工具',
     'LBL_DIAGNOSTIC_VARDEFS'=>'Sugar结构输出(VARDEFS)',
 	'LBL_DISABLED' => '已显示',
@@ -363,11 +374,11 @@ $mod_strings = array (
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'绑定 LDAP 用户<br>例如:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
     'LBL_LDAP_LOGIN_ATTRIBUTE_DESC'=>'LDAP 用户查找例子<br>Examples:<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;dn,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;dn',
     'LBL_LDAP_ENCRYPTION_TYPE_DESC'=> '加密类型会影响您与 LDAP 服务器的连接' .
-        '是否安全。对常规的不安全连接使用“无”。使用 TLS 强制保护常规' .
-        '连接的安全。对在 ldaps:// 上建立的安全连接使用 SSL',
+        '是否安全。对常规的不安全连接使用“无”。使用 StartTLS 强制保护常规 ' .
+        '连接的安全。对在 ldaps:// 上建立的安全连接使用 LDAPS',
     'LBL_LDAP_SERVER_HOSTNAME_DESC'=> '请仅指定 IP 地址的 LDAP 的主机名称。' .
         '示例：ldap.example.com, 10.11.45.75',
-    'LBL_LDAP_SERVER_PORT_DESC'=>'示例：对不安全连接和 TLS 使用 389。对 SSL 使用 636',
+    'LBL_LDAP_SERVER_PORT_DESC'=>'示例：对不安全连接和 StartTLS 使用 389。对 LDAPS 使用 636',
     'LBL_LDAP_GROUP_NAME'=>'组名：',
 	'LBL_LDAP_GROUP_NAME_DESC'=>'例如 cn=sugarcrm',
     'LBL_LDAP_USER_DN_DESC'=>'例如: ou=people,dc=example,dc=com',
@@ -474,6 +485,8 @@ $mod_strings = array (
     'LBL_MANAGE_RELATE_DENORMALIZATION_PRE_CHECK_RESULTS' => '预检查结果',
     'LBL_MANAGE_RELATE_DENORMALIZATION_FIELDS_FOR' => '字段',
     'LBL_MANAGE_RELATE_DENORMALIZATION_JOB_TITLE' => '已安排的任务',
+    'LBL_SUGAR_OUTFITTER' => 'SugarOutfitters',
+    'LBL_SUGAR_OUTFITTER_TOOLTIP' => '浏览 SugarOutfitters，SugarCRM 市场，查找可以为您的 Sugar 实例添加新功能的附加组件',
 
     'LBL_MANUAL_VALIDATION_TXT' => '人手验证',
     'LBL_MANUAL_VALIDATION'=>'如果您一直有自动验证问题，请检查载管理员面板下 <a href="index.php?module=Configurator&action=EditView">系统设置</a> 中的代理设置。
@@ -555,6 +568,9 @@ $mod_strings = array (
     'LBL_MODULE_LICENSE'                        => '请阅读下面许可申明：',
     'LBL_MODULE_LOADER_TITLE' => '模块加载器',
     'LBL_MODULE_LOADER' => '增加或者移除模块, 主题, 语言包和其他的扩展。',
+    'LBL_MODULE_LOADER_LICENSE_WARNING' => '<a href="{0}">上传</a> 自定义文件包的功能不是 '
+        . '可用于 {1}。 要查看哪些许可证类型包括此模块加载器功能，请参阅 '
+        . '<a href="{2}">许可证类型矩阵</a> 文档。',
     'LBL_MODULE_NAME' => '管理',
     'LBL_MODULE_NAME_SINGULAR' => '管理',
     'LBL_MODULE_TITLE' => '系统管理: 首页',
@@ -669,8 +685,6 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => '重建 JS 组文件',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => '重新连接并重写存在的组文件为最新版本的组文件',
-    'LBL_REPAIR_JS_FILES_TITLE' => '修复 javascript 文件',
-    'LBL_REPAIR_JS_FILES_DESC_SHORT' => '修复 JS 文件',
     'LBL_REPAIR_JS_FILES_PROCESSING' => '处理文件中. 这将花费一些时间.  离开这些页面将取消处理, 因此按需要离开或等待确认......',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => '文件处理完成',
     'LBL_REPAIR_FIELD_CASING_TITLE' => '修复非小写字段',
@@ -912,7 +926,7 @@ $mod_strings = array (
     'LBL_VALIDATION_FILE'=>'校验关键文件',
     'LBL_VALIDATION_SUCCESS_DATE'=>'上次成功校验',
 	'LBL_VISIBLE_PANELS'=>'已显示的子面板',
-    'LBL_VISIBLE_TABS'=>'已显示模块',
+    'LBL_AVAILABLE_MODULES' => '可用模块',
     'LBL_WORKFLOW_DESC'                     => '管理工作流条件，提醒和动作',
     'LBL_WORKFLOW_TITLE'                    => '工作流管理',
     'LBL_WORKBENCH' => '工作台',
@@ -957,12 +971,10 @@ $mod_strings = array (
     'WARN_LICENSE_SEATS'=>  "<b>警告：</b>当 ",
     'WARN_LICENSE_SEATS2' => "您的订阅仅允许",
     'WARN_LICENSE_SEATS3' =>
-        "<p class=\"error\">时，有活动用户，请禁用一些用户，联系您的合作伙伴或销售代表，"
-        . "或发送电子邮件至 <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>。</p>"
-        . "<p class=\"error\">如需了解更多信息，请参阅"
-        . "<a target=\"_blank\" "
-        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
-        . "《了解用户类型和 Sugar 许可证》</a>一文。</p>",
+        ". <p class=\"error\">请停用某些用户或<a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>联系我们</a> 添加更多许可证。</p>",
+    'WARN_LICENSE_SEATS3_IDM' =>
+        ". <p class=\"error\">请停用 SugarCloud 设置中的<a target=\"_blank\" href='%s'>某些用户</a> "
+        . "或 <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>联系我们</a> 添加更多许可证。</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>警告：</b>活动用户数量已经超过许可证允许的最大值： ",
     'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>警告：<b>您将无法创建其他活动用户。"
         . " 请购买更多订阅。",
@@ -970,7 +982,7 @@ $mod_strings = array (
     'WARN_LICENSE_TYPE_SEATS_EDIT_MAXED' => '您无法创建额外 %s 个用户。请购买更多订阅。',
     'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>警告：<b>您将无法创建其他活动用户。"
         . " 请购买更多订阅。",
-    'WARN_REPAIR_CONFIG' => '<b>警告：</b> 需要修复 config.php 文件。请使用 “管理”区域的 “修复”页中的  <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>重建配置文件 </a>脚本修复配置文件。',
+    'WARN_REPAIR_CONFIG' => '<b>警告：</b> 需要修复 config.php 文件。请使用“管理”区域“修复”页面中的 <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>重建配置文件</a> 脚本来修复配置文件。',
     'WARN_UPGRADE_APP'=> "有新的版本更新可用。",
     'WARN_UPGRADE' => '<b>警告：</b>请升级 ',
     'WARN_UPGRADENOTE' => '笔记：',
@@ -1044,11 +1056,11 @@ $mod_strings = array (
 
 'ML_PACKAGE_SCANNING'=> '扫描 {PACKAGE}',
 'ML_INSTALLATION_FAILED'=> '安装失败！',
-'ML_PACKAGE_NOT_CONFIRM'=> '您正在尝试安装的安装包不符合Sugar Open Cloud或您的系统管理员设置的策略。',
+    'ML_PACKAGE_NOT_CONFIRM' => '您正在尝试安装的安装包不符合 SugarCloud 或您的系统管理员设置的政策。',
 'ML_TO_RESOLVE'=>'为了解决此问题：',
-'ML_OBTAIN_NEW_PACKAGE'=>'Sugar Open Cloud顾客必须从安装包供应商获得一个新的安装包来解决下面描述的问题。',
+    'ML_OBTAIN_NEW_PACKAGE' => 'SugarCloud 顾客必须从安装包供应商获得一个新的安装包来解决下面描述的问题。',
 'ML_RELAX_LOCAL'=>'假如您在本地部署SugarCRM，您可以放宽模块安装器的限制运行安装包。',
-'ML_SUGAR_LOADING_POLICY'=>'在这里查看Sugar Open Cloud 安装包引导详细策略',
+    'ML_SUGAR_LOADING_POLICY'=>'SugarCloud 的政策详见',
 'ML_SUGAR_KB'=>'SugarCRM 知识库',
 'ML_SUGAR_DZ'=>'SugarCRM开发区',
 'ML_PKG_SCAN_GUIDE'=>'程序包扫描策略指南',
@@ -1253,6 +1265,7 @@ $mod_strings = array (
     'LBL_ASYNC_CALL_FAILED' => '异步调用失败',
     'LBL_REPAIRXSSEXECUTE_FAILED' => '失败: 无法定义 Bean 和 ID',
     'LBL_DIAGNOSTICS_ERROR_SUGARLOG' => '无法复制 sugarcrm.log 到 {0}<br>',
+    'LBL_DIAGNOSTICS_ERROR_MLPLOG' => '无法将 package_install.log 复制到 {0}<br>',
     'LBL_DIAGNOSTICS_ERROR_PHPINFO' => '无法写入文件 {0}phpinfo.html<br>',
     'LBL_DIAGNOSTICS_ERROR_LISTBEANFILES' => '无法写入文件 {0}beanFiles.html<br>',
     'LBL_DIAGNOSTICS_ERROR_MD5' => '无法复制文件.md5 to {0}<br>跳过 md5 检查.<br>',
@@ -1364,10 +1377,28 @@ $mod_strings = array (
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT' => '这些设置表示网页浏览器用于控制允许在网页上加载哪些资源的标准内容安全策略（CSP）指令。有关可接受字段值和格式的更多信息，请参阅 <a href={{linkToDocumentation}} target="_blank"> 系统 </a> 文档。更新 CSP 设置后，用户需要刷新浏览器，以使更改生效。',
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT_ADVANCED' => '这些设置适用于对单个内容安全策略（CSP）指令有深入了解的用户。默认情况下，“img src” CSP 指令在 Sugar 中定义，允许通过 HTTP 或 HTTPS 加载所有图像。有关可接受的字段值和格式的更多信息，请参阅 <a href={{linkToDocumentation}} target="_blank"> 系统 </a>文档。在 CSP 设置更新后，用户需要刷新其浏览器来使更改生效。',
     //Maps
+    'LBL_MAPS_LOGGER_START_DATE' => '日志开始日期：',
+    'LBL_MAPS_LOGGER_DETAILED_LOGS' => '详细日志',
+    'LBL_MAPS_LOGGER_NO_LOGS_AVAILABLE' => '没有可用的日志。',
+    'LBL_MAPS_LOGGER_ENABLE_MODULES_FOR_LOG' => '为模块启用日志：',
+    'LBL_MAPS_LOGGER_LOG_LEVEL' => '选择日志级别......',
+    'LBL_MAPS_LOGGER_LOG_TYPE' => '日志级别：',
+    'LBL_MAPS_LOGGER_LOG_ALL_MESSAGES' => '所有消息',
+    'LBL_MAPS_LOGGER_LOG_ERROR' => '错误',
+    'LBL_MAPS_LOGGER_LOG_SUCCESS' => '成功',
+    'LBL_MAPS_LOGGER_LBL_MODULE' => '模块',
+    'LBL_MAPS_LOGGER_LBL_NAME' => '名称',
+    'LBL_MAPS_LOGGER_LBL_STATUS' => '状态',
+    'LBL_MAPS_LOGGER_LBL_GEOCODE' => '已进行地理编码',
+    'LBL_MAPS_LOGGER_YES' => '是',
+    'LBL_MAPS_LOGGER_NO' => '否',
+    'LBL_MAPS_LOGGER_OF' => '的',
     'LBL_MAPS_ADMIN_CONFIG_TITLE' => '映射',
+    'LBL_MAPS_ADMIN_LOG_VIEWER' => '日志查看器',
     'LBL_MAPS_ADD_NEW_MODULE_TO_GEOCODE' => '添加新的地理编码模块',
     'LBL_MAPS_SELECT_NEW_MODULE_TO_GEOCODE' => '选择一个模块...',
     'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION' => '配置映射',
+    'LBL_MAPS_ADMIN_CONFIG_LOG_VIEWER_DESCRIPTION' => '访问地理编码日志',
     'LBL_MAPS_LOG_LEVEL_TITLE' => '日志级别',
     'LBL_MAPS_LOG_LVL_FATAL' => '致命的',
     'LBL_MAPS_LOG_LVL_DEBUG' => '调试',
@@ -1429,9 +1460,12 @@ $mod_strings = array (
     'LBL_CLOUD_DRIVE_DESCRIPTION' => '为云驱动器配置默认路径设置。',
     'LBL_GOOGLE_DRIVE_NAME' => '谷歌驱动器',
     'LBL_GOOGLE_DRIVE_TOOLTIP' => '配置谷歌驱动器默认路径',
+    'LBL_DROPBOX_DRIVE' => 'Dropbox 驱动器',
+    'LBL_DROPBOX_DRIVE_TOOLTIP' => '配置 Dropbox 驱动器默认路径',
     'LBL_GOOGLE_DRIVE_SAVE_BUTTON' => '保存',
     'LBL_SELECT_ROOT_PATH' => '选择根路径',
     'LBL_REMOVE_ROOT_PATH' => '删除根路径',
+    'LBL_ROOT_PATH_REMOVED' => '根路径已删除。',
     'LBL_VALIDATE_ROOT_PATH' => '验证根路径',
     'LBL_PATHS_FOR_RECORD_VIEW' => '记录视图的路径',
     'LBL_DEFAULT_STARTING_PATH' => '默认起始路径',
@@ -1445,14 +1479,16 @@ $mod_strings = array (
     'LBL_MICROSOFT_ONEDRIVE_TOOLTIP' => '配置微软网盘默认路径',
     'LBL_DRIVE_PATH_CONFIG' => '驱动器路径配置',
     'LBL_DRIVE_ROOT_PATH' => '根路径',
+    'LBL_FIELDS_VARIABLE' => '字段变量',
+    'LBL_UNABLE_TO_RETRIEVE_ROOT_PATH' => '无法检索根路径',
     'LBL_HINT_NAME' => 'Hint 字段',
     'LBL_HINT_DESCRIPTION' => '配置 Hint 面板中显示哪些字段，并通过 Hint 进行充实。',
-    'LBL_HINT_SECTION_HEADER' => 'Hint ',
-    'LBL_HINT_SECTION_DESCRIPTION' => '配置 Hint 的设置',
+    'LBL_HINT_SECTION_HEADER' => 'Sugar Hint',
+    'LBL_HINT_SECTION_DESCRIPTION' => '配置 Sugar Hint 的设置',
 
-    'LBL_HINT_CONFIG' => 'Hint 配置',
+    'LBL_HINT_CONFIG' => 'Sugar Hint 配置',
     'LBL_HINT_CONFIG_NAME' => 'Hint 配置',
-    'LBL_HINT_CONFIG_SAVED' => 'Hint 配置设置已经保存。',
+    'LBL_HINT_CONFIG_SAVED' => 'Sugar Hint 配置设置已经保存。',
     'LBL_HINT_CONFIG_DESCRIPTION' => '更新 Hint 设置。',
     'LBL_HINT_CONFIG_LOGGER_SECTION_HEADER' => 'Hint 记录器',
 
@@ -1460,7 +1496,24 @@ $mod_strings = array (
     'LBL_HINT_RESYNC_DESCRIPTION' => '与 Hint Insights 服务重新同步，以更正通知问题，包括对首选项和电子邮件地址的更改未生效。',
 
     'LBL_HINT_UNINSTALL' => '卸载',
-    'LBL_HINT_UNINSTALL_DESCRIPTION' => '卸载 Hint ，包括禁用 Hint Insights 中的通知。',
+    'LBL_HINT_UNINSTALL_DESCRIPTION' => '卸载 Sugar Hint ，包括禁用 Sugar Hint Insights 中的通知。',
 
     'LBL_HINT_CONFIG_NOTIFICATIONS_HEADER' => '通知',
+
+    'LBL_DOCUSIGN_GROUP' => 'DocuSign',
+    'LBL_DOCUSIGN_NAME' => '设置',
+    'LBL_DOCUSIGN_TOOLTIP' => 'DocuSign配置',
+    'LBL_DOCUSIGN_DESCRIPTION' => '配置DocuSign功能',
+    'LBL_SUGAR_MAPS' => 'Sugar 地图',
+    'LBL_CLOUD_DRIVE' => '云驱动',
+
+    // Sugar Automate
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_TITLE' => 'Sugar Automate 设置',
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_DESC' => 'Sugar Automate 软件包的设置',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => '模板',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => '管理模板',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_NAME' => '配置模块',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_DESC' => '配置启用的模块',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => '模板',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => '管理模板',
 );

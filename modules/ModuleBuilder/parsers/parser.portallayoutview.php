@@ -15,6 +15,12 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 class ParserPortalLayoutView extends ParserModifyLayoutView
 {
 
+    /**
+     * @var \History|mixed
+     */
+    //@codingStandardsIgnoreStart
+    public $_history;
+    //@codingStandardsIgnoreEnd
     var $maxColumns; // number of columns in this layout
     var $usingWorkingFile = false; // if a working file exists (used by view.edit.php among others to determine the title for the layout edit panel)
     var $language_module; // set to module name for studio, passed to the smarty template and used by sugar_translate
@@ -252,7 +258,7 @@ class ParserPortalLayoutView extends ParserModifyLayoutView
                 $def['type'] != 'id' && (empty($def ['dbType']) || $def ['dbType'] != 'id') &&
                 (isset($def['type']) && !in_array($def['type'], $invalidTypes)))
             {
-            	$label = isset($def['vname']) ? $def ['vname'] : $def['name'];
+                $label = $def ['vname'] ?? $def['name'];
             	$modelFields [$field] = array('name' => $field, 'label' => $label);
             }
         }

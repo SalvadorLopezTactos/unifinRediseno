@@ -194,4 +194,10 @@ For å opprette en {{calls_singular_module}}:
 - Klikk "Velg en deltaker" for å legge til en eksisterende bruker, kontakt, eller emne til {{calls_singular_module}}.
 - Klikk på pluss-ikonet til høyre for "Velg en deltaker" til å opprette en {{calls_singular_module}} deltaker som en ny sugar-post.
 3. Klikk "Lagre" for å fullføre den nye posten og gå tilbake til forrige side.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Er Smart Guide-samtale",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Underordnede oppgaver',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Underordnede møter',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Underordnede samtaler',
 );

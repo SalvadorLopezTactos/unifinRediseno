@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Listpanel för konton',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Postpanel för konton',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för konton',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Kontoinformation',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Fokuslåda för konton - konsol',
     'LBL_NEXT_RENEWAL_DATE' => 'Datum för nästa förnyelse',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Datum för nästa förnyelse',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Kontonamn / bransch',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Plats',
     'LBL_PURCHASES' => 'Köp',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tidslinje för konto',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organisera',
+    'LBL_CREATE_NEW' => 'Skapa ny',
+    'LBL_MANAGE' => 'Hantera',
+    'LBL_SEE_DETAILS' => 'Visa detaljer',
+    'LBL_HIDE_NEW' => 'Dölj',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagram',
@@ -205,4 +212,7 @@ För att skapa en {{module_name}}:
 2. Klicka på "Spara" för att spara den nya posten och återgå till föregående sida.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Accounts&#39; rapporter',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Externa användare',
 );

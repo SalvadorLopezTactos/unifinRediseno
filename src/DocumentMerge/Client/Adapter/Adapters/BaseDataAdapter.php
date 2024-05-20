@@ -20,21 +20,21 @@ use SugarOAuth2Server;
  */
 class BaseDataAdapter implements AdapterInterface
 {
-    const MAX_RETRIEVE = 20;
+    public const MAX_RETRIEVE = 20;
 
     /**
      * The client id for the sudo token
      *
      * @var string
      */
-    const CLIENT_ID = 'sugar';
+    public const CLIENT_ID = 'sugar';
 
     /**
      * The platform for the sudo token
      *
      * @var string
      */
-    const PLATFORM = 'dms';
+    public const PLATFORM = 'dms';
 
     /**
      * This data will be processed in order to be

@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Tarihçe',
     'LBL_PMSE_LABEL_NOTES' => 'Notları Göster',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Notlar Ekle',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'DocuSign&#39;a Gönder',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Seç…',
     'LBL_PMSE_FORM_LABEL_USER' => 'Kullanıcı',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Are you sure you want to approve this process?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Are you sure you want to reject this process?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Are you sure you want to route this process?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Bu işlemi, DocuSign&#39;a göndermek istediğinizden emin misiniz?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Process has been approved successfully',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Process has been rejected successfully',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Process has been routed successfully',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'İşlem DocuSign&#39;a başarıyla gönderildi',
     'LBL_PA_PROCESS_CLOSED' => 'Görüntülemeye çalıştığınız süreç kapalı.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Görüntülemeye çalıştığınız süreç şu anda mevcut değil.',
 

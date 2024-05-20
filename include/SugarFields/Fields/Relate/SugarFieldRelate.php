@@ -30,6 +30,8 @@ class SugarFieldRelate extends SugarFieldBase {
      */
     public function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
     {
+        $database_key = [];
+        $form = [];
         if(!empty($vardef['function']['returns']) && $vardef['function']['returns'] == 'html'){
             return parent::getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
         }
@@ -45,7 +47,7 @@ class SugarFieldRelate extends SugarFieldBase {
 
         if (isset($displayParams['idName']))
         {
-            $rpos = strrpos($displayParams['idName'], (string) $vardef['name']);
+            $rpos = strrpos($displayParams['idName'], $vardef['name']);
             if ($rpos !== false) {
                 $displayParams['idNameHidden'] = substr($displayParams['idName'], 0, $rpos);
             }
@@ -74,12 +76,12 @@ class SugarFieldRelate extends SugarFieldBase {
                 trigger_error("Smarty error: {$app_list_strings['ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS']}", E_USER_WARNING);
             } //if
 
-            $copy_phone = isset($displayParams['copyPhone']) ? $displayParams['copyPhone'] : true;
+            $copy_phone = $displayParams['copyPhone'] ?? true;
 
             $field_to_name = array();
             $field_to_name['id'] = $vardef['id_name'];
             $field_to_name['name'] = $vardef['name'];
-            $address_fields = isset($displayParams['field_to_name_array']) ? $displayParams['field_to_name_array'] : array('_address_street', '_address_city', '_address_state', '_address_postalcode', '_address_country');
+            $address_fields = $displayParams['field_to_name_array'] ?? array('_address_street', '_address_city', '_address_state', '_address_postalcode', '_address_country');
             $count = 0;
             foreach($form as $f) {
                 foreach($address_fields as $afield) {
@@ -137,6 +139,8 @@ class SugarFieldRelate extends SugarFieldBase {
     }
 
     function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
+        $database_key = [];
+        $form = [];
         $call_back_function = 'set_return';
         if(isset($displayParams['call_back_function'])) {
             $call_back_function = $displayParams['call_back_function'];
@@ -173,7 +177,7 @@ class SugarFieldRelate extends SugarFieldBase {
                 trigger_error("Smarty error: {$app_list_strings['ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS']}", E_USER_WARNING);
             } //if
 
-            $copy_phone = isset($displayParams['copyPhone']) ? $displayParams['copyPhone'] : true;
+            $copy_phone = $displayParams['copyPhone'] ?? true;
 
             $field_to_name = array();
             $field_to_name['id'] = $vardef['id_name'];

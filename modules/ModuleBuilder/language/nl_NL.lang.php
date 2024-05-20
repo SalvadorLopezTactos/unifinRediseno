@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "Deze volgen de formule in het Sugar zelfbedieningsportaal niet.",
-'LBL_POPHELP_REQUIRED'=>"Maak een formule om te bepalen of dit veld verplicht is in layouts.<br/>"
-    . "Verplichte velden volgen de formule in de op de browser gebaseerde mobiele weergave,<br/>"
-    . "maar volgen niet de formulie in de oorspronkelijke applicaties, zoals Sugar Mobile voor de iPhone. <br/>"
-    . "Deze volgen de formule in het Sugar zelfbedieningsportaal niet.",
-'LBL_POPHELP_READONLY'=>"Maak een formule om te bepalen of dit veld alleen-lezen is in lay-outs.<br/>"
-        . "Alleen-lezen velden volgen de formule in de op de browser gebaseerde mobiele weergave, <br/>"
-        . "maar volgen niet de formule in de originele toepassingen, zoals Sugar Mobile voor de iPhone. <br/>"
-        . "Ze volgen niet de formule in het Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Selecteer om dit veld te gebruiken als u naar records zoekt via Algemeen Zoeken in deze module.',
+    'LBL_POPHELP_REQUIRED'=>'Velden die voorwaardelijk vereist zijn, zijn niet beschikbaar voor gebruik in de volgende actietypen van SugarBPM: Gerelateerd record toevoegen, Veld wijzigen. Verwijder de tekst &#39;Verplicht als&#39; om dit veld te gebruiken in deze procesdefinitie-acties',
+'LBL_POPHELP_READONLY'=>"Maak een formule om te bepalen of dit veld Alleen lezen is in layouts.<br/>"
+        . "Alleen lezen-velden volgen de formule in de op de browser gebaseerde mobiele weergave,<br/>"
+        . "maar volgen niet de formule in de oorspronkelijke applicaties, zoals Sugar Mobile voor iPhone. <br/>"
+        . "Deze volgen de formule in het Sugar-zelfbedieningsportaal niet.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Selecteer om dit veld te gebruiken als u records zoekt via Algemeen zoeken voor deze module.',
 //Revert Module labels
 'LBL_RESET' => 'Resetten',
 'LBL_RESET_MODULE' => 'Module resetten',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Decimaal',
                 'autoincrement' => 'Automatisch verhogen',
                 'actionbutton' => 'Actieknop',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Veel gebruikte labels",

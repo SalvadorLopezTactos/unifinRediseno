@@ -21,6 +21,10 @@ class GoogleCloudApigeeV1AddonsConfig extends \Google\Model
 {
   protected $advancedApiOpsConfigType = GoogleCloudApigeeV1AdvancedApiOpsConfig::class;
   protected $advancedApiOpsConfigDataType = '';
+  protected $apiSecurityConfigType = GoogleCloudApigeeV1ApiSecurityConfig::class;
+  protected $apiSecurityConfigDataType = '';
+  protected $connectorsPlatformConfigType = GoogleCloudApigeeV1ConnectorsPlatformConfig::class;
+  protected $connectorsPlatformConfigDataType = '';
   protected $integrationConfigType = GoogleCloudApigeeV1IntegrationConfig::class;
   protected $integrationConfigDataType = '';
   protected $monetizationConfigType = GoogleCloudApigeeV1MonetizationConfig::class;
@@ -39,6 +43,34 @@ class GoogleCloudApigeeV1AddonsConfig extends \Google\Model
   public function getAdvancedApiOpsConfig()
   {
     return $this->advancedApiOpsConfig;
+  }
+  /**
+   * @param GoogleCloudApigeeV1ApiSecurityConfig
+   */
+  public function setApiSecurityConfig(GoogleCloudApigeeV1ApiSecurityConfig $apiSecurityConfig)
+  {
+    $this->apiSecurityConfig = $apiSecurityConfig;
+  }
+  /**
+   * @return GoogleCloudApigeeV1ApiSecurityConfig
+   */
+  public function getApiSecurityConfig()
+  {
+    return $this->apiSecurityConfig;
+  }
+  /**
+   * @param GoogleCloudApigeeV1ConnectorsPlatformConfig
+   */
+  public function setConnectorsPlatformConfig(GoogleCloudApigeeV1ConnectorsPlatformConfig $connectorsPlatformConfig)
+  {
+    $this->connectorsPlatformConfig = $connectorsPlatformConfig;
+  }
+  /**
+   * @return GoogleCloudApigeeV1ConnectorsPlatformConfig
+   */
+  public function getConnectorsPlatformConfig()
+  {
+    return $this->connectorsPlatformConfig;
   }
   /**
    * @param GoogleCloudApigeeV1IntegrationConfig

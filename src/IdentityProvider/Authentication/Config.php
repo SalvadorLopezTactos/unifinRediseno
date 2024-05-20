@@ -17,16 +17,17 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 use Sugarcrm\IdentityProvider\Srn;
 use Sugarcrm\IdentityProvider\STS\EndpointInterface;
 use Sugarcrm\IdentityProvider\STS\EndpointService;
+use function GuzzleHttp\default_user_agent;
 
 /**
  * Configuration glue for IdM
  */
 class Config
 {
-    const LDAP_ENCRYPTION_NONE = 'none';
-    const LDAP_ENCRYPTION_SSL = 'ssl';
-    const LDAP_ENCRYPTION_TLS = 'tls';
-    const IDM_MODE_KEY = 'idm_mode';
+    public const LDAP_ENCRYPTION_NONE = 'none';
+    public const LDAP_ENCRYPTION_SSL = 'ssl';
+    public const LDAP_ENCRYPTION_TLS = 'tls';
+    public const IDM_MODE_KEY = 'idm_mode';
 
     /**
      * list of key names with values in array format
@@ -118,7 +119,7 @@ class Config
             return $result ?? $default;
         } else {
             // construct key for db config setting
-            list($idmMode, $idmKey) = explode('.', $key, 2);
+            [$idmMode, $idmKey] = explode('.', $key, 2);
             $dbConfigKey = $idmMode . '_' . $idmKey;
             if (isset($this->getIdmSettings()->settings[$dbConfigKey])) {
                 return $this->getIdmSettings()->settings[$dbConfigKey];
@@ -221,6 +222,11 @@ class Config
                 $this->getDefaultServiceAccountPermissions($tid)
             ),
         ];
+
+        $idmModeConfig['http_client']['headers']['User-Agent'] = $this->get(
+            'site_url',
+            $_SERVER['HTTP_HOST'] ?? default_user_agent()
+        );
 
         if ($stsKeySetId) {
             $idmModeConfig['keySetId'] = $stsKeySetId;
@@ -518,11 +524,11 @@ class Config
     {
         $isSPPrivateKeyCertSet = (bool)$this->get('SAML_request_signing_pkey')
             && (bool)$this->get('SAML_request_signing_x509');
-        $siteUrl = rtrim($this->get('site_url'), '/');
+        $siteUrl = rtrim((string)$this->get('site_url'), '/');
         $acsUrl = sprintf('%s/index.php?module=Users&action=Authenticate', $siteUrl);
         $sloUrl = sprintf('%s/index.php?module=Users&action=Logout', $siteUrl);
-        $idpSsoUrl = htmlspecialchars_decode($this->get('SAML_loginurl'), ENT_QUOTES);
-        $idpSloUrl = htmlspecialchars_decode($this->get('SAML_SLO'), ENT_QUOTES);
+        $idpSsoUrl = htmlspecialchars_decode((string)$this->get('SAML_loginurl'), ENT_QUOTES);
+        $idpSloUrl = htmlspecialchars_decode((string)$this->get('SAML_SLO'), ENT_QUOTES);
         return [
             'strict' => false,
             'debug' => false,
@@ -578,7 +584,7 @@ class Config
         // make sure host is in symfony/ldap format
         $host = $this->getLdapSetting('ldap_hostname', '127.0.0.1');
         $encryption = $this->getLdapSetting('ldap_encryption', self::LDAP_ENCRYPTION_NONE);
-        if (strpos($host, 'ldaps://') === 0 && $encryption != self::LDAP_ENCRYPTION_TLS) {
+        if (strpos((string)$host, 'ldaps://') === 0 && $encryption != self::LDAP_ENCRYPTION_TLS) {
             $host = substr($host, strlen('ldaps://'));
             $encryption = self::LDAP_ENCRYPTION_SSL;
         }
@@ -597,7 +603,7 @@ class Config
             'baseDn' => $this->getLdapSetting('ldap_base_dn', ''),
             'uidKey' => $this->getLdapSetting('ldap_login_attr', ''),
             'filter' => $this->buildLdapSearchFilter(),
-            'dnString' => null,
+            'dnString' => '',
             'entryAttribute' => $this->getLdapSetting('ldap_bind_attr'),
             'autoCreateUser' => $this->getLdapSetting('ldap_auto_create_users', false),
         ];
@@ -659,7 +665,7 @@ class Config
             $this->ldapSettings = \Administration::getSettings('ldap');
         }
         if (isset($this->ldapSettings->settings[$key])) {
-            return trim(htmlspecialchars_decode($this->ldapSettings->settings[$key])) ?: $default;
+            return trim(htmlspecialchars_decode($this->ldapSettings->settings[$key], ENT_COMPAT)) ?: $default;
         }
 
         return $default;

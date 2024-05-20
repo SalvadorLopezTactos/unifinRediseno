@@ -22,9 +22,9 @@ use Symfony\Component\Validator\Constraint;
  */
 class InputParameters extends Constraint
 {
-    const ERROR_REQUEST = 1;
-    const ERROR_GET = 2;
-    const ERROR_POST = 3;
+    public const ERROR_REQUEST = 1;
+    public const ERROR_GET = 2;
+    public const ERROR_POST = 3;
 
     protected static $errorNames = array(
         self::ERROR_REQUEST => 'ERROR_REQUEST',

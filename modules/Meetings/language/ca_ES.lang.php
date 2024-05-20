@@ -222,4 +222,10 @@ Per crear un {{meetings_singular_module}}:
     - Feu clic a "Selecciona un convidat" per afegir un usuari, un contacte o un client potencial existent al {{meetings_singular_module}}.
     - Feu clic a la icona del símbol de suma a la dreta de "Selecciona un convidat" per crear un convidat de {{meetings_singular_module}} com a un registre de Sugar nou. 
 3. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'És una reunió de Smart Guide',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Tasques secundàries',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Trucades secundàries',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Reunions secundàries',
 );

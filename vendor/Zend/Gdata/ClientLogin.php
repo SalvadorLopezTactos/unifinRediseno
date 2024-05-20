@@ -49,13 +49,13 @@ class Zend_Gdata_ClientLogin
      * The Google client login URI
      *
      */
-    const CLIENTLOGIN_URI = 'https://www.google.com/accounts/ClientLogin';
+    public const CLIENTLOGIN_URI = 'https://www.google.com/accounts/ClientLogin';
 
     /**
      * The default 'source' parameter to send to Google
      *
      */
-    const DEFAULT_SOURCE = 'Zend-ZendFramework';
+    public const DEFAULT_SOURCE = 'Zend-ZendFramework';
 
     /**
      * Set Google authentication credentials.
@@ -147,7 +147,7 @@ class Zend_Gdata_ClientLogin
         foreach (explode("\n", $response->getBody()) as $l) {
             $l = chop($l);
             if ($l) {
-                list($key, $val) = explode('=', chop($l), 2);
+                [$key, $val] = explode('=', chop($l), 2);
                 $goog_resp[$key] = $val;
             }
         }
@@ -173,7 +173,7 @@ class Zend_Gdata_ClientLogin
             else {
                 require_once 'vendor/Zend/Gdata/App/AuthException.php';
                 throw new Zend_Gdata_App_AuthException('Authentication with Google failed. Reason: ' .
-                    (isset($goog_resp['Error']) ? $goog_resp['Error'] : 'Unspecified.'));
+                    ($goog_resp['Error'] ?? 'Unspecified.'));
             }
         }
     }

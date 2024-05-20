@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Ενημέρωση ορισμού προϊόντος',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Επεξεργασία χρονοδιαγραμμάτων',
 'LBL_OOTB_DATA_ARCHIVER' => 'Εκτελέστε ενεργά αρχεία / διαγραφές δεδομένων',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Εφαρμόστε δικαιώματα συνδρομής όταν αλλάξουν',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Καταγράφει τον Γεωκωδικοποιητή',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Σύνθετες Επιλογές',
 'LBL_TOGGLE_ADV' => 'Εμφάνιση Σύνθετων Επιλογών',
 'LBL_TOGGLE_BASIC' => 'Εμφάνιση Βασικών Επιλογών',
+'LBL_UPDATEMOMENTUMCJ' => 'Ενημέρωση ώθησης Έξυπνων Οδηγών σε εξέλιξη',
 // Links
 'LNK_LIST_SCHEDULER' => 'Χρονοπρογραμματιστές εργασιών',
 'LNK_NEW_SCHEDULER' => 'Δημιουργία Χρονοπρογραμματιστών',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Εκτελέστε ενεργά αρχεία / διαγραφές δεδομένων',
 'LBL_PMSEENGINECRON' => 'Χρονοδιάγραμμα SugarBPM',
 );
-

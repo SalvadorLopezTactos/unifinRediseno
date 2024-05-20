@@ -73,8 +73,8 @@ class Zend_Crypt_Hmac extends Zend_Crypt
     /**
      * Constants representing the output mode of the hash algorithm
      */
-    const STRING = 'string';
-    const BINARY = 'binary';
+    public const STRING = 'string';
+    public const BINARY = 'binary';
 
     /**
      * Performs a HMAC computation given relevant details such as Key, Hashing
@@ -171,6 +171,7 @@ class Zend_Crypt_Hmac extends Zend_Crypt
      */
     protected static function _getMhashDefinition($hashAlgorithm)
     {
+        $types = [];
         for ($i = 0; $i <= mhash_count(); $i++)
         {
             $types[mhash_get_hash_name($i)] = $i;

@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'For optimal experience using IIS/FastCGI sapi, set fastcgi.logging to 0 in your php.ini file.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Unsupported PHP Version Installed: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Database unavailable',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database Support was not found.  Please make sure you have the necessary drivers for one of the following supported Database Types: MySQL, MS SQLServer, Oracle, or DB2.  You might need to uncomment the extension in the php.ini file, or recompile with the right binary file, depending on your version of PHP.  Please refer to your PHP Manual for more information on how to enable Database Support.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database Support was not found.  Please make sure you have the necessary drivers for one of the following supported Database Types: MySQL, MS SQLServer, Oracle or DB2.  You might need to uncomment the extension in the php.ini file, or recompile with the right binary file, depending on your version of PHP.  Please refer to your PHP Manual for more information on how to enable Database Support.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Functions associated with XML Parser Libraries that are needed by the Sugar application were not found.  You might need to uncomment the extension in the  php.ini file, or recompile with the right binary file, depending on your version of PHP.  Please refer to your PHP Manual for more information.',
     'LBL_CHECKSYS_CSPRNG' => 'Random number generator',
     'ERR_CHECKSYS_MBSTRING'             => 'Functions associated with the Multibyte Strings PHP extension (mbstring) that are needed by the Sugar application were not found. <br/><br/>Generally, the mbstring module is not enabled by default in PHP and must be activated with --enable-mbstring when the PHP binary is built. Please refer to your PHP Manual for more information on how to enable mbstring support.',
@@ -632,32 +632,15 @@ Decline this call
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
-        'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
-
-<p>You may review this&nbsp;$module_name at:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
-
-You may review this $module_name at:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Scheduled Report Emails',
         'subject' => 'Scheduled Report: $report_name as of $report_time',
         'description' => 'This template is used when the System sends a scheduled report to a user.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Hello $assigned_user,<br></p>
+<p>Attached is an auto generated report that has been scheduled for you.<br></p>
+<p>Report Name: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Report Run Date and Time: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Hello $assigned_user,
@@ -683,14 +666,6 @@ Report Run Date and Time: $report_time',
             Please log in to Sugar to view the comment.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'New account information',
-        'description' => 'This template is used when the System Administrator sends a new password to a user.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Here is your account username and temporary password:</p><p>Username : $contact_user_user_name </p><p>Password : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>After you log in using the above password, you may be required to reset the password to one of your own choice.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'Here is your account username and temporary password:<br />Username : $contact_user_user_name<br />Password : $contact_user_user_hash<br /><br />$config_site_url<br /><br />After you log in using the above password, you may be required to reset the password to one of your own choice.',
-        'name' => 'System-generated password email',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Reset your account password',
         'description' => "This template is used to send a user a link to click to reset the user's account password.",

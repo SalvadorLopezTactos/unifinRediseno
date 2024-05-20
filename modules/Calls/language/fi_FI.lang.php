@@ -199,4 +199,10 @@ Luodaksesi {{calls_singular_module}}-tietueen:
 - Napsauta "Valitse kutsuttu" lisätäksesi {{calls_singular_module}}-moduuliin käyttäjän, kontaktin tai liidin. - Napsauta "Valitse osallistuja" -kohdan oikealla olevaa plus-painiketta luodaksesi {{calls_singular_module}}-osallistujan uudeksi Sugarin tietueeksi.
 
 3. Paina ‘Tallenna’ luodaksesi tietueen. Tämän jälkeen palaat edelliselle sivulle.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "On älykäs ohjeistuskutsu",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Lapsi toiminnot',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Lapsi palaverit',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Lapsi kutsut',
 );

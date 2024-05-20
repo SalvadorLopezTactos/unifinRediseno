@@ -67,7 +67,15 @@ class AdministrationViewEnablewirelessmodules extends SugarView
             'ProductBundles',
             'ProductTemplates',
             'Project',
-            'DocuSignEnvelopes',
+            'ExternalUsers',
+            // Sugar Automate related modules are not yet ready for Mobile
+            'CJ_Forms',
+            'CJ_WebHooks',
+            'DRI_SubWorkflow_Templates',
+            'DRI_SubWorkflows',
+            'DRI_Workflow_Task_Templates',
+            'DRI_Workflow_Templates',
+            'DRI_Workflows',
         );
 
         // replicate the essential part of the behavior of the private loadMapping() method in SugarController

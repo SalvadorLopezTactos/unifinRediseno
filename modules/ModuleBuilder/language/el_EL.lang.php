@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Δημιουργήστε έναν τύπο για να προσδιορίσετε εάν αυτό το πεδίο απαιτείται σε διατάξεις.<br/>"
-    . "Τα απαιτούμενα πεδία θα ακολουθήσουν τον τύπο στην προβολή κινητού που βασίζεται στο πρόγραμμα περιήγησης, <br/>"
-    . "αλλά δεν θα εφαρμόσει τον τύπο στις εγγενείς εφαρμογές, όπως το Sugar Mobile για iPhone. <br/>"
-    . "Δεν θα εφαρμόσουν τον τύπο στο Portal Sugar Self-Service.",
-'LBL_POPHELP_READONLY'=>"Δημιουργήστε έναν τύπο για να προσδιορίσετε εάν αυτό το πεδίο θα διαβάζεται μόνο σε διατάξεις.<br/>"
+    'LBL_POPHELP_REQUIRED'=>'Πεδία που απαιτούνται υπό όρους δεν είναι διαθέσιμα για χρήση στους ακόλουθους τύπους ενεργειών SugarBPM: Προσθήκη σχετικής εγγραφής, Αλλαγή πεδίου. Αφαιρέστε το κείμενο "Απαιτείται εάν" για να χρησιμοποιήσετε αυτό το πεδίο σε αυτές τις ενέργειες ορισμού διαδικασίας',
+'LBL_POPHELP_READONLY'=>"Δημιουργήστε έναν τύπο για να προσδιορίσετε εάν αυτό το πεδίο είναι μόνο για ανάγνωση σε διατάξεις.<br/>"
         . "Τα πεδία μόνο για ανάγνωση θα ακολουθήσουν τον τύπο στην προβολή κινητού που βασίζεται στο πρόγραμμα περιήγησης, <br/>"
-        . "αλλά δεν θα ακολουθούν τον τύπο στις εγγενείς εφαρμογές, όπως το Sugar Mobile για iPhone. <br/>"
-        . "Δεν θα ακολουθήσουν τον τύπο στο Self-Service Portal Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Επιλέξτε να χρησιμοποιείτε αυτό το πεδίο κατά την αναζήτηση εγγραφών χρησιμοποιώντας την Καθολική αναζήτηση σε αυτήν την ενότητα.',
+        . "αλλά δεν θα εφαρμόζουν τον τύπο στις εγγενείς εφαρμογές, όπως το Sugar Mobile για iPhone. <br/>"
+        . "Δεν θα εφαρμόζουν τον τύπο στο Portal Sugar Self-Service.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Επιλέξτε τη χρήση αυτού του πεδίου κατά την αναζήτηση για εγγραφές με την Καθολική αναζήτηση σε αυτή την ενότητα.',
 //Revert Module labels
 'LBL_RESET' => 'Επαναφορά',
 'LBL_RESET_MODULE' => 'Επαναφορά Ενότητας',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Δεκαδικός αριθμός',
                 'autoincrement' => 'auto-increment',
                 'actionbutton' => 'ActionButton',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Ετικέτες Συχνής Χρήσης",

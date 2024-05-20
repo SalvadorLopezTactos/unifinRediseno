@@ -40,9 +40,7 @@ class ViewDisplayProperties extends ViewList
         foreach ($sources as $module => $mapping) {
             foreach ($mapping as $entry) {
                 if ($entry == $source) {
-                    $return[$module] = isset($app_list_strings['moduleList'][$module])
-                                       ? $app_list_strings['moduleList'][$module]
-                                       : $module;
+                    $return[$module] = $app_list_strings['moduleList'][$module] ?? $module;
                 }
             }
         }
@@ -71,9 +69,7 @@ class ViewDisplayProperties extends ViewList
 
             // If the module is not enabled and is included and accessible, add it
             if (empty($enabled[$e]) && $i && $a) {
-                $return[$e] = isset($app_list_strings['moduleList'][$e])
-                                        ? $app_list_strings['moduleList'][$e]
-                                        : $e;
+                $return[$e] = $app_list_strings['moduleList'][$e] ?? $e;
             }
         }
 

@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Dec',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalendár bol už pridaný',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} je vybratý',
+    'LBL_NO_USER_SELECTED' => 'Vyberte používateľa alebo tím',
+    'LBL_NO_CALENDAR_SELECTED' => 'Vyberte kalendár',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nepodarilo sa uložiť kalendáre.',
+
 );
 
 $mod_list_strings = array(

@@ -15,6 +15,6 @@ namespace Sugarcrm\Sugarcrm\Maps\Engine\Geocode;
 
 class Constants
 {
-    const QUEUE_TABLE = 'geocode_queue';
-    const CLIENT_NAME = 'Maps';
+    public const QUEUE_TABLE = 'geocode_queue';
+    public const CLIENT_NAME = 'Maps';
 }

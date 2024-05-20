@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logos',
 	'LBL_ADMIN_WIZARD' => 'Admin Wizard',
-	'LBL_ALLOW_USER_TABS' => 'Allow users to hide tabs',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'System Settings',
 	'LBL_ENABLE_MAILMERGE' => 'Enable mail merge?',
 	'LBL_LOGVIEW' => 'Configure Log Settings',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Use this setting to determine the number of months in advance of the current date that Free/Busy information for calls and meetings is published.<BR>To turn Free/Busy publishing off, enter "0".  The minimum is 1 month; the maximum is 12 months.',
     'LBL_PDFMODULE_NAME' => 'PDF Settings',
     'SUGARPDF_BASIC_SETTINGS' => 'Document Properties',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Advanced Settings',
     'SUGARPDF_LOGO_SETTINGS' => 'Images',
-
-    'PDF_CREATOR' => 'PDF Creator',
-    'PDF_CREATOR_INFO' => 'Defines the creator of the document. <br>This is typically the name of the application that generates the PDF.',
 
     'PDF_AUTHOR' => 'Author',
     'PDF_AUTHOR_INFO' => 'The Author appears in the document properties.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Select New Image for Quotes',
     'PDF_NEW_HEADER_LOGO_INFO' => 'The file format can be either .jpg or .png. (Only .jpg for EZPDF)<BR>The recommended size is 867x74 px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Quotes Image Width',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Change the scale of the uploaded image that appears in Quotes PDF Documents. (TCPDF only)',
+    'PDF_TITLE' => 'Title',
+    'PDF_TITLE_INFO' => 'The Title appears in the document properties.',
+
+    'PDF_SUBJECT' => 'Subject',
+    'PDF_SUBJECT_INFO' => 'The Subject appears in the document properties.',
 
     'PDF_SMALL_HEADER_LOGO' => 'For Reports PDF Documents',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'This image appears in the default Header in Reports PDF Documents.<br> This image also appears in the top left-hand corner of the Sugar application.',
@@ -240,68 +238,11 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Select New Image for Reports',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'The file format can be either .jpg or .png. (Only .jpg for EZPDF)<BR>The recommended size is 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Reports Image Width',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Change the scale of the uploaded image that appears in Reports PDF Documents. (TCPDF only)',
-
-
-    'PDF_HEADER_STRING' => 'Header String',
-    'PDF_HEADER_STRING_INFO' => 'Header description string',
-
-    'PDF_HEADER_TITLE' => 'Header Title',
-    'PDF_HEADER_TITLE_INFO' => 'String to print as title on document header',
-
-    'PDF_FILENAME' => 'Default Filename',
-    'PDF_FILENAME_INFO' => 'Default filename for the generated PDF files',
-
-    'PDF_TITLE' => 'Title',
-    'PDF_TITLE_INFO' => 'The Title appears in the document properties.',
-
-    'PDF_SUBJECT' => 'Subject',
-    'PDF_SUBJECT_INFO' => 'The Subject appears in the document properties.',
-
     'PDF_KEYWORDS' => 'Keyword(s)',
     'PDF_KEYWORDS_INFO' => 'Associate Keywords with the document, generally in the form "keyword1 keyword2..."',
 
-    'PDF_COMPRESSION' => 'Compression',
-    'PDF_COMPRESSION_INFO' => 'Activates or deactivates page compression. <br>When activated, the internal representation of each page is compressed, which leads to a compression ratio of about 2 for the resulting document.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG Quality (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Set the default JPEG compression quality (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF Version',
-    'PDF_PDF_VERSION_INFO' => 'Set the PDF version (check PDF reference for valid values).',
-
-    'PDF_PROTECTION' => 'Document Protection',
-    'PDF_PROTECTION_INFO' => 'Set document protection<br>- copy: copy text and images to the clipboard<br>- print: print the document<br>- modify: modify it (except for annotations and forms)<br>- annot-forms: add annotations and forms<br>Note: the protection against modification is for people who have the full Acrobat product.',
-
-    'PDF_USER_PASSWORD' => 'User Password',
-    'PDF_USER_PASSWORD_INFO' => 'If you don\\\'t set any password, the document will open as usual. <br>If you set a user password, the PDF viewer will ask for it before displaying the document. <br>The master password, if different from the user one, can be used to get full access.',
-
-    'PDF_OWNER_PASSWORD' => 'Owner Password',
-    'PDF_OWNER_PASSWORD_INFO' => 'If you don\\\'t set any password, the document will open as usual. <br>If you set a user password, the PDF viewer will ask for it before displaying the document. <br>The master password, if different from the user one, can be used to get full access.',
-
-    'PDF_ACL_ACCESS' => 'Access Control',
-    'PDF_ACL_ACCESS_INFO' => 'Default Access Control for the PDF generation.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Cell Height Ratio',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'If the height of a cell is smaller than (Font Height x Cell Height Ratio), then (Font Height x Cell Height Ratio) is used as the cell height.<br>(Font Height x Cell Height Ratio) is also used as the height of the cell when no height is define.',
-
-    'K_TITLE_MAGNIFICATION' => 'Title Magnification',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Title magnification respect main font size.',
-
-    'K_SMALL_RATIO' => 'Small Font Factor',
-    'K_SMALL_RATIO_INFO' => 'Reduction factor for small font.',
-
-    'HEAD_MAGNIFICATION' => 'Head Magnification',
-    'HEAD_MAGNIFICATION_INFO' => 'Magnification factor for titles.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Image scale ratio',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Ratio used to scale the images',
-
-    'PDF_UNIT' => 'Unit',
-    'PDF_UNIT_INFO' => 'document unit of measure',
 	'PDF_GD_WARNING'=>'You do not have the GD library installed for PHP. Without the GD library installed, only JPEG logos can be displayed in PDF documents.',
-    'ERR_EZPDF_DISABLE'=>'Warning : The EZPDF class is disabled from the config table and it set as the PDF class. Please "Save" this form to set TCPDF as the PDF Class and return in a stable state.',
+    'ERR_EZPDF_DISABLE'=>'Warning : The EZPDF class is disabled from the config table and it is set as the PDF class. Please "Save" this form to set TCPDF as the PDF Class and return in a stable state.',
     'LBL_IMG_RESIZED'=>"(resized for display)",
 
 
@@ -358,14 +299,13 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Add a PDF Font',
     'LBL_PDF_PATCH' => 'Patch',
-    'LBL_PDF_PATCH_INFO' => 'Custom modification of the encoding. Write a PHP array.<br>Example :<br>ISO-8859-1 does not contain the euro symbol. To add it at position 164, write "array(164=>\\\'Euro\\\';)".',
     'LBL_PDF_ENCODING_TABLE' => 'Encoding Table',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Name of the encoding table.<br>This option is ignored for TrueType Unicode, OpenType Unicode and symbolic fonts.<br>The encoding defines the association between a code (from 0 to 255) and a character contained in the font.<br>The first 128 are fixed and correspond to ASCII.',
     'LBL_PDF_FONT_FILE' => 'Font File',
     'LBL_PDF_FONT_FILE_INFO' => '.ttf or .otf or .pfb file',
     'LBL_PDF_METRIC_FILE' => 'Metric File',
     'LBL_PDF_METRIC_FILE_INFO' => '.afm or .ufm file',
-    'LBL_ADD_FONT_BUTTON' => 'Add [Alt+C]',
+    'LBL_ADD_FONT_BUTTON' => 'Add',
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'This file does not have a good file extension.',
     'LBL_PDF_INSTRUCTIONS' => 'Instructions',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
@@ -379,7 +319,7 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be used if the font is not available in the system of your reader.
 <br><br>
 Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF website</a>.
 <br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF website</a>.
@@ -390,8 +330,8 @@ BSOFR
     'LBL_ADDFONTRESULT_TITLE' => 'Result of the add font process',
     'LBL_STATUS_FONT_SUCCESS' => 'SUCCESS : The font has been added to SugarCRM.',
     'LBL_STATUS_FONT_ERROR' => 'ERROR : The font has not been added. Look at the log below.',
-    'LBL_FONT_MOVE_DEFFILE' => 'Font definition file move to :',
-    'LBL_FONT_MOVE_FILE' => 'Font file move to :',
+    'LBL_FONT_MOVE_DEFFILE' => 'Font definition file move to : ',
+    'LBL_FONT_MOVE_FILE' => 'Font file move to : ',
 
 // Font manager
     'ERR_LOADFONTFILE' => 'ERROR: LoadFontFile error!',

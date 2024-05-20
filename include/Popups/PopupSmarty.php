@@ -18,7 +18,11 @@ require_once('include/SearchForm/SearchForm2.php');
 define("NUM_COLS", 2);
 class PopupSmarty extends ListViewSmarty{
 
-	var $contextMenus = false;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $fieldDefs;
+    public $contextMenus = false;
 	var $export = false;
 	var $mailmerge = false;
 	var $mergeduplicates = false;
@@ -67,7 +71,7 @@ class PopupSmarty extends ListViewSmarty{
     {
         $pathParts = pathinfo(SugarThemeRegistry::current()->getImageURL('arrow.gif',false));
 
-        list($width,$height) = getimagesize($pathParts['dirname'].'/'.$pathParts['basename']);
+        [$width, $height] = getimagesize($pathParts['dirname'].'/'.$pathParts['basename']);
 
         $this->th->ss->assign('arrowExt', $pathParts['extension']);
         $this->th->ss->assign('arrowWidth', $width);
@@ -109,7 +113,7 @@ class PopupSmarty extends ListViewSmarty{
 
 
 		$this->th->ss->assign('bgHilite', $hilite_bg);
-		$this->th->ss->assign('colCount', count($this->displayColumns) + 1);
+        $this->th->ss->assign('colCount', (is_countable($this->displayColumns) ? count($this->displayColumns) : 0) + 1);
 		$this->th->ss->assign('htmlVar', strtoupper($htmlVar));
 		$this->th->ss->assign('moduleString', $this->moduleString);
         $this->th->ss->assign('editLinkString', $GLOBALS['app_strings']['LBL_EDIT_BUTTON']);
@@ -179,7 +183,9 @@ class PopupSmarty extends ListViewSmarty{
         $jsLang = getVersionedScript("cache/jsLanguage/{$GLOBALS['current_language']}.js",  $GLOBALS['sugar_config']['js_lang_version']);
 
         $this->th->ss->assign('data', $this->data['data']);
-		$this->data['pageData']['offsets']['lastOffsetOnPage'] = $this->data['pageData']['offsets']['current'] + count($this->data['data']);
+        $this->data['pageData']['offsets']['lastOffsetOnPage'] = $this->data['pageData']['offsets']['current'] + (is_countable(
+            $this->data['data']
+        ) ? count($this->data['data']) : 0);
 		$this->th->ss->assign('pageData', $this->data['pageData']);
 
         $navStrings = array('next' => $GLOBALS['app_strings']['LNK_LIST_NEXT'],
@@ -436,7 +442,7 @@ class PopupSmarty extends ListViewSmarty{
 
 		// Bug 43452 - FG - Changed the way generated Where array is imploded into the string.
 		//                  Now it's imploding in the same way view.list.php do.
-		if (count($where_clauses) > 0 ) {
+        if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
 		    $where = '( ' . implode(' and ', $where_clauses) . ' )';
         }
 
@@ -481,12 +487,8 @@ class PopupSmarty extends ListViewSmarty{
 	            $this->fieldDefs[$name]['name'] = $this->fieldDefs[$name]['name'];
 	            if($this->fieldDefs[$name]['type'] == 'relate')
 	            	$this->fieldDefs[$name]['type'] = 'name';
-                if (!is_scalar($this->fieldDefs[$name]['options'] ?? null)) {
-                    LoggerManager::getLogger()->fatal(
-                        sprintf('scalar expected, "%s" given', gettype($this->fieldDefs[$name]['options'] ?? null))
-                            . PHP_EOL . (new Exception())->getTraceAsString()
-                    );
-                } elseif (isset($GLOBALS['app_list_strings'][$this->fieldDefs[$name]['options']])) {
+                if (is_scalar($this->fieldDefs[$name]['options'] ?? null)
+                    && isset($GLOBALS['app_list_strings'][$this->fieldDefs[$name]['options']])) {
 	                $this->fieldDefs[$name]['options'] = $GLOBALS['app_list_strings'][$this->fieldDefs[$name]['options']]; // fill in enums
 	            }
 	            if(!empty($_REQUEST[$name]))

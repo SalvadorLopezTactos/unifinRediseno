@@ -57,7 +57,7 @@ class SugarACLStatic extends SugarACLStrategy
         }
 
         // make sure we have the correct action name
-        $action = !empty($_REQUEST['bwcFrame']) ? strtolower($action) : $this->fixUpActionName($action);
+        $action = !empty($_REQUEST['bwcFrame']) ? strtolower($action) : static::fixUpActionName($action);
         if($action == "field") {
             return $this->fieldACL($module, $context['action'], $context);
         }
@@ -110,7 +110,7 @@ class SugarACLStatic extends SugarACLStrategy
      */
     protected function fieldACL($module, $action, $context)
     {
-        $bean = isset($context['bean'])?$context['bean']:null;
+        $bean = $context['bean'] ?? null;
         $is_owner = false;
         if(!empty($context['owner_override'])) {
             $is_owner = $context['owner_override'];

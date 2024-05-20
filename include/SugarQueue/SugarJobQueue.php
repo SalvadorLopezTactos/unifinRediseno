@@ -163,6 +163,7 @@ class SugarJobQueue
      */
     public function nextJob($clientID)
     {
+        $job = null;
         $now = $this->db->now();
         $queued = SchedulersJob::JOB_STATUS_QUEUED;
         $try = $this->jobTries;

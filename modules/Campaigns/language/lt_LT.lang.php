@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'Sekamos nuorodos adresas:',
   'LBL_TRACKER_TEXT' => 'Sekamos nuorodos pavadinimas:',
   'LBL_TRACKER_COUNT' => 'Sekamos nuorodos skaičius:',
-  'LBL_REFER_URL' => 'Sekamos nuorodos URL:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kampanijos',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'El. kampanijos',
   'LBL_NEW_FORM_TITLE' => 'Nauja kampanija',

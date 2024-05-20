@@ -1020,6 +1020,13 @@
             if (this.isDirty()) {
                 saveObj.totalToSave = this.dirtyModels.length;
 
+                if (saveObj.suppressMessage === false) {
+                    app.alert.show('save_worksheet_alert', {
+                        level: 'process',
+                        title: app.lang.get('LBL_SAVING'),
+                        autoClose: false
+                    });
+                }
                 this.dirtyModels.each(function(model) {
                     saveObj.model = model;
                     this._worksheetSaveHelper(saveObj, ctx);
@@ -1061,22 +1068,28 @@
             draft_save_type: this.draftSaveType
         }, {silent: true});
 
-        saveObj.model.save({}, {success: _.bind(function() {
-            saveObj.saveCount++;
-            //if this is the last save, go ahead and trigger the callback;
-            if (saveObj.totalToSave === saveObj.saveCount) {
-                if (saveObj.isDraft && saveObj.suppressMessage === false) {
-                    app.alert.show('success', {
-                        level: 'success',
-                        autoClose: true,
-                        autoCloseDelay: 10000,
-                        title: app.lang.get("LBL_FORECASTS_WIZARD_SUCCESS_TITLE", "Forecasts") + ":",
-                        messages: [app.lang.get("LBL_FORECASTS_WORKSHEET_SAVE_DRAFT_SUCCESS", "Forecasts")]
-                    });
+        saveObj.model.save({}, {
+            complete: () => {
+                saveObj.saveCount++;
+                if (saveObj.totalToSave === saveObj.saveCount) {
+                    if (saveObj.isDraft && saveObj.suppressMessage === false) {
+                        app.alert.show('success', {
+                            level: 'success',
+                            autoClose: true,
+                            autoCloseDelay: 10000,
+                            title: `${app.lang.get('LBL_FORECASTS_WIZARD_SUCCESS_TITLE', 'Forecasts')}`,
+                            messages: [app.lang.get('LBL_FORECASTS_WORKSHEET_SAVE_DRAFT_SUCCESS', 'Forecasts')]
+                        });
+                    }
+                    ctx.trigger('forecasts:worksheet:saved', saveObj.totalToSave, this.worksheetType, saveObj.isDraft);
+                    app.alert.dismiss('save_worksheet_alert');
                 }
-                ctx.trigger('forecasts:worksheet:saved', saveObj.totalToSave, this.worksheetType, saveObj.isDraft);
+            },
+            silent: true,
+            alerts: {
+                success: false
             }
-        }, this), silent: true, alerts: { 'success': false }});
+        });
     },
 
     /**

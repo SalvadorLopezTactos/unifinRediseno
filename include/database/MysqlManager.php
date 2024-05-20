@@ -66,13 +66,23 @@
  */
 abstract class MysqlManager extends DBManager
 {
-	/**
+    /**
+     * Starting from this version MySQL no longer supports length attribute for int fields, int(11) -> int
+     */
+    public const VERSION_INT_NO_LENGTH = '8.0.17';
+    public const INT_DEFAULT_LENGTH = '11';
+
+    /**
 	 * @see DBManager::$dbType
 	 */
 	public $dbType = 'mysql';
 	public $variant = 'mysql';
 	public $dbName = 'MySQL';
 	public $label = 'LBL_MYSQL';
+    /**
+     * @var string
+     */
+    public $lastsql;
 
 	protected $maxNameLengths = array(
 		'table' => 64,
@@ -258,10 +268,12 @@ abstract class MysqlManager extends DBManager
             if (isset($matches[2][0]) && in_array(strtolower($matches[1][0]), array('varchar','char','varchar2','int','decimal','float'))) {
                 $columns[$name]['len'] = strtolower($matches[2][0]);
                 //MySQL8 ignores the length of int and it's always just 32 bits int
-                if (strtolower($matches[1][0]) == 'int'
-                    && $matches[2][0] === ''
-                    && version_compare($this->version(), '8.0.17', '>=')) {
-                    $columns[$name]['len'] = 11;
+                if (strtolower($matches[1][0]) == 'int') {
+                    if (version_compare($this->version(), self::VERSION_INT_NO_LENGTH, '>=')) {
+                        $columns[$name]['len'] = null;
+                    } elseif ($matches[2][0] === '') {
+                        $columns[$name]['len'] = self::INT_DEFAULT_LENGTH;
+                    }
                 }
             }
 			if ( stristr($row['Extra'],'auto_increment') )
@@ -301,8 +313,11 @@ abstract class MysqlManager extends DBManager
 	 */
 	public function version()
 	{
-		return $this->getOne("SELECT version() version");
-	}
+        if (!isset(static::$version)) {
+            static::$version = $this->getOne("SELECT version() version");
+        }
+        return static::$version;
+    }
 
 	/**
 	 * @see DBManager::tableExists()
@@ -437,7 +452,7 @@ WHERE TABLE_SCHEMA = ?
 		}
 		$all_strings = implode(',', $all_parameters);
 
-		switch (strtolower($type)) {
+        switch (strtolower((string)$type)) {
 			case 'today':
 				return "CURDATE()";
 			case 'left':
@@ -581,8 +596,8 @@ WHERE TABLE_SCHEMA = ?
      */
     public function isTextType($type)
     {
-        $type = $this->getColumnType(strtolower($type));
-        return in_array($type, array('blob','text','longblob', 'longtext'));
+        $type = $this->getColumnType(strtolower((string)$type));
+        return in_array($type, ['blob', 'text', 'longblob', 'longtext']);
     }
 
     /**
@@ -593,7 +608,7 @@ WHERE TABLE_SCHEMA = ?
      */
     public function isBlobType($type)
     {
-        $type = strtolower($type);
+        $type = strtolower((string)$type);
         $ctype = $this->getColumnType($type);
         return $ctype === 'blob' || $ctype === 'longblob';
     }
@@ -926,10 +941,13 @@ FROM information_schema.statistics';
 			$fieldDef['default'] = '0';
 		if (($fieldDef['dbType'] == 'varchar' || $fieldDef['dbType'] == 'enum') && empty($fieldDef['len']) )
 			$fieldDef['len'] = '255';
-		if ($fieldDef['dbType'] == 'uint')
-			$fieldDef['len'] = '10';
-		if ($fieldDef['dbType'] == 'int' && empty($fieldDef['len']) )
-			$fieldDef['len'] = '11';
+        if (in_array($fieldDef['dbType'], ['int', 'uint'], true)) {
+            if (version_compare($this->version(), self::VERSION_INT_NO_LENGTH, '>=')) {
+                $fieldDef['len'] = null;
+            } elseif (empty($fieldDef['len'])) {
+                $fieldDef['len'] = self::INT_DEFAULT_LENGTH;
+            }
+        }
 
 		if($fieldDef['dbType'] == 'decimal') {
 			if(isset($fieldDef['len'])) {
@@ -972,7 +990,7 @@ FROM information_schema.statistics';
 			if($execute)
 				$this->query($sql);
 		} else {
-			$sql = '';
+            $sql = [];
 		}
 		return $sql;
 	}

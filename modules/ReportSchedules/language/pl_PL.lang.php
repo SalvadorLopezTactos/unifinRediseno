@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Pulpit rekordów harmonogramów raportów',
     'LBL_FILE_TYPE' => 'Typy pliku',
+    'LBL_EMBED_REPORT' => 'Umieść raport w wiadomości e-mail',
+    'LBL_EMBED_REPORT_INFO' => 'Uwaga: jeśli raport ma więcej niż 200 wierszy, zostanie załączony w postaci pliku CSV.',
 );

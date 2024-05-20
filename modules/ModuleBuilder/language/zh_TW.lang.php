@@ -818,15 +818,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"建立公式以確定這個字段在布局中是否為必填。<br/>"
-    . "必填字段將遵循基於瀏覽器移動視圖中的公式，<br/>"
-    . "但不會遵循本地應用程式中的公式，比如用於 iPhone 的 Sugar Mobile。 <br/>"
-    . "他們不會遵循 Sugar 自助服務門戶中的公式。",
-'LBL_POPHELP_READONLY'=>"建立公式以確定這個字段在布局中是否為唯讀。<br/>"
-        . "唯讀字段將遵循基於瀏覽器移動視圖中的公式，<br/>"
-        . "但不會遵循本地應用程式中的公式，比如用於 iPhone 的 Sugar Mobile。 <br/>"
-        . "他們不會遵循 Sugar 自助服務門戶中的公式。",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'選擇此選項可在使用此模塊上的全局搜索來搜索記錄時使用此字段。',
+    'LBL_POPHELP_REQUIRED'=>'有條件要求的欄位不可用於以下 SugarBPM 動作類型：新增相關記錄、變更欄位。請移除「必填條件」文字，以便在這些過程定義動作中使用此欄位',
+'LBL_POPHELP_READONLY'=>"建立公式以確定這個欄位在版面配置中是否為唯讀。<br/>"
+        . "唯讀欄位將遵循基於瀏覽器行動視圖中的公式，<br/>"
+        . "但不會遵循原生應用程式中的公式，比如用於 iPhone 的 Sugar Mobile。 <br/>"
+        . "它們不會遵循 Sugar 自助服務入口網站中的公式。",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'選取此選項可在使用此模組上的「全域搜尋」功能搜尋記錄時使用此欄位。',
 //Revert Module labels
 'LBL_RESET' => '重設',
 'LBL_RESET_MODULE' => '重設模組',
@@ -863,6 +860,7 @@ $mod_strings = array(
                 'decimal'=>'小數點',
                 'autoincrement' => '自動遞增',
                 'actionbutton' => '操作按鈕',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "最常使用標籤",

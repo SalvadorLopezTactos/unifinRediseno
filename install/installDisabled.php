@@ -16,6 +16,10 @@ if( !isset( $install_script ) || !$install_script ){
 
 
 $langHeader = get_language_header();
+
+/**
+ * @psalm-suppress UndefinedGlobalVariable
+ */
 $out =<<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 

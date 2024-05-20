@@ -89,7 +89,7 @@
                 this.modules = _.map(response, function(value, key) {
                     return {
                         moduleName: key,
-                        moduleLabel: value,
+                        moduleDisplay: value,
                     };
                 });
 

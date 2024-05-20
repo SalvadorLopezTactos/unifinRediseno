@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Neispravna vrijednost za {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Vrijednost mora biti između {{min}} i {{max}}',
-    'LBL_HISTORY_LOG' => 'Zadnje potvrđeno',
+    'LBL_HISTORY_LOG' => 'Zadnja obveza',
     'LBL_NO_COMMIT' => 'Nema prethodnog potvrđivanja',
 
     'LBL_MANGER_SAVED' => 'Voditelj je spremio'

@@ -22,12 +22,9 @@
                                                                    style="{{#if attributes.expiryComingSoon}}color:#AA0001{{/if}}">
                                 {{attributes.service_remaining_time}}</time>
                             </div>
-                            <div class="row-left">
-                                <a class="row-cell secondary" data-placement="bottom" rel="tooltip"
-                                   title="{{fieldValue this "name"}}"
-                                   href="#{{buildRoute model=this}}">{{fieldValue this "name"}}</a>
-                                <div class="row-cell">{{str "LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY" attributes._module attributes}}</div>
-                            </div>
+                            {{#with ../collection.fieldsMeta.purchase}}
+                                {{field ../../this model=../this template='list'}}
+                            {{/with}}
                         </div>
                         <div class="content-row">
                             <div class="row-left">

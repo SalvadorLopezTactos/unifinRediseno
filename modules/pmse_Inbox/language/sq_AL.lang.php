@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Historia',
     'LBL_PMSE_LABEL_NOTES' => 'Shënime',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Sho shënime',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Dërgo te DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Zgjidh...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Përdorues',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Je i sigurt që dëshiron ta miratosh këtë proces?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Je i sigurt që dëshiron ta refuzosh këtë proces?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Je i sigurt që dëshiron ta delegosh këtë proces?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Je i sigurt që dëshiron ta dërgosh këtë proces te DocuSign?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Procesi u miratua me sukses',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Procesi u refuzua me sukses',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Procesi u delegua me sukses',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Procesi është dërguar me sukses te DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'The process you are trying to view is closed.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'The process you are trying view is not available at this moment.',
 

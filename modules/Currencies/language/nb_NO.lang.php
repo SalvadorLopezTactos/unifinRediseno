@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Opprettet av',
   'LBL_EDIT_LAYOUT' => 'Redigér Oppsett' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Kun administratorer',
-  'LBL_CURRENCY_DEFAULT' => 'Amerikanske dollar (standard)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Systemvaluta (standard)',
 );
 ?>

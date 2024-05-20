@@ -16,6 +16,9 @@ use Sugarcrm\Sugarcrm\SugarConnect\Publisher;
 use Sugarcrm\Sugarcrm\SugarConnect\Configuration\ConfigurationAwareInterface;
 use Sugarcrm\Sugarcrm\SugarConnect\Configuration\ConfigurationAwareTrait;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 class AfterSave implements Publisher, ConfigurationAwareInterface
 {
     use ConfigurationAwareTrait;
@@ -53,7 +56,7 @@ class AfterSave implements Publisher, ConfigurationAwareInterface
                 'id' => $bean->id,
                 // Use isUpdate if it is in args. Default to an update because
                 // after_delete and after_restore are technically updates.
-                'is_update' => isset($args['isUpdate']) ? $args['isUpdate'] : true,
+                'is_update' => $args['isUpdate'] ?? true,
                 'change_type' => $event,
                 'data' => $data,
             ]

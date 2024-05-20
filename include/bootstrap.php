@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-define('SUGAR_BASE_DIR', str_replace('\\', '/', realpath(dirname(__FILE__) . '/..')));
+define('SUGAR_BASE_DIR', str_replace('\\', '/', realpath(__DIR__ . '/..')));
 
 if (extension_loaded('shadow') && ini_get('shadow.enabled')) {
     $shadowConfig = shadow_get_config();

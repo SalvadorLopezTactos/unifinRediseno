@@ -68,6 +68,9 @@
             action = this.def.route.action;
         }
         if (this.def.link && app.acl.hasAccessToModel(action, this.model)) {
+            this.module = this.model.module || this.context.get('module');
+            this.modelId = this.model.get('id');
+            this.linkTarget = 'focus';
             this.href = this.buildHref();
         }
         app.view.Field.prototype._render.call(this);
@@ -86,6 +89,10 @@
     buildHref: function() {
         var defRoute = this.def.route ? this.def.route : {},
             module = this.model.module || this.context.get('module');
+        // This is a workaround until bug 61478 is resolved to keep parity with 6.7
+        if (module === 'Users' && this.context.get('module') !== 'Users') {
+            module = 'Employees';
+        }
         // FIXME remove this.def.bwcLink functionality (not yet removed due to Portal need for Documents)
         return '#' + app.router.buildRoute(module, this.model.get('id'), defRoute.action, this.def.bwcLink);
     },

@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Dez',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'O calendário já foi adicionado',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} está selecionado',
+    'LBL_NO_USER_SELECTED' => 'Selecione um usuário ou equipe',
+    'LBL_NO_CALENDAR_SELECTED' => 'Selecione um calendário',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Ocorreu uma falha ao salvar os calendários.',
+
 );
 
 $mod_list_strings = array(

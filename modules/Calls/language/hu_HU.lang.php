@@ -184,4 +184,10 @@ Egy {{calls_singular_module}} modul létrehozásához:
 - Kattintson a "Résztvevő kiválasztása" gombra egy meglévő felhasználó, kapcsolat vagy ajánlás a {{calls_singular_module}} modulhoz történő  hozzáadásához. 
 - Kattintson a plusz ikonra a "Résztvevő kiválasztása" mellett jobbra egy {{calls_singular_module}} résztvevő új Sugar adatként történő létrehozásához. 
 3. Kattintson a "Mentés" gombra az új adat mentéséhez és az előző oldalra történő visszatéréshez.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Smart Guide hívás",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Gyermek feladatok',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Gyermek megbeszélések',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Gyermek hívások',
 );

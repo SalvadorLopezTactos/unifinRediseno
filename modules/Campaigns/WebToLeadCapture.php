@@ -214,7 +214,7 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
         echo '<html ' . get_language_header() . '><head><title>SugarCRM</title></head><body>';
         echo '<form name="redirect" action="' .
             htmlspecialchars($redirect_url, ENT_COMPAT, 'UTF-8') .
-            '" method="' . htmlspecialchars($redirectRequestType) . '">';
+            '" method="' . htmlspecialchars($redirectRequestType, ENT_COMPAT) . '">';
 
         // Determine whether form values should be passed back to the redirect
         // URL. WTL forms generated prior to 11.3 should default to sending the

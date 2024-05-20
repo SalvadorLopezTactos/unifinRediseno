@@ -14,6 +14,10 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
 use Sugarcrm\IdentityProvider\Srn;
 
 class UsersViewEdit extends ViewEdit {
+    /**
+     * @var \UserViewHelper|mixed
+     */
+    public $fieldHelper;
 var $useForSubpanel = true;
 
     function preDisplay() {
@@ -120,17 +124,24 @@ var $useForSubpanel = true;
             if (empty($this->bean->id)) {
                 $license_users = $admin->settings['license_users'];
                 if ($license_users != '') {
-                    $array = get_user_array(false, "", "", false, null, " AND " . User::getLicensedUsersWhere(), false);
-                    $license_seats_needed = (is_countable($array) ? count($array) : 0) - $license_users;
+                    $user_array = get_user_array(
+                        false,
+                        "",
+                        "",
+                        false,
+                        null,
+                        " AND " . User::getLicensedUsersWhere(),
+                        false
+                    );
+                    $license_seats_needed = (is_countable($user_array) ? count($user_array) : 0) - $license_users;
                 } else {
                     $license_seats_needed = -1;
                 }
-                if( $license_seats_needed >= 0 ){
+                if ($license_seats_needed >= 0) {
                     displayAdminError(translate('WARN_LICENSE_SEATS_USER_CREATE', 'Administration'));
-                    if( isset($_SESSION['license_seats_needed'])) {
+                    if (isset($_SESSION['license_seats_needed'])) {
                         unset($_SESSION['license_seats_needed']);
                     }
-                    //die();
                 }
             }
         }
@@ -235,7 +246,9 @@ EOD
             !$idpConfig->isSpecialBeanAction($this->bean, $_REQUEST);
         $this->ss->assign('SHOW_NON_EDITABLE_FIELDS_ALERT', $showNonEditableFieldsAlert);
         if ($showNonEditableFieldsAlert) {
-            if ($GLOBALS['current_user']->isAdminForModule('Users')) {
+            /** @var User $currentUser */
+            $currentUser = $GLOBALS['current_user'];
+            if ($currentUser->isAdmin() || ($currentUser->isAdminForModule('Users') && $currentUser->isIdmUserManager)) {
                 $tenantSrn = Srn\Converter::fromString($idpConfig->getIDMModeConfig()['tid']);
                 $srnManager = new Srn\Manager([
                     'partition' => $tenantSrn->getPartition(),

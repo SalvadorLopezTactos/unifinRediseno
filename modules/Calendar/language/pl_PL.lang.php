@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => 'Lis',
     'LBL_DEC' => 'Gru',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalendarz został już dodany',
+    'LBL_CALENDAR_IS_SELECTED' => 'Wybrano kalendarz {{calendar}}',
+    'LBL_NO_USER_SELECTED' => 'Wybierz użytkownika lub zespół',
+    'LBL_NO_CALENDAR_SELECTED' => 'Wybierz kalendarz',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nie udało się zapisanie kalendarzy.',
+
 );
 
 $mod_list_strings = array(

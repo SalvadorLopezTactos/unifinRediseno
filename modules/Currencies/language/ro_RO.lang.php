@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Creat de',
   'LBL_EDIT_LAYOUT' => 'Editeaza Plan General' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Doar administratorii',
-  'LBL_CURRENCY_DEFAULT' => 'Dolari americani (Implicit)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Valută sistem (implicit)',
 );
 ?>

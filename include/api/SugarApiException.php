@@ -28,6 +28,13 @@ class SugarApiException extends SugarException
     public $descriptionLabel;
 
     /**
+     * to log fatal error
+     * @var bool
+     */
+    protected $logFatalError = false;
+
+
+    /**
      * @param string $messageLabel optional Label for error message.  Used to load the appropriate translated message.
      * @param array $msgArgs optional set of arguments to substitute into error message string
      * @param string|null $moduleName Provide module name if $messageLabel is a module string, leave empty if
@@ -45,6 +52,11 @@ class SugarApiException extends SugarException
         if (!empty($this->messageLabel)) {
             $this->descriptionLabel = $this->messageLabel . '_DESC';
         }
+
+        // log fatal error for any exception
+        if (!empty($GLOBALS['log']) && ($this->httpCode >= 500 || $this->logFatalError)) {
+            $GLOBALS['log']->fatal($this->message);
+        }
     }
 
     public function getHttpCode()
@@ -60,6 +72,7 @@ class SugarApiExceptionError extends SugarApiException
     public $httpCode = 500;
     public $errorLabel = 'fatal_error';
     public $messageLabel = 'EXCEPTION_FATAL_ERROR';
+    protected $logFatalError = true;
 }
 
 /**
@@ -221,6 +234,7 @@ class SugarApiExceptionConnectorResponse extends SugarApiException
     public $httpCode = 502;
     public $errorLabel = 'bad_gateway';
     public $messageLabel = 'EXCEPTION_CONNECTOR_RESPONSE';
+    protected $logFatalError = true;
 }
 
 /**
@@ -250,6 +264,7 @@ class SugarApiExceptionSearchUnavailable extends SugarApiExceptionServiceUnavail
 {
     public $errorLabel = 'search_unavailable';
     public $messageLabel = 'EXCEPTION_SEARCH_UNAVAILABLE';
+    protected $logFatalError = true;
 }
 
 /**
@@ -259,6 +274,7 @@ class SugarApiExceptionSearchRuntime extends SugarApiExceptionError
 {
     public $errorLabel = 'search_runtime';
     public $messageLabel = 'EXCEPTION_SEARCH_RUNTIME';
+    protected $logFatalError = true;
 }
 
 /**
@@ -277,6 +293,7 @@ class SugarApiExceptionModuleDisabled extends SugarApiExceptionNotAuthorized
 {
     public $errorLabel = 'module_disabled';
     public $messageLabel = 'EXCEPTION_MODULE_DISABLED';
+    protected $logFatalError = true;
 }
 
 /**

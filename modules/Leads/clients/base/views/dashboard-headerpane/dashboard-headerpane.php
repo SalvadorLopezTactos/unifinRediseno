@@ -40,6 +40,7 @@ $viewdefs["Leads"]["base"]["view"]["dashboard-headerpane"] = array(
                     'licenseDependency' => [
                         'HINT' => [
                             'type' => 'hint-dashboardtitle',
+                             'css_class' => 'hint-dashboard-record',
                         ],
                     ],
                 ),

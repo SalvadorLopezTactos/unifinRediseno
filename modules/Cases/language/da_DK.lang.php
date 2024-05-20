@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Case-liste dashboard',
     'LBL_CASES_RECORD_DASHBOARD' => 'Caseoptegnelses-dashboard',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Sagsoplysninger',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Cases Fokus Dashboard - Konsol',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Sager',
 
 	'ERR_DELETE_RECORD'					=> 'Du skal angive et postnummer for at slette virksomheden.',
@@ -158,4 +158,29 @@ To create a {{module_name}}:
     'LBL_SLA_DETAILS' => 'SLA detaljer',
     'LBL_HOURS' => 'Timer',
     'LBL_WIDGET_STATUS' => 'Status',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiser',
+    'LBL_CREATE_NEW' => 'Opret ny',
+    'LBL_MANAGE' => 'Administrer',
+    'LBL_SEE_DETAILS' => 'Vis oplysninger',
+    'LBL_HIDE_NEW' => 'Skjul',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Sager',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Sag',
+    'LBL_KIOSK_CREATE' => 'Opret sag',
+    'LBL_KIOSK_SUBJECT' => 'Emne',
+    'LBL_KIOSK_CASE_ID' => 'Sags-id',
+    'LBL_KIOSK_STATUS' => 'Status',
+    'LBL_KIOSK_CATEGORY' => 'Kategori',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Indsendt den {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioritet',
+    'LBL_KIOSK_CREATE_CASE' => 'Kontakt Os',
+    'LBL_KIOSK_DESCRIPTION' => 'Beskrivelse',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Din anmodning er indsendt.',
+    'LBL_KIOSK_ATTACHED' => 'Alle vedhæftninger',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Eksterne brugere',
 );

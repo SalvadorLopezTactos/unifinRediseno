@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Aangemaakt door',
   'LBL_EDIT_LAYOUT' => 'Wijzig Lay-out' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Alleen voor Administrators',
-  'LBL_CURRENCY_DEFAULT' => 'Amerikaanse Dollars (standaard)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Systeemvaluta (standaard)',
 );
 ?>

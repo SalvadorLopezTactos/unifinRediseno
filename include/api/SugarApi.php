@@ -560,7 +560,7 @@ abstract class SugarApi
             // do not override previous value if it exists since it should have higher precedence
             if (!isset($parsed[$field])) {
                 $direction = array_shift($column);
-                $parsed[$field] = strtolower($direction) !== 'desc';
+                $parsed[$field] = strtolower((string)$direction) !== 'desc';
             }
         }
 

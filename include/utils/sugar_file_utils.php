@@ -29,8 +29,9 @@ require_once 'include/utils.php';
 function sugar_mkdir($pathname, $mode=null, $recursive=false, $context='') {
 	$mode = get_mode('dir_mode', $mode);
 
-	if ( sugar_is_dir($pathname,$mode) )
-	    return true;
+    if (sugar_is_dir($pathname)) {
+        return true;
+    }
 
 	$result = false;
 	if(empty($mode))
@@ -359,13 +360,11 @@ function get_mode($key = 'dir_mode', $mode=null) {
 }
 
 function sugar_is_dir($path, $mode='r'){
-		if(defined('TEMPLATE_URL'))return is_dir($path, $mode);
-		return is_dir($path);
+    return is_dir($path);
 }
 
 function sugar_is_file($path, $mode='r'){
-		if(defined('TEMPLATE_URL'))return is_file($path, $mode);
-		return is_file($path);
+    return is_file($path);
 }
 
 /**

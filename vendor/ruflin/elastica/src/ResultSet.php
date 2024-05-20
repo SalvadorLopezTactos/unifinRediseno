@@ -40,11 +40,9 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @var Result[] Results
      */
-    private $_results = [];
+    private $_results;
 
     /**
-     * Constructs ResultSet object.
-     *
      * @param Result[] $results
      */
     public function __construct(Response $response, Query $query, $results)
@@ -180,6 +178,18 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
+     * Returns the Point-In-Time ID, if available.
+     *
+     * @See: https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html#search-after
+     */
+    public function getPointInTimeId(): ?string
+    {
+        $data = $this->_response->getData();
+
+        return $data['pit_id'] ?? null;
+    }
+
+    /**
      * Returns true if the query has timed out.
      */
     public function hasTimedOut(): bool
@@ -221,7 +231,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Returns the current object of the set.
      *
-     * @return \Elastica\Result Set object
+     * @return Result Set object
      */
     public function current(): Result
     {

@@ -85,36 +85,36 @@ require_once 'vendor/Zend/Gdata/YouTube/InboxFeed.php';
 class Zend_Gdata_YouTube extends Zend_Gdata_Media
 {
 
-    const AUTH_SERVICE_NAME = 'youtube';
-    const CLIENTLOGIN_URL = 'https://www.google.com/youtube/accounts/ClientLogin';
+    public const AUTH_SERVICE_NAME = 'youtube';
+    public const CLIENTLOGIN_URL = 'https://www.google.com/youtube/accounts/ClientLogin';
 
-    const STANDARD_TOP_RATED_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/top_rated';
-    const STANDARD_MOST_VIEWED_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/most_viewed';
-    const STANDARD_RECENTLY_FEATURED_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/recently_featured';
-    const STANDARD_WATCH_ON_MOBILE_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/watch_on_mobile';
+    public const STANDARD_TOP_RATED_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/top_rated';
+    public const STANDARD_MOST_VIEWED_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/most_viewed';
+    public const STANDARD_RECENTLY_FEATURED_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/recently_featured';
+    public const STANDARD_WATCH_ON_MOBILE_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/watch_on_mobile';
 
-    const STANDARD_TOP_RATED_URI_V2 =
+    public const STANDARD_TOP_RATED_URI_V2 =
         'http://gdata.youtube.com/feeds/api/standardfeeds/top_rated';
-    const STANDARD_MOST_VIEWED_URI_V2 =
+    public const STANDARD_MOST_VIEWED_URI_V2 =
         'http://gdata.youtube.com/feeds/api/standardfeeds/most_viewed';
-    const STANDARD_RECENTLY_FEATURED_URI_V2 =
+    public const STANDARD_RECENTLY_FEATURED_URI_V2 =
         'http://gdata.youtube.com/feeds/api/standardfeeds/recently_featured';
-    const STANDARD_WATCH_ON_MOBILE_URI_V2 =
+    public const STANDARD_WATCH_ON_MOBILE_URI_V2 =
         'http://gdata.youtube.com/feeds/api/standardfeeds/watch_on_mobile';
 
-    const USER_URI = 'http://gdata.youtube.com/feeds/api/users';
-    const VIDEO_URI = 'http://gdata.youtube.com/feeds/api/videos';
-    const PLAYLIST_REL = 'http://gdata.youtube.com/schemas/2007#playlist';
-    const USER_UPLOADS_REL = 'http://gdata.youtube.com/schemas/2007#user.uploads';
-    const USER_PLAYLISTS_REL = 'http://gdata.youtube.com/schemas/2007#user.playlists';
-    const USER_SUBSCRIPTIONS_REL = 'http://gdata.youtube.com/schemas/2007#user.subscriptions';
-    const USER_CONTACTS_REL = 'http://gdata.youtube.com/schemas/2007#user.contacts';
-    const USER_FAVORITES_REL = 'http://gdata.youtube.com/schemas/2007#user.favorites';
-    const VIDEO_RESPONSES_REL = 'http://gdata.youtube.com/schemas/2007#video.responses';
-    const VIDEO_RATINGS_REL = 'http://gdata.youtube.com/schemas/2007#video.ratings';
-    const VIDEO_COMPLAINTS_REL = 'http://gdata.youtube.com/schemas/2007#video.complaints';
-    const ACTIVITY_FEED_URI = 'http://gdata.youtube.com/feeds/api/events';
-    const FRIEND_ACTIVITY_FEED_URI =
+    public const USER_URI = 'http://gdata.youtube.com/feeds/api/users';
+    public const VIDEO_URI = 'http://gdata.youtube.com/feeds/api/videos';
+    public const PLAYLIST_REL = 'http://gdata.youtube.com/schemas/2007#playlist';
+    public const USER_UPLOADS_REL = 'http://gdata.youtube.com/schemas/2007#user.uploads';
+    public const USER_PLAYLISTS_REL = 'http://gdata.youtube.com/schemas/2007#user.playlists';
+    public const USER_SUBSCRIPTIONS_REL = 'http://gdata.youtube.com/schemas/2007#user.subscriptions';
+    public const USER_CONTACTS_REL = 'http://gdata.youtube.com/schemas/2007#user.contacts';
+    public const USER_FAVORITES_REL = 'http://gdata.youtube.com/schemas/2007#user.favorites';
+    public const VIDEO_RESPONSES_REL = 'http://gdata.youtube.com/schemas/2007#video.responses';
+    public const VIDEO_RATINGS_REL = 'http://gdata.youtube.com/schemas/2007#video.ratings';
+    public const VIDEO_COMPLAINTS_REL = 'http://gdata.youtube.com/schemas/2007#video.complaints';
+    public const ACTIVITY_FEED_URI = 'http://gdata.youtube.com/feeds/api/events';
+    public const FRIEND_ACTIVITY_FEED_URI =
         'http://gdata.youtube.com/feeds/api/users/default/friendsactivity';
 
     /**
@@ -123,7 +123,7 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
      *
      * @var string
      */
-     const IN_REPLY_TO_SCHEME =
+     public const IN_REPLY_TO_SCHEME =
          'http://gdata.youtube.com/schemas/2007#in-reply-to';
 
     /**
@@ -131,7 +131,7 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
      *
      * @var string
      */
-    const INBOX_FEED_URI =
+    public const INBOX_FEED_URI =
         'http://gdata.youtube.com/feeds/api/users/default/inbox';
 
     /**
@@ -140,42 +140,42 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
      *
      * @var integer
      */
-    const ACTIVITY_FEED_MAX_USERS = 20;
+    public const ACTIVITY_FEED_MAX_USERS = 20;
 
     /**
      * The suffix for a feed of favorites.
      *
      * @var string
      */
-    const FAVORITES_URI_SUFFIX = 'favorites';
+    public const FAVORITES_URI_SUFFIX = 'favorites';
 
     /**
      * The suffix for the user's upload feed.
      *
      * @var string
      */
-    const UPLOADS_URI_SUFFIX = 'uploads';
+    public const UPLOADS_URI_SUFFIX = 'uploads';
 
     /**
      * The suffix for a feed of video responses.
      *
      * @var string
      */
-    const RESPONSES_URI_SUFFIX = 'responses';
+    public const RESPONSES_URI_SUFFIX = 'responses';
 
     /**
      * The suffix for a feed of related videos.
      *
      * @var string
      */
-    const RELATED_URI_SUFFIX = 'related';
+    public const RELATED_URI_SUFFIX = 'related';
 
     /**
      * The suffix for a feed of messages (inbox entries).
      *
      * @var string
      */
-    const INBOX_URI_SUFFIX = 'inbox';
+    public const INBOX_URI_SUFFIX = 'inbox';
 
     /**
      * Namespaces used for Zend_Gdata_YouTube
@@ -649,6 +649,7 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
      */
     public static function parseFormUploadTokenResponse($response)
     {
+        $php_errormsg = null;
         // Load the feed as an XML DOMDocument object
         @ini_set('track_errors', 1);
         $doc = new DOMDocument();

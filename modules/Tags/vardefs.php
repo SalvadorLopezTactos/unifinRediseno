@@ -14,6 +14,8 @@ SugarAutoLoader::load('modules/Tags/TagsRelatedModulesUtilities.php');
 $dictionary['Tag'] = array(
     'comment' => 'Tagging module',
     'table' => 'tags',
+    'color' => 'pink',
+    'icon' => 'sicon-tag-lg',
     'audited' => true,
     'activity_enabled' => false,
     'favorites' => true,

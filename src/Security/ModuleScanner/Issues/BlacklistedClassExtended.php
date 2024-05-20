@@ -26,6 +26,6 @@ final class BlacklistedClassExtended implements Issue
 
     public function getMessage(): string
     {
-        return sprintf('Code attempted to extend blacklisted class "%s" on line %s', $this->class, $this->line);
+        return sprintf('Code attempted to extend denylisted class "%s" on line %s', $this->class, $this->line);
     }
 }

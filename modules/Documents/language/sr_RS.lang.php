@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Šablon? :',
     'LBL_DET_TEMPLATE_TYPE'=>'Tip dokumenta:',
     'LBL_TEAM'=> 'Tim:',
+    'LBL_IS_SHARED' => 'Dostupno eksterno:',
     'LBL_DOC_DESCRIPTION'=>'Opis:',
     'LBL_DOC_ACTIVE_DATE'=> 'Datum objave:',
     'LBL_DOC_EXP_DATE'=> 'Datum isteka:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Pošalji u DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Sinhronizacija na Google Drive',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Sinhronizuj sve na Google Drive',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Sinhronizuj sve na OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Sinhronizacija na OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Sinhronizuj sve na Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Sinhronizacija na Dropbox',
 );

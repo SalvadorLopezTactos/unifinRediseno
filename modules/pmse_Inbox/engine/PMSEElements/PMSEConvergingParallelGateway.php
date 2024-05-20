@@ -34,6 +34,8 @@ class PMSEConvergingParallelGateway extends PMSEConvergingGateway
         } else {
             $result['previous_flows'] = array();
             $result['close_thread'] = true;
+            // We should close current flow if it's not the last one in the Converging Parallel Gateway
+            $result['close_flow'] = true;
         }
 
         return $result;

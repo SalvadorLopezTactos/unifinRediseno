@@ -133,7 +133,7 @@ class ProductBundle extends SugarBean
         $this->load_relationship('products');
         $beans = $this->products->getBeans();
 
-        usort($beans, array(__CLASS__, 'compareProductOrNoteIndexAsc'));
+        usort($beans, array(self::class, 'compareProductOrNoteIndexAsc'));
 
         return $beans;
     }
@@ -179,7 +179,7 @@ class ProductBundle extends SugarBean
         $this->load_relationship('product_bundle_notes');
         $beans = $this->product_bundle_notes->getBeans();
 
-        usort($beans, array(__CLASS__, 'compareProductOrNoteIndexAsc'));
+        usort($beans, array(self::class, 'compareProductOrNoteIndexAsc'));
 
         return $beans;
     }
@@ -209,7 +209,7 @@ class ProductBundle extends SugarBean
             $this->product_bundle_notes->getBeans()
         );
 
-        usort($bundle_list, array(__CLASS__, 'compareProductOrNoteIndexAsc'));
+        usort($bundle_list, array(self::class, 'compareProductOrNoteIndexAsc'));
 
         return $bundle_list;
     }
@@ -403,7 +403,7 @@ class ProductBundle extends SugarBean
     /**
      * Returns a list of the associated opportunities
      */
-    public function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
         global $current_language, $app_strings, $app_list_strings;
 //		global $support_expired, $support_coming_due, $support_coming_due_color, $support_expired_color;
@@ -484,11 +484,7 @@ class ProductBundle extends SugarBean
     {
         $firstValue = $obj1->position;
         $secondValue = $obj2->position;
-
-        if ($firstValue == $secondValue) {
-            return 0;
-        }
-        return ($firstValue < $secondValue) ? -1 : 1;
+        return $firstValue <=> $secondValue;
     }
 
     /**
@@ -500,10 +496,7 @@ class ProductBundle extends SugarBean
      */
     public static function compareProductBundlesByIndex($pb1, $pb2)
     {
-        if ($pb1->position == $pb2->position) {
-            return 0;
-        }
-        return ($pb1->position < $pb2->position) ? -1 : 1;
+        return $pb1->position <=> $pb2->position;
     }
 
     /**

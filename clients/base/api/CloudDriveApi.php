@@ -23,6 +23,10 @@ use Sugarcrm\Sugarcrm\Util\Uuid;
 class CloudDriveApi extends SugarApi
 {
     /**
+     * @var \Sugarcrm\Sugarcrm\CloudDrive\DriveFacade|mixed
+     */
+    public $driveFacade;
+    /**
      * @inheritdoc
      */
     public function registerApiRest()
@@ -51,8 +55,17 @@ class CloudDriveApi extends SugarApi
                 'path' => ['CloudDrive', 'file', '?',],
                 'pathVars' => ['CloudDrive', 'file', 'fileId',],
                 'method' => 'getFile',
-                'shortHelp' => 'Retreives a file data',
+                'shortHelp' => 'Retrieves a file data',
                 'longHelp' => 'include/api/help/cloud_drive_file.html',
+                'minVersion' => '11.16',
+            ],
+            'getSharedLink' => [
+                'reqType' => 'POST',
+                'path' => ['CloudDrive', 'shared', 'link',],
+                'pathVars' => ['CloudDrive', 'shared', 'link',],
+                'method' => 'getSharedLink',
+                'shortHelp' => 'Retrieves a file shared link',
+                'longHelp' => 'include/api/help/cloud_drive_shared_link.html',
                 'minVersion' => '11.16',
             ],
             'syncAllFiles' => [
@@ -154,6 +167,15 @@ class CloudDriveApi extends SugarApi
                 'longHelp' => 'include/api/help/cloud_drive_create_file.html',
                 'minVersion' => '11.16',
             ],
+            'uploadDocument' => [
+                'reqType' => 'POST',
+                'path' => ['CloudDrive', 'document',],
+                'pathVars' => ['CloudDrive', 'document',],
+                'method' => 'uploadDocumentToDrive',
+                'shortHelp' => 'create a file on the drive',
+                'longHelp' => 'include/api/help/cloud_drive_create_file_from_doc.html',
+                'minVersion' => '11.18',
+            ],
         ];
     }
 
@@ -194,9 +216,23 @@ class CloudDriveApi extends SugarApi
      */
     public function getFile(ServiceBase $api, array $args)
     {
-        $this->requireArgs($args, ['type', 'fileId']);
+        $this->requireArgs($args, ['type',]);
         $driveFacade = $this->getDrive($args['type']);
         return $driveFacade->getFile($args);
+    }
+
+    /**
+     * Retrieves a file from google drive
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return false|array
+     */
+    public function getSharedLink(ServiceBase $api, array $args)
+    {
+        $this->requireArgs($args, ['type',]);
+        $driveFacade = $this->getDrive($args['type']);
+        return $driveFacade->getSharedLink($args);
     }
 
     /**
@@ -204,16 +240,18 @@ class CloudDriveApi extends SugarApi
      *
      * @param ServiceBase $api
      * @param array $args
-     * @return bool
+     * @return array
      */
-    public function syncAllFiles(ServiceBase $api, array $args): ?bool
+    public function syncAllFiles(ServiceBase $api, array $args): array
     {
         $this->requireArgs($args, ['type', 'module', 'recordId',]);
 
+        $largeFile = false;
         $module = $args['module'];
         $recordId = $args['recordId'];
         $pathId = $args['path'];
         $driveId = $args['driveId'];
+        $folderPath = array_key_exists('folderPath', $args) ? $args['folderPath'] : [];
 
         $driveFacade = $this->getDrive($args['type']);
 
@@ -230,23 +268,49 @@ class CloudDriveApi extends SugarApi
 
         foreach ($documentIds as $documentId) {
             $documentBean = \BeanFactory::retrieveBean('Documents', $documentId);
+
+            $this->checkDocumentAttachedFile($documentBean);
+
             $filePath = $driveFacade->getDrive()->getFilePath($documentBean);
+            $path = $folderPath;
+            $path[] = [
+                'name' => $documentBean->filename,
+            ];
+            $uploadOptions = [
+                'documentBean' => $documentBean,
+                'filePath' => $filePath,
+                'pathId' => $pathId,
+                'fileName' => $documentBean->filename,
+                'driveId' => $driveId,
+                'folderPath' => $path,
+                'fileSize' => $documentBean->latest_revision_file_size,
+            ];
+            $uploadOptions = $this->checkForLargeFile($uploadOptions, $documentBean->latest_revision_file_size);
+
+            if ($uploadOptions['largeFile']) {
+                $largeFile = true;
+            }
 
             try {
-                $driveFacade->uploadFile([
-                    'documentBean' => $documentBean,
-                    'filePath' => $filePath,
-                    'pathId' => $pathId,
-                    'fileName' => $documentBean->filename,
-                    'driveId' => $driveId,
-                ]);
+                $driveFacade->uploadFile($uploadOptions);
             } catch (Google_Exception $e) {
                 $GLOBALS['log']->fatal($e);
-                return false;
+                return [
+                    'success' => false,
+                ];
             }
         }
 
-        return true;
+        if ($largeFile) {
+            return [
+                'success' => true,
+                'message' => 'LBL_LARGE_FILE_UPLOAD',
+            ];
+        }
+
+        return [
+            'success' => true,
+        ];
     }
 
     /**
@@ -254,9 +318,9 @@ class CloudDriveApi extends SugarApi
      *
      * @param ServiceBase $api
      * @param array $args
-     * @return bool
+     * @return array
      */
-    public function syncFile(ServiceBase $api, array $args): bool
+    public function syncFile(ServiceBase $api, array $args): array
     {
         $this->requireArgs($args, ['type', 'module', 'recordId',]);
 
@@ -264,25 +328,56 @@ class CloudDriveApi extends SugarApi
         $recordId = $args['recordId'];
         $pathId = $args['path'];
         $driveId = $args['driveId'];
+        $folderPath = array_key_exists('folderPath', $args) ? $args['folderPath'] : [];
         $driveFacade = $this->getDrive($args['type']);
 
         $documentBean = \BeanFactory::retrieveBean($module, $recordId);
+
+        $this->checkDocumentAttachedFile($documentBean);
+
         $filePath = $driveFacade->getDrive()->getFilePath($documentBean);
+        $folderPath[] = [
+            'name' => $documentBean->filename,
+        ];
+
+        $uploadOptions = [
+            'documentBean' => $documentBean,
+            'filePath' => $filePath,
+            'pathId' => $pathId,
+            'fileName' => $documentBean->filename,
+            'driveId' => $driveId,
+            'folderPath' => $folderPath,
+            'fileSize' => $documentBean->latest_revision_file_size,
+        ];
+        $uploadOptions = $this->checkForLargeFile($uploadOptions, $documentBean->latest_revision_file_size);
 
         try {
-            $driveFacade->uploadFile([
-                'documentBean' => $documentBean,
-                'filePath' => $filePath,
-                'pathId' => $pathId,
-                'fileName' => $documentBean->filename,
-                'driveId' => $driveId,
-            ]);
+            $response = $driveFacade->uploadFile($uploadOptions);
         } catch (Google_Exception $e) {
             $GLOBALS['log']->fatal($e);
             return false;
         }
 
-        return true;
+        return $response;
+    }
+
+    /**
+     * Checks for large file
+     *
+     * @param array $options
+     * @param int $size
+     *
+     * @return array
+     */
+    public function checkForLargeFile($options, $size): array
+    {
+        $maxUploadSize = 4194304;
+
+        if ($size > $maxUploadSize) {
+            $options['largeFile'] = true;
+        }
+
+        return $options;
     }
 
     /**
@@ -318,10 +413,14 @@ class CloudDriveApi extends SugarApi
      *
      * @param ServiceBase $api
      * @param array $args
-     * @return bool
+     * @return array
+     * @throws SugarApiExceptionNotAuthorized
      */
-    public function createSugarDocument(ServiceBase $api, array $args): bool
+    public function createSugarDocument(ServiceBase $api, array $args): array
     {
+        if (!SugarACL::checkAccess('Documents', 'create')) {
+            throw new SugarApiExceptionNotAuthorized('No access to create records for module Documents');
+        }
         $this->requireArgs($args, ['fileId', 'fileName', 'type',]);
         $fileId = $args['fileId'];
         $recordModule = $args['recordModule'];
@@ -334,6 +433,10 @@ class CloudDriveApi extends SugarApi
             $fileData = $this->downloadFile($api, $args);
         } catch (Google_Exception $e) {
             throw $e;
+        }
+
+        if (array_key_exists('success', $fileData) && !$fileData['success']) {
+            return $fileData;
         }
 
         $fileContent = $fileData['content'];
@@ -352,7 +455,10 @@ class CloudDriveApi extends SugarApi
             $this->addDocumentRelationship($recordModule, $recordId, $documentId);
         }
 
-        return true;
+        return [
+            'success' => true,
+            'documentId' => $documentId,
+        ];
     }
 
     /**
@@ -572,7 +678,7 @@ class CloudDriveApi extends SugarApi
         if ($args['module']) {
             $sugarQuery->where()->equals('path_module', $args['module']);
         }
-        if ($args['recordId']) {
+        if (isset($args['recordId']) && $args['recordId']) {
             $sugarQuery->where()->equals('record_id', $args['recordId']);
         }
 
@@ -687,6 +793,26 @@ class CloudDriveApi extends SugarApi
         try {
             if (count($paths) > 0) {
                 $folder = $paths[0];
+                $path = $folder['path'];
+                $path = $this->parsePath($path, $record);
+
+                if ($args['type'] === 'dropbox' && $folder['path']) {
+                    $file = $this->getFile($api, [
+                        'folderPath' => $path,
+                        'type' => $args['type'],
+                    ]);
+
+                    if (is_array($file) && isset($file['message']) && !$file['success']) {
+                        return $file;
+                    }
+
+                    return [
+                        'root' => isset($file['files']) ? true : false,
+                        'path' => $path,
+                        'isShared' => $folder['is_shared'],
+                        'pathCreateIndex' => count((array) $path) - 1,
+                    ];
+                }
 
                 if ($folder['folder_id']) {
                     $file = $this->getFile($api, [
@@ -699,7 +825,7 @@ class CloudDriveApi extends SugarApi
                         return $file;
                     }
 
-                    if (array_key_exists('parents', $file)) {
+                    if (property_exists($file, 'parents')) {
                         return [
                             'root' => $folder['folder_id'],
                             'path' => $folder['path'],
@@ -709,9 +835,6 @@ class CloudDriveApi extends SugarApi
                         ];
                     }
                 }
-
-                $path = $folder['path'];
-                $path = $this->parsePath($path, $record);
 
                 if ($path[0]['name'] === 'My files' || $path[0]['name'] === 'Shared') {
                     $path[0]['folderId'] = 'root';
@@ -759,7 +882,7 @@ class CloudDriveApi extends SugarApi
                     'root' => $rootPath->folder_id,
                     'driveId' => $file->driveId,
                     'path' => $rootPath->path,
-                    'parentId' => $file->parents[0],
+                    'parentId' => is_array($file->parents) && count($file->parents) > 0 ? $file->parents[0] : '',
                     'isShared' => $rootPath->is_shared,
                 ];
             }
@@ -786,7 +909,7 @@ class CloudDriveApi extends SugarApi
          * 1. a json formatted path - it means we already know folder ids
          * 2. just a string - 'path1/path2/{$name}' - this was added manually by the user
          */
-        $decodedPath = json_decode($path);
+        $decodedPath = json_decode($path, true);
 
         if (is_null($decodedPath) && is_string($path)) {
             $path = trim($path, '/');
@@ -1007,6 +1130,60 @@ class CloudDriveApi extends SugarApi
     }
 
     /**
+     * Upload a document to the drive
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     */
+    public function uploadDocumentToDrive(ServiceBase $api, array $args) : array
+    {
+        $this->requireArgs($args, ['documentId', 'cloud_service_type', 'path']);
+
+        $cloudServiceName = $args['cloud_service_type'];
+        $documentId = $args['documentId'];
+        $path = $args['path'];
+
+        $documentBean = \BeanFactory::getBean('Documents', $documentId);
+        $drive = new DriveFacade($cloudServiceName);
+
+        $documentRevisionID = $documentBean->document_revision_id;
+        $revisionBean = \BeanFactory::retrieveBean('DocumentRevisions', $documentRevisionID);
+        $fileName = $revisionBean->filename;
+
+        $uploadOptions = [
+            'documentBean' => $documentBean,
+            'fileName' => $fileName,
+        ];
+        if ($cloudServiceName === 'dropbox') {
+            $path = json_decode($path, true);
+            $path[] = ['name' => $fileName];
+
+            $uploadOptions['folderPath'] = $path;
+            $uploadOptions['filePath'] = $path;
+        } else {
+            $uploadOptions['pathId'] = $path;
+        }
+
+        $res = $drive->uploadFile($uploadOptions);
+        if (is_array($res) && isset($res['success'])) {
+            if ($res['success'] === true) {
+                return [
+                    'status' => 'success',
+                    'documentName' => $documentBean->name,
+                ];
+            } else {
+                return [
+                    'status' => 'error',
+                    'message' => $res['message'],
+                ];
+            }
+        } else {
+            return $res;
+        }
+    }
+
+    /**
      * Gets the drive client
      *
      * @param array $args
@@ -1017,5 +1194,19 @@ class CloudDriveApi extends SugarApi
 
         $driveFacade = $this->getDrive($args['type']);
         return $driveFacade->getClient($args);
+    }
+
+    /**
+     * Check if a document have a file attached
+     *
+     * @param SugarBean $documentBean
+     */
+    public function checkDocumentAttachedFile(\SugarBean $documentBean)
+    {
+        $filePath = 'upload://'.$documentBean->document_revision_id;
+
+        if (!$documentBean->filename || !file_exists($filePath)) {
+            throw new Exception('LBL_ERR_NO_FILE_ATTACHED');
+        }
     }
 }

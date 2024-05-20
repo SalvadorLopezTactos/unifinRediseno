@@ -24,7 +24,7 @@ class SugarCronParallelJobs extends SugarCronJobs
 
         // Beware of PHP bug #60185 - maybe problematic here, though works fine on my tests.
         global $sugar_config;
-        chdir(dirname(__FILE__). "/../../");
+        chdir(__DIR__. "/../../");
         $command = sprintf("nohup %s -f run_job.php %s %s 1>/dev/null 2>/dev/null &", $sugar_config['cron']['php_binary'], $job->id, $this->getMyId());
         shell_exec($command);
         return true;
@@ -73,6 +73,7 @@ class SugarCronParallelJobs extends SugarCronJobs
 
     protected function runWindows($job)
     {
+        $sugar_config = [];
         if(!$this->checkPHPBinary($job)) {
             return;
         }
@@ -80,7 +81,7 @@ class SugarCronParallelJobs extends SugarCronJobs
             $this->fail("Cannot run PHP binary, please enable COM extension");
         }
         $WshShell = new COM("WScript.Shell");
-        chdir(dirname(__FILE__). "/../../");
+        chdir(__DIR__. "/../../");
         $command = sprintf("%s -f run_job.php %s %s", $sugar_config['cron']['php_binary'], $job->id, $this->getMyId());
         $WshShell->Run($command, 0, false); // no window, don't wait for return
         $WshShell->Release();

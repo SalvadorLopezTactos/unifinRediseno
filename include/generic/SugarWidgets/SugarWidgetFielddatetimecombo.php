@@ -24,10 +24,11 @@ class SugarWidgetFieldDateTimecombo extends SugarWidgetFieldDateTime {
 	//TODO:now for date time field , we just search from date start to date end. The time is from 00:00:00 to 23:59:59
 	//If there is requirement, we can modify report.js::addFilterInputDatetimesBetween and this function
 	function queryFilterBetween_Datetimes(& $layout_def) {
-        global $timedate;
         if ($this->getAssignedUser()) {
-            $begin = $timedate->handle_offset($layout_def['input_name0'], $timedate->get_db_date_time_format(), false, $this->assigned_user);
-            $end = $timedate->handle_offset($layout_def['input_name2'], $timedate->get_db_date_time_format(), false, $this->assigned_user);
+            // report's assigned user' timezone is already taken into account in the _get_column_select method
+            // via add_tz_offset which adds (+/- INTERVAL X MINUTE) to the first part of the condition
+            $begin = $layout_def['input_name0'];
+            $end = $layout_def['input_name2'];
         } else {
             $begin = $layout_def['input_name0'];
             $end = $layout_def['input_name1'];
@@ -38,4 +39,17 @@ class SugarWidgetFieldDateTimecombo extends SugarWidgetFieldDateTime {
 			")\n";
 	}
 
+    /**
+     * Get datetime value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        $value = parent::getFieldControllerData($layoutDef);
+
+        return $value;
+    }
 }

@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Dashboard elenco account',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Dashboard record account',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Account Focus Drawer',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Dettagli account',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Dashboard focus account - Console',
     'LBL_NEXT_RENEWAL_DATE' => 'Data del prossimo rinnovo',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Data del prossimo rinnovo',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Nome account/Settore',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Luogo',
     'LBL_PURCHASES' => 'Acquisti',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tempistica Account',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizza',
+    'LBL_CREATE_NEW' => 'Crea Nuovo',
+    'LBL_MANAGE' => 'Gestisci',
+    'LBL_SEE_DETAILS' => 'Mostra Dettagli',
+    'LBL_HIDE_NEW' => 'Nascondi',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafici',
@@ -206,4 +213,7 @@ Per creare un record del modulo {{module_name}}:
 2. Cliccare "Salva" per salvare il nuovo record e ritornare alla pagina precedente.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Report sul modulo Aziende',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Utenti esterni',
 );

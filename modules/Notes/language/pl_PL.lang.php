@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Pulpit listy uwag',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Pulpit rekordów notatek',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy notatek',
+    'LBL_EXTERNAL_USER' => 'Zewnętrzny użytkownik',
+    'LBL_EXTERNAL_USER_NAME' => 'Zewnętrzny użytkownik',
 
     'LBL_RELATED_CONTACT' => 'Powiązany kontakt',
     'ERR_DELETE_RECORD' => 'Aby usunąć Kontrahenta, musisz podać numer rekordu.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Typ wiadomości e-mail',
     'LBL_EMAIL_ID' => 'Identyfikator wiadomości e-mail',
     'LBL_PHONE' => 'Telefon:',
-    'LBL_PORTAL_FLAG' => 'Wyświetlić w portalu?',
+    'LBL_PORTAL_FLAG' => 'Dostępne zewnętrznie',
     'LBL_EMBED_FLAG' => 'Umieścić w wiadomości?',
     'LBL_PRODUCT_ID' => 'ID pozycji oferty:',
     'LBL_QUOTE_ID' => 'ID oferty:',

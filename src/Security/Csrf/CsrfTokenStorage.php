@@ -29,7 +29,7 @@ class CsrfTokenStorage implements TokenStorageInterface
      * The namespace used to store values in the session.
      * @var string
      */
-    const SESSION_NAMESPACE = 'csrf_tokens';
+    public const SESSION_NAMESPACE = 'csrf_tokens';
 
     /**
      * @var Sugarcrm\Sugarcrm\Util\Arrays\TrackableArray\TrackableArray

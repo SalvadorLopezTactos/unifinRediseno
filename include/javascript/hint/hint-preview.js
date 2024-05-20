@@ -22,6 +22,9 @@
      * @return {boolean} True if the expected layout is rendered.
      */
     function isGivenLayout(layoutName) {
+        if (app.sideDrawer && app.sideDrawer.isOpen()) {
+            return app.sideDrawer._components[0].name === layoutName;
+        }
         return app.controller.layout && app.controller.layout.name === layoutName;
     }
 
@@ -55,6 +58,7 @@
     function getPreview() {
         var previewCmpPath = ['sidebar', 'preview-pane', 'preview'];
         return getView(app.drawer, ['create'].concat(previewCmpPath)) ||
+            getView(app.sideDrawer, ['record'].concat(previewCmpPath)) ||
             getView(app.controller.layout, previewCmpPath);
     }
 
@@ -66,6 +70,7 @@
     function _getPreviewPane() {
         var previewCmpPath = ['sidebar', 'preview-pane'];
         return getView(app.drawer, ['create'].concat(previewCmpPath)) ||
+            getView(app.sideDrawer, ['record'].concat(previewCmpPath)) ||
             getView(app.controller.layout, previewCmpPath);
     }
 
@@ -158,7 +163,9 @@
      */
     function isTriggeredOnSubpanel(model) {
         var hasModelFromSubpanel = false;
-        var recordModel = app.controller.layout.model;
+        var recordModel = app.sideDrawer && app.sideDrawer.isOpen() ?
+            app.sideDrawer._components[0].model :
+            app.controller.layout.model;
         var moduleLink = model.link && model.link.name;
         if (moduleLink && isGivenLayout('record') && recordModel) {
             var relatedCollection = recordModel.getRelatedCollection(moduleLink);
@@ -212,7 +219,9 @@
     function isEnrichedRecordView(model) {
         var isEnrichedRecord = isGivenLayout('record') && isEnrichedModel(model);
         var dashBoardHeaderPath = ['sidebar', 'dashboard-pane', 'dashboard', 'dashboard-headerpane'];
-        var dashBoardHeader = getView(app.controller.layout, dashBoardHeaderPath);
+        var recordLayout = app.sideDrawer && app.sideDrawer.isOpen() ? app.sideDrawer._components[0] :
+            app.controller.layout;
+        var dashBoardHeader = getView(recordLayout, dashBoardHeaderPath);
         if (isEnrichedRecord && dashBoardHeader) {
             var dashboardTitle = _.findWhere(dashBoardHeader.fields, {type: 'hint-dashboardtitle'});
             isEnrichedRecord = dashboardTitle && dashboardTitle.getHintState(dashboardTitle.hintStateKey);
@@ -335,13 +344,17 @@
     function _editStyles() {
         var $navTabs;
         var $tabbableClass;
-        var tabbable = App.controller.layout._components[0]; //calling the parent component in sidebar.
-        var self = App.controller.layout._components[0]._components[2]; //preview-pane in sugar layout/tabbed-layout.js
+        var tabbable = App.sideDrawer && App.sideDrawer.isOpen() ?
+            App.sideDrawer._components[0]._components[0] :
+            App.controller.layout._components[0]; //calling the parent component in sidebar.
+        var self = tabbable._components[2]; //preview-pane in sugar layout/tabbed-layout.js
         var hintTabsHidden = tabbable.$(tabbable.$('.tabbable.hide-tabs.preview-active'));
         var hintLabelTitle = tabbable.$(tabbable.$('.nav-item'));
         var hintLabelNonHidden = tabbable.$(tabbable.$('.nav.nav-tabs.related-tabs.preview-pane-tabs'));
         var hintLabelHidden =  tabbable.$(tabbable.$('.nav.nav-tabs.related-tabs.hide.preview-pane-tabs'));
         var hintPreviewPosition = _getSpecificLayoutPosition(_getPreviewPane(), 'Hint-Tab') + 1;
+
+        self.$(hintLabelTitle[hintPreviewPosition]).addClass('hint-nav-tab');
 
         if (hintLabelHidden.length) {
             hintLabelHidden.removeClass('hide');
@@ -373,7 +386,9 @@
      * The classNames are unique for the Tabbable and nav-tabs components.
      */
     function _editStylesHintUndo() {
-        var tabbable = App.controller.layout._components[0]; // calling the parent component in sidebar.
+        var tabbable = App.sideDrawer && App.sideDrawer.isOpen() ?
+            App.sideDrawer._components[0]._components[0] :
+            App.controller.layout._components[0]; // calling the parent component in sidebar.
         var hintTabs = tabbable.$(tabbable.$('.tabbable.preview-active'));
         var hintLabel = tabbable.$(tabbable.$('.nav.nav-tabs.related-tabs.preview-pane-tabs'));
         if (hintLabel.length) {
@@ -383,8 +398,8 @@
             hintTabs.addClass('hide-tabs');
         }
 
-        if (app.controller.layout._components[0] && app.controller.layout._components[0]._components) {
-            var self = app.controller.layout._components[0]._components[2];
+        if (tabbable._components) {
+            var self = tabbable._components[2];
             var previewPosition = _getSpecificLayoutPosition(_getPreviewPane(), 'preview');
             var hintPreviewPosition = _getSpecificLayoutPosition(_getPreviewPane(), 'Hint-Tab');
 
@@ -412,7 +427,9 @@
      * Edit styles preview undo
      */
     function _editStylesPreviewUndo() {
-        var tabbable = App.controller.layout._components[0]; // calling the parent component in sidebar.
+        var tabbable = App.sideDrawer && App.sideDrawer.isOpen() ?
+            App.sideDrawer._components[0]._components[0] :
+            App.controller.layout._components[0]; // calling the parent component in sidebar.
         var hintTabs = tabbable.$(tabbable.$('.tabbable.preview-active'));
         var hintLabel = tabbable.$(tabbable.$('.nav.nav-tabs.related-tabs.preview-pane-tabs'));
         if (hintLabel.length) {
@@ -422,7 +439,7 @@
             hintTabs.addClass('hide-tabs');
         }
 
-        var self = App.controller.layout._components[0]._components[2];
+        var self = tabbable._components[2];
         var previewPosition = _getSpecificLayoutPosition(_getPreviewPane(), 'preview');
         var hintPreviewPosition = _getSpecificLayoutPosition(_getPreviewPane(), 'Hint-Tab');
 
@@ -452,7 +469,9 @@
      * The classNames are unique for the Tabbable and nav-tabs components.
      */
     function _removeExtraStyles() {
-        var tabbable = App.controller.layout._components[0];
+        var tabbable = App.sideDrawer && App.sideDrawer.isOpen() ?
+            App.sideDrawer._components[0]._components[0] :
+            App.controller.layout._components[0];
         var hintLabel = tabbable.$(tabbable.$('.nav.nav-tabs.related-tabs')[3]);
         var addHideClassOnce = tabbable.$(tabbable.$('.nav.nav-tabs.related-tabs.hide')[3]).hasClass('hide');
         if (hintLabel.length && !(addHideClassOnce)) {
@@ -475,7 +494,9 @@
         var preview;
         var modelName = model.module;
         if (app.hint.isHintUser()) {
-            var isRecordViewlayoutType = SUGAR.App.controller.layout.type === 'record';
+            var isRecordViewlayoutType = SUGAR.App.sideDrawer && SUGAR.App.sideDrawer.isOpen() ?
+                SUGAR.App.sideDrawer._components[0].type === 'record' :
+                SUGAR.App.controller.layout.type === 'record';
             var hintViewInTab = app.hint.shouldUseOldHintPreview(modelName);
             if (_tabViewValidationCheck(model) && !isRecordViewlayoutType) {
                 _editStyles();

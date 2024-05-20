@@ -44,7 +44,7 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
     public $needsUrl = false;
     public $sharingOptions = null;
 
-    const APP_STRING_ERROR_PREFIX = 'ERR_GOOGLE_API_';
+    public const APP_STRING_ERROR_PREFIX = 'ERR_GOOGLE_API_';
 
     public function getClient()
     {
@@ -221,6 +221,7 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
 
         return [
             'success' => true,
+            'message' => 'LBL_FILE_UPLOADED',
         ];
     }
 
@@ -257,6 +258,7 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
 
         return [
             'success' => true,
+            'message' => 'LBL_FILE_UPLOADED',
         ];
     }
 

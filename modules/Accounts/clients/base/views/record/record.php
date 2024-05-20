@@ -157,18 +157,18 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                     'type' => 'favorite',
                     'dismiss_label' => true,
                 ),
-                array(
-                    'name' => 'follow',
-                    'label'=> 'LBL_FOLLOW',
-                    'type' => 'follow',
-                    'readonly' => true,
-                    'dismiss_label' => true,
-                ),
                 [
                     'name' => 'is_escalated',
                     'type' => 'badge',
                     'badge_label' => 'LBL_ESCALATED',
                     'warning_level' => 'important',
+                    'dismiss_label' => true,
+                ],
+                [
+                    'name' => 'follow',
+                    'label'=> 'LBL_FOLLOW',
+                    'type' => 'follow',
+                    'readonly' => true,
                     'dismiss_label' => true,
                 ],
             )
@@ -282,6 +282,10 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                     'name' => 'phone_alternate',
                     'label' => 'LBL_PHONE_ALT',
                 ),
+                [
+                    'name' => 'geocode_status',
+                    'licenseFilter' => ['MAPS'],
+                ],
                 'email',
                 'phone_fax',
                 'campaign_name',

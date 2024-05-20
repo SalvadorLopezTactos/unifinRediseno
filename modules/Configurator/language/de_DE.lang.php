@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logos',
 	'LBL_ADMIN_WIZARD' => 'Admin-Assistent',
-	'LBL_ALLOW_USER_TABS' => 'Es Benutzern erlauben, die Registerkarten zu konfigurieren',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Systemeinstellungen',
 	'LBL_ENABLE_MAILMERGE' => 'Serienbriefe zulassen?',
 	'LBL_LOGVIEW' => 'Protokolleinstellungen konfigurieren',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Verwenden Sie diese Einstellung, um festzulegen, wie viele Monate vor dem heutigen Datum die Informationen zu Frei/Gebucht für Telefonate und Konferenzen veröffentlicht werden soll.<BR> Um die Veröffentlichung von Frei/Gebucht auszuschalten, geben sie "0" ein. Das Minimum ist 1 Monat; das Maximum 12 Monate.',
     'LBL_PDFMODULE_NAME' => 'PDF-Einstellungen berichten',
     'SUGARPDF_BASIC_SETTINGS' => 'Dokumenteigenschaften',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Erweiterte Einstellungen',
     'SUGARPDF_LOGO_SETTINGS' => 'Bilder',
-
-    'PDF_CREATOR' => 'PDF Creator',
-    'PDF_CREATOR_INFO' => 'Definiert den Ersteller des Dokuments. <br>Das ist normalerweise der Name der Anwendung, welche die PDF-Datei generiert.',
 
     'PDF_AUTHOR' => 'Autor',
     'PDF_AUTHOR_INFO' => 'Der Autor wird in den Dokumenteigenschaften angezeigt.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Neues Bild für Angebote wählen',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Das Dateiformat kann entweder .jpg oder .png sein (Nur .jpg für EZPDF)<BR>Die empfohlene Größe ist 867x60 Pixel.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Angebote-Bildbreite',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Verändert die Größe des hochgeladenen Bildes, welches in den Angebote-PDF-Dokumenten angezeigt wird. (nur TCPDF)',
+    'PDF_TITLE' => 'Name',
+    'PDF_TITLE_INFO' => 'Der Titel wird in den Dokumenteneigenschaften angezeigt.',
+
+    'PDF_SUBJECT' => 'Betreff',
+    'PDF_SUBJECT_INFO' => 'Der Betriff wird in den Dokumenteneigenschaften angezeigt.',
 
     'PDF_SMALL_HEADER_LOGO' => 'Aktuelles Bild',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Dieses Bild wird im Header der PFD-Dokumentenseite angezeigt.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Neues Bild wählen',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Das Dateiformat kann entweder .jpg oder .png sein. (nur .jpg für EZPDF) Die empfohlene Größe ist 212x40 Pixel.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Bildbreise für Bericht',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Ändern Sie die Größe des hochgeladenen Bildes, welches im Berichts-PDF angezeigt wird. (nur TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Header-String',
-    'PDF_HEADER_STRING_INFO' => 'Header-Beschriftung',
-
-    'PDF_HEADER_TITLE' => 'Header-Titel',
-    'PDF_HEADER_TITLE_INFO' => 'String, der als Titel in der Kopfzeile gedruckt werden soll',
-
-    'PDF_FILENAME' => 'Standard-Dateiname',
-    'PDF_FILENAME_INFO' => 'Standard-Dateiname für erzeugte PDF-Dateien',
-
-    'PDF_TITLE' => 'Name',
-    'PDF_TITLE_INFO' => 'Der Titel wird in den Dokumenteneigenschaften angezeigt.',
-
-    'PDF_SUBJECT' => 'Betreff',
-    'PDF_SUBJECT_INFO' => 'Der Betriff wird in den Dokumenteneigenschaften angezeigt.',
-
     'PDF_KEYWORDS' => 'Suchbegriff(e)',
     'PDF_KEYWORDS_INFO' => 'Suchbegriffe mit einem Dokument verknüpfen, normalerweise in der Form: "Suchbegriff1 Suchbegriff2...."',
 
-    'PDF_COMPRESSION' => 'Komprimierung',
-    'PDF_COMPRESSION_INFO' => 'Schaltet die Seitenkomprimierung ein oder aus. <br>Wenn sie aktiviert ist, wird die interne Darstellung der einzelnen Seiten komprimiert, was zu einem Komprimierungsverhältnis von etwa 2 bei den ausgegebenen Dokumenten führt.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG-Qualität (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Konfiguriert die Standard-JPEG-Qualität (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF-Version',
-    'PDF_PDF_VERSION_INFO' => 'Legt die PDF-Version fest (siehe PDF-Referenz für gültige Werte).',
-
-    'PDF_PROTECTION' => 'Dokumenten-Schutz',
-    'PDF_PROTECTION_INFO' => 'Einstellung des Dokumentenschutzes<br>- kopieren: Text und Bilder in die Zwischenablage kopieren<br>- drucken: Dokument verändert<br>drucken: Es verändern (mit Ausnahme von Anmerkungen und Formblätter)<br>- Notiz-Formblätter: Anmerkungen und Formblätter hinzufügen<br>Hinweis: Der Schutz vor Änderungen kann nur durch Personen eingestellt werden, die mit der Vollversion des Acrobat-Produkts arbeiten.',
-
-    'PDF_USER_PASSWORD' => 'Benutzerpasswort',
-    'PDF_USER_PASSWORD_INFO' => 'Wenn Sie kein Passwort festlegen, wird das Dokument wie üblich geöffnet. <br>Wenn Sie ein Benutzerpasswort festlegen, wird der PDF Viewer Sie danach fragen, bevor das Dokument angezeigt werden kann. <br>Es kann auch das Master-Passwort verwendet werden, um den vollständigen Zugriff zu erhalten.',
-
-    'PDF_OWNER_PASSWORD' => 'Eigentümer-Passwort',
-    'PDF_OWNER_PASSWORD_INFO' => 'Wenn Sie kein Passwort festlegen, wird das Dokument wie üblich geöffnet. <br>Wenn Sie ein Benutzerpasswort festlegen, wird der PDF Viewer Sie danach fragen, bevor das Dokument angezeigt werden kann. <br>Es kann auch das Master-Passwort verwendet werden, um den vollständigen Zugriff zu erhalten.',
-
-    'PDF_ACL_ACCESS' => 'Zugriffskontrolle',
-    'PDF_ACL_ACCESS_INFO' => 'Standard-Zugriffskontrolle für die PDF-Erzeugung.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Zellen-Höhenverhältnis',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Wenn die Höhe einer Zelle kleiner ist als (Schrifthöhe x-Zell-Höhenverhältnis), wird (Schrifthöhe x-Zell-Höhenverhältnis) als Zellenhöhe verwendet. <br>(Schrifthöhe x-Zell-Höhenverhältnis) wird auch als die Höhe der Zelle verwendet, wenn keine Höhe festgelegt wurde.',
-
-    'K_TITLE_MAGNIFICATION' => 'Titel-Vergrößerung',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Die Titel-Vergrößerung behält die Hauptschriftgröße bei.',
-
-    'K_SMALL_RATIO' => 'Kleiner Schriftfaktor',
-    'K_SMALL_RATIO_INFO' => 'Reduktionsfaktor für kleine Schrift.',
-
-    'HEAD_MAGNIFICATION' => 'Kopfzeilenvergrößerung',
-    'HEAD_MAGNIFICATION_INFO' => 'Vergrößerungsfaktor für Titel.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Bildmaßstab',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Maßstab, der für Bilder verwendet wird',
-
-    'PDF_UNIT' => 'Einheit',
-    'PDF_UNIT_INFO' => 'Dokument-Maßeinheit',
 	'PDF_GD_WARNING'=>'Sie haben die GD-Bibliothek für PHP nicht installiert. Ohne die GD-Bibliothek können in PDF-Dokumenten nur JPEG-Logos angezeigt werden.',
     'ERR_EZPDF_DISABLE'=>'Warnung: Die EZPDF-Klasse ist in der Einstellungstabelle deaktiviert und als PDF-Klasse festgelegt. Bitte speichern Sie dieses Formular, um TCPDF als PDF-Klasse festzulegen und in einen stabilen Zustand zurückkehren.',
     'LBL_IMG_RESIZED'=>"(Format wurde dem Monitor angepasst)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Eine PDF-Schriftart hinzufügen',
     'LBL_PDF_PATCH' => 'Patch',
-    'LBL_PDF_PATCH_INFO' => 'Benutzerdefinierte Änderung der Kodierung. Schreiben Sie ein PHP-Array.<br>Beispiel:<br>ISO-8859-1 enthält kein Euro-Symbol. Um dieses auf Position 164 hinzuzufügen, schreiben Sie "Array(164=>\\\'Euro\\\')".',
     'LBL_PDF_ENCODING_TABLE' => 'Kodierungstabelle',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Name der Kodierungstabelle.. <br>Für Unicode TrueType-, OpenType Unicode- und Symbol-Schriftarten wird diese Option ignoriert.<br>Die Kodierung definiert die Zuordnung zwischen einem Code (von 0 bis 255) und einem Zeichen der Schriftart. <br>Die ersten 128 sind fixiert und entsprechen ASCII.',
     'LBL_PDF_FONT_FILE' => 'Schriftartdatei',

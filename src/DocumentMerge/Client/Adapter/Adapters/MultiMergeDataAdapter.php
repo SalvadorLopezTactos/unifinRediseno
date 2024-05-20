@@ -13,6 +13,10 @@ namespace Sugarcrm\Sugarcrm\DocumentMerge\Client\Adapter\Adapters;
 
 class MultiMergeDataAdapter extends BaseDataAdapter
 {
+    /**
+     * @var mixed[]|array<string, string>|mixed
+     */
+    public $payload;
     public function getData(): array
     {
         $this->payload = parent::getData();

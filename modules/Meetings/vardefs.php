@@ -12,6 +12,8 @@
 
 $dictionary['Meeting'] = array(
     'table' => 'meetings',
+    'color' => 'teal',
+    'icon' => 'sicon-meetings-lg',
     'audited' => true,
     'activity_enabled'=>true,
     'unified_search' => true,
@@ -798,8 +800,8 @@ VardefManager::createVardef('Meetings', 'Meeting', array(
     'default',
     'assignable',
     'team_security',
+    'customer_journey_activity',
 ));
 
 //boost value for full text search
 $dictionary['Meeting']['fields']['description']['full_text_search']['boost'] = 0.55;
-

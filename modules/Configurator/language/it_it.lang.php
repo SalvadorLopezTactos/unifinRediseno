@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Loghi',
 	'LBL_ADMIN_WIZARD' => 'Guida amministratore',
-	'LBL_ALLOW_USER_TABS' => 'Permetti algli utenti di nascondere le schede',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Impostazioni del Sistema',
 	'LBL_ENABLE_MAILMERGE' => 'Abilitare Stampa Unione?',
 	'LBL_LOGVIEW' => 'Configurare Impostazioni di Accesso',
@@ -217,11 +216,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Usa questa impostazione per stabilire il numero di mesi antecedenti la data corrente per i quali l´informazione Libero/Occupato per chiamate e riunioni è pubblicato.</BR>Per disattivare la pubblicazione dello stato Libero/Occupato, impostare "0".  Il minimo è 1 mese; il massimo 12 mesi.',
     'LBL_PDFMODULE_NAME' => 'PDF Settings',
     'SUGARPDF_BASIC_SETTINGS' => 'Proprietà del documento',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Impostazioni avanzate',
     'SUGARPDF_LOGO_SETTINGS' => 'Immmagini',
-
-    'PDF_CREATOR' => 'PDF Creator',
-    'PDF_CREATOR_INFO' => 'Definisci il creator del documento. <br>Generalmente è il nome dell´applicazione che crea il PDF.',
 
     'PDF_AUTHOR' => 'Autore',
     'PDF_AUTHOR_INFO' => 'L´autore appare nelle proprietà del documento.',
@@ -232,8 +227,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Seleziona una Nuova Immagine per le Offerte',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Il formato del file può essere .jpg o .png. (Solo .jpg per EZPDF)<BR>La dimensione consigliata è 867x74 px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Dimensione Immagine delle Offerte',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Modifica la scala dell´immagine caricata che appare nei Documenti PDF delle Offerte. (Solo TCPDF)',
+    'PDF_TITLE' => 'Titolo',
+    'PDF_TITLE_INFO' => 'Il Titolo compare nelle proprietà dei documenti.',
+
+    'PDF_SUBJECT' => 'Soggetto',
+    'PDF_SUBJECT_INFO' => 'Il Soggetto compare nelle proprietà dei documenti.',
 
     'PDF_SMALL_HEADER_LOGO' => 'Documenti PDF per Reports',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Questa immagine compare nell´intestazione predefinita nei Documenti PDF dei Reports.<br> Questa immagine appare anche nell´angolo in alto a sinistra dell´applicazione Sugar.',
@@ -241,66 +239,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Seleziona una Nuova Immagine per i Reports',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Il formato del file può essere .jpg o .png. (Solo .jpg per EZPDF)<BR>La dimensione consigliata è 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Dimensione Immagine dei Reports',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Modifica la scala dell´immagine caricata che appare nei Documenti PDF dei Reports. (Solo TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Stringa Intestazione',
-    'PDF_HEADER_STRING_INFO' => 'Descrizione della stringa di Intestazione',
-
-    'PDF_HEADER_TITLE' => 'Titolo Intestazione',
-    'PDF_HEADER_TITLE_INFO' => 'Stringa da scrivere come titolo nell´intestazione del documento',
-
-    'PDF_FILENAME' => 'Nome File predefinito',
-    'PDF_FILENAME_INFO' => 'Nome File predefinito per i Files PDF creati',
-
-    'PDF_TITLE' => 'Titolo',
-    'PDF_TITLE_INFO' => 'Il Titolo compare nelle proprietà dei documenti.',
-
-    'PDF_SUBJECT' => 'Soggetto',
-    'PDF_SUBJECT_INFO' => 'Il Soggetto compare nelle proprietà dei documenti.',
-
     'PDF_KEYWORDS' => 'Parolachiave(Parolechiave)',
     'PDF_KEYWORDS_INFO' => 'Associa Parolechiave al documento, generalmente con la formula "parolachiave1 parolachiave2..."',
 
-    'PDF_COMPRESSION' => 'Compressione',
-    'PDF_COMPRESSION_INFO' => 'Attiva o disattiva la compressione della pagina. <br>Una volta attivata, la rappresentazione interna di ogni pagina viene compressa, conducendo ad una rapporto di compressione di circa 2 per il documento derivante.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG Qualità(1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Imposta la qualità di compressione JPEG predefinita (1-100)',
-
-    'PDF_PDF_VERSION' => 'Versione PDF',
-    'PDF_PDF_VERSION_INFO' => 'Imposta la versione PDF (controlla la fonte PDF per valori validi).',
-
-    'PDF_PROTECTION' => 'Protezione del Documento',
-    'PDF_PROTECTION_INFO' => 'Imposta la Protezione del Documento<br>- copia: copia testo ed immagini nella clipboard<br>- stampa: stampa il documento<br>- modifica: modifica il documento (eccetto note e moduli)<br>- note-moduli: aggiungi note e moduli<br>Nota: la protezione sulla modifica è riservata alle persone che hanno l´intero prodotto Acrobat.',
-
-    'PDF_USER_PASSWORD' => 'Password Utente',
-    'PDF_USER_PASSWORD_INFO' => 'Se non imposti una password, il documento verrà aperto come di consueto. <br>Se imposti una password utente, il visualizzatore PDF la richiederà prima di aprire il documento. <br>La password principale, se diversa dalla password utente, può essere utilizzata per avere l´intero.',
-
-    'PDF_OWNER_PASSWORD' => 'Password proprietaria',
-    'PDF_OWNER_PASSWORD_INFO' => 'Se non imposti una password, il documento verrà aperto come di consueto. <br>Se imposti una password utente, il visualizzatore PDF la richiederà prima di aprire il documento. <br>La password principale, se diversa dalla password utente, può essere utilizzata per avere l´intero.',
-
-    'PDF_ACL_ACCESS' => 'Controllo Accesso',
-    'PDF_ACL_ACCESS_INFO' => 'Controllo Accesso predefinito per la creazione di PDF.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Rapporto altezza cella',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Se l´altezza di una cella è minore di (Rapporto altezza carattere x altezza cella), allora (Rapporto altezza carattere x altezza cella) è utilizzato come altezza della cella.<br>(Rapporto altezza carattere x altezza cella) è anche utilizzata come altezza della cella quando non viene definita nessuna altezza.',
-
-    'K_TITLE_MAGNIFICATION' => 'Ingrandimento Titolo',
-    'K_TITLE_MAGNIFICATION_INFO' => 'L´ingrandimento del Titolo rispetta la dimensione del carattere principale.',
-
-    'K_SMALL_RATIO' => 'Fattore carattere minuscolo',
-    'K_SMALL_RATIO_INFO' => 'Riduzione fattore per carattere minuscolo.',
-
-    'HEAD_MAGNIFICATION' => 'Ingrandimento Intestazione',
-    'HEAD_MAGNIFICATION_INFO' => 'Fattore ingrandimento per titoli.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Rapporto di Scala dell´Immagine',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Rapporto utilizzato per scalare le immagini',
-
-    'PDF_UNIT' => 'Unità',
-    'PDF_UNIT_INFO' => 'Unità di misura del documento',
 	'PDF_GD_WARNING'=>'Non hai installato la libreria GD per PHP. Senza l´installazione della libreria GD, possono essere visualizzati solo i loghi JPEG nei documenti PDF.',
     'ERR_EZPDF_DISABLE'=>'Avviso : La classe EZPDF è disattivata dalla tabella di configurazione ed è impostata come classe PDF. Si prega di "Salvare" questo form per impostare TCPDF come Classe PDF e ritornare in uno stato stabile.',
     'LBL_IMG_RESIZED'=>"(ridimensionato allo schermo)",
@@ -359,7 +300,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Aggiungi un Font PDF',
     'LBL_PDF_PATCH' => 'Patch',
-    'LBL_PDF_PATCH_INFO' => 'Modifica personalizzata della codifica. Scrivi un array PHP .<br>Esempio :<br>ISO-8859-1 non contiene il simbolo dell´euro. Per aggiungerlo alla posizione 164, scrivi "array(164=>\\´Euro\\´)".',
     'LBL_PDF_ENCODING_TABLE' => 'Tabella di codifica',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Nome della tabella di codifica.<br>Questa opzione è ignorata per TrueType Unicode, OpenType Unicode e caratteri simbolici.<br>La codifica definisce l´associazione tra un codice (da 0 a 255) e un carattere contenuto nel Font.<br>I primi 128 sono fissi e corrispondono a ASCII.',
     'LBL_PDF_FONT_FILE' => 'File Font',

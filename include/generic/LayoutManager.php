@@ -321,10 +321,69 @@ class LayoutManager
 		return null;
 	}
 
+
+    /**
+     * Get value for report row in order to use it in sidecar.
+     *
+     * @param mixed $widgetDef
+     *
+     * @return mixed
+     */
+    public function widgetReportForSideCar($widgetDef)
+    {
+        $theclass = $this->getClassFromWidgetDef($widgetDef, false);
+        $label = $widgetDef['module'] ?? '';
+
+        if ($theclass instanceof SugarWidgetSubPanelTopButton) {
+            $label = $theclass->get_subpanel_relationship_name($widgetDef);
+        }
+
+        $theclass->setWidgetId($label);
+
+        //#27426
+        $fieldDef = $this->getFieldDef($widgetDef);
+        if (!empty($fieldDef) && !empty($fieldDef['type']) && strtolower(trim($fieldDef['type'])) === 'multienum') {
+            $widgetDef['fields'] = sugarArrayMerge($widgetDef['fields'], $fieldDef);
+            $widgetDef['fields']['module']  = $label;
+        }
+        //end
+
+        if (array_key_exists('onlyValue', $widgetDef) && $widgetDef['onlyValue'] === false) {
+            $data = [];
+
+            $data['type'] = $widgetDef['type'];
+            $data['module'] = $widgetDef['module'];
+            $data['name'] = $widgetDef['name'];
+
+            if (array_key_exists('label', $widgetDef)) {
+                $data['label'] = $widgetDef['label'];
+            }
+
+            $value = $theclass->getSidecarFieldData($widgetDef, null, null);
+
+            if (is_array($value)) {
+                $data = array_merge($data, $value);
+            } else {
+                $data['value'] = $value;
+            }
+
+            if (array_key_exists('id_name', $fieldDef)) {
+                $data['id_name'] = $fieldDef['id_name'];
+            }
+
+            if (array_key_exists('vname', $fieldDef)) {
+                $data['vname'] = $fieldDef['vname'];
+            }
+            return $data;
+        }
+
+        return $theclass->getSidecarFieldData($widgetDef, null, null);
+    }
+
 	function widgetDisplay($widget_def, $use_default = false, $grabName = false, $grabId = false)
 	{
 		$theclass = $this->getClassFromWidgetDef($widget_def, $use_default);
- 		$label = isset($widget_def['module']) ? $widget_def['module'] : '';
+        $label = $widget_def['module'] ?? '';
 	    if ($theclass instanceof SugarWidgetSubPanelTopButton) {
             $label = $theclass->get_subpanel_relationship_name($widget_def);
 	    }

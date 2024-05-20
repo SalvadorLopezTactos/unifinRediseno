@@ -790,69 +790,67 @@ $mod_strings = array(
 //POPUP HELP
 'LBL_POPHELP_FIELD_DATA_TYPE'=>'Выберите подходящий тип данных основываясь на типе данных, которые будут введены в поле.',
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configure the field to be full text searchable.',
-'LBL_POPHELP_FTS_FIELD_BOOST' => 'Boosting is the process of enhancing the relevancy of a record\\\'s fields.<br />Fields with a higher boost level will be given greater weight when the search is performed. When a search is performed, matching records containing fields with a greater weight will be appear higher in the search results.<br />The default value is 1.0 which stands for a neutral boost. To apply a positive boost any float value higher than 1 is accepted. For a negative boost use values lower than 1. For example a value of 1.35 will positively boost a field by 135%. Using a value of 0.60 will apply a negative boost.<br />Note that in previous versions it was required to perform a full text search reindex. This is no longer required.',
-'LBL_POPHELP_IMPORTABLE'=>'Да: Поле будет включено в операцию импорта.<br />Нет: Поле не будет включено в операцию импорта.<br />Требуется: Значение поля нужно вводить для любого импорта.',
-'LBL_POPHELP_PII'=>'Данное поле будет автоматически отмечено для аудита и доступно при просмотре личных сведений.<br>Также поля с личными сведениями можно полностью удалить, если подан запрос на удаления записи, содержащей конфиденциальные данные.<br>Удаление могут выполнить администраторы или пользователи в роли менеджера защиты данных с помощью модуля защиты данных.',
-'LBL_POPHELP_IMAGE_WIDTH'=>'Введите значение ширины, измеряемое в пикселах.<br />Загруженное изображение будет отмасштабировано до этой ширины.',
-'LBL_POPHELP_IMAGE_HEIGHT'=>'Введите значение высоты, измеряемое в пикселах.<br />Загруженное изображение будет отмасштабировано до этой высоты.',
-'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'
-. '<br><b>In Filter</b>: The field will appear in the Merge Duplicates feature, and will also be available in the Find Duplicates feature.<br><b>Filter Only</b>: The field will not appear in the Merge Duplicates feature, but will be available in the Find Duplicates feature.<br><b>Default Selected Filter</b>: The field will be used for a filter condition by default in the Find Duplicates page, and will also appear in the Merge Duplicates feature.'
+'LBL_POPHELP_FTS_FIELD_BOOST' => 'Усиление - это процесс повышения релевантности полей записи.<br />Поля с более высоким уровнем усиления будут получать более высокий вес при выполнении поиска. При выполнении поиска совпадающие записи, содержащие поля с более высоким весом, будут отображаться выше в списке результатов поиска.<br />Значение по умолчанию составляет 1,0, что соответствует нейтральному усилению. Чтобы получить положительное усиление, вводится число с плавающей точкой, большее чем 1. Для получения отрицательного усиления вводятся значения, меньшие чем 1. Например, значение 1,35 даст положительное усиление поля на 135%. Значение 0,60 даст отрицательное усиление.<br />Следует иметь в виду, что в предыдущих версиях требовалось выполнение полной реиндексации текстового поиска. Теперь она не требуется.',
+'LBL_POPHELP_IMPORTABLE'=>'<b>Да</b>: Поле будет включено в операцию импорта.<br><b>Нет</b>: Поле не будет включено в операцию импорта.<br><b>Требуется</b>: Значение поля нужно вводить для любого импорта.',
+'LBL_POPHELP_PII'=>'Данное поле будет автоматически отмечено для аудита и доступно при просмотре личных сведений.<br>Также поля с личными сведениями можно полностью удалить, если будет подан запрос на удаление записи, содержащей конфиденциальные данные.<br>Удаление могут выполнить администраторы или пользователи с правами менеджера защиты данных с помощью модуля защиты данных.',
+'LBL_POPHELP_IMAGE_WIDTH'=>'Введите значение ширины, измеряемое в пикселах.<br> Загруженное изображение будет отмасштабировано до этой ширины.',
+'LBL_POPHELP_IMAGE_HEIGHT'=>'Введите значение высоты, измеряемое в пикселах.<br> Загруженное изображение будет отмасштабировано до этой высоты.',
+'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Включено</b>: Поле появится в функции «Объединить дубликаты», но его нельзя будет использовать для постановки условий фильтрации в функции «Поиск дубликатов».<br><b>Выключено</b>: Это поле не будет отображаться в функции «Объединить дубликаты» и не будет доступно для постановки условий фильтрации в функции «Поиск дубликатов».'
+. '<br><b>В фильтре</b>: Это поле появится в функции «Объединить дубликаты», а также будет доступно в функции «Поиск дубликатов».<br><b>Только фильтр</b>: Это поле не будет отображаться в функции «Объединить дубликаты», но будет доступно в функции «Поиск дубликатов».<br><b>Фильтр, выбранный по умолчанию</b>: Это поле будет использоваться для постановки условия фильтрации по умолчанию на странице «Поиск дубликатов», а также будет отображаться в функции «Объединить дубликаты».'
 ,
-'LBL_POPHELP_CALCULATED'=>"Create a formula to determine the value in this field.<br>"
-   . "Workflow definitions containing an action that are set to update this field will no longer execute the action.<br>"
-   . "Fields using formulas will not be calculated in real-time in "
-   . "the Sugar Self-Service Portal or "
-   . "Mobile EditView layouts.",
+'LBL_POPHELP_CALCULATED'=>"Создайте формулу, чтобы определить значение в данном поле.<br>"
+   . "Определения рабочих процессов, содержащие действие и настроенные на обновление данного поля, не будут выполнять данное действие.<br>"
+   . "Поля, использующие формулы, не будут рассчитываться в режиме реального времени на "
+   . "портале самообслуживания Sugar или "
+   . "в мобильных макетах EditView.",
 
-'LBL_POPHELP_DEPENDENT'=>"Create a formula to determine whether this field is visible in layouts.<br/>"
-        . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
-        . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
-        . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Создайте формулу, чтобы указывать, является ли это поле обязательным в макетах.<br/>"
-    . "Обязательные поля будут соответствовать формуле в мобильном представлении для браузера, <br/>"
-    . "однако не будут соответствовать формуле в собственных приложениях, например Sugar Mobile для iPhone. <br/>"
-    . "Они не будут соответствовать формуле на портале самообслуживания Sugar.",
-'LBL_POPHELP_READONLY'=>"Создайте формулу, чтобы указывать, является ли это поле полем только для чтения в макетах.<br/>"
-        . "Поля только для чтения будут соответствовать формуле в мобильном представлении для браузера, <br/>"
-        . "однако не будут соответствовать формуле в собственных приложениях, например Sugar Mobile для iPhone. <br/>"
+'LBL_POPHELP_DEPENDENT'=>"Создайте формулу, чтобы определить, будет ли данное поле видимым в макетах.<br/>"
+        . "Зависимые поля будут соответствовать формуле зависимостей в мобильной версии браузера, <br/>"
+        . "но не будут соответствовать формуле в собственных приложениях, таких как Sugar Mobile для iPhone. <br/>"
         . "Они не будут соответствовать формуле на портале самообслуживания Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Выберите это поле при поиске записей с помощью глобального поиска в этом модуле.',
+    'LBL_POPHELP_REQUIRED'=>'Условно обязательные поля недоступны для использования в следующих типах действий SugarBPM: «Добавить связанную запись», «Изменить поле». Удалите текст «Обязательно, если», чтобы использовать данное поле в этих действиях для определения процесса',
+'LBL_POPHELP_READONLY'=>"Создайте формулу, чтобы определить, будет ли данное поле доступным только для чтения в макетах.<br/>"
+        . "Поля, доступные только для чтения, будут соответствовать формуле в мобильной версии браузера, <br/>"
+        . "но не будут соответствовать формуле в собственных приложениях, таких как Sugar Mobile для iPhone. <br/>"
+        . "Они не будут соответствовать формуле на портале самообслуживания Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Выберите данное поле для использования при поиске записей с помощью глобального поиска в данном модуле.',
 //Revert Module labels
 'LBL_RESET' => 'Сбросить',
-'LBL_RESET_MODULE' => 'Очистить модуль',
+'LBL_RESET_MODULE' => 'Сброс модуля',
 'LBL_REMOVE_CUSTOM' => 'Убрать индивидуальные настройки',
-'LBL_CLEAR_RELATIONSHIPS' => 'Очистить отношения',
-'LBL_RESET_LABELS' => 'Очистить ярлыки',
-'LBL_RESET_LAYOUTS' => 'Сбросить настройки визуального отображения',
+'LBL_CLEAR_RELATIONSHIPS' => 'Удалить взаимосвязи',
+'LBL_RESET_LABELS' => 'Сброс меток',
+'LBL_RESET_LAYOUTS' => 'Сброс макетов',
 'LBL_REMOVE_FIELDS' => 'Убрать индивидуальные поля',
 'LBL_CLEAR_EXTENSIONS' => 'Очистить расширения',
 
 'LBL_HISTORY_TIMESTAMP' => 'Отметка времени',
-'LBL_HISTORY_TITLE' => 'история',
+'LBL_HISTORY_TITLE' => ' история',
 
 'fieldTypes' => array(
                 'varchar'=>'Текстовое поле',
-                'int'=>'Целое значение',
-                'float'=>'Значение с плавающей точкой',
+                'int'=>'Целое число',
+                'float'=>'Значение с плавающей запятой',
                 'bool'=>'Флажок',
                 'enum'=>'Выпадающий список',
                 'multienum' => 'Множественное выделение',
                 'date'=>'Дата',
                 'phone' => 'Телефон',
                 'currency' => 'Валюта',
-                'html' => 'HTML-сообщение',
+                'html' => 'HTML',
                 'radioenum' => 'Радио',
                 'relate' => 'Относится к',
                 'address' => 'Адрес',
                 'text' => 'Текстовое поле',
-                'url' => 'URL',
-                'iframe' => 'Плавающий фрейм',
+                'url' => 'URL-адрес',
+                'iframe' => 'IFrame',
                 'image' => 'Изображение',
-                'encrypt'=>'Закодировать',
+                'encrypt'=>'Шифровать',
                 'datetimecombo' =>'Дата/время',
                 'decimal'=>'Десятичное значение',
-                'autoincrement' => 'Автоматическое возрастание',
-                'actionbutton' => 'Кнопка действия',
+                'autoincrement' => 'Автоматическое увеличение',
+                'actionbutton' => 'Управляющая кнопка',
+                'geocodestatus' => 'Статус геокода',
 ),
 'labelTypes' => array(
     "" => "Часто используемые метки",
@@ -863,16 +861,16 @@ $mod_strings = array(
 
 'LBL_ILLEGAL_FIELD_VALUE' =>"Выпадающий префикс не может содержать кавычки.",
 'LBL_CONFIRM_SAVE_DROPDOWN' =>"Вы выбрали этот объект для удаления из выпадающего списка. Любые выпадающие поля, содержащие список с этим объектом в качестве значения, не будут больше отображать это значение, и значение не будет больше доступно для выбора в выпадающих полях. Вы действительно хотите продолжить?",
-'LBL_POPHELP_VALIDATE_US_PHONE'=>"Select to validate this field for the entry of a 10-digit<br>" .
-                                 "phone number, with allowance for the country code 1, and<br>" .
-                                 "to apply a U.S. format to the phone number when the record<br>" .
-                                 "is saved. The following format will be applied: (xxx) xxx-xxxx.",
+'LBL_POPHELP_VALIDATE_US_PHONE'=>"Выберите, чтобы проверить это поле для ввода 10-значного<br>" .
+                                 "номер телефона, с учетом кода страны 1, и<br>" .
+                                 ", чтобы применить американский формат к номеру телефона, когда запись<br>" .
+                                 "сохраняется. Будет применяться следующий формат: (xxx) xxx-xxxx.",
 'LBL_ALL_MODULES'=>'Все модули',
-'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (связано {1} ID)',
+'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (связано идентификаторов {1})',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Копировать из макета',
-'LBL_RELATIONSHIP_TYPE' => 'Связь',
+'LBL_RELATIONSHIP_TYPE' => 'Связи',
 
 // Edit Labels
-'LBL_COMPARISON_LANGUAGE' => 'Язык для сравнения',
-'LBL_LABEL_NOT_TRANSLATED' => 'Невозможно перевести этот ярлык',
+'LBL_COMPARISON_LANGUAGE' => 'Язык сравнения',
+'LBL_LABEL_NOT_TRANSLATED' => 'Эта метка не может быть переведена',
 );

@@ -55,7 +55,7 @@ class PMSETimerEvent extends PMSEIntermediateEvent
         if (empty($externalAction)) {
             $eventDefinition = $this->retrieveDefinitionData($flowData['bpmn_id']);
             $flowData['cas_flow_status'] = 'SLEEPING';
-            $eventCriteria = json_decode(html_entity_decode($eventDefinition['evn_criteria']));
+            $eventCriteria = json_decode(html_entity_decode($eventDefinition['evn_criteria'], ENT_COMPAT));
             if (!is_array($eventCriteria)) {
                 if (!empty($eventDefinition['evn_criteria'])) {
                     $date = TimeDate::getInstance()->getNow();

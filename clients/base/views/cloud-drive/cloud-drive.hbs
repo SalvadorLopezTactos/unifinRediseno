@@ -31,13 +31,14 @@
         <button class="btn btn-primary {{#if sharedWithMe}}active{{/if}} toggleShared" data-sharedwithme="true">{{str "LBL_SHARED_WITH_ME"}}</button>
     </div>
 
-    <div class="list-view  h-full">
+    <div class="list-view h-full">
         <div class="pull-left ml-2">
             {{#each pathFolders}}
                 {{#if folderId}}
-                    <a data-id="{{folderId}}" data-driveid="{{driveId}}" class="parentFolder back">{{name}} {{#unless @last}}/{{/unless}}</a>
+                    <a data-id="{{folderId}}"  data-driveid="{{driveId}}" data-index="{{@index}}" class="parentFolder back">{{name}} {{#unless @last}}/{{/unless}}</a>
                 {{else}}
-                    <span>{{name}} {{#unless @last}}/{{/unless}}</span>
+                    {{#eq ../../options.driveType 'dropbox'}}<a data-id="{{folderId}}" data-index="{{@index}}" data-driveid="{{driveId}}" class="parentFolder back">{{name}} {{#unless @last}}/{{/unless}}</a>{{/eq}}
+                    {{#notEq ../../options.driveType 'dropbox'}}<span>{{name}} {{#unless @last}}/{{/unless}}</span>{{/notEq}}
                 {{/if}}
             {{/each}}
         </div>
@@ -84,9 +85,25 @@
                         {{/if}}
                         </th>
                     {{/eq}}
-                    <th class="cell-small">
-                        <span>{{str 'LBL_OWNERS'}}</span>
-                    </th>
+                    {{#eq options.driveType 'dropbox'}}
+                        <th class="sorting" data-fieldname="name" data-orderby={{#eq sortOptions.fieldName 'name'}}{{sortOptions.direction}}{{/eq}}
+                            {{#notEq sortOptions.fieldName 'name'}}"asc"{{/notEq}}>
+                            <div class="sortable-row-header-container">
+                                <span class="sortable-row-header-column-name">
+                                        {{str 'LBL_NAME'}}
+                                </span>
+                                <span class="sortable-row-header-arrows">
+                                    <i class="sicon sicon-arrow-up"></i>
+                                    <i class="sicon sicon-arrow-down"></i>
+                                </span>
+                            </div>
+                        </th>
+                    {{/eq}}
+                    {{#notEq options.driveType 'dropbox'}}
+                        <th class="cell-small">
+                            <span>{{str 'LBL_OWNERS'}}</span>
+                        </th>
+                    {{/notEq}}
                     {{#eq options.driveType 'google'}}
                         <th class="sorting cell-small" data-fieldname="modifiedTime" data-orderby={{#eq sortOptions.fieldName 'modifiedTime'}}{{sortOptions.direction}}{{/eq}}
                             {{#notEq sortOptions.fieldName "modifiedTime"}}"desc"{{/notEq}}>
@@ -119,6 +136,20 @@
                         {{/if}}
                         </th>
                     {{/eq}}
+                    {{#eq options.driveType 'dropbox'}}
+                        <th class="sorting cell-small" data-fieldname="modifiedTime" data-orderby={{#eq sortOptions.fieldName 'modifiedTime'}}{{sortOptions.direction}}{{/eq}}
+                            {{#notEq sortOptions.fieldName "modifiedTime"}}"desc"{{/notEq}}>
+                            <div class="sortable-row-header-container">
+                                <span class="sortable-row-header-column-name">
+                                        {{str 'LBL_DATE_MODIFIED'}}
+                                </span>
+                                <span class="sortable-row-header-arrows">
+                                    <i class="sicon sicon-arrow-up"></i>
+                                    <i class="sicon sicon-arrow-down"></i>
+                                </span>
+                            </div>
+                        </th>
+                    {{/eq}}
                     <th class="cell-xxsmall" data-fieldname="[actions]" data-orderby="">
 
                     </th>
@@ -135,21 +166,25 @@
                                     <span class="sicon sicon-folder reset-width w-1/12"></span>
                                 {{/if}}
                             {{/if}}
-                            <a data-id="{{id}}" data-driveid = "{{driveId}}"
+                            <a data-id="{{id}}" data-driveid = "{{driveId}}" data-name="{{name}}"
                                 {{#if isFolder}}class="folder"
                                 {{else}}class="file" data-link="{{webViewLink}}"
                                 {{/if}} href="javascript:void(0)">{{name}}</a>
                         </td>
+                        {{#notEq ../options.driveType 'dropbox'}}
+                            <td class="cd-cell cell-small">
+                                {{#each owners}}
+                                    {{#if photoLink}}
+                                    <img src="{{photoLink}}" alt="user" class="avatar avatar-btn">
+                                    {{/if}}
+                                    {{displayName}}
+                                {{/each}}
+                            </td>
+                        {{/notEq}}
                         <td class="cd-cell cell-small">
-                            {{#each owners}}
-                                {{#if photoLink}}
-                                <img src="{{photoLink}}" alt="user" class="avatar avatar-btn">
-                                {{/if}}
-                                {{displayName}}
-                            {{/each}}
-                        </td>
-                        <td class="cd-cell cell-small">
-                            {{formatDate dateModified}}
+                            {{#unless isFolder}}
+                                {{formatDate dateModified}}
+                            {{/unless}}
                         </td>
                         <td class="cell-xxsmall">
                             <div class="btn-group fieldset actions list">
@@ -158,10 +193,18 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     {{#unless isFolder}}
+                                        {{#if ../isGoodForDocuSign}}
+                                            <li role="menuitem">
+                                                <span class="list">
+                                                    <a href="javascript:void(0);" class="rowaction sendToDocuSign"
+                                                    data-id="{{id}}" data-filename="{{name}}" data-driveid="{{driveId}}">{{str 'LBL_SEND_TO_DOCUSIGN'}}</a>
+                                                </span>
+                                            </li>
+                                        {{/if}}
                                         <li role="menuitem">
                                             <span class="list">
                                                 <a href="javascript:void(0);" class="rowaction downloadFile"
-                                                    data-id="{{id}}" data-driveid="{{driveId}}"
+                                                    data-id="{{id}}" data-driveid="{{driveId}}" data-name="{{name}}"
                                                     {{#if downloadUrl}}data-downloadurl="{{downloadUrl}}"{{/if}}>
                                                 {{str 'LBL_DOWNLOAD_DRIVE_FILE'}}</a>
                                             </span>
@@ -169,22 +212,25 @@
                                     {{/unless}}
                                     <li role="menuitem">
                                         <span class="list">
-                                            <a href="javascript:void(0);" class="rowaction"
+                                            <a href="javascript:void(0);" class="rowaction copyLink" data-name="{{name}}"
                                             data-clipboard="enabled" data-clipboard-text="{{webViewLink}}">
                                             {{str 'LBL_COPY_GOOGLE_DRIVE_LINK'}}</a>
                                         </span>
                                     </li>
                                     {{#unless isFolder}}
-                                    <li role="menuitem">
-                                        <span class="list">
-                                            <a href="javascript:void(0);" class="rowaction createSugarDocument"
-                                            data-id="{{id}}" data-filename="{{name}}" data-driveid="{{driveId}}">{{str 'LBL_CREATE_SUGAR_DOCUMENT'}}</a>
-                                        </span>
-                                    </li>
+                                        {{#unless ../../noDocumentsAccess}}
+                                            <li role="menuitem">
+                                                <span class="list">
+                                                    <a href="javascript:void(0);" class="rowaction createSugarDocument"
+                                                    data-id="{{id}}" data-filename="{{name}}"
+                                                    data-driveid="{{driveId}}">{{str 'LBL_CREATE_SUGAR_DOCUMENT'}}</a>
+                                                </span>
+                                            </li>
+                                        {{/unless}}
                                     {{/unless}}
                                     <li role="menuitem">
                                         <span class="list">
-                                            <a href="javascript:void(0);" class="rowaction deleteFile" data-id="{{id}}" data-driveid="{{driveId}}">
+                                            <a href="javascript:void(0);" class="rowaction deleteFile" data-id="{{id}}" data-driveid="{{driveId}}" data-name="{{name}}">
                                                 {{str 'LBL_DELETE'}}</a>
                                         </span>
                                     </li>
@@ -196,7 +242,9 @@
                 {{#if nextPageToken}}
                     <tr>
                         <td><a class="loadmore">{{str 'LBL_LOAD_MORE'}}</a></td>
-                        <td></td>
+                        {{#notEq options.driveType 'dropbox'}}
+                            <td></td>
+                        {{/notEq}}
                         <td></td>
                         <td></td>
                     </tr>

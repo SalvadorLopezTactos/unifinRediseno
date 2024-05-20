@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Tabloul de bord Listă conturi',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare conturi',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare conturi',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Detalii cont',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Sertar de focalizare conturi - consolă',
     'LBL_NEXT_RENEWAL_DATE' => 'Data următoarei reînnoiri',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Data următoarei reînnoiri',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Denumire cont/Industrie',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Locație',
     'LBL_PURCHASES' => 'Achiziții',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Cronologie cont',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizează',
+    'LBL_CREATE_NEW' => 'Creare nou',
+    'LBL_MANAGE' => 'Gestionare',
+    'LBL_SEE_DETAILS' => 'Vizualizare detalii',
+    'LBL_HIDE_NEW' => 'Ascundere',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafic',
@@ -201,4 +208,7 @@ Pentru a crea un {{module_name}}:
 2. Faceţi clic pe "Salvare" pentru a finaliza noua înregistrare şi pentru a reveni la pagina anterioară.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Rapoarte conturi',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Utilizatori externi',
 );

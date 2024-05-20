@@ -615,7 +615,7 @@ installLog("DemoData: Leads");
 for($i=0; $i<$number_leads; $i++)
 {
 	$lead = new Lead();
-    $lead->account_name = $sugar_demodata['company_name_array'][random_int(0, $company_name_count-1)];
+    $lead->account_name = $sugar_demodata['company_name_array'][random_int(0, $company_name_count - 1)];
     $lead->first_name = $sugar_demodata['first_name_array'][random_int(0, $first_name_max)];
     $lead->last_name = $sugar_demodata['last_name_array'][random_int(0, $last_name_max)];
     $lead->primary_address_street = $sugar_demodata['street_address_array'][random_int(0, $street_address_max)];
@@ -638,7 +638,7 @@ for($i=0; $i<$number_leads; $i++)
 	if($i % 3 == 1)
 	{
 		$lead->billing_address_state = $sugar_demodata['billing_address_state']['east'];
-            $assigned_user_id = random_int(9, 10);
+        $assigned_user_id = random_int(9, 10);
 			if($assigned_user_id == 9)
 			{
 				$lead->assigned_user_name = "seed_will";
@@ -905,10 +905,10 @@ foreach($sugar_demodata['kbdocuments_seed_data'] as $v){
     $kbdocContent->kbdocument_body = $v['body'];
     $kbdocContent->tag = $v['tag'];
     $kbdocContent->status = $sugar_demodata['kbdocuments_statuses'][array_rand($sugar_demodata['kbdocuments_statuses'])];
-    $kbdocContent->active_date = isset($v['active_date']) ? $v['active_date'] : null;
-    $kbdocContent->exp_date = isset($v['exp_date']) ? $v['exp_date'] : null;
-    $kbdocContent->useful = isset($v['useful']) ? $v['useful'] : 0;
-    $kbdocContent->notuseful = isset($v['notuseful']) ? $v['notuseful'] : 0;
+    $kbdocContent->active_date = $v['active_date'] ?? null;
+    $kbdocContent->exp_date = $v['exp_date'] ?? null;
+    $kbdocContent->useful = $v['useful'] ?? 0;
+    $kbdocContent->notuseful = $v['notuseful'] ?? 0;
     $kbdocContent->category_id = $categoryIds[array_rand($categoryIds)];
     $idDocument = $kbdocContent->save();
     if (isset($v['localizations'])) {

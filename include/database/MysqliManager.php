@@ -88,6 +88,10 @@ class MysqliManager extends MysqlManager
      * @var bool
      */
     protected $connected = false;
+    /**
+     * @var int
+     */
+    private $retryCount;
 
     /**
      * Create DB Driver
@@ -274,7 +278,7 @@ class MysqliManager extends MysqlManager
 	 */
 	public function quote($string)
 	{
-		return mysqli_real_escape_string($this->getDatabase(),$this->quoteInternal($string));
+        return mysqli_real_escape_string($this->getDatabase(), (string)$this->quoteInternal($string));
 	}
 
     /**
@@ -324,6 +328,7 @@ class MysqliManager extends MysqlManager
         if ($this->checkError('Could Not Connect', $dieOnError)) {
             $this->logger->info("connected to db");
         }
+        static::$version = null;
 
         mysqli_report(MYSQLI_REPORT_OFF);
         return true;
@@ -402,11 +407,11 @@ class MysqliManager extends MysqlManager
 
         if (isset($sslOptions['ssl_ca']) && $sslOptions['ssl_ca']) {
             mysqli_ssl_set($this->database,
-                isset($sslOptions['ssl_key']) ? $sslOptions['ssl_key'] : null,
-                isset($sslOptions['ssl_cert']) ? $sslOptions['ssl_cert'] : null,
-                isset($sslOptions['ssl_ca'])  ? $sslOptions['ssl_ca'] : null,
-                isset($sslOptions['ssl_capath']) ? $sslOptions['ssl_capath'] : null,
-                isset($sslOptions['ssl_cipher']) ? $sslOptions['ssl_cipher'] : null
+                $sslOptions['ssl_key'] ?? null,
+                $sslOptions['ssl_cert'] ?? null,
+                $sslOptions['ssl_ca'] ?? null,
+                $sslOptions['ssl_capath'] ?? null,
+                $sslOptions['ssl_cipher'] ?? null
             );
         } else {
             $this->connectOptions['db_client_flags'] = $this->connectOptions['db_client_flags'] | MYSQLI_CLIENT_SSL;

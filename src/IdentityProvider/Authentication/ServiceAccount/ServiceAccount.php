@@ -12,6 +12,9 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount;
 
+use Exception;
+use Sugarcrm\IdentityProvider\Srn\Converter;
+use Sugarcrm\IdentityProvider\Srn\Manager as SrnManager;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 
 class ServiceAccount extends User
@@ -22,8 +25,11 @@ class ServiceAccount extends User
     public function getSugarUser(): \User
     {
         if ($this->sugarUser === null) {
-            /** @var \User $userBean */
-            $this->sugarUser = $this->getUserBean()->getSystemUser();
+            $this->sugarUser = $this->getDataSourceUser();
+            if ($this->sugarUser === null) {
+                /** @var \User $userBean */
+                $this->sugarUser = $this->getUserBean()->getSystemUser();
+            }
         }
         return $this->sugarUser;
     }
@@ -66,5 +72,35 @@ class ServiceAccount extends User
     public function getDataSourceName(): ?string
     {
         return $this->getAttribute('dataSourceName');
+    }
+
+    /**
+     * try to get user from dataSourceSRN
+     * @return \User|null
+     */
+    protected function getDataSourceUser(): ?\User
+    {
+        $dataSourceSRN = $this->getDataSourceSRN();
+        if (empty($dataSourceSRN)) {
+            return null;
+        }
+        try {
+            $userSRN = Converter::fromString($dataSourceSRN);
+        } catch (Exception $e) {
+            return null;
+        }
+        if (empty($userSRN->getResource()[0]) || !SrnManager::isUser($userSRN)) {
+            return null;
+        }
+        if (empty($userSRN->getResource()[1])) {
+            return null;
+        }
+        $userId = $userSRN->getResource()[1];
+        $user = $this->getUserBean();
+        $user->retrieve($userId, true, false);
+        if (!$user->id || !$user->isDeveloperForAnyModule()) {
+            return null;
+        }
+        return $user;
     }
 }

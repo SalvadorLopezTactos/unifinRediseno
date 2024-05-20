@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Chýba potrebná hodnota',
     'LBL_ERROR_SYNC_USERS' => 'Nesprávna hodnota pre synchronizáciu s e-mailovým klientom: ',
     'LBL_ID_EXISTS_ALREADY' => 'V tejto tabuľke už ID existuje',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY v tejto tabuľke už existuje',
     'LBL_ASSIGNED_USER' => 'Ak používateľ neexistuje, použite aktuálneho používateľa',
     'LBL_SHOW_HIDDEN' => 'Zobraziť polia, ktoré štandardne nie sú importovateľné',
     'LBL_UPDATE_RECORDS' => 'Aktualizovať existujúce záznamy namiesto ich importovania (nie späť)',

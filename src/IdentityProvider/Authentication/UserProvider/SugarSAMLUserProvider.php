@@ -21,8 +21,16 @@ class SugarSAMLUserProvider extends SAMLUserProvider
     /**
      * {@inheritdoc}
      */
-    public function loadUserByUsername($nameIdentifier)
+    public function loadUserByUsername($username)
     {
-        return new User($nameIdentifier);
+        return $this->loadUserByIdentifier($username);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function loadUserByIdentifier(string $identifier): User
+    {
+        return new User($identifier);
     }
 }

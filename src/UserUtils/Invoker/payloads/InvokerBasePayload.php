@@ -21,6 +21,10 @@ use SugarQuery;
  */
 class InvokerBasePayload extends InvokerPayload
 {
+    protected $dashboards;
+    protected $filters;
+    protected $userSettings;
+
     /**
      * the command type
      *

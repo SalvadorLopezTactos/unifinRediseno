@@ -34,7 +34,7 @@ class vCard
 		$bad = array("\n", "\r");
 		$good = array("=0A", "=0D");
 		$encoding = '';
-		if(strpos($contact->primary_address_street, "\n") || strpos($contact->primary_address_street, "\r")) {
+        if (strpos((string)$contact->primary_address_street, "\n") || strpos((string)$contact->primary_address_street, "\r")) {
 			$contact->primary_address_street = str_replace($bad, $good, $contact->primary_address_street);
 			$encoding = 'QUOTED-PRINTABLE';
 		}

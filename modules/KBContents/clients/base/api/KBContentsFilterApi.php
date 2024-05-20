@@ -60,7 +60,7 @@ class KBContentsFilterApi extends FilterApi
      */
     public function filterListSetup(ServiceBase $api, array $args, $acl = 'list')
     {
-        list($args, $q, $options, $seed) = parent::filterListSetup($api, $args, $acl);
+        [$args, $q, $options, $seed] = parent::filterListSetup($api, $args, $acl);
 
         if (!empty($args['mostUseful'])) {
             $q->select()->fieldRaw('(kbcontents.useful - kbcontents.notuseful)', 'mu');

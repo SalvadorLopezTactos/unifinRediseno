@@ -47,12 +47,20 @@
     CURSOR_LOCATION: 'cursor',
 
     /**
-     * The tinyMCE button object for the signature dropdown.
+     * The tinyMCE button API object for the signature dropdown.
      *
      * @private
      * @property {Object|null}
      */
-    _signatureBtn: null,
+    _signatureBtnApi: null,
+
+    /**
+     * List of menu items for fetched signatures
+     *
+     * @private
+     * @property {Array}
+     */
+    _signatureSubmenu: [],
 
     /**
      * The number of signatures found from the API response.
@@ -245,10 +253,14 @@
         if (!this._iframeHasBody(this._getHtmlEditableField())) {
             return;
         }
+        var iframeWaitingTime = 500;
         _.debounce(_.bind(function() {
+            if (this.disposed) {
+                return;
+            }
             var field;
             // Pad this to the final height due to the iframe margins/padding
-            var padding = (this.tplName === 'detail') ? 0 : 25;
+            var padding = (this.tplName === 'detail' || this.tplName === 'preview') ? 0 : 25;
             var contentHeight = 0;
             contentHeight = this._getContentHeight() + padding;
             // Only resize the editor when the content is fully loaded
@@ -263,7 +275,7 @@
                     this.view.trigger('tinymce:resize');
                 }
             }
-        }, this), 150)();
+        }, this), iframeWaitingTime)();
     },
 
     /**
@@ -295,7 +307,6 @@
      * a local file.
      */
     addCustomButtons: function(editor) {
-        var self = this;
         var attachmentButtons = [];
 
         // Attachments can only be added if the user has permission to create
@@ -304,11 +315,12 @@
         if (app.acl.hasAccess('create', 'Notes')) {
             attachmentButtons.push({
                 text: app.lang.get('LBL_ATTACH_FROM_LOCAL', this.module),
-                onclick: _.bind(function(event) {
+                type: 'menuitem',
+                onAction: (event) => {
                     // Track click on the file attachment button.
                     app.analytics.trackEvent('click', 'tinymce_email_attachment_file_button', event);
                     this.view.trigger('email_attachments:file');
-                }, this)
+                },
             });
 
             // The user can only select a document to attach if he/she has
@@ -318,54 +330,56 @@
             if (app.acl.hasAccess('view', 'Documents')) {
                 attachmentButtons.push({
                     text: app.lang.get('LBL_ATTACH_SUGAR_DOC', this.module),
-                    onclick: _.bind(function(event) {
+                    type: 'menuitem',
+                    onAction: (event) => {
                         // Track click on the document attachment button.
                         app.analytics.trackEvent('click', 'tinymce_email_attachment_doc_button', event);
                         this._selectDocument();
-                    }, this)
+                    },
                 });
             }
 
-            editor.addButton('sugarattachment', {
-                type: 'menubutton',
+            editor.ui.registry.addMenuButton('sugarattachment', {
                 tooltip: app.lang.get('LBL_ATTACHMENT', this.module),
-                icon: 'paperclip',
-                onclick: function(event) {
+                icon: 'plus',
+                onAction: (event) => {
                     // Track click on the attachment button.
                     app.analytics.trackEvent('click', 'tinymce_email_attachment_button', event);
                 },
-                menu: attachmentButtons
+                fetch: (callback) => {
+                    callback(attachmentButtons);
+                },
             });
         }
 
-        editor.addButton('sugarsignature', {
-            type: 'menubutton',
+        editor.ui.registry.addMenuButton('sugarsignature', {
             tooltip: app.lang.get('LBL_SIGNATURE', this.module),
-            icon: 'pencil',
+            icon: 'edit-block',
             // disable the signature button until they have been loaded
-            disabled: true,
-            onPostRender: function() {
-                self._signatureBtn = this;
+            onSetup: (btnApi) => {
+                btnApi.setEnabled(false);
+                this._signatureBtnApi = btnApi;
                 // load the users signatures
-                self._getSignatures();
+                this._getSignatures();
             },
-            onclick: function(event) {
+            onAction: (event) => {
                 // Track click on the signature button.
                 app.analytics.trackEvent('click', 'tinymce_email_signature_button', event);
             },
-            // menu is populated from the _getSignatures() response
-            menu: []
+            fetch: (callback) => {
+                callback(this._signatureSubmenu);
+            },
         });
 
         if (app.acl.hasAccess('view', 'EmailTemplates')) {
-            editor.addButton('sugartemplate', {
+            editor.ui.registry.addButton('sugartemplate', {
                 tooltip: app.lang.get('LBL_TEMPLATE', this.module),
-                icon: 'file-o',
-                onclick: _.bind(function(event) {
+                icon: 'document-properties',
+                onAction: (event) => {
                     // Track click on the template button.
                     app.analytics.trackEvent('click', 'tinymce_email_template_button', event);
                     this._selectEmailTemplate();
-                }, this)
+                },
             });
         }
 
@@ -377,7 +391,7 @@
             // the user has at least 1 signature
             if (this._numSignatures > 0) {
                 // enable the signature button
-                this._signatureBtn.disabled(false);
+                this._signatureBtnApi.setEnabled(true);
             }
         }, this));
 
@@ -392,7 +406,7 @@
             // the user has at least 1 signature
             if (this._numSignatures > 0) {
                 // disable the signature button
-                this._signatureBtn.disabled(true);
+                this._signatureBtnApi.setEnabled(false);
             }
         }, this));
     },
@@ -427,7 +441,7 @@
                 return emailBody;
             }
 
-            this._htmleditor.execCommand('mceInsertContent', false, content);
+            this._htmleditor.insertContent(content);
 
             // Get the HTML content from the editor.
             emailBody = this._htmleditor.getContent();
@@ -497,6 +511,8 @@
      * @param {Data.BeanCollection} signatures
      */
     _getSignaturesSuccess: function(signatures) {
+        this._signatureSubmenu = [];
+
         if (this.disposed === true) {
             return;
         }
@@ -512,16 +528,17 @@
             return;
         }
 
-        if (!_.isNull(this._signatureBtn)) {
+        if (!_.isNull(this._signatureBtnApi)) {
             // write the signature names to the control dropdown
             _.each(signatures, _.bind(function(signature) {
-                this._signatureBtn.settings.menu.push({
+                this._signatureSubmenu.push({
                     text: signature.get('name'),
-                    onclick: _.bind(function(event) {
+                    type: 'menuitem',
+                    onAction: (event) => {
                         // Track click on a signature.
                         app.analytics.trackEvent('click', 'email_signature', event);
                         this._insertSignature(signature, this.CURSOR_LOCATION);
-                    }, this)
+                    },
                 });
             }, this));
 
@@ -530,7 +547,7 @@
 
             // If the editor is focused before the signatures are returned, enable the signature button
             if (this._editorFocused) {
-                this._signatureBtn.disabled(false);
+                this._signatureBtnApi.setEnabled(true);
             }
         }
     },

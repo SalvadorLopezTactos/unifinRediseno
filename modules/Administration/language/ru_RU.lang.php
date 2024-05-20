@@ -92,6 +92,7 @@ $mod_strings = array (
     'ERR_UW_PACKAGE_NEWER_VERSION_EXISTS'       => 'Существует более новая версия пакета: {0}. Удалите ее, прежде чем загружать новую.',
     'ERR_UW_PACKAGE_ALREADY_INSTALLED'          => 'Пакет уже установлен.',
     'ERR_UW_PACKAGE_NOT_INSTALLED'              => 'Пакет не установлен.',
+    'ERR_UW_PACKAGE_INSTALLED_WITH_ERROR'       => 'Установка пакета завершилась ошибкой. Изменения остались',
     'ERR_UW_PACKAGE_IS_UNINSTALLABLE'           => 'Пакет не подлежит удалению. Его невозможно деинсталлировать.',
     'ERR_UW_PACKAGE_ALREADY_ENABLED'            => 'Пакет уже активирован.',
     'ERR_UW_PACKAGE_ALREADY_DISABLED'           => 'Пакет уже отключен.',
@@ -130,7 +131,12 @@ $mod_strings = array (
     'LBL_ADMIN_WIZARD' => 'Быстрая настройка параметров SugarCRM',
     'LBL_ADMINISTRATION_HOME_TITLE' => 'Система',
     'LBL_ADMINISTRATION_HOME_DESC' =>'Конфигурирование системных настроек в соответствии с техническими требованиями вашей организации. Часть выполненных здесь стандартных настроек может быть перезаписана пользователями на странице настройки личных параметров пользователя.',
-    'LBL_ALLOW_USER_TABS' => 'Разрешить пользователям скрывать вкладки',
+    'LBL_ALLOW_USERS_PINNED_MODULES' => 'Разрешить пользователям устанавливать количество закрепленных модулей',
+    'LBL_ALLOW_USERS_AVAILABLE_MODULES' => 'Позволять пользователям выбирать из доступных модулей',
+    'LBL_NUMBER_PINNED_MODULES' => 'Количество закрепленных модулей',
+    'LBL_NUMBER_PINNED_MODULES_TOOLTIP' => 'Мы рекомендуем выбирать реалистичное количество наиболее часто ' .
+        'используемых модулей, поскольку есть вероятность, что большое количество не будет отображаться в большинстве браузеров. Значения более ' .
+        'не будут приниматься во внимание',
     'LBL_ALREADY_RUNNING'                  => 'Этот сервер работает как оффлайн клиент.',
     'LBL_APPLY_DST_FIX_DESC' => 'Этот обязательный шаг обновит временную функциональность (только MYSQL).',
     'LBL_APPLY_DST_FIX' => 'Исправление дневного времени',
@@ -145,7 +151,7 @@ $mod_strings = array (
     'LBL_IMPORT_METADATA_BUTTON_TITLE' => 'Импорт файла метаданных IdP',
     'LBL_IMPORT_METADATA_BUTTON_LABEL' => 'Импорт файла метаданных IdP',
     'LBL_CAT_VIEW'            => 'Категории',
-    'LBL_CHANGE_NAME_MODULES'=>'Изменить названия модулей приложения',
+    'LBL_CHANGE_NAME_MODULES'=> 'Изменить названия модулей приложения',
     'LBL_CHECK_FOR_UPDATES'  => 'Проверить обновления',
     'LBL_CHECK_NOW_LABEL' =>'Проверить сейчас',
     'LBL_CHECK_NOW_TITLE' =>'Проверить сейчас',
@@ -171,17 +177,20 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'Удаление из кеша файла, используемого для хранения данных шрифтов PDF',
     'LBL_CONFIG_CHECK' =>'Проверка конфигурации',
     'LBL_CONFIG_FTS' => 'Настроить механизм полнотекстового поиска',
-    'LBL_CONFIG_TABS'=>'Вы можете перемещать вкладки модулей для настройки их видимости в окне рабочего интерфейса. Если вы хотите исключить подобную возможность для пользователей, не обладающих правами администратора, оставьте неотмеченной опцию "Разрешить пользователям скрывать вкладки".',
-	'LBL_CONFIG_TABS_DESC'=>'Перетяните и оставьте названия модулей, чтобы вкладки или субпанели отображались или были скрыты. Чтобы управлять доступом к модулям, используйте <a href="?module=ACLRoles&action=index">Role Management.</a>',
-	'LBL_CONFIG_LANGS_DESC'=>'Используйте перетаскивание чтобы разрешить или запретить использование языков, расположенных ниже.',
-	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'Выберите эту опцию, чтобы дать пользователям возможность выбирать вкладки модулей для отображения в Пользовательских Настройках.',
-	'LBL_CONFIGURATOR_DESC'=>'Установка Config.php',
+    'LBL_CONFIG_TABS'=>'Панель навигации и субпанели',
+    'LBL_CONFIG_TABS_DESC_BRIEFLY'=>'Выберите, какие модули будут доступны пользователям на панели навигации и в качестве субпанелей. Для контроля доступа пользователей к модулям используйте функцию <a href="?module=ACLRoles&action=index">«Управление ролями».</a>',
+    'LBL_CONFIG_TABS_DESC_DETAILED'=>'Перетаскивайте модули, чтобы сделать их доступными на панели навигации или скрытыми. <br>
+        Поле «Количество закрепленных модулей» определяет количество доступных модулей, которое будет показано при сворачивании
+        панели навигации (например, если вводится число 5, первые пять модулей в списке будут закреплены). Когда включены
+        поля с флажками, пользователи могут изменять настройки панели навигации через Профиль пользователя.',
+    'LBL_CONFIG_LANGS_DESC'=>'Используйте перетаскивание чтобы разрешить или запретить использование языков, расположенных ниже.',
+    'LBL_CONFIGURATOR_DESC'=>'Установка Config.php',
     'LBL_CONFIGURATOR_TITLE'=>'Конфигуратор',
     'LBL_CONFIGURE_GROUP_TABS_DESC' => 'Группировка вкладок на навигационной панели',
     'LBL_CONFIGURE_GROUP_TABS' => 'Настройка сгруппированных вкладок',
     'LBL_CONFIGURE_SETTINGS_TITLE' => 'Настройка конфигурации',
     'LBL_CONFIGURE_SETTINGS' => 'Системные настройки',
-    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Отображение вкладок и субпанелей модуля',
+    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Панель навигации и субпанели',
     'LBL_CONFIGURE_UPDATER'=>'Настройка обновлений Sugar',
     'LBL_CONTRACT_TITLE'=>'Контракты',
     'LBL_CONTRACT_DESC'=>'Определить типы договоров для модуля Договоры. Когда пользователь создает контракт, для выбора отображается выпадающее меню Типы.',
@@ -226,6 +235,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_GETMYSQLTS' => 'mysql schema',
     'LBL_DIAGNOSTIC_GETPHPINFO' => 'Получение phpinfo()',
     'LBL_DIAGNOSTIC_GETSUGARLOG' => 'Получение sugarcrm.log',
+    'LBL_DIAGNOSTIC_GETMLPLOG' => 'Получение файла package_install.log',
     'LBL_DIAGNOSTIC_GETTING' => 'Получение...',
     'LBL_DIAGNOSTIC_MD5'=>'Информация MD5',
     'LBL_DIAGNOSTIC_MYSQLDUMPS'=>'MySQL - конфигурация Table Dumps',
@@ -234,6 +244,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_NO_MYSQL' => 'БД MySQL не установлена. Функции MySQL недоступны.',
     'LBL_DIAGNOSTIC_PHPINFO'=>'phpinfo()',
     'LBL_DIAGNOSTIC_SUGARLOG'=>'Файл журнала SugarCRM',
+    'LBL_DIAGNOSTIC_MLPLOG'=>'Файл журнала установки пакета',
     'LBL_DIAGNOSTIC_TITLE'=>'Диагностика',
     'LBL_DIAGNOSTIC_VARDEFS'=>'Вывод схемы Sugar (VARDEFS)',
 	'LBL_DISABLED' => 'Скрыты',
@@ -361,11 +372,11 @@ $mod_strings = array (
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Авторизация пользователя LDAP, например:[<b>AD:</b>&nbsp;userPrincipalName] [<b>openLDAP:</b>&nbsp;userPrincipalName] [<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid]',
     'LBL_LDAP_LOGIN_ATTRIBUTE_DESC'=>'Поиск пользователя LDAP, например:[<b>AD:</b>&nbsp;userPrincipalName] [<b>openLDAP:</b>&nbsp;dn] [<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;dn]',
     'LBL_LDAP_ENCRYPTION_TYPE_DESC'=> 'От типа шифрования зависит безопасность вашего подключения ' .
-        'к серверу LDAP. Выберите "Нет" для обычного незащищенного подключения. Выберите "TLS", чтобы ваше обычное ' .
-        'подключение было безопасным. Выберите "SSL" для безопасного подключения через ldaps://',
+        'безопасное или нет. Выберите «Нет» для обычного незащищенного подключения. Выберите «StartTLS», чтобы ваше обычное ' .
+        'подключение было безопасным. Выберите «LDAPS» для безопасного подключения через ldaps://',
     'LBL_LDAP_SERVER_HOSTNAME_DESC'=> 'Укажите только имя узла LDAP IP-адреса. ' .
         'Пример: ldap.example.com, 10.11.45.75',
-    'LBL_LDAP_SERVER_PORT_DESC'=>'Пример: 389 для незащищенного соединения и TLS. 636 для SSL',
+    'LBL_LDAP_SERVER_PORT_DESC'=>'Пример: 389 для незащищенного соединения и StartTLS. 636 для LDAPS',
     'LBL_LDAP_GROUP_NAME'=>'Группа:',
 	'LBL_LDAP_GROUP_NAME_DESC'=>'Пример: <em>cn=sugarcrm</em>',
     'LBL_LDAP_USER_DN_DESC'=>'Пример: <em>ou=people,dc=example,dc=com</eM>',
@@ -472,6 +483,8 @@ $mod_strings = array (
     'LBL_MANAGE_RELATE_DENORMALIZATION_PRE_CHECK_RESULTS' => 'Результаты предварительной проверки',
     'LBL_MANAGE_RELATE_DENORMALIZATION_FIELDS_FOR' => 'Поля для',
     'LBL_MANAGE_RELATE_DENORMALIZATION_JOB_TITLE' => 'Запланированное задание',
+    'LBL_SUGAR_OUTFITTER' => 'SugarOutfitters',
+    'LBL_SUGAR_OUTFITTER_TOOLTIP' => 'Просмотрите SugarOutfitters, магазин SugarCRM, в котором могут находиться надстройки, позволяющие добавить новые возможности в ваш экземпляр Sugar',
 
     'LBL_MANUAL_VALIDATION_TXT' => 'Подтверждение вручную',
     'LBL_MANUAL_VALIDATION'=>'В случае если Вы испытываете постоянные затруднения с автоматическим подтверждением, пожалуйста, проверьте , настройки прокси на <a href="index.php?module=Configurator&action=EditView">System Settings</a> панели администратора. <br />	Если Ваше системное окружение не позволяет системе связываться с центром подтверждения лицензий используя интернет, Вам необходимо предпринять следующие шаги:  <a href="javascript:void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Manual Validation</a>.',
@@ -552,6 +565,9 @@ $mod_strings = array (
     'LBL_MODULE_LICENSE'                        => 'Пожалуйста, прочитайте лицензионное соглашение:',
     'LBL_MODULE_LOADER_TITLE' => 'Загрузчик модулей',
     'LBL_MODULE_LOADER' => 'Добавление / удаление модулей, тем, языковых пакетов и других расширений',
+    'LBL_MODULE_LOADER_LICENSE_WARNING' => 'Возможность <a href="{0}">загружать</a> пакеты пользовательских файлов не '
+        . 'доступна для {1}. Узнать, какие типы лицензий включают функцию «Загрузчик модулей», можно в '
+        . 'документе <a href="{2}">«Матрица типов лицензии»</a>.',
     'LBL_MODULE_NAME' => 'Администрирование',
     'LBL_MODULE_NAME_SINGULAR' => 'Администрирование',
     'LBL_MODULE_TITLE' => 'Администрирование: Главная',
@@ -666,8 +682,6 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Обновление JS Grouping Files',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Перезапись JS Grouping Files их более свежими версиями',
-    'LBL_REPAIR_JS_FILES_TITLE' => 'Восстановление файлов JavaScript',
-    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Восстановление файлов JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Восстановление файлов может занять несколько минут. Переход на другую страницу не остановит процесс восстановления, поэтому вы можете либо покинуть данную страницу, либо дождаться сообщения об окончании процесса восстановления...<br>',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Восстановление закончено.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Восстановление нестрочных полей',
@@ -909,7 +923,7 @@ $mod_strings = array (
     'LBL_VALIDATION_FILE'=>'Файл лицензионного ключа',
     'LBL_VALIDATION_SUCCESS_DATE'=>'Последняя удачная проверка:',
 	'LBL_VISIBLE_PANELS'=>'Доступные субпанели',
-    'LBL_VISIBLE_TABS'=>'Отображаемые вкладки модулей',
+    'LBL_AVAILABLE_MODULES' => 'Доступные модули',
     'LBL_WORKFLOW_DESC'                     => 'Управление условиями бизнес-процессов, уведомлениями и действиями',
     'LBL_WORKFLOW_TITLE'                    => 'Управление бизнес-процессом',
     'LBL_WORKBENCH' => 'Автоматизированное рабочее место',
@@ -954,12 +968,10 @@ $mod_strings = array (
     'WARN_LICENSE_SEATS'=>  "<b>Предупреждение.</b> Зарегистрировано ",
     'WARN_LICENSE_SEATS2' => " активных пользователя(-ей), однако условия вашей подписки предусматривают только ",
     'WARN_LICENSE_SEATS3' =>
-        "<p class=\"error\">Деактивируйте некоторых пользователей, обратитесь к своему партнеру или менеджеру по продажам"
-        . " либо отправьте электронное письмо по адресу <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
-        . "<p class=\"error\">Подробнее см. в статье "
-        . "<a target=\"_blank\" "
-        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
-        . "Типы пользователей и лицензии Sugar</a>.</p>",
+        ". <p class=\"error\">Деактивируйте некоторых пользователей или <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>свяжитесь с нами, чтобы</a> добавить еще лицензий.</p>",
+    'WARN_LICENSE_SEATS3_IDM' =>
+        ". <p class=\"error\">Деактивируйте некоторых пользователей в <a target=\"_blank\" href='%s'>настройках SugarCloud</a> "
+        . "или <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>свяжитесь с нами,</a> чтобы добавить еще лицензии.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Предупреждение: Количество активных пользователей уже равно максимальному количеству допустимых лицензий:",
     'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Предупреждение.</b> Вы не сможете создать дополнительных активных пользователей."
         . " Приобретите дополнительные подписки.",
@@ -967,7 +979,7 @@ $mod_strings = array (
     'WARN_LICENSE_TYPE_SEATS_EDIT_MAXED' => 'Вы не можете создать еще %s пользователя(-ей). Приобретите больше подписок.',
     'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Предупреждение.</b> Вы не сможете создать дополнительных активных пользователей."
         . " Приобретите дополнительные подписки.",
-    'WARN_REPAIR_CONFIG' => '<b>Предупреждение.</b> Необходимо восстановить файл config.php. Воспользуйтесь сценарием <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Обновление файла конфигурации</a> на странице "Восстановление" в области администрирования, чтобы восстановить файл конфигурации.',
+    'WARN_REPAIR_CONFIG' => '<b>Предупреждение:</b> требуется восстановление файла config.php. Для восстановления файла конфигурации используйте скрипт <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Файла конфигурации восстановления</a> на странице «Восстановление» в области администрирования.',
     'WARN_UPGRADE_APP'=> "В данный момент доступна обновленная версия приложения.",
     'WARN_UPGRADE' => 'Предупреждение: пожалуйста, обновите систему до версии',
     'WARN_UPGRADENOTE' => 'Примечание:',
@@ -1041,11 +1053,11 @@ $mod_strings = array (
 
 'ML_PACKAGE_SCANNING'=> 'Сканирование {PACKAGE}',
 'ML_INSTALLATION_FAILED'=> 'Установка прервана!',
-'ML_PACKAGE_NOT_CONFIRM'=> 'Пакет, который вы пытаетесь установить, не соответствует политике в рамках <b>Sugar Open Cloud</b> или политике, установленной вашим системным администратором.',
+    'ML_PACKAGE_NOT_CONFIRM' => 'Пакет, который вы пытаетесь установить, не соответствует политике, установленной SugarCloud или вашим системным администратором.',
 'ML_TO_RESOLVE'=>'Для решения данной проблемы:',
-'ML_OBTAIN_NEW_PACKAGE'=>'Клиенты <b>Sugar Open Cloud</b> должны получить новый установочный пакет от поставщика для устранения нижеописанных проблем.',
+    'ML_OBTAIN_NEW_PACKAGE' => 'Клиенты SugarCloud должны получить новый установочный пакет от поставщика для устранения нижеописанных проблем.',
 'ML_RELAX_LOCAL'=>'Если Sugar используется только в локальной сети, вы можете уменьшить ограничения Загрузчика Модулей на разрешение установки пакета.',
-'ML_SUGAR_LOADING_POLICY'=>'Политики загрузки пакета <b>Sugar Open Cloud</b> подробно изложены в',
+    'ML_SUGAR_LOADING_POLICY'=>'Правила SugarCloud подробно приведены в',
 'ML_SUGAR_KB'=>'База знаний SugarCRM',
 'ML_SUGAR_DZ'=>'Зона разработчика SugarCRM',
 'ML_PKG_SCAN_GUIDE'=>'Руководство по политике сканирования пакетов',
@@ -1247,6 +1259,7 @@ $mod_strings = array (
     'LBL_ASYNC_CALL_FAILED' => 'Асинхронный вызов не удался',
     'LBL_REPAIRXSSEXECUTE_FAILED' => 'Ошибка: класс или ID не определены',
     'LBL_DIAGNOSTICS_ERROR_SUGARLOG' => 'Не удалось скопировать sugarcrm.log в {0}<br>',
+    'LBL_DIAGNOSTICS_ERROR_MLPLOG' => 'Не удалось скопировать package_install.log в {0}<br>',
     'LBL_DIAGNOSTICS_ERROR_PHPINFO' => 'Не удалось записать в файл {0}phpinfo.html<br>',
     'LBL_DIAGNOSTICS_ERROR_LISTBEANFILES' => 'Не удалось записать в файл {0}beanFiles.html<br>',
     'LBL_DIAGNOSTICS_ERROR_MD5' => 'Не удалось копировать файлы.md5 в {0}<br>Пропустить проверки md5.<br>',
@@ -1358,10 +1371,28 @@ $mod_strings = array (
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT' => 'Эти параметры представляют собой директивы политики защиты содержимого (CSP), используемые веб-браузерами для управления тем, какие ресурсы разрешено загружать на веб-странице. Дополнительная информация о допустимых значениях и форматах полей приведена в документации <a href={{linkToDocumentation}} target="_blank">Система</a>. После обновления настроек CSP необходимо обновить окно браузера, чтобы изменения вступили в силу.',
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT_ADVANCED' => 'Эти параметры предназначены для пользователей, хорошо осведомленных о директивах политики защиты содержимого (CSP). Директива &#39;img-src&#39; CSP определяется системой Sugar по умолчанию и разрешает загрузку всех изображений через HTTP или HTTPS. Дополнительная информация о допустимых значениях и форматах полей приведена в документации <a href={{linkToDocumentation}} target="_blank">Система</a>. После обновления настроек CSP необходимо обновить окно браузера, чтобы изменения вступили в силу.',
     //Maps
+    'LBL_MAPS_LOGGER_START_DATE' => 'Дата начала ведения журналов:',
+    'LBL_MAPS_LOGGER_DETAILED_LOGS' => 'Детальные журналы',
+    'LBL_MAPS_LOGGER_NO_LOGS_AVAILABLE' => 'Нет доступных журналов.',
+    'LBL_MAPS_LOGGER_ENABLE_MODULES_FOR_LOG' => 'Включить журналы для модулей:',
+    'LBL_MAPS_LOGGER_LOG_LEVEL' => 'Выбрать уровень ведения журнала...',
+    'LBL_MAPS_LOGGER_LOG_TYPE' => 'Уровень ведения журнала:',
+    'LBL_MAPS_LOGGER_LOG_ALL_MESSAGES' => 'Все сообщения',
+    'LBL_MAPS_LOGGER_LOG_ERROR' => 'Ошибки',
+    'LBL_MAPS_LOGGER_LOG_SUCCESS' => 'Успешно',
+    'LBL_MAPS_LOGGER_LBL_MODULE' => 'Модуль',
+    'LBL_MAPS_LOGGER_LBL_NAME' => 'Название',
+    'LBL_MAPS_LOGGER_LBL_STATUS' => 'Статус',
+    'LBL_MAPS_LOGGER_LBL_GEOCODE' => 'Геокодированный',
+    'LBL_MAPS_LOGGER_YES' => 'Да',
+    'LBL_MAPS_LOGGER_NO' => 'Нет',
+    'LBL_MAPS_LOGGER_OF' => 'из',
     'LBL_MAPS_ADMIN_CONFIG_TITLE' => 'Карты',
+    'LBL_MAPS_ADMIN_LOG_VIEWER' => 'Средство просмотра журнала',
     'LBL_MAPS_ADD_NEW_MODULE_TO_GEOCODE' => 'Добавить новый модуль для геокодирования',
     'LBL_MAPS_SELECT_NEW_MODULE_TO_GEOCODE' => 'Выберите модуль...',
     'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION' => 'Настройка карт',
+    'LBL_MAPS_ADMIN_CONFIG_LOG_VIEWER_DESCRIPTION' => 'Доступ к журналам геокодирования',
     'LBL_MAPS_LOG_LEVEL_TITLE' => 'Уровень детализации',
     'LBL_MAPS_LOG_LVL_FATAL' => 'Фатальный',
     'LBL_MAPS_LOG_LVL_DEBUG' => 'Отладка',
@@ -1423,9 +1454,12 @@ $mod_strings = array (
     'LBL_CLOUD_DRIVE_DESCRIPTION' => 'Настройка параметров пути по умолчанию для облачных хранилищ.',
     'LBL_GOOGLE_DRIVE_NAME' => 'Google Диск',
     'LBL_GOOGLE_DRIVE_TOOLTIP' => 'Настройка путей по умолчанию для Google Диска',
+    'LBL_DROPBOX_DRIVE' => 'Диск Dropbox',
+    'LBL_DROPBOX_DRIVE_TOOLTIP' => 'Настройка путей по умолчанию для Диска Dropbox',
     'LBL_GOOGLE_DRIVE_SAVE_BUTTON' => 'Сохранить',
     'LBL_SELECT_ROOT_PATH' => 'Выбрать корневой путь',
     'LBL_REMOVE_ROOT_PATH' => 'Удалить корневой путь',
+    'LBL_ROOT_PATH_REMOVED' => 'Корневой путь был удален.',
     'LBL_VALIDATE_ROOT_PATH' => 'Проверить корневой путь',
     'LBL_PATHS_FOR_RECORD_VIEW' => 'Пути для просмотра записи',
     'LBL_DEFAULT_STARTING_PATH' => 'Начальный путь по умолчанию',
@@ -1439,14 +1473,16 @@ $mod_strings = array (
     'LBL_MICROSOFT_ONEDRIVE_TOOLTIP' => 'Настройка путей по умолчанию для Microsoft OneDrive',
     'LBL_DRIVE_PATH_CONFIG' => 'Конфигурация пути к диску',
     'LBL_DRIVE_ROOT_PATH' => 'Корневой путь',
+    'LBL_FIELDS_VARIABLE' => 'Переменная поля',
+    'LBL_UNABLE_TO_RETRIEVE_ROOT_PATH' => 'Не удалось получить корневой путь',
     'LBL_HINT_NAME' => 'Поля Hint',
     'LBL_HINT_DESCRIPTION' => 'Настройка способа отображения полей, обогащенных с помощью Hint, на панели Hint.',
-    'LBL_HINT_SECTION_HEADER' => 'Hint',
-    'LBL_HINT_SECTION_DESCRIPTION' => 'Конфигурация параметров для Hint',
+    'LBL_HINT_SECTION_HEADER' => 'Sugar Hint',
+    'LBL_HINT_SECTION_DESCRIPTION' => 'Конфигурация параметров для Sugar Hint',
 
-    'LBL_HINT_CONFIG' => 'Конфигурация Hint',
+    'LBL_HINT_CONFIG' => 'Конфигурация Sugar Hint',
     'LBL_HINT_CONFIG_NAME' => 'Конфигурация Hint',
-    'LBL_HINT_CONFIG_SAVED' => 'Параметры конфигурации Hint были сохранены.',
+    'LBL_HINT_CONFIG_SAVED' => 'Параметры конфигурации Sugar Hint были сохранены.',
     'LBL_HINT_CONFIG_DESCRIPTION' => 'Обновление параметров Hint.',
     'LBL_HINT_CONFIG_LOGGER_SECTION_HEADER' => 'Средство ведения журнала',
 
@@ -1454,7 +1490,24 @@ $mod_strings = array (
     'LBL_HINT_RESYNC_DESCRIPTION' => 'Выполните повторную синхронизацию с сервисом Hint Insights и устраните проблемы с уведомлениями, в том числе изменения в настройках и адресах электронной почты, которые не вступили в силу.',
 
     'LBL_HINT_UNINSTALL' => 'Деинсталляция',
-    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Выполните деинсталляцию Hint, включая отключение уведомлений от Hint Insights.',
+    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Выполните деинсталляцию Sugar Hint, включая отключение уведомлений от Sugar Hint Insights.',
 
     'LBL_HINT_CONFIG_NOTIFICATIONS_HEADER' => 'Уведомления',
+
+    'LBL_DOCUSIGN_GROUP' => 'DocuSign',
+    'LBL_DOCUSIGN_NAME' => 'Настройки',
+    'LBL_DOCUSIGN_TOOLTIP' => 'Конфигурация DocuSign',
+    'LBL_DOCUSIGN_DESCRIPTION' => 'Настройка функций DocuSign',
+    'LBL_SUGAR_MAPS' => 'Карты Sugar',
+    'LBL_CLOUD_DRIVE' => 'Облачное хранилище',
+
+    // Sugar Automate
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_TITLE' => 'Настройки автоматизации Sugar',
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_DESC' => 'Настройка пакета автоматизации Sugar',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'Шаблоны',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'Управление шаблонами',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_NAME' => 'Настройка модулей',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_DESC' => 'Настройка включенных модулей',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'Шаблоны',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'Управление шаблонами',
 );

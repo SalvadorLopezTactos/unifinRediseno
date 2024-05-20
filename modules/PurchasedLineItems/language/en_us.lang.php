@@ -20,7 +20,7 @@ $mod_strings = [
     'LBL_NEW_FORM_TITLE' => 'Create Purchased Line Item',
     'LBL_PURCHASED_LINE_ITEMS_LIST_DASHBOARD' => 'Purchased Line Items List Dashboard',
     'LBL_PURCHASED_LINE_ITEMS_RECORD_DASHBOARD' => 'Purchased Line Items Record Dashboard',
-    'LBL_PURCHASED_LINE_ITEMS_FOCUS_DRAWER_DASHBOARD' => 'Purchased Line Items Focus Drawer',
+    'LBL_PURCHASED_LINE_ITEMS_FOCUS_DRAWER_DASHBOARD' => 'Purchased Line Items Focus Dashboard',
 
     // Menu Language Strings
     'LNK_IMPORT_PURCHASEDLINEITEMS' => 'Import Purchased Line Items',

@@ -36,6 +36,8 @@
 
                     // reload opportunities subpanel
                     this.context.parent.trigger('subpanel:reload', {links: reloadLinks});
+                    // catch the after save moment
+                    this.context.parent.trigger('opportunities:record:saved');
                 }
             }, this)
         };

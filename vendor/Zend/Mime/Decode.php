@@ -128,16 +128,16 @@ class Zend_Mime_Decode
         // find an empty line between headers and body
         // default is set new line
         if (strpos($message, $EOL . $EOL)) {
-            list($headers, $body) = explode($EOL . $EOL, $message, 2);
+            [$headers, $body] = explode($EOL . $EOL, $message, 2);
         // next is the standard new line
         } else if ($EOL != "\r\n" && strpos($message, "\r\n\r\n")) {
-            list($headers, $body) = explode("\r\n\r\n", $message, 2);
+            [$headers, $body] = explode("\r\n\r\n", $message, 2);
         // next is the other "standard" new line
         } else if ($EOL != "\n" && strpos($message, "\n\n")) {
-            list($headers, $body) = explode("\n\n", $message, 2);
+            [$headers, $body] = explode("\n\n", $message, 2);
         // at last resort find anything that looks like a new line
         } else {
-            @list($headers, $body) = @preg_split("%([\r\n]+)\\1%U", $message, 2);
+            @[$headers, $body] = @preg_split("%([\r\n]+)\\1%U", $message, 2);
         }
 
         $headers = iconv_mime_decode_headers($headers, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);

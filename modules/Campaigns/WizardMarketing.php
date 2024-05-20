@@ -166,7 +166,7 @@ else {
 }
 
 
-$scope_options=get_message_scope_dom($campaign_focus->id,$campaign_focus->name,$mrkt_focus->db);
+$scope_options=get_message_scope_dom($campaign_focus->id);
 $prospectlists=array();
 if (isset($mrkt_focus->all_prospect_lists) && $mrkt_focus->all_prospect_lists==1) {
     $ss->assign("ALL_PROSPECT_LISTS_CHECKED","checked");

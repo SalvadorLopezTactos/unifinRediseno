@@ -22,29 +22,85 @@ class NodeConfig extends \Google\Collection
   protected $collection_key = 'taints';
   protected $acceleratorsType = AcceleratorConfig::class;
   protected $acceleratorsDataType = 'array';
+  protected $advancedMachineFeaturesType = AdvancedMachineFeatures::class;
+  protected $advancedMachineFeaturesDataType = '';
+  /**
+   * @var string
+   */
   public $bootDiskKmsKey;
+  protected $confidentialNodesType = ConfidentialNodes::class;
+  protected $confidentialNodesDataType = '';
+  /**
+   * @var int
+   */
   public $diskSizeGb;
+  /**
+   * @var string
+   */
   public $diskType;
+  protected $gcfsConfigType = GcfsConfig::class;
+  protected $gcfsConfigDataType = '';
+  protected $gvnicType = VirtualNIC::class;
+  protected $gvnicDataType = '';
+  /**
+   * @var string
+   */
   public $imageType;
   protected $kubeletConfigType = NodeKubeletConfig::class;
   protected $kubeletConfigDataType = '';
+  /**
+   * @var string[]
+   */
   public $labels;
   protected $linuxNodeConfigType = LinuxNodeConfig::class;
   protected $linuxNodeConfigDataType = '';
+  /**
+   * @var int
+   */
   public $localSsdCount;
+  protected $loggingConfigType = NodePoolLoggingConfig::class;
+  protected $loggingConfigDataType = '';
+  /**
+   * @var string
+   */
   public $machineType;
+  /**
+   * @var string[]
+   */
   public $metadata;
+  /**
+   * @var string
+   */
   public $minCpuPlatform;
+  /**
+   * @var string
+   */
   public $nodeGroup;
+  /**
+   * @var string[]
+   */
   public $oauthScopes;
+  /**
+   * @var bool
+   */
   public $preemptible;
   protected $reservationAffinityType = ReservationAffinity::class;
   protected $reservationAffinityDataType = '';
   protected $sandboxConfigType = SandboxConfig::class;
   protected $sandboxConfigDataType = '';
+  /**
+   * @var string
+   */
   public $serviceAccount;
   protected $shieldedInstanceConfigType = ShieldedInstanceConfig::class;
   protected $shieldedInstanceConfigDataType = '';
+  /**
+   * @var bool
+   */
+  public $spot;
+  /**
+   * @var string[]
+   */
   public $tags;
   protected $taintsType = NodeTaint::class;
   protected $taintsDataType = 'array';
@@ -65,34 +121,114 @@ class NodeConfig extends \Google\Collection
   {
     return $this->accelerators;
   }
+  /**
+   * @param AdvancedMachineFeatures
+   */
+  public function setAdvancedMachineFeatures(AdvancedMachineFeatures $advancedMachineFeatures)
+  {
+    $this->advancedMachineFeatures = $advancedMachineFeatures;
+  }
+  /**
+   * @return AdvancedMachineFeatures
+   */
+  public function getAdvancedMachineFeatures()
+  {
+    return $this->advancedMachineFeatures;
+  }
+  /**
+   * @param string
+   */
   public function setBootDiskKmsKey($bootDiskKmsKey)
   {
     $this->bootDiskKmsKey = $bootDiskKmsKey;
   }
+  /**
+   * @return string
+   */
   public function getBootDiskKmsKey()
   {
     return $this->bootDiskKmsKey;
   }
+  /**
+   * @param ConfidentialNodes
+   */
+  public function setConfidentialNodes(ConfidentialNodes $confidentialNodes)
+  {
+    $this->confidentialNodes = $confidentialNodes;
+  }
+  /**
+   * @return ConfidentialNodes
+   */
+  public function getConfidentialNodes()
+  {
+    return $this->confidentialNodes;
+  }
+  /**
+   * @param int
+   */
   public function setDiskSizeGb($diskSizeGb)
   {
     $this->diskSizeGb = $diskSizeGb;
   }
+  /**
+   * @return int
+   */
   public function getDiskSizeGb()
   {
     return $this->diskSizeGb;
   }
+  /**
+   * @param string
+   */
   public function setDiskType($diskType)
   {
     $this->diskType = $diskType;
   }
+  /**
+   * @return string
+   */
   public function getDiskType()
   {
     return $this->diskType;
   }
+  /**
+   * @param GcfsConfig
+   */
+  public function setGcfsConfig(GcfsConfig $gcfsConfig)
+  {
+    $this->gcfsConfig = $gcfsConfig;
+  }
+  /**
+   * @return GcfsConfig
+   */
+  public function getGcfsConfig()
+  {
+    return $this->gcfsConfig;
+  }
+  /**
+   * @param VirtualNIC
+   */
+  public function setGvnic(VirtualNIC $gvnic)
+  {
+    $this->gvnic = $gvnic;
+  }
+  /**
+   * @return VirtualNIC
+   */
+  public function getGvnic()
+  {
+    return $this->gvnic;
+  }
+  /**
+   * @param string
+   */
   public function setImageType($imageType)
   {
     $this->imageType = $imageType;
   }
+  /**
+   * @return string
+   */
   public function getImageType()
   {
     return $this->imageType;
@@ -111,10 +247,16 @@ class NodeConfig extends \Google\Collection
   {
     return $this->kubeletConfig;
   }
+  /**
+   * @param string[]
+   */
   public function setLabels($labels)
   {
     $this->labels = $labels;
   }
+  /**
+   * @return string[]
+   */
   public function getLabels()
   {
     return $this->labels;
@@ -133,58 +275,114 @@ class NodeConfig extends \Google\Collection
   {
     return $this->linuxNodeConfig;
   }
+  /**
+   * @param int
+   */
   public function setLocalSsdCount($localSsdCount)
   {
     $this->localSsdCount = $localSsdCount;
   }
+  /**
+   * @return int
+   */
   public function getLocalSsdCount()
   {
     return $this->localSsdCount;
   }
+  /**
+   * @param NodePoolLoggingConfig
+   */
+  public function setLoggingConfig(NodePoolLoggingConfig $loggingConfig)
+  {
+    $this->loggingConfig = $loggingConfig;
+  }
+  /**
+   * @return NodePoolLoggingConfig
+   */
+  public function getLoggingConfig()
+  {
+    return $this->loggingConfig;
+  }
+  /**
+   * @param string
+   */
   public function setMachineType($machineType)
   {
     $this->machineType = $machineType;
   }
+  /**
+   * @return string
+   */
   public function getMachineType()
   {
     return $this->machineType;
   }
+  /**
+   * @param string[]
+   */
   public function setMetadata($metadata)
   {
     $this->metadata = $metadata;
   }
+  /**
+   * @return string[]
+   */
   public function getMetadata()
   {
     return $this->metadata;
   }
+  /**
+   * @param string
+   */
   public function setMinCpuPlatform($minCpuPlatform)
   {
     $this->minCpuPlatform = $minCpuPlatform;
   }
+  /**
+   * @return string
+   */
   public function getMinCpuPlatform()
   {
     return $this->minCpuPlatform;
   }
+  /**
+   * @param string
+   */
   public function setNodeGroup($nodeGroup)
   {
     $this->nodeGroup = $nodeGroup;
   }
+  /**
+   * @return string
+   */
   public function getNodeGroup()
   {
     return $this->nodeGroup;
   }
+  /**
+   * @param string[]
+   */
   public function setOauthScopes($oauthScopes)
   {
     $this->oauthScopes = $oauthScopes;
   }
+  /**
+   * @return string[]
+   */
   public function getOauthScopes()
   {
     return $this->oauthScopes;
   }
+  /**
+   * @param bool
+   */
   public function setPreemptible($preemptible)
   {
     $this->preemptible = $preemptible;
   }
+  /**
+   * @return bool
+   */
   public function getPreemptible()
   {
     return $this->preemptible;
@@ -217,10 +415,16 @@ class NodeConfig extends \Google\Collection
   {
     return $this->sandboxConfig;
   }
+  /**
+   * @param string
+   */
   public function setServiceAccount($serviceAccount)
   {
     $this->serviceAccount = $serviceAccount;
   }
+  /**
+   * @return string
+   */
   public function getServiceAccount()
   {
     return $this->serviceAccount;
@@ -239,10 +443,30 @@ class NodeConfig extends \Google\Collection
   {
     return $this->shieldedInstanceConfig;
   }
+  /**
+   * @param bool
+   */
+  public function setSpot($spot)
+  {
+    $this->spot = $spot;
+  }
+  /**
+   * @return bool
+   */
+  public function getSpot()
+  {
+    return $this->spot;
+  }
+  /**
+   * @param string[]
+   */
   public function setTags($tags)
   {
     $this->tags = $tags;
   }
+  /**
+   * @return string[]
+   */
   public function getTags()
   {
     return $this->tags;

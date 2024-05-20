@@ -59,7 +59,8 @@
     getGridstackOptions: function() {
         return {
             staticGrid: true, // removes drag|drop|resize
-            disableOneColumnMode: true, // will manually do 1 column
+            disableOneColumnMode: true, // will manually do 1 column,
+            rtl: app.lang.direction === 'rtl'
         };
     },
 
@@ -120,7 +121,9 @@
                     tooltip: option.description,
                     icon: option.icon,
                     customIcon: option.customIcon,
-                    href: option.link
+                    href: option.link,
+                    onclick: option.onclick,
+                    target: option.target
                 });
             });
         }

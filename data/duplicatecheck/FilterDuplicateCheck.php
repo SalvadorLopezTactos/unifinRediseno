@@ -16,9 +16,9 @@
  */
 class FilterDuplicateCheck extends DuplicateCheckStrategy
 {
-    const DUPE_CHECK_RANK = 'duplicate_check_rank';
-    const FIELD_PLACEHOLDER = '$';
-    const FILTER_QUERY_LIMIT = 20;
+    public const DUPE_CHECK_RANK = 'duplicate_check_rank';
+    public const FIELD_PLACEHOLDER = '$';
+    public const FILTER_QUERY_LIMIT = 20;
 
     var $filterTemplate = array();
     var $rankingFields = array();
@@ -218,7 +218,7 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
         $incomingFieldValue = trim($incomingFieldValue);
         $dupeFieldValue = trim($dupeFieldValue);
         if ($incomingFieldValue === $dupeFieldValue) {
-            return pow(2, $fieldWeight);
+            return 2 ** $fieldWeight;
         }
         return 0;
     }
@@ -234,10 +234,7 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
     {
         $dupe1Rank = $dupe1[self::DUPE_CHECK_RANK];
         $dupe2Rank = $dupe2[self::DUPE_CHECK_RANK];
-        if ($dupe1Rank == $dupe2Rank) {
-            return 0;
-        }
-        return ($dupe1Rank < $dupe2Rank) ? 1 : -1;
+        return $dupe2Rank <=> $dupe1Rank;
     }
 
 }

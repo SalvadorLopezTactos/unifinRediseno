@@ -16,13 +16,13 @@ use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageManifestException;
 
 class PackageManifest
 {
-    const PACKAGE_TYPE_FULL = 'full';
-    const PACKAGE_TYPE_LANGPACK = 'langpack';
-    const PACKAGE_TYPE_MODULE = 'module';
-    const PACKAGE_TYPE_PATCH = 'patch';
-    const PACKAGE_TYPE_THEME = 'theme';
+    public const PACKAGE_TYPE_FULL = 'full';
+    public const PACKAGE_TYPE_LANGPACK = 'langpack';
+    public const PACKAGE_TYPE_MODULE = 'module';
+    public const PACKAGE_TYPE_PATCH = 'patch';
+    public const PACKAGE_TYPE_THEME = 'theme';
 
-    const PACKAGE_TYPES = [
+    public const PACKAGE_TYPES = [
         self::PACKAGE_TYPE_FULL,
         self::PACKAGE_TYPE_LANGPACK,
         self::PACKAGE_TYPE_MODULE,
@@ -30,7 +30,7 @@ class PackageManifest
         self::PACKAGE_TYPE_THEME,
     ];
 
-    const MODULE_PACKAGE_TYPES = [
+    public const MODULE_PACKAGE_TYPES = [
         self::PACKAGE_TYPE_MODULE,
         self::PACKAGE_TYPE_THEME,
         self::PACKAGE_TYPE_LANGPACK,

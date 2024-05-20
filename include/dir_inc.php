@@ -10,14 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 function copy_recursive( $source, $dest ){
-
-
     if( is_file( $source ) ){
         return( copy( $source, $dest ) );
     }
-    if( !sugar_is_dir($dest, 'instance') ){
+    if (!sugar_is_dir($dest)) {
         sugar_mkdir( $dest );
     }
 
@@ -39,7 +36,7 @@ function copy_recursive( $source, $dest ){
 
 function mkdir_recursive($path, $check_is_parent_dir = false)
 {
-	if(sugar_is_dir($path, 'instance')) {
+    if (sugar_is_dir($path)) {
 		return(true);
 	}
 	if(sugar_is_file($path, 'instance')) {

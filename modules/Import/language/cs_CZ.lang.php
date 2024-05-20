@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Požadovaná hodnota chybí',
     'LBL_ERROR_SYNC_USERS' => 'Neplatnáý hodnota pro synchronizaci do Outlooku:',
     'LBL_ID_EXISTS_ALREADY' => 'V této tabulte ID již existuje',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY již v této tabulce existuje',
     'LBL_ASSIGNED_USER' => 'Pokud uživatel neexistuje, použijte aktuálního uživatele',
     'LBL_SHOW_HIDDEN' => 'Ukázat pole která nejsou běžně importovatelná',
     'LBL_UPDATE_RECORDS' => 'Aktualizovat existující zínamy namísto importování (nelze vrátit)',

@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Gumbi za obrazac',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Odobri/odbij',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Usmjeri',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Pošalji u DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Druge opcije usmjeravanja',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Promijeni vrijednost dodijeljeno korisniku',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Tim',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Spajanje dok.',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Odaberi...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Spajanje dokumenata u PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Pošalji spojeni dokument e-poštom',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Spajanje dok.',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Vrsta pristupnika za skupljanje ne odgovara vrsti pristupnika dolaznog tijeka',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Pristupnici za širenje proširuju procese u više ogranaka. Pri uporabi pristupnika za skupljanje radi ponovnog skupljanja tih ogranaka u jedan put potrebno je upotrijebiti ispravnu vrstu pristupnika za skupljanje, zavisno od vrste pristupnika za širenje koji je korišten za izradu tih ogranaka. Za ogranke izrađene isključivim pristupnicima za širenje ili pristupnicima za širenje koji se temelje na događaju upotrijebite isključivi pristupnik za njihovo ponovno skupljanje. Za ogranke izrađene paralelnim ili uključivim pristupnicima upotrijebite paralelni pristupnik za skupljanje kako biste ih ponovno skupili.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Polje modula',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Odnos modula',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Korisnik',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Uloga',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Tim',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Aktivnost obrasca',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Poslovno pravilo',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Radnja u vezi s poslovnim pravilom',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Predložak e-pošte',
 );

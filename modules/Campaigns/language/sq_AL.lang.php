@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'URL e gjurmuesit:',
   'LBL_TRACKER_TEXT' => 'Teksti lidhës i gjurmuesit',
   'LBL_TRACKER_COUNT' => 'Numrimi i gjurmuesve:',
-  'LBL_REFER_URL' => 'URL e ridrejtuar e gjurmuesit',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'fushatat',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Fushatat e emaileve',
   'LBL_NEW_FORM_TITLE' => 'Fushatë e re',

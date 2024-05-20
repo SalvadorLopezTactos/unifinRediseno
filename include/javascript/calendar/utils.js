@@ -35,7 +35,7 @@
      * @return {Mixed} An Array or an Object with myCalendars and otherCalendars
      */
     utils.getConfigurationsByKey = function getConfigurationsByKey(key, calendarCategory) {
-        let calendarsSaved = app.cache.get(key);
+        let calendarsSaved = app.user.lastState.get(key);
 
         let calendarConfigurations = {
             myCalendars: [],
@@ -125,6 +125,97 @@
         const b = (bHash + 70).toString(16);
 
         return '#' + r + g + b;
+    };
+
+    const dateMapping = {
+        'Y-m-d': {
+            full: 'yyyy-MM-dd',
+            dayAndMonth: 'MM-dd',
+            dayAndVerboseMonth: 'MMMM dd',
+            fullVerboseMonth: 'yyyy, MMMM dd',
+        },
+        'm-d-Y': {
+            full: 'MM-dd-YYYY',
+            dayAndMonth: 'MM-dd',
+            dayAndVerboseMonth: 'MMMM dd',
+            fullVerboseMonth: 'MMMM dd, yyyy',
+        },
+        'd-m-Y': {
+            full: 'dd-MM-YYYY',
+            dayAndMonth: 'dd-MM',
+            dayAndVerboseMonth: 'dd MMMM',
+            fullVerboseMonth: 'dd MMMM, yyyy',
+        },
+        'Y/m/d': {
+            full: 'yyyy/MM/dd',
+            dayAndMonth: 'MM/dd',
+            dayAndVerboseMonth: 'MMMM dd',
+            fullVerboseMonth: 'yyyy, MMMM dd',
+        },
+        'm/d/Y': {
+            full: 'MM/dd/yyyy',
+            dayAndMonth: 'MM/dd',
+            dayAndVerboseMonth: 'MMMM dd',
+            fullVerboseMonth: 'MMMM dd, yyyy',
+        },
+        'd/m/Y': {
+            full: 'dd/MM/yyyy',
+            dayAndMonth: 'dd/MM',
+            dayAndVerboseMonth: 'dd MMMM',
+            fullVerboseMonth: 'dd MMMM, yyyy',
+        },
+        'Y.m.d': {
+            full: 'yyyy.MM.dd',
+            dayAndMonth: 'MM.dd',
+            dayAndVerboseMonth: 'MMMM dd',
+            fullVerboseMonth: 'yyyy, MMMM dd',
+        },
+        'd.m.Y': {
+            full: 'dd.MM.yyyy',
+            dayAndMonth: 'dd.MM',
+            dayAndVerboseMonth: 'dd MMMM',
+            fullVerboseMonth: 'dd MMMM, yyyy',
+        },
+        'm.d.Y': {
+            full: 'MM.dd.yyyy',
+            dayAndMonth: 'MM.dd',
+            dayAndVerboseMonth: 'MMMM dd',
+            fullVerboseMonth: 'MMMM dd, yyyy',
+        },
+    };
+
+    const timeMapping = {
+        'H:i': 'H:mm',
+        'h:ia': 'h:mmtt',
+        'h:iA': 'h:mmtt',
+        'h:i a': 'h:mm tt',
+        'h:i A': 'h:mm tt',
+        'H.i': 'H.mm',
+        'h.ia': 'h.mmtt',
+        'h.iA': 'h.mmtt',
+        'h.i a': 'h.mm tt',
+        'h.i A': 'h.mm tt'
+    };
+
+    /**
+     * Get kendo date mapping
+     *
+     * @param {string} datePref Sugar date format
+     * @param {string} interestingParts
+     * @return {string} Kendo date format
+     */
+    utils.getKendoDateMapping = function(datePref, interestingParts) {
+        return dateMapping[datePref][interestingParts] || dateMapping[datePref].full;
+    };
+
+    /**
+     * Get kendo time mapping
+     *
+     * @param {string} timePref Sugar time format
+     * @return {string} Kendo time format
+     */
+    utils.getKendoTimeMapping = function(timePref) {
+        return timeMapping[timePref];
     };
 
     app.Calendar.utils = utils;

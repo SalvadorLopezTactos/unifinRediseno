@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logos',
 	'LBL_ADMIN_WIZARD' => 'Asistent d&#39;Administració',
-	'LBL_ALLOW_USER_TABS' => 'Permetre als usuaris amagar pestanyes',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Configuració del sistema',
 	'LBL_ENABLE_MAILMERGE' => 'Habilitar combinar correspondència?',
 	'LBL_LOGVIEW' => 'Configuració de Registre',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Faci servir aquesta opció per determinar el número de mesos per endavant sobre la data actual amb la que es pública l´informació relativa al estat de Disponible/Ocupat sobre trucades i reunions.<BR>Per desactivar la publicació del estat Disponible/Ocupat, posi "0".  El mínim es 1 mes; el màxim 12.',
     'LBL_PDFMODULE_NAME' => 'Configuració PDF',
     'SUGARPDF_BASIC_SETTINGS' => 'Propietats del Document',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Configuració Avançada',
     'SUGARPDF_LOGO_SETTINGS' => 'Imatges',
-
-    'PDF_CREATOR' => 'Creador del PDF',
-    'PDF_CREATOR_INFO' => 'Defineix el creador del document. <br>Normalment és el nom de l&#39;aplicació que genera el PDF.',
 
     'PDF_AUTHOR' => 'Autor',
     'PDF_AUTHOR_INFO' => 'L&#39;Autor apareix a les propietats del document.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Seleccioni una nova imatge per els pressupostos',
     'PDF_NEW_HEADER_LOGO_INFO' => 'El format d&#39;arxiu pot ser .jpg o .png. (Només .jpg per EZPDF) <BR> El tamany recomanat és 867x60 px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Amplada d&#39;imatge per a pressupostos',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Canvia l&#39;escala d&#39;imatge pujada que apareix als Documents PDF de Pressupostos. (Només TCPDF)',
+    'PDF_TITLE' => 'Títol',
+    'PDF_TITLE_INFO' => 'El títol apareix a les propietats del document.',
+
+    'PDF_SUBJECT' => 'Assumpte',
+    'PDF_SUBJECT_INFO' => 'L&#39;Assumpte apareix a les propietats del document',
 
     'PDF_SMALL_HEADER_LOGO' => 'Per a Documents PDF d&#39;Informes',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Aquesta imatge apareix a la Capçelera per defecte dels Documents PDF d&#39;Informes. Aquesta imatge també apareix a la cantonada superior esquerra de l&#39;aplicació Sugar.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Seleccioni una nova imatge de Pressupostos',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'El format d&#39;arxiu pot ser .jpg o .png. (Només .jpg per EZPDF) El tamany recomanat és 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Amplada d&#39;imatge per Informes',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Canvia l&#39;escala de l&#39;imatge pujada que apareix en els Documents PDF d&#39;Informes. (Només TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Cadena d&#39;encapçalament',
-    'PDF_HEADER_STRING_INFO' => 'Cadena de descripció de l&#39;encapçalament',
-
-    'PDF_HEADER_TITLE' => 'Títol de la Capçalera',
-    'PDF_HEADER_TITLE_INFO' => 'Cadena a imprimir com a títol a la capçelera del document',
-
-    'PDF_FILENAME' => 'Nom de l&#39;Arxiu Per Defecte',
-    'PDF_FILENAME_INFO' => 'Nom de l&#39;arxiu per defecte per els arxius PDF generats',
-
-    'PDF_TITLE' => 'Títol',
-    'PDF_TITLE_INFO' => 'El títol apareix a les propietats del document.',
-
-    'PDF_SUBJECT' => 'Assumpte',
-    'PDF_SUBJECT_INFO' => 'L&#39;Assumpte apareix a les propietats del document',
-
     'PDF_KEYWORDS' => 'Paraula(es) clau',
     'PDF_KEYWORDS_INFO' => 'Associar Paraules clau amb el document, generalment a la forma "paraula1 paraula2..."',
 
-    'PDF_COMPRESSION' => 'Compressió',
-    'PDF_COMPRESSION_INFO' => 'Activa o desactiva la compressió de pàgina. <br>Quan ha estat activada, la representació interna de cada pàgina es comprimeix, portant a nivells de ratios de compressió d&#39;aprox. 2 per el document resultant.',
-
-    'PDF_JPEG_QUALITY' => 'Qualitat JPEG (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Estable de qualitat de compressió JPEG per defecte (1-100)',
-
-    'PDF_PDF_VERSION' => 'Versió PDF',
-    'PDF_PDF_VERSION_INFO' => 'Estableix la versió de PDF (consulti la referència PDF per a valors vàlids).',
-
-    'PDF_PROTECTION' => 'Protecció de Document',
-    'PDF_PROTECTION_INFO' => 'Estableix la protecció de document <br>-copiar: copiar text i imatges al portapapers<br>- imprimir: imprimir el document<br>- modificar: modificar el document (excepte les anotacions i formularis)<br>- anot-forms: afegir anotacions i formularis)<br>Nota: la protecció davant la modificació és per a gent que posseeix el producte. Acrobat complet.',
-
-    'PDF_USER_PASSWORD' => 'Contrasenya d&#39;Usuari',
-    'PDF_USER_PASSWORD_INFO' => 'Si no estableix cap contrasenya, el document s&#39;obrirà com de costum.<br>Si estableix una contrasenya d&#39;usuari, el visor PDF se la solicitarà abans de mostrar el document.<br>Si la contrasenya mestra és diferent de la d&#39;usuari podrà utilitzar-la per obtenir accés complet.',
-
-    'PDF_OWNER_PASSWORD' => 'Contrasenya de Propietari',
-    'PDF_OWNER_PASSWORD_INFO' => 'Si no estableix cap contrasenya, el document s&#39;obrirà com de costum.<br>Si estableix una contrasenya d&#39;usuari, el visor PDF se la solicitarà abans de mostrar el document.<br>Si la contrasenya mestra és diferent de la d&#39;usuari podrà utilitzar-la per obtenir accés complet.',
-
-    'PDF_ACL_ACCESS' => 'Control d&#39;Accés',
-    'PDF_ACL_ACCESS_INFO' => 'Control d&#39;Accés per defecte per a la generació del PDF.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Ratio d&#39;Alçada de la Cel·la',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Si l&#39;alçada d&#39;una cel·la é menor que (Alçada de la Font x Ratio d&#39;alçada de la Cel·la), llavors s&#39;utilitzarà (Alçada de la Font x Ratio d&#39;Alçada de la Cel·la) com l&#39;alçada de la cel·la. <br>(Alçada de la Font x Ratio d&#39;Alçada de la Cel·la) també s&#39;utilitza com l&#39;alçada de la cel·la quan no hi ha cap alçada definida.',
-
-    'K_TITLE_MAGNIFICATION' => 'Augment del Títol',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Augment del títol respecte al tamany principal de la font.',
-
-    'K_SMALL_RATIO' => 'Coeficient per a Fonts Petites',
-    'K_SMALL_RATIO_INFO' => 'Coeficient de Reducció per a fonts petites',
-
-    'HEAD_MAGNIFICATION' => 'Augment de la Capçelera',
-    'HEAD_MAGNIFICATION_INFO' => 'Coeficient d&#39;augment per a títols.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Ratio d&#39;escalat d&#39;imatges',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Ratio utilitzat per escalar les imatges',
-
-    'PDF_UNIT' => 'Unitat',
-    'PDF_UNIT_INFO' => 'unitat de mesura del document',
 	'PDF_GD_WARNING'=>'No ha instalat la llibreria GD per a PHP. Sense la llibreria GD, només es mostraran els logos JPEG en els documents PDF.',
     'ERR_EZPDF_DISABLE'=>'Avís: La classe EZPDF ha estat dehabilitada a la taula de configuració i està establerta com la classe per a PDF. Si us palu, "Guardi" aquest formulari per a establir TCPDF com la Classe PDF i torni a un estat estable.',
     'LBL_IMG_RESIZED'=>"(redimensionat per a ser mostrat)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Afegir una Font PDF',
     'LBL_PDF_PATCH' => 'Pegat',
-    'LBL_PDF_PATCH_INFO' => 'Modificacions personalitzades de la codificació Escgui un array PHP.<br>Exemple:<br>ISO-8859-1 no conté el símbol de l&#39;euro. Per afegir-lo a la posició 164, escrigui  "array(164=>&#39;Euro&#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'Taula de Codificaicó',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Nom de la taula de codificació.<br>Aquesta opció és ignorada a Unicode TrueType, Unicode OpenType i fonts amb símbols.<br>La codificació defineix la associació entre un codi (de 0 a 255) i un caràcter contingut a la font.<br>Esl primers 128 son fixes i es corresponen amb ASCII',
     'LBL_PDF_FONT_FILE' => 'Arxiu de Font',

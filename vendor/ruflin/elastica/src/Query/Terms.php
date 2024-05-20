@@ -20,76 +20,59 @@ class Terms extends AbstractQuery
     private $field;
 
     /**
-     * @var string[]
-     */
-    private $terms;
-
-    /**
-     * @var string[]|null
-     */
-    private $lookup;
-
-    /**
-     * @param string[] $terms Terms list, leave empty if building a terms-lookup query
+     * @param list<bool|float|int|string> $terms Terms list, leave empty if building a terms-lookup query
      */
     public function __construct(string $field, array $terms = [])
     {
-        if (empty($field)) {
+        if ('' === $field) {
             throw new InvalidException('Terms field name has to be set');
         }
 
         $this->field = $field;
-        $this->terms = $terms;
+        $this->setTerms($terms);
     }
 
     /**
      * Sets terms for the query.
      *
-     * @param string[]
+     * @param list<bool|float|int|string> $terms
      */
     public function setTerms(array $terms): self
     {
-        $this->terms = $terms;
-
-        return $this;
+        return $this->setParam($this->field, $terms);
     }
 
     /**
      * Adds a single term to the list.
+     *
+     * @param bool|float|int|string $term
      */
-    public function addTerm(string $term): self
+    public function addTerm($term): self
     {
-        $this->terms[] = $term;
+        if (!\is_scalar($term)) {
+            throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a scalar, %s given.', __METHOD__, \is_object($term) ? \get_class($term) : \gettype($term)));
+        }
 
-        return $this;
+        $terms = $this->getParam($this->field);
+
+        if (isset($terms['index'])) {
+            throw new InvalidException('Mixed terms and terms lookup are not allowed.');
+        }
+
+        return $this->addParam($this->field, $term);
     }
 
     public function setTermsLookup(string $index, string $id, string $path): self
     {
-        $this->lookup = [
+        return $this->setParam($this->field, [
             'index' => $index,
             'id' => $id,
             'path' => $path,
-        ];
-
-        return $this;
+        ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray(): array
+    public function setBoost(float $boost): self
     {
-        if (null !== $this->lookup && \count($this->terms)) {
-            throw new InvalidException('Unable to build Terms query: only one of terms or lookup properties should be set');
-        }
-
-        if (null !== $this->lookup) {
-            $this->setParam($this->field, $this->lookup);
-        } else {
-            $this->setParam($this->field, $this->terms);
-        }
-
-        return parent::toArray();
+        return $this->setParam('boost', $boost);
     }
 }

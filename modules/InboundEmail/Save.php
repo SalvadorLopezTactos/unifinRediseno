@@ -100,7 +100,7 @@ $stored_options['from_addr'] = trim($_REQUEST['from_addr']);
 $stored_options['reply_to_name'] = trim($_REQUEST['reply_to_name']);
 $stored_options['reply_to_addr'] = trim($_REQUEST['reply_to_addr']);
 $stored_options['only_since'] = $onlySince;
-$stored_options['filter_domain'] = $_REQUEST['filter_domain'];
+$stored_options['filter_domains'] = $_REQUEST['filter_domains'];
 $stored_options['email_num_autoreplies_24_hours'] = $_REQUEST['email_num_autoreplies_24_hours'];
 $stored_options['allow_outbound_group_usage'] = isset($_REQUEST['allow_outbound_group_usage']) ? true : false;
 
@@ -110,8 +110,8 @@ if (!$focus->isPop3Protocol()) {
 } // if
 if ( $focus->isMailBoxTypeCreateCase() || ($focus->mailbox_type == 'createcase' && empty($_REQUEST['id']) ) )
 {
-	$stored_options['distrib_method'] = (isset($_REQUEST['distrib_method'])) ? $_REQUEST['distrib_method'] : "";
-	$stored_options['create_case_email_template'] = (isset($_REQUEST['create_case_template_id'])) ? $_REQUEST['create_case_template_id'] : "";
+    $stored_options['distrib_method'] = $_REQUEST['distrib_method'] ?? "";
+    $stored_options['create_case_email_template'] = $_REQUEST['create_case_template_id'] ?? "";
 } // if
 $storedOptions['folderDelimiter'] = $delimiter;
 
@@ -189,7 +189,7 @@ $GLOBALS['log']->info('----->InboundEmail now saving self');
 
 //When an admin is creating an IE account we do not want their private team to be added
 //or they may be included in a round robin assignment.
-$previousTeamAccessCheck = isset($GLOBALS['sugar_config']['disable_team_access_check']) ? $GLOBALS['sugar_config']['disable_team_access_check'] : null;
+$previousTeamAccessCheck = $GLOBALS['sugar_config']['disable_team_access_check'] ?? null;
 $GLOBALS['sugar_config']['disable_team_access_check'] = TRUE;
 
 $monitor_fields = array(

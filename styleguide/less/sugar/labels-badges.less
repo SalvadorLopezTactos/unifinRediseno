@@ -115,6 +115,7 @@ a {
   border-radius: @borderRadiusSmall;
   box-sizing: border-box;
 }
+
 // undo link styling
 a.label,
 a > .label {
@@ -726,15 +727,164 @@ a .label-dark-text {
 .label-module-md,
 .label-module-sm,
 .label-module-mini {
+  .inline-flex();
+
   /* override */
   border-radius: @labelBorderRadius;
   text-align: center;
   padding: 0;
-  display: inline-flex;
 
   /* additive */
   justify-content: center;
   align-items: center;
+
+  &.sicon:empty {
+    .inline-flex();
+  }
+}
+
+// Module label sizes
+
+.label-module-size-sm {
+  .h-6();
+  .w-6();
+  .text-xs();
+}
+
+.label-module-size-lg {
+  .h-8();
+  .w-8();
+  .text-base();
+}
+
+// Module label colors
+
+.label-module-color-army,
+.label-module-color-army a {
+  background-color: @lightArmy;
+  color: @darkArmy;
+
+  &.sicon {
+    background-color: @army;
+    color: @lightArmy;
+  }
+}
+
+.label-module-color-coral,
+.label-module-color-coral a {
+  background-color: @lightCoral;
+  color: @darkCoral;
+
+  &.sicon {
+    background-color: @coral;
+    color: @lightCoral;
+  }
+}
+
+.label-module-color-green,
+.label-module-color-green a {
+  background-color: @lightGreen;
+  color: @darkGreen;
+
+  &.sicon {
+    background-color: @green;
+    color: @lightGreen;
+  }
+}
+
+.label-module-color-ocean,
+.label-module-color-ocean a {
+  background-color: @lightOcean;
+  color: @darkOcean;
+
+  &.sicon {
+    background-color: @ocean;
+    color: @lightOcean;
+  }
+}
+
+.label-module-color-orange,
+.label-module-color-orange a {
+  background-color: @lightOrange;
+  color: @darkOrange;
+
+  &.sicon {
+    background-color: @orange;
+    color: @lightOrange;
+  }
+}
+
+.label-module-color-pacific,
+.label-module-color-pacific a {
+  background-color: @lightPacific;
+  color: @darkPacific;
+
+  &.sicon {
+    background-color: @pacific;
+    color: @lightPacific;
+  }
+}
+
+.label-module-color-pink,
+.label-module-color-pink a {
+  background-color: @lightPink;
+  color: @darkPink;
+
+  &.sicon {
+    background-color: @pink;
+    color: @lightPink;
+  }
+}
+
+.label-module-color-purple,
+.label-module-color-purple a {
+  background-color: @lightPurple;
+  color: @darkPurple;
+
+  &.sicon {
+    background-color: @purple;
+    color: @lightPurple;
+  }
+}
+
+.label-module-color-red,
+.label-module-color-red a {
+  background-color: @lightRed;
+  color: @darkRed;
+
+  &.sicon {
+    background-color: @red;
+    color: @lightRed;
+  }
+}
+
+.label-module-color-teal,
+.label-module-color-teal a {
+  background-color: @lightTeal;
+  color: @darkTeal;
+
+  &.sicon {
+    background-color: @teal;
+    color: @lightTeal;
+  }
+}
+
+.label-module-color-yellow,
+.label-module-color-yellow a {
+  background-color: @lightYellow;
+  color: @darkYellow;
+
+  &.sicon {
+    background-color: @yellow;
+    color: @lightYellow;
+  }
+}
+
+.label-module-color-sidebar,
+.label-module-color-sidebar.sicon,
+.label-module-color-sidebar a {
+  background-color: transparent;
+  color: @white;
 }
 
 /* NEW SKIN END */

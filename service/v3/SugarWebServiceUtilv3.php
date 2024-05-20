@@ -151,19 +151,19 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 	            $entry = array();
 	            $entry['name'] = $var['name'];
 	            $entry['type'] = $var['type'];
-	            $entry['group'] = isset($var['group']) ? $var['group'] : '';
-	            $entry['id_name'] = isset($var['id_name']) ? $var['id_name'] : '';
+                $entry['group'] = $var['group'] ?? '';
+                $entry['id_name'] = $var['id_name'] ?? '';
 
-	            if ($var['type'] == 'link') {
-		            $entry['relationship'] = (isset($var['relationship']) ? $var['relationship'] : '');
-		            $entry['module'] = (isset($var['module']) ? $var['module'] : '');
-		            $entry['bean_name'] = (isset($var['bean_name']) ? $var['bean_name'] : '');
+                if ($var['type'] == 'link') {
+                    $entry['relationship'] = ($var['relationship'] ?? '');
+                    $entry['module'] = ($var['module'] ?? '');
+                    $entry['bean_name'] = ($var['bean_name'] ?? '');
 					$link_fields[$var['name']] = $entry;
 	            } else {
 		            if($translate) {
 		            	$entry['label'] = isset($var['vname']) ? translate($var['vname'], $value->module_dir) : $var['name'];
 		            } else {
-		            	$entry['label'] = isset($var['vname']) ? $var['vname'] : $var['name'];
+                        $entry['label'] = $var['vname'] ?? $var['name'];
 		            }
 		            $entry['required'] = $required;
 		            $entry['options'] = $options_ret;
@@ -267,8 +267,6 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 	}
 
     function get_module_view_defs($module_name, $type, $view){
-        $listViewDefs = [];
-        $viewdefs = [];
         $metadataFile = null;
         $view = strtolower($view);
         if ($view == 'subpanel') {
@@ -423,9 +421,7 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
     {
         $a_date = strtotime( $a['date_due'] ) ;
         $b_date = strtotime( $b['date_due'] ) ;
-
-        if( $a_date == $b_date ) return 0 ;
-        return ($a_date > $b_date ) ? 1 : -1;
+        return $a_date <=> $b_date;
   }
 
 }

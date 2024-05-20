@@ -20,6 +20,7 @@ require_once('include/EditView/EditView2.php');
  */
 class DetailView2 extends EditView
 {
+    public $defs;
     var $view = 'DetailView';
 
     /**
@@ -53,7 +54,7 @@ class DetailView2 extends EditView
         }
 
         if (!empty($this->metadataFile) && file_exists($this->metadataFile)) {
-        	include($this->metadataFile);
+            include $this->metadataFile;
         }
 
         $this->defs = $viewdefs[$this->module][$this->view];

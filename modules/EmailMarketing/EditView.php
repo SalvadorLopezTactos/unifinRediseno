@@ -23,7 +23,7 @@ if (!empty($_REQUEST['record'])) {
 }
 
 $dateStartFormatted = ViewDateFormatter::format('datetime', $focus->date_start);
-list($dateStart, $timeStart) = $timedate->split_date_time($dateStartFormatted);
+[$dateStart, $timeStart] = $timedate->split_date_time($dateStartFormatted);
 
 if (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] === 'true') {
     $focus->id = '';
@@ -110,7 +110,7 @@ if (empty($_REQUEST['campaign_name'])) {
 $params = [];
 $params[] = sprintf(
     '<a href="index.php?module=Campaigns&action=index">%s</a>',
-    htmlspecialchars($mod_strings['LNK_CAMPAIGN_LIST'])
+    htmlspecialchars($mod_strings['LNK_CAMPAIGN_LIST'], ENT_COMPAT)
 );
 $params = [];
 $href = 'index.php?' . http_build_query([
@@ -120,12 +120,12 @@ $href = 'index.php?' . http_build_query([
     ]);
 $params[] = sprintf(
     '<a href="%s">%s</a>',
-    htmlspecialchars($href),
-    htmlspecialchars($campaign_name)
+    htmlspecialchars($href, ENT_COMPAT),
+    htmlspecialchars($campaign_name, ENT_COMPAT)
 );
 
 if (empty($focus->id)) {
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'] . ' ' . $mod_strings['LBL_MODULE_NAME']);
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'] . ' ' . $mod_strings['LBL_MODULE_NAME'], ENT_COMPAT);
 } else {
     $href = 'index.php?' . http_build_query([
             'module' => $focus->module_dir,
@@ -134,10 +134,10 @@ if (empty($focus->id)) {
         ]);
     $params[] = sprintf(
         '<a href="%s">%s</a>',
-        htmlspecialchars($href),
-        htmlspecialchars($focus->name)
+        htmlspecialchars($href, ENT_COMPAT),
+        htmlspecialchars($focus->name, ENT_COMPAT)
     );
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL']);
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL'], ENT_COMPAT);
 }
 $xtpl->assign('PAGE_TITLE', getClassicModuleTitle($focus->module_dir, $params, true));
 

@@ -61,8 +61,8 @@ class ModuleNameValidator extends BeanModuleNameValidator
      */
     protected function getModulesFromGlobals()
     {
-        $moduleList = isset($GLOBALS['moduleList']) ? $GLOBALS['moduleList'] : array();
-        $modInvisList = isset($GLOBALS['modInvisList']) ? $GLOBALS['modInvisList'] : array();
+        $moduleList = $GLOBALS['moduleList'] ?? array();
+        $modInvisList = $GLOBALS['modInvisList'] ?? array();
         return array_merge($moduleList, $modInvisList);
     }
 

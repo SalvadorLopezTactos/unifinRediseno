@@ -91,7 +91,7 @@ class TeamBasedACLVisibility extends SugarVisibility implements StrategyInterfac
     {
         global $current_user;
 
-        list($teamTableAlias, $tableAlias) = $this->getAliases();
+        [$teamTableAlias, $tableAlias] = $this->getAliases();
         $inClause = "SELECT tst.team_id
             FROM team_sets_teams tst
             INNER JOIN team_memberships {$teamTableAlias} ON {$teamTableAlias}.team_id = tst.team_id

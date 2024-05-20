@@ -669,6 +669,7 @@ function set_note_attachment($session,$note)
  */
 function get_note_attachment($session,$id)
 {
+    $note = null;
 	$error = new SoapError();
 	if(!validate_authenticated($session)){
 		$error->set_error('invalid_login');
@@ -705,6 +706,7 @@ function get_note_attachment($session,$id)
  * @return no error for success, error for failure
  */
 function relate_note_to_module($session,$note_id, $module_name, $module_id){
+    $seed = null;
 	global  $beanList;
 	$error = new SoapError();
 	if(!validate_authenticated($session)){
@@ -891,6 +893,7 @@ function get_available_modules($session){
  * @return Empty error on success, Error on failure
  */
 function update_portal_user($session,$portal_name, $name_value_list){
+    $contact = null;
     $name_value_list = object_to_array_deep($name_value_list);
 	global  $beanList, $beanFiles;
 	$error = new SoapError();
@@ -1016,6 +1019,8 @@ function get_server_version(){
  * @return unknown
  */
 function get_relationships($session, $module_name, $module_id, $related_module, $related_module_query, $deleted){
+    $sql = null;
+    $list = [];
 		$error = new SoapError();
 	$ids = array();
 	if(!validate_authenticated($session)){
@@ -1051,8 +1056,7 @@ function get_relationships($session, $module_name, $module_id, $related_module, 
 	if ($id_list === FALSE) {
 		$error->set_error('no_relationship_support');
 		return array('ids'=>$ids, 'error'=>$error->get_soap_array());
-	}
-    elseif ((is_countable($id_list) ? count($id_list) : 0) == 0) {
+    } elseif ((is_countable($id_list) ? count($id_list) : 0) == 0) {
 		return array('ids'=>$ids, 'error'=>$error->get_soap_array());
 	}
 
@@ -1344,7 +1348,7 @@ function set_document_revision($session,$document_revision)
  * @return get_entry_list_result 	- id, module_name, and list of fields from each record
  */
 function search_by_module($user_name, $password, $search_string, $modules, $offset, $max_results){
-    $output_list = [];
+    $query_array = [];
     $modules = object_to_array_deep($modules);
 	$error = new SoapError();
     $hasLoginError = false;
@@ -1525,6 +1529,7 @@ function search_by_module($user_name, $password, $search_string, $modules, $offs
  */
 function get_mailmerge_document($session, $file_name, $fields)
 {
+    $merge_array = [];
     $fields = object_to_array_deep($fields);
     global $app_list_strings;
     $error = new SoapError();
@@ -1647,6 +1652,7 @@ function get_mailmerge_document($session, $file_name, $fields)
  */
 function get_mailmerge_document2($session, $file_name, $fields)
 {
+    $merge_array = [];
     $fields = object_to_array_deep($fields);
     global $app_list_strings, $app_strings;
 
@@ -1793,6 +1799,7 @@ function get_mailmerge_document2($session, $file_name, $fields)
  */
 function get_document_revision($session,$id)
 {
+    $dr = null;
     global $sugar_config;
 
     $error = new SoapError();
@@ -1852,6 +1859,8 @@ function set_campaign_merge($session,$targets, $campaign_id){
 @return get_entries_count_result - this is a complex type as defined in SoapTypes.php
 */
 function get_entries_count($session, $module_name, $query, $deleted) {
+    $where_clauses = [];
+    $sql = null;
 	global $current_user;
 
 	$error = new SoapError();

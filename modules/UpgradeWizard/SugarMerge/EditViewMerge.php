@@ -22,6 +22,14 @@
  */
 class EditViewMerge{
 	/**
+     * @var mixed|mixed[]
+     */
+    public $mergeData;
+    /**
+     * @var int|string
+     */
+    public $defaulPanel;
+    /**
 	 * The variable name that is used with the file for example in editviewdefs and detailviewdefs it is $viewdefs
 	 *
 	 * @var STRING
@@ -518,8 +526,8 @@ class EditViewMerge{
                 //3-way merge
                 else if (is_array($value)){
                     $newTM[$key] = MergeUtils::deepMergeDef(
-                        isset($oldTM[$key]) ? $oldTM[$key] : array(),
-                        isset($newTM[$key]) ? $newTM[$key] : array(),
+                        $oldTM[$key] ?? array(),
+                        $newTM[$key] ?? array(),
                         $value
                     );
                 }
@@ -654,7 +662,7 @@ class EditViewMerge{
 
 		$panel_ids = array();
         $setDefaultPanel = false;
-        
+
         if ((is_countable($panels) ? count($panels) : 0) == 1) {
 		   $arrayKeys = array_keys($panels);
 		   if(!empty($arrayKeys[0])) {
@@ -692,13 +700,14 @@ class EditViewMerge{
 	protected function loadData($module, $original_file, $new_file, $custom_file){
 		$this->module = $module;
         $varName = $this->varName;
-		require($original_file);
+        ${$varName} = [];
+        require $original_file;
         ${$varName} = $this->renameEmailField(${$varName});
         $this->originalData = ${$varName};
-		require($new_file);
+        require $new_file;
         $this->newData = ${$varName};
 		if(file_exists($custom_file)){
-			require($custom_file);
+            require $custom_file;
             ${$varName} = $this->renameEmailField(${$varName});
             $this->customData = ${$varName};
 		}else{
@@ -709,17 +718,18 @@ class EditViewMerge{
     /**
      * Renames email1 field to email before merging layouts
      *
-     * @param array $viewDefs Layout definitions
+     * @param mixed $viewDefs Layout definitions
      * @return array Updated layout definitions
      */
-    protected function renameEmailField(array $viewDefs)
+    protected function renameEmailField($viewDefs)
     {
-        array_walk_recursive($viewDefs, function (&$value, $key) {
-            if (($key === 'name' || is_numeric($key)) && $value === 'email1') {
-                $value = 'email';
-            }
-        });
-
+        if (is_array($viewDefs)) {
+            array_walk_recursive($viewDefs, function (&$value, $key) {
+                if (($key === 'name' || is_numeric($key)) && $value === 'email1') {
+                    $value = 'email';
+                }
+            });
+        }
         return $viewDefs;
     }
 

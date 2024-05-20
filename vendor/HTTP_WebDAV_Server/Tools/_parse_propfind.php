@@ -130,7 +130,7 @@ class _parse_propfind
 	{
 		// name space handling
 		if (strstr($name, " ")) {
-			list($ns, $tag) = explode(" ", $name);
+			[$ns, $tag] = explode(" ", $name);
 			if ($ns == "")
 				$this->success = false;
 		} else {

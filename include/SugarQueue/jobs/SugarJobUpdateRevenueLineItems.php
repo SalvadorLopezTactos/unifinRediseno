@@ -41,7 +41,7 @@ class SugarJobUpdateRevenueLineItems implements RunnableSchedulerJob
         $this->job->runnable_ran = true;
         $this->job->runnable_data = $data;
 
-        $keys = json_decode(html_entity_decode($data), true);
+        $keys = json_decode(html_entity_decode($data, ENT_COMPAT), true);
 
         foreach ($keys as $key) {
             /* @var $opp RevenueLineItem */
@@ -65,7 +65,7 @@ class SugarJobUpdateRevenueLineItems implements RunnableSchedulerJob
         /* @var $db DBManager */
         $db = DBManagerFactory::getInstance();
         // get all the opps to break into groups of 100 and go newest to oldest
-        $sql = "select id from revenue_line_items where deleted = 0 ORDER BY date_modified DESC;";
+        $sql = "select id from revenue_line_items where deleted = 0 ORDER BY date_modified DESC";
         $results = $db->query($sql);
 
         $jobs = array();

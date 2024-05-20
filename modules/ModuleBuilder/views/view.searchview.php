@@ -16,6 +16,10 @@ require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class ViewSearchView extends ViewListView
 {
+    /**
+     * @var mixed|string
+     */
+    public $title;
  	public function __construct()
  	{
  		parent::__construct();

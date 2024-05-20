@@ -189,13 +189,13 @@ class ProductTemplate extends SugarBean {
 SELECT cost_price, list_price, discount_price, id FROM {$this->table_name} WHERE currency_id IN(?) AND deleted=0 
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $rows = $this->db->getConnection()
             ->executeQuery(
                 $sql,
                 [$fromid],
                 [Connection::PARAM_STR_ARRAY]
             );
-        foreach ($stmt as $row) {
+        foreach ($rows->iterateAssociative() as $row) {
             $this->db->getConnection()
                 ->update(
                     $this->table_name,
@@ -211,7 +211,8 @@ SQL;
         }
     }
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $app_list_strings;
 
 		$temp_array = parent::get_list_view_data();

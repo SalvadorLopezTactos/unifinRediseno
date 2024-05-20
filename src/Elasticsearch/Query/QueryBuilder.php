@@ -36,18 +36,18 @@ class QueryBuilder
      * Field separator
      * @deprecated
      */
-    const FIELD_SEP = '.';
+    public const FIELD_SEP = '.';
 
     /**
      * Module name prefix separator
      * @deprecated Use Mapping::PREFIX_SEP
      */
-    const PREFIX_SEP = '__';
+    public const PREFIX_SEP = '__';
 
     /**
      * Boost value separator
      */
-    const BOOST_SEP = '^';
+    public const BOOST_SEP = '^';
 
     /**
      * @var Container

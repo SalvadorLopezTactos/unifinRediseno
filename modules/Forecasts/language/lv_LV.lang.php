@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Prognožu vēsture',
     'LBL_FORECAST_HISTORY' => 'Prognozes: Vēsture',
     'LBL_FORECAST_HISTORY_TITLE' => 'Prognozes: Vēsture',
+    'LBL_TAB_COMMITMENT' => 'Iesniegšana',
+    'LBL_CURRENT' => 'Pašreizējais',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Laikposms',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Izmaiņas veica',
     'LBL_WK_VERSION' => 'Versija',
     'LBL_WK_REVISION' => 'Revīzija',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Lai piekļūtu metrikas API, ir nepieciešams Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Laika posms:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Vai jūs plānojat nodot tas summas?',
     'ERR_FORECAST_AMOUNT' => 'Norādiet nodošanas summu ar cipari.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Iekļauta piltuve',
+    'LBL_UPSIDE_PIPELINE' => 'Augšējā piltuve',
+    'LBL_EXCLUDED_PIPELINE' => 'Neiekļauta piltuve',
+    'LBL_WON' => 'Iegūts',
+    'LBL_LOST' => 'Zaudēts',
+    'LBL_ALL' => 'Viss',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Filtru rokasgrāmata',
+    'LBL_HELP_MAIN_BODY' => 'Visa metrika ietver tikai darījumus, kas pieder atlasītajam(-iem) lietotājam(-iem), laika periodu un visus papildu filtrus, ko piemērojāt',
+    'LBL_FORECAST_HELP' => 'Darījumi, kas jau ir iegūti vai ir iekļauti {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Atvērt darījumus ar {{{forecastStage}}} no {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Atvērt darījumus iekļautajā {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Atvērt darījumus ar {{{forecastStage}}} no {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Atvērt darījumus ar {{{forecastStage}}} no {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Atvērt darījumus neiekļautajā {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Darījumi, kas jau ir iegūti',
+    'LBL_LOST_HELP' => 'Darījumi, kas jau ir zaudēti',
+    'LBL_ALL_HELP' => 'Visi darījumi',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Sākuma datums',
     'LBL_FC_USER' => 'Ieplānot',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Iesniegšana',
     'LBL_TEAM_COMMITMENT' => 'Darba grupas iesniegšana',
     'LBL_FORECASTED' => 'Prognozēts',
+    'LBL_OPPORTUNITY_FORECAST' => 'Darījuma prognoze',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Ieņēmumu posteņu prognoze',
+    'LBL_LAST_COMMITMENT' => 'Pēdējā iesniegšana',
     'LBL_ADJUSTED_TOTAL' => 'Koriģēta kopsumma',
     'LBL_COMMIT_STAGE' => 'Iesniegt posmu',
     'LBL_SALES_STAGE' => 'Posms',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Precizēts)',
     'LBL_SAVE_DRAFT' => 'Saglabāt',
     'LBL_CHANGES_BY' => 'Izmaiņas no {0}',
-    'LBL_FORECAST_SETTINGS' => 'Uzstādījumi',
+    'LBL_FORECAST_SETTINGS' => 'Prognozes iestatījumi',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Prognozes ustādījumi',

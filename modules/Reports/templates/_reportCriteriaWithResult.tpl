@@ -24,8 +24,7 @@
 
 {$chartResources}
 
-
-<form action="index.php?action=ReportCriteriaResults&module=Reports&page=report&id={$report_id}" method="post" name="EditView" id="EditView" onSubmit="return fill_form();">
+<form style="{$bwcDisplayStyle}" action="index.php?action=ReportCriteriaResults&module=Reports&page=report{$bwcToTransfer}&id={$report_id}" method="post" name="EditView" id="EditView" onSubmit="return fill_form();">
 {sugar_csrf_form_token}
 <input type="hidden" name='report_offset' value ="{$report_offset}">
 <input type="hidden" name='sort_by' value ="{$sort_by}">
@@ -343,8 +342,16 @@ for(var i in report_def.links_def) {
 } // for
 
 function load_page() {
-	var abortLoad = openEditMode();
+	var abortLoad = openCopyAsMode();
 	if (abortLoad) return;
+	abortLoad = openEditMode();
+	if (abortLoad) return;
+	var reportId = document.getElementsByName('record')[0].value;
+	if (window.location.search.indexOf('legacyBwc=1') === -1) {
+		setTimeout(function() {
+			window.top.App.router.redirect('Reports/' + reportId)
+		}, 2000);
+	}
 	displayGroupCount();
 	reload_joins();
     //current_module = document.EditView.self.options[document.EditView.self.options.selectedIndex].value;
@@ -400,12 +407,34 @@ if(typeof YAHOO != 'undefined') YAHOO.util.Event.addListener(window, 'load', loa
 function openEditMode() {
 	var abortLoadPage = false;
 	var forminput = document.getElementById('editReportButton_old');
+
+	if (!forminput && window.location.search.indexOf('sidecarEdit') > -1) {
+		forminput = document.getElementById('editReportButton');
+	}
+
 	if (forminput && (typeof(viewMode) != 'undefined') && (viewMode === 'edit')) {
 		forminput.form.to_pdf.value='';
 		forminput.form.to_csv.value='';
 		forminput.form.action.value='ReportsWizard';
 		forminput.form.submit();
 		abortLoadPage = true;
+	}
+	return abortLoadPage;
+}
+
+function openCopyAsMode() {
+	var abortLoadPage = false;
+	if (typeof(document.forms) !== 'undefined') {
+		var form = document.forms.EditView;
+		if (form && (typeof(viewMode) != 'undefined') && (viewMode === 'copyAs')) {
+			form.to_pdf.value='';
+			form.to_csv.value='';
+			form.save_as.value=true;
+			form.save_as_report_type.value=newReportType;
+			form.action.value='ReportsWizard';
+			form.submit();
+			abortLoadPage = true;
+		}
 	}
 	return abortLoadPage;
 }

@@ -41,7 +41,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
      * @exception 'SoapFault' -- The SOAP error, if any
      */
     public function login($user_auth, $application, $name_value_list = array()){
-        $availModuleNames = [];
         $user_auth = object_to_array_deep($user_auth);
         $name_value_list = object_to_array_deep($name_value_list);
 
@@ -406,7 +405,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
      * @exception 'SoapFault' -- The SOAP error, if any
      */
     function search_by_module($session, $search_string, $modules, $offset, $max_results,$assigned_user_id = '', $select_fields = array(), $unified_search_only = TRUE, $favorites = FALSE){
-        $unified_search_modules = [];
         $modules = object_to_array_deep($modules);
         $select_fields = object_to_array_deep($select_fields);
 
@@ -695,7 +693,7 @@ SQL;
     	$contents = '';
     	if($saved_report->id != null)
     	{
-    	    $reporter = new Report(html_entity_decode($saved_report->content));
+            $reporter = new Report(html_entity_decode($saved_report->content, ENT_COMPAT));
     	    $reporter->layout_manager->setAttribute("no_sort",1);
     	    //Translate pdf to correct language
     	    $module_for_lang = $reporter->module;

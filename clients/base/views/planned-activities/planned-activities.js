@@ -123,6 +123,17 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    _getTabFieldDefs: function(tab) {
+        let tabFieldDefs = this._super('_getTabFieldDefs', [tab]);
+        if (tabFieldDefs && tabFieldDefs.assigned_user_name) {
+            tabFieldDefs.assigned_user_name.enableFocusIcon = false;
+        }
+        return tabFieldDefs;
+    },
+
+    /**
      * Update the invitation collection.
      *
      * @param {BeanCollection} collection Active tab's collection.

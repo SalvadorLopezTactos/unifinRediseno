@@ -3,8 +3,6 @@
 
 .navbar {
   .search {
-    padding: 0 6px;
-    position: relative;
     min-width: 170px !important;
 
     // Tags UL dropdown menu
@@ -17,10 +15,8 @@
       font-size: 0;
       background: @primaryContentBackground;
       border: @borderWidget;
-      border-radius: 0 0 3px 3px;
+      border-radius: 0;
       box-sizing: border-box;
-      // Match left margin from ul element styling.
-      margin-left: 25px;
 
       .tags {
         .tag-wrapper {
@@ -28,9 +24,14 @@
           .mb-0\.5();
           .ml-1();
           .px-0\.5();
+          .max-w-40();
 
           .tag-name {
             line-height: 0.175rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            .block();
+            .overflow-hidden();
 
             a {
               .p-1();
@@ -71,7 +72,7 @@
     // Typeahead UL dropdown menu
     .typeahead {
       height: auto;
-      top: 100%;
+      top: calc(100% ~"+" 0.0625rem);
       right: -1px;
       left: 1px;
       overflow: hidden;
@@ -119,9 +120,9 @@
       // A non-ideal solution for the rendering position of the search results list. This is necessary
       // because we need to give some room to the tags list before the typeahead/results list. Using
       // top: 100% on the typeahead normally allows us to always render under the navbar, and using
-      // top: 175% here we are doing the same thing, just allowing some room for the tags list.
+      // top: 190% here we are doing the same thing, just allowing some room for the tags list.
       .typeahead {
-        top: 175%;
+        top: 190%;
       }
     }
   }
@@ -132,12 +133,62 @@
   float: none;
   margin: 0;
   white-space: nowrap;
+
+  .quicksearch-taglist {
+    display: flex;
+    align-items: flex-start;
+
+    .multiple-tag-label {
+      background: none;
+      color: @textColor;
+      cursor: pointer;
+      background-color: @contentBackground;
+      line-height: 0.625rem;
+      top: 0;
+      .font-normal();
+      .px-1();
+      .py-1\.5();
+      .border-none();
+    }
+
+    .tag-dropdown-button {
+      cursor: inherit;
+      .align-top();
+      .mt-0();
+      .ml-0();
+      .p-0();
+    }
+
+    .tag-dropdown-list {
+      left: auto;
+      right: auto;
+      top: 2.75rem;
+      width: 12.5rem;
+      .overflow-y-auto();
+      .fixed();
+
+      li.menu-item {
+        cursor: pointer;
+
+        &:focus,
+        &:hover {
+          text-decoration: none;
+          filter: none;
+
+          .sicon.sicon-check {
+            color: @white;
+          }
+        }
+      }
+    }
+  }
+
   // Module type table cell
   .quicksearch-modulelist-wrapper {
     vertical-align: top;
-    cursor: pointer;
 
     .module-dropdown {
+      cursor: pointer;
       display: flex;
       align-items: center;
       padding: 8px;
@@ -151,9 +202,13 @@
 
     .non-module-label {
       font-weight: 500;
-      padding: 4px 6px;
       line-height: 10px;
       min-width: 25px;
+      color: @textColor;
+      background-color: @contentBackground;
+      top: 0;
+      .px-1();
+      .py-1\.5();
     }
 
     .fa.fa-caret-down {
@@ -185,7 +240,7 @@
       position: fixed;
       left: auto;
       right: auto;
-      top: 50px;
+      top: 2.6rem;
       width: 200px;
       overflow-y: auto;
       height: calc(~"100% - 100px");
@@ -226,6 +281,14 @@
     }
   }
   // Inner wrapper for each individual tag result pill
+  .quicksearch-filter-group {
+    .justify-end();
+
+    .tag-wrapper {
+      top: 0.5rem;
+    }
+  }
+
   .tag-wrapper {
     position: relative;
     display: inline;
@@ -246,9 +309,13 @@
     }
 
     div.tag-name {
-      display: inline;
-      font-size: 11px;
-      line-height: 13px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 7.813rem;
+      .text-xs();
+      .align-middle();
+      .inline-block();
+      .overflow-hidden();
     }
 
     a.tag-remove {
@@ -280,28 +347,33 @@
   // Input field table cell
   .quicksearch-bar-wrapper {
     width: 100%;
+    min-width: 6.25rem;
   }
   // Input field
-  .search-query {
+  .search-query[type="text"] {
+    background-color: @searchbarBackground;
     border: none;
     float: none;
     color: @textColor;
     min-height: 28px;
     min-width: 140px;
     text-overflow: ellipsis;
-    width: 100%;
-    box-sizing: border-box;
     transition: none;
+    .w-full();
+    .box-border();
+    .rounded-md();
+    .my-1\.5();
+
+    &::placeholder {
+      text-align: center;
+    }
+
     .placeholder(@placeholderText);
   }
 }
 
 // Global search icon button
 .quicksearch-button-wrapper {
-  position: absolute;
-  top: 8px;
-  right: 4px;
-
   .btn:focus:not(.disabled):not(:active) {
     .tab-focus();
   }
@@ -411,6 +483,10 @@ li.search-result {
 
 .search-more-results {
   margin-left: 6px;
+
+  .block-footer {
+    display: none;
+  }
 }
 
 .sidebar-content {
@@ -498,7 +574,7 @@ li.search-result {
 // Navbar search input and controls
 .navbar-search {
   /* override */
-  height: 44px;
+  height: @headerNavHeight;
 
   /* override */
   border-radius: 0;
@@ -506,11 +582,9 @@ li.search-result {
   /* override */
   border: none;
 
-  /* additive */
-  border-left: 1px solid @navbarSearchBorder;
-
   // Module type table cell
-  .quicksearch-modulelist-wrapper {
+  .quicksearch-modulelist-wrapper,
+  .quicksearch-taglist {
     .menu-item {
       &:focus,
       &:hover {
@@ -540,13 +614,14 @@ li.search-result {
 
   // Input field
   .search-query {
-    /* override */
-    margin: 15px 0 0;
-    padding: 0 20px 12px 6px;
-
     /* additive */
     box-shadow: none;
   }
+}
+
+.quicksearch-button {
+  top: 0.375rem;
+  right: 1.75rem;
 }
 
 /* NEW SKIN END */

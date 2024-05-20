@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Προγραμμάτων Αναφοράς',
     'LBL_FILE_TYPE' => 'Τύπος (τύποι) αρχείου (αρχείων)',
+    'LBL_EMBED_REPORT' => 'Ενσωμάτωση αναφοράς στο Email',
+    'LBL_EMBED_REPORT_INFO' => 'Σημείωση: Εάν η αναφορά υπερβαίνει τις 200 σειρές, θα επισυνάψουμε την αναφορά ως αρχείο CSV.',
 );

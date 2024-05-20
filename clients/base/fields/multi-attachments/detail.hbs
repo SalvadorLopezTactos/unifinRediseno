@@ -34,9 +34,24 @@
         {{#if value}}
         <li>
             <button class="btn-link btn-invisible multi-attach-download-all-btn" data-action="download-all">
-                <i class="sicon sicon-download"></i>{{str this.download_label this.module}}
+                <i class="sicon sicon-download"></i>
+                {{#eq value.length 1}}
+                    {{str 'LBL_DOWNLOAD_ONE' this.module}}
+                {{else}}
+                    {{str 'LBL_DOWNLOAD_ALL' this.module}}
+                {{/eq}}
             </button>
         </li>
         {{/if}}
     </ul>
 </div>
+{{#if singleImage }}
+    <a class="attachment-preview"
+       data-placement="bottom"
+       title="{{value.[0].name}}"
+       href="{{value.[0].url}}"
+       data-url="{{value.[0].url}}"
+       target="_blank">
+        <img src="{{value.[0].url}}"  alt="{{value.[0].name}}"/>
+    </a>
+{{/if}}

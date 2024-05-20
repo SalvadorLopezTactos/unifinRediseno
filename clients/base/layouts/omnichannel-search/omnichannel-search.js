@@ -24,6 +24,7 @@
         'omnichannel-search-modulelist',
         'omnichannel-search-button',
         'omnichannel-search-bar',
+        'omnichannel-search-results',
     ],
 
     /**
@@ -46,7 +47,7 @@
      */
     _placeComponent: function(component) {
         if (_.contains(this.componentsToAdd, component.name)) {
-            this.$('[data-component=searchbar]').append(component.el);
+            this.$('[data-component=searchbar-inputs]').append(component.el);
         } else {
             this._super('_placeComponent', [component]);
         }

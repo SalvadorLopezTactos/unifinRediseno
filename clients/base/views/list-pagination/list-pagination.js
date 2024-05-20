@@ -18,6 +18,7 @@
         'click .paginate-prev:not(.disabled)': 'handlePaginate',
         'click .paginate-next:not(.disabled)': 'handlePaginate',
         'click .page-count': 'getPageCount',
+        'keydown input.current-page': 'handleInput',
         'change input.current-page': 'handlePaginate',
         'focus input.current-page:not([data-focus-expect=true])': 'handleFocusPageInput',
     },
@@ -120,6 +121,22 @@
 
         this.layout.on('list:sort:fire', this.handleListSort, this);
         this.layout.on('list:record:deleted', this.handleCollectionRemove, this);
+
+        let parentLayout = this.layout.layout || {};
+        if (!_.isEmpty(parentLayout)) {
+            this.listenTo(parentLayout, 'metric:count:fetched', function(total) {
+                let metricsComp = parentLayout.getComponent('forecast-metrics') || {};
+                if (!_.isEmpty(metricsComp)) {
+                    let hasActiveChanged = metricsComp.model.get('lastActive') !== metricsComp.model.get('active');
+                    // if the active metric tab has changed set the paginationAction as paginate
+                    if (hasActiveChanged) {
+                        this.paginationAction = this.paginationActions.paginate;
+                    }
+                }
+
+                this.pageTotalFetched(total);
+            });
+        }
     },
 
     /**
@@ -163,8 +180,16 @@
             this.limit = limit;
             this.clearCache();
         }
+        let parentLayout = this.layout.layout || {};
+        let metricsComp = {};
 
-        this.pagesCount = 0;
+        if (!_.isEmpty(parentLayout)) {
+            metricsComp = parentLayout.getComponent('forecast-metrics') || {};
+        }
+
+        if (_.isEmpty(metricsComp)) {
+            this.pagesCount = 0;
+        }
         this.setCache();
         this.render();
     },
@@ -185,6 +210,10 @@
      * Set data of current page to cache variable
      */
     setCache: function() {
+        if (!this.collection) {
+            return;
+        }
+
         this.cachedCollection[this.page] = {
             models: _.clone(this.collection.models),
             next_offset: this.collection.next_offset,
@@ -373,6 +402,40 @@
     },
 
     /**
+     * Check valid value for page input
+     *
+     * @param event
+     */
+    handleInput: function(event) {
+        if (!this.isNumberInput(event.key)) {
+            event.preventDefault();
+        }
+    },
+
+    /**
+     * Validate if the input is integer or arrow keys or delete or backspace or enter
+     *
+     * @param {string} key
+     * @return {boolean}
+     */
+    isNumberInput: function(key) {
+        if ((key >= '0' && key <= '9') ||
+            [
+                'ArrowLeft',
+                'ArrowUp',
+                'ArrowRight',
+                'ArrowDown',
+                'Backspace',
+                'Delete',
+                'Enter',
+            ].includes(key)) {
+            return true;
+        }
+
+        return false;
+    },
+
+    /**
      * Paginate to the previous page
      */
     getPreviousPage: function() {
@@ -393,7 +456,37 @@
      * 'collection-count' field.
      */
     getPageCount: function() {
-        this.context.trigger('paginate');
+        // Check if the collection-count does not exist, in case of Forecasts module's Opp Review Tab,
+        // we do not have that field hence we cannot trigger 'paginate' and we'll have to call fetchCount from this
+        this.context.get('noCollectionField') ? this.fetchCount() : this.context.trigger('paginate');
+    },
+
+    /**
+     * Fetches the total amount of filtered records from the collection
+     */
+    fetchCount: function() {
+        if (_.isNull(this.collection.total)) {
+            app.alert.show('fetch_count_alert', {
+                level: 'process',
+                title: app.lang.get('LBL_LOADING'),
+                autoClose: false
+            });
+        }
+
+        this.collection.trigger('list:page-total:fetching');
+
+        this.isLoadingCount = true;
+
+        let successCallback = _.bind(function(total) {
+            this.isLoadingCount = false;
+            this.collection.trigger('list:page-total:fetched', total);
+        }, this);
+        this.collection.fetchTotal({
+            success: successCallback,
+            complete: function() {
+                app.alert.dismiss('fetch_count_alert');
+            }
+        });
     },
 
     /**

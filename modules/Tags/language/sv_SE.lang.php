@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Instrumentpanel för taggposter',
     'LBL_MY_TAGS' => 'Mina taggar',
     'LBL_MY_FAVORITE_TAGS' => 'Mina favorittaggar',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} Taggar',
 );

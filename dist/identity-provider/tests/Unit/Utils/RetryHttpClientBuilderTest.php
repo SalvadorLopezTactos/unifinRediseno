@@ -35,6 +35,18 @@ class RetryHttpClientBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::createHttpClient
+     */
+    public function testCreateHttpClientWithHeaders()
+    {
+        $client = RetryHttpClientBuilder::getClient(['headers' => ['User-Agent'=>'SugarCRM 12.0']]);
+        $this->assertInstanceOf(ClientInterface::class, $client);
+        $config = $client->getConfig();
+        $this->assertArrayHasKey('headers', $config);
+        $this->assertEquals('SugarCRM 12.0', $config['headers']['User-Agent']);
+    }
+
+    /**
      * @return array
      */
     public function delayExponentialProvider()

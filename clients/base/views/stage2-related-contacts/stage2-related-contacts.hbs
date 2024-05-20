@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class='hint-preview-contacts'>
+<div class='hint-preview-contacts rounded-b-md mb-4 p-0'>
     {{#if isHintRequestLoading}}
         <div class= 'loading'><span>{{str 'LBL_HINT_LOADING'}}</span></div>
     {{else}}
@@ -27,10 +27,7 @@
                     </div>
                 </span>
             {{else}}
-                <span class='label label-module label-module-lg label-Contacts'
-                    rel='tooltip' title='' data-placement='right' data-original-title='Contact'>
-                    Co
-                </span>
+                {{moduleLabel 'Contacts' 'lg' class='pull-left mt-1' aria-hidden='true'}}
             {{/if}}
             <div class='hint-preview-contacts-nameandphone'>
                 <div class='span4 ellipsis_inline name' title="{{this.attributes.name}}">

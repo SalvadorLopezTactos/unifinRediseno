@@ -38,7 +38,7 @@ $mod_strings = array (
 	'LBL_DURATION_HOURS' => 'Durée en Heures :',
 	'LBL_DURATION_MINUTES' => 'Durée en Minutes :',
 	'LBL_DURATION' => 'Durée :',
-	'LBL_EMAIL' => 'Composer un email',
+	'LBL_EMAIL' => 'Email',
   'LBL_ACCOUNT_NAME' => 'Compte',
 	'LBL_FIRST_NAME' => 'Prénom',
 	'LBL_HISTORY_SUBPANEL_TITLE' => 'Notes',
@@ -80,7 +80,7 @@ $mod_strings = array (
     'LBL_EMAIL_REMINDER_SENT' => 'Notification par email envoyée',
 	'LBL_REMINDER' => 'Notification :',
 	'LBL_REMINDER_POPUP' => 'Rappel utilisateurs',
-	'LBL_REMINDER_EMAIL' => 'Composer un email',
+	'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Rapp. email tous',
     'LBL_POPUP_REMINDER' => 'Popup de rappel',
     'LBL_POPUP_REMINDER_TIME' => 'Heure de rappel par Popup',
@@ -168,7 +168,7 @@ $mod_strings = array (
     'LBL_REPEAT_END_BY' => 'Le',
     'LBL_REPEAT_DOW' => 'Répétition depuis',
     'LBL_REPEAT_UNTIL' => 'Répétition jusque',
-    'LBL_REPEAT_COUNT' => 'Répétition occurences',
+    'LBL_REPEAT_COUNT' => 'Répétition occurrences',
     'LBL_RECURRING_LIMIT_ERROR' => 'Cette réunion ne peut être planifiée car elle dépasse le nombre maximum de récurrence autorisé qui est de $limit.',
     'LBL_EDIT_ALL_RECURRENCES' => 'Éditer toutes les occurrences',
     'LBL_REMOVE_ALL_RECURRENCES' => 'Supprimer toutes les occurrences',
@@ -218,4 +218,10 @@ Pour créer un enregistrement {{meetings_singular_module}}, les étapes suivante
     - Cliquer sur Sélectionner un invité pour ajouter un utilisateur, contact ou lead actuel à l&#39;enregistrement {{meetings_singular_module}}.
     - Cliquer sur l&#39;icône plus située à droite de cette option pour créer un invité {{meetings_singular_module}} en tant que nouvel enregistrement Sugar.
 3. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Est une réunion du guide intelligent',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Tâches enfants',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Appels enfants',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Réunions enfants',
 );

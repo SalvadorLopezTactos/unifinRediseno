@@ -10,6 +10,18 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 class TemplateImage extends TemplateText{
+    /**
+     * @var mixed
+     */
+    public $border;
+    /**
+     * @var mixed
+     */
+    public $width;
+    /**
+     * @var mixed
+     */
+    public $height;
 	var $type = 'image';	
 		
 	function get_field_def(){

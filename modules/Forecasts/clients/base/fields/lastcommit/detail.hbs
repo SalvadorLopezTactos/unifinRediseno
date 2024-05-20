@@ -11,19 +11,6 @@
  */
 --}}
 <div class='row-fluid last-commit'>
-    <div class="span8 datapoints ml-2">
-        <div class="pull-right">
-            {{#each this.data_points}}
-                <div class="datapoint flex items-center justify-end p-2 border-l border-light text-xs">
-                    {{#if this.value}}
-                        {{formatCurrency this.value}}
-                    {{else}}
-                        {{{this.error}}}
-                    {{/if}}
-                </div>
-            {{/each}}
-        </div>
-    </div>
     <div class="hr hide"></div>
     <div class="span4 commit-date">
         {{#if this.commit_date}}

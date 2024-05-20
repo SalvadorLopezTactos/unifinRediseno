@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Për eksperiencën optimale duhet përdorur IIS/FastCGI sapi, të vendosur fastcgi.kycu në 0 te skedari juaj php.ini',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Version PHP i pambështetur i instaluar',
     'LBL_DB_UNAVAILABLE'                => 'Baza e të dhënave e padisponueshme',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Mbështetja e bazës së të dhënave nuk u gjet. Sigurohu që të kesh njësitë e nevojshme për një nga llojet e mëposhtme të bazës së mbështetur të të dhënave: MySQL, MS SQLServer, Oracle ose DB2. Mund të të duhet të heqësh komentin nga shtesa në skedarin php.ini ose të përpilosh sërish me skedarin e duhur binar, në varësi të versionit tënd të PHP. Shiko manualin PHP për më shumë informacion se si të aktivizosh mbështetjen e bazës së të dhënave.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Mbështetja e bazës së të dhënave nuk u gjet. Sigurohu që ke njësitë e nevojshme për një nga llojet e mëposhtme të bazave të të dhënave të mbështetura: MySQL, MS SQLServer, Oracle ose DB2. Mund të të duhet të heqësh shtesën në skedarin php.ini ose të ripërpilosh me skedarin e duhur binar, në varësi të versionit tënd të PHP. Referoju manualit të PHP për më shumë informacion se si të aktivizosh mbështetjen e bazës së të dhënave.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funksionet që lidhen me XML bibliotekat Parser që janë të nevojshme nga ana aplikimit Sugar nuk janë gjetur. Ju mund të keni nevojë të pa pakoment në shtrirjen e dosjes php.ini, ose të përpiloni dosjen binare të drejtë në varësi të versionit tuaj të PHP. Ju lutemi referojuni në PHP manualin tuaj për më shumë informacione.',
     'LBL_CHECKSYS_CSPRNG' => 'Gjeneruesi i numrave të rastësishëm',
     'ERR_CHECKSYS_MBSTRING'             => 'Funksionet lidhur me zgjerimin e funksionit Strings PHP (mbstring) që janë të nevojshmë nga ana e aplikimit Sugar nuk u gjetën.<br /><br />Në përgjithësi, moduli mbstring nuk është i aktivizuar nga default në PHP dhe duhet të aktivizoni llogarinë tuaj me --aktivizo--mbstring kur PHP është ndërtuar binare.',
@@ -561,32 +561,15 @@ Refuzo këtë thirrje
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Emaile njoftimi për detyrën',
-        'subject' => 'SugarCRM - Caktuar $module_name ',
-        'description' => 'Ky shabllon përdoret kur sistemi u dërgon përdoruesve një detyrë.',
-        'body' => '<div>
-<p>$assigned_by_user ka caktuar një&nbsp;$module_name për&nbsp;$assigned_user.</p>
-
-<p>Mund ta shqyrtosh këtë&nbsp;$module_name në:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user ka caktuar një $module_name për $assigned_user.
-
-Mund ta shqyrtosh këtë $module_name në:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Emailet e raportit të planifikuar',
         'subject' => 'Raporti i planifikuar: $report_name duke filluar nga $report_time',
         'description' => 'Ky shabllon përdoret kur sistemi u dërgon përdoruesve një raport të planifikuar.',
         'body' => '<div>
-<p>Përshëndetje $assigned_user,</p>
-<p>Bashkëngjitur gjendet një raport i planifikuar për ty i gjeneruar automatikisht.</p>
-<p>Emri i raportit: $report_name</p>
-<p>Data dhe ora e ekzekutimit të raportit: $report_time</p>
+<p>Përshëndetje $assigned_user,<br></p>
+<p>Bashkëngjitur gjendet një raport i planifikuar për ty i gjeneruar automatikisht.<br></p>
+<p>Emri i raportit: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Data dhe ora e nxjerrjes së raportit: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Përshëndetje $assigned_user,
@@ -612,14 +595,6 @@ Data dhe ora e ekzekutimit të raportit: $report_time',
             Identifikohu në Sugar për të parë komentin.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informacioni i llogarisë së re',
-        'description' => 'përshkrim<br />Ky model është përdorur kur Sistemi i Administratorit dërgon një fjalëkalim të ri për përdoruesin.',
-        'body' => 'Trupi<br />Këtu është Emri i llogarisë tuaj dhe fjalëkalimi i përkohshëm:<br />Emri i përdoruesit: $ kontakt_përdoruesi_përdoruesi_emri<br />Fjalëkalimi: $ kontaktt_përdoruesi_përdoruesi_hash<br /><br /> $config_site_url<br /><br />Pasi të identifikoheni në përdorimin e fjalëkalimit të mësipërm, mund  t&#39;ju kërkohet të rivendosni fjalëkalimin sipas zgjedhjes tuaj.<br /><br /><br /><br /><br /><br /><br /><br />$ config_site_url<br /><br />Pasi ju të hyni në përdorimin fjalëkalimin e mësipërme, ju mund të kërkohet për të rivendosur fjalëkalimin në një e zgjedhjes tuaj.',
-        'txt_body' =>
-'tekst_trupi<br />Këtu është llogaria juaj e emrit të përdoruesit dhe fjalëkalimi i përkohshëm: Emri i përdoruesit:  kontakt_përdorues_përdorues_emri: $ $ kontakt__përdorues_përdorues_hash $config_site_url  Pasi të identifikoheni në përdorimin e fjalëkalimit të mësipërm, mund  t&#39;ju kërkohet të rivendosni fjalëkalimin sipas zgjedhjes tuaj.',
-        'name' => 'emri<br />Sistemi- i gjeneruar të fjalëkalimi i emailit',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Rivendos fjalëkalimin e llogarisë tëndë',
         'description' => "përshkrim<br />Ky model është përdorur kur Sistemi i Administratorit dërgon një fjalëkalim të ri për përdoruesin.",

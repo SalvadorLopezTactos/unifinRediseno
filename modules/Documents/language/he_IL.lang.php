@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'תבנית:',
     'LBL_DET_TEMPLATE_TYPE'=>'סוג מסמך:',
     'LBL_TEAM'=> 'צוות:',
+    'LBL_IS_SHARED' => 'זמין חיצונית:',
     'LBL_DOC_DESCRIPTION'=>'תיאור:',
     'LBL_DOC_ACTIVE_DATE'=> 'פורסם בתאריך:',
     'LBL_DOC_EXP_DATE'=> 'תאריך תפוגה:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'שלח ל-DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'סנכרון עם Google Drive',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'סנכרון הכול עם Google Drive',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'סנכרון הכול עם OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'סנכרון עם OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'סנכרון הכול עם Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'סנכרון עם Dropbox',
 );

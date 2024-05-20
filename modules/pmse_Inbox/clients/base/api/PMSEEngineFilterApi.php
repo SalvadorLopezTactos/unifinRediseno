@@ -349,7 +349,7 @@ class PMSEEngineFilterApi extends FilterApi
      */
     public static function addFieldFilterPA($field, $expression, SugarQuery_Builder_Where $where)
     {
-        list($operator, $value) = self::getExpression($expression);
+        [$operator, $value] = self::getExpression($expression);
         switch($operator) {
             case '$equals':
                 //more dirty hack
@@ -582,7 +582,7 @@ class PMSEEngineFilterApi extends FilterApi
             }
 
             $arr_aux = array();
-            $arr_aux['cas_id'] = (isset($bean->fetched_row['cas_id']))? $bean->fetched_row['cas_id']:$bean->fetched_row['pmse_bpm_flow__cas_id'];
+            $arr_aux['cas_id'] = $bean->fetched_row['cas_id'] ?? $bean->fetched_row['pmse_bpm_flow__cas_id'];
             $arr_aux['act_assignment_method'] = $bean->fetched_row['act_assignment_method'];
             $arr_aux['cas_title'] = $bean->fetched_row['cas_title'];
             $arr_aux['pro_title'] = $bean->fetched_row['pro_title'];

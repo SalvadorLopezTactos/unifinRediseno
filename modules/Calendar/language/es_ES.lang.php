@@ -155,7 +155,7 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Plantilla',
     'LBL_RECORD_OTHER_TAB' => 'Otros',
     'LBL_EVENT_START' => 'Inicio',
-    'LBL_EVENT_END' => 'Finalización',
+    'LBL_EVENT_END' => 'Fin',
     'LBL_EVENT_END' => 'Fin',
     'LBL_DAY_EVENT_TEMPLATE' => 'Evento de día',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Evento de semana',
@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Febrero',
     'LBL_MARCH' => 'Marzo',
     'LBL_APRIL' => 'Abril',
-    'LBL_MAY' => 'My.',
+    'LBL_MAY' => 'Mayo',
     'LBL_JUNE' => 'Junio',
     'LBL_JULY' => 'Julio',
     'LBL_AUGUST' => 'Agosto',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Oct.',
     'LBL_NOV' => 'Nov.',
     'LBL_DEC' => 'Dic.',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Ya se ha añadido el calendario',
+    'LBL_CALENDAR_IS_SELECTED' => 'Se ha seleccionado {{calendar}}',
+    'LBL_NO_USER_SELECTED' => 'Seleccione un usuario o equipo',
+    'LBL_NO_CALENDAR_SELECTED' => 'Seleccione un calendario',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Error al guardar Calendarios.',
 
 );
 

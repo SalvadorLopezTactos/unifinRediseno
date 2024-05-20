@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'ละติจูด',
     'LBL_LONGITUDE' => 'ลองจิจูด',
     'LBL_GEOCODED' => 'จีโอโค้ด',
+    'LBL_ERROR_MESSAGE' => 'ข้อความแสดงข้อผิดพลาดจีโอโค้ด',
 ];

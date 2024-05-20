@@ -13,6 +13,10 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+/**
+ * @deprecated This file will be removed in the next release.
+ */
+
 // Logic hooks to publish a bean to the Sugar Connect webhook.
 
 $hook_array['after_save'][] = array(

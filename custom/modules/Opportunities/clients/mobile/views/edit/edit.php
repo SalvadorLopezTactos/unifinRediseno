@@ -1,5 +1,5 @@
 <?php
-// created: 2020-10-12 12:18:14
+// created: 2024-05-20 10:34:39
 $viewdefs['Opportunities']['mobile']['view']['edit'] = array (
   'templateMeta' => 
   array (
@@ -229,6 +229,9 @@ $viewdefs['Opportunities']['mobile']['view']['edit'] = array (
           'label' => 'LBL_OPPORTUNITIES_AG_VENDEDORES_1_FROM_AG_VENDEDORES_TITLE',
         ),
         36 => 'tag',
+        37 => 'forecasted_likely',
+        38 => 'commit_stage',
+        39 => 'lost',
       ),
     ),
   ),

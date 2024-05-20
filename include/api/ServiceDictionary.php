@@ -15,6 +15,10 @@
  * Collects information about what endpoints are available in the system
  */
 class ServiceDictionary {
+    /**
+     * @var mixed
+     */
+    public $cacheDir;
     public function __construct() {
         $this->cacheDir = sugar_cached('include/api/');
     }
@@ -47,6 +51,7 @@ class ServiceDictionary {
      * @return array The data stored in saveDictionaryToStorage()
      */
     protected function loadDictionaryFromStorage($apiType) {
+        $apiDictionary = [];
         $dictFile = $this->cacheDir.'ServiceDictionary.'.$apiType.'.php';
         if ( ! file_exists($dictFile) || inDeveloperMode() ) {
             // No stored service dictionary, I need to build them
@@ -112,7 +117,7 @@ class ServiceDictionary {
                     $platform = $pathParts[$path['platformPart']];
                 }
 
-                require_once($file);
+                require_once $file;
                 if (!(class_exists($fileClass) 
                       && is_subclass_of($fileClass,'SugarApi')) ) {
                     // Either the class doesn't exist, or it's not a subclass of SugarApi, regardless, we move on

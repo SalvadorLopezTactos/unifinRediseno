@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Käyttäjän tietoja ei löydy',
     'ERR_USER_NAME_EXISTS'              => 'Käyttäjänimi {0} on jo olemassa. Päällekkäisiä käyttäjänimiä ei hyväksytä. Muuta käyttäjänimi yksilölliseksi.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => '"Sugar Hint" -lisenssi on tallennettava yhteensopivalla lisälisenssityypillä',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Tämä ominaisuus sisältyy jo Sugar Sell Premier -ratkaisuun.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Tämä käyttäjä lukittiin ulos Sugar sovelluksesta eikä voi kirjautua sisään käyttäen hänen nykyistä salasanaansa.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Käyttäjä, jolla on vain ulkoiset tunnukset, ei voi kirjautua Sugar-tunnuksilla',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Salasana',
     'LBL_CHOOSE_A_KEY'					=> 'Valitse avain estääksesi kalenterisi luvaton julkaisu',
     'LBL_NO_KEY'                        => 'Avainta ei ole asetettu. Aseta avain julkaistaksesi.',
-	'LBL_CHOOSE_WHICH'					=> 'Valitse, mitkä moduulit ovat saatavilla ylänavigointipalkissa. Määritä järjestys, jossa haluaisit moduulien näkyvän.',
+    'LBL_CHOOSE_WHICH'                  => 'Valitse, mitkä moduulit ovat saatavilla sivunavigointipalkissa. Määritä järjestys, jossa haluaisit moduulien näkyvän.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Kiinnitettyjen moduulien määrä',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Kirjoita kiinnitettävien moduulien määrä navigointipalkin ollessa kutistettu (esim. jos syötetään 5, listan viisi ensimmäistä moduulia kiinnitetään). Suosittelemme määrää, joka vastaa usein käyttämiesi moduulien määrää. Yli 100 olevia arvoja ei noudateta.',
 	'LBL_CITY'							=> 'Kaupunki',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Tyhjennä',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP-käyttäjänimi:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP-palvelimen tyyppi:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP-palvelimen spesifikaatiot',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Valtuutettu sähköpostitili',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Valitse sähköpostipalvelun tarjoaja:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail -salasana:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail -tunnus:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'käyttäjät/tiimit/roolit',
     'LBL_LOADING_ITEMS' => 'Ladataan tietoja...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Älykkään oppaan käyttö',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Älykäs opas viimeineniimeinen aktiivinen',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Puuttuvat Smart Guide oikeudet',
 ); // END STRINGS DEFS

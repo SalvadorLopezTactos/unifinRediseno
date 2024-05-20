@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Užrašų sąrašo ataskaitų sritis',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Pastabų ataskaitų sritis',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ pastabos',
+    'LBL_EXTERNAL_USER' => 'Išorinis vartotojas',
+    'LBL_EXTERNAL_USER_NAME' => 'Išorinis vartotojas',
 
     'LBL_RELATED_CONTACT' => 'Susiję kontaktai',
     'ERR_DELETE_RECORD' => 'Jūs turite nurodyti įrašo numerį, kad galėtumėte ištrinti klientą.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'El. pašto tipas',
     'LBL_EMAIL_ID' => 'El. pašto ID',
     'LBL_PHONE' => 'Telefonas:',
-    'LBL_PORTAL_FLAG' => 'Rodyti portale?',
+    'LBL_PORTAL_FLAG' => 'Prieinama išorėje',
     'LBL_EMBED_FLAG' => 'Įterpti į laišką?',
     'LBL_PRODUCT_ID' => 'Produkto ID:',
     'LBL_QUOTE_ID' => 'Pasiūlymo ID:',

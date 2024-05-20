@@ -73,7 +73,7 @@ class Consumer implements RunnableSchedulerJob
             return $this->job->postponeJob($msg);
         }
 
-        list($success, $processed, $duration, $errorMsg) = $this->engine->consumeModuleFromQueue($data);
+        [$success, $processed, $duration, $errorMsg] = $this->engine->consumeModuleFromQueue($data);
 
         $msg = sprintf('Processed %s records in %s second(s)', $processed, $duration);
 

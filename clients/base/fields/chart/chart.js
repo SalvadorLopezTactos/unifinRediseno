@@ -66,6 +66,11 @@
      */
     preserveAspectRatio: function() {
         const chartData = this.model.get('rawChartData');
+
+        if (!chartData) {
+            return;
+        }
+
         const params = this.getChartParams(chartData);
         const config = this.getChartConfig(chartData, params);
 
@@ -137,6 +142,7 @@
         if (this.view.layout && this.view.layout.layout && this.view.layout.layout.name === 'drillthrough-pane') {
             params.isOnDrillthrough = true;
         }
+
         // make sure we destroy and unlisten to events before creating a new chart el
         if (this.chart) {
             this.chart.chart.unbindEvents();
@@ -258,6 +264,9 @@
 
             case 'funnel chart':
             case 'funnel chart 3D':
+                // funnel preserves its aspect ratio so it needs scroll
+                this.$('[data-content="chart"]').css('overflow-y', 'auto');
+
                 chartConfig = {
                     funnelType: 'basic',
                     chartType: 'funnelChart',

@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกแท็ก',
     'LBL_MY_TAGS' => 'แท็กของฉัน',
     'LBL_MY_FAVORITE_TAGS' => 'แท็กโปรดของฉัน',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} แท็ก',
 );

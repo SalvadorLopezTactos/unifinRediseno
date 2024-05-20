@@ -39,7 +39,8 @@ class ProjectsLocationsJobs extends \Google\Service\Resource
    * `projects.locations.jobs.create` with a [regional endpoint]
    * (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
    * `projects.jobs.create` is not recommended, as your job will always start in
-   * `us-central1`. (jobs.create)
+   * `us-central1`. Do not enter confidential information when you supply string
+   * values using the API. (jobs.create)
    *
    * @param string $projectId The ID of the Cloud Platform project that the job
    * belongs to.
@@ -150,6 +151,7 @@ class ProjectsLocationsJobs extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string filter The kind of filter to use.
+   * @opt_param string name Optional. The job name. Optional.
    * @opt_param int pageSize If there are many jobs, limit response to at most
    * this many. The actual number of jobs returned will be the lesser of
    * max_responses and an unspecified server-defined limit.

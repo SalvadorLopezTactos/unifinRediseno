@@ -99,7 +99,7 @@ class CrossModuleAggHandler extends AbstractHandler implements
      */
     protected function getAggDef($field)
     {
-        return isset($this->aggDefs[$field]) ? $this->aggDefs[$field] : false;
+        return $this->aggDefs[$field] ?? false;
     }
 
     /**

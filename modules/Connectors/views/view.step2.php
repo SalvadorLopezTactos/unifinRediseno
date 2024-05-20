@@ -120,7 +120,7 @@ class ViewStep2 extends SugarView
 		    	       continue;
 		    	    }
 
-		            $merge_fields[$field] = isset($focusBean->field_defs[$field]['vname']) ?  $focusBean->field_defs[$field]['vname'] : $field;
+                $merge_fields[$field] = $focusBean->field_defs[$field]['vname'] ?? $field;
 		    }
 
 		    //do not show the id on the merge screen

@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Paneli i listës së shënimeve',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të shënimeve',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te shënimet',
+    'LBL_EXTERNAL_USER' => 'Përdorues i jashtëm',
+    'LBL_EXTERNAL_USER_NAME' => 'Përdorues i jashtëm',
 
     'LBL_RELATED_CONTACT' => 'Kontakt i lidhur',
     'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë llogarinë',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Lloji i emailit',
     'LBL_EMAIL_ID' => 'Identifikuesi i emailit',
     'LBL_PHONE' => 'Telefoni',
-    'LBL_PORTAL_FLAG' => 'shfaq në portal',
+    'LBL_PORTAL_FLAG' => 'Ofrohet jashtë',
     'LBL_EMBED_FLAG' => 'ngulitur në mail?',
     'LBL_PRODUCT_ID' => 'ID e produktit',
     'LBL_QUOTE_ID' => 'ID e kuotës',

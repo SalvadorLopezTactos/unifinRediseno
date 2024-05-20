@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Tahmin Tarihçesini Görüntüle',
     'LBL_FORECAST_HISTORY' => 'Tahminler: Tarihçe',
     'LBL_FORECAST_HISTORY_TITLE' => 'Tarihçe',
+    'LBL_TAB_COMMITMENT' => 'Onay',
+    'LBL_CURRENT' => 'Şimdiki',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Zaman Aralığı',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Değiştiren',
     'LBL_WK_VERSION' => 'Versiyon',
     'LBL_WK_REVISION' => 'Revizyon',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Metrik API&#39;sine erişim için Sugar Sell Premier gerekir',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Zaman Aralığı:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Bu tutarı onaylamak ister misiniz?',
     'ERR_FORECAST_AMOUNT' => 'Onaylanan Miktar gereklidir ve sayı olmalıdır.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Dahil Edilen Satış Olasılığı',
+    'LBL_UPSIDE_PIPELINE' => 'Yukarı Yönlü Satış Olasılığı',
+    'LBL_EXCLUDED_PIPELINE' => 'Hariç Tutulan Satış Olasılığı',
+    'LBL_WON' => 'Kazanıldı',
+    'LBL_LOST' => 'Kaybedildi',
+    'LBL_ALL' => 'Hepsi',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Filtreler Rehberi',
+    'LBL_HELP_MAIN_BODY' => 'Tüm ölçümler, yalnızca seçilen kullanıcıya/kullanıcılara ait Fırsatları, dönemi ve uyguladığınız ek filtreleri içerir',
+    'LBL_FORECAST_HELP' => 'Önceden kazanılan veya {{{forecastStage}}} aşamasına dahil olan Fırsatlar',
+    'LBL_INCLUDED_PIPELINE_HELP' => '{{{forecastStage}}} / {{{commitStageValue}}} aşamasına sahip açık Fırsatlar',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Dahil olan {{{forecastStage}}} aşamasındaki açık Fırsatlar',
+    'LBL_UPSIDE_PIPELINE_HELP' => '{{{forecastStage}}} / {{{commitStageValue}}} aşamasına sahip açık Fırsatlar',
+    'LBL_EXCLUDED_PIPELINE_HELP' => '{{{forecastStage}}} / {{{commitStageValue}}} aşamasına sahip açık Fırsatlar',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Dahil olmayan {{{forecastStage}}} aşamasındaki açık Fırsatlar',
+    'LBL_WON_HELP' => 'Önceden kazanılan Fırsatlar',
+    'LBL_LOST_HELP' => 'Önceden kaybedilen Fırsatlar',
+    'LBL_ALL_HELP' => 'Tüm Fırsatlar',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Başlangıç Tarihi',
     'LBL_FC_USER' => 'Planlanacak Kişi',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Onay',
     'LBL_TEAM_COMMITMENT' => 'Takım Onayı',
     'LBL_FORECASTED' => 'Tahmin edildi',
+    'LBL_OPPORTUNITY_FORECAST' => 'Fırsat Tahmini',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Gelir Kalemi Tahmini',
+    'LBL_LAST_COMMITMENT' => 'Son Onay',
     'LBL_ADJUSTED_TOTAL' => 'Ayarlanmış Toplam',
     'LBL_COMMIT_STAGE' => 'Onay Aşaması',
     'LBL_SALES_STAGE' => 'Aşama',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Düzeltilmiş)',
     'LBL_SAVE_DRAFT' => 'Kaydet',
     'LBL_CHANGES_BY' => '{0} tarafından yapılan değişiklikler',
-    'LBL_FORECAST_SETTINGS' => 'Ayarlar',
+    'LBL_FORECAST_SETTINGS' => 'Tahmin Ayarları',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Tahminler Ayarı',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Mali yıl başlangıç ​​tarihi:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Satış Tahmini modülü tarafından kullanılacak zaman aralığını tanımlayın.<br><br>Finansal yıl için Başlangıç Tarihi seçerek başlayın. Ardından satış tahmini için kullanacağınız zaman aralığının tipini seçin. Zaman aralıkları için tarihler seçiminize uygun olarak otomatik şekilde hesaplanacak. Alt Zaman Aralığı, Satış Tahminleri için temel oluşturmaktadır.<br><br>Görülebilir gelecek ve geçmiş zaman aralıkları, Tahminler modülünde görülebilecek alt zaman aralıklarının sayısını belirleyecektir. Kullanıcılar görülebilir alt zaman aralıkları için tahmin değerlerini görebilir ve değiştirebilir.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} modülünü nasıl sınıflandırmak istediğinizi yapılandırın. <br><br>Lütfen Aralık ayarlarının ilk onaydan sonra değiştirilemeyeceğini unutmayın. Yükseltilmiş kurulumlar için Aralık ayarı, mevcut Tahmin verileriyle kilitlenir.<br><br>Olasılık aralıklarına bağlı olarak iki veya daha fazla kategori seçebilir veya olasılığa dayalı olmayan kategoriler oluşturabilirsiniz. <br><br>Özel kategorilerinizin sol tarafında işaret kutucukları mevcuttur; hangi aralıkların, yöneticilere taahhüt edilen ve bildirilen Tahmin miktarının içerisine dahil edileceğine karar vermek için bunları kullanın. <br><br>Kullanıcı, {{forecastByModule}} modülünün dahili/harici durumunu ve kategorisini çalışma sayfalarından manuel olarak değiştirebilir.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} modülünü nasıl sınıflandırmak istediğinizi yapılandırın. <br><br>Lütfen Aralık ayarlarının ilk onaydan sonra değiştirilemeyeceğini unutmayın. Yükseltilmiş kurulumlar için Aralık ayarı, mevcuy Tahmin verileriyle kilitlenir.<br><br>Olasılık aralıklarına bağlı olarak iki veya daha fazla kategori seçebilir veya olasılığa dayalı olmayan kategoriler oluşturabilirsiniz. <br><br>Özel kategorilerinizin sol tarafında işaret kutucukları mevcuttur; hangi aralıkların, yöneticilere taahhüt edilen ve bildirilen Tahmin miktarının içerisine dahil edileceğine karar vermek için bunları kullanın. <br><br>Kullanıcı, {{forecastByModule}} modülünün dahili/harici durumunu ve kategorisini çalışma sayfalarından manuel olarak değiştirebilir.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Kullanıcının her {{forecastByModuleSingular}} tahmini için doldurmalarını istediğiniz kolonları seçin. Olası kolonu {{forecastByModule}} içinde gösterilen miktar olduğu için gizlenemez.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Tahmin modülünde görmek istediğiniz kolonları seçin. Alanların listesi, çalışma sayfası ile bir araya gelerek kullanıcıların nasıl görüntülemek istediklerini tanımlamada kullanılacak.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Tahmin Yönteminin nasıl yapılacağını belirten metin için yer doldurucuyum.',

@@ -11,7 +11,7 @@
  */
 
 
-include_once dirname(__FILE__).'/UpgradeDriver.php';
+include_once __DIR__.'/UpgradeDriver.php';
 
 function packUpgradeWizardCli($phar, $params, $files = array())
 {

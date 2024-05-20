@@ -38,10 +38,15 @@ table.rc-table-resizing thead > th > a {
   .overflow-hidden();
 
   .multi-selection-flex {
-    height: calc(~'100% - 56px');
+    height: calc(~'100% - 78px');
   }
 
   .search-filter .filter-options .filter-definition-container {
+    max-height: 215px;
+    .overflow-auto();
+  }
+
+  .massupdate-fields-container {
     max-height: 215px;
     .overflow-auto();
   }
@@ -98,7 +103,7 @@ table.rc-table-resizing thead > th > a {
                   .sticky();
 
                   left: 0;
-                  z-index: 100;
+                  z-index: 101;
                 }
 
                 th.sticky-column.stick-first {
@@ -149,16 +154,15 @@ table.rc-table-resizing thead > th > a {
                 }
               }
             }
-
-            .no-data-available {
-              margin-top: 12px;
-              text-align: center;
-            }
           }
         }
       }
     }
   }
+}
+
+.vis_action_hidden input {
+  .hide();
 }
 
 .sidebar-visible,

@@ -12,6 +12,8 @@
 
 class UnifiedSearchAdvanced {
 
+    public $cache_search;
+    public $cache_display;
     var $query_string = '';
 
     /* path to search form */
@@ -105,7 +107,7 @@ class UnifiedSearchAdvanced {
 		//Create the two lists (doing it this way preserves the user's ordering choice for enabled modules)
 		foreach($modules_to_search as $module=>$data)
 		{
-			$label = isset($app_list_strings['moduleList'][$module]) ? $app_list_strings['moduleList'][$module] : $module;
+            $label = $app_list_strings['moduleList'][$module] ?? $module;
 			if(!empty($data['checked']))
 			{
 				$json_enabled[] = array("module" => $module, 'label' => $label);
@@ -164,7 +166,7 @@ class UnifiedSearchAdvanced {
 	            }
 			}
 
-			$current_user->setPreference('showGSDiv', isset($_REQUEST['showGSDiv']) ? $_REQUEST['showGSDiv'] : 'no', 0, 'search');
+            $current_user->setPreference('showGSDiv', $_REQUEST['showGSDiv'] ?? 'no', 0, 'search');
 			$current_user->setPreference('globalSearch', $modules_to_search, 0, 'search'); // save selections to user preference
 		} else {
 			$users_modules = $current_user->getPreference('globalSearch', 'search');
@@ -205,7 +207,7 @@ class UnifiedSearchAdvanced {
                 $mod_strings = return_module_language($current_language, $seed->module_dir);
 
                 //retrieve the original list view defs and store for processing in case of custom layout changes
-                require('modules/'.$seed->module_dir.'/metadata/listviewdefs.php');
+                require 'modules/' . $seed->module_dir . '/metadata/listviewdefs.php';
 				$orig_listViewDefs = $listViewDefs;
                 $defs = SugarAutoLoader::loadWithMetafiles($seed->module_dir, 'listviewdefs');
                 if($defs) {
@@ -275,8 +277,10 @@ class UnifiedSearchAdvanced {
                 }
 
                 if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
-                    $where = '((' . implode(' ) OR ( ', $where_clauses) . '))';
-                } else {
+                    $where = '(('. implode(' ) OR ( ', $where_clauses) . '))';
+                }
+                else
+                {
                     /* Clear $where from prev. module
                        if in current module $where_clauses */
                     $where = '';
@@ -456,7 +460,7 @@ class UnifiedSearchAdvanced {
         $json_disabled = array();
         foreach($unified_search_modules_display as $module=>$data)
         {
-            $label = isset($app_list_strings['moduleList'][$module]) ? $app_list_strings['moduleList'][$module] : $module;
+            $label = $app_list_strings['moduleList'][$module] ?? $module;
             if($data['visible'] === true)
             {
                 $json_enabled[] = array("module" => $module, 'label' => $label);
@@ -481,7 +485,7 @@ class UnifiedSearchAdvanced {
         if (isset($unified_search_modules) && safeIsIterable($unified_search_modules)) {
             foreach ($unified_search_modules as $module => $data) {
                 if (!isset($unified_search_modules_display[$module])) {
-                $label = isset($app_list_strings['moduleList'][$module]) ? $app_list_strings['moduleList'][$module] : $module;
+                $label = $app_list_strings['moduleList'][$module] ?? $module;
                     if ($data['default']) {
                         $json_enabled[] = ['module' => $module, 'label' => $label];
                   $json_enabled[] = array("module" => $module, 'label' => $label);

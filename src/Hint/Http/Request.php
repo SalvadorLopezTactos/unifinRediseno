@@ -14,9 +14,9 @@ namespace Sugarcrm\Sugarcrm\Hint\Http;
 final class Request
 {
     // currently supported methods
-    const METHOD_POST = 'POST';
-    const METHOD_GET = 'GET';
-    const METHOD_DELETE = 'DELETE';
+    public const METHOD_POST = 'POST';
+    public const METHOD_GET = 'GET';
+    public const METHOD_DELETE = 'DELETE';
 
     /**
      * @var string

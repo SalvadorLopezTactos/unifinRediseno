@@ -94,7 +94,7 @@ class PMSELogger extends AbstractLogger
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
-            $c = __CLASS__;
+            $c = self::class;
             self::$instance = new $c;
         }
 
@@ -270,8 +270,8 @@ class PMSELogger extends AbstractLogger
         $data = $this->prepareActivityData($message, $params);
 
         // Get data we need for the activity record
-        $module_id = isset($params['module_id']) ? $params['module_id'] : null;
-        $module_name = isset($params['module_name']) ? $params['module_name'] : 'pmse_Inbox';
+        $module_id = $params['module_id'] ?? null;
+        $module_name = $params['module_name'] ?? 'pmse_Inbox';
         
         $beanActivity = new Activity();
         $beanActivity->parent_id = $module_id;

@@ -18,7 +18,7 @@ function get_body(&$ss, $vardef)
     // get the module
     $vars = $ss->get_template_vars();
     $fields = $vars['module']->mbvardefs->vardefs['fields'];
-    $module = $vars['module']->key_name ? $vars['module']->key_name : $vars['module']->name;
+    $module = $vars['module']->key_name ?: $vars['module']->name;
 
     $actionButtonData = '{"settings": {}, "actionMenu": {}, "buttons": {}}';
     // if we have ext4 data get it instead of default settings

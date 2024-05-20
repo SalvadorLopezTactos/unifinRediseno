@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Vaata prognoosi ajalugu',
     'LBL_FORECAST_HISTORY' => 'Prognoosid: ajalugu',
     'LBL_FORECAST_HISTORY_TITLE' => 'Ajalugu',
+    'LBL_TAB_COMMITMENT' => 'Kohustus',
+    'LBL_CURRENT' => 'Praegune',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Ajaperiood',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Muutja',
     'LBL_WK_VERSION' => 'Versioon',
     'LBL_WK_REVISION' => 'Redaktsioon',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Juurdepääs mõõdikute rakendusliidesele nõuab Sugar Sell Premieri',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Ajaperiood:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Kas soovite need summad plaanida?',
     'ERR_FORECAST_AMOUNT' => 'Plaanitav summa on kohustuslik ja see peab olema number.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Kaasatud müügilehter',
+    'LBL_UPSIDE_PIPELINE' => 'Tagurpidi müügilehter',
+    'LBL_EXCLUDED_PIPELINE' => 'Välistatud müügilehter',
+    'LBL_WON' => 'Võidetud',
+    'LBL_LOST' => 'Kaotatud',
+    'LBL_ALL' => 'Kõik',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Filtrite juhend',
+    'LBL_HELP_MAIN_BODY' => 'Kõik mõõdikud hõlmavad ainult valitud kasutaja(te)le kuuluvaid võimalusi, ajaperioodi ja kõiki teie rakendatud täiendavaid filtreid',
+    'LBL_FORECAST_HELP' => 'Võimalused, mis on juba võidetud või on kaasatud {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Avage võimalused väärtuse {{{commitStageValue}}} etapiga {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Avage võimalused kaasatud etapis {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Avage võimalused väärtuse {{{commitStageValue}}} etapiga {{{forecastStage}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Avage võimalused väärtuse {{{commitStageValue}}} etapiga {{{forecastStage}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Avage võimalused välistatud etapis {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Võimalused, mis on juba võidetud',
+    'LBL_LOST_HELP' => 'Võimalused, mis on juba kaotatud',
+    'LBL_ALL_HELP' => 'Kõik võimalused',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Alguskuupäev',
     'LBL_FC_USER' => 'Plaani',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Kohustus',
     'LBL_TEAM_COMMITMENT' => 'Meeskonna kohustus',
     'LBL_FORECASTED' => 'Prognoositav',
+    'LBL_OPPORTUNITY_FORECAST' => 'Võimaluse prognoos',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Tuluartikli prognoos',
+    'LBL_LAST_COMMITMENT' => 'Viimane kohustus',
     'LBL_ADJUSTED_TOTAL' => 'Kohandatud kokku',
     'LBL_COMMIT_STAGE' => 'Sooritusetapp',
     'LBL_SALES_STAGE' => 'Etapp',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => ' (kohandatud)',
     'LBL_SAVE_DRAFT' => 'Salvesta',
     'LBL_CHANGES_BY' => 'Muutub {0} võrra',
-    'LBL_FORECAST_SETTINGS' => 'Sätted',
+    'LBL_FORECAST_SETTINGS' => 'Prognoosi seaded',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Prognooside seadistamine',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Majandusaasta alguskuupäev:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigureerige moodulis Prognoosid kasutatav ajaperiood. <br><br>Pange tähele, et ajaperioodi sätteid ei saa pärast algsseadistust muuta.<br><br>Esmalt valige majandusaasta alguskuupäev. Seejärel valige prognoosi ajaperioodi tüüp. Ajaperioodide kuupäevavahemik arvutatakse teie valikute põhjal automaatselt. Alam ajaperiood on prognoosi töölehe aluseks. <br><br>Kuvatavad tulevased ja möödunud ajaperioodid määratlevad prognooside mooduli nähtavad alamperioodid. Kasutajad saavad prognoosi arve nähtavates alamperioodides vaadata ja redigeerida.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigureerige, kuidas soovite moodulit {{forecastByModule}} liigitada. <br><br>Pange tähele, et vahemiku sätteid pole võimalik pärast esimest kinnitamist enam muuta. Täiendatud eksemplaridel on vahemiku säte olemasolevatesse prognoosiandmetesse lukustatud.<br><br>Võite valida kaks või enam tõenäosusvahemikel põhinevat kategooriat või luua kategooriaid, mis ei põhine tõenäosusel. <br><br>Teie kohandatud kategooriatest vasakul asuvad märkeruudud. Kasutage neid, et otsustada, millised vahemikud kaasatakse kinnitatavatesse ja juhtidele saadetavatesse prognoosisummadesse. <br><br>Kasutaja saab oma töölehelt kaasamise/väljajätmise olekut ja mooduli {{forecastByModule}} kategooriat käsitsi muuta.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Kaonfigureerige, kuidas sooviksite kategoriseerida {{forecastByModule}}. <br><br>Pange tähele, et Vahemiku seadeid pole pärast esimest sooritust enam võimalik muuta. Täiustatud juhtumite puhul on Vahemiku seadistus olemasoleva Prognoosi andmetes lukustatud..<br><br>Teil on lubatud valida tõenäosusvahemike alusel vähemalt kaks või enam tõenäosusel põhinevat kategooriat või luua tõenäosusel mitte põhinevaid kategooriaid. <br><br>Teie kohandatud kategooriatest vasakul asuvad märkeruudud; kasutage neid, et määrata, millised vahemikud lisatakse Prognoosi vahemikesse, millest peetakse kinni ja mida teatatakse juhatajatele. <br><br>Kasutajal on võimalik oma töölehelt käsitsi muuta {{forecastByModule}} lisamise/välistamise olekut ja kategooriat.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Valige veerud, mille puhul soovite, et kasutajad need iga {{forecastByModuleSingular}} puhul oma prognoosides täidaks. Pange tähele, et summa Tõenäoline on seotud suvandis {{forecastByModule}} näidatud summaga; seetõttu ei saa veergu Tõenäoline peita.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Valige, milliseid veerge soovite moodulis Prognoos kuvada. Väljade loend ühendab töölehe ja võimaldab kasutajal valida, kuidas selle vaadet konfigureerida.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Olen prognoosimise viisi teksti Prognoosi kohatäide!',

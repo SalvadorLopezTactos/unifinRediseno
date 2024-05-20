@@ -12,8 +12,16 @@
 
  require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
- class PopupMetaDataParser extends ListLayoutMetaDataParser
- {
+class PopupMetaDataParser extends ListLayoutMetaDataParser
+{
+    /**
+     * @var bool|mixed
+     */
+    public $search;
+    //@codingStandardsIgnoreStart
+    public $_packageName;
+    public $_view;
+    //@codingStandardsIgnoreEnd
 
  	// Columns is used by the view to construct the listview - each column is built by calling the named function
  	public $columns = array ( 'LBL_DEFAULT' => 'getDefaultFields' , 'LBL_AVAILABLE' => 'getAdditionalFields' , 'LBL_HIDDEN' => 'getAvailableFields' ) ;
@@ -130,7 +138,7 @@
 		global $mod_strings , $current_language;
 		$oldModStrings = $mod_strings;
 		$GLOBALS['mod_strings'] = return_module_language($current_language , $this->_moduleName);
-    	require($file);
+        require $file;
     	if (!isset($popupMeta)) {
     		sugar_die ("unable to load Module Popup Definition");
     	}

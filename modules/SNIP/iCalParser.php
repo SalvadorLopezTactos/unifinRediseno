@@ -29,12 +29,17 @@ class Event{
 	public $sequence;
 	public $location;
 	public $attendees = array();
+    public $organizer;
 }
 
 /**
  * Base class for all vObjects
  */
 class vBasic{
+    /**
+     * @var \Event
+     */
+    public $event;
 	protected $properties = array();
 	protected $stack = array();
 	protected $parent = null;
@@ -132,7 +137,7 @@ class vEvent extends vBasic{
 	 * @return
 	 */
 	function generateVCal(){
-        $cal =  <<<VEVENT_WRAP
+        $cal = <<<VEVENT_WRAP
 BEGIN:VEVENT
 STATUS:CONFIRMED
 CLASS:PUBLIC

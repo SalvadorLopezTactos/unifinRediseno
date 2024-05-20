@@ -225,6 +225,17 @@
       height: 16px;
       line-height: 16px;
     }
+
+    .assigned-user-name {
+      span.list {
+        display: inline-block;
+        vertical-align: middle;
+
+        .relate-field-container {
+          padding: 0;
+        }
+      }
+    }
   }
 
   .btn.loading {
@@ -968,6 +979,11 @@
     .pl-2\.5();
   }
 
+  .record-cell[data-type="name"],
+    .record-cell[data-type="fullname"] {
+    margin-right: 50px;
+  }
+
   .record-cell[data-type="avatar"],
     .record-cell[data-type="hint-contacts-photo"],
     .record-cell[data-type="image"] {
@@ -1054,6 +1070,38 @@
       margin-right: 3px;
       margin-bottom: 2px;
       color: @purple;
+    }
+  }
+
+  .dataTable {
+    tr {
+      td.edit-td {
+        .px-0();
+
+        z-index: 10;
+      }
+
+      &:not(.tr-inline-edit) {
+        td.edit-td .btn-group.edit {
+          display: none;
+        }
+
+        &:not(:hover) {
+          td.edit-td .btn-group.detail {
+            display: none;
+          }
+        }
+      }
+
+      &.tr-inline-edit {
+        td {
+          .bg-dropdown-link-background-hover();
+
+          &.edit-td .btn-group.detail {
+            display: none;
+          }
+        }
+      }
     }
   }
 }

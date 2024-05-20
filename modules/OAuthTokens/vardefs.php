@@ -224,6 +224,14 @@ $dictionary['OAuthToken'] = array(
                 'tstate',
             ],
         ],
+        'expire_ts' => [
+            'name' => 'idx_oauth_tstate_expire_ts',
+            'type' => 'index',
+            'fields' => [
+                'tstate',
+                'expire_ts',
+            ],
+        ],
     ),
    'relationships'=>array(
         'consumer_tokens' =>

@@ -35,6 +35,8 @@ class ViewPopup extends SugarView{
 
 	public function display()
 	{
+        $listViewDefs = [];
+        $searchdefs = [];
 		global $popupMeta, $mod_strings;
 
         if(($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')){
@@ -47,7 +49,7 @@ class ViewPopup extends SugarView{
 		    sugar_cleanup(true);
 		}
 
-		$popupMeta = SugarAutoLoader::loadPopupMeta($this->module, isset($_REQUEST['metadata'])?$_REQUEST['metadata']:null);
+        $popupMeta = SugarAutoLoader::loadPopupMeta($this->module, $_REQUEST['metadata'] ?? null);
 
         $defs = $this->loadWithPopup('listviewdefs');
 		if(is_array($defs)) {
@@ -131,18 +133,15 @@ class ViewPopup extends SugarView{
 			$popup->massUpdateData = $massUpdateData;
 
             $tpl = 'include/Popups/tpls/PopupGeneric.tpl';
-            if(file_exists($this->getCustomFilePathIfExists("modules/{$this->module}/tpls/popupGeneric.tpl")))
-            {
+            if (file_exists((string)$this->getCustomFilePathIfExists("modules/{$this->module}/tpls/popupGeneric.tpl"))) {
                 $tpl = $this->getCustomFilePathIfExists("modules/{$this->module}/tpls/popupGeneric.tpl");
             }
 
-            if(file_exists($this->getCustomFilePathIfExists("modules/{$this->module}/tpls/popupHeader.tpl")))
-            {
+            if (file_exists((string)$this->getCustomFilePathIfExists("modules/{$this->module}/tpls/popupHeader.tpl"))) {
                 $popup->headerTpl = $this->getCustomFilePathIfExists("modules/{$this->module}/tpls/popupHeader.tpl");
             }
 
-            if(file_exists($this->getCustomFilePathIfExists("modules/{$this->module}/tpls/popupFooter.tpl")))
-            {
+            if (file_exists((string)$this->getCustomFilePathIfExists("modules/{$this->module}/tpls/popupFooter.tpl"))) {
                 $popup->footerTpl = $this->getCustomFilePathIfExists("modules/{$this->module}/tpls/popupFooter.tpl");
             }
 

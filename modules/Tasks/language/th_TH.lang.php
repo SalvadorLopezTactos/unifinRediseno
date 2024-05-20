@@ -117,4 +117,13 @@ $mod_strings = array (
  - คลิก "แสดงเพิ่มเติม" เพื่อแสดงฟิลด์อื่นๆ หากจำเป็น
 2. คลิก "บันทึก" เพื่อสิ้นสุดการสร้างระเบียนใหม่ และกลับสู่เพจก่อนหน้า',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'คู่มืออัจฉริยะ งาน',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'คืองานคู่มืออัจฉริยะ',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'คู่มืออัจฉริยะ วันที่เริ่มกิจกรรม',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'คู่มืออัจฉริยะ วันที่เสร็จกิจกรรม',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'คู่มืออัจฉริยะ - วันจึงจะเสร็จสมบูรณ์',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'การประชุมย่อย',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'การโทรย่อย',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'งานย่อย',
 );

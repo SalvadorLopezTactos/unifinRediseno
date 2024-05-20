@@ -364,7 +364,7 @@ class PMSEExpressionEvaluator
 
     public function executeExponentOp($value1, $operator, $value2)
     {
-        return pow($value1, $value2);
+        return $value1 ** $value2;
     }
 
     public function executeUnaryOp($operator, $value)
@@ -758,7 +758,7 @@ class PMSEExpressionEvaluator
     public function typeData($value, $typeDate)
     {
         global $timedate;
-        switch (strtolower($typeDate)) {
+        switch (strtolower((string)$typeDate)) {
             case 'address'://varchar
             case 'relate'://varchar
             case 'text':

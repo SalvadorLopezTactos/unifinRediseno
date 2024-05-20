@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Ogiltig värde för {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Värdet måste vara mellan {{min}} och {{max}}',
-    'LBL_HISTORY_LOG' => 'Senaste commit',
+    'LBL_HISTORY_LOG' => 'Senaste förpliktelsen',
     'LBL_NO_COMMIT' => 'Ingen tidigare commit',
 
     'LBL_MANGER_SAVED' => 'Manager sparat'

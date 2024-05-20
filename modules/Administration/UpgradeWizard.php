@@ -17,6 +17,7 @@ if(!is_admin($GLOBALS['current_user'])){
 require_once 'ModuleInstall/ModuleScanner.php';
 require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
 
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 use Sugarcrm\Sugarcrm\PackageManager\Entity\PackageManifest;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageManifestException;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -25,11 +26,13 @@ use UploadFile as BaseUploadFile;
 use Sugarcrm\Sugarcrm\PackageManager\File\UploadFile;
 use Sugarcrm\Sugarcrm\PackageManager\File\PackageZipFile;
 use Sugarcrm\Sugarcrm\PackageManager\Exception\ModuleScannerException;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+use Sugarcrm\Sugarcrm\AccessControl\SugarFeatureVoter;
 
 global $mod_strings;
 
 $form_action = "index.php?module=Administration&view=module&action=UpgradeWizard";
-$uploadLabel = htmlspecialchars(translate('LBL_UW_UPLOAD_MODULE', 'Administration'));
+$uploadLabel = htmlspecialchars(translate('LBL_UW_UPLOAD_MODULE', 'Administration'), ENT_COMPAT);
 $descItemsQueued = $mod_strings['LBL_UW_DESC_MODULES_QUEUED'];
 $descItemsInstalled = $mod_strings['LBL_UW_DESC_MODULES_INSTALLED'];
 
@@ -74,14 +77,19 @@ if ($run !== "" && empty($GLOBALS['sugar_config']['use_common_ml_dir'])) {
 
 
 echo getClassicModuleTitle(
-    htmlspecialchars(translate('LBL_MODULE_NAME', 'Administration')),
-    [htmlspecialchars(translate('LBL_MODULE_LOADER_TITLE', 'Administration'))],
+    htmlspecialchars(translate('LBL_MODULE_NAME', 'Administration'), ENT_COMPAT),
+    [htmlspecialchars(translate('LBL_MODULE_LOADER_TITLE', 'Administration'), ENT_COMPAT)],
     false
 );
 $csrfToken = smarty_function_sugar_csrf_form_token(array(), $smarty);
 
 // upload link
-if (!empty($GLOBALS['sugar_config']['use_common_ml_dir'])) {
+//
+$isUploadEnabled = true;
+if (!AccessControlManager::instance()->allowFeatureAccess(SugarFeatureVoter::MODULE_LOADER_UPLOAD_FEATURE_NAME)) {
+    $isUploadEnabled = false;
+}
+if (!empty($GLOBALS['sugar_config']['use_common_ml_dir']) || $isUploadEnabled === false) {
     $form = '<p>' . $mod_strings['LBL_MODULE_UPLOAD_DISABLE_HELP_TEXT'] . '</p>';
 }else{
     $form =<<<eoq
@@ -100,7 +108,8 @@ if (!empty($GLOBALS['sugar_config']['use_common_ml_dir'])) {
 <input type=hidden name="upgrade_zip_escaped" value="" />
 </td>
 </tr>
-</table></td></tr></table>
+</table>
+</td></tr></table>
 </form>
 eoq;
 }
@@ -119,7 +128,47 @@ if (!empty($reloadMetadata)) {
 }
 
 $GLOBALS['log']->info( "Upgrade Wizard view");
-?>
-</td>
-</tr>
-</table></td></tr></table>
+
+if (!AccessControlManager::instance()->allowFeatureAccess(SugarFeatureVoter::MODULE_LOADER_UPLOAD_FEATURE_NAME)) {
+    $sugarDocUrl = 'http://www.sugarcrm.com/crm/product_doc.php';
+    $metadataManager = MetaDataManager::getManager('base');
+    $serverInfo = $metadataManager->getServerInfo();
+    $edition = $serverInfo['flavor'];
+    $version = $serverInfo['version'];
+    $lang = $GLOBALS['current_language'];
+    $licenseData = SubscriptionManager::instance()->getSystemCRMKeys();
+    $licenseNames = array_column($licenseData, 'customer_product_name');
+    $licenseKeys = array_keys($licenseData);
+    $products = implode(',', $licenseKeys);
+
+    $linkTpl = '%s?edition=%s&version=%s&lang=%s&products=%s&module=%s';
+
+    $link1 = sprintf(
+        $linkTpl,
+        $sugarDocUrl,
+        $edition,
+        $version,
+        $lang,
+        $products,
+        'ModuleLoaderUploadingPackages'
+    );
+
+    $link2 = sprintf(
+        $linkTpl,
+        $sugarDocUrl,
+        $edition,
+        $version,
+        $lang,
+        $products,
+        'LicenseTypesMatrix'
+    );
+
+    echo string_format(
+        translate('LBL_MODULE_LOADER_LICENSE_WARNING', 'Administration'),
+        [
+            $link1,
+            implode(', ', $licenseNames),
+            $link2,
+        ]
+    );
+}

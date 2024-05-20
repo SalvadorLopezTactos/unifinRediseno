@@ -17,12 +17,12 @@ global $current_user;
 $productCodes = $current_user->getProductCodes();
 $productCodes = urlencode(implode(',', $productCodes));
 
-$flavor = isset($GLOBALS['sugar_flavor']) ? $GLOBALS['sugar_flavor'] : '';
-$version = isset($GLOBALS['sugar_version']) ? $GLOBALS['sugar_version'] : '';
-$language = isset($GLOBALS['current_language']) ? $GLOBALS['current_language'] : '';
-$action = isset($GLOBALS['action']) ? $GLOBALS['action'] : '';
+$flavor = $GLOBALS['sugar_flavor'] ?? '';
+$version = $GLOBALS['sugar_version'] ?? '';
+$language = $GLOBALS['current_language'] ?? '';
+$action = $GLOBALS['action'] ?? '';
 $status = getVersionStatus($version);
-$key = isset($GLOBALS['key']) ? $GLOBALS['key'] : '';
+$key = $GLOBALS['key'] ?? '';
 $module = 'DocuSignAdmin';
 
 $url = "https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$language}&" .

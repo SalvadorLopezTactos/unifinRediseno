@@ -33,7 +33,7 @@ if(!SugarACL::checkAccess('Reports', 'edit', $context))
 }
 global $current_user, $mod_strings, $ACLAllowedModules, $current_language, $app_list_strings, $app_strings, $sugar_config, $sugar_version;
 
-echo getClassicModuleTitle("Reports", [htmlspecialchars($mod_strings['LBL_CREATE_CUSTOM_REPORT']) ], false);
+echo getClassicModuleTitle("Reports", [htmlspecialchars($mod_strings['LBL_CREATE_CUSTOM_REPORT'], ENT_COMPAT) ], false);
 
 $ACLAllowedModules = getACLAllowedModules();
 uksort($ACLAllowedModules,"juliansort");
@@ -162,6 +162,15 @@ if ($doRound !== null)
 
 js_setup($sugar_smarty);
 
+$bwcToTransfer = '';
+$legacyBwc = '';
+if (isset($_REQUEST['legacyBwc']) && $_REQUEST['legacyBwc'] === '1') {
+    $bwcToTransfer = '&legacyBwc=1';
+    $legacyBwc = '1';
+}
+
+$sugar_smarty->assign("legacyBwc", $legacyBwc);
+
 if ($runQuery == 1) {
 	$args = array();
 	$report_def = array();
@@ -213,10 +222,10 @@ else if ($saveReport !== null && ($saveReport == 'on')) {
 	$report_def = array();
     $report_name = '';
 	if (!empty($reportDef)) {
-		$report_def = html_entity_decode($reportDef);
-		$panels_def = html_entity_decode($panelsDef);
-		$filters_def = html_entity_decode($filtersDef);
-        $report_name = html_entity_decode($saveReportAs);
+        $report_def = html_entity_decode($reportDef, ENT_COMPAT);
+        $panels_def = html_entity_decode($panelsDef, ENT_COMPAT);
+        $filters_def = html_entity_decode($filtersDef, ENT_COMPAT);
+        $report_name = html_entity_decode($saveReportAs, ENT_COMPAT);
 	}
 
 	if (!empty($id)) {
@@ -250,7 +259,7 @@ else if ($saveReport !== null && ($saveReport == 'on')) {
 
 	$saveAndRunQuery = $request->getValidInputRequest('save_and_run_query');
 	if ($saveAndRunQuery !== null && ($saveAndRunQuery == 'on')) {
-		header('location:index.php?action=ReportCriteriaResults&module=Reports&page=report&id='.$args['reporter']->saved_report->id);
+        header('location:index.php?action=ReportCriteriaResults&module=Reports&page=report' . $bwcToTransfer . '&id='.$args['reporter']->saved_report->id);
 	}
 	else {
 		$assigned_user_html_def = array(

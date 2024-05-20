@@ -71,6 +71,18 @@
 }
 
 .email-recipients.fieldset {
+  &.edit-toggled {
+    & > .detail {
+      .hide();
+    }
+  }
+
+  &:not(.edit-toggled) {
+    & > :not(.detail) {
+      .hide();
+    }
+  }
+
   .fieldset-group {
     display: table-row;
 

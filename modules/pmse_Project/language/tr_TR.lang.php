@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Form Düğmeleri',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Onayla/Reddet',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Rota',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'DocuSign&#39;a Gönder',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Diğer Rota Opsiyonları',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Kullanıcıya Atanmışı Değiştir',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Takım',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Belge Birleştirme',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Seç…',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'PDF&#39;e Belge Birleştirme',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Birleştirilmiş belgeyi e-posta ile gönder',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Belge Birleştirme',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Birleşen ağ geçidi tipi, gelen akışın ağ geçidi türüyle eşleşmiyor',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Farklılaşan ağ geçitleri, işlemleri çoklu dallara genişletir. Bu dalları tek yolda yeniden birleştirmek için bir birleştirme ağ geçidi kullanılırken birleştirme ağ geçidinin doğru türü, dalların oluşturulması için kullanılan dağıtma ağ geçidinin türüne bağlı olarak kullanılmalıdır. Hariç tutan veya olay bazlı dağıtma ağ geçitleriyle oluşturulan dalları yeniden birleştirmek için hariç tutan bir birleştirme ağ geçidi kullanın. Paralel veya kapsayıcı birleştirme ağ geçitleriyle oluşturulan dalları yeniden birleştirmek için bir paralel veya kapsayıcı aş geçidi kullanın.   ',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Modül Alanı',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Modül ilişkisi',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Kullanıcı',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Görev',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Takım',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Aktivite oluştur',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'İş kuralı',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'İş kuralı aksiyonu',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-Posta şablonu',
 );

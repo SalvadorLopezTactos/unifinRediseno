@@ -42,6 +42,7 @@
 class OneToManyRelationship extends AbstractRelationship
 {
 
+    public $rhs_subpanel;
     /*
      * Constructor
      * @param array $definition Parameters passed in as array defined in parent::$definitionKeys

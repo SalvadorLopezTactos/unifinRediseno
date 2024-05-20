@@ -135,7 +135,7 @@ class Dashboard extends Basic
                                 // this is license controled dashlet
                                 unset($metadata->components[$component_key]->rows[$row_key][$item_key]);
                                 // Check if this row is now empty.
-                                if ((is_countable($metadata->components[$component_key]->rows[$row_key]) ? count($metadata->components[$component_key]->rows[$row_key]) : 0) == 0) {
+                                if (count($metadata->components[$component_key]->rows[$row_key]) == 0) {
                                     // This row is now empty, remove it and mark the metadata as dirty.
                                     unset($metadata->components[$component_key]->rows[$row_key]);
                                     $dirty = true;

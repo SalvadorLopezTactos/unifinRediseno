@@ -11,18 +11,18 @@
  */
 class ExtAPIMicrosoft extends ExtAPIMicrosoftEmail
 {
-    const SCOPES_AUTHORIZE = array(
+    public const SCOPES_AUTHORIZE = array(
         'offline_access',
         'https://graph.microsoft.com/User.Read',
         'https://graph.microsoft.com/Files.ReadWrite.All',
     );
-    const SCOPES_GRAPH_API = array(
+    public const SCOPES_GRAPH_API = array(
         'offline_access',
         'https://graph.microsoft.com/User.Read',
         'https://graph.microsoft.com/Files.ReadWrite.All',
     );
 
-    const SCOPES_DRIVE_API = array(
+    public const SCOPES_DRIVE_API = array(
         'offline_access',
         'https://graph.microsoft.com/Files.ReadWrite.All',
     );

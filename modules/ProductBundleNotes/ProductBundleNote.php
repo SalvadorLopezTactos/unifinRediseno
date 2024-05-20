@@ -98,7 +98,7 @@ class ProductBundleNote extends SugarBean
         // empty
     }
 
-    public function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
         // empty
     }

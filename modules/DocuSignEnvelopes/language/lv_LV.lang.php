@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Nav iestatīts klienta noslēpums',
     'LBL_RESEND_BUTTON_LABEL' => 'Sūtīt vēlreiz',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Iegūt aploksni',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Mākoņa pakalpojuma veids',
+    'LBL_CLOUD_PATH' => 'Mākoņa ceļš',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign aplokšņu saraksta informācijas panelis',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Nesenās DocuSign aploksnes',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign aplokšņu fokusa panelis',
 
-    'LBL_DOCUMENT_FROM' => 'Dokuments no ',
+    'LBL_NEW_ENVELOPE' => 'Jauna aploksne',
     'LBL_DOCUMENT_IS_NOW' => ' tagad ir ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign kļūda. Nevarēja iegūt konta Id, pamatojoties uz piekļuves pilnvaru',
     'LBL_ERROR_RESEND' => 'Neizdevās atkārtoti nosūtīt DocuSign. Aploksnes statusam ir jābūt &#39;nosūtīts&#39;',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Atjaunināšana neveiksmīga',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign noteikumi nepieļauj vairākus pieprasījumus vienā aploksnē 15 minūšu laikā',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Radās kļūda. Aploksni nevarēja atjaunināt. Lūdzu, pārbaudiet žurnālus!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Radās kļūda. Veidnes nevarēja iekļaut sarakstā. Lūdzu, pārbaudiet žurnālus!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Radās kļūda. Nevarēja iegūt veidni. Lūdzu, pārbaudiet žurnālus!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Aploksne nav pabeigta',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Aploksnes satuts DocuSign tagad ir ',
     'LBL_OVERVIEW' => 'Pārskats',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Pievienot dokumentu',
     'LBL_BUTTON_SEND' => 'Sūtīt',
     'LBL_BUTTON_CLEAR' => 'Notīrīt',
-    'LBL_MISSING_OBJECT' => 'DocuSign objekts nav logā',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Lietot veidni',
     'LBL_PLEASE_LOG_IN' => 'No sākuma pierakstieties DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Jūs nevarat lejupielādēt šo dokumentu. To ir izveidojis cits lietotājs!',
     'LBL_SEND_NOT_ALLOWED' => 'Jūs nevarat nosūtīt šo aploksni. To ir izveidojis cits lietotājs!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Parakstīts',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Nevarēja lejupielādēt dokumentu. Lūdzu, pārbaudiet žurnālus!',
     'LBL_DOCUMENT_COMPLETED' => 'Pabeigts',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign Info',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'tagad ir',
+    'LBL_SETTINGS_TITLE' => 'DocuSign iestatījumi',
+    'LBL_RECIPIENT_SELECTION' => 'Saņēmēja atlases uzvedība',
+    'LBL_RECIPIENT_NAME' => 'Nosaukums',
+    'LBL_RECIPIENT_EMAIL' => 'E-pasts',
+    'LBL_RECIPIENT_TYPE' => 'Tips',
+    'LBL_TEMPLATE_NAME' => 'Nosaukums',
+    'LBL_RECIPIENT_SELECT' => 'Atlasīt...',
+    'LBL_RECIPIENT_ROLE' => 'Loma',
+    'LBL_SELECT_BUTTON_LABEL' => 'Atlasīt',
+    'LBL_BACK_BUTTON_LABEL' => 'Atpakaļ',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Neizdevās iegūt potenciālos saņēmējus!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Neizdevās iegūt veidnes!',
 ];

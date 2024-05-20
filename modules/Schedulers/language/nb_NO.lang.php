@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Oppdater produktdefinisjon',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Prosesstidsbevisste planer',
 'LBL_OOTB_DATA_ARCHIVER' => 'Kjør aktive dataarkiver/slettinger',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Bruk abonnementsrettigheter når de endres',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Oppføringer geokoding',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Avanserte innstillinger',
 'LBL_TOGGLE_ADV' => 'Avanserte innstillinger',
 'LBL_TOGGLE_BASIC' => 'Grunnleggende innstillinger',
+'LBL_UPDATEMOMENTUMCJ' => 'Oppdater fremdriften for Smart Guides som pågår',
 // Links
 'LNK_LIST_SCHEDULER' => 'Planleggere',
 'LNK_NEW_SCHEDULER' => 'Opprett planlegger',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Begynn aktive dataarkiver / slettinger',
 'LBL_PMSEENGINECRON' => 'SugarBPM-planlegger',
 );
-

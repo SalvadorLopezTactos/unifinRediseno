@@ -106,10 +106,10 @@ class PMSEActivityDefinitionWrapper
         $result = array("success" => false);
 //        $this->activity = new BpmnActivity();
         $this->activity->retrieve_by_string_fields(array('act_uid' => $args['record']));
-        if ($this->activity->fetched_row != false) {
+        if (!empty($this->activity->fetched_row)) {
 //            $this->activityDefinition = new BpmActivityDefinition();
             $this->activityDefinition->retrieve($this->activity->id);
-            if ($this->activityDefinition->fetched_row != false) {
+            if (!empty($this->activityDefinition->fetched_row)) {
                 $result['success'] = true;
                 if (empty($this->activityDefinition->fetched_row['act_readonly_fields'])) {
                     $this->activityDefinition->fetched_row['act_readonly_fields'] = $this->getDefaultReadOnlyFields();
@@ -176,7 +176,7 @@ class PMSEActivityDefinitionWrapper
         $this->activity->retrieve_by_string_fields(array('act_uid' => $args['act_uid']));
         $data = array("success" => false);
         if (count($args) > 0) {
-            if ($this->activity->fetched_row != false) {
+            if (!empty($this->activity->fetched_row)) {
                 $args['id'] = $this->activity->id; //$primaryKeyField;
                 foreach ($args as $key => $value) {
                     if ($key == 'act_readonly_fields' || $key == 'act_required_fields' || $key == 'act_expected_time') {
@@ -212,9 +212,7 @@ class PMSEActivityDefinitionWrapper
         $data = array("success" => false);
         if (isset($args['record']) && count($args) > 0) {
             if ($this->activity->retrieve_by_string_fields(array('act_uid' => $args['record']))) {
-                if ($this->activity->fetched_row != false) {
-
-
+                if (!empty($this->activity->fetched_row)) {
                     $args['id'] = $this->activity->id;
                     $this->activityDefinition->retrieve($this->activity->id);
 
@@ -262,7 +260,7 @@ class PMSEActivityDefinitionWrapper
     {
         $this->processDefinition->retrieve($this->activityDefinition->pro_id);
         $bean = $this->factory->getBean($this->processDefinition->pro_module);
-        $fieldsData = isset($bean->field_defs) ? $bean->field_defs : array();
+        $fieldsData = $bean->field_defs ?? array();
 
         $output = array();
         foreach ($fieldsData as $field) {
@@ -294,7 +292,7 @@ class PMSEActivityDefinitionWrapper
     {
         $this->processDefinition->retrieve($this->activityDefinition->pro_id);
         $bean = $this->factory->getBean($this->processDefinition->pro_module);
-        $fieldsData = isset($bean->field_defs) ? $bean->field_defs : array();
+        $fieldsData = $bean->field_defs ?? array();
 
         $output = array();
         foreach ($fieldsData as $field) {

@@ -98,7 +98,7 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY' => 'Created By ID',
     'LBL_EXPORT_TYPE_NAME' => 'Type Name',
 
-    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Contracts Focus Drawer',
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Contracts Focus Dashboard',
 
     'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Contracts Record Dashboard',
 );

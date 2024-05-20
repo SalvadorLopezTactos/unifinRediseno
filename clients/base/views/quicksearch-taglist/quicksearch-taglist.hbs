@@ -10,6 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-{{#each selectedTags}}
-    {{partial 'tag' ../this this}}
-{{/each}}
+{{#if dropdownList}}
+    <div class="flex pull-right tag-group-wrapper">
+        <div class="btn btn-invisible tag-dropdown justify-between min-w-10 p-2">
+            <span class="label multiple-tag-label" aria-label="{{str 'LBL_GLOBAL_SEARCH_MODULE_FILTER'}}" title="{{../dropdownName}}">{{../dropdownName}}</span>
+            <div class="tag-dropdown-button btn btn-invisible" track="click:globalsearch-dropdown">
+                <i class="sicon sicon-chevron-down"></i>
+            </div>
+        </div>
+        <ul class="dropdown-menu tag-dropdown-list mx-0">
+            {{#each selectedTags}}
+                <li class="tag-name menu-item" id={{id}} tag-name="{{name}}">
+                    <i class="{{buildIcon 'sicon-check'}}"></i>
+                    <span class="ellipsis_inline" data-placement="bottom" title="{{name}}">{{name}}</span>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+{{else}}
+    {{#each selectedTags}}
+        {{partial 'tag' ../this this}}
+    {{/each}}
+{{/if}}
+

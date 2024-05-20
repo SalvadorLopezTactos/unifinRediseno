@@ -14,7 +14,7 @@
  * @extends View.Layout
  */
 ({
-    className: 'search',
+    className: 'search w-full absolute px-30 box-border',
 
     /**
      * @inheritdoc
@@ -194,13 +194,13 @@
      * @inheritdoc
      */
     _placeComponent: function(component) {
+
         if (component.name === 'quicksearch-modulelist' ||
-            component.name === 'quicksearch-taglist' ||
-            component.name === 'quicksearch-bar'
+            component.name === 'quicksearch-taglist'
         ) {
-            this.$('[data-component=searchbar]').append(component.el);
+            this.$('.quicksearch-filter-group').append(component.el);
         } else {
-            this._super('_placeComponent', [component]);
+            this.$('[data-component=searchbar]').append(component.el);
         }
     },
 

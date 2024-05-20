@@ -69,11 +69,12 @@
                 if (menuItem.visible === true) {
                     menuItem.module = name;
                     menuItem.type = menuItem.type || 'quickcreate';
-                    // apply default icon for compatibility with customizations from previous versions
-                    // but leave the possibility to turn icon off by specifying empty value
-                    if (!("icon" in menuItem)) {
-                        menuItem.icon = 'sicon sicon-plus';
+                    menuItem.icon = meta.icon || 'sicon sicon-plus';
+
+                    if (!menuItem.label) {
+                        menuItem.label = app.lang.getModuleName(name);
                     }
+
                     //TODO: refactor sidecar field hbs helper so it can accept the module name directly
                     menuItem.model = app.data.createBean(name);
                     returnList.push(menuItem);

@@ -155,8 +155,8 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Shabllonet',
     'LBL_RECORD_OTHER_TAB' => 'Tjetër',
     'LBL_EVENT_START' => 'Fillimi',
-    'LBL_EVENT_END' => 'Përfundimi',
-    'LBL_EVENT_END' => 'Fund',
+    'LBL_EVENT_END' => 'Fundi',
+    'LBL_EVENT_END' => 'Fundi',
     'LBL_DAY_EVENT_TEMPLATE' => 'Ngjarje e ditës',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Ngjarje e javës',
     'LBL_MONTH_EVENT_TEMPLATE' => 'Ngjarje e muajit',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Tet',
     'LBL_NOV' => 'Nën',
     'LBL_DEC' => 'Dhje',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalendari ishte shtuar tashmë',
+    'LBL_CALENDAR_IS_SELECTED' => 'Është zgjedhur {{calendar}}',
+    'LBL_NO_USER_SELECTED' => 'Zgjidh një përdorues ose ekip',
+    'LBL_NO_CALENDAR_SELECTED' => 'Zgjidh një kalendar',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nuk u arrit ruajtja e kalendarëve.',
 
 );
 

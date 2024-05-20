@@ -59,7 +59,7 @@
                 this.clearErrorDecoration();
                 _.defer(function (field) {
                     field._errors = errors;
-                    if (field.action === 'edit' || field.view.inlineEditMode) {
+                    if (_.include(['edit', 'disabled'], field.action) || field.view.inlineEditMode) {
                         if (field.parent) {
                             field.parent.setMode('edit');
                         } else {
@@ -275,13 +275,14 @@
                 }
                 this._addViewClass(this.action);
                 if (!_.isEmpty(this._errors)) {
-                    if (this.action === 'edit') {
+                    if (_.include(['edit', 'disabled'], this.action)) {
                         this.decorateError(this._errors);
                     }
                 }
                 if (this.def.required) {
                     this.clearRequiredLabel();
-                    if ((this.action === 'edit' || -1 !== _.indexOf(['edit', 'list-edit'], this.tplName)) && this._shouldRenderRequiredPlaceholder()) {
+                    if ((this.action === 'edit' || -1 !== _.indexOf(['edit', 'list-edit', 'disabled'], this.tplName)) &&
+                        this._shouldRenderRequiredPlaceholder()) {
                         this.decorateRequired();
                     }
                 }

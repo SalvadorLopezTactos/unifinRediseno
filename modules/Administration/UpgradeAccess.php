@@ -19,9 +19,9 @@ $contents = getHtaccessData($htaccess_file);
 
 $status =  file_put_contents($htaccess_file, $contents);
 if (!$status) {
-    echo '<p>' . htmlspecialchars($mod_strings['LBL_HT_NO_WRITE']) . '<span class="stop">' . htmlspecialchars($htaccess_file).'</span></p>'.PHP_EOL;
-    echo '<p>' . htmlspecialchars($mod_strings['LBL_HT_NO_WRITE_2']).'</p>'.PHP_EOL;
-    echo htmlspecialchars($contents) . PHP_EOL;
+    echo '<p>' . htmlspecialchars($mod_strings['LBL_HT_NO_WRITE'], ENT_COMPAT) . '<span class="stop">' . htmlspecialchars($htaccess_file, ENT_COMPAT).'</span></p>'.PHP_EOL;
+    echo '<p>' . htmlspecialchars($mod_strings['LBL_HT_NO_WRITE_2'], ENT_COMPAT).'</p>'.PHP_EOL;
+    echo htmlspecialchars($contents, ENT_COMPAT) . PHP_EOL;
 }
 
 

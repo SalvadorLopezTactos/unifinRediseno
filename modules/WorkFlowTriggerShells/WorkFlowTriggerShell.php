@@ -130,7 +130,8 @@ class WorkFlowTriggerShell extends SugarBean {
 	}
 	
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 
 		global $app_strings, $mod_strings;
 		global $app_list_strings;

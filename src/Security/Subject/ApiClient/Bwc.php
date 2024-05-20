@@ -22,6 +22,7 @@ final class Bwc implements ApiClient
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

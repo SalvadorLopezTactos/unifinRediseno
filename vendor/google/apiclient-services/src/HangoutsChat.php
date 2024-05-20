@@ -23,9 +23,8 @@ use Google\Client;
  * Service definition for HangoutsChat (v1).
  *
  * <p>
- * Enables bots to fetch information and perform actions in Google Chat.
- * Authentication using a service account is a prerequisite for using the Google
- * Chat REST API.</p>
+ * Enables apps to fetch information and perform actions in Google Chat.
+ * Authentication is a prerequisite for using the Google Chat REST API.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -79,6 +78,10 @@ class HangoutsChat extends \Google\Service
                   'type' => 'string',
                   'required' => true,
                 ],
+                'requestId' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
                 'threadKey' => [
                   'location' => 'query',
                   'type' => 'string',
@@ -92,6 +95,10 @@ class HangoutsChat extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'requestId' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
                 'threadKey' => [
                   'location' => 'query',
@@ -116,6 +123,10 @@ class HangoutsChat extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'requestId' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
                 'threadKey' => [
                   'location' => 'query',
@@ -161,6 +172,10 @@ class HangoutsChat extends \Google\Service
                   'type' => 'string',
                   'required' => true,
                 ],
+                'requestId' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
                 'threadKey' => [
                   'location' => 'query',
                   'type' => 'string',
@@ -174,6 +189,10 @@ class HangoutsChat extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'requestId' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
                 'threadKey' => [
                   'location' => 'query',
@@ -198,6 +217,10 @@ class HangoutsChat extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'requestId' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
                 'threadKey' => [
                   'location' => 'query',
@@ -245,6 +268,10 @@ class HangoutsChat extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'requestId' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
                 'threadKey' => [
                   'location' => 'query',
@@ -307,6 +334,10 @@ class HangoutsChat extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'requestId' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
                 'threadKey' => [
                   'location' => 'query',

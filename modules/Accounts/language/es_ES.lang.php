@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Panel de lista de cuentas',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Panel de registros de cuentas',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en las cuentas',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Detalles de la cuenta',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Panel de enfoque en las cuentas - Consola',
     'LBL_NEXT_RENEWAL_DATE' => 'Fecha de la siguiente renovación',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Fecha de la siguiente renovación',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Nombre de la cuenta/Industria',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Ubicación',
     'LBL_PURCHASES' => 'Compras',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línea de tiempo de la cuenta',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiza',
+    'LBL_CREATE_NEW' => 'Crear nuevo',
+    'LBL_MANAGE' => 'Gestionar',
+    'LBL_SEE_DETAILS' => 'Mostrar detalles',
+    'LBL_HIDE_NEW' => 'Ocultar',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Gráficos',
@@ -208,4 +215,7 @@ Para crear un {{module_name}}:
 2. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Informes de Cuentas',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Usuarios externos',
 );

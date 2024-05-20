@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Előrejelzés-történet megtekintése',
     'LBL_FORECAST_HISTORY' => 'Előrejelzések: Előzmény',
     'LBL_FORECAST_HISTORY_TITLE' => 'Előzmény',
+    'LBL_TAB_COMMITMENT' => 'Elkötelezettség',
+    'LBL_CURRENT' => 'Aktuális',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Időszak',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Módosította',
     'LBL_WK_VERSION' => 'Verzió',
     'LBL_WK_REVISION' => 'Módosítás',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'A metrikus API-hez való hozzáféréshez Sugar Sell Premierre van szükség',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Időszak:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'El akarja kötelezni ezeket az összegeket?',
     'ERR_FORECAST_AMOUNT' => 'Az összeg elkötelezéséhez egy számot kell megadnia.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Belefoglalt adatcsatorna',
+    'LBL_UPSIDE_PIPELINE' => 'Felfelé mutató adatcsatorna',
+    'LBL_EXCLUDED_PIPELINE' => 'Kihagyott adatcsatorna',
+    'LBL_WON' => 'Megnyert',
+    'LBL_LOST' => 'Elvesztett',
+    'LBL_ALL' => 'Minden',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Útmutató a szűrőkhöz',
+    'LBL_HELP_MAIN_BODY' => 'Minden mutatónak csak a kiválasztott felhasználó(k)hoz, időintervallumokhoz és további, alkalmazott szűrőkhöz tartozó Lehetőségeket szabad tartalmaznia',
+    'LBL_FORECAST_HELP' => 'Már megnyert, vagy {{{forecastStage}}} szintbe foglalt Lehetőségek',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Nyitott lehetőségek {{{forecastStage}}}/{{{commitStageValue}}} értékkel',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Nyitott lehetőségek belefoglalt {{{forecastStage}}} szinttel',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Nyitott lehetőségek {{{forecastStage}}}/{{{commitStageValue}}} értékkel',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Nyitott lehetőségek {{{forecastStage}}}/{{{commitStageValue}}} értékkel',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Nyitott lehetőségek kizárt {{{forecastStage}}} szinttel',
+    'LBL_WON_HELP' => 'Már elnyert lehetőségek',
+    'LBL_LOST_HELP' => 'Már elveszített lehetőségek',
+    'LBL_ALL_HELP' => 'Minden lehetőség',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Kezdés dátuma',
     'LBL_FC_USER' => 'Időbeosztás',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Elkötelezettség',
     'LBL_TEAM_COMMITMENT' => 'Csapat elkötelezettség',
     'LBL_FORECASTED' => 'Előrejelezve',
+    'LBL_OPPORTUNITY_FORECAST' => 'Lehetőség-előrejelzés',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Bevételi sor tételelőrejelzés',
+    'LBL_LAST_COMMITMENT' => 'Utolsó elkötelezés',
     'LBL_ADJUSTED_TOTAL' => 'Igazított összeg',
     'LBL_COMMIT_STAGE' => 'Elköteleződés szintje',
     'LBL_SALES_STAGE' => 'Szint',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(korrigált)',
     'LBL_SAVE_DRAFT' => 'Mentés',
     'LBL_CHANGES_BY' => 'Változások itt: {0}',
-    'LBL_FORECAST_SETTINGS' => 'Beállítások',
+    'LBL_FORECAST_SETTINGS' => 'Előrejelzések beállításai',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Előjelzés beállítások',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Üzleti év kezdő dátuma:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Állítsa be az időszakot, amivel az Előrejelzések modul dolgozni fog!<br /><br />Első lépésként adja meg az üzleti év első napját! Ezt követően válassza ki, mely időszakot kíván vizsgálni a jövőben! A kiválasztott időszaki bontást a rendszer automatikusan hozzáigazítja a kezdő dátumhoz.<br /><br />A megtekinthető jövőbeni és elmúlt időszakok száma meghatározza, hogy hány alperiódust jelenít meg az Előrejelzések modul. Ezt a felhasználók később szerkeszthetik.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Állítsa be, hogyan szeretné testre szabni a következőt: {{forecastByModule}}.<br><br>Kérjük, ne feledje, hogy a tartományt nem lehet módosítani az első elkötelezés után. A frissített munkamenetek esetén a tartománybeállítások a meglévő előrejelzési adatokhoz vannak kötve.<br><br>Kiválaszthat két vagy több kategóriát a valószínűségtartományok alapján vagy kiválaszthat kategóriákat, amelyek nem a valószínűségen alapulnak. <br><br>Az egyedi kategóriák bal oldalán jelölőnégyzetrek találhatóak; használja ezeket annak eldöntéséhez, hogy mely kategóriák szerepeljenek az elkötelezett előrejelzési mennyiségben és legyenek jelentve a vezetőknek. <br><br>Egy felhasználó megváltoztathatja a {{forecastByModule}} kategóriáját és befoglalás/kizárás állapotát kézileg a saját munkalapjáról.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Állítsa be, hogyan szeretné kategorizálni a következőt: {{forecastByModule}}. <br><br>Kérjük, ne feledje, hogy a tartománybeállítások nem módosíthatók az első véglegesítést követően. A fejlesztett esetek esetén a tartománybeállítások a meglévő előrejelzési adatokhoz lesznek kötve. <br><br>Kiválaszthat két vagy több kategóriát a valószínűségtartomány alapján, vagy létrehozhat olyan új kategóriákat, amelyek nem a valószínűségtől függenek. <br><br>Ezek a jelölőnégyzetek az egyedi kategóriák bal oldalán találhatóak; használja ezeket annak eldöntésére, hogy melyik tartományokat szeretné belefoglalni az előrejelzett mennyiségbe, és jelenteni a vezetőinek. <br><br>A felhasználó megváltoztathatja a befoglalás/kihagyás állapotot és a(z) {{forecastByModule}} kategóriáját kézileg a saját munkalapján.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Adja meg, a felhasználóknak mely oszlopokat kell majd kitölteniük lehetőségeik előrejelzése során! Vegye figyelembe, hogy a "valószínű összeg" kapcsolódik a Lehetőség változójához, így azt az oszlopot nem lehet elrejteni.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Adja meg, mely oszlopokat kíván megjeleníteni az Előrejelzések modulban! A mezők listája tartalmazza majd a munkalapot és a felhasználók módosíthatják a nézet beállításait.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ez egy helykitöltő mintaszöveg!',

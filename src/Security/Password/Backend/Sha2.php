@@ -36,6 +36,8 @@ use Sugarcrm\Sugarcrm\Security\Password\Exception\RuntimeException;
  *
  * @see http://php.net/manual/en/function.crypt.php
  *
+ * @deprecated due to security issue https://www.php.net/manual/en/function.crypt.php
+ *
  */
 class Sha2 implements BackendInterface, SaltConsumerInterface
 {

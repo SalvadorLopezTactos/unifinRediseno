@@ -222,4 +222,10 @@ $mod_strings = array (
     - คลิก "เลือกผู้เข้าร่วม" ที่จะเพิ่มผู้ใช้ ที่อยู่ติดต่อ หรือผู้สนใจที่มีอยู่ใน {{meetings_singular_module}}
     - คลิกไอคอนบวกทางด้านขวาของ "เลือกผู้เข้าร่วม" เพื่อสร้างผู้เข้าร่วม {{meetings_singular_module}} เป็นระเบียน Sugar ใหม่
 3. คลิก "บันทึก" เพื่อสิ้นสุดการสร้างระเบียนใหม่ และกลับสู่เพจก่อนหน้า',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'เป็นการประชุมคู่มืออัจฉริยะ',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'งานย่อย',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'การโทรย่อย',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'การประชุมย่อย',
 );

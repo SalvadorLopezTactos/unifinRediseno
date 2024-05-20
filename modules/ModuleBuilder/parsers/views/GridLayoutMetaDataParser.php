@@ -15,6 +15,16 @@ require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDataParserInterface
 {
 
+    //@codingStandardsIgnoreStart
+    /**
+     * @var string|mixed|mixed[]
+     */
+    public $_view;
+    /**
+     * @var mixed[]
+     */
+    public $_originalViewDef;
+    //@codingStandardsIgnoreEnd
     static $variableMap = array (
     	MB_EDITVIEW => 'EditView' ,
     	MB_DETAILVIEW => 'DetailView' ,
@@ -268,22 +278,29 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
     {
         // Obtain the full list of valid fields in this module
     	$availableFields = array () ;
-        foreach ( $this->_fielddefs as $key => $def )
-        {
 
+        $fieldsDefs = $this->_fielddefs;
+
+        $mm = MetaDataManager::getManager('base', false);
+        $fieldsDefs = $mm->applyLicensesFilter($fieldsDefs);
+
+        foreach ($fieldsDefs as $key => $def) {
             if ( $this->isValidField($key, $def) || isset($this->_originalViewDef[$key]) )
             {
                 //If the field original label existing, we should use the original label instead the label in its fielddefs.
             	if(isset($this->_originalViewDef[$key]) && is_array($this->_originalViewDef[$key]) && isset($this->_originalViewDef[$key]['label'])){
                     $availableFields [ $key ] = array ( 'name' => $key , 'label' => $this->_originalViewDef[$key]['label']) ;
                 }else{
-                    $availableFields [ $key ] = array ( 'name' => $key , 'label' => isset($def [ 'label' ]) ? $def [ 'label' ] : $def['vname'] ) ; // layouts use 'label' not 'vname' for the label entry
+                    $availableFields [ $key ] = array ( 'name' => $key , 'label' => $def [ 'label' ] ?? $def['vname'] ) ; // layouts use 'label' not 'vname' for the label entry
                 }
 
-                $availableFields[$key]['translatedLabel'] = translate( isset($def [ 'label' ]) ? $def [ 'label' ] : $def['vname'], $this->_moduleName);
+                $availableFields[$key]['translatedLabel'] = translate(
+                    $def ['label'] ?? $def['vname'],
+                    $this->_moduleName
+                );
                 if (isset($this->_originalViewDef[$key]['type']) && $this->_originalViewDef[$key]['type'] == 'fieldset') {
                     $availableFields[$key]['fieldset'] = true;
-                
+
                     if (isset($this->_originalViewDef[$key]['fields'])) {
                         $availableFields[$key]['fieldset_fields'] = $this->getFieldsetFields($this->_originalViewDef[$key]['fields']);
                     }
@@ -354,7 +371,6 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
      */
     function addField ( $def , $panelID = FALSE)
     {
-
         if ((is_countable($this->_viewdefs ['panels']) ? count($this->_viewdefs ['panels']) : 0) == 0) {
             $GLOBALS [ 'log' ]->error ( get_class ( $this ) . "->addField(): _viewdefs empty for module {$this->_moduleName} and view {$this->_view}" ) ;
         }
@@ -430,7 +446,9 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
         foreach ( $this->_viewdefs [ 'panels' ] as $panelID => $panel )
         {
             $lastRowTouched = false ;
-            $lastRowID = (is_countable($this->_viewdefs ['panels'] [$panelID]) ? count($this->_viewdefs ['panels'] [$panelID]) : 0) - 1; // zero offset
+            $lastRowID = (is_countable($this->_viewdefs ['panels'] [$panelID]) ? count(
+                $this->_viewdefs ['panels'] [$panelID]
+            ) : 0) - 1; // zero offset
 
             foreach ( $panel as $rowID => $row )
             {
@@ -459,8 +477,10 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
                 {
                     unset ( $this->_viewdefs [ 'panels' ] [ $panelID ] [ $lastRowID ] ) ;
                     // if the row was the only one in the panel, and the panel is not the first (default) panel, then remove the panel also
-                    if ((is_countable($this->_viewdefs ['panels'] [$panelID]) ? count($this->_viewdefs ['panels'] [$panelID]) : 0) == 0 && $panelID != $firstPanelID) {
-                        unset($this->_viewdefs['panels'][$panelID]);
+                    if ((is_countable($this->_viewdefs ['panels'] [$panelID]) ? count(
+                        $this->_viewdefs ['panels'] [$panelID]
+                    ) : 0) == 0 && $panelID != $firstPanelID) {
+                        unset($this->_viewdefs ['panels'] [$panelID]);
                     }
                 }
 
@@ -710,7 +730,11 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
 
                         // If there are additional fielddefs provided for the field, combine them with the
                         // filtered fielddefs
-                        if (!empty($fieldname) && !empty($def) && !empty($this->additionalFieldDefs[$fieldname])) {
+                        if (!empty($fieldname)
+                            && !empty($def)
+                            && is_array($def)
+                            && !empty($this->additionalFieldDefs[$fieldname])
+                            && is_array($this->additionalFieldDefs[$fieldname])) {
                             $def = array_merge($def, $this->additionalFieldDefs[$fieldname]);
                         }
 
@@ -869,7 +893,7 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
     		$panels = $viewdef['panels'];
     	} else {
             $defs = MetaDataFiles::mapArrayToPath(MetaDataFiles::getViewDefVar($this->_view), $viewdef);
-            $panels = isset($defs['panels']) ? $defs['panels'] : null;
+            $panels = $defs['panels'] ?? null;
     	}
 
         return $panels;
@@ -960,6 +984,7 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
             'hideLabel' => true,
             'readonly' => true,
             'related_fields' => true,
+            'licenseFilter' => true,
         );
 		$ret = array_intersect_key($def, $requiredProps);
         if (!empty($def['vname']) && empty($def['label']))

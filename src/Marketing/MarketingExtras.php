@@ -184,7 +184,6 @@ class MarketingExtras
      */
     private function configureProxy($ch)
     {
-        $proxy_settings = [];
         $proxy_config = \Administration::getSettings('proxy');
 
         if (!empty($proxy_config) &&
@@ -193,11 +192,11 @@ class MarketingExtras
         ) {
             curl_setopt($ch, CURLOPT_PROXY, $proxy_config->settings['proxy_host']);
             curl_setopt($ch, CURLOPT_PROXYPORT, $proxy_config->settings['proxy_port']);
-            if (!empty($proxy_settings['proxy_auth'])) {
+            if (!empty($proxy_config->settings['proxy_auth'])) {
                 curl_setopt(
                     $ch,
                     CURLOPT_PROXYUSERPWD,
-                    $proxy_settings['proxy_username'] . ':' . $proxy_settings['proxy_password']
+                    $proxy_config->settings['proxy_username'] . ':' . $proxy_config->settings['proxy_password']
                 );
             }
         }

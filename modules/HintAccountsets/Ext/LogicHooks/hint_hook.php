@@ -13,7 +13,7 @@ $hook_array['after_delete'][] = [
     1,
     'Hook description',
     null,
-    'Sugarcrm\\Sugarcrm\\modules\\HintAccountsets\\HintAccountsetsHook',
+    \Sugarcrm\Sugarcrm\modules\HintAccountsets\HintAccountsetsHook::class,
     'afterDelete',
 ];
 
@@ -21,7 +21,7 @@ $hook_array['after_relationship_add'][] = [
     1,
     'Hook description',
     null,
-    'Sugarcrm\\Sugarcrm\\modules\\HintAccountsets\\HintAccountsetsHook',
+    \Sugarcrm\Sugarcrm\modules\HintAccountsets\HintAccountsetsHook::class,
     'afterRelationshipAdd',
 ];
 
@@ -29,7 +29,7 @@ $hook_array['after_relationship_delete'][] = [
     1,
     'Hook description',
     null,
-    'Sugarcrm\\Sugarcrm\\modules\\HintAccountsets\\HintAccountsetsHook',
+    \Sugarcrm\Sugarcrm\modules\HintAccountsets\HintAccountsetsHook::class,
     'afterRelationshipDelete',
 ];
 
@@ -37,6 +37,6 @@ $hook_array['after_save'][] = [
     1,
     'Hook description',
     null,
-    'Sugarcrm\\Sugarcrm\\modules\\HintAccountsets\\HintAccountsetsHook',
+    \Sugarcrm\Sugarcrm\modules\HintAccountsets\HintAccountsetsHook::class,
     'afterSave',
 ];

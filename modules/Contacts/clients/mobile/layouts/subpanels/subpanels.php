@@ -27,6 +27,13 @@ $viewdefs['Contacts']['mobile']['layout']['subpanels'] = array(
                 'link' => 'meetings',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_MESSAGES_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'message_invites',
+            ],
+        ],
         array(
             'layout' => 'subpanel',
             'label' => 'LBL_TASKS_SUBPANEL_TITLE',
@@ -104,6 +111,13 @@ $viewdefs['Contacts']['mobile']['layout']['subpanels'] = array(
             'label' => 'LBL_QUOTES_BILL_TO',
             'context' => [
                 'link' => 'billing_quotes',
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'contracts',
             ],
         ],
         array (

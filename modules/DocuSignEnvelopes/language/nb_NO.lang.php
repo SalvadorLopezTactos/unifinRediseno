@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Ingen klienthemmelighet stilt inn',
     'LBL_RESEND_BUTTON_LABEL' => 'Send på ny',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Hent omslag',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Skytjenestetype',
+    'LBL_CLOUD_PATH' => 'Skybane',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign omslagsliste dashbord',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Aktuelle DocuSign omslag',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign omslag fokusskuff',
 
-    'LBL_DOCUMENT_FROM' => 'Dokument fra ',
+    'LBL_NEW_ENVELOPE' => 'Nytt omslag',
     'LBL_DOCUMENT_IS_NOW' => ' er nå ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign feil. Kunne ikke hente konto-ID basert på tilgangssymbol',
     'LBL_ERROR_RESEND' => 'DocuSign kunne ikke sendes på ny. Omslagsstatusen må være &#39;sendt&#39;',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Oppdatering mislyktes',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign reglene tillater ikke flere henvendelser for samme omslag i løpet av 15 minutter',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Det oppsto en feil. Omslag kunne ikke oppdateres. Sjekk loggene!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'En feil skjedde. Kunne ikke liste maler. Vennligst sjekk loggene!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'En feil skjedde. Kunne ikke hente mal. Vennligst sjekk loggene!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Omslag ikke fullført',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Omslagsstatus i DocuSign er nå ',
     'LBL_OVERVIEW' => 'Oversikt',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Tilføy dokument',
     'LBL_BUTTON_SEND' => 'Send',
     'LBL_BUTTON_CLEAR' => 'Fjern',
-    'LBL_MISSING_OBJECT' => 'DocuSign objekt er ikke i vindu',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Bruk mal',
     'LBL_PLEASE_LOG_IN' => 'Logg inn hos DocuSign først!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Du kan ikke laste ned dette dokumentet. Det ble opprettet av en annen bruker!',
     'LBL_SEND_NOT_ALLOWED' => 'Du kan ikke sende dette omslaget. Det ble opprettet av en annen bruker!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Signert',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Kunne ikke laste ned dokumentet. Sjekk logger!',
     'LBL_DOCUMENT_COMPLETED' => 'Fullført',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign Info',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'er nå',
+    'LBL_SETTINGS_TITLE' => 'DocuSign-innstillinger',
+    'LBL_RECIPIENT_SELECTION' => 'Mottakerens valgadferd',
+    'LBL_RECIPIENT_NAME' => 'Tidsperiode',
+    'LBL_RECIPIENT_EMAIL' => 'E-post',
+    'LBL_RECIPIENT_TYPE' => 'Type',
+    'LBL_TEMPLATE_NAME' => 'Navn',
+    'LBL_RECIPIENT_SELECT' => 'Velg ...',
+    'LBL_RECIPIENT_ROLE' => 'Rolle',
+    'LBL_SELECT_BUTTON_LABEL' => 'Velg',
+    'LBL_BACK_BUTTON_LABEL' => 'Tilbake',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Kunne ikke hente potensielle mottakere!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Kunne ikke hente maler!',
 ];

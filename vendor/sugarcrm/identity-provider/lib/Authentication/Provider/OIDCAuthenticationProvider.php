@@ -12,8 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\Authentication\Provider;
 
-use Jose\Loader as JWTLoader;
-use Jose\LoaderInterface;
+use Jose\Component\Core\Util\JsonConverter;
+use Jose\Component\Signature\Serializer\JWSSerializerManager;
 use Sugarcrm\IdentityProvider\Authentication\Provider\OIDC;
 use Sugarcrm\IdentityProvider\Authentication\Token\OIDC\OIDCCodeToken;
 use Sugarcrm\IdentityProvider\Authentication\Token\OIDC\ResultToken;
@@ -38,9 +38,9 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
     private $oidcService;
 
     /**
-     * @var JWTLoader
+     * @var JWSSerializerManager
      */
-    private $jwtLoader;
+    private $jwsManager;
 
     /**
      * @var UserProviderInterface
@@ -72,7 +72,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
      * @param OIDCUserMapping $mapper
      * @param UserCheckerInterface $userChecker
      * @param OIDC\ExternalServiceInterface $oidcService
-     * @param LoaderInterface $jwtLoader
+     * @param JWSSerializerManager $jwsManager
      */
     public function __construct(
         array $config,
@@ -80,11 +80,11 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         OIDCUserMapping $mapper,
         UserCheckerInterface $userChecker,
         OIDC\ExternalServiceInterface $oidcService,
-        LoaderInterface $jwtLoader
+        JWSSerializerManager $jwsManager
     ) {
         $this->config = $config;
         $this->oidcService = $oidcService;
-        $this->jwtLoader = $jwtLoader;
+        $this->jwsManager = $jwsManager;
         $this->userProvider = $userProvider;
         $this->userChecker = $userChecker;
         $this->mapper = $mapper;
@@ -119,8 +119,8 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         $claims = $this->oidcService->getUserInfo($accessToken);
         if (empty($claims) && in_array('openid', $this->config['scope']) != false) {
             $idTokenString = $accessToken->getValues()['id_token'];
-            $idToken = $this->jwtLoader->load($idTokenString);
-            $claims = $idToken->getClaims();
+            $idToken = $this->jwsManager->unserialize($idTokenString);
+            $claims = JsonConverter::decode($idToken->getPayload());
         }
 
         if (empty($claims['sub'])) {
@@ -133,7 +133,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         }
 
         $resultToken = new ResultToken($token->getCredentials(), $token->getAttributes());
-        $user = $this->userProvider->loadUserByUsername($claims['sub']);
+        $user = $this->userProvider->loadUserByIdentifier($claims['sub']);
 
         $identityMap = $this->mapper->mapIdentity($claims);
         $user->setAttribute('sub', $claims['sub']);

@@ -446,7 +446,8 @@ $dictionary['ProductBundle'] = array(
             'lhs_key' => 'id',
             'relationship_type' => 'one-to-many',
         ),
-    )
+    ),
+    'optimistic_locking' => true,
 );
 
 VardefManager::createVardef(

@@ -40,7 +40,7 @@ class SugarJobRemoveReassignedItems implements RunnableSchedulerJob
      */
     public function run($data)
     {
-        $args = json_decode(html_entity_decode($data), true);
+        $args = json_decode(html_entity_decode($data, ENT_COMPAT), true);
         $this->job->runnable_ran = true;
         $fw = new ForecastWorksheet();
 

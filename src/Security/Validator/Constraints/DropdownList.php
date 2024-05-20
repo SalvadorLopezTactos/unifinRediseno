@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class DropdownList extends Constraint
 {
-    const ERROR_INVALID_DROPDOWN_KEY = 1;
+    public const ERROR_INVALID_DROPDOWN_KEY = 1;
     protected static $errorNames = array(
         self::ERROR_INVALID_DROPDOWN_KEY => 'ML_LANGUAGE_FILE_KEYS_INVALID',
     );

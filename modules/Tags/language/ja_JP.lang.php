@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'タグのレコードダッシュボード',
     'LBL_MY_TAGS' => 'マイタグ',
     'LBL_MY_FAVORITE_TAGS' => 'お気に入りのタグ',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} 件のタグ',
 );

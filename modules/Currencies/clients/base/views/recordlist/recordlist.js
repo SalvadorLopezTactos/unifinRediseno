@@ -27,9 +27,9 @@
             this.collection.each(function(model) {
                 if (model.get('id') == app.currency.getBaseCurrencyId()) {
                     model.isDefault = true;
-                    var defaultLang = app.lang.get('LBL_CURRENCY_DEFAULT', 'Currencies');
-                    if (defaultLang) {
-                        model.set('name', defaultLang);
+                    let defaultCurrencyName = app.lang.get('LBL_CURRENCY_DEFAULT', 'Currencies');
+                    if (defaultCurrencyName) {
+                        model.set('name', defaultCurrencyName);
                     }
                 }
             }, this);
@@ -58,10 +58,10 @@
     _render: function() {
         this._super('_render');
 
-        var $tableRow = this.$('tr[name="Currencies_-99"]');
-        var $rowCheckBox = $tableRow.find('input[name="check"]');
-        var $rowActionDropdown = $tableRow.find('a.dropdown-toggle');
-        var $defaultCurrencyLabel = $tableRow.find('[data-type="name"] div.ellipsis_inline');
+        let $tableRow = this.$('tr[name="Currencies_-99"]');
+        let $rowCheckBox = $tableRow.find('input[name="check"]');
+        let $rowActionDropdown = $tableRow.find('[data-toggle="dropdown"');
+        let $defaultCurrencyLabel = $tableRow.find('[data-type="name"] div.ellipsis_inline');
 
         // Add the default currency class to the default currency row
         if ($defaultCurrencyLabel.length) {
@@ -75,6 +75,7 @@
 
         // remove actions
         if ($rowActionDropdown.length) {
+            $rowActionDropdown.closest('span.overflow-visible').css('justify-content', 'left').css('left', '0');
             $rowActionDropdown.remove();
         }
     }

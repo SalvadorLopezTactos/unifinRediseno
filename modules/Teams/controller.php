@@ -15,11 +15,10 @@ use Symfony\Component\Validator\Constraints as AssertBasic;
 
 class TeamsController extends SugarController {
 
-
 	public function action_DisplayInlineTeams(){
 		$this->view = 'ajax';
 		$body = '';
-		$primary_team_id = isset($_REQUEST['team_id']) ? $_REQUEST['team_id'] : '';
+        $primary_team_id = $_REQUEST['team_id'] ?? '';
 		$caption = '';
 		if(!empty($_REQUEST['team_set_id'])){
 			require_once('modules/Teams/TeamSetManager.php');

@@ -78,10 +78,7 @@ class SugarUpgradeOpportunityUpdateSalesStageFieldData extends UpgradeScript
             $this->db->quoted(Opportunity::STATUS_IN_PROGRESS)
         );
         $results = $this->db->query($sql);
-
-        //Retrieve the first option of the sales stage dom for default
-        reset($salesStageOptions);
-        $salesStageFirstOption = key($salesStageOptions);
+        $salesStageFirstOption = array_key_first($salesStageOptions);
 
         while ($row = $this->db->fetchRow($results)) {
             $opp = BeanFactory::getBean('Opportunities', $row['id']);

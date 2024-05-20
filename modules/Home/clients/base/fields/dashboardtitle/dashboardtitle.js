@@ -86,6 +86,9 @@
     toggleClicked: function(evt) {
         var self = this;
         if (!_.isEmpty(this.dashboards)) {
+            if (_.isFunction(self.view.adjustDropdownMenu)) {
+                self.view.adjustDropdownMenu();
+            }
             return;
         }
 
@@ -104,7 +107,11 @@
         self.dashboards = collection;
         var optionTemplate = app.template.getField(self.type, 'options', self.module);
         self.$('.dropdown-menu').html(optionTemplate(collection));
+        if (_.isFunction(self.view.adjustDropdownMenu)) {
+            self.view.adjustDropdownMenu();
+        }
     },
+
     /**
      * Handle the click from the UI
      * @param {Object} evt The jQuery Event Object

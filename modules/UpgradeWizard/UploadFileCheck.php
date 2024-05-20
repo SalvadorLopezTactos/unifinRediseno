@@ -21,7 +21,7 @@ require_once('include/JSON.php');
 require_once('include/upload_file.php');
 
 $json = getJSONobj();
-$file_name = $json->decode(html_entity_decode($_REQUEST['file_name']));
+$file_name = $json->decode(html_entity_decode($_REQUEST['file_name'], ENT_COMPAT));
  if(isset($file_name['jsonObject']) && $file_name['jsonObject'] != null){
 	$file_name = $file_name['jsonObject'];
   }

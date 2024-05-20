@@ -25,7 +25,6 @@ class SugarUpgradeAddCustomEmailTemplate extends UpgradeScript
             global $mod_strings;
 
             $templateData = array(
-                'AssignmentNotification' => 'assigned_notification_email',
                 'Meeting' => 'meeting_notification_email',
                 'Call' => 'call_notification_email',
                 '‌ReportSchedule' => 'scheduled_report_email',
@@ -44,6 +43,11 @@ class SugarUpgradeAddCustomEmailTemplate extends UpgradeScript
                 $emailTemp->published = 'off';
                 $emailTemp->type = 'system';
                 $emailTemp->text_only = 1;
+
+                if ($templateKey === '‌ReportSchedule') {
+                    $emailTemp->text_only = 0;
+                }
+
                 $id =$emailTemp->save();
                 $this->upgrader->config['emailTemplate'][$templateKey] = $id;
             }

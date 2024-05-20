@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logoer',
 	'LBL_ADMIN_WIZARD' => 'Administrator guide',
-	'LBL_ALLOW_USER_TABS' => 'Tillad, at brugere skjuler faner',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Systemindstillinger',
 	'LBL_ENABLE_MAILMERGE' => 'Vil du aktivere brevfletning?',
 	'LBL_LOGVIEW' => 'Konfigurer logindstillinger',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => '"Brug denne indstilling til at bestemme, hvor mange måneder før den aktuelle dato oplysninger om ledig/optaget i forbindelse med opkald og møder udgives.<BR>Du kan slå udgivelse af ledig/optaget fra ved at angive ""0"". Minimum er 1 måned. Maksimum er 12 måneder."',
     'LBL_PDFMODULE_NAME' => 'PDF-indstillinger',
     'SUGARPDF_BASIC_SETTINGS' => 'Dokumentegenskaber',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Avancerede indstillinger',
     'SUGARPDF_LOGO_SETTINGS' => 'Billeder',
-
-    'PDF_CREATOR' => 'PDF-opretter:',
-    'PDF_CREATOR_INFO' => 'Definerer opretteren af dokumentet. <br>Dette er typisk navnet på det program, der genererer PDF&#39;en.',
 
     'PDF_AUTHOR' => 'Forfatter',
     'PDF_AUTHOR_INFO' => 'Forfatteren vises i dokumentegenskaberne.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Vælg et nyt billede til tilbud',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Filformatet kan enten være .jpg eller .png. "kun .jpg til EZPDF"<BR>Den anbefalede størrelse er 867x74 px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Billedbredde til tilbud',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Skift skaleringen af det uploadede billede, der vises i PDF-dokumenter til tilbud. "kun TCPDF"',
+    'PDF_TITLE' => 'Titel',
+    'PDF_TITLE_INFO' => 'Titlen vises i dokumentegenskaberne.',
+
+    'PDF_SUBJECT' => 'Emne',
+    'PDF_SUBJECT_INFO' => 'Emnet vises i dokumentegenskaberne.',
 
     'PDF_SMALL_HEADER_LOGO' => 'PDF-dokumenter til rapporter',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Dette billede vises i standardhovedet i PDF-dokumenter til rapporter.<br> Dette billede vises også i øverste venstre hjørne af Sugar-programmet.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Vælg et nyt billede til rapporter',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Filformatet kan enten være .jpg eller .png. "kun .jpg til EZPDF"<BR>Den anbefalede størrelse er 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Billedbredde til rapporter',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Skift skaleringen af det uploadede billede, der vises i PDF-dokumenter til rapporter. "kun TCPDF"',
-
-
-    'PDF_HEADER_STRING' => 'Dokumenthovedstreng',
-    'PDF_HEADER_STRING_INFO' => 'Streng til beskrivelse af dokumenthoved',
-
-    'PDF_HEADER_TITLE' => 'Dokumenthovedtitel',
-    'PDF_HEADER_TITLE_INFO' => 'Streng til udskrivning som titel på dokumenthoved',
-
-    'PDF_FILENAME' => 'Standardfilnavn',
-    'PDF_FILENAME_INFO' => 'Standardfilnavn til de genererede PDF-filer',
-
-    'PDF_TITLE' => 'Titel',
-    'PDF_TITLE_INFO' => 'Titlen vises i dokumentegenskaberne.',
-
-    'PDF_SUBJECT' => 'Emne',
-    'PDF_SUBJECT_INFO' => 'Emnet vises i dokumentegenskaberne.',
-
     'PDF_KEYWORDS' => 'Nøgleord',
     'PDF_KEYWORDS_INFO' => '"Knyt nøgleord til dokumentet, normalt med formen ""nøgleord1 nøgleord2..."""',
 
-    'PDF_COMPRESSION' => 'Komprimering',
-    'PDF_COMPRESSION_INFO' => 'Aktiverer eller deaktiverer sidekomprimering. <br>Når dette felt er aktiveret, komprimeres den interne visning af hver side, hvilket giver en komprimeringsgrad på cirka 2 af det oprettede dokument.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG-kvalitet "1-100"',
-    'PDF_JPEG_QUALITY_INFO' => 'Angiv JPEG-komprimeringskvaliteten "1-100" som standard',
-
-    'PDF_PDF_VERSION' => 'PDF-version',
-    'PDF_PDF_VERSION_INFO' => 'Angiv PDF-versionen "kontrollér PDF-reference for gyldige værdier".',
-
-    'PDF_PROTECTION' => 'Dokumentbeskyttelse',
-    'PDF_PROTECTION_INFO' => 'Angiv dokumentbeskyttelse<br>- kopiér: kopiér tekst og billeder til Udklipsholder<br>- udskriv: udskriv dokumentet<br>- rediger: rediger det "bortset fra anmærkninger og formularer"<br>- anmærkninger og formularer: tilføj anmærkninger og formularer<br>Bemærk! Beskyttelsen mod ændringer er beregnet til brugere, der har det fulde Acrobat-produkt.',
-
-    'PDF_USER_PASSWORD' => 'Brugeradgangskode',
-    'PDF_USER_PASSWORD_INFO' => 'Hvis du ikke angiver en adgangskode, åbnes dokumentet som sædvanlig. <br>Hvis du angiver en brugeradgangskode, beder PDF-fremviseren om den, før dokumentet vises. <br>Masteradgangskoden kan bruges til at opnå fuld adgang, hvis den adskiller sig fra brugeradgangskoden.',
-
-    'PDF_OWNER_PASSWORD' => 'Ejeradgangskode',
-    'PDF_OWNER_PASSWORD_INFO' => 'Hvis du ikke angiver en adgangskode, åbnes dokumentet som sædvanlig. <br>Hvis du angiver en brugeradgangskode, beder PDF-fremviseren om den, før dokumentet vises. <br>Masteradgangskoden kan bruges til at opnå fuld adgang, hvis den adskiller sig fra brugeradgangskoden.',
-
-    'PDF_ACL_ACCESS' => 'Adgangskontrol',
-    'PDF_ACL_ACCESS_INFO' => 'Standardadgangskontrol til PDF-generering.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Cellehøjdeforhold',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Hvis højden på en celle er mindre end "Skrifthøjde x Cellehøjdeforhold", bruges "Skrifthøjde x Cellehøjdeforhold" som cellehøjde.<br>"Skrifthøjde x Cellehøjdeforhold" bruges også som højde på cellen, når der ikke er defineret en højde.',
-
-    'K_TITLE_MAGNIFICATION' => 'Titelforstørrelse',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Titelforstørrelse respekterer hovedskrifttypens størrelse.',
-
-    'K_SMALL_RATIO' => 'Lille skrifttype-faktor',
-    'K_SMALL_RATIO_INFO' => 'Reduktionsfaktor til lille skrifttype.',
-
-    'HEAD_MAGNIFICATION' => 'Dokumenthovedforstørrelse',
-    'HEAD_MAGNIFICATION_INFO' => 'Forstørrelsesfaktor til titler.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Billedskaleringsforhold',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Forhold, der bruges til at skalere billederne',
-
-    'PDF_UNIT' => 'Enhed',
-    'PDF_UNIT_INFO' => 'dokumentets måleenhed',
 	'PDF_GD_WARNING'=>'Du har ikke GD-biblioteket installeret til PHP. Hvis GD-biblioteket ikke er installeret, kan kun JPEG-logoer vises i PDF-dokumenter.',
     'ERR_EZPDF_DISABLE'=>'"Advarsel: EZPDF-klassen er deaktiveret i config-tabellen, og den er angivet som PDF-klasse. ""Gem"" denne formular for at angive TCPDF som PDF-klasse, og vend tilbage i stabil tilstand."',
     'LBL_IMG_RESIZED'=>"\"tilpasset til visning\"",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Tilføj en PDF-skrifttype',
     'LBL_PDF_PATCH' => 'Programrettelse',
-    'LBL_PDF_PATCH_INFO' => '"Brugerdefineret redigering af kodningen. Skriv en PHP-matrix.<br>Eksempel:<br>ISO-8859-1 indeholder ikke eurosymbolet. Hvis du vil tilføje det på position 164, skal du skrive ""array"164=>&#39;Euro&#39;"""."',
     'LBL_PDF_ENCODING_TABLE' => 'Kodningstabel',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Navn på kodningstabellen.<br>Denne indstilling ignoreres ved TrueType Unicode, OpenType Unicode og symbolske skrifttyper.<br>Kodningen definerer tilknytningen mellem en kode "fra 0 til 255" og et tegn i skrifttypen.<br>De første 128 er faste og svarer til ASCII.',
     'LBL_PDF_FONT_FILE' => 'Skrifttypefil',

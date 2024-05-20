@@ -561,32 +561,15 @@ $assigned_by_user 님이 전화에 초대하셨습니다
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => '할당 알림 이메일',
-        'subject' => 'SugarCRM - 할당된 $module_name ',
-        'description' => '이 템플릿은 시스템이 할당된 작업을 사용자에게 전송시 사용됩니다.',
-        'body' => '<div>
-<p>$assigned_by_user 님이 $module_name을(를) $assigned_user 님에게 할당했습니다.</p>
-
-<p>이 $module_name을(를) 확인할 수 있는 곳:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user 님이 $module_name을(를) $assigned_user 님에게 할당했습니다.
-
-이 $module_name을(를) 확인할 수 있는 곳:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => '보고서 일정 이메일',
         'subject' => '보고서 일정: $report_time의 report_name',
         'description' => '이 템플릿은 시스템이 보고서 일정을 사용자에게 전송시 사용됩니다.',
         'body' => '<div>
-<p>$assigned_user 님, 안녕하세요.</p>
-<p>첨부파일은 자동으로 생성된 보고서입니다.</p>
-<p>보고서 이름: $report_name</p>
-<p>보고서 실행 날짜 및 시간: $report_time</p>
+<p>$assigned_user 님, 안녕하세요.<br></p>
+<p>첨부파일은 자동으로 생성된 보고서입니다.<br></p>
+<p>보고서 이름: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>보고서 실행 날짜 및 시간: $report_time<br></p>
 </div>',
         'txt_body' =>
             '$assigned_user 님, 안녕하세요.
@@ -612,14 +595,6 @@ $assigned_by_user 님이 전화에 초대하셨습니다
                 Sugar에 로그인하여 코멘트를 확인하십시오.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => '새 계정 정보',
-        'description' => '이 템플릿은 시스템 관리자가 사용자에 새 비밀번호 전송시 사용됩니다.',
-        'body' => '귀하의 계정 사용자명과 임시 비밀번호입니다 : 사용자명 : $contact_user_user_name 비밀번호 : $contact_user_user_hash $config_site_url. 위 비밀번호로 로그인 후에 본인만의 비밀번호로 재설정하십시오.',
-        'txt_body' =>
-'귀하의 계정 사용자명과 임시 비밀번호입니다 : 사용자명 : $contact_user_user_name 비밀번호 : $contact_user_user_hash $config_site_url. 위 비밀번호로 로그인 후에 본인만의 비밀번호로 재설정하십시오.',
-        'name' => '자동 생성된 이메일 비밀번호',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => '귀하의 계정 비밀번호를 재설정하십시오.',
         'description' => "이 템플릿은 계정 비밀번호 재설정시 클릭할 링크를 사용자에게 전송할때 사용됩니다.",

@@ -16,14 +16,14 @@ class Param implements ArrayableInterface, \Countable
     /**
      * Params.
      *
-     * @var array
+     * @var array<string, mixed>|\stdClass
      */
     protected $_params = [];
 
     /**
      * Raw Params.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $_rawParams = [];
 
@@ -32,13 +32,13 @@ class Param implements ArrayableInterface, \Countable
      * the an array out of the class name (last part of the class name)
      * and the params.
      *
-     * @return array Filter array
+     * @return array<string, mixed> Filter array
      */
     public function toArray()
     {
         $data = [$this->_getBaseName() => $this->getParams()];
 
-        if (!empty($this->_rawParams)) {
+        if ($this->_rawParams) {
             $data = \array_merge($data, $this->_rawParams);
         }
 
@@ -84,9 +84,13 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return $this
      */
-    public function addParam($key, $value)
+    public function addParam($key, $value, ?string $subKey = null)
     {
-        $this->_params[$key][] = $value;
+        if (null !== $subKey) {
+            $this->_params[$key][$subKey] = $value;
+        } else {
+            $this->_params[$key][] = $value;
+        }
 
         return $this;
     }
@@ -96,7 +100,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @param string $key Key to return
      *
-     * @throws \Elastica\Exception\InvalidException If requested key is not set
+     * @throws InvalidException If requested key is not set
      *
      * @return mixed Key value
      */
@@ -136,6 +140,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return \count($this->_params);
@@ -172,7 +177,7 @@ class Param implements ArrayableInterface, \Countable
      */
     protected function _getBaseName()
     {
-        return Util::getParamName($this);
+        return Util::toSnakeCase((new \ReflectionClass($this))->getShortName());
     }
 
     /**

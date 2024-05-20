@@ -49,7 +49,7 @@ class RebuildCommand extends Command implements InstanceModeInterface
     {
         $command = Container::getInstance()->get(StateAwareRebuild::class);
         $ignoreUpToDate = $input->getOption('ignore-up-to-date');
-        list($status, $message) = $command($ignoreUpToDate);
+        [$status, $message] = $command($ignoreUpToDate);
         $output->writeln($message);
 
         return $status ? 0 : 1;

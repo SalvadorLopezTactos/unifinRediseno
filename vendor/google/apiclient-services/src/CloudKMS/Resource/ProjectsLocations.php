@@ -17,6 +17,8 @@
 
 namespace Google\Service\CloudKMS\Resource;
 
+use Google\Service\CloudKMS\GenerateRandomBytesRequest;
+use Google\Service\CloudKMS\GenerateRandomBytesResponse;
 use Google\Service\CloudKMS\ListLocationsResponse;
 use Google\Service\CloudKMS\Location;
 
@@ -30,6 +32,22 @@ use Google\Service\CloudKMS\Location;
  */
 class ProjectsLocations extends \Google\Service\Resource
 {
+  /**
+   * Generate random bytes using the Cloud KMS randomness source in the provided
+   * location. (locations.generateRandomBytes)
+   *
+   * @param string $location The project-specific location in which to generate
+   * random bytes. For example, "projects/my-project/locations/us-central1".
+   * @param GenerateRandomBytesRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return GenerateRandomBytesResponse
+   */
+  public function generateRandomBytes($location, GenerateRandomBytesRequest $postBody, $optParams = [])
+  {
+    $params = ['location' => $location, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('generateRandomBytes', [$params], GenerateRandomBytesResponse::class);
+  }
   /**
    * Gets information about a location. (locations.get)
    *
@@ -52,8 +70,8 @@ class ProjectsLocations extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string filter A filter to narrow down results to a preferred
-   * subset. The filtering language accepts strings like "displayName=tokyo", and
-   * is documented in more detail in [AIP-160](https://google.aip.dev/160).
+   * subset. The filtering language accepts strings like `"displayName=tokyo"`,
+   * and is documented in more detail in [AIP-160](https://google.aip.dev/160).
    * @opt_param int pageSize The maximum number of results to return. If not set,
    * the service selects a default.
    * @opt_param string pageToken A page token received from the `next_page_token`

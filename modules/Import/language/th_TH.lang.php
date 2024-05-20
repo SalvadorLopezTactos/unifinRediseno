@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'ไม่มีค่าที่ต้องระบุ',
     'LBL_ERROR_SYNC_USERS' => 'ค่าไม่ถูกต้องสำหรับซิงค์กับอีเมลไคลเอนต์: ',
     'LBL_ID_EXISTS_ALREADY' => 'มี ID ในตารางนี้แล้ว',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'มี SYNC_KEY อยู่แล้วในตารางนี้',
     'LBL_ASSIGNED_USER' => 'ถ้าไม่มีผู้ใช้นี้อยู่ ให้ใช้ผู้ใช้ปัจจุบัน',
     'LBL_SHOW_HIDDEN' => 'แสดงฟิลด์ที่ไม่สามารถนำเข้าได้ตามปกติ',
     'LBL_UPDATE_RECORDS' => 'อัปเดตระเบียนที่มีอยู่แทนการนำเข้า (ไม่สามารถยกเลิกได้)',

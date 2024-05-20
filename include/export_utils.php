@@ -199,7 +199,7 @@ function exportFromApi($args, $sample = false)
     }
     $records = $recordList['records'];
 
-    $members = isset($args['members']) ? $args['members'] : false;
+    $members = $args['members'] ?? false;
 
     //Array of fields that should not be exported, and are only used for logic
     $remove_from_members = array("ea_deleted", "ear_deleted", "primary_address");
@@ -455,11 +455,9 @@ function getExportContentFromResult(
     // set up labels to be used for the header row
     $field_labels = getExportHeaderLabels($focus, $fields_array, $members, $remove_from_members);
 
-    $user_agent = (isset($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
+    // we have to add the byte order marking even for mac now.
     // Bug 60377 - Mac Excel doesn't support UTF-8
-    if ($locale->getExportCharset() == 'UTF-8' &&
-        ! preg_match('/macintosh|mac os x|mac_powerpc/i', $user_agent)
-    ) {
+    if ($locale->getExportCharset() === 'UTF-8') {
         // Bug 55520 - add BOM to the exporting CSV so any symbols are displayed correctly in Excel
         $BOM = "\xEF\xBB\xBF";
         $content = $BOM;
@@ -555,7 +553,7 @@ function getExportContentFromResult(
 
                 // Keep as $key => $value for post-processing
                 $base_value = $value;
-                $new_arr[$key] = str_replace('"', '""', $value);
+                $new_arr[$key] = str_replace('"', '""', (string)$value);
 
                 // If this is an enum or multienum, export the display label as well
                 $display_label = getTranslatedFieldValue($focus, $key, $base_value, $val);
@@ -582,8 +580,7 @@ function getExportContentFromResult(
 
             $email_data = getNonPrimaryEmailsData($focus, $keys);
             foreach (array_keys($records) as $bean_id) {
-                $records[$bean_id]['email_addresses_non_primary'] = isset($email_data[$bean_id])
-                    ? $email_data[$bean_id] : '';
+                $records[$bean_id]['email_addresses_non_primary'] = $email_data[$bean_id] ?? '';
             }
         }
 
@@ -755,6 +752,8 @@ function serializeNonPrimaryEmails(array $emails)
 
 function generateSearchWhere($module, $query)
 {
+    $where = null;
+    $ret_array = [];
     // this function is similar to the function prepareSearchForm() in view.list.php
     $seed = BeanFactory::newBean($module);
     if (file_exists('modules/' . $module . '/SearchForm.html')) {
@@ -783,7 +782,7 @@ function generateSearchWhere($module, $query)
     }
     $searchForm->populateFromArray($query);
     $where_clauses = $searchForm->generateSearchWhere(true, $module);
-    if (count($where_clauses) > 0) {
+    if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
         $where = '(' . implode(' ) AND ( ', $where_clauses) . ')';
     }
         $GLOBALS['log']->info("Export Where Clause: {$where}");
@@ -873,53 +872,53 @@ function returnFakeDataRow($focus, $field_array, $rowsToReturn = 5)
                     break;
                 case "int":
                     // return random number`
-                    $returnContent .= '"' . mt_rand(0, 4) . '",';
+                    $returnContent .= '"' . random_int(0, 4) . '",';
                     break;
                 case "name":
                     // return first, last, user name, or random name string
                     if ($field['name'] == 'first_name') {
-                        $count = count($sugar_demodata['first_name_array']) - 1;
-                        $returnContent .= '"' . $sugar_demodata['last_name_array'][mt_rand(0, $count)] . '",';
+                        $count = (is_countable($sugar_demodata['first_name_array']) ? count($sugar_demodata['first_name_array']) : 0) - 1;
+                        $returnContent .= '"' . $sugar_demodata['last_name_array'][random_int(0, $count)] . '",';
                     } elseif ($field['name'] == 'last_name') {
-                        $count = count($sugar_demodata['last_name_array']) - 1;
-                        $returnContent .= '"' . $sugar_demodata['last_name_array'][mt_rand(0, $count)] . '",';
+                        $count = (is_countable($sugar_demodata['last_name_array']) ? count($sugar_demodata['last_name_array']) : 0) - 1;
+                        $returnContent .= '"' . $sugar_demodata['last_name_array'][random_int(0, $count)] . '",';
                     } elseif ($field['name'] == 'user_name') {
-                        $count = count($sugar_demodata['first_name_array']) - 1;
-                        $returnContent .= '"' . $sugar_demodata['last_name_array'][mt_rand(0, $count)] .
-                            '_' . mt_rand(1, 111) . '",';
+                        $count = (is_countable($sugar_demodata['first_name_array']) ? count($sugar_demodata['first_name_array']) : 0) - 1;
+                        $returnContent .= '"' . $sugar_demodata['last_name_array'][random_int(0, $count)] .
+                            '_' . random_int(1, 111) . '",';
                     } else {
                         // return based on bean
                         if ($focus->module_dir =='Accounts') {
-                            $count = count($sugar_demodata['company_name_array']) - 1;
-                            $returnContent .= '"'.$sugar_demodata['company_name_array'][mt_rand(0, $count)].'",';
+                            $count = (is_countable($sugar_demodata['company_name_array']) ? count($sugar_demodata['company_name_array']) : 0) - 1;
+                            $returnContent .= '"'.$sugar_demodata['company_name_array'][random_int(0, $count)].'",';
                         } elseif ($focus->module_dir =='Bugs') {
-                            $count = count($sugar_demodata['bug_seed_names']) - 1;
-                            $returnContent .= '"'.$sugar_demodata['bug_seed_names'][mt_rand(0, $count)].'",';
+                            $count = (is_countable($sugar_demodata['bug_seed_names']) ? count($sugar_demodata['bug_seed_names']) : 0) - 1;
+                            $returnContent .= '"'.$sugar_demodata['bug_seed_names'][random_int(0, $count)].'",';
                         } elseif ($focus->module_dir =='Notes') {
-                            $count = count($sugar_demodata['note_seed_names_and_Descriptions']) - 1;
+                            $count = (is_countable($sugar_demodata['note_seed_names_and_Descriptions']) ? count($sugar_demodata['note_seed_names_and_Descriptions']) : 0) - 1;
                             $returnContent .= '"' .
-                                $sugar_demodata['note_seed_names_and_Descriptions'][mt_rand(0, $count)] . '",';
+                                $sugar_demodata['note_seed_names_and_Descriptions'][random_int(0, $count)] . '",';
                         } elseif ($focus->module_dir =='Calls') {
-                            $count = count($sugar_demodata['call_seed_data_names']) - 1;
-                            $returnContent .= '"'.$sugar_demodata['call_seed_data_names'][mt_rand(0, $count)].'",';
+                            $count = (is_countable($sugar_demodata['call_seed_data_names']) ? count($sugar_demodata['call_seed_data_names']) : 0) - 1;
+                            $returnContent .= '"'.$sugar_demodata['call_seed_data_names'][random_int(0, $count)].'",';
                         } elseif ($focus->module_dir =='Tasks') {
-                            $count = count($sugar_demodata['task_seed_data_names']) - 1;
-                            $returnContent .= '"'.$sugar_demodata['task_seed_data_names'][mt_rand(0, $count)].'",';
+                            $count = (is_countable($sugar_demodata['task_seed_data_names']) ? count($sugar_demodata['task_seed_data_names']) : 0) - 1;
+                            $returnContent .= '"'.$sugar_demodata['task_seed_data_names'][random_int(0, $count)].'",';
                         } elseif ($focus->module_dir =='Meetings') {
-                            $count = count($sugar_demodata['meeting_seed_data_names']) - 1;
-                            $returnContent .= '"'.$sugar_demodata['meeting_seed_data_names'][mt_rand(0, $count)].'",';
+                            $count = (is_countable($sugar_demodata['meeting_seed_data_names']) ? count($sugar_demodata['meeting_seed_data_names']) : 0) - 1;
+                            $returnContent .= '"'.$sugar_demodata['meeting_seed_data_names'][random_int(0, $count)].'",';
                         } elseif ($focus->module_dir =='ProductCategories') {
-                            $count = count($sugar_demodata['productcategory_seed_data_names']) - 1;
+                            $count = (is_countable($sugar_demodata['productcategory_seed_data_names']) ? count($sugar_demodata['productcategory_seed_data_names']) : 0) - 1;
                             $returnContent .=
-                                '"' . $sugar_demodata['productcategory_seed_data_names'][mt_rand(0, $count)] . '",';
+                                '"' . $sugar_demodata['productcategory_seed_data_names'][random_int(0, $count)] . '",';
                         } elseif ($focus->module_dir =='ProductTypes') {
-                            $count = count($sugar_demodata['producttype_seed_data_names']) - 1;
+                            $count = (is_countable($sugar_demodata['producttype_seed_data_names']) ? count($sugar_demodata['producttype_seed_data_names']) : 0) - 1;
                             $returnContent .=
-                                '"' . $sugar_demodata['producttype_seed_data_names'][mt_rand(0, $count)] . '",';
+                                '"' . $sugar_demodata['producttype_seed_data_names'][random_int(0, $count)] . '",';
                         } elseif ($focus->module_dir =='ProductTemplates') {
-                            $count = count($sugar_demodata['producttemplate_seed_data']) - 1;
+                            $count = (is_countable($sugar_demodata['producttemplate_seed_data']) ? count($sugar_demodata['producttemplate_seed_data']) : 0) - 1;
                             $returnContent .=
-                                '"' . $sugar_demodata['producttemplate_seed_data'][mt_rand(0, $count)] . '",';
+                                '"' . $sugar_demodata['producttemplate_seed_data'][random_int(0, $count)] . '",';
                         } else {
                             $returnContent .= '"Default Name for '.$focus->module_dir.'",';
                         }
@@ -928,10 +927,10 @@ function returnFakeDataRow($focus, $field_array, $rowsToReturn = 5)
                 case "relate":
                     if ($field['name'] == 'team_name') {
                         // apply team names and user_name
-                        $teams_count = count($sugar_demodata['teams']) - 1;
-                        $users_count = count($sugar_demodata['users']) - 1;
-                        $returnContent .= '"' . $sugar_demodata['teams'][mt_rand(0, $teams_count)]['name'] . ',' .
-                        $sugar_demodata['users'][mt_rand(0, $users_count)]['user_name'] . '",';
+                        $teams_count = (is_countable($sugar_demodata['teams']) ? count($sugar_demodata['teams']) : 0) - 1;
+                        $users_count = (is_countable($sugar_demodata['users']) ? count($sugar_demodata['users']) : 0) - 1;
+                        $returnContent .= '"' . $sugar_demodata['teams'][random_int(0, $teams_count)]['name'] . ',' .
+                        $sugar_demodata['users'][random_int(0, $users_count)]['user_name'] . '",';
                     } else {
                         // apply GUID
                         $returnContent .= '"' . create_guid() . '",';
@@ -939,7 +938,7 @@ function returnFakeDataRow($focus, $field_array, $rowsToReturn = 5)
                     break;
                 case "bool":
                     // return 0 or 1
-                    $returnContent .= '"' . mt_rand(0, 1) . '",';
+                    $returnContent .= '"' . random_int(0, 1) . '",';
                     break;
                 case "text":
                     // return random text
@@ -948,9 +947,9 @@ function returnFakeDataRow($focus, $field_array, $rowsToReturn = 5)
                         ' malesuada libero, sit amet commodo magna eros quis urna",';
                     break;
                 case "team_list":
-                    $teams_count = count($sugar_demodata['teams']) - 1;
+                    $teams_count = (is_countable($sugar_demodata['teams']) ? count($sugar_demodata['teams']) : 0) - 1;
                     // give fake team names (East,West,North,South)
-                    $returnContent .= '"' . $sugar_demodata['teams'][mt_rand(0, $teams_count)]['name'] . '",';
+                    $returnContent .= '"' . $sugar_demodata['teams'][random_int(0, $teams_count)]['name'] . '",';
                     break;
                 case "date":
                     // return formatted date
@@ -971,36 +970,36 @@ function returnFakeDataRow($focus, $field_array, $rowsToReturn = 5)
                     $returnContent .= '"' . $value . '",';
                     break;
                 case "phone":
-                    $value = '(' . mt_rand(300, 999) . ') ' . mt_rand(300, 999) . '-' . mt_rand(1000, 9999);
+                    $value = '(' . random_int(300, 999) . ') ' . random_int(300, 999) . '-' . random_int(1000, 9999);
                     $returnContent .= '"' . $value . '",';
                     break;
                 case "varchar":
                     // process varchar for possible values
                     if ($field['name'] == 'first_name') {
-                        $count = count($sugar_demodata['first_name_array']) - 1;
-                        $returnContent .= '"'.$sugar_demodata['last_name_array'][mt_rand(0, $count)].'",';
+                        $count = (is_countable($sugar_demodata['first_name_array']) ? count($sugar_demodata['first_name_array']) : 0) - 1;
+                        $returnContent .= '"'.$sugar_demodata['last_name_array'][random_int(0, $count)].'",';
                     } elseif ($field['name'] == 'last_name') {
-                        $count = count($sugar_demodata['last_name_array']) - 1;
-                        $returnContent .= '"'.$sugar_demodata['last_name_array'][mt_rand(0, $count)].'",';
+                        $count = (is_countable($sugar_demodata['last_name_array']) ? count($sugar_demodata['last_name_array']) : 0) - 1;
+                        $returnContent .= '"'.$sugar_demodata['last_name_array'][random_int(0, $count)].'",';
                     } elseif ($field['name'] == 'user_name') {
-                        $count = count($sugar_demodata['first_name_array']) - 1;
+                        $count = (is_countable($sugar_demodata['first_name_array']) ? count($sugar_demodata['first_name_array']) : 0) - 1;
                         $returnContent .=
-                            '"'.$sugar_demodata['last_name_array'][mt_rand(0, $count)] . '_' . mt_rand(1, 111) . '",';
+                            '"'.$sugar_demodata['last_name_array'][random_int(0, $count)] . '_' . random_int(1, 111) . '",';
                     } elseif ($field['name'] == 'title') {
-                        $count = count($sugar_demodata['titles']) - 1;
-                        $returnContent .= '"'.$sugar_demodata['titles'][mt_rand(0, $count)].'",';
+                        $count = (is_countable($sugar_demodata['titles']) ? count($sugar_demodata['titles']) : 0) - 1;
+                        $returnContent .= '"'.$sugar_demodata['titles'][random_int(0, $count)].'",';
                     } elseif (strpos($field['name'], 'address_street') > 0) {
-                        $count = count($sugar_demodata['street_address_array']) - 1;
-                        $returnContent .= '"'.$sugar_demodata['street_address_array'][mt_rand(0, $count)].'",';
+                        $count = (is_countable($sugar_demodata['street_address_array']) ? count($sugar_demodata['street_address_array']) : 0) - 1;
+                        $returnContent .= '"'.$sugar_demodata['street_address_array'][random_int(0, $count)].'",';
                     } elseif (strpos($field['name'], 'address_city') > 0) {
-                        $count = count($sugar_demodata['city_array']) - 1;
-                        $returnContent .= '"'.$sugar_demodata['city_array'][mt_rand(0, $count)].'",';
+                        $count = (is_countable($sugar_demodata['city_array']) ? count($sugar_demodata['city_array']) : 0) - 1;
+                        $returnContent .= '"'.$sugar_demodata['city_array'][random_int(0, $count)].'",';
                     } elseif (strpos($field['name'], 'address_state') > 0) {
                         $state_arr = array('CA', 'NY', 'CO', 'TX', 'NV');
                         $count = count($state_arr) - 1;
-                        $returnContent .= '"'.$state_arr[mt_rand(0, $count)].'",';
+                        $returnContent .= '"'.$state_arr[random_int(0, $count)].'",';
                     } elseif (strpos($field['name'], 'address_postalcode') > 0) {
-                        $returnContent .= '"'.mt_rand(12345, 99999).'",';
+                        $returnContent .= '"'.random_int(12345, 99999).'",';
                     } else {
                         $returnContent .= '"",';
                     }
@@ -1024,7 +1023,7 @@ function returnFakeDataRow($focus, $field_array, $rowsToReturn = 5)
                             $count = count($dd_values) - 1;
 
                             // choose one at random
-                            $returnContent .= '"' . $dd_values[mt_rand(0, $count)] . '",';
+                            $returnContent .= '"' . $dd_values[random_int(0, $count)] . '",';
                         } else {
                             // name of enum options array was found but is empty, return blank
                             $returnContent .= '"",';
@@ -1109,6 +1108,7 @@ function translateForExport($field_db_name, $focus)
 */
 function get_field_order_mapping($name = '', $reorderArr = '', $exclude = true, $passed_fields_to_exclude = array())
 {
+    $field_to_exclude = [];
     // define the ordering of fields, note that the key value is what is important, and should be the db field name
     $field_order_array = array();
     $field_order_array['accounts'] = array( 'name'=>'Name', 'id'=>'ID', 'website'=>'Website',
@@ -1184,7 +1184,7 @@ function get_field_order_mapping($name = '', $reorderArr = '', $exclude = true, 
 
     $field_order_array['notes'] = array('name' => 'Name', 'id'=>'ID', 'description' => 'Description',
         'filename' => 'Attachment', 'parent_type' => 'Parent Type', 'parent_id' => 'Parent ID',
-        'contact_id' => 'Contact ID', 'portal_flag' => 'Display in Portal?', 'assigned_user_name' =>'Assigned to',
+        'contact_id' => 'Contact ID', 'portal_flag' => 'Available Externally', 'assigned_user_name' =>'Assigned to',
         'assigned_user_id' => 'assigned_user_id', 'team_id' => 'Team id', 'team_set_id' => 'Team Set ID',
         'date_entered' => 'Date Created', 'date_modified' => 'Date Modified',  'created_by_name' => 'Created By Name',
         'created_by' => 'Created By ID', 'modified_by_name' => 'Modified By User Name',
@@ -1457,7 +1457,7 @@ function get_field_order_mapping2($name, $reorderArr = '', $exclude = true, $for
 
     $field_order_array['notes'] = array('name' => 'Name', 'id'=>'ID', 'description' => 'Description',
         'filename' => 'Attachment', 'parent_type' => 'Parent Type', 'parent_id' => 'Parent ID',
-        'contact_id' => 'Contact ID', 'portal_flag' => 'Display in Portal?', 'assigned_user_name' =>'Assigned to',
+        'contact_id' => 'Contact ID', 'portal_flag' => 'Available Externally', 'assigned_user_name' =>'Assigned to',
         'assigned_user_id' => 'assigned_user_id', 'team_id' => 'Team id', 'team_set_id' => 'Team Set ID',
         'date_entered' => 'Date Created', 'date_modified' => 'Date Modified',  'created_by_name' => 'Created By Name',
         'created_by' => 'Created By ID', 'modified_by_name' => 'Modified By User Name',

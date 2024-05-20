@@ -48,17 +48,19 @@
                     });
                 }
             },
-            // This will be removed once we move Reports record view into sidecar
-            // For now, let's just catch all the edge cases that link to sidecar record view
-            // and reroute them
             {
-                name: 'ReportsRecord',
-                route: 'Reports/:id(/:action)',
-                callback: function(id, action) {
-                    var route = app.bwc.buildRoute('Reports', id);
-                    app.router.redirect(route);
+                name: 'ReportsBwc',
+                route: 'Reports/:id/bwc',
+                callback: function(id) {
+                    app.router.navigate(
+                        `#bwc/index.php?module=Reports&action=DetailView&record=${id}&legacyBwc=1`,
+                        {
+                            trigger: true,
+                            replace: true
+                        }
+                    );
                 }
-            }
+            },
         ];
 
         app.router.addRoutes(routes);

@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashbord for muligheterliste',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashbord for muligheteroppføring',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Mulighetsdetaljer',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Muligheter fokusskuff - Konsoll',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Muligheter fokusskuff',
     'LBL_RENEWAL_OPPORTUNITY' => 'Fornyelsesmulighet',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Forpliktet',
     'LBL_FORECAST' => 'Inkluder i prognose',
     'LBL_COMMIT_STAGE' => 'Forpliktet stadie',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Prognose',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Prognosestadie',
     'LBL_WORKSHEET' => 'Regneark',
     'LBL_PURCHASED_LINE_ITEMS' => 'Kjøpte linjeelementer',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiser',
+    'LBL_CREATE_NEW' => 'Opprett ny',
+    'LBL_MANAGE' => 'Administrer',
+    'LBL_SEE_DETAILS' => 'Vis detaljer',
+    'LBL_HIDE_NEW' => 'Skjul',
+
     'LBL_FORECASTED_LIKELY' => 'Sannsynlig prognose',
+    'LBL_LOST' => 'Tapt',
     'LBL_RENEWAL' => 'Fornyelse',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Fornyelsesmuligheter',
     'LBL_RENEWAL_PARENT' => 'Overordnet mulighet',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Salgsmulighetens rolle',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notater',
+    'LBL_TAB_OPPORTUNITY' => '{{module}} Gjennomgang',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Ved å klikke på Bekreft , vil du bli slettet alle prognoser data og endre Salgsmuliheter. Hvis dette er ikke hva du mente , trykk Avbryt for å gå tilbake til tidligere innstillinger .',
@@ -211,25 +220,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Etter du starte denne endringen , vil Revenue linjeelement poster opprettes for hver eksisterende { { module_name } } i bakgrunnen . Når Revenue Linjeelementer er komplett og tilgjengelig, vil en melding bli sendt til e-postadressen på din brukerprofil. Vær oppmerksom på at forekomsten må konfigureres til å sende e-post via Admin > E-postinnstillinger for at varsling skal sendes.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulen {{plural_module_name}} lar deg spore individuelle salg fra start til slutt. Hver {{module_name}} post representerer et potensielt salg og inkluderer relevante salgsdata samt relatert til andre viktige poster som {{quotes_module}}, {{contacts_module}}, osv. Et {{module_name}} vil normalt gå gjennom flere salgsfaser til det merkes enten "Lukket vunnet" eller "Lukket tapt". {{plural_module_name}} kan påvirkes ytterligere ved å bruke Sugars {{forecasts_singular_module}}-modul for å forstå og forutsi salgstrender samt fokusere arbeidet for å oppnå salgskvoter.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}-modulen lar deg spore individuelt salg fra start til slutt. Hver {{module_name}}-oppføringen representerer et potensielt salg og inkluderer relevante salgsdata samt knyttet til andre viktige poster som {{quotes_module}}, {{contacts_module}}osv. En {{module_name}} vil vanligvis gå gjennom flere salgsfaser til den er merket enten "Closed Won" eller "Closed Lost". {{plural_module_name}} kan utnyttes ytterligere ved å bruke Sugars {{forecasts_singular_module}}-modul for å forstå og forutsi salgstrender samt fokusere arbeidet med å oppnå salgskvoter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulen {{plural_module_name}} lar deg spore individuelt salg og ordrelinjene som tilhører salget fra start til slutt. Hvert {{module_name}}-innlegg representerer et potensielt salg og inkluderer relevante salgsdata samt relaterte til andre viktige innlegg som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_RECORD' => '{{plural_module_name}}-modulen lar deg spore individuelle salg og linjeelementene som tilhører disse salgene fra start til slutt. Hver {{module_name}}-oppføring representerer et potensielt salg og inneholder relevante salgsdata samt relatert til andre viktige oppføringer som {{quotes_module}}, {{contacts_module}} osv.
 
-- Rediger feltene til dette innlegget ved å klikke på et enkelt felt eller på Rediger-knappen.
-- Vis eller modifiser lenker til andre poster i underpanelene ved å bytte nederste venstre rute til "Datavisning".
-- Lag og se brukerkommentarer og registrer endringslogg i {{activitystream_singular_module}} ved å vende den nederste venstre ruten til "Aktivitetsstrøm".
-- Følg eller favoritt dette innlegget ved hjelp av ikonene til høyre for innleggsnavnet.
-- Ytterligere handlinger er tilgjengelige i nedtrekksmenyen Handlinger til høyre for Rediger-knappen.',
+- Rediger feltene for denne posten ved å klikke et enkeltfelt eller Rediger-knappen.
+- Vis eller endre koblinger til andre poster i underpanelene ved å bytte ruten nederst til venstre til "Datavisning".
+- Lag og vis brukerkommentarer og registrer endringshistorikk i {{activitystream_singular_module}} ved å bytte nederste venstre rute til "Aktivitetsstrøm".
+- Følg eller favoritt denne oppføringen ved hjelp av ikonene til høyre for oppføringsnavnet.
+- Flere handlinger er tilgjengelige i rullegardinmenyen Handlinger til høyre for Rediger-knappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulen {{plural_module_name}} lar deg spore individuelt salg og ordrelinjene som tilhører salget fra start til slutt. Hverr {{module_name}}-innlegg representerer et potensielt salg og inkluderer relevante salgsdata samt relaterte til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_CREATE' => '{{plural_module_name}}-modulen lar deg spore individuelle salg og linjeelementene som tilhører disse salgene fra start til slutt. Hver {{module_name}}-oppføring representerer et potensielt salg og inkluderer relevante salgsdata samt knyttet til andre viktige oppføringer som {{quotes_module}}, {{contacts_module}}, etc.
 
-Slik oppretter du en {{module_name}}:
-1. Gi verdier for feltene etter ønske.
- - Felt merket "Påkrevd" må fylles ut før lagring.
- - Klikk "Vis mer" for å eksponere flere felt om nødvendig.
-2. Klikk "Lagre" for å fullføre den nye posten og gå tilbake til forrige side.',
+For å opprette en {{module_name}}:
+1. Angi verdier for feltene etter behov.
+ - Felt merket "Obligatorisk" må fylles ut før lagring.
+ - Klikk på "Vis mer" for å vise flere felt om nødvendig.
+2. Klikk på "Lagre" for å fullføre den nye oppføringen og gå tilbake til forrige side.',
 
 // END ENT/ULT
 

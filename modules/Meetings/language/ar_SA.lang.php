@@ -222,4 +222,10 @@ $mod_strings = array (
 - انقر فوق "تحديد الحضور" لإضافة مستخدم أو جهة اتصال أو عميل محتمل موجود إلى {{meetings_singular_module}}.
 - انقر فوق أيقونة علامة الزائد إلى اليمين من "تحديد الحضور" لإنشاء أحد الحاضرين {{meetings_singular_module}} كسجل جديد في Sugar.
 3. انقر فوق "حفظ" لإنهاء السجل الجديد وللعودة إلى الصفحة السابقة.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'هو اجتماع دليل ذكي',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'المهام الفرعية',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'المكالمات الفرعية',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'الاجتماعات الفرعية',
 );

@@ -16,6 +16,10 @@
  * @extends View.View
  */
 ({
+    plugins: [
+        'ErrorDecoration',
+    ],
+
     className: 'omni-detail',
 
     events: {
@@ -104,7 +108,7 @@
      * @inheritdoc
      */
     initialize: function(options) {
-        options.model = app.data.createBean();
+        options.model = app.data.createBean('Calls');
         this._super('initialize', [options]);
 
         this.updateMetadata();
@@ -157,7 +161,9 @@
 
         // enable/disable all fields in the summary panel
         _.each(this.fields, field => {
-            field.setMode(enableFields ? 'edit' : 'disabled');
+            if (field.$el) {
+                field.setMode(enableFields ? 'edit' : 'disabled');
+            }
         }, this);
     },
 

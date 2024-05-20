@@ -104,6 +104,22 @@ class SugarLicensing
 
         curl_setopt($this->_curl, CURLOPT_CONNECTTIMEOUT, $timeout);
 
+        // proxy settings
+        $proxy_config = Administration::getSettings('proxy');
+        if (!empty($proxy_config)
+            && !empty($proxy_config->settings['proxy_on'])
+            && $proxy_config->settings['proxy_on'] == 1) {
+            curl_setopt($this->_curl, CURLOPT_PROXY, $proxy_config->settings['proxy_host']);
+            curl_setopt($this->_curl, CURLOPT_PROXYPORT, $proxy_config->settings['proxy_port']);
+            if (!empty($proxy_config->settings['proxy_auth'])) {
+                curl_setopt(
+                    $this->_curl,
+                    CURLOPT_PROXYUSERPWD,
+                    $proxy_config->settings['proxy_username'] . ':' . $proxy_config->settings['proxy_password']
+                );
+            }
+        }
+
         if (!empty($payload)) {
             if (is_array($payload)) {
                 $payload = json_encode($payload);

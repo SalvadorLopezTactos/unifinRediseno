@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Brukerinformasjon ikke funnet',
     'ERR_USER_NAME_EXISTS'              => 'Brukernavnet {0} finnes allerede. Dubpliserte brukernavn er ikke tillatt. Endre brukernavnet slik at det blir unikt.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => '"Sugar Hint"-lisens må lagres med ekstra kompatibel lisenstype',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Denne muligheten er allerede inkludert I Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Denne brukeren er stengt ute av Sugar og kan ikke logge inn med sitt eksisterende passord.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Kun ekstern auth-bruker har ikke tillatelse til å logge på med Sugar-legitimasjon',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Passord:',
     'LBL_CHOOSE_A_KEY'					=> 'Velg en tast for å forhindre andre fra å se din kalender',
     'LBL_NO_KEY'                        => 'Nøkkel er ikke satt. Vennligst angi nøkkelen for å aktivere publisering.',
-	'LBL_CHOOSE_WHICH'					=> 'Velg hvilke etiketter som er synlige',
+    'LBL_CHOOSE_WHICH'                  => 'Velg hvilke etiketter som er synlige i sidenavigasjonsfeltet. Angi rekkefølgen du vil at modulene skal vises.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Antall festede moduler',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Skriv antall tilgjengelige moduler å feste når navigasjonsfeltet er skjult (f.eks. hvis 5 skrives, festes de første fem modulene i listen din). Vi anbefaler et nummer som representerer de oftest brukte modulene dine. Verdier over 100 vil ikke bli respektert.',
 	'LBL_CITY'							=> 'By',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Slett',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP-brukernavn',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP-servertype:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP server spesifikasjon',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Autorisert e-postkonto',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Velg din e-postleverandør',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! e-post passord',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! e-post ID:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'brukere/team/roller',
     'LBL_LOADING_ITEMS' => 'Laster data...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Tilgang til Smart Guide',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Smart Guide sist aktiv',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Manglende tilgang til Smart Guide',
 ); // END STRINGS DEFS

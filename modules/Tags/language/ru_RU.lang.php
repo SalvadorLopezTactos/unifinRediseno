@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Информационная панель записей тегов',
     'LBL_MY_TAGS' => 'Мои теги',
     'LBL_MY_FAVORITE_TAGS' => 'Мои избранные теги',
+    'LBL_MORE_TAGS' => 'Число тегов: {{tagsNumber}}',
 );

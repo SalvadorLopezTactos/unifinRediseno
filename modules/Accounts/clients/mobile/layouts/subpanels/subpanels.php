@@ -10,105 +10,105 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['Accounts']['mobile']['layout']['subpanels'] = array(
-    'components' => array(
-        array(
+    'components' => [
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CALLS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'calls',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_MEETINGS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'meetings',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_TASKS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'tasks',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_NOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'notes',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_MEMBER_ORG_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'members',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_EMAILS_SUBPANEL_TITLE',
             'linkable' => false,
             'unlinkable' => false,
-            'context' => array(
+            'context' => [
                 'link' => 'archived_emails',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CONTACTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'contacts',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_OPPORTUNITIES_SUBPANEL_TITLE',
             'linkable' => false,
-            'context' => array(
+            'context' => [
                 'link' => 'opportunities',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_LEADS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'leads',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_CASES_SUBPANEL_TITLE',
             'linkable' => false,
-            'context' => array(
+            'context' => [
                 'link' => 'cases',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_RLI_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'revenuelineitems',
-            ),
+            ],
             'linkable' => false,
             'creatable' => false,
             'unlinkable' => false,
-        ),
-        array (
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_PRODUCTS_SUBPANEL_TITLE',
-            'context' => array (
+            'context' => [
                 'link' => 'products',
-            ),
-        ),
-        array(
+            ],
+        ],
+        [
             'layout' => 'subpanel',
             'label' => 'LBL_DOCUMENTS_SUBPANEL_TITLE',
-            'context' => array(
+            'context' => [
                 'link' => 'documents',
-            ),
-        ),
+            ],
+        ],
         [
             'layout' => 'subpanel',
             'label' => 'LBL_QUOTES_BILLTO',
@@ -124,6 +124,14 @@ $viewdefs['Accounts']['mobile']['layout']['subpanels'] = array(
                 'link' => 'quotes_shipto',
             ],
             'linkable' => false,
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
+            'override_subpanel_list_view' => 'subpanel-for-accounts',
+            'context' => [
+                'link' => 'contracts',
+            ],
         ],
         [
             'layout' => 'subpanel',
@@ -155,5 +163,5 @@ $viewdefs['Accounts']['mobile']['layout']['subpanels'] = array(
                 'link' => 'accounts_escalations',
             ],
         ],
-    ),
+    ],
 );

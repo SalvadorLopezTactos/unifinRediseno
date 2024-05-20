@@ -12,6 +12,7 @@
 
 class tracker_monitor extends Monitor
 {
+    public $visible;
     /**
      * save
      * This method retrieves the Store instances associated with monitor and calls

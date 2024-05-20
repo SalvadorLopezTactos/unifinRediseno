@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'URL sistema za praćenje:',
   'LBL_TRACKER_TEXT' => 'Tekst linka sistema za praćenje:',
   'LBL_TRACKER_COUNT' => 'Broj sistema za praćenje:',
-  'LBL_REFER_URL' => 'URL za redirekciju sistema za praćenje:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kampanje',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Email Kampanje',
   'LBL_NEW_FORM_TITLE' => 'Nova Kampanja',

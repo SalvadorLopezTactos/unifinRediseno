@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Sukūrė',
   'LBL_EDIT_LAYOUT' => 'Redaguoti išdėstymą' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Administrators Only',
-  'LBL_CURRENCY_DEFAULT' => 'JAV doleriai (numatytasis)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Sistemos valiuta (numatytoji)',
 );
 ?>

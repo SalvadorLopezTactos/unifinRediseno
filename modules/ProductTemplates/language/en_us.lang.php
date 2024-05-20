@@ -119,6 +119,6 @@ $mod_strings = array (
   'LBL_LOCK_DURATION' => 'Lock Duration',
     'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Product Catalog List Dashboard',
     'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Product Catalog Record Dashboard',
-    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Product Catalog Focus Drawer',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Product Catalog Focus Dashboard',
     'LBL_FILTER_ACTIVE_STATUS' => 'Status is Active',
 );

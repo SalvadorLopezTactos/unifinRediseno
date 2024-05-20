@@ -817,15 +817,12 @@ If Opportunities is included, Accounts must either be required or removed from t
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Създайте формула, за да определите дали това поле е задължително в оформления.<br/>"
-    . "Задължителните полета ще бъдат след формулата в мобилния изглед, базиран на браузър,<br/>"
-    . "но няма да бъдат след формулата в основните приложения като Sugar Mobile за iPhone. <br/>"
-    . "Те няма да бъдат след формулата в портала за самообслужване на Sugar.",
+    'LBL_POPHELP_REQUIRED'=>'Полета, които се изискват условно, не са налични за използване в следните типове действия на SugarBPM: Добавяне на свързан запис, Промяна на поле. Моля, премахнете текста "Изисква се, ако", за да използвате това поле при тези действия за дефиниране на процеса',
 'LBL_POPHELP_READONLY'=>"Създайте формула, за да определите дали това поле е само за четене в оформления.<br/>"
         . "Полетата само за четене ще бъдат след формулата в мобилния изглед, базиран на браузър,<br/>"
         . "но няма да бъдат след формулата в основните приложения като Sugar Mobile за iPhone. <br/>"
         . "Те няма да бъдат след формулата в портала за самообслужване на Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Изберете да използвате това поле, когато търсите записи с помощта на „Глобално търсене" в този модул.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Изберете да използвате това поле, когато търсите записи с помощта на Global Search в този модул.',
 //Revert Module labels
 'LBL_RESET' => 'Изпълни',
 'LBL_RESET_MODULE' => 'Първоначални настройки',
@@ -862,6 +859,7 @@ If Opportunities is included, Accounts must either be required or removed from t
                 'decimal'=>'Десетично число',
                 'autoincrement' => 'Автоматично нарастване',
                 'actionbutton' => 'ActionButton',
+                'geocodestatus' => 'Статус на Geocode',
 ),
 'labelTypes' => array(
     "" => "Често използвани етикети",

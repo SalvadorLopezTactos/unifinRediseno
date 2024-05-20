@@ -1,7 +1,7 @@
 {
     "name": "symfony/expression-language",
     "type": "library",
-    "description": "Symfony ExpressionLanguage Component",
+    "description": "Provides an engine that can compile and evaluate expressions",
     "keywords": [],
     "homepage": "https://symfony.com",
     "license": "MIT",
@@ -16,9 +16,9 @@
         }
     ],
     "require": {
-        "php": "^5.5.9|>=7.0.8",
-        "symfony/cache": "~3.1|~4.0",
-        "symfony/polyfill-php70": "~1.6"
+        "php": ">=7.2.5",
+        "symfony/cache": "^4.4|^5.0|^6.0",
+        "symfony/service-contracts": "^1.1|^2|^3"
     },
     "autoload": {
         "psr-4": { "Symfony\\Component\\ExpressionLanguage\\": "" },
@@ -26,10 +26,5 @@
             "/Tests/"
         ]
     },
-    "minimum-stability": "dev",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.4-dev"
-        }
-    }
+    "minimum-stability": "dev"
 }

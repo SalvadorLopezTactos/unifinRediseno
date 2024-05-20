@@ -92,6 +92,7 @@ $mod_strings = array (
     'ERR_UW_PACKAGE_NEWER_VERSION_EXISTS'       => 'קיימת גרסה עדכנית יותר של החבילה: {0}. יש להסיר את הגרסה הנוכחית לפני העלאת גרסה חדשה.',
     'ERR_UW_PACKAGE_ALREADY_INSTALLED'          => 'החבילה כבר מותקנת.',
     'ERR_UW_PACKAGE_NOT_INSTALLED'              => 'החבילה אינה מותקנת.',
+    'ERR_UW_PACKAGE_INSTALLED_WITH_ERROR'       => 'שגיאה בעת התקנת החבילה. השינויים נשארים במקומם',
     'ERR_UW_PACKAGE_IS_UNINSTALLABLE'           => 'החבילה אינה ניתנת להתקנה ולכן לא ניתן לבטל את ההתקנה שלה.',
     'ERR_UW_PACKAGE_ALREADY_ENABLED'            => 'החבילה כבר מופעלת.',
     'ERR_UW_PACKAGE_ALREADY_DISABLED'           => 'החבילה כבר מושבתת.',
@@ -130,7 +131,12 @@ $mod_strings = array (
     'LBL_ADMIN_WIZARD' => 'קבע בקלות את תצורת מערכת SugarCRM שברשותך',
     'LBL_ADMINISTRATION_HOME_TITLE' => 'מערכת',
     'LBL_ADMINISTRATION_HOME_DESC' =>'קבע את תצורת הגדרות כלל המערכת בהתאם למפרטים של הארגון שלך. משתמשים יכולים לעקוף חלק מההגדרות ברירת מחדל המקומיות בתוך דף הגדרות המשתמש שלהם.',
-    'LBL_ALLOW_USER_TABS' => 'Allow users to hide tabs',
+    'LBL_ALLOW_USERS_PINNED_MODULES' => 'אפשר למשתמשים להגדיר את מספר המודולים המוצמדים',
+    'LBL_ALLOW_USERS_AVAILABLE_MODULES' => 'אפשר למשתמשים לבחור מבין מודולים זמינים',
+    'LBL_NUMBER_PINNED_MODULES' => 'מספר המודולים המוצמדים',
+    'LBL_NUMBER_PINNED_MODULES_TOOLTIP' => 'מומלץ להגדיר כאן מספר מציאותי של המודולים הנמצאים ' .
+        'בשימוש הכי תדיר, כי סביר להניח שלא תהיה אפשרות להציג מספר גדול ברוב הגדלים של דפדפנים. המערכת לא תכבד ערכים מעל ' .
+        '100',
     'LBL_ALREADY_RUNNING'                  => 'שרת זה פועל בתור חשבון משתמש לא מקוון.',
     'LBL_APPLY_DST_FIX_DESC' => 'שלב חובה זה יעדכן את פונקציונליות הטיפול בזמן (MYSQL בלבד).',
     'LBL_APPLY_DST_FIX' => 'החל תיקון שעון קיץ',
@@ -145,7 +151,7 @@ $mod_strings = array (
     'LBL_IMPORT_METADATA_BUTTON_TITLE' => 'ייצוא קובץ idP מטא-נתונים',
     'LBL_IMPORT_METADATA_BUTTON_LABEL' => 'ייצוא קובץ idP מטא-נתונים',
     'LBL_CAT_VIEW'            => 'Categories',
-    'LBL_CHANGE_NAME_MODULES'=>'שנה את השמות של המודולים המופיעים בתוך היישום',
+    'LBL_CHANGE_NAME_MODULES'=> 'שנה את השמות של המודולים המופיעים בתוך היישום',
     'LBL_CHECK_FOR_UPDATES'  => 'בדוק עבור עדכונים',
     'LBL_CHECK_NOW_LABEL' =>'בדוק כעת',
     'LBL_CHECK_NOW_TITLE' =>'בדוק כעת',
@@ -171,17 +177,20 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'מסיר קובץ מוטמן המשמש לאחסון נתונים של גופני PDF',
     'LBL_CONFIG_CHECK' =>'בדיקת Config',
     'LBL_CONFIG_FTS' => 'הגדר מנוע חיפוש טקסט מלא',
-    'LBL_CONFIG_TABS'=>'Drag and Drop the module names below to set their tabs as either as displayed or hidden. If you want to prevent non-admin users from displaying or hiding tabs uncheck the "Allow users to hide tabs" checkbox',
-	'LBL_CONFIG_TABS_DESC'=>'גרור ושחרר את השמות של המודולים למטה כדי להגדיר כך שיופיעו או יוסתרו בסרגל הניווט העליון או בתור פאנלי-משנה. כדי לבקר את הגישה למודולים, השתמש ב<a href="?module=ACLRoles&action=index">ניהול תפקידים.</a>',
-	'LBL_CONFIG_LANGS_DESC'=>'גרור ושחרר את השמות של השפות למטה כדי להפעיל ולהשבית אותן.',
-	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'בחר באפשרות זו כדי לאפשר למשתמשים לבחור את לשוניות המודול שבהן יוכלו לצפות. במידה ונבחרה, משתמשים יוכלו לבחור את לשוניות המודול שגלויות להם על ידי ניהול הלשוניות בתוך הגדרות המשתמש שלהם.',
-	'LBL_CONFIGURATOR_DESC'=>'הגדר את config.php',
+    'LBL_CONFIG_TABS'=>'סרגל הניווט ופאנלי משנה',
+    'LBL_CONFIG_TABS_DESC_BRIEFLY'=>'יש לבחור אילו מודולים יהיו זמינים למשתמשים בסרגל הניווט ובפאנלי המשנה שלו. באמצעות <a href="?module=ACLRoles&action=index">ניהול תפקידים</a>, אפשר לשלוט בגישה של משתמשים אל מודולים.',
+    'LBL_CONFIG_TABS_DESC_DETAILED'=>'כדי להגדיר מודולים מסוימים כך שיהיו גלויים בסרגל הניווט או מוסתרים, אפשר לגרור ולשחרר אותם. <br>
+        השדה &#39;מספר המודולים המוצמדים&#39;  קובע כמה מהמודולים הזמינים יופיעו כאשר סרגל
+        הניווט מכווץ (למשל, אם הוזן הערך 5, יוצמדו חמשת המודולים הראשונים ברשימה שלך). כשהשדות של תיבות הסימון
+        מופעלים, המשתמשים יכולים לשנות את הגדרות סרגל הניווט דרך פרופיל המשתמש שלהם.',
+    'LBL_CONFIG_LANGS_DESC'=>'גרור ושחרר את השמות של השפות למטה כדי להפעיל ולהשבית אותן.',
+    'LBL_CONFIGURATOR_DESC'=>'הגדר את config.php',
     'LBL_CONFIGURATOR_TITLE'=>'מגדיר',
     'LBL_CONFIGURE_GROUP_TABS_DESC' => 'Create and edit the grouping of navigation tabs',
     'LBL_CONFIGURE_GROUP_TABS' => 'Configure Tab Groups',
     'LBL_CONFIGURE_SETTINGS_TITLE' => 'הגדרות מערכת',
     'LBL_CONFIGURE_SETTINGS' => 'קבע את התצורה של הגדרות כלל המערכת',
-    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'הצג מודולים ולוחות משנה',
+    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'סרגל הניווט ופאנלי משנה',
     'LBL_CONFIGURE_UPDATER'=>'קבע את התצורה של עדכוני Sugar',
     'LBL_CONTRACT_TITLE'=>'Contracts',
     'LBL_CONTRACT_DESC'=>'הגדר סוגי חוזים עבור מודול החוזים. כאשר משתמשים יוצרים חוזה, תפריט הסוגים הנגלל מציג את סוגי החוזים לבחירה.',
@@ -226,6 +235,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_GETMYSQLTS' => 'mysql schema',
     'LBL_DIAGNOSTIC_GETPHPINFO' => 'מידע phpinfo()',
     'LBL_DIAGNOSTIC_GETSUGARLOG' => 'משיג sugarcrm.log',
+    'LBL_DIAGNOSTIC_GETMLPLOG' => 'מקבל את package_install.log',
     'LBL_DIAGNOSTIC_GETTING' => 'משיג...',
     'LBL_DIAGNOSTIC_MD5'=>'מידע MD5',
     'LBL_DIAGNOSTIC_MYSQLDUMPS'=>'MySQL - Configuration Table Dumps',
@@ -234,6 +244,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_NO_MYSQL' => 'You do not have MySQL. The MySQL functions have been disabled.',
     'LBL_DIAGNOSTIC_PHPINFO'=>'phpinfo()',
     'LBL_DIAGNOSTIC_SUGARLOG'=>'קובץ תיעוד של SugarCRM',
+    'LBL_DIAGNOSTIC_MLPLOG'=>'קובץ יומן של התקנת חבילה',
     'LBL_DIAGNOSTIC_TITLE'=>'כלי ניתוח',
     'LBL_DIAGNOSTIC_VARDEFS'=>'פלט סכמת Sugar (VARDEFS)',
 	'LBL_DISABLED' => 'מושבת',
@@ -361,11 +372,11 @@ $mod_strings = array (
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'For Binding the LDAP User<br>Examples:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
     'LBL_LDAP_LOGIN_ATTRIBUTE_DESC'=>'For searching for the LDAP User<br>Examples:<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;dn,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;dn',
     'LBL_LDAP_ENCRYPTION_TYPE_DESC'=> 'סוג ההצפנה קובע האם החיבור שלך לשרת LDAP יהיה ' .
-        'מאובטח או לא. השתמש ב"ללא"/None לחיבור רגיל ללא אבטחה. השתמש ב- TLS כדי לחזק את החיבור ' .
-        'הרגיל שלך כדי שיהיה מאובטח. השתמש ב- SSL לחיבור מאובטח באמצעות ldaps://',
+        'בין אם הם מאובטחים או לא. יש להשתמש באפשרות "ללא" לחיבור רגיל ללא אבטחה. יש להשתמש ב-StartTLS כדי לאכוף את ' .
+        'החיבור הרגיל שלך על מנת שיהיה מאובטח. יש להשתמש ב-LDAPS כדי לאבטח את החיבור ב-ldaps://',
     'LBL_LDAP_SERVER_HOSTNAME_DESC'=> 'אנא ציין אך ורק את שם מארח ה- LDAP של כתובת ה- IP. ' .
         'דוגמה: ldap.example.com, 10.11.45.75',
-    'LBL_LDAP_SERVER_PORT_DESC'=>'דוגמה: 389 עבור "ללא אבטחה" ו- TLS. 636 עבור SSL',
+    'LBL_LDAP_SERVER_PORT_DESC'=>'לדוגמה: 389 לחיבור ללא אבטחה ו-StartTLS. 636 ל-LDAPS',
     'LBL_LDAP_GROUP_NAME'=>'Group Name:',
 	'LBL_LDAP_GROUP_NAME_DESC'=>'דוגמה cn=sugarcrm',
     'LBL_LDAP_USER_DN_DESC'=>'דוגמה: ou=people,dc=example,dc=com',
@@ -472,6 +483,8 @@ $mod_strings = array (
     'LBL_MANAGE_RELATE_DENORMALIZATION_PRE_CHECK_RESULTS' => 'בדיקת תוצאות מקדימה',
     'LBL_MANAGE_RELATE_DENORMALIZATION_FIELDS_FOR' => 'שדות עבור',
     'LBL_MANAGE_RELATE_DENORMALIZATION_JOB_TITLE' => 'משימה מתוזמנת',
+    'LBL_SUGAR_OUTFITTER' => 'SugarOutfitters',
+    'LBL_SUGAR_OUTFITTER_TOOLTIP' => 'ב-SugarOutfitters, החנות של SugarCRM, אפשר למצוא תוספים שיכולים להוסיף יכולות חדשות לסביבה שלך ב-Sugar',
 
     'LBL_MANUAL_VALIDATION_TXT' => 'אימות ידני',
     'LBL_MANUAL_VALIDATION'=>'If you experience persistent problems with automatic validation, please check your Proxy configuration in the <a href="index.php?module=Configurator&action=EditView">System Settings</a> admin panel. <br />	If your system environment prohibits your system from communicating to the license validation server through the internet, you should proceed with the <a href="#" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Manual Validation</a> steps.',
@@ -552,6 +565,9 @@ $mod_strings = array (
     'LBL_MODULE_LICENSE'                        => 'אנא קרא את הסכם הרישיון הבא:',
     'LBL_MODULE_LOADER_TITLE' => 'טוען מודולים',
     'LBL_MODULE_LOADER' => 'הוסף או הסר מודולים, ערכות נושא, חבילות שפה והרחבות אחרות של Sugar',
+    'LBL_MODULE_LOADER_LICENSE_WARNING' => 'היכולת <a href="{0}">להעלות</a> חבילות קבצים מותאמות אישית אינה '
+        . 'זמין עבור {1}. כדי לראות אילו סוגי רישיונות כוללים פונקציונליות זו של מטעין מודול, עיין ב'
+        . 'תיעוד של <a href="{2}">מטריצת סוגי רישיונות</a>.',
     'LBL_MODULE_NAME' => 'ניהול מערכת',
     'LBL_MODULE_NAME_SINGULAR' => 'ניהול מערכת',
     'LBL_MODULE_TITLE' => 'ניהול מערכת: בית',
@@ -666,8 +682,6 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'בנה מחדש קבצי JS Grouping',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'משרשר מחדש ומחליף קבצי קבוצה קיימים בגרסאות המעודכנות ביותר של קבצי הקבוצה',
-    'LBL_REPAIR_JS_FILES_TITLE' => 'תקן קבצי javascript',
-    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'תקן קבצי JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'מעבד קבצים. זה צפוי להימשך מספר דקות. יציאה מדף זה לא תבטל את התהליך, לכן תרגיש חופשי להמשיך הלאה או להמתין לאישור...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'עיבוד הקבצים הסתיים.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'תקן שדות של אותיות גדולות',
@@ -909,7 +923,7 @@ $mod_strings = array (
     'LBL_VALIDATION_FILE'=>'קובץ מפתח אימות',
     'LBL_VALIDATION_SUCCESS_DATE'=>'Last successful validation :',
 	'LBL_VISIBLE_PANELS'=>'פאנלי-משנה מוצגים',
-    'LBL_VISIBLE_TABS'=>'Displayed Tabs',
+    'LBL_AVAILABLE_MODULES' => 'מודולים זמינים',
     'LBL_WORKFLOW_DESC'                     => 'נהל תנאים, התראות ופעולות של זרימת עבודה',
     'LBL_WORKFLOW_TITLE'                    => 'ניהול זרימת עבודה',
     'LBL_WORKBENCH' => 'ספסל עבודה',
@@ -954,12 +968,10 @@ $mod_strings = array (
     'WARN_LICENSE_SEATS'=>  "<b>אזהרה:</b> יש ",
     'WARN_LICENSE_SEATS2' => " משתמשים פעילים כאשר המנוי שלך מאפשר רק עבור ",
     'WARN_LICENSE_SEATS3' =>
-        "<p class=\"error\">עליך לבטל משתמשים מסוימים, פנה אל השותף או נציג המכירות שלך,"
-        . " או שלח דוא\"ל אל <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
-        . "<p class=\"error\">לקבלת מידע נוסף, ראה "
-        . "<a target=\"_blank\" "
-        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
-        . "</a>מאמר</p> על הבנת סוגי המשתמשים ורישיונות Sugar.",
+        "<p class=\"error\">עליך להשבית חלק מהמשתמשים או<a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>לפנות אלינו</a> כדי להוסיף רישיונות.</p>",
+    'WARN_LICENSE_SEATS3_IDM' =>
+        "<p class=\"error\">נא להשבית חלק מהמשתמשים <a target=\"_blank\" href='%s'>בהגדרות SugarCloud</a> "
+        . "או <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>לפנות אלינו</a> כדי להוסיף רישיונות.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Warning: The number of active users is already the maximum number of licenses allowed:",
     'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>אזהרה:</b> לא תוכל ליצור משתמשים פעילים נוספים."
         . " עליך לרכוש מנויים נוספים.",
@@ -967,7 +979,7 @@ $mod_strings = array (
     'WARN_LICENSE_TYPE_SEATS_EDIT_MAXED' => 'אינך יכול ליצור משתמשי %s נוספים. עליך לרכוש עוד מינויים.',
     'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>אזהרה:</b> לא תוכל ליצור משתמשים פעילים נוספים."
         . " עליך לרכוש מנויים נוספים.",
-    'WARN_REPAIR_CONFIG' => '<b>אזהרה:</b> יש לתקן את הקובץ config.php. השתמש בסקריפט <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>בנה מחדש קובץ Config</a> בדף &#39;תיקון&#39; באזור הניהול כדי לתקן את קובץ התצורה.',
+    'WARN_REPAIR_CONFIG' => '<b>אזהרה:</b> יש לתקן את הקובץ config.php.  נא להשתמש בסקריפט <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>בנה מחדש קובץ Config</a> בדף התיקון באזור מנהל המערכת, כדי לתקן את קובץ התצורה.',
     'WARN_UPGRADE_APP'=> "An updated version of the application is now available.",
     'WARN_UPGRADE' => 'Warning: Please upgrade',
     'WARN_UPGRADENOTE' => 'Note:',
@@ -1041,11 +1053,11 @@ $mod_strings = array (
 
 'ML_PACKAGE_SCANNING'=> 'סורק {PACKAGE}',
 'ML_INSTALLATION_FAILED'=> 'ההתקנה נכשלה!',
-'ML_PACKAGE_NOT_CONFIRM'=> 'החבילה שאתה מנסה להתקין לא תואמת למדיניות שהוגדרה בתוך Sugar Open Cloud או למדיניות שהוגדרה על ידי מנהל המערכת שלך.',
+    'ML_PACKAGE_NOT_CONFIRM' => 'החבילה שאתה מנסה להתקין לא תואמת למדיניות שקבעו SugarCloud או מנהל המערכת שלך.',
 'ML_TO_RESOLVE'=>'כדי לפתור בעיה זאת:',
-'ML_OBTAIN_NEW_PACKAGE'=>'לקוחות של Sugar Open Cloud צריכים להשיג חבילה חדשה מספק החבילות אשר עונה על הבעיות המתוארות מטה.',
+    'ML_OBTAIN_NEW_PACKAGE' => 'לקוחות SugarCloud חייבים לקבל מספק החבילות חבילה חדשה, שתספק מענה לבעיות המתוארות להלן.',
 'ML_RELAX_LOCAL'=>'במידה ואתה מפעיל את Sugar מקומית, תוכל להוריד את הגבלות טוען המודולים שלך כדי לאפשר את התקנת החבילה.',
-'ML_SUGAR_LOADING_POLICY'=>'מדיניות טעינת החבילות של Sugar Open Cloud מפורטת ב',
+    'ML_SUGAR_LOADING_POLICY'=>'המדיניות של SugarCloud מפורטת תחת',
 'ML_SUGAR_KB'=>'בסיס ידע SugarCRM',
 'ML_SUGAR_DZ'=>'אזור מפתחים SugarCRM',
 'ML_PKG_SCAN_GUIDE'=>'מדריך המדיניות לסריקת חבילות',
@@ -1249,6 +1261,7 @@ $mod_strings = array (
     'LBL_ASYNC_CALL_FAILED' => 'שיחה אסינכרונית נכשלה',
     'LBL_REPAIRXSSEXECUTE_FAILED' => 'כישלון: Bean או מזהה לא הוגדרו',
     'LBL_DIAGNOSTICS_ERROR_SUGARLOG' => 'לא ניתן להעתיק את sugarcrm.log ל-{0}<br>',
+    'LBL_DIAGNOSTICS_ERROR_MLPLOG' => 'לא ניתן להעתיק את החבילה package_install.log אל {0}<br>',
     'LBL_DIAGNOSTICS_ERROR_PHPINFO' => 'לא ניתן לכתוב בקובץ {0}phpinfo.html<br>',
     'LBL_DIAGNOSTICS_ERROR_LISTBEANFILES' => 'לא ניתן לכתוב בקובץ {0}beanFiles.html<br>',
     'LBL_DIAGNOSTICS_ERROR_MD5' => 'לא ניתן להעתיק את files.md5 ל-{0}<br>מדלג על בדיקות md5.<br>',
@@ -1360,10 +1373,28 @@ $mod_strings = array (
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT' => 'הגדרות אלה מייצגות דירקטיבות סטנדרטיות של מדיניות אבטחת תוכן (CSP) שנמצאות בשימוש על-ידי דפדפני אינטרנט כדי לקבוע אילו משאבים יכולים להיטען בדף אינטרנט. למידע נוסף על הפורמטים והערכים המקובלים עבור שדות, עיין במסמכי העזרה של ה<a href={{linkToDocumentation}} target="_blank">מערכת</a>. ברגע שהגדרות ה-CSP יעודכנו, המשתמשים יצטרכו לרענן את הדפדפנים שלהם כדי שהשינויים ייכנסו לתוקף.',
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT_ADVANCED' => 'הגדרות אלה מיועדות למשתמשים בעלי הבנה מעמיקה בדירקטיבות השונות של מדיניות אבטחת התוכן (CSP). דירקטיבת CSP בשם ‏&#39;img-src&#39; מוגדרת כברירת מחדל על ידי Sugar ומאפשרת טעינה של כל התמונות בחיבור HTTP או HTTPS. למידע נוסף על הפורמטים והערכים המקובלים עבור שדות, עיין במסמכי העזרה של ה<a href={{linkToDocumentation}} target="_blank">מערכת</a>. ברגע שהגדרות ה-CSP יעודכנו, המשתמשים יצטרכו לרענן את הדפדפנים שלהם כדי שהשינויים ייכנסו לתוקף.',
     //Maps
+    'LBL_MAPS_LOGGER_START_DATE' => 'תאריך התחלה של יומנים:',
+    'LBL_MAPS_LOGGER_DETAILED_LOGS' => 'יומנים מפורטים',
+    'LBL_MAPS_LOGGER_NO_LOGS_AVAILABLE' => 'אין יומנים זמינים.',
+    'LBL_MAPS_LOGGER_ENABLE_MODULES_FOR_LOG' => 'הפעל יומנים למודולים:',
+    'LBL_MAPS_LOGGER_LOG_LEVEL' => 'בחירת רמת יומן...',
+    'LBL_MAPS_LOGGER_LOG_TYPE' => 'רמת יומן:',
+    'LBL_MAPS_LOGGER_LOG_ALL_MESSAGES' => 'כל ההודעות',
+    'LBL_MAPS_LOGGER_LOG_ERROR' => 'שגיאות',
+    'LBL_MAPS_LOGGER_LOG_SUCCESS' => 'הצליח',
+    'LBL_MAPS_LOGGER_LBL_MODULE' => 'מודול',
+    'LBL_MAPS_LOGGER_LBL_NAME' => 'שם',
+    'LBL_MAPS_LOGGER_LBL_STATUS' => 'סטטוס',
+    'LBL_MAPS_LOGGER_LBL_GEOCODE' => 'עם קידוד גאוגרפי',
+    'LBL_MAPS_LOGGER_YES' => 'כן',
+    'LBL_MAPS_LOGGER_NO' => 'לא',
+    'LBL_MAPS_LOGGER_OF' => 'מתוך',
     'LBL_MAPS_ADMIN_CONFIG_TITLE' => 'מפות',
+    'LBL_MAPS_ADMIN_LOG_VIEWER' => 'מציג היומנים',
     'LBL_MAPS_ADD_NEW_MODULE_TO_GEOCODE' => 'הוסף מודול חדש לקידוד גיאוגרפי',
     'LBL_MAPS_SELECT_NEW_MODULE_TO_GEOCODE' => 'בחר מודול...',
     'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION' => 'קביעת התצורה של מפות',
+    'LBL_MAPS_ADMIN_CONFIG_LOG_VIEWER_DESCRIPTION' => 'גישה ליומני קידוד גאוגרפי',
     'LBL_MAPS_LOG_LEVEL_TITLE' => 'רמת תיעוד ביומן',
     'LBL_MAPS_LOG_LVL_FATAL' => 'קריטי',
     'LBL_MAPS_LOG_LVL_DEBUG' => 'ניפוי באגים',
@@ -1425,9 +1456,12 @@ $mod_strings = array (
     'LBL_CLOUD_DRIVE_DESCRIPTION' => 'קבע את הגדרות נתיב ברירת המחדל עבור כונני הענן.',
     'LBL_GOOGLE_DRIVE_NAME' => 'Google Drive',
     'LBL_GOOGLE_DRIVE_TOOLTIP' => 'קביעת נתיבי ברירת המחדל עבור Google Drive',
+    'LBL_DROPBOX_DRIVE' => 'Dropbox Drive',
+    'LBL_DROPBOX_DRIVE_TOOLTIP' => 'הגדרת נתיבי ברירת המחדל עבור Dropbox Drive',
     'LBL_GOOGLE_DRIVE_SAVE_BUTTON' => 'שמירה',
     'LBL_SELECT_ROOT_PATH' => 'בחירת נתיב בסיס',
     'LBL_REMOVE_ROOT_PATH' => 'הסרת נתיב בסיס',
+    'LBL_ROOT_PATH_REMOVED' => 'נתיב הבסיס הוסר.',
     'LBL_VALIDATE_ROOT_PATH' => 'אימות נתיב בסיס',
     'LBL_PATHS_FOR_RECORD_VIEW' => 'נתיבים עבור תצוגת רשומות',
     'LBL_DEFAULT_STARTING_PATH' => 'ברירת מחדל לנתיב הפותח',
@@ -1441,14 +1475,16 @@ $mod_strings = array (
     'LBL_MICROSOFT_ONEDRIVE_TOOLTIP' => 'קביעת נתיבי ברירת המחדל עבור Microsoft Onedrive',
     'LBL_DRIVE_PATH_CONFIG' => 'הגדרת נתיב כונן',
     'LBL_DRIVE_ROOT_PATH' => 'נתיב בסיס',
+    'LBL_FIELDS_VARIABLE' => 'משתנה שדות',
+    'LBL_UNABLE_TO_RETRIEVE_ROOT_PATH' => 'לא ניתן לאחזר את נתיב הבסיס',
     'LBL_HINT_NAME' => 'שדות Hint',
     'LBL_HINT_DESCRIPTION' => 'הגדר אילו שדות יוצגו בחלונית של Hint ויקבלו מידע נוסף מ-Hint.',
-    'LBL_HINT_SECTION_HEADER' => 'Hint',
-    'LBL_HINT_SECTION_DESCRIPTION' => 'קביעת הגדרות עבור Hint',
+    'LBL_HINT_SECTION_HEADER' => 'Sugar Hint',
+    'LBL_HINT_SECTION_DESCRIPTION' => 'קביעת הגדרות עבור Sugar Hint',
 
-    'LBL_HINT_CONFIG' => 'תצורת Hint',
+    'LBL_HINT_CONFIG' => 'תצורת Sugar Hint',
     'LBL_HINT_CONFIG_NAME' => 'תצורת Hint',
-    'LBL_HINT_CONFIG_SAVED' => 'הגדרות תצורת Hint נשמרו.',
+    'LBL_HINT_CONFIG_SAVED' => 'הגדרות תצורת Sugar Hint נשמרו.',
     'LBL_HINT_CONFIG_DESCRIPTION' => 'עדכן את הגדרות Hint.',
     'LBL_HINT_CONFIG_LOGGER_SECTION_HEADER' => 'כלי הרישום ביומן של Hint',
 
@@ -1456,7 +1492,24 @@ $mod_strings = array (
     'LBL_HINT_RESYNC_DESCRIPTION' => 'סנכרון מחדש עם שירות Hint Insights כדי לתקן בעיות בהודעות, כולל שינויים לגבי העדפות וכתובות דוא"ל שאינם נכנסים לתוקף.',
 
     'LBL_HINT_UNINSTALL' => 'הסר התקנה',
-    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'הסרת ההתקנה של Hint, כולל השבתת הודעות מאת Hint Insights.',
+    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'הסר/י את ההתקנה של Sugar Hint, כולל השבתת ההודעות מ-Sugar Hint Insights.',
 
     'LBL_HINT_CONFIG_NOTIFICATIONS_HEADER' => 'הודעות',
+
+    'LBL_DOCUSIGN_GROUP' => 'DocuSign',
+    'LBL_DOCUSIGN_NAME' => 'הגדרות',
+    'LBL_DOCUSIGN_TOOLTIP' => 'תצורת DocuSign',
+    'LBL_DOCUSIGN_DESCRIPTION' => 'תצורת תכונות של DocuSign',
+    'LBL_SUGAR_MAPS' => 'Sugar Maps',
+    'LBL_CLOUD_DRIVE' => 'Cloud Drive',
+
+    // Sugar Automate
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_TITLE' => 'הגדרות Sugar Automate',
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_DESC' => 'התקנה של חבילת Sugar Automate',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'תבניות',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'ניהול תבניות',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_NAME' => 'הגדרה של מודולים',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_DESC' => 'הגדרה של מודולים מופעלים',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'תבניות',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'ניהול תבניות',
 );

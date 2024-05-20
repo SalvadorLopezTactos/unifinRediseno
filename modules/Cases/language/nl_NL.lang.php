@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Dashboard caselijst',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashboard caserecord',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Details case',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Focus drawer-cases - console',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer cases',
 
 	'ERR_DELETE_RECORD'					=> 'U dient een record te selecteren om de organisatie te verwijderen.',
@@ -162,4 +162,29 @@ To create a {{module_name}}:
     'LBL_SLA_DETAILS' => 'SLA details',
     'LBL_HOURS' => 'Uur',
     'LBL_WIDGET_STATUS' => 'Status',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiseren',
+    'LBL_CREATE_NEW' => 'Maak Nieuwe',
+    'LBL_MANAGE' => 'Beheren',
+    'LBL_SEE_DETAILS' => 'Bekijk details',
+    'LBL_HIDE_NEW' => 'Verbergen',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Cases',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Case',
+    'LBL_KIOSK_CREATE' => 'Case aanmaken',
+    'LBL_KIOSK_SUBJECT' => 'Onderwerp',
+    'LBL_KIOSK_CASE_ID' => 'Case-ID',
+    'LBL_KIOSK_STATUS' => 'Status',
+    'LBL_KIOSK_CATEGORY' => 'Categorie',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Verzonden op {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioriteit',
+    'LBL_KIOSK_CREATE_CASE' => 'Neem contact met ons op',
+    'LBL_KIOSK_DESCRIPTION' => 'Beschrijving',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Uw verzoek is ingediend.',
+    'LBL_KIOSK_ATTACHED' => 'Alle bijlagen',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Externe gebruikers',
 );

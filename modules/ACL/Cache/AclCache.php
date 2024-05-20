@@ -15,7 +15,7 @@ use Sugarcrm\Sugarcrm\ACL\Cache;
  */
 class AclCache implements Cache
 {
-    const HASH_KEY = 'ACL';
+    public const HASH_KEY = 'ACL';
 
     /** @var SugarCacheAbstract */
     protected $cache;

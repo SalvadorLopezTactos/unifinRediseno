@@ -18,6 +18,9 @@ use Sugarcrm\Sugarcrm\SugarConnect\Configuration\ConfigurationAwareTrait;
 use Sugarcrm\Sugarcrm\SugarConnect\Configuration\ConfigurationInterface;
 use Sugarcrm\Sugarcrm\SugarConnect\Event\Event;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 class SugarBean implements Publisher, ConfigurationAwareInterface
 {
     use ConfigurationAwareTrait;

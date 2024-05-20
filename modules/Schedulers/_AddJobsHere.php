@@ -47,6 +47,7 @@ $job_strings = [
     'updateTrackerSessions',
     'sendEmailReminders',
     'cleanJobQueue',
+    'updateMomentumCJ',
 
     //Add class to build additional TimePeriods as necessary
     'class::SugarJobCreateNextTimePeriod',
@@ -529,6 +530,13 @@ function cleanJobQueue($job)
     $hard_cutoff_date = $job->db->quoted($td->getNow()->modify("- $hard_cutoff days")->asDb());
     $job->db->query("DELETE FROM {$job->table_name} WHERE status='done' AND date_modified < ".$job->db->convert($hard_cutoff_date, 'datetime'));
     $job->db->optimizeTable($job->table_name);
+    return true;
+}
+
+function updateMomentumCJ($job)
+{
+    $updater = new Sugarcrm\Sugarcrm\CustomerJourney\Bean\Activity\Scheduler\MomentumUpdater();
+    $updater->run();
     return true;
 }
 

@@ -29,7 +29,9 @@ whenever the font receives updates.
 
 .sicon {
   display: inline-block;
-  font: normal normal normal 12px 'SugarIcons';
+  font: normal normal normal 1em/1 'SugarIcons';
+  color: inherit;
+  flex-shrink: 0;
   speak: none;
   text-transform: none;
 
@@ -104,9 +106,9 @@ whenever the font receives updates.
 -------------------------*/
 
 .sicon-is-spinning {
-  -webkit-animation: sicon-spin 2s infinite linear;
-  -moz-animation: sicon-spin 2s infinite linear;
-  animation: sicon-spin 2s infinite linear;
+  -webkit-animation: sicon-spin 1s infinite linear;
+  -moz-animation: sicon-spin 1s infinite linear;
+  animation: sicon-spin 1s infinite linear;
 }
 
 @-webkit-keyframes sicon-spin {

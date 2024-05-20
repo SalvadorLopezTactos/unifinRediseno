@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Juhtumite loendi töölaud',
     'LBL_CASES_RECORD_DASHBOARD' => 'Juhtumikirjete töölaud',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Juhtumi üksikasjad',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Juhtumite fookuse sahtel - konsool',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Juhtumite fookuse sahtel',
 
 	'ERR_DELETE_RECORD'					=> 'Konto kustutamiseks täpsustage kirje numbrit.',
@@ -162,4 +162,29 @@ Mooduli {{module_name}} loomiseks tehke järgmist.
     'LBL_SLA_DETAILS' => 'SLA üksikasjad',
     'LBL_HOURS' => 'Tundi',
     'LBL_WIDGET_STATUS' => 'Olek',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Korralda',
+    'LBL_CREATE_NEW' => 'Loo uus',
+    'LBL_MANAGE' => 'Halda',
+    'LBL_SEE_DETAILS' => 'Kuva üksikasjad',
+    'LBL_HIDE_NEW' => 'Peida',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Juhtumid',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Juhtum',
+    'LBL_KIOSK_CREATE' => 'Loo juhtum',
+    'LBL_KIOSK_SUBJECT' => 'Teema',
+    'LBL_KIOSK_CASE_ID' => 'Juhtumi ID',
+    'LBL_KIOSK_STATUS' => 'Olek',
+    'LBL_KIOSK_CATEGORY' => 'Kategooria',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Esitatud {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Tähtsus',
+    'LBL_KIOSK_CREATE_CASE' => 'Võtke ühendust',
+    'LBL_KIOSK_DESCRIPTION' => 'Kirjeldus',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Teie taotluse esitamine õnnestus.',
+    'LBL_KIOSK_ATTACHED' => 'Kõik lisatud',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Välised kasutajad',
 );

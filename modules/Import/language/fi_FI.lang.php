@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Vaadittu arvo puuttuu',
     'LBL_ERROR_SYNC_USERS' => 'Virheellinen arvo Outlookiin synkronoitavaksi:',
     'LBL_ID_EXISTS_ALREADY' => 'ID on jo tässä taulussa',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY on jo olemassa tässä taulukossa',
     'LBL_ASSIGNED_USER' => 'Jos käyttäjää ei ole, käytä nykyistä käyttäjää',
     'LBL_SHOW_HIDDEN' => 'Näytä kentät, jotka eivät ole normaalisti tuotavia',
     'LBL_UPDATE_RECORDS' => 'Päivitä olemassa olevat tietueet tuomisen sijaan (ei kumottavissa)',

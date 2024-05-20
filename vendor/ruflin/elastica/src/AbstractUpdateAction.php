@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Base class for things that can be sent to the update api (Document and
  * Script).
@@ -17,6 +19,8 @@ class AbstractUpdateAction extends Param
 
     /**
      * Sets the id of the document.
+     *
+     * @return $this
      */
     public function setId(?string $id = null): self
     {
@@ -55,7 +59,7 @@ class AbstractUpdateAction extends Param
     /**
      * Get the document index name.
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return string Index name
      */
@@ -65,7 +69,91 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Sets the version of a document for use with optimistic concurrency control.
+     * Sets the version parameters of a document for use with optimistic concurrency control.
+     *
+     * @return $this
+     */
+    public function setVersionParams(array $responseData): self
+    {
+        if (isset($responseData['_version'])) {
+            $this->setVersion($responseData['_version']);
+        }
+
+        if (isset($responseData['_seq_no'])) {
+            $this->setSequenceNumber($responseData['_seq_no']);
+        }
+
+        if (isset($responseData['_primary_term'])) {
+            $this->setPrimaryTerm($responseData['_primary_term']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Sets the sequence number of a document for use with optimistic concurrency control.
+     *
+     * @param int $number Sequence Number
+     *
+     * @return $this
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html
+     */
+    public function setSequenceNumber(int $number): self
+    {
+        return $this->setParam('if_seq_no', $number);
+    }
+
+    /**
+     * Returns document version.
+     *
+     * @throws InvalidException
+     *
+     * @return int Document version
+     */
+    public function getSequenceNumber(): int
+    {
+        return $this->getParam('if_seq_no');
+    }
+
+    public function hasSequenceNumber(): bool
+    {
+        return $this->hasParam('if_seq_no');
+    }
+
+    /**
+     * Sets the primary term of a document for use with optimistic concurrency control.
+     *
+     * @param int $term Primary Term
+     *
+     * @return $this
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html
+     */
+    public function setPrimaryTerm(int $term): self
+    {
+        return $this->setParam('if_primary_term', $term);
+    }
+
+    /**
+     * Returns document version.
+     *
+     * @throws InvalidException
+     *
+     * @return int Document version
+     */
+    public function getPrimaryTerm(): int
+    {
+        return $this->getParam('if_primary_term');
+    }
+
+    public function hasPrimaryTerm(): bool
+    {
+        return $this->hasParam('if_primary_term');
+    }
+
+    /**
+     * Sets the version of a document.
      *
      * @param int $version Document version
      *
@@ -80,6 +168,8 @@ class AbstractUpdateAction extends Param
 
     /**
      * Returns document version.
+     *
+     * @throws InvalidException
      *
      * @return int|string Document version
      */
@@ -97,37 +187,6 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Sets the version_type of a document
-     * Default in ES is internal, but you can set to external to use custom versioning.
-     *
-     * @param string $versionType Document version type
-     *
-     * @return $this
-     */
-    public function setVersionType($versionType)
-    {
-        return $this->setParam('version_type', $versionType);
-    }
-
-    /**
-     * Returns document version type.
-     *
-     * @return int|string Document version type
-     */
-    public function getVersionType()
-    {
-        return $this->getParam('version_type');
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasVersionType()
-    {
-        return $this->hasParam('version_type');
-    }
-
-    /**
      * Set operation type.
      *
      * @param string $opType Only accept create
@@ -141,6 +200,8 @@ class AbstractUpdateAction extends Param
 
     /**
      * Get operation type.
+     *
+     * @throws InvalidException
      *
      * @return string
      */
@@ -172,11 +233,13 @@ class AbstractUpdateAction extends Param
     /**
      * Get routing parameter.
      *
+     * @throws InvalidException
+     *
      * @return string
      */
     public function getRouting()
     {
-        return $this->getParam('_routing');
+        return $this->getParam('routing');
     }
 
     /**
@@ -184,7 +247,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasRouting()
     {
-        return $this->hasParam('_routing');
+        return $this->hasParam('routing');
     }
 
     /**
@@ -210,6 +273,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return string
      */
     public function getFields()
@@ -236,6 +301,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return int
      */
     public function getRetryOnConflict()
@@ -248,25 +315,37 @@ class AbstractUpdateAction extends Param
      */
     public function hasRetryOnConflict()
     {
-        return $this->hasParam('_retry_on_conflict');
+        return $this->hasParam('retry_on_conflict');
     }
 
     /**
-     * @param bool $refresh
+     * @param bool|string $refresh
+     *
+     * @phpstan-param bool|Reindex::REFRESH_* $refresh
      *
      * @return $this
      */
     public function setRefresh($refresh = true)
     {
-        return $this->setParam('refresh', (bool) $refresh ? 'true' : 'false');
+        if (\is_bool($refresh)) {
+            $refresh = $refresh ? Reindex::REFRESH_TRUE : Reindex::REFRESH_FALSE;
+        }
+
+        return $this->setParam(Reindex::REFRESH, $refresh);
     }
 
     /**
-     * @return bool
+     * @throws InvalidException
+     *
+     * @return bool|string
      */
     public function getRefresh()
     {
-        return 'true' === $this->getParam('refresh');
+        $refresh = $this->getParam('refresh');
+
+        return \in_array($refresh, [Reindex::REFRESH_TRUE, Reindex::REFRESH_FALSE], true)
+            ? Reindex::REFRESH_TRUE === $refresh
+            : $refresh;
     }
 
     /**
@@ -288,6 +367,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return bool
      */
     public function getTimeout()
@@ -314,6 +395,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return string
      */
     public function getConsistency()
@@ -340,6 +423,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return string
      */
     public function getReplication()
@@ -391,7 +476,7 @@ class AbstractUpdateAction extends Param
      */
     public function getOptions(array $fields = [])
     {
-        if (!empty($fields)) {
+        if ($fields) {
             return \array_filter(\array_intersect_key($this->getParams(), \array_flip($fields)));
         }
 

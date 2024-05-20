@@ -16,11 +16,11 @@
  */
 class Encoding
 {
-    const EightBit        = "8bit";
-    const SevenBit        = "7bit";
-    const Binary          = "binary";
-    const Base64          = "base64";
-    const QuotedPrintable = "quoted-printable";
+    public const EightBit        = "8bit";
+    public const SevenBit        = "7bit";
+    public const Binary          = "binary";
+    public const Base64          = "base64";
+    public const QuotedPrintable = "quoted-printable";
 
     /**
      * Returns true/false indicating whether or not $encoding is a valid, known encoding for the context of a Mailer.

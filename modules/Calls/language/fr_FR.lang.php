@@ -63,12 +63,12 @@ $mod_strings = array (
     'LBL_NAME' => 'Nom',
     'LBL_FIRST_NAME' => 'Prénom',
     'LBL_LAST_NAME' => 'Nom',
-    'LBL_EMAIL' => 'Composer un email',
+    'LBL_EMAIL' => 'Email',
     'LBL_ACCOUNT_NAME' => 'Compte',    
     'LBL_PHONE' => 'Téléphone',
     'LBL_REMINDER' => 'Notification :',
     'LBL_REMINDER_POPUP' => 'Rappel utilisateurs',
-    'LBL_REMINDER_EMAIL' => 'Composer un email',
+    'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Rapp. email tous',
     'LBL_EMAIL_REMINDER' => 'Notification par email',
     'LBL_EMAIL_REMINDER_TIME' => 'Heure de rappel par email',
@@ -136,7 +136,7 @@ $mod_strings = array (
     'LBL_REPEAT_END_BY' => 'Le',
     'LBL_REPEAT_DOW' => 'Répétition depuis',
     'LBL_REPEAT_UNTIL' => 'Répétition jusque',
-    'LBL_REPEAT_COUNT' => 'Répétition occurences',
+    'LBL_REPEAT_COUNT' => 'Répétition occurrences',
     'LBL_EDIT_ALL_RECURRENCES' => 'Éditer toutes les occurrences',
     'LBL_REMOVE_ALL_RECURRENCES' => 'Supprimer toutes les occurrences',
     'LBL_DATE_END_ERROR' => 'La date de fin est avant la date de début',
@@ -194,4 +194,10 @@ Pour créer un enregistrement {{calls_singular_module}}, les étapes suivantes s
     - Cliquer sur Sélectionner un invité pour ajouter un utilisateur, contact ou lead actuel à l&#39;enregistrement {{calls_singular_module}}.
     - Cliquer sur l&#39;icône plus située à droite de cette option pour créer un invité {{calls_singular_module}} en tant que nouvel enregistrement Sugar.
 3. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Est un appel du guide intelligent",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Tâches enfants',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Réunions enfants',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Appels enfants',
 );

@@ -42,13 +42,13 @@ class SmtpMailer extends BaseMailer
     /**
      * Only use SMTP to send email with PHPMailer.
      */
-    const MailTransmissionProtocol = "smtp";
+    public const MailTransmissionProtocol = "smtp";
 
     /**
      * Maps EAPM application names to their appropriate API names for use in
      * sending email via SMTP OAUTH
      */
-    const ApiMap = [
+    public const ApiMap = [
         'Google' => 'GoogleEmail',
         'Microsoft' => 'MicrosoftEmail',
     ];
@@ -59,19 +59,19 @@ class SmtpMailer extends BaseMailer
     protected $mailer;
 
     /**
-     * Fixed time duration for connection command to SMTP (for prevent port scanning on connection)
+     * Fixed response time duration for sending email (for prevent SSRF attack on connection)
      *
-     * @var int|null
+     * @var bool
      */
-    public $connectionCommandTimeDuration = null;
+    public $fixedResponseTimeDuration = false;
 
     /**
-     * @param int|null $seconds
+     * @param bool $value
      * @return void
      */
-    public function setConnectionCommandTimeDuration(?int $seconds): void
+    public function setFixedResponseTimeDuration(bool $value): void
     {
-        $this->connectionCommandTimeDuration = $seconds;
+        $this->fixedResponseTimeDuration = $value;
     }
 
     /**
@@ -79,7 +79,13 @@ class SmtpMailer extends BaseMailer
      */
     public function connect()
     {
-        $this->mailer = $this->generateMailer(); // get a fresh PHPMailer object
+        // If we already have a mailer, and we need to persist connections,
+        // do not create a fresh mailer object, as that will clear any active
+        // connection.
+        $keepAlive = SugarConfig::getInstance()->get('smtp_mailer_keep_alive', false);
+        if (empty($this->mailer) || !$keepAlive) {
+            $this->mailer = $this->generateMailer();
+        }
         $this->transferConfigurations($this->mailer);
         // connect to the SMTP server
         $this->connectToHost($this->mailer);
@@ -245,30 +251,22 @@ class SmtpMailer extends BaseMailer
     {
         $connectionStartTime = null;
         $timeDurationMicroseconds = null;
-        if (!is_null($this->connectionCommandTimeDuration)) {
-            if ($this->connectionCommandTimeDuration < 3) {
-                $this->setConnectionCommandTimeDuration(3);
-            }
+        $mailer->getSMTPInstance()->Timeout = SugarConfig::getInstance()->get('email_mailer_timeout', 2);
+        $mailer->getSMTPInstance()->Timelimit = SugarConfig::getInstance()->get('email_mailer_timelimit', 2);
 
-            $setTimeout = $mailer->getSMTPInstance()->Timeout;
-            $setTimelimit = $mailer->getSMTPInstance()->Timelimit;
-
-            $halfTimeDuration = floor($this->connectionCommandTimeDuration / 2);
-
-            $timeDurationMicroseconds = $this->connectionCommandTimeDuration * 1000000;
-
-            $mailer->getSMTPInstance()->Timeout = $halfTimeDuration;
-            $mailer->getSMTPInstance()->Timelimit = $halfTimeDuration;
-
+        if ($this->fixedResponseTimeDuration) {
             $connectionStartTime = round(microtime(true));
+
+            $timeDurationMicroseconds = ($mailer->getSMTPInstance()->Timeout + $mailer->getSMTPInstance()->Timelimit) * 1000000;
         }
 
         try {
             // have PHPMailer attempt to connect to the SMTP server
             $result = $mailer->smtpConnect();
 
-            if (!is_null($this->connectionCommandTimeDuration)) {
+            if ($this->fixedResponseTimeDuration) {
                 $connectionDurationMicroseconds = round((microtime(true) - $connectionStartTime) * 1000000);
+
                 if ($connectionDurationMicroseconds < $timeDurationMicroseconds) {
                     $sleepTimeMicroseconds = $timeDurationMicroseconds - $connectionDurationMicroseconds;
                     usleep($sleepTimeMicroseconds);
@@ -289,11 +287,6 @@ class SmtpMailer extends BaseMailer
                 "Failed to connect to outbound SMTP Mail Server: {$message}",
                 MailerException::FailedToConnectToRemoteServer
             );
-        }
-
-        if (!is_null($this->connectionCommandTimeDuration)) {
-            $mailer->getSMTPInstance()->Timeout = $setTimeout;
-            $mailer->getSMTPInstance()->Timelimit = $setTimelimit;
         }
     }
 

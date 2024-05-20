@@ -36,7 +36,7 @@ $viewdefs['Quotes']['base']['view']['list'] = array(
                     'enabled'           => true,
                     'default'           => true,
                     'name'              => 'billing_account_name',
-                    'sortable'          => false,
+                    'sortable'          => true,
                 ),
                 array(
                     'label' => 'LBL_QUOTE_STAGE',

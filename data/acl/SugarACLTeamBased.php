@@ -35,7 +35,7 @@ class SugarACLTeamBased extends SugarACLStrategy
             return true;
         }
         $user = $this->getCurrentUser($context);
-        $bean = isset($context['bean']) ? $context['bean'] : null;
+        $bean = $context['bean'] ?? null;
         $isOwner = !empty($context['owner_override']) ?
             $context['owner_override'] :
             ($bean && $bean->isOwner($user->id));

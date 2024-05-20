@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'Seuraajan URL:',
   'LBL_TRACKER_TEXT' => 'Seuraajan linkkiteksti:',
   'LBL_TRACKER_COUNT' => 'Seuraajien määrä:',
-  'LBL_REFER_URL' => 'Seuraajan uudelleenohjauksen URL:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kampanjat',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Sähköpostikampanjat',
   'LBL_NEW_FORM_TITLE' => 'Uusi kampanja',

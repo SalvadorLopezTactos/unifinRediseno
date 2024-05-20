@@ -69,20 +69,24 @@ EORSS;
 
     protected function generateItem($item)
     {
-        $name = !empty($item['name_value_list']['name']['value'])?htmlentities( $item['name_value_list']['name']['value']): '';
-        $url = $GLOBALS['sugar_config']['site_url']  . htmlentities('/index.php?module=' . $item['module_name']. '&action=DetailView&record=' . $item['id']);
+        $name = !empty($item['name_value_list']['name']['value']) ? htmlentities($item['name_value_list']['name']['value'], ENT_COMPAT) : '';
+        $url = $GLOBALS['sugar_config']['site_url'] . htmlentities('/index.php?module=' . $item['module_name'] . '&action=DetailView&record=' . $item['id'], ENT_COMPAT);
         $date = TimeDate::httpTime(TimeDate::getInstance()->fromDb($item['name_value_list']['date_modified']['value'])->getTimestamp());
         $description = '';
         $displayFieldNames = true;
-        if ((is_countable($item['name_value_list']) ? count($item['name_value_list']) : 0) == 2 && isset($item['name_value_list']['name'])) {
+        if ((is_countable($item['name_value_list']) ? count(
+            $item['name_value_list']
+        ) : 0) == 2 && isset($item['name_value_list']['name'])) {
             $displayFieldNames = false;
         }
         foreach($item['name_value_list'] as $k=>$v){
             if ( $k == 'name' || $k == 'date_modified') {
                 continue;
             }
-            if($displayFieldNames) $description .= '<b>' .htmlentities( $k) . ':<b>&nbsp;';
-            $description .= htmlentities( $v['value']) . "<br>";
+            if ($displayFieldNames) {
+                $description .= '<b>' . htmlentities($k, ENT_COMPAT) . ':<b>&nbsp;';
+            }
+            $description .= htmlentities($v['value'], ENT_COMPAT) . "<br>";
         }
 
         echo <<<EORSS

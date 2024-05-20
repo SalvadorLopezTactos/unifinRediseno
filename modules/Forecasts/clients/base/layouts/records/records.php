@@ -12,36 +12,114 @@
  */
 
 $viewdefs['Forecasts']['base']['layout']['records'] = array(
+    'css_class' => 'flex-list-layout flex flex-column h-full',
     'components' => array(
         array(
             'layout' => array(
                 'type' => 'default',
                 'name' => 'sidebar',
+                'css_class' => 'forecasts-records h-full',
                 'components' => array(
                     array(
                         'layout' => array(
                             'type' => 'base',
                             'name' => 'main-pane',
-                            'css_class' => 'main-pane span8',
+                            'css_class' => 'main-pane forecasts-main span8',
                             'components' => array(
                                 array(
                                     'view' => 'list-headerpane',
                                 ),
-                                array(
-                                    'view' => 'info',
-                                ),
-                                array(
-                                    'layout' => 'list',
-                                    'context' => array(
-                                        'module' => 'ForecastManagerWorksheets',
-                                    ),
-                                ),
-                                array(
-                                    'layout' => 'list',
-                                    'context' => array(
-                                        'module' => 'ForecastWorksheets',
-                                    ),
-                                ),
+                                [
+                                    'layout' => [
+                                        'type' => 'tabbed-layout',
+                                        'name' => 'tabbed-layout',
+                                        'css_class' => 'h-full',
+                                        'components' => [
+                                            [
+                                                'layout' => [
+                                                    'css_class' => 'h-full',
+                                                    'type' => 'filterpanel',
+                                                    'last_state' => [
+                                                        'id' => 'forecasts-list-filterpanel',
+                                                        'defaults' => [
+                                                            'toggle-view' => 'list',
+                                                        ],
+                                                    ],
+                                                    'context' => [
+                                                        'listViewModule' => 'Opportunities',
+                                                        'loadModuleLabel' => true,
+                                                    ],
+                                                    'refresh_button' => true,
+                                                    'label' => 'LBL_TAB_OPPORTUNITY',
+                                                    'components' => [
+                                                        [
+                                                            'layout' => 'filter',
+                                                            'loadModule' => 'Forecasts',
+                                                            'context' => [
+                                                                'module' => 'Opportunities',
+                                                                'noCollectionField' => true,
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'view' => 'filter-rows',
+                                                        ],
+                                                        [
+                                                            'view' => 'filter-actions',
+                                                        ],
+                                                        [
+                                                            'layout' => [
+                                                                'name' => 'forecast-metrics',
+                                                                'type' => 'base',
+                                                                'css_class' => 'forecast-metrics m-4 border-solid border-b border-default',
+                                                                'components' => [
+                                                                    [
+                                                                        'view' => 'forecast-metrics',
+                                                                    ],
+                                                                    [
+                                                                        'view' => 'forecast-metrics-help',
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'layout' => 'list',
+                                                            'context' => [
+                                                                'module' => 'Opportunities',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
+                                            [
+                                                'layout' => [
+                                                    'name' => 'LBL_TAB_COMMITMENT',
+                                                    'type' => 'base',
+                                                    'module' => 'Forecasts',
+                                                    'components' => [
+                                                        [
+                                                            'view' => 'commitment-headerpane',
+                                                        ],
+                                                        [
+                                                            'view' => 'info',
+                                                        ],
+                                                        [
+                                                            'layout' => 'list',
+                                                            'context' => [
+                                                                'module' => 'ForecastManagerWorksheets',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'layout' => 'list',
+                                                            'context' => [
+                                                                'module' => 'ForecastWorksheets',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ),
                         ),
                     ),

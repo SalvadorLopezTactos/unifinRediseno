@@ -178,8 +178,9 @@
         const unitType = this.model.get('unitType');
         const radius = this.model.get('radius');
         const contextModel = app.controller.context.get('model');
-        const recordId = contextModel.get('id');
-        const recordModule = contextModel.module;
+        const recordLayout = this.closestComponent('record');
+        const recordId = recordLayout && recordLayout.model ? recordLayout.model.get('id') : contextModel.get('id');
+        const recordModule = recordLayout && recordLayout.module ? recordLayout.module : contextModel.module;
         const mapsModule = `${module}/maps`;
 
         if (!module) {

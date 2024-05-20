@@ -190,7 +190,7 @@ class SugarFieldParent extends SugarFieldRelate {
     	   return $args[$searchKey];
     	}
 
-    	return isset($args[$key]) ? $args[$key] : '';
+        return $args[$key] ?? '';
     }
 
     /**

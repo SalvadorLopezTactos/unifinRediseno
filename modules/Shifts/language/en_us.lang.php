@@ -35,7 +35,7 @@ $mod_strings = [
     'LBL_START_TIME' => 'Start Time',
     'LBL_END_TIME' => 'End Time',
 
-    'LBL_SHIFTS_FOCUS_DRAWER_DASHBOARD' => 'Shifts Focus Drawer',
+    'LBL_SHIFTS_FOCUS_DRAWER_DASHBOARD' => 'Shifts Focus Dashboard',
 
     'LBL_SHIFT_RECORD_DASHBOARD' => 'Shifts Record Dashboard',
     'LBL_MY_SHIFTS' => 'My Shifts',

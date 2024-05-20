@@ -19,31 +19,31 @@
 class HealthCheckScannerMeta
 {
     // Minimum allowed upgrader version
-    const ALLOWED_UPGRADER_VERSION = '7.6.0.0';
+    public const ALLOWED_UPGRADER_VERSION = '7.6.0.0';
 
-    const FLAG_GREEN = 1;
-    const FLAG_YELLOW = 2;
-    const FLAG_RED = 3;
+    public const FLAG_GREEN = 1;
+    public const FLAG_YELLOW = 2;
+    public const FLAG_RED = 3;
 
     // default translation locale
-    const DEFAULT_LOCALE = 'en_us';
+    public const DEFAULT_LOCALE = 'en_us';
 
     // plain vanilla sugar
-    const VANILLA = 'A';
+    public const VANILLA = 'A';
     // studio mods
-    const STUDIO = 'B';
+    public const STUDIO = 'B';
     // studio and MB mods
-    const STUDIO_MB = 'C';
+    public const STUDIO_MB = 'C';
     // studio and MB mods that need to BWC some modules
-    const STUDIO_MB_BWC = 'D';
+    public const STUDIO_MB_BWC = 'D';
     // heavy customization, needs fixes
-    const CUSTOM = 'E';
+    public const CUSTOM = 'E';
     // manual customization required
-    const MANUAL = 'F';
+    public const MANUAL = 'F';
     // already on 7
-    const UPGRADED = 'G';
+    public const UPGRADED = 'G';
     //unsupported database
-    const UNSUPPORTED_DB = 'H';
+    public const UNSUPPORTED_DB = 'H';
 
     /**
      *
@@ -425,6 +425,14 @@ class HealthCheckScannerMeta
             'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Deprecated_use_of_FontAwesome_detected/',
             //@codingStandardsIgnoreEnd
         ],
+        587 => [
+            'report' => 'deprecatedLESSColorVariables',
+            'bucket' => self::CUSTOM,
+            //@codingStandardsIgnoreStart
+            'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Deprecated_LESS_Colour_Variables/',
+            //@codingStandardsIgnoreEnd
+        ],
+
         // BUCKET F
         501 => array(
             'report' => 'missingFile',
@@ -436,7 +444,7 @@ class HealthCheckScannerMeta
         ),
         503 => array(
             'report' => 'sameModuleName',
-            'bucket' => self::MANUAL,
+            'bucket' => self::CUSTOM,
         ),
         504 => array(
             'report' => 'fieldTypeMissing',
@@ -570,6 +578,34 @@ class HealthCheckScannerMeta
             'kb' => 'http://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Use_Of_App_View_InvokeParent/',
             //@codingStandardsIgnoreEnd
         ),
+        563 => [
+            'report' => 'incompatibleMonologCustomization',
+            'bucket' => self::MANUAL,
+            //@codingStandardsIgnoreStart
+            'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Incompatible_Monolog_Customization/',
+            //@codingStandardsIgnoreEnd
+        ],
+        564 => [
+            'report' => 'outdatedDbalUsage',
+            'bucket' => self::MANUAL,
+            //@codingStandardsIgnoreStart
+            'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Use_of_Outdated_DBAL_Functionality/',
+            //@codingStandardsIgnoreEnd
+        ],
+        565 => [
+            'report' => 'deprecatedConfigParameterPasswordHash',
+            'bucket' => self::CUSTOM,
+            //@codingStandardsIgnoreStart
+            'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Use_of_Deprecated_Config_Parameter_Password_Hash/',
+            //@codingStandardsIgnoreEnd
+        ],
+        566 => [
+            'report' => 'unsupportedConfigParameterPasswordHash',
+            'bucket' => self::MANUAL,
+            //@codingStandardsIgnoreStart
+            'kb' => 'https://support.sugarcrm.com/Knowledge_Base/Installation_Upgrade/Troubleshooting_Health_Check_Output/Health_Check_Error_Use_of_Unsupported_Config_Parameter_Password_Hash/',
+            //@codingStandardsIgnoreEnd
+        ],
         // Bucket G
         901 => array(
             'report' => 'alreadyUpgraded',
@@ -796,7 +832,7 @@ class HealthCheckScannerMeta
     {
         //From 7.6.1 and onwards HealthCheck language files are always bundled with HC.
         $mod_strings = array();
-        include dirname(__FILE__) . '/../language/' . self::DEFAULT_LOCALE . '.lang.php';
+        include __DIR__ . '/../language/' . self::DEFAULT_LOCALE . '.lang.php';
         $this->modStrings = $mod_strings;
     }
 

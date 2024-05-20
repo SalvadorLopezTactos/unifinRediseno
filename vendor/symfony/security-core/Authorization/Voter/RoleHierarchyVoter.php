@@ -24,7 +24,7 @@ class RoleHierarchyVoter extends RoleVoter
 {
     private $roleHierarchy;
 
-    public function __construct(RoleHierarchyInterface $roleHierarchy, $prefix = 'ROLE_')
+    public function __construct(RoleHierarchyInterface $roleHierarchy, string $prefix = 'ROLE_')
     {
         $this->roleHierarchy = $roleHierarchy;
 
@@ -36,6 +36,6 @@ class RoleHierarchyVoter extends RoleVoter
      */
     protected function extractRoles(TokenInterface $token)
     {
-        return $this->roleHierarchy->getReachableRoles($token->getRoles());
+        return $this->roleHierarchy->getReachableRoleNames($token->getRoleNames());
     }
 }

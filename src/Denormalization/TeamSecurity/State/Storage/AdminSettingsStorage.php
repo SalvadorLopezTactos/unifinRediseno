@@ -24,8 +24,8 @@ final class AdminSettingsStorage implements Storage
     /**#@+
      * @var string
      */
-    const CATEGORY = 'team_security';
-    const NAME = 'denormalization_state';
+    public const CATEGORY = 'team_security';
+    public const NAME = 'denormalization_state';
     /**#@-*/
 
     /**

@@ -588,13 +588,12 @@ class OpportunitiesSeedData {
 
         //Retrieve the first option of the sales stage dom for default
         $salesStageDomOptions = $app_list_strings['sales_stage_dom'];
-        reset($salesStageDomOptions);
-        $salesStageFirstOption = key($salesStageDomOptions);
+        $salesStageFirstOption = array_key_first($salesStageDomOptions);
 
         $oppFieldDefs = $opp->getFieldDefinitions();
         $oppSalesStageFieldDef = $oppFieldDefs['sales_stage'];
 
-        $defaultSalesStage = isset($oppSalesStageFieldDef['default']) ? $oppSalesStageFieldDef['default'] : $salesStageFirstOption;
+        $defaultSalesStage = $oppSalesStageFieldDef['default'] ?? $salesStageFirstOption;
 
         $latestRliSalesStageIndex = 0;
         $latestRliSalesStageKey = '';
@@ -854,8 +853,8 @@ class OpportunitiesSeedData {
             for ($i = $total_months; $i >= 0; $i--) {
                 // define priority for month,
                 self::$_ranges[$total_months-$i] = ( $total_months-$i > 6 )
-                    ? self::$_ranges[$total_months-$i] = pow(6, 2) + $i
-                    :  self::$_ranges[$total_months-$i] = pow($i, 2) + 1;
+                    ? self::$_ranges[$total_months-$i] = 6 ** 2 + $i
+                    :  self::$_ranges[$total_months-$i] = $i ** 2 + 1;
                 // increase probability for current quarters
                 self::$_ranges[$total_months-$i] = $total_months-$i == 0 ? self::$_ranges[$total_months-$i]*2.5 : self::$_ranges[$total_months-$i];
                 self::$_ranges[$total_months-$i] = $total_months-$i == 1 ? self::$_ranges[$total_months-$i]*2 : self::$_ranges[$total_months-$i];
@@ -893,7 +892,7 @@ class OpportunitiesSeedData {
     public static function createDate($monthDelta = null)
     {
         global $timedate;
-        $monthDelta = $monthDelta === null ? self::getMonthDeltaFromRange() : $monthDelta;
+        $monthDelta = $monthDelta ?? self::getMonthDeltaFromRange();
 
         $now = $timedate->getNow(true);
         $now->modify("+$monthDelta month");
@@ -911,7 +910,7 @@ class OpportunitiesSeedData {
     public static function createPastDate($monthDelta = null)
     {
         global $timedate;
-        $monthDelta = $monthDelta === null ? self::getMonthDeltaFromRange() : $monthDelta;
+        $monthDelta = $monthDelta ?? self::getMonthDeltaFromRange();
 
         $now = $timedate->getNow(true);
         $now->modify("-$monthDelta month");

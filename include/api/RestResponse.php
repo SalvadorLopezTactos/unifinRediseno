@@ -16,10 +16,10 @@
 class RestResponse extends Zend_Http_Response
 {
     // Response encodings
-    const RAW = 0;
-    const JSON = 1;
-    const JSON_HTML = 2;
-    const FILE = 3;
+    public const RAW = 0;
+    public const JSON = 1;
+    public const JSON_HTML = 2;
+    public const FILE = 3;
 
     /**
      * Response type
@@ -61,7 +61,7 @@ class RestResponse extends Zend_Http_Response
         $this->code = 200;
         $this->shouldSendBody = true;
         if(!empty($server['SERVER_PROTOCOL'])) {
-            list($http, $version) = explode('/', $server['SERVER_PROTOCOL']);
+            [$http, $version] = explode('/', $server['SERVER_PROTOCOL']);
             $this->version = $version;
         } else {
             $this->version = '1.1';
@@ -272,7 +272,7 @@ class RestResponse extends Zend_Http_Response
             if (is_array($this->body) || is_object($this->body)) {
                 $etag = md5(json_encode($this->body));
             } else {
-                $etag = md5($this->body);
+                $etag = md5((string)$this->body);
             }
         }
 

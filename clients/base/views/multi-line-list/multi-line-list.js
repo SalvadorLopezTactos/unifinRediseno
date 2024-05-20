@@ -49,24 +49,140 @@
     className: 'multi-line-list-view',
     drawerModelId: null,
     sideDrawer: null,
-    plugins: ['ConfigDrivenList'],
+    plugins: ['ConfigDrivenList', 'ResizableColumns'],
 
     /**
      * Event handlers for left row actions.
      */
-    contextEvents: {
+    rowEvents: {
         'list:openrow:fire': 'openClicked',
         'list:editrow:fire': 'editClicked',
         'list:copyrow:fire': 'copyClicked'
     },
 
     /**
+     * metric data
+     */
+    metric: null,
+
+    /**
+     * indicates if the last metric tab is hidden
+     */
+    isMetricEmpty: false,
+
+    /**
+     * options
+     */
+    options: null,
+
+    /**
+     * @inheritdoc
+     */
+    loadData: function(options) {
+        if (!this.metric) {
+            // Don't load data until metric is ready
+            return;
+        }
+        this._super('loadData', [options]);
+    },
+
+    /**
+     * Metric data is ready
+     * @param {Object} data metric record from event
+     */
+    metricDataReady: function(data) {
+        this.metric = data;
+        app.events.off('metric:ready');
+        this.initialize(this.options);
+        this.undelegateEvents();
+        this.delegateEvents();
+    },
+
+    /**
+     * Metric data is ready
+     * @param {Object} data metric record from event
+     */
+    metricDataInitialize: function(data) {
+        if (data) {
+            this.metric = data;
+            this.initialize(this.options);
+            this.undelegateEvents();
+            this.delegateEvents();
+        }
+    },
+
+    /**
+     * Process multi field column header labels
+     * @param {Object} labels
+     * @param {Object} meta
+     */
+    _setMetricLabels: function(labels, meta) {
+        var metricLabels = {};
+        _.each(labels, function(label) {
+            metricLabels[label.label] = label.labelValue;
+        }, this);
+        _.each(meta.panels[0].fields, function(field) {
+            if (metricLabels[field.label]) {
+                field.labelValue = metricLabels[field.label]; // to be used by handlebar template
+            }
+        }, this);
+    },
+
+    /**
+     * Adding focus drawer types from vardefs.php to mulit-line-list fields
+     *
+     * @param {Array} fields The field from vardefs.php
+     * @param {Array} panels The mulit-line-list panels
+     */
+    setSubfieldType: function(fields, panels) {
+        let allowedTypes = [
+            'name',
+            'parent',
+            'relate',
+            'int'
+        ];
+
+        _.each(fields, function(field) {
+            _.each(panels[0].fields, function(fieldDefs, fieldsIndex) {
+                var subFields = fieldDefs.subfields;
+                _.each(subFields, function(subField, subFieldIndex) {
+                    if (field.name === subField.name && allowedTypes.includes(field.type)) {
+                        if (!subField.hasOwnProperty('type')) {
+                            this.meta.panels[0].fields[fieldsIndex].subfields[subFieldIndex].type = field.type;
+                        }
+
+                        this.meta.panels[0].fields[fieldsIndex].subfields[subFieldIndex].link = true;
+                    }
+                }, this);
+            }, this);
+        }, this);
+    },
+
+    /**
      * @override
      */
     initialize: function(options) {
+        if (!this.metric) {
+            // do not proceed if metric data is not ready
+            app.events.off('metric:ready');
+            app.events.on('metric:ready', this.metricDataReady, this);
+            app.events.off('metric:initialize');
+            app.events.on('metric:initialize', this.metricDataInitialize, this);
+
+            this.options = options;
+            this._super('initialize', [options]);
+            this.hasModuleAccess = _.contains(
+                app.metadata.getModuleNames(),
+                this.module
+            );
+            this.addContextListeners();
+            return;
+        }
         var defaultMeta = app.metadata.getView(null, 'multi-line-list') || {};
         var listViewMeta = app.metadata.getView(options.module, 'multi-line-list') || {};
         options.meta = _.extend({}, defaultMeta, listViewMeta, options.meta || {});
+        options.meta.panels = this.metric.viewdefs.base.view['multi-line-list'].panels;
+        this._setMetricLabels(this.metric.labels, options.meta);
         this._setConfig(options);
         this._setCollectionOption(options);
 
@@ -76,6 +192,7 @@
             app.metadata.getModuleNames(),
             this.module
         );
+        this.addContextListeners();
 
         // Set fields on context to forcefully load these fields
         var fields = this._extractFieldNames(this.meta);
@@ -83,6 +200,14 @@
 
         this.context.resetLoadFlag();
         this.context.set('skipFetch', false);
+
+        if (this.collection) {
+            options.fields = fields;
+            this.collection.fetch(options);
+
+            this.stopListening(this.collection);
+            this.listenTo(this.collection, 'sync', this._render);
+        }
 
         this.leftColumns = [];
         this.addActions(this.meta);
@@ -99,10 +224,135 @@
             'click .multi-line-row td:not(:first-child)': 'handleRowClick',
         });
 
+        // Add event handlers for row actions
+        _.each(this.rowEvents, function(callback, event) {
+            this.context.off(event, this[callback], this);
+            this.context.on(event, this[callback], this);
+        }, this);
+
         if (this.hasFrozenColumn) {
             this.$el.on('scroll', _.bind(this.toggleFrozenColumnBorder, this));
         }
+
         this.autoRefresh(true);
+        this._setResizableColumns();
+        // Add focus drawer types from vardefs.php to mulit-line-list fields
+        let moduleMetadataFields = app.metadata.getModule(this.module, 'fields');
+        this.setSubfieldType(moduleMetadataFields, this.meta.panels);
+    },
+
+    /**
+     * Sets configs for resizable columns.
+     */
+    _setResizableColumns: function() {
+        this.meta = this.meta || {};
+        this.meta.last_state = this.meta.last_state || {id: 'multi-line-list'};
+        this._fieldSizesKey = app.user.lastState.key(this.metric.id + ':column-width', this);
+        this._fieldSizes = null;
+        this._fields = {visible:  _.flatten(_.pluck(this.meta.panels, 'fields'))};
+        this.on('list:column:resize:save', this.saveCurrentWidths, this);
+    },
+
+    /**
+     * Gets the widths for each field.
+     *
+     * @return {Array} The list of widths if found, `undefined` otherwise.
+     */
+    getCacheWidths: function() {
+        let fieldSizes = this._fieldSizes ||
+            app.user.lastState.get(this._fieldSizesKey);
+        let visibleFields = _.pluck(this._fields.visible, 'name');
+
+        if (!fieldSizes || !_.isEqual(visibleFields, fieldSizes.visible)) {
+            return;
+        }
+
+        return fieldSizes.widths;
+    },
+
+    /**
+     * Saves the field widths.
+     *
+     * @param {Array} columns The field widths
+     */
+    saveCurrentWidths: function(columns) {
+        if (!this._fieldSizesKey || (this._fieldSizes && _.isEqual(this._fieldSizes.widths, columns))) {
+            return;
+        }
+        let visibleFields = _.pluck(this._fields.visible, 'name');
+
+        this._fieldSizes = {
+            visible: visibleFields,
+            widths: columns
+        };
+
+        app.user.lastState.set(this._fieldSizesKey, this._fieldSizes);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    bindDataChange: function() {
+        //Tells that the last metric tab is hidden
+        this.stopListening(this.context);
+        this.listenTo(this.context, 'metric:empty', this.handleLastMetricHide);
+    },
+
+    /**
+     * Handle event of hiding last metric tab
+     */
+    handleLastMetricHide: function() {
+        this.isMetricEmpty = true;
+        this._render();
+    },
+
+    /**
+     * Adds listeners for the context events
+     */
+    addContextListeners: function() {
+        this.stopListening(this.context);
+
+        this.listenTo(this.context, 'filter:fetch:start', _.bind(this.toggleSkeletonLoader, this, true));
+        this.listenTo(this.context, 'filter:fetch:success filter:fetch:complete', function() {
+            if (this.metric) {
+                this.toggleSkeletonLoader(false);
+            } else {
+                this.toggleSkeletonLoader(true);
+            }
+        }, this);
+        this.listenTo(this.context, 'active:metric:changed metric:empty', function() {
+            this.toggleSkeletonLoader(true);
+        }, this);
+    },
+
+    /**
+     * Toggles the skeleton loader on/off on the multiline list view
+     * @param show {boolean} determines if the loaders should be turned on/off. A true value will toggle on the
+     * loaders and false will turn it off.
+     */
+    toggleSkeletonLoader: function(show) {
+        const loaderElem = this.$('.multi-line-list-loader');
+
+        if (loaderElem && !this.isMetricEmpty) {
+            const dataTable = loaderElem.find('.dataTable');
+            const footerElem = loaderElem.find('.block-footer');
+            let hasLoader = loaderElem.find('.data-skeleton-loader').length !== 0;
+
+            // if the loader is already in desired state then return
+            if (hasLoader === show) {
+                return;
+            }
+
+            if (footerElem) {
+                footerElem.css('display', show ? 'none' : 'block');
+            }
+
+            if (dataTable) {
+                dataTable.css('display', show ? 'none' : 'table');
+            }
+
+            loaderElem.toggleClass('data-skeleton-loader', show);
+        }
     },
 
     /**
@@ -144,28 +394,27 @@
      * @param {Object} options object for the view
      */
     _setConfig: function(options) {
-        var configMeta = app.metadata.getModule('ConsoleConfiguration');
-
-        if (configMeta && options.context && options.context.parent) {
-            let config = configMeta.config;
-            var module = options.context.get('module');
-            var consoleId = options.context.parent.get('modelId');
-            options.meta = options.meta || {};
-            options.meta.filterDef = config.filter_def[consoleId][module] || [];
-            var orderByPrimary = config.order_by_primary[consoleId][module] || '';
-            var orderBySecondary = config.order_by_secondary[consoleId][module] || '';
-            var orderBy = orderByPrimary.trim();
-            if (orderBySecondary) {
-                orderBy += ',' + orderBySecondary.trim();
+        options.meta = options.meta || {};
+        if (this.metric.filter_def) {
+            options.meta.filterDef = this.metric.filter_def;
+        }
+        if (this.metric.order_by_primary) {
+            var orderBy =
+                this.metric.order_by_primary.trim() +
+                ':' +
+                (this.metric.order_by_primary_direction ? this.metric.order_by_primary_direction : 'asc');
+            if (this.metric.order_by_secondary) {
+                orderBy +=
+                    ',' +
+                    this.metric.order_by_secondary.trim() +
+                    ':' +
+                    (this.metric.order_by_secondary_direction ? this.metric.order_by_secondary_direction : 'asc');
             }
             options.meta.collectionOptions = options.meta.collectionOptions || {};
             options.meta.collectionOptions.params = options.meta.collectionOptions.params || {};
             options.meta.collectionOptions.params.order_by = orderBy;
-            let freezeFirstColumn = config.freeze_first_column && config.freeze_first_column[consoleId] &&
-                !_.isUndefined(config.freeze_first_column[consoleId][module]) ?
-                config.freeze_first_column[consoleId][module] : true;
-            this.hasFrozenColumn = app.config.allowFreezeFirstColumn && freezeFirstColumn;
         }
+        this.hasFrozenColumn = app.config.allowFreezeFirstColumn && this.metric.freeze_first_column;
     },
 
     /**
@@ -193,11 +442,27 @@
      */
     setFilterDef: function(options) {
         var meta = options.meta || {};
+        let optionsCollection = options.context.get('collection');
+        let filterComp = this.layout.getComponent('multi-line-filterpanel') ?
+            this.layout.getComponent('multi-line-filterpanel').getComponent('filter') : {};
+
         if (meta.filterDef) {
             // filterDef maybe altered by other methods like applyFilter()
             // but defaultFilterDef always maintains a copy of original default filters
-            options.context.get('collection').defaultFilterDef = meta.filterDef;
-            options.context.get('collection').filterDef = meta.filterDef;
+            optionsCollection.defaultFilterDef = meta.filterDef;
+            optionsCollection.filterDef = _.union(
+                meta.filterDef,
+                optionsCollection.origFilterDef || []
+            );
+        }
+
+        if (filterComp) {
+            let searchComp = filterComp.getComponent('filter-quicksearch');
+
+            if (!_.isEmpty(searchComp.currentSearch)) {
+                optionsCollection.filterDef =
+                    filterComp.buildFilterDef(optionsCollection.filterDef, searchComp.currentSearch, this.context);
+            }
         }
     },
 
@@ -256,10 +521,18 @@
         var model = this.collection.get(modelId);
         if (app.sideDrawer && model) {
             const openDrawer = _.bind(function() {
+                let dataTitle = app.sideDrawer.getDataTitle(
+                    model.get('_module'),
+                    'LBL_FOCUS_DRAWER_DASHBOARD',
+                    model.get('name')
+                );
                 app.sideDrawer.open({
                     layout: 'row-model-data',
+                    dashboardName: model.get('name'),
                     context: {
                         model: model,
+                        contentType: 'dashboard',
+                        dataTitle: dataTitle,
                         module: model.get('_module'),
                         layout: 'multi-line',
                         modelId: model.id,
@@ -426,15 +699,36 @@
      * Reload the data
      */
     refreshData: function() {
-        this.context.reloadData();
+        if (this.metric) {
+            this.context.reloadData();
+        }
     },
 
     /**
      * @inheritdoc
      */
     _render: function() {
+        this._unbindResizableColumns();
+
+        if (this.isMetricEmpty) {
+            let emptyTemplate = app.template.getView('multi-line-list.multi-line-empty-list');
+            let content = emptyTemplate();
+            this.$el.html(content);
+            return;
+        }
+
         this._super('_render');
         this.$el.closest('.dashboard').css('overflow-y', 'hidden');
+        this._makeColumnResizable();
+        if (app.sideDrawer && app.sideDrawer.isOpen()) {
+            let id = app.sideDrawer.getParentContextDef('baseModelId');
+            if (id) {
+                let $row = this.getRowDomForModelId(id);
+                if ($row.length) {
+                    this.focusRow(id);
+                }
+            }
+        }
     },
 
     /**
@@ -446,6 +740,14 @@
             this.$el.off('scroll', _.bind(this.toggleFrozenColumnBorder, this));
         }
         this.$el.closest('.dashboard').css('overflow-y', 'auto');
+        this.stopListening();
+        if (this.context) {
+            _.each(this.rowEvents, function(callback, event) {
+                this.context.off(event, this[callback], this);
+            }, this);
+        }
+        this.metric = null;
+        this.options = null;
         this._super('_dispose');
     }
 })

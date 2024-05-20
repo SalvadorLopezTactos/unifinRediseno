@@ -15,7 +15,7 @@ $mod_strings = array (
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Meetings Record Dashboard',
     'LBL_LEAD_GUESTS' => 'Lead Guests',
     'LBL_CONTACT_GUESTS' => 'Contact Guests',
-    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Meetings Focus Drawer',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Meetings Focus Dashboard',
 
 	'ERR_DELETE_RECORD' => 'A record number must be specified to delete the Meeting.',
 	'LBL_ACCEPT_THIS'=>'Accept?',
@@ -222,4 +222,10 @@ To create a {{meetings_singular_module}}:
     - Click "Select an Attendee" to add an existing user, contact, or lead to the {{meetings_singular_module}}.
     - Click the plus icon to the right of "Select an Attendee" to create a {{meetings_singular_module}} attendee as a new Sugar record.
 3. Click "Save" to finalize the new record and return to the previous page.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Is Smart Guide Meeting',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Child Tasks',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Child Calls',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Child Meetings',
 );

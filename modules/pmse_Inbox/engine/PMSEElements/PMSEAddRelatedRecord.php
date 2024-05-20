@@ -89,7 +89,7 @@ class PMSEAddRelatedRecord extends PMSEScriptTask
             ) {
 
                 $arr_module = $definitionBean->act_field_module;
-                $arr_fields = json_decode(htmlspecialchars_decode($definitionBean->act_fields));
+                $arr_fields = json_decode(htmlspecialchars_decode($definitionBean->act_fields, ENT_COMPAT));
 
                 // TODO: Probably the act_module field should be used instead of pro_module
                 $sugarModule = $processDefinitionBean->pro_module;

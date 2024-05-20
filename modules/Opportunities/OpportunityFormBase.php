@@ -55,7 +55,7 @@ function buildTableForm($rows, $mod='Opportunities'){
 
 	$form .= "<form action='index.php' method='post' name='dupOpps'><input type='hidden' name='selectedOpportunity' value=''>";
 	$form .= "<table width='100%' cellpadding='0' cellspacing='0' class='list view'>";
-	$form .= "<tr class='pagination'><td colspan='$cols'><table width='100%' cellspacing='0' cellpadding='0' border='0'><tr><td><input type='submit' class='button' name='ContinueOpportunity' value='${mod_strings['LNK_NEW_OPPORTUNITY']}'></td></tr></table></td></tr><tr>";
+        $form .= "<tr class='pagination'><td colspan='$cols'><table width='100%' cellspacing='0' cellpadding='0' border='0'><tr><td><input type='submit' class='button' name='ContinueOpportunity' value='{$mod_strings['LNK_NEW_OPPORTUNITY']}'></td></tr></table></td></tr><tr>";
 	$form .= "<tr><td scope='col'>&nbsp;</td>";
     require_once('include/formbase.php');
 	$form .= getPostToForm();
@@ -72,15 +72,15 @@ function buildTableForm($rows, $mod='Opportunities'){
 
 		$form .= "<tr class='$rowColor'>";
 
-		$form .= "<td width='1%' nowrap='nowrap'><a href='#' onclick='document.dupOpps.selectedOpportunity.value=\"${row['id']}\";document.dupOpps.submit();'>[${app_strings['LBL_SELECT_BUTTON_LABEL']}]</a>&nbsp;&nbsp;</td>";
+            $form .= "<td width='1%' nowrap='nowrap'><a href='#' onclick='document.dupOpps.selectedOpportunity.value=\"{$row['id']}\";document.dupOpps.submit();'>[{$app_strings['LBL_SELECT_BUTTON_LABEL']}]</a>&nbsp;&nbsp;</td>";
 		$wasSet = false;
 		foreach ($row as $key=>$value){
 				if($key != 'id'){
 					if(!$wasSet){
-					$form .= "<td scope='row'><a target='_blank' href='index.php?module=Opportunities&action=DetailView&record=${row['id']}'>$value</a></td>";
+                        $form .= "<td scope='row'><a target='_blank' href='index.php?module=Opportunities&action=DetailView&record={$row['id']}'>$value</a></td>";
 					$wasSet = true;
 					}else{
-					$form .= "<td><a target='_blank' href='index.php?module=Opportunities&action=DetailView&record=${row['id']}'>$value</a></td>";
+                        $form .= "<td><a target='_blank' href='index.php?module=Opportunities&action=DetailView&record={$row['id']}'>$value</a></td>";
 					}
 				}}
 
@@ -91,7 +91,7 @@ function buildTableForm($rows, $mod='Opportunities'){
 		}
 		$form .= "</tr>";
 	}
-    $form .= "<tr class='pagination'><td colspan='$cols'><table width='100%' cellspacing='0' cellpadding='0' border='0'><tr><td><input type='submit' class='button' name='ContinueOpportunity' value='${mod_strings['LNK_NEW_OPPORTUNITY']}'></td></tr></table></td></tr><tr>";
+        $form .= "<tr class='pagination'><td colspan='$cols'><table width='100%' cellspacing='0' cellpadding='0' border='0'><tr><td><input type='submit' class='button' name='ContinueOpportunity' value='{$mod_strings['LNK_NEW_OPPORTUNITY']}'></td></tr></table></td></tr><tr>";
 	$form .= "</table><BR></form>";
 
 	return $form;
@@ -121,7 +121,7 @@ $the_form = get_left_form_header($mod_strings['LBL_NEW_FORM_TITLE']);
 $the_form .= <<<EOQ
 		<form name="{$prefix}OppSave" onSubmit="return check_form('{$prefix}OppSave')" method="POST" action="index.php">
 			<input type="hidden" name="{$prefix}module" value="Opportunities">
-			<input type="hidden" name="${prefix}action" value="Save">
+			<input type="hidden" name="{$prefix}action" value="Save">
 EOQ;
 $the_form .= $this->getFormBody($prefix, $mod, "{$prefix}OppSave");
 $the_form .= <<<EOQ
@@ -174,9 +174,9 @@ $cal_lang = "en";
 $the_form = <<<EOQ
 <p>
 			<input type="hidden" name="{$prefix}record" value="">
-			<input type="hidden" name="{$prefix}assigned_user_id" value='${user_id}'>
+			<input type="hidden" name="{$prefix}assigned_user_id" value='{$user_id}'>
 
-			<input type="hidden" name="{$prefix}team_id" value='${team_id}'>
+			<input type="hidden" name="{$prefix}team_id" value='{$team_id}'>
 		$lbl_opportunity_name&nbsp;<span class="required">$lbl_required_symbol</span><br>
 		<input name='{$prefix}name' type="text" value="">
 EOQ;
@@ -202,7 +202,7 @@ $encoded_popup_request_data = $json->encode($popup_request_data);
 ///////////////////////////////////////
 
 $the_form .= <<<EOQ
-		${mod_strings['LBL_ACCOUNT_NAME']}&nbsp;<span class="required">${lbl_required_symbol}</span><br>
+		{$mod_strings['LBL_ACCOUNT_NAME']}&nbsp;<span class="required">{$lbl_required_symbol}</span><br>
 		<input class='sqsEnabled' autocomplete='off' id='qc_account_name' name='account_name' type='text' value="" size="16"><input id='qc_account_id' name='account_id' type="hidden" value=''>&nbsp;<input title="{$app_strings['LBL_SELECT_BUTTON_TITLE']}" type="button" class="button" value='{$app_strings['LBL_SELECT_BUTTON_LABEL']}' name=btn1
 			onclick='open_popup("Accounts", 600, 400, "", true, false, {$encoded_popup_request_data});' /><br>
 EOQ;

@@ -84,7 +84,7 @@ class SugarUpgradeMerge7 extends UpgradeScript
     {
         $this->log("Checking file $filename");
         $filename = $this->normalizeFilepath($filename);
-        list($modules, $module_name, $clients, $platform, $views, $viewname) = explode(DIRECTORY_SEPARATOR, $filename);
+        [$modules, $module_name, $clients, $platform, $views, $viewname] = explode(DIRECTORY_SEPARATOR, $filename);
 
         $old_viewdefs = $this->loadFile($filename, $module_name, $platform, $viewname);
         $new_viewdefs = $this->loadFile("{$this->context['new_source_dir']}/$filename", $module_name, $platform, $viewname);

@@ -24,6 +24,15 @@ $viewdefs['Messages']['base']['view']['recordlist'] = [
                 'acl_action' => 'massupdate',
             ],
             [
+                'name' => 'calc_field_button',
+                'type' => 'button',
+                'label' => 'LBL_UPDATE_CALC_FIELDS',
+                'events' => [
+                    'click' => 'list:updatecalcfields:fire',
+                ],
+                'acl_action' => 'massupdate',
+            ],
+            [
                 'name' => 'massdelete_button',
                 'type' => 'button',
                 'label' => 'LBL_DELETE',

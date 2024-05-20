@@ -67,15 +67,15 @@ class SoapHelperWebServices {
 	            $entry['name'] = $var['name'];
 	            $entry['type'] = $var['type'];
 	            if ($var['type'] == 'link') {
-		            $entry['relationship'] = (isset($var['relationship']) ? $var['relationship'] : '');
-		            $entry['module'] = (isset($var['module']) ? $var['module'] : '');
-		            $entry['bean_name'] = (isset($var['bean_name']) ? $var['bean_name'] : '');
+                    $entry['relationship'] = ($var['relationship'] ?? '');
+                    $entry['module'] = ($var['module'] ?? '');
+                    $entry['bean_name'] = ($var['bean_name'] ?? '');
 					$link_fields[$var['name']] = $entry;
 	            } else {
 		            if($translate) {
 		            	$entry['label'] = isset($var['vname']) ? translate($var['vname'], $value->module_dir) : $var['name'];
 		            } else {
-		            	$entry['label'] = isset($var['vname']) ? $var['vname'] : $var['name'];
+                        $entry['label'] = $var['vname'] ?? $var['name'];
 		            }
 		            $entry['required'] = $required;
 		            $entry['options'] = $options_ret;
@@ -460,7 +460,7 @@ class SoapHelperWebServices {
             }
 
 			foreach($filterFields as $field){
-				$var = $value->field_defs[$field];
+                $var = $value->field_defs[$field] ?? null;
                 if (isset($var['name']) && isset($value->{$var['name']})) {
                     $val = $value->{$var['name']};
 					$type = $var['type'];
@@ -765,6 +765,7 @@ class SoapHelperWebServices {
 			foreach($name_value_list as $value) {
 				$val = $value['value'];
                 if (is_array($seed->field_defs) && isset($value['name'])
+                    && isset($seed->field_defs[$value['name']])
                     && is_array($seed->field_defs[$value['name']]) &&
                     $seed->field_defs[$value['name']]['type'] == 'enum') {
                     $vardef = $seed->field_defs[$value['name']];
@@ -923,7 +924,7 @@ class SoapHelperWebServices {
         $this->getLogger()->info('Begin: SoapHelperWebServices->get_report_value');
 		$field_list = array();
 		$output_list = array();
-        $report = new Report(html_entity_decode($seed->content), '', '');
+        $report = new Report(html_entity_decode($seed->content, ENT_COMPAT), '', '');
 		$report->enable_paging = false; //set paging = false for report.
 
 		$next_row_fn = 'get_next_row';
@@ -1125,10 +1126,10 @@ class SoapHelperWebServices {
 
 		$query = '';
 
-		$trimmed_email = trim($seed->email1);
-        $trimmed_email2 = trim($seed->email2);
-	    $trimmed_last = trim($seed->last_name);
-	    $trimmed_first = trim($seed->first_name);
+        $trimmed_email = trim((string)$seed->email1);
+        $trimmed_email2 = trim((string)$seed->email2);
+        $trimmed_last = trim((string)$seed->last_name);
+        $trimmed_first = trim((string)$seed->first_name);
 		if(!empty($trimmed_email) || !empty($trimmed_email2)){
 
 			//obtain a list of contacts which contain the same email address

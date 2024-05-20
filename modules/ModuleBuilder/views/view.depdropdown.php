@@ -28,7 +28,7 @@ class ViewDepDropdown extends SugarView
         $parentList = $this->request->getValidInputRequest('parentList');
         $childList = $this->request->getValidInputRequest('childList');
 
-        $mapping = empty($_REQUEST['mapping']) ? array() : json_decode(html_entity_decode($_REQUEST['mapping']), true);
+        $mapping = empty($_REQUEST['mapping']) ? array() : json_decode(html_entity_decode($_REQUEST['mapping'], ENT_COMPAT), true);
 
         $this->ss->assign("mapping", $mapping);
 

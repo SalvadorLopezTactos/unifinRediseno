@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Создано пользователем',
   'LBL_EDIT_LAYOUT' => 'Правка расположения' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Только администраторы',
-  'LBL_CURRENCY_DEFAULT' => 'Долл. США (по умолчанию)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Системная валюта (по умолчанию)',
 );
 ?>

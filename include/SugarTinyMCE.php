@@ -207,12 +207,12 @@ eoq;
     private function overloadButtonConfigs()
     {
         if (SugarAutoLoader::existing($this->customConfigFile)) {
-            require_once($this->customConfigFile);
+            require_once $this->customConfigFile;
         }
 
         $defs = SugarAutoLoader::loadExtension('tinymce');
         if ($defs) {
-            require($defs);
+            require $defs;
         }
 
         if (!isset($buttonConfigs)) {

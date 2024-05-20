@@ -283,8 +283,11 @@ $dictionary['ForecastDirectReports'] = array( 'table'=>'does_not_exist',
 
   ),
 );
-$dictionary['Forecast'] = array('table' => 'forecasts'
-,'acl_fields' =>false,
+$dictionary['Forecast'] = array(
+    'table' => 'forecasts',
+    'color' => 'army',
+    'icon' => 'sicon-forecasts-lg',
+    'acl_fields' =>false,
    'fields' => array (
   'id' =>
   array (

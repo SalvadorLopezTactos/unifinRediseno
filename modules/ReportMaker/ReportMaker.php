@@ -80,7 +80,7 @@ class ReportMaker extends SugarBean {
     {
         $query = "update data_sets set report_id='' where report_id= ? and deleted=0";
         $conn = $this->db->getConnection();
-        $conn->executeQuery($query, array($id));
+        $conn->executeStatement($query, array($id));
         parent::mark_deleted($id);
     }
 
@@ -129,7 +129,8 @@ EOT;
     }
 
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $timedate;
 		global $app_strings, $mod_strings;
 		global $app_list_strings;

@@ -116,6 +116,8 @@ class ProcessView {
 
     function get_adv_related($step, $target_element, $rel_name_part){
 
+        $target_rel2_field = null;
+        $target_rel2_type = null;
         global $process_dictionary;
         global $local_string;
 
@@ -193,6 +195,7 @@ class ProcessView {
 
     function build_top_block($element_count, & $top_array, $selected_element){
 
+        $input_element = null;
         if($this->hide_this_type($top_array['value'])){
             //mod_id
             //input_element
@@ -697,6 +700,9 @@ class ProcessView {
     function get_action_shell_display_text($action_shell, $get_all_fields = true)
     {
 
+        $opt = [];
+        $temp_module = null;
+        $meta_filter = null;
         $action_processed = false;
 
         $workflow_object = $action_shell->get_workflow_object();

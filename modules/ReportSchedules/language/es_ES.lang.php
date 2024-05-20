@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Cuadro de mando de registros de planificación de informes',
     'LBL_FILE_TYPE' => 'Tipos de archivo',
+    'LBL_EMBED_REPORT' => 'Informe insertado en el correo electrónico',
+    'LBL_EMBED_REPORT_INFO' => 'Nota: Si el informe supera las 200 filas, adjuntaremos el informe como archivo CSV.',
 );

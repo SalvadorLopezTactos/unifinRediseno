@@ -19,7 +19,8 @@
     events: {
         'click a[name=clear_button]': 'clear',
         'click .addDocument': 'openDocumentsSelectionList',
-        'click .sendEnvelope': 'sendToDocuSign'
+        'click .sendEnvelope': 'sendToDocuSign',
+        'click .selectTemplate': 'selectTemplate'
     },
 
     /**
@@ -27,12 +28,33 @@
      */
     initialize: function(options) {
         this._super('initialize', [options]);
+
+        this.listenTo(this.collection, 'change add remove', _.bind(this.toggleFieldsAccessability, this));
+    },
+
+    /**
+     * Toggle fields accessability
+     */
+    toggleFieldsAccessability: function() {
+        var clearButton = this.$('a[name=clear_button]');
+        var sendButton = this.$('.sendEnvelope');
+
+        if (this.collection.models.length === 0) {
+            clearButton.hide();
+            sendButton.addClass('disabled');
+        } else {
+            clearButton.show();
+            sendButton.removeClass('disabled');
+        }
     },
 
     /**
      * Clear collection
      */
     clear: function() {
+        if (this.collection.models.length === 0) {
+            return;
+        }
         this.collection.reset();
     },
 
@@ -59,6 +81,22 @@
      * Send to DocuSign
      */
     sendToDocuSign: function() {
+        if (this.collection.models.length === 0) {
+            return;
+        }
         this.context.parent.trigger('sendDocumentsToDocuSign');
+    },
+
+    /**
+     * Select template
+     */
+    selectTemplate: function() {
+        this.context.parent.trigger('selectTemplate');
+    },
+
+    _render: function() {
+        this._super('_render');
+
+        this.toggleFieldsAccessability();
     }
 })

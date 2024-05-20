@@ -16,6 +16,10 @@ use Sugarcrm\Sugarcrm\Session\SessionStorage;
 class UsersViewAuthenticate extends SidecarView
 {
     /**
+     * @var mixed
+     */
+    public $platform;
+    /**
      * Do we need only data for parent window or the whole Sidecar?
      * @var bool
      */

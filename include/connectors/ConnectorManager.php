@@ -99,7 +99,7 @@ class ConnectorManager
         // Handle the cache file
         $cacheFile = sugar_cached('api/metadata/connectors.php');
         if (file_exists($cacheFile)) {
-            require $cacheFile;
+            include $cacheFile;
         } else {
             $connectors = $this->buildConnectorsMeta();
         }

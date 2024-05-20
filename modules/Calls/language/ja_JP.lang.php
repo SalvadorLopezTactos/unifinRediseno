@@ -188,4 +188,10 @@ Sugarユーザ、取引先担当者、リードをコール参加者として追
 - 既存のユーザー、連絡先、リードを{{calls_singular_module}} に追加するには、「参加者の選択」をクリックします。
 - 「参加者の選択」の右側にあるプラスアイコンをクリックして{{calls_singular_module}} 参加者を新しいSugarレコードとして作成します。
 3. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "スマートガイド通話です",
+    'LBL_PARENT_CALL_OF_TASK_REL' => '子タスク',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => '子会議',
+    'LBL_PARENT_CALL_OF_CALL_REL' => '子通話',
 );

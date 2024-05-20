@@ -13,7 +13,6 @@
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Encoder;
 
 use Sugarcrm\IdentityProvider\Encoder\BCryptLegacyMD5PasswordEncoder;
-use Sugarcrm\IdentityProvider\Encoder\BCryptLegacyMD5StrictPasswordEncoder;
 use Sugarcrm\IdentityProvider\Encoder\BCryptPasswordEncoder;
 use Sugarcrm\IdentityProvider\Encoder\CryptLegacyMD5PasswordEncoder;
 use Sugarcrm\IdentityProvider\Encoder\CryptLegacyMD5StrictPasswordEncoder;
@@ -46,7 +45,7 @@ class EncoderBuilderTest extends \PHPUnit_Framework_TestCase
                 false,
             ],
             'blowfish_md5_strict' => [
-                BCryptLegacyMD5StrictPasswordEncoder::class,
+                BCryptLegacyMD5PasswordEncoder::class,
                 ['passwordHash' => ['backend' => 'native']],
                 true,
                 true,

@@ -143,7 +143,7 @@ class SugarOAuth
                 $this->oAuthConsumer->setCallbackUrl($callback);
             }
 
-            list($url, $query_params) = $this->parseUrl($url);
+            [$url, $query_params] = $this->parseUrl($url);
             $params = array_merge($params, $query_params);
 
             $this->oAuthConsumer->setRequestTokenUrl($url);
@@ -182,7 +182,7 @@ class SugarOAuth
         public function fetch($url, $params = array(), $method = 'GET', $headers = null)
         {
             $acc = $this->makeAccessToken();
-            list($url, $query_params) = $this->parseUrl($url);
+            [$url, $query_params] = $this->parseUrl($url);
             $params = array_merge($params, $query_params);
             
             $client = $acc->getHttpClient($this->_oauth_config, $url);

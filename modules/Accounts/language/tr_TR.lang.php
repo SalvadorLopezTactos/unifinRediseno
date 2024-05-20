@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Hesaplar Listesi Panosu',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Hesaplar Kaydı Panosu',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Hesapların Odak Bölmesi',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Hesap Bilgileri',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Hesapların Odak Bölmesi - Konsol',
     'LBL_NEXT_RENEWAL_DATE' => 'Sonraki Yenileme Tarihi',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Sonraki Yenileme Tarihi',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Hesap Adı/Endüstri',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Yer',
     'LBL_PURCHASES' => 'Satın Alımlar',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Hesap Zaman Çizelgesi',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Düzenle',
+    'LBL_CREATE_NEW' => 'Yeni Oluştur',
+    'LBL_MANAGE' => 'Yönet',
+    'LBL_SEE_DETAILS' => 'Detayları Görüntüle',
+    'LBL_HIDE_NEW' => 'Gizle',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikler',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. "Kaydet" tuşuna basarak yeni kaydınızı tamamlayın ve önceki sayfaya dönün.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Müşteri Raporları',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Harici Kullanıcılar',
 );

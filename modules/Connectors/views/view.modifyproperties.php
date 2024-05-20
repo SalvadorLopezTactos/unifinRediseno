@@ -65,7 +65,7 @@ class ViewModifyProperties extends SugarView
             }else{
                 if (empty($required_fields)){
                     foreach ($fields as $field_id) {
-                        $label = isset($connector_strings[$field_id]) ? $connector_strings[$field_id] : $field_id;
+                        $label = $connector_strings[$field_id] ?? $field_id;
                         $required_fields[$id][$field_id] = $label;
                     }
                 }

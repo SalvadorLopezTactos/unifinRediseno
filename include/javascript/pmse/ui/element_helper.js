@@ -79,6 +79,7 @@ PMSE.ElementHelper.prototype._typeToControl = {
     //"image": "image" ,
     "integer": "integer",
     "multiselect": "multiselect",
+    "parent_type": "dropdown",
     //"flex relate": "flexrelate",
     "phone": "text",
     "radio": "radio",
@@ -819,8 +820,8 @@ PMSE.ElementHelper.prototype.processValueDependency = function (dependantField, 
             newFieldSettings.options = [];
             var beanToProcess = App.data.createBean(PROJECT_MODULE);
             if (this._currentMod && this._currentMod !== PROJECT_MODULE) {
-                this._currentMod = this._currentMod.charAt(0).toUpperCase() + this._currentMod.slice(1);
-                beanToProcess = App.data.createBean(this._currentMod);
+                var relMod = App.data.getRelatedModule(PROJECT_MODULE, this._currentMod);
+                beanToProcess = App.data.createBean(relMod);
             }
             var fields = beanToProcess && beanToProcess.fields ? beanToProcess.fields : [];
             var fieldName = parentField.getSelectedData().value;

@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Izveidoja',
   'LBL_EDIT_LAYOUT' => 'Rediģēt izkārtojumu' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Tikai administratoriem',
-  'LBL_CURRENCY_DEFAULT' => 'ASV dolāri (noklusējums)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Sistēmas valūta (noklusējuma)',
 );
 ?>

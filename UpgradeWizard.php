@@ -72,7 +72,7 @@ if ($res !== false && $upg->success) {
     }
 } else {
     // error
-    $reply = array("status" => "error", "message" => $upg->error?$upg->error:"Stage {$_REQUEST['action']} failed", 'data' => $res);
+    $reply = array("status" => "error", "message" => $upg->error ?: "Stage {$_REQUEST['action']} failed", 'data' => $res);
 }
 
 if ($_REQUEST['action'] == 'healthcheck') {

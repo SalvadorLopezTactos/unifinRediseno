@@ -146,15 +146,18 @@ class SugarMath
      */
     protected function _applyOperation($operator, $params = null)
     {
+        if (!is_array($params)) {
+            $params = [];
+        }
         switch ($operator) {
             case 'add':
-                return bcadd($params[0], $params[1], $this->scale);
+                return bcadd($params[0] ?? '0', $params[1] ?? '0', $this->scale);
                 break;
             case 'sub':
-                return bcsub($params[0], $params[1], $this->scale);
+                return bcsub($params[0] ?? '0', $params[1] ?? '0', $this->scale);
                 break;
             case 'mul':
-                return bcmul($params[0], $params[1], $this->scale);
+                return bcmul($params[0] ?? '0', $params[1] ?? '0', $this->scale);
                 break;
             case 'div':
                 try {
@@ -166,7 +169,7 @@ class SugarMath
                         throw new InvalidArgumentException('Invalid arguments for division');
                     }
 
-                    return @bcdiv($numerator, $denominator, $this->scale);
+                    return bcdiv($numerator, $denominator, $this->scale);
                 } catch (DivisionByZeroError $e) {
                     LoggerManager::getLogger()->fatal('Division by zero bcdiv: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
                 } catch (InvalidArgumentException $e) {
@@ -176,7 +179,7 @@ class SugarMath
                 break;
             case 'pow':
                 // bcpow anyway truncates exponent, at least it does not raise warning if we do it explicitly
-                return bcpow($params[0], (int)$params[1], $this->scale);
+                return bcpow($params[0] ?? '0', (int)$params[1], $this->scale);
                 break;
             case 'mod':
                 try {
@@ -188,7 +191,7 @@ class SugarMath
                         throw new InvalidArgumentException('Invalid arguments for modulo');
                     }
 
-                    return @bcmod($numerator, $denominator, $this->scale);
+                    return bcmod($numerator, $denominator, $this->scale);
                 } catch (DivisionByZeroError $e) {
                     LoggerManager::getLogger()->fatal('Division by zero in bcmod: ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
                 } catch (InvalidArgumentException $e) {
@@ -225,7 +228,7 @@ class SugarMath
                 }
                 break;
             case 'comp':
-                return bccomp($params[0], $params[1], $this->scale);
+                return bccomp($params[0] ?? '0', $params[1] ?? '0', $this->scale);
                 break;
             default:
                 throw new SugarMath_Exception("unknown operator '{$operator}'");
@@ -375,19 +378,19 @@ class SugarMath
             case 'numeric':
             default:
                 if (!is_numeric($value)) {
-                    $message = isset($errorMsg) ? $errorMsg : "value '{$value}' must be numeric";
+                    $message = $errorMsg ?? "value '{$value}' must be numeric";
                     throw new SugarMath_Exception("{$message}");
                 }
                 break;
             case 'int':
             case 'intpos':
                 if (!is_numeric($value) || strpos((string)$value, '.') !== false) {
-                    $message = isset($errorMsg) ? $errorMsg : "value '{$value}' must be an integer";
+                    $message = $errorMsg ?? "value '{$value}' must be an integer";
                     throw new SugarMath_Exception("{$message}");
                 }
                 if ($type == 'intpos') {
                     if ($value < 0) {
-                        $message = isset($errorMsg) ? $errorMsg : "value '{$value}' must be a positive integer";
+                        $message = $errorMsg ?? "value '{$value}' must be a positive integer";
                         throw new SugarMath_Exception("{$message}");
                     }
                 }

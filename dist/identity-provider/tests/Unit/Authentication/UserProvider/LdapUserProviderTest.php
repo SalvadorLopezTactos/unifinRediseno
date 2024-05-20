@@ -19,11 +19,12 @@ use Symfony\Component\Ldap\Adapter\QueryInterface;
 use Symfony\Component\Ldap\Entry;
 use Symfony\Component\Ldap\Exception\ConnectionException;
 use Symfony\Component\Ldap\LdapInterface;
+use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * @requires extension ldap
- * @coversDefaultClass Sugarcrm\IdentityProvider\Authentication\UserProvider\LdapUserProvider
+ * @coversDefaultClass \Sugarcrm\IdentityProvider\Authentication\UserProvider\LdapUserProvider
  */
 class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -59,8 +60,8 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
     {
         $this->ldap = $this->getMockBuilder(LdapInterface::class)->getMock();
         $this->ldap->method('escape')->willReturn('username');
-        $this->token = $this->getMockBuilder(TokenInterface::class)->getMock();
-        $this->token->method('getUsername')->willReturn('username');
+        $this->token = $this->getMockBuilder(AbstractToken::class)->getMock();
+        $this->token->method('getUserIdentifier')->willReturn('username');
         $this->token->method('getCredentials')->willReturn('password');
         $this->entries = $this->getMockBuilder(CollectionInterface::class)->getMock();
         $this->query = $this->getMockBuilder(QueryInterface::class)->getMock();
@@ -85,14 +86,14 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
         $this->ldap->method('escape')->willReturnArgument(0);
         $this->ldap->method('query')->willReturn($this->query);
 
-        $user = $this->userProvider->loadUserByUsername('user1');
+        $user = $this->userProvider->loadUserByIdentifier('user1');
         $this->assertTrue($user instanceof User);
         /** @var User $user */
         $this->assertSame($entry, $user->getAttribute('entry'));
     }
 
     /**
-     * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     * @expectedException \Symfony\Component\Security\Core\Exception\UserNotFoundException
      *
      * @covers ::loadUserByToken
      */
@@ -105,7 +106,7 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     * @expectedException \Symfony\Component\Security\Core\Exception\UserNotFoundException
      * @expectedExceptionMessage User "username" not found.
      *
      * @covers ::loadUserByToken
@@ -120,7 +121,7 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     * @expectedException \Symfony\Component\Security\Core\Exception\UserNotFoundException
      * @expectedExceptionMessage More than one user found
      *
      * @covers ::loadUserByToken

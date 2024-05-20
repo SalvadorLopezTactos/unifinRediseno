@@ -101,7 +101,9 @@
                     layout: 'maps-manual-geocoding',
                     module: 'Geocode',
                     context: app.controller.context,
-                });
+                }, _.bind(function notifyListeners() {
+                    this.trigger('maps-manual-geocoding-finished');
+                }, this));
             },
 
             /**

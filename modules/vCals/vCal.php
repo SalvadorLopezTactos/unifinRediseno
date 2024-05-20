@@ -38,10 +38,10 @@ class vCal extends SugarBean {
 	// This is used to retrieve related fields from form posts.
 	var $additional_column_fields = Array();
 
-	const UTC_FORMAT = 'Ymd\THi00\Z';
-    const EOL = "\r\n";
-    const TAB = "\t";
-    const CHARSPERLINE = 75;
+    public const UTC_FORMAT = 'Ymd\THi00\Z';
+    public const EOL = "\r\n";
+    public const TAB = "\t";
+    public const CHARSPERLINE = 75;
 
 	public function __construct()
 	{
@@ -76,7 +76,7 @@ class vCal extends SugarBean {
 	{
 	}
 
-	function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
 	{
 	}
 
@@ -343,7 +343,7 @@ class vCal extends SugarBean {
      */
     public static function escape_ical_chars($string)
     {
-        $string = str_replace(array("\\", "\r", "\n", ";", ","), array("\\\\", "\\r", "\\n", "\\;", "\\,"), $string);
+        $string = str_replace(["\\", "\r", "\n", ";", ","], ["\\\\", "\\r", "\\n", "\\;", "\\,"], (string)$string);
         return $string;
     }
 

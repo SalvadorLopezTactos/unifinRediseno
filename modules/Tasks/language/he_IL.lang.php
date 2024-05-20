@@ -117,4 +117,13 @@ $mod_strings = array (
  - לחץ על "הצג עוד" כדי להציג שדות אחרים לפי הצורך.
 2. לחץ על "שמור" כדי להשלים את הרישום החדש ולחזור לדף הקודם.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'משימת מדריך חכם',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'משימה של מדריך חכם',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'תאריך התחלה של פעילות מדריך חכם',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'תאריך סיום של פעילות מדריך חכם',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'מדריך חכם - ימים לסיום',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'פגישות ילד',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'שיחות ילד',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'משימות ילד',
 );

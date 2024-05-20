@@ -190,4 +190,10 @@ Da bi {{calls_singular_module}} bio kreiran:
 - Kliknite na "Odaberi saučesnika" da dodaš postojećeg korisnika, kontakt ili rukovodioca u {{calls_singular_module}}.
 - Kliknite na ikonu plus sa desne strane "Odaberi saučesnika" da kreiraš {{calls_singular_module}} saučesnika kao nov Sugar zapis.
 3. Kliknite na "Sačuvaj" da dovršite nov zapis i za povratak na predhodnu stranu.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "je Smart Guide poziv",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Podređeni zadaci',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Podređeni sastanci',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Podređeni pozivi',
 );

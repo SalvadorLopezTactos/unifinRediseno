@@ -38,6 +38,9 @@
         this.collection.on('reset', function() {
             this.hide();
             this.buildCommitLog();
+            if (this.context.get('forecastType') === 'Direct') {
+                this.show();
+            }
         }, this);
 
         this.context.on('forecast:commit_log:trigger', function() {

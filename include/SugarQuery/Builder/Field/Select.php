@@ -138,7 +138,7 @@ class SugarQuery_Builder_Field_Select extends SugarQuery_Builder_Field
             $this->table = strstr($this->table, '_cstm') ? $this->table : $this->table . '_cstm';
         }
         if (!empty($this->def['db_concat_fields'])) {
-            $tableAlias = $this->jta ? $this->jta : $this->table;
+            $tableAlias = $this->jta ?: $this->table;
             $expr = $GLOBALS['db']->concat($tableAlias, $this->def['db_concat_fields']);
             $this->field = $expr;
             $this->markNonDb();

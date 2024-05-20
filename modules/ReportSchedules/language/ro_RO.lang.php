@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare programe raportate',
     'LBL_FILE_TYPE' => 'Tip de fișier',
+    'LBL_EMBED_REPORT' => 'Încorporare raport în e-mail',
+    'LBL_EMBED_REPORT_INFO' => 'Notă: dacă raportul depășește 200 de rânduri, vom atașa raportul ca fișier CSV.',
 );

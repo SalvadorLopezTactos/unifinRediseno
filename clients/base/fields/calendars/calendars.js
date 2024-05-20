@@ -36,27 +36,6 @@
     },
 
     /**
-     * Remove deleted calendars stored in Local Storage
-     *
-     * Check for the local storage updates to make sure this field was not set with deleted calendars
-     * If needed, we'll update the model
-     */
-    _removeCalendarsStoredButDeleted: function() {
-        let calendarsUpdated = [];
-        let calendarIdsInLocalStorage = _.pluck(
-            app.cache.get(this.view.keyToStoreCalendarConfigurations)[this.name],
-            'calendarId'
-        );
-        _.each(this.model.get(this.name), function(calendar) {
-            if (calendarIdsInLocalStorage.indexOf(calendar.calendarId) >= 0) {
-                calendarsUpdated.push(calendar);
-            }
-        });
-
-        this.model.set(this.name, calendarsUpdated, {silent: true});
-    },
-
-    /**
      * @inheritdoc
      */
     bindDataChange: function() {
@@ -72,9 +51,6 @@
      * Listening to external events
      */
     _registerEvents: function() {
-        this.listenTo(app.events, 'calendar:storage:changed', _.bind(this._removeCalendarsStoredButDeleted, this));
-        this.listenTo(app.events, 'calendar:storage:changed', _.bind(this.updateCount, this));
-
         this.listenTo(this, 'calendars:selectAll', _.bind(this.selectAllCalendars, this));
     },
 
@@ -110,7 +86,9 @@
         };
         data[this.name] = configurations;
 
-        app.cache.set(this.view.keyToStoreCalendarConfigurations, data);
+        if (this.view.name !== 'calendar-scheduler-dashlet') {
+            app.user.lastState.set(this.view.keyToStoreCalendarConfigurations, data);
+        }
 
         this.model.set(this.name, configurations);
         this.updateCount();
@@ -148,12 +126,14 @@
                     }
                 });
 
-                const dataToSaveInLS = {
+                const dataToSaveInStorage = {
                     myCalendars: this.model.get('myCalendars') || [],
                     otherCalendars: newCalendars
                 };
 
-                app.cache.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInLS);
+                if (this.view.name !== 'calendar-scheduler-dashlet') {
+                    app.user.lastState.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInStorage);
+                }
                 this.model.set(this.name, newCalendars);
 
                 this.render();
@@ -289,19 +269,27 @@
         const currentCalendars = app.utils.deepCopy(this.model.get(fieldToClear));
 
         //useful for clear otherCalendars
-        let cache = app.cache.get(this.view.keyToStoreCalendarConfigurations);
         if (fieldToClear === 'myCalendars') {
             this.model.set(fieldToClear, []);
-            cache[fieldToClear] = [];
         } else {
             const updatedCalendars = _.map(currentCalendars, function(calendar) {
                 calendar.selected = false;
                 return calendar;
             });
-            cache[fieldToClear] = updatedCalendars;
             this.model.set(fieldToClear, updatedCalendars);
         }
-        app.cache.set(this.view.keyToStoreCalendarConfigurations, cache);
+
+
+        if (this.view.name !== 'calendar-scheduler-dashlet') {
+            let cache = app.user.lastState.get(this.view.keyToStoreCalendarConfigurations);
+            if (fieldToClear === 'myCalendars') {
+                cache[fieldToClear] = [];
+            } else {
+                cache[fieldToClear] = this.model.get(fieldToClear);
+            }
+
+            app.user.lastState.set(this.view.keyToStoreCalendarConfigurations, cache);
+        }
     },
 
     /**
@@ -369,11 +357,14 @@
                     });
 
                     if (configurationsToShow.myCalendars.length !== myConfigurationsToShowVerified.length) {
-                        const dataToSaveInLS = {
+                        const dataToSaveInStorage = {
                             myCalendars: myConfigurationsToShowVerified,
                             otherCalendars: configurationsToShow.otherCalendars || []
                         };
-                        app.cache.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInLS);
+
+                        if (this.view.name !== 'calendar-scheduler-dashlet') {
+                            app.user.lastState.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInStorage);
+                        }
 
                         //trigger count update
                         this.model.set(this.name, myConfigurationsToShowVerified);
@@ -392,11 +383,11 @@
                         otherConfigurationsToShowVerified =  this.verifyConfigurations(otherConfigurationsToShow, data);
 
                         if (configurationsToShow.otherCalendars.length !== otherConfigurationsToShowVerified.length) {
-                            const dataToSaveInLS = {
+                            const dataToSaveInStorage = {
                                 myCalendars: configurationsToShow.myCalendars || [],
                                 otherCalendars: otherConfigurationsToShowVerified
                             };
-                            app.cache.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInLS);
+                            app.user.lastState.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInStorage);
 
                             //trigger count update
                             this.model.set(this.name, otherConfigurationsToShowVerified);
@@ -601,14 +592,14 @@
     },
 
     /**
-     * Update model AND localStorage with calendars selected.
+     * Update model AND storage with calendars selected.
      * Specific actions are going to be executed in each view where the field is added
      *
      * @param {Object} calendar
      * @param {boolean} checked
      */
     updateCalendars: function(calendar, checked) {
-        let dataToSaveInLS;
+        let dataToSaveInStorage;
         let configurations;
 
         const calendarId = calendar.calendarId;
@@ -635,35 +626,31 @@
                 };
 
                 const newCalendarsList = calendarsOnModel.concat([tempConfig]);
-                dataToSaveInLS = {
+                dataToSaveInStorage = {
                     myCalendars: newCalendarsList,
                     otherCalendars: otherConfigurations
                 };
 
                 if (this.view.name != 'calendar-scheduler-dashlet') {
-                    app.cache.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInLS);
+                    app.user.lastState.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInStorage);
                 }
 
                 this.model.set(this.name, newCalendarsList);
             } else {
                 configurations = _.filter(calendarsOnModel, _.bind(function(calendar) {
                     if (calendar.calendarId === calendarId) {
-                        if (
-                            (!_.isEmpty(calendar.userId) && calendar.userId === userId)
-                        ) {
-                            return false;
-                        }
+                        return false;
                     }
                     return true;
                 }, this));
 
-                dataToSaveInLS = {
+                dataToSaveInStorage = {
                     myCalendars: configurations,
                     otherCalendars: otherConfigurations
                 };
 
                 if (this.view.name != 'calendar-scheduler-dashlet') {
-                    app.cache.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInLS);
+                    app.user.lastState.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInStorage);
                 }
 
                 this.model.set(this.name, configurations);
@@ -682,13 +669,13 @@
                     return calendar;
                 }, this));
 
-                dataToSaveInLS = {
+                dataToSaveInStorage = {
                     myCalendars: myConfigurations,
                     otherCalendars: configurations
                 };
 
                 if (this.view.name != 'calendar-scheduler-dashlet') {
-                    app.cache.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInLS);
+                    app.user.lastState.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInStorage);
                 }
 
                 this.model.set(this.name, configurations);
@@ -705,13 +692,13 @@
                     return calendar;
                 }, this));
 
-                dataToSaveInLS = {
+                dataToSaveInStorage = {
                     myCalendars: myConfigurations,
                     otherCalendars: configurations
                 };
 
                 if (this.view.name != 'calendar-scheduler-dashlet') {
-                    app.cache.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInLS);
+                    app.user.lastState.set(this.view.keyToStoreCalendarConfigurations, dataToSaveInStorage);
                 }
 
                 this.model.set(this.name, configurations);

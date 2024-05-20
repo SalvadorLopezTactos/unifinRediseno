@@ -563,6 +563,22 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
     },
 
     getRelatedField : function(link, ftype, field){
+        if (field && ftype === 'related') {
+            if (this.model.link && this.model.link.bean) {
+                let bean = this.model.link.bean;
+                let module = bean.get('_module');
+
+                if (module && module.toLowerCase() === link) {
+                    return bean.get(field);
+                }
+            }
+
+            let values = this.model.get(link) || {};
+            if (values && !_.isEmpty(values[field])) {
+                return values[field];
+            }
+        }
+
         var linkVar = this._linkValueVarname(link);
         var linkValues = this.model.get(linkVar) || {};
 
@@ -1185,13 +1201,11 @@ SUGAR.forms.Dependency.prototype.fire = function(undo)
                 if (this.testOnLoad && action.afterRender) {
                     if (this.context.view.action === 'list') {
                         this.context.view.on('render', function() {
-                            /*
                             var prevModel = action.context.model;
                             action.context.setModel(model);
                             action.exec();
                             action.context.setModel(prevModel);
-                            */
-                        }, this);
+                        }, action);
                     }
                 }
             }
@@ -1362,7 +1376,11 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
 
         // get all the related fields for the links in this formula
         _.each(this.dependency.getRelatedFields(), function(field) {
-            linkFields[field.link] = _.union(linkFields[field.link] || [], [field.relate]);
+            linkFields[field.link] = _.union(
+                linkFields[field.link] || [],
+                [field.relate],
+                [field.condition_field] || []
+            );
         });
 
         var colChangeCallback = _.bind(function(relModel, value, event) {

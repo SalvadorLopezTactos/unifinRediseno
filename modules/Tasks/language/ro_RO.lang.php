@@ -111,4 +111,13 @@ Pentru a crea {{module_name}}:
 - Faceţi clic pe "Afişare mai multe" pentru a afişa câmpuri suplimentare, dacă este necesar.
 2. Faceţi clic pe "Salvare" pentru a finaliza noua înregistrare şi pentru a reveni la pagina anterioară.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Sarcină de ghid inteligent',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Este sarcină de ghid inteligent',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Data de începere a activității de ghid inteligent',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Data de finalizare a activității de ghid inteligent',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Ghid inteligent - zile rămase până la finalizare',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Întâlniri copii',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Apeluri copii',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Sarcini copii',
 );

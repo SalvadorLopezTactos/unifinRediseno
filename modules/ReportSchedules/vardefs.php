@@ -104,6 +104,16 @@ $dictionary['ReportSchedule'] = array(
             'len' => 32,
             'default' => 'PDF',
             'comment' => 'File type for scheduled report attachment',
+            'dependency' => 'equal($embed_report, "")',
+        ],
+        'embed_report' => [
+            'name' => 'embed_report',
+            'vname' => 'LBL_EMBED_REPORT',
+            'type' => 'enum',
+            'options' => 'embed_report_dom',
+            'len' => 32,
+            'default' => '',
+            'comment' => 'Embed report in email',
         ],
     ),
     'relationships' => array(

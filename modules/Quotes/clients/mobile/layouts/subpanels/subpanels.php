@@ -31,7 +31,7 @@ $viewdefs['Quotes']['mobile']['layout']['subpanels'] = array(
             'linkable' => false,
             'unlinkable' => false,
             'context' => array(
-                'link' => 'archived_emails',
+                'link' => 'emails',
             ),
         ),
         array(
@@ -55,5 +55,12 @@ $viewdefs['Quotes']['mobile']['layout']['subpanels'] = array(
                 'link' => 'documents',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'contracts',
+            ],
+        ],
     ),
 );

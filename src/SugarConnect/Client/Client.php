@@ -12,6 +12,9 @@
 
 namespace Sugarcrm\Sugarcrm\SugarConnect\Client;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 interface Client
 {
     /**

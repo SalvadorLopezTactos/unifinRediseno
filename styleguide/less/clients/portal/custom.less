@@ -37,6 +37,32 @@ ul.nav.nav-tabs li.activity {
       }
     }
   }
+
+  #content {
+    left: 0;
+    width: 100%;
+
+    .span12 {
+      .headerpane {
+        width: 100%;
+      }
+    }
+  }
+
+  #drawers {
+    .main-pane {
+      &.span8 {
+        width: calc(66vw ~"-" @sidebarNavWidth);
+      }
+    }
+  }
+
+  .navbar {
+    &.navbar-fixed-top {
+      left: 0;
+      width: 100%;
+    }
+  }
 }
 
 .dashboard {

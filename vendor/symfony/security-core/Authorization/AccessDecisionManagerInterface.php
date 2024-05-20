@@ -23,11 +23,10 @@ interface AccessDecisionManagerInterface
     /**
      * Decides whether the access is possible or not.
      *
-     * @param TokenInterface $token      A TokenInterface instance
-     * @param array          $attributes An array of attributes associated with the method being invoked
-     * @param object         $object     The object to secure
+     * @param array $attributes An array of attributes associated with the method being invoked
+     * @param mixed $object     The object to secure
      *
-     * @return bool true if the access is granted, false otherwise
+     * @return bool
      */
     public function decide(TokenInterface $token, array $attributes, $object = null);
 }

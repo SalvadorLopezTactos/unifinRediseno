@@ -395,7 +395,7 @@ class Administration extends SugarBean {
     public function saveSetting($category, $key, $value, $platform = '')
     {
         // platform is always lower case
-        $platform = strtolower($platform);
+        $platform = strtolower((string)$platform);
         $conn = $this->db->getConnection();
         $builder = $conn->createQueryBuilder();
         $query = $builder
@@ -434,9 +434,19 @@ class Administration extends SugarBean {
             global $moduleList;
             // FIXME TY-839 'portal' should be the platform, not category
             if (in_array($category, $moduleList) || $category == 'portal') {
-                $cache_key = "ModuleConfig-" . $category;
-                if ($platform != "base") {
+                $cache_key = 'ModuleConfig-' . $category;
+                if ($platform !== 'base') {
                     $cache_key .= $platform;
+                } else {
+                    // Since the base config for a module has changed, and the
+                    // module config for other platforms extends from the base
+                    // module config, we should clear the cache value for all
+                    // platforms. That way, they will properly refetch the next
+                    // time getConfigForModule is called for them
+                    $availablePlatforms = MetaDataManager::getPlatformList();
+                    foreach ($availablePlatforms as $availablePlatform) {
+                        sugar_cache_clear($cache_key . $availablePlatform);
+                    }
                 }
                 sugar_cache_clear($cache_key);
             }

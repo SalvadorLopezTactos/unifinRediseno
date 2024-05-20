@@ -15,6 +15,10 @@ require_once('include/EditView/EditView2.php');
  * @api
  */
 class SubpanelQuickCreate{
+    /**
+     * @var \EditView|mixed
+     */
+    public $ev;
     public $defaultProcess = true;
 
     /**

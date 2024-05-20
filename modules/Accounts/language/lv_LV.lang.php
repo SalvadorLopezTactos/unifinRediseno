@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Klientu saraksta instrumentu panelis',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Klientu ierakstu instrumentu panelis',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Uzņēmumu fokusa panelis',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Klienta informācija',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Uzņēmumu fokusa panelis - Konsole',
     'LBL_NEXT_RENEWAL_DATE' => 'Nākamās atjaunošanas datums',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Nākamās atjaunošanas datums',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Klienta nosaukums/nozare',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Atrašanās vieta',
     'LBL_PURCHASES' => 'Pirkumi',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Uzņēmuma laikjosla',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizēt',
+    'LBL_CREATE_NEW' => 'Izveidot jaunu',
+    'LBL_MANAGE' => 'Pārvaldīt',
+    'LBL_SEE_DETAILS' => 'Skatīt papildus informāciju',
+    'LBL_HIDE_NEW' => 'Paslēpt',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagrammas',
@@ -207,4 +214,7 @@ Lai izveidotu {{module_name}}:
 2. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta izveidi un atgrieztos iepriekšējā lapā.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Uzņēmumu atskaites',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Ārējie lietotāji',
 );

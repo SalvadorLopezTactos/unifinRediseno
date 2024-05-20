@@ -19,3 +19,6 @@ $platforms[] = 'collabspot';
 $platforms[] = 'collabspotbackend';
 $platforms[] = 'discover';
 $platforms[] = 'dms';
+$platforms[] = 'kiosk';
+$platforms[] = 'sugarlambda';
+$platforms[] = 'connections';

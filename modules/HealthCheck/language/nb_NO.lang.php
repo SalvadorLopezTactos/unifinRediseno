@@ -110,6 +110,10 @@ $mod_strings = array(
     'LBL_SCAN_561_LOG' => 'Text for Translation
 custom/modules/Quotes/EditView.js KAN inneholde tilpasninger som ikke er kompatible med nye tilbud.',
     'LBL_SCAN_562_LOG' => 'Use of removed Sidecar app.view.invokeParent method in %s',
+    'LBL_SCAN_563_LOG' => 'Bruk av inkompatibel Monolog-tilpasning: %s',
+    'LBL_SCAN_564_LOG' => 'Bruk av utdatert DBAL-funksjonalitet: %s',
+    'LBL_SCAN_565_LOG' => 'Bruk av frarådet konfigegenskap $sugar_config[&#39;passwordHash&#39;]. Fra versjon 13.3 vil den ikke være støttet: %s',
+    'LBL_SCAN_566_LOG' => 'Bruk av ustøttet konfigegenskap $sugar_config[&#39;passwordHash&#39;]: %s',
     'LBL_SCAN_570_LOG' => 'Ugyldig status og type for e-post: status =%s, type = %s',
     'LBL_SCAN_571_LOG' => 'Avskrevne filen har tilpasninger: %s',
     'LBL_SCAN_572_LOG' => 'Egendefinert fil har navnekonflikt: %s',

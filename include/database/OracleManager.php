@@ -127,6 +127,10 @@ class OracleManager extends DBManager
      * @var array
      */
     protected $configOptions;
+    /**
+     * @var string
+     */
+    public $lastQuery;
 
     /**
      * Gets a string comparison SQL snippet for use in hard coded queries. This
@@ -241,7 +245,10 @@ class OracleManager extends DBManager
      */
     public function version()
     {
-        return $this->getOne("SELECT version FROM product_component_version WHERE product like '%Oracle%'");
+        if (!isset(static::$version)) {
+            static::$version = $this->getOne("SELECT version FROM product_component_version WHERE product like '%Oracle%'");
+        }
+        return static::$version;
     }
 
     /**
@@ -669,6 +676,7 @@ WHERE OWNER = ?
             	NLS_COMP=LINGUISTIC
 				NLS_SORT=BINARY_CI";
             }
+            static::$version = null;
             $this->query($session_query);
 
         if (!$this->checkError('Could Not Connect', $dieOnError)) {
@@ -731,7 +739,7 @@ WHERE OWNER = ?
             array_unshift($all_parameters, $string);
         }
 
-        switch (strtolower($type)) {
+        switch (strtolower((string)$type)) {
             case 'date':
                 return "to_date($string, 'YYYY-MM-DD')";
             case 'time':
@@ -875,7 +883,7 @@ WHERE OWNER = ?
      */
     public function isBlobType($type)
     {
-        $type = strtolower($type);
+        $type = strtolower((string)$type);
         return $type === 'blob' || $this->getColumnType($type) == 'blob';
     }
 
@@ -943,7 +951,7 @@ WHERE OWNER = ?
     protected function alterVarchar2ToNumber($tablename, $oldColumn, $newColumn, $ignoreRequired)
     {
         $sql = array();
-        $newColumn['name'] = 'tmp_' . mt_rand();
+        $newColumn['name'] = 'tmp_' . random_int(0, mt_getrandmax());
 
         $columnSQL = $this->changeOneColumnSQL($tablename, $newColumn, 'ADD', $ignoreRequired);
         $sql[] = "ALTER TABLE $tablename ADD $columnSQL";
@@ -1040,7 +1048,7 @@ WHERE OWNER = ?
     public function compareVarDefs($fielddef1, $fielddef2, $ignoreName = false)
     {
         if (isset($fielddef1['type']) && isset($fielddef1['len']) && $fielddef1['type'] == 'number') {
-            list($dblen, $dbprec) = $this->parseLenPrecision($fielddef1);
+            [$dblen, $dbprec] = $this->parseLenPrecision($fielddef1);
             if ($dblen == 38 && empty($dbprec) && $this->isNumericType($this->getFieldType($fielddef2))) {
                 return true;
             }
@@ -1549,7 +1557,7 @@ LEFT JOIN all_constraints c
      */
     protected function _findSequence($name)
     {
-        $db_user_name = strtoupper(isset($this->configOptions['db_user_name'])?$this->configOptions['db_user_name']:'');
+        $db_user_name = strtoupper($this->configOptions['db_user_name'] ?? '');
 
         $uname = strtoupper($name);
         $row = $this->fetchOne(
@@ -2085,7 +2093,7 @@ LEFT JOIN all_constraints c
             $wrappedFields = array();
             $hasWrappedFields = false;
             foreach ($index['fields'] as $field) {
-                $fieldDef = isset($fieldDefs[$field]) ? $fieldDefs[$field] : false;
+                $fieldDef = $fieldDefs[$field] ?? false;
 
                 // skip indices with non-db fields
                 if ($fieldDef && isset($fieldDef['source']) && $fieldDef['source'] == 'non-db') {

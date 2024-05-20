@@ -257,8 +257,9 @@ class DocumentRevision extends SugarBean {
     {
 		return $list_form;
 	}
-	
-	function get_list_view_data(){
+
+    public function get_list_view_data($filter_fields = [])
+    {
         $forecast_fields = [];
 		$revision_fields = $this->get_list_view_array();
 
@@ -274,12 +275,12 @@ class DocumentRevision extends SugarBean {
         }
 
         $db = DBManagerFactory::getInstance();
-        $stmt = $db->getConnection()
+        $result = $db->getConnection()
             ->executeQuery(
                 'SELECT id, revision FROM document_revisions WHERE document_id=? AND deleted=0',
                 [$doc_id]
             );
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $return_array[$row['id']] = $row['revision'];
         }
         return $return_array;

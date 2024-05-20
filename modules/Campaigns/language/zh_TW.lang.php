@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => '追蹤器 URL：',
   'LBL_TRACKER_TEXT' => '追蹤器連結文字：',
   'LBL_TRACKER_COUNT' => '追蹤器計數：',
-  'LBL_REFER_URL' => '追蹤器重新導向 URL： ',
   'LBL_DEFAULT_SUBPANEL_TITLE' => '推廣活動',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'電子郵件推廣活動',
   'LBL_NEW_FORM_TITLE' => '新推廣活動',

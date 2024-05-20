@@ -55,6 +55,10 @@ class SugarLogger implements LoggerTemplate
      * Logger file handle
      */
     protected $fp = false;
+    /**
+     * @var string
+     */
+    protected $full_log_file;
 
     public function __get(
         $key
@@ -173,8 +177,10 @@ class SugarLogger implements LoggerTemplate
 	    if ( is_array($message) )
 		    $message = print_r($message,true);
 
-		//write out to the file including the time in the dateFormat the process id , the user id , and the log level as well as the message
-        $this->write(strftime($this->dateFormat) . ' [' . getmypid () . '][' . $userID . '][' . strtoupper($level) . '] ' . $message . "\n");
+        // mute deprecation
+        $time = @strftime($this->dateFormat);
+        //write out to the file including the time in the dateFormat the process id , the user id , and the log level as well as the message
+        $this->write($time . ' [' . getmypid() . '][' . $userID . '][' . strtoupper($level) . '] ' . $message . "\n");
     }
     
     /**

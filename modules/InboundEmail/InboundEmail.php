@@ -238,10 +238,10 @@ class InboundEmail extends SugarBean {
         }
 
 		// generate cache table for email 2.0
-		$multiDImArray = $this->generateMultiDimArrayFromFlatArray(explode(",", $this->mailbox), $this->retrieveDelimiter());
+        $multiDImArray = $this->generateMultiDimArrayFromFlatArray(explode(",", (string)$this->mailbox), $this->retrieveDelimiter());
 		$raw = $this->generateFlatArrayFromMultiDimArray($multiDImArray, $this->retrieveDelimiter());
 		sort($raw);
-		$raw = $this->filterMailBoxFromRaw(explode(",", $this->mailbox), $raw);
+        $raw = $this->filterMailBoxFromRaw(explode(",", (string)$this->mailbox), $raw);
 		$this->mailbox = implode(",", $raw);
 		$ret = parent::save($check_notify);
 		return $ret;
@@ -529,7 +529,7 @@ class InboundEmail extends SugarBean {
 
 		$GLOBALS['log']->info("INBOUNDEMAIL: deleting cache using query [ {$q} ]");
         $conn = $this->db->getConnection();
-        $conn->executeQuery($q, array($this->id));
+        $conn->executeStatement($q, array($this->id));
 	}
 
 	/**
@@ -1095,7 +1095,7 @@ class InboundEmail extends SugarBean {
 				fclose($fh);
                 $diff = unserialize($data, ['allowed_classes' => false]);
 				if (!empty($diff)) {
-                    if ((is_countable($diff) ? count($diff) : 0)> 50) {
+                    if ((is_countable($diff) ? count($diff) : 0) > 50) {
                         $newDiff = array_slice($diff, 50, is_countable($diff) ? count($diff) : 0, true);
 					} else {
 						$newDiff=array();
@@ -1123,7 +1123,7 @@ class InboundEmail extends SugarBean {
 				$diff = $this->pop3_shiftCache($diff, $cacheUIDLs);
                 $this->getEmailUI()->preflightEmailCache("{$this->EmailCachePath}/{$this->id}");
 
-                if ((is_countable($diff) ? count($diff) : 0)> 50) {
+                if ((is_countable($diff) ? count($diff) : 0) > 50) {
                     $newDiff = array_slice($diff, 50, is_countable($diff) ? count($diff) : 0, true);
 				} else {
 					$newDiff=array();
@@ -1167,7 +1167,13 @@ class InboundEmail extends SugarBean {
 			$GLOBALS['log']->info("[EMAIL] Start updating overview cache for pop3 mailbox [{$this->mailbox}] for user [{$current_user->user_name}]");
 			$this->updateOverviewCacheFile($fetchedOverviews);
 			$GLOBALS['log']->info("[EMAIL] Start updating overview cache for pop3 mailbox [{$this->mailbox}] for user [{$current_user->user_name}]");
-            return array('status' => "In Progress", 'mbox' => $this->mailbox, 'count'=> (count($results) + $startingNo), 'totalcount' => is_countable($diff) ? count($diff) : 0, 'ieid' => $this->id);
+            return [
+                'status' => "In Progress",
+                'mbox' => $this->mailbox,
+                'count' => (count($results) + $startingNo),
+                'totalcount' => is_countable($diff) ? count($diff) : 0,
+                'ieid' => $this->id,
+            ];
 		} // if
 		unlink($cacheFilePath);
 		return  array('status' => "done");
@@ -1366,7 +1372,11 @@ class InboundEmail extends SugarBean {
 		$this->setCacheTimestamp($mailbox);
 		$GLOBALS['log']->info("[EMAIL] Performing IMAP search using criteria [{$criteria}] on mailbox [{$mailbox}] for user [{$current_user->user_name}]");
 		$searchResults = imap_search($this->conn, $criteria, SE_UID);
-        $GLOBALS['log']->info("[EMAIL] Done IMAP search on mailbox [{$mailbox}] for user [{$current_user->user_name}]. Result count = ".(is_countable($searchResults) ? count($searchResults) : 0));
+        $GLOBALS['log']->info(
+            "[EMAIL] Done IMAP search on mailbox [{$mailbox}] for user [{$current_user->user_name}]. Result count = " . (is_countable(
+                $searchResults
+            ) ? count($searchResults) : 0)
+        );
 
 		if(!empty($searchResults)) {
 			// process rules
@@ -2355,7 +2365,7 @@ class InboundEmail extends SugarBean {
 			}
 
 			$focusUser = BeanFactory::getBean('Users', $groupId);
-			$mailerId = (isset($_REQUEST['outbound_email'])) ? $_REQUEST['outbound_email'] : "";
+            $mailerId = $_REQUEST['outbound_email'] ?? "";
 
 			$oe = new OutboundEmail();
             $oe->getSystemMailerSettings();
@@ -2370,9 +2380,9 @@ class InboundEmail extends SugarBean {
 				$stored_options['sentFolder'] = (isset($_REQUEST['sentFolder']) ? trim($_REQUEST['sentFolder']) : "");
 			} // if
 			$stored_options['only_since'] = $onlySince;
-			$stored_options['filter_domain'] = '';
+            $stored_options['filter_domains'] = '';
 			$storedOptions['folderDelimiter'] = $delimiter;
-			$stored_options['outbound_email'] = (isset($_REQUEST['outbound_email'])) ? $_REQUEST['outbound_email'] : $oe->id;
+            $stored_options['outbound_email'] = $_REQUEST['outbound_email'] ?? $oe->id;
 			$this->stored_options = base64_encode(serialize($stored_options));
 
 			$ieId = $this->save();
@@ -2477,7 +2487,7 @@ class InboundEmail extends SugarBean {
 
         //If user has selected multiple mailboxes, we only need to test the first mailbox for the connection string.
         $a_mailbox = explode(",", $this->mailbox);
-        $tmpMailbox = isset($a_mailbox[0]) ? $a_mailbox[0] : "";
+        $tmpMailbox = $a_mailbox[0] ?? "";
 
         $nonSsl = '/notls/novalidate-cert/secure';
         $ssl = '/ssl/tls/validate-cert/secure';
@@ -2604,7 +2614,7 @@ class InboundEmail extends SugarBean {
 
 		//If user has selected multiple mailboxes, we only need to test the first mailbox for the connection string.
 		$a_mailbox = explode(",", $this->mailbox);
-		$tmpMailbox = isset($a_mailbox[0]) ? $a_mailbox[0] : "";
+        $tmpMailbox = $a_mailbox[0] ?? "";
 
         if (null !== $this->remoteSystemName) {
             $servicesList = $useSsl ? $ssl : $nonSsl;
@@ -2750,7 +2760,7 @@ class InboundEmail extends SugarBean {
     public function getSessionConnectionOptions(RemoteSystemName $remoteSystemName, $email_user, $port, $protocol)
     {
         $sessionConnectionString = $remoteSystemName->value() . $email_user . $port . $protocol;
-        return (isset($_SESSION[$sessionConnectionString]) ? $_SESSION[$sessionConnectionString] : "");
+        return ($_SESSION[$sessionConnectionString] ?? "");
     }
 
     public function setSessionConnectionOptions(RemoteSystemName $remoteSystemName, $email_user, $port, $protocol, $goodStr)
@@ -2762,7 +2772,7 @@ class InboundEmail extends SugarBean {
     public function getSessionInboundDelimiterString(RemoteSystemName $remoteSystemName, $email_user, $port, $protocol)
     {
         $sessionInboundDelimiterString = $remoteSystemName->value() . $email_user . $port . $protocol . 'delimiter';
-        return (isset($_SESSION[$sessionInboundDelimiterString]) ? $_SESSION[$sessionInboundDelimiterString] : "");
+        return ($_SESSION[$sessionInboundDelimiterString] ?? "");
     }
 
     public function setSessionInboundDelimiterString(
@@ -2779,7 +2789,7 @@ class InboundEmail extends SugarBean {
     public function getSessionInboundFoldersString(RemoteSystemName $remoteSystemName, $email_user, $port, $protocol)
     {
         $sessionInboundFoldersListString = $remoteSystemName->value() . $email_user . $port . $protocol . 'foldersList';
-        return (isset($_SESSION[$sessionInboundFoldersListString]) ? $_SESSION[$sessionInboundFoldersListString] : "");
+        return ($_SESSION[$sessionInboundFoldersListString] ?? "");
     }
 
     public function setSessionInboundFoldersString(
@@ -3002,7 +3012,7 @@ class InboundEmail extends SugarBean {
 
             //set the default values for the new case bean
             $description = $email->description ?: $email->description_html;
-            $description = htmlspecialchars_decode($description);
+            $description = htmlspecialchars_decode($description, ENT_COMPAT);
             $caseDefaultValues = [
                 'description' => $description,
                 'assigned_user_id' => $userId,
@@ -3118,6 +3128,11 @@ class InboundEmail extends SugarBean {
             	$email = $email->et->handleReplyType($email, "reply");
             	$ret = $email->et->displayComposeEmail($email);
             	$ret['description'] = empty($email->description_html) ?  str_replace("\n", "\n<BR/>", $email->description) : $email->description_html;
+
+                if (!$this->checkFilterDomain($email)) {
+                    // should not send auto reply
+                    return;
+                }
 
 				include_once('include/workflow/alert_utils.php');
 
@@ -4310,7 +4325,7 @@ class InboundEmail extends SugarBean {
 			$email->type = 'inbound';
 			if(!empty($unixHeaderDate)) {
 			    $email->date_sent = $timedate->asUser($unixHeaderDate);
-			    list($email->date_start, $email->time_start) = $timedate->split_date_time($email->date_sent);
+                [$email->date_start, $email->time_start] = $timedate->split_date_time($email->date_sent);
 			} else {
 			    $email->date_start = $email->time_start = $email->date_sent = "";
 			}
@@ -4583,7 +4598,7 @@ class InboundEmail extends SugarBean {
 
             if (!empty($unixHeaderDate)) {
                 $email->date_sent = $timedate->asUser($unixHeaderDate);
-                list($email->date_getMessageUidstart, $email->time_start) = $timedate->split_date_time($email->date_sent);
+                [$email->date_getMessageUidstart, $email->time_start] = $timedate->split_date_time($email->date_sent);
             } else {
                 $email->date_start = $email->time_start = $email->date_sent = "";
             }
@@ -4591,17 +4606,18 @@ class InboundEmail extends SugarBean {
 
             $email->to_name = $mailer->getTo($uid);
             $email->to_addrs_names = $email->to_name;
-            $email->to_addrs = implode(',', $mailer->getToAddresses($uid));
+            $email->to_addrs = implode(',', $this->deleteEmptyEmailAddresses($mailer->getToAddresses($uid)));
 
             $email->from_name = $mailer->getFrom($uid);
             $email->from_addr_name = $email->from_name;
-            $email->from_addr = implode(',', $mailer->getFromAddress($uid));
+            $email->from_addr = implode(',', $this->deleteEmptyEmailAddresses($mailer->getFromAddress($uid)));
 
-            $email->cc_addrs = implode(',', $mailer->getCcAddresses($uid));
+            $email->cc_addrs = implode(',', $this->deleteEmptyEmailAddresses($mailer->getCcAddresses($uid)));
             $email->cc_addrs_names = $mailer->getCc($uid);
 
             $email->reply_to_name = $mailer->getReplyTo($uid);
-            $email->reply_to_email = implode(',', $mailer->getReplyToAddresses($uid));
+            $replyToAddresses = $this->deleteEmptyEmailAddresses($mailer->getReplyToAddresses($uid));
+            $email->reply_to_email = implode(',', $replyToAddresses);
 
             if (!empty($email->reply_to_email)) {
                 $email->reply_to_addr   = $email->reply_to_name;
@@ -4847,6 +4863,8 @@ class InboundEmail extends SugarBean {
             // Bug 50241: can't process <?xml:namespace .../> properly. Strip <?xml ...> tag first.
             $text = preg_replace("/<\?xml[^>]*>/", "", $text);
             $text = InboundEmailUtils::updateInlineImageHtml($text, $this->inlineImages);
+            // Bug CS-2965 remove extra spaces in emails from Outlook
+            $text = preg_replace('/<o:p>(.*?)<\/o:p>/', '$1', $text);
         }
         return SugarCleaner::cleanHtml($text, false);
     }
@@ -4979,24 +4997,24 @@ class InboundEmail extends SugarBean {
 	 * @return bool true if not filtered, false if filtered
 	 */
 	function checkFilterDomain($email) {
-		$filterDomain = $this->get_stored_options('filter_domain');
-		if(!isset($filterDomain) || empty($filterDomain)) {
-			return true; // nothing set for this
-		} else {
-			$replyTo = strtolower($email->reply_to_email);
-			$from = strtolower($email->from_addr);
-			$filterDomain = '@'.strtolower($filterDomain);
-			if(strpos($replyTo, $filterDomain) !== false) {
-				$GLOBALS['log']->debug('Autoreply cancelled - [reply to] address domain matches filter domain.');
-				return false;
-			} elseif(strpos($from, $filterDomain) !== false) {
-				$GLOBALS['log']->debug('Autoreply cancelled - [from] address domain matches filter domain.');
-				return false;
-			} else {
-				return true; // no match
-			}
-		}
-	}
+        $filterDomains = $this->get_stored_options('filter_domains');
+        if (!isset($filterDomains) || empty($filterDomains)) {
+            return true; // nothing set for this
+        }
+        foreach (explode(',', $filterDomains) as $filterDomain) {
+            $replyTo = strtolower($email->reply_to_email);
+            $from = strtolower($email->from_addr);
+            $filterDomain = '@' . strtolower($filterDomain);
+            if (strpos($replyTo, $filterDomain) !== false) {
+                $GLOBALS['log']->debug('Autoreply cancelled - [reply to] address domain matches filter domain.');
+                return false;
+            } elseif (strpos($from, $filterDomain) !== false) {
+                $GLOBALS['log']->debug('Autoreply cancelled - [from] address domain matches filter domain.');
+                return false;
+            }
+        }
+        return true; // no match
+    }
 
 	/**
 	 * returns true if subject is NOT "out of the office" type
@@ -5016,7 +5034,22 @@ class InboundEmail extends SugarBean {
 		return true; // no matches to ooto strings
 	}
 
-
+    /**
+     * Removes empty email addresses from an array.
+     *
+     * @param Array $emailAddresses An Array of email addresses
+     * @return array An array of non-empty email addresses
+     */
+    private function deleteEmptyEmailAddresses($emailAddresses): array
+    {
+        $validEmailAddresses = [];
+        foreach ($emailAddresses as $emailAddress) {
+            if (!strpos($emailAddress, "<>")) {
+                $validEmailAddresses[] = $emailAddress;
+            }
+        }
+        return $validEmailAddresses;
+    }
 	/**
 	 * sets a timestamp for an autoreply to a single email addy
 	 *
@@ -5053,7 +5086,7 @@ class InboundEmail extends SugarBean {
 		$a = $this->db->fetchByAssoc($r);
 
 		$email_num_autoreplies_24_hours = $this->get_stored_options('email_num_autoreplies_24_hours');
-		$maxReplies = (isset($email_num_autoreplies_24_hours)) ? $email_num_autoreplies_24_hours : $this->maxEmailNumAutoreplies24Hours;
+        $maxReplies = $email_num_autoreplies_24_hours ?? $this->maxEmailNumAutoreplies24Hours;
 
 		if($a['c'] >= $maxReplies) {
 			$GLOBALS['log']->debug('Autoreply cancelled - more than ' . $maxReplies . ' replies sent in 24 hours.');
@@ -5294,7 +5327,9 @@ eoq;
             $ret = imap_search($this->conn, 'UNDELETED UNSEEN');
 		}
 
-        $GLOBALS['log']->debug('-----> getNewMessageIds() got '.(is_countable($ret) ? count($ret) : 0).' new Messages');
+        $GLOBALS['log']->debug(
+            '-----> getNewMessageIds() got ' . (is_countable($ret) ? count($ret) : 0) . ' new Messages'
+        );
 		return $ret;
 	}
 
@@ -5396,6 +5431,7 @@ eoq;
 	 * @return string "true" on success, "false" or $errorMessage on failure
 	 */
 	function connectMailserver($test=false, $force=false) {
+        $opts = [];
 		global $mod_strings;
         if (!extension_loaded('imap')) {
 			$GLOBALS['log']->debug('------------------------- IMAP libraries NOT available!!!! die()ing thread.----');
@@ -5705,7 +5741,8 @@ eoq;
 	/**
 	 * Override's SugarBean's
 	 */
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $mod_strings;
 		global $app_list_strings;
 		$temp_array = $this->get_list_view_array();
@@ -6071,7 +6108,7 @@ eoq;
 		global $app_strings;
 		$this->connectMailserver();
 
-        if (strpos($uid, (string) $app_strings['LBL_EMAIL_DELIMITER']) !== false) {
+		if(strpos($uid, $app_strings['LBL_EMAIL_DELIMITER']) !== false) {
 			$uids = explode($app_strings['LBL_EMAIL_DELIMITER'], $uid);
 		} else {
 			$uids[] = $uid;
@@ -6737,7 +6774,7 @@ eoq;
 	    foreach($usersList as $userObject)
 	    {
             $showFolders = $userObject->getPreference('showFolders', 'Emails', $userObject);
-            $previousSubscriptions = unserialize(base64_decode($showFolders), ['allowed_classes' => false]);
+            $previousSubscriptions = unserialize(base64_decode((string)$showFolders), ['allowed_classes' => false]);
 	        if($previousSubscriptions === FALSE)
 	            $previousSubscriptions = array();
 
@@ -6831,7 +6868,7 @@ eoq;
 			$temp['ieId'] = $this->id;
 			$temp['site_url'] = $sugar_config['site_url'];
 			$temp['seen'] = $msg->seen;
-			$temp['type'] = (isset($msg->type)) ? $msg->type: 'remote';
+            $temp['type'] = $msg->type ?? 'remote';
 			$temp['to_addrs'] = to_html($msg->to);
 			$temp['hasAttach'] = '0';
 
@@ -6972,9 +7009,9 @@ eoq;
 	 * @return array
 	 */
 	function sortMailboxes($mbox, $ret, $delimeter = ".") {
-        if (strpos($mbox, (string) $delimeter)) {
-            $node = substr($mbox, 0, strpos($mbox, (string) $delimeter));
-            $nodeAfter = substr($mbox, strpos($mbox, (string)$node) + strlen($node) + 1, strlen($mbox));
+		if(strpos($mbox, $delimeter)) {
+			$node = substr($mbox, 0, strpos($mbox, $delimeter));
+			$nodeAfter = substr($mbox, strpos($mbox, $node) + strlen($node) + 1, strlen($mbox));
 
 			if(!isset($ret[$node])) {
 				$ret[$node] = array();
@@ -7085,7 +7122,7 @@ eoq;
                         $tmp = array();
                         while($a = $this->db->fetchByAssoc($r))
                         {
-                            $tmp[html_entity_decode($a['mid'])] = $a['cnt'];
+                            $tmp[html_entity_decode($a['mid'], ENT_COMPAT)] = $a['cnt'];
                         }
                         foreach($tmpMsgs as $k1 => $v1)
                         {

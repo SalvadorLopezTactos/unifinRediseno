@@ -98,7 +98,7 @@ function smarty_function_sugar_action_menu($params, &$smarty)
         unset($params['params']);
         $params = array_merge_recursive($params, $addition_params);
     }
-    $flat = isset($params['flat']) ? $params['flat'] : (isset($sugar_config['enable_action_menu']) ? !$sugar_config['enable_action_menu'] : false);
+    $flat = $params['flat'] ?? (isset($sugar_config['enable_action_menu']) ? !$sugar_config['enable_action_menu'] : false);
     //if buttons have not implemented, it returns empty string;
     if(empty($params['buttons']))
         return '';

@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'ケースリストのダッシュ ボード',
     'LBL_CASES_RECORD_DASHBOARD' => 'ケースレコードのダッシュ ボード',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'ケース詳細',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'ケース フォーカス ドロワ - コンソール',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'ケース フォーカス ドロワ',
 
 	'ERR_DELETE_RECORD'					=> 'あなたがアカウントを削除するには、レコード番号を指定する必要があります。',
@@ -156,4 +156,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'SLA詳細',
     'LBL_HOURS' => '時間',
     'LBL_WIDGET_STATUS' => 'ステータス:',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => '編成',
+    'LBL_CREATE_NEW' => '新規作成',
+    'LBL_MANAGE' => '管理',
+    'LBL_SEE_DETAILS' => 'レポートの詳細',
+    'LBL_HIDE_NEW' => '非表示',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'ケース',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'ケース',
+    'LBL_KIOSK_CREATE' => 'ケース作成',
+    'LBL_KIOSK_SUBJECT' => '件名',
+    'LBL_KIOSK_CASE_ID' => 'ケースID',
+    'LBL_KIOSK_STATUS' => 'ステータス',
+    'LBL_KIOSK_CATEGORY' => 'カテゴリ',
+    'LBL_KIOSK_SUBMITTED_BY' => '送信日：{{date}}',
+    'LBL_KIOSK_PRIORITY' => '優先度',
+    'LBL_KIOSK_CREATE_CASE' => 'お問い合わせ',
+    'LBL_KIOSK_DESCRIPTION' => '詳細',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'リクエストは正常に送信されました。',
+    'LBL_KIOSK_ATTACHED' => 'すべての添付ファイル',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => '外部ユーザー',
 );

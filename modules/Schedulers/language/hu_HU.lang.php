@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Termékmeghatározás frissítése',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Folyamat időtudatos beosztása',
 'LBL_OOTB_DATA_ARCHIVER' => 'Aktív adatarchívum futtatása/Törlések',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Feliratkozási kötelezettség alkalmazása, ha megváltozik',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Rekordok geokódolása',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Speciális beállítások',
 'LBL_TOGGLE_ADV' => 'Speciális beállítások megjelenítése',
 'LBL_TOGGLE_BASIC' => 'Alapbeállítások megjelenítése',
+'LBL_UPDATEMOMENTUMCJ' => 'A folyamatban lévő Smart Guide-ok momentumának frissítése',
 // Links
 'LNK_LIST_SCHEDULER' => 'Ütemezők',
 'LNK_NEW_SCHEDULER' => 'Ütemező létrehozása',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Aktív adatarchívum futtatása/Törlések',
 'LBL_PMSEENGINECRON' => 'SugarBPM Ütemező',
 );
-

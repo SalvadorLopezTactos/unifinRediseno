@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Luoja',
   'LBL_EDIT_LAYOUT' => 'Muokkaa asettelua' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Vain administraattoreille',
-  'LBL_CURRENCY_DEFAULT' => 'Yhdysvaltain dollaria (oletus)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Järjestelmän valuutta (oletus)',
 );
 ?>

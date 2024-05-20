@@ -21,6 +21,7 @@ use Sugarcrm\Sugarcrm\UserUtils\Managers\ManagerFactory;
  */
 class Command implements CommandInterface
 {
+    public $type;
     /**
      * The manager
      *

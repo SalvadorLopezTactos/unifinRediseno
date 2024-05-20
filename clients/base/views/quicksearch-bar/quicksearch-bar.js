@@ -15,7 +15,7 @@
 */
 ({
 
-    className: 'table-cell quicksearch-bar-wrapper',
+    className: 'quicksearch-bar-wrapper max-w-150',
     /**
      * The minimum number of characters before the search bar attempts to
      * retrieve results.
@@ -186,7 +186,9 @@
      * Function to dispose the keydown and keyup events.
      */
     disposeKeyEvents: function() {
-        this.$input.off('keydown keyup');
+        if (this.$input) {
+            this.$input.off('keydown keyup');
+        }
     },
 
     /**

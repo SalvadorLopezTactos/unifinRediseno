@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logo&#39;s',
 	'LBL_ADMIN_WIZARD' => 'Wizard beheer',
-	'LBL_ALLOW_USER_TABS' => 'Sta gebruikers toe om tabs te verbergen',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Systeeminstellingen',
 	'LBL_ENABLE_MAILMERGE' => 'Samenvoegen E-mail inschakelen?',
 	'LBL_LOGVIEW' => 'Log bekijken',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Gebruik deze instelling om het aantal maanden te bepalen vóór de huidige datum, voor publicatie van de vrij / bezet informatie voor Telefoongesprekken en Afspraken. </ Br> Om de publicatie van vrij / bezet uit te schakelen, geef "0" in. Het minimum is 1 maand, het maximum 12 maanden.',
     'LBL_PDFMODULE_NAME' => 'Rapport PDF Instellingen',
     'SUGARPDF_BASIC_SETTINGS' => 'Document Eigenschappen',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Geavanceerde Instellingen',
     'SUGARPDF_LOGO_SETTINGS' => 'Afbeeldingen',
-
-    'PDF_CREATOR' => 'PDF Creator',
-    'PDF_CREATOR_INFO' => 'Definieert de maker van een document.<br>Het betreft de naam van de applicatie die een PDF genereert.',
 
     'PDF_AUTHOR' => 'Auteur',
     'PDF_AUTHOR_INFO' => 'De Auteur wordt opgeslagen in de document eigenschappen.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Selecteer nieuwe afbeelding voor Offertes',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Bestandsformaat moet .jg of .png zijn (Voor EZPDF alleen .jpg)<br>Aanbevolen resolutie is 867x74 pixels.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Offerte Afbeelding Breedte',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Verander de schaal van het geüploade beeld dat in de Offerte Pdf- Documenten verschijnt. (only TCPDF)',
+    'PDF_TITLE' => 'Titel',
+    'PDF_TITLE_INFO' => 'Deze titel verschijnt in de document eigenschappen.',
+
+    'PDF_SUBJECT' => 'Onderwerp',
+    'PDF_SUBJECT_INFO' => 'Dit onderwerp verschijnt in de document eigenschappen',
 
     'PDF_SMALL_HEADER_LOGO' => 'Voor het exporteren van PDF Documenten.',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Deze afbeelding verschijnt in de standaard kop van Pdf- Documenten van rapporten. Dit beeld verschijnt ook in de linkerbovenhoek van Sugar.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Kies een nieuwe afbeelding voor rapporten.',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Het bestandsformaat kan .jpg of .pgn zijn. (Alleen .jpg voor EZPDF)<BR>De aanbevolen afmeting is 212x40 pixels.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Rapportafbeelding breedte',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Wijzig de schaal van de geüploade afbeelding die wordt weergegeven in de Reports PDF Documenten. (alleen TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Titelzin',
-    'PDF_HEADER_STRING_INFO' => 'Beschrijvende zin titel',
-
-    'PDF_HEADER_TITLE' => 'Header Title',
-    'PDF_HEADER_TITLE_INFO' => 'Zin die wordt afgedrukt als titel van document',
-
-    'PDF_FILENAME' => 'Standaard bestandsnaam',
-    'PDF_FILENAME_INFO' => 'Standaard bestandsnaam voor de gegenereerde PDF bestanden',
-
-    'PDF_TITLE' => 'Titel',
-    'PDF_TITLE_INFO' => 'Deze titel verschijnt in de document eigenschappen.',
-
-    'PDF_SUBJECT' => 'Onderwerp',
-    'PDF_SUBJECT_INFO' => 'Dit onderwerp verschijnt in de document eigenschappen',
-
     'PDF_KEYWORDS' => 'Sleutelwoord(en)',
     'PDF_KEYWORDS_INFO' => 'Associeer zoekwoorden met het document, meestal in de vorm "keyword1 keyword2 ..."',
 
-    'PDF_COMPRESSION' => 'Compressie',
-    'PDF_COMPRESSION_INFO' => 'Activeert of deactiveert pagina compressie.<br />Wanneer geactiveerd, wordt de interne representatie van elke pagina gecomprimeerd, wat leidt tot een compressie verhouding van ongeveer 2 voor het uiteindelijke document.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG Kwaliteit (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Stel de standaard JPEG-compressie kwaliteit (1-100) in.',
-
-    'PDF_PDF_VERSION' => 'PDF Versie',
-    'PDF_PDF_VERSION_INFO' => 'Stel de PDF-versie in (check PDF referentie voor geldige waarden).',
-
-    'PDF_PROTECTION' => 'Document Beveiliging',
-    'PDF_PROTECTION_INFO' => 'Stel Document Beveiliging In.<br />- kopie: kopieer tekst en afbeeldingen naar het klembord<br />- Print: print het document<br />- Wijzigen: het aanpassen (behalve voor annotaties en formulieren)<br />- Annot-formulieren: aantekeningen toevoegen en formulieren<br />Let op: de bescherming tegen modificatie is voor mensen die het volledige Acrobat-product hebben.',
-
-    'PDF_USER_PASSWORD' => 'Gebruikerswachtwoord',
-    'PDF_USER_PASSWORD_INFO' => 'Als u geen wachtwoord instelt, zal het document openen zoals gebruikelijk.<br />Als u een gebruiker wachtwoord instelt, zal de PDF-viewer vragen dit wachtwoord voordat het document getoond wordt.<br />Het hoofdwachtwoord, indien verschillend van de gebruiker is,  kan worden gebruikt om volledige toegang te krijgen.',
-
-    'PDF_OWNER_PASSWORD' => 'Wachtwoord Eigenaar',
-    'PDF_OWNER_PASSWORD_INFO' => 'Als u geen wachtwoord instelt, zal het document te openen zijn zoals gebruikelijk.<br />Als u een gebruiker wachtwoord instelt, zal de PDF-viewer hiernaar vragen voordat het document wordt weergegeven. Het hoofdwachtwoord, indien verschillend van de gebruiker, kan worden gebruikt om volledige toegang te krijgen.',
-
-    'PDF_ACL_ACCESS' => 'Toegangsbeheer',
-    'PDF_ACL_ACCESS_INFO' => 'Standaard Toegangsbeheer voor PDF aanmaak.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Cel hoogte Ratio',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Wanneer de hoogte van een cel kleiner is dan (Font Hoogte x Hoogte Cell Ratio), dan wordt (Font Hoogte x Hoogte Cell Ratio) gebruikt als de cel hoogte.<br />(Font Hoogte x Hoogte Cell Ratio) wordt ook gebruikt als de hoogte van de cel als er geen hoogte is te definiëren.',
-
-    'K_TITLE_MAGNIFICATION' => 'Titel Vergroting',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Titel vergroting : belangrijkste lettergrootte.',
-
-    'K_SMALL_RATIO' => 'Klein Lettertype Factor',
-    'K_SMALL_RATIO_INFO' => 'Reductiefactor voor kleine lettertype.',
-
-    'HEAD_MAGNIFICATION' => 'Kop Vergroting',
-    'HEAD_MAGNIFICATION_INFO' => 'Vergrotingsfactor voor titels',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Afbeelding schaal ratio',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'De verhouding gebruikt voor de schaalverdeling van afbeeldingen',
-
-    'PDF_UNIT' => 'Eenheid',
-    'PDF_UNIT_INFO' => 'document meeteenheid',
 	'PDF_GD_WARNING'=>'U heeft de GD bibliotheek niet geïnstalleerd in PHP. Zonder deze geïnstalleerde GD bibliotheek, kunnen alleen JPEG logo&#39;s worden weergegeven in PDF-documenten.',
     'ERR_EZPDF_DISABLE'=>'Waarschuwing: De EZPDF klasse is uitgeschakeld in de config tabel en staat ingesteld als PDF-klasse. Sla dit formulier op om TCPDF als de PDF-klasse in te stellen en terug te keren naar een stabiele toestand.',
     'LBL_IMG_RESIZED'=>"(aangepast voor weergave)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'PDF lettertype toevoegen',
     'LBL_PDF_PATCH' => 'Patch',
-    'LBL_PDF_PATCH_INFO' => 'Aangepaste wijziging van de codering. Schrijf een PHP array.<br />Voorbeeld:<br />ISO-8859-1 bevat het euro-symbool niet. Om toe te voegen op positie 164, schrijf "array (164 => \\ &#39;Euro \\&#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'Tabel Coderen',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Naam van de coderingtabel. <br /><br> Deze optie wordt genegeerd voor TrueType Unicode, OpenType-Unicode en symbolische lettertypen. <br> De codering bevat de associatie tussen een code (van 0 tot 255) en een karakter in het lettertype. <Br > De eerste 128 zijn vast en komen overeen met de ASCII-tabel.',
     'LBL_PDF_FONT_FILE' => 'Lettertype Tabel',

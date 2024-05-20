@@ -628,32 +628,15 @@ Odrzuć to połączenie:
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Powiadomienia e-mail o przydziałach',
-        'subject' => 'SugarCRM - przydzielony $module_name ',
-        'description' => 'Ten szablon jest używany, gdy system wysyła przydziały zadań do użytkowników.',
-        'body' => '<div>
-<p>Użytkownik $assigned_by_user przydzielił moduł $module_name do użytkownika $assigned_user.</p>
-
-<p>Moduł $module_name można sprawdzić, klikając to łącze:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            'Użytkownik $assigned_by_user przydzielił moduł $module_name do użytkownika $assigned_user.
-
-Moduł $module_name można sprawdzić, klikając to łącze:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Wiadomości e-mail o zaplanowanych raportach',
         'subject' => 'Zaplanowany raport: $report_name od $report_time',
         'description' => 'Ten szablon jest używany, gdy system wysyła zaplanowane raporty do użytkowników.',
         'body' => '<div>
-<p>Witaj $assigned_user,</p>
-<p>w załączeniu jest automatycznie wygenerowany raport zaplanowany.</p>
-<p>Nazwa raportu: $report_name</p>
-<p>Data i godzina uruchomienia raportu: $report_time</p>
+<p>Witaj $assigned_user,<br></p>
+<p>w załączeniu jest automatycznie wygenerowany raport zaplanowany.<br></p>
+<p>Nazwa raportu: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Data i godzina uruchomienia raportu: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Witaj $assigned_user,
@@ -679,21 +662,6 @@ Data i godzina uruchomienia raportu: $report_time',
             Zaloguj się w portalu Sugar, aby wyświetlić komentarz.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informacje o nowym koncie',
-        'description' => 'Ten szablon jest używany, gdy administrator systemu wysyła nowe hasło do użytkownika.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Twoja nazwa użytkownika i tymczasowe hasło:</p><p>Nazwa użytkownika: $contact_user_user_name </p><p>Hasło: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Po zalogowaniu przy użyciu powyższego hasła może być wymagana zmiana hasła na Twoje własne.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Twoja nazwa użytkownika i tymczasowe hasło:
-Nazwa użytkownika: $contact_user_user_name
-Hasło: $contact_user_user_hash
-
-$config_site_url
-
-Po zalogowaniu przy użyciu powyższego hasła może być wymagana zmiana hasła na Twoje własne.',
-        'name' => 'Hasło e-mail generowane przez system',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Resetuj hasło do swojego konta',
         'description' => "Ten szablon jest używany do wysłania użytkownikowi linku do zresetowania hasła do konta użytkownika.",

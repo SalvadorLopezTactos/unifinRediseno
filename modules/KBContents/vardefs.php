@@ -12,6 +12,8 @@
 $dictionary['KBContent'] = array(
     'optimistic_locking' => true,
     'table' => 'kbcontents',
+    'color' => 'coral',
+    'icon' => 'sicon-knowledgebase-xl',
     'audited' => true,
     'activity_enabled' => true,
     'unified_search' => true,

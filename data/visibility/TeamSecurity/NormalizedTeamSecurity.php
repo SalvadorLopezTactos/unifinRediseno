@@ -27,19 +27,19 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
      * $sugar_config base key for performance profile
      * @var string
      */
-    const CONFIG_PERF_KEY = "perfProfile.TeamSecurity.%s";
+    public const CONFIG_PERF_KEY = "perfProfile.TeamSecurity.%s";
 
     /**
      * Default teamSet prefetch count
      * @var integer
      */
-    const TEAMSET_PREFETCH_MAX = 500;
+    public const TEAMSET_PREFETCH_MAX = 500;
 
     /**
      * The SQL hint that can be used inside a select subquery (MySQL specific)
      * https://dev.mysql.com/doc/refman/8.0/en/optimizer-hints.html#optimizer-hints-subquery
      */
-    const SUBQUERY_OPTIMIZER_HINT = '/*+ SUBQUERY(MATERIALIZATION) */';
+    public const SUBQUERY_OPTIMIZER_HINT = '/*+ SUBQUERY(MATERIALIZATION) */';
 
     /**
      * Get team security `join` as a `IN()` condition.

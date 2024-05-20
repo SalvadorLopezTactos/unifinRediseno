@@ -14,7 +14,7 @@ use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 class AuthApi extends SugarApi
 {
-    const CONNECTOR_LABELS = [
+    public const CONNECTOR_LABELS = [
         'GoogleEmail' => 'LBL_SMTPTYPE_GOOGLE_OAUTH2',
         'MicrosoftEmail' => 'LBL_SMTPTYPE_MICROSOFT',
     ];

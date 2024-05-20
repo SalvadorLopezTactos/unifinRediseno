@@ -43,6 +43,14 @@
     /**
      * @inheritdoc
      */
+    _render: function() {
+        this.tooltipPlacement = app.lang.direction === 'ltr' ? 'right' : 'left';
+        this._super('_render');
+    },
+
+    /**
+     * @inheritdoc
+     */
     _renderHtml: function() {
         this.isAvailable = this._isAvailable();
 

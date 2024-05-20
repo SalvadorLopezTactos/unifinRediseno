@@ -17,6 +17,14 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
     /**
+     * @var \SugarBean|null|mixed
+     */
+    public $bean;
+    /**
+     * @var mixed|string
+     */
+    public $loadedViewClient;
+    /**
      * The file that the metadata for this implementation was loaded from
      * 
      * @var string
@@ -91,7 +99,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
         }
 
         // Make sure the paneldefs are proper if there are any
-        $this->_paneldefs = isset($this->_viewdefs) ? $this->_viewdefs : array();
+        $this->_paneldefs = $this->_viewdefs ?? array();
 
         // Lastly, but not leastly, grab the original metadata
         $original = $this->getOriginalMetadata();

@@ -15,14 +15,16 @@ use Doctrine\DBAL\Connection;
 
 class Email extends SugarBean {
 
-    const STATE_READY = 'Ready';
-    const STATE_DRAFT = 'Draft';
-    const STATE_ARCHIVED = 'Archived';
+    public const STATE_READY = 'Ready';
+    public const STATE_DRAFT = 'Draft';
+    public const STATE_ARCHIVED = 'Archived';
 
-    const DIRECTION_UNKNOWN = 'Unknown';
-    const DIRECTION_OUTBOUND = 'Outbound';
-    const DIRECTION_INBOUND = 'Inbound';
-    const DIRECTION_INTERNAL = 'Internal';
+    public const DIRECTION_UNKNOWN = 'Unknown';
+    public const DIRECTION_OUTBOUND = 'Outbound';
+    public const DIRECTION_INBOUND = 'Inbound';
+    public const DIRECTION_INTERNAL = 'Internal';
+
+    public const DEFAULT_RECIPIENT_CHUNK_SIZE = 10;
 
     /**
      * A flag to toggle when synchronizing the email's sender and recipients. See
@@ -750,7 +752,7 @@ class Email extends SugarBean {
             $mailer->setSubject($mod_strings['LBL_TEST_EMAIL_SUBJECT']);
             $mailer->addRecipientsTo(new EmailIdentity($toaddress));
             $mailer->setTextBody($mod_strings['LBL_TEST_EMAIL_BODY']);
-            $mailer->setConnectionCommandTimeDuration(5);
+            $mailer->setFixedResponseTimeDuration(true);
 
             $mailer->send();
             $return['status'] = true;
@@ -915,7 +917,7 @@ class Email extends SugarBean {
                 $this->description = EmailTemplate::parse_template($this->description, $object_arr);
             }
 
-            $this->description = html_entity_decode($this->description, ENT_COMPAT, 'UTF-8');
+            $this->description = html_entity_decode((string)$this->description, ENT_COMPAT, 'UTF-8');
 
             if ($this->type != 'draft' && $this->status != 'draft' &&
                 $this->type != 'archived' && $this->status != 'archived'
@@ -1070,7 +1072,7 @@ class Email extends SugarBean {
                             $note->name           = $filename;
                             $note->filename       = $filename;
                             $note->file_mime_type = $this->email2GetMime($fileLocation);
-                            $note->team_id     = (isset($_REQUEST['primaryteam']) ? $_REQUEST['primaryteam'] : $current_user->getPrivateTeamID());
+                            $note->team_id     = ($_REQUEST['primaryteam'] ?? $current_user->getPrivateTeamID());
                             $noteTeamSet       = new TeamSet();
                             $noteteamIdsArray  = (isset($_REQUEST['teamIds']) ? explode(",", $_REQUEST['teamIds']) : array($current_user->getPrivateTeamID()));
                             $note->team_set_id = $noteTeamSet->addTeams($noteteamIdsArray);
@@ -2236,9 +2238,10 @@ class Email extends SugarBean {
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($query, array($this->id));
         $row = $stmt->fetchAssociative();
+        $ie = BeanFactory::newBean('InboundEmail');
         if (!empty($row)) {
             $this->description = $row['description'];
-            $this->description_html = $row['description_html'];
+            $this->description_html = $ie->getHTMLDisplay(SugarCleaner::cleanHtml($row['description_html']));
             $this->raw_source = $row['raw_source'];
             $this->from_addr_name = $row['from_addr'];
             $this->reply_to_addr = $row['reply_to_addr'];
@@ -3591,7 +3594,8 @@ SQL;
 		parent::fill_in_additional_detail_fields();
 	}
 
-	function get_list_view_data() {
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $app_list_strings;
 		global $theme;
 		global $current_user;
@@ -3890,10 +3894,10 @@ SQL;
 		{
 		      if( !empty($_REQUEST[$key]) )
 		      {
-		          $db_key =  isset($properties['db_key']) ? $properties['db_key'] : $key;
+                  $db_key = $properties['db_key'] ?? $key;
                   $searchValue = $this->db->quote($_REQUEST[$key]);
 
-		          $opp = isset($properties['opp']) ? $properties['opp'] : 'like';
+                  $opp = $properties['opp'] ?? 'like';
 		          if($opp == 'like')
 		              $searchValue = "%" . $searchValue . "%";
 
@@ -4355,7 +4359,7 @@ SQL;
                 'longer being used.');
 
             if(empty($this->description_html)) return;
-			list($type, $subtype) = explode('/', $noteType);
+            [$type, $subtype] = explode('/', $noteType);
 			if(strtolower($type) != 'image') {
 			    return;
 			}
@@ -4548,6 +4552,7 @@ SQL;
         }
 
         try {
+            /** @var IMailer $mailer */
             $mailer = MailerFactory::getMailer($config);
             $mailer->setSubject($this->name);
             $mailer->setHtmlBody($this->description_html);
@@ -4568,9 +4573,9 @@ SQL;
             }
 
             // Add recipients.
-            $this->addEmailRecipients($mailer, 'to');
-            $this->addEmailRecipients($mailer, 'cc');
-            $this->addEmailRecipients($mailer, 'bcc');
+            $recipientsTo = $this->loadEmailRecipients('to');
+            $recipientsCc = $this->loadEmailRecipients('cc');
+            $recipientsBcc = $this->loadEmailRecipients('bcc');
 
             // Add attachments.
             if ($this->load_relationship('attachments')) {
@@ -4582,11 +4587,19 @@ SQL;
                 }
             }
 
-            // Generate the Message-ID header using the ID of this email.
-            $mailer->setMessageId($this->id);
+            $this->assignEmailRecipients($mailer, 'cc', $recipientsCc);
+            $this->assignEmailRecipients($mailer, 'bcc', $recipientsBcc);
 
-            // Send the email.
-            $sentMessage = $mailer->send();
+            $toChunks = array_chunk($recipientsTo, $this->getRecipientChunkSize());
+            foreach ($toChunks as $toChunk) {
+                $this->assignEmailRecipients($mailer, 'to', $toChunk);
+
+                // Generate the Message-ID header using the ID of this email.
+                $mailer->setMessageId($this->id);
+
+                // Send the email.
+                $mailer->send();
+            }
 
             // Archive after sending.
             $this->state = static::STATE_ARCHIVED;
@@ -4622,24 +4635,17 @@ SQL;
     }
 
     /**
-     * Adds the recipients from the specified role to the mailer.
+     * Prepares the recipients from the specified role.
      *
      * Updates the participant rows where the email address was not chosen prior to send-time.
      *
-     * @param IMailer $mailer
      * @param string $role Can be "to", "cc", or "bcc".
-     * @return int Number of recipients added.
+     * @return EmailIdentity[] Recipients for the specified role
      */
-    protected function addEmailRecipients(IMailer $mailer, $role)
+    protected function loadEmailRecipients($role)
     {
-        static $methodMap = array(
-            'to' => 'addRecipientsTo',
-            'cc' => 'addRecipientsCc',
-            'bcc' => 'addRecipientsBcc',
-        );
-
         $ea = BeanFactory::newBean('EmailAddresses');
-        $num = 0;
+        $recipients = [];
         $beans = $this->getParticipants($role);
 
         foreach ($beans as $bean) {
@@ -4663,17 +4669,36 @@ SQL;
 
             try {
                 // Rows that are just an email address don't have names. EmailIdentity can sort that out.
-                $identity = new EmailIdentity($bean->email_address, $bean->parent_name);
-                $method = $methodMap[$role];
-                $mailer->$method($identity);
-                $num++;
+                $recipients[] = new EmailIdentity($bean->email_address, $bean->parent_name);
             } catch (MailerException $me) {
                 // Invalid email address. Log it and skip.
                 $GLOBALS['log']->warning($me->getLogMessage());
             }
         }
 
-        return $num;
+        return $recipients;
+    }
+
+    /**
+     * @param IMailer $mailer
+     * @param string $role
+     * @param EmailIdentity[] $recipients
+     * @return void
+     */
+    protected function assignEmailRecipients(IMailer $mailer, string $role, array $recipients): void
+    {
+        $mailer->clearRecipients($role === 'to', $role === 'cc', $role === 'bcc');
+
+        static $methodMap = array(
+            'to' => 'addRecipientsTo',
+            'cc' => 'addRecipientsCc',
+            'bcc' => 'addRecipientsBcc',
+        );
+
+        foreach ($recipients as $recipient) {
+            $method = $methodMap[$role];
+            $mailer->$method($recipient);
+        }
     }
 
     /**
@@ -4895,6 +4920,12 @@ SQL;
         // At this point, we know the email subject contains the case macro, and
         // a matching case exists, so only now do we retrieve the Case.
         $acase->retrieve($caseId);
+
+        // Cannot retrieve case
+        if (empty($acase->retrieve($caseId))) {
+            return false;
+        }
+
         $this->parent_type = 'Cases';
         $this->parent_id = $caseId;
 
@@ -4904,7 +4935,9 @@ SQL;
         if (empty($this->assigned_user_id)) {
             $this->assigned_user_id = $acase->assigned_user_id;
         }
-        $acase->pending_processing = true;
+        if ($this->direction === static::DIRECTION_INBOUND) {
+            $acase->pending_processing = true;
+        }
         $acase->save();
         return true;
     }
@@ -4967,6 +5000,15 @@ SQL;
             }
         }
         return null;
+    }
+
+    /**
+     * Retrieve the configured size of a chunk, when splitting of recipients list is required
+     * @return int
+     */
+    protected function getRecipientChunkSize(): int
+    {
+        return (int)SugarConfig::getInstance()->get('email_recipient_chunk_size', self::DEFAULT_RECIPIENT_CHUNK_SIZE);
     }
 
     /**

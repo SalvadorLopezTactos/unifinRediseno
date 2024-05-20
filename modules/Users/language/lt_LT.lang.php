@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Vartotojo informacija nerasta',
     'ERR_USER_NAME_EXISTS'              => 'The user name {0} already exists. Duplicate user names are not allowed. Change the user name to be unique.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => '„Sugar Hint“ licencija turi būti išsaugota kartu su papildomu suderinamu licencijos tipu',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Ši galimybė jau įtraukta į „Sugar Sell Premier“.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Šis vartotojas yra užblokuotas, negalima prisijungti naudojantis senu slaptažodžiu.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Tik išorinio autentifikavimo įgaliojimus turinčiam vartotojui neleidžiama prisijungti naudojant „Sugar“ kredencialus',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Slaptažodis',
     'LBL_CHOOSE_A_KEY'					=> 'Pasirinkti raktą, kad užkirsti kelią nesankcionuotam Jūsų kalendoriaus paskelbimui',
     'LBL_NO_KEY'                        => 'Raktas nėra nurodytas. Prašome nurodyti raktą, kad būtų galima paskelbti.',
-	'LBL_CHOOSE_WHICH'					=> 'Pasirinkite kurias korteles rodyti',
+    'LBL_CHOOSE_WHICH'                  => 'Pasirinkite, kurie moduliai pasiekiami šoninėje naršymo juostoje. Nurodykite tvarką, kuria norite, kad moduliai būtų rodomi.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Prisegtų modulių skaičius',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Įrašykite galimų modulių, kurie bus prisegti, kai naršymo juosta sulankstoma, skaičių (pvz., jei įvesta 5, prisegami pirmieji penki sąrašo moduliai). Rekomenduojame įrašyti skaičių, kuris atspindi dažniausiai naudojamus modulius. Į didesnes nei 100 vertes nebus atsižvelgiama.',
 	'LBL_CITY'							=> 'Miestas',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Išvalyti',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP vartojo vardas:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP serverio tipas:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP serverio specifikacijos',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Įgaliota el. pašto paskyra',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Pasirinkite pašto tiekėją:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! pašto slaptažodis:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! pašto ID:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'vartotojai / komandos / vaidmenys',
     'LBL_LOADING_ITEMS' => 'Kraunami duomenys...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => '„Smart Guide“ prieiga',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => '„Smart Guide“ paskutinis aktyvus',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Trūksta „Smart Guide“ prieigos',
 ); // END STRINGS DEFS

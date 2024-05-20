@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Krijo një formulë për të përcaktuar nëse kjo fushë kërkohet në formatime.<br/>"
-    . "Fushat e kërkuara do të ndjekin formulën në pamjen celulare të bazuar në shfletues,<br/>"
-    . "por nuk do të ndjekin formulën në aplikacionet origjinale, si \"Sugar Mobile\" për \"iPhone\". <br/>"
-    . "Ato nuk do të ndjekin formulën në portalin e vetëshërbimit të \"Sugar\".",
-'LBL_POPHELP_READONLY'=>"Krijo një formulë për të përcaktuar nëse kjo fushë lexohet vetëm në skica.<br/>"
-        . "Fushat vetëm për lexim do të ndjekin formulën në pamjen e celularit në shfletues, <br/>"
-        . "por nuk do ta ndjekin formulën në aplikacionet origjinale, si p.sh. Sugar Mobile për iPhone. <br/><0/>"
-        . "Ata nuk do ta ndjekin formulën në portalin e vetëshërbimit të Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Zgjidh përdorimin e kësaj fushe gjatë kërkimit për të dhënat duke përdorur "Kërkimi global" në këtë modul.',
+    'LBL_POPHELP_REQUIRED'=>'Fushat që kërkohen me kusht nuk janë të disponueshme për t&#39;u përdorur në llojet e mëposhtme të veprimit SugarBPM: Shto regjistrime të lidhura, ndrysho fushën. Hiq tekstin "Kërkohet nëse" për të përdorur këtë fushë në këto veprime të përcaktimit të procesit',
+'LBL_POPHELP_READONLY'=>"Krijo një formulë për të përcaktuar nëse kjo fushë është vetëm për lexim në formate.<br/>"
+        . "Fushat vetëm për lexim do të ndjekin formulën në pamjen celulare të bazuar në shfletues,<br/>"
+        . "por nuk do të ndjekin formulën në aplikacionet origjinale, si \"Sugar Mobile\" për iPhone. <br/>"
+        . "Ato nuk do të ndjekin formulën në portalin e vetëshërbimit të Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Zgjidh për të përdorur këtë fushë kur kërkon për regjistrime duke përdorur kërkimin global në këtë modul.',
 //Revert Module labels
 'LBL_RESET' => 'Rivendos',
 'LBL_RESET_MODULE' => 'Rivendosni Module',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Dhjetor',
                 'autoincrement' => 'Rritje automatike',
                 'actionbutton' => 'Buton veprimi',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Labelat e përdorura shpesh",

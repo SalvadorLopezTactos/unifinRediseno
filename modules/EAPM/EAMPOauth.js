@@ -35,7 +35,7 @@ var EAMPOauth = (function () {
         handleOauthComplete: function (e) {
             var data = JSON.parse(e.data);
             if (data.result) {
-                if (!data.hasRefreshToken) {
+                if (!data.hasRefreshToken && !data.hasFreshAccessToken) {
                     alert("The application is unable to work in offline mode. Please sign out and sign in again.");
                 }
             } else {

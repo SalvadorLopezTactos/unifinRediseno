@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Crea una fórmula per determinar si aquest camp és obligatori al disseny.<br/>"
-    . "Els camps obligatoris seguiran la fórmula a la vista mòbil basada en navegador, <br/>"
-    . "però no seguiran la fórmula a les aplicacions natives, com ara Sugar Mobile per a iPhone.<br/>"
-    . "No seguiran la fórmula al Portal autoservei de Sugar.",
-'LBL_POPHELP_READONLY'=>"Crea una fórmula per determinar si aquest camp és només de lectura al disseny.<br/>"
-        . "Els camps de només lectura seguiran la fórmula a la vista mòbil basada en navegador, <br/>"
+    'LBL_POPHELP_REQUIRED'=>'Els camps que són obligatoris condicionalment no estan disponibles per a l&#39;ús als següents tipus d&#39;accions de SugarBPM: Afegir registre relacionat, Canviar camp. Suprimiu el text "Obligatori si" per utilitzar aquest camp en aquestes accions de definició de processos',
+'LBL_POPHELP_READONLY'=>"Creeu una fórmula per determinar si aquest camp és obligatori al disseny.<br/>"
+        . "Els camps només de lectura seguiran la fórmula a la vista mòbil basada en navegador, <br/>"
         . "però no seguiran la fórmula a les aplicacions natives, com ara Sugar Mobile per a iPhone.<br/>"
         . "No seguiran la fórmula al Portal autoservei de Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccioneu-ho per utilitzar aquest camp quan cerqueu registres amb la Cerca global a aquest mòdul.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccioneu-ho per utilitzar aquest camp a la cerca de registres amb la Cerca global a aquest mòdul.',
 //Revert Module labels
 'LBL_RESET' => 'Restablir',
 'LBL_RESET_MODULE' => 'Restablir Mòdul',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Decimal',
                 'autoincrement' => 'AutoIncrementa',
                 'actionbutton' => 'Botó d&#39;acció',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Les etiquetes d&#39;ús freqüent",

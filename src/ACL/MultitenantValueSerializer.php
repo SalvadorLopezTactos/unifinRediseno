@@ -14,6 +14,7 @@ namespace Sugarcrm\Sugarcrm\ACL;
 
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use RuntimeException;
 use Sugarcrm\Sugarcrm\Security\Crypto\AES256GCM;
 
@@ -27,7 +28,7 @@ final class MultitenantValueSerializer implements ValueSerializer
     /**
      * Encryption key
      *
-     * @var Uuid
+     * @var UuidInterface
      */
     private $key;
 
@@ -45,7 +46,7 @@ final class MultitenantValueSerializer implements ValueSerializer
 
     public function __construct(
         ValueSerializer $valueSerializer,
-        Uuid $encryptionKey,
+        UuidInterface $encryptionKey,
         LoggerInterface $logger
     ) {
         $this->valueSerializer = $valueSerializer;

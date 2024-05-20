@@ -26,8 +26,8 @@ class Configurator
 	var $previous_sugar_override_config_array = array();
 	var $useAuthenticationClass = false;
 
-    const COMPANY_LOGO_UPLOAD_PATH = 'upload://tmp_logo_company_upload/logo.png';
-    const COMPANY_LOGO_UPLOAD_PATH_DARK = 'upload://tmp_logo_company_upload/logo_dark.png';
+    public const COMPANY_LOGO_UPLOAD_PATH = 'upload://tmp_logo_company_upload/logo.png';
+    public const COMPANY_LOGO_UPLOAD_PATH_DARK = 'upload://tmp_logo_company_upload/logo_dark.png';
     /**
      * List of allowed undefined `$sugar_config` keys to be set
      * @var array
@@ -180,7 +180,7 @@ class Configurator
 	{
 		global $sugar_config, $sugar_version;
 		$sc = SugarConfig::getInstance();
-		list($oldConfig, $overrideArray) = $this->readOverride();
+        [$oldConfig, $overrideArray] = $this->readOverride();
 		$this->previous_sugar_override_config_array = $overrideArray;
 		$diffArray = deepArrayDiff($this->config, $sugar_config);
 		$overrideArray = sugarArrayMergeRecursive($overrideArray, $diffArray);
@@ -233,7 +233,7 @@ class Configurator
             MetaDataManager::MM_SERVERINFO,
         ];
 
-        list($oldConfig, $currentConfigArray) = $this->readOverride();
+        [$oldConfig, $currentConfigArray] = $this->readOverride();
         foreach($currentConfigArray as $key => $val) {
             if (in_array($key, $this->allowUndefined) || isset ($sugar_config[$key])) {
                 if (empty($val) ) {

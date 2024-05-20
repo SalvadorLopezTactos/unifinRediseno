@@ -3,9 +3,9 @@
 }
 
 .hint-preview {
-  background: #fff;
+  background: @inputBackground;
   position: relative;
-  margin: 74px 14px 0;
+  margin: 51px 14px 0;
   border-width: 1px;
   border-color: @borderColor;
   border-style: solid;
@@ -17,10 +17,6 @@
 
 .hint-preview .panel:not(:first-child) {
   border-top: 1px solid @borderColor;
-}
-
-.hint-preview .show-hide-toggle {
-  padding: 15px;
 }
 
 .hint-preview .err_message_col1 {
@@ -39,13 +35,14 @@
 .hint-preview .headline {
   display: flex;
   font-size: 15px;
-  color: #333;
-  font-weight: bold;
-  align-items: center;
   padding: 7px 10px 8px;
-  background-color: var(--input-background);
-  border-bottom: 1px solid @borderColor;
-  justify-content: space-between;
+}
+
+.headline .saveAll {
+  height: 4px;
+  margin: 10px;
+  right: 0;
+  position: absolute;
 }
 
 .hint-preview .headline .hint-preview-icon--cloud {
@@ -58,7 +55,7 @@
 
 .hint-preview .headline .hint-preview-icon--cloud::before {
   z-index: 100;
-  color: #176de5;
+  color: @gray70;
   content: '\f0ed';
   position: relative;
   font-family: FontAwesome;
@@ -203,12 +200,8 @@
 }
 
 .hint-preview-tabbed-layout {
-  background: #fff;
   position: relative;
   margin: 7px 14px 0;
-  border-width: 1px;
-  border-color: @borderColor;
-  border-style: solid;
 }
 
 .hint-preview-tabbed-layout .panel {
@@ -239,16 +232,10 @@
 }
 
 .hint-preview-tabbed-layout .headline {
+  height: 15px;
   display: flex;
   font-size: 15px;
-  color: #333;
-  font-weight: bold;
-  align-items: center;
-  padding: 7px 10px 8px;
   background-color: var(--input-background);
-  border-bottom: 1px solid @borderColor;
-  border-bottom-color: @borderColor;
-  justify-content: space-between;
 }
 
 .hint-preview-tabbed-layout .headline .hint-preview-icon--cloud {
@@ -261,7 +248,7 @@
 
 .hint-preview-tabbed-layout .headline .hint-preview-icon--cloud::before {
   z-index: 100;
-  color: #176de5;
+  color: @gray70;
   content: '\f0ed';
   position: relative;
   font-family: FontAwesome;
@@ -382,7 +369,7 @@
 .hint-preview-tabbed-layout .headline .hint-preview-icon--locked,
 .hint-preview-tabbed-layout .headline .hint-preview-icon--confirm,
 .hint-preview-tabbed-layout .headline .hint-preview-icon--loading {
-  margin: 0 4px 0 0;
+  margin: 10px 12px 0 0;
   margin-left: auto;
 }
 
@@ -464,7 +451,7 @@
   font-size: 12px;
   margin-top: 25px;
   position: absolute;
-  width: calc(100% - 60px);
+  width: calc(~"100% - 60px");
 }
 
 .hint-preview-contact .record-cell.record-cell--title .detail {
@@ -554,10 +541,6 @@
   justify-content: flex-end;
 }
 
-.hint-preview-field-value.record-cell--hint_account_logo .label-Accounts {
-  background: #999;
-}
-
 .hint-preview-field-value.record-cell--hint_account_logo .image_preview {
   height: 50px;
   position: relative;
@@ -622,7 +605,7 @@
 
 .hint-preview-field-value .hint-preview-icon--cloud::before {
   z-index: 100;
-  color: #176de5;
+  color: @gray70;
   content: '\f0ed';
   position: relative;
   font-family: FontAwesome;
@@ -654,7 +637,7 @@
 
 .hint-preview-field-value .hint-preview-icon--locked::before {
   z-index: 100;
-  color: #176de5;
+  color: #79ade0;
   content: '\f023';
   position: relative;
   font-family: FontAwesome;
@@ -836,7 +819,7 @@
 
 .hint-preview-list .headline .hint-preview-icon--cloud::before {
   z-index: 100;
-  color: #176de5;
+  color: @gray70;
   content: '\f0ed';
   position: relative;
   font-family: FontAwesome;

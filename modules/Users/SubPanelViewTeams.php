@@ -19,6 +19,7 @@
 
 class SubPanelViewTeams {
 
+    public $hideNewButton;
 	var $users_list = null;
 	var $focus;
 

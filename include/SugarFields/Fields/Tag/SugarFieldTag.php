@@ -72,7 +72,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
             $originalTags = $this->getOriginalTags($currRelBeans);
 
             // Grab the changes from old to new
-            list($addedTags, $removedTags) = $this->getChangedValues($originalTags, $changedTags);
+            [$addedTags, $removedTags] = $this->getChangedValues($originalTags, $changedTags);
 
             // Handle delete of tags
             // For mass append tag_type will be 'add' and hence delete can be skipped
@@ -146,7 +146,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
                 $data[$fieldName] = array();
             }
         } else {
-            list ($relName, $fields, $limit) = $this->parseProperties($properties);
+            [$relName, $fields, $limit] = $this->parseProperties($properties);
             $data[$fieldName] = array_values(
                 $this->getLinkedRecords($bean, $relName, $fields, $limit, array('name_lower', 'ASC'))
             );

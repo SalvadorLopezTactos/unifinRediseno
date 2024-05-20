@@ -24,7 +24,6 @@ $viewdefs['Reports']['base']['view']['list'] = array(
                     'type' => 'name',
                     'enabled' => true,
                     'default' => true,
-                    'bwcLink' => true,
                 ),
                 array (
                     'name'  => 'module',

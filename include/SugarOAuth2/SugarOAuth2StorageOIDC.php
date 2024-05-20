@@ -75,4 +75,11 @@ class SugarOAuth2StorageOIDC extends SugarOAuth2Storage
     {
         return translate($label, $module);
     }
+
+    public function unsetRefreshToken($refresh_token)
+    {
+        // Overide parent behavior and do nothing, because
+        // 1. IDM tokens are not saved to database, so no need to delete them
+        // 2. attempt to delete such token caused database error on DB2
+    }
 }

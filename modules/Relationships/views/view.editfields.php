@@ -13,6 +13,9 @@
 
 class ViewEditFields extends ViewAjax{
  	
+    public $rel;
+    public $id;
+    public $fields;
     public function __construct(){
         $rel = $this->rel = $this->request->getValidInputRequest('rel');
         $this->id = $this->request->getValidInputRequest('id', 'Assert\Guid');

@@ -98,7 +98,7 @@ $current_language = isset($_SESSION['language']) ? basename($_SESSION['language'
 if(file_exists("install/language/{$current_language}.lang.php")) {
     require_once FileLoader::validateFilePath("install/language/{$current_language}.lang.php");
 } else {
-	require_once("install/language/{$default_lang}.lang.php");
+    require_once "install/language/{$default_lang}.lang.php";
 }
 
 if($current_language != 'en_us') {
@@ -211,16 +211,16 @@ if (!isset($_SESSION['setup_system_name']) || empty($_SESSION['setup_system_name
     $_SESSION['setup_system_name'] = 'SugarCRM';
 }
 if (!isset($_SESSION['setup_site_session_path']) || empty($_SESSION['setup_site_session_path'])) {
-    $_SESSION['setup_site_session_path'] = (isset($sugar_config['session_dir'])) ? $sugar_config['session_dir'] : '';
+    $_SESSION['setup_site_session_path'] = $sugar_config['session_dir'] ?? '';
 }
 if (!isset($_SESSION['setup_site_log_dir']) || empty($_SESSION['setup_site_log_dir'])) {
-    $_SESSION['setup_site_log_dir'] = (isset($sugar_config['log_dir'])) ? $sugar_config['log_dir'] : '.';
+    $_SESSION['setup_site_log_dir'] = $sugar_config['log_dir'] ?? '.';
 }
 if (!isset($sugar_config['unique_key'])) {
     $sugar_config['unique_key'] = get_unique_key();
 }
 if (!isset($_SESSION['cache_dir']) || empty($_SESSION['cache_dir'])) {
-    $_SESSION['cache_dir'] = isset($sugar_config['cache_dir']) ? $sugar_config['cache_dir'] : 'cache/';
+    $_SESSION['cache_dir'] = $sugar_config['cache_dir'] ?? 'cache/';
 }
 
     //check if this is an offline client installation

@@ -30,7 +30,7 @@ class Ldap implements LdapInterface, LoggerAwareInterface
     private $adapter;
 
     private static $adapterMap = array(
-        'ext_ldap' => 'Symfony\Component\Ldap\Adapter\ExtLdap\Adapter',
+        'ext_ldap' => \Symfony\Component\Ldap\Adapter\ExtLdap\Adapter::class,
     );
 
     public function __construct(AdapterInterface $adapter)

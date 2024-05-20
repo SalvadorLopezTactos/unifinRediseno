@@ -19,6 +19,9 @@ namespace Google\Service\Datastore;
 
 class Mutation extends \Google\Model
 {
+  /**
+   * @var string
+   */
   public $baseVersion;
   protected $deleteType = Key::class;
   protected $deleteDataType = '';
@@ -26,13 +29,23 @@ class Mutation extends \Google\Model
   protected $insertDataType = '';
   protected $updateType = Entity::class;
   protected $updateDataType = '';
+  /**
+   * @var string
+   */
+  public $updateTime;
   protected $upsertType = Entity::class;
   protected $upsertDataType = '';
 
+  /**
+   * @param string
+   */
   public function setBaseVersion($baseVersion)
   {
     $this->baseVersion = $baseVersion;
   }
+  /**
+   * @return string
+   */
   public function getBaseVersion()
   {
     return $this->baseVersion;
@@ -78,6 +91,20 @@ class Mutation extends \Google\Model
   public function getUpdate()
   {
     return $this->update;
+  }
+  /**
+   * @param string
+   */
+  public function setUpdateTime($updateTime)
+  {
+    $this->updateTime = $updateTime;
+  }
+  /**
+   * @return string
+   */
+  public function getUpdateTime()
+  {
+    return $this->updateTime;
   }
   /**
    * @param Entity

@@ -23,11 +23,99 @@
     className: 'preview-headerbar',
 
     events: {
+        'mousemove .record-edit-link-wrapper, .record-lock-link-wrapper': 'handleMouseMove',
+        'mouseleave .record-edit-link-wrapper, .record-lock-link-wrapper': 'handleMouseLeave',
         'click [name=edit_button]': 'editClicked',
         'click [name=save_button]': 'saveClicked',
         'click [name=cancel_button]': 'cancelClicked',
         'click [name=create_cancel_button]': 'createCancelClicked',
         'click [name=edit_overview_tab_button]': 'editOverviewTabClicked',
+    },
+
+    /**
+     * Checks if tooltip is visible.
+     *
+     * @param {Object} field
+     * @return {boolean}
+     * @private
+     */
+    _isTooltipOn: function(field) {
+        return !!$(field).attr('aria-describedby');
+    },
+
+    /**
+     * Checks if ellipsis is active.
+     *
+     * @param {Object} field
+     * @return {boolean}
+     * @private
+     */
+    _isEllipsisOn: function(field) {
+        return field.offsetWidth < field.scrollWidth;
+    },
+
+    /**
+     * Gets target fields in a record-cell for a mouse event.
+     * For now it only returns fields with tooltips.
+     *
+     * @param {Event} event Event object
+     * @return {Object} collection of DOM elements of the target fields
+     * @private
+     */
+    _getMouseTargetFields: function(event) {
+        let target = this.$(event.target);
+        let cell = target.parents('.record-cell');
+        let fields = cell.find('[title]');
+        return fields;
+    },
+
+    /**
+     * Handles mousemove event.
+     *
+     * @param {Event} event Event object
+     */
+    handleMouseMove: function(event) {
+        let fields = this._getMouseTargetFields(event);
+        _.each(fields, function(field) {
+            let rect = field.getBoundingClientRect();
+            let tooltipOn = this._isTooltipOn(field);
+            let ellipsisOn = this._isEllipsisOn(field);
+
+            if (event.clientX >= rect.left && event.clientX < (rect.left + rect.width) &&
+                event.clientY >= rect.top && event.clientY < (rect.top + rect.height)) {
+                if (!tooltipOn && ellipsisOn) {
+                    $(field).tooltip('show');
+                }
+            } else if (tooltipOn) {
+                $(field).tooltip('hide');
+            }
+        }, this);
+    },
+
+    /**
+     * Handles mouseleave event.
+     *
+     * @param {Event} event Event object
+     */
+    handleMouseLeave: function(event) {
+        let fields = this._getMouseTargetFields(event);
+        _.each(fields, function(field) {
+            if (this._isTooltipOn(field)) {
+                $(field).tooltip('hide');
+            }
+        }, this);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    adjustTitle: function() {
+        let $titleCell = this.$el.find('.record-cell').first();
+        if ($titleCell) {
+            let $ellipsisDiv = $titleCell.find('.ellipsis_inline');
+            let width = parseInt($titleCell.css('max-width'), 10) - 28; // minus width of dropdown toggle
+            $ellipsisDiv.css({'max-width': width});
+        }
     },
 
     /**
@@ -168,6 +256,14 @@
         // If there are no changes, don't warn.
         if (_.isEmpty(changes)) {
             return false;
+        }
+
+        // if the only change is removal of legacy component from metadata then return false
+        if (Object.keys(changes).length === 1 && Object.keys(changes) == 'metadata') {
+            // if previous model had legacy components and the synced model doesn't
+            if (!this.model.getSynced('metadata').legacyComponents && this.model.get('metadata').legacyComponents) {
+                return false;
+            }
         }
 
         // If the only change is to my_favorite, don't warn.

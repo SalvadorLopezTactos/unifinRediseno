@@ -57,6 +57,10 @@ class SugarACLDeveloperForTarget extends SugarACLStrategy
                 return true;
             }
 
+            if ($module === "Administration" && $current_user->isDeveloperForAnyModule()) {
+                return true;
+            }
+
             $dev_mods = $current_user->getDeveloperModules();
             $ret = count($dev_mods);
             if ($ret) {
@@ -77,8 +81,6 @@ class SugarACLDeveloperForTarget extends SugarACLStrategy
 
         if ($this->allowUserRead && !$this->isWriteOperation($view, $context)) {
             return true;
-        } else {
-            return false;
         }
 
         return false;

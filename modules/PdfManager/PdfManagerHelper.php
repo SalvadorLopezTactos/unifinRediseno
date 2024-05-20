@@ -77,7 +77,7 @@ class PdfManagerHelper
         $studio_modules = array_keys($studio_browser->modules);
         foreach ($studio_modules as $module_name) {
             if (!in_array($module_name, $bannedModules)) {
-                $available_modules[$module_name] = isset($module_names[strtolower($module_name)]) ? $module_names[strtolower($module_name)] : strtolower($module_name);
+                $available_modules[$module_name] = $module_names[strtolower($module_name)] ?? strtolower($module_name);
             }
         }
         asort($available_modules);

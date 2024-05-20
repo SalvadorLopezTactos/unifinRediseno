@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'템플릿',
     'LBL_DET_TEMPLATE_TYPE'=>'문서 형식:',
     'LBL_TEAM'=> '팀',
+    'LBL_IS_SHARED' => '외부 사용 가능:',
     'LBL_DOC_DESCRIPTION'=>'설명',
     'LBL_DOC_ACTIVE_DATE'=> '배포일',
     'LBL_DOC_EXP_DATE'=> '만료일',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'DocuSign에 전송',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Google 드라이브에 동기화',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Google 드라이브에 모두 동기화',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'OneDrive에 모두 동기화',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'OneDrive에 동기화',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Dropbox에 모두 동기화',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Dropbox에 동기화',
 );

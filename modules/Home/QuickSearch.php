@@ -25,9 +25,9 @@ class QuickSearchQuery
      * Condition operators
      * @var string
      */
-    const CONDITION_CONTAINS    = 'contains';
-    const CONDITION_LIKE_CUSTOM = 'like_custom';
-    const CONDITION_EQUAL       = 'equal';
+    public const CONDITION_CONTAINS    = 'contains';
+    public const CONDITION_LIKE_CUSTOM = 'like_custom';
+    public const CONDITION_EQUAL       = 'equal';
 
     protected $extra_where;
 
@@ -260,7 +260,7 @@ class QuickSearchQuery
         $data = [];
         global $sugar_config;
 
-        $app_list_strings = isset($GLOBALS['app_list_strings']) ? $GLOBALS['app_list_strings'] : null;
+        $app_list_strings = $GLOBALS['app_list_strings'] ?? null;
         $data['totalCount'] = count($results);
         $data['fields']     = array();
 

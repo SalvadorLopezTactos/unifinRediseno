@@ -220,19 +220,19 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
 	            $entry = array();
 	            $entry['name'] = $var['name'];
 	            $entry['type'] = $var['type'];
-	            $entry['group'] = isset($var['group']) ? $var['group'] : '';
-	            $entry['id_name'] = isset($var['id_name']) ? $var['id_name'] : '';
+                $entry['group'] = $var['group'] ?? '';
+                $entry['id_name'] = $var['id_name'] ?? '';
 
 	            if ($var['type'] == 'link') {
-		            $entry['relationship'] = (isset($var['relationship']) ? $var['relationship'] : '');
-		            $entry['module'] = (isset($var['module']) ? $var['module'] : '');
-		            $entry['bean_name'] = (isset($var['bean_name']) ? $var['bean_name'] : '');
+                    $entry['relationship'] = ($var['relationship'] ?? '');
+                    $entry['module'] = ($var['module'] ?? '');
+                    $entry['bean_name'] = ($var['bean_name'] ?? '');
 					$link_fields[$var['name']] = $entry;
 	            } else {
 		            if($translate) {
 		            	$entry['label'] = isset($var['vname']) ? translate($var['vname'], $value->module_dir) : $var['name'];
 		            } else {
-		            	$entry['label'] = isset($var['vname']) ? $var['vname'] : $var['name'];
+                        $entry['label'] = $var['vname'] ?? $var['name'];
 		            }
 		            $entry['required'] = $required;
 		            $entry['options'] = $options_ret;

@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logók',
 	'LBL_ADMIN_WIZARD' => 'Admin varázsló',
-	'LBL_ALLOW_USER_TABS' => 'Fülek elrejtésének engedélyezése a felhasználók számára',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Rendszer-beállítások',
 	'LBL_ENABLE_MAILMERGE' => 'Körlevél létrehozásának engedélyezése?',
 	'LBL_LOGVIEW' => 'Napló megtekintése',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Használja ezt a beállítást annak meghatározására, hogy az aktuális dátumhoz képest hány hónapra előre lehessen látni a Szabad/Foglalt üzenetet a közzétett hívásoknál és találkozóknál.<br />A Szabad/Foglalt információ megjelenítésének kikapcsolásához írjon be 0-t. A minimum intervallum 1 hónap, a maximum 12.',
     'LBL_PDFMODULE_NAME' => 'PDF beállítások',
     'SUGARPDF_BASIC_SETTINGS' => 'Dokumentum tulajdonságai',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Speciális beállítások',
     'SUGARPDF_LOGO_SETTINGS' => 'Képek',
-
-    'PDF_CREATOR' => 'PDF szerkesztő',
-    'PDF_CREATOR_INFO' => 'Meghatározza a dokumentum forrását. Ez jellemzően a PDF-et generáló alkalmazás neve.',
 
     'PDF_AUTHOR' => 'Szerző',
     'PDF_AUTHOR_INFO' => 'A szerző neve a dokumentum tulajdonságai között szerepel.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Válasszon új képet az árajánlatokhoz',
     'PDF_NEW_HEADER_LOGO_INFO' => 'A fájl formátuma kizárólag .jpg vagy .png lehet (EZPDF esetén csak .jpg).<br />Az ajánlott méret 867x60 px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Árajánlatok képméret szélessége',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Módosítsa az árajánlatot tartalmazó PDF dokumentumhoz feltöltött kép méretét. (csak TCPDF)',
+    'PDF_TITLE' => 'Cím',
+    'PDF_TITLE_INFO' => 'A cím a dokumentum tulajdonságaiban fog megjelenni.',
+
+    'PDF_SUBJECT' => 'Tárgy',
+    'PDF_SUBJECT_INFO' => 'A téma a dokumentum tulajdonságaiban fog megjelenni.',
 
     'PDF_SMALL_HEADER_LOGO' => 'PDF formátumú jelentésekhez',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Ez a kép jelenik meg az alapértelmezett fejlécben a PDF-dokumentumokban készített jelentéseknél.<br />Ez a kép a Sugar alkalmazás bal felső sarkában is megjelenik.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Válasszon új képet a jelentésekhez',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'A fájl formátuma kizárólag .jpg vagy .png lehet (EZPDF esetén csak .jpg).<br />Az ajánlott méret 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Jelentések kép szélessége',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'A Jelentések PDF dokumentum számára feltöltött kép méretarányainak megváltoztatása (csak TCPDF).',
-
-
-    'PDF_HEADER_STRING' => 'Fejléc szöveg',
-    'PDF_HEADER_STRING_INFO' => 'Fejléc leírása',
-
-    'PDF_HEADER_TITLE' => 'Fejléc címe',
-    'PDF_HEADER_TITLE_INFO' => 'A dokumentum fejlécére, címként nyomtatandó szöveg',
-
-    'PDF_FILENAME' => 'Alapértelmezett fájlnév',
-    'PDF_FILENAME_INFO' => 'Alapértelmezett fájlnév a létrehozott PDF fájlok esetén',
-
-    'PDF_TITLE' => 'Cím',
-    'PDF_TITLE_INFO' => 'A cím a dokumentum tulajdonságaiban fog megjelenni.',
-
-    'PDF_SUBJECT' => 'Tárgy',
-    'PDF_SUBJECT_INFO' => 'A téma a dokumentum tulajdonságaiban fog megjelenni.',
-
     'PDF_KEYWORDS' => 'Kulcsszó/kulcsszavak',
     'PDF_KEYWORDS_INFO' => 'Adjon meg kulcsszavakat a dokumentumhoz az alábbi formában: "kulcsszó1 kulcsszó2..."',
 
-    'PDF_COMPRESSION' => 'Tömörítés',
-    'PDF_COMPRESSION_INFO' => 'Oldaltömörítés aktiválása vagy deaktiválása.<br />Ha aktív, az oldalak belső megjelenése tömörített formában történik, ami körülbelül kétszeres tömörítést jelent a létrejött dokumentumban.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG minősége (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Állítsa be az alapértelmezett JPEG tömörítési minőséget (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF változat',
-    'PDF_PDF_VERSION_INFO' => 'PDF verzió beállítása (ellenőrizze a PDF jellemzőket a valós értékekhez)',
-
-    'PDF_PROTECTION' => 'Dokumentum védelme',
-    'PDF_PROTECTION_INFO' => 'Dokumentum védelem beállítása<br />- másolás: szöveg és kép másolása vágólapra<br />- nyomtatás: dokumentum nyomtatása<br />- módosítás: dokumentum módosítása (kivéve űrlapok és jegyzetek)<br />- jegyzetek-űrlapok: jegyzetek és űrlapok hozzáadása<br />Megjegyzés: a módosítás elleni védelem a teljes Adobe Acrobattal rendelkező felhasználókra vonatkozik.',
-
-    'PDF_USER_PASSWORD' => 'Felhasználói jelszó',
-    'PDF_USER_PASSWORD_INFO' => 'Ha nem állít be jelszót, a dokumentum bárki számára olvasható lesz.<br />Ha jelszót ad a dokumentumhoz, annak megtekintéséhez a PDF olvasó később kérni fogja azt.<br />Amennyiben elsődleges és másodlagos jelszót is használ, az elsődleges fog teljes hozzáférést garantálni.',
-
-    'PDF_OWNER_PASSWORD' => 'Tulajdonosi jelszó',
-    'PDF_OWNER_PASSWORD_INFO' => 'Ha nem állít be jelszót, a dokumentum bárki számára olvasható lesz.<br />Ha jelszót ad a dokumentumhoz, annak megtekintéséhez a PDF olvasó később kérni fogja azt.<br />Amennyiben elsődleges és másodlagos jelszót is használ, az elsődleges fog teljes hozzáférést garantálni.',
-
-    'PDF_ACL_ACCESS' => 'Hozzáférés ellenőrzése',
-    'PDF_ACL_ACCESS_INFO' => 'A PDF exportálás alapértelmezett hozzáférés-szabályai.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Cellamagasság aránya',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Ha egy cella magassága kisebb lenne, mint a Betűmagasság x Cellamagasság aránya, akkor a cella magassága meg lesz feleltetve ezzel. A képlet igaz lesz arra az esetre is, ha a cellának nincs meghatározva a magassága.',
-
-    'K_TITLE_MAGNIFICATION' => 'Cím nagyítása',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Cím nagyítása, figyelembevéve a fő betűméretet.',
-
-    'K_SMALL_RATIO' => 'Kisbetű tényező',
-    'K_SMALL_RATIO_INFO' => 'Csökkentő tényező kisbetűkhöz.',
-
-    'HEAD_MAGNIFICATION' => 'Head nagyítás',
-    'HEAD_MAGNIFICATION_INFO' => 'Nagyítási tényező a címekhez.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Képméret csökkentésének aránya',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Méretarány a képek méretezéséhez',
-
-    'PDF_UNIT' => 'Egység',
-    'PDF_UNIT_INFO' => 'dokumentum mértékegység',
 	'PDF_GD_WARNING'=>'Nincs telepítve a GD Library a PHP-hez. Enélkül csak JPEG logók jelenhetnek meg a PDF dokumenumokban.',
     'ERR_EZPDF_DISABLE'=>'Figyelem: az EZPDF osztály le van tiltva a config táblából és PDF osztályként van beállítva. Kérem, mentse ezt az űrlapot a TCPDF, PDF osztályként történő beállításához, és térjen vissza egy stabil állapotba.',
     'LBL_IMG_RESIZED'=>"(képernyőhöz átméretezve)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'PDF betűtípus hozzáadása',
     'LBL_PDF_PATCH' => 'Javítócsomag',
-    'LBL_PDF_PATCH_INFO' => 'Kódolás egyéni beállítása. PHP tömb írása.<br />Például:<br />ISO-8859-1 nem tartalmazza az EURO szimbólumot. Ha a 164. sorba kívánja beszúrni, írja be: "array(164=>\\$#39;Euro\\$#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'Kódolási táblázat',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'A kódolási táblázat neve.<br />Az opciót nem veszi figyelembe a rendszer TrueType Unicode, OpenType Unicode és szimbolikus betűkészletek használata során.<br />A kódolás párosítja össze a kódokat (0-tól 255-ig) és a betűtípusban szereplő karaktereket.<br />Az első 128 kód rögzített és az ASCII kódolásnak felel meg.',
     'LBL_PDF_FONT_FILE' => 'Betűtípus fájl',

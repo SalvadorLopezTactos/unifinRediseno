@@ -21,6 +21,7 @@ use Google\Service\FirebaseRealtimeDatabase\DatabaseInstance;
 use Google\Service\FirebaseRealtimeDatabase\DisableDatabaseInstanceRequest;
 use Google\Service\FirebaseRealtimeDatabase\ListDatabaseInstancesResponse;
 use Google\Service\FirebaseRealtimeDatabase\ReenableDatabaseInstanceRequest;
+use Google\Service\FirebaseRealtimeDatabase\UndeleteDatabaseInstanceRequest;
 
 /**
  * The "instances" collection of methods.
@@ -58,10 +59,11 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
     return $this->call('create', [$params], DatabaseInstance::class);
   }
   /**
-   * Marks a DatabaseInstance to be deleted. The DatabaseInstance will be purged
-   * within 30 days. The default database cannot be deleted. IDs for deleted
-   * database instances may never be recovered or re-used. The Database may only
-   * be deleted if it is already in a DISABLED state. (instances.delete)
+   * Marks a DatabaseInstance to be deleted. The DatabaseInstance will be set to
+   * the DELETED state for 20 days, and will be purged within 30 days. The default
+   * database cannot be deleted. IDs for deleted database instances may never be
+   * recovered or re-used. The Database may only be deleted if it is already in a
+   * DISABLED state. (instances.delete)
    *
    * @param string $name The fully qualified resource name of the database
    * instance, in the form: `projects/{project-number}/locations/{location-
@@ -135,6 +137,8 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
    * @opt_param string pageToken Token returned from a previous call to
    * `ListDatabaseInstances` indicating where in the set of database instances to
    * resume listing.
+   * @opt_param bool showDeleted Indicate that DatabaseInstances in the `DELETED`
+   * state should also be returned.
    * @return ListDatabaseInstancesResponse
    */
   public function listProjectsLocationsInstances($parent, $optParams = [])
@@ -160,6 +164,27 @@ class ProjectsLocationsInstances extends \Google\Service\Resource
     $params = ['name' => $name, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('reenable', [$params], DatabaseInstance::class);
+  }
+  /**
+   * Restores a DatabaseInstance that was previously marked to be deleted. After
+   * the delete method is used, DatabaseInstances are set to the DELETED state for
+   * 20 days, and will be purged within 30 days. Databases in the DELETED state
+   * can be undeleted without losing any data. This method may only be used on a
+   * DatabaseInstance in the DELETED state. Purged DatabaseInstances may not be
+   * recovered. (instances.undelete)
+   *
+   * @param string $name The fully qualified resource name of the database
+   * instance, in the form: `projects/{project-number}/locations/{location-
+   * id}/instances/{database-id}`
+   * @param UndeleteDatabaseInstanceRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return DatabaseInstance
+   */
+  public function undelete($name, UndeleteDatabaseInstanceRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('undelete', [$params], DatabaseInstance::class);
   }
 }
 

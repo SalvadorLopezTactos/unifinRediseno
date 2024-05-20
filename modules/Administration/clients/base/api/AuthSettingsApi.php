@@ -212,7 +212,7 @@ class AuthSettingsApi extends SugarApi
             $this->ldapSettings = \Administration::getSettings('ldap');
         }
         if (isset($this->ldapSettings->settings[$key])) {
-            return trim(htmlspecialchars_decode($this->ldapSettings->settings[$key])) ?: $default;
+            return trim(htmlspecialchars_decode($this->ldapSettings->settings[$key], ENT_COMPAT)) ?: $default;
         }
 
         return $default;

@@ -222,4 +222,10 @@ Aby utworzyć moduł {{meetings_singular_module}}:
     - Kliknij Wybierz uczestnika, aby dodać istniejącego użytkownika, kontakt lub namiar do modułu {{meetings_singular_module}}.
     - Kliknij ikonę z plusem po prawej stronie Wybierz uczestnika, aby utworzyć uczestnika dla modułu {{meetings_singular_module}} jako nowy rekord Sugar.
 3. Kliknij Zapisz, aby zapisać nowy rekord i powrócić do poprzedniej strony.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Jest spotkaniem Smart Guide',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Zadania podrzędne',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Połączenia podrzędne',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Spotkania podrzędne',
 );

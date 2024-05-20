@@ -21,10 +21,10 @@ class UserInitJob implements \RunnableSchedulerJob
     /**
      * Job name
      */
-    const NAME = 'Hint User Init Job';
+    public const NAME = 'Hint User Init Job';
 
     // Max number of user ids per job
-    const ID_CHUNK_SIZE = 100;
+    public const ID_CHUNK_SIZE = 100;
 
     /**
      * @var \SchedulersJob

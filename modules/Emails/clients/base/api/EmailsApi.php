@@ -199,7 +199,7 @@ class EmailsApi extends ModuleApi
                         $e->getUserFriendlyMessage(),
                         null,
                         'Emails',
-                        451,
+                        500,
                         'smtp_server_error'
                     );
                 case MailerException::InvalidHeader:
@@ -211,7 +211,7 @@ class EmailsApi extends ModuleApi
                         $e->getUserFriendlyMessage(),
                         null,
                         'Emails',
-                        451,
+                        500,
                         'smtp_payload_error'
                     );
                 default:

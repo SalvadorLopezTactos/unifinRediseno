@@ -26,8 +26,10 @@
         this._super('_render');
 
         if (this.isHidden()) {
+            this.toggleCell('hide');
             this._super('hide');
         } else {
+            this.toggleCell('show');
             this._super('show');
         }
 
@@ -107,6 +109,10 @@
     toggleCell: function(toggleMethod) {
         var parentElem = this.getParentElem();
         if (!_.isEmpty(parentElem)) {
+            if (parentElem.prop('tagName') === 'TD') {
+                return;
+            }
+
             parentElem[toggleMethod]();
             parentElem.closest('.record-cell')[toggleMethod]();
         }

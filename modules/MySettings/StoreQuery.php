@@ -13,6 +13,10 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 class StoreQuery{
+    /**
+     * @var mixed|bool
+     */
+    public $populate_only;
 	var $query = array();
 	
 	function addToQuery($name, $val){

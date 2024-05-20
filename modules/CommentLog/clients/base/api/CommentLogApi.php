@@ -60,7 +60,7 @@ class CommentLogApi extends ModuleApi
         $method = $api->getRequest()->getMethod();
         $message = sprintf(
             'The %s action is not supported by this endpoint',
-            isset($this->methodMaps[$method]) ? $this->methodMaps[$method] : 'requested'
+            $this->methodMaps[$method] ?? 'requested'
         );
         throw new SugarApiExceptionNoMethod($message);
     }

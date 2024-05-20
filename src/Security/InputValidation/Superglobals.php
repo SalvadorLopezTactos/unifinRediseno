@@ -49,9 +49,9 @@ use Psr\Log\LoggerInterface;
  */
 class Superglobals
 {
-    const GET = 'GET';
-    const POST = 'POST';
-    const REQUEST = 'REQUEST';
+    public const GET = 'GET';
+    public const POST = 'POST';
+    public const REQUEST = 'REQUEST';
 
     /**
      * Raw $_GET values

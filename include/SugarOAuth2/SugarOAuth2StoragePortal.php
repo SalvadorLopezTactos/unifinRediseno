@@ -187,6 +187,7 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
      */
     protected function findPortalApiUser()
     {
+        $admin = null;
         if (isset($this->portalApiUser)) {
             return $this->portalApiUser;
         }

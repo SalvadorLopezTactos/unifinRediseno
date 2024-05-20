@@ -216,4 +216,10 @@ Egy {{meetings_singular_module}} modul létrehozásához:
 - Kattintson a "Résztvevő kiválasztása" gombra egy meglévő felhasználó, kapcsolat vagy ajánlás hozzáadásához a {{meetings_singular_module}} modulhoz. 
 - Kattintson a plusz ikonra a "Résztvevő kiválasztása" mellett jobbra egy {{meetings_singular_module}} résztvevő új Sugar adatként történő létrehozásához. 
 3. Kattintson a "Mentés" gombra az új adat mentéséhez és az előző oldalra történő visszatéréshez.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Egy Smart Guide megbeszélés',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Gyermek feladatok',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Gyermek hívások',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Gyermek megbeszélések',
 );

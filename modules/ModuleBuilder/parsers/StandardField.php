@@ -71,9 +71,7 @@ class StandardField extends DynamicField
             if(isset($dictionary[$bean_name]['unified_search_default_enabled']) && isset($dictionary[$bean_name]['unified_search'])
             && $dictionary[$bean_name]['unified_search_default_enabled'] && $dictionary[$bean_name]['unified_search'])
             {
-                $currdef['unified_search'] = $field->unified_search = isset($currdef['unified_search'])
-                 ? $currdef['unified_search']
-                 : true;
+                $currdef['unified_search'] = $field->unified_search = $currdef['unified_search'] ?? true;
             }
         }
         // end #51427

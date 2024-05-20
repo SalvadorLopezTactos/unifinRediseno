@@ -16,7 +16,7 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Process Business Rules',
   'LBL_MODULE_NAME_SINGULAR' => 'Process Business Rule',
 
-  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Process Business Rules Focus Drawer',
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Process Business Rules Focus Dashboard',
 
   'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Process Business Rules Record Dashboard',
   'LBL_RST_UID' => 'Business Rule ID',

@@ -18,20 +18,20 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
 class MailApi extends ModuleApi
 {
     /*-- API Argument Constants --*/
-    const EMAIL_CONFIG = "email_config";
-    const FROM_ADDRESS = "from_address";
-    const TO_ADDRESSES = "to_addresses";
-    const CC_ADDRESSES = "cc_addresses";
-    const BCC_ADDRESSES = "bcc_addresses";
-    const ATTACHMENTS = "attachments";
-    const TEAMS = "teams";
-    const RELATED = "related";
-    const SUBJECT = "subject";
-    const HTML_BODY = "html_body";
-    const TEXT_BODY = "text_body";
-    const STATUS = "status";
-    const DATE_SENT = "date_sent";
-    const ASSIGNED_USER_ID = "assigned_user_id";
+    public const EMAIL_CONFIG = "email_config";
+    public const FROM_ADDRESS = "from_address";
+    public const TO_ADDRESSES = "to_addresses";
+    public const CC_ADDRESSES = "cc_addresses";
+    public const BCC_ADDRESSES = "bcc_addresses";
+    public const ATTACHMENTS = "attachments";
+    public const TEAMS = "teams";
+    public const RELATED = "related";
+    public const SUBJECT = "subject";
+    public const HTML_BODY = "html_body";
+    public const TEXT_BODY = "text_body";
+    public const STATUS = "status";
+    public const DATE_SENT = "date_sent";
+    public const ASSIGNED_USER_ID = "assigned_user_id";
 
     /*-- API Fields with default values --*/
     public static $fields = array(
@@ -344,7 +344,7 @@ class MailApi extends ModuleApi
 
                 if (strpos($sortBy, ":")) {
                     // it has a :, it's specifying ASC / DESC
-                    list($column, $direction) = explode(":", $sortBy);
+                    [$column, $direction] = explode(":", $sortBy);
 
                     if (strtolower($direction) == "desc") {
                         $direction = "DESC";

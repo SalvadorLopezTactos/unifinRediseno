@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Februar',
     'LBL_MARCH' => 'Mars',
     'LBL_APRIL' => 'April',
-    'LBL_MAY' => 'May',
+    'LBL_MAY' => 'Mai',
     'LBL_JUNE' => 'Juni',
     'LBL_JULY' => 'Juli',
     'LBL_AUGUST' => 'August',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Okt',
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Des',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalender var allerede lagt til',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} er valgt',
+    'LBL_NO_USER_SELECTED' => 'Velg en bruker eller et team',
+    'LBL_NO_CALENDAR_SELECTED' => 'Velg en kalender',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Kunne ikke lagre kalendre.',
 
 );
 

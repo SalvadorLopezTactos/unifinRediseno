@@ -24,6 +24,22 @@
     initialize: function(options) {
         this._super('initialize', [options]);
         this.type = 'collection-count';
+
+        this._registerEvents();
+    },
+
+    /**
+     * Register panel related events
+     */
+    _registerEvents: function() {
+        this.listenTo(this.context, 'drawer:reports:list:updated', this._resetCachedCount, this);
+    },
+
+    /**
+     * Reset total cached count each time the list has changed
+     */
+    _resetCachedCount: function() {
+        this.cachedCount = null;
     },
 
     /**

@@ -16,8 +16,47 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
-    const HISTORYFILENAME = 'restored.php';
-    const HISTORYVARIABLENAME = 'viewdefs';
+    /**
+     * @var \MetaDataConverter|mixed
+     */
+    public $mdc;
+    /**
+     * @var string|mixed|mixed[]
+     */
+    public $loadedModule;
+    /**
+     * @var \SugarBean|null|mixed
+     */
+    public $bean;
+    /**
+     * @var string|mixed
+     */
+    public $historyPathname;
+    /**
+     * @var mixed|string
+     */
+    public $sidecarSubpanelName;
+    /**
+     * @var string
+     */
+    //@codingStandardsIgnoreStart
+    public $_language;
+    //@codingStandardsIgnoreEnd
+    /**
+     * @var string|mixed
+     */
+    public $sidecarFile;
+    /**
+     * @var mixed|string|mixed[]
+     */
+    public $loadedSubpanelName;
+    /**
+     * @var mixed|string
+     */
+    public $loadedSubpanelFileName;
+    public $overrideArrayKey;
+    public const HISTORYFILENAME = 'restored.php';
+    public const HISTORYVARIABLENAME = 'viewdefs';
 
     /**
      * Subpanel link name
@@ -105,7 +144,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
             $this->_language = $this->bean->module_dir;
         }
         // Make sure the paneldefs are proper if there are any
-        $this->_paneldefs = isset($this->_viewdefs['panels']) ? $this->_viewdefs['panels'] : array();
+        $this->_paneldefs = $this->_viewdefs['panels'] ?? array();
     }
 
     /**
@@ -330,7 +369,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
 
         // locate effective subpanel definition file
         foreach ($files as $spec) {
-            list($path, $subPanelName) = $spec;
+            [$path, $subPanelName] = $spec;
 
             if (file_exists($path)) {
                 $this->loadedSubpanelFileName = $path;
@@ -347,7 +386,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
 
         // locate original subpanel definition file
         foreach ($files as $spec) {
-            list($path) = $spec;
+            [$path] = $spec;
 
             if (strpos($path, 'custom/') !== 0 && file_exists($path)) {
                 $this->originalDefsFileName = $path;

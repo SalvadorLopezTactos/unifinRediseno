@@ -11,6 +11,8 @@
  */
 $dictionary['User'] = array(
     'table' => 'users',
+    'color' => 'teal',
+    'icon' => 'sicon-user-group-lg',
     'archive' => false,
     'favorites' => false,
     'fields' => array(
@@ -829,6 +831,7 @@ $dictionary['User'] = array(
             'studio' => false,
             'exportable'=>true,
             'idm_mode_disabled' => true,
+            'use_formula' => 'email',
         ),
         'email'=> array(
             'name' => 'email',
@@ -1196,6 +1199,31 @@ $dictionary['User'] = array(
             'type' => 'bool',
             'comment' => 'Previously Licensed',
         ],
+        'customer_journey_access' => [
+            'name' => 'customer_journey_access',
+            'vname' => 'LBL_CUSTOMER_JOURNEY_ACCESS',
+            'required' => false,
+            'reportable' => true,
+            'audited' => true,
+            'importable' => 'true',
+            'massupdate' => false,
+            'type' => 'bool',
+            'default' => false,
+            'studio' => false,
+            'readonly' => true,
+        ],
+        'customer_journey_last_active' => [
+            'name' => 'customer_journey_last_active',
+            'vname' => 'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE',
+            'required' => false,
+            'reportable' => true,
+            'audited' => true,
+            'importable' => 'true',
+            'massupdate' => false,
+            'type' => 'datetime',
+            'studio' => false,
+            'readonly' => true,
+        ],
     ) ,
     'name_format_map' => array(
         'f' => 'first_name',
@@ -1250,6 +1278,31 @@ $dictionary['User'] = array(
                 'business_center_id',
             ),
         ),
+        'idx_user_cjp_access' => [
+            'name' => 'idx_user_cjp_access',
+            'type' => 'index',
+            'fields' => [
+                'customer_journey_access',
+                'deleted',
+                'user_name',
+                'is_group',
+                'portal_only',
+                'status',
+            ],
+        ],
+        'idx_user_cjp_last_active' => [
+            'name' => 'idx_user_cjp_last_active',
+            'type' => 'index',
+            'fields' => [
+                'customer_journey_access',
+                'customer_journey_last_active',
+                'deleted',
+                'user_name',
+                'is_group',
+                'portal_only',
+                'status',
+            ],
+        ],
     ) ,
     'required_import_indexes' => array('idx_user_name::user_name'),
 	'relationships' => array (

@@ -20,34 +20,84 @@ namespace Google\Service\Bigquery;
 class ExternalDataConfiguration extends \Google\Collection
 {
   protected $collection_key = 'sourceUris';
+  /**
+   * @var bool
+   */
   public $autodetect;
+  protected $avroOptionsType = AvroOptions::class;
+  protected $avroOptionsDataType = '';
   protected $bigtableOptionsType = BigtableOptions::class;
   protected $bigtableOptionsDataType = '';
+  /**
+   * @var string
+   */
   public $compression;
+  /**
+   * @var string
+   */
   public $connectionId;
   protected $csvOptionsType = CsvOptions::class;
   protected $csvOptionsDataType = '';
+  /**
+   * @var string[]
+   */
   public $decimalTargetTypes;
   protected $googleSheetsOptionsType = GoogleSheetsOptions::class;
   protected $googleSheetsOptionsDataType = '';
   protected $hivePartitioningOptionsType = HivePartitioningOptions::class;
   protected $hivePartitioningOptionsDataType = '';
+  /**
+   * @var bool
+   */
   public $ignoreUnknownValues;
+  /**
+   * @var int
+   */
   public $maxBadRecords;
   protected $parquetOptionsType = ParquetOptions::class;
   protected $parquetOptionsDataType = '';
+  /**
+   * @var string
+   */
+  public $referenceFileSchemaUri;
   protected $schemaType = TableSchema::class;
   protected $schemaDataType = '';
+  /**
+   * @var string
+   */
   public $sourceFormat;
+  /**
+   * @var string[]
+   */
   public $sourceUris;
 
+  /**
+   * @param bool
+   */
   public function setAutodetect($autodetect)
   {
     $this->autodetect = $autodetect;
   }
+  /**
+   * @return bool
+   */
   public function getAutodetect()
   {
     return $this->autodetect;
+  }
+  /**
+   * @param AvroOptions
+   */
+  public function setAvroOptions(AvroOptions $avroOptions)
+  {
+    $this->avroOptions = $avroOptions;
+  }
+  /**
+   * @return AvroOptions
+   */
+  public function getAvroOptions()
+  {
+    return $this->avroOptions;
   }
   /**
    * @param BigtableOptions
@@ -63,18 +113,30 @@ class ExternalDataConfiguration extends \Google\Collection
   {
     return $this->bigtableOptions;
   }
+  /**
+   * @param string
+   */
   public function setCompression($compression)
   {
     $this->compression = $compression;
   }
+  /**
+   * @return string
+   */
   public function getCompression()
   {
     return $this->compression;
   }
+  /**
+   * @param string
+   */
   public function setConnectionId($connectionId)
   {
     $this->connectionId = $connectionId;
   }
+  /**
+   * @return string
+   */
   public function getConnectionId()
   {
     return $this->connectionId;
@@ -93,10 +155,16 @@ class ExternalDataConfiguration extends \Google\Collection
   {
     return $this->csvOptions;
   }
+  /**
+   * @param string[]
+   */
   public function setDecimalTargetTypes($decimalTargetTypes)
   {
     $this->decimalTargetTypes = $decimalTargetTypes;
   }
+  /**
+   * @return string[]
+   */
   public function getDecimalTargetTypes()
   {
     return $this->decimalTargetTypes;
@@ -129,18 +197,30 @@ class ExternalDataConfiguration extends \Google\Collection
   {
     return $this->hivePartitioningOptions;
   }
+  /**
+   * @param bool
+   */
   public function setIgnoreUnknownValues($ignoreUnknownValues)
   {
     $this->ignoreUnknownValues = $ignoreUnknownValues;
   }
+  /**
+   * @return bool
+   */
   public function getIgnoreUnknownValues()
   {
     return $this->ignoreUnknownValues;
   }
+  /**
+   * @param int
+   */
   public function setMaxBadRecords($maxBadRecords)
   {
     $this->maxBadRecords = $maxBadRecords;
   }
+  /**
+   * @return int
+   */
   public function getMaxBadRecords()
   {
     return $this->maxBadRecords;
@@ -160,6 +240,20 @@ class ExternalDataConfiguration extends \Google\Collection
     return $this->parquetOptions;
   }
   /**
+   * @param string
+   */
+  public function setReferenceFileSchemaUri($referenceFileSchemaUri)
+  {
+    $this->referenceFileSchemaUri = $referenceFileSchemaUri;
+  }
+  /**
+   * @return string
+   */
+  public function getReferenceFileSchemaUri()
+  {
+    return $this->referenceFileSchemaUri;
+  }
+  /**
    * @param TableSchema
    */
   public function setSchema(TableSchema $schema)
@@ -173,18 +267,30 @@ class ExternalDataConfiguration extends \Google\Collection
   {
     return $this->schema;
   }
+  /**
+   * @param string
+   */
   public function setSourceFormat($sourceFormat)
   {
     $this->sourceFormat = $sourceFormat;
   }
+  /**
+   * @return string
+   */
   public function getSourceFormat()
   {
     return $this->sourceFormat;
   }
+  /**
+   * @param string[]
+   */
   public function setSourceUris($sourceUris)
   {
     $this->sourceUris = $sourceUris;
   }
+  /**
+   * @return string[]
+   */
   public function getSourceUris()
   {
     return $this->sourceUris;

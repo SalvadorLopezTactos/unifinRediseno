@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'لوحة معلومات سجل العلامات',
     'LBL_MY_TAGS' => 'علاماتي',
     'LBL_MY_FAVORITE_TAGS' => 'علاماتي المفضلة',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} علامات',
 );

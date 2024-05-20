@@ -260,7 +260,7 @@ function create_marketing_summary  ($focus){
                  "<td colspan=2 align='right'>$new_mrkt_input</td></tr>";
     $mrkt_tbl .= "<tr  class='listViewHRS1'><td scope='col' width='15%'><b>".$mod_strings['LBL_MRKT_NAME']."</b></td><td width='15%' scope='col'><b>".$mod_strings['LBL_FROM_MAILBOX_NAME']."</b></td><td width='15%' scope='col'><b>".$mod_strings['LBL_STATUS_TEXT']."</b></td><td scope='col' colspan=2>&nbsp;</td></tr>";
 
-    if ((is_countable($mrkt_lists) ? count($mrkt_lists) : 0)>0) {
+    if ((is_countable($mrkt_lists) ? count($mrkt_lists) : 0) > 0) {
             $mrkt_focus = BeanFactory::newBean('EmailMarketing');
             foreach($mrkt_lists as $mrkt_id){
                 $mrkt_focus->retrieve($mrkt_id);

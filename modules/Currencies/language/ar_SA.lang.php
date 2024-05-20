@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'تم الإنشاء بواسطة',
   'LBL_EDIT_LAYOUT' => 'تعديل المخطط' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'المسؤولون فقط',
-  'LBL_CURRENCY_DEFAULT' => 'دولار أمريكي (افتراضي)',
-
+  'LBL_CURRENCY_DEFAULT' => 'عملة النظام (الافتراضية)',
 );
 ?>

@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Címke bejegyzés műszerfal',
     'LBL_MY_TAGS' => 'Címkéim',
     'LBL_MY_FAVORITE_TAGS' => 'Kedvenc címkéim',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} címke',
 );

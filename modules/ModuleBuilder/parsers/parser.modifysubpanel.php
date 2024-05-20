@@ -23,6 +23,22 @@
 class ParserModifySubPanel extends ParserModifyListView
 {
 
+    /**
+     * @var string|mixed
+     */
+    public $moduleName;
+    /**
+     * @var string|mixed
+     */
+    public $subPanelName;
+    /**
+     * @var \aSubPanel|bool|mixed
+     */
+    public $panel;
+    /**
+     * @var null|\SugarBean|mixed
+     */
+    public $subPanelParentModule;
     var $listViewDefs = false ;
     var $defaults = array ( ) ;
     var $additional = array ( ) ;
@@ -118,7 +134,7 @@ class ParserModifySubPanel extends ParserModifyListView
                 {
                     if ((empty ( $fieldDefinition [ 'source' ] ) || $fieldDefinition [ 'source' ] == 'db' || $fieldDefinition [ 'source' ] == 'custom_fields') && $fieldDefinition [ 'type' ] != 'id' && strcmp ( $fieldName, 'deleted' ) != 0 || (isset ( $def [ 'name' ] ) && strpos ( $def [ 'name' ], "_name" ) != false) || ! empty ( $def [ 'custom_type' ] ) && (empty ( $fieldDefinition [ 'dbType' ] ) || $fieldDefinition [ 'dbType' ] != 'id') && (empty ( $fieldDefinition [ 'dbtype' ] ) || $fieldDefinition [ 'dbtype' ] != 'id') || (! empty ( $fieldDefinition [ 'studio' ] ) && $fieldDefinition [ 'studio' ] == 'visible'))
                     {
-                        $label = (isset ( $fieldDefinition [ 'vname' ] )) ? $fieldDefinition [ 'vname' ] : (isset ( $fieldDefinition [ 'label' ] ) ? $fieldDefinition [ 'label' ] : $fieldDefinition [ 'name' ]) ;
+                        $label = $fieldDefinition [ 'vname' ] ?? $fieldDefinition [ 'label' ] ?? $fieldDefinition [ 'name' ] ;
                         $this->availableFields [ $fieldName ] = array ( 'width' => '10' , 'label' => $label ) ;
                     }
                 }

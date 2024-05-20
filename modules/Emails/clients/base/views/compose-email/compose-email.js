@@ -99,7 +99,7 @@
             var field = this.getField('recipients');
 
             if (field) {
-                field.setMode('detail');
+                field.trigger('recipients:edit:hide');
             }
         }, this);
     },

@@ -687,10 +687,8 @@ class BusinessCenter extends Basic
             ]);
 
             foreach ($holidays as $holiday) {
-                if ($holiday->related_module === 'BusinessCenters') {
-                    $sdt = new \SugarDateTime($holiday->holiday_date);
-                    $this->holidays[$sdt->format('Y-m-d')] = $holiday->name;
-                }
+                $sdt = new \SugarDateTime($holiday->holiday_date);
+                $this->holidays[$sdt->format('Y-m-d')] = $holiday->name;
             }
         }
 

@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Falta valor necessário',
     'LBL_ERROR_SYNC_USERS' => 'Valor inválido para sincronizar para o Outlook:',
     'LBL_ID_EXISTS_ALREADY' => 'ID já existe nesta tabela',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY já existe nesta tabela',
     'LBL_ASSIGNED_USER' => 'se o utilizador não existir use o utilizador actual',
     'LBL_SHOW_HIDDEN' => 'Mostrar campos que não são normalmente importáveis',
     'LBL_UPDATE_RECORDS' => 'Actualizar registos existentes em vez de importá-los (Sem Desfazer)',

@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Δημιουργήθηκε Από',
   'LBL_EDIT_LAYOUT' => 'Επεξεργασία Διάταξης' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Μόνο Διαχειριστές',
-  'LBL_CURRENCY_DEFAULT' => 'Δολάρια ΗΠΑ (Προεπιλογή)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Νόμισμα συστήματος (προεπιλογή)',
 );
 ?>

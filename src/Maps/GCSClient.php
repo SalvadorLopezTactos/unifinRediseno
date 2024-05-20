@@ -173,9 +173,9 @@ class GCSClient
         $statusEndpoint = 'checkStatus';
 
         $urls = [
-            'createBatch' => "${ip}${version}${geocodeEndpoint}",
-            'getGeocodeByZipcode' => "${ip}${version}${geocodeByZipcodeEndpoint}",
-            'checkStatus' => "${ip}${version}${statusEndpoint}",
+            'createBatch' => "{$ip}{$version}{$geocodeEndpoint}",
+            'getGeocodeByZipcode' => "{$ip}{$version}{$geocodeByZipcodeEndpoint}",
+            'checkStatus' => "{$ip}{$version}{$statusEndpoint}",
         ];
 
         return $urls;

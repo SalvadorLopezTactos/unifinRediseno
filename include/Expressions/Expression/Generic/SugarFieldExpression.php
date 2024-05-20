@@ -14,6 +14,10 @@
 class SugarFieldExpression extends GenericExpression
 {
     /**
+     * @var mixed
+     */
+    public $varName;
+    /**
      * @var SugarBean
      */
     public $context;

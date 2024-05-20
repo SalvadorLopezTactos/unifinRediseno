@@ -59,13 +59,13 @@ class Zend_Gdata_App
       *
       * @see _majorProtocolVersion
       */
-    const DEFAULT_MAJOR_PROTOCOL_VERSION = 1;
+    public const DEFAULT_MAJOR_PROTOCOL_VERSION = 1;
 
     /** Default minor protocol version.
       *
       * @see _minorProtocolVersion
       */
-    const DEFAULT_MINOR_PROTOCOL_VERSION = null;
+    public const DEFAULT_MINOR_PROTOCOL_VERSION = null;
 
     /**
      * Client object used to communicate
@@ -808,6 +808,7 @@ class Zend_Gdata_App
         $className='Zend_Gdata_App_Feed', $majorProtocolVersion = null,
         $minorProtocolVersion = null)
     {
+        $php_errormsg = null;
         if (!class_exists($className, false)) {
           require_once 'vendor/Zend/Loader.php';
           @Zend_Loader::loadClass($className);
@@ -846,6 +847,7 @@ class Zend_Gdata_App
     public static function importFile($filename,
             $className='Zend_Gdata_App_Feed', $useIncludePath = false)
     {
+        $php_errormsg = null;
         @ini_set('track_errors', 1);
         $feed = @file_get_contents($filename, $useIncludePath);
         @ini_restore('track_errors');
@@ -1072,11 +1074,11 @@ class Zend_Gdata_App
             } else {
                 require_once 'vendor/Zend/Gdata/App/Exception.php';
                 throw new Zend_Gdata_App_Exception(
-                        "Unable to find '${class}' in registered packages");
+                    "Unable to find '{$class}' in registered packages");
             }
         } else {
             require_once 'vendor/Zend/Gdata/App/Exception.php';
-            throw new Zend_Gdata_App_Exception("No such method ${method}");
+            throw new Zend_Gdata_App_Exception("No such method {$method}");
         }
     }
 

@@ -156,6 +156,11 @@ abstract class DBManager implements LoggerAwareInterface
 	 */
 	protected static $index_descriptions = array();
 
+    /**
+     * @var DB version. Set by \DBManager::version()
+     */
+    protected static $version;
+
 	/**
 	 * Maximum length of identifiers
 	 * @abstract
@@ -283,6 +288,23 @@ abstract class DBManager implements LoggerAwareInterface
      * @var Doctrine\DBAL\Connection
      */
     protected $conn;
+
+    /**
+     * @var DBManager
+     */
+    public $helper;
+    /**
+     * @var int
+     */
+    public $references;
+    /**
+     * @var string[]
+     */
+    public $children;
+    /**
+     * @var int
+     */
+    public $count_id;
 
     /**
      * Gets a string comparison SQL snippet for use in hard coded queries. This
@@ -551,10 +573,8 @@ abstract class DBManager implements LoggerAwareInterface
             SugarXHprof::getInstance()->trackSQL($query, $this->query_time);
         }
 
-        $do_the_dump = isset($sugar_config['dump_slow_queries'])
-            ? $sugar_config['dump_slow_queries'] : false;
-        $slow_query_time_msec = isset($sugar_config['slow_query_time_msec'])
-            ? $sugar_config['slow_query_time_msec'] : 5000;
+        $do_the_dump = $sugar_config['dump_slow_queries'] ?? false;
+        $slow_query_time_msec = $sugar_config['slow_query_time_msec'] ?? 5000;
 
         if ($do_the_dump) {
             if ($slow_query_time_msec < ($this->query_time * 1000)) {
@@ -994,7 +1014,7 @@ abstract class DBManager implements LoggerAwareInterface
 	{
         $indices = $this->massageIndexDefs($fieldDefs, $indices);
 		if (!empty($fieldDefs)) {
-            $sql = $this->createTableSQLParams($tablename, $fieldDefs, $indices, $engine);
+            $sql = $this->createTableSQLParams($tablename, $fieldDefs, $indices);
 			$res = true;
 			if ($sql) {
 				$msg = "Error creating table: $tablename";
@@ -1093,7 +1113,7 @@ abstract class DBManager implements LoggerAwareInterface
         //if the table does not exist create it and we are done
         $sql = "/* Table : $tableName */\n";
         if (!$this->tableExists($tableName)) {
-            $createtablesql = $this->createTableSQLParams($tableName, $fielddefs, $indices, $engine);
+            $createtablesql = $this->createTableSQLParams($tableName, $fielddefs, $indices);
             if($execute && $createtablesql){
                 $this->createTableParams($tableName,$fielddefs,$indices,$engine);
             }
@@ -1218,8 +1238,8 @@ abstract class DBManager implements LoggerAwareInterface
 
                 // BR-1787: we can not decrease the length of the column
                 if (!empty($value['len']) && !empty($compareFieldDefs[$name]['len'])) {
-                    list($dblen, $dbprec) = $this->parseLenPrecision($compareFieldDefs[$name]);
-                    list($vlen, $vprec) = $this->parseLenPrecision($value);
+                    [$dblen, $dbprec] = $this->parseLenPrecision($compareFieldDefs[$name]);
+                    [$vlen, $vprec] = $this->parseLenPrecision($value);
 
                     if (isset($dbprec)) {
                         // already have precision - match both separately
@@ -1447,8 +1467,8 @@ abstract class DBManager implements LoggerAwareInterface
             }
             // if the length in db is greather than the vardef, ignore it
             if ($key == 'len') {
-                list($dblen, $dbprec) = $this->parseLenPrecision($fielddef1);
-                list($vlen, $vprec) = $this->parseLenPrecision($fielddef2);
+                [$dblen, $dbprec] = $this->parseLenPrecision($fielddef1);
+                [$vlen, $vprec] = $this->parseLenPrecision($fielddef2);
                 if ($dblen >= $vlen && ((is_null($dbprec) && is_null($vprec)) || $dbprec >= $vprec)) {
                     continue;
                 }
@@ -1772,7 +1792,7 @@ abstract class DBManager implements LoggerAwareInterface
 		if(!empty($count_query))
 		{
 			// We have a count query.  Run it and get the results.
-			$result = $this->query($count_query, true, "Error running count query for $this->object_name List: ");
+            $result = $this->query($count_query, true, "Error running count query for $bean->object_name List: ");
 			$assoc = $this->fetchByAssoc($result);
 
 			// free resource
@@ -3010,7 +3030,7 @@ abstract class DBManager implements LoggerAwareInterface
             if ($type == 'char') {
                 $defLen = 254;
             }
-            $defLen =  isset($parts['len']) ? $parts['len'] : $defLen; // Use the mappings length (precision) as default if it exists
+            $defLen =  $parts['len'] ?? $defLen; // Use the mappings length (precision) as default if it exists
         }
 
         if(!empty($fieldDef['len'])) {
@@ -3303,7 +3323,7 @@ abstract class DBManager implements LoggerAwareInterface
 	 */
 	public function getColumnType($type)
 	{
-		return isset($this->type_map[$type])?$this->type_map[$type]:$type;
+        return $this->type_map[$type] ?? $type;
 	}
 
 	/**
@@ -4848,5 +4868,56 @@ abstract class DBManager implements LoggerAwareInterface
     public static function isSqlServer(?DBManager $db) : bool
     {
         return ($db instanceof SqlsrvManager);
+    }
+
+    /**
+     * Implements a generic physical delete for any bean.
+     *
+     * @param SugarBean $bean The bean to delete.
+     *
+     * @return bool
+     */
+    public function delete(SugarBean $bean): bool
+    {
+        $fieldDef = $bean->getPrimaryFieldDefinition();
+        $moduleName = $bean->getModuleName();
+
+        if (!array_key_exists('name', $fieldDef)) {
+            $this->logger->error("Unable to delete a {$moduleName} bean because the primary field has no name");
+            return false;
+        }
+
+        $primaryFieldName = $fieldDef['name'];
+        $primaryFieldValue = $bean->getFieldValue($primaryFieldName);
+
+        if (empty($primaryFieldValue)) {
+            $this->logger->error("Unable to delete a {$moduleName} bean without a primary key");
+            return false;
+        }
+
+        // Build a delete query.
+        $builder = $this->getConnection()->createQueryBuilder();
+        $builder->delete($bean->getTableName());
+
+        // Create the primary key filter.
+        $boundValue = $this->bindValue($builder, $primaryFieldValue, $fieldDef);
+        $filter = $builder->expr()->eq($primaryFieldName, $boundValue);
+
+        // Add the primary key filter to the query.
+        $builder->where($filter);
+
+        // Delete the row.
+        $affectedRows = $builder->executeStatement();
+
+        if ($affectedRows < 1) {
+            $this->logger->error("Failed to delete the {$moduleName}:{$bean->id} bean");
+            return false;
+        }
+
+        if ($affectedRows > 1) {
+            $this->logger->warning("Deleted multiple {$moduleName}:{$bean->id} beans");
+        }
+
+        return true;
     }
 }

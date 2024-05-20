@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Oluşturan',
   'LBL_EDIT_LAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Yalnızca Yöneticiler',
-  'LBL_CURRENCY_DEFAULT' => 'Amerikan Doları (Varsayılan)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Sistem Para Birimi (Varsayılan)',
 );
 ?>

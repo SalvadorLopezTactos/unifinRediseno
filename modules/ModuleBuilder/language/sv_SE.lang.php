@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Skapa en formel för att avgöra om detta fält är obligatoriskt i layouter.<br/>"
-    . "Obligatoriska fält följer formeln i webbläsarbaserad mobilvy, <br/>"
-    . "men kommer att följa formeln i de nativa applikationerna, såsom Sugar Mobile för iPhone.<br/>"
-    . "De kommer inte att följa formeln på Sugar Self-Service-portalen.",
+    'LBL_POPHELP_REQUIRED'=>'Fält som villkorligt krävs är inte tillgängliga att användas i följande SugarBPM-åtgärdstyper: Lägg till relaterad post, Ändra fält. Ta bort texten "Krävs om" för att använda detta fält i dessa processdefinieringsåtgärder',
 'LBL_POPHELP_READONLY'=>"Skapa en formel för att avgöra om detta fält är skrivskyddat i layouter.<br/>"
-        . "Skrivskyddade fält följer formeln i den webbläsarbaserad mobilvyn, <br/>"
-        . "men kommer inte att följa formeln i de nativa applikationerna, såsom Sugar Mobile för iPhone.<br/>"
-        . "De kommer inte att följa formeln på Sugar Self Service-portalen.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Markera fältet för att använda det när du söker efter poster med Global Search på denna modul.',
+        . "Skrivskyddade fält följer formeln i webbläsarbaserad mobilvy, <br/>"
+        . "men kommer inte att följa formeln i lokala applikationer, såsom Sugar Mobile för iPhone. <br/>"
+        . "De kommer inte att följa formeln på Sugar Self-Service-portalen.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Välj att använda detta fält när du söker efter poster med global sökning på denna modul.',
 //Revert Module labels
 'LBL_RESET' => 'Återställ',
 'LBL_RESET_MODULE' => 'Reset Modul',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Decimaltal',
                 'autoincrement' => 'Automatisk ökning',
                 'actionbutton' => 'Åtgärdsknapp',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Frekvent använda labels",

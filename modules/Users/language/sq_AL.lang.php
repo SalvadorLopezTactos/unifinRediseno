@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informacioni i përdoruesit nuk është gjetur',
     'ERR_USER_NAME_EXISTS'              => 'Emri i përdoruesit {0} tashmë ekziston. Emrat e dubluar të përdoruesve nuk lejohen. Ndrysho emrin e përdoruesit që të jetë i veçantë.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licenca "Sugar Hint" duhet të ruhet me një lloj licence shtesë të pajtueshme',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Kjo aftësi është tashmë e përfshirë në "Sugar Sell Premier".',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Ky përdorues është mbyllur në aplikimin e Sigar dhe nuk mund të kyçet duke përdor fjalëkalimin e tij/saj ekzistues.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Vetëm autorizim i jashtëm, përdoruesi nuk mund të identifikohet duke përdorur kredencialet e "Sugar"',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Fjalëkalimi',
     'LBL_CHOOSE_A_KEY'					=> 'Selekto një çelës për të ndaluar publikim të paautorizuar të kalendarit tuaj',
     'LBL_NO_KEY'                        => 'Nuk është vendosur çelësi. Ju lutemi vendosni çelësin për të aktivizuar publikimin.',
-	'LBL_CHOOSE_WHICH'					=> 'Zgjidh cilat lidhëse janë shfaqur',
+    'LBL_CHOOSE_WHICH'                  => 'Zgjidh modulet që janë të aksesueshme nga shiriti anësor i navigimit. Cakto rendin në të cilën dëshiron të shfaqen modulet.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Numri i moduleve të ngulitura',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Shkruaj numrin e moduleve të disponueshme për t&#39;u ngulitur kur shiriti i navigimit është i palosur (p.sh., nëse vendos 5, pesë modulet e para në listë janë të ngulitura). Rekomandojmë të vendoset një numër që përfaqëson modulet më të përdorura. Vlerat mbi 100 nuk do të respektohen.',
 	'LBL_CITY'							=> 'Qyteti',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Fshi',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'Emri i përdorimit SMTP',
 	'LBL_MAIL_SMTPTYPE'                => 'Lloji Serveri SMTP:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'Specifikimi i SMTP Serverit',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Llogari emaili e autorizuar',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Zgjidh furnizuesin e emailit tënd',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Fjalëkalimi i Yahoo! Mailit',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'ID e Yahoo! Mailit',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'përdoruesit/ekipet/rolet',
     'LBL_LOADING_ITEMS' => 'Të dhënat po ngarkohen...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Aksesi tek udhëzuesi inteligjent',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Aktiviteti i fundit tek udhëzuesi inteligjent',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Mungon aksesi tek udhëzuesi inteligjent',
 ); // END STRINGS DEFS

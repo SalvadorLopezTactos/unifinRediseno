@@ -51,9 +51,7 @@ class SugarUpgradeFixSingularList extends UpgradeScript
                 $packages[$packageKey] = $packageKey;
             }
 
-            $changes[$packageKey] = isset($changes[$packageKey])
-                ? $changes[$packageKey]
-                : array();
+            $changes[$packageKey] = $changes[$packageKey] ?? array();
 
             // Try to add custom module to moduleList
             if (!isset($app_list_strings['moduleList'][$MBModule])) {
@@ -62,7 +60,7 @@ class SugarUpgradeFixSingularList extends UpgradeScript
                     $mod_strings = array();
                     require $langFile;
 
-                    $moduleName = isset($mod_strings['LBL_MODULE_NAME']) ? $mod_strings['LBL_MODULE_NAME'] : false;
+                    $moduleName = $mod_strings['LBL_MODULE_NAME'] ?? false;
 
                     if ($moduleName) {
                         $app_list_strings['moduleList'][$MBModule] = $moduleName;

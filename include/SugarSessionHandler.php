@@ -48,7 +48,7 @@ class SugarSessionHandler extends SessionHandler
     /**
      * {@inheritdoc}
      */
-    public function open($save_path, $session_id)
+    public function open($save_path, $session_id): bool
     {
         $result = parent::open($save_path, $session_id);
 
@@ -62,7 +62,7 @@ class SugarSessionHandler extends SessionHandler
     /**
      * {@inheritdoc}
      */
-    public function close()
+    public function close(): bool
     {
         if ($this->isCurrentSessionExceeded() && basename($_SERVER['SCRIPT_NAME']) !== 'cron.php') {
             global $current_user;
@@ -84,8 +84,7 @@ class SugarSessionHandler extends SessionHandler
 
             $details = array();
             foreach ($vars as $var) {
-                $value = isset($_SERVER[$var])
-                    ? $_SERVER[$var] : 'Not set';
+                $value = $_SERVER[$var] ?? 'Not set';
                 $details[] = $var . ': ' . $value;
             }
 

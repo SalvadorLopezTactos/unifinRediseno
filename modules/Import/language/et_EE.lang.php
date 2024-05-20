@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Nõutav väärtus on puudu',
     'LBL_ERROR_SYNC_USERS' => 'Sobimatu meilikliendiga sünkroonitav väärtus: ',
     'LBL_ID_EXISTS_ALREADY' => 'ID on selles tabelis juba olemas',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY on selles valemis juba olemas',
     'LBL_ASSIGNED_USER' => 'Kui kasutajat pole olemas, kasutage praegust kasutajat',
     'LBL_SHOW_HIDDEN' => 'Näita välju, mis pole tavaliselt imporditavad',
     'LBL_UPDATE_RECORDS' => 'Värskenda olemasolevaid kirjeid nende importimise asemel (tagasi võtmine puudub)',

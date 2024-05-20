@@ -426,17 +426,17 @@ class CalendarEventsApi extends ModuleApi
         $dateStart = $calEvents->formatDateTime('datetime', $args['date_start'], 'user');
 
         $params = array();
-        $params['type'] = isset($args['repeat_type']) ? $args['repeat_type'] : '';
-        $params['interval'] = isset($args['repeat_interval']) ? $args['repeat_interval'] : '';
-        $params['count'] = isset($args['repeat_count']) ? $args['repeat_count'] : '';
-        $params['until'] = isset($args['repeat_until']) ? $args['repeat_until'] : '';
+        $params['type'] = $args['repeat_type'] ?? '';
+        $params['interval'] = $args['repeat_interval'] ?? '';
+        $params['count'] = $args['repeat_count'] ?? '';
+        $params['until'] = $args['repeat_until'] ?? '';
         $params['until'] = $calEvents->formatDateTime('date', $params['until'], 'user');
-        $params['dow'] = isset($args['repeat_dow']) ? $args['repeat_dow'] : '';
+        $params['dow'] = $args['repeat_dow'] ?? '';
 
-        $params['selector'] = isset($args['repeat_selector']) ? $args['repeat_selector'] : '';
-        $params['days'] = isset($args['repeat_days']) ? $args['repeat_days'] : '';
-        $params['ordinal'] = isset($args['repeat_ordinal']) ? $args['repeat_ordinal'] : '';
-        $params['unit'] = isset($args['repeat_unit']) ? $args['repeat_unit'] : '';
+        $params['selector'] = $args['repeat_selector'] ?? '';
+        $params['days'] = $args['repeat_days'] ?? '';
+        $params['ordinal'] = $args['repeat_ordinal'] ?? '';
+        $params['unit'] = $args['repeat_unit'] ?? '';
 
         $repeatDateTimeArray = $calEvents->buildRecurringSequence($dateStart, $params);
         return $repeatDateTimeArray;
@@ -462,6 +462,7 @@ class CalendarEventsApi extends ModuleApi
      * This invitees list supercedes the users, contacts, and leads links.
      * Existing attendees that are not found in this list are removed.
      *
+     * @deprecated Will be removed in the next release.
      * @param array          $args The API arguments.
      * @param SugarBean|null $bean The bean that is being saved.
      *

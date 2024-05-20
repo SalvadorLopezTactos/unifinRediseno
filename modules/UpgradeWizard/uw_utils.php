@@ -602,7 +602,7 @@ function prepSystemForUpgrade() {
 	global $subdirs;
 	global $base_upgrade_dir;
 	global $base_tmp_upgrade_dir;
-    list($p_base_upgrade_dir, $p_base_tmp_upgrade_dir) = getUWDirs();
+    [$p_base_upgrade_dir, $p_base_tmp_upgrade_dir] = getUWDirs();
 	///////////////////////////////////////////////////////////////////////////////
 	////	Make sure variables exist
 	if(empty($base_upgrade_dir)){
@@ -665,7 +665,8 @@ function prepSystemForUpgrade() {
 }
 
 if ( !function_exists('extractFile') ) {
-function extractFile($zip_file, $file_in_zip) {
+    function extractFile($zip_file, $file_in_zip, $base_tmp_upgrade_dir_stub = '')
+    {
     global $base_tmp_upgrade_dir;
 
 	// strip cwd
@@ -835,7 +836,7 @@ function unlinkUWTempFiles() {
 
 	logThis('at unlinkUWTempFiles()');
 	$tempDir='';
-	list($upgDir, $tempDir) = getUWDirs();
+    [$upgDir, $tempDir] = getUWDirs();
 
     if(file_exists($tempDir) && is_dir($tempDir)){
 		$files = findAllFiles($tempDir, array(), false);
@@ -1042,7 +1043,7 @@ function checkFiles($files, $echo=false) {
 function deletePackageOnCancel(){
 	global $mod_strings;
 	global $sugar_config;
-	list($base_upgrade_dir, $base_tmp_upgrade_dir) = getUWDirs();
+    [$base_upgrade_dir, $base_tmp_upgrade_dir] = getUWDirs();
 	logThis('running delete');
     if(!isset($_SESSION['install_file']) || ($_SESSION['install_file'] == "")) {
     	logThis('ERROR: trying to delete non-existent file: ['.$_REQUEST['install_file'].']');
@@ -1411,7 +1412,7 @@ function repairDBForUpgrade($execute=false,$path=''){
 	foreach ($dictionary as $meta) {
 		$tablename = $meta['table'];
 		$fielddefs = $meta['fields'];
-        $indices = isset($meta['indices']) ? $meta['indices'] : [];
+        $indices = $meta['indices'] ?? [];
 		$sql .= $db->repairTableParams($tablename, $fielddefs, $indices, $execute);
 	}
 	 $qry_str = "";
@@ -2334,7 +2335,7 @@ function getUWDirs()
 function whetherNeedToSkipDir($dir, $skipDirs)
 {
     foreach($skipDirs as $skipMe) {
-        if (strpos(clean_path($dir), (string)$skipMe) !== false) {
+		if(strpos( clean_path($dir), $skipMe ) !== false) {
 			return true;
 		}
 	}

@@ -57,7 +57,7 @@ interface SugarMetric_Provider_Interface
      * @param Exception $exception
      * @return mixed
      */
-    public function handleException(Exception $exception);
+    public function handleException(\Throwable $exception);
 
     /**
      * Set transaction class name (f.e. background, massupdate)

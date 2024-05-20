@@ -222,4 +222,10 @@ So erstellen Sie ein {{meetings_singular_module}}:
 - Klicken Sie auf "Teilnehmer auswählen", um einen bestehenden Benutzer, Kontakt oder Interessent zu {{meetings_singular_module}} hinzuzufügen.
 - Klicken Sie auf das Plus-Symbol rechts neben "Teilnehmer wählen" zum Erstellen eines Teilnehmers für {{meetings_singular_module}} als neuen Sugar-Datensatz.
 3. Klicken Sie auf "Speichern", um den Datensatz fertigzustellen und auf die letzte Seite zurück zu kommen.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Ist Smart Guide Meeting',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Untergeordnete Aufgaben',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Untergeordnete Anrufe',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Untergeordnete Meetings',
 );

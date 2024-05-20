@@ -312,8 +312,8 @@ class CustomQuery extends SugarBean {
 		$this->fill_in_additional_detail_fields();
 	}
 
-	function get_list_view_data(){
-        $smarty = null;
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $app_strings;
         global $mod_strings;
 
@@ -352,7 +352,7 @@ class CustomQuery extends SugarBean {
                 'return_module' => $this->module_name,
                 'return_action' => 'index',
             ));
-            $url = htmlspecialchars($url);
+            $url = htmlspecialchars($url, ENT_COMPAT);
 
             $csrfToken = smarty_function_sugar_csrf_form_token(array(), $smarty);
 
@@ -371,7 +371,7 @@ BUTTON;
                     'record' => $this->id,
                     'edit' => 'true',
                 ));
-            $temp_array['LINK'] = '<a href="' . htmlspecialchars($url) . '">' . $temp_array['NAME'] . '</a>';
+            $temp_array['LINK'] = '<a href="' . htmlspecialchars($url, ENT_COMPAT) . '">' . $temp_array['NAME'] . '</a>';
         } else {
             $temp_array['LINK'] = $temp_array['NAME'];
         }
@@ -503,14 +503,14 @@ AND dataset_layouts.parent_value= ?
 AND data_sets.deleted = 0
 AND dataset_layouts.deleted = 0
 SQL;
-        $stmt = $this->getSlaveDb()
+        $result = $this->getSlaveDb()
             ->getConnection()
             ->executeQuery(
                 $query,
                 [$this->id, $column_name]
             );
         //data sets exists with this query and custom layout enabled
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
 			//First re-order the list_order_x
 				$layout_object = new DataSet_Layout();
 				$layout_object->retrieve($row['id']);
@@ -548,13 +548,13 @@ AND dataset_layouts.parent_value = ?
 AND data_sets.custom_layout = 'Enabled'
 AND data_sets.deleted = '0'
 SQL;
-        $stmt = $this->getSlaveDb()
+        $result = $this->getSlaveDb()
             ->getConnection()
             ->executeQuery(
                 $query,
                 [$this->id, $column_name]
             );
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $dataset_object = new DataSet_Layout();
             $dataset_object->retrieve($row['id']);
             $dataset_object->parent_value = $new_column_name;
@@ -572,13 +572,13 @@ WHERE data_sets.query_id = ?
 AND data_sets.deleted = '0'
 SQL;
 
-        $stmt = $this->getSlaveDb()
+        $result = $this->getSlaveDb()
             ->getConnection()
             ->executeQuery(
                 $query,
                 [$this->id]
             );
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             //Get new position
             $layout_object = new DataSet_Layout();
             $controller = new Controller();

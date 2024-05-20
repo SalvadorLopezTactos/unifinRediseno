@@ -18,6 +18,8 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class DeployedMetaDataImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
+    public $module_dir;
+    public $client;
     /**
      * Additional metadata parameters
      *

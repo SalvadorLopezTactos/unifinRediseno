@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Siltide kirjete töölaud',
     'LBL_MY_TAGS' => 'Minu sildid',
     'LBL_MY_FAVORITE_TAGS' => 'Minu lemmiksildid',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} silti',
 );

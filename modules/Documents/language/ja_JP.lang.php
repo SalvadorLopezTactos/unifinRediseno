@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'テンプレート :',
     'LBL_DET_TEMPLATE_TYPE'=>'ドキュメントタイプ:',
     'LBL_TEAM'=> 'チーム:',
+    'LBL_IS_SHARED' => '外部で利用可能：',
     'LBL_DOC_DESCRIPTION'=>'詳細:',
     'LBL_DOC_ACTIVE_DATE'=> '発行日:',
     'LBL_DOC_EXP_DATE'=> '有効期限:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'DocuSignに送信',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Googleドライブに同期する',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Googleドライブにすべて同期する',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'OneDriveにすべて同期する',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'OneDriveに同期する',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Dropboxにすべて同期する',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Dropboxに同期する',
 );

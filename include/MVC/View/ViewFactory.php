@@ -150,7 +150,7 @@ class ViewFactory{
 	 */
     private static function buildFromFile($file, &$bean, $view_object_map, $type, $module)
     {
-		require_once($file);
+        require_once $file;
 		//try ModuleViewType first then try ViewType if that fails then use SugarView
 		$class = SugarAutoLoader::customClass(ucfirst($module).'View'.ucfirst($type));
 

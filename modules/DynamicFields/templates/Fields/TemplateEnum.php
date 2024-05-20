@@ -14,6 +14,21 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 class TemplateEnum extends TemplateText{
+    /**
+     * @var array<string, class-string<\trigger>>|array<string, string>|mixed
+     */
+    public $localVardefMap;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $trigger;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $action;
+    /** @var array */
+    public $visibility_grid;
+
     var $max_size = 100;
     var $len = 100;
     var $type='enum';
@@ -53,9 +68,10 @@ class TemplateEnum extends TemplateText{
         parent::populateFromPost($request);
         // Handle empty massupdate checkboxes
         $this->massupdate = !empty($_REQUEST['massupdate']);
-        if (!empty($this->visibility_grid) && is_string($this->visibility_grid))
-        {
-            $this->visibility_grid = json_decode(html_entity_decode($this->visibility_grid), true);
+        if (empty($this->visibility_grid)) {
+            $this->visibility_grid = [];
+        } elseif (is_string($this->visibility_grid)) {
+            $this->visibility_grid = json_decode(html_entity_decode($this->visibility_grid, ENT_COMPAT), true);
         }
     	// now convert trigger,action pairs into a dependency array representation
     	// we expect the dependencies in the following format:
@@ -143,11 +159,10 @@ class TemplateEnum extends TemplateText{
 		// this class may be extended, so only do the unserialize for genuine TemplateEnums
         if (get_class($this) == 'TemplateEnum' && empty($def['dependency'])) {
             $def['dependency'] = isset($this->ext4) ?
-                @unserialize(html_entity_decode($this->ext4), ['allowed_classes' => false])
+                @unserialize(html_entity_decode($this->ext4, ENT_COMPAT), ['allowed_classes' => false])
                 : null;
         }
-        if (!empty($this->visibility_grid))
-            $def['visibility_grid'] = $this->visibility_grid;
+        $def['visibility_grid'] = empty($this->visibility_grid) ? [] : $this->visibility_grid;
 
 		return $def;
 	}
@@ -187,8 +202,9 @@ class TemplateEnum extends TemplateText{
 		if (!empty($this->default) && is_array($this->default)) {
 			$this->default = $this->default[0];
 		}
-        if (!empty($this->visibility_grid) && is_string($this->visibility_grid))
-        {
+        if (empty($this->visibility_grid)) {
+            $this->visibility_grid = [];
+        } elseif (is_string($this->visibility_grid)) {
             $this->visibility_grid = json_decode($this->visibility_grid, true);
         }
 		parent::save($df);

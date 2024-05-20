@@ -18,11 +18,6 @@
          * - Extends a view with create article and revision functionality.
          */
         app.plugins.register('KBContent', ['view'], {
-
-            events: {
-                'click .mce-btnKBTemplate': 'launchTemplateDrawer'
-            },
-
             CONTENT_LOCALIZATION: 1,
             CONTENT_REVISION: 2,
 
@@ -49,6 +44,7 @@
                     } else {
                         this._initValidationHandler(this.model);
                     }
+                    this.context.on('button:add-template:click', this.launchTemplateDrawer, this);
                 });
             },
 

@@ -1057,7 +1057,7 @@
         if (_.isEmpty(this.enrichFieldsOptions)) {
             this._callStage2API('read', 'hint/enrich/config', {
                 success: function(data) {
-                    var rawConfigData = data.response.config_data;
+                    var rawConfigData = data && data.response && data.response.config_data;
                     if (rawConfigData) {
                         self.enrichFieldsOptions = JSON.parse(rawConfigData);
                         self._enrichModel();
@@ -1314,17 +1314,11 @@
                     }
                 }
                 if (!_.isEmpty(self._attrsToSave)) {
-                    if (self.isDarkMode) {
-                        self.$('[data-name="saveAll"]').addClass('hint-preview-icon-darkmode--cloud').tooltip({
-                            title: app.lang.get('LBL_HINT_PREVIEW_TOOLTIP_TITLE'),
-                            placement: 'left'
-                        });
-                    } else {
-                        self.$('[data-name="saveAll"]').addClass('hint-preview-icon--cloud').tooltip({
-                            title: app.lang.get('LBL_HINT_PREVIEW_TOOLTIP_TITLE'),
-                            placement: 'left'
-                        });
-                    }
+                    self.$('[data-name="saveAll"]').addClass('btn btn-primary saveAll').tooltip({
+                        title: app.lang.get('LBL_HINT_PREVIEW_TOOLTIP_TITLE'),
+                        placement: 'left'
+                    });
+                    self.$('.saveAll').text(app.lang.get('LBL_HINT_ENRICH_ALL'));
                 }
                 self._resetEnrichAutoFillState();
 
@@ -2343,10 +2337,11 @@
                 self.filteredAttrsToSave = _.omit(self.filteredAttrsToSave, 'hint_phone_1', 'hint_phone_2');
             }
             // Add loading animation for saveAll icon.
+            $btn.html('');
             if (self.isDarkMode) {
-                $btn.removeClass('hint-preview-icon-darkmode--cloud').addClass('hint-preview-icon-darkmode--loading');
+                $btn.removeClass('btn btn-primary saveAll').addClass('hint-preview-icon-darkmode--loading');
             } else {
-                $btn.removeClass('hint-preview-icon--cloud').addClass('hint-preview-icon--loading');
+                $btn.removeClass('btn btn-primary saveAll').addClass('hint-preview-icon--loading');
             }
 
             //Remove any erased fields

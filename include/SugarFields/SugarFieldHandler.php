@@ -78,7 +78,7 @@ class SugarFieldHandler
         		$file = 'include/SugarFields/Fields/Base/SugarFieldBase.php';
                 $type = 'Base';
         	}
-			require_once($file);
+            require_once $file;
 
 			$class = SugarAutoLoader::customClass('SugarField' . $type);
 			//could be a custom class check it
@@ -145,7 +145,7 @@ class SugarFieldHandler
      */
     private static function getOriginalFieldType($vardef)
     {
-        $type = isset($vardef['type']) ? $vardef['type'] : 'varchar';
+        $type = $vardef['type'] ?? 'varchar';
         if ($type === 'relate') {
             if (!empty($vardef['module'] && !empty($vardef['rname']))) {
                 $module = BeanFactory::getObjectName($vardef['module']);

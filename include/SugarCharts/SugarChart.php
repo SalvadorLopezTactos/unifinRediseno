@@ -16,6 +16,16 @@
  */
 class SugarChart
 {
+    /**
+     * @var mixed|int
+     */
+    public $div;
+    public $app_strings;
+    /**
+     * @var string|mixed
+     */
+    public $chartStringsXML;
+    public $id;
     private $db;
     protected $ss;
     var $forceHideDataGroupLink = false;
@@ -226,17 +236,17 @@ class SugarChart
         $this->chart_yAxis['yMax'] = $this->is_currency ? $this->convertCurrency($this->chart_yAxis['yMax']) : $this->chart_yAxis['yMax'];
         $max = $this->chart_yAxis['yMax'];
         $exp = ($max == 0) ? 1 : floor(log10($max));
-        $baseval = $max / pow(10, $exp);
+        $baseval = $max / 10 ** $exp;
 
         // steps will be 10^n, 2*10^n, 5*10^n (where n >= 0)
         if ($baseval > 0 && $baseval <= 1) {
-            $step = 2 * pow(10, $exp-1);
+            $step = 2 * 10 ** ($exp-1);
         } elseif ($baseval > 1 && $baseval <= 3) {
-            $step = 5 * pow(10, $exp-1);
+            $step = 5 * 10 ** ($exp-1);
         } elseif ($baseval > 3 && $baseval <= 6) {
-            $step = 10 * pow(10, $exp-1);
+            $step = 10 * 10 ** ($exp-1);
         } elseif ($baseval > 6 && $baseval <= 10) {
-            $step = 20 * pow(10, $exp-1);
+            $step = 20 * 10 ** ($exp-1);
         }
 
         // edge cases for values less than 10
@@ -722,6 +732,24 @@ class SugarChart
     }
 
     /**
+     * Cleanup XML
+     *
+     * @param string $xmlContents
+     * @return string
+     */
+    public function cleanupXML($xmlContents)
+    {
+        $replaceDictionary = [
+            '&reg;' => '&#174;',
+        ];
+        $searchStrings = array_keys($replaceDictionary);
+        $replaceStrings = array_values($replaceDictionary);
+        $xmlContents = str_replace($searchStrings, $replaceStrings, $xmlContents);
+
+        return $xmlContents;
+    }
+
+    /**
      * function to save XML contents into a file
      *
      * @param     string $xmlFilename location of the xml file
@@ -732,6 +760,8 @@ class SugarChart
     {
         global $app_strings;
         global $locale;
+
+        $xmlContents = $this->cleanupXML($xmlContents);
 
         $xmlContents = chr(255).chr(254).$GLOBALS['locale']->translateCharset($xmlContents, 'UTF-8', 'UTF-16LE');
 

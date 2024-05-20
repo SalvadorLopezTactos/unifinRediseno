@@ -102,7 +102,7 @@ $viewdefs['Quotes']['base']['view']['activity-timeline'] = [
                     'type' => 'focuscab',
                     'css_class' => 'dashboard-icon',
                     'icon' => 'sicon-focus-drawer',
-                    'tooltip' => 'LBL_FOCUS',
+                    'tooltip' => 'LBL_FOCUS_DRAWER_DASHBOARD',
                 ],
             ],
         ],

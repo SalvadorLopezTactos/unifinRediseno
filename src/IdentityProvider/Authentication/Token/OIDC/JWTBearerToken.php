@@ -12,8 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC;
 
-use Jose\Factory\JWKFactory;
-use Jose\Factory\JWSFactory;
+use Jose\Component\Core\JWK;
+use Jose\Easy\JWSBuilder;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 /**
@@ -21,9 +21,9 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
  */
 class JWTBearerToken extends AbstractToken
 {
-    const EXPIRE_INTERVAL = 300;
+    public const EXPIRE_INTERVAL = 300;
 
-    const DEFAULT_SIGNATURE_ALGORITHM = 'RS256';
+    public const DEFAULT_SIGNATURE_ALGORITHM = 'RS256';
 
     /**
      * Sugar User identity field
@@ -72,7 +72,7 @@ class JWTBearerToken extends AbstractToken
     public function __toString()
     {
         $privateKeyInfo = $this->getAttribute('privateKey');
-        $jwkPrivateKey = JWKFactory::createFromValues($privateKeyInfo);
+        $jwkPrivateKey = new JWK($privateKeyInfo);
         $currentTime = $this->getAttribute('iat');
         $claims = [
             'iat' => $currentTime,
@@ -85,13 +85,12 @@ class JWTBearerToken extends AbstractToken
         if ($this->hasAttribute('sudoer')) {
             $claims['sudoer'] = $this->getAttribute('sudoer');
         }
-        return JWSFactory::createJWSToCompactJSON(
-            $claims,
-            $jwkPrivateKey,
-            [
-                'kid' => $this->getAttribute('kid'),
-                'alg' => isset($privateKeyInfo['alg']) ? $privateKeyInfo['alg'] : static::DEFAULT_SIGNATURE_ALGORITHM,
-            ]
-        );
+
+        $jwsBuilder = new JWSBuilder();
+        return $jwsBuilder
+            ->header('kid', $this->getAttribute('kid'))
+            ->alg($privateKeyInfo['alg'] ?? static::DEFAULT_SIGNATURE_ALGORITHM)
+            ->payload($claims)
+            ->sign($jwkPrivateKey);
     }
 }

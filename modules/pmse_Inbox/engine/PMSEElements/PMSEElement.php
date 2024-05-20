@@ -332,7 +332,7 @@ class PMSEElement implements PMSERunnable
         }
         $response['flow_data'] = $data;
         $response['flow_filters'] = $filters;
-        $response['flow_id'] = isset($data['id']) ? $data['id'] : '';
+        $response['flow_id'] = $data['id'] ?? '';
         return $response;
     }
 

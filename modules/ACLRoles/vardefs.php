@@ -10,144 +10,163 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- 
-$dictionary['ACLRole'] = array('table' => 'acl_roles', 'archive' => false, 'comment' => 'ACL Role definition'
-                               ,'fields' => array (
-  'id' => 
-  array (
-    'name' => 'id',
-    'vname' => 'LBL_ID',
-    'required'=>true,
-    'type' => 'id',
-    'reportable'=>false,
-    'comment' => 'Unique identifier'
-  ),
-   'date_entered' => 
-  array (
-    'name' => 'date_entered',
-    'vname' => 'LBL_DATE_ENTERED',
-    'type' => 'datetime',
-    'required'=>true,
-    'comment' => 'Date record created'
-  ),
-  'date_modified' => 
-  array (
-    'name' => 'date_modified',
-    'vname' => 'LBL_DATE_MODIFIED',
-    'type' => 'datetime',
-    'required'=>true,
-    'comment' => 'Date record last modified'
-  ),
-    'modified_user_id' => 
-  array (
-    'name' => 'modified_user_id',
-    'rname' => 'user_name',
-    'id_name' => 'modified_user_id',
-    'vname' => 'LBL_MODIFIED',
-    'type' => 'assigned_user_name',
-    'table' => 'modified_user_id_users',
-    'isnull' => 'false',
-    'dbType' => 'id',
-    'required'=> false,
-    'len' => 36,
-    'reportable'=>true,
-    'comment' => 'User who last modified record'
-  ),
-    'created_by' => 
-  array (
-    'name' => 'created_by',
-    'rname' => 'user_name',
-    'id_name' => 'created_by',
-    'vname' => 'LBL_CREATED',
-    'type' => 'assigned_user_name',
-    'table' => 'created_by_users',
-    'isnull' => 'false',
-    'dbType' => 'id',
-    'len' => 36,
-    'comment' => 'User who created record'
-  ),
-   'name' => 
-  array (
-    'name' => 'name',
-    'type' => 'varchar',
-    'vname' => 'LBL_NAME',
-    'len' => 150,
-    'comment' => 'The role name'
-  ),
-   'description' => 
-  array (
-    'name' => 'description',
-    'vname' => 'LBL_DESCRIPTION',
-    'type' => 'text',
-    'comment' => 'The role description'
-  ),
-  'deleted' => 
-  array (
-    'name' => 'deleted',
-    'vname' => 'LBL_DELETED',
-    'type' => 'bool',
-    'reportable'=>false,
-    'comment' => 'Record deletion indicator'
-  ),
-  'users' => 
-  array (
-  	'name' => 'users',
-    'type' => 'link',
-    'relationship' => 'acl_roles_users',
-      'link_class' => 'UserLink',
-    'source'=>'non-db',
-	'vname'=>'LBL_USERS',
-  ),
-    'actions' => 
-  array (
-  	'name' => 'actions',
-    'type' => 'link',
-    'relationship' => 'acl_roles_actions',
-    'source'=>'non-db',
-	'vname'=>'LBL_USERS',
-  ),
-        'acl_role_sets' => array(
+
+$dictionary['ACLRole'] = [
+    'table' => 'acl_roles',
+    'color' => 'teal',
+    'icon' => 'sicon-role-mgmt-lg',
+    'archive' => false,
+    'comment' => 'ACL Role definition',
+    'fields' => [
+        'id' =>
+            [
+                'name' => 'id',
+                'vname' => 'LBL_ID',
+                'required'=>true,
+                'type' => 'id',
+                'reportable'=>false,
+                'comment' => 'Unique identifier',
+            ],
+        'date_entered' =>
+            [
+                'name' => 'date_entered',
+                'vname' => 'LBL_DATE_ENTERED',
+                'type' => 'datetime',
+                'required'=>true,
+                'comment' => 'Date record created',
+            ],
+        'date_modified' =>
+            [
+                'name' => 'date_modified',
+                'vname' => 'LBL_DATE_MODIFIED',
+                'type' => 'datetime',
+                'required'=>true,
+                'comment' => 'Date record last modified',
+            ],
+        'modified_user_id' =>
+            [
+                'name' => 'modified_user_id',
+                'rname' => 'user_name',
+                'id_name' => 'modified_user_id',
+                'vname' => 'LBL_MODIFIED',
+                'type' => 'assigned_user_name',
+                'table' => 'modified_user_id_users',
+                'isnull' => 'false',
+                'dbType' => 'id',
+                'required'=> false,
+                'len' => 36,
+                'reportable'=>true,
+                'comment' => 'User who last modified record',
+            ],
+        'created_by' =>
+            [
+                'name' => 'created_by',
+                'rname' => 'user_name',
+                'id_name' => 'created_by',
+                'vname' => 'LBL_CREATED',
+                'type' => 'assigned_user_name',
+                'table' => 'created_by_users',
+                'isnull' => 'false',
+                'dbType' => 'id',
+                'len' => 36,
+                'comment' => 'User who created record',
+            ],
+        'name' =>
+            [
+                'name' => 'name',
+                'type' => 'varchar',
+                'vname' => 'LBL_NAME',
+                'len' => 150,
+                'comment' => 'The role name',
+            ],
+        'description' =>
+            [
+                'name' => 'description',
+                'vname' => 'LBL_DESCRIPTION',
+                'type' => 'text',
+                'comment' => 'The role description',
+            ],
+        'deleted' =>
+            [
+                'name' => 'deleted',
+                'vname' => 'LBL_DELETED',
+                'type' => 'bool',
+                'reportable'=>false,
+                'comment' => 'Record deletion indicator',
+            ],
+        'users' =>
+            [
+                'name' => 'users',
+                'type' => 'link',
+                'relationship' => 'acl_roles_users',
+                'link_class' => 'UserLink',
+                'source'=>'non-db',
+                'vname'=>'LBL_USERS',
+            ],
+        'actions' =>
+            [
+                'name' => 'actions',
+                'type' => 'link',
+                'relationship' => 'acl_roles_actions',
+                'source'=>'non-db',
+                'module' => 'ACLActions',
+                'bean_name' => 'ACLAction',
+                'rel_fields' => [
+                    'access_override' => [
+                        'type' => 'int',
+                    ],
+                ],
+            ],
+        'access_override' => [
+            'name' => 'access_override',
+            'type' => 'int',
+            'studio' => 'false',
+            'source' => 'non-db',
+            'massupdate' => false,
+            'link' => 'actions',
+            'rname_link' => 'access_override',
+            'link_type' => 'one',
+        ],
+        'acl_role_sets' => [
             'name' => 'acl_role_sets',
             'type' => 'link',
             'source' => 'non-db',
             'relationship' => 'acl_role_sets_acl_roles',
-        ),
-),
-'acls' => array('SugarACLDeveloperOrAdmin' => array('aclModule' => 'Users')),
-'indices' => array (
-       array('name' =>'aclrolespk', 'type' =>'primary', 'fields'=>array('id')),
-       array('name' =>'idx_aclrole_id_del', 'type' =>'index', 'fields'=>array('id', 'deleted')),
-       array('name' => 'idx_aclrole_name', 'type' => 'index', 'fields' => array('name'))
+        ],
+    ],
+    'acls' => ['SugarACLDeveloperOrAdmin' => ['aclModule' => 'Users']],
+    'indices' => [
+        ['name' =>'aclrolespk', 'type' =>'primary', 'fields'=> ['id']],
+        ['name' =>'idx_aclrole_id_del', 'type' =>'index', 'fields'=> ['id', 'deleted']],
+        ['name' => 'idx_aclrole_name', 'type' => 'index', 'fields' => ['name']],
+    ],
+];
 
-                                                   )
-
-                            );
-
-$dictionary['ACLRoleSet'] = array(
+$dictionary['ACLRoleSet'] = [
     'table' => 'acl_role_sets',
     'archive' => false,
-    'fields' => array(
-        'hash' => array(
+    'fields' => [
+        'hash' => [
             'name' => 'hash',
             'type' => 'varchar',
             'len' => 32,
             'isnull' => false,
-        ),
-        'acl_roles' => array(
+        ],
+        'acl_roles' => [
             'name' => 'acl_roles',
             'type' => 'link',
             'source' => 'non-db',
             'relationship' => 'acl_role_sets_acl_roles',
             'duplicate_merge' => 'disabled',
-        ),
-    ),
-    'indices' => array(
-        array(
+        ],
+    ],
+    'indices' => [
+        [
             'name' => 'idx_acl_role_sets_hash',
             'type' => 'unique',
-            'fields' => array('hash'),
-        ),
-    ),
-);
+            'fields' => ['hash'],
+        ],
+    ],
+];
 
 VardefManager::createVardef('ACLRoleSets', 'ACLRoleSet');

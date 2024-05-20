@@ -79,10 +79,12 @@ function traverse_tree($parent_id, $depth_flag, &$tree_depth, &$tree_branches, &
 function create_category($parent_id){
 	global $sugar_demodata;
 	$last_name_array = $sugar_demodata['last_name_array'];
-    $last_name_count = (is_countable($sugar_demodata['last_name_array']) ? count($sugar_demodata['last_name_array']) : 0) - 1;
+    $last_name_count = (is_countable($sugar_demodata['last_name_array']) ? count(
+        $sugar_demodata['last_name_array']
+    ) : 0) - 1;
 	$last_name_max = $last_name_count - 1;
 	$category = BeanFactory::newBean('ProductCategories');
-    $category->name = $last_name_array[random_int(0, $last_name_max)] ." Widgets";
+    $category->name = $last_name_array[random_int(0, $last_name_max)] . " Widgets";
 	$category->parent_id = $parent_id;
     $key = array_rand($sugar_demodata['users']);
     $category->assigned_user_id = $sugar_demodata['users'][$key]['id'];
@@ -106,7 +108,7 @@ global $tekkyware_id;
 $first_name_max = $first_name_count - 1;
 
 	$template = BeanFactory::newBean('ProductTemplates');
-    $template->name = $first_name_array[random_int(0, $first_name_max)] ." Gadget";
+    $template->name = $first_name_array[random_int(0, $first_name_max)] . " Gadget";
 	$template->tax_class = "Taxable";
 	$template->manufacturer_id = $tekkyware_id;
 	$template->currency_id = $dollar_id;
@@ -117,7 +119,10 @@ $first_name_max = $first_name_count - 1;
 	$template->discount_price = 1799.95;
 	$template->discount_usdollar = 1799.95;
 	$template->pricing_formula = "IsList";
-    $template->mft_part_num = $company_name_array[random_int(0, $company_name_count-1)].' '.random_int(1, 1000000) ."XYZ987";
+    $template->mft_part_num = $company_name_array[random_int(0, $company_name_count - 1)] . ' ' . random_int(
+        1,
+        1000000
+    ) . "XYZ987";
 	$template->pricing_factor = "1";
 	$template->status = "Available";
 	$template->weight = 20.0;

@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Darījumu saraksta instrumentu panelis',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Darījumu ierakstu instrumentu panelis',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Informācija par darījumu',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Darījumu fokusa panelis - Konsole',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Darījumu fokusa panelis',
     'LBL_RENEWAL_OPPORTUNITY' => 'Atjaunojamais darījums',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Iesniegts',
     'LBL_FORECAST' => 'Iekļatu prognozē',
     'LBL_COMMIT_STAGE' => 'Iesniegt posmu',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Prognoze',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Prognozes posms',
     'LBL_WORKSHEET' => 'Darblapa',
     'LBL_PURCHASED_LINE_ITEMS' => 'Iegādātie produkti',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizēt',
+    'LBL_CREATE_NEW' => 'Izveidot jaunu',
+    'LBL_MANAGE' => 'Pārvaldīt',
+    'LBL_SEE_DETAILS' => 'Skatīt papildu informāciju',
+    'LBL_HIDE_NEW' => 'Paslēpt',
+
     'LBL_FORECASTED_LIKELY' => 'Iespējamā prognoze',
+    'LBL_LOST' => 'Zaudēts',
     'LBL_RENEWAL' => 'Atjaunošana',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Atjaunojamie darījumi',
     'LBL_RENEWAL_PARENT' => 'Sākotnējais darījums',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Iespējas loma',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Piezīmes',
+    'LBL_TAB_OPPORTUNITY' => '{{module}} apskate',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Spiežot apstiprināt tiks izdzēsti VISI prognožu dati un mainīts jūsu Pārdošanas iespēju skats. Ja tas nav, tas ko vēlaties, spiediet Atcelt un atgriezties pie iepriekšējiem uzstādījumiem.',
@@ -211,7 +220,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Pēc tam, kad jūs uzsāksiet šo izmaiņu, fonā tiks izveidoti ieņēmumu posteņu ieraksti katram esošajam {{module_name}}. Kad ieņēmumu posteņi tiks pabeigti un būs pieejami, paziņojums tiks nosūtīts uz e-pasta adresi jūsu lietotāja profilā. Lūdzu, ņemiet vērā, ka jūsu instancei ir jābūt konfigurētai uz e-pastu nosūtīšanu caur Admin > e-pasta iestatījumiem, lai paziņojumi tiktu nosūtīti.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir kāda produkta potenciāls pārdošanas darījums, un tas ietver atbilstošu pārdošanas informāciju, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem {{quotes_module}}, {{contacts_module}} u. c. Modulis {{module_name}} parasti iziet vairākus pārdošanas posmus, līdz tas tiek atzīmēts kā „Aizvērts-noslēgts” vai „Aizvērts-zaudēts”. Moduļa {{plural_module_name}} izmantošanu var vēl vairāk uzlabot, izmantojot „Sugar” moduli {{forecasts_singular_module}}, ar kura palīdzību var saprast un prognozēt pārdošanas tendences, kā arī koncentrēt darbu uz pārdošanas kvotu sasniegšanu.',
+    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir kāda produkta potenciāls pārdošanas darījums, un tas ietver atbilstošu pārdošanas informāciju, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem {{quotes_module}}, {{contacts_module}} u. c. Modulis {{module_name}} parasti iziet vairākus pārdošanas posmus, līdz tas tiek atzīmēts kā „Aizvērts-iegūts” vai „Aizvērts bez panākumiem”. Moduļa {{plural_module_name}} izmantošanu var vēl vairāk uzlabot, izmantojot „Sugar” moduli {{forecasts_singular_module}}, ar kura palīdzību var saprast un prognozēt pārdošanas tendences, kā arī koncentrēt darbu uz pārdošanas kvotu sasniegšanu.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem un tiem piederošajiem produktiem no sākuma līdz beigām. Katrs moduļa {{module_name}} ieraksts ir potenciāls pārdošanas darījums un ietver atbilstošus pārdošanas datus, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem {{quotes_module}}, {{contacts_module}}, utt.

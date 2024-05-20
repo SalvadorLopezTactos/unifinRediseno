@@ -92,6 +92,7 @@ $mod_strings = array (
     'ERR_UW_PACKAGE_NEWER_VERSION_EXISTS'       => 'يوجد إصدار أحدث من الحزمة: {0}، الرجاء إزالة هذا الإصدار قبل محاولة تحميل إصدار جديد.',
     'ERR_UW_PACKAGE_ALREADY_INSTALLED'          => 'تم تثبيت الحزمة بالفعل.',
     'ERR_UW_PACKAGE_NOT_INSTALLED'              => 'لم يتم تثبيت الحزمة.',
+    'ERR_UW_PACKAGE_INSTALLED_WITH_ERROR'       => 'أسفر تثبيت الحزمة عن خطأ. سيتم ترك التغييرات في محلها',
     'ERR_UW_PACKAGE_IS_UNINSTALLABLE'           => 'الحزمة غير قابلة لإلغاء التثبيت. لا يمكن إلغاء تثبيت الحزمة.',
     'ERR_UW_PACKAGE_ALREADY_ENABLED'            => 'تم تمكين الحزمة بالفعل.',
     'ERR_UW_PACKAGE_ALREADY_DISABLED'           => 'تم تعطيل الحزمة بالفعل.',
@@ -130,7 +131,12 @@ $mod_strings = array (
     'LBL_ADMIN_WIZARD' => 'أعد بسهولة نظام SugarCRM الخاص بك',
     'LBL_ADMINISTRATION_HOME_TITLE' => 'النظام',
     'LBL_ADMINISTRATION_HOME_DESC' =>'تكوين الإعدادات على النظام بأكمله وفقًا لمواصفات المؤسسة الخاصة بك. يمكن للمستخدمين تجاوز بعض الإعدادات المحلية الافتراضية داخل صفحة إعدادات المستخدم الخاصة بهم.',
-    'LBL_ALLOW_USER_TABS' => 'السماح للمستخدمين بتحديد وحدات لتظهر في شريط التنقل',
+    'LBL_ALLOW_USERS_PINNED_MODULES' => 'السماح للمستخدمين بعدد محدد من الوحدات المثبتة',
+    'LBL_ALLOW_USERS_AVAILABLE_MODULES' => 'السماح للمستخدمين بالتحديد من الوحدات المتاحة',
+    'LBL_NUMBER_PINNED_MODULES' => 'عدد الوحدات المثبتة',
+    'LBL_NUMBER_PINNED_MODULES_TOOLTIP' => 'نوصي بضبط هذا إلى عدد واقعي من ' .
+        'الوحدات المستخدمة المتكرر استخدامها لأنه على الأرجح لن يكون عدد كبير منها مرئيًا في معظم أحجام المتصفحات. القيم أكبر من ' .
+        '100 لن تتم مراعاتها',
     'LBL_ALREADY_RUNNING'                  => 'يتم تشغيل هذا الخادم كعميل غير متصل.',
     'LBL_APPLY_DST_FIX_DESC' => 'ستحدث هذه الخطوة الإلزامية وظائف (MYSQL فقط).',
     'LBL_APPLY_DST_FIX' => 'تطبيق تصحيح التوقيت الصيفي',
@@ -145,7 +151,7 @@ $mod_strings = array (
     'LBL_IMPORT_METADATA_BUTTON_TITLE' => 'استيراد ملف بيانات تعريف IdP',
     'LBL_IMPORT_METADATA_BUTTON_LABEL' => 'استيراد ملف بيانات تعريف IdP',
     'LBL_CAT_VIEW'            => 'الفئات',
-    'LBL_CHANGE_NAME_MODULES'=>'قم بتغيير أسماء الوحدات الظاهرة في التطبيق',
+    'LBL_CHANGE_NAME_MODULES'=> 'قم بتغيير أسماء الوحدات الظاهرة في التطبيق',
     'LBL_CHECK_FOR_UPDATES'  => 'التحقق من وجود تحديثات',
     'LBL_CHECK_NOW_LABEL' =>'تحقق الآن',
     'LBL_CHECK_NOW_TITLE' =>'تحقق الآن',
@@ -171,17 +177,20 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'إزالة الملف المخزن مؤقتًا المستخدم لحفظ بيانات خطوط PDF',
     'LBL_CONFIG_CHECK' =>'التحقق من Config',
     'LBL_CONFIG_FTS' => 'تكوين مشغل البحث عن كامل النص',
-    'LBL_CONFIG_TABS'=>'وحدات العرض واللوحات الفرعية',
-	'LBL_CONFIG_TABS_DESC'=>'قم بسحب أسماء الوحدات وإسقاطها أدناه لتعيينها ليتم عرضها أو إخفاؤها في أعلى شريط التنقل أو كلوحات فرعية. للتحكم في الوصول إلى الوحدات، استخدم إدارة أدوار <a href="?module=ACLRoles&action=index">.</a>',
-	'LBL_CONFIG_LANGS_DESC'=>'قم بسحب أسماء اللغات وإدراجها أدناه لتمكينها أو تعطيلها.',
-	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'حدد هذا الخيار للسماح للمستخدمين باختيار أي علامات تبويب الوحدة يمكنها عرضها. عند التحديد، سيكون لدى المستخدمين إمكانية اختيار أي علامات تبويب الوحدة المتاحة بواسطة إدارة علامات التبويب بداخل إعدادات المستخدم.',
-	'LBL_CONFIGURATOR_DESC'=>'إنشاء Config.php',
+    'LBL_CONFIG_TABS'=>'شريط التنقل واللوحات الفرعية',
+    'LBL_CONFIG_TABS_DESC_BRIEFLY'=>'حدد الوحدات المتوفرة للمستخدمين في شريط التنقل وكجموعات فرعية. للتحكم في وصول المستخدمين إلى الوحدات، استخدم <a href="?module=ACLRoles&action=index">إدارة الأدوار.</a>',
+    'LBL_CONFIG_TABS_DESC_DETAILED'=>'اسحب الوحدات وأسقطها لضبطها كمتاحة في شريط التنقل أو كمخفية. <br>
+        يحدد حقل عدد الوحدات المثبتة عدد الوحدات المتاحة المعروضة عند
+        طي شريط التنقل (مثال في حالة إدخال 5، يتم تثبيت أول خمس وحدات في قائمتك). عند تمكين
+        حقول التحديد، يمكن للمستخدمين تعديل إعدادات شريط التنقل عبر ملف تعريف المستخدم لهم.',
+    'LBL_CONFIG_LANGS_DESC'=>'قم بسحب أسماء اللغات وإدراجها أدناه لتمكينها أو تعطيلها.',
+    'LBL_CONFIGURATOR_DESC'=>'إنشاء Config.php',
     'LBL_CONFIGURATOR_TITLE'=>'المكون',
     'LBL_CONFIGURE_GROUP_TABS_DESC' => 'إنشاء عوامل تصفية قائمة الوحدة وتحريرها',
     'LBL_CONFIGURE_GROUP_TABS' => 'تكوين عوامل تصفية قائمة الوحدة',
     'LBL_CONFIGURE_SETTINGS_TITLE' => 'إعدادات النظام',
     'LBL_CONFIGURE_SETTINGS' => 'تكوين إعدادات النظام بأكمله',
-    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'وحدات العرض واللوحات الفرعية',
+    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'شريط التنقل واللوحات الفرعية',
     'LBL_CONFIGURE_UPDATER'=>'تكوين تحديثات Sugar',
     'LBL_CONTRACT_TITLE'=>'العقود',
     'LBL_CONTRACT_DESC'=>'قم بتحديد أنواع العقود لوحدة العقود. عند إنشاء المستخدم عقدًا، تعرض قائمة الأنواع المنسدلة أنواع العقد للتحديد.',
@@ -226,6 +235,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_GETMYSQLTS' => 'مخطط قاعدة البيانات',
     'LBL_DIAGNOSTIC_GETPHPINFO' => 'الحصول على phpinfo()',
     'LBL_DIAGNOSTIC_GETSUGARLOG' => 'الحصول على sugarcrm.log',
+    'LBL_DIAGNOSTIC_GETMLPLOG' => 'Getting package_install.log',
     'LBL_DIAGNOSTIC_GETTING' => 'يتم الآن الحصول على...',
     'LBL_DIAGNOSTIC_MD5'=>'معلومات MD5',
     'LBL_DIAGNOSTIC_MYSQLDUMPS'=>'تفريغ جدول التكوين',
@@ -234,6 +244,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_NO_MYSQL' => 'ليس لديك MySQL. تم تعطيل وظائف MySQL.',
     'LBL_DIAGNOSTIC_PHPINFO'=>'phpinfo()',
     'LBL_DIAGNOSTIC_SUGARLOG'=>'ملف سجل SugarCRM',
+    'LBL_DIAGNOSTIC_MLPLOG'=>'ملف سجل تثبيت الحزمة',
     'LBL_DIAGNOSTIC_TITLE'=>'أداة تشخيص',
     'LBL_DIAGNOSTIC_VARDEFS'=>'نتائج مخطط Sugar (تعريفات متغيره)',
 	'LBL_DISABLED' => 'معطَّل',
@@ -361,11 +372,11 @@ $mod_strings = array (
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'أمثلة لربط<br>مستخدم LDAP:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid ',
     'LBL_LDAP_LOGIN_ATTRIBUTE_DESC'=>'أمثلة للبحث عن<br>مستخدم LDAP: &nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName,&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid ',
     'LBL_LDAP_ENCRYPTION_TYPE_DESC'=> 'نوع التشفير يؤثر على ما إذا كان اتصالك بخادم LDAP سيكون ' .
-        'آمنًا أم لا. استخدم "بلا" لاتصال غير آمن عادي. استخدم TLS لتفعيل ' .
-        'تآمين الاتصال العادي. استخدم SSL لاتصال آمن عبر ldaps://',
+        'آمنًا أم لا. استخدم "بلا" لاتصال غير آمن عادي. استخدم StartTLS لتفعيل ' .
+        'تأمين الاتصال العادي. استخدم LDAPS لاتصال آمن عبر ldaps://',
     'LBL_LDAP_SERVER_HOSTNAME_DESC'=> 'الرجاء تحديد اسم مضيف LDAP لعنوان IP فقط. ' .
         'مثال: ldap.example.com, 10.11.45.75',
-    'LBL_LDAP_SERVER_PORT_DESC'=>'مثال: 389 للاتصال غير الآمن وTLS. 636 لـ SSL',
+    'LBL_LDAP_SERVER_PORT_DESC'=>'مثال: 389 للاتصال غير الآمن وStartTLS. 636 لـ LDAPS',
     'LBL_LDAP_GROUP_NAME'=>'اسم المجموعة:',
 	'LBL_LDAP_GROUP_NAME_DESC'=>'مثال cn=sugarcrm',
     'LBL_LDAP_USER_DN_DESC'=>'مثال: ou=people،dc=مثال،dc=com',
@@ -472,6 +483,8 @@ $mod_strings = array (
     'LBL_MANAGE_RELATE_DENORMALIZATION_PRE_CHECK_RESULTS' => 'نتائج الفحص المسبق',
     'LBL_MANAGE_RELATE_DENORMALIZATION_FIELDS_FOR' => 'حقول لـ',
     'LBL_MANAGE_RELATE_DENORMALIZATION_JOB_TITLE' => 'وظيفة مجدولة',
+    'LBL_SUGAR_OUTFITTER' => 'SugarOutfitters',
+    'LBL_SUGAR_OUTFITTER_TOOLTIP' => 'استعرض SugarOutfitters، وهو سوق SugarCRM، لتعثر على وظائف إضافية يمكنها أن تضيف قدرات جديدة إلى مثيلك من Sugar',
 
     'LBL_MANUAL_VALIDATION_TXT' => 'التحقق اليدوي',
     'LBL_MANUAL_VALIDATION'=>'
@@ -554,6 +567,9 @@ $mod_strings = array (
     'LBL_MODULE_LICENSE'                        => 'يُرجى قراءة اتفاقية الترخيص التالية:',
     'LBL_MODULE_LOADER_TITLE' => 'أداة تحميل الوحدة',
     'LBL_MODULE_LOADER' => 'إضافة أو إزالة وحدات Sugar، والسمات، وحزم اللغة، وملاحق أخرى',
+    'LBL_MODULE_LOADER_LICENSE_WARNING' => 'القدرة على <a href="{0}">تحميل</a> حزم الملفات المخصصة ليست '
+        . 'متوفرة لـ {1}. لمعرفة أنواع التراخيص التي تتضمن وظيفة إداة تحميل الوحدة هذه، ارجع إلى وثيقة '
+        . '<a href="{2}">مصفوفة أنواع التراخيص</a>.',
     'LBL_MODULE_NAME' => 'الإدارة',
     'LBL_MODULE_NAME_SINGULAR' => 'الإدارة',
     'LBL_MODULE_TITLE' => 'الإدارة: الصفحة الرئيسية',
@@ -668,8 +684,6 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'إعادة إنشاء الملفات المجمعة JS',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'إعادة السلسلة واستبدال ملفات المجموعة الموجودة بأحدث إصدارات ملفات المجموعة',
-    'LBL_REPAIR_JS_FILES_TITLE' => 'إصلاح ملفات javascript',
-    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'إصلاح ملفات JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'معالجة الملفات. قد يستغرق هذا عدة دقائق.  الانتقال من هذه الصفحة لن يلغي المعالجة، لذا يمكنك الانتقال كما تشاء أو الانتظار للتأكيد...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'تمت معالجة الملفات.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'إصلاح حقول الأحرف غير الصغيرة',
@@ -911,7 +925,7 @@ $mod_strings = array (
     'LBL_VALIDATION_FILE'=>'ملف مفتاح التحقق',
     'LBL_VALIDATION_SUCCESS_DATE'=>'آخر التحققات الناجحة: ',
 	'LBL_VISIBLE_PANELS'=>'اللوحات الفرعية المعروضة',
-    'LBL_VISIBLE_TABS'=>'الوحدات المعروضة',
+    'LBL_AVAILABLE_MODULES' => 'الوحدات المتاحة',
     'LBL_WORKFLOW_DESC'                     => 'إدارة شروط سير العمل، والتعديل، والإجراءات',
     'LBL_WORKFLOW_TITLE'                    => 'إدارة سير العمل',
     'LBL_WORKBENCH' => 'منضدة عمل',
@@ -956,12 +970,10 @@ $mod_strings = array (
     'WARN_LICENSE_SEATS'=>  "<b>تحذير:</b>هناك ",
     'WARN_LICENSE_SEATS2' => " مستخدمون نشطون بينما اشتراكك يسمح فقط بـ ",
     'WARN_LICENSE_SEATS3' =>
-        ". <p class=\"error\">الرجاء إلغاء تنشيط بعض المستخدمين أو اتصل بشريكك أو مندوب المبيعات،"
-        . " أو أرسل بريدًا إلكترونيًا إلى sales@sugarcrm.com <a href='mailto:sales@sugarcrm.com'></a>.</p>"
-        . "<p class=\"error\">للحصول على مزيد من المعلومات، راجع المقالة "
-        . "<a target=\"_blank\" "
-        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
-        . "فهم أنواع المستخدمين وتراخيص Sugar</a>.</p>",
+        ". <p class=\"error\">الرجاء إلغاء تنشيط بعض المستخدمين أو <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>اتصل بنا</a> لإضافة مزيد من التراخيص.</p>",
+    'WARN_LICENSE_SEATS3_IDM' =>
+        ". <p class=\"error\">الرجاء إلغاء تنشيط بعض المستخدمين في <a target=\"_blank\" href='%s'>إعدادات SugarCloud</a> "
+        . "أو <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>اتصل بنا</a> لإضافة مزيد من التراخيص.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>تحذير:</b> وصل عدد المستخدمين النشطين بالفعل إلى عدد التراخيص الأقصى المسموح به: ",
     'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>تحذير:</b> لن تستطيع إنشاء مزيد من المستخدمين النشطين."
         . " الرجاء شراء المزيد من الاشتراكات.",
@@ -969,7 +981,7 @@ $mod_strings = array (
     'WARN_LICENSE_TYPE_SEATS_EDIT_MAXED' => 'لا يمكنك إنشاء %s مستخدمين إضافيين. الرجاء شراء المزيد من الاشتراكات.',
     'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>تحذير:</b> لن تستطيع إنشاء مستخدمين نشطين إضافيين."
         . " الرجاء شراء المزيد من الاشتراكات.",
-    'WARN_REPAIR_CONFIG' => '<b>تحذير:</b> يحتاج ملف config.php إلى الإصلاح. الرجاء استخدام البرنامج النصي <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>إعادة إنشاء ملف Config</a> في صفحة "الإصلاح" في جزء "المسؤول" لإصلاح ملف التكوين.',
+    'WARN_REPAIR_CONFIG' => '<b>تحذير:</b> يحتاج ملف config.php إلى إعادة الإصلاح.  الرجاء استخدام البرنامج النصي <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>إعادة إنشاء ملف Config</a> في صفحة الإصلاح في منطقة المسؤول لإصلاح ملف التكوين.',
     'WARN_UPGRADE_APP'=> "يتوفر الآن إصدار محدث من التطبيق. ",
     'WARN_UPGRADE' => '<b>تحذير:</b> يُرجى ترقية ',
     'WARN_UPGRADENOTE' => 'ملاحظة: ',
@@ -1043,11 +1055,11 @@ $mod_strings = array (
 
 'ML_PACKAGE_SCANNING'=> 'فحص {PACKAGE}',
 'ML_INSTALLATION_FAILED'=> 'فشل التثبيت!',
-'ML_PACKAGE_NOT_CONFIRM'=> 'الحزمة التي تحاول تثبيتها لا تتفق مع السياسات الموضوعة الخاصة بـ Sugar Open Cloud أو الموضوعة بواسطة مسؤول النظام الخاص بك.',
+    'ML_PACKAGE_NOT_CONFIRM' => 'الحزمة التي تحاول تثبيتها لا تتفق مع السياسات الموضوعة من SugarCloud أو الموضوعة بواسطة مسؤول النظام الخاص بك.',
 'ML_TO_RESOLVE'=>'لإصلاح هذه المشكلة:',
-'ML_OBTAIN_NEW_PACKAGE'=>'يجب على عملاء Sugar Open Cloud الحصول على حزمة جديدة من موفر الحزمة الذي يعالج المشاكل الموصوفة أدناه.',
+    'ML_OBTAIN_NEW_PACKAGE' => 'يجب على عملاء SugarCloud الحصول على حزمة جديدة تعالج المشاكل الواردة أدناه من موفر الحزمة.',
 'ML_RELAX_LOCAL'=>'في حالة تشغيل Sugar بشكل محلي، يمكنك تخفيف قيود أداة تحميل الوحدة للسماح بتثبيت الحزمة.',
-'ML_SUGAR_LOADING_POLICY'=>'توجد سياسات تحميل حزمة Sugar Open Cloud مفصلة في',
+    'ML_SUGAR_LOADING_POLICY'=>'توجد سياسات SugarCloud مفصلة في',
 'ML_SUGAR_KB'=>'قاعدة معارف SugarCRM',
 'ML_SUGAR_DZ'=>'منطقة مطور SugarCRM',
 'ML_PKG_SCAN_GUIDE'=>'دليل نهج مسح الحزمة',
@@ -1253,6 +1265,7 @@ $mod_strings = array (
     'LBL_ASYNC_CALL_FAILED' => 'فشل اتصال غير متزامن',
     'LBL_REPAIRXSSEXECUTE_FAILED' => 'فشل: لم يتم تعريف Bean أو ID',
     'LBL_DIAGNOSTICS_ERROR_SUGARLOG' => 'لا يمكن نسخ sugarcrm.log إلى {0}<br>',
+    'LBL_DIAGNOSTICS_ERROR_MLPLOG' => 'تعذر نسخ package_install.log إلى {0}<br>',
     'LBL_DIAGNOSTICS_ERROR_PHPINFO' => 'تعذرت الكتابة إلى ملف {0}phpinfo.html<br>',
     'LBL_DIAGNOSTICS_ERROR_LISTBEANFILES' => 'تعذرت الكتابة إلى ملف {0}beanFiles.html<br>',
     'LBL_DIAGNOSTICS_ERROR_MD5' => 'تعذر نسخ ملفات .md5 إلى {0}<br>تخطي تحققات md5.<br>',
@@ -1364,10 +1377,28 @@ $mod_strings = array (
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT' => 'تمثل هذه الإعدادات توجيهات سياسة أمان المحتوى (CSP) القياسية المستخدمة بواسطة مستعرضات الويب للتحكم في الموارد المسموح بتحميلها على صفحة ويب. لمزيد من المعلومات عن قيم وتنسيقات الحقول المقبولة، ارجع إلى وثائق <a href={{linkToDocumentation}} target="_blank">النظام</a>. بمجرد تحديث إعدادات CSP، سيحتاج المستخدمون إلى تحديث مستعرضاتهم لتسري التغييرات.',
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT_ADVANCED' => 'هذه الإعدادات موجهة للمستخدمين أصحاب الفهم المتقدم لتوجيهات سياسة أمان المحتوى (CSP) الفردية. يتم تعريف توجيه &#39;img-src&#39; في Sugar افتراضيًا والذي يسمح بتحميل كل الصور عبر HTTP أو HTTPS. لمزيد من المعلومات عن قيم وتنسيقات الحقول المقبولة، ارجع إلى وثائق <a href={{linkToDocumentation}} target="_blank">النظام</a>. بمجرد تحديث إعدادات CSP، سيحتاج المستخدمون إلى تحديث مستعرضاتهم لتسري التغييرات.',
     //Maps
+    'LBL_MAPS_LOGGER_START_DATE' => 'تاريخ بدء السجلات:',
+    'LBL_MAPS_LOGGER_DETAILED_LOGS' => 'السجلات التفصيلية',
+    'LBL_MAPS_LOGGER_NO_LOGS_AVAILABLE' => 'لا تتوفر سجلات.',
+    'LBL_MAPS_LOGGER_ENABLE_MODULES_FOR_LOG' => 'تمكين السجلات للوحدات:',
+    'LBL_MAPS_LOGGER_LOG_LEVEL' => 'حدد مستوى السجل...',
+    'LBL_MAPS_LOGGER_LOG_TYPE' => 'مستوى السجل:',
+    'LBL_MAPS_LOGGER_LOG_ALL_MESSAGES' => 'كل الرسائل',
+    'LBL_MAPS_LOGGER_LOG_ERROR' => 'الأخطاء',
+    'LBL_MAPS_LOGGER_LOG_SUCCESS' => 'نجاح',
+    'LBL_MAPS_LOGGER_LBL_MODULE' => 'الوحدة',
+    'LBL_MAPS_LOGGER_LBL_NAME' => 'الاسم',
+    'LBL_MAPS_LOGGER_LBL_STATUS' => 'الحالة',
+    'LBL_MAPS_LOGGER_LBL_GEOCODE' => 'مرمز جعرافيًا',
+    'LBL_MAPS_LOGGER_YES' => 'نعم',
+    'LBL_MAPS_LOGGER_NO' => 'لا',
+    'LBL_MAPS_LOGGER_OF' => 'من',
     'LBL_MAPS_ADMIN_CONFIG_TITLE' => 'الخرائط',
+    'LBL_MAPS_ADMIN_LOG_VIEWER' => 'عارض السجلات',
     'LBL_MAPS_ADD_NEW_MODULE_TO_GEOCODE' => 'إضافة وحدة جديدة للترميز الجغرافي',
     'LBL_MAPS_SELECT_NEW_MODULE_TO_GEOCODE' => 'تحديد وحدة...',
     'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION' => 'تكوين الخرائط',
+    'LBL_MAPS_ADMIN_CONFIG_LOG_VIEWER_DESCRIPTION' => 'الوصول إلى سجلات الترميز الجغرافي',
     'LBL_MAPS_LOG_LEVEL_TITLE' => 'مستوى السجل',
     'LBL_MAPS_LOG_LVL_FATAL' => 'فادح',
     'LBL_MAPS_LOG_LVL_DEBUG' => 'تصحيح',
@@ -1429,9 +1460,12 @@ $mod_strings = array (
     'LBL_CLOUD_DRIVE_DESCRIPTION' => 'قم بتكوين إعدادات المسار الافتراضي لمحركات السحابة.',
     'LBL_GOOGLE_DRIVE_NAME' => 'Google Drive',
     'LBL_GOOGLE_DRIVE_TOOLTIP' => 'تكوين المسارات الافتراضية لـ Google Drive',
+    'LBL_DROPBOX_DRIVE' => 'Dropbox Drive',
+    'LBL_DROPBOX_DRIVE_TOOLTIP' => 'تكوين المسارات الافتراضية لـ Dropbox Drive',
     'LBL_GOOGLE_DRIVE_SAVE_BUTTON' => 'حفظ',
     'LBL_SELECT_ROOT_PATH' => 'تحديد المسار الجذر',
     'LBL_REMOVE_ROOT_PATH' => 'إزالة المسار الجذر',
+    'LBL_ROOT_PATH_REMOVED' => 'تمت إزالة المسار الجذر.',
     'LBL_VALIDATE_ROOT_PATH' => 'التحقق من صحة المسار الجذر',
     'LBL_PATHS_FOR_RECORD_VIEW' => 'مسارات طريقة عرض السجل',
     'LBL_DEFAULT_STARTING_PATH' => 'مسار البدء الافتراضي',
@@ -1445,14 +1479,16 @@ $mod_strings = array (
     'LBL_MICROSOFT_ONEDRIVE_TOOLTIP' => 'تكوين المسارات الافتراضية لـ Microsoft Onedrive',
     'LBL_DRIVE_PATH_CONFIG' => 'تكوين مسار المحرك',
     'LBL_DRIVE_ROOT_PATH' => 'المسار الجذر',
+    'LBL_FIELDS_VARIABLE' => 'متغيرات الحقول',
+    'LBL_UNABLE_TO_RETRIEVE_ROOT_PATH' => 'تتعذر استعادة المسار الجذر',
     'LBL_HINT_NAME' => 'حقول التلميح',
     'LBL_HINT_DESCRIPTION' => 'قم بتكوين الحقول المعروضة في لوحة "تلميح" والمحسنة من Hint.',
-    'LBL_HINT_SECTION_HEADER' => 'تلميح',
-    'LBL_HINT_SECTION_DESCRIPTION' => 'تكوين إعدادات Hint',
+    'LBL_HINT_SECTION_HEADER' => 'Sugar Hint',
+    'LBL_HINT_SECTION_DESCRIPTION' => 'تكوين إعدادات Sugar Hint',
 
-    'LBL_HINT_CONFIG' => 'تكوين Hint',
+    'LBL_HINT_CONFIG' => 'تكوين Sugar Hint',
     'LBL_HINT_CONFIG_NAME' => 'تكوين Hint',
-    'LBL_HINT_CONFIG_SAVED' => 'تم حفظ إعدادات تكوين Hint.',
+    'LBL_HINT_CONFIG_SAVED' => 'تم حفظ إعدادات تكوين Sugar Hint.',
     'LBL_HINT_CONFIG_DESCRIPTION' => 'تحديث إعدادات Hint.',
     'LBL_HINT_CONFIG_LOGGER_SECTION_HEADER' => 'مسجل Hint',
 
@@ -1460,7 +1496,24 @@ $mod_strings = array (
     'LBL_HINT_RESYNC_DESCRIPTION' => 'أعد المزامنة مع خدمة Hint Insights لتصحيح المشكلات مع الإشعارات، يما في ذلك التغييرات على التفضيلات وعناوين البريد الإلكتروني التي لم يسر مفعولها.',
 
     'LBL_HINT_UNINSTALL' => 'إلغاء التثبيت',
-    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'قم بإلغاء تثبيت Hint، بما في ذلك تعطيل الإشعارات من Hint Insights.',
+    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'قم بإلغاء تثبيت Sugar Hint، ويشمل ذلك تعطيل الإشعارات من Sugar Hint Insights.',
 
     'LBL_HINT_CONFIG_NOTIFICATIONS_HEADER' => 'الإشعارات',
+
+    'LBL_DOCUSIGN_GROUP' => 'DocuSign',
+    'LBL_DOCUSIGN_NAME' => 'الإعدادات',
+    'LBL_DOCUSIGN_TOOLTIP' => 'تكوين DocuSign',
+    'LBL_DOCUSIGN_DESCRIPTION' => 'تكوين ميزات DocuSign',
+    'LBL_SUGAR_MAPS' => 'خرائط Sugar',
+    'LBL_CLOUD_DRIVE' => 'محرك السحابة',
+
+    // Sugar Automate
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_TITLE' => 'إعدادات Sugar Automate',
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_DESC' => 'إعداد حزمة Sugar Automate',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'القوالب',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'إدارة القوالب',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_NAME' => 'تكوين الوحدات',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_DESC' => 'تكوين الوحدات المُمكّنة',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'القوالب',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'إدارة القوالب',
 );

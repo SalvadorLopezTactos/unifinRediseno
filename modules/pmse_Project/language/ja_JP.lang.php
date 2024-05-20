@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'フォームボタン',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => '承認/却下',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'ルーティング',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'DocuSignに送信',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => '他のルーティングオプション',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'レコードオーナーを変更',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'チーム',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'ドキュメントマージ',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => '選択...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'PDF にドキュメントマージ',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'マージされたドキュメントをEメールで送信する',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'ドキュメントマージ',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => '収束ゲートウェイタイプが、受信フローのゲートウェイタイプと一致しません。',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => '分岐ゲートウェイは、プロセスを複数のブランチに展開します。収束ゲートウェイを使用して、これらのブランチを1個のパスに再収束するときは、ブランチを作成するために使用された分岐ゲートウェイのタイプにあわせて正しいタイプの収束ゲートウェイを使用する必要があります。の1 つのパスにこれらの枝を再収束、枝を作成に使用された分岐のゲートウェイの種類によって収束ゲートウェイの適切な型する必要があります使用します。排他的またはイベントベースの分岐ゲートウェイで作成されたブランチには、排他的収束ゲートウェイを使用して収束します。並列または包括的分岐ゲートウェイで作成されたブランチには、並列収束ゲートウェイを使用して収束します。',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'モジュールフィールド',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'モジュール関連',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'ユーザー',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => '役割',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'チーム',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'フォームアクティビティ',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'ビジネスルール',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'ビジネスルールのアクション',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Eメールテンプレート',
 );

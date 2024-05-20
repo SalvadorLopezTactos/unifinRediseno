@@ -55,7 +55,10 @@
                     if (dashlet.getComponent('cloud-drive')) {
                         let _dashlet = dashlet.getComponent('cloud-drive');
                         if (_dashlet && _dashlet.options.driveType === type) {
-                            return _dashlet.cid;
+                            return {
+                                cid: _dashlet.cid,
+                                pathFolders: _dashlet.pathFolders,
+                            };
                         }
                     }
                 }
@@ -66,7 +69,11 @@
             /**
              * trigger a reload on the dashlet
              */
-            syncDriveDashlet: function(dashletCid) {
+            syncDriveDashlet: function(dashletCid, result) {
+                app.alert.show('file-upload', {
+                    level: 'info',
+                    messages: app.lang.get(result.message),
+                });
                 app.events.trigger(`${dashletCid}:cloud-drive:reload`);
             },
         });

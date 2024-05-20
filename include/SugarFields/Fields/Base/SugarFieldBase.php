@@ -18,6 +18,7 @@
  *
  * @property Sugar_Smarty $ss
  */
+#[AllowDynamicProperties]
 class SugarFieldBase {
     /**
      * A simple error property to be accessed by calling code for child object
@@ -27,7 +28,8 @@ class SugarFieldBase {
      * @var string
      */
     public $error;
-    var $hasButton = false;
+    public $hasButton = false;
+
     protected static $base = array();
 
     protected $needsSecondaryQuery = false;
@@ -45,6 +47,8 @@ class SugarFieldBase {
      * @var array
      */
     protected $options = array();
+
+    protected $type;
 
     public function __construct($type)
     {
@@ -245,7 +249,7 @@ class SugarFieldBase {
     {
     	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
 
-        $formName = isset($displayParams['formName']) ? $displayParams['formName'] : '';
+        $formName = $displayParams['formName'] ?? '';
         return $this->fetch($this->findTemplate($view, $formName));
     }
 
@@ -476,7 +480,7 @@ class SugarFieldBase {
     		return '';
     	}
 
-    	return isset($args[$key]) ? $args[$key] : '';
+        return $args[$key] ?? '';
     }
 
     function getQueryLike() {

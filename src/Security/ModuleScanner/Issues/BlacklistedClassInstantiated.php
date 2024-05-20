@@ -26,6 +26,6 @@ final class BlacklistedClassInstantiated implements Issue
 
     public function getMessage(): string
     {
-        return sprintf('Code attempted to instantiate blacklisted class "%s" on line %s', $this->class, $this->line);
+        return sprintf('Code attempted to instantiate denylisted class "%s" on line %s', $this->class, $this->line);
     }
 }

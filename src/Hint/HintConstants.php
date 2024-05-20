@@ -18,11 +18,11 @@ use Sugarcrm\Sugarcrm\Hint\Queue\Event\InstanceResyncCompletedEvent;
 
 class HintConstants
 {
-    const HINT_CONFIG_GEO = 'HintConfigGeo';
-    const HINT_CONFIG_NOTIFICATION = 'HintConfigNotification';
-    const HINT_CONFIG_HARD_UNINSTALL = 'HintConfigHardUninstall';
+    public const HINT_CONFIG_GEO = 'HintConfigGeo';
+    public const HINT_CONFIG_NOTIFICATION = 'HintConfigNotification';
+    public const HINT_CONFIG_HARD_UNINSTALL = 'HintConfigHardUninstall';
 
-    const HINT_CONFIG_MAP = [
+    public const HINT_CONFIG_MAP = [
         self::HINT_CONFIG_GEO => [
             'name' => 'HintGeo',
             'platform' => 'base',
@@ -43,39 +43,39 @@ class HintConstants
     ];
 
     // Metadata for Hint field View defs
-    const DEFAULT_HINT_ACCOUNTS_BASIC_PANEL = [
+    public const DEFAULT_HINT_ACCOUNTS_BASIC_PANEL = [
         'hint_account_size', 'hint_account_industry', 'hint_account_location', 'annual_revenue', 'description',
     ];
 
-    const DEFAULT_HINT_ACCOUNTS_EXPANDED_PANEL = [
+    public const DEFAULT_HINT_ACCOUNTS_EXPANDED_PANEL = [
         'hint_account_naics_code_lbl', 'sic_code', 'hint_account_fiscal_year_end', 'hint_account_founded_year',
         'hint_account_facebook_handle', 'twitter', 'hint_account_industry_tags',
     ];
 
-    const DEFAULT_HINT_CONTACTS_BASIC_PANEL = [
+    public const DEFAULT_HINT_CONTACTS_BASIC_PANEL = [
         'phone_work', 'phone_mobile', 'phone_other', 'email',
     ];
 
-    const DEFAULT_HINT_CONTACTS_EXPANDED_PANEL = [
+    public const DEFAULT_HINT_CONTACTS_EXPANDED_PANEL = [
         'hint_education', 'hint_education', 'hint_job_2', 'hint_facebook', 'hint_twitter',
     ];
 
-    const DEFAULT_HINT_LEADS_BASIC_PANEL = [
+    public const DEFAULT_HINT_LEADS_BASIC_PANEL = [
         'phone_work', 'phone_mobile', 'phone_other', 'email',
     ];
 
-    const DEFAULT_HINT_LEADS_EXPANDED_PANEL = [
+    public const DEFAULT_HINT_LEADS_EXPANDED_PANEL = [
         'hint_education', 'hint_education', 'hint_job_2', 'hint_facebook', 'hint_twitter',
     ];
 
-    const DEFAULT_ACCOUNTS_FIELDS = [
+    public const DEFAULT_ACCOUNTS_FIELDS = [
         'twitter', 'sic_code', 'description', 'annual_revenue', 'hint_account_size',
         'hint_account_industry', 'hint_account_location', 'hint_account_founded_year', 'hint_account_industry_tags',
         'hint_account_naics_code_lbl', 'hint_account_sic_code_label', 'hint_account_facebook_handle',
         'hint_account_fiscal_year_end', 'hint_account_annual_revenue',
     ];
 
-    const DEFAULT_CONTACTS_FIELDS = [
+    public const DEFAULT_CONTACTS_FIELDS = [
         'title', 'phone_work', 'phone_mobile', 'hint_photo', 'phone_other', 'hint_job_2', 'hint_twitter',
         'hint_facebook', 'hint_education', 'hint_account_size', 'hint_industry_tags', 'hint_account_website',
         'hint_account_industry', 'hint_account_location', 'hint_account_description', 'hint_account_founded_year',
@@ -84,7 +84,7 @@ class HintConstants
         'hint_education_2',
     ];
 
-    const DEFAULT_LEADS_FIELDS = [
+    public const DEFAULT_LEADS_FIELDS = [
         'title', 'account_name', 'phone_work', 'hint_photo', 'phone_mobile', 'phone_other', 'hint_job_2',
         'hint_twitter', 'hint_facebook', 'hint_education', 'hint_account_size', 'hint_industry_tags',
         'hint_account_website', 'hint_account_industry', 'hint_account_location', 'hint_account_description',

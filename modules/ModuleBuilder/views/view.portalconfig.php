@@ -76,10 +76,10 @@ class ViewPortalConfig extends SugarView
     {
         if (is_array($field)) {
             foreach ($field as $key => $value) {
-                $field[$key] = html_entity_decode($value);
+                $field[$key] = html_entity_decode($value, ENT_COMPAT);
             }
         } else {
-            $field = html_entity_decode($field);
+            $field = html_entity_decode($field, ENT_COMPAT);
         }
         return $field;
     }

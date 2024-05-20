@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Zorunlu değer eksik',
     'LBL_ERROR_SYNC_USERS' => 'Outlook ile senkronize etmek için geçersiz bir değer:',
     'LBL_ID_EXISTS_ALREADY' => 'ID zaten bu tabloda mevcut',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY zaten bu tabloda mevcut',
     'LBL_ASSIGNED_USER' => 'Eğer kullanıcı yok ise, şu anki kullanıcıyı kullan',
     'LBL_SHOW_HIDDEN' => 'Normal koşullarda Veri Yükleme yapılamayacak alanları göster',
     'LBL_UPDATE_RECORDS' => 'Verileri Yüklemek yerine, kayıtları güncelle (Geri Almak mümkün değil)',

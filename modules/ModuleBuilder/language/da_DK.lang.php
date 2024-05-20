@@ -818,15 +818,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Opret en formel til at bestemme, om dette felt er påkrævet i layouts.<br/>"
-    . "Påkrævede felter vil følge formlen i den browser-baserede mobilvisning, <br/>"
-    . "men vil ikke følge formlen i de indfødte programmer, som Sugar Mobile til iPhone.<br/>"
-    . "De vil ikke følge formlen i Sugar Self-Service-portalen.",
+    'LBL_POPHELP_REQUIRED'=>'Felter, der er betinget påkrævet, er ikke tilgængelige til brug i de følgende SugarBPM handlingstyper: Tilføj Tilknyttet Post, Skift Felt. Fjern venligst teksten "Påkrævet hvis" for at bruge feltet i disse handlinger til procesdefinitioner',
 'LBL_POPHELP_READONLY'=>"Opret en formel til at bestemme, om dette felt er skrivebeskyttet i layouts.<br/>"
-        . "Skrivebeskyttede felter følger formlen i den browserbaserede mobilvisning, <br/>"
-        . "men følger ikke formlen i de indfødte apps, f.eks. Sugar Mobile til iPhone. <br/>"
-        . "De følger ikke formlen i Sugar Self-Service-portalen.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Vælg dette for at bruge dette felt, når du søger efter poster ved hjælp af Global søgning i dette modul.',
+        . "Skrivebeskyttede felter vil følge formlen i den browser-baserede mobilvisning, <br/>"
+        . "men vil ikke følge formlen i de indfødte programmer, som Sugar Mobile til iPhone.<br/>"
+        . "De vil ikke følge formlen i Sugar Self-Service-portalen.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Vælg at bruge dette felt ved søgning efter poster ved hjælp af Global Søgning på dette modul.',
 //Revert Module labels
 'LBL_RESET' => 'Nulstil',
 'LBL_RESET_MODULE' => 'Nulstil modul',
@@ -863,6 +860,7 @@ $mod_strings = array(
                 'decimal'=>'Decimal',
                 'autoincrement' => 'auto-increment',
                 'actionbutton' => 'Handlingsknap',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Ofte brugte etiketter",

@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => '建立人',
   'LBL_EDIT_LAYOUT' => '編輯配置' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => '僅限管理員',
-  'LBL_CURRENCY_DEFAULT' => '美元 (預設值)',
-
+  'LBL_CURRENCY_DEFAULT' => '系統貨幣（預設值）',
 );
 ?>

@@ -11,6 +11,8 @@
  */
 $dictionary['Team'] = array(
     'table' => 'teams',
+    'color' => 'teal',
+    'icon' => 'sicon-team-perm',
     'archive' => false,
     'fields' => array(
         'name' => array(

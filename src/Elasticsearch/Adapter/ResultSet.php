@@ -88,6 +88,7 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $current = new Result($this->resultSet->current());
@@ -100,6 +101,7 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->resultSet->key();
@@ -108,23 +110,23 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
-        return $this->resultSet->next();
+        $this->resultSet->next();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
-        return $this->resultSet->rewind();
+        $this->resultSet->rewind();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->resultSet->valid();
     }
@@ -132,7 +134,7 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return $this->resultSet->count();
     }

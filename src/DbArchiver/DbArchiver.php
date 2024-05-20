@@ -12,7 +12,11 @@
 
 namespace Sugarcrm\Sugarcrm\DbArchiver;
 
+use BeanFactory;
+use DataArchiver;
 use Doctrine\DBAL\Connection;
+use Email;
+use Document;
 use RuntimeException;
 
 /**
@@ -24,6 +28,11 @@ class DbArchiver
      * Archive Limit value
      */
     private const ARCHIVE_LIMIT = 10000;
+
+    /**
+     * Size of chunks for internal operations, like attached files or related records removal
+     */
+    private const ID_CHUNK_SIZE = 100;
 
     /**
      * @var string
@@ -212,7 +221,7 @@ class DbArchiver
      * @throws RuntimeException
      * @throws \SugarQueryException
      */
-    public function performProcess($where, $type = \DataArchiver::PROCESS_TYPE_ARCHIVE)
+    public function performProcess($where, $type = DataArchiver::PROCESS_TYPE_ARCHIVE)
     {
         // Return the results of a query to the database using the given where clause object
         $resultsArray = $this->getTableResults($where);
@@ -237,7 +246,7 @@ class DbArchiver
         $this->conn = \DBManagerFactory::getConnection();
 
         // Call this method in case the archive table hasnt been created yet
-        if ($type === \DataArchiver::PROCESS_TYPE_ARCHIVE) {
+        if ($type === DataArchiver::PROCESS_TYPE_ARCHIVE) {
             $this->createArchiveTable();
             $this->archive($results, $cstmResults);
             if (isset($casIds) && count($casIds) > 0) {
@@ -245,12 +254,29 @@ class DbArchiver
             }
         }
 
+        if ($this->getBean()->getModuleName() == 'Notes') {
+            foreach ($this->getNotesAttachments($ids) as $row) {
+                $ids[] = $row['id'];
+            }
+            //Delete files before DB rows, otherwise some file names will be unavailable
+            $this->deleteFiles($ids);
+        }
+
+        // Emails require some extra cleanup
+        if ($this->getBean() instanceof Email && $type === DataArchiver::PROCESS_TYPE_DELETE) {
+            $this->cleanupEmails($ids);
+        }
+
+        if ($this->getBean() instanceof Document && $type === DataArchiver::PROCESS_TYPE_DELETE) {
+            $this->cleanupDocuments($ids);
+        }
+
         // Deletion always occurs
         $this->delete($ids);
 
         // Do cascading bpm deletion if this is from the bpm inbox table
         if (isset($casIds) && count($casIds) > 0) {
-            $this->cascadeBpmProcess($casIds, \DataArchiver::PROCESS_TYPE_DELETE);
+            $this->cascadeBpmProcess($casIds, DataArchiver::PROCESS_TYPE_DELETE);
         }
 
         // Delete from custom table if there is one
@@ -260,7 +286,7 @@ class DbArchiver
 
         // Delete relationships if hard delete, otherwise, leave them alone
         // Only delete relationships if we are not working with the bpm inbox table
-        if ($type === \DataArchiver::PROCESS_TYPE_DELETE && !isset($casIds)) {
+        if ($type === DataArchiver::PROCESS_TYPE_DELETE && !isset($casIds)) {
             $this->deleteRelationships($ids);
 
             // Delete audit table entries if hard delete, otherwise, leave them alone
@@ -268,7 +294,7 @@ class DbArchiver
                 $this->delete($ids, $this->getBean()->get_audit_table_name(), 'parent_id');
             }
         // Hard delete process with the bpm inbox table
-        } elseif ($type === \DataArchiver::PROCESS_TYPE_DELETE && isset($casIds) && count($casIds) > 0) {
+        } elseif ($type === DataArchiver::PROCESS_TYPE_DELETE && isset($casIds) && count($casIds) > 0) {
             $this->cascadeBpmProcess($casIds, $type);
         }
 
@@ -358,7 +384,7 @@ class DbArchiver
      * @throws RuntimeException
      * @throws Doctrine\DBAL\Exception
      */
-    private function delete(array $ids, string $table = null, string $id_name = 'id')
+    private function delete(array $allIds, string $table = null, string $id_name = 'id')
     {
         // Grab table name to use in queries
         if (is_null($table)) {
@@ -368,12 +394,14 @@ class DbArchiver
         // Single query to delete all ids passed
         $builder = $this->conn->createQueryBuilder();
 
-        $builder->delete($table)
-            ->where($builder->expr()->in($id_name, ':ids'))
-            ->setParameter('ids', $ids, Connection::PARAM_STR_ARRAY);
+        foreach (array_chunk($allIds, static::ID_CHUNK_SIZE) as $ids) {
+            $builder->delete($table)
+                ->where($builder->expr()->in($id_name, ':ids'))
+                ->setParameter('ids', $ids, Connection::PARAM_STR_ARRAY);
 
-        // Execute query builder
-        $builder->execute();
+            // Execute query builder
+            $builder->execute();
+        }
 
         $this->getBean()->db->optimizeTable($table);
     }
@@ -420,8 +448,8 @@ class DbArchiver
 
                 // Grab the id label name associated with the list of ids we are working with as it corresponds to the
                 // relationship table
-                $id_name = $side === 'LHS' ? $bean->$name->relationship->def['join_key_lhs'] :
-                    $bean->$name->getRelationshipObject()->def['join_key_rhs'];
+                $id_name = $side === 'LHS' ? $bean->$name->relationship->def['join_key_lhs'] ?? null :
+                    $bean->$name->getRelationshipObject()->def['join_key_rhs'] ?? null;
 
                 // For certain relationships this will not exist, and thus we dont want to attempt to delete, as it will
                 // throw an error
@@ -447,13 +475,13 @@ class DbArchiver
         $flowTable = 'pmse_bpm_flow';
         $threadModule = 'pmse_BpmThread';
         $threadTable = 'pmse_bpm_thread';
-        if ($type === \DataArchiver::PROCESS_TYPE_DELETE) {
+        if ($type === DataArchiver::PROCESS_TYPE_DELETE) {
             // Get pmse_bpmFlow table and delete rows corresponding to casID
             $this->delete($casIds, $flowTable, 'cas_id');
 
             // Get pmse_bpmThread table and delete rows corresponding to casID
             $this->delete($casIds, $threadTable, 'cas_id');
-        } elseif ($type === \DataArchiver::PROCESS_TYPE_ARCHIVE) {
+        } elseif ($type === DataArchiver::PROCESS_TYPE_ARCHIVE) {
             $flowBean = \BeanFactory::newBean($flowModule);
             $threadBean = \BeanFactory::newBean($threadModule);
             $this->createArchiveTable($flowBean);
@@ -614,5 +642,122 @@ class DbArchiver
         $q = new \SugarQuery();
         $w = $q->where()->equals('id', $id);
         $this->performProcess($w);
+    }
+
+    private function getNotesAttachments($ids)
+    {
+        $attachmentsQuery = new \SugarQuery();
+        $attachmentsQuery->select(['id']);
+        $attachmentsQuery->from($this->getBean());
+        $attachmentsQuery->where()->in('note_parent_id', $ids);
+        return $attachmentsQuery->execute();
+    }
+
+    private function deleteFiles($ids)
+    {
+        foreach ($ids as $file) {
+            \UploadFile::unlink_file($file);
+        }
+    }
+
+    private function cleanupEmails(array $allEmailIds): void
+    {
+        foreach (array_chunk($allEmailIds, static::ID_CHUNK_SIZE) as $emailIds) {
+            // Remove linked Notes and Notes files
+            $this->cleanupEmailNotes($emailIds);
+
+            // Remove all related embedded_filed
+            $this->cleanupEmailTextEmbeddedFiles($emailIds);
+
+            // Remove attached email_text records
+            $this->cleanupEmailText($emailIds);
+        }
+    }
+
+    private function cleanupEmailNotes(array $emailIds): void
+    {
+        $notesTable = BeanFactory::getBean('Notes')->getTableName();
+        $builder = $this->conn->createQueryBuilder();
+        $builder->select('id')
+            ->from($notesTable)
+            ->where($builder->expr()->in('email_id', ':ids'))
+            ->setParameter('ids', $emailIds, Connection::PARAM_STR_ARRAY);
+        $fileIds = $builder->executeQuery()->fetchFirstColumn();
+
+        $notesTable = BeanFactory::getBean('Notes')->getTableName();
+        $builder = $this->conn->createQueryBuilder();
+        $builder->delete($notesTable)
+            ->where($builder->expr()->in('email_id', ':ids'))
+            ->setParameter('ids', $emailIds, Connection::PARAM_STR_ARRAY);
+        $builder->executeStatement();
+        $this->getBean()->db->optimizeTable($notesTable);
+
+        $this->deleteFiles($fileIds);
+    }
+
+    private function cleanupEmailTextEmbeddedFiles(array $emailIds): void
+    {
+        $emailTextTable = BeanFactory::getBean('EmailText')->getTableName();
+        $embeddedFilesTable = BeanFactory::getBean('EmbeddedFiles')->getTableName();
+        $builder = $this->conn->createQueryBuilder();
+        $builder->select('description_html')
+            ->from($emailTextTable)
+            ->where($builder->expr()->in('email_id', ':ids'))
+            ->setParameter('ids', $emailIds, Connection::PARAM_STR_ARRAY);
+        $results = $builder->executeQuery()->fetchFirstColumn();
+
+        $embeddedFileIds = [];
+        $pattern = '~EmbeddedFiles/([a-zA-Z0-9-]+)/file/description_html_file~';
+        foreach ($results as $emailText) {
+            if (!is_string($emailText) || !preg_match($pattern, $emailText, $matches)) {
+                continue;
+            }
+            $embeddedFileIds[] = $matches[1];
+        }
+
+        $this->deleteFiles($embeddedFileIds);
+
+        $builder = $this->conn->createQueryBuilder();
+        $builder->delete($embeddedFilesTable)
+            ->where($builder->expr()->in('id', ':ids'))
+            ->setParameter('ids', $embeddedFileIds, Connection::PARAM_STR_ARRAY);
+        $builder->executeStatement();
+        $this->getBean()->db->optimizeTable($embeddedFilesTable);
+    }
+
+    private function cleanupEmailText(array $emailIds): void
+    {
+        $emailTextTable = BeanFactory::getBean('EmailText')->getTableName();
+        $builder = $this->conn->createQueryBuilder();
+        $builder->delete($emailTextTable)
+            ->where($builder->expr()->in('email_id', ':ids'))
+            ->setParameter('ids', $emailIds, Connection::PARAM_STR_ARRAY);
+        $builder->executeStatement();
+        $this->getBean()->db->optimizeTable($emailTextTable);
+    }
+
+    /**
+     * @param array $documentIds
+     * @return void
+     */
+    protected function cleanupDocuments(array $documentIds): void
+    {
+        foreach (array_chunk($documentIds, static::ID_CHUNK_SIZE) as $idsChunk) {
+            $table = BeanFactory::getBean('DocumentRevisions')->getTableName();
+            $qb = $this->conn->createQueryBuilder();
+            $qb->select('id')
+                ->from($table)
+                ->where($qb->expr()->in('document_id', ':ids'))
+                ->setParameter('ids', $idsChunk, Connection::PARAM_STR_ARRAY);
+            $revisionIds = $qb->fetchFirstColumn();
+
+            $qb = $this->conn->createQueryBuilder();
+            $qb->delete($table)
+                ->where($qb->expr()->in('document_id', ':ids'))
+                ->setParameter('ids', $idsChunk, Connection::PARAM_STR_ARRAY)
+                ->executeStatement();
+
+            $this->deleteFiles($revisionIds);
+        }
     }
 }

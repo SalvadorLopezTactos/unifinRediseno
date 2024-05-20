@@ -36,16 +36,9 @@
     helpObject: {},
 
     /**
-     * Boolean to indicate if the current view's tour is enabled.
-     *
-     * @type {boolean} `true` if tour is enabled, otherwise `false`.
-     * @private
+     * List of resources from meta
      */
-    _tourEnabled: false,
-
-    events: {
-        'click [data-action=tour]': 'showTour'
-    },
+    resources: [],
 
     /**
      * @inheritdoc
@@ -53,16 +46,21 @@
     initialize: function(options) {
         this._super('initialize', [options]);
         this.createHelpObject();
-        this.on('render', this.toggleTourLink, this);
+
+        this.initResources();
     },
 
     /**
-     * Checks if the current view's tour is enabled.
-     *
-     * @return {boolean} `true` if tour is enabled, otherwise `false`.
+     * Initialize resources from meta
      */
-    isTourEnabled: function() {
-        return this._tourEnabled;
+    initResources: function() {
+        if (this.meta && this.meta.resources) {
+            this.resources = this.meta.resources;
+
+            if (app.user.hasLicense('SUGAR_SELL_ESSENTIALS')) {
+                this.resources = _.omit(this.resources, 'marketplace');
+            }
+        }
     },
 
     /**
@@ -77,40 +75,6 @@
         }, langContext);
         var ctx = this.context.parent || this.context;
         this.helpObject = app.help.get(ctx.get('module'), ctx.get('layout'), helpUrl);
-    },
-
-    /**
-     * Method to set the `tourEnabled` flag based on current module and layout.
-     */
-    toggleTourLink: function() {
-        var ctx = app.controller.context;
-        if (app.tutorial.hasTutorial(ctx.get('layout'), ctx.get('module'))) {
-            this._tourEnabled = true;
-            this.$('[data-action=tour]').removeClass('disabled');
-        } else {
-            this._tourEnabled = false;
-            this.$('[data-action=tour]').addClass('disabled');
-        }
-    },
-
-    /**
-     * Click handler for tour link.
-     *
-     * Displays the tour and closes the help popup.
-     */
-    showTour: function() {
-        if (!this.isTourEnabled() || app.tutorial.instance) {
-            return;
-        }
-
-        var ctx = app.controller.context;
-        var helpLayout = this.layout.closestComponent('help');
-        if (helpLayout && !helpLayout.disposed) {
-            helpLayout.toggle(false);
-        }
-
-        app.tutorial.resetPrefs();
-        app.tutorial.show(ctx.get('layout'), {module: ctx.get('module')});
     },
 
     /**

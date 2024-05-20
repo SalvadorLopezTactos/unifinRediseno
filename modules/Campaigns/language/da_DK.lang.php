@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'Sporings-URL:',
   'LBL_TRACKER_TEXT' => 'Tekst til sporingslink:',
   'LBL_TRACKER_COUNT' => 'Antal sporinger:',
-  'LBL_REFER_URL' => 'Sporingsomdirigerings-URL:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kampagner',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'E-mail-kampagner',
   'LBL_NEW_FORM_TITLE' => 'Ny kampagne',

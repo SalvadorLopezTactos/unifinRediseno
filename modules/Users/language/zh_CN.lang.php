@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> '未找到用户信息',
     'ERR_USER_NAME_EXISTS'              => '用户名 {0} 已存在。不允许使用重复的用户名。请将其更改为唯一的用户名。',
     'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” 许可证必须与其他兼容的许可证类型一起保存',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => '这种功能已经包含在Sugar Sell Premier中。',
 	'ERR_USER_IS_LOCKED_OUT'			=> '当前用户已被锁在 Sugar 应用程序外，无法使用现有密码登录。',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => '仅通过外部验证的用户不能使用 Sugar 凭据登录',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => '密码',
     'LBL_CHOOSE_A_KEY'					=> '选择一个密钥来阻止未授权的人发布您的日程安排',
     'LBL_NO_KEY'                        => '没有设置关键字。请设置关键字使其能发布。',
-	'LBL_CHOOSE_WHICH'					=> '选择在顶部导航栏可访问的模块。指定要显示的模块顺序。',
+    'LBL_CHOOSE_WHICH'                  => '选择在侧导航栏可访问的模块。指定要显示的模块顺序。',
+    'LBL_NUMBER_PINNED_MODULES'         => '固定模块的数量',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => '写下导航栏折叠时要锁定的可用模块数量（例如，如果输入 5，则将锁定列表中的前五个模块）。我们推荐一个代表您最常使用的模块的数量。不允许输入超过 100 的数值。',
 	'LBL_CITY'							=> '城市',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> '清除',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP 用户名：',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP 服务器类型：',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP 服务器规格',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => '授权电子邮件账户',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => '选择您的电子邮件提供商：',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo！邮件密码：',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! 邮件 ID：',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => '用户/团队/角色',
     'LBL_LOADING_ITEMS' => '加载数据...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => '智能指南访问',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => '智能指南上次活动时间',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => '缺少智能指南访问权限',
 ); // END STRINGS DEFS

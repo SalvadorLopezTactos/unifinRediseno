@@ -561,32 +561,15 @@ $assigned_by_userがあなたを通話に招待しました
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => '割り当て通知メール',
-        'subject' => 'SugarCRM - $module_nameが割り当てられました ',
-        'description' => 'システムがユーザにタスクの割り当てを送信する際に、このテンプレートを使用します。',
-        'body' => '<div>
-<p>$assigned_by_userが&nbsp;$assigned_userに&nbsp;$module_nameを割り当てました。</p>
-
-<p>この&nbsp;$module_nameを次のリンクから確認できます。<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_userが$assigned_userに$module_nameを割り当てました。
-
-この$module_nameを次のリンクから確認できます。
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => '予定されているレポートメール',
         'subject' => '予定されているレポート：$report_name（$report_time現在）',
         'description' => 'システムが予定されているレポートをユーザに送信する際に、このテンプレートを使用します。',
         'body' => '<div>
-<p>$assigned_user様</p>
-<p>この添付ファイルは、あなたのために自動生成されたレポートです。</p>
-<p>レポート名：$report_name</p>
-<p>レポート実行日時：$report_time</p>
+<p>こんにちは、$assigned_user様<br></p>
+<p>この添付ファイルは、あなたのために自動生成されたレポートです。<br></p>
+<p>レポート名：<a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>レポート実行日時：$report_time<br></p>
 </div>',
         'txt_body' =>
             '$assigned_user様
@@ -612,14 +595,6 @@ $assigned_by_userがあなたを通話に招待しました
             Sugarにログインしてコメントを確認してください。',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'アカウント情報',
-        'description' => 'このテンプレートはシステム管理者がユーザに新しいパスワードを送付する際に使用されます。',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>アカウント名と一時パスワードは次の通りです:</p><p>ユーザ名 : $contact_user_user_name </p><p>パスワード : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>上記のパスワードを用いてログインした後、任意のパスワードに変更してください。</p></td></tr><tr><td colspan=\"2\"></td></tr> </tbody></table> </div>',
-        'txt_body' =>
-'アカウント名と一時パスワードは次の通りです:<br />ユーザ名 : $contact_user_user_name<br />パスワード : $contact_user_user_hash<br /><br />$config_site_url<br /><br />上記のパスワードを用いてログインした後、任意のパスワードに変更してください。',
-        'name' => '自動生成したパスワードのお知らせ',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'アカウントパスワードのリセット',
         'description' => "このテンプレートは、ユーザのアカウントパスワードをリセットするためのリンクを送信する際に用います。",

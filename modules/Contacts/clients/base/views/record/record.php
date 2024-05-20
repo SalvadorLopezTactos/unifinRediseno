@@ -278,6 +278,10 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
                         ),
                     ),
                 ),
+                [
+                    'name' => 'geocode_status',
+                    'licenseFilter' => ['MAPS'],
+                ],
                 'phone_fax',
                 'phone_work',
                 'twitter',
@@ -359,8 +363,10 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
             'fields' => [
                 [
                     'name' => 'hint_account_website',
+                    'label' => 'LBL_HINT_COMPANY_WEBSITE',
                     'type' => 'stage2_url',
                     'white_list' => true,
+                    'fields' => ['hint_photo', 'hint_account_logo'],
                 ],
                 'hint_education',
                 [

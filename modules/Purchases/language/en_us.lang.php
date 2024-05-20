@@ -56,5 +56,5 @@ $mod_strings = [
     'LBL_PURCHASES_LIST_DASHBOARD' => 'Purchases List Dashboard',
     'LBL_PURCHASES_RECORD_DASHBOARD' => 'Purchases Record Dashboard',
     'LBL_RELATED_ACCOUNT' => 'Related Account',
-    'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Purchases Focus Drawer',
+    'LBL_PURCHASES_FOCUS_DRAWER_DASHBOARD' => 'Purchases Focus Dashboard',
 ];

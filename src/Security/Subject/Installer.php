@@ -21,6 +21,7 @@ final class Installer implements Subject
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

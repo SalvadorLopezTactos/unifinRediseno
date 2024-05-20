@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Gebruikersgegevens niet gevonden',
     'ERR_USER_NAME_EXISTS'              => 'De gebruikersnaam {0} bestaat al. Dubbele gebruikersnamen zijn niet toegestaan. Wijzig de gebruikersnaam zodat deze uniek is.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” licentie moet worden opgeslagen met aanvullend compatibel type licentie',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Deze mogelijkheid is al opgenomen in Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Deze gebruiker is heeft geen toegang tot Sugar en kan niet inloggen met zijn/ haar huidige wachtwoord.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Gebruiker met alleen externe auth mag niet aanmelden met inloggegevens van Sugar',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Wijzig wachtwoord',
     'LBL_CHOOSE_A_KEY'					=> 'Kies een key om ongewenste publicatie van je Agenda te voorkomen.',
     'LBL_NO_KEY'                        => 'Key is niet ingesteld. Stel uw key in, om publicatie mogelijk te maken.',
-	'LBL_CHOOSE_WHICH'					=> 'Kies welke tabs worden weergegeven',
+    'LBL_CHOOSE_WHICH'                  => 'Selecteer welke modules toegankelijk zijn in de navigatiebalk aan de zijkant. Bepaal de volgorde waarin u de modules wilt zien.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Aantal vastgezette modules',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Vermeld het aantal beschikbare modules dat vastgezet wordt als de navigatiebalk ingeklapt is (bijvoorbeeld: als u 5 invoert, dan worden de eerste vijf modules op de lijst vastgezet). We raden aan om een aantal in te vullen dat uw meest gebruikte modules representeert. Waarden groter dan 100 worden niet gerespecteerd.',
 	'LBL_CITY'							=> 'Plaats',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Wissen',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'Gebruikersnaam',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP Server Type',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP Server Specificatie',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Geautoriseerd e-mailaccount',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Kies uw e-mail provider',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! E-mail Wachtwoord',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! E-mail ID',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'gebruikers/teams/rollen',
     'LBL_LOADING_ITEMS' => 'Gegevens laden...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Toegang tot slimme gids',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Slimme gids, laatst actief',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Toegang tot slimme gids ontbreekt',
 ); // END STRINGS DEFS

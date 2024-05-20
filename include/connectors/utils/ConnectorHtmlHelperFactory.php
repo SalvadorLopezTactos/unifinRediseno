@@ -16,8 +16,8 @@
  */
 class ConnectorHtmlHelperFactory
 {
-    const CONNECTOR_HTML_HELPER_MAIN = 'include/connectors/utils/ConnectorHtmlHelper.php';
-    const CONNECTOR_HTML_HELPER_CUSTOM = 'custom/include/connectors/utils/ConnectorHtmlHelper.php';
+    public const CONNECTOR_HTML_HELPER_MAIN = 'include/connectors/utils/ConnectorHtmlHelper.php';
+    public const CONNECTOR_HTML_HELPER_CUSTOM = 'custom/include/connectors/utils/ConnectorHtmlHelper.php';
 
     /**
      * Return instance of HTML helper class

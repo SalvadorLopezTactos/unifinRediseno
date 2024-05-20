@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => '必要值缺失',
     'LBL_ERROR_SYNC_USERS' => '同步至電子郵件用戶端的值無效：',
     'LBL_ID_EXISTS_ALREADY' => 'ID 已經存在於此表格中',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY 已經存在於此表格中',
     'LBL_ASSIGNED_USER' => '如果使用者不存在，則使用目前使用者',
     'LBL_SHOW_HIDDEN' => '顯示非正常匯入的欄位',
     'LBL_UPDATE_RECORDS' => '升級現有記錄而不匯入（不能復原操作）',

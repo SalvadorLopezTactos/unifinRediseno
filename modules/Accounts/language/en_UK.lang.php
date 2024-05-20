@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Accounts List Dashboard',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Accounts Record Dashboard',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Accounts Focus Drawer',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Account Details',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Accounts Focus Dashboard - Console',
     'LBL_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Account Name/Industry',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Location',
     'LBL_PURCHASES' => 'Purchases',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Account Timeline',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organize',
+    'LBL_CREATE_NEW' => 'Create New',
+    'LBL_MANAGE' => 'Manage',
+    'LBL_SEE_DETAILS' => 'View Details',
+    'LBL_HIDE_NEW' => 'Hide',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Charts',
@@ -207,4 +214,7 @@ To create an {{module_name}}:
 2. Click "Save" to finalise the new record and return to the previous page.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Accounts&#39; reports',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'External Users',
 );

@@ -11,12 +11,19 @@
  */
 --}}
 <div class="omni-detail-wrapper">
-    <div class="omni-detail-content omni-detail-title">
+    <div class="omni-detail-content omni-detail-title sticky">
         {{#if summaryTitle}}
             <div class="omni-detail-title-text">{{summaryTitle}}</div>
         {{else}}
             <div class="omni-detail-title-text">{{str 'LBL_OMNICHANNEL_CONFIG_SUMMARY'}}</div>
         {{/if}}
+
+        <div class="loading ml-1">
+            - <span></span>
+            <i class="l1">.</i>
+            <i class="l2">.</i>
+            <i class="l3">.</i>
+        </div>
     </div>
 
     <div class="omni-detail-content">
@@ -33,7 +40,7 @@
     <div class="omni-detail-content">
         <div class="omni-summary-cell">
             {{#each meta.fields}}
-                <div class="omni-cell">
+                <div class="record-cell omni-cell">
                     <div class="omni-label">{{str label ../currentContactModule}}</div>
                     {{#if this.readonly}}
                         {{field ../../this model=../../model template='detail'}}

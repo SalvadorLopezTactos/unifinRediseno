@@ -23,11 +23,11 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class SugarOidcUserMapping implements MappingInterface
 {
-    const OIDC_USER_STATUS_ACTIVE = 0;
-    const OIDC_USER_STATUS_INACTIVE = 1;
+    public const OIDC_USER_STATUS_ACTIVE = 0;
+    public const OIDC_USER_STATUS_INACTIVE = 1;
 
-    const IDM_USER_TYPE_REGULAR = 0;
-    const IDM_USER_TYPE_ADMINISTRATOR = 1;
+    public const IDM_USER_TYPE_REGULAR = 0;
+    public const IDM_USER_TYPE_ADMINISTRATOR = 1;
 
     protected $userMapping = [
         'user_name' => 'preferred_username',
@@ -37,6 +37,7 @@ class SugarOidcUserMapping implements MappingInterface
         'email' => 'email',
         'title' => 'title',
         'department' => 'department',
+        'license_type' => 'license_type',
     ];
 
     protected $addressMapping = [
@@ -123,7 +124,7 @@ class SugarOidcUserMapping implements MappingInterface
      */
     protected function getAttribute(array $response, $name)
     {
-        return isset($response[$name]) ? $response[$name] : null;
+        return $response[$name] ?? null;
     }
 
     /**

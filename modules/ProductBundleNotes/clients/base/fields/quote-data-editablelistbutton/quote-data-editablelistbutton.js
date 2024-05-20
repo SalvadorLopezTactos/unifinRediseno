@@ -115,7 +115,7 @@
         };
         var options = {
             success: successCallback,
-            error: function(error) {
+            error: function(model, error) {
                 if (error.status === 409) {
                     app.utils.resolve409Conflict(error, self.model, function(model, isDatabaseData) {
                         if (model) {

@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Направени прогнози',
     'LBL_FORECAST_HISTORY' => 'Направени прогнози',
     'LBL_FORECAST_HISTORY_TITLE' => 'История',
+    'LBL_TAB_COMMITMENT' => 'Ангажимент',
+    'LBL_CURRENT' => 'Текущ',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Период',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Модифицирано от',
     'LBL_WK_VERSION' => 'Версия',
     'LBL_WK_REVISION' => 'Ревизия',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Достъп до интерфейс на приложения за метрики изисква Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Период:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Искате ли да изпратите тези суми?',
     'ERR_FORECAST_AMOUNT' => 'Сумата е задължителна и следва да е число.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Включени текущи възможности',
+    'LBL_UPSIDE_PIPELINE' => 'Възможни затворени текущи възможности',
+    'LBL_EXCLUDED_PIPELINE' => 'Изключени текущи възможности',
+    'LBL_WON' => 'Спечелена',
+    'LBL_LOST' => 'Загубена',
+    'LBL_ALL' => 'Всички',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Насока за филтри',
+    'LBL_HELP_MAIN_BODY' => 'Всички метрики съдържат само възможности, които принадлежат към избрания(ите) потребител(и) и всякакви допълнителни филтри, които сте приложили',
+    'LBL_FORECAST_HELP' => 'Възможности, които вече са спечелени, или са във включен {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Отворени възможности с {{{forecastStage}}} на {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Отворени възможности във включен {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Отворени възможности с {{{forecastStage}}} на {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Отворени възможности с {{{forecastStage}}} на {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Отворени възможности в изключен {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Възможности, които вече са спечелени',
+    'LBL_LOST_HELP' => 'Възможности, които вече са загубени',
+    'LBL_ALL_HELP' => 'Всички възможности',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Начална дата',
     'LBL_FC_USER' => 'Планиране за',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Ангажимент',
     'LBL_TEAM_COMMITMENT' => 'Ангажимент на екип',
     'LBL_FORECASTED' => 'Прогнозиран',
+    'LBL_OPPORTUNITY_FORECAST' => 'Прогноза за възможности',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Прогноза на приходни позиции',
+    'LBL_LAST_COMMITMENT' => 'Последен ангажимент',
     'LBL_ADJUSTED_TOTAL' => 'Коригирана обща',
     'LBL_COMMIT_STAGE' => 'Commit Stage',
     'LBL_SALES_STAGE' => 'Етап',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Коригирано)',
     'LBL_SAVE_DRAFT' => 'Съхрани',
     'LBL_CHANGES_BY' => 'Промени от {0}',
-    'LBL_FORECAST_SETTINGS' => 'Настройки',
+    'LBL_FORECAST_SETTINGS' => 'Настройки за изготвяне на прогнози',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Настройка на прогнозите',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Начална дата на финансовата година:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Конфигуриране на периодите, които ще се използват при изготвяне на прогнози в модула. <br><br>Моля, отбележете, че настройките на периодите не могат да бъдат променяни след първоначалната настройка. <br><br>Първо въведете начална дата на финансовата година за вашата организация. След това изберете времевия период, за който искате да имате прогнози за продажбите. Началните и крайни дати на периодите ще бъдат изчислени автоматично на база на въведените данни. Времевите периоди са базата за изготвяне на прогнозни планове.<br><br>Имате възможност в модула да бъдат визуализирани и дефиниран от вас брой на бъдещи и минали периоди. Потребителите имат възможност да променят стойностите на прогнозите за всеки от визуализираните периоди.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Конфигурирайте начина, по който желаете да категоризирате {{forecastByModule}}. <br><br>Моля, обърнете внимание, че настройките „Обхват" не могат да се променят след първото изпълнение. За актуализирани екземпляри настройката „Обхват" е блокирана в съществуващите данни „Прогноза".<br><br>Можете да изберете две или повече категории въз основа на обхватите на вероятност или да създадете категории, които не са основани на вероятност. <br><br>Има полета за отметки вляво от вашите персонализирани категории; използвайте ги, за да решите кои обхвати ще бъдат включени в подаденото и докладвано на мениджърите прогнозно количество. <br><br>Потребителят може да промени статуса включване/изключване и категорията на {{forecastByModule}} ръчно от своята електронна таблица.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Конфигурирайте как бихте желали да категоризирате {{forecastByModule}}. <br><br>Моля, обърнете внимание, че настройките на обхвата не могат да бъдат променяни след първото предаване. За надградени екземпляри настройката Обхват е заключена в съществуващите прогнозни данни.<br><br>Можете да изберете две или повече категории според обхватите на вероятност или да създадете категории, които не са основани на вероятност. <br><br>Има кутии за отметки отляво на Вашите персонализирани категории; използвайте тях, за да решите кои обхвати да бъдат включени в прогнозната сума, предадена и отчетена на мениджърите. <br><br>Потребителят може да промени статуса включи/изключи и категорията на {{forecastByModule}} ръчно от своя работен лист.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Select the columns you would like the user to ﬁll out for their forecasts of each {{forecastByModuleSingular}}. Please note the Likely amount is tied to the amount shown in {{forecastByModule}}; for this reason the Likely column cannot be hidden.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Маркирайте колоните, които бихте искали да виждате в модул Прогнози. Списъкът с полета ще състави плана и ще позволи на потребителите да изберат как да конфигурират изгледа за себе си.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Аз съм указател за мястото за Прогноза от how-to text!',

@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'לא הוגדר סוד לקוח',
     'LBL_RESEND_BUTTON_LABEL' => 'שליחה חוזרת',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'השג מעטפה',
+    'LBL_CLOUD_SERVICE_TYPE' => 'סוג שירות ענן',
+    'LBL_CLOUD_PATH' => 'נתיב ענן',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'לוח המחוונים של רשימת המעטפות ב-DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'המעטפות האחרונות של DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'מגירת הפוקוס של מעטפות DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'מסמך מאת ',
+    'LBL_NEW_ENVELOPE' => 'מעטפה חדשה',
     'LBL_DOCUMENT_IS_NOW' => ' הוא כעת ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'שגיאת DocuSign. לא ניתן היה להשיג את מזהה החשבון לפי אסימון הגישה',
     'LBL_ERROR_RESEND' => 'לא ניתן היה לבצע את פעולת השליחה מחדש ב-DocuSign. סטטוס המעטפה חייב להיות &#39;נשלחה&#39;',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'העדכון נכשל',
     'LBL_ERROR_FETCH_TIME' => 'הכללים של DocuSign לא מאפשרים הגשת בקשות מרובות לאותה מעטפה בטווח זמן של 15 דקות',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'אירעה שגיאה. לא ניתן היה לעדכן את המעטפה. בדוק את יומני הרישום!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'אירעה שגיאה. לא ניתן להציג רשימת תבניות. נא לבדוק ביומני הרישום!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'אירעה שגיאה. לא ניתן להביא את התבנית. נא לבדוק ביומני הרישום!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'המעטפה לא הושלמה',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'הסטטוס של המעטפה ב-DocuSign הוא כעת ',
     'LBL_OVERVIEW' => 'סקירה',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'הוסף מסמך',
     'LBL_BUTTON_SEND' => 'שלח',
     'LBL_BUTTON_CLEAR' => 'נקה',
-    'LBL_MISSING_OBJECT' => 'אובייקט DocuSign לא נמצא בחלון',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'השתמש בתבנית',
     'LBL_PLEASE_LOG_IN' => 'יש להיכנס ל-DocuSign תחילה!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'אינך יכול להוריד את המסמך הזה. הוא נוצר על ידי משתמש אחר!',
     'LBL_SEND_NOT_ALLOWED' => 'אינך יכול לשלוח את המעטפה הזו. היא נוצרה על ידי משתמש אחר!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'חתומה',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'לא ניתן היה להוריד את המסמך. בדוק את יומני הרישום!',
     'LBL_DOCUMENT_COMPLETED' => 'הושלמה',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'מידע DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'הוא כעת',
+    'LBL_SETTINGS_TITLE' => 'הגדרות DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'התנהגות בחירת נמענים',
+    'LBL_RECIPIENT_NAME' => 'שם',
+    'LBL_RECIPIENT_EMAIL' => 'דוא"ל',
+    'LBL_RECIPIENT_TYPE' => 'סוג',
+    'LBL_TEMPLATE_NAME' => 'שם',
+    'LBL_RECIPIENT_SELECT' => 'בחירה...',
+    'LBL_RECIPIENT_ROLE' => 'תפקיד',
+    'LBL_SELECT_BUTTON_LABEL' => 'בחר',
+    'LBL_BACK_BUTTON_LABEL' => 'חזרה',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'אחזור נמענים פוטנציאליים נכשל!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'אחזור התבניות נכשל!',
 ];

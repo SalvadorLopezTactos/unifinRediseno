@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'עדכן הגדרת מוצר',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'עיבוד תזמונים תלויי-זמן',
 'LBL_OOTB_DATA_ARCHIVER' => 'הפעלת מחיקות/אחסונים בארכיון של נתונים פעילים',
+'LBL_OOTB_LICENSE_INSTALLER' => 'יש להחיל זכויות מנויים כשהן משתנות',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'כלי להמרת כתובות לקואורדינטות (geocoder) ברשומות',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'אפשרויות מתקדמות',
 'LBL_TOGGLE_ADV' => 'הצג אפשרויות מתקדמות',
 'LBL_TOGGLE_BASIC' => 'הצג אפשרויות בסיסיות',
+'LBL_UPDATEMOMENTUMCJ' => 'עדכון Momentum של מדריכים חכמים המתבצעים כעת',
 // Links
 'LNK_LIST_SCHEDULER' => 'מתזמנים',
 'LNK_NEW_SCHEDULER' => 'צור תיזמון',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'הפעלת מחיקות/אחסונים בארכיון של נתונים פעילים',
 'LBL_PMSEENGINECRON' => 'מתזמן SugarBPM',
 );
-

@@ -14,7 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Tasks List Dashboard',
   'LBL_TASKS_RECORD_DASHBOARD' => 'Tasks Record Dashboard',
-  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Tasks Focus Drawer',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Tasks Focus Dashboard',
 
   'LBL_RELATED_CONTACT' => 'Related Contact',
   'LBL_MODULE_NAME' => 'Tasks',
@@ -117,4 +117,13 @@ To create a {{module_name}}:
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Smart Guide Task',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Is Smart Guide Task',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Smart Guide Activity Start Date',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Smart Guide Activity Completion Date',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Smart Guide - Days to Complete',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Child Meetings',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Child Calls',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Child Tasks',
 );

@@ -147,13 +147,6 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                     'type' => 'favorite',
                     'dismiss_label' => true,
                 ),
-                array(
-                    'name' => 'follow',
-                    'label' => 'LBL_FOLLOW',
-                    'type' => 'follow',
-                    'readonly' => true,
-                    'dismiss_label' => true,
-                ),
                 [
                     'name' => 'renewal',
                     'type' => 'renewal',
@@ -164,6 +157,13 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                     'type' => 'badge',
                     'badge_label' => 'LBL_ESCALATED',
                     'warning_level' => 'important',
+                    'dismiss_label' => true,
+                ],
+                [
+                    'name' => 'follow',
+                    'label' => 'LBL_FOLLOW',
+                    'type' => 'follow',
+                    'readonly' => true,
                     'dismiss_label' => true,
                 ],
             ),
@@ -181,73 +181,65 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                         'account_id'
                     )
                 ),
-                array(
+                [
                     'name' => 'date_closed',
                     'type' => 'date-cascade',
                     'label' => 'LBL_LIST_DATE_CLOSED',
-                    'disable_field' => array(
+                    'disable_field' => [
                         'total_revenue_line_items',
                         'closed_revenue_line_items',
-                    ),
-                ),
-                array(
+                    ],
+                ],
+                [
                     'name' => 'sales_status',
-                ),
-                array(
+                    'label' => 'LBL_SALES_STATUS',
+                    'default' => true,
+                    'enabled' => true,
+                    'type' => 'enum',
+                ],
+                [
                     'name' => 'sales_stage',
                     'type' => 'enum-cascade',
                     'label' => 'LBL_SALES_STAGE',
-                    'disable_field' => array(
+                    'disable_field' => [
                         'total_revenue_line_items',
                         'closed_revenue_line_items',
-                    ),
-                ),
-                array(
+                    ],
+                    'span' => 6,
+                ],
+                [
                     'name' => 'amount',
                     'type' => 'currency',
                     'label' => 'LBL_LIKELY',
-                    'related_fields' => array(
+                    'related_fields' => [
                         'amount',
                         'currency_id',
                         'base_rate',
-                    ),
-                    'span' => 6,
+                    ],
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
-                ),
-                array(
+                ],
+                [
                     'name' => 'service_start_date',
                     'type' => 'date-cascade',
                     'label' => 'LBL_SERVICE_START_DATE',
                     'disable_field' => 'service_open_revenue_line_items',
-                    'related_fields' => array(
-                        'service_open_revenue_line_items',
-                    ),
-                ),
-                'probability',
-                [
-                    'name' => 'commit_stage',
-                    'type' => 'enum-cascade',
-                    'disable_field' => 'closed_won_revenue_line_items',
-                    'disable_positive' => true,
-                    'span' => 6,
                     'related_fields' => [
-                        'probability',
-                        'closed_won_revenue_line_items',
+                        'service_open_revenue_line_items',
                     ],
                 ],
-                array(
-                    'name' => 'best_case',
-                    'type' => 'currency',
-                    'label' => 'LBL_BEST',
-                    'related_fields' => array(
-                        'best_case',
-                        'currency_id',
-                        'base_rate',
-                    ),
-                    'currency_field' => 'currency_id',
-                    'base_rate_field' => 'base_rate',
-                ),
+                [
+                    'name' => 'forecasted_likely',
+                    'comment' => 'Rollup of included RLIs on the Opportunity',
+                    'readonly' => true,
+                    'related_fields' =>
+                        [
+                            0 => 'currency_id',
+                            1 => 'base_rate',
+                        ],
+                    'label' => 'LBL_FORECASTED_LIKELY',
+                    'span' => 6,
+                ],
                 [
                     'name' => 'service_duration',
                     'type' => 'fieldset-cascade',
@@ -272,18 +264,17 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                     ],
                     'disable_field' => 'service_open_flex_duration_rlis',
                 ],
-                array(
-                    'name' => 'worst_case',
-                    'type' => 'currency',
-                    'label' => 'LBL_WORST',
-                    'related_fields' => array(
-                        'worst_case',
-                        'currency_id',
-                        'base_rate',
-                    ),
-                    'currency_field' => 'currency_id',
-                    'base_rate_field' => 'base_rate',
-                ),
+                [
+                    'name' => 'commit_stage',
+                    'type' => 'enum-cascade',
+                    'disable_field' => 'closed_won_revenue_line_items',
+                    'disable_positive' => true,
+                    'related_fields' => [
+                        'probability',
+                        'closed_won_revenue_line_items',
+                    ],
+                    'span' => 6,
+                ],
                 [
                     'name' => 'commentlog',
                     'label' => 'LBL_COMMENTLOG',
@@ -297,10 +288,22 @@ $viewdefs['Opportunities']['base']['view']['record'] = array(
                         'max_num' => 100,
                     ],
                 ],
-                array(
+                [
+                    'name' => 'lost',
+                    'comment' => 'Rollup of lost RLIs on the Opportunity',
+                    'readonly' => true,
+                    'related_fields' =>
+                        [
+                            0 => 'currency_id',
+                            1 => 'base_rate',
+                        ],
+                    'label' => 'LBL_LOST',
+                    'span' => 6,
+                ],
+                [
                     'name' => 'tag',
-                    'span' => 12,
-                ),
+                    'span' => 6,
+                ],
             ),
         ),
         array(

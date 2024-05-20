@@ -97,13 +97,14 @@ class SearchFieldsCommand extends Command implements InstanceModeInterface
             foreach ($result as $module => $fields) {
                 foreach ($fields as $field => $props) {
                     $searchAble = !empty($props['searchable']) ? 'yes' : 'no';
-                    $boost = isset($props['boost']) ? $props['boost'] : 'n/a';
+                    $boost = $props['boost'] ?? 'n/a';
                     $table->addRow(array($module, $field, $props['type'], $searchAble, $boost));
                 }
             }
         }
 
         $table->render();
+        return 0;
     }
 
     /**

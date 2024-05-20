@@ -17,7 +17,7 @@ class CallsViewEdit extends ViewEdit
     /**
      * @const MAX_REPEAT_INTERVAL Max repeat interval.
      */
-    const MAX_REPEAT_INTERVAL = 30;
+    public const MAX_REPEAT_INTERVAL = 30;
     
  	/**
  	 * @see SugarView::preDisplay()

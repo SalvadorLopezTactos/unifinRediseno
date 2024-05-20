@@ -36,7 +36,7 @@ class ContentType implements UnstructuredInterface
 
     public static function fromString($headerLine)
     {
-        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        [$name, $value] = GenericHeader::splitHeaderLine($headerLine);
         $value = HeaderWrap::mimeDecodeValue($value);
 
         // check to ensure proper header type for this factory

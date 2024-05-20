@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Dashboard de lista de casos',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashboard de registo de casos',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalhes da ocorrência',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Dashboard de foco em Ocorrências - Consola',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em Ocorrências',
 
 	'ERR_DELETE_RECORD'					=> 'Um número de registo deverá ser especificado para eliminar a Conta.',
@@ -163,4 +163,29 @@ Para criar um {{module_name}}:
     'LBL_SLA_DETAILS' => 'Detalhes de SLA',
     'LBL_HOURS' => 'Horas',
     'LBL_WIDGET_STATUS' => 'Estado',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizar',
+    'LBL_CREATE_NEW' => 'Criar Novo',
+    'LBL_MANAGE' => 'Gerir',
+    'LBL_SEE_DETAILS' => 'Ver Detalhes',
+    'LBL_HIDE_NEW' => 'Ocultar',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Ocorrências',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Ocorrência',
+    'LBL_KIOSK_CREATE' => 'Criar Ocorrência',
+    'LBL_KIOSK_SUBJECT' => 'Assunto',
+    'LBL_KIOSK_CASE_ID' => 'ID da Ocorrência',
+    'LBL_KIOSK_STATUS' => 'Estado',
+    'LBL_KIOSK_CATEGORY' => 'Categoria',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Submetido em {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioridade',
+    'LBL_KIOSK_CREATE_CASE' => 'Contacte-nos',
+    'LBL_KIOSK_DESCRIPTION' => 'Descrição',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'O seu pedido foi submetido com sucesso.',
+    'LBL_KIOSK_ATTACHED' => 'Todos os Anexos',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Utilizadores Externos',
 );

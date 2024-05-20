@@ -18,6 +18,8 @@ require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class ViewPopupview extends ViewListView
 {
+    public $editPackage;
+    public $searchlayout;
     public function __construct()
     {
         parent::__construct();

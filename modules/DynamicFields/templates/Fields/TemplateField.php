@@ -14,7 +14,40 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 $GLOBALS['studioReadOnlyFields'] = array('date_entered'=>1, 'date_modified'=>1, 'created_by'=>1, 'id'=>1, 'modified_user_id'=>1);
-class TemplateField{
+class TemplateField
+{
+    public $hidemassupdate;
+    public $no_default;
+    public $comments;
+    public $merge_filter;
+    public $studio;
+    public $full_text_search;
+    /**
+     * @var mixed
+     */
+    public $calculated;
+    /**
+     * @var mixed|string
+     */
+    public $enforced;
+    public $dependency;
+    public $required_formula;
+    public $readonly_formula;
+    /**
+     * @var mixed
+     */
+    public $options;
+    public $calculation_visible;
+    /**
+     * @var mixed|int
+     */
+    public $duplicate_merge_dom_value;
+    public $module;
+    public $custom_module;
+    /**
+     * @var mixed
+     */
+    public $tablename;
 	/*
 		The view is the context this field will be used in
 		-edit
@@ -52,6 +85,32 @@ class TemplateField{
     public $autoinc_next = '';
     public $pii = false;
     public $readonly = false;
+    /** @var bool */
+    public $require_option;
+    /** @var bool */
+    public $mass_update;
+    /** @var int */
+    public $max_size;
+    /** @var string */
+    public $id_name;
+    /** @var string */
+    public $dbType;
+    /** @var array */
+    public $related_fields;
+    /** @var bool */
+    public $isnull;
+    /** @var string */
+    public $workflow;
+    /** @var string */
+    public $function;
+    /** @var string */
+    public $function_bean;
+    /** @var bool */
+    public $deleted;
+    /** @var string */
+    public $date_modified;
+    /** @var string */
+    public $labelValue;
 
     /**
      * "duplicate_merge" attribute is considered enabled, if not specified
@@ -360,10 +419,10 @@ class TemplateField{
             'type' => $this->type,
             // This needs to be a boolean value so clients know how to handle it
             'massupdate' => $this->convertBooleanValue($this->massupdate),
-            'hidemassupdate' => (isset($this->hidemassupdate)) ? $this->hidemassupdate : false,
+            'hidemassupdate' => $this->hidemassupdate ?? false,
             'no_default' => !empty($this->no_default),
-            'comments' => (isset($this->comments)) ? $this->comments : '',
-            'help' => (isset($this->help)) ? $this->help : '',
+            'comments' => $this->comments ?? '',
+            'help' => $this->help ?? '',
             'importable' => $this->importable,
             'duplicate_merge' => $this->duplicate_merge,
             'duplicate_merge_dom_value' => $this->getDupMergeDomValue(),
@@ -385,7 +444,7 @@ class TemplateField{
         }
         if (!empty($this->calculated) && !empty($this->formula) && is_string($this->formula)) {
             $array['calculated'] = $this->calculated;
-            $array['formula'] = html_entity_decode($this->formula);
+            $array['formula'] = html_entity_decode($this->formula, ENT_COMPAT);
             $array['enforced'] = !empty($this->enforced) && $this->enforced == true;
             if ($array['calculated'] && $array['enforced']) {
                 unset($array['default']);
@@ -399,13 +458,13 @@ class TemplateField{
             $array['calculated'] = false;
         }
         if (!empty($this->dependency) && is_string($this->dependency)) {
-            $array['dependency'] = html_entity_decode($this->dependency);
+            $array['dependency'] = html_entity_decode($this->dependency, ENT_COMPAT);
         }
         if (!empty($this->required_formula) && is_string($this->required_formula)) {
-            $array['required_formula'] = html_entity_decode($this->required_formula);
+            $array['required_formula'] = html_entity_decode($this->required_formula, ENT_COMPAT);
         }
         if (!empty($this->readonly) && !empty($this->readonly_formula) && is_string($this->readonly_formula)) {
-            $array['readonly_formula'] = html_entity_decode($this->readonly_formula);
+            $array['readonly_formula'] = html_entity_decode($this->readonly_formula, ENT_COMPAT);
         }
         if (!empty($this->len)) {
             $array['len'] = $this->len;
@@ -559,9 +618,7 @@ class TemplateField{
         }
 
         foreach ($this->vardef_map as $vardef => $field) {
-            $constraints = isset($this->vardefMapValidation[$field]) ?
-                $this->vardefMapValidation[$field]
-                : null;
+            $constraints = $this->vardefMapValidation[$field] ?? null;
             $value = $request->getValidInputRequest($vardef, $constraints);
             if ($value !== null) {
                 // Bug #48826. Some fields are allowed to have special characters and must be decoded from the request
@@ -653,7 +710,7 @@ class TemplateField{
        }
 
        $field_defs = $bean->field_defs;
-       return isset($field_defs[$name]['name']) ? $field_defs[$name]['name'] : $name;
+        return $field_defs[$name]['name'] ?? $name;
     }
 
     /**

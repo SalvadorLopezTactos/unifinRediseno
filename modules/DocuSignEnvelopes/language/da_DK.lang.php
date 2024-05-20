@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Ingen klienthemmelighed indstillet',
     'LBL_RESEND_BUTTON_LABEL' => 'Send igen',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Anskaf konvolut',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Cloud service-type',
+    'LBL_CLOUD_PATH' => 'Cloud sti',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Betjeningspanel for liste med DocuSign-konvolutter',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Seneste DocuSign-konvolutter',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffe for DocuSign-konvolutter',
 
-    'LBL_DOCUMENT_FROM' => 'Dokument fra',
+    'LBL_NEW_ENVELOPE' => 'Ny konvolut',
     'LBL_DOCUMENT_IS_NOW' => ' er nu ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign-fejl. Konto-id kunne ikke hentes baseret på adgangstoken',
     'LBL_ERROR_RESEND' => 'Genafsendelse af DocuSign mislykkedes. Konvolutstatus skal være &#39;sendt&#39;',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Opdatering mislykkedes',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign-regler tillader ikke flere anmodninger til den samme konvolut inden for 15 minutter',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Der opstod en fejl. Konvolut kunne ikke opdateres. Kontrollér logge!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Der opstod en fejl. Kunne ikke liste skabeloner. Tjek venligst logfiler!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Der skete en fejl. Kunne ikke hente skabelonen. Kontroller venligst logfiler!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Kunvolut ikke gennemført',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Konvolutstatus i DocuSign er nu ',
     'LBL_OVERVIEW' => 'Oversigt',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Tilføj dokument',
     'LBL_BUTTON_SEND' => 'Send',
     'LBL_BUTTON_CLEAR' => 'Ryd',
-    'LBL_MISSING_OBJECT' => 'DocuSign-objekt er ikke i vindue',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Brug skabelon',
     'LBL_PLEASE_LOG_IN' => 'Log ind på DocuSign først!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Du kan ikke hente dette dokument. Det er oprettet af en anden bruger!',
     'LBL_SEND_NOT_ALLOWED' => 'Du kan ikke sende denne konvolut. Den er oprettet af en anden bruger!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Underskrevet',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Dokumentet kunne ikke hentes. Kontrollér logge!',
     'LBL_DOCUMENT_COMPLETED' => 'Gennemført',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Oplysninger om DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'er nu',
+    'LBL_SETTINGS_TITLE' => 'DocuSign indstillinger',
+    'LBL_RECIPIENT_SELECTION' => 'Modtagerudvælgelsesadfærd',
+    'LBL_RECIPIENT_NAME' => 'Navn',
+    'LBL_RECIPIENT_EMAIL' => 'Email',
+    'LBL_RECIPIENT_TYPE' => 'Type',
+    'LBL_TEMPLATE_NAME' => 'Navn',
+    'LBL_RECIPIENT_SELECT' => 'Vælg...',
+    'LBL_RECIPIENT_ROLE' => 'Rolle',
+    'LBL_SELECT_BUTTON_LABEL' => 'Vælg',
+    'LBL_BACK_BUTTON_LABEL' => 'Tilbage',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Kunne ikke hente potentielle modtagere!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Kunne ikke hente skabeloner!',
 ];

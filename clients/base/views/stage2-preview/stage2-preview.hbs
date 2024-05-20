@@ -14,13 +14,8 @@
     {{#if oldHintPreview}}hint-preview-tabbed-layout{{else}}hint-preview{{/if}}
 {{else}}
     {{#if isListView}}hint-preview-list{{else}}hint-preview{{/if}}
-{{/if}}'>
-<div class='headline'>
-    {{#if isDarkMode}}
-        <div class='hintDarkModeLogo'></div>
-    {{else}}
-        <div class='hintLogo'></div>
-    {{/if}}
+{{/if}} rounded-md'>
+<div class='headline rounded-t-md'>
     {{#unless _stage2ErrorCode}}
         {{#if shouldShowHintCloudLogo}}
         <div class='{{#if isHintRequestLoading}}
@@ -56,7 +51,7 @@
         {{/eq}}
     </div>
 {{else}}
-    <div class='hint-preview-container'>
+    <div class='hint-preview-container rounded-b-md mb-4 p-0'>
         {{#if isHintRequestLoading}}
             {{#eq moduleName 'Accounts'}}
                 {{#if isDarkMode}}

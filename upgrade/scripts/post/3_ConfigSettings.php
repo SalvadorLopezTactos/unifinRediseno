@@ -85,6 +85,9 @@ class SugarUpgradeConfigSettings extends UpgradeScript
         $this->fixConfigSettings($defaultSettings);
         $this->unserializeXssTags($defaultSettings);
         $this->setDefaultPrivateIps();
+        $this->fixGeneratedPasswordSetting();
+
+        $this->removeFallbackVersionFromConfig();
     }
 
     private function setDefaultPrivateIps(): void
@@ -154,5 +157,32 @@ class SugarUpgradeConfigSettings extends UpgradeScript
                 unset($this->upgrader->config['mass_actions'][$setting]);
             }
         }
+    }
+
+    private function fixGeneratedPasswordSetting()
+    {
+        if (version_compare($this->from_version, '12.3.0', '>') || empty($this->upgrader->config['passwordsetting'])) {
+            return;
+        }
+        $this->log('Disabling system generated passwords...');
+        $this->upgrader->config['passwordsetting']['SystemGeneratedPasswordON'] = false;
+        if (isset($this->upgrader->config['passwordsetting']['generatepasswordtmpl'])) {
+            $id = $this->upgrader->config['passwordsetting']['generatepasswordtmpl'];
+            $tpl = BeanFactory::getBean('EmailTemplates', $id);
+            $tpl->mark_deleted($id);
+            unset($this->upgrader->config['passwordsetting']['generatepasswordtmpl']);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    private function removeFallbackVersionFromConfig(): void
+    {
+        if (version_compare($this->from_version, '12.3.0', '>')
+            || empty($this->upgrader->config['product_definition']['options']['fallback_version'])) {
+            return;
+        }
+        unset($this->upgrader->config['product_definition']['options']['fallback_version']);
     }
 }

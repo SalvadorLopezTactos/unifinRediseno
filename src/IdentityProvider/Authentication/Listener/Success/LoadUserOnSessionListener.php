@@ -27,6 +27,7 @@ class LoadUserOnSessionListener
         $user = $event->getAuthenticationToken()->getUser();
         $this->setGlobalUser($user);
         $this->setSessionUserId($user);
+        $this->setSessionIdmUserManager($user);
     }
 
     /**
@@ -46,5 +47,15 @@ class LoadUserOnSessionListener
     protected function setSessionUserId(User $user)
     {
         $_SESSION['authenticated_user_id'] = $user->getSugarUser()->id;
+    }
+
+    /**
+     * set idm user manager flag into $_SESSION
+     * This is needed for BWC modules. Because it doesn't use token introspection and load user directly from session.
+     * @param User $user
+     */
+    protected function setSessionIdmUserManager(User $user)
+    {
+        $_SESSION['is_idm_user_manager'] = $user->getSugarUser()->isIdmUserManager;
     }
 }

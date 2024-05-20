@@ -56,7 +56,7 @@ class PackageManagerDisplay{
         if (!empty($mi_errors)) {
             $error_html = '<div style="margin:0 10px 10px 10px;">';
             foreach ($mi_errors as $error) {
-                $error_html .= '<p style="color: red">' . htmlspecialchars($error) . '</p>';
+                $error_html .= '<p style="color: red">' . htmlspecialchars($error, ENT_COMPAT) . '</p>';
             }
             $error_html .= '</div>';
         }

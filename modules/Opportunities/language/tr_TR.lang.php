@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Fırsatlar Listesi Panosu',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Fırsatlar Kaydı Panosu',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Fırsat Bilgileri',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Fırsatların Odak Bölmesi - Konsol',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Fırsatlar Odak Bölmesi',
     'LBL_RENEWAL_OPPORTUNITY' => 'Yenileme Fırsatı',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Uygulandı',
     'LBL_FORECAST' => 'Tahminde Dahil et',
     'LBL_COMMIT_STAGE' => 'Onay Aşaması',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Tahmin',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Tahmin Aşaması',
     'LBL_WORKSHEET' => 'Çalışma Sayfası',
     'LBL_PURCHASED_LINE_ITEMS' => 'Satın Alınan Kalemler',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Düzenle',
+    'LBL_CREATE_NEW' => 'Yeni Oluştur',
+    'LBL_MANAGE' => 'Yönet',
+    'LBL_SEE_DETAILS' => 'Detayları Görüntüle',
+    'LBL_HIDE_NEW' => 'Gizle',
+
     'LBL_FORECASTED_LIKELY' => 'Tahmini Muhtemel',
+    'LBL_LOST' => 'Kaybedildi',
     'LBL_RENEWAL' => 'Yenileme',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Yenileme Fırsatları',
     'LBL_RENEWAL_PARENT' => 'Üst Fırsat',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Fırsat Rolü',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notlar',
+    'LBL_TAB_OPPORTUNITY' => '{{module}} İncelemesi',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Onayla tuşuna basarak, BÜTÜN Satış Tahminlerini silecek ve Fırsatlar Görünümünü değiştireceksiniz. Eğer yapmak istediğiniz bu değilse, iptal tuşuna basın ve önceki ekrana dönün.',
@@ -211,25 +220,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Bu değişikliği başlattıktan sonra, Gelir Kalemleri kayıtları mevcut bütün {{module_name}} için arka planda oluşturulacak. Gelir Kalemleri tamamlandığında ve kullanıma hazır olduğunda, kullanıcı profilinizdeki e-posta adresine bir mesaj gönderilecek. Lütfen, kurulumunuzun Sistem Yönetimi > E-Posta Ayarları altında, e-posta gönderecek şekilde ayarlandığından emin olun.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} modülü, münferit satışları başından sonuna kadar takip etmenizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve ilgili satış verişlerini ayrıca {{quotes_module}}, {{contacts_module}} gibi ilişkili diğer önemli bilgileri içerir. Bir {{module_name}} genellikle "Kazanılarak kapandı" veya "Kaybedilerek kapandı" olarak işaretlenene kadar birçok Satış Aşaması üzerinden ilerler. {{plural_module_name}} satış trendlerinin anlaşılması ve tahmin edilmesi ve aynı zamanda satış kotalarına ulaşılması için işe odaklanılmasına yönelik olarak Sugar&#39;ın {{forecasts_singular_module}} modülü kullanılarak daha da geliştirilebilir.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} modülü, bireysel satışları başından sonuna kadar izlemenizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve ilgili satış verilerini ve ayrıca {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlarla ilgili verileri içerir. Bir {{module_name}} "Başarıyla Kapandı" veya "Başarısızlıkla Kapandı" olarak işaretlenene kadar genellikle birkaç Satış Aşaması boyunca ilerler. {{plural_module_name}}, satış eğilimlerini aynı zamanda satış kotalarına ulaşmak için odaklanma çalışmasını anlamak ve tahmin etmek üzere Sugar&#39;ın {{forecasts_singular_module}} yapma modülünü kullanarak daha da geliştirilebilir.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} modülü, münferit satışları ve o satışlara ait kalemleri başından sonuna kadar takip etmenizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir.
+    'LBL_HELP_RECORD' => '{{plural_module_name}} modülü, bireysel satışları ve bu satışlara ait kalemleri başından sonuna kadar izleminizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve ilgili satış verilerini ve ayrıca {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlarla ilgili verileri içerir.
 
-- Bu kaydın alanlarını, herhangi bir alana veya Düzenle düğmesine tıklayarak değiştirin.
-- Sol altta yer alan paneli "Veri Görünümü" olarak değiştirerek diğer kayıtlar ile olan bağlantıları görüntüleyin veya değiştirin.
-- Sol altta yer alan paneli "Aktivite Akışı" olarak değiştirerek kullanıcı yorumları görün, oluşturun ve {{activitystream_singular_module}} modülünde değişiklik tarihçesini görün.
-- Kayıt adının sağ tarafında bulunan simgeleri kullanarak bu kaydı takip edin veya favoriler arasına alın.
-- Değiştir tuşunun sağındaki açılır Aksiyonlar menüsü içinde ek aksiyonlar yer almaktadır.',
+- Bu kaydın alanlarını, ayrı bir alana veya Düzenle düğmesine tıklayarak düzenleyin.
+- Alt solda yer alan paneli "Veri Görünümü" olarak değiştirerek alt panellerde diğer kayıtlar ile olan bağlantıları görün veya değiştirin.
+- Alt solda yer alan paneli "Aktivite Akışı" olarak değiştirerek kullanıcı yorumları görün, oluşturun ve {{activitystream_singular_module}} kaydındaki değişiklik tarihçesini görün.
+- Kayıt isminin sağındaki ikonları kullanarak bu kaydı izleyin veya favori olarak işaretleyin.
+- Daha fazla işlem, Düzenle düğmesinin sağındaki İşlemler açılır menüsünde yer almaktadır.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} modülü, münferit satışları ve o satışlara ait kalemleri başından sonuna kadar takip etmenizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} modülü, bireysel satışları ve bu satışlara ait kalemleri başından sonuna kadar izleminizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve ilgili satış verileri ve ayrıca {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlarla ilgili bilgileri içerir.
 
- {{module_name}} kaydı oluşturmak için:
-1. İstenen şekilde alanlara değer girin.
- - "Zorunlu" olarak işaretlenmiş alanların kayıt öncesinde girilmesi gerekmektedir.
- - Gerektiğinde, "Daha Fazla Göster" seçeneği ile ek alanları gösterin.
-2. "Kaydet" tuşuna basarak yeni kaydı tamamlayın ve önceki sayfaya dönün.',
+Bir {{module_name}} oluşturmak için:
+1. Alanlar için istediğiniz şekilde değerleri girin.
+ - "Zorunlu" olarak işaretlenen alanların, kaydetmeden önce girilmesi gereklidir.
+ - Gerekiyorsa ek alanları görüntülemek için "Daha Fazlası" seçeneğine tıklayın.
+2. "Kaydet" tuşuna tıklayarak yeni kaydı sona erdirin ve önceki sayfaya dönün.',
 
 // END ENT/ULT
 

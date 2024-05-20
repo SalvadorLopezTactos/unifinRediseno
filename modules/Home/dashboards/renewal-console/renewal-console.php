@@ -80,6 +80,30 @@ return [
                 'name' => 'LBL_ACCOUNTS',
                 'components' => [
                     [
+                        'layout' => [
+                            'name' => 'kpi-metrics',
+                            'type' => 'base',
+                            'css_class' => 'kpi-metrics',
+                            "metric_module" => "Accounts",
+                            "metric_context" => "renewals_console",
+                            "order_by_primary" => "next_renewal_date",
+                            'components' => [
+                                [
+                                    'context' => [
+                                        'module' => 'Accounts',
+                                    ],
+                                    'layout' => 'kpi-metrics-tabs',
+                                ],
+                                [
+                                    'context' => [
+                                        'module' => 'Accounts',
+                                    ],
+                                    'view' => 'kpi-metrics-tools',
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
                         'context' => [
                             'module' => 'Accounts',
                         ],
@@ -97,6 +121,30 @@ return [
             [
                 'name' => 'LBL_OPPORTUNITIES',
                 'components' => [
+                    [
+                        'layout' => [
+                            'name' => 'kpi-metrics',
+                            'type' => 'base',
+                            'css_class' => 'kpi-metrics',
+                            "metric_module" => "Opportunities",
+                            "metric_context" => "renewals_console",
+                            "order_by_primary" => "date_closed",
+                            'components' => [
+                                [
+                                    'context' => [
+                                        'module' => 'Opportunities',
+                                    ],
+                                    'layout' => 'kpi-metrics-tabs',
+                                ],
+                                [
+                                    'context' => [
+                                        'module' => 'Opportunities',
+                                    ],
+                                    'view' => 'kpi-metrics-tools',
+                                ],
+                            ],
+                        ],
+                    ],
                     [
                         'context' => [
                             'module' => 'Opportunities',

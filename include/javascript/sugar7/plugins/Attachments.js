@@ -108,7 +108,8 @@
                     filename: data.record.filename || data.record.name,
                     file_mime_type: data.record.file_mime_type,
                     file_size: data.record.file_size,
-                    file_ext: data.record.file_ext
+                    file_ext: data.record.file_ext,
+                    portal_flag: data.record.portal_flag
                 };
             }
         });

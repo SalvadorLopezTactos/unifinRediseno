@@ -59,7 +59,7 @@ class Adapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function createQuery($dn, $query, array $options = [])
+    public function createQuery(string $dn, string $query, array $options = [])
     {
         return new Query($this->getConnection(), $dn, $query, $options);
     }
@@ -67,12 +67,12 @@ class Adapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function escape($subject, $ignore = '', $flags = 0)
+    public function escape(string $subject, string $ignore = '', int $flags = 0)
     {
         $value = ldap_escape($subject, $ignore, $flags);
 
         // Per RFC 4514, leading/trailing spaces should be encoded in DNs, as well as carriage returns.
-        if ((int) $flags & \LDAP_ESCAPE_DN) {
+        if ($flags & \LDAP_ESCAPE_DN) {
             if (!empty($value) && ' ' === $value[0]) {
                 $value = '\\20'.substr($value, 1);
             }

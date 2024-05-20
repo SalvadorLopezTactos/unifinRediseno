@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Ldap\Adapter\CollectionInterface;
 use Symfony\Component\Ldap\Exception\LdapException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 /**
  * Class TenantConfigInitializerTest
@@ -254,7 +254,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             new User(
                 $username,
                 '',
-                ['entry' => new Entry($entryDn, [strtolower($entryAttribute) => $entryAttributeValue])]
+                ['entry' => new Entry($entryDn, [strtolower($entryAttribute) => [$entryAttributeValue]])]
             )
         );
 
@@ -301,7 +301,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['retrieveUser'])
             ->getMock();
         $provider->expects($this->any())->method('retrieveUser')->willReturn(
-            new User($username = 'user1', '', ['entry' => new Entry('dn', ['' => ''])])
+            new User($username = 'user1', '', ['entry' => new Entry('dn')])
         );
         $token = new UsernamePasswordToken($username, $password, 'key');
         $provider->authenticate($token);
@@ -330,7 +330,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['retrieveUser'])
             ->getMock();
         $provider->expects($this->any())->method('retrieveUser')->willReturn(
-            new User($username = 'user1', '', ['entry' => new Entry('dn', ['' => ''])])
+            new User($username = 'user1', '', ['entry' => new Entry('dn')])
         );
         $token = new UsernamePasswordToken($username, $password, 'key');
         $provider->authenticate($token);
@@ -363,7 +363,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['retrieveUser'])
             ->getMock();
         $provider->expects($this->any())->method('retrieveUser')->willReturn(
-            new User($username = 'user1', '', ['entry' => new Entry('dn', ['' => ''])])
+            new User($username = 'user1', '', ['entry' => new Entry('dn')])
         );
         $token = new UsernamePasswordToken($username, $password, 'key');
         $provider->authenticate($token);
@@ -405,7 +405,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['retrieveUser'])
             ->getMock();
         $provider->expects($this->any())->method('retrieveUser')->willReturn(
-            new User($username = 'user1', '', ['entry' => new Entry($userDn, ['' => ''])])
+            new User($username = 'user1', '', ['entry' => new Entry($userDn)])
         );
         $token = new UsernamePasswordToken($username, $password, 'key');
         $provider->authenticate($token);
@@ -455,8 +455,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $provider->expects($this->any())->method('retrieveUser')->willReturn(
             new User($username = 'user1', '', ['entry' => new Entry('dn', [
-                '' => '',
-                $userUnique => 'test',
+                $userUnique => ['test'],
             ])])
         );
         $token = new UsernamePasswordToken($username, $password, 'key');
@@ -474,27 +473,27 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $username = 'testuser';
         $password = 'testpassword';
         $provider = $this->getMockBuilder(LdapAuthenticationProvider::class)
-                         ->setConstructorArgs([
-                                                  $this->userProvider,
-                                                  $this->userChecker,
-                                                  'key',
-                                                  $this->ldap,
-                                                  $this->mapper,
-                                                  '{username}',
-                                                  true,
-                                                  $this->ldapConfig,
-                                              ])
-                         ->setMethods(['groupCheck'])
-                         ->getMock();
+            ->setConstructorArgs([
+                $this->userProvider,
+                $this->userChecker,
+                'key',
+                $this->ldap,
+                $this->mapper,
+                '{username}',
+                true,
+                $this->ldapConfig,
+            ])
+            ->setMethods(['groupCheck'])
+            ->getMock();
         $token = new UsernamePasswordToken($username, $password, 'key');
         $user = new User($username, '', ['entry' => new Entry('dn', [])]);
 
         $this->userProvider->expects($this->once())
-            ->method('loadUserByUsername')
+            ->method('loadUserByIdentifier')
             ->with($username)
-            ->willThrowException(new UsernameNotFoundException());
+            ->willThrowException(new UserNotFoundException());
         $this->userProvider->expects($this->once())
-                               ->method('loadUserByToken')->with($token)->willReturn($user);
+            ->method('loadUserByToken')->with($token)->willReturn($user);
         $provider->authenticate($token);
     }
 
@@ -524,7 +523,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $token = new UsernamePasswordToken($username, $password, 'key');
         $ldapException = new LdapException('ldap exception', 0, new ConnectionException('Invalid credentials'));
         $this->userProvider->expects($this->once())
-            ->method('loadUserByUsername')
+            ->method('loadUserByIdentifier')
             ->with($username)
             ->willThrowException($ldapException);
         $this->userProvider->expects($this->never())->method('loadUserByToken');
@@ -565,7 +564,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $user->method('getRoles')->willReturn([]);
 
         $this->userProvider->expects($this->once())
-            ->method('loadUserByUsername')
+            ->method('loadUserByIdentifier')
             ->with($username)
             ->willReturn($user);
 

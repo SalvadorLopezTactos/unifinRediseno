@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Benötigter Wert fehlt',
     'LBL_ERROR_SYNC_USERS' => 'Ungültiger Wert bei der Synchronisierung mit Outlook: ',
     'LBL_ID_EXISTS_ALREADY' => 'Diese ID existiert bereits in der Tabelle',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY existiert bereits in der Tabelle',
     'LBL_ASSIGNED_USER' => 'Wenn der Benutzer nicht existiert, verwenden Sie den derzeitigen Benutzer',
     'LBL_SHOW_HIDDEN' => 'Felder anzeigen, die normalerweise nicht importierbar sind',
     'LBL_UPDATE_RECORDS' => 'Aktualisieren von Datensätzen, anstatt sie zu importieren (kann nicht rückgängig gemacht werden)',

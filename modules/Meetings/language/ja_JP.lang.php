@@ -212,4 +212,10 @@ $mod_strings = array (
 - 「参加者を選択」をクリックして既存のユーザ、取引先担当者またはリードを{{meetings_singular_module}} に追加します。
 - 「参加者を選択」の右側のプラスアイコンをクリックして{{meetings_singular_module}} 参加者を新しいSugarレコードとして追加します。
 3. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'スマートガイド会議です',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => '子タスク',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => '子通話',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => '子会議',
 );

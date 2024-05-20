@@ -40,13 +40,9 @@
                 this.height = 50;
             }
             if (_.isEqual(this.value, '')) {
-                template = app.template.getField(this.type, 'module-icon', this._getModuleName());
+                let template = app.template.getField(this.type, 'module-icon', this._getModuleName());
                 if (template) {
-                    this.$('.image_field').replaceWith(template({
-                        module: this.name === 'hint_account_logo' ? 'Accounts' : this._getModuleName(),
-                        labelSizeClass: 'label-module-lg',
-                        tooltipPlacement: app.lang.direction === 'ltr' ? 'right' : 'left'
-                    }));
+                    this.$('.image_field').replaceWith(template(this._getModuleIconMeta()));
                 }
             } else {
                 //Resize widget before the image is loaded
@@ -62,6 +58,34 @@
             this.$el.parent().addClass('hidden');
             return this;
         }
+    },
+
+    /**
+     * Gets the metadata to pass to the module-icon template based on the
+     * module settings
+     *
+     * @return {Object} the set of module-icon template metadata
+     * @private
+     */
+    _getModuleIconMeta: function() {
+        let module = this.name === 'hint_account_logo' ? 'Accounts' : this._getModuleName();
+        let moduleMeta = app.metadata.getModule(module);
+        let classes = `label-module-color-${moduleMeta.color}`;
+        let content = '';
+
+        if (moduleMeta.display_type === 'abbreviation') {
+            content = app.lang.getModuleIconLabel(this.module);
+        } else {
+            classes += ` sicon ${moduleMeta.icon}`;
+        }
+
+        return {
+            module: module,
+            labelSizeClass: 'label-module-lg',
+            tooltipPlacement: app.lang.direction === 'ltr' ? 'right' : 'left',
+            content: content,
+            classes: classes
+        };
     },
 
     /**

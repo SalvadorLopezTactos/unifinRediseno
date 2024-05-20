@@ -32,7 +32,7 @@ class HtmlHandler extends AbstractHandler implements ProcessDocumentHandlerInter
             if (isset($bean->$field)) {
                 //$bean->$field contains the encoded html entities, e.g., "&lt;p&gt;To connect
                 //your device to the Internet, use any application that accesses the Internet. &lt;/p&gt;"
-                $value = html_entity_decode($bean->$field);
+                $value = html_entity_decode($bean->$field, ENT_COMPAT);
 
                 //Html fields are stored including Html tags in database, which will be stripped
                 //before sending over to Elastic

@@ -12,6 +12,8 @@
 
 $dictionary['Escalation'] = [
     'table' => 'escalations',
+    'color' => 'red',
+    'icon' => 'sicon-escalation-lg',
     'audited' => true,
     'unified_search' => true,
     'full_text_search' => true,

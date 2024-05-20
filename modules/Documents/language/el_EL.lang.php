@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Πρότυπο; :',
     'LBL_DET_TEMPLATE_TYPE'=>'Τύπος Εγγράφου:',
     'LBL_TEAM'=> 'Ομάδα:',
+    'LBL_IS_SHARED' => 'Διατίθεται Εξωτερικά:',
     'LBL_DOC_DESCRIPTION'=>'Περιγραφή:',
     'LBL_DOC_ACTIVE_DATE'=> 'Ημερομηνία Ενεργοποίησης:',
     'LBL_DOC_EXP_DATE'=> 'Ημερομηνία Λήξης:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Αποστολή στο DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Συγχρονισμός στο Google Drive',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Συγχρονισμός όλων στο Google Drive',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Συγχρονισμός όλων στο OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Συγχρονισμός στο OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Συγχρονισμός όλων στο Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Συγχρονισμός στο Dropbox',
 );

@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Kontode loendi töölaud',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Kontokirjete töölaud',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Kontode fookuse sahtel',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Ettevõtte üksikasjad',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Kontode fookuse sahtel - konsool',
     'LBL_NEXT_RENEWAL_DATE' => 'Järgmise uuendamise kuupäev',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Järgmise uuendamise kuupäev',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Ettevõtte nimi/tööstusharu',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Asukoht',
     'LBL_PURCHASES' => 'Ostud',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Konto ajaskaala',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Korralda',
+    'LBL_CREATE_NEW' => 'Loo uus',
+    'LBL_MANAGE' => 'Halda',
+    'LBL_SEE_DETAILS' => 'Kuva üksikasjad',
+    'LBL_HIDE_NEW' => 'Peida',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagrammid',
@@ -207,4 +214,7 @@ Mooduli {{module_name}} loomisek stehke järgmist.
 2. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu Salvesta.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Konto aruanded',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Välised kasutajad',
 );

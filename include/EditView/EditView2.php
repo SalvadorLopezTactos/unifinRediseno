@@ -18,6 +18,22 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
  */
 class EditView
 {
+    /**
+     * @var mixed|array<string, mixed>|array<string, array<int|string, array<int|string, array<int|string, mixed>&mixed[]>>>
+     */
+    public $defs;
+    /**
+     * @var mixed[]
+     */
+    public $sectionLabels;
+    /**
+     * @var mixed
+     */
+    public $returnRelationship;
+    /**
+     * @var string|mixed
+     */
+    public $returnName;
     /** @var TemplateHandler */
     public $th;
     public $tpl;
@@ -123,7 +139,7 @@ class EditView
         }
 
         if (!empty($this->metadataFile) && SugarAutoLoader::existing($this->metadataFile)) {
-            include($this->metadataFile);
+            include $this->metadataFile;
         }
 
         $this->defs = $viewdefs[$this->module][$this->view];
@@ -265,7 +281,9 @@ class EditView
 
         $this->sectionPanels = array();
         $this->sectionLabels = array();
-        if (!empty($this->defs['panels']) && (is_countable($this->defs['panels']) ? count($this->defs['panels']) : 0) > 0) {
+        if (!empty($this->defs['panels']) && (is_countable($this->defs['panels']) ? count(
+            $this->defs['panels']
+        ) : 0) > 0) {
            $keys = array_keys($this->defs['panels']);
            if (is_numeric($keys[0]))
            {
@@ -279,7 +297,7 @@ class EditView
             $this->requiredFirst();
         }
 
-        $maxColumns = isset($this->defs['templateMeta']['maxColumns']) ? $this->defs['templateMeta']['maxColumns'] : 2;
+        $maxColumns = $this->defs['templateMeta']['maxColumns'] ?? 2;
         $panelCount = 0;
         static $itemCount = 100; //Start the generated tab indexes at 100 so they don't step on custom ones.
 
@@ -491,7 +509,7 @@ class EditView
                 }
 
 	       	 	if(isset($this->fieldDefs[$name]['function'])) {
-                    $functionBean = isset($this->fieldDefs[$name]['function_bean']) ? $this->fieldDefs[$name]['function_bean'] : null;
+                    $functionBean = $this->fieldDefs[$name]['function_bean'] ?? null;
                     $function = $this->fieldDefs[$name]['function'];
                     $functionArgs = array($this->focus, $name, $value, $this->view);
 
@@ -523,7 +541,7 @@ class EditView
 	       	 	}
 
 	       	 	if(!$valueFormatted) {
-                    $value = isset($this->focus->$name) ? $this->focus->$name : '';
+                    $value = $this->focus->$name ?? '';
                     $value = ViewDateFormatter::format($this->fieldDefs[$name]['type'], $value);
                 }
 
@@ -634,15 +652,15 @@ class EditView
         $this->th->ss->assign('isDuplicate', $this->isDuplicate);
         $this->th->ss->assign('def', $this->defs);
         $this->th->ss->assign('useTabs', isset($this->defs['templateMeta']['useTabs']) && isset($this->defs['templateMeta']['tabDefs']) ? $this->defs['templateMeta']['useTabs'] : false);
-        $this->th->ss->assign('maxColumns', isset($this->defs['templateMeta']['maxColumns']) ? $this->defs['templateMeta']['maxColumns'] : 2);
+        $this->th->ss->assign('maxColumns', $this->defs['templateMeta']['maxColumns'] ?? 2);
         $this->th->ss->assign('module', $this->module);
-        $this->th->ss->assign('headerTpl', isset($this->defs['templateMeta']['form']['headerTpl']) ? $this->defs['templateMeta']['form']['headerTpl'] : 'include/' . $this->view . '/header.tpl');
-        $this->th->ss->assign('footerTpl', isset($this->defs['templateMeta']['form']['footerTpl']) ? $this->defs['templateMeta']['form']['footerTpl'] : 'include/' . $this->view . '/footer.tpl');
+        $this->th->ss->assign('headerTpl', $this->defs['templateMeta']['form']['headerTpl'] ?? 'include/' . $this->view . '/header.tpl');
+        $this->th->ss->assign('footerTpl', $this->defs['templateMeta']['form']['footerTpl'] ?? 'include/' . $this->view . '/footer.tpl');
         $this->th->ss->assign('current_user', $current_user);
         $this->th->ss->assign('bean', $this->focus);
         $this->th->ss->assign('isAuditEnabled', $this->focus->is_AuditEnabled());
         $this->th->ss->assign('gridline',$current_user->getPreference('gridline') == 'on' ? '1' : '0');
-        $this->th->ss->assign('tabDefs', isset($this->defs['templateMeta']['tabDefs']) ? $this->defs['templateMeta']['tabDefs'] : false);
+        $this->th->ss->assign('tabDefs', $this->defs['templateMeta']['tabDefs'] ?? false);
         $this->th->ss->assign('VERSION_MARK', getVersionedPath(''));
 
         // Needed for BWC locked field handling
@@ -707,8 +725,8 @@ class EditView
         $this->th->ss->assign('form_name', $form_name);
         $this->th->ss->assign('set_focus_block', get_set_focus_js());
 
-        $this->th->ss->assign('form', isset($this->defs['templateMeta']['form']) ? $this->defs['templateMeta']['form'] : null);
-        $this->th->ss->assign('includes', isset($this->defs['templateMeta']['includes']) ? $this->defs['templateMeta']['includes'] : null);
+        $this->th->ss->assign('form', $this->defs['templateMeta']['form'] ?? null);
+        $this->th->ss->assign('includes', $this->defs['templateMeta']['includes'] ?? null);
         $this->th->ss->assign('view', $this->view);
 
         $admin = Administration::getSettings();
@@ -766,8 +784,8 @@ class EditView
             $height = $current_user->getPreference('text_editor_height');
             $width  = $current_user->getPreference('text_editor_width');
 
-            $height = isset($height) ? $height : '300px';
-            $width  = isset($width) ? $width : '95%';
+            $height = $height ?? '300px';
+            $width  = $width ?? '95%';
 
             $this->th->ss->assign('RICH_TEXT_EDITOR_HEIGHT', $height);
             $this->th->ss->assign('RICH_TEXT_EDITOR_WIDTH', $width);

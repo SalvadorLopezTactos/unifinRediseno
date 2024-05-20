@@ -88,7 +88,7 @@ class SugarFieldInt extends SugarFieldBase
         // Use the basic field type for searches, no need to format/unformat everything... for now
     	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         if($this->isRangeSearchView($vardef)) {
-           $id = isset($displayParams['idName']) ? $displayParams['idName'] : $vardef['name'];
+            $id = $displayParams['idName'] ?? $vardef['name'];
  		   $this->ss->assign('original_id', "{$id}");
            $this->ss->assign('id_range', "range_{$id}");
            $this->ss->assign('id_range_start', "start_range_{$id}");
@@ -110,7 +110,7 @@ class SugarFieldInt extends SugarFieldBase
         ImportFieldSanitize $settings
         )
     {
-        $value = str_replace($settings->num_grp_sep,"",$value);
+        $value = str_replace((string)$settings->num_grp_sep, "", (string)$value);
         if (!is_numeric($value) || strstr($value,".")) {
             return false;
         }

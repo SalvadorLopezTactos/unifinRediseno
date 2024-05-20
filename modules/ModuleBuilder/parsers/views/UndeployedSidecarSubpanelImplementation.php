@@ -17,8 +17,32 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
 
-    const HISTORYFILENAME = 'restored.php';
-    const HISTORYVARIABLENAME = 'viewdefs';
+    /**
+     * @var \MetaDataConverter|mixed
+     */
+    public $mdc;
+    /**
+     * @var string|mixed
+     */
+    //@codingStandardsIgnoreStart
+    public $_subpanelName;
+    //@codingStandardsIgnoreEnd
+    /**
+     * @var string|mixed|mixed[]
+     */
+    public $client;
+    /**
+     * @var string|mixed
+     */
+    public $historyPathname;
+    public $module;
+    /**
+     * @var string|mixed[]|mixed
+     */
+    public $sidecarSubpanelName;
+    public $sidecarFile;
+    public const HISTORYFILENAME = 'restored.php';
+    public const HISTORYVARIABLENAME = 'viewdefs';
 
     /**
      * The constructor
@@ -80,7 +104,7 @@ class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementa
         $this->_viewdefs = $this->getNewViewDefs($viewdefs);
 
         $this->_fielddefs = $this->getFieldDefs();
-        $this->_paneldefs = isset($this->_viewdefs['panels']) ? $this->_viewdefs['panels'] : array();
+        $this->_paneldefs = $this->_viewdefs['panels'] ?? array();
 
         // Set the global mod_strings directly as Sugar does not automatically load the
         // language files for undeployed modules (how could it?)

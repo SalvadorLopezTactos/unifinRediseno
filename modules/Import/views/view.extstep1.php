@@ -129,19 +129,24 @@ class ImportViewExtStep1 extends ImportView
                         && isset($mod_strings['LBL_IMPORT_FIELDDEF_' . strtoupper($properties['type'])]) )
                     $fieldtype = ' [' . $mod_strings['LBL_IMPORT_FIELDDEF_' . strtoupper($properties['type'])] . '] ';
 
-                $comment = isset($properties['comments']) ? $properties['comments'] : (isset($properties['comment']) ? $properties['comment'] : '');
+                $comment = $properties['comments'] ?? $properties['comment'] ?? '';
                 if (!empty($comment)) {
                     $fieldtype .= ' - ' . $comment;
                 }
 
-                $options[$displayname.$fieldname] = '<option value="'.$fieldname.'" title="'. $displayname . htmlentities($fieldtype) . '"'
+                $options[$displayname.$fieldname] = '<option value="' . $fieldname . '" title="' . $displayname . htmlentities($fieldtype, ENT_COMPAT) . '"'
                     . $selected . $req_class . '>' . $displayname . $req_mark . '</option>\n';
             }
 
             // get default field value
             $defaultFieldHTML = '';
             if ( !empty($defaultField) ) {
-                $defaultFieldHTML = getControl($module,$defaultField,$fields[$defaultField],( isset($default_values[$defaultField]) ? $default_values[$defaultField] : '' ));
+                $defaultFieldHTML = getControl(
+                    $module,
+                    $defaultField,
+                    $fields[$defaultField],
+                    ($default_values[$defaultField] ?? '')
+                );
             }
 
             if ( isset($default_values[$defaultField]) )
@@ -151,7 +156,7 @@ class ImportViewExtStep1 extends ImportView
             ksort($options);
 
             $help_text = isset($sugarMapping['sugar_help_key']) ? $import_mod_strings[$sugarMapping['sugar_help_key']] : '';
-            $rowLabel = isset($mod_strings[$sugarMapping['sugar_label']]) ? $mod_strings[$sugarMapping['sugar_label']] : $sugarMapping['default_label'] ;
+            $rowLabel = $mod_strings[$sugarMapping['sugar_label']] ?? $sugarMapping['default_label'] ;
             $columns[] = array(
                 'field_choices' => implode('',$options),
                 'default_field' => $defaultFieldHTML,

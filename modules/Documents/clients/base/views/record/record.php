@@ -152,6 +152,7 @@ $viewdefs['Documents']['base']['view']['record'] = array(
                 'related_doc_name',
                 'related_doc_rev_number',
                 'team_name',
+                'is_shared',
             ),
         ),
         [

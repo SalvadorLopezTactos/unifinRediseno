@@ -15,6 +15,23 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 
 class ListViewDisplay {
+    /**
+     * @var mixed[]|mixed
+     */
+    public $searchColumns;
+    /**
+     * @var mixed|mixed[]|mixed[][]|float[]|int[]
+     */
+    public $displayColumns;
+    public $delete;
+    public $email;
+    /**
+     * @var mixed[]
+     */
+    public $data;
+    public $showMassupdateFields;
+    public $mergeduplicates;
+    public $targetList;
     static $listViewCounter = 0;
 
 	var $show_mass_update_form = false;
@@ -196,7 +213,7 @@ class ListViewDisplay {
 	 * @param html_var string html string to be passed back and forth
 	 */
 	function process($file, $data, $htmlVar) {
-		$this->rowCount = count($data['data']);
+        $this->rowCount = is_countable($data['data']) ? count($data['data']) : 0;
 		$this->moduleString = $data['pageData']['bean']['moduleDir'] . '2_' . strtoupper($htmlVar) . '_offset';
 	}
 
@@ -582,7 +599,7 @@ EOF;
 
 		$massUpdateRun = isset($_REQUEST['massupdate']) && $_REQUEST['massupdate'] == 'true';
 		$uids = empty($_REQUEST['uid']) || $massUpdateRun ? '' : $_REQUEST['uid'];
-        $select_entire_list = ($massUpdateRun) ? 0 : (isset($_POST['select_entire_list']) ? $_POST['select_entire_list'] : (isset($_REQUEST['select_entire_list']) ? $_REQUEST['select_entire_list'] : 0));
+        $select_entire_list = ($massUpdateRun) ? 0 : ($_POST['select_entire_list'] ?? $_REQUEST['select_entire_list'] ?? 0);
 
 		$str .= "<textarea style='display: none' name='uid'>{$uids}</textarea>\n" .
 				"<input type='hidden' name='select_entire_list' value='{$select_entire_list}'>\n".
@@ -667,8 +684,8 @@ EOF;
                 if (isset($this->seed->custom_fields)) {
                     $customField = $this->seed->custom_fields;
                     if (isset($customField->bean) && isset($customField->bean->$columnLower)) {
-                        $htmlDisplay = html_entity_decode($customField->bean->$columnLower);
-                        for ($count = 0; $count < count($data['data']); $count++) {
+                        $htmlDisplay = html_entity_decode($customField->bean->$columnLower, ENT_COMPAT);
+                        for ($count = 0; $count < (is_countable($data['data']) ? count($data['data']) : 0); $count++) {
                             $data['data'][$count][$columnName] = $htmlDisplay;
                         }
                     }

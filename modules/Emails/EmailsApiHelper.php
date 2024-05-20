@@ -47,7 +47,7 @@ class EmailsApiHelper extends SugarBeanApiHelper
 
         sugar_mkdir(sugar_cached('images/'));
         while ($a = $stmt->fetchAssociative()) {
-            list($type) = explode('/', $a['file_mime_type']);
+            [$type] = explode('/', $a['file_mime_type']);
             if (strtolower($type) === 'image') {
                 $noteId = $a['id'];
                 $this->cid2Link($noteId, $imageUrlTemplate, $descriptionHtml);

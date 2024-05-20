@@ -21,7 +21,7 @@ $href_string = "javascript:node_click('activetimeperiods','activetimeperiodswork
 $mod_strings = return_module_language($current_language, 'Forecasts');
 $GLOBALS['displayListView'] = true;
 function get_worksheet_defintion($user_id, $forecast_type, $timeperiod_id, $allow_commit = false) {
-        $lv = null;
+    $lv = null;
 		//global variable references.
 	global $current_user;
 	global $current_language;

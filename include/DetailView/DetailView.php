@@ -20,10 +20,23 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 class DetailView
 {
 
-	var $list_row_count = null;
-	var $return_to_list_only=false;
-	var $offset_key_mismatch=false;
-	var $no_record_found=false;
+    public $local_theme;
+    /**
+     * @var mixed|array<string, mixed>
+     */
+    public $local_app_strings;
+    public $records_per_page;
+    public $local_current_module;
+    public $query_where;
+    public $query_orderby;
+    /**
+     * @var mixed|string
+     */
+    public $base_URL;
+    public $list_row_count = null;
+    public $return_to_list_only = false;
+    public $offset_key_mismatch = false;
+    public $no_record_found = false;
 
     /**
      * @var Request
@@ -195,8 +208,7 @@ class DetailView
 		//store a maximum of 20 entries in the nav_ids_visited array.
 		//remove the oldest entry when this limit is reached.
 		if (count($nav_ids_visited) >= 20) {
-			reset($nav_ids_visited);
-			unset($nav_ids_visited[key($nav_ids_visited)]);
+            unset($nav_ids_visited[array_key_first($nav_ids_visited)]);
 		}
 		$nav_ids_visited[$offset]=$object->id;
 		$nav_history=sprintf("%s:%s:%s",$nav_stamp,$nav_offset,implode(',', $nav_ids_visited));

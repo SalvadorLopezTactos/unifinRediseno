@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Produktdefinition aktualisieren',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Zeitpläne für Prozessdauerbenachrichtigung',
 'LBL_OOTB_DATA_ARCHIVER' => 'Aktive Datenarchive/Löschungen ausführen',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Anwenden von Abonnementberechtigungen wenn diese geändert werden',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geokodier-Datensätze',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Erw. Optionen',
 'LBL_TOGGLE_ADV' => 'Erw. Optionen anzeigen',
 'LBL_TOGGLE_BASIC' => 'Grundlegende Optionen anzeigen',
+'LBL_UPDATEMOMENTUMCJ' => 'Update-Dynamik der laufenden Smart Guides',
 // Links
 'LNK_LIST_SCHEDULER' => 'Zeitplaner',
 'LNK_NEW_SCHEDULER' => 'Neue Aufgabe',
@@ -178,4 +180,3 @@ Zum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.
 'LBL_SUGARJOBDATAARCHIVER' => 'Aktive Datenarchive/Löschungen ausführen',
 'LBL_PMSEENGINECRON' => 'SugarBPM-Zeitplaner',
 );
-

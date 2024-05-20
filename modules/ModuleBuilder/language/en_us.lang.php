@@ -819,10 +819,7 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Create a formula to determine whether this field is required in layouts.<br/>"
-    . "Required fields will follow the formula in the browser-based mobile view, <br/>"
-    . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
-    . "They will not follow the formula in the Sugar Self-Service Portal.",
+    'LBL_POPHELP_REQUIRED'=>'Fields that are conditionally required are not available for use in the following SugarBPM action types: Add Related Record, Change Field. Please remove the "Required If" text to use this field in these process definition actions',
 'LBL_POPHELP_READONLY'=>"Create a formula to determine whether this field is read only in layouts.<br/>"
         . "Read only fields will follow the formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
@@ -864,6 +861,7 @@ $mod_strings = array(
                 'decimal'=>'Decimal',
                 'autoincrement' => 'AutoIncrement',
                 'actionbutton' => 'ActionButton',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Frequently used labels",

@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Formularknapper',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Godkend/Afvis',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Route',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Send til DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Andre routemuligheder',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Ændr tildelt til bruger',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Team',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Flet skabelon',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Vælg...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Flet skabelon til PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Send flettet dokument via e-mail',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Flet skabelon',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Konvergerende gateway type svarer ikke til gateway type af en indgående strøm',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Divergerende gateways udvider processer i flere grene. Når du bruger en konvergerende gateway til at rekonvergere disse grene tilbage i én sti, skal den korrekte type af konvergerende gateway bruges, afhængigt af hvilken type divergerende gateway, der blev brugt til at oprette grenene. For grene lavet med eksklusive eller event-baserede divergerende gateways, skal du bruge en eksklusiv konvergerende gateway til at rekonvergere dem. For grene oprettet med parallelle eller inklusive divergerende gateways, skal du bruge en parallel konvergerende gateway til at rekonvergere dem.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Modulfelt',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Modulforhold',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Bruger',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Rolle',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Team',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Formularaktivitet',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Forretningsregel',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Forretningsregel handling',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-mail-skabelon',
 );

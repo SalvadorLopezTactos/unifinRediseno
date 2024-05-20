@@ -159,10 +159,10 @@
             return;
         }
 
-        if (this.values.get('display_manager')) {
-            this.parseManagerWorksheet(collection || this.forecastManagerWorksheetContext.get('collection'));
-        } else {
-            this.parseRepWorksheet(collection || this.forecastWorksheetContext.get('collection'));
+        if (!_.isUndefined(this.forecastManagerWorksheetContext)) {
+            if (this.values.get('display_manager')) {
+                this.parseManagerWorksheet(collection || this.forecastManagerWorksheetContext.get('collection'));
+            }
         }
     },
 

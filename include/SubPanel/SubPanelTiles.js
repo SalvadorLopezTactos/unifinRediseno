@@ -132,6 +132,11 @@ function sub_p_rem(sp,lf,li,rp){
 
 	return_url = "index.php?module="+get_module_name()+"&action=SubPanelViewer&subpanel="+sp+"&record="+get_record_id()+"&sugar_body_only=1&inline=1";
 
+    let refreshId = Math.random().toString();
+    // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+    return_url += `&refreshId=${refreshId}`;/* jshint ignore:line */
+    // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+
 	remove_url = "index.php?module="+ get_module_name()
 			+ "&action=DeleteRelationship"
 			+ "&record="+ get_record_id()

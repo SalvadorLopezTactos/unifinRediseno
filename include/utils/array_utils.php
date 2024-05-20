@@ -227,7 +227,7 @@ function object_to_array_deep($obj)
 	function setDeepArrayValue(&$array, $key, $value) {
 		//if _ is at position zero, that is invalid.
 		if (strrpos($key, "_")) {
-		list ($key, $remkey) = explode('_', $key, 2);
+            [$key, $remkey] = explode('_', $key, 2);
 			if (!isset($array[$key]) || !is_array($array[$key])) {
 				$array[$key] = array();
 			}
@@ -243,11 +243,11 @@ function object_to_array_deep($obj)
 // Returns FALSE if number of elements in the arrays do not match; otherwise, returns merged array
 // Example: array("a", "b", "c") and array("x", "y", "z") are passed in; array("ax", "by", "cz") is returned
 function array_merge_values($arr1, $arr2) {
-	if (count($arr1) != count($arr2)) {
+    if ((is_countable($arr1) ? count($arr1) : 0) != (is_countable($arr2) ? count($arr2) : 0)) {
 		return FALSE;
 	}
 
-	for ($i = 0; $i < count($arr1); $i++) {
+    for ($i = 0; $i < (is_countable($arr1) ? count($arr1) : 0); $i++) {
 		$arr1[$i] .= $arr2[$i];
 	}
 
@@ -299,9 +299,7 @@ function maskConfigNode($node, array &$res): void
             $res[$key] = $res[$key] ?? [];
             maskConfigNode($node[$key], $res[$key]);
         } else {
-            if ((0 === substr_compare($key, 'password', -strlen('password')))
-                || (0 === substr_compare($key, 'pwd', -strlen('pwd')))
-                || (0 === substr_compare($key, 'pass', -strlen('pass')))) {
+            if (str_ends_with($key, 'password') || str_ends_with($key, 'pwd') || str_ends_with($key, 'pass')) {
                 $res[$key] = '******';
             } else {
                 $res[$key] = $node[$key];
@@ -352,7 +350,7 @@ class SugarArray extends ArrayObject
 
     private function _getFromSource($key, $default) {
         if (strpos($key, '.') === false) {
-            return isset($this[$key]) ? $this[$key] : $default;
+            return $this[$key] ?? $default;
         }
 
         $exploded = explode('.', $key);
@@ -363,7 +361,7 @@ class SugarArray extends ArrayObject
     private function _getRecursive($raw_config, $children, $default) {
         if ($raw_config === $default) {
             return $default;
-        } elseif (count($children) == 0) {
+        } elseif ((is_countable($children) ? count($children) : 0) == 0) {
             return $raw_config;
         } else {
             $next_key = array_shift($children);

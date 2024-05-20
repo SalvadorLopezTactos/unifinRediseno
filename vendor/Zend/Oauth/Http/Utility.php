@@ -189,7 +189,7 @@ class Zend_Oauth_Http_Utility
      */
     public function generateNonce()
     {
-        return md5(uniqid(rand(), true));
+        return md5(uniqid(random_int(0, mt_getrandmax()), true));
     }
 
     /**

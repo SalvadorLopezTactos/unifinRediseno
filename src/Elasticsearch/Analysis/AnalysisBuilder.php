@@ -31,12 +31,12 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Exception\AnalyzerBuilderException;
  */
 class AnalysisBuilder
 {
-    const ANALYSIS = 'analysis';
-    const ANALYZER = 'analyzer';
-    const CUSTOM_ANALYZER = 'custom';
-    const TOKENIZER = 'tokenizer';
-    const TOKENFILTER = 'filter';
-    const CHARFILTER = 'char_filter';
+    public const ANALYSIS = 'analysis';
+    public const ANALYZER = 'analyzer';
+    public const CUSTOM_ANALYZER = 'custom';
+    public const TOKENIZER = 'tokenizer';
+    public const TOKENFILTER = 'filter';
+    public const CHARFILTER = 'char_filter';
 
     /**
      * @var array List of analysis entries

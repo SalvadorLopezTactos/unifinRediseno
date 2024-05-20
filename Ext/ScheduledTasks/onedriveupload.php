@@ -51,16 +51,11 @@ if (!class_exists('OneDriveUploadJob')) {
             $this->job->runnable_ran = true;
             $this->job->runnable_data = $data;
             $data = unserialize(base64_decode($data), ['allowed_classes' => false]);
-            if ($data === false) {
-                $GLOBALS['log']->fatal('OneDriveUploadJob data could not be unserialized');
-                return true;
-            }
             $uploadUrl = $data['uploadUrl'];
             $filePath = $data['filePath'];
             $client = $oneDriveClient->getClient();
             $fileName = $data['fileName'];
             $fileSize = $data['fileSize'];
-
             $fragSize = 320 * 1024;
             $numFrags = ceil($fileSize / $fragSize);
             $bytesRemaining = $fileSize;
@@ -80,7 +75,6 @@ if (!class_exists('OneDriveUploadJob')) {
                 }
 
                 $data = $oneDriveClient->getFileChunk($filePath, $chunkSize, $offset);
-
                 $contentRange = " bytes {$start}-{$end}/{$fileSize}";
                 $headers = array(
                     'Content-Length'=> $numBytes,

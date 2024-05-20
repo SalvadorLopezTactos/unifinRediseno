@@ -36,10 +36,10 @@
      * @property {Object}
      */
     drawerConfigs: {
-        // pixels between drawer's top and nav bar's bottom
-        topPixels: 0,
-        // pixels between drawer's bottom and footer's top
-        bottomPixels: 0,
+        // drawer's top in pixel or percentage
+        top: 0,
+        // drawer's bottom in pixel or percentage
+        bottom: 0,
         // drawer's right in pixel or percentage
         right: 0,
         // drawer's left in pixel or percentage
@@ -53,10 +53,16 @@
     $main: null,
 
     /**
-     * Store breadcrumbs for the side-drawers being opened
+     * Store tabs for the side-drawers being opened
      * @property {Array}
      */
-    _breadcrumbs: [],
+    _tabs: [],
+
+    /**
+     * Index of active tab
+     * @property {number}
+     */
+    activeTabIndex: 0,
 
     /**
      * @inheritdoc
@@ -102,10 +108,8 @@
         this.$main = app.$contentEl.children().first();
         this.addDrawerHandler = _.bind(this.toggle, this);
         this.removeDrawerHandler = _.bind(this.toggle, this);
-        this.resizeHandler = _.bind(this._resizeDrawer, this);
         this.$main.on('drawer:add.sidedrawer', this.addDrawerHandler);
         this.$main.on('drawer:remove.sidedrawer', this.removeDrawerHandler);
-        $(window).on('resize.sidedrawer', this.resizeHandler);
 
         this.before('tabbed-dashboard:switch-tab', function(params) {
             var callback = _.bind(function() {
@@ -150,6 +154,7 @@
         if (this.layout && this.layout.name === 'filterpanel') {
             this.hide();
         }
+        $(window).on('resize.' + this.cid, _.bind(_.debounce(this.resetTabs, 100), this));
     },
 
     /**
@@ -159,10 +164,165 @@
     config: function(configs) {
         configs = configs || {};
         this.drawerConfigs = _.extend({}, this.drawerConfigs, configs);
-        this.$el.css('top', $('#header .navbar').outerHeight() + this.drawerConfigs.topPixels);
-        this.$el.css('height', this._determineDrawerHeight());
+
+        const imprsn = $('.impersonation-banner');
+        let top = imprsn.length ? imprsn.height() : 0;
+        top += this.drawerConfigs.top;
+
+        this.$el.css('top', top);
+        this.$el.css('bottom', this.drawerConfigs.bottom);
         this.$el.css('left', this.drawerConfigs.left);
         this.$el.css('right', this.drawerConfigs.right);
+    },
+
+    /**
+     * Render tabs.
+     */
+    renderTabs: function() {
+        let tabsTemplate = app.template.getLayout(this.name + '.drawer-tabs');
+        this.$('.drawer-tabs').html(tabsTemplate(this));
+        this.$('.drawer-tabs').find('li.tab:not(.active) a').on('click', _.bind(this.tabClicked, this));
+        this.$('.drawer-tabs').find('.sicon-close').on('click', _.bind(this.closeTabClicked, this));
+
+        this.setTabWidths();
+    },
+
+    /**
+     * Calculates and sets equal width for all the tabs.
+     */
+    setTabWidths: function() {
+        let totalWidth = this.$('.drawer-tabs').width();
+
+        if (totalWidth && this._tabs.length) {
+            this.$('.drawer-tabs .nav-tabs .tab').width(totalWidth / this._tabs.length);
+        }
+    },
+
+    /**
+     * Re-render tabs when window size changes.
+     */
+    resetTabs: function() {
+        if (this.disposed || app.drawer.isOpening() || app.drawer.isClosing()) {
+            return;
+        }
+        this.renderTabs();
+    },
+
+    /**
+     * Handle tab click.
+     * @param {Event} event
+     */
+    tabClicked: function(event) {
+        let index = parseInt(event.currentTarget.getAttribute('data-index'));
+        if (this.hasUnsavedChanges(_.bind(this.switchTab, this, index))) {
+            return;
+        }
+        this.switchTab(index);
+    },
+
+    /**
+     * Switch tab.
+     * @param {number} index Tab index to switch to
+     */
+    switchTab: function(index) {
+        if (index >= 0 && index < this._tabs.length) {
+            this.activeTabIndex = index;
+            this.resetTabs();
+            this.currentContextDef = this._tabs[this.activeTabIndex];
+            this.showComponent(this.currentContextDef);
+        }
+    },
+
+
+    /**
+     * Close tab handler.
+     * @param {Event} event
+     */
+    closeTabClicked: function(event) {
+        let index = parseInt(event.currentTarget.getAttribute('data-index'));
+        this.closeTab(index);
+    },
+
+    /**
+     * Close tab.
+     * @param {number} index Tab index to close
+     */
+    closeTab: function(index) {
+        if (this._tabs.length > 1 && index >= 0 && index < this._tabs.length) {
+            this._tabs.splice(index, 1);
+            if (index < this.activeTabIndex || this.activeTabIndex === this._tabs.length) {
+                this.activeTabIndex--;
+            }
+            this.resetTabs();
+            if (this.currentContextDef != this._tabs[this.activeTabIndex]) {
+                this.currentContextDef = this._tabs[this.activeTabIndex];
+                this.showComponent(this.currentContextDef);
+            }
+        } else if (this._tabs.length === 1 && index === 0) {
+            this.close();
+        }
+    },
+
+    /**
+     * Get active tab.
+     * @return {Object}
+     */
+    getActiveTab: function() {
+        return this.currentContextDef;
+    },
+
+    /**
+     * Get tab index if it already exists.
+     * @param {Object} def The component definition.
+     * @return {number|null} The tab index
+     */
+    getTabIndex: function(def) {
+        let index = null;
+        _.find(this._tabs, function(tab, i) {
+            if (tab.context.contentType === def.context.contentType &&
+                tab.context.module === def.context.module &&
+                tab.context.modelId === def.context.modelId) {
+                index = i;
+                return true;
+            }
+        });
+        return index;
+    },
+
+    /**
+     * Returns data to generate a html attribute 'title' and icon of FD tabs
+     * @param {string} module
+     * @param {string} tabType type name [RECORD | FOCUS_DRAWER]
+     * @param {string} tabName
+     * @return array
+     */
+    getDataTitle: function(module, tabType, tabName) {
+        let moduleNameSingular = app.lang.get('LBL_MODULE_NAME_SINGULAR', module) || module;
+        let moduleMeta = app.metadata.getModule(module);
+        let labelColor = (moduleMeta) ? `label-module-color-${moduleMeta.color}` : `label-${module}`;
+
+        return {
+            module: moduleNameSingular,
+            view: app.lang.get(tabType),
+            name: tabName,
+            labelColor: labelColor
+        };
+    },
+
+    /**
+     * Call _open() to open the drawer or
+     * check if it's ok to open a new tab if the drawer is already open.
+     *
+     * @param {Object} def The component definition.
+     * @param {Function} onClose Callback method when the drawer closes.
+     * @param {boolean} sideDrawerClick True if the click originated from a side-drawer
+     */
+    open: function(def, onClose, sideDrawerClick) {
+        if (this.isOpen() && this.hasUnsavedChanges(
+            _.bind(this._open, this, def, onClose, sideDrawerClick))) {
+            return;
+        }
+        this._open(def, onClose, sideDrawerClick);
     },
 
     /**
@@ -175,16 +335,47 @@
      * @param {Object} def The component definition.
      * @param {Function} onClose Callback method when the drawer closes.
      * @param {boolean} sideDrawerClick True if the click originated from a side-drawer
+     * @private
      */
-    open: function(def, onClose, sideDrawerClick) {
+    _open: function(def, onClose, sideDrawerClick) {
         // store the callback function to be called later
         this.onCloseCallback = onClose;
 
+        // check if it already exists
         if (sideDrawerClick) {
-            this._breadcrumbs.push(def);
-        } else {
-            this._breadcrumbs = [def];
+            let index = this.getTabIndex(def);
+            if (index !== null) {
+                this.switchTab(index);
+                return;
+            }
         }
+
+        // set tab title
+        if (def) {
+            def.isFocusDashboard = def.isFocusDashboard || true;
+            if (def.context.model) {
+                def.recordName = def.context.model.get('name');
+            }
+
+            if (def.isFocusDashboard) {
+                def.hasTitle = !_.isUndefined(def.dashboardName);
+            } else {
+                def.hasTitle = !!def.recordName;
+            }
+
+            if (def.context.layout === 'record') {
+                def.context.skipRouting = true;
+            }
+        }
+
+        if (sideDrawerClick) {
+            this._tabs.push(def);
+        } else {
+            this._tabs = [def];
+        }
+
+        this.activeTabIndex = this._tabs.length - 1;
+        this.resetTabs();
 
         // open the drawer if not yet
         if (!this.isOpen()) {
@@ -198,7 +389,14 @@
             this.$el.show('slide', {direction: 'right'}, 300, _.bind(this.showComponent, this, def));
             this.currentState = 'idle';
         } else {
-            this.showComponent(def);
+            let _showComponent = _.bind(this.showComponent, this, def);
+            if (!app.sideDrawer.triggerBefore('side-drawer:content-changed', {callback: _showComponent})) {
+                return;
+            }
+            _showComponent();
+            if (this.isHidden()) {
+                this.slideIn();
+            }
         }
 
         let oldContext = this.getParentContextDef('parentContext');
@@ -350,6 +548,10 @@
     _setButtonState: function(button, state) {
         button.prop('disabled', !state);
         button.toggleClass('disabled', !state);
+
+        if (this.getParentContextDef('hideRecordSwitching') && !state) {
+            button.hide();
+        }
     },
 
     /**
@@ -364,9 +566,8 @@
             description: 'LBL_SHORTCUT_CLOSE_DRAWER',
             callOnFocus: true,
             handler: function() {
-                var $closeButton = this.$('button[data-action="close"]');
-                if ($closeButton.is(':visible') && !$closeButton.hasClass('disabled')) {
-                    $closeButton.click();
+                if (this.isOpen()) {
+                    this._close();
                 }
             }
         });
@@ -395,6 +596,20 @@
             component.loadData();
             component.render();
         }
+    },
+
+    /**
+     * Get drawer width.
+     *
+     * @param {View.Component} component The component.
+     * @return {number} The component width.
+     */
+    getPaneWidth: function(component) {
+        if (!this.$el) {
+            return 0;
+        }
+
+        return this.$el.width() || 0;
     },
 
     /**
@@ -453,7 +668,7 @@
         this.currentState = 'closing';
         this.$el.hide('slide', {direction: 'right'}, 300);
         this.currentState = '';
-        this._breadcrumbs = [];
+        this._tabs = [];
         this.drawerHidden = false;
 
         this.unfocusRow();
@@ -534,34 +749,6 @@
     },
 
     /**
-     * Calculate the height of the drawer
-     * @return {number}
-     * @private
-     */
-    _determineDrawerHeight: function() {
-        var windowHeight = $(window).height();
-        var headerHeight = $('#header .navbar').outerHeight() + this.drawerConfigs.topPixels;
-        var footerHeight = $('footer').outerHeight() + this.drawerConfigs.bottomPixels;
-
-        return windowHeight - headerHeight - footerHeight;
-    },
-
-    /**
-     * Resize the height of the drawer.
-     * @private
-     */
-    _resizeDrawer: _.throttle(function() {
-        if (this.disposed) {
-            return;
-        }
-        // resize the drawer if it is opened.
-        if (this.currentState === 'idle') {
-            var drawerHeight = this._determineDrawerHeight();
-            this.$el.css('height', drawerHeight);
-        }
-    }, 300),
-
-    /**
      * @override
      */
     _placeComponent: function(component) {
@@ -580,7 +767,11 @@
         let list = context.get('collection');
         let baseModelId = this.getParentContextDef('baseModelId');
         let model = list.get(baseModelId);
-        this._doSwitchRecord(model, evt.currentTarget.dataset.actionType);
+        let actionType = evt.currentTarget.dataset.actionType;
+        if (this.hasUnsavedChanges(_.bind(this._doSwitchRecord, this, model, actionType))) {
+            return;
+        }
+        this._doSwitchRecord(model, actionType);
     },
 
     /**
@@ -614,13 +805,18 @@
      */
     switchToAnotherModel: function(model) {
         let def = this.getParentContextDef();
+        let fieldDefs = this.getParentContextDef('fieldDefs');
+        let fieldValue = model.get(fieldDefs.name);
+        let tabType = def.context.contentType === 'record' ?
+            'LBL_RECORD' : 'LBL_FOCUS_DRAWER_DASHBOARD';
+        def.dashboardName = fieldValue;
         def.context.baseModelId = model.get('id');
 
         // Get the correct module name and ID for the next record. The module name can vary, for
         // example with flex relate fields.
         def.context.module = this._getRelatedModuleName(model);
         def.context.modelId = this._getRelatedModelId(model);
-
+        def.context.dataTitle = this.getDataTitle(def.context.module, tabType, fieldValue);
         this.open(def);
     },
 
@@ -635,6 +831,7 @@
         switch (fieldDefs.type) {
             case 'name':
             case 'fullname':
+            case 'int':
                 return model.get('_module');
             case 'relate':
                 if (fieldDefs.module) {
@@ -663,6 +860,7 @@
         switch (fieldDefs.type) {
             case 'name':
             case 'fullname':
+            case 'int':
                 return model.get('id');
             case 'relate':
                 return model.get(fieldDefs.id_name);
@@ -690,10 +888,18 @@
     /**
      * @inheritdoc
      */
+    _render: function() {
+        this._super('_render');
+        this.renderTabs();
+    },
+
+    /**
+     * @inheritdoc
+     */
     _dispose: function() {
         this.$main.off('drawer:add.sidedrawer', this.addDrawerHandler);
         this.$main.off('drawer:remove.sidedrawer', this.removeDrawerHandler);
-        $(window).off('resize.sidedrawer', this.resizeHandler);
+        $(window).off('resize.' + this.cid);
         this._super('_dispose');
     },
 })

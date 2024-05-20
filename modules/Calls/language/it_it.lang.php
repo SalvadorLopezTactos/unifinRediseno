@@ -194,4 +194,10 @@ Per creare una {{calls_singular_module}}:
     - Clicca "Seleziona un invitato" per aggiungere un utente esistente, contatto e lead alla  {{calls_singular_module}}.
     - Clicca l´icona più a destra del pulsante "Seleziona un invitato" per inserire l´invitato della {{calls_singular_module}} come nuovo record in Sugar.
 3. Cliccare "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "La chiamata della Guida Intelligente è",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Compiti figli',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Riunioni figlie',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Chiamate figlie',
 );

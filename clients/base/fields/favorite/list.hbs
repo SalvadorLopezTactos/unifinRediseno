@@ -11,7 +11,8 @@
  */
 --}}
 <button type="button" class="btn btn-invisible{{#if value}} active{{/if}} favorite-button" rel="tooltip"
-    title="{{str 'LBL_FAVORITE' this.module}}" aria-label="{{str 'LBL_FAVORITE' this.module}}"
+    title="{{#if value}}{{str 'LBL_UNFAVORITE' this.module}}{{else}}{{str 'LBL_FAVORITE' this.module}}{{/if}}"
+    aria-label="{{#if value}}{{str 'LBL_UNFAVORITE' this.module}}{{else}}{{str 'LBL_FAVORITE' this.module}}{{/if}}"
     data-placement="bottom" aria-pressed="{{#if value}}true{{else}}false{{/if}}"
 >
     <i class="sicon {{#if value}}sicon-star-fill{{else}}sicon-star-outline{{/if}}"></i>

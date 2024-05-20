@@ -247,6 +247,7 @@ function get_user_alert_details(& $focus, $user_meta_array, & $address_array){
 
 	function get_alert_recipient($user_id)
 	{
+        $user_array = [];
 	    global $locale;
 		$notify_user = BeanFactory::getBean('Users', $user_id);
 
@@ -283,7 +284,7 @@ function get_user_alert_details(& $focus, $user_meta_array, & $address_array){
 
 	function get_alert_recipient_from_custom_fields($target_module, $target_email, $target_name)
 	{
-
+        $user_array = [];
 		//user type is trig_user_custom
 
 		if (empty($target_module->$target_email)) {
@@ -314,6 +315,8 @@ function get_user_alert_details(& $focus, $user_meta_array, & $address_array){
  * @return mixed
  */
 function create_alert_email($notify_user) {
+        $focus = null;
+        $notify_mail = null;
 		global $sugar_version, $sugar_config, $app_list_strings, $current_user;
 
 		if (empty($_SESSION['authenticated_user_language'])) {
@@ -573,6 +576,7 @@ function get_related_array(& $focus, & $user_meta_array, & $address_array){
 
 
 function compile_rel_user_info($target_object, $user_meta_array, &$address_array){
+    $user_array = [];
 		//compile user address info based on target object
 
 		if($user_meta_array['rel_email_value']==""){
@@ -888,7 +892,7 @@ function reconstruct_target_body($focus, $target_body, $component_array, $notify
 function replace_target_body_items($target_body, $replace_array){
 
 	foreach ($replace_array as $name => $replacement_value){
-		$replacement_value=nl2br($replacement_value);
+        $replacement_value = nl2br((string)$replacement_value);
         $target_body = str_replace($name, $replacement_value, $target_body);
 	}
 	return $target_body;

@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Kodi sekret i klientit nuk është vendosur',
     'LBL_RESEND_BUTTON_LABEL' => 'Ridërgo',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Ngarko zarfin',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Lloji i shërbimit të resë kompjuterike',
+    'LBL_CLOUD_PATH' => 'Shtegu i resë kompjuterike',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Paneli i listës së zarfeve të DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Zarfet më të fundit të DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit të zarfeve të DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'Dokument nga ',
+    'LBL_NEW_ENVELOPE' => 'Zarf i ri',
     'LBL_DOCUMENT_IS_NOW' => ' është tashmë ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'Gabim i DocuSign. ID-ja e llogarisë nuk mund të merrej në bazë të kodit së aksesit',
     'LBL_ERROR_RESEND' => 'Ridërgimi nga DocuSign nuk mund të kryhej. Statusi i zarfit duhet të jetë "dërguar"',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Përditësimi nuk u krye',
     'LBL_ERROR_FETCH_TIME' => 'Rregullat e DocuSign nuk lejojnë kërkesa të shumëfishta ndaj të njëjtit zarf brenda 15 minutash',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Ndodhi një gabim. Zarfi nuk mund të përditësohej. Kontrollo regjistrat!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Ndodhi një gabim. Shabllonet nuk mund të listoheshin. Kontrollo evidencat!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Ndodhi një gabim. Nuk mund të merrej shablloni. Kontrollo evidencat!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Zarfi nuk është përfunduar',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Statusi i zarfit në DocuSign është tashmë ',
     'LBL_OVERVIEW' => 'Pamje e përgjithshme',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Shto dokument',
     'LBL_BUTTON_SEND' => 'Dërgo',
     'LBL_BUTTON_CLEAR' => 'Pastro',
-    'LBL_MISSING_OBJECT' => 'Objekti i DocuSign nuk është në dritare',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Përdor shabllonin',
     'LBL_PLEASE_LOG_IN' => 'Identifikohu fillimisht në DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Nuk mund ta shkarkosh këtë dokument. Ai është krijuar nga një përdorues tjetër!',
     'LBL_SEND_NOT_ALLOWED' => 'Nuk mund ta dërgosh këtë zarf. Ai është krijuar nga një përdorues tjetër!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Nënshkruar',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Dokumenti nuk mund të shkarkohej. Kontrollo regjistrat!',
     'LBL_DOCUMENT_COMPLETED' => 'Përfunduar',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Informacion për DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'është tashmë',
+    'LBL_SETTINGS_TITLE' => 'Cilësimet e DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'Veprimi i përzgjedhjes së marrësit',
+    'LBL_RECIPIENT_NAME' => 'Emri',
+    'LBL_RECIPIENT_EMAIL' => 'Emaili',
+    'LBL_RECIPIENT_TYPE' => 'Lloji',
+    'LBL_TEMPLATE_NAME' => 'Emri',
+    'LBL_RECIPIENT_SELECT' => 'Zgjidh...',
+    'LBL_RECIPIENT_ROLE' => 'Roli',
+    'LBL_SELECT_BUTTON_LABEL' => 'Zgjidh',
+    'LBL_BACK_BUTTON_LABEL' => 'Prapa',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Nuk arriti të marrë marrësit e mundshëm!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Nuk arriti të marrë shabllonet!',
 ];

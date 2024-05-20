@@ -640,7 +640,7 @@ function executevardefs()
 	  if( file_exists( $vardefFileName )) {
 	    // echo "<br>".$vardefFileName."<br>";
       }
-      include_once( $vardefFileName );
+        include_once $vardefFileName;
     }
 
     echo "<html lang='en'>";

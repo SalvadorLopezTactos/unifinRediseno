@@ -19,10 +19,18 @@ require_once 'modules/OAuthTokens/OAuthToken.php';
  */
 class SugarSNIP
 {
+    /**
+     * @var \SugarHttpClient|mixed
+     */
+    public $client;
+    /**
+     * @var string|mixed
+     */
+    public $last_error;
     // Username for SNIP system user
-    const SNIP_USER = 'SNIPuser';
-    const OAUTH_KEY = 'SNIPOAuthKey';
-    const DEFAULT_URL = 'https://ease.sugarcrm.com/';
+    public const SNIP_USER = 'SNIPuser';
+    public const OAUTH_KEY = 'SNIPOAuthKey';
+    public const DEFAULT_URL = 'https://ease.sugarcrm.com/';
 
     /**
      * Singleton instance
@@ -92,11 +100,11 @@ class SugarSNIP
      * Generic REST call to SNIP instance
      *
      * @param string $name function to call
-     * @param string $params parameters
+     * @param array $params parameters
      * @param bool $json encode params as JSON in data var or send as query?
      * @return bool Success?
      */
-    public function callRest($name, $params = array(), $json = false, &$connectionfailed=false)
+    public function callRest(string $name, array $params = [], $json = false, &$connectionfailed = false)
     {
         if(isset($params['url'])) {
             $url = $params['url'];
@@ -327,7 +335,7 @@ class SugarSNIP
             return array('status'=>'notpurchased','message'=>null);
 
         $connectionfailed=false;
-        $this->callRest('status',false,$json=false,$connectionfailed);
+        $this->callRest('status', [], false, $connectionfailed);
 
         //check if server is down
         if ($connectionfailed || !is_object($this->last_result) || $this->last_result->result!='ok' && $this->last_result->result!='instance not found'){
@@ -456,6 +464,7 @@ class SugarSNIP
      */
     public function getSnipUser()
     {
+        $user = null;
         if($this->user) {
             return $this->user;
         }
@@ -580,12 +589,14 @@ class SugarSNIP
         if(empty($e->id)) return;
 
         //Process attachments
-        if (isset($email['message']['attachments']) && (is_countable($email['message']['attachments']) ? count($email['message']['attachments']) : 0)) {
+        if (isset($email['message']['attachments']) && (is_countable($email['message']['attachments']) ? count(
+            $email['message']['attachments']
+        ) : 0)) {
             foreach ($email['message']['attachments'] as $attach)
             {
                 $note = $this->processEmailAttachment($attach, $e);
                 if (!empty($note)) {
-                    list($image, $subtype) = explode('/', $note->file_mime_type);
+                    [$image, $subtype] = explode('/', $note->file_mime_type);
                     if ($image === 'image' && !empty($subtype) && !empty($attach['partid'])) {
                         // A File Attachment was created in a Note object. If it represents an inline image, we
                         // need to update any 'cid:' references in the description html to reference this note id

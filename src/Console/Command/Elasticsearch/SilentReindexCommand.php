@@ -13,6 +13,7 @@
 namespace Sugarcrm\Sugarcrm\Console\Command\Elasticsearch;
 
 use Sugarcrm\Sugarcrm\Console\CommandRegistry\Mode\InstanceModeInterface;
+use Sugarcrm\Sugarcrm\Elasticsearch\Queue\QueueManager;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
 use Sugarcrm\Sugarcrm\Elasticsearch\Container;
@@ -96,6 +97,7 @@ class SilentReindexCommand extends Command implements InstanceModeInterface
             $this->reportIndexingDone();
         }
         $output->writeln("Reindexing complete");
+        return 0;
     }
 
     /**
@@ -132,15 +134,7 @@ class SilentReindexCommand extends Command implements InstanceModeInterface
      */
     protected function hasMoreRecords()
     {
-        // check the count for each module
-        $queueManager = $this->container->queueManager;
-        foreach ($queueManager->getQueuedModules() as $module) {
-            if ($queueManager->getQueueCountModule($module) > 0) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->container->queueManager->hasMoreRecords(QueueManager::DEFAULT_BUCKET_ID);
     }
 
     /**

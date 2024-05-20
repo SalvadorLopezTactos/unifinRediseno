@@ -14,6 +14,8 @@
 class UndeployedRelationships extends AbstractRelationships implements RelationshipsInterface
 {
     
+    public $packageKey;
+    public $installDefs;
     protected $basepath ; // Base directory for the lhs_module
     protected $packageName ;
     private $activitiesToAdd ; // if we need to add in the composite Activities and History subpanels to the module during the build

@@ -13,6 +13,8 @@
 $dictionary['DocumentTemplate'] = [
     'table' => 'document_templates',
     'audited' => true,
+    'color' => 'coral',
+    'icon' => 'sicon-document-lg',
     'favorites' => true,
     'comment' => 'Document Templates are used with Document Merging',
     'duplicate_check' => [

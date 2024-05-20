@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'לחוויה אופטימלית באמצעות sapi IIS/FastCGI, הגדר fastcgi.logging ל0 בקובץ ה-php.ini שלך.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'מותקנת גרסת PHP לא נתמכת: (גרסה',
     'LBL_DB_UNAVAILABLE'                => 'מסד נתונים אינו זמין',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'לא נמצאה תמיכה במסד הנתונים. ודא שברשותך מנהלי ההתקנים הדרושים עבור אחד מהסוגים הבאים של מסדי נתונים נתמכים: MySQL‏, MS SQLServer‏, Oracle או DB2. ייתכן שתצטרך להוריד את התגובה של הסיומת בקובץ ה-php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסת PHP שברשותך. עיין במדריך PHP לקבלת מידע נוסף אודות אופן ההפעלה של תמיכה במסד נתונים.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'לא נמצא תמיכה במסד נתונים.  נא לוודא הימצאות של מנהלי ההתקנים הנחוצים לאחד מהסוגים הנתמכים הבאים של מסדי נתונים: MySQL‏, MS SQLServer‏, Oracle או DB2.  ייתכן שיהיה צריך להסיר את ההערה של הסיומת בקובץ ה-php.ini או לבצע הידור מחדש של הקובץ הבינארי המתאים, לפי גרסת PHP שברשותך.  נא לעיין במדריך ה-PHP למידע נוסף על אופן ההפעלה של תמיכה במסד נתונים.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'לא נמצאו פונקציות הקשורות לספריות מנתח XML הנחוצים ליישום ה-Sugar. ייתכן שתצטרך להוריד את התגובה של השלוחה בקובץ php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסת ה-PHP שלך. נא עיין במדריך PHP שלך לקבלת מידע נוסף.',
     'LBL_CHECKSYS_CSPRNG' => 'מחולל מספרים אקראיים',
     'ERR_CHECKSYS_MBSTRING'             => 'לא נמצאו פונקציות הקשורות לשלוחת מחרוזות מרובות הבתים של PHP (mbstring) הנחוצים ליישום ה-Sugar. <br/><br/>באופן כללי, מודול ה-mbstring לא מופעל כברירת מחדל ב-PHP וחייב להיות מופעל עם --אפשר-mbstring כאשר ה-PHP הבניארי בנוי. נא עיין במדריך PHP שלך לקבלת מידע נוסף על כיצד לאפשר תמיכת mbstring.',
@@ -561,32 +561,15 @@ $assigned_by_user הזמין אותך לשיחה
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'הודעות דוא"ל עם התראות הקצאה',
-        'subject' => 'SugarCRM - הקצאת $module_name ',
-        'description' => 'תבנית זו נמצאת בשימוש כאשר המערכת שולחת למשתמש הקצאה של משימה.',
-        'body' => '<div>
-<p>$assigned_by_user הקצה&nbsp;$module_name ל$assigned_user.</p>
-
-<p>ניתן לראות את ה$module_name כאן:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user הקצה $module_name ל$assigned_user.
-
-ניתן לראות את ה$module_name כאן:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'הודעות דוא"ל לגבי דוחות מתוזמנים',
         'subject' => 'דוח מתוזמן: $report_name נכון ל-$report_time',
         'description' => 'תבנית זו נמצאת בשימוש כאשר המערכת שולחת למשתמש דוח מתוזמן.',
         'body' => '<div>
-<p>הי $assigned_user,</p>
-<p>מצורף לדוא"ל דוח שהופק אוטומטית ותוזמן עבורך.</p>
-<p>שם הדוח: $report_name</p>
-<p>התאריך והשעה של הפקת הדוח: $report_time</p>
+<p>שלום $assigned_user,<br></p>
+<p>מצורף דוח שהופק אוטומטית ותוזמן עבורך.<br></p>
+<p>שם דוח: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>התאריך והשעה של הפקת הדוח: $report_time<br></p>
 </div>',
         'txt_body' =>
             'הי $assigned_user,
@@ -612,14 +595,6 @@ $assigned_by_user הזמין אותך לשיחה
             לצפייה בהערה, יש להיכנס למערכת של Sugar.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'פרטי חשבון חדשים',
-        'description' => 'תבנית זו מובאת לשימוש כאשר מנהל המערכת שולח סיסמה חדשה למשתמש.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Here is your account username and temporary password:</p><p>Username : $contact_user_user_name </p><p>Password : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>After you log in using the above password, you may be required to reset the password to one of your own choice.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'Here is your account username and temporary password:<br />Username : $contact_user_user_name<br />Password : $contact_user_user_hash<br /><br />$config_site_url<br /><br />After you log in using the above password, you may be required to reset the password to one of your own choice.',
-        'name' => 'דוא"ל סיסמה ביצירת המערכת',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'אפס סיסמת החשבון שלך',
         'description' => "This template is used to send a user a link to click to reset the user&#39;s account password.",

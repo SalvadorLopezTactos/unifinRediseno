@@ -13,6 +13,8 @@
 
 $dictionary['pmse_Business_Rules'] = array(
     'table' => 'pmse_business_rules',
+    'color' => 'orange',
+    'icon' => 'sicon-process-business-rules-lg',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => true,

@@ -53,13 +53,50 @@ $searchFields['Opportunities'] =
 	   'start_range_amount' => array ('query_type' => 'default',  'enable_range_search' => true),
        'end_range_amount' => array ('query_type' => 'default', 'enable_range_search' => true),
 
-       'range_best_case' => array ('query_type' => 'default', 'enable_range_search' => true),
- 	   'start_best_case' => array ('query_type' => 'default',  'enable_range_search' => true),
-       'end_best_case' => array ('query_type' => 'default', 'enable_range_search' => true),
-
-       'range_worst_case' => array ('query_type' => 'default', 'enable_range_search' => true),
- 	   'start_worst_case' => array ('query_type' => 'default',  'enable_range_search' => true),
-       'end_worst_case' => array ('query_type' => 'default', 'enable_range_search' => true),
-		//Range Search Support 			
+        'range_forecasted_likely' =>
+            [
+                'query_type' => 'default',
+                'enable_range_search' => true,
+            ],
+        'start_range_forecasted_likely' =>
+            [
+                'query_type' => 'default',
+                'enable_range_search' => true,
+            ],
+        'end_range_forecasted_likely' =>
+            [
+                'query_type' => 'default',
+                'enable_range_search' => true,
+            ],
+        'range_commit_stage' =>
+            [
+                'query_type' => 'default',
+                'enable_range_search' => true,
+            ],
+        'start_range_commit_stage' =>
+            [
+                'query_type' => 'default',
+                'enable_range_search' => true,
+            ],
+        'end_range_commit_stage' =>
+            [
+                'query_type' => 'default',
+                'enable_range_search' => true,
+            ],
+        'range_lost' =>
+            [
+                'query_type' => 'default',
+                'enable_range_search' => true,
+            ],
+        'start_range_lost' =>
+            [
+                'query_type' => 'default',
+                'enable_range_search' => true,
+            ],
+        'end_range_lost' =>
+            [
+                'query_type' => 'default',
+                'enable_range_search' => true,
+            ],
 	);
 ?>

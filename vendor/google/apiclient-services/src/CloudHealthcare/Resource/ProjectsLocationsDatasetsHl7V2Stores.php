@@ -17,9 +17,12 @@
 
 namespace Google\Service\CloudHealthcare\Resource;
 
+use Google\Service\CloudHealthcare\ExportMessagesRequest;
 use Google\Service\CloudHealthcare\HealthcareEmpty;
 use Google\Service\CloudHealthcare\Hl7V2Store;
+use Google\Service\CloudHealthcare\ImportMessagesRequest;
 use Google\Service\CloudHealthcare\ListHl7V2StoresResponse;
+use Google\Service\CloudHealthcare\Operation;
 use Google\Service\CloudHealthcare\Policy;
 use Google\Service\CloudHealthcare\SetIamPolicyRequest;
 use Google\Service\CloudHealthcare\TestIamPermissionsRequest;
@@ -68,6 +71,29 @@ class ProjectsLocationsDatasetsHl7V2Stores extends \Google\Service\Resource
     return $this->call('delete', [$params], HealthcareEmpty::class);
   }
   /**
+   * Exports the messages to a destination. To filter messages to be exported,
+   * define a filter using the start and end time, relative to the message
+   * generation time (MSH.7). This API returns an Operation that can be used to
+   * track the status of the job by calling GetOperation. Immediate fatal errors
+   * appear in the error field. Otherwise, when the operation finishes, a detailed
+   * response of type ExportMessagesResponse is returned in the response field.
+   * The metadata field type for this operation is OperationMetadata.
+   * (hl7V2Stores.export)
+   *
+   * @param string $name The name of the source HL7v2 store, in the format `projec
+   * ts/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7v2Stores/{hl
+   * 7v2_store_id}`
+   * @param ExportMessagesRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Operation
+   */
+  public function export($name, ExportMessagesRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('export', [$params], Operation::class);
+  }
+  /**
    * Gets the specified HL7v2 store. (hl7V2Stores.get)
    *
    * @param string $name The resource name of the HL7v2 store to get.
@@ -85,16 +111,21 @@ class ProjectsLocationsDatasetsHl7V2Stores extends \Google\Service\Resource
    * resource exists and does not have a policy set. (hl7V2Stores.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int options.requestedPolicyVersion Optional. The policy format
-   * version to be returned. Valid values are 0, 1, and 3. Requests specifying an
-   * invalid value will be rejected. Requests for policies with any conditional
-   * bindings must specify version 3. Policies without any conditional bindings
-   * may specify any valid value or leave the field unset. To learn which
-   * resources support conditions in their IAM policies, see the [IAM
+   * @opt_param int options.requestedPolicyVersion Optional. The maximum policy
+   * version that will be used to format the policy. Valid values are 0, 1, and 3.
+   * Requests specifying an invalid value will be rejected. Requests for policies
+   * with any conditional role bindings must specify version 3. Policies with no
+   * conditional role bindings may specify any valid value or leave the field
+   * unset. The policy in the response might use the policy version that you
+   * specified, or it might use a lower policy version. For example, if you
+   * specify version 3, but the policy has no conditional role bindings, the
+   * response uses version 1. To learn which resources support conditions in their
+   * IAM policies, see the [IAM
    * documentation](https://cloud.google.com/iam/help/conditions/resource-
    * policies).
    * @return Policy
@@ -104,6 +135,45 @@ class ProjectsLocationsDatasetsHl7V2Stores extends \Google\Service\Resource
     $params = ['resource' => $resource];
     $params = array_merge($params, $optParams);
     return $this->call('getIamPolicy', [$params], Policy::class);
+  }
+  /**
+   * Import messages to the HL7v2 store by loading data from the specified
+   * sources. This method is optimized to load large quantities of data using
+   * import semantics that ignore some HL7v2 store configuration options and are
+   * not suitable for all use cases. It is primarily intended to load data into an
+   * empty HL7v2 store that is not being used by other clients. An existing
+   * message will be overwritten if a duplicate message is imported. A duplicate
+   * message is a message with the same raw bytes as a message that already exists
+   * in this HL7v2 store. When a message is overwritten, its labels will also be
+   * overwritten. The import operation is idempotent unless the input data
+   * contains multiple valid messages with the same raw bytes but different
+   * labels. In that case, after the import completes, the store contains exactly
+   * one message with those raw bytes but there is no ordering guarantee on which
+   * version of the labels it has. The operation result counters do not count
+   * duplicated raw bytes as an error and count one success for each message in
+   * the input, which might result in a success count larger than the number of
+   * messages in the HL7v2 store. If some messages fail to import, for example due
+   * to parsing errors, successfully imported messages are not rolled back. This
+   * method returns an Operation that can be used to track the status of the
+   * import by calling GetOperation. Immediate fatal errors appear in the error
+   * field, errors are also logged to Cloud Logging (see [Viewing error logs in
+   * Cloud Logging](https://cloud.google.com/healthcare/docs/how-tos/logging)).
+   * Otherwise, when the operation finishes, a response of type
+   * ImportMessagesResponse is returned in the response field. The metadata field
+   * type for this operation is OperationMetadata. (hl7V2Stores.import)
+   *
+   * @param string $name The name of the target HL7v2 store, in the format `projec
+   * ts/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7v2Stores/{hl
+   * 7v2_store_id}`
+   * @param ImportMessagesRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Operation
+   */
+  public function import($name, ImportMessagesRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('import', [$params], Operation::class);
   }
   /**
    * Lists the HL7v2 stores in the given dataset.
@@ -150,8 +220,9 @@ class ProjectsLocationsDatasetsHl7V2Stores extends \Google\Service\Resource
   /**
    * Updates the HL7v2 store. (hl7V2Stores.patch)
    *
-   * @param string $name Resource name of the HL7v2 store, of the form
-   * `projects/{project_id}/datasets/{dataset_id}/hl7V2Stores/{hl7v2_store_id}`.
+   * @param string $name Resource name of the HL7v2 store, of the form `projects/{
+   * project_id}/locations/{location_id}/datasets/{dataset_id}/hl7V2Stores/{hl7v2_
+   * store_id}`.
    * @param Hl7V2Store $postBody
    * @param array $optParams Optional parameters.
    *
@@ -172,8 +243,9 @@ class ProjectsLocationsDatasetsHl7V2Stores extends \Google\Service\Resource
    * `PERMISSION_DENIED` errors. (hl7V2Stores.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -193,8 +265,9 @@ class ProjectsLocationsDatasetsHl7V2Stores extends \Google\Service\Resource
    * (hl7V2Stores.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse

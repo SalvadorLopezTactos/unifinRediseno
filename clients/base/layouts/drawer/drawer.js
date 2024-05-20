@@ -20,8 +20,6 @@
 
     scrollTopPositions: [], //stores scroll positions for main and side pane
 
-    // Do not show focus drawer icons in the top drawer
-    disableFocusDrawer: true,
 
     initialize: function(options) {
         var self = this;
@@ -413,8 +411,6 @@
 
         //indicate that it's an active drawer
         drawers.$next.addClass('drawer active');
-        //set the height of the new drawer
-        drawers.$next.css('height', drawerHeight);
         //set the animation starting point for the new drawer
         drawers.$next.css('top', aboveWindowTopPos);
         //mark the top drawer as inactive
@@ -551,11 +547,8 @@
      * @private
      */
     _determineDrawerHeight: function() {
-        var windowHeight = $(window).height(),
-            headerHeight = $('#header .navbar').outerHeight(),
-            footerHeight = $('footer').outerHeight();
-
-        return windowHeight - headerHeight - footerHeight;
+        let windowHeight = $(window).height();
+        return windowHeight;
     },
 
     /**
@@ -716,6 +709,11 @@
             topDrawer.dispose(); //dispose top-most drawer
         }
 
+        closeCallback = this.onCloseCallback.pop();
+        if (closeCallback) {
+            closeCallback.apply(window, callbackArgs); //execute callback
+        }
+
         layout = _.last(this._components);
         if (layout) { // still have layouts in the drawer
             app.trigger('app:view:change', layout.options.type, layout.context.attributes);
@@ -725,7 +723,11 @@
 
             // If the side drawer was open before this drawer was open, restore the side drawer
             if (app.sideDrawer && app.sideDrawer.isHidden()) {
-                app.sideDrawer.slideIn();
+                if (!_.isUndefined(topDrawer.closeFocusDrawer) && topDrawer.closeFocusDrawer) {
+                    app.sideDrawer.close();
+                } else {
+                    app.sideDrawer.slideIn();
+                }
             }
 
             // Reopen the omnichannel after all drawers are closed, as long as the omnichannel was closed automatically
@@ -740,11 +742,6 @@
         this._enterState(this.STATES.IDLE);
 
         app.shortcuts.restoreSession();
-
-        closeCallback = this.onCloseCallback.pop();
-        if (closeCallback) {
-            closeCallback.apply(window, callbackArgs); //execute callback
-        }
     },
 
     /**

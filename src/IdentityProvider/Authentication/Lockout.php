@@ -17,9 +17,9 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\TemporaryLockedU
 
 class Lockout
 {
-    const LOCKOUT_DISABLED = 0;
-    const LOCK_TYPE_PERMANENT = 1;
-    const LOCK_TYPE_TIME = 2;
+    public const LOCKOUT_DISABLED = 0;
+    public const LOCK_TYPE_PERMANENT = 1;
+    public const LOCK_TYPE_TIME = 2;
 
     /**
      * password setting config

@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Nu este setat un secret client',
     'LBL_RESEND_BUTTON_LABEL' => 'Retrimitere',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Preluare plic',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Tip serviciu cloud',
+    'LBL_CLOUD_PATH' => 'Cale cloud',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Tablou de bord Listă plicuri DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Plicuri DocuSign recente',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare plicuri DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'Document de la ',
+    'LBL_NEW_ENVELOPE' => 'Plic nou',
     'LBL_DOCUMENT_IS_NOW' => ' este acum ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'Eroare DocuSign. Nu s-a putut obține ID-ul contului pe baza token-ului de acces',
     'LBL_ERROR_RESEND' => 'Retrimiterea DocuSign nu a putut fi efectuată. Starea plicului trebuie să fie „trimis”',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Actualizare nereușită',
     'LBL_ERROR_FETCH_TIME' => 'Regulile DocuSign nu permit cereri multiple către același plic în decurs de 15 minute',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'S-a produs o eroare. Plicul nu a putut fi actualizat. Verificați jurnalele!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'S-a produs o eroare. Imposibil de afișat șabloanele. Verificați jurnalele!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'S-a produs o eroare. Imposibil de preluat șabloanele. Verificați jurnalele!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Plic nefinalizat',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Starea plicului în DocuSign este acum ',
     'LBL_OVERVIEW' => 'Prezentare generală',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Adăugare document',
     'LBL_BUTTON_SEND' => 'Trimitere',
     'LBL_BUTTON_CLEAR' => 'Ștergere',
-    'LBL_MISSING_OBJECT' => 'Obiectul DocuSign nu este pe fereastră',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Utilizare șablon',
     'LBL_PLEASE_LOG_IN' => 'Conectați-vă mai întâi la DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Nu puteți descărca acest document. Acesta a fost creat de un alt utilizator!',
     'LBL_SEND_NOT_ALLOWED' => 'Nu puteți trimite acest plic. Acesta a fost creat de un alt utilizator!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Semnat',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Nu s-a putut descărca documentul. Verificați jurnalele!',
     'LBL_DOCUMENT_COMPLETED' => 'Finalizat',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Informații DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'este acum',
+    'LBL_SETTINGS_TITLE' => 'Setări DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'Comportament selectare destinatari',
+    'LBL_RECIPIENT_NAME' => 'Nume',
+    'LBL_RECIPIENT_EMAIL' => 'E-mail',
+    'LBL_RECIPIENT_TYPE' => 'Tip',
+    'LBL_TEMPLATE_NAME' => 'Nume',
+    'LBL_RECIPIENT_SELECT' => 'Selectare...',
+    'LBL_RECIPIENT_ROLE' => 'Rol',
+    'LBL_SELECT_BUTTON_LABEL' => 'Selectare',
+    'LBL_BACK_BUTTON_LABEL' => 'Înapoi',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Preluarea potențialilor destinatari a eșuat!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Preluarea șabloanelor a eșuat!',
 ];

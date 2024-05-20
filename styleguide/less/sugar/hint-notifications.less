@@ -94,17 +94,25 @@
 
 .stage2-notification-pref-addbtn,
 .stage2-notification-pref-removebtn {
+  border: @gray80 1px solid;
+  color: @gray70;
+  background-color: @primaryContentBackground;
   padding: 0;
   outline: 0 none;
-  color: #9b9b9b;
   min-height: 28px;
   min-width: 30px;
   max-height: 28px;
   border-radius: 3px;
-  background-color: white;
-  border-width: 1px;
-  border-color: #9b9b9b;
-  border-style: solid;
+}
+
+.stage2-notification-pref-addbtn:hover,
+.stage2-notification-pref-removebtn:hover {
+  border: @sicon-hover-color 1px solid;
+  color: @sicon-hover-color;
+
+  i {
+    color: @sicon-hover-color;
+  }
 }
 
 .stage2-notification-pref-addbtn.fake,

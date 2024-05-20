@@ -49,9 +49,7 @@ class RefreshQueue
         if (count($this->tasks) == 0) {
             return null;
         }
-
-        reset($this->tasks);
-        $category = key($this->tasks);
+        $category = array_key_first($this->tasks);
 
         $task = array_shift($this->tasks[$category]);
         if (count($this->tasks[$category]) == 0) {

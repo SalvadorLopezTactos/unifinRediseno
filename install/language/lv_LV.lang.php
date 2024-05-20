@@ -561,32 +561,15 @@ Noraidīt šo zvanu
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'E-pasta paziņojumi par piešķiršanu',
-        'subject' => 'SugarCRM - piešķirts modulis $module_name ',
-        'description' => 'Šī veidne tiek izmantota, kad Sistēma lietotājam nosūta piešķirto uzdevumu.',
-        'body' => '<div>
-<p>$assigned_by_user piešķīra &nbsp;$module_name lietotājam&nbsp;$assigned_user.</p>
-
-<p>Varat apskatīt šo moduli &nbsp;$module_name saitē:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user piešķīra moduli $module_name lietotājam $assigned_user.
-
-Varat apskatīt šo moduli $module_name saitē:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'E-pasta paziņojumi par ieplānotajiem pārskatiem',
         'subject' => 'Ieplānotais pārskats: $report_name no $report_time',
         'description' => 'Šī veidne tiek izmantota, kad Sistēma lietotājam nosūta ieplānoto pārskatu.',
         'body' => '<div>
-<p>Godātais/-ā $assigned_user!</p>
-<p>Pielikumā ir automātiski ģenerētais pārskats, kas ir ieplānots Jums.</p>
-<p>Pārskata nosaukums: $report_name</p>
-<p>Pārskata izpildes datums un laiks: $report_time</p>
+<p>Godātais/ā $assigned_user,<br></p>
+<p>Pielikumā ir automātiski ģenerēta atskaite, kas ir ieplānota Jums.<br></p>
+<p>Atskaites nosaukums: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Atskaites izpildes datums un laiks: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Godātais/-ā $assigned_user!
@@ -612,21 +595,6 @@ Pārskata izpildes datums un laiks: $report_time',
             Lai apskatītu komentāru, pierakstieties Sugar sistēmā.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Jaunā konta informācija',
-        'description' => 'Šī veidne tiek lietota, kad sistēmas administrators sūta jaunu paroli lietotājam.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Te ir jūsu lietotājvārds un pagaidu parole:</p><p>Lietotājvārds : $contact_user_user_name </p><p>Parole : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Pēc pieteikšanās sistēmā ar norādīto paroli, iespējams, jums tiks prasīts nomainīt šo paroli ar tādu, kādu jūs vēlaties lietot.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Te ir jūsu lietotājvārds un pagaidu parole:
-Lietotājvārds : $contact_user_user_name
-Parole : $contact_user_user_hash
-
-$config_site_url
-
-Pēc pieteikšanās sistēmā ar norādīto paroli, iespējams, jums tiks prasīts nomainīt šo paroli ar tādu, kādu jūs vēlaties lietot.',
-        'name' => 'Sistēmas ģenerēts paroles e-pasts',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Izveidot jaunu paroli jūsu kontam',
         'description' => "Šī veidne tiek lietota, lai nosūtītu lietotājam saiti, kuru noklikšķinot tiks iestatīta jauna konta parole.",

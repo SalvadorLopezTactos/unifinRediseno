@@ -10,14 +10,32 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+global $current_user;
+
+$productCodes = $current_user->getProductCodes();
+$productCodes = urlencode(implode(',', $productCodes));
+
+$flavor = $GLOBALS['sugar_flavor'] ?? '';
+$version = $GLOBALS['sugar_version'] ?? '';
+$language = $GLOBALS['current_language'] ?? '';
+$action = $GLOBALS['action'] ?? '';
+$status = getVersionStatus($version);
+$key = $GLOBALS['key'] ?? '';
+$module = 'DocuSignAdmin';
+
+$url = "https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$language}&" .
+    "מוצרים={$productCodes}&help_action={$action}&status={$status}&key={$key}&module={$module}";
+
 $connector_strings = [
-    'LBL_LICENSING_INFO' => 'השלבים לשימוש במחבר של DocuSign:
+    'LBL_LICENSING_INFO' => "השלבים לשימוש במחבר של DocuSign:
         <br> - יצירת מפתח שילוב
         <br> - הפעלת DocuSign Connect for Envelopes
         (כלומר, רכיב ה-Webhook המשמש את DocuSign להרשמה לנקודת כניסה של Sugar)
         <br> - הגדרת יישום חדש ב-DocuSign, הוספת ה-URI להפניה מחדש ויצירת מפתח סודי
         כתובת ה-URI להפניה מחדש חייבת להיות https://SUGAR_URL/oauth-handler/DocuSignOauth2Redirect
-        <br> במקרה של הגבלות IP של המופע של Sugar, הוסף את כתובות ה-IP של DocuSign לרשימת הכתובות המותרות',
+        <br> במקרה של הגבלות IP של המופע של Sugar, הוסף את כתובות ה-IP של DocuSign לרשימת הכתובות המותרות",
     'environment' => 'סביבה',
     'integration_key' => 'מפתח שילוב',
     'client_secret' => 'סוד הלקוח',

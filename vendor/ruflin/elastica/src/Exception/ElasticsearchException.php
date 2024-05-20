@@ -2,12 +2,14 @@
 
 namespace Elastica\Exception;
 
-\trigger_error('Elastica\Exception\ElasticsearchException is deprecated. Use Elastica\Exception\ResponseException::getResponse::getFullError instead.', E_USER_DEPRECATED);
+\trigger_deprecation('ruflin/elastica', '5.2.0', 'The "%s" class is deprecated, use "Elastica\Exception\ResponseException::getResponse()::getFullError()" instead. It will be removed in 8.0.', ElasticsearchException::class);
 
 /**
  * Elasticsearch exception.
  *
  * @author Ian Babrou <ibobrik@gmail.com>
+ *
+ * @deprecated since version 5.2.0
  */
 class ElasticsearchException extends \Exception implements ExceptionInterface
 {
@@ -29,8 +31,6 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     private $_isRemote = false;
 
     /**
-     * Constructs elasticsearch exception.
-     *
      * @param int    $code  Error code
      * @param string $error Error message from elasticsearch
      */

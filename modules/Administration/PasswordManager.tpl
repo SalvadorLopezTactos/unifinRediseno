@@ -165,107 +165,6 @@
     </tr>
 </table>
 
-<table id="sysGeneratedId" name="sysGeneratedName" width="100%" border="0" cellspacing="1" cellpadding="0"
-       class="edit view">
-    <tr>
-        <th align="left" scope="row" colspan="4">
-            <h4>
-                {$MOD.LBL_PASSWORD_SYST_GENERATED_TITLE}
-            </h4>
-        </th>
-    </tr>
-    <tr>
-        <td scope="row" width='25%'>
-            {$MOD.LBL_PASSWORD_SYST_GENERATED_PWD_ON}
-            :&nbsp{sugar_help text=$MOD.LBL_PASSWORD_SYST_GENERATED_PWD_HELP WIDTH=400}
-        </td>
-        <td>
-            {if ($config.passwordsetting.SystemGeneratedPasswordON ) == '1'}
-                {assign var='SystemGeneratedPasswordON' value='CHECKED'}
-            {else}
-                {assign var='SystemGeneratedPasswordON' value=''}
-            {/if}
-            <input type='hidden' name='passwordsetting_SystemGeneratedPasswordON' value='0'>
-            <input name='passwordsetting_SystemGeneratedPasswordON' id='SystemGeneratedPassword_checkbox'
-                   type='checkbox' value='1' {$SystemGeneratedPasswordON}
-                   onclick='enable_syst_generated_pwd(this);toggleDisplay("SystemGeneratedPassword_warning");'>
-        </td>
-        {if !($config.passwordsetting.SystemGeneratedPasswordON)}
-            {assign var='smtp_warning' value='none'}
-        {/if}
-    </tr>
-    <tr>
-        <td colspan="2" id="SystemGeneratedPassword_warning" scope="row" style='display:{$smtp_warning}'
-        ;>
-        <i>{if $SMTP_SERVER_NOT_SET}&nbsp;&nbsp;&nbsp;&nbsp;{$MOD.ERR_SMTP_SERVER_NOT_SET}<br>{/if}
-            &nbsp;&nbsp;&nbsp;&nbsp;{$MOD.LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE}</i>
-        </td>
-    </tr>
-    <tr>
-        <td align="left" scope="row" colspan="4">
-            {$MOD.LBL_PASSWORD_SYST_EXPIRATION}
-        </td>
-    </tr>
-    <tr>
-        <td colspan='4'>
-            <table width="100%" id='syst_generated_pwd_table' border="0" cellspacing="1" cellpadding="0">
-                <tr>
-                    {assign var='systexplogin' value=''}
-                    {assign var='systexptime' value=''}
-                    {assign var='systexpnone' value=''}
-                    {if ($config.passwordsetting.systexpiration) == '0' || $config.passwordsetting.systexpiration==''}
-                        {assign var='systexpnone' value='CHECKED'}
-                    {/if}
-                    {if ($config.passwordsetting.systexpiration) == '1'}
-                        {assign var='systexptime' value='CHECKED'}
-                    {/if}
-                    {if ($config.passwordsetting.systexpiration) == '2'}
-                        {assign var='systexplogin' value='CHECKED'}
-                    {/if}
-                    <td width='30%'>
-                        <input type="radio" name="passwordsetting_systexpiration" value='0' {$systexpnone}
-                               onclick="form.passwordsetting_systexpirationtime.value='';form.passwordsetting_systexpirationlogin.value='';">
-                        {$MOD.LBL_UW_NONE}
-                    </td>
-                    <td width='30%'>
-                        <input type="radio" name="passwordsetting_systexpiration" id="required_sys_pwd_exp_time"
-                               value='1' {$systexptime} onclick="form.passwordsetting_systexpirationlogin.value='';">
-                        {$MOD.LBL_PASSWORD_EXP_IN}
-                        {assign var='sdays' value=''}
-                        {assign var='sweeks' value=''}
-                        {assign var='smonths' value=''}
-                        {if ($config.passwordsetting.systexpirationtype ) == '1'}
-                            {assign var='sdays' value='SELECTED'}
-                        {/if}
-                        {if ($config.passwordsetting.systexpirationtype ) == '7'}
-                            {assign var='sweeks' value='SELECTED'}
-                        {/if}
-                        {if ($config.passwordsetting.systexpirationtype ) == '30'}
-                            {assign var='smonths' value='SELECTED'}
-                        {/if}
-                        <input type='text' maxlength="3" and style="width:2em" name='passwordsetting_systexpirationtime'
-                               value='{$config.passwordsetting.systexpirationtime}'>
-                        <SELECT NAME="passwordsetting_systexpirationtype">
-                            <OPTION VALUE='1' {$sdays}>{$MOD.LBL_DAYS}
-                            <OPTION VALUE='7' {$sweeks}>{$MOD.LBL_WEEKS}
-                            <OPTION VALUE='30' {$smonths}>{$MOD.LBL_MONTHS}
-                        </SELECT>
-                    </td>
-                    <td colspan='2' width='40%'>
-                        <input type="radio" name="passwordsetting_systexpiration" id="required_sys_pwd_exp_login"
-                               value='2' {$systexplogin} onclick="form.passwordsetting_systexpirationtime.value='';">
-                        {$MOD.LBL_PASSWORD_EXP_AFTER}
-                        <input type='text' maxlength="3" and style="width:2em"
-                               name='passwordsetting_systexpirationlogin'
-                               value="{$config.passwordsetting.systexpirationlogin}">
-                        {$MOD.LBL_PASSWORD_LOGINS}
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
-
 <table id="userResetPassId" name="userResetPassName" width="100%" border="0" cellspacing="1" cellpadding="0"
        class="edit view">
     <tr>
@@ -374,24 +273,7 @@
             </h4>
         </th>
     </tr>
-
-    <tr>
-        <td scope="row" width="35%">{$MOD.LBL_PASSWORD_GENERATE_TEMPLATE_MSG}:</td>
-        <td>
-            <slot>
-                <select tabindex='251' id="generatepasswordtmpl"
-                        name="passwordsetting_generatepasswordtmpl" {$IE_DISABLED}>{$TMPL_DRPDWN_GENERATE}</select>
-                <input type="button" class="button"
-                       onclick="javascript:open_email_template_form('generatepasswordtmpl')"
-                       value="{$MOD.LBL_PASSWORD_CREATE_TEMPLATE}" {$IE_DISABLED}>
-                <input type="button" value="{$MOD.LBL_PASSWORD_EDIT_TEMPLATE}" class="button"
-                       onclick="javascript:edit_email_template_form('generatepasswordtmpl')"
-                       name='edit_generatepasswordtmpl' id='edit_generatepasswordtmpl' style="{$EDIT_TEMPLATE}">
-            </slot>
-        </td>
-        <td></td>
-        <td></td>
-    </tr>
+    
     <tr>
         <td scope="row">{$MOD.LBL_PASSWORD_LOST_TEMPLATE_MSG}:</td>
         <td>

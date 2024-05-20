@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Creato Da',
   'LBL_EDIT_LAYOUT' => 'Modifica Layout' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Solo Amministratori',
-  'LBL_CURRENCY_DEFAULT' => 'Dollari USA (predefinito)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Valuta del sistema (predefinita)',
 );
 ?>

@@ -33,18 +33,18 @@ class Mapping implements MappingInterface
      * Property name prefix separator
      * @var string
      */
-    const PREFIX_SEP = '__';
+    public const PREFIX_SEP = '__';
 
     /**
      * Common prefix
      * @var string
      */
-    const PREFIX_COMMON = 'Common__';
+    public const PREFIX_COMMON = 'Common__';
 
     /**
      * command field names
      */
-    const COMMON_FIELD_NAMES = [
+    public const COMMON_FIELD_NAMES = [
         'acl_team_set_id',
         'assigned_user_id',
         'created_by',
@@ -59,7 +59,7 @@ class Mapping implements MappingInterface
     /**
      * Module Name field used in index, this name should be unique
      */
-    const MODULE_NAME_FIELD = 'sugar_module_name';
+    public const MODULE_NAME_FIELD = 'sugar_module_name';
 
     /**
      * @var string Module name

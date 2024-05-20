@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Painel de lista de notas',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Painel de registro de notas',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em notas',
+    'LBL_EXTERNAL_USER' => 'Usuário externo',
+    'LBL_EXTERNAL_USER_NAME' => 'Usuário externo',
 
     'LBL_RELATED_CONTACT' => 'Contato relacionado',
     'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para excluir a Conta.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Tipo de e-mail',
     'LBL_EMAIL_ID' => 'ID de e-mail',
     'LBL_PHONE' => 'Telefone',
-    'LBL_PORTAL_FLAG' => 'Exibir no Portal?',
+    'LBL_PORTAL_FLAG' => 'Disponível externamente',
     'LBL_EMBED_FLAG' => 'Embutido no E-mail?',
     'LBL_PRODUCT_ID' => 'ID de Item de linha cotado:',
     'LBL_QUOTE_ID' => 'ID da Cotação:',

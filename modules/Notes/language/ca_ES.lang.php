@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Quadre de comandament del llistat de notas',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de notes',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les notes',
+    'LBL_EXTERNAL_USER' => 'Usuari extern',
+    'LBL_EXTERNAL_USER_NAME' => 'Usuari extern',
 
     'LBL_RELATED_CONTACT' => 'Contacte relacionat',
     'ERR_DELETE_RECORD' => 'Per suprimir el compte, heu d&#39;especificar un número de registre.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Tipus de correu electrònic',
     'LBL_EMAIL_ID' => 'ID del correu electrònic',
     'LBL_PHONE' => 'Telèfon:',
-    'LBL_PORTAL_FLAG' => 'Mostrar en el Portal?',
+    'LBL_PORTAL_FLAG' => 'Disponible externament',
     'LBL_EMBED_FLAG' => 'Incloure en correu?',
     'LBL_PRODUCT_ID' => 'ID Producte:',
     'LBL_QUOTE_ID' => 'ID Pressupost:',

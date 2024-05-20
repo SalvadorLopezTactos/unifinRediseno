@@ -24,6 +24,15 @@ $viewdefs['ContractTypes']['base']['view']['recordlist'] = array(
                 ),
                 'acl_action' => 'edit',
             ),
+            [
+                'name' => 'calc_field_button',
+                'type' => 'button',
+                'label' => 'LBL_UPDATE_CALC_FIELDS',
+                'events' => [
+                    'click' => 'list:updatecalcfields:fire',
+                ],
+                'acl_action' => 'massupdate',
+            ],
             array(
                 'name' => 'delete_button',
                 'type' => 'button',

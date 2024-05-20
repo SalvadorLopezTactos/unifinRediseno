@@ -22,6 +22,10 @@ use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserInterface
 {
     /**
+     * @var mixed|\TimeDate|object
+     */
+    public $timeDate;
+    /**
      * Object Bean
      * @var object
      */
@@ -325,11 +329,14 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
     {
         if (empty($this->relatedBeans[$link])) {
             $args = PMSEBaseValidator::getLogicHookArgs();
-            $expRel = isset($this->criteriaToken->expRel) ? $this->criteriaToken->expRel : '';
-            $event = isset($args['event']) ? $args['event'] : '';
+            $expRel = $this->criteriaToken->expRel ?? '';
+            $event = $args['event'] ?? '';
             if (((isset($args['link']) && $link === $args['link']) || (isset($args['module']) && $args['module'] === $link)) &&
                 $this->checkRelationshipChange($expRel, $event)) {
-                return [BeanFactory::retrieveBean($args['related_module'], $args['related_id'])];
+                $relBean = BeanFactory::retrieveBean($args['related_module'], $args['related_id']);
+                if (!is_null($relBean)) {
+                    return [$relBean];
+                }
             }
         }
         return [];
@@ -349,7 +356,7 @@ class PMSEFieldParser extends PMSEAbstractDataParser implements PMSEDataParserIn
             // This logic is a fairly bad assumption, but works in most cases. The
             // assumption is that a link name won't be in the bean list so try to load
             // a related bean instead.
-            $expRel = isset($this->criteriaToken->expRel) ? $this->criteriaToken->expRel : '';
+            $expRel = $this->criteriaToken->expRel ?? '';
             $relationshipChange = in_array($expRel, ['Added', 'Removed', 'AddedOrRemoved']);
             if ($relationshipChange) {
                 $beans = $this->getRelationshipChangeBean($token[0]);

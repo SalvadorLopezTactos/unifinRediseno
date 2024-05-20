@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Informačný panel so zoznamom príležitostí',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Informačný panel so záznamom príležitostí',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Podrobnosti o príležitosti',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Informačný panel so zameraním na príležitosti – Konzola',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na príležitosti',
     'LBL_RENEWAL_OPPORTUNITY' => 'Príležitosť obnovenia',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Schválené',
     'LBL_FORECAST' => 'Zahrnúť do prognózy',
     'LBL_COMMIT_STAGE' => 'Fáza schválenia',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Prognóza',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Fáza prognózy',
     'LBL_WORKSHEET' => 'Tabuľka',
     'LBL_PURCHASED_LINE_ITEMS' => 'Zakúpené riadkové položky',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizovať',
+    'LBL_CREATE_NEW' => 'Vytvoriť nový',
+    'LBL_MANAGE' => 'Spravovať',
+    'LBL_SEE_DETAILS' => 'Zobraziť podrobnosti',
+    'LBL_HIDE_NEW' => 'Skryť',
+
     'LBL_FORECASTED_LIKELY' => 'Prognózované ako pravdepodobné',
+    'LBL_LOST' => 'Nezískané',
     'LBL_RENEWAL' => 'Obnovenie',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Príležitosti obnovenia',
     'LBL_RENEWAL_PARENT' => 'Nadradená príležitosť',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Rola obchodnej príležirosti',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Poznámky',
+    'LBL_TAB_OPPORTUNITY' => 'Revízia {{module}}',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Kliknutím na tlačidlo Potvrdiť vymažete VŠETKY dáta prognóz a zmeníte zobrazenie príležitostí. Ak tento krok nebol vaším zámerom, kliknutím na tlačidlo Zrušiť sa vrátite do predchádzajúcich nastavení.',
@@ -211,19 +220,19 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Po vykonaní tejto zmeny budú v pozadí vytvorené záznamy položiek krivky výnosu pre každý existujúci {{module_name}}. Keď sú položky krivky výnosu kompletné a dostupné, odošle sa upozornenie na e-mail vo vašom profile. Na to, aby vaša inštancia odosielala e-maily, musí byť správne nastavená v časti Administrátor > Nastavenia e-mailu.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje od začiatku do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad {{quotes_module}}, {{contacts_module}} a pod. {{module_name}} štandardne prejde niekoľkými fázami predaja a na záver sa označí buď stavom „Uzatvorené získané“, alebo „Uzatvorené nezískané“. Modul {{plural_module_name}} možno využiť ešte viac použitím modulu {{forecasts_singular_module}} aplikácie Sugar, vďaka čomu možno porozumieť trendom predaja a predpovedať ich, ako aj zamerať sa na prácu s cieľom dosiahnuť kvóty predaja.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a obsahuje príslušné údaje predaja, ako aj údaje súvisiace s inými dôležitými záznamami, ako napr. {{quotes_module}}, {{contacts_module}} atď. Modul {{module_name}} štandardne prejde niekoľkými fázami predaja a na záver sa označí buď stavom „Uzatvorené/získané“, alebo „Uzatvorené/nezískané“. Moduly {{plural_module_name}} možno využiť ešte viac použitím modulu {{forecasts_singular_module}} aplikácie Sugar, vďaka čomu možno porozumieť trendom predaja a predpovedať ich, ako aj zamerať prácu s cieľom dosiahnuť kvóty predaja.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a riadkové položky patriace k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad záznamy {{quotes_module}}, {{contacts_module}} a pod.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a riadkové položky prislúchajúce k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a obsahuje príslušné údaje predaja, ako aj údaje súvisiace s inými dôležitými záznamami, ako napr. {{quotes_module}}, {{contacts_module}} atď. 
 
-– Polia tohto záznamu upravíte kliknutím na jednotlivé polia alebo stlačením tlačidla Upraviť.
-– Prepojenia na ďalšie záznamy v podpaneloch možno zobraziť alebo upraviť prepnutím ľavého spodného panelu na „Zobrazenie údajov“.
-– Poznámky používateľa a históriu zmien záznamov môžete vytvoriť a zobraziť v module {{activitystream_singular_module}} prepnutím ľavého spodného panelu na „Aktivity“.
-– Záznam môžete sledovať alebo označiť ako obľúbený pomocou ikon napravo od názvu záznamu.
+– Polia tohto záznamu upravíte kliknutím na jednotlivé polia alebo na tlačidlo Upraviť.
+– Prepojenia na ďalšie záznamy v pomocných paneloch možno zobraziť alebo upraviť prepnutím ľavého spodného panela na „Zobrazenie údajov“.
+– Poznámky používateľa a históriu zmien záznamov môžete vytvoriť a zobraziť v module {{activitystream_singular_module}} prepnutím ľavého spodného panela na „Aktivity“.
+– Záznam môžete sledovať alebo označiť ako obľúbený pomocou ikon nachádzajúcich sa napravo od názvu záznamu.
 – Ďalšie akcie sú k dispozícii v rozbaľovacej ponuke Akcie napravo od tlačidla Upraviť.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a riadkové položky patriace k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad záznamy {{quotes_module}}, {{contacts_module}} a pod.
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a riadkové položky prislúchajúce k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a obsahuje príslušné údaje predaja, ako aj údaje súvisiace s inými dôležitými záznamami, napr. {{quotes_module}}, {{contacts_module}} atď.
 
 Ak chcete vytvoriť modul {{module_name}}:
 1. Zadajte požadované hodnoty do polí.

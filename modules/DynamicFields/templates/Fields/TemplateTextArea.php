@@ -10,6 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 class TemplateTextArea extends TemplateText{
+    /**
+     * @var mixed
+     */
+    public $rows;
+    /**
+     * @var mixed
+     */
+    public $cols;
 	var $type = 'text';
 	var $len = '';
     public $massupdate = 0;

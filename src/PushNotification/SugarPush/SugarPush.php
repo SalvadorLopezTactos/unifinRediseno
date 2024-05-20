@@ -189,25 +189,24 @@ class SugarPush implements NotificationService
 
     /**
      * Updates a user's device.
-     *
-     * @param string $platform The device's platform.
-     * @param string $oldDeviceId The device's old ID.
-     * @param string $newDeviceId The device's new ID.
-     * @return bool
      */
-    public function update(string $platform, string $oldDeviceId, string $newDeviceId) : bool
+    public function update(string $platform, string $oldDeviceId, string $newDeviceId = '') : bool
     {
+        $post = [
+            'application_id' => $this->getApplicationId($platform),
+            'device_id' => $oldDeviceId,
+        ];
+        if ($newDeviceId && $oldDeviceId !== $newDeviceId) {
+            $post['new_device_id'] = $newDeviceId;
+        }
+
         $response = $this->client->request(
             'POST',
             '/device',
             [
                 'timeout' => self::SOCKET_TIMEOUT_SEC,
                 'connect_timeout' => self::SOCKET_TIMEOUT_SEC,
-                GuzzleHttp\RequestOptions::JSON => [
-                    'application_id' => $this->getApplicationId($platform),
-                    'device_id' => $oldDeviceId,
-                    'new_device_id' => $newDeviceId,
-                ],
+                GuzzleHttp\RequestOptions::JSON => $post,
             ]
         );
 
@@ -267,17 +266,11 @@ class SugarPush implements NotificationService
                 ]
             );
 
-            $statusCode = $response->getStatusCode();
-            if ($statusCode !== 200) {
-                $body = (string) $response->getBody();
-                $log->error('sugar push [setActive]: statusCode: ' . $statusCode . ' body: ' . $body);
-            }
+            return $this->isSuccess($response);
         } catch (\Throwable $e) {
             $log->error('sugar push [setActive]: ' . $e);
             return false;
         }
-
-        return true;
     }
 
     /**

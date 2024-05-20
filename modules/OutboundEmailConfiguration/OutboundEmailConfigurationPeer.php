@@ -16,12 +16,12 @@
 
 class OutboundEmailConfigurationPeer
 {
-    const MODE_DEFAULT = "default";
-    const MODE_SMTP    = "smtp";
+    public const MODE_DEFAULT = "default";
+    public const MODE_SMTP    = "smtp";
 
-    const STATUS_VALID_CONFIG = 0;
-    const STATUS_INVALID_SYSTEM_CONFIG = 101;
-    const STATUS_INVALID_USER_CONFIG = 102;
+    public const STATUS_VALID_CONFIG = 0;
+    public const STATUS_INVALID_SYSTEM_CONFIG = 101;
+    public const STATUS_INVALID_USER_CONFIG = 102;
 
     static public $configurationStatusMessageMappings = array(
         self::STATUS_INVALID_SYSTEM_CONFIG        => 'LBL_EMAIL_INVALID_SYSTEM_CONFIGURATION',
@@ -567,7 +567,7 @@ class OutboundEmailConfigurationPeer
         $charset = null
     ) {
         $outboundEmailConfiguration = null;
-        $mode                       = strtolower($outboundEmail->mail_sendtype);
+        $mode = strtolower((string)$outboundEmail->mail_sendtype);
 
         // setup the mailer's known configurations based on the type of mailer
         switch ($mode) {

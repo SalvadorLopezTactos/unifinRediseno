@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Prikaži povijest predviđanja',
     'LBL_FORECAST_HISTORY' => 'Predviđanja: povijest',
     'LBL_FORECAST_HISTORY_TITLE' => 'Povijest',
+    'LBL_TAB_COMMITMENT' => 'Obveza',
+    'LBL_CURRENT' => 'Trenutačno',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Vremensko razdoblje',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Izmijenio/la',
     'LBL_WK_VERSION' => 'Verzija',
     'LBL_WK_REVISION' => 'Revizija',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Pristup API-ju za parametre zahtijeva Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Vremensko razdoblje:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Želite li potvrditi ove iznose?',
     'ERR_FORECAST_AMOUNT' => 'Obavezan je potvrđeni iznos i mora biti broj.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Uključeni prodajni kanal',
+    'LBL_UPSIDE_PIPELINE' => 'Uzlazni prodajni kanal',
+    'LBL_EXCLUDED_PIPELINE' => 'Izostavljeni prodajni kanal',
+    'LBL_WON' => 'Uspjelo',
+    'LBL_LOST' => 'Neuspjelo',
+    'LBL_ALL' => 'Sve',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Vodič na filtrima',
+    'LBL_HELP_MAIN_BODY' => 'Svi parametri uključuju samo prilike koje pripadaju odabranim korisnicima, vremenskom razdoblju i svim dodatnim filtrima koje ste primijenili',
+    'LBL_FORECAST_HELP' => 'Prilike koje su već uspjele ili se nalaze u uključenoj stavci {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Otvorene prilike s {{{forecastStage}}} vrijednosti {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Otvorene prilike u uključenoj stavci {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Otvorene prilike s {{{forecastStage}}} vrijednosti {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Otvorene prilike s {{{forecastStage}}} vrijednosti {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Otvorene prilike u izostavljenoj stavci {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Prilike koje su već uspjele',
+    'LBL_LOST_HELP' => 'Prilike koje su već neuspjele',
+    'LBL_ALL_HELP' => 'Sve prilike',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Datum početka',
     'LBL_FC_USER' => 'Zakaži za',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Obveza',
     'LBL_TEAM_COMMITMENT' => 'Obveza tima',
     'LBL_FORECASTED' => 'Predviđeno',
+    'LBL_OPPORTUNITY_FORECAST' => 'Predviđanje prilika',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Predviđanje stavki prihoda',
+    'LBL_LAST_COMMITMENT' => 'Zadnja obveza',
     'LBL_ADJUSTED_TOTAL' => 'Prilagođeno ukupno',
     'LBL_COMMIT_STAGE' => 'Faza potvrđivanja',
     'LBL_SALES_STAGE' => 'Faza',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => ' (Prilagođeno)',
     'LBL_SAVE_DRAFT' => 'Spremi',
     'LBL_CHANGES_BY' => 'Promijenio/la {0}',
-    'LBL_FORECAST_SETTINGS' => 'Postavke',
+    'LBL_FORECAST_SETTINGS' => 'Postavke predviđanja',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Postavljanje predviđanja',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Datum početka fiskalne godine:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurirajte vremensko razdoblje koje će se upotrebljavati u modulu predviđanja. <br><br>Imajte na umu da se postavke vremenskog razdoblja ne mogu promijeniti nakon prvog postavljanja.<br><br>Započnite tako da odaberete datum početka fiskalne godine. Zatim odaberite vrstu vremenskog razdoblja za predviđanja. Raspon datuma za vremenska razdoblja automatski će se izračunati na temelju vaših odabira. Podrazdoblje je osnova za radni list s predviđanjima. <br><br> Putem budućih i prošlih vremenskih razdoblja koja se mogu prikazati odredit će se broj vidljivih podrazdoblja u modulu predviđanja. Korisnici mogu pregledati i urediti brojeve predviđanja u vidljivim podrazdobljima.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurirajte kako želite kategorizirati {{forecastByModule}}. <br><br>Imajte na umu da postavke raspona ne možete više mijenjati nakon prvotne potvrde. Za nadograđene instance postavke raspona zaključane su s postojećim podacima o predviđanjima.<br><br>Možete odabrati dvije ili više kategorija ovisno o rasponima vjerojatnosti ili izraditi kategorije koje se ne temelje na vjerojatnosti.<br><br>Nalijevo od prilagođenih kategorija nalaze se potvrdni okviri koje možete upotrijebiti za odabir raspona koje želite uključiti u predviđeni iznos koji se izvršava i prijavljuje voditeljima.<br><br>U radnom listu korisnik može ručno promijeniti status uključenja/isključenja i kategoriju predviđanja {{forecastByModule}}.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurirajte kako želite kategorizirati {{forecastByModule}}. <br><br>Imajte na umu da se postavke raspona ne mogu mijenjati nakon prve potvrde. Za nadograđene instance, postavka raspona je zaključana s postojećim podacima predviđanja.<br><br>Možete odabrati dvije ili više kategorija na temelju raspona vjerojatnosti ili stvoriti kategorije koje se ne temelje na vjerojatnosti. <br><br>Postoje potvrdni okviri s lijeve strane prilagođenih kategorija; upotrijebite ih kako biste odlučili koji će rasponi biti uključeni u predviđeni iznos koji se potvrđuje i prijavljuje upraviteljima. <br><br>Korisnik ručno može promijeniti status uključivanja/isključivanja i kategoriju {{forecastByModule}} na svom radnom listu.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Odaberite stupce koje korisnik treba ispuniti za predviđanja kod svakog {{forecastByModuleSingular}}. Imajte na umu da je vjerojatni iznos povezan s iznosom koji se prikazuje u {{forecastByModule}}; iz tog razloga nije moguće sakriti stupac Vjerojatno.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Odaberite koji stupci će se prikazivati u modulu predviđanja. Putem popisa polja sastavit će se radni list i time će korisnik moći odabrati način konfiguracije prikaza.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ja sam rezervirano mjesto teksta objašnjenja za predviđanja prema!',

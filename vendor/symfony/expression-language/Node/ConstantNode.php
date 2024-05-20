@@ -22,7 +22,7 @@ class ConstantNode extends Node
 {
     private $isIdentifier;
 
-    public function __construct($value, $isIdentifier = false)
+    public function __construct($value, bool $isIdentifier = false)
     {
         $this->isIdentifier = $isIdentifier;
         parent::__construct(
@@ -36,7 +36,7 @@ class ConstantNode extends Node
         $compiler->repr($this->attributes['value']);
     }
 
-    public function evaluate($functions, $values)
+    public function evaluate(array $functions, array $values)
     {
         return $this->attributes['value'];
     }

@@ -359,18 +359,21 @@
 
             this.quotaCollection = app.utils.getSubpanelCollection(ctx, 'ForecastManagerWorksheets');
 
-            this.quotaCollection.on('reset', this.processQuotaCollection, this);
+            if (!_.isUndefined(this.quotaCollection)) {
+                this.quotaCollection.on('reset', this.processQuotaCollection, this);
 
-            this.quotaCollection.on('change:quota', function(data) {
-                var oldQuota = (this.getOldTotalFromCollectionById(data.get('user_id'))) ? this.getOldTotalFromCollectionById(data.get('user_id')).quota : 0,
-                    newQuota = data.get('quota'),
-                    diff = app.math.sub(data.get('quota'), oldQuota),
-                    newQuotaTotal = app.math.add(this.serverData.get('quota_amount'), diff);
-                // set the new "oldTotals" value
-                this.setOldTotalFromCollectionById(data.get('user_id'), {quota: newQuota});
-                // calculate and update the Quota on the frontend
-                this.calculateData({quota_amount: newQuotaTotal});
-            }, this);
+                this.quotaCollection.on('change:quota', function(data) {
+                    let oldQuota = (this.getOldTotalFromCollectionById(data.get('user_id'))) ?
+                        this.getOldTotalFromCollectionById(data.get('user_id')).quota : 0;
+                    let newQuota = data.get('quota');
+                    let diff = app.math.sub(data.get('quota'), oldQuota);
+                    let newQuotaTotal = app.math.add(this.serverData.get('quota_amount'), diff);
+                    // set the new "oldTotals" value
+                    this.setOldTotalFromCollectionById(data.get('user_id'), {quota: newQuota});
+                    // calculate and update the Quota on the frontend
+                    this.calculateData({quota_amount: newQuotaTotal});
+                }, this);
+            }
 
             this.processQuotaCollection();
 
@@ -497,14 +500,17 @@
             oldQuota = model.get('quota_amount'),
             quota = 0;
         this.oldTotals.models = new Backbone.Model();
-        _.each(this.quotaCollection.models, function(model) {
-            quota = model.get('quota');
-            newQuota = app.math.add(newQuota, quota);
-            // save all the initial likely values
-            this.setOldTotalFromCollectionById(model.get('user_id'), {
-                quota: quota
-            });
-        }, this);
+
+        if (!_.isUndefined(this.quotaCollection) && !_.isUndefined(this.quotaCollection.models)) {
+            _.each(this.quotaCollection.models, function(model) {
+                quota = model.get('quota');
+                newQuota = app.math.add(newQuota, quota);
+                // save all the initial likely values
+                this.setOldTotalFromCollectionById(model.get('user_id'), {
+                    quota: quota
+                });
+            }, this);
+        }
 
         if(oldQuota !== newQuota) {
             this.calculateData({quota_amount: newQuota});

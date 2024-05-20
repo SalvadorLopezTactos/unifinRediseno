@@ -818,8 +818,8 @@ class ForecastManagerWorksheet extends SugarBean
         $managerAmount = (isset($managerQuota['amount']) && !empty($managerQuota['amount']))
                             ? $managerQuota['amount'] : '0';
         $newTotal = SugarMath::init($managerAmount, 6)->sub($reporteeTotal)->result();
-        $quota = BeanFactory::getBean('Quotas', isset($managerQuota['id']) ? $managerQuota['id'] : null);
-        $quotaAmount = isset($quota->amount) ? $quota->amount : '0';
+        $quota = BeanFactory::getBean('Quotas', $managerQuota['id'] ?? null);
+        $quotaAmount = $quota->amount ?? '0';
         /**
          * if this is the current user, we need to use the manager assigned amount to figure out if we need to adjust
          * their quota to make sure that the reporteeTotal + the current assigned Quota is > the manager assigned

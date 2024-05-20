@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Information utilisateur non trouvée',
     'ERR_USER_NAME_EXISTS'              => 'Le nom d&#39;utilisateur {0} existe déjà. Les noms d&#39;utilisateur en double ne sont pas autorisés. Changez le nom d&#39;utilisateur afin qu&#39;il soit unique.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'La licence "Sugar Hint" doit être sauvegardée avec un type de licence compatible supplémentaire',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Cette fonctionnalité est déjà incluse dans Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Compte utilisateur bloqué : cet utilisateur ne peut pas se connecter.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Un utilisateur avec auth externe uniquement n&#39;est pas autorisé à se connecter en utilisant des identifiants Sugar',
 
@@ -96,7 +97,7 @@ $mod_strings = array (
 	'LBL_ADMIN'							=> 'Administrateur',
 	'LBL_ADVANCED'                     => 'Avancé',
     'LBL_ANY_ADDRESS'                  => 'Adresse Quelconque :',
-	'LBL_ANY_EMAIL'						=> 'Composer un email',
+	'LBL_ANY_EMAIL'						=> 'Email',
 	'LBL_ANY_PHONE'						=> 'Téléphone Quelconque',
 	'LBL_BUTTON_CREATE'					=> 'Créer',
 	'LBL_BUTTON_EDIT'					=> 'Éditer',
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Changer le mot de passe',
     'LBL_CHOOSE_A_KEY'					=> 'Si une clé est spécifiée elle empêchera une publication non autorisée de votre agenda',
     'LBL_NO_KEY'                        => 'Aucune clé n&#39;a été configurée. Veuillez configurer une clé afin de pouvoir utiliser cette fonctionnalité.',
-	'LBL_CHOOSE_WHICH'					=> 'Sélectionner les onglets visibles dans l&#39;application',
+    'LBL_CHOOSE_WHICH'                  => 'Sélectionnez les modules accessibles dans la barre de navigation latérale. Désignez l&#39;ordre dans lequel vous souhaitez que les modules apparaissent.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Nombre de modules épinglés',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Inscrivez le nombre de modules disponibles à épingler lorsque la barre de navigation est réduite (par exemple, si vous saisissez 5, les cinq premiers modules de votre liste sont épinglés). Nous recommandons un nombre qui représente les modules que vous utilisez le plus fréquemment. Les valeurs supérieures à 100 ne seront pas respectées.',
 	'LBL_CITY'							=> 'Ville',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Effacer',
@@ -191,7 +194,7 @@ $mod_strings = array (
 	'LBL_LIST_ACCEPT_STATUS'			=> 'Statut',
 	'LBL_LIST_ADMIN'					=> 'Admin',
 	'LBL_LIST_DEPARTMENT'				=> 'Service',
-	'LBL_LIST_EMAIL'					=> 'Composer un email',
+	'LBL_LIST_EMAIL'					=> 'Email',
 	'LBL_LIST_FORM_TITLE'				=> 'Utilisateurs',
 	'LBL_LIST_GROUP'					=> 'Groupe',
 	'LBL_LIST_LAST_NAME'				=> 'Nom',
@@ -319,7 +322,7 @@ $mod_strings = array (
 	'LBL_REMINDER_TEXT'					=> 'Délai par défaut avant rappel à une personne d&#39;un appel ou d&#39;une réunion approchant',
 	'LBL_REMINDER'						=> 'Rappel par défaut',
 	'LBL_REMINDER_POPUP' => 'Popup',
-	'LBL_REMINDER_EMAIL' => 'Composer un email',
+	'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES'   => 'Envoyer rappel emails aux participants',
 	'LBL_REMOVED_TABS'					=> 'Onglet(s) caché(s)',
 	'LBL_REPORTS_TO_NAME'				=> 'Rend compte à',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'Login SMTP :',
 	'LBL_MAIL_SMTPTYPE'                => 'Type SMTP :',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'Configuration SMTP',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Compte e-mail autorisé',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Choisissez votre fournisseur de messagerie email fzmploykjchkj :',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail - Mot de passe :',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail - Email :',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'utilisateurs/équipes/rôles',
     'LBL_LOADING_ITEMS' => 'Chargement des données ...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Accès au guide intelligent',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Dernière activité du guide intelligent',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Accès au guide intelligent manquant',
 ); // END STRINGS DEFS

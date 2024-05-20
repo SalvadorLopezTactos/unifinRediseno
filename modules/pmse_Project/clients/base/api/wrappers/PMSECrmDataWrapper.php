@@ -679,10 +679,10 @@ class PMSECrmDataWrapper implements PMSEObservable
         // @codingStandardsIgnoreEnd
         $output = null;
         $data = $args['data'];
-        $filter = isset($args['filter']) ? $args['filter'] : '';
-        $type = isset($args['call_type']) ? $args['call_type'] : '';
-        $baseModule = isset($args['base_module']) ? $args['base_module'] : '';
-        $orderBy = isset($args['order_by']) ? $args['order_by'] : '';
+        $filter = $args['filter'] ?? '';
+        $type = $args['call_type'] ?? '';
+        $baseModule = $args['base_module'] ?? '';
+        $orderBy = $args['order_by'] ?? '';
 
         $outputType = 0;
         switch ($data) {
@@ -734,8 +734,8 @@ class PMSECrmDataWrapper implements PMSEObservable
                 $output = $this->retrieveProcessDefinition($filter);
                 break;
             case 'related':
-                $cardinality = isset($args['cardinality']) ? $args['cardinality'] : 'all';
-                $removeTarget = isset($args['removeTarget']) ? $args['removeTarget'] : false;
+                $cardinality = $args['cardinality'] ?? 'all';
+                $removeTarget = $args['removeTarget'] ?? false;
                 $output = $this->retrieveRelatedBeans($filter, $cardinality, $removeTarget);
                 $outputType = 1;
                 break;
@@ -906,13 +906,13 @@ SQL;
             ->getDatabasePlatform()
             ->modifyLimitQuery($query, 25, 0);
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery(
                 $query,
                 ['filter' => $filter . '%']
             );
 
-        foreach ($stmt as $a) {
+        foreach ($result->iterateAssociative() as $a) {
             $person = array();
             $person['fullName'] = $a['first_name'] . ' ' . $a['last_name'];
             $person['emailAddress'] = $a['email_address'];
@@ -1356,7 +1356,7 @@ SQL;
     {
         $output = null;
         $data = $args['record'];
-        $filter = isset($args['filter']) ? $args['filter'] : '';
+        $filter = $args['filter'] ?? '';
         switch ($data) {
             case 'project':
                 $args['data']['filter'] = $args['filter'];
@@ -1463,12 +1463,12 @@ SQL;
     {
         /* TODO: change the hardcoded queries to Bean procedures */
         $res = new stdClass();
-        $res->targetModule = isset($args['pro_old_module']) ? $args['pro_old_module'] : '';
-        $res->newModule = isset($args['pro_module']) ? $args['pro_module'] : '';
+        $res->targetModule = $args['pro_old_module'] ?? '';
+        $res->newModule = $args['pro_module'] ?? '';
         if (empty($res->newModule)) {
-            $res->newModule = isset($args['pro_new_module']) ? $args['pro_new_module'] : '';
+            $res->newModule = $args['pro_new_module'] ?? '';
         }
-        $res->targetProcess = isset($args['filter']) ? $args['filter'] : '';
+        $res->targetProcess = $args['filter'] ?? '';
         $res->success = false;
 
         if (empty($res->targetModule) || empty($res->newModule) || empty($res->targetProcess)) {
@@ -1501,13 +1501,13 @@ SQL;
                 $activity[$actId] = '';
             }
 
-            $actTypesStmt = $db->getConnection()
+            $actTypesResult = $db->getConnection()
                 ->executeQuery(
                     'SELECT id, act_script_type FROM pmse_bpmn_activity WHERE pro_id = ?',
                     [$proId]
                 );
 
-            foreach ($actTypesStmt as $row) {
+            foreach ($actTypesResult->iterateAssociative() as $row) {
                 if (isset($activity[$row['id']])) {
                     $activity[$row['id']] = $row['act_script_type'];
                 }
@@ -1621,9 +1621,13 @@ SQL;
         $groupFieldsMap = array();
 
         $moduleBean = $this->getModuleFilter($newModuleFilter);
-        $fieldsData = isset($moduleBean->field_defs) ? $moduleBean->field_defs : array();
+        $fieldsData = $moduleBean->field_defs ?? array();
 
         foreach ($fieldsData as $field) {
+            // hide required by formula fields for ARR and CF event settings
+            if (!empty($field['required_formula']) && in_array($type, ['CF', 'AC'])) {
+                continue;
+            }
             $tmpField = array();
             if (isset($field['vname']) && (PMSEEngineUtils::isValidField($field, $type)) &&
                 AccessControlManager::instance()->allowFieldAccess($newModuleFilter, $field['name']) &&
@@ -1675,7 +1679,7 @@ SQL;
                     }
 
                     $tmpField['optionItem'] = 'none';
-                    if (in_array($field['type'], array('enum', 'radioenum', 'multienum'))) {
+                    if (in_array($field['type'], array('enum', 'radioenum', 'multienum', 'parent_type'))) {
                         if (!isset($field['options']) || !isset($app_list_strings[$field['options']])) {
                             if (PMSEEngineUtils::specialFields($field, $type)) {
                                 $tmpField['optionItem'] = $this->gatewayModulesMethod($field);
@@ -1756,14 +1760,14 @@ SQL;
         global $app_list_strings;
         $output = array();
         $moduleBean = $this->getModuleFilter($newModuleFilter);
-        $fieldsData = isset($moduleBean->field_defs) ? $moduleBean->field_defs : array();
+        $fieldsData = $moduleBean->field_defs ?? array();
         foreach ($fieldsData as $field) {
             $retrieveId = isset($additionalArgs['retrieveId']) && !empty($additionalArgs['retrieveId']) && $field['name'] == 'id' ? $additionalArgs['retrieveId'] : false;
             if (isset($field['vname']) && (PMSEEngineUtils::isValidField($field, 'AC') || $retrieveId)) {
                 $tmpField = array();
                 $tmpField['value'] = $field['name'];
                 $tmpField['text'] = $this->getFormattedFieldLabel($field['vname'], $newModuleFilter);
-                $tmpField['type'] = isset($fieldTypes[$field['type']]) ? $fieldTypes[$field['type']] : ucfirst(
+                $tmpField['type'] = $fieldTypes[$field['type']] ?? ucfirst(
                     $field['type']
                 );
                 $tmpField['type'] = (isset($tmpField['relationship']) && stristr($tmpField['relationship'], 'email'))
@@ -1798,10 +1802,9 @@ SQL;
                 $newfield = $this->dataFieldPersonalized($field, $arrayModules, $customfields);
                 if (isset($field['vname']) && isset($newfield)) {
                     $tmpField = array();
-                    $tmpField['value'] = isset($newfield['value']) ? $newfield['value'] : $field['name'];
-                    $tmpField['text'] = isset($newfield['text']) ? $newfield['text'] :
-                                            $this->getFormattedFieldLabel($field['vname'], $newModuleFilter);
-                    $tmpField['type'] = isset($fieldTypes[$newfield['type']]) ? $fieldTypes[$newfield['type']] : ucfirst(
+                    $tmpField['value'] = $newfield['value'] ?? $field['name'];
+                    $tmpField['text'] = $newfield['text'] ?? $this->getFormattedFieldLabel($field['vname'], $newModuleFilter);
+                    $tmpField['type'] = $fieldTypes[$newfield['type']] ?? ucfirst(
                         $newfield['type']
                     );
                     $tmpField['optionItem'] = 'none';
@@ -1814,7 +1817,7 @@ SQL;
                         }
                     }
                     if (isset($field['required']) || isset($newfield['required'])) {
-                        $tmpField['required'] = isset($newfield['required']) ? $newfield['required'] : $field['required'];
+                        $tmpField['required'] = $newfield['required'] ?? $field['required'];
                     }
                     if (isset($field['len'])) {
                         $tmpField['len'] = $field['len'];
@@ -1854,7 +1857,7 @@ SQL;
 
         $output = array();
         $moduleBean = $this->getModuleFilter($newModuleFilter);
-        $fieldsData = isset($moduleBean->field_defs) ? $moduleBean->field_defs : array();
+        $fieldsData = $moduleBean->field_defs ?? array();
         foreach ($fieldsData as $field) {
             if (isset($field['vname']) && PMSEEngineUtils::isValidField($field)) {
                 if ($field['type'] == 'date' || $field['type'] == 'datetimecombo' || $field['type'] == 'datetime') {
@@ -2209,7 +2212,7 @@ SQL;
                 ) //TYPE original relate
             )
         );
-        return isset($arraymodules[$module])? $arraymodules[$module] : array();
+        return $arraymodules[$module] ?? array();
     }
 
     /**
@@ -2276,6 +2279,7 @@ SQL;
                 break;
             case 'created_by_name':
             case 'modified_by_name':
+            case 'reports_to_name':
                 $field['type'] = 'user';
                 break;
             case 'teams':
@@ -2458,7 +2462,7 @@ SQL;
         $newLockedFieldsStr = '';
 
         $moduleBean = BeanFactory::newBean($module);
-        $fieldsDataArray = isset($moduleBean->field_defs) ? $moduleBean->field_defs : array();
+        $fieldsDataArray = $moduleBean->field_defs ?? array();
         $lockedVarsArray = json_decode($proLockedVariables);
         foreach ($fieldsDataArray as $key => $fieldsArray) {
             if (!empty($fieldsArray['group']) && (in_array($fieldsArray['group'], $lockedVarsArray))) {

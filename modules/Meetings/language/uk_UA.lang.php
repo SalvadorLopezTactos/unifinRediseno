@@ -222,4 +222,10 @@ $mod_strings = array (
     -  Натисніть "Вибрати учасника зустрічі", щоб додати наявного користувача, контакт чи попередній контакт до {{meetings_singular_module}}.
     - Натисніть на значок зі знаком "+" праворуч від напису "Вибрати запрошеного", щоб створити запрошеного учасника зустрічі {{meetings_singular_module}} як новий запис Sugar.
 3. Натисніть "Зберегти", щоб завершити створення нового запису й повернутися до попередньої сторінки.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Це зустріч Smart Guide',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Дочірні завдання',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Дочірні виклики',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Дочірні зустрічі',
 );

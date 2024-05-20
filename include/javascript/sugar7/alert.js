@@ -108,6 +108,11 @@
         show: function(options) {
             this._count++;
             app.alert.show('data:sync:process', options);
+        },
+
+        reset: function() {
+            this._count = 0;
+            app.alert.dismiss('data:sync:process');
         }
     } ;
 
@@ -213,4 +218,7 @@
         }
     });
 
+    app.events.on('processalert:reset', function() {
+        processAlert.reset();
+    });
 })(SUGAR.App);

@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Notlar Listesi Panosu',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Notlar Kaydı Panosu',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Notlar Odak Bölmesi',
+    'LBL_EXTERNAL_USER' => 'Harici Kullanıcı',
+    'LBL_EXTERNAL_USER_NAME' => 'Harici Kullanıcı',
 
     'LBL_RELATED_CONTACT' => 'İlişkili Kontak',
     'ERR_DELETE_RECORD' => 'Müşteriyi silmek için bir kayıt numarası girmelisiniz.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'E-posta Türü',
     'LBL_EMAIL_ID' => 'E-posta Kimliği',
     'LBL_PHONE' => 'Telefon:',
-    'LBL_PORTAL_FLAG' => 'Portal&#39;da Görünsün mü?',
+    'LBL_PORTAL_FLAG' => 'Harici Olarak Mevcut',
     'LBL_EMBED_FLAG' => 'E-Posta içinde gömülü mü?',
     'LBL_PRODUCT_ID' => 'Ürün ID:',
     'LBL_QUOTE_ID' => 'Teklif ID:',

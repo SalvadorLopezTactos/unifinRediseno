@@ -42,11 +42,12 @@
         if (app.acl.hasAccess('create', 'Notes')) {
             attachmentButtons.push({
                 text: app.lang.get('LBL_EMAIL_ATTACHMENTS', this.module),
-                onclick: _.bind(function(event) {
+                type: 'menuitem',
+                onAction: (event) => {
                     // Track click on the file attachment button.
                     app.analytics.trackEvent('click', 'tinymce_email_attachment_file_button', event);
                     this.view.trigger('email_attachments:file');
-                }, this)
+                },
             });
 
             // The user can only select a document to attach if he/she has
@@ -56,23 +57,25 @@
             if (app.acl.hasAccess('view', 'Documents')) {
                 attachmentButtons.push({
                     text: app.lang.get('LBL_EMAIL_ATTACHMENTS2', this.module),
-                    onclick: _.bind(function(event) {
+                    type: 'menuitem',
+                    onAction: (event) => {
                         // Track click on the document attachment button.
                         app.analytics.trackEvent('click', 'tinymce_email_attachment_doc_button', event);
                         this._selectDocument();
-                    }, this)
+                    },
                 });
             }
 
-            editor.addButton('sugarattachment', {
-                type: 'menubutton',
+            editor.ui.registry.addMenuButton('sugarattachment', {
                 tooltip: app.lang.get('LBL_ATTACHMENTS', this.module),
-                icon: 'paperclip',
-                onclick: function(event) {
+                icon: 'plus',
+                onAction: (event) => {
                     // Track click on the attachment button.
                     app.analytics.trackEvent('click', 'tinymce_email_attachment_button', event);
                 },
-                menu: attachmentButtons
+                fetch: (callback) => {
+                    callback(attachmentButtons);
+                },
             });
         }
     },

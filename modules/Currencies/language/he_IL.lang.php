@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'נוצר על ידי',
   'LBL_EDIT_LAYOUT' => 'ערוך תצורה' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'מנהלים בלבד',
-  'LBL_CURRENCY_DEFAULT' => 'דולר ארה"ב (ברירת מחדל)',
-
+  'LBL_CURRENCY_DEFAULT' => 'מטבע מערכת (ברירת מחדל)',
 );
 ?>

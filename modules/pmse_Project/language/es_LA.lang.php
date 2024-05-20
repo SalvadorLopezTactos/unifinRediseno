@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Botones de Formularios',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Aprobar/Rechazar',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Ruta',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Enviar a DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Otras Opciones de Enrutamiento',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Cambio Asignado al Usuario',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Equipo',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Combinación de Documentos',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Seleccionar...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Combinación de Documentos en PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Enviar documento combinado por correo electrónico',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Combinación de Documentos',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'El tipo de pasarela convergente no coincide con el tipo de pasarela del flujo de entrada',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Las pasarelas divergentes expanden los procesos en múltiples ramificaciones. Cuando se usa una pasarela convergente para hacer converger de nuevo todas estas ramificaciones en una ruta, debe utilizarse el tipo correcto de pasarela convergente, dependiendo del tipo de pasarela divergent que se haya utilizado para crear las ramificaciones. Para ramificaciones creadas con pasarelas divergentes exclusivas o basadas en eventos, utilice una pasarela convergente exclusiva para hacerlas converger. Para ramificaciones creadas con pasarelas divergentes paralelas o inclusivas, utilice una pasarela convergente paralela.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Campo de módulo',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Relación de módulo',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Usuario',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Función',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Equipo',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Actividad de formulario',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Norma empresarial',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Acción de norma empresarial',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Plantilla de correo electrónico',
 );

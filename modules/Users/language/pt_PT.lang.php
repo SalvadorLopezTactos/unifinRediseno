@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informação de Utilizador não encontrada',
     'ERR_USER_NAME_EXISTS'              => 'O nome de utilizador {0} já existe. Não são permitidos nomes de utilizador duplicados. Altere o nome de utilizador para que seja exclusivo.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'A licença do "Sugar Hint" deve ser guardada com um tipo de licença compatível adicional',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Esta capacidade já está incluída no Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Este utilizador tem o acesso ao Sugar bloqueado e não consegue aceder com a sua palavra-passe existente.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Apenas a autenticação externa não permite que o utilizador inicie sessão com as credenciais de Sugar',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Palavra-passe',
     'LBL_CHOOSE_A_KEY'					=> 'Escolha uma chave para evitar a publicação não autorizada do seu calendário',
     'LBL_NO_KEY'                        => 'A chave não está definida. Por favor defina a chave para permitir a publicação.',
-	'LBL_CHOOSE_WHICH'					=> 'Escolha quais os módulos que deseja visualizar',
+    'LBL_CHOOSE_WHICH'                  => 'Seleccione os módulos que são acessíveis na barra de navegação lateral. Designe a ordem em que gostaria que os módulos aparecessem.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Número de módulos fixados',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Escreva o número de módulos disponíveis para fixar quando a barra de navegação estiver recolhida (por exemplo, se for inserido o número 5, serão fixados os primeiros cinco módulos da sua lista). Recomendamos um número que represente os módulos usados com mais frequência. Valores superiores a 100 não serão respeitados.',
 	'LBL_CITY'							=> 'Cidade:',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Apagar',
@@ -545,6 +548,7 @@ Clique em Cancelar para sair da página sem reatribuir qualquer registo.',
 	'LBL_MAIL_SMTPUSER'					=> 'Nome de Utilizador SMTP:',
 	'LBL_MAIL_SMTPTYPE'                => 'Tipo de servidor SMTP:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'Especificação servidor SMTP',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Conta de E-mail autorizada',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Escolha o seu fornecedor de e-mail',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Palavra-passe do Yahoo! Mail:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'ID Yahoo! Mail',
@@ -700,4 +704,9 @@ Clique em Cancelar para sair da página sem reatribuir qualquer registo.',
     'LBL_UTILS_USER_TEAMS_ROLES' => 'utilizadores/equipas/funções',
     'LBL_LOADING_ITEMS' => 'A carregar dados...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Acesso do Guia Inteligente',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Guia Inteligente Ativo Pela Última Vez',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Acesso do Guia Inteligente Em Falta',
 ); // END STRINGS DEFS

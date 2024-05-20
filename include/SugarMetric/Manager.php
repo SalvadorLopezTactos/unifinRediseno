@@ -66,9 +66,7 @@ class SugarMetric_Manager
                 if (file_exists($path)) {
                     require_once $path;
 
-                    $additionalConfig = isset($sugar_config['metric_settings'][$name])
-                        ? $sugar_config['metric_settings'][$name]
-                        : array();
+                    $additionalConfig = $sugar_config['metric_settings'][$name] ?? array();
 
                     /** @var SugarMetric_Provider_Interface $metric  */
                     $metric = new $name($additionalConfig);

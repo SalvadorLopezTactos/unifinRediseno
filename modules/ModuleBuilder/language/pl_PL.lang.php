@@ -810,19 +810,16 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_POPHELP_CALCULATED'=>"Utwórz formułę, aby określić wartość w tym polu.<br>"
    . "Definicje workflow zawierające czynność aktualizacji tego pola nie będą już wykonywać tej czynności.<br>"
    . "Pola wykorzystujące formuły nie będą obliczane w czasie rzeczywistym w układach "
-   . "portal samoobsługowy Sugar lub "
+   . "Portal samoobsługowy klientów lub "
    . "Mobilny widok edycji.",
 
 'LBL_POPHELP_DEPENDENT'=>"Utwórz formułę służącą do określania, czy to pole jest widoczne w układach.<br/>"
-        . "Pola zależne będą zgodne z formułą zależności w mobilnym widoku przeglądarki, <br/>"
+        . "Pola zależne będą zgodne z formułą zależności w mobilnym widoku przeglądarki,<br/>"
         . "ale nie będą zgodne z formułą w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
         . "Nie będą zgodne z formułą w portalu samoobsługowym Sugar.",
-'LBL_POPHELP_REQUIRED'=>"Utwórz formułę służącą do określania, czy to pole jest wymagane w układach.<br/>"
-    . "Pola wymagane będą zgodne z formułą w mobilnym widoku przeglądarki, <br/>"
-    . "ale nie będą zgodne z formułą w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
-    . "Nie będą zgodne z formułą w portalu samoobsługowym Sugar.",
+    'LBL_POPHELP_REQUIRED'=>'Pól wymaganych warunkowo nie można używać w następujących typach czynności SugarBPM: Dodaj powiązany rekord, Zmień pole. Usuń tekst „Wymagane, jeśli”, aby używać tego pola w tych czynnościach definiowania procesu',
 'LBL_POPHELP_READONLY'=>"Utwórz formułę służącą do określania, czy to pole jest tylko do odczytu w układach.<br/>"
-        . "Pola tylko do odczytu będą zgodne z formułą w mobilnym widoku przeglądarki, <br/>"
+        . "Pola tylko do odczytu będą zgodne z formułą w mobilnym widoku przeglądarki,<br/>"
         . "ale nie będą zgodne z formułą w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
         . "Nie będą zgodne z formułą w portalu samoobsługowym Sugar.",
 'LBL_POPHELP_GLOBAL_SEARCH'=>'Tego pola używaj podczas wyszukiwania rekordów za pomocą globalnego wyszukiwania w tym module.',
@@ -862,6 +859,7 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
                 'decimal'=>'Dziesiętne',
                 'autoincrement' => 'Automatyczne zwiększanie',
                 'actionbutton' => 'Przycisk czynności',
+                'geocodestatus' => 'Stan geokodu',
 ),
 'labelTypes' => array(
     "" => "Często używane etykiety",

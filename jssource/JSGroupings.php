@@ -362,7 +362,7 @@
                    'include/javascript/sugar7/plugins/CollectionFieldLoadAll.js'  => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/sugar7/plugins/EmailParticipants.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/fuse/fuse.js' => 'include/javascript/sugar_sidecar.min.js',
-                    'include/javascript/tinymce4/jquery.tinymce.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/tinymce6/tinymce.jquery.min.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/mousetrap/mousetrap.min.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/clipboardjs/clipboard.min.js' => 'include/javascript/sugar_sidecar.min.js',
                     // Library for flex-grid layouts
@@ -375,6 +375,13 @@
                     'include/javascript/sugar7/userAgent.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Previewable.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Attachments.js'  => 'include/javascript/sugar_sidecar.min.js',
+                    // Library for Sugar Automate
+                    'include/javascript/customer-journey/CJBaseHelper.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/customer-journey/CJFieldHelper.js'  => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/customer-journey/CJAsPanelOrTab.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/customer-journey/CJEvents.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/customer-journey/CJForms.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/customer-journey/CJViewAndField.js' => 'include/javascript/sugar_sidecar.min.js',
                )
            ),
 
@@ -412,6 +419,10 @@
                 'include/javascript/hint/hint.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/hint/stage2-handlebar-helpers.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/notification-preferences.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/plugins/ReportsPanel.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/plugins/ReportExport.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/docusign/docusign-console.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/plugins/ReportIntelligenceDashlet.js' => 'include/javascript/sugar_grp7.min.js',
             ),
 
             $sugar_grp_portal2 = array(
@@ -513,7 +524,6 @@
                 'include/javascript/pmse/ui/item_updater.js' => 'include/javascript/pmse.ui.min.js',
                 'include/javascript/pmse/ui/html_panel.js' => 'include/javascript/pmse.ui.min.js',
                 'include/javascript/pmse/ui/store.js' => 'include/javascript/pmse.ui.min.js',
-                'include/javascript/pmse/ui/grid.js' => 'include/javascript/pmse.ui.min.js',
                 'include/javascript/pmse/ui/history_panel.js' => 'include/javascript/pmse.ui.min.js',
                 'include/javascript/pmse/ui/log_field.js' => 'include/javascript/pmse.ui.min.js',
                 'include/javascript/pmse/ui/message_panel.js' => 'include/javascript/pmse.ui.min.js',

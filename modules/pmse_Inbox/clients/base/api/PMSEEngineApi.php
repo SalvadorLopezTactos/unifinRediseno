@@ -21,6 +21,11 @@ use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
 class PMSEEngineApi extends SugarApi
 {
+    public $pmse;
+    /**
+     * @var Sugarcrm\Sugarcrm\ProcessManager\PMSE|mixed
+     */
+    public $wrapper;
     /**
      * PMSECaseFlowHandler object
      * @var PMSECaseFlowHandler
@@ -38,6 +43,12 @@ class PMSEEngineApi extends SugarApi
      */
     private $caseWrapper;
 
+    /**
+     * PMSEEmailHandler object
+     * @var PMSEEmailHandler
+     */
+    private $emailHandler;
+
     public function __construct()
     {
         $this->caseFlowHandler = ProcessManager\Factory::getPMSEObject('PMSECaseFlowHandler');
@@ -45,6 +56,7 @@ class PMSEEngineApi extends SugarApi
         $this->pmse = PMSE::getInstance();
         $this->wrapper = ProcessManager\Factory::getPMSEObject('PMSEWrapper');
         $this->caseWrapper = ProcessManager\Factory::getPMSEObject('PMSECaseWrapper');
+        $this->emailHandler = ProcessManager\Factory::getPMSEObject('PMSEEmailHandler');
     }
 
     public function registerApiRest()
@@ -390,6 +402,13 @@ class PMSEEngineApi extends SugarApi
                     $flowBean->assigned_user_id = $current_user->id;
                     $flowBean->cas_user_id =  $current_user->id;
                     $flowBean->cas_assignment_method = 'static';
+                    if ($activityDefinitionBean->act_email_process_user) {
+                        $flowData = [
+                            'cas_sugar_module' => $flowBean->cas_sugar_module,
+                            'cas_sugar_object_id' => $flowBean->cas_sugar_object_id,
+                        ];
+                        $this->emailHandler->queueActivityEmail($flowData, $activityDefinitionBean, $current_user->id);
+                    }
                 }
             }
             $flowBean->cas_start_date = TimeDate::getInstance()->nowDb();
@@ -644,14 +663,9 @@ INNER JOIN pmse_bpm_activity_definition ON pmse_bpmn_activity.id = pmse_bpm_acti
 WHERE pmse_inbox.cas_id = ? AND cas_flow_status = 'FORM'
 SQL;
 
-        $stmt = $db->getConnection()
-            ->executeQuery(
-                $query,
-                [$args['cas_id']]
-            );
-
+        $result = $db->getConnection()->executeQuery($query, [$args['cas_id']]);
         $results = [];
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $time = json_decode(base64_decode($row['act_expected_time']));
             $results[] = array(
                 'act_name' => $row['act_name'],
@@ -693,11 +707,11 @@ SQL;
         if (!empty($args['id'])) {
             $params = [$args['id']];
         }
-        $result= $db->getConnection()->executeQuery($get_actIds, $params);
+        $result = $db->getConnection()->executeQuery($get_actIds, $params);
 
         $tmpArray = array();
 
-        foreach ($result as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $tmpArray[$row['id']] = $row['first_name'] . ' ' . $row['last_name'];
         }
         $res['result'] = $tmpArray;
@@ -1163,6 +1177,11 @@ SQL;
             unset($listButtons[$continue]);
             $returnArray['case']['taskContinue'] = true;
         }
+
+        if ($activity->act_response_buttons === 'SEND_TO_DOCUSIGN') {
+            $listButtons = ['send_docusign'];
+        }
+
         $returnArray['case']['reclaim'] = $reclaimCaseByUser;
         $returnArray['case']['buttons'] = $this->getButtons($listButtons, $activity);
         $returnArray['case']['readonly'] = json_decode(base64_decode($activity->act_readonly_fields));
@@ -1316,6 +1335,13 @@ SQL;
                     ),
                 ),
             ),
+            'send_docusign' => [
+                'type' => 'rowaction',
+                'event' => 'case:send_to_docusign',
+                'name' => 'send_docusign',
+                'label' => translate('LBL_PMSE_LABEL_SEND_TO_DOCUSIGN', $module_name),
+                'css_class' => 'btn btn-primary',
+            ],
             'edit' => array(
                 'type' => 'actiondropdown',
                 'name' => 'main_dropdown',

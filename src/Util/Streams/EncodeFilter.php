@@ -17,6 +17,10 @@ use php_user_filter;
 
 class EncodeFilter extends php_user_filter
 {
+    /**
+     * @var \stdClass|mixed
+     */
+    public $bucket;
     private $data;
     private static $token = '~!#@&';
 
@@ -26,7 +30,7 @@ class EncodeFilter extends php_user_filter
         return true;
     }
 
-    public function filter($in, $out, &$consumed, $closing)
+    public function filter($in, $out, &$consumed, $closing): int
     {
         while ($bucket = stream_bucket_make_writeable($in)) {
             $this->data .= $bucket->data;

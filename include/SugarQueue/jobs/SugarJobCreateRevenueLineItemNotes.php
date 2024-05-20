@@ -70,11 +70,11 @@ class SugarJobCreateRevenueLineItemNotes extends JobNotification implements Runn
         $settings = Opportunity::getSettings();
 
         if ((isset($settings['opps_view_by']) && $settings['opps_view_by'] !== 'Opportunities')) {
-            $GLOBALS['log']->fatal("Opportunity are being used with Revenue Line Items. " . __CLASS__ . " should not be running");
+            $GLOBALS['log']->fatal("Opportunity are being used with Revenue Line Items. " . self::class . " should not be running");
             return false;
         }
 
-        $args = json_decode(html_entity_decode($data), true);
+        $args = json_decode(html_entity_decode($data, ENT_COMPAT), true);
         $this->job->runnable_ran = true;
 
         $labels = $args['labels'];

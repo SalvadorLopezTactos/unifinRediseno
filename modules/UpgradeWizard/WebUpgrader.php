@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once dirname(__FILE__) . '/UpgradeDriver.php';
+require_once __DIR__ . '/UpgradeDriver.php';
 
 /**
  * Web driver
@@ -41,17 +41,17 @@ class WebUpgrader extends UpgradeDriver
     /**
      * {@inheritDoc}
      */
-    const VERSION_FILE = 'version.json';
+    public const VERSION_FILE = 'version.json';
 
     /**
      * IIS configuration file name
      */
-    const IIS_CONFIG = 'web.config';
+    public const IIS_CONFIG = 'web.config';
 
     /**
      * maxAllowedContentLength value for IIS. 100M
      */
-    const IIS_CONTENT_LENGTH = 104857600;
+    public const IIS_CONTENT_LENGTH = 104857600;
 
     /**
      * Updating IIS config if maxAllowedContentLength < 100M or not set
@@ -125,7 +125,7 @@ class WebUpgrader extends UpgradeDriver
     public function start()
     {
         if (!isset($this->state['stage']) || !array_search('started', $this->state['stage'])) {
-            list($version, $build) = self::getVersion();
+            [$version, $build] = self::getVersion();
             $this->log("WebUpgrader v.$version (build $build) starting");
         }
     }
@@ -386,7 +386,7 @@ class WebUpgrader extends UpgradeDriver
             $logoFileName = $appearance === 'dark' ? 'company_logo_dark.png' : 'company_logo.png';
         }
 
-        include dirname(__FILE__) . '/upgrade_screen.php';
+        include __DIR__ . '/upgrade_screen.php';
     }
 
     /**
@@ -436,7 +436,13 @@ class WebUpgrader extends UpgradeDriver
                     break;
                 }
             }
-            return $this->error("The health check didn't pass: " . $logDetails['log'], true);
+            $messageMaxLength = 250;
+            $message= $logDetails['log'];
+            $message = mb_strlen($message) > $messageMaxLength
+                ? mb_substr($message, 0, $messageMaxLength) . ' ...'
+                : $message;
+
+            return $this->error("The health check didn't pass: " . $message, true);
         }
         return true;
     }

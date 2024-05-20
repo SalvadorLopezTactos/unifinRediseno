@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Creare una formula per determinare se questo campo è obbligatorio nei layout.<br/>"
-    . "I campi obbligatori seguiranno la formula nella vista mobile basata su browser,<br/>"
-    . "ma non seguiranno la formula nelle applicazioni native, come Sugar Mobile per iPhone.<br/>"
-    . "Non seguiranno la formula nel portale Sugar Self-Service.",
+    'LBL_POPHELP_REQUIRED'=>'I campi obbligatori in maniera condizionale non sono disponibili per l&#39;utilizzo nei seguenti tipi di azione SugarBPM: Aggiungi Record Relazionato, Cambia Campo. Rimuovere il testo "Richiesto se" per utilizzare i campi in queste azioni di definizione del processo',
 'LBL_POPHELP_READONLY'=>"Creare una formula per determinare se questo campo è di sola lettura nei layout.<br/>"
         . "I campi di sola lettura seguiranno la formula nella vista mobile basata su browser,<br/>"
-        . "ma non seguiranno la formula nelle applicazioni native, come Sugar Mobile per iPhone.<br/>"
+        . "ma non la seguiranno nelle applicazioni native, come Sugar Mobile per iPhone.<br/>"
         . "Non seguiranno la formula nel portale Sugar Self-Service.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleziona per utilizzare questo campo durante la ricerca di record utilizzando la Ricerca globale su questo modulo.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Selezionare per usare questo campo quando si cercano i record usando la Ricerca globale in questo modulo.',
 //Revert Module labels
 'LBL_RESET' => 'Reimposta',
 'LBL_RESET_MODULE' => 'Reimposta Modulo',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Decimale',
                 'autoincrement' => 'Incremento automatico',
                 'actionbutton' => 'ActionButton',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Etichette utilizzate di frequente",

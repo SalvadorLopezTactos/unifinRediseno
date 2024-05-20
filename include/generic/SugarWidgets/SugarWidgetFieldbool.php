@@ -76,7 +76,29 @@ class SugarWidgetFieldBool extends SugarWidgetReportField
         $cell = "<input name='checkbox_display' class='checkbox' type='checkbox' disabled $on_or_off>";
         return  $cell;
     }
-    
+
+    /**
+     * Get bool value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        $value = $this->_get_list_value($layoutDef);
+        $key = $this->_get_column_alias($layoutDef);
+        $key = strtoupper($key);
+
+        if (empty($layoutDef['fields'][$key])) {
+            $value = !empty($value);
+
+            return $value;
+        }
+
+        return $value;
+    }
+
  function queryFilterStarts_With(&$layout_def)
  {
     return $this->queryFilterEquals($layout_def);

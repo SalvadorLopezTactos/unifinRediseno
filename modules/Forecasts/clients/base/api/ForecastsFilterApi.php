@@ -108,8 +108,7 @@ class ForecastsFilterApi extends FilterApi
         if (!empty($args['filter'])) {
             // todo-sfa: clean this up as it currently doesn't handle much in the way of nested arrays
             foreach ($args['filter'] as $key => $filter) {
-                reset($filter);
-                $filter_key = key($filter);
+                $filter_key = array_key_first($filter);
                 // if the key is assigned_user_id, take the value and save it for later
                 if ($found_assigned_user == false && $filter_key == 'user_id') {
                     $found_assigned_user = array_pop($filter);

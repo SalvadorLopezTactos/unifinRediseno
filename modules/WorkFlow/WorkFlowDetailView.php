@@ -105,7 +105,7 @@ $note = BeanFactory::newBean('Notes');
 //FIXME: notes.email_type should be EmailTemplates
 $notes_list = $note->get_full_list("notes.name", "notes.email_id=" . $GLOBALS['db']->quoted($focus->id), true);
 if(!empty($notes_list)) {
-    for ($i=0; $i<(is_countable($notes_list) ? count($notes_list) : 0); $i++) {
+    for ($i = 0; $i < (is_countable($notes_list) ? count($notes_list) : 0); $i++) {
         $the_note = $notes_list[$i];
         $attachments .= "<a href=\"index.php?entryPoint=download&id={$the_note->id}&type=Notes\">".$the_note->name."</a><br />";
     }

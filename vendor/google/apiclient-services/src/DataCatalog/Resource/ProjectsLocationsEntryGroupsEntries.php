@@ -19,8 +19,16 @@ namespace Google\Service\DataCatalog\Resource;
 
 use Google\Service\DataCatalog\DatacatalogEmpty;
 use Google\Service\DataCatalog\GetIamPolicyRequest;
+use Google\Service\DataCatalog\GoogleCloudDatacatalogV1Contacts;
 use Google\Service\DataCatalog\GoogleCloudDatacatalogV1Entry;
+use Google\Service\DataCatalog\GoogleCloudDatacatalogV1EntryOverview;
 use Google\Service\DataCatalog\GoogleCloudDatacatalogV1ListEntriesResponse;
+use Google\Service\DataCatalog\GoogleCloudDatacatalogV1ModifyEntryContactsRequest;
+use Google\Service\DataCatalog\GoogleCloudDatacatalogV1ModifyEntryOverviewRequest;
+use Google\Service\DataCatalog\GoogleCloudDatacatalogV1StarEntryRequest;
+use Google\Service\DataCatalog\GoogleCloudDatacatalogV1StarEntryResponse;
+use Google\Service\DataCatalog\GoogleCloudDatacatalogV1UnstarEntryRequest;
+use Google\Service\DataCatalog\GoogleCloudDatacatalogV1UnstarEntryResponse;
 use Google\Service\DataCatalog\Policy;
 use Google\Service\DataCatalog\TestIamPermissionsRequest;
 use Google\Service\DataCatalog\TestIamPermissionsResponse;
@@ -104,8 +112,9 @@ class ProjectsLocationsEntryGroupsEntries extends \Google\Service\Resource
    * groups. (entries.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param GetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -117,7 +126,9 @@ class ProjectsLocationsEntryGroupsEntries extends \Google\Service\Resource
     return $this->call('getIamPolicy', [$params], Policy::class);
   }
   /**
-   * Lists entries. (entries.listProjectsLocationsEntryGroupsEntries)
+   * Lists entries. Note: Currently, this method can list only custom entries. To
+   * get a list of both custom and automatically created entries, use
+   * SearchCatalog. (entries.listProjectsLocationsEntryGroupsEntries)
    *
    * @param string $parent Required. The name of the entry group that contains the
    * entries to list. Can be provided in URL format.
@@ -139,6 +150,38 @@ class ProjectsLocationsEntryGroupsEntries extends \Google\Service\Resource
     $params = ['parent' => $parent];
     $params = array_merge($params, $optParams);
     return $this->call('list', [$params], GoogleCloudDatacatalogV1ListEntriesResponse::class);
+  }
+  /**
+   * Modifies contacts, part of the business context of an Entry. To call this
+   * method, you must have the `datacatalog.entries.updateContacts` IAM permission
+   * on the corresponding project. (entries.modifyEntryContacts)
+   *
+   * @param string $name Required. The full resource name of the entry.
+   * @param GoogleCloudDatacatalogV1ModifyEntryContactsRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return GoogleCloudDatacatalogV1Contacts
+   */
+  public function modifyEntryContacts($name, GoogleCloudDatacatalogV1ModifyEntryContactsRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('modifyEntryContacts', [$params], GoogleCloudDatacatalogV1Contacts::class);
+  }
+  /**
+   * Modifies entry overview, part of the business context of an Entry. To call
+   * this method, you must have the `datacatalog.entries.updateOverview` IAM
+   * permission on the corresponding project. (entries.modifyEntryOverview)
+   *
+   * @param string $name Required. The full resource name of the entry.
+   * @param GoogleCloudDatacatalogV1ModifyEntryOverviewRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return GoogleCloudDatacatalogV1EntryOverview
+   */
+  public function modifyEntryOverview($name, GoogleCloudDatacatalogV1ModifyEntryOverviewRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('modifyEntryOverview', [$params], GoogleCloudDatacatalogV1EntryOverview::class);
   }
   /**
    * Updates an existing entry. You must enable the Data Catalog API in the
@@ -170,6 +213,21 @@ class ProjectsLocationsEntryGroupsEntries extends \Google\Service\Resource
     return $this->call('patch', [$params], GoogleCloudDatacatalogV1Entry::class);
   }
   /**
+   * Marks an Entry as starred by the current user. Starring information is
+   * private to each user. (entries.star)
+   *
+   * @param string $name Required. The name of the entry to mark as starred.
+   * @param GoogleCloudDatacatalogV1StarEntryRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return GoogleCloudDatacatalogV1StarEntryResponse
+   */
+  public function star($name, GoogleCloudDatacatalogV1StarEntryRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('star', [$params], GoogleCloudDatacatalogV1StarEntryResponse::class);
+  }
+  /**
    * Gets your permissions on a resource. Returns an empty set of permissions if
    * the resource doesn't exist. Supported resources are: - Tag templates - Entry
    * groups Note: This method gets policies only within Data Catalog and can't be
@@ -179,8 +237,9 @@ class ProjectsLocationsEntryGroupsEntries extends \Google\Service\Resource
    * (entries.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse
@@ -190,6 +249,22 @@ class ProjectsLocationsEntryGroupsEntries extends \Google\Service\Resource
     $params = ['resource' => $resource, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('testIamPermissions', [$params], TestIamPermissionsResponse::class);
+  }
+  /**
+   * Marks an Entry as NOT starred by the current user. Starring information is
+   * private to each user. (entries.unstar)
+   *
+   * @param string $name Required. The name of the entry to mark as **not**
+   * starred.
+   * @param GoogleCloudDatacatalogV1UnstarEntryRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return GoogleCloudDatacatalogV1UnstarEntryResponse
+   */
+  public function unstar($name, GoogleCloudDatacatalogV1UnstarEntryRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('unstar', [$params], GoogleCloudDatacatalogV1UnstarEntryResponse::class);
   }
 }
 

@@ -16,7 +16,8 @@
  */
 class ParentModuleVisibility extends ACLVisibility
 {
-
+    /** @var SugarQuery_Builder_Join */
+    public $join;
     protected $parentLink = "";
     /**
      * @param SugarBean $bean

@@ -273,6 +273,10 @@ $viewdefs['Prospects']['base']['view']['record'] = array(
                         ),
                     ),
                 ),
+                [
+                    'name' => 'geocode_status',
+                    'licenseFilter' => ['MAPS'],
+                ],
                 'phone_work',
                 'assigned_user_name',
                 'twitter',

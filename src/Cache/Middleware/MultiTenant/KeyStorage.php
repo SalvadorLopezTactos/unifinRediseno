@@ -12,7 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant;
 
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * Multi-tenant cache key storage
@@ -22,14 +22,14 @@ interface KeyStorage
     /**
      * Returns the currently effective key
      *
-     * @return Uuid
+     * @return UuidInterface
      */
-    public function getKey() : ?Uuid;
+    public function getKey() : ?UuidInterface;
 
     /**
      * Updates the key
      *
-     * @param Uuid $key
+     * @param UuidInterface $key
      */
-    public function updateKey(Uuid $key) : void;
+    public function updateKey(UuidInterface $key) : void;
 }

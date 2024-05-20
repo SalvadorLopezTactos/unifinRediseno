@@ -20,7 +20,7 @@ if (!is_admin($current_user)) {
 global $mod_strings;
 
 //echo out warning message and msgDiv
-echo '<p>' . htmlspecialchars($mod_strings['LBL_REPAIR_JS_FILES_PROCESSING']) . '</p>';
+echo '<p>' . htmlspecialchars($mod_strings['LBL_REPAIR_JS_FILES_PROCESSING'], ENT_COMPAT) . '</p>';
 echo '<div id="msgDiv"></div>';
 
 //echo out script that will make an ajax call to process the files via callJSRepair.php

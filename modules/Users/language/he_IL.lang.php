@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'פרטי המשתמש לא נמצאו',
     'ERR_USER_NAME_EXISTS'              => 'שם המשתמש {0} כבר קיים. אין אפשרות לשמות משתמש כפולים. שנה שם המשתמש לערך ייחודי.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'יש לשמור את רישיון "Sugar Hint" עם סוג רישיון תואם נוסף',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'היכולת כבר כלולה ב-Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'משתמש זה ננעל מחוץ ליישום Sugar ולא יכול להתחבר בעזרת הסיסמה הקיימת שלו.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'משתמש עם הרשאת אימות חיצוני אינה מורשה להיכנס באמצעות הרשאות Sugar',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'סיסמה',
     'LBL_CHOOSE_A_KEY'					=> 'בחר מפתח כדי למנוע פרסום לא מורשה של לוח השנה שלך',
     'LBL_NO_KEY'                        => 'לא הוגדר מפתח. אנא הגדר מפתח על מנת לאפשר פרסום',
-	'LBL_CHOOSE_WHICH'					=> 'Choose which tabs are displayed',
+    'LBL_CHOOSE_WHICH'                  => 'בחר אילו מודולים נגישים מסרגל הניווט הצידי. אפשר לקבוע את סדר הופעתם של המודולים.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'מספר המודולים המוצמדים',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'כאן אפשר לרשום את מספר המודולים הזמינים להצמדה כשסרגל הניווט מכווץ (למשל, אם הוזן 5, חמשת המודולים הראשונים ברשימה מוצמדים). מומלץ לבחור מספר שמייצג את המודולים הנמצאים בשימוש הכי תדיר אצלך. המערכת לא תכבד ערכים מעל 100.',
 	'LBL_CITY'							=> 'עיר',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'נקה',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'שם משתמש SMTP:',
 	'LBL_MAIL_SMTPTYPE'                => 'סוג שרת SMTP:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'מפרט שרת SMTP',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'חשבון דוא"ל מורשה',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'בחר את ספק הדוא"ל שלך:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'סיסמת Yahoo! Mail:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'מזהה Yahoo! Mail:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'משתמשים/צוותים/תפקידים',
     'LBL_LOADING_ITEMS' => 'המערכת טוענת נתונים...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'גישה למדריכים חכמים',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'מדריך חכם פעיל אחרון',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'חסרה גישה למדריכים חכמים',
 ); // END STRINGS DEFS

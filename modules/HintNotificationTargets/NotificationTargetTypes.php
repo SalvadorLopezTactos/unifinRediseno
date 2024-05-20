@@ -13,11 +13,11 @@ namespace Sugarcrm\Sugarcrm\modules\HintNotificationTargets;
 
 class NotificationTargetTypes
 {
-    const SUGAR_TARGET_TYPE = 'sugar';
-    const BROWSER_TARGET_TYPE = 'browser';
-    const EMAIL_IMMEDIATE_TARGET_TYPE = 'email-immediate';
-    const EMAIL_DAILY_TARGET_TYPE = 'email-daily';
-    const EMAIL_WEEKLY_TARGET_TYPE = 'email-weekly';
+    public const SUGAR_TARGET_TYPE = 'sugar';
+    public const BROWSER_TARGET_TYPE = 'browser';
+    public const EMAIL_IMMEDIATE_TARGET_TYPE = 'email-immediate';
+    public const EMAIL_DAILY_TARGET_TYPE = 'email-daily';
+    public const EMAIL_WEEKLY_TARGET_TYPE = 'email-weekly';
 
     /**
      * All available target types

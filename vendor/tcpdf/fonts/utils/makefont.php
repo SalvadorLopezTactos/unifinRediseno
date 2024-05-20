@@ -85,6 +85,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * @param array $patch Optional modification of the encoding
  */
 function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=array()/* BEGIN SUGARCRM SPECIFIC */, $cidInfo=""/* END SUGARCRM SPECIFIC */) {
+	$widths = [];
+ $type = null;
+ $fm = [];
+ $fd = null;
 	//Generate a font definition file
 	ini_set('auto_detect_line_endings', '1');
 	if (!file_exists($fontfile)) {
@@ -324,7 +328,7 @@ r47930 - 2009-06-02 16:21:39 -0700 (Tue, 02 Jun 2009) - jenny - Updating with ch
  */
 function ReadMap($enc) {
 	//Read a map file
-	$file = dirname(__FILE__).'/enc/'.strtolower($enc).'.map';
+	$file = __DIR__.'/enc/'.strtolower($enc).'.map';
 	$a = file($file);
 	if (empty($a)) {
 		die('Error: encoding not found: '.$enc);
@@ -552,10 +556,10 @@ function ReadAFM($file,&$map) {
 
 function MakeFontDescriptor($fm, $symbolic=false) {
 	//Ascent
-	$asc = (isset($fm['Ascender']) ? $fm['Ascender'] : 1000);
+	$asc = ($fm['Ascender'] ?? 1000);
 	$fd = "array('Ascent'=>".$asc;
 	//Descent
-	$desc = (isset($fm['Descender']) ? $fm['Descender'] : -200);
+	$desc = ($fm['Descender'] ?? -200);
 	$fd .= ",'Descent'=>".$desc;
 	//CapHeight
 	if (isset($fm['CapHeight'])) {
@@ -588,7 +592,7 @@ function MakeFontDescriptor($fm, $symbolic=false) {
 	}
 	$fd .= ",'FontBBox'=>'[".$fbb[0].' '.$fbb[1].' '.$fbb[2].' '.$fbb[3]."]'";
 	//ItalicAngle
-	$ia = (isset($fm['ItalicAngle']) ? $fm['ItalicAngle'] : 0);
+	$ia = ($fm['ItalicAngle'] ?? 0);
 	$fd .= ",'ItalicAngle'=>".$ia;
 	//StemV
 	if (isset($fm['StdVW'])) {

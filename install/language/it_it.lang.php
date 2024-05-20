@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Per una prestazione ottimale dell´utilizzo di IIS/FastCGI sapi, imposta fastcgi.logging a 0 nel file php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versione PHP Installata Non Supportata: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Database non disponibile',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Il supporto del database non è stato trovato. Assicurati di disporre dei driver necessari per uno dei seguenti tipi di database supportati: MySQL, MS SQLServer, Oracle o DB2. Potrebbe essere necessario rimuovere il commento dall\'estensione nel file php.ini o ricompilare con il file binario corretto, a seconda della versione di PHP. Fare riferimento al manuale PHP per ulteriori informazioni su come abilitare il supporto del database.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Supporto del database non trovato. Assicurarsi di disporre dei driver necessari per uno dei seguenti tipi di database supportati: MySQL, MS SQLServer, Oracle o DB2. Potrebbe essere necessario decommentare l\'estensione nel file php.ini o ricompilare con il file binario corretto, a seconda della versione di PHP. Consultare il manuale PHP per ulteriori informazioni su come abilitare il supporto del database.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Le funzioni associate a librerie XML Parser richieste dall´applicazione di Sugar non sono state trovate. Potrebbe essere necessario decommentare l´estensione nel file php.ini, o ricompilare con il file binario giusto, a seconda della versione di PHP. Per ulteriori informazioni si prega di consultare il Manuale PHP.',
     'LBL_CHECKSYS_CSPRNG' => 'Generatore di numeri casuali',
     'ERR_CHECKSYS_MBSTRING'             => 'Le funzioni associate all´estensione di PHP Multibyte Strings (mbstring), richieste dall´applicazione di Sugar, non sono state trovate. <br /><br />Generalmente, il modulo mbstring non è abilitato di default in PHP e deve essere attivato con -- attiva-mbstring quando il PHP binario è costruito. Si prega di consultare il Manuale PHP per ulteriori informazioni su come abilitare il supporto mbstring.',
@@ -561,32 +561,15 @@ Rifiuta questa chiamata
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Email di notifica assegnazione',
-        'subject' => 'SugarCRM - $module_name assegnato ',
-        'description' => 'Questo modello viene utilizzato quando il Sistema invia un\'assegnazione di attività a un utente.',
-        'body' => '<div>
-<p>$assigned_by_user ha assegnato un&nbsp;$module_name a&nbsp;$assigned_user.</p>
-
-<p>Puoi visualizzare questo&nbsp;$module_name su:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user ha assegnato un $module_name a $assigned_user.
-
-Puoi visualizzare questo $module_name su:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Email report pianificato',
         'subject' => 'Report pianificato: $report_name alle $report_time',
         'description' => 'Questo modello viene utilizzato quando il Sistema invia un report pianificato a un utente.',
         'body' => '<div>
-<p>Salve $assigned_user,</p>
-<p>In allegato un report generato automaticamente pianificato per te.</p>
-<p>Nome report: $report_name</p>
-<p>Data e ora di esecuzione del report: $report_time</p>
+<p>Salve $assigned_user,<br></p>
+<p>In allegato un rapporto generato automaticamente che è stato programmato per te.<br></p>
+<p>Nome del rapporto: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Data e ora di esecuzione del rapporto: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Salve $assigned_user,
@@ -612,14 +595,6 @@ Data e ora di esecuzione del report: $report_time',
             Accedi a Sugar per visualizzare il commento.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informazioni Nuovo account',
-        'description' => 'Questo template viene utilizzato quando l´Amministratore di sistema  invia una nuova password all´utente.',
-        'body' => 'Queste sono la username e la password temporanea del tuo account:<br />Username : $contact_user_user_name<br /><br />Password : $contact_user_user_hash<br /><br /><a href="$config_site_url">$config_site_url</a><br /><br />Dopo esserti connesso con questa password, il sistema potrebbe richiederti di reimpostare la password con una di tua scelta.',
-        'txt_body' =>
-'Queste sono la username e la password temporanea del tuo account:$contact_user_user_name Password : $contact_user_user_hash $config_site_url Dopo esserti connesso con questa password, il sistema potrebbe richiederti di reimpostare la password con una di tua scelta.',
-        'name' => 'Email password generata dal sistema',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Reimposta la password del tuo account',
         'description' => "Questo template viene utilizzato per inviare all´utente il link da cliccare per reimpostare la password dell´account.",

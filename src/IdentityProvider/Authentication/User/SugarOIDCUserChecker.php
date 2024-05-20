@@ -66,10 +66,10 @@ class SugarOIDCUserChecker extends UserChecker
     /**
      * Find or create Sugar User.
      *
-     * @param User $user
+     * @param UserInterface $user
      * @throws \Exception
      */
-    protected function loadSugarUser(User $user)
+    protected function loadSugarUser(UserInterface $user)
     {
         $userAttributes = $user->getAttribute('oidc_data');
         $identify = $user->getAttribute('oidc_identify');
@@ -103,11 +103,15 @@ class SugarOIDCUserChecker extends UserChecker
      * @param \User $sugarUser
      * @param array $attributes
      */
-    protected function setUserData(\User $sugarUser, User $user, array $attributes)
+    protected function setUserData(\User $sugarUser, UserInterface $user, array $attributes)
     {
         $attribute = $user->getAttributes();
         if (isset($attribute['ext']['sudoer'])) {
             $sugarUser->sudoer = $attribute['ext']['sudoer'];
+        }
+
+        if (isset($attribute['ext']['is_user_manager'])) {
+            $sugarUser->isIdmUserManager = $attribute['ext']['is_user_manager'];
         }
 
         $timeDate = \TimeDate::getInstance();
@@ -121,7 +125,7 @@ class SugarOIDCUserChecker extends UserChecker
         $email = null;
         if (isset($attributes['email'])) {
             $primaryEmail = $sugarUser->emailAddress->getPrimaryAddress($sugarUser);
-            if (strcasecmp($primaryEmail, $attributes['email']) !== 0) {
+            if (strcasecmp((string)$primaryEmail, $attributes['email']) !== 0) {
                 $email = $attributes['email'];
             }
             unset($attributes['email']);
@@ -129,6 +133,11 @@ class SugarOIDCUserChecker extends UserChecker
 
         if (array_key_exists('user_name', $attributes)) {
             unset($attributes['user_name']);
+        }
+
+        //do not need to update licenses_type if the user already exist
+        if (array_key_exists('license_type', $attributes)) {
+            unset($attributes['license_type']);
         }
 
         $attributes = $this->getDbMassagedAttributes($attributes, $sugarUser);

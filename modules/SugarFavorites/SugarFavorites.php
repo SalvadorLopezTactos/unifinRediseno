@@ -46,7 +46,7 @@ class SugarFavorites extends Basic
         $moduleJS = JSON::encode($module);
         $recordJS = JSON::encode($record);
         $onClick = "var self=this; parent.SUGAR.App.api.favorite($moduleJS, $recordJS, $(self).hasClass('off'), { success: function() { $(self).toggleClass('on off'); } });";
-        $onClickHTML = htmlspecialchars($onClick);
+        $onClickHTML = htmlspecialchars($onClick, ENT_COMPAT);
         return <<<HTML
 <div class="star"><div class="{$cssClass}" onclick="{$onClickHTML}">&nbsp;</div></div>
 HTML;
@@ -215,7 +215,7 @@ HTML;
 
         if(!$joinTo) {
             if(is_array($sugar_query->from)) {
-                list($bean, $alias) = $sugar_query->from;
+                [$bean, $alias] = $sugar_query->from;
             }
             else {
                 $bean = $sugar_query->from;

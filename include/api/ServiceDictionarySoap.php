@@ -12,6 +12,18 @@
 
 
 class ServiceDictionarySoap extends ServiceDictionary {
+    /**
+     * @var mixed[]
+     */
+    public $dict;
+    /**
+     * @var mixed[]|mixed
+     */
+    public $functionBuffer;
+    /**
+     * @var mixed[]|mixed
+     */
+    public $typeBuffer;
     public function loadDictionary() {
         $this->dict = $this->loadDictionaryFromStorage('soap');
     }
@@ -39,6 +51,7 @@ class ServiceDictionarySoap extends ServiceDictionary {
     }
 
     public function getRegisteredEndpoints() {
+        $returnData = [];
         // Using the function and type buffers, I need to generate a new WSDL, and cache the function list.
         $returnData['functions'] = $this->functionBuffer;
         $returnData['typeBuffer'] = $this->typeBuffer;

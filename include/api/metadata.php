@@ -12,7 +12,7 @@
 
 $apiSettings = array(
     'minVersion' => '10',
-    'maxVersion' => '11.16',
+    'maxVersion' => '11.20',
     'minClientVersions' => array(
         'nomad' => '6.0.2',
     ),

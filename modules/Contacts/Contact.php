@@ -330,7 +330,7 @@ class Contact extends Person {
         $this->name = $locale->formatName($this);
 	}
 
-    function get_list_view_data($filter_fields = array())
+    public function get_list_view_data($filter_fields = array())
     {
         $temp_array = parent::get_list_view_data();
 
@@ -484,7 +484,7 @@ class Contact extends Person {
                 if ( ($user_id = $focus_user->retrieve_user_id($eachItem))
                         || $focus_user->retrieve($eachItem)) {
                     // it is a user, add user
-                    $this->user_sync->add($user_id ? $user_id : $focus_user->id);
+                    $this->user_sync->add($user_id ?: $focus_user->id);
                     return;
                 }
                 if ( $focus_team->retrieve($eachItem)
@@ -586,6 +586,11 @@ class Contact extends Person {
      */
     public function verifyDuplicatePortalName()
     {
+        // ignore if not changed
+        if (isset($this->fetched_row['portal_name']) &&
+            $this->portal_name === $this->fetched_row['portal_name']) {
+            return false;
+        }
         $query = new SugarQuery();
         $query->select(['portal_name']);
         $query->from($this);

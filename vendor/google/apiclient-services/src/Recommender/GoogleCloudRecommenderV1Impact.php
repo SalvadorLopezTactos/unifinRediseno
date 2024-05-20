@@ -19,16 +19,29 @@ namespace Google\Service\Recommender;
 
 class GoogleCloudRecommenderV1Impact extends \Google\Model
 {
+  /**
+   * @var string
+   */
   public $category;
   protected $costProjectionType = GoogleCloudRecommenderV1CostProjection::class;
   protected $costProjectionDataType = '';
+  protected $reliabilityProjectionType = GoogleCloudRecommenderV1ReliabilityProjection::class;
+  protected $reliabilityProjectionDataType = '';
   protected $securityProjectionType = GoogleCloudRecommenderV1SecurityProjection::class;
   protected $securityProjectionDataType = '';
+  protected $sustainabilityProjectionType = GoogleCloudRecommenderV1SustainabilityProjection::class;
+  protected $sustainabilityProjectionDataType = '';
 
+  /**
+   * @param string
+   */
   public function setCategory($category)
   {
     $this->category = $category;
   }
+  /**
+   * @return string
+   */
   public function getCategory()
   {
     return $this->category;
@@ -48,6 +61,20 @@ class GoogleCloudRecommenderV1Impact extends \Google\Model
     return $this->costProjection;
   }
   /**
+   * @param GoogleCloudRecommenderV1ReliabilityProjection
+   */
+  public function setReliabilityProjection(GoogleCloudRecommenderV1ReliabilityProjection $reliabilityProjection)
+  {
+    $this->reliabilityProjection = $reliabilityProjection;
+  }
+  /**
+   * @return GoogleCloudRecommenderV1ReliabilityProjection
+   */
+  public function getReliabilityProjection()
+  {
+    return $this->reliabilityProjection;
+  }
+  /**
    * @param GoogleCloudRecommenderV1SecurityProjection
    */
   public function setSecurityProjection(GoogleCloudRecommenderV1SecurityProjection $securityProjection)
@@ -60,6 +87,20 @@ class GoogleCloudRecommenderV1Impact extends \Google\Model
   public function getSecurityProjection()
   {
     return $this->securityProjection;
+  }
+  /**
+   * @param GoogleCloudRecommenderV1SustainabilityProjection
+   */
+  public function setSustainabilityProjection(GoogleCloudRecommenderV1SustainabilityProjection $sustainabilityProjection)
+  {
+    $this->sustainabilityProjection = $sustainabilityProjection;
+  }
+  /**
+   * @return GoogleCloudRecommenderV1SustainabilityProjection
+   */
+  public function getSustainabilityProjection()
+  {
+    return $this->sustainabilityProjection;
   }
 }
 

@@ -80,6 +80,7 @@ class FieldList implements Field, Countable
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return array_map(function (Field $field) {

@@ -2,7 +2,6 @@
 
 namespace Elastica;
 
-use Elastica\Exception\JSONParseException;
 use Elastica\Exception\NotFoundException;
 
 /**
@@ -89,17 +88,14 @@ class Response
             return $error;
         }
 
-        $rootError = $error;
-        if (isset($error['root_cause'][0])) {
-            $rootError = $error['root_cause'][0];
-        }
+        $rootError = $error['root_cause'][0] ?? $error;
 
         $message = $rootError['reason'];
         if (isset($rootError['index'])) {
             $message .= ' [index: '.$rootError['index'].']';
         }
 
-        if (isset($error['reason']) && $rootError['reason'] != $error['reason']) {
+        if (isset($error['reason']) && $rootError['reason'] !== $error['reason']) {
             $message .= ' [reason: '.$error['reason'].']';
         }
 
@@ -117,9 +113,7 @@ class Response
     {
         $response = $this->getData();
 
-        if (isset($response['error'])) {
-            return $response['error'];
-        }
+        return $response['error'] ?? null;
     }
 
     /**
@@ -209,31 +203,12 @@ class Response
     /**
      * Response data array.
      *
-     * @return array Response data array
+     * @return array<string, mixed> Response data array
      */
     public function getData()
     {
         if (null == $this->_response) {
-            $response = $this->_responseString;
-
-            try {
-                if ($this->getJsonBigintConversion()) {
-                    $response = JSON::parse($response, true, 512, JSON_BIGINT_AS_STRING);
-                } else {
-                    $response = JSON::parse($response);
-                }
-            } catch (JSONParseException $e) {
-                // leave response as is if parse fails
-            }
-
-            if (empty($response)) {
-                $response = [];
-            }
-
-            if (\is_string($response)) {
-                $response = ['message' => $response];
-            }
-
+            $response = $this->getResponseString();
             $this->_response = $response;
             $this->_responseString = '';
         }
@@ -293,7 +268,7 @@ class Response
     /**
      * Time request took.
      *
-     * @throws \Elastica\Exception\NotFoundException
+     * @throws NotFoundException
      *
      * @return int Time request took
      */
@@ -311,7 +286,7 @@ class Response
     /**
      * Get the _shard statistics for the response.
      *
-     * @throws \Elastica\Exception\NotFoundException
+     * @throws NotFoundException
      *
      * @return array
      */
@@ -329,7 +304,7 @@ class Response
     /**
      * Get the _scroll value for the response.
      *
-     * @throws \Elastica\Exception\NotFoundException
+     * @throws NotFoundException
      *
      * @return string
      */
@@ -362,5 +337,31 @@ class Response
     public function getJsonBigintConversion()
     {
         return $this->_jsonBigintConversion;
+    }
+
+    /**
+     * @return array|string[]
+     */
+    private function getResponseString()
+    {
+        $response = $this->_responseString;
+        if (empty($response)) {
+            return [];
+        }
+        try {
+            if ($this->getJsonBigintConversion()) {
+                $response = JSON::parse($response, true, 512, \JSON_BIGINT_AS_STRING);
+            } else {
+                $response = JSON::parse($response);
+            }
+        } catch (\JsonException $e) {
+            // leave response as is if parse fails
+        }
+
+        if (\is_string($response)) {
+            $response = ['message' => $response];
+        }
+
+        return $response;
     }
 }

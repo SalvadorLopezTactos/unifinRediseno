@@ -533,7 +533,8 @@
         },
 
         showErrDismissUpdatePrimaryEmail: function() {
-            var label = parent.SUGAR.App.user.get('type') == 'admin' ?
+            const currentUser = parent.SUGAR.App.user;
+            const label = currentUser.get('type') === 'admin' || currentUser.get('is_idm_user_manager') ?
                 'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' :
                 'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE';
             parent.SUGAR.App.alert.show('dismiss_delete_primary_email', {

@@ -48,14 +48,22 @@
      *
      * @param {Object} contact connect-streams Contact object
      * @param {Array} models the list of beans found by the record match search
+     * @param {Object} context the context in which the records were matched
+     * @param {Array} moduleList the module list for search
      * @private
      */
-    _handleContactRecordsMatched: function(contact, models, context) {
+    _handleContactRecordsMatched: function(contact, models, context, moduleList) {
         var contactId = contact && contact.getContactId();
         if (contactId) {
             this.setModels(contactId, models, 0);
-            if (context && !_.isEmpty(context.phoneSearchParams)) {
-                this.setSearch(contactId, context.phoneSearchParams, true);
+            if (context && !_.isEmpty(context.phoneNumber)) {
+                var params = {
+                    term: context.phoneNumber,
+                    module_list: moduleList || ''
+                };
+                // show 'Search' tab if models is empty
+                var silent = !_.isEmpty(models);
+                this.setSearch(contactId, params, silent);
             }
         }
     },

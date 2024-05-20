@@ -18,13 +18,6 @@ namespace Sugarcrm\Sugarcrm\UserUtils\Invoker\payloads;
 class InvokerFiltersPayload extends InvokerBasePayload
 {
     /**
-     * The filters in the command
-     *
-     * @var array
-     */
-    protected $filters;
-
-    /**
      * The modules in the command
      *
      * @var mixed

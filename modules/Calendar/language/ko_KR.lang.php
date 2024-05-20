@@ -90,7 +90,7 @@ $mod_strings = array (
     'LBL_INFO_RELATED_TO' => '관련된 정보',
 
     'LBL_NO_USER' => '다음항목이 일치하지 않습니다: 담당자',
-    'LBL_SUBJECT' => '제목',
+    'LBL_SUBJECT' => '대상',
     'LBL_DURATION' => '기간',
     'LBL_STATUS' => '상태',
     'LBL_DATE_TIME' => '날짜와 시간',
@@ -155,8 +155,8 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => '템플릿',
     'LBL_RECORD_OTHER_TAB' => '기타',
     'LBL_EVENT_START' => '시작',
-    'LBL_EVENT_END' => '끝',
-    'LBL_EVENT_END' => '끝',
+    'LBL_EVENT_END' => '마지막',
+    'LBL_EVENT_END' => '마지막',
     'LBL_DAY_EVENT_TEMPLATE' => '일간 이벤트',
     'LBL_WEEK_EVENT_TEMPLATE' => '주간 이벤트',
     'LBL_MONTH_EVENT_TEMPLATE' => '월간 이벤트',
@@ -164,7 +164,7 @@ $mod_strings = array (
     'LBL_TIMELINE_EVENT_TEMPLATE' => '타임라인 이벤트',
     'LBL_SCHEDULERMONTH_EVENT_TEMPLATE' => '일정관리 이벤트',
     'LBL_ICAL_EVENT_TEMPLATE' => 'iCal 이벤트',
-    'LBL_SUBJECT' => '제목',
+    'LBL_SUBJECT' => '대상',
     'LBL_CALENDAR_TYPE' => '캘린더 유형',
     'LBL_COLOR' => '색',
     'LBL_DURATION_MINUTES' => '기간(분)',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => '10월',
     'LBL_NOV' => '11월',
     'LBL_DEC' => '12월',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => '캘린더가 이미 추가되었습니다',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}}가 선택되었습니다',
+    'LBL_NO_USER_SELECTED' => '사용자 또는 팀을 선택하십시오',
+    'LBL_NO_CALENDAR_SELECTED' => '캘린더를 선택하십시오',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => '캘린더를 저장하지 못했습니다',
 
 );
 

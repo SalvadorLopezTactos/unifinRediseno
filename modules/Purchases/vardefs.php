@@ -12,6 +12,8 @@
 
 $dictionary['Purchase'] = [
     'table' => 'purchases',
+    'color' => 'pacific',
+    'icon' => 'sicon-purchase-lg',
     'audited' => true,
     'activity_enabled' => true,
     'unified_search' => true,
@@ -340,6 +342,16 @@ $dictionary['Purchase'] = [
             'relationship' => '',
             'hideacl' => true,
             'readonly' => true,
+        ],
+    ],
+    'indices' => [
+        [
+            'name' => 'idx_purch_del_accountid',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'account_id',
+            ],
         ],
     ],
     'relationships' => [

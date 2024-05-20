@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'За по-добра производителност при използване на IIS/FastCGI sapi, моля задайте стойност 0 на параметъра fastcgi.logging във файла php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Инсталираната версия на PHP не се поддържа: ( версия',
     'LBL_DB_UNAVAILABLE'                => 'Базата данни е недостъпна.',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Не беше открита Database Support.  Моля, уверете се, че имате необходимите драйвъри за един от следните поддържани типове бази данни: MySQL, MS SQLServer, Oracle или DB2.  Може да се наложи да отмените коментара на разширението на файла php.ini или да компилирате повторно с правилния двоичен файл, според вашата версия на PHP.  Моля, направете справка в ръководството си за РНР за повече информация за това как да активирате Database Support.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Не беше открита „Поддръжка на база данни".  Моля, уверете се, че имате необходимите драйвъри за един от следните поддържани типове бази данни: MySQL, MS SQLServer, Oracle или DB2.  Може да се наложи да отмените коментара на разширението на файла php.ini или да компилирате повторно с правилния двоичен файл според Вашата версия на PHP.  Моля, направете справка в ръководството си за РНР за повече информация за това как да активирате „Поддръжка на база данни".',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Функции предоставяни от библиотеките XML Parser Libraries и необходими за функционирането на SugarCRM не са открити. Вероятно трябва да премахнете коментара пред реда за съответното разширение във файла  php.ini или да компилирате отново PHP. Можете да се обърнете към ръководството на използваната PHP версия за повече информация.',
     'LBL_CHECKSYS_CSPRNG' => 'Генератор на случайни номера',
     'ERR_CHECKSYS_MBSTRING'             => 'Функции предоставяни от разширението mbstring и необходими за функционирането на SugarCRM не са открити.  <br/><br/>Разширението mbstring обикновено не е разрешено по подразбиране в PHP инсталациите и трябва да бъде активирано чрез опцията --enable-mbstring в процеса на компилиране на приложението. Моля обърнете се към ръководството на използваната PHP версия за повече информация как да разрешите разширението mbstring.',
@@ -635,32 +635,15 @@ $assigned_by_user ви покани на среща
         <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Имейли с уведомления за задание',
-        'subject' => 'SugarCRM - Зададен $module_name ',
-        'description' => 'Шаблонът се използва, когато системата изпраща задание до потребител.',
-        'body' => '<div>
-<p>$assigned_by_user възложи&nbsp;$module_name на&nbsp;$assigned_user.</p>
-
-<p>Можете да прегледате&nbsp;$module_name на:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user възложи $module_name на $assigned_user.
-
-Можете да прегледате $module_name на:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Имейли за насрочена справка',
         'subject' => 'Насрочена справка: $report_name от $report_time',
         'description' => 'Шаблонът се използва, когато системата изпраща насрочена справка до потребител.',
         'body' => '<div>
-<p>Здравейте, $assigned_user,</p>
-<p>Прикаченият файл съдържа автоматично генерирана справка, която е насрочена за Вас.</p>
-<p>Име на справка: $report_name</p>
-<p>Дата и час на изпълнение на справката: $report_time</p>
+<p>Здравейте, $assigned_user,<br></p>
+<p>Прикаченият файл съдържа автоматично генерирана справка, която е насрочена за Вас.<br></p>
+<p>Име на справка: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Дата и час на изпълнение на справката: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Здравейте, $assigned_user,
@@ -686,14 +669,6 @@ $assigned_by_user ви покани на среща
                 Влезте в Sugar, за да видите коментара.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Информация за нов потребител',
-        'description' => 'Шаблонът се използва за изпращане на нова потребилска парола от Системен администратор',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Here is your account username and temporary password:</p><p>Username : $contact_user_user_name</p><p>Password : $contact_user_user_hash</p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>After you log in using the above password, you may be required to reset the password to one of your own choice.</p></td></tr><tr><td colspan=\"2\"></td></tr></tbody></table></div>',
-        'txt_body' =>
-'Here is your account username and temporary password: Username : $contact_user_user_name Password : $contact_user_user_hash $config_site_url After you log in using the above password, you may be required to reset the password to one of your own choice.',
-        'name' => 'Поща за системно генерирана парола',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Нова потребителска парола',
         'description' => "This template is used to send a user a link to click to reset the user&#39;s account password.",

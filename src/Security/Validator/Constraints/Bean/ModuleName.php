@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class ModuleName extends Constraint
 {
-    const ERROR_UNKNOWN_MODULE = 1;
+    public const ERROR_UNKNOWN_MODULE = 1;
 
     protected static $errorNames = array(
         self::ERROR_UNKNOWN_MODULE => 'ERROR_UNKNOWN_MODULE',

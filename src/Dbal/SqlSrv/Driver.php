@@ -12,36 +12,19 @@
 
 namespace Sugarcrm\Sugarcrm\Dbal\SqlSrv;
 
-use Doctrine\DBAL\Driver\DriverException;
-use Doctrine\DBAL\Driver\ExceptionConverterDriver;
-use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Driver\SQLSrv\Driver as BaseDriver;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAL\Driver\AbstractSQLServerDriver;
+use Doctrine\DBAL\Driver\SQLSrv\Connection as DriverConnection;
 
 /**
  * MS SQL Server driver
  */
-class Driver extends BaseDriver implements ExceptionConverterDriver
+class Driver extends AbstractSQLServerDriver
 {
     /**
      * {@inheritdoc}
      */
-    public function connect(array $params, $username = null, $password = null, array $driverOptions = array())
+    public function connect(array $params)
     {
-        return new Connection($params['connection']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function convertException($message, DriverException $exception)
-    {
-        switch ($exception->getErrorCode()) {
-            case '2627':
-            case '2601':
-                return new UniqueConstraintViolationException($message, $exception);
-        }
-
-        throw new Exception\DriverException($message, $exception);
+        return new Connection(new DriverConnection($params['connection']));
     }
 }

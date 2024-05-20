@@ -12,12 +12,12 @@
 
 class KBContent extends SugarBean {
 
-    const DEFAULT_STATUS = 'draft';
-    const ST_DRAFT = 'draft';
-    const ST_IN_REVIEW = 'in-review';
-    const ST_APPROVED = 'approved';
-    const ST_PUBLISHED = 'published';
-    const ST_EXPIRED = 'expired';
+    public const DEFAULT_STATUS = 'draft';
+    public const ST_DRAFT = 'draft';
+    public const ST_IN_REVIEW = 'in-review';
+    public const ST_APPROVED = 'approved';
+    public const ST_PUBLISHED = 'published';
+    public const ST_EXPIRED = 'expired';
 
     public $table_name = "kbcontents";
     public $object_name = "KBContent";
@@ -119,7 +119,7 @@ class KBContent extends SugarBean {
     {
         $admin = BeanFactory::newBean('Administration');
         $config = $admin->getConfigForModule('KBContents');
-        return isset($config['languages']) ? $config['languages'] : array();
+        return $config['languages'] ?? array();
     }
 
     /**
@@ -131,8 +131,7 @@ class KBContent extends SugarBean {
         $data = $this->getLanguages();
         $result = array();
         foreach ($data as $value) {
-            reset($value);
-            $result[key($value)] = current($value);
+            $result[array_key_first($value)] = current($value);
         }
         return $result;
     }

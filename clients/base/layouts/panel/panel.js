@@ -45,7 +45,9 @@
         var collapse;
         this.hideShowLastStateKey = app.user.lastState.key(this.HIDE_SHOW_KEY, this);
 
-        if (app.config.collapseSubpanels) {
+        if (this.layout && this.layout.layoutType === 'focus' && this.type === 'subpanel') {
+            collapse = true;
+        } else if (app.config.collapseSubpanels) {
             collapse = true;
         } else {
             var hideShowLastState = app.user.lastState.get(this.hideShowLastStateKey);

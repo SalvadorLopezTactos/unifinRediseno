@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Instrumentpanel med anteckningslistor',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Instrumentpanel med anteckningsposter',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för anteckningar',
+    'LBL_EXTERNAL_USER' => 'Extern användare',
+    'LBL_EXTERNAL_USER_NAME' => 'Extern användare',
 
     'LBL_RELATED_CONTACT' => 'Relaterad kontakt',
     'ERR_DELETE_RECORD' => 'Ett postnummer måste specificeras för att kunna radera organisationen.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Typ av e-post',
     'LBL_EMAIL_ID' => 'E-post ID',
     'LBL_PHONE' => 'Telefon:',
-    'LBL_PORTAL_FLAG' => 'Visa i portal?',
+    'LBL_PORTAL_FLAG' => 'Tillgänglig externt',
     'LBL_EMBED_FLAG' => 'Infoga i mail?',
     'LBL_PRODUCT_ID' => 'Produkt ID:',
     'LBL_QUOTE_ID' => 'Offert ID:',

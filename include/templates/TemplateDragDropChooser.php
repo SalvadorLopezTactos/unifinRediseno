@@ -21,7 +21,10 @@ class TemplateDragDropChooser extends Template {
  * and lastly call the display function
  */
     function display(){
-
+        $mid_div_name = null;
+        $right_div_name = null;
+        $data1_enc = null;
+        $data2_enc = null;
   /*   valid entries for expected arguments array are as follow:
    *   args['left_header'] = value of left table header
    *   args['mid_header'] = value of middle table header

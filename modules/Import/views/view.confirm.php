@@ -13,7 +13,7 @@
 
 class ImportViewConfirm extends ImportView
 {
-    const SAMPLE_ROW_SIZE = 3;
+    public const SAMPLE_ROW_SIZE = 3;
  	protected $pageTitleKey = 'LBL_CONFIRM_TITLE';
     protected $errorScript = "";
 
@@ -103,7 +103,14 @@ class ImportViewConfirm extends ImportView
 
         // Now parse the file and look for errors
         $customDelimiter = $this->getDelimiterValue();
-        $customEnclosure = $this->request->getValidInputRequest('custom_enclosure', array('Assert\Type' => array('type' => 'string'), 'Assert\Length' => array('min' => 0, 'max' => 1)), '');
+        $customEnclosure = $this->request->getValidInputRequest(
+            'custom_enclosure',
+            array(
+                'Assert\Type' => array('type' => 'string'),
+                'Assert\Length' => array('min' => 0, 'max' => 1, 'allowEmptyString' => true),
+            ),
+            ''
+        );
 
         $importFile = new ImportFile( $uploadFileName, $customDelimiter, html_entity_decode($customEnclosure,ENT_QUOTES), FALSE);
 
@@ -182,7 +189,7 @@ class ImportViewConfirm extends ImportView
          $maxRecordsExceeded = FALSE;
          $maxRecordsWarningMessg = "";
          $lineCount = $importFile->getNumberOfLinesInfile();
-         $maxLineCount = isset($sugar_config['import_max_records_total_limit'] ) ? $sugar_config['import_max_records_total_limit'] : 5000;
+         $maxLineCount = $sugar_config['import_max_records_total_limit'] ?? 5000;
          if( !empty($maxLineCount) && ($lineCount > $maxLineCount) )
          {
              $maxRecordsExceeded = TRUE;
@@ -286,7 +293,7 @@ class ImportViewConfirm extends ImportView
     {
         global $locale, $current_user;
 
-        $localized_name_format = isset($field_map['importlocale_default_locale_name_format'])? $field_map['importlocale_default_locale_name_format'] : $locale->getLocaleFormatMacro($current_user);
+        $localized_name_format = $field_map['importlocale_default_locale_name_format'] ?? $locale->getLocaleFormatMacro($current_user);
         $this->ss->assign('default_locale_name_format', $localized_name_format);
         $this->ss->assign('getNameJs', $locale->getNameJs());
 
@@ -296,15 +303,14 @@ class ImportViewConfirm extends ImportView
     {
         global $locale, $current_user, $sugar_config;
 
-        $num_grp_sep = isset($field_map['importlocale_num_grp_sep'])? $field_map['importlocale_num_grp_sep'] : $current_user->getPreference('num_grp_sep');
-        $dec_sep = isset($field_map['importlocale_dec_sep'])? $field_map['importlocale_dec_sep'] : $current_user->getPreference('dec_sep');
+        $num_grp_sep = $field_map['importlocale_num_grp_sep'] ?? $current_user->getPreference('num_grp_sep');
+        $dec_sep = $field_map['importlocale_dec_sep'] ?? $current_user->getPreference('dec_sep');
 
         $this->ss->assign("NUM_GRP_SEP",( empty($num_grp_sep) ? $sugar_config['default_number_grouping_seperator'] : $num_grp_sep ));
         $this->ss->assign("DEC_SEP",( empty($dec_sep)? $sugar_config['default_decimal_seperator'] : $dec_sep ));
 
 
-        $significantDigits = isset($field_map['importlocale_default_currency_significant_digits']) ? $field_map['importlocale_default_currency_significant_digits']
-                                :  $locale->getPrecedentPreference('default_currency_significant_digits', $current_user);
+        $significantDigits = $field_map['importlocale_default_currency_significant_digits'] ?? $locale->getPrecedentPreference('default_currency_significant_digits', $current_user);
 
         $sigDigits = '';
         for($i=0; $i<=6; $i++)
@@ -325,7 +331,7 @@ class ImportViewConfirm extends ImportView
     private function setCurrencyOptions($field_map = array() )
     {
         global $locale, $current_user;
-        $cur_id = isset($field_map['importlocale_currency'])? $field_map['importlocale_currency'] : $locale->getPrecedentPreference('currency', $current_user);
+        $cur_id = $field_map['importlocale_currency'] ?? $locale->getPrecedentPreference('currency', $current_user);
         // get currency preference
         $currency = new ListCurrency();
         if($cur_id)
@@ -360,14 +366,14 @@ eoq;
         global $current_user, $sugar_config;
 
         $timeFormat = $current_user->getUserDateTimePreferences();
-        $defaultTimeOption = isset($field_map['importlocale_timeformat'])? $field_map['importlocale_timeformat'] : $timeFormat['time'];
-        $defaultDateOption = isset($field_map['importlocale_dateformat'])? $field_map['importlocale_dateformat'] : $timeFormat['date'];
+        $defaultTimeOption = $field_map['importlocale_timeformat'] ?? $timeFormat['time'];
+        $defaultDateOption = $field_map['importlocale_dateformat'] ?? $timeFormat['date'];
 
         $timeOptions = get_select_options_with_id($sugar_config['time_formats'], $defaultTimeOption);
         $dateOptions = get_select_options_with_id($sugar_config['date_formats'], $defaultDateOption);
 
         // get list of valid timezones
-        $userTZ = isset($field_map['importlocale_timezone'])? $field_map['importlocale_timezone'] : $current_user->getPreference('timezone');
+        $userTZ = $field_map['importlocale_timezone'] ?? $current_user->getPreference('timezone');
         if(empty($userTZ))
             $userTZ = TimeDate::userTimezone();
 
@@ -380,7 +386,7 @@ eoq;
     private function setImportFileCharacterSet($importFile, $field_map = array())
     {
         global $locale;
-        $charset_for_import = isset($field_map['importlocale_charset']) ? $field_map['importlocale_charset'] : $importFile->autoDetectCharacterSet();
+        $charset_for_import = $field_map['importlocale_charset'] ?? $importFile->autoDetectCharacterSet();
         $charsetOptions = get_select_options_with_id( $locale->getCharsetSelect(), $charset_for_import);//wdong,  bug 25927, here we should use the charset testing results from above.
         $this->ss->assign('CHARSETOPTIONS', $charsetOptions);
     }
@@ -407,10 +413,8 @@ eoq;
         $maxColumns = 0;
         foreach($sampleSet as $v)
         {
-            if ((is_countable($v) ? count($v) : 0) > $maxColumns) {
+            if (is_countable($v) && count($v) > $maxColumns) {
                 $maxColumns = count($v);
-            } else {
-                continue;
             }
         }
 

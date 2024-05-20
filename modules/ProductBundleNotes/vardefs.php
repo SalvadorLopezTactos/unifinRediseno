@@ -107,5 +107,6 @@ $dictionary['ProductBundleNote'] = array(
     ),
     'indices' => array(
         array('name' => 'procuct_bundle_notespk', 'type' => 'primary', 'fields' => array('id')),
-    )
+    ),
+    'optimistic_locking' => true,
 );

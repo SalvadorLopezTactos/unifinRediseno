@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Dashboard notitielijst',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Dashboard Notitiesrecord',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer aantekeningen',
+    'LBL_EXTERNAL_USER' => 'Externe gebruiker',
+    'LBL_EXTERNAL_USER_NAME' => 'Externe gebruiker',
 
     'LBL_RELATED_CONTACT' => 'Gekoppeld contact',
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om de organisatie te verwijderen.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Type e-mail',
     'LBL_EMAIL_ID' => 'E-mail-ID',
     'LBL_PHONE' => 'Telefoon:',
-    'LBL_PORTAL_FLAG' => 'Weergeven in portal?',
+    'LBL_PORTAL_FLAG' => 'Extern beschikbaar',
     'LBL_EMBED_FLAG' => 'Invoegen in e-mail?',
     'LBL_PRODUCT_ID' => 'Product ID:',
     'LBL_QUOTE_ID' => 'Offerte ID:',

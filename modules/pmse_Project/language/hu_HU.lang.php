@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Nyomtatvány Gombjai',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Jováhagyás/Elutasítás',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Átvezetés',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Küldés a DocuSignnak',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Más Átvezetési Opciók',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Adattulajdonos Megváltoztatása',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Csoport',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumentumok egyesítése',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Választ...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumentumok összevonása PDF formátumba',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Egyesített dokumentum küldése e-mailben',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumentumok egyesítése',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'A konvergáló átjáró típus nem felel meg a bejövő folyamat átjáró típusának',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'A divergáló átjárók kiterjesztik a folyamatokat több ágra. Amikor konvergáló átjárót használ ezeknek az ágaknak egy útvonalra való visszatereléséhez a megfelelő konvergáló átjáró típust kell használnia, attól függően, milyen divergáló átjáró alkalmazása történt az ágak létrehozásához. Amennyiben exkluzív vagy eseményalapú divergáló átjárók révén létesültek az ágak, használjon exkluzív konvergáló átjárót az ágak visszatereléséhez. Párhuzamos vagy inkuzív divergáló átjárók révén létesült ágak esetén használjon párhuzamos konvergáló átjárót az ismételt konvergáláshoz.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Modulmező',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Modul kapcsolata',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Felhasználó',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Szerepkör',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Csapat',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Tevékenység létrehozása',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Üzleti szabály',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Üzleti szabály tevékenység',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-mail sablon',
 );

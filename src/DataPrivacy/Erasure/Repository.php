@@ -22,7 +22,7 @@ class Repository
     /**
      * DB table name
      */
-    const DB_TABLE = 'erased_fields';
+    public const DB_TABLE = 'erased_fields';
 
     /**
      * @var Connection

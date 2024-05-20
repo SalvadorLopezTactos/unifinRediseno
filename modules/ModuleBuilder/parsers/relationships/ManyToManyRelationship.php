@@ -23,6 +23,8 @@
 class ManyToManyRelationship extends AbstractRelationship
 {
 
+    public $lhs_subpanel;
+    public $rhs_subpanel;
     /*
      * Constructor
      * @param array $definition Parameters passed in as array with keys defined in parent::keys

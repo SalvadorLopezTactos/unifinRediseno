@@ -58,6 +58,20 @@ class SugarWidgetFieldcurrency_id extends SugarWidgetFieldEnum
     }
 
     /**
+     * Get currency value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        $value = $this->displayListPlain($layoutDef);
+
+        return $value;
+    }
+
+    /**
      * Overriding sorting because of default currency is not present in DB
      *
      * @param array $layout_def

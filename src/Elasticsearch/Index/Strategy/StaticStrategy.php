@@ -27,7 +27,7 @@ namespace Sugarcrm\Sugarcrm\Elasticsearch\Index\Strategy;
  */
 class StaticStrategy extends AbstractStrategy
 {
-    const DEFAULT_INDEX = 'shared';
+    public const DEFAULT_INDEX = 'shared';
 
     /**
      * {@inheritdoc}

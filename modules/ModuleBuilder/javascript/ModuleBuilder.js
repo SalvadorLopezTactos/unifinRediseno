@@ -1731,7 +1731,14 @@ if (typeof(ModuleBuilder) == 'undefined') {
                         ModuleBuilder.getContent(url, function() {
                             ModuleBuilder.updateContent.apply(this, arguments);
                             ModuleBuilder.state.markAsDirty();
-                            dialog.cancel();
+                            try {
+                                dialog.cancel();
+                            } catch (error) {
+                                if (dialog.element !== null) {
+                                    console.log(error);
+                                }
+                                //dialog was destroyed successfully
+                            }
                         });
                         ModuleBuilder.contentURL = originalUrl;
                     }

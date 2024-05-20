@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Tabloul de bord Listă cazuri',
     'LBL_CASES_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare cazuri',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalii caz',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Sertar de focalizare cazuri - consolă',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare cazuri',
 
 	'ERR_DELETE_RECORD'					=> 'Trebuie să specifici un număr de înregistrare pentru a șterge contul.',
@@ -156,4 +156,29 @@ Pentru a crea {{module_name}}:
     'LBL_SLA_DETAILS' => 'Detalii SLA',
     'LBL_HOURS' => 'Ore',
     'LBL_WIDGET_STATUS' => 'Stare',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizare',
+    'LBL_CREATE_NEW' => 'Creare nou',
+    'LBL_MANAGE' => 'Gestionare',
+    'LBL_SEE_DETAILS' => 'Vizualizare detalii',
+    'LBL_HIDE_NEW' => 'Ascundere',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Cazuri',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Caz',
+    'LBL_KIOSK_CREATE' => 'Creare caz',
+    'LBL_KIOSK_SUBJECT' => 'Subiect',
+    'LBL_KIOSK_CASE_ID' => 'ID caz',
+    'LBL_KIOSK_STATUS' => 'Stare',
+    'LBL_KIOSK_CATEGORY' => 'Categorie',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Trimis la {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioritate',
+    'LBL_KIOSK_CREATE_CASE' => 'Contactați-ne',
+    'LBL_KIOSK_DESCRIPTION' => 'Descriere',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Cererea dvs. a fost trimisă cu succes.',
+    'LBL_KIOSK_ATTACHED' => 'Toate atașate',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Utilizatori externi',
 );

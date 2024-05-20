@@ -25,6 +25,7 @@ $viewdefs['Cases']['base']['view']['multi-line-list'] = [
                             'default' => true,
                             'enabled' => true,
                             'readonly' => true,
+                            'link' => true,
                         ],
                     ],
                 ],
@@ -177,5 +178,14 @@ $viewdefs['Cases']['base']['view']['multi-line-list'] = [
             ],
             '$owner' => '',
         ],
+    ],
+    'defaults' => [
+        'order_by_primary' => 'follow_up_datetime:asc',
+        'order_by_secondary' => '',
+        'freeze_first_column' => true,
+    ],
+    'orderBy' => [
+        'field' => 'follow_up_datetime',
+        'direction' => 'asc',
     ],
 ];

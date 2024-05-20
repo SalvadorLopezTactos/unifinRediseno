@@ -20,7 +20,7 @@ $xtpl = new XTemplate('modules/MailMerge/Merge.html');
 $module = $_SESSION['MAILMERGE_MODULE'];
 $document_id = $_SESSION['MAILMERGE_DOCUMENT_ID'];
 $selObjs = urldecode($_SESSION['SELECTED_OBJECTS_DEF']);
-$relObjs = (isset($_SESSION['MAILMERGE_RELATED_CONTACTS']) ? $_SESSION['MAILMERGE_RELATED_CONTACTS'] : '');
+$relObjs = ($_SESSION['MAILMERGE_RELATED_CONTACTS'] ?? '');
 
 $relModule = '';
 if(!empty($_SESSION['MAILMERGE_CONTAINS_CONTACT_INFO'])){

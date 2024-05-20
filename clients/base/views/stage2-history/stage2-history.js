@@ -19,7 +19,7 @@
             icon: 'phone',
         },
         Emails: {
-            icon: 'envelope',
+            icon: 'email-lg',
         },
     },
 

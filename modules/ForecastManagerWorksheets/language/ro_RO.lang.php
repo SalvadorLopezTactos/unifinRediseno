@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Valoare invalida pentru campul {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Valoarea trebuie sa fie intre {{min}} si {{max}}',
-    'LBL_HISTORY_LOG' => 'Ultima asumare',
+    'LBL_HISTORY_LOG' => 'Ultimul angajament',
     'LBL_NO_COMMIT' => 'Nu exista asumari anterioare',
 
     'LBL_MANGER_SAVED' => 'Salvat de manager'

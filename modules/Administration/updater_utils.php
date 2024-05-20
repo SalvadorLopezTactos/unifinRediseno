@@ -46,6 +46,8 @@ function getBaseSystemInfo($send_usage_info = true)
 }
 
 function check_now($send_usage_info=true, $get_request_data=false, $response_data = false, $from_install=false ) {
+    $sclient = null;
+    $sugar_version = null;
 	global $sugar_config, $timedate;
 	global $db, $license;
 
@@ -93,7 +95,7 @@ function check_now($send_usage_info=true, $get_request_data=false, $response_dat
         $needToDownload = false;
 	}
 
-    if ($response_data || !$sclient->getError()) {
+    if ($response_data || !is_soap_fault($encodedResult)) {
 		$serializedResultData = sugarDecode($key,$encodedResult);
         $resultData = unserialize($serializedResultData, ['allowed_classes' => false]);
         if($response_data && empty($resultData))
@@ -110,8 +112,7 @@ function check_now($send_usage_info=true, $get_request_data=false, $response_dat
     if (!isset($resultData['validation'])) {
         $resultData['validation'] = 'invalid';
     }
-	if($response_data || !$sclient->getError() )
-	{
+    if ($response_data || !is_soap_fault($encodedResult)) {
         // This section of code is a portion of the code referred
         // to as Critical Control Software under the End User
         // License Agreement.  Neither the Company nor the Users
@@ -281,7 +282,7 @@ function shouldCheckSugar(){
 function authenticateDownloadKey()
 {
 
-    $licenseSettings = isset($GLOBALS['license']->settings) ? $GLOBALS['license']->settings : '';
+    $licenseSettings = $GLOBALS['license']->settings ?? '';
 
     // Retrieve license if required
 	if ((!is_array($licenseSettings) ||
@@ -691,9 +692,13 @@ function apiActualLoadSystemStatus()
         // BEGIN License User Limit Enforcement
         $license_seats_needed = 0;
         $exceededLicenseTypes = SubscriptionManager::instance()->getSystemLicenseTypesExceededLimit($license_seats_needed, true);
+        $invalidLicenseTypes = [];
+        if (!empty($exceededLicenseTypes)) {
+            $invalidLicenseTypes = SubscriptionManager::instance()->getInvalidUsersLicenseTypes();
+        }
         // fix the license type issue
         global $current_user;
-        if (!empty($current_user) && !empty($exceededLicenseTypes) && $current_user->fixLicenseTypeMismatch()) {
+        if (!empty($current_user) && !empty($invalidLicenseTypes) && $current_user->fixLicenseTypeMismatch()) {
             $license_seats_needed = 0;
             $exceededLicenseTypes = SubscriptionManager::instance()->getSystemLicenseTypesExceededLimit($license_seats_needed, true);
         }
@@ -813,6 +818,7 @@ function loadLicense($firstLogin=false){
 }
 
 function loginLicense(){
+    $sugar_version = null;
 	global $current_user, $license;
 	loadLicense(true);
 
@@ -899,8 +905,7 @@ function loginLicense(){
 			include('sugar_version.php');
 
             $newVersion = '';
-            if (!empty($version) && count($version) == 1)
-            {
+            if (!empty($version) && (is_countable($version) ? count($version) : 0) == 1) {
                 $newVersion = $version[0]['version'];
             }
 

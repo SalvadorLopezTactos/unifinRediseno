@@ -20,6 +20,7 @@ namespace Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\Re
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\AttachTrustRequest;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\DetachTrustRequest;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\Domain;
+use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\ExtendSchemaRequest;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\LDAPSSettings;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\ListDomainsResponse;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\Operation;
@@ -27,6 +28,7 @@ use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\Policy;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\ReconfigureTrustRequest;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\ResetAdminPasswordRequest;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\ResetAdminPasswordResponse;
+use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\RestoreDomainRequest;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\SetIamPolicyRequest;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\TestIamPermissionsRequest;
 use Google\Service\ManagedServiceforMicrosoftActiveDirectoryConsumerAPI\TestIamPermissionsResponse;
@@ -70,7 +72,7 @@ class ProjectsLocationsManagedidentitiesGlobalDomains extends \Google\Service\Re
    * mydomain.myorganization.com, with the following restrictions: * Must contain
    * only lowercase letters, numbers, periods and hyphens. * Must start with a
    * letter. * Must contain between 2-64 characters. * Must end with a number or a
-   * letter. * Must not start with period. * First segement length (mydomain form
+   * letter. * Must not start with period. * First segment length (mydomain for
    * example above) shouldn't exceed 15 chars. * The last segment cannot be fully
    * numeric. * Must be unique within the customer project.
    * @return Operation
@@ -112,6 +114,21 @@ class ProjectsLocationsManagedidentitiesGlobalDomains extends \Google\Service\Re
     return $this->call('detachTrust', [$params], Operation::class);
   }
   /**
+   * Extend Schema for Domain (domains.extendSchema)
+   *
+   * @param string $domain Required. The domain resource name using the form:
+   * `projects/{project_id}/locations/global/domains/{domain_name}`
+   * @param ExtendSchemaRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Operation
+   */
+  public function extendSchema($domain, ExtendSchemaRequest $postBody, $optParams = [])
+  {
+    $params = ['domain' => $domain, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('extendSchema', [$params], Operation::class);
+  }
+  /**
    * Gets information about a domain. (domains.get)
    *
    * @param string $name Required. The domain resource name using the form:
@@ -130,16 +147,21 @@ class ProjectsLocationsManagedidentitiesGlobalDomains extends \Google\Service\Re
    * resource exists and does not have a policy set. (domains.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int options.requestedPolicyVersion Optional. The policy format
-   * version to be returned. Valid values are 0, 1, and 3. Requests specifying an
-   * invalid value will be rejected. Requests for policies with any conditional
-   * bindings must specify version 3. Policies without any conditional bindings
-   * may specify any valid value or leave the field unset. To learn which
-   * resources support conditions in their IAM policies, see the [IAM
+   * @opt_param int options.requestedPolicyVersion Optional. The maximum policy
+   * version that will be used to format the policy. Valid values are 0, 1, and 3.
+   * Requests specifying an invalid value will be rejected. Requests for policies
+   * with any conditional role bindings must specify version 3. Policies with no
+   * conditional role bindings may specify any valid value or leave the field
+   * unset. The policy in the response might use the policy version that you
+   * specified, or it might use a lower policy version. For example, if you
+   * specify version 3, but the policy has no conditional role bindings, the
+   * response uses version 1. To learn which resources support conditions in their
+   * IAM policies, see the [IAM
    * documentation](https://cloud.google.com/iam/help/conditions/resource-
    * policies).
    * @return Policy
@@ -245,13 +267,30 @@ class ProjectsLocationsManagedidentitiesGlobalDomains extends \Google\Service\Re
     return $this->call('resetAdminPassword', [$params], ResetAdminPasswordResponse::class);
   }
   /**
+   * RestoreDomain restores domain backup mentioned in the RestoreDomainRequest
+   * (domains.restore)
+   *
+   * @param string $name Required. Resource name for the domain to which the
+   * backup belongs
+   * @param RestoreDomainRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Operation
+   */
+  public function restore($name, RestoreDomainRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('restore', [$params], Operation::class);
+  }
+  /**
    * Sets the access control policy on the specified resource. Replaces any
    * existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and
    * `PERMISSION_DENIED` errors. (domains.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -270,8 +309,9 @@ class ProjectsLocationsManagedidentitiesGlobalDomains extends \Google\Service\Re
    * This operation may "fail open" without warning. (domains.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse

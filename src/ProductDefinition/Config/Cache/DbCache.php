@@ -18,9 +18,9 @@ class DbCache implements CacheInterface
      * Product definition refresh interval in hours
      * It means how many hours system will wait before refresh product definition
      */
-    const REFRESH_INTERVAL = 24;
+    public const REFRESH_INTERVAL = 24;
 
-    const TABLE_NAME = 'product_definition';
+    public const TABLE_NAME = 'product_definition';
 
     /**
      * @var \DBManager

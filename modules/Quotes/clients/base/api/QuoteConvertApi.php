@@ -54,7 +54,7 @@ class QuoteConvertApi extends SugarApi
         $quote->load_relationship('opportunities');
 
         $beans = $quote->opportunities->getBeans();
-        if (is_countable($beans) && count($beans) > 0) {
+        if (is_countable($beans) ? count($beans) : 0) {
             // throw an exception here as we already have one.
             throw new SugarApiExceptionEditConflict(
                 'EXCEPTION_QUOTE_ALREADY_CONVERTED',
@@ -103,8 +103,7 @@ class QuoteConvertApi extends SugarApi
         $opp->date_closed = $quote->date_quote_expected_closed;
         $opp->name = $quote->name;
         $opp->assigned_user_name = $quote->assigned_user_name;
-        $opp->opportunity_type = isset($app_list_strings['opportunity_type_dom']['New Business']) ?
-            $app_list_strings['opportunity_type_dom']['New Business'] : null;
+        $opp->opportunity_type = $app_list_strings['opportunity_type_dom']['New Business'] ?? null;
         $opp->team_id = $quote->team_id;
 
         // TODO: this will need to change when we have the switch for Opportunities,

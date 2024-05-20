@@ -118,7 +118,7 @@
             content_css = [];
 
         // To open a link in the same window we need to use _top instead of _self as target
-        _.each(config.target_list, function(target) {
+        _.each(config.link_target_list, function(target) {
             if (target.text === app.lang.getAppString('LBL_TINYMCE_TARGET_SAME')) {
                 target.value = '_top';
             }
@@ -245,11 +245,13 @@
     addCustomButtons: function(editor) {
         // if the user has access to KB Templates then add the template button
         if (app.acl.hasAccess('view', 'KBContentTemplates')) {
-            editor.addButton('kbtemplate', {
+            editor.ui.registry.addButton('kbtemplate', {
                 tooltip: app.lang.get('LBL_TEMPLATE', this.module),
-                icon: 'file-o',
+                icon: 'document-properties',
                 name: 'template',
-                classes: 'btnKBTemplate', // this gets added as mce-btnKBTemplate
+                onAction: () => {
+                    this.context.trigger('button:add-template:click');
+                },
             });
         }
     },

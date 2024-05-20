@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'عنوان URL للمتعقب: ',
   'LBL_TRACKER_TEXT' => 'ارتباط نص المتعقب: ',
   'LBL_TRACKER_COUNT' => 'عدد المتعقبين: ',
-  'LBL_REFER_URL' => 'إعادة توجية عنوان URL للمتعقب: ',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'الحملات',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'الدعاية عبر البريد الإلكتروني',
   'LBL_NEW_FORM_TITLE' => 'حملة جديدة',

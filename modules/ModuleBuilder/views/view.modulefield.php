@@ -16,6 +16,7 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class ViewModulefield extends SugarView
 {
+    public $mbModule;
     /**
      * @var FieldViewer
      */
@@ -75,6 +76,20 @@ class ViewModulefield extends SugarView
 		*/
 		$field_types = $GLOBALS['mod_strings']['fieldTypes'];
 
+        $moduleName = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+
+        if (hasMapsLicense()) {
+            $administration = new Administration();
+            $administration->retrieveSettings(false, true);
+            $mapsModules = $administration->settings['maps_enabled_modules'];
+
+            if (!in_array($moduleName, $mapsModules)) {
+                unset($field_types['geocodestatus']);
+            }
+        } else {
+            unset($field_types['geocodestatus']);
+        }
+
         //For input validation we want to ensure we validate against all possible field types.  The parent field type
         //is added to the field_type array dynamically throughout this flow and therefore is not in the filed_types array
         //durng certain validation attempts.
@@ -94,7 +109,6 @@ class ViewModulefield extends SugarView
                 $field_name_exceptions[] = strtoupper($beanList[$relModule]) . '_ID';
             }
         }
-        $moduleName = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
         if (!AccessControlManager::instance()->allowFieldAccess($moduleName, $field_name)) {
             throw new SugarApiExceptionFieldDisabled();
         }
@@ -330,6 +344,20 @@ class ViewModulefield extends SugarView
 
         if ($isModuleBwc || $isMB) {
             $field_types = array_diff_key($field_types, ['actionbutton' => '']);
+        }
+
+        ksort($field_types);
+
+        // GeocodeStatuses are not supported on BWC modules, therefore we need to check for that condition and
+        // remove it as an available option if that is the case.
+        // Same for ModuleBuilder, we don't currently support creating GeocodeStatuses from Module Builder on
+        // account that the AB configuration screens are dependend on already deployed metadata, therefore
+        // actions such as update field / create field will run into issues with metadata not being available
+        $isModuleBwc = in_array($moduleName, $GLOBALS['bwcModules']);
+        $isMB = !empty($_REQUEST['view_package']);
+
+        if ($isModuleBwc || $isMB) {
+            $field_types = array_diff_key($field_types, ['geocodestatus' => '']);
         }
 
         ksort($field_types);

@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Pulpit rekordów znaczników',
     'LBL_MY_TAGS' => 'Moje znaczniki',
     'LBL_MY_FAVORITE_TAGS' => 'Moje ulubione znaczniki',
+    'LBL_MORE_TAGS' => 'Liczba znaczników: {{tagsNumber}}',
 );

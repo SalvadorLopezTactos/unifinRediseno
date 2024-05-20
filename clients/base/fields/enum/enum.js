@@ -72,21 +72,46 @@
     initialize: function() {
         this._super('initialize', arguments);
 
-        //Reset the availible options based on the user's access and the model's values
-        if (_.isString(this.def.options)) {
-            var self = this;
-
-            this.listenTo(this.model, "sync", function(model){
-                var options = app.lang.getAppListStrings(self.def.options);
-                if (options) {
-                    self.items = self._filterOptions(options);
-                }
-            });
-        }
-
         // Set appendValue for mass update
         if (!_.isUndefined(this.model) && !_.isUndefined(this.model.get(this.name + '_replace'))) {
             this.appendValue = this.model.get(this.name + '_replace') === '1';
+        }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    bindDataChange: function() {
+        if (this.model) {
+            // When the model syncs, reset the availible options based on the
+            // user's access and the model's values
+            if (_.isString(this.def.options)) {
+                this.listenTo(this.model, 'sync', function() {
+                    if (this.disposed) {
+                        return;
+                    }
+                    var options = app.lang.getAppListStrings(this.def.options);
+                    if (options) {
+                        this.items = this._filterOptions(options);
+                    }
+                    this.render();
+                });
+            }
+
+            // Avoid rendering process on select2 change in order to keep focus.
+            this.listenTo(this.model, 'change:' + this.name, function() {
+                let ele = this.$el;
+                if (ele) {
+                    let field = this.$(this.fieldTag);
+                    if (field) {
+                        if (_.isEmpty(field.data('select2'))) {
+                            this.render();
+                        } else {
+                            field.select2('val', this.format(this.model.get(this.name)));
+                        }
+                    }
+                }
+            });
         }
     },
 
@@ -720,28 +745,6 @@
     },
 
     /**
-     * @inheritdoc
-     * Avoid rendering process on select2 change in order to keep focus.
-     */
-    bindDataChange: function() {
-        if (this.model) {
-            this.model.on('change:' + this.name, function() {
-                let ele = this.$el;
-                if (ele) {
-                    let field = this.$(this.fieldTag);
-                    if (field) {
-                        if (_.isEmpty(field.data('select2'))) {
-                            this.render();
-                        } else {
-                            field.select2('val', this.format(this.model.get(this.name)));
-                        }
-                    }
-                }
-            }, this);
-        }
-    },
-
-    /**
      * Override to remove default DOM change listener, we use Select2 events instead
      * Binds append value checkbox change for massupdate.
      *
@@ -803,6 +806,7 @@
         if (plugin) {
             plugin.close();
         }
+        this.stopListening();
         this._super('_dispose');
     }
 })

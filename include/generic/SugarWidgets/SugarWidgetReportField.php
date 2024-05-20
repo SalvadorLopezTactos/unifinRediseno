@@ -46,6 +46,19 @@ class SugarWidgetReportField extends SugarWidgetField
 		}
 	}
 
+    /**
+     * Get field data for sidecar
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getSidecarFieldData(array $layout_def)
+    {
+        $obj = $this->getSubClass($layout_def);
+
+        return $obj->getFieldControllerData($layout_def);
+    }
 
     public function display(array $layout_def)
  {
@@ -117,8 +130,7 @@ class SugarWidgetReportField extends SugarWidgetField
         // for a field with type='currency' conversion of values into a user-preferred currency
         if ($layout_def['type'] == 'currency' && strpos($layout_def['name'], '_usdoll') === false) {
             $currency = $this->reporter->currency_obj;
-            $currency_alias = isset($layout_def['currency_alias'])
-                ? $layout_def['currency_alias'] : $currency->table_name;
+                $currency_alias = $layout_def['currency_alias'] ?? $currency->table_name;
                 $query = $this->getCurrencyRateQuery($layout_def, $currency_alias);
             // We need to use convert() for AVG because of Oracle
             if ($layout_def['group_function'] != 'avg') {
@@ -297,8 +309,8 @@ class SugarWidgetReportField extends SugarWidgetField
                 if(!in_array($layout_def['name'], array('description', 'account_description', 'lead_source_description', 'status_description', 'to_addrs', 'cc_addrs', 'bcc_addrs', 'work_log', 'objective', 'resolution'))) {
                     $header_cell = "<a class=\"listViewThLinkS1\" href=\"".$start.$sort_by.$end."\">";
                     $header_cell .= $this->displayHeaderCellPlain($layout_def);
-                    $header_cell .= ListView::getArrowUpDownStart(isset($layout_def['sort']) ? $layout_def['sort'] : '');
-                    $header_cell .= ListView::getArrowUpDownEnd(isset($layout_def['sort']) ? $layout_def['sort'] : '');
+                    $header_cell .= ListView::getArrowUpDownStart($layout_def['sort'] ?? '');
+                    $header_cell .= ListView::getArrowUpDownEnd($layout_def['sort'] ?? '');
 		            $header_cell .= "</a>";
 					return $header_cell;
 				}

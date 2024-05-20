@@ -363,7 +363,6 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
      * @exception 'SoapFault' -- The SOAP error, if any
      */
     function search_by_module($session, $search_string, $modules, $offset, $max_results,$assigned_user_id = '', $select_fields = array()){
-        $unified_search_modules = [];
         $modules = object_to_array_deep($modules);
         $select_fields = object_to_array_deep($select_fields);
         $this->getLogger()->info('Begin: SugarWebServiceImpl->search_by_module');

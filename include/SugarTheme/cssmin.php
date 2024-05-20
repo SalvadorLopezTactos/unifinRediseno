@@ -90,10 +90,8 @@ class cssmin
 		$css = cssmin::minify($css, $options);
 		$items = array();
 		preg_match_all("/(.+){(.+:.+);}/U", $css, $items);
-		if (count($items[0]) > 0)
-			{
-			for ($i = 0; $i < count($items[0]); $i++)
-				{
+        if ((is_countable($items[0]) ? count($items[0]) : 0) > 0) {
+            for ($i = 0; $i < (is_countable($items[0]) ? count($items[0]) : 0); $i++) {
 				$keys		= explode(",", $items[1][$i]);
 				$styles_tmp	= explode(";", $items[2][$i]);
 				$styles = array();

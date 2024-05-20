@@ -110,8 +110,8 @@ class PMSEFormResponseParser extends PMSEAbstractDataParser implements PMSEDataP
         while (is_array($row)) {
             $uidStr = '{::_form_::' . $row['act_uid'] . '::}';
             $idStr = '{::_form_::' . $row['act_id'] . '::}';
-            $existsUID = stristr($uidStr, (string) $criteriaToken->expField);
-            $existsID = stristr($idStr, (string) $criteriaToken->expField);
+            $existsUID = stristr($uidStr, $criteriaToken->expField);
+            $existsID = stristr($idStr, $criteriaToken->expField);
             if ($existsUID || $existsID) {
                 $tokenValue = $row['frm_action'];
                 $tokenUid = $existsUID ? $row['act_uid'] : $row['act_id'];

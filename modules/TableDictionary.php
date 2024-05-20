@@ -54,6 +54,7 @@ include "metadata/calendar_ical_configsMetaData.php";
 include("metadata/report_cache.php");
 include("metadata/saved_reportsMetaData.php");
 include 'metadata/reportschedules_usersMetaData.php';
+include 'metadata/reports_panelsMetaData.php';
 
 include("metadata/product_bundle_noteMetaData.php");
 include("metadata/product_bundle_productMetaData.php");
@@ -151,6 +152,13 @@ include 'metadata/messages_usersMetaData.php';
 include 'metadata/accounts_escalationsMetaData.php';
 include 'metadata/contacts_escalationsMetaData.php';
 include 'metadata/documents_escalationsMetaData.php';
+
+// External users relationships
+include 'metadata/external_users_accountsMetaData.php';
+include 'metadata/external_users_bugsMetaData.php';
+include 'metadata/external_users_casesMetaData.php';
+include 'metadata/external_users_opportunitiesMetaData.php';
+include 'metadata/external_users_quotesMetaData.php';
 
 //hint metadata
 include 'metadata/hint-packageMetaData.php';

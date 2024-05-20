@@ -37,9 +37,9 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'importable' => 'required',
         ),
         'forecasted_likely' => [
-            'formula' => '',
-            'calculated' => false,
-            'enforced' => false,
+            'formula' => 'ifElse(equal(indexOf($commit_stage, forecastIncludedCommitStages()), -1), 0, $amount)',
+            'calculated' => true,
+            'enforced' => true,
         ],
         'best_case' => array(
             'calculated' => false,
@@ -87,7 +87,7 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
         'sales_status' => array(
             'studio' => false,
             'reportable' => false,
-            'audited' => false,
+            'audited' => true,
             'massupdate' => false,
             'importable' => false,
         ),
@@ -116,6 +116,12 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'workflow' => true,
             'calculated' => true,
             'formula' => 'forecastCommitStage($probability)',
+        ],
+        'lost' => [
+            'formula' => 'ifElse(equal(indexOf($sales_stage, forecastOnlySalesStages(false, true, false)), -1), 0, $amount)',
+            'reportable' => true,
+            'workflow' => true,
+            'studio' => true,
         ],
     );
 
@@ -179,6 +185,7 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
                 'service_start_date' => false,
                 'probability' => true,
                 'service_duration' => false,
+                'lost' => false,
             )
         );
 

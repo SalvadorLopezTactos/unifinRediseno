@@ -20,11 +20,31 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
  */
 class SugarController
 {
-	/**
-	 * remap actions in here
-	 * e.g. make all detail views go to edit views
-	 * $action_remap = array('detailview'=>'editview');
-	 */
+    /**
+     * @var mixed
+     */
+    public $errors;
+    /**
+     * @var mixed[]
+     */
+    public $req_for_email;
+    /**
+     * @var mixed[]
+     */
+    public $file_access_control_map;
+    /**
+     * @var mixed[]
+     */
+    public $entry_point_registry;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $wireless_module_registry;
+    /**
+     * remap actions in here
+     * e.g. make all detail views go to edit views
+     * $action_remap = array('detailview'=>'editview');
+     */
 	protected $action_remap = array('index'=>'listview');
 	/**
 	 * The name of the current module.
@@ -322,7 +342,7 @@ class SugarController
       * Handle exception
       * @param Exception $e
       */
-    protected function handleException(Exception $e)
+    protected function handleException(\Throwable $e)
     {
         $GLOBALS['log']->fatal('Exception in Controller: ' . $e);
         $logicHook = new LogicHook();
@@ -631,15 +651,9 @@ class SugarController
 	 * Specify what happens after the deletion has occurred.
 	 */
 	protected function post_delete(){
-		$return_module = isset($_REQUEST['return_module']) ?
-			$_REQUEST['return_module'] :
-			$GLOBALS['sugar_config']['default_module'];
-		$return_action = isset($_REQUEST['return_action']) ?
-			$_REQUEST['return_action'] :
-			$GLOBALS['sugar_config']['default_action'];
-		$return_id = isset($_REQUEST['return_id']) ?
-			$_REQUEST['return_id'] :
-			'';
+        $return_module = $_REQUEST['return_module'] ?? $GLOBALS['sugar_config']['default_module'];
+        $return_action = $_REQUEST['return_action'] ?? $GLOBALS['sugar_config']['default_action'];
+        $return_id = $_REQUEST['return_id'] ?? '';
 		$url = "index.php?module=".$return_module."&action=".$return_action."&record=".$return_id;
 
 		//eggsurplus Bug 23816: maintain VCR after an edit/save. If it is a duplicate then don't worry about it. The offset is now worthless.
@@ -727,12 +741,8 @@ class SugarController
 	 * Specify what happens after the massupdate has occurred.
 	 */
 	protected function post_massupdate(){
-		$return_module = isset($_REQUEST['return_module']) ?
-			$_REQUEST['return_module'] :
-			$GLOBALS['sugar_config']['default_module'];
-		$return_action = isset($_REQUEST['return_action']) ?
-			$_REQUEST['return_action'] :
-			$GLOBALS['sugar_config']['default_action'];
+        $return_module = $_REQUEST['return_module'] ?? $GLOBALS['sugar_config']['default_module'];
+        $return_action = $_REQUEST['return_action'] ?? $GLOBALS['sugar_config']['default_action'];
         $url = "index.php?module=".$return_module."&action=".$return_action;
         if (isset($_REQUEST['updated_records'])) {
             $url .= "&updated_records=" . $_REQUEST['updated_records'];
@@ -855,7 +865,7 @@ class SugarController
                 ACLController::displayNoAccess();
                 sugar_cleanup(true);
             }
-				require_once($this->entry_point_registry[$entryPoint]['file']);
+            require_once $this->entry_point_registry[$entryPoint]['file'];
 				$this->_processed = true;
 				$this->view = '';
 		}

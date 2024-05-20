@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Tapauslistojen työpöytä',
     'LBL_CASES_RECORD_DASHBOARD' => 'Tapaustietueiden työpöytä',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Palvelupyynnön tiedot',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Tapausten keskitetty koontinäyttö – konsoli',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Palvelupyynnöt-tietolaatikko',
 
 	'ERR_DELETE_RECORD'					=> 'Tietuenumero tulee määritellä jotta voit poistaa asiakkaan.',
@@ -170,4 +170,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'Palvelutasosopimuksen tiedot',
     'LBL_HOURS' => 'Tuntia',
     'LBL_WIDGET_STATUS' => 'Tila',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Järjestä',
+    'LBL_CREATE_NEW' => 'Luo uusi',
+    'LBL_MANAGE' => 'Hallinnoi',
+    'LBL_SEE_DETAILS' => 'Näytä tiedot',
+    'LBL_HIDE_NEW' => 'Piilota',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Palvelupyynnöt',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Palvelupyyntö',
+    'LBL_KIOSK_CREATE' => 'Luo palvelupyyntö',
+    'LBL_KIOSK_SUBJECT' => 'Aihe',
+    'LBL_KIOSK_CASE_ID' => 'Palvelupyynnön tunnus',
+    'LBL_KIOSK_STATUS' => 'Tila',
+    'LBL_KIOSK_CATEGORY' => 'Luokka',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Lähetetty {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioriteetti',
+    'LBL_KIOSK_CREATE_CASE' => 'Ota yhteyttä',
+    'LBL_KIOSK_DESCRIPTION' => 'Kuvaus',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Pyyntösi on lähetetty.',
+    'LBL_KIOSK_ATTACHED' => 'Kaikki liitteenä',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Ulkoiset käyttäjät',
 );

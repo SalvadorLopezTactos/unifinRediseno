@@ -90,6 +90,9 @@ class SugarFolder {
      */
     protected $folderSubscriptionTable;
 
+    /** @var string */
+    public $acl_team_set_id;
+
 	/**
 	 * Sole constructor
 	 */
@@ -1120,7 +1123,7 @@ ENDW;
             2
         );
         $result = $connection->executeQuery($query, [$this->parent_folder])->fetchFirstColumn();
-        if (count($result) == 1) {
+        if ((is_countable($result) ? count($result) : 0) == 1) {
             $this->db->getConnection()->update($this->table, ['has_child' => 0], ['id' => $this->parent_folder]);
         } // if
         $this->name = $name;

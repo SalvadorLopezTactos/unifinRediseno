@@ -12,27 +12,16 @@
 
 namespace Sugarcrm\Sugarcrm\Dbal\SqlSrv;
 
-use Doctrine\DBAL\Driver\SQLSrv\SQLSrvConnection as BaseConnection;
+use Doctrine\DBAL\Driver\Middleware\AbstractConnectionMiddleware;
+use Doctrine\DBAL\Driver\Statement as StatementInterface;
 
 /**
  * MS SQL Server connection
  */
-class Connection extends BaseConnection
+class Connection extends AbstractConnectionMiddleware
 {
-    /**
-     * @param resource $connection
-     */
-    public function __construct($connection)
+    public function prepare(string $sql): StatementInterface
     {
-        $this->conn = $connection;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function prepare($sql)
-    {
-        return new Statement($this->conn, $sql, $this->lastInsertId);
+        return new Statement(parent::prepare($sql));
     }
 }

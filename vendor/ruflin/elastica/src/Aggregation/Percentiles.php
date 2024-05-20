@@ -9,9 +9,12 @@ namespace Elastica\Aggregation;
  */
 class Percentiles extends AbstractSimpleAggregation
 {
+    use Traits\KeyedTrait;
+    use Traits\MissingTrait;
+
     /**
-     * @param string $name  the name of this aggregation
-     * @param string $field the field on which to perform this aggregation
+     * @param string      $name  the name of this aggregation
+     * @param string|null $field the field on which to perform this aggregation
      */
     public function __construct(string $name, ?string $field = null)
     {
@@ -47,18 +50,6 @@ class Percentiles extends AbstractSimpleAggregation
     }
 
     /**
-     * the keyed flag is set to true which associates a unique string
-     * key with each bucket and returns the ranges as a hash
-     * rather than an array.
-     *
-     * @return $this
-     */
-    public function setKeyed(bool $keyed = true): self
-    {
-        return $this->setParam('keyed', $keyed);
-    }
-
-    /**
      * Set which percents must be returned.
      *
      * @param float[] $percents
@@ -78,16 +69,5 @@ class Percentiles extends AbstractSimpleAggregation
     public function addPercent(float $percent): self
     {
         return $this->addParam('percents', $percent);
-    }
-
-    /**
-     * Defines how documents that are missing a value should
-     * be treated.
-     *
-     * @return $this
-     */
-    public function setMissing(float $missing): self
-    {
-        return $this->setParam('missing', $missing);
     }
 }

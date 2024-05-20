@@ -117,4 +117,13 @@ $mod_strings = array (
  - 按一下「顯示更多」以顯示更多欄位（若需）。
 2. 按一下「儲存」以完成新記錄並返回至上一頁。',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => '智慧指南工作',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => '為智慧指南工作',
+    'LBL_CJ_ACTIVITY_START_DATE' => '智慧指南活動開始日期',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => '智慧指南活動完成日期',
+    'LBL_CJ_DAYS_TO_COMPLETE' => '智慧指南 - 需完成的天數',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => '子項會議',
+    'LBL_PARENT_TASK_OF_CALL_REL' => '子項通話',
+    'LBL_PARENT_TASK_OF_TASK_REL' => '子項工作',
 );

@@ -20,7 +20,6 @@ class PMSEEmailsTemplates extends vCardApi
      * @var Sugarcrm\Sugarcrm\ProcessManager\PMSE|mixed
      */
     public $crmDataWrapper;
-
     public function __construct()
     {
         $this->crmDataWrapper = ProcessManager\Factory::getPMSEObject('PMSECrmDataWrapper');
@@ -90,7 +89,7 @@ class PMSEEmailsTemplates extends vCardApi
     {
         $direction = null;
         // Initialize this var since not all requests send 'q'
-        $q = isset($args["q"]) ? $args["q"] : null;
+        $q = $args["q"] ?? null;
         ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
         $offset = 0;
         $limit = (!empty($args["max_num"])) ? (int)$args["max_num"] : 20;
@@ -113,7 +112,7 @@ class PMSEEmailsTemplates extends vCardApi
 
                 if (strpos($sortBy, ":")) {
                     // it has a :, it's specifying ASC / DESC
-                    list($column, $direction) = explode(":", $sortBy);
+                    [$column, $direction] = explode(":", $sortBy);
 
                     if (strtolower($direction) == "desc") {
                         $direction = "DESC";
@@ -165,7 +164,7 @@ class PMSEEmailsTemplates extends vCardApi
 
         $output = array();
         $moduleBean = BeanFactory::newBean($newModuleFilter);
-        $fieldsData = isset($moduleBean->field_defs) ? $moduleBean->field_defs : array();
+        $fieldsData = $moduleBean->field_defs ?? array();
         foreach ($fieldsData as $field) {
             //$retrieveId = isset($additionalArgs['retrieveId']) && !empty($additionalArgs['retrieveId']) && $field['name'] == 'id' ? $additionalArgs['retrieveId'] : false;
             if (isset($field['vname']) && PMSEEngineUtils::isValidField($field, 'ET') &&
@@ -175,7 +174,7 @@ class PMSEEmailsTemplates extends vCardApi
                 $tmpField['_module'] = $newModuleFilter;
                 $tmpField['name'] = str_replace(':', '', translate($field['vname'], $newModuleFilter));
                 $tmpField['rhs_module'] = $filter;
-                if (empty($q) || stripos($tmpField['name'], (string) $q) !== false) {
+                if (empty($q) || stripos($tmpField['name'], $q) !== false) {
                     $output[] = $tmpField;
                 }
             }
@@ -223,8 +222,7 @@ class PMSEEmailsTemplates extends vCardApi
             throw $sugarApiExceptionNotAuthorized;
         }
         if (isset($_FILES) && count($_FILES) === 1) {
-            reset($_FILES);
-            $first_key = key($_FILES);
+            $first_key = array_key_first($_FILES);
             if (isset($_FILES[$first_key]['tmp_name'])
                 && $this->isUploadedFile($_FILES[$first_key]['tmp_name'])
                 && !empty($_FILES[$first_key]['size'])

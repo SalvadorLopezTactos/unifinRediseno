@@ -55,7 +55,7 @@ class IdmUserFilterApi extends FilterApi
 
         $args['module'] = 'Users';
 
-        list($args, $q, $options, $seed) = $this->filterListSetup($api, $args);
+        [$args, $q, $options, $seed] = $this->filterListSetup($api, $args);
 
         return $this->runQuery($api, $args, $q, $options, $seed);
     }

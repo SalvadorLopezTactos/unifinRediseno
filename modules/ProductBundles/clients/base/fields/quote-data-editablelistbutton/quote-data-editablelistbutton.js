@@ -175,7 +175,11 @@
                     self.setDisabled(false);
                 }
             },
-            lastModified: self.model.get('date_modified'),
+            apiOptions: {
+                headers: {
+                    'X-TIMESTAMP': self.model.get('date_modified')
+                }
+            },
             //Show alerts for this request
             showAlerts: {
                 'process': true,
@@ -195,6 +199,6 @@
             related: {
                 name: this.model.get('name')
             }
-        }, null, options);
+        }, null, options, options.apiOptions);
     }
 });

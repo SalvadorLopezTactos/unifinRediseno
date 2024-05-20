@@ -22,8 +22,22 @@ require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 class DeployedSubpanelImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
 
-    const HISTORYFILENAME = 'restored.php' ;
-    const HISTORYVARIABLENAME = 'layout_defs' ;
+    /**
+     * @var string|mixed
+     */
+    public $historyPathname;
+    /**
+     * @var string|mixed
+     */
+    //@codingStandardsIgnoreStart
+    public $_language;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $_fullFielddefs;
+    //@codingStandardsIgnoreEnd
+    public const HISTORYFILENAME = 'restored.php' ;
+    public const HISTORYVARIABLENAME = 'layout_defs' ;
 
     private $_subpanelName ;
     private $_aSubPanelObject ; // an aSubPanel Object representing the current subpanel

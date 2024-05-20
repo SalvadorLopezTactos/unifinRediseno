@@ -738,6 +738,7 @@ class SugarRouting {
 	 * @return string HTML
 	 */
 	function renderRuleRow($rule) {
+        $mod_strings = [];
 		global $theme;
 		$active = ($rule['active'] == true) ? " CHECKED" : "";
 		$ret  = "<tr>";

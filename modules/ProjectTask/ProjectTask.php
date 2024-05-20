@@ -209,7 +209,8 @@ class ProjectTask extends SugarBean {
 		return $the_where;
 	}
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
         global $action, $currentModule, $current_language, $focus, $app_list_strings, $timedate, $locale;
         $current_module_strings = return_module_language($current_language, 'ProjectTask');
 		$today = $timedate->handle_offset(date($GLOBALS['timedate']->get_db_date_time_format(), time()), $timedate->dbDayFormat, true);
@@ -358,7 +359,7 @@ class ProjectTask extends SugarBean {
                 }
                 $parentProjectTask->percent_complete = $this->_calculateCompletePercent($tasks);
                 unset($tasks);
-                $parentProjectTask->save(isset($GLOBALS['check_notify']) ? $GLOBALS['check_notify'] : '');
+                $parentProjectTask->save($GLOBALS['check_notify'] ?? '');
             }
 		}
 	}

@@ -25,7 +25,7 @@ class XhprofLogger implements SQLLogger
      * Maximum length of the parameter value to dump
      * @var int
      */
-    const MAX_PARAM_LENGTH = 100;
+    public const MAX_PARAM_LENGTH = 100;
 
     /**
      * @var array

@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => '表單按鈕',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => '核准/拒絕',
     'LBL_PMSE_FORM_OPTION_ROUTE' => '路由',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => '發送到 DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => '其他路由選項',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => '變更指派至使用者',
     'LBL_PMSE_FORM_LABEL_TEAM' => '小組',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => '文檔合併',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => '選取...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => '合併文檔至 PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => '通過電子郵件發送合併的文檔',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => '文檔合併',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => '融合閘道類型與傳入流的閘道類型不匹配',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => '分散的閘道將流程擴展到多個分支。當使用收斂閘道將這些分支重新融合成一條路徑時，必須使用正確類型的收斂閘道，具體取決於創建分支的收斂閘道類型。對於使用獨佔或基於事件的分散閘道所創建的分支，請使用獨佔聚合閘道重新進行融合。對於使用並行或包含的分散閘道創建的分支, 請使用並行聚合通道重新進行融合。',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => '模塊領域',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => '模塊關係',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => '使用者',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => '角色',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => '小組',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => '表單活動',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => '商務規則',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => '商務規則行動',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => '電子郵件範本',
 );

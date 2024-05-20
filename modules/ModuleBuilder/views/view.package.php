@@ -13,6 +13,11 @@
 require_once('modules/ModuleBuilder/MB/ModuleBuilder.php');
 class Viewpackage extends SugarView
 {
+    /**
+     * @var mixed|array<mixed, array<string, string>>
+     */
+    public $buttons;
+    public $package;
  	/**
 	 * @see SugarView::_getModuleTitleParams()
 	 */
@@ -28,7 +33,7 @@ class Viewpackage extends SugarView
 
 	function display()
 	{
-         $original_name = null;
+        $original_name = null;
  		global $mod_strings;
  		$smarty = new Sugar_Smarty();
  		$mb = new ModuleBuilder();

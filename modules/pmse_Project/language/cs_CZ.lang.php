@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Tlačítka formy',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Schválit/Odmítnout',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Směrovat',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Odeslat do DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Další Routing možnosti',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Změnit vlastníka záznamů',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Tým',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Sloučení dokumentů',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Vyberte...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Sloučení dokumentů do PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Odeslat sloučený dokument e-mailem',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Sloučení dokumentů',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Typ sbíhající brány neodpovídá typu brány příchozího toku',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Rozbíhající brány rozšiřují procesy do několika větví. Při použití sbíhající brány k opětovnému sbíhání těchto větví zpět do jedné cesty se musí použít správný typ sbíhající brány, a to v závislosti na typu rozbíhající brány, která byla použita k vytvoření větví. U větví vytvořených pomocí výhradní rozbíhající brány nebo rozbíhající brány založené na událostech použijte k jejich opětovnému sbíhání výhradní sbíhající bránu. U větví vytvořených pomocí paralelní nebo zahrnující rozbíhající brány použijte k jejich opětovnému sbíhání paralelní sbíhající bránu.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Pole modulu',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Vztah modulu',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Uživatel',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Role',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Tým',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Aktivita ve formuláři',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Obchodní pravidlo',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Akce obchodního pravidla',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Šablona e-mailu',
 );

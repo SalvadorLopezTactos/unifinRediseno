@@ -117,4 +117,13 @@ Ak chcete vytvoriť modul {{module_name}}:
  - Ak chcete rozbaliť dodatočné polia, kliknite na možnosť „Zobraziť viac“.
 2. Kliknite na možnosť „Uložiť“ na dokončenie nového záznamu a návrat na predchádzajúcu stránku.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Úloha inteligentného sprievodcu',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Je úloha inteligentného sprievodcu',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Dátum začatia aktivity inteligentného sprievodcu',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Dátum dokončenia aktivity inteligentného sprievodcu',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Inteligentný sprievodca – dni do dokončenia',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Podriadené schôdzky',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Podriadené volania',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Podriadené úlohy',
 );

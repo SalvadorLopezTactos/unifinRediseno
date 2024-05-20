@@ -196,7 +196,7 @@ class MarketingExtrasContent
         $headers = strtolower($headers);
 
         foreach ($this->blacklistedHeaders as $blacklistedHeader) {
-            if (strpos($headers, (string) $blacklistedHeader) !== false) {
+            if (strpos($headers, $blacklistedHeader) !== false) {
                 \LoggerManager::getLogger()->warn('MarketingExtrasContent:: Cannot load iframe due to ' .
                     $blacklistedHeader . ' header from URL ' . $url);
                 return false;

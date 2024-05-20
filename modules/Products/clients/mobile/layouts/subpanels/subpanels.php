@@ -18,6 +18,20 @@ $viewdefs['Products']['mobile']['layout']['subpanels'] = array(
                 'link' => 'documents',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_NOTES_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'notes',
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'contracts',
+            ],
+        ],
         array(
             'layout' => 'subpanel',
             'label' => 'LBL_RELATED_PRODUCTS',

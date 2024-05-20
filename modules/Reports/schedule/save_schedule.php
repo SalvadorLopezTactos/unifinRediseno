@@ -41,7 +41,7 @@ if(!empty($_REQUEST['schedule_type']) ){
 }
 
 $rs->save_schedule($id,$current_user->id, $_REQUEST['id'],$date_start,$_REQUEST['schedule_time_interval'], $active, $schedule_type);
-$refreshPage = (isset($_REQUEST['refreshPage']) ? $_REQUEST['refreshPage'] : "true");
+    $refreshPage = ($_REQUEST['refreshPage'] ?? "true");
 if (!$active) {
 	$date_start = $app_strings['LBL_LINK_NONE'];
 } else {	
@@ -59,4 +59,3 @@ if ($refreshPage == "false") {
 	echo '<script>opener.window.location.reload();window.close();</script>';
 }
 }
-?>

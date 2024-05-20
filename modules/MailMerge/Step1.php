@@ -195,7 +195,12 @@ $xtpl->assign("MAILMERGE_TEMPLATES", get_select_options_with_id(getDocumentRevis
 
 if(isset($_SESSION['MAILMERGE_MODULE'])){
 	$module_select_text = $mod_strings['LBL_MAILMERGE_SELECTED_MODULE'];
-    $xtpl->assign("MAILMERGE_NUM_SELECTED_OBJECTS", (is_countable($_SESSION['MAILMERGE_RECORD']) ? count($_SESSION['MAILMERGE_RECORD']) : 0)." ".$_SESSION['MAILMERGE_MODULE']." Selected");
+    $xtpl->assign(
+        "MAILMERGE_NUM_SELECTED_OBJECTS",
+        (is_countable($_SESSION['MAILMERGE_RECORD']) ? count(
+            $_SESSION['MAILMERGE_RECORD']
+        ) : 0) . " " . $_SESSION['MAILMERGE_MODULE'] . " Selected"
+    );
 }
 else{
 	$module_select_text = $mod_strings['LBL_MAILMERGE_MODULE'];

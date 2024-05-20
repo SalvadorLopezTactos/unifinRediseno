@@ -11,19 +11,22 @@
  */
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 
+/** @var User $current_user */
 global $current_user,$admin_group_header;
 
 $config = \SugarConfig::getInstance();
 $idpConfig = new Authentication\Config($config);
 $idmModeConfig = $idpConfig->getIDMModeConfig();
 $admin_option_defs = [];
+$cloudSettingsPanelKey = $current_user->isIdmUserManager && !$current_user->isAdmin() ? 'Users' : 'Administration';
 
 if ($idpConfig->isIDMModeEnabled()) {
-    if (!key_exists('Administration', $admin_option_defs)) {
-        $admin_option_defs['Administration'] = [];
+    if (!key_exists($cloudSettingsPanelKey, $admin_option_defs)) {
+        $admin_option_defs[$cloudSettingsPanelKey] = [];
     }
-    $admin_option_defs['Administration']['sugarCloudSettings'] = [
+    $admin_option_defs[$cloudSettingsPanelKey]['sugarCloudSettings'] = [
         'Administration',
         'icon' => 'sicon-cloud',
         'LBL_SUGAR_CLOUD_SETTINGS_TITLE',
@@ -56,16 +59,8 @@ if (!empty($insights['enabled'])) {
     ];
 }
 
-if (key_exists('Administration', $admin_option_defs) &&
-    (key_exists('insights', $admin_option_defs['Administration'])
-        || key_exists('sugarCloudSettings', $admin_option_defs['Administration']))) {
-    $admin_group_header[] = [
-        'LBL_SUGAR_CLOUD_TITLE',
-        '',
-        false,
-        $admin_option_defs,
-        'LBL_SUGAR_CLOUD_DESC',
-    ];
+if (!empty($admin_option_defs[$cloudSettingsPanelKey]['sugarCloudSettings']) || !empty($admin_option_defs['Administration']['insights'])) {
+    $admin_group_header[] = ['LBL_SUGAR_CLOUD_TITLE', '', false, $admin_option_defs, 'LBL_SUGAR_CLOUD_DESC'];
 }
 
 //users and security.
@@ -83,7 +78,7 @@ if ($idpConfig->isIDMModeEnabled()) {
         sprintf($GLOBALS['app_strings']['ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE'], $passwordManagerUrl)
     );
     $passwordManagerOnClick = sprintf(
-        'onclick = "app.alert.show(\'disabled-for-idm-mode\', {level: \'info\', messages: \'%s\'});"',
+        'onclick = "parent.SUGAR.App.alert.show(\'disabled-for-idm-mode\', {level: \'info\', messages: \'%s\'});"',
         $passwordManagerLink
     );
 } else {
@@ -226,7 +221,13 @@ $admin_option_defs['studio']['studio']= array('Studio', 'icon' => 'sicon-studio'
 if(isset($GLOBALS['beanFiles']['iFrame'])) {
     $admin_option_defs['Administration']['portal']= array('iFrames', 'icon' => 'sicon-my-sites', 'LBL_IFRAME','DESC_IFRAME','./index.php?module=iFrames&action=index');
 }
-$admin_option_defs['Administration']['rename_tabs']= array('RenameTabs', 'icon' => 'sicon-edit', 'LBL_RENAME_TABS','LBL_CHANGE_NAME_MODULES',"./index.php?action=wizard&module=Studio&wizard=StudioWizard&option=RenameTabs");
+$admin_option_defs['Administration']['rename_tabs'] = [
+    'Administration',
+    'icon' => 'sicon-edit',
+    'LBL_RENAME_TABS',
+    'LBL_CHANGE_NAME_MODULES',
+    'javascript:void(parent.SUGAR.App.router.navigate("Administration/module-names-and-icons", {trigger: true}));',
+];
 $admin_option_defs['Administration']['moduleBuilder']= array('ModuleBuilder', 'icon' => 'sicon-module-builder', 'LBL_MODULEBUILDER','LBL_MODULEBUILDER_DESC','./index.php?module=ModuleBuilder&action=index&type=mb');
 $admin_option_defs['Administration']['configure_tabs']= array('ConfigureTabs', 'icon' => 'sicon-display-modules', 'LBL_CONFIGURE_TABS_AND_SUBPANELS','LBL_CONFIGURE_TABS_AND_SUBPANELS_DESC','./index.php?module=Administration&action=ConfigureTabs');
 $admin_option_defs['Administration']['module_loader'] = array('ModuleLoader', 'icon' => 'sicon-module-loader', 'LBL_MODULE_LOADER_TITLE','LBL_MODULE_LOADER','./index.php?module=Administration&action=UpgradeWizard&view=module');
@@ -262,6 +263,18 @@ $admin_option_defs['any']['denormalization'] = [
     'LBL_MANAGE_RELATE_DENORMALIZATION_DESC',
     'javascript:void(parent.SUGAR.App.router.navigate("Administration/denormalization", {trigger: true}));',
 ];
+if ($current_user && !$current_user->hasLicenses([Subscription::SUGAR_SELL_ESSENTIALS_KEY])) {
+    $admin_option_defs['any']['sugarOutfitters'] = [
+        'Administration',
+        'icon' => 'sicon-marketplace',
+        'LBL_SUGAR_OUTFITTER',
+        'LBL_SUGAR_OUTFITTER_TOOLTIP',
+        'https://www.sugaroutfitters.com/',
+        null,
+        null,
+        '_blank',
+    ];
+}
 
 $admin_group_header[]= array('LBL_STUDIO_TITLE','',false,$admin_option_defs, 'LBL_TOOLS_DESC');
 
@@ -304,15 +317,24 @@ if (hasMapsLicense()) {
     $admin_option_defs = [];
     $admin_option_defs['Administration']['maps'] = [
         'Administration',
+        'icon' => 'sicon-map-pin',
         'LBL_MAPS_ADMIN_CONFIG_TITLE',
         'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION',
         'javascript:void(parent.SUGAR.App.router.navigate("Administration/config/maps", {trigger: true}));',
+    ];
+    $admin_option_defs['Administration']['maps-logger'] = [
+        'Administration',
+        'icon' => 'sicon-preview',
+        'LBL_MAPS_ADMIN_LOG_VIEWER',
+        'LBL_MAPS_ADMIN_CONFIG_LOG_VIEWER_DESCRIPTION',
+        'javascript:void(parent.SUGAR.App.router.navigate("Administration/config/maps-logger", {trigger: true}));',
     ];
     $admin_group_header[] = [
         'LBL_MAPS_ADMIN_CONFIG_TITLE',
         '',
         false,
         $admin_option_defs,
+        'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION',
         'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION',
     ];
 }
@@ -445,7 +467,7 @@ foreach ($admin_group_header as $key=>$values) {
             }
 
             if (displayWorkflowForCurrentUser() == false) {
-                unset($values[3]['any']['workflow_management']);
+                unset($admin_group_header[$key][3]['any']['workflow_management']);
             }
 
             // Need this check because Quotes and Products share the header group
@@ -505,6 +527,13 @@ $admin_option_defs['Administration']['microsoft_onedrive'] = [
     'LBL_MICROSOFT_ONEDRIVE_TOOLTIP',
     'javascript:void(parent.SUGAR.App.router.navigate("Administration/drive-path/onedrive", {trigger: true}));',
 ];
+$admin_option_defs['Administration']['microsoft_dropbox'] = [
+    'Administration',
+    'icon' => 'sicon-settings',
+    'LBL_DROPBOX_DRIVE',
+    'LBL_DROPBOX_DRIVE_TOOLTIP',
+    'javascript:void(parent.SUGAR.App.router.navigate("Administration/drive-path/dropbox", {trigger: true}));',
+];
 
 $admin_group_header[] = [
     'LBL_CLOUD_DRIVE',
@@ -513,3 +542,47 @@ $admin_group_header[] = [
     $admin_option_defs,
     'LBL_CLOUD_DRIVE_DESCRIPTION',
 ];
+
+$admin_option_defs = [];
+$admin_option_defs['Administration']['docusign-settings'] = [
+    'Administration',
+    'icon' => 'sicon-settings',
+    'LBL_DOCUSIGN_NAME',
+    'LBL_DOCUSIGN_TOOLTIP',
+    'javascript:void(parent.SUGAR.App.router.navigate("DocuSign/settings", {trigger: true}));',
+];
+
+$admin_group_header[] = [
+    'LBL_DOCUSIGN_GROUP',
+    '',
+    false,
+    $admin_option_defs,
+    'LBL_DOCUSIGN_DESCRIPTION',
+];
+
+// Sugar Automate Administration Settings
+if (hasAutomateLicense()) {
+    $admin_option_defs = [];
+
+    $admin_option_defs['DRI_Workflows']['dri_customer_journey_templates'] = [
+        'customer_journey_workflow_templates',
+        'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME',
+        'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC',
+        'javascript:parent.SUGAR.App.router.navigate("DRI_Workflow_Templates", {trigger: true});',
+    ];
+
+    $admin_option_defs['Administration']['dri_customer_journey_configure_modules'] = [
+        'customer_journey_configure_modules',
+        'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_NAME',
+        'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_DESC',
+        'javascript:parent.SUGAR.App.router.navigate("DRI_Workflows/layout/configure-modules", {trigger: true});',
+    ];
+
+    $admin_group_header[] = [
+        'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_TITLE',
+        '',
+        false,
+        $admin_option_defs,
+        'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_DESC',
+    ];
+}

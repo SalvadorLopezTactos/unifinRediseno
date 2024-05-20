@@ -31,7 +31,7 @@ use Sugarcrm\Sugarcrm\Hint\Queue\Event\InstanceEnableNotificationsEvent;
 
 class EventConverter
 {
-    const TYPE_TO_CLASS_MAP = [
+    public const TYPE_TO_CLASS_MAP = [
         EventTypes::FAVORITE_ADD => FavoriteAccountAddEvent::class,
         EventTypes::FAVORITE_DELETE => FavoriteAccountDeleteEvent::class,
         EventTypes::ACCOUNT_DELETE => AccountDeleteEvent::class,

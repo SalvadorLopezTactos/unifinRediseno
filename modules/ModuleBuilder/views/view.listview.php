@@ -17,6 +17,27 @@ require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 class ViewListView extends SugarView
 {
     /**
+     * @var mixed|mixed[]
+     */
+    public $editModule;
+    public $editLayout;
+    public $subpanel;
+    /**
+     * @var mixed
+     */
+    public $subpanelLabel;
+    public $package;
+    /**
+     * @var bool|mixed
+     */
+    public $fromModuleBuilder;
+    public $translatedEditModule;
+    /**
+     * @var mixed|string
+     */
+    public $translatedViewType;
+
+    /**
 	 * @see SugarView::_getModuleTitleParams()
 	 */
 	protected function _getModuleTitleParams($browserTitle = false)
@@ -350,7 +371,7 @@ class ViewListView extends SugarView
                 continue;
             }
 
-            $type = isset($button['type']) ? $button['type'] : 'button';
+            $type = $button['type'] ?? 'button';
             if (! empty ( $button [ 'plain' ] ))
             {
                 $text .= <<<EOQ

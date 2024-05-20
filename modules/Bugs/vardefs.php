@@ -13,6 +13,8 @@ $dictionary['Bug'] = array(
     'table' => 'bugs',
     'audited' => true,
     'escalatable' => true,
+    'color' => 'red',
+    'icon' => 'sicon-bug',
     'activity_enabled' => true,
     'comment' => 'Bugs are defects in products and services',
     'duplicate_merge' => true,
@@ -166,6 +168,15 @@ $dictionary['Bug'] = array(
             'bean_name' => 'Escalation',
             'source' => 'non-db',
             'vname' => 'LBL_ESCALATIONS',
+        ],
+        'external_users' => [
+            'name' => 'external_users',
+            'type' => 'link',
+            'relationship' => 'external_users_bugs',
+            'module' => 'ExternalUsers',
+            'bean_name' => 'ExternalUser',
+            'source' => 'non-db',
+            'vname' => 'LBL_EXTERNAL_USERS',
         ],
         'tasks' => array(
             'name' => 'tasks',
@@ -431,6 +442,7 @@ VardefManager::createVardef('Bugs', 'Bug', array(
     'assignable',
     'team_security',
     'issue',
+    'external_source',
     'escalatable',
 ));
 

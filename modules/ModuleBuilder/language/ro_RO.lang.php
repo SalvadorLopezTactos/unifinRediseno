@@ -817,15 +817,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Creați o formulă pentru a determina dacă acest câmp este obligatoriu în machete.<br/>"
-    . "Câmpurile obligatorii vor respecta formula din vizualizare mobilă bazată pe browser, <br/>"
-    . "însă nu vor respecta formula din aplicațiile native, precum Sugar Mobile pentru iPhone. <br/>"
-    . "Acestea nu vor respecta formula din Portalul de autoservire Sugar.",
-'LBL_POPHELP_READONLY'=>"Creați o formulă pentru a determina dacă acest câmp este numai în citire în machete.<br/>"
-        . "Câmpurile numai în citire vor respecta formula din vizualizare mobilă bazată pe browser, <br/>"
+    'LBL_POPHELP_REQUIRED'=>'Câmpurile care sunt necesare în mod condiționat nu sunt disponibile pentru utilizare în următoarele tipuri de acțiuni SugarBPM: Adaugă înregistrare aferentă, Schimbă câmp. Vă rugăm să eliminați textul „Obligatoriu dacă” pentru a putea utiliza acest câmp în aceste acțiuni de definire a proceselor',
+'LBL_POPHELP_READONLY'=>"Creați o formulă pentru a determina dacă acest câmp este de tip „doar citire” în machete.<br/>"
+        . "Câmpurile „doar citire” vor respecta formula din vizualizarea mobilă bazată pe browser, <br/>"
         . "însă nu vor respecta formula din aplicațiile native, precum Sugar Mobile pentru iPhone. <br/>"
         . "Acestea nu vor respecta formula din Portalul de autoservire Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Selectați să utilizați acest câmp atunci când căutați înregistrări folosind Căutarea globală din acest modul.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Selectați să utilizați acest câmp când căutați înregistrări folosind Căutare globală la acest modul.',
 //Revert Module labels
 'LBL_RESET' => 'Reseteaza',
 'LBL_RESET_MODULE' => 'Reseteaza Modulul',
@@ -862,6 +859,7 @@ $mod_strings = array(
                 'decimal'=>'Zecimal',
                 'autoincrement' => 'Autoincrementare',
                 'actionbutton' => 'Buton acțiune',
+                'geocodestatus' => 'Stare codificare geografică',
 ),
 'labelTypes' => array(
     "" => "Format Implicit e-mail",

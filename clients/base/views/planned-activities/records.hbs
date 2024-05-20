@@ -57,12 +57,16 @@
                                 {{str 'LBL_NO_SUBJECT' this.module}}
                             {{/if}}
                         </div>
-                        {{#if attributes.assigned_user_id}}
-                            <a href="#{{buildRoute module="Employees" id=attributes.assigned_user_id action="detail"}}">{{fieldValue this "assigned_user_name"}}</a>&#44;
-                        {{else}}
-                            {{str "LBL_UNASSIGNED" this.module}}&#44;
-                        {{/if}}
-                        {{relativeTime attributes.record_date class='date'}}
+                        <div class="assigned-user-name">
+                            {{#if attributes.assigned_user_id}}
+                                {{#with ../../tabFieldDefs.assigned_user_name}}
+                                    {{field ../../../this model=../../this template="list"}}&#44;
+                                {{/with}}
+                            {{else}}
+                                {{str "LBL_UNASSIGNED" this.module}}&#44;
+                            {{/if}}
+                            {{relativeTime attributes.record_date class='date'}}
+                        </div>
                     </div>
                 </li>
             {{/each}}

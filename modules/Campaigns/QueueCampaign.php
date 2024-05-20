@@ -142,8 +142,8 @@ if (!$test) {
     $campaign->db->query($delete_query);
 }
 
-$return_module=isset($_REQUEST['return_module'])?$_REQUEST['return_module']:'Campaigns';
-$return_action=isset($_REQUEST['return_action'])?$_REQUEST['return_action']:'DetailView';
+$return_module=$_REQUEST['return_module'] ?? 'Campaigns';
+$return_action=$_REQUEST['return_action'] ?? 'DetailView';
 $return_id=$_REQUEST['record'];
 
 if ($test) {

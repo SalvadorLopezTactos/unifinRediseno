@@ -28,7 +28,7 @@ class IndexValueExpression extends GenericExpression
 			$index = intval($index);
 
 		if ( $index >= sizeof($array) || $index < 0 )
-			throw new Exception( $this->getOperationName() . ": Attempt to access an index out of bounds" );
+            throw new Exception(static::getOperationName() . ": Attempt to access an index out of bounds");
 
 		return $array[$index];
 	}
@@ -81,5 +81,3 @@ EOQ;
 	function toString() {
 	}
 }
-
-?>

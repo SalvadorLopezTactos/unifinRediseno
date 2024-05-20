@@ -169,7 +169,6 @@
         app.api.fileDownload(
             fileUrl,
             {},
-            {iframe: this.$el}
         );
     },
 
@@ -187,6 +186,7 @@
         var timesRun = 0;
         var maxRun = 90; //equivalent of running the timer for 3 minutes if we run it once at 2 seconds
 
+        this._documentGeneratedEventTriggered = false;
         var timer = setInterval(function() {
             timesRun++;
             //if it takes longer than 3 minutes do not wait
@@ -199,6 +199,10 @@
                 success: function(record) {
                     if (record.get('status') === 'success') {
                         clearInterval(timer);
+                        if (!this._documentGeneratedEventTriggered) {
+                            app.events.trigger('docmerge:document:generated', record.get('generated_document_id'));
+                            this._documentGeneratedEventTriggered = true;
+                        }
 
                         app.alert.show('merge_success', {
                             level: 'success',
@@ -242,7 +246,7 @@
                     this.render();
                 }.bind(this)
             });
-        }.bind(this), 2000);
+        }.bind(this), 500);
     },
 
     /**

@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Hozzon létre képletet annak meghatározására, hogy a mező kitöltése kötelező-e az elrendezésekben.<br/>"
-    . "A kötelező mezők követik a képletet a böngészőalapú mobilnézetben, <br/>"
-    . "de nem követik a képletet a natív alkalmazásokban, így például a Sugar Mobile for iPhone alkalmazásban. <br/>"
-    . "Nem követik a képletet a Sugar Önkiszolgáló Portálban.",
+    'LBL_POPHELP_REQUIRED'=>'A feltételesen kötelező mezők nem elérhetőek a következő SugarBPM tevékenységtípusok során: Kapcsolódó rekord hozzáadása, Mezőcsere. Kérjük, távolítsa el a "Kötelező, ha" szöveget ezekből a mezőlből ahhoz, hogy használni tudja ezeket a mezőket a megadott folyamatok során',
 'LBL_POPHELP_READONLY'=>"Hozzon létre képletet annak meghatározására, hogy a mező csak olvasható-e az elrendezésekben.<br/>"
         . "A csak olvasható mezők követik a képletet a böngészőalapú mobilnézetben, <br/>"
         . "de nem követik a képletet a natív alkalmazásokban, így például a Sugar Mobile for iPhone alkalmazásban. <br/>"
-        . "Nem követik a képletet a Sugar Önkiszolgáló Portálban.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Válassza ki ennek a mezőnek a használatát, ha rekordokat keres a Globális kereső használatával ebben a modulban.',
+        . "They will not follow the formula in the Sugar Self-Service Portal.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Jelölje ki ezt a mezőt használatra, ha a Globális Keresés segítségével keres rekordokat ebben a modulban.',
 //Revert Module labels
 'LBL_RESET' => 'Visszaállít',
 'LBL_RESET_MODULE' => 'Modul visszaállítása',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Decimális',
                 'autoincrement' => 'Automatikus növelés',
                 'actionbutton' => 'AkcióGomb',
+                'geocodestatus' => 'GeokódÁllapot',
 ),
 'labelTypes' => array(
     "" => "gyakran használt címkék",

@@ -122,7 +122,7 @@ for ($i = 0; $i < (is_countable($projectTasks) ? count($projectTasks) : 0); $i++
 	$mpx .= $projTaskId . "," .$projTaskId . ",";
 	
 	// name
-    $mpx_name = htmlspecialchars_decode( $locale->translateCharset($projectTasks[$i]->name, 'UTF-8', $locale->getExportCharset()) );
+    $mpx_name = htmlspecialchars_decode($locale->translateCharset($projectTasks[$i]->name, 'UTF-8', $locale->getExportCharset()), ENT_COMPAT);
     $mpx_name = str_replace('"', '""', $mpx_name);
     
 	$mpx .= "\"" . $mpx_name . "\",";

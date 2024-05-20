@@ -62,7 +62,7 @@ function smarty_function_sugar_fetch($params, &$smarty)
         $theData = $params['object'][$theKey];
     }
     if (!empty($params['escape']) && $params['escape'] === 'html') {
-        $theData = htmlspecialchars($theData);
+        $theData = htmlspecialchars($theData, ENT_COMPAT);
     }
     if(!empty($params['assign'])) {
         $smarty->assign($params['assign'],$theData);

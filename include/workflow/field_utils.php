@@ -15,7 +15,7 @@ include_once('include/workflow/workflow_utils.php');
 include_once('include/workflow/expression_utils.php');
 
 	function get_field_output(& $temp_module, $selector_array, $meta_array, $actions=false){
-
+        $selected_ext1 = null;
 		global $current_language;
 		global $app_list_strings;
 		global $app_strings;
@@ -141,8 +141,7 @@ include_once('include/workflow/expression_utils.php');
 					$sorted_fields = call_user_func($function);
 				}else{
                     //get list of strings if sorted fields has not already been populated
-                    if(count($sorted_fields) == 0)
-                    {
+                if ((is_countable($sorted_fields) ? count($sorted_fields) : 0) == 0) {
                         $sorted_fields = $app_list_strings[$target_field_array['options']];
                     }
 				}
@@ -854,7 +853,7 @@ function check_special_fields($field_name, $source_object, $use_past_array=false
 				 return get_display_text($source_object, $field_name, $source_object->$field_name, null, null, $context);
 		} else {
 			//use the past value
-            if ($source_object->fetched_row === false) {
+            if (empty($source_object->fetched_row)) {
                 return null;
             }
 				return get_display_text($source_object, $field_name, $source_object->fetched_row[$field_name], null, null, $context);

@@ -223,7 +223,7 @@ class QuotesViewEdit extends ViewEdit
                         foreach ($bundle_list as $line_item) {
 							if ($line_item->object_name == "Product") {
 								/* @var $line_item Product */
-                                $tax_class_name = isset($line_item->tax_class) ? $line_item->tax_class : "";
+                                $tax_class_name = $line_item->tax_class ?? "";
 
 								$encoded_name = js_escape(br2nl($line_item->name));
 
@@ -268,7 +268,7 @@ class QuotesViewEdit extends ViewEdit
 					$product_list = $product_bundle->get_products();
 					if (is_array($product_list)) {
 						foreach ($product_list as $line_item) {
-                            $tax_class_name = isset($line_item->tax_class) ? $line_item->tax_class : "";
+                            $tax_class_name = $line_item->tax_class ?? "";
 
 							$add_row[] = "quotesManager.addRow('','$line_item->quantity','$line_item->product_template_id','$line_item->name'"
 											. ", '".format_number($line_item->cost_usdollar, $significantDigits, $significantDigits, array('convert' => true, 'currency_id' => $curid)) . "'"

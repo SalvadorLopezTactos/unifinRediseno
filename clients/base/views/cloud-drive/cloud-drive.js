@@ -30,13 +30,15 @@
         'click .refreshPath': 'refreshPath',
         'click .sorting': 'sortColumn',
         'mouseenter [data-toggle=tooltip]': 'showTooltip',
-        'mouseleave [data-toggle=tooltip]': 'hideTooltip'
+        'mouseleave [data-toggle=tooltip]': 'hideTooltip',
+        'click .copyLink': 'copyLink',
+        'click .sendToDocuSign': 'downloadDocumentInSugar',
     },
 
     /**
      * @inheritdoc
      */
-    plugins: ['Dashlet'],
+    plugins: ['Dashlet', 'DocumentMerge'],
 
     /**
      * Default drive type
@@ -68,6 +70,10 @@
         ] : [
             {name: 'My files', folderId: 'root'},
         ];
+
+        const ctxModel = app.controller.context;
+        this.showMergeButtonsOnThisView = ctxModel.get('layout') === 'record' && ctxModel.get('module') !== 'Home';
+
         app.events.on(`${this.cid}:cloud-drive:reload`, this.loadFiles, this);
         $(window).on('resize.' + this.cid, _.bind(_.debounce(this.adjustHeaderPaneTitle, 50), this));
     },
@@ -82,6 +88,10 @@
         });
 
         this.getRootFolder();
+
+        if (!app.acl.hasAccess('create', 'Documents')) {
+            this.noDocumentsAccess = true;
+        }
     },
 
     /**
@@ -161,6 +171,7 @@
             type: this.options.driveType,
             driveId: this.driveId,
             sortOptions: this.sortOptions,
+            folderPath: this.pathFolders,
         }, {
             success: _.bind(callback, this),
             error: _.bind(this._handleDriveError, this),
@@ -176,6 +187,11 @@
      * @param {Object} data
      */
     displayItems: function(data) {
+        if (!_.isUndefined(data.success) && !data.success) {
+            this.noConnection = true;
+            this.errorMessage = data.message;
+        }
+
         this.showCreateMessage = false;
         this.files = data.files;
         this.nextPageToken = data.nextPageToken;
@@ -254,12 +270,8 @@
             let parentIdsRemoveIndex = this.parentIds.indexOf(this.folderId);
             this.parentIds.splice(parentIdsRemoveIndex + 1);
 
-            let pathRemoveIndex = this.pathFolders.findIndex(function(element, index) {
-                if (element.folderId === this.folderId) {
-                    return true;
-                }
-            }.bind(this));
-            this.pathFolders.splice(pathRemoveIndex + 1);
+            const pathRemoveIndex = evt.target.dataset.index;
+            this.pathFolders.splice(parseInt(pathRemoveIndex) + 1);
         } else {
             this.pathFolders.push({
                 name: evt.target.text,
@@ -272,7 +284,8 @@
 
         this.parentId = this.parentIds[this.parentIds.length - 2];
         this.nextPageToken = null;
-        this.getParent(this.navigateTo);
+
+        this.options.driveType === 'dropbox' ? this.loadFiles() : this.getParent(this.navigateTo);
     },
 
     /**
@@ -375,11 +388,25 @@
         if (webViewLink) {
             this.showPreview({webViewLink: webViewLink});
         } else {
-            const url = app.api.buildURL('CloudDrive/file', fileId, null, {type: this.options.driveType});
-            app.api.call('read', url, null, {
-                success: _.bind(this.showPreview, this),
-                error: _.bind(this._handleDriveError, this),
-            });
+            if (this.options.driveType === 'dropbox') {
+                const folderName = evt.target.dataset.name;
+                const folderPath = this.getFolderPath(folderName);
+                const url = app.api.buildURL('CloudDrive/shared', 'link');
+
+                app.api.call('create', url, {
+                    'type': this.options.driveType,
+                    'folderPath': folderPath,
+                }, {
+                    success: _.bind(this.showPreview, this),
+                    error: _.bind(this._handleDriveError, this),
+                });
+            } else {
+                const url = app.api.buildURL('CloudDrive/file', fileId, null, {type: this.options.driveType});
+                app.api.call('read', url, null, {
+                    success: _.bind(this.showPreview, this),
+                    error: _.bind(this._handleDriveError, this),
+                });
+            }
         }
     },
 
@@ -389,7 +416,8 @@
      * @param {string} file
      */
     showPreview: function(file) {
-        window.open(file.webViewLink, '_blank');
+        const url = file.webViewLink || file.url;
+        window.open(url, '_blank');
     },
 
     /**
@@ -421,6 +449,8 @@
         const fileId = evt.target.dataset.id;
         const driveId = evt.target.dataset.driveid;
         const downloadUrl = evt.target.dataset.downloadurl;
+        const folderName = evt.target.dataset.name;
+        const folderPath = this.getFolderPath(folderName);
 
         if (!_.isEmpty(downloadUrl)) {
             window.open(downloadUrl, '_blank');
@@ -438,6 +468,7 @@
             fileId: fileId,
             driveId: driveId,
             type: this.options.driveType,
+            folderPath: folderPath,
         }, {
             success: _.bind(function(data) {
                 if (data.success) {
@@ -511,6 +542,24 @@
     },
 
     /**
+     * Handles no permission errors
+     *
+     * @param {Object} error
+     */
+    _handleNoPermissionError: function(error) {
+        if (this.popover) {
+            this.hidePopover();
+        }
+
+        const alertId = app.utils.generateUUID();
+        app.alert.show('drive-permission-error' + alertId, {
+            level: 'error',
+            messages: app.lang.get('LBL_NO_PERMISSION_FILE_ERROR'),
+        });
+        this.render();
+    },
+
+    /**
      * Deletes a file from drive
      *
      * @param {Event} evt
@@ -534,16 +583,21 @@
     _deleteFile: function(evt) {
         const fileId = evt.target.dataset.id;
         const driveId = evt.target.dataset.driveid;
+        const folderName = evt.target.dataset.name;
+        const folderPath = this.getFolderPath(folderName);
+
         app.alert.show('drive-syncing', {
             level: 'process'
         });
+
         const url = app.api.buildURL('CloudDrive/delete');
         app.api.call('create', url, {
             fileId: fileId,
             driveId: driveId,
             type: this.options.driveType,
+            folderPath: folderPath,
         }, {
-            error: _.bind(this._handleDriveError, this),
+            error: _.bind(this._handleNoPermissionError, this),
             complete: _.bind(function() {
                 this.loadFiles();
                 app.alert.dismiss('drive-syncing');
@@ -572,7 +626,16 @@
             driveId: driveId,
             type: this.options.driveType
         }, {
-            success: _.bind(function() {
+            success: _.bind(function(result) {
+                if (!result.success) {
+                    app.alert.show('drive-error', {
+                        level: 'error',
+                        messages: app.lang.get(result.message),
+                    });
+
+                    return;
+                }
+
                 app.alert.show('drive-syncing', {
                     level: 'success',
                     messages: app.lang.get('LBL_DRIVE_DOCUMENT_CREATED'),
@@ -583,6 +646,8 @@
                         links: ['documents']
                     });
                 }
+
+                this.trigger('sugar-document:created', result.documentId);
             }, this),
             error: _.bind(this._handleDriveError, this),
         });
@@ -594,7 +659,7 @@
      * @param {Event} evt
      */
     createFolder: function(evt) {
-        if (_.isArray(this.pathFolders) && !_.isEmpty(this.parentId)) {
+        if (_.isArray(this.pathFolders) && (this.options.driveType === 'dropbox' || !_.isEmpty(this.parentId))) {
             let parentFolderId = this.parentId || this.folderId;
 
             if (this.pathCreateIndex === this.pathFolders.length) {
@@ -617,13 +682,14 @@
             const folder = _.filter(this.pathFolders, function(item) {
                 return item.name;
             })[this.pathCreateIndex];
-            if (!_.isUndefined(folder) && _.isString(folder.name)) {
+            if (this.options.driveType === 'dropbox' || (!_.isUndefined(folder) && _.isString(folder.name))) {
                 const url = app.api.buildURL('CloudDrive', 'folder');
                 app.api.call('create', url, {
                     'name': folder.name,
                     'parent': parentFolderId,
                     'driveId': this.driveId,
                     'type': this.options.driveType,
+                    'folderPath': this.pathFolders,
                 }, {
                     success: _.bind(function(result) {
                         this.pathCreateIndex++;
@@ -653,6 +719,14 @@
         this.loadFiles(null, true);
     },
 
+    getFolderPath: function(folderName) {
+        return _.union(this.pathFolders, [
+            {
+                'name': folderName,
+            }
+        ]);
+    },
+
     /**
      * Creates a new folder on the drive
      *
@@ -661,6 +735,7 @@
     createNewFolder: function(evt) {
         const folderName = $('[name=folderName]').val();
         const url = app.api.buildURL('CloudDrive', 'folder');
+        const folderPath = this.getFolderPath(folderName);
 
         app.alert.show('drive-create-folder', {
             level: 'process'
@@ -671,6 +746,7 @@
             'parent': this.folderId,
             'driveId': this.driveId,
             'type': this.options.driveType,
+            'folderPath': folderPath,
         }, {
             success: _.bind(this.loadFiles, this),
             error: _.bind(this._handleDriveError, this),
@@ -688,11 +764,19 @@
     uploadNewFile: function(evt) {
         const element = _.first($('input[name=uploadFile]'));
         const file = _.first(element.files);
+
+        if (!file) {
+            this.hidePopover();
+            return;
+        }
+
+        const folderPath = this.getFolderPath(file.name);
         let formData = new FormData();
         formData.append('file', file);
         formData.append('fileName', file.name);
         formData.append('parentId', this.folderId);
         formData.append('type', this.options.driveType);
+        formData.append('folderPath', JSON.stringify(folderPath));
 
         if (!_.isEmpty(this.driveId)) {
             formData.append('driveId', this.driveId);
@@ -739,8 +823,41 @@
     _render: function() {
         this._super('_render', arguments);
 
+        this.addKebabButton();
         this.initPopovers();
         this.adjustDropdowns();
+    },
+
+    /**
+     * Add kebab button
+     */
+    addKebabButton: function() {
+        const dashletToolbar = this.layout.getComponent('dashlet-toolbar');
+        const kebabTemplate = app.template.getView('cloud-drive', 'kebab-actions');
+        const kebabElement = kebabTemplate({showMergeButtonsOnThisView: this.showMergeButtonsOnThisView});
+        if (dashletToolbar instanceof app.view.View && dashletToolbar.$('.kebab-actions').length === 0) {
+            dashletToolbar.$('.btn-toolbar > .dashlet-toolbar').after(kebabElement);
+            dashletToolbar.$('.btn-toolbar').css('display', 'contents');
+
+            dashletToolbar.$('a[data-dashletaction="newSignedDocument"]').on(
+                'click',
+                _.bind(this.newSignedDocument, this)
+            );
+            if (this.showMergeButtonsOnThisView) {
+                dashletToolbar.$('a[data-dashletaction="mergeDocuSign"]').on(
+                    'click',
+                    _.bind(this.docMergeAndSendToDocuSign, this)
+                );
+                dashletToolbar.$('a[data-dashletaction="mergeWEP"]').on(
+                    'click',
+                    _.bind(this.mergeFile, this)
+                );
+                dashletToolbar.$('a[data-dashletaction="mergePdf"]').on(
+                    'click',
+                    _.bind(this.mergeFile, this)
+                );
+            }
+        }
     },
 
     /**
@@ -940,10 +1057,16 @@
             return;
         }
 
+        const buttonsGroup = this.$('.btn-group.cd-radio-buttons button');
+
+        if (buttonsGroup.length === 0) {
+            return;
+        }
+
         dashletTitle = dashletToolbar.$('.dashlet-title');
         const textWidth = this.getTextWidth(dashletTitle.text(), dashletTitle.css('font'));
         const titleRect = dashletTitle[0].getBoundingClientRect();
-        const buttonGroupRect = this.$('.refreshPath')[0].getBoundingClientRect();
+        const buttonGroupRect = buttonsGroup[0].getBoundingClientRect();
         this.titleLeft = titleRect.left === 0 ? this.titleLeft : titleRect.left;
         const buttonGroupLeft = buttonGroupRect.left;
 
@@ -954,6 +1077,167 @@
             dashletTitle.show();
             dashletToolbar.$el.removeClass('pull-right');
         }
+    },
+
+    /**
+     * Copies the link to the document
+     *
+     * @param {Event} evt
+     */
+    copyLink: function(evt) {
+        if (this.options.driveType !== 'dropbox') {
+            return;
+        }
+
+        const folderName = evt.target.dataset.name;
+        const folderPath = this.getFolderPath(folderName);
+
+        const url = app.api.buildURL('CloudDrive/shared', 'link');
+        app.api.call('create', url, {
+            'type': this.options.driveType,
+            'folderPath': folderPath,
+        }, {
+            success: _.bind(this.setWebLink, this),
+            error: _.bind(this._handleDriveError, this),
+        });
+    },
+
+    /**
+     * Sets the web link on the clipboard
+     *
+     * @param {Array} result
+     */
+    setWebLink: function(result) {
+        if (this.disposed) {
+            return;
+        }
+
+        navigator.clipboard.writeText(result.url).then(_.bind(function() {
+            app.alert.show('copy-success', {
+                level: 'success',
+                messages: app.lang.get('LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS'),
+            });
+        }, this));
+    },
+
+    /**
+     * Click on the toolbar button to create a new envelope in the current directory
+     */
+    newSignedDocument: function() {
+        var drawerOptions = {
+            layout: 'selection-list',
+            context: {
+                module: 'Documents',
+                collection: app.data.createBeanCollection('Documents'),
+                model: app.data.createBean('Documents')
+            }
+        };
+
+        app.drawer.open(drawerOptions, this.sendDocumentToDocuSign.bind(this));
+    },
+
+    /**
+     * Click on a document row action to send it to DocuSign
+     *
+     * @param {Event}
+     */
+    downloadDocumentInSugar: function(e) {
+        this.listenToOnce(this, 'sugar-document:created', this.sendDocumentToDocuSign, this);
+
+        this.createSugarDocument(e);
+    },
+
+    /**
+     * Send document to DocuSign
+     *
+     * @param {mixed} documentId
+     */
+    sendDocumentToDocuSign: function(documentId) {
+        if (documentId.id) {
+            documentId = documentId.id;
+        }
+        const ctxModel = app.controller.context.get('model');
+        const module = ctxModel.get('_module');
+        const modelId = ctxModel.get('id');
+
+        if (_.isUndefined(documentId)) {
+            return;
+        }
+        const documents = [documentId];
+        let pathParam = this.folderId;
+        if (this.options.driveType === 'dropbox') {
+            pathParam = JSON.stringify(this.pathFolders);
+        }
+
+        app.events.trigger('docusign:send:initiate', {
+            returnUrlParams: {
+                parentRecord: module,
+                parentId: modelId,
+                token: app.api.getOAuthToken()
+            },
+            documents: documents,
+            cloudServiceName: this.options.driveType,
+            cloudPath: pathParam
+        });
+    },
+
+    /*
+     * Merge document to Word/Excel/Powerpoint/Pdf
+     *
+     * @param {Event} evt
+     */
+    mergeFile: function(e) {
+        if (e.currentTarget.dataset.dashletaction === 'mergeWEP') {
+            this.context.trigger('button:merge_template:click', app.controller.context.get('model'));
+        } else {
+            this.context.trigger('button:merge_template_pdf:click', app.controller.context.get('model'));
+        }
+
+        this.stopListening(app.events, 'docmerge:document:generated');
+        this.listenToOnce(app.events, 'docmerge:document:generated', this.uploadDocument, this);
+    },
+
+    /**
+     * Upload document to cloud
+     *
+     * @param {string} documentId
+     */
+    uploadDocument: function(documentId) {
+        let formData = new FormData();
+        formData.append('documentId', documentId);
+        formData.append('cloud_service_type', this.options.driveType);
+        let path = this.folderId;
+        if (this.options.driveType === 'dropbox') {
+            path = JSON.stringify(this.pathFolders);
+        }
+        formData.append('path', path);
+
+        const url = app.api.buildURL('CloudDrive', 'document');
+
+        app.api.call('create', url, formData, {
+            success: function(result) {
+                app.alert.dismiss('merge_success');
+
+                app.alert.show('upload-success', {
+                    level: 'success',
+                    messages: app.lang.get('LBL_UPLOAD_AND_LINK_COMPLETE', null, {documentName: result.documentName}),
+                });
+            },
+            error: _.bind(this._handleDriveError, this)
+        }, {
+            contentType: false,
+            processData: false
+        });
+    },
+
+    /**
+     * Document Merge then Send to DocuSign
+     */
+    docMergeAndSendToDocuSign: function() {
+        this.context.trigger('button:merge_template:click', app.controller.context.get('model'));
+
+        this.stopListening(app.events, 'docmerge:document:generated');
+        this.listenToOnce(app.events, 'docmerge:document:generated', this.sendDocumentToDocuSign, this);
     },
 
     /**

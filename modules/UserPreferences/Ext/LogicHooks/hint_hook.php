@@ -13,6 +13,6 @@ $hook_array['after_save'][] = array(
     1,
     'Hook description',
     null,
-    'Sugarcrm\\Sugarcrm\\modules\\UserPreferences\\HintUserPreferencesHook',
+    \Sugarcrm\Sugarcrm\modules\UserPreferences\HintUserPreferencesHook::class,
     'afterSave',
 );

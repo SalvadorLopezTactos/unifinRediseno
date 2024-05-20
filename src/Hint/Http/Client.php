@@ -32,17 +32,17 @@ class Client implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    const DATA_ENRICHMENT_ACTION_AUTH = '/hint/data-enrichment/v3/tokens';
-    const NOTIFICATIONS_SVC_ACTION_CREATE_TOKEN = '/hint/notifications-service/v1/createToken';
-    const COMPANY_IDENTITY_SVC_URL = '/hint/data-enrichment/v1/createIdentity';
-    const DATA_ENRICHMENT_CONFIG_SVC_URL = '/hint/data-enrichment/v1/config-fields-for-enrich';
-    const DATA_ENRICHMENT_UPDATE_LIC_URL = '/hint/data-enrichment/v1/updateLicense';
-    const DATA_ENRICHMENT_DELETE_INSTANCE = '/hint/data-enrichment/v1/instance';
-    const HINT_EU_AWS_REGIONS = ['eu-west-1', 'eu-central-1'];
-    const HINT_APSE_AWS_REGIONS = ['ap-southeast-2', 'ap-southeast-1'];
-    const US_REGION = 'US';
-    const EU_REGION = 'EU';
-    const APSE_REGION = 'APSE';
+    public const DATA_ENRICHMENT_ACTION_AUTH = '/hint/data-enrichment/v3/tokens';
+    public const NOTIFICATIONS_SVC_ACTION_CREATE_TOKEN = '/hint/notifications-service/v1/createToken';
+    public const COMPANY_IDENTITY_SVC_URL = '/hint/data-enrichment/v1/createIdentity';
+    public const DATA_ENRICHMENT_CONFIG_SVC_URL = '/hint/data-enrichment/v1/config-fields-for-enrich';
+    public const DATA_ENRICHMENT_UPDATE_LIC_URL = '/hint/data-enrichment/v1/updateLicense';
+    public const DATA_ENRICHMENT_DELETE_INSTANCE = '/hint/data-enrichment/v1/instance';
+    public const HINT_EU_AWS_REGIONS = ['eu-west-1', 'eu-central-1'];
+    public const HINT_APSE_AWS_REGIONS = ['ap-southeast-2', 'ap-southeast-1'];
+    public const US_REGION = 'US';
+    public const EU_REGION = 'EU';
+    public const APSE_REGION = 'APSE';
 
     public $endpoint;
 

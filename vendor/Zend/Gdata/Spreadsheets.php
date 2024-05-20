@@ -94,12 +94,13 @@ require_once('vendor/Zend/Gdata/Spreadsheets/CellQuery.php');
  */
 class Zend_Gdata_Spreadsheets extends Zend_Gdata
 {
-    const SPREADSHEETS_FEED_URI = 'http://spreadsheets.google.com/feeds/spreadsheets';
-    const SPREADSHEETS_POST_URI = 'http://spreadsheets.google.com/feeds/spreadsheets/private/full';
-    const WORKSHEETS_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#worksheetsfeed';
-    const LIST_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#listfeed';
-    const CELL_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#cellsfeed';
-    const AUTH_SERVICE_NAME = 'wise';
+    public string $_server;
+    public const SPREADSHEETS_FEED_URI = 'http://spreadsheets.google.com/feeds/spreadsheets';
+    public const SPREADSHEETS_POST_URI = 'http://spreadsheets.google.com/feeds/spreadsheets/private/full';
+    public const WORKSHEETS_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#worksheetsfeed';
+    public const LIST_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#listfeed';
+    public const CELL_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#cellsfeed';
+    public const AUTH_SERVICE_NAME = 'wise';
 
     /**
      * Namespaces used for Zend_Gdata_Photos

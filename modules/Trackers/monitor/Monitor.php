@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 define('MAX_SESSION_LENGTH', 36);
 
+#[\AllowDynamicProperties]
 class Monitor implements Trackable {
 
     var $metricsFile;
@@ -46,7 +46,7 @@ class Monitor implements Trackable {
     	$this->name = $name;
     	$this->metricsFile = $metadata;
 
-    	require($this->metricsFile);
+        require $this->metricsFile;
     	$fields = $dictionary[$this->name]['fields'];
     	$this->table_name = !empty($dictionary[$this->name]['table']) ? $dictionary[$this->name]['table'] : $this->name;
     	$this->metrics = array();
@@ -58,9 +58,9 @@ class Monitor implements Trackable {
     	   	  continue;
     	   }
 
-    	   $type = isset($field['dbType']) ? $field['dbType'] : $field['type'];
+            $type = $field['dbType'] ?? $field['type'];
     	   $name = $field['name'];
-    	   $this->metrics[$name] = new Metric($type, $name);
+            $this->metrics[$name] = new Sugarcrm\Sugarcrm\Trackers\Metric($type, $name);
     	}
 
     	$this->monitor_id = $monitorId;
@@ -186,7 +186,7 @@ class Monitor implements Trackable {
  		$to_arr = array();
  		$metrics = $this->getMetrics();
 	    foreach($metrics as $name=>$metric) {
-	    	    $to_arr[$name] = isset($this->$name) ? $this->$name : null;
+            $to_arr[$name] = $this->$name ?? null;
 	    }
 	    return $to_arr;
  	}

@@ -116,7 +116,7 @@
         // handle the case for user clicking MyOpportunities first
         this.selectedUser = selectedUser;
         if (selectedUser.showOpps) {
-            var nodeId = (selectedUser.is_manager ? 'jstree_node_myopps_' : 'jstree_node_') + selectedUser.user_name;
+            var nodeId = (selectedUser.is_manager ? 'jstree_node_myopps_' : 'jstree_node_') + selectedUser.id;
             this.selectJSTreeNode(nodeId)
             // check before render if we're trying to re-render tree with a fresh root user
             // otherwise do not re-render tree
@@ -138,7 +138,7 @@
                 // we need to "select" the user on the tree to show they're selected
 
                 // create node ID
-                var nodeId = 'jstree_node_' + selectedUser.user_name;
+                var nodeId = 'jstree_node_' + selectedUser.id;
 
                 // select node only if it is not the already selected node
                 if (this.jsTree.jstree('get_selected').attr('id') != nodeId) {
@@ -157,10 +157,8 @@
         // jstree kept trying to hold on to the root node css staying selected when
         // user clicked a user's name from the worksheet, so explicitly causing a deselection
         this.jsTree.jstree('deselect_all');
-
         this.jsTree.jstree('select_node', '#' + nodeId);
     },
-
 
     /**
      * Recursively step through the tree and for each node representing a tree node, run the data attribute through
@@ -223,9 +221,10 @@
             data = [ data ];
         }
 
-        var treeData = this._recursiveReplaceHTMLChars(data, this),
-            selectedUser = this.context.get('selectedUser'),
-            nodeId = (selectedUser.is_manager && selectedUser.showOpps ? 'jstree_node_myopps_' : 'jstree_node_') + selectedUser.user_name;
+        let treeData = this._recursiveReplaceHTMLChars(data, this);
+        let selectedUser = this.context.get('selectedUser');
+        let nodeId = (selectedUser.is_manager && selectedUser.showOpps ? 'jstree_node_myopps_' : 'jstree_node_') +
+                selectedUser.id;
         treeData.ctx = this.context;
 
         this.jsTree = $(".jstree-sugar").jstree({
@@ -235,7 +234,7 @@
             },
             "ui": {
                 // when the tree re-renders, initially select the root node
-                "initially_select": [ nodeId ]
+                initially_select: [nodeId]
             },
             "types": {
                 "types": {
@@ -254,7 +253,8 @@
             }, this))
         .on("select_node.jstree", _.bind(function(event, data) {
             if (this.initHasSelected) {
-                this.previousUserName = (this.selectedUser.is_manager && this.selectedUser.showOpps ? 'jstree_node_myopps_' : 'jstree_node_') + this.selectedUser.user_name;
+                this.previousUserName = (this.selectedUser.is_manager && this.selectedUser.showOpps ?
+                    'jstree_node_myopps_' : 'jstree_node_') + this.selectedUser.id;
 
                 var jsData = data.inst.get_json(),
                     nodeType = jsData[0].attr.rel,

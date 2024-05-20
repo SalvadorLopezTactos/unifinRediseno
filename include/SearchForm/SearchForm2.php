@@ -15,7 +15,11 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 class SearchForm
 {
- 	var $seed = null;
+    /**
+     * @var mixed[]
+     */
+    public $searchColumns;
+    public $seed = null;
  	var $module = '';
  	var $action = 'index';
  	var $searchdefs = array();
@@ -141,8 +145,10 @@ class SearchForm
 		if($this->nbTabs>1){
 		    $this->th->ss->assign('TABS', $this->_displayTabs($this->module . '|' . $this->displayView));
 		}
-		$this->th->ss->assign('searchTableColumnCount',
-		    ((isset($this->searchdefs['templateMeta']['maxColumns']) ? $this->searchdefs['templateMeta']['maxColumns'] : 2) * 2 ) - 1);
+        $this->th->ss->assign(
+            'searchTableColumnCount',
+            (($this->searchdefs['templateMeta']['maxColumns'] ?? 2) * 2) - 1
+        );
 		$this->th->ss->assign('fields', $this->fieldDefs);
 		$this->th->ss->assign('customFields', $this->customFieldDefs);
 		$this->th->ss->assign('formData', $this->formData);
@@ -169,7 +175,7 @@ class SearchForm
         //Show and hide the good tab form
         foreach($this->tabs as $tabkey=>$viewtab){
             $viewName=str_replace(array($this->module . '|','_search'),'',$viewtab['key']);
-            if (strpos($this->view, (string)$viewName) !== false) {
+            if(strpos($this->view,$viewName)!==false){
                 $this->tabs[$tabkey]['displayDiv']='';
                 //if this is advanced tab, use form with saved search sub form built in
                 if($viewName=='advanced'){
@@ -389,12 +395,8 @@ class SearchForm
 	                }
 	            }
 
-                if (!is_scalar($this->fieldDefs[$fvName]['options'] ?? null)) {
-                    LoggerManager::getLogger()->fatal(
-                        sprintf('scalar expected, "%s" given', gettype($this->fieldDefs[$fvName]['options'] ?? null))
-                            . PHP_EOL . (new Exception())->getTraceAsString()
-                    );
-                } elseif (isset($GLOBALS['app_list_strings'][$this->fieldDefs[$fvName]['options']])) {
+                if (is_scalar($this->fieldDefs[$fvName]['options'] ?? null)
+                    && isset($GLOBALS['app_list_strings'][$this->fieldDefs[$fvName]['options']])) {
 	                // fill in enums
                     $this->fieldDefs[$fvName]['options'] = $GLOBALS['app_list_strings'][$this->fieldDefs[$fvName]['options']];
                     //Hack to add blanks for parent types on search views
@@ -725,9 +727,7 @@ class SearchForm
                          $parms['value'] = $this->searchFields[$real_field]['value'];
                          $parms['operator'] = 'between';
 
-                         $field_type = isset($this->seed->field_defs[$real_field]['type'])
-                             ? $this->seed->field_defs[$real_field]['type']
-                             : '';
+                         $field_type = $this->seed->field_defs[$real_field]['type'] ?? '';
                          if($field_type == 'datetimecombo' || $field_type == 'datetime')
                          {
                                 $type = $field_type;
@@ -742,9 +742,7 @@ class SearchForm
                      //Special case for datetime and datetimecombo fields.  By setting the type here we allow an actual between search
                      if(in_array($parms['operator'], array('=', 'between', "not_equal", 'less_than', 'greater_than', 'less_than_equals', 'greater_than_equals')))
                      {
-                        $field_type = isset($this->seed->field_defs[$real_field]['type'])
-                            ? $this->seed->field_defs[$real_field]['type']
-                            : '';
+                        $field_type = $this->seed->field_defs[$real_field]['type'] ?? '';
 
                         if (strtolower($field_type) == 'readonly'
                             && isset($this->seed->field_defs[$real_field]['dbType'])) {
@@ -1114,7 +1112,12 @@ class SearchForm
                                      // If it is a unified search and if the search contains more then 1 word (contains space)
                                      // and if it's the last element from db_field (so we do the concat only once, not for every db_field element)
                                      // we concat the db_field array() (both original, and in reverse order) and search for the whole string in it
-                                    if ($UnifiedSearch && strpos($field_value, ' ') !== false && strpos($db_field, (string)$parms['db_field'][count($parms['db_field']) - 1]) !== false) {
+                                    if ($UnifiedSearch && strpos($field_value, ' ') !== false && strpos(
+                                        $db_field,
+                                        $parms['db_field'][(is_countable($parms['db_field']) ? count(
+                                            $parms['db_field']
+                                        ) : 0) - 1]
+                                    ) !== false) {
                                          // Get the table name used for concat
                                          $concat_table = explode('.', $db_field);
                                          $concat_table = $concat_table[0];
@@ -1122,8 +1125,9 @@ class SearchForm
                                          $concat_fields = $parms['db_field'];
 
                                          // If db_fields (e.g. contacts.first_name) contain table name, need to remove it
-                                         for ($i = 0; $i < count($concat_fields); $i++)
-                                         {
+                                       for ($i = 0; $i < (is_countable($concat_fields) ? count(
+                                           $concat_fields
+                                       ) : 0); $i++) {
                                          	if (strpos($concat_fields[$i], $concat_table) !== false)
                                          	{
                                          		$concat_fields[$i] = substr($concat_fields[$i], strlen($concat_table) + 1);
@@ -1146,7 +1150,8 @@ class SearchForm
                                                    {
                                                       foreach($GLOBALS['app_list_strings']['salutation_dom'] as $salutation)
                                                       {
-                                                       if (!empty($salutation) && strpos($field_value, (string)$salutation) === 0) {
+                                                         if(!empty($salutation) && strpos($field_value, $salutation) === 0)
+                                                         {
                                                             $field_value = trim(substr($field_value, strlen($salutation)));
                                                             break;
                                                          }

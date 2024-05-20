@@ -184,6 +184,7 @@ class Zend_Crypt_Math_BigInteger_Gmp implements Zend_Crypt_Math_BigInteger_Inter
 
     public function hexToDecimal($operand)
     {
+        $hex = null;
         $return = '0';
         while(strlen($hex)) {
             $hex = hexdec(substr($operand, 0, 4));

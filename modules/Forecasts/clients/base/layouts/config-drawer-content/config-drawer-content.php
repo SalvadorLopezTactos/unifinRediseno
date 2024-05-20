@@ -20,8 +20,5 @@ $viewdefs['Forecasts']['base']['layout']['config-drawer-content'] = array(
         array(
             'view' => 'config-scenarios',
         ),
-        array(
-            'view' => 'config-worksheet-columns',
-        ),
     ),
 );

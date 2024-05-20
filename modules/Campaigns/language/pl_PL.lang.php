@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'URL śledzenia: ',
   'LBL_TRACKER_TEXT' => 'Tekst linku śledzenia:',
   'LBL_TRACKER_COUNT' => 'Licznik śledzeń:',
-  'LBL_REFER_URL' => 'URL linku śledzenia przekierowań:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kampanie',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Kampanie mailingowe',
   'LBL_NEW_FORM_TITLE' => 'Nowa kampania',

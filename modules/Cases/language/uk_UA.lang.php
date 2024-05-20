@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Інформаційна панель списку звернень',
     'LBL_CASES_RECORD_DASHBOARD' => 'Інформаційна панель записів звернень',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Відомості про звернення',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Фокусна панель звернень — Консоль',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель звернень',
 
 	'ERR_DELETE_RECORD'					=> 'Необхідно вказати номер запису перед видаленням.',
@@ -162,4 +162,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'Відомості про Угоду про рівень обслуговування (SLA)',
     'LBL_HOURS' => 'Години',
     'LBL_WIDGET_STATUS' => 'Статус',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Упорядкувати',
+    'LBL_CREATE_NEW' => 'Створити новий',
+    'LBL_MANAGE' => 'Керувати',
+    'LBL_SEE_DETAILS' => 'Переглянути деталі',
+    'LBL_HIDE_NEW' => 'Приховати',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Звернення',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Звернення',
+    'LBL_KIOSK_CREATE' => 'Створити звернення',
+    'LBL_KIOSK_SUBJECT' => 'Тема',
+    'LBL_KIOSK_CASE_ID' => 'Ідентифікатор звернення',
+    'LBL_KIOSK_STATUS' => 'Статус',
+    'LBL_KIOSK_CATEGORY' => 'Категорія',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Надіслано: {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Пріоритет',
+    'LBL_KIOSK_CREATE_CASE' => 'Зв’язатися з нами',
+    'LBL_KIOSK_DESCRIPTION' => 'Опис',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Ваш запит успішно надіслано.',
+    'LBL_KIOSK_ATTACHED' => 'Усі вкладення',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Зовнішні користувачі',
 );

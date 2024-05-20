@@ -373,12 +373,12 @@ function get_user_list_array($user) {
  * @return User Array -- An array of user detail records
  */
 function user_list($user, $password) {
+    $output_list = [];
 	if(!validate_user($user, $password)){
 		return array();
 	}
 
     $seed_user = BeanFactory::newBean('Users');
-    $output_list = Array();
 	if(!$seed_user->ACLAccess('ListView')){
 		return $output_list;
 	}
@@ -635,6 +635,7 @@ function case_by_search($name, $where = '', $msi_id='0')
  */
 function track_email($user_name, $password,$parent_id, $contact_ids, $date_sent, $email_subject, $email_body)
 {
+    $email = null;
 	if(!validate_user($user_name, $password)){
 		return "Invalid username and/or password";
 	}

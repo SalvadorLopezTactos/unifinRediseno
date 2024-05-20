@@ -27,7 +27,7 @@ use Google\Client;
  * collected for all App Engine applications by default. Trace data from other
  * applications can be provided using this API. This library is used to interact
  * with the Cloud Trace API directly. If you are looking to instrument your
- * application for Cloud Trace, we recommend using OpenCensus.</p>
+ * application for Cloud Trace, we recommend using OpenTelemetry.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -38,7 +38,7 @@ use Google\Client;
  */
 class CloudTrace extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
   /** Write Trace data for a project or application. */

@@ -27,7 +27,7 @@ use Sugarcrm\Sugarcrm\Security\Password\Exception\RuntimeException;
  */
 class Salt
 {
-    const BASE64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    public const BASE64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
     /**
      * Crypto Secure PRNG

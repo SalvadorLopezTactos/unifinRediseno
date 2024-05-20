@@ -20,19 +20,51 @@ namespace Google\Service\Testing;
 class ApkManifest extends \Google\Collection
 {
   protected $collection_key = 'usesPermission';
+  /**
+   * @var string
+   */
   public $applicationLabel;
   protected $intentFiltersType = IntentFilter::class;
   protected $intentFiltersDataType = 'array';
+  /**
+   * @var int
+   */
   public $maxSdkVersion;
+  /**
+   * @var int
+   */
   public $minSdkVersion;
+  /**
+   * @var string
+   */
   public $packageName;
+  /**
+   * @var int
+   */
   public $targetSdkVersion;
+  /**
+   * @var string[]
+   */
   public $usesPermission;
+  /**
+   * @var string
+   */
+  public $versionCode;
+  /**
+   * @var string
+   */
+  public $versionName;
 
+  /**
+   * @param string
+   */
   public function setApplicationLabel($applicationLabel)
   {
     $this->applicationLabel = $applicationLabel;
   }
+  /**
+   * @return string
+   */
   public function getApplicationLabel()
   {
     return $this->applicationLabel;
@@ -51,45 +83,103 @@ class ApkManifest extends \Google\Collection
   {
     return $this->intentFilters;
   }
+  /**
+   * @param int
+   */
   public function setMaxSdkVersion($maxSdkVersion)
   {
     $this->maxSdkVersion = $maxSdkVersion;
   }
+  /**
+   * @return int
+   */
   public function getMaxSdkVersion()
   {
     return $this->maxSdkVersion;
   }
+  /**
+   * @param int
+   */
   public function setMinSdkVersion($minSdkVersion)
   {
     $this->minSdkVersion = $minSdkVersion;
   }
+  /**
+   * @return int
+   */
   public function getMinSdkVersion()
   {
     return $this->minSdkVersion;
   }
+  /**
+   * @param string
+   */
   public function setPackageName($packageName)
   {
     $this->packageName = $packageName;
   }
+  /**
+   * @return string
+   */
   public function getPackageName()
   {
     return $this->packageName;
   }
+  /**
+   * @param int
+   */
   public function setTargetSdkVersion($targetSdkVersion)
   {
     $this->targetSdkVersion = $targetSdkVersion;
   }
+  /**
+   * @return int
+   */
   public function getTargetSdkVersion()
   {
     return $this->targetSdkVersion;
   }
+  /**
+   * @param string[]
+   */
   public function setUsesPermission($usesPermission)
   {
     $this->usesPermission = $usesPermission;
   }
+  /**
+   * @return string[]
+   */
   public function getUsesPermission()
   {
     return $this->usesPermission;
+  }
+  /**
+   * @param string
+   */
+  public function setVersionCode($versionCode)
+  {
+    $this->versionCode = $versionCode;
+  }
+  /**
+   * @return string
+   */
+  public function getVersionCode()
+  {
+    return $this->versionCode;
+  }
+  /**
+   * @param string
+   */
+  public function setVersionName($versionName)
+  {
+    $this->versionName = $versionName;
+  }
+  /**
+   * @return string
+   */
+  public function getVersionName()
+  {
+    return $this->versionName;
   }
 }
 

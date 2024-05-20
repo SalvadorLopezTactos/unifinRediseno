@@ -10,7 +10,18 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+namespace Sugarcrm\Sugarcrm\Trackers;
+
 class Metric {
+
+    //@codingStandardsIgnoreStart
+    public $_name;
+    public $_type;
+    /**
+     * @var bool|mixed
+     */
+    public $_mutable;
+    //@codingStandardsIgnoreEnd
 
     public function __construct($type, $name)
     {

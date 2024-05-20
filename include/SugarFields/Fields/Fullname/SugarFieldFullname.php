@@ -88,7 +88,7 @@ class SugarFieldFullname extends SugarFieldBase
         }
         if ( property_exists($focus, $fn) && property_exists($focus, $ln) ) {
             $name_arr = preg_split('/\s+/',$value);
-            if ( count($name_arr) == 1) {
+            if ((is_countable($name_arr) ? count($name_arr) : 0) == 1) {
                 $focus->$ln = $value;
             }
             else {

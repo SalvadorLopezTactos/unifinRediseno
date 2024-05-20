@@ -21,10 +21,15 @@ require_once 'modules/Teams/TeamSetManager.php';
 
 class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
 
-	var $user_id;
+    /**
+     * @var mixed
+     */
+    public $customMethod;
+    public $user_id;
 
     public function __construct($bean, $field_defs, $customMethod = '', $form_name = 'EditView')
     {
+        $module = null;
         parent::__construct(false);
 
     	$this->tpl_path = SugarAutoLoader::existingCustomOne('include/SugarFields/Fields/Teamset/TeamsetCollectionEmailView.tpl');

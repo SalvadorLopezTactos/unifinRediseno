@@ -149,7 +149,7 @@ class SugarACLPortal extends SugarACLStatic
         
         // Handle file and image type field checking here, specifically for creates
         if ($accessGranted === false && $action === 'create') {
-            $bean = isset($context['bean']) ? $context['bean'] : null;
+            $bean = $context['bean'] ?? null;
             
             // If there is a bean, and a field name and defs for that fieldname...
             if ($bean && isset($context['field']) && isset($bean->field_defs[$context['field']])) {

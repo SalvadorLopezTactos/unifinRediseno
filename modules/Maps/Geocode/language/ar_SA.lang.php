@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'خط العرض',
     'LBL_LONGITUDE' => 'خط الطول',
     'LBL_GEOCODED' => 'مرمز جعرافيًا',
+    'LBL_ERROR_MESSAGE' => 'رسالة خطأ الترميز الجغرافي',
 ];

@@ -191,6 +191,16 @@
     scrollContainer: null,
 
     /**
+     * Stores references to fields by model ID
+     */
+    rowFields: {},
+
+    /**
+     * Stores any list edit toggled models by model ID
+     */
+    toggledListModels: {},
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -199,7 +209,7 @@
         }
         // bolt record view metadata for the given module onto the dashlet
         this._defaultBaseMeta = options.meta;
-        options.meta = this._extendMeta({module: options.meta.module, type: 'record'});
+        this.options.meta = this._extendMeta({module: options.meta.module, type: 'record'});
 
         this._super('initialize', [options]);
 
@@ -213,7 +223,11 @@
         // listen to tab events
         this.events = _.extend(this.events || {}, {
             'click [class*="orderBy"]': 'setOrderBy',
-            'click [data-action=tab-switcher]': 'tabSwitcher'
+            'click [data-action=tab-switcher]': 'tabSwitcher',
+            'click [data-action=edit-list-row]': '_handleRowEditClicked',
+            'click [data-action=cancel-list-row]': '_handleRowCancelClicked',
+            'click [data-action=save-list-row]': '_handleRowSaveClicked',
+            'dblclick tr.single': '_handleRowDoubleClick'
         });
 
         /**
@@ -268,6 +282,171 @@
             }
         }
         this.model.doValidate(fieldsToValidate, _.bind(this.validationComplete, this));
+    },
+
+    /**
+     * Handles when the edit button is clicked on an editable list row
+     *
+     * @param event
+     * @private
+     */
+    _handleRowEditClicked: function(event) {
+        let row = this._getClickedRowElement(event);
+        this._toggleRow(row, true);
+    },
+
+    /**
+     * Handles when the cancel button is clicked on an editable list row
+     *
+     * @param event
+     * @private
+     */
+    _handleRowCancelClicked: function(event) {
+        let row = this._getClickedRowElement(event);
+
+        let model = this.collection.get(row.data('id'));
+        if (model) {
+            model.revertAttributes();
+        }
+
+        this._toggleRow(row, false);
+    },
+
+    /**
+     * Handles when the save button is clicked on an editable list row
+     *
+     * @param event
+     * @private
+     */
+    _handleRowSaveClicked: function(event) {
+        let row = this._getClickedRowElement(event);
+        let model = this.collection.get(row.data('id'));
+        if (model) {
+            let fieldsToValidate = this.getFields(model.module, model);
+            model.doValidate(fieldsToValidate, (isValid) => {
+                if (isValid) {
+                    model.save({}, {
+                        success: () => {
+                            this._toggleRow(row, false);
+                        },
+                        showAlerts: {
+                            'process': true,
+                            'success': {
+                                messages: app.lang.get('LBL_RECORD_SAVED', self.module)
+                            }
+                        },
+                    });
+                }
+            });
+        }
+    },
+
+    /**
+     * Handles when an editable list row has been double-clicked
+     *
+     * @param event
+     * @private
+     */
+    _handleRowDoubleClick: function(event) {
+        if (!this._isClickableElement(event.target)) {
+            let row = this._getClickedRowElement(event);
+            this._toggleRow(row, true);
+        }
+    },
+
+    /**
+     * Checks if the given element is "clickable" - that is, if it is an element that always
+     * performs some action, if it is a focus icon, or if it has an event associated in another way
+     * @param element
+     * @return {boolean}
+     */
+    _isClickableElement: function(element) {
+        let tagNames = [element.tagName, element.parentElement.tagName].map(tag => tag.toLowerCase());
+        if (['a', 'button', 'input'].some(tag => tagNames.includes(tag))) {
+            return true;
+        }
+        if (element.classList.contains('focus-icon')) {
+            return true;
+        }
+        return ['data-action', 'data-clipboard', 'data-event'].some(attr => {
+            return element.getAttribute(attr) || element.parentElement.getAttribute(attr);
+        });
+    },
+
+    /**
+     * Given a click event, gets the editable list row associated with the click target
+     *
+     * @param {Event} event the click event
+     * @return {jQuery} a jQuery element representing the row clicked
+     * @private
+     */
+    _getClickedRowElement: function(event) {
+        return $(event.currentTarget).closest('tr');
+    },
+
+    /**
+     * Toggles an editable list row between edit/detail mode
+     *
+     * @param {jQuery} row the jQuery row element object
+     * @param {bool} isEdit true to set the row to edit mode; false to set it to detail mode
+     */
+    _toggleRow(row, isEdit) {
+        if (!row) {
+            return;
+        }
+        let model = this.collection.get(row.data('id'));
+        if (model && app.acl.hasAccessToModel('edit', model)) {
+            row.toggleClass('tr-inline-edit', isEdit);
+
+            if (isEdit) {
+                this.toggledListModels[model.id] = model;
+            } else {
+                delete this.toggledListModels[model.id];
+            }
+
+            this.toggleFields(this.rowFields[model.cid], isEdit);
+        }
+    },
+
+    /**
+     * Given a list of model IDs, toggles edit mode on the list rows
+     * representing those IDs
+     *
+     * @param {Array} ids the list of model IDs
+     * @param {bool} isEdit true to set the rows to edit mode; false to set them to list mode
+     * @private
+     */
+    _toggleRowsByModelId(ids, isEdit) {
+        _.each(ids, function(id) {
+            let row = this.$el.find(`tr[data-id=${id}]`);
+            if (row.length) {
+                this._toggleRow(row, isEdit);
+            }
+        }, this);
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Adds checks to see if any list view tab models are dirty
+     */
+    hasUnsavedChanges: function() {
+        let formFields = [];
+        _.each(this.rowFields[_.first(_.keys(this.rowFields))], function(field) {
+            if (field.name) {
+                formFields.push(field.name);
+            }
+            if (field.def.fields) {
+                formFields = _.chain(field.def.fields).pluck('name').compact().union(formFields).value();
+            }
+        }, this);
+
+        let hasUnsavedListTabChanges = _.some(_.values(this.toggledListModels), function(model) {
+            var changedAttributes = model.changedAttributes(model.getSynced());
+            return !_.isEmpty(_.intersection(_.keys(changedAttributes), formFields));
+        }, this);
+
+        return hasUnsavedListTabChanges || this._super('hasUnsavedChanges');
     },
 
     /**
@@ -387,8 +566,7 @@
      * and the fields displayed).
      */
     initTabSugarLogic: function() {
-        // ensure that the SugarLogic listeners are attached only once
-        if (!this.disposed && !this.model.hasSugarLogicEvents) {
+        if (!this.disposed) {
             // we may lack a collection, so we create one to be able to trigger onLoad logics
             if (!this.collection) {
                 if (this.model.collection) {
@@ -398,10 +576,9 @@
                 }
             }
 
-            this._slCtx = this.initSugarLogic();
-            this.context.addFields(this._getDepFields());
+            this.stopSugarLogic();
+            this.startSugarLogic();
             this.collection.trigger('sync', this.collection, this.collection.models);
-            this.model.hasSugarLogicEvents = true;
         }
     },
 
@@ -483,7 +660,6 @@
                     return;
                 }
                 this._syncIdsToModels(model);
-                this.render();
             }, this)
         });
     },
@@ -552,7 +728,8 @@
             var link = tab.link;
             var field = _.find(moduleFields, function(mField) {
                 return mField.link === link ||
-                    (mField.name === 'parent_type' && contextModel.get('parent_type').toLowerCase() === link);
+                    (mField.name === 'parent_type' && contextModel.get('parent_type') &&
+                        contextModel.get('parent_type').toLowerCase() === link);
             });
             if (field) {
                 if (field.name === 'parent_type') {
@@ -649,7 +826,7 @@
      */
     tabSwitcher: function(event) {
         // don't switch tabs if you are editing
-        if (this.action == 'edit') {
+        if (this.action == 'edit' || this.inlineEditMode || !_.isEmpty(this.toggledListModels)) {
             return; // maybe we should show a message?
         }
         var index = this.$(event.currentTarget).data('index');
@@ -685,6 +862,8 @@
                 this._loadDataForTabs([tab]);
             }
             this.render();
+
+            this.initTabSugarLogic();
         }
     },
 
@@ -705,6 +884,7 @@
         this.module = tab.module;
         this.context.set('module', this.module);
         this.meta = this._extendMeta(tab);
+        this.options.meta = this._extendMeta({module: tab.module, type: tab.type});
         this._initDropdownBasedViews();
         this.modulePlural = app.lang.getAppListStrings('moduleList')[this.module] || this.module;
         this.moduleSingular = app.lang.getAppListStrings('moduleListSingular')[this.module] || this.modulePlural;
@@ -919,6 +1099,16 @@
                 if (_.isArray(meta.related_fields)) {
                     relates = relates.concat(meta.related_fields);
                 }
+
+                if (_.isArray(meta.fields)) {
+                    _.each(meta.fields, function(field) {
+                        if (_.isObject(field) && field.name) {
+                            relates.push(field.name);
+                        } else if (_.isString(field)) {
+                            relates.push(field);
+                        }
+                    }, this);
+                }
             });
 
             fields = _.union(fields, relates);
@@ -949,6 +1139,7 @@
         if (this._contextModel) {
             this._contextModel = undefined;
         }
+        this.toggledListModels = {};
         this._loadContextModel();
         this._super('loadData', [options]);
         this._loadDataForTabs(this.tabs, options);
@@ -1020,6 +1211,10 @@
                         complete: function() {
                             tab.collection.dataFetched = true;
                             callback(null);
+
+                            if (self._isActiveTab(tab)) {
+                                self.initTabSugarLogic();
+                            }
                         }
                     });
                 } else if (tab.type === 'record') {
@@ -1787,9 +1982,15 @@
             });
             _.each(nameFields, function(field) {
                 if (field.$el) {
+                    field.enableTitleLink = !!this.closestComponent('side-drawer');
+                    if (field.enableTitleLink) {
+                        field.module = this.model.module || this.context.get('module');
+                        field.modelId = this.model.get('id');
+                        field.linkTarget = 'focus';
+                    }
                     field.setMode('dashlet-header');
                 }
-            });
+            }, this);
         }
 
         toolbar.adjustHeaderPaneTitle();
@@ -1830,10 +2031,7 @@
     _filterButtonsFromFields: function(fields) {
         fields = this._super('_filterButtonsFromFields', [fields]);
         return _.filter(fields, function(field) {
-            if (field.type === 'dashletaction') {
-                return false;
-            }
-            return true;
+            return field.type !== 'dashletaction';
         });
     },
 
@@ -2515,10 +2713,44 @@
 
     /**
      * @inheritdoc
+     * Adds logic for handling inline editing on list tab rows
+     *
      * @private
      */
     _render: function() {
+        this._checkRowEditAccess();
         this._super('_render');
         this.scrollContainer = this.$el.find('.dashablerecord .tab-content');
+        this._setRowFields();
+        this._toggleRowsByModelId(_.keys(this.toggledListModels), true);
+    },
+
+    /**
+     * Stores references to all fields in the current view by model ID for quick access
+     *
+     * @private
+     */
+    _setRowFields: function() {
+        this.rowFields = {};
+        _.each(this.fields, function(field) {
+            if (field.model && field.model.cid && _.isUndefined(field.parent)) {
+                this.rowFields[field.model.cid] = this.rowFields[field.model.cid] || [];
+                this.rowFields[field.model.cid].push(field);
+            }
+        }, this);
+    },
+
+    /**
+     * For list tabs, marks collection models that the user does not have edit access to
+     *
+     * @private
+     */
+    _checkRowEditAccess: function() {
+        if (!this.collection) {
+            return;
+        }
+        _.each(this.collection.models, function(model) {
+            model.hasEditAccess = app.acl.hasAccessToModel('edit', model);
+        }, this);
     },
 })

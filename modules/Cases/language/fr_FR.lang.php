@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Tableau de bord de la liste de Tickets',
     'LBL_CASES_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de Tickets',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Détails du ticket',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Tiroir de rangement Tickets - Console',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Tickets',
 
 	'ERR_DELETE_RECORD'					=> 'Vous devez spécifier un ID pour toute suppression.',
@@ -162,4 +162,29 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
     'LBL_SLA_DETAILS' => 'Détails SLA',
     'LBL_HOURS' => 'Heures',
     'LBL_WIDGET_STATUS' => 'Statut',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiser',
+    'LBL_CREATE_NEW' => 'Créer un nouveau',
+    'LBL_MANAGE' => 'Gérer',
+    'LBL_SEE_DETAILS' => 'Afficher les détails',
+    'LBL_HIDE_NEW' => 'Masquer',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Tickets',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Ticket',
+    'LBL_KIOSK_CREATE' => 'Créer un ticket',
+    'LBL_KIOSK_SUBJECT' => 'Sujet',
+    'LBL_KIOSK_CASE_ID' => 'Ticket (ID)',
+    'LBL_KIOSK_STATUS' => 'Statut',
+    'LBL_KIOSK_CATEGORY' => 'Catégorie',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Soumis le {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Priorité',
+    'LBL_KIOSK_CREATE_CASE' => 'Nous contacter',
+    'LBL_KIOSK_DESCRIPTION' => 'Description',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Votre demande a été transmise avec succès.',
+    'LBL_KIOSK_ATTACHED' => 'Toutes les pièces jointes',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Utilisateurs extérieurs',
 );

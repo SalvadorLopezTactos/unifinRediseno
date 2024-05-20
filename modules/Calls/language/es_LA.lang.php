@@ -194,4 +194,10 @@ Para crear una {{calls_singular_module}}:
     - Haga clic en "Seleccionar un Asistente" para agregar un usuario, contacto o cliente potencial existentes en {{calls_singular_module}}.
     - Haga clic en el símbolo + a la derecha de "Seleccionar un Asistente" para crear un asistente {{calls_singular_module}} como registro nuevo de Sugar.
 3. Haga clic en "Guardar" para finalizar el registro nuevo y volver a la página anterior.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Es una llamada de la guía rápida",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Tareas secundarias',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Reuniones secundarias',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Llamadas secundarias',
 );

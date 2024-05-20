@@ -71,6 +71,7 @@ class LegacyJsonServer
      */
     public function query($request_id, $params, $returnFullBeans = false)
     {
+        $list_arr = [];
         global $response, $sugar_config;
         $json = getJSONobj();
 
@@ -85,7 +86,7 @@ class LegacyJsonServer
         if (is_array($args['conditions'])) {
             foreach ($args['conditions'] as $key => $condition) {
                 if (!empty($condition['value'])) {
-                    $where = $json->decode(utf8_encode($condition['value']));
+                    $where = $json->decode(mb_convert_encoding($condition['value'], 'UTF-8', 'ISO-8859-1'));
                     // cn: bug 12693 - API change due to CSRF security changes.
                     $where = empty($where) ? $condition['value'] : $where;
                     $args['conditions'][$key]['value'] = $where;
@@ -297,7 +298,7 @@ class LegacyJsonServer
                 $first_name_query = array_shift($query_parts);
                 $name_query = "({$table}first_name like '" . $GLOBALS['db']->quote($first_name_query) . "%'";
                 if (count($query_parts) > 0) {
-                    $last_name_query = implode('', $query_parts);
+                    $last_name_query = implode($query_parts);
                     $full_name_group = 'and';
                 } else {
                     $last_name_query = $first_name_query;
@@ -354,6 +355,6 @@ class LegacyJsonServer
     protected function encodeResult($result)
     {
         $json = getJSONobj();
-        return $json->encode($result, true);
+        return $json->encode($result);
     }
 }

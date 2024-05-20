@@ -42,4 +42,12 @@ class SugarPreAuthPassEncoder implements PasswordEncoderInterface
     {
         return false;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function needsRehash(string $encoded): bool
+    {
+        return false;
+    }
 }

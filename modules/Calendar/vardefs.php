@@ -12,6 +12,8 @@
 $dictionary['Calendar'] = [
     'table' => 'calendar',
     'audited' => false,
+    'color' => 'teal',
+    'icon' => 'sicon-calendar-lg',
     'activity_enabled' => false,
     'duplicate_merge' => true,
     'fields' => [
@@ -30,7 +32,7 @@ $dictionary['Calendar'] = [
             'calculated' => false,
             'len' => 100,
             'size' => '20',
-            'options' => [],
+            'options' => '',
             'field_types_allowed' => [
                 'varchar',
                 'text',
@@ -54,7 +56,7 @@ $dictionary['Calendar'] = [
             'merge_filter' => 'disabled',
             'calculated' => false,
             'size' => '20',
-            'options' => [],
+            'options' => '',
             'duplicate_on_record_copy' => 'always',
         ],
         'event_start' => [
@@ -72,7 +74,7 @@ $dictionary['Calendar'] = [
             'calculated' => false,
             'len' => 100,
             'size' => '20',
-            'options' => [],
+            'options' => '',
             'field_types_allowed' => [
                 'date',
                 'datetime',
@@ -92,7 +94,7 @@ $dictionary['Calendar'] = [
             'calculated' => false,
             'len' => 100,
             'size' => '20',
-            'options' => [],
+            'options' => '',
             'dependency' => 'and(equal($duration_minutes,""), equal($duration_hours,""), equal($duration_days,""))',
             'audited' => false,
             'field_types_allowed' => [
@@ -115,7 +117,7 @@ $dictionary['Calendar'] = [
             'calculated' => false,
             'len' => 100,
             'size' => '20',
-            'options' => [],
+            'options' => '',
             'dependency' => 'equal($event_end,"")',
             'field_types_allowed' => [
                 'int',
@@ -136,7 +138,7 @@ $dictionary['Calendar'] = [
             'calculated' => false,
             'len' => 100,
             'size' => '20',
-            'options' => [],
+            'options' => '',
             'dependency' => 'equal($event_end,"")',
             'field_types_allowed' => [
                 'int',
@@ -157,7 +159,7 @@ $dictionary['Calendar'] = [
             'calculated' => false,
             'len' => 100,
             'size' => '20',
-            'options' => [],
+            'options' => '',
             'dependency' => 'equal($event_end,"")',
             'field_types_allowed' => [
                 'int',
@@ -201,7 +203,7 @@ $dictionary['Calendar'] = [
             'calculated' => false,
             'len' => 100,
             'size' => '20',
-            'options' => [],
+            'options' => '',
         ],
         'allow_create' => [
             'name' => 'allow_create',

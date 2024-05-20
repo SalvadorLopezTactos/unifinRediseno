@@ -18,6 +18,8 @@ use Sugarcrm\Sugarcrm\PackageManager\File\PackageZipFile;
 use Sugarcrm\Sugarcrm\PackageManager\PackageManager;
 use UploadFile as BaseUploadFile;
 use Sugarcrm\Sugarcrm\PackageManager\File\UploadFile;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+use Sugarcrm\Sugarcrm\AccessControl\SugarFeatureVoter;
 
 /**
  * Administration API PackageApiRest
@@ -175,6 +177,7 @@ final class PackageApiRest extends FileApi
                 ],
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
+                'noLoginRequired' => true,
             ],
         ];
     }
@@ -192,6 +195,7 @@ final class PackageApiRest extends FileApi
     public function uploadPackage(RestService $api, array $args): array
     {
         $this->ensureAdminUser();
+        $this->ensureModuleLoaderIsAllowed();
 
         $_REQUEST['view'] = 'module';
         try {
@@ -276,6 +280,7 @@ final class PackageApiRest extends FileApi
     public function enablePackage(RestService $api, array $args): array
     {
         $this->ensureAdminUser();
+
         $this->requireArgs($args, ['id']);
 
         $upgradeHistory = $this->getUpgradeHistoryByIdOrFail($args['id']);
@@ -458,6 +463,17 @@ final class PackageApiRest extends FileApi
     {
         if (empty($GLOBALS['current_user']) || !$GLOBALS['current_user']->isAdmin()) {
             throw new SugarApiExceptionNotAuthorized(translate('EXCEPTION_NOT_AUTHORIZED'));
+        }
+    }
+
+    /**
+     * ensure module loader feature is allowed
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    private function ensureModuleLoaderIsAllowed()
+    {
+        if (!AccessControlManager::instance()->allowFeatureAccess(SugarFeatureVoter::MODULE_LOADER_UPLOAD_FEATURE_NAME)) {
+            throw new SugarApiExceptionNotAuthorized(translate('EXCEPTION_MODULELOADER_UPLOAD'));
         }
     }
 

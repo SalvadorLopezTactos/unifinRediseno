@@ -18,13 +18,14 @@ $viewdefs['Cases']['base']['view']['subpanel-for-accounts'] = array(
       'label' => 'LBL_PANEL_1',
       'fields' =>
       array(
-        array(
-          'label' => 'LBL_LIST_NUMBER',
-          'enabled' => true,
-          'default' => true,
-          'readonly' => true,
-          'name' => 'case_number',
-        ),
+        [
+            'label' => 'LBL_LIST_NUMBER',
+            'enabled' => true,
+            'default' => true,
+            'readonly' => true,
+            'link' => true,
+            'name' => 'case_number',
+        ],
         array(
           'label' => 'LBL_LIST_SUBJECT',
           'enabled' => true,

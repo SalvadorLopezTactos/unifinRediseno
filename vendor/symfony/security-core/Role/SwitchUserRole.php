@@ -11,36 +11,13 @@
 
 namespace Symfony\Component\Security\Core\Role;
 
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-
 /**
- * SwitchUserRole is used when the current user temporarily impersonates
- * another one.
+ * Allows migrating session payloads from v4.
  *
- * @author Fabien Potencier <fabien@symfony.com>
+ * @internal
  */
 class SwitchUserRole extends Role
 {
+    private $deprecationTriggered;
     private $source;
-
-    /**
-     * @param string         $role   The role as a string
-     * @param TokenInterface $source The original token
-     */
-    public function __construct($role, TokenInterface $source)
-    {
-        parent::__construct($role);
-
-        $this->source = $source;
-    }
-
-    /**
-     * Returns the original Token.
-     *
-     * @return TokenInterface The original TokenInterface instance
-     */
-    public function getSource()
-    {
-        return $this->source;
-    }
 }

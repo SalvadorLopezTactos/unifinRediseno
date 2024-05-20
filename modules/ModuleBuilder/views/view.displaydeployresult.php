@@ -12,6 +12,30 @@
 
 class ViewDisplaydeployresult extends SugarView
 {
+    /**
+     * @var bool
+     */
+    public $show_header;
+    /**
+     * @var bool
+     */
+    public $show_title;
+    /**
+     * @var bool
+     */
+    public $show_subpanels;
+    /**
+     * @var bool
+     */
+    public $show_search;
+    /**
+     * @var bool
+     */
+    public $show_javascript;
+    /**
+     * @var bool
+     */
+    public $view_print;
     public function __construct()
     {
 		$this->show_header = false;

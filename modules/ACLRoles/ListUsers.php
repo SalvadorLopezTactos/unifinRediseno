@@ -19,7 +19,7 @@ if(isset($_REQUEST['record'])) $record = $_REQUEST['record'];
 
 			<input type="hidden" name="module" value="Users">
 			<input type="hidden" name="user_id" value="">
-            <input type="hidden" name="record" value="<?php echo htmlspecialchars($record); ?>">
+            <input type="hidden" name="record" value="<?php echo htmlspecialchars($record, ENT_COMPAT); ?>">
 			<input type="hidden" name="isDuplicate" value=''>
 			
 			

@@ -194,4 +194,10 @@ Mooduli {{calls_singular_module}} loomiseks tehke järgmist.
     - Olemasoleva kasutaja, kontakti või müügivihje lisamiseks moodulisse {{calls_singular_module}} klõpsake suvandit Vali kutsutu.
     - Mooduli {{calls_singular_module}} kutsutu loomiseks Sugari uue kirjena klõpsake suvandist Vali kutsutu paremal olevat plussmärki.
 3. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu Salvesta.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "On Nutika juhise kõne",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Tütarülesanded',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Tütarkohtumised',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Tütarkõned',
 );

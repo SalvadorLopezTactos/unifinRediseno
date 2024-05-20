@@ -356,16 +356,16 @@ class TemplateHandler {
                             $sqs_objects[$name.'_'.$parsedView] = $qsd->loadQSObject('Teams', 'Team', $field['name'], $field['name'], $field['id_name']);
                         } else if($matches[0] == 'Accounts') {
                             $nameKey = $name;
-                            $idKey = isset($field['id_name']) ? $field['id_name'] : 'account_id';
+                            $idKey = $field['id_name'] ?? 'account_id';
 
                             //There are billingKey, shippingKey and additionalFields entries you can define in editviewdefs.php
                             //entry to allow quick search to autocomplete fields with a suffix value of the
                             //billing/shippingKey value (i.e. 'billingKey' => 'primary' in Contacts will populate
                             //primary_XXX fields with the Account's billing address values).
                             //addtionalFields are key/value pair of fields to fill from Accounts(key) to Contacts(value)
-                            $billingKey = isset($f['displayParams']['billingKey']) ? $f['displayParams']['billingKey'] : null;
-                            $shippingKey = isset($f['displayParams']['shippingKey']) ? $f['displayParams']['shippingKey'] : null;
-                            $additionalFields = isset($f['displayParams']['additionalFields']) ? $f['displayParams']['additionalFields'] : null;
+                            $billingKey = $f['displayParams']['billingKey'] ?? null;
+                            $shippingKey = $f['displayParams']['shippingKey'] ?? null;
+                            $additionalFields = $f['displayParams']['additionalFields'] ?? null;
                             $sqs_objects[$name.'_'.$parsedView] = $qsd->getQSAccount($nameKey, $idKey, $billingKey, $shippingKey, $additionalFields);
                         } else if($matches[0] == 'Contacts'){
                             $sqs_objects[$name.'_'.$parsedView] = $qsd->getQSContact($field['name'], $field['id_name']);
@@ -428,7 +428,7 @@ class TemplateHandler {
                             $sqs_objects[$name] = $qsd->loadQSObject('Teams', 'Team', $field['name'], $field['name'], $field['id_name']);
                         } else if($matches[0] == 'Accounts') {
                             $nameKey = $name;
-                            $idKey = isset($field['id_name']) ? $field['id_name'] : 'account_id';
+                            $idKey = $field['id_name'] ?? 'account_id';
 
                             //There are billingKey, shippingKey and additionalFields entries you can define in editviewdefs.php
                             //entry to allow quick search to autocomplete fields with a suffix value of the
@@ -473,19 +473,21 @@ class TemplateHandler {
 
                 //merge populate_list && field_list with vardef
                 if (!empty($field['field_list']) && !empty($field['populate_list'])) {
-                    for ($j=0; $j<count($field['field_list']); $j++) {
+                    for ($j=0; $j<(is_countable($field['field_list']) ? count($field['field_list']) : 0); $j++) {
                 		//search for the same couple (field_list_item,populate_field_item)
                			$field_list_item = $field['field_list'][$j];
                			$field_list_item_alternate = $qsd->form_name . '_' . $field['field_list'][$j];
                			$populate_list_item = $field['populate_list'][$j];
                 		$found = false;
-                		for ($k=0; $k<count($sqs_objects[$name]['field_list']); $k++) {
-                			if (($field_list_item == $sqs_objects[$name]['populate_list'][$k] || $field_list_item_alternate == $sqs_objects[$name]['populate_list'][$k]) && //il faut inverser field_list et populate_list (cf lignes 465,466 ci-dessus)
-                				$populate_list_item == $sqs_objects[$name]['field_list'][$k]) {
-                				$found = true;
-                				break;
-                			}
-                		}
+                        for ($k = 0; $k < (is_countable($sqs_objects[$name]['field_list']) ? count(
+                            $sqs_objects[$name]['field_list']
+                        ) : 0); $k++) {
+                            if (($field_list_item == $sqs_objects[$name]['populate_list'][$k] || $field_list_item_alternate == $sqs_objects[$name]['populate_list'][$k]) && //il faut inverser field_list et populate_list (cf lignes 465,466 ci-dessus)
+                                $populate_list_item == $sqs_objects[$name]['field_list'][$k]) {
+                                $found = true;
+                                break;
+                            }
+                        }
                 		if (!$found) {
                 			$sqs_objects[$name]['field_list'][] = $field['populate_list'][$j]; // as in lines 462 and 463
                 			$sqs_objects[$name]['populate_list'][] = $field['field_list'][$j];

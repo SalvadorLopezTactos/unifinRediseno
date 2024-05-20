@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'של הגשש URLה-:',
   'LBL_TRACKER_TEXT' => 'מלל בקישור של הגשש:',
   'LBL_TRACKER_COUNT' => 'מונה גששים:',
-  'LBL_REFER_URL' => 'ישיר של הגשש URL:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'קמפיינים',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'דואר אלקטרוני ברמפיין',
   'LBL_NEW_FORM_TITLE' => 'קמפיין חדש',

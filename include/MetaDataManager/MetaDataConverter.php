@@ -342,7 +342,7 @@ class MetaDataConverter
 
             // if we don't have a label at least set the module name as the label
             // similar to configure shortcut bar
-            $label = isset($def['label']) ? $def['label'] : translate($linkModule);
+            $label = $def['label'] ?? translate($linkModule);
             $return[$linkName] = array(
                 'order' => $order,
                 'module' => $linkModule,
@@ -459,7 +459,7 @@ class MetaDataConverter
         $pathInfo = pathinfo($fileName);
         $dirParts = preg_split('/[\/\\\]+/', $pathInfo['dirname'], -1, PREG_SPLIT_NO_EMPTY);
 
-        if (count($dirParts) < 3) {
+        if ((is_countable($dirParts) ? count($dirParts) : 0) < 3) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Directory '%s' is an incorrect path for a subpanel",
@@ -588,7 +588,7 @@ class MetaDataConverter
                 }
                 $viewdefs['override_subpanel_list_view'] = array(
                     'view' => $this->fromLegacySubpanelName($subpanelFileName),
-                    'link' => (isset($layoutdef['get_subpanel_data']) ? $layoutdef['get_subpanel_data'] : ''),
+                    'link' => ($layoutdef['get_subpanel_data'] ?? ''),
                 );
             }
             elseif ($key == 'title_key') {
@@ -691,6 +691,7 @@ class MetaDataConverter
      */
     public function fromLegacyProfileActions(array $global_control_links)
     {
+        $viewdefs = [];
         $menu = $this->processFromGlobalControlLinkFormat($global_control_links);
         global $app_strings;
         include("clients/base/views/profileactions/profileactions.php");
@@ -977,7 +978,7 @@ class MetaDataConverter
         }
         $searchFields = array();
         include $filename;
-        return (isset($searchFields[$moduleName]) ? $searchFields[$moduleName] : array());
+        return ($searchFields[$moduleName] ?? array());
     }
 
 }

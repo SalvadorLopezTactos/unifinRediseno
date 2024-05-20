@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Nenašla sa informácia o používateľovi.',
     'ERR_USER_NAME_EXISTS'              => 'Meno používateľa {0} už existuje. Duplikované mená používateľa nie sú povolené. Zmeňte meno používateľa tak, aby bolo jedinečné.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licencia „Sugar Hint“ sa musí uložiť s ďalším kompatibilným typom licencie',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Táto možnosť je už zahrnutá v Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Tento používateľ má zablokovaný prístup do aplikácie Sugar a nemôže sa prihlásiť pomocou svojho hesla.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Používateľ len s externým overením nemá povolenie na prihlásenie pomocou poverení Sugar',
 
@@ -107,7 +108,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Heslo',
     'LBL_CHOOSE_A_KEY'					=> 'Zvoľte kľúč na predchádzanie neoprávnenému zverejneniu vášho kalendára',
     'LBL_NO_KEY'                        => 'Kľúč nie je nastavený. Nastavte kľúč na povolenie zverejnenia.',
-	'LBL_CHOOSE_WHICH'					=> 'Vyberte moduly, ktoré sú prístupné v rámci hornej navigačnej lišty. Určite poradie, v ktorom chcete, aby sa moduly objavovali.',
+    'LBL_CHOOSE_WHICH'                  => 'Vyberte moduly, ktoré majú byť prístupné v rámci bočnej navigačnej lišty. Určite poradie, v ktorom chcete, aby sa moduly objavovali.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Počet pripnutých modulov',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Napíšte počet dostupných modulov, ktoré sa majú pripnúť pri zbalení navigačnej lišty (napr. ak zadáte 5, pripne sa prvých päť modulov v zozname). Odporúčame počet, ktorý predstavuje vaše najčastejšie používané moduly. Hodnoty nad 100 nebudú zohľadnené.',
 	'LBL_CITY'							=> 'Mesto',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Zmazať',
@@ -545,6 +548,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP meno používateľa:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP typ servera:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP špecifikácia servera',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Autorizovaný e-mailový účet',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Vyberte si poskytovateľa pošty:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! heslo pošty:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail ID:',
@@ -699,4 +703,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'používatelia/tímy/roly',
     'LBL_LOADING_ITEMS' => 'Načítavanie údajov...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Prístup k inteligentnému sprievodcovi',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Inteligentný sprievodca naposledy aktívny',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Chýbajúci prístup k inteligentnému sprievodcovi',
 ); // END STRINGS DEFS

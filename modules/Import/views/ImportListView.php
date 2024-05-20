@@ -72,7 +72,7 @@ class ImportListView
         else
             $this->dataSource->setCurrentOffset($params['offset']);
 
-        $this->recordsPerPage = isset($params['totalRecords']) ? $params['totalRecords'] : ($sugar_config['list_max_entries_per_page'] + 0);
+        $this->recordsPerPage = $params['totalRecords'] ?? $sugar_config['list_max_entries_per_page'] + 0;
         $this->data = $this->dataSource->loadDataSet($this->recordsPerPage)->getDataSet();
         $this->maxColumns = $this->getMaxColumnsForDataSet();
     }
@@ -117,7 +117,7 @@ class ImportListView
         foreach($this->data as $data)
         {
             if ((is_countable($data) ? count($data) : 0) > $maxColumns) {
-                $maxColumns = count($data);
+                $maxColumns = is_countable($data) ? count($data) : 0;
             }
         }
         return $maxColumns;

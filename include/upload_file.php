@@ -21,7 +21,16 @@ use Sugarcrm\Sugarcrm\Util\Streams\EncodeFilter;
  */
 class UploadFile
 {
-	public $field_name;
+    /**
+     * @var string|mixed
+     */
+    public $mime_type;
+    public $file_size;
+    /**
+     * @var \ExternalAPIBase|mixed
+     */
+    public $api;
+    public $field_name;
 	public $stored_file_name;
 	var $uploaded_file_name;
 	public $original_file_name;
@@ -444,6 +453,7 @@ class UploadFile
 	 */
 	function upload_doc($bean, $bean_id, $doc_type, $file_name, $mime_type)
 	{
+        $result = [];
 		if(!empty($doc_type)&&$doc_type!='Sugar') {
 			global $sugar_config;
 	        $destination = $this->get_upload_path($bean_id);
@@ -478,7 +488,7 @@ class UploadFile
                 if ( !ArrayFunctions::is_array_access($_SESSION['user_error_message']) )
                     $_SESSION['user_error_message'] = array();
 
-                $error_message = isset($result['errorMessage']) ? $result['errorMessage'] : $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'];
+                $error_message = $result['errorMessage'] ?? $GLOBALS['app_strings']['ERR_EXTERNAL_API_SAVE_FAIL'];
                 $_SESSION['user_error_message'][] = $error_message;
 
             }
@@ -557,7 +567,7 @@ class UploadFile
            $path = UploadStream::path($path);
        }
        $ret = realpath($path);
-       return $ret?$ret:$path;
+        return $ret ?: $path;
     }
 
     /**
@@ -615,9 +625,19 @@ class UploadFile
  */
 class UploadStream
 {
-    const STREAM_NAME = "upload";
+    public $context;
+
+    /**
+     * @var mixed|resource|bool
+     */
+    public $dirp;
+    /**
+     * @var mixed|resource|bool
+     */
+    public $fp;
+    public const STREAM_NAME = "upload";
     protected static $upload_dir;
-    public static $wrapper_class = __CLASS__;
+    public static $wrapper_class = self::class;
     /** @var self */
     protected static $instance;
 
@@ -684,7 +704,7 @@ class UploadStream
             return false;
         }
 
-        // checking that UploadStream::STREAM_NAME is not blocked by black list
+        // checking that UploadStream::STREAM_NAME is not blocked by denylist
         $streams = $configuration['suhosin.executor.include.blacklist'];
         if ($streams != '')
         {
@@ -742,19 +762,17 @@ class UploadStream
             if(class_exists($GLOBALS['sugar_config']['upload_wrapper_class'])) {
                 self::$wrapper_class = $GLOBALS['sugar_config']['upload_wrapper_class'];
             } else {
-                self::$wrapper_class = __CLASS__;
+                self::$wrapper_class = self::class;
             }
         } else {
-            self::$wrapper_class = __CLASS__;
+            self::$wrapper_class = self::class;
         }
         stream_register_wrapper(self::STREAM_NAME, self::$wrapper_class);
         self::$instance = new self::$wrapper_class();
         self::$fileConverter = new FilePhpEntriesConverter();
 
-        if (version_compare(phpversion(), '7.4.16', '>=')) {
-            stream_filter_register('encodeFilter', EncodeFilter::class);
-            stream_filter_register('decodeFilter', DecodeFilter::class);
-        }
+        stream_filter_register('encodeFilter', EncodeFilter::class);
+        stream_filter_register('decodeFilter', DecodeFilter::class);
     }
 
     /**
@@ -790,10 +808,8 @@ class UploadStream
         $to = self::path($path);
         sugar_mkdir(dirname($to), null, true);
         if (move_uploaded_file($upload, $to)) {
-            if (version_compare(phpversion(), '7.4.16', '>=')) {
-                $encPath = self::$fileConverter->convert($to);
-                rename($encPath, $to);
-            }
+            $encPath = self::$fileConverter->convert($to);
+            rename($encPath, $to);
 
             return self::$instance->registerFile($path);
         }
@@ -955,11 +971,9 @@ class UploadStream
 
     public function stream_read($count)
     {
-        if (version_compare(phpversion(), '7.4.16', '>=')) {
-            if (!$this->decodeFilterAppended) {
-                stream_filter_append($this->fp, 'decodeFilter');
-                $this->decodeFilterAppended = true;
-            }
+        if (!$this->decodeFilterAppended) {
+            stream_filter_append($this->fp, 'decodeFilter');
+            $this->decodeFilterAppended = true;
         }
 
         return fread($this->fp, $count);
@@ -986,11 +1000,9 @@ class UploadStream
     }
     public function stream_write($data)
     {
-        if (version_compare(phpversion(), '7.4.16', '>=')) {
-            if (!$this->encodeFilterAppended) {
-                stream_filter_append($this->fp, 'encodeFilter');
-                $this->encodeFilterAppended = true;
-            }
+        if (!$this->encodeFilterAppended) {
+            stream_filter_append($this->fp, 'encodeFilter');
+            $this->encodeFilterAppended = true;
         }
 
         return fwrite($this->fp, $data);

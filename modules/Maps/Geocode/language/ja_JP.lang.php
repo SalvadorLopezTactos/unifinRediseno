@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => '緯度',
     'LBL_LONGITUDE' => '経度',
     'LBL_GEOCODED' => 'ジオコーディング済み',
+    'LBL_ERROR_MESSAGE' => 'ジオコードエラーメッセージ',
 ];

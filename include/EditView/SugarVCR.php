@@ -154,9 +154,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
  			$ids[$index] = $row['id'];
  			$index++;
  		}
-        //get last index of ids
-        end($ids);
-        $_SESSION[$module.'total'] = key($ids);
+        $_SESSION[$module.'total'] = array_key_last($ids);
         reset($ids);
  		//now that we have the array of ids, store this in the session
  		$_SESSION[$module.'QUERY_ARRAY'] = $ids;

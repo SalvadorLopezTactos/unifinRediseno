@@ -16,19 +16,40 @@
      * @inheritdoc
      */
     addCustomButtons: function (editor) {
-        editor.addButton('sugarfieldbutton', {
+        this._registerIcons(editor);
+
+        editor.ui.registry.addButton('sugarfieldbutton', {
             title: app.lang.get('LBL_SUGAR_FIELD_SELECTOR', 'pmse_Emails_Templates'),
             class: 'mce_selectfield',
-            icon: 'fullpage',
-
-            onclick: _.bind(this._showVariablesBook, this)
+            icon: 'preferences',
+            onAction: _.bind(this._showVariablesBook, this),
         });
-        editor.addButton('sugarlinkbutton', {
+        editor.ui.registry.addButton('sugarlinkbutton', {
             title: app.lang.get('LBL_SUGAR_LINK_SELECTOR', 'pmse_Emails_Templates'),
             class: 'mce_selectfield',
-            image: 'styleguide/assets/img/record-link.svg',
-            onclick: _.bind(this._showLinksDrawer, this)
+            icon: 'sugar-record-link',
+            onAction: _.bind(this._showLinksDrawer, this),
         });
+    },
+
+    /**
+     * Add custom icons to TinyMCE
+     * @private
+     */
+    _registerIcons: function(editor) {
+        const icons = [
+            {
+                name: 'sugar-record-link',
+                url: 'styleguide/assets/img/record-link.svg',
+            },
+        ];
+
+        icons.map((icon) =>
+            editor.ui.registry.addIcon(icon.name,
+                `<span class="tox-custom-icon-wrapp">
+                <i class="tox-custom-icon" style="background-image: url('${icon.url}')"></i>
+                </span>`)
+        );
     },
 
     /**

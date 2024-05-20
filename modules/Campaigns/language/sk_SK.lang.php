@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'URL stopára: ',
   'LBL_TRACKER_TEXT' => 'Text odkazu stopára: ',
   'LBL_TRACKER_COUNT' => 'Počet stopárov: ',
-  'LBL_REFER_URL' => 'URL presmerovania stopára: ',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kampane',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'E-mailové kampane',
   'LBL_NEW_FORM_TITLE' => 'Nová kampaň',

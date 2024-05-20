@@ -22,9 +22,9 @@
 <input type="hidden" name="return_module" value="{$RETURN_MODULE|escape:'html':'UTF-8'}">
 <input type="hidden" name="return_action" value="{$RETURN_ACTION|escape:'html':'UTF-8'}">
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="navigation_bar_subpanels">
 <tr><td colspan='100'><h2>{$title}</h2></td></tr>
-<tr><td colspan='100'>{$MOD.LBL_CONFIG_TABS_DESC}</td></tr>
+<tr><td colspan='100'>{$MOD.LBL_CONFIG_TABS_DESC_BRIEFLY}</td></tr>
 <tr><td><br></td></tr>
 <tr><td colspan='100'>
 	<table border="0" cellspacing="1" cellpadding="1" class="actionsContainer">
@@ -35,14 +35,35 @@
 			</td>
 		</tr>
 	</table>
-	
-	<div class='add_table' style='margin-bottom:5px'>
-		<table id="ConfigureTabs" class="themeSettings edit view" style='margin-bottom:0px;' border="0" cellspacing="0" cellpadding="0">
+
+	<div class='add_table'>
+		<table id="ConfigureTabs" class="themeSettings edit view" cellspacing="8" cellpadding="0">
 			<tr>
 				<td colspan="2">
-				    <input type='checkbox' name='user_edit_tabs' value=1 class='checkbox' {if !empty($user_can_edit)}CHECKED{/if}>&nbsp;
-				    <b onclick='document.EditView.user_edit_tabs.checked= !document.EditView.user_edit_tabs.checked' style='cursor:default'>{$MOD.LBL_ALLOW_USER_TABS}</b>
-				    &nbsp;{sugar_help text=$MOD.LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP}
+					{$MOD.LBL_CONFIG_TABS_DESC_DETAILED}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<label>
+						<input type="checkbox" name="users_pinned_modules" value="1" {if !empty($users_pinned_modules)}CHECKED{/if} />
+						<span>{$MOD.LBL_ALLOW_USERS_PINNED_MODULES}</span>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<label>
+						<input type="checkbox" name="user_edit_tabs" value="1" {if !empty($user_can_edit)}CHECKED{/if} />
+						{$MOD.LBL_ALLOW_USERS_AVAILABLE_MODULES}
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+						{$MOD.LBL_NUMBER_PINNED_MODULES}
+						{sugar_help text=$MOD.LBL_NUMBER_PINNED_MODULES_TOOLTIP}
+						<input type="text" name="number_pinned_modules" value="{$number_pinned_modules}" />
 				</td>
 			</tr>
 			<tr>
@@ -59,7 +80,7 @@
 	</div>
 	
 	<div class='add_subpanels' style='margin-bottom:5px'>
-		<table id="ConfigureSubPanels" class="themeSettings edit view" style='margin-bottom:0px;' border="0" cellspacing="0" cellpadding="0">
+		<table id="ConfigureSubPanels" class="themeSettings edit view" cellspacing="8" cellpadding="0">
 			<tr>
 				<td width='1%'>
 					<div id="enabled_subpanels_div"></div>	
@@ -86,7 +107,7 @@
 <script type="text/javascript">
 	var enabled_modules = {$enabled_tabs};
 	var disabled_modules = {$disabled_tabs};
-	var lblEnabled = '{sugar_translate label="LBL_VISIBLE_TABS"}';
+	var lblEnabled = '{sugar_translate label="LBL_AVAILABLE_MODULES"}';
 	var lblDisabled = '{sugar_translate label="LBL_HIDDEN_TABS"}';
 
 	SUGAR.enabledTabsTable = new YAHOO.SUGAR.DragDropTable(
@@ -185,19 +206,7 @@
 		YAHOO.util.Dom.get('disabled_tabs').value = YAHOO.lang.JSON.stringify(modules);
 	}
 
-    // ping sidecar everytime this page is loaded to check for out of data user data and metadata
+    // Ping sidecar everytime this page is loaded to check for out of data user data and metadata
     var app = parent.SUGAR.App;
-    app.api.call('read', app.api.buildURL('ping'), {}, {
-        error: function(response) {
-            // if we get a 412 back, then we need to sync the metadata and listen for the sync:complete
-            // event to disable the tour for this module
-            if (response.status == 412) {
-                app.events.once('app:sync:complete', function() {
-                    // make sure we disable the tour on the footer
-                    app.additionalComponents.footer.getComponent('footer-actions').handleViewChange(app.layout, 'Administration');
-                }, app);
-                app.sync();
-            }
-        }
-    });
+    app.api.call('read', app.api.buildURL('ping'));
 </script>

@@ -24,6 +24,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Container;
  * are not exposed to higher up levels.
  *
  */
+#[\AllowDynamicProperties]
 class IndexCollection implements \IteratorAggregate
 {
     /**
@@ -43,7 +44,7 @@ class IndexCollection implements \IteratorAggregate
      * {@inheritdoc}
      * @return Index[]
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this);
     }

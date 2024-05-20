@@ -117,4 +117,13 @@ $mod_strings = array (
  - انقر فوق "إظهار المزيد" لعرض حقول إضافية إذا لزم الأمر.
 2. انقر فوق "حفظ" لإنهاء السجل الجديد والعودة إلى الصفحة السابقة.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'مهمة الدليل الذكي',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'هي مهمة دليل ذكي',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'تاريخ بدء نشاط الدليل الذكي',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'تاريخ إكمال نشاط الدليل الذكي',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'الدليل الذكي - الأيام حتى الاكتمال',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'الاجتماعات الفرعية',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'المكالمات الفرعية',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'المهام الفرعية',
 );

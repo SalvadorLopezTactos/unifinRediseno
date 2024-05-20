@@ -308,7 +308,7 @@
      */
     _getCellToEllipsify: function($cells) {
         var fieldTypesToEllipsify = ['fullname', 'name', 'text', 'base', 'enum', 'url',
-            'dashboardtitle', 'label', 'drillthrough-labels'];
+            'hint-dashboardtitle', 'dashboardtitle', 'label', 'drillthrough-labels'];
 
         return _.find($cells, function(cell) {
             return (_.indexOf(fieldTypesToEllipsify, $(cell).data('type')) !== -1);

@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Productdefinitie bijwerken',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Tijdbewuste planningen verwerken',
 'LBL_OOTB_DATA_ARCHIVER' => 'Actieve gegevensarchieven/verwijderingen uitvoeren',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Abonnementsrechten toepassen als deze gewijzigd zijn',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geocodering records',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Geavanceerde opties',
 'LBL_TOGGLE_ADV' => 'Geavanceerde opties weergeven',
 'LBL_TOGGLE_BASIC' => 'Basis opties weergeven',
+'LBL_UPDATEMOMENTUMCJ' => 'Update momentum van slimme gidsen in bewerking',
 // Links
 'LNK_LIST_SCHEDULER' => 'Taakplanners',
 'LNK_NEW_SCHEDULER' => 'Nieuwe Taakplanner',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Actieve gegevensarchieven/verwijderingen uitvoeren',
 'LBL_PMSEENGINECRON' => 'SugarBPM Taakplanner',
 );
-

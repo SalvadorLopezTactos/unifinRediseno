@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'السجل',
     'LBL_PMSE_LABEL_NOTES' => 'عرض الملاحظات',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'إضافة ملاحظات',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'إرسال إلى DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'تحديد...',
     'LBL_PMSE_FORM_LABEL_USER' => 'المستخدم',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'هل أنت متأكد من أنك تريد الموافقة على هذه العملية؟',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'هل أنت متأكد من أنك تريد رفض هذه العملية؟',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'هل أنت متأكد من أنك تريد توجيه هذه العملية؟',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'هل تريد بالتأكيد إرسال هذه العملية إلى DocuSign؟',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'تمت الموافقة على العملية بنجاح',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'تم رفض العملية بنجاح',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'تم توجيه العملية بنجاح',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'تم إرسال العملية إلى DocuSign بنجاح',
     'LBL_PA_PROCESS_CLOSED' => 'يتم إغلاق العملية التي تحاول عرضها.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'العملية التي تحاول عرضها غير متوفرة في هذه اللحظة.',
 

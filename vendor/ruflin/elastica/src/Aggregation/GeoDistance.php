@@ -11,6 +11,8 @@ use Elastica\Exception\InvalidException;
  */
 class GeoDistance extends AbstractAggregation
 {
+    use Traits\KeyedTrait;
+
     public const DISTANCE_TYPE_ARC = 'arc';
     public const DISTANCE_TYPE_PLANE = 'plane';
 
@@ -55,10 +57,10 @@ class GeoDistance extends AbstractAggregation
     /**
      * Add a distance range to this aggregation.
      *
-     * @param int $fromValue a distance
-     * @param int $toValue   a distance
+     * @param int|null $fromValue a distance
+     * @param int|null $toValue   a distance
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return $this
      */

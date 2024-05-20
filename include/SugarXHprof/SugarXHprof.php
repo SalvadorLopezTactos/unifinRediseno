@@ -64,7 +64,7 @@ class SugarXHprof
     /**
      * @var string class of manager for customization, has to extend from SugarXHprof class
      */
-    protected static $manager = __CLASS__;
+    protected static $manager = self::class;
 
     /**
      * @var string path to directory for logs, if log_to is empty then xhprof.output_dir be used
@@ -229,7 +229,7 @@ class SugarXHprof
             require_once 'include/SugarXHprof/' . static::$manager . '.php';
         }
 
-        if (class_exists(static::$manager) && is_subclass_of(static::$manager, __CLASS__)) {
+        if (class_exists(static::$manager) && is_subclass_of(static::$manager, self::class)) {
             static::$instance = new static::$manager();
         } else {
             static::$instance = new self();
@@ -334,7 +334,7 @@ class SugarXHprof
         }
 
         $rate = 1 / static::$sample_rate * 100;
-        if (rand(0, 100) > $rate) {
+        if (random_int(0, 100) > $rate) {
             static::$enable = false;
             return;
         }
@@ -347,7 +347,7 @@ class SugarXHprof
             'end'
         ));
 
-        $this->startTime = isset($_SERVER['REQUEST_TIME_FLOAT']) ? $_SERVER['REQUEST_TIME_FLOAT'] : microtime(true);
+        $this->startTime = $_SERVER['REQUEST_TIME_FLOAT'] ?? microtime(true);
 
         xhprof_enable(static::$flags, array(
             'ignored_functions' => static::$ignored_functions
@@ -405,8 +405,8 @@ class SugarXHprof
         $wallTime = $xhprofData['main()']['wt'];
 
         if ($wallTime > static::$filter_wt * 1000) {
-            $sqlQueries = count($this->sqlTracker['sql']);
-            $elasticQueries = count($this->elasticTracker['queries']);
+            $sqlQueries = is_countable($this->sqlTracker['sql']) ? count($this->sqlTracker['sql']) : 0;
+            $elasticQueries = is_countable($this->elasticTracker['queries']) ? count($this->elasticTracker['queries']) : 0;
             $action = static::cleanActionString(static::detectAction());
 
             $runName = implode('d', array(
@@ -535,7 +535,7 @@ class SugarXHprof
                             $args .= 'Object(' . get_class($a) . ')';
                             break;
                         case 'resource':
-                            $args .= 'Resource(' . strstr($a, '#') . ')';
+                            $args .= 'Resource(' . get_resource_id($a) . ')';
                             break;
                         case 'boolean':
                             $args .= $a ? 'True' : 'False';
@@ -549,9 +549,9 @@ class SugarXHprof
                 }
             }
 
-            $callName = (isset($t['class']) ? $t['class'] : '')
-                . (isset($t['type']) ? $t['type'] : '')
-                . (isset($t['function']) ? $t['function'] : '');
+            $callName = ($t['class'] ?? '')
+                . ($t['type'] ?? '')
+                . ($t['function'] ?? '');
 
             $callsHash[$callName] = isset($callsHash[$callName]) ? $callsHash[$callName] + 1 : 1;
             $repeated[$callName] = isset($repeated[$callName]) ? $repeated[$callName] + 1 : 0;
@@ -605,6 +605,7 @@ class SugarXHprof
      */
     protected function saveDataToMongoDB($data)
     {
+        $mongoData = [];
         if (!extension_loaded('mongo')) {
             error_log('xhprof - extension mongo not loaded');
 

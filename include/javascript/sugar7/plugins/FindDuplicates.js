@@ -129,10 +129,20 @@
                         layoutName: 'records',
                         dupelisttype: 'dupecheck-list-multiselect',
                         collection: this.createDuplicateCollection(dupeCheckModel),
-                        model: app.data.createBean(this.module)
+                        model: app.data.createBean(this.module),
+                        module: this.module
                     }
                 }, _.bind(function(refresh, primaryRecord) {
-                    if (refresh && dupeCheckModel.id === primaryRecord.id) {
+                    if (this.closestComponent('side-drawer')) {
+                        if (primaryRecord) {
+                            let currentTabIndex = app.sideDrawer.activeTabIndex;
+                            if (dupeCheckModel.id === primaryRecord.id) {
+                                app.sideDrawer.switchTab(currentTabIndex);
+                            } else {
+                                app.sideDrawer.closeTab(currentTabIndex);
+                            }
+                        }
+                    } else if (refresh && dupeCheckModel.id === primaryRecord.id) {
                         app.router.refresh();
                     } else if (refresh) {
                         app.navigate(this.context, primaryRecord);

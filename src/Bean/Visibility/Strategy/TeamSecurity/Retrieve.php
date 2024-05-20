@@ -89,11 +89,11 @@ final class Retrieve implements Strategy
 
     public function applyToFrom(DBManager $db, $query, $table)
     {
-        throw new \LogicException(__CLASS__ . '::' . __METHOD__ . ' should not be called.');
+        throw new \LogicException(self::class . '::' . __METHOD__ . ' should not be called.');
     }
 
     public function applyToWhere(DBManager $db, $query, $table)
     {
-        throw new \LogicException(__CLASS__ . '::' . __METHOD__ . ' should not be called.');
+        throw new \LogicException(self::class . '::' . __METHOD__ . ' should not be called.');
     }
 }

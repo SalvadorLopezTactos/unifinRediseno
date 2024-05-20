@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Przyciski formularza',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Akceptuj/Odrzuć',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Przekieruj',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Wyślij do DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Inne opcje przekierowania',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Zmień użytkownika, do którego przypisano',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Zespół',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Scalanie dokumentów',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Wybierz...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Scalanie dokumentów do pliku PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Wyślij scalony dokument pocztą e-mail',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Scalanie dokumentów',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Typ bramki skupiającej jest niezgodny z typem bramki przepływu przychodzącego',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Bramki rozpraszające pozwalają rozdzielać procesy na wiele gałęzi. W przypadku korzystania z bramki skupiającej w celu ponownego skupienia tych gałęzi w jedną ścieżkę należy użyć poprawnego typu bramki skupiającej dopasowanego do typu bramki rozpraszającej użytej do utworzenia tych gałęzi. Jeśli gałęzie zostały utworzone przy użyciu wykluczających bramek rozpraszających lub bramek opartych na zdarzeniach, należy użyć wykluczającej bramki skupiającej. W przypadku gałęzi utworzonych za pomocą równoległych lub włączających bramek rozpraszających należy użyć równoległej bramki skupiającej w celu ich połączenia.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Pole modułu',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Relacja modułu',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Użytkownik',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Rola',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Zespół',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Aktywność formularza',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Zasada biznesowa',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Czynność dot. zasady biznesowej',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Szablon wiadomości e-mail',
 );

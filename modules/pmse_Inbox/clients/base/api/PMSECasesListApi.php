@@ -15,6 +15,7 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 
 class PMSECasesListApi extends FilterApi
 {
+    public $pmse;
     public function __construct()
     {
         $this->pmse = PMSE::getInstance();

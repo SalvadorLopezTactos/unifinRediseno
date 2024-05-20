@@ -21,7 +21,7 @@ class Logger implements LoggerInterface
     use LoggerTrait;
 
     // The name of sugar logger channel
-    const CHANNEL_NAME = 'hint';
+    public const CHANNEL_NAME = 'hint';
 
     /**
      * Underlying pure PSR-3 logger

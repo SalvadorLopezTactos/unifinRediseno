@@ -17,19 +17,19 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\ServiceAcco
 
 class User extends IdmUser
 {
-    const USER_STATUS_ACTIVE = 'Active';
-    const USER_STATUS_INACTIVE = 'Inactive';
+    public const USER_STATUS_ACTIVE = 'Active';
+    public const USER_STATUS_INACTIVE = 'Inactive';
 
-    const USER_EMPLOYEE_STATUS_ACTIVE = 'Active';
-    const USER_EMPLOYEE_STATUS_INACTIVE = 'Inactive';
+    public const USER_EMPLOYEE_STATUS_ACTIVE = 'Active';
+    public const USER_EMPLOYEE_STATUS_INACTIVE = 'Inactive';
 
     // User password generator types
-    const PASSWORD_TYPE_SYSTEM = 'syst';
-    const PASSWORD_TYPE_USER = 'user';
+    public const PASSWORD_TYPE_SYSTEM = 'syst';
+    public const PASSWORD_TYPE_USER = 'user';
 
     // sugar config expiration types
-    const PASSWORD_EXPIRATION_TYPE_TIME = 1;
-    const PASSWORD_EXPIRATION_TYPE_LOGIN = 2;
+    public const PASSWORD_EXPIRATION_TYPE_TIME = 1;
+    public const PASSWORD_EXPIRATION_TYPE_LOGIN = 2;
 
     /**
      * @var bool

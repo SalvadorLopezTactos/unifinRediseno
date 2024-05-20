@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Jelentésütemezések bejegyzés műszerfal',
     'LBL_FILE_TYPE' => 'Fájltípus(ok)',
+    'LBL_EMBED_REPORT' => 'Jelentés beágyazása egy e-mailbe',
+    'LBL_EMBED_REPORT_INFO' => 'Megjegyzés: ha a jelentés több, mint 200 soros, akkor CSV-fájlként csatoljuk a jelentést.',
 );

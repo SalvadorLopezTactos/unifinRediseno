@@ -61,7 +61,7 @@ class Scheduler implements RunnableSchedulerJob
      */
     public function run($data)
     {
-        if (!hasMapsLicense()) {
+        if (!hasSystemMapsLicense()) {
             return $this->job->failJob(translate('LBL_MAPS_NO_LICENSE_ACCESS'));
         }
 

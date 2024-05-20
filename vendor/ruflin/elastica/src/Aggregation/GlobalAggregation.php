@@ -9,4 +9,12 @@ namespace Elastica\Aggregation;
  */
 class GlobalAggregation extends AbstractAggregation
 {
+    public function toArray(): array
+    {
+        $array = parent::toArray();
+        // Force json encoding to object
+        $array[$this->_getBaseName()] = new \ArrayObject();
+
+        return $array;
+    }
 }

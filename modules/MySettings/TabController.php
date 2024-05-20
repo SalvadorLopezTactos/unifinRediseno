@@ -64,18 +64,19 @@ class TabController
     {
         global $moduleList;
 
+        $trimmed_tabs = '';
         $administration = Administration::getSettings('MySettings', true);
         if (isset($administration->settings) && isset($administration->settings['MySettings_tab'])) {
             $tabs = $administration->settings['MySettings_tab'];
-            $trimmed_tabs = is_string($tabs) ? trim($tabs) : $tabs;
+            if (is_string($tabs)) {
+                $trimmed_tabs = trim($tabs);
+            } elseif (is_array($tabs)) {
+                $trimmed_tabs = trim(base64_encode(serialize($tabs)));
+            }
             //make sure serialized string is not empty
             if (!empty($trimmed_tabs)) {
                 // TODO: decode JSON rather than base64
-                if (is_string($trimmed_tabs)) {
-                    // Sometimes for unclear reason on Oracle we get decoded array here instead of string
-                    $tabs = base64_decode($trimmed_tabs);
-                    $tabs = unserialize($tabs, ['allowed_classes' => false]);
-                }
+                $tabs = unserialize(base64_decode($trimmed_tabs), ['allowed_classes' => false]);
                 if ($requireInModuleList && !empty($tabs) && is_array($tabs)) {
                     //Ensure modules saved in the prefences exist.
                     foreach ($tabs as $id => $tab) {
@@ -191,31 +192,98 @@ class TabController
     }
 
     /**
+     * Determine if the users can edit in their User Profile how many modules they want pinned in
+     * the Navigation Bar when this one is collapsed.
+     *
+     * @return bool true if editing is allowed, false otherwise.
+     */
+    public function get_users_pinned_modules()
+    {
+        $category = $this->getMySettings();
+        $setting = $category->settings['MySettings_disable_users_pinned_modules'] ?? null;
+        
+        return $setting !== 'yes';
+    }
+    
+    /**
+     * Set option flag if the users can edit in their User Profile how many modules they want pinned in
+     * the Navigation Bar when this one is collapsed.
+     *
+     * @param bool true if editing is allowed, false otherwise.
+     */
+    public function set_users_pinned_modules($value)
+    {
+        global $current_user;
+        if (is_admin($current_user)) {
+            $administration = BeanFactory::newBean('Administration');
+            $setting = ($value) ? 'no' : 'yes';
+            $administration->saveSetting('MySettings', 'disable_users_pinned_modules', $setting);
+        }
+    }
+
+    /**
      * Determine if the users can edit or not.
      *
      * @return bool true if editing is allowed, false otherwise.
      */
     public function get_users_can_edit()
     {
-        $administration = $this->getMySettings();
-        if (isset($administration->settings) && isset($administration->settings['MySettings_disable_useredit'])) {
-            if ($administration->settings['MySettings_disable_useredit'] == 'yes') {
-                return false;
-            }
-        }
-
-        return true;
+        $category = $this->getMySettings();
+        $setting = $category->settings['MySettings_disable_useredit'] ?? null;
+    
+        return $setting !== 'yes';
     }
 
-    public function set_users_can_edit($boolean)
+    public function set_users_can_edit($value)
     {
         global $current_user;
         if (is_admin($current_user)) {
             $administration = BeanFactory::newBean('Administration');
-            if ($boolean) {
-                $administration->saveSetting('MySettings', 'disable_useredit', 'no');
-            } else {
-                $administration->saveSetting('MySettings', 'disable_useredit', 'yes');
+            $setting = ($value) ? 'no' : 'yes';
+            $administration->saveSetting('MySettings', 'disable_useredit', $setting);
+        }
+    }
+
+    /**
+     * Get the number of modules to display in the navigation bar when this one is collapsed
+     *
+     * @return int
+     */
+    public function get_number_pinned_modules()
+    {
+        $numberPinnedModules = $this->getSugarConfig('maxPinnedModules');
+        
+        if (true === is_numeric($numberPinnedModules)) {
+            $numberPinnedModules = intval($numberPinnedModules);
+        } else {
+            $numberPinnedModules = $this->getSugarConfig('default_max_pinned_modules');
+        }
+        
+        return $numberPinnedModules;
+    }
+    
+    /**
+     * Set the number of modules to display in the navigation bar when this one is collapsed
+     *
+     * @param int
+     */
+    public function set_number_pinned_modules($value)
+    {
+        global $current_user;
+        $value = intval($value);
+
+        if (is_admin($current_user) && $value >= 1 && $value <= 100) {
+            $configurator = new Configurator();
+            $configurator->config['maxPinnedModules'] = $value;
+            $configurator->handleOverride();
+            SugarConfig::getInstance()->clearCache();
+            MetaDataManager::refreshSectionCache(MetaDataManager::MM_CONFIG);
+        } else {
+            if (!is_admin($current_user)) {
+                LoggerManager::getLogger()->warn('User does not have enough rights to set the number of modules to display in the navigation bar');
+            }
+            if ($value < 1 || $value > 100) {
+                LoggerManager::getLogger()->warn('User try to set out of range number of modules to display in the navigation bar');
             }
         }
     }
@@ -391,5 +459,16 @@ class TabController
     public function getMySettings()
     {
         return Administration::getSettings('MySettings');
+    }
+
+    /**
+     * Get SugarConfig
+     *
+     * @param string SugarConfig key
+     * @return mixed SugarConfig value
+     */
+    public function getSugarConfig($key)
+    {
+        return SugarConfig::getInstance()->get($key);
     }
 }

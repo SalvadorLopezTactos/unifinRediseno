@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Tableau de bord de la liste de notes',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de notes',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Notes',
+    'LBL_EXTERNAL_USER' => 'Utilisateur extérieur',
+    'LBL_EXTERNAL_USER_NAME' => 'Utilisateur extérieur',
 
     'LBL_RELATED_CONTACT' => 'Contact lié',
     'ERR_DELETE_RECORD' => 'Vous devez spécifier un ID pour toute suppression.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Type d&#39;e-mail',
     'LBL_EMAIL_ID' => 'ID d&#39;e-mail',
     'LBL_PHONE' => 'Téléphone :',
-    'LBL_PORTAL_FLAG' => 'Afficher dans le Portail?',
+    'LBL_PORTAL_FLAG' => 'Disponible en externe',
     'LBL_EMBED_FLAG' => 'Joindre à l&#39;email?',
     'LBL_PRODUCT_ID' => 'Produit (ID) :',
     'LBL_QUOTE_ID' => 'Devis (ID) :',

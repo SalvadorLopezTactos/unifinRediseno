@@ -116,4 +116,13 @@ Per creare un {{module_name}}:
 - Clicca "Mostra più Moduli" per visualizzare ulteriori campi se necessario.
 2. Clicca "Salva" per salvare il nuovo record e tornare alla pagina precedente.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Compito della Guida Intelligente',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'È un compito della Guida Intelligente',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Data di inizio del compito della Guida Intelligente',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Data di completamento dell&#39;attività della Guida Intelligente',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Guida Intelligente - Giorni per il completamento',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Riunioni figlie',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Chiamate figlie',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Compiti figli',
 );

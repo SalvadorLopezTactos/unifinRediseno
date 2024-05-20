@@ -12,9 +12,9 @@
  */
 
 
-$sugar_version      = '12.0.5';
-$sugar_db_version   = '12.0.5';
+$sugar_version      = '13.0.3';
+$sugar_db_version   = '13.0.3';
 $sugar_flavor       = 'ENT';
-$sugar_build        = '399';
-$sugar_timestamp    = '2024-02-29 2:49pm';
-$sugar_mar_version  = 'Q2 2022';
+$sugar_build        = '294';
+$sugar_timestamp    = '2024-02-23 2:21pm';
+$sugar_mar_version  = 'Q2 2023';

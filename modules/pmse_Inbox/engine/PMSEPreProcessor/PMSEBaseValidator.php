@@ -277,7 +277,7 @@ class PMSEBaseValidator
      */
     public function getDecodedCriteria(string $criteria)
     {
-        return json_decode(html_entity_decode($criteria));
+        return json_decode(html_entity_decode($criteria, ENT_COMPAT));
     }
 
     /**

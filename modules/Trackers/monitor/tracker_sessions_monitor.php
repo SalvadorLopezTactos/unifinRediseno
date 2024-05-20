@@ -12,6 +12,10 @@
 
 class tracker_sessions_monitor extends Monitor
 {
+    /**
+     * @var bool
+     */
+    public $new;
     public function __construct($name = '', $monitorId = '', $metadata = '', $store = '')
     {
         parent::__construct($name, $monitorId, $metadata, $store);

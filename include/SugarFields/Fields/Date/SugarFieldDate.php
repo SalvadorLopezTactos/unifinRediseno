@@ -29,7 +29,7 @@ class SugarFieldDate extends SugarFieldDatetime {
         $timedate = TimeDate::getInstance();
         $db = DBManagerFactory::getInstance();
         //If it's in ISO format, convert it to db format
-        if(preg_match('/(\d{4})\-?(\d{2})\-?(\d{2})T(\d{2}):?(\d{2}):?(\d{2})\.?\d*([Z+-]?)(\d{0,2}):?(\d{0,2})/i', $value)) {
+        if (preg_match('/(\d{4})\-?(\d{2})\-?(\d{2})T(\d{2}):?(\d{2}):?(\d{2})\.?\d*([Z+-]?)(\d{0,2}):?(\d{0,2})/i', (string)$value)) {
            $value = $timedate->fromIso($value)->asDbDate(false);
         }
 

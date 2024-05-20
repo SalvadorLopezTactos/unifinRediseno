@@ -20,16 +20,23 @@ use Elasticsearch\Endpoints\Indices\Alias;
 use Elasticsearch\Endpoints\Indices\Aliases\Update;
 use Elasticsearch\Endpoints\Indices\Analyze;
 use Elasticsearch\Endpoints\Indices\Cache\Clear;
+use Elasticsearch\Endpoints\Indices\ClearCache;
 use Elasticsearch\Endpoints\Indices\Close;
 use Elasticsearch\Endpoints\Indices\Create;
 use Elasticsearch\Endpoints\Indices\Delete;
+use Elasticsearch\Endpoints\Indices\DeleteAlias;
 use Elasticsearch\Endpoints\Indices\Exists;
 use Elasticsearch\Endpoints\Indices\Flush;
 use Elasticsearch\Endpoints\Indices\ForceMerge;
+use Elasticsearch\Endpoints\Indices\GetAlias;
+use Elasticsearch\Endpoints\Indices\GetMapping;
 use Elasticsearch\Endpoints\Indices\Mapping\Get as MappingGet;
 use Elasticsearch\Endpoints\Indices\Open;
+use Elasticsearch\Endpoints\Indices\PutSettings;
 use Elasticsearch\Endpoints\Indices\Refresh;
 use Elasticsearch\Endpoints\Indices\Settings\Put;
+use Elasticsearch\Endpoints\Indices\UpdateAliases;
+use Elasticsearch\Endpoints\OpenPointInTime;
 use Elasticsearch\Endpoints\UpdateByQuery;
 
 /**
@@ -38,6 +45,7 @@ use Elasticsearch\Endpoints\UpdateByQuery;
  * Handles reads, deletes and configurations of an index
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
+ * @phpstan-import-type TCreateQueryArgsMatching from Query
  */
 class Index implements SearchableInterface
 {
@@ -72,7 +80,7 @@ class Index implements SearchableInterface
     /**
      * Return Index Stats.
      *
-     * @return \Elastica\Index\Stats
+     * @return IndexStats
      */
     public function getStats()
     {
@@ -82,7 +90,7 @@ class Index implements SearchableInterface
     /**
      * Return Index Recovery.
      *
-     * @return \Elastica\Index\Recovery
+     * @return IndexRecovery
      */
     public function getRecovery()
     {
@@ -105,7 +113,10 @@ class Index implements SearchableInterface
      */
     public function getMapping(): array
     {
-        $response = $this->requestEndpoint(new MappingGet());
+        // TODO: Use only GetMapping when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(GetMapping::class) ? new GetMapping() : new MappingGet();
+
+        $response = $this->requestEndpoint($endpoint);
         $data = $response->getData();
 
         // Get first entry as if index is an Alias, the name of the mapping is the real name and not alias name
@@ -117,7 +128,7 @@ class Index implements SearchableInterface
     /**
      * Returns the index settings object.
      *
-     * @return \Elastica\Index\Settings Settings object
+     * @return IndexSettings
      */
     public function getSettings()
     {
@@ -154,9 +165,11 @@ class Index implements SearchableInterface
     /**
      * Update entries in the db based on a query.
      *
-     * @param array|Query|string $query   Query object or array
-     * @param AbstractScript     $script  Script
-     * @param array              $options Optional params
+     * @param AbstractQuery|array|Query|string|null $query Query object or array
+     * @phpstan-param TCreateQueryArgsMatching $query
+     *
+     * @param AbstractScript $script  Script
+     * @param array          $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
      */
@@ -183,22 +196,21 @@ class Index implements SearchableInterface
         $endpoint = new IndexEndpoint();
 
         if (null !== $doc->getId() && '' !== $doc->getId()) {
-            $endpoint->setID($doc->getId());
+            $endpoint->setId($doc->getId());
         }
 
         $options = $doc->getOptions(
             [
-                'version',
-                'version_type',
-                'routing',
-                'percolate',
-                'parent',
-                'op_type',
                 'consistency',
-                'replication',
-                'refresh',
-                'timeout',
+                'op_type',
+                'parent',
+                'percolate',
                 'pipeline',
+                'refresh',
+                'replication',
+                'retry_on_conflict',
+                'routing',
+                'timeout',
             ]
         );
 
@@ -215,9 +227,7 @@ class Index implements SearchableInterface
             if (isset($data['_id']) && !$doc->hasId()) {
                 $doc->setId($data['_id']);
             }
-            if (isset($data['_version'])) {
-                $doc->setVersion($data['_version']);
-            }
+            $doc->setVersionParams($data);
         }
 
         return $response;
@@ -248,13 +258,13 @@ class Index implements SearchableInterface
      * @param int|string $id      Document id
      * @param array      $options options for the get request
      *
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      * @throws NotFoundException
      */
     public function getDocument($id, array $options = []): Document
     {
         $endpoint = new DocumentGet();
-        $endpoint->setID($id);
+        $endpoint->setId($id);
         $endpoint->setParams($options);
 
         $response = $this->requestEndpoint($endpoint);
@@ -272,10 +282,10 @@ class Index implements SearchableInterface
             $data = [];
         }
 
-        $document = new Document($id, $data, $this->getName());
-        $document->setVersion($result['_version']);
+        $doc = new Document($id, $data, $this->getName());
+        $doc->setVersionParams($result);
 
-        return $document;
+        return $doc;
     }
 
     /**
@@ -290,7 +300,7 @@ class Index implements SearchableInterface
         }
 
         $endpoint = new \Elasticsearch\Endpoints\Delete();
-        $endpoint->setID(\trim($id));
+        $endpoint->setId(\trim($id));
         $endpoint->setParams($options);
 
         return $this->requestEndpoint($endpoint);
@@ -299,8 +309,10 @@ class Index implements SearchableInterface
     /**
      * Deletes documents matching the given query.
      *
-     * @param AbstractQuery|array|Query|string $query   Query object or array
-     * @param array                            $options Optional params
+     * @param AbstractQuery|array|Query|string|null $query Query object or array
+     * @phpstan-param TCreateQueryArgsMatching $query
+     *
+     * @param array $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      */
@@ -311,6 +323,19 @@ class Index implements SearchableInterface
         $endpoint = new DeleteByQuery();
         $endpoint->setBody(['query' => \is_array($query) ? $query : $query->toArray()]);
         $endpoint->setParams($options);
+
+        return $this->requestEndpoint($endpoint);
+    }
+
+    /**
+     * Opens a Point-in-Time on the index.
+     *
+     * @see: https://www.elastic.co/guide/en/elasticsearch/reference/current/point-in-time-api.html
+     */
+    public function openPointInTime(string $keepAlive): Response
+    {
+        $endpoint = new OpenPointInTime();
+        $endpoint->setParams(['keep_alive' => $keepAlive]);
 
         return $this->requestEndpoint($endpoint);
     }
@@ -377,36 +402,48 @@ class Index implements SearchableInterface
      *                            array => Associative array of options (option=>value)
      *
      * @throws InvalidException
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      *
      * @return Response Server response
      */
     public function create(array $args = [], $options = null): Response
     {
-        if (\is_bool($options) && $options) {
-            try {
-                $this->delete();
-            } catch (ResponseException $e) {
-                // Table can't be deleted, because doesn't exist
+        if (null === $options) {
+            if (\func_num_args() >= 2) {
+                \trigger_deprecation('ruflin/elastica', '7.1.0', 'Passing null as 2nd argument to "%s()" is deprecated, avoid passing this argument or pass an array instead. It will be removed in 8.0.', __METHOD__);
             }
-        } elseif (\is_array($options)) {
-            foreach ($options as $key => $value) {
-                switch ($key) {
-                    case 'recreate':
-                        try {
-                            $this->delete();
-                        } catch (ResponseException $e) {
-                            // Table can't be deleted, because doesn't exist
-                        }
-                        break;
-                    default:
-                        throw new InvalidException('Invalid option '.$key);
-                        break;
-                }
-            }
+            $options = [];
+        } elseif (\is_bool($options)) {
+            \trigger_deprecation('ruflin/elastica', '7.1.0', 'Passing a bool as 2nd argument to "%s()" is deprecated, pass an array with the key "recreate" instead. It will be removed in 8.0.', __METHOD__);
+            $options = ['recreate' => $options];
+        } elseif (!\is_array($options)) {
+            throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be of type array|bool|null, %s given.', __METHOD__, \is_object($options) ? \get_class($options) : \gettype($options)));
         }
 
         $endpoint = new Create();
+        $invalidOptions = \array_diff(\array_keys($options), $allowedOptions = \array_merge($endpoint->getParamWhitelist(), [
+            'recreate',
+        ]));
+
+        if (1 === $invalidOptionCount = \count($invalidOptions)) {
+            throw new InvalidException(\sprintf('"%s" is not a valid option. Allowed options are "%s".', \implode('", "', $invalidOptions), \implode('", "', $allowedOptions)));
+        }
+
+        if ($invalidOptionCount > 1) {
+            throw new InvalidException(\sprintf('"%s" are not valid options. Allowed options are "%s".', \implode('", "', $invalidOptions), \implode('", "', $allowedOptions)));
+        }
+
+        if ($options['recreate'] ?? false) {
+            try {
+                $this->delete();
+            } catch (ResponseException $e) {
+                // Index can't be deleted, because it doesn't exist
+            }
+        }
+
+        unset($options['recreate']);
+
+        $endpoint->setParams($options);
         $endpoint->setBody($args);
 
         return $this->requestEndpoint($endpoint);
@@ -423,9 +460,7 @@ class Index implements SearchableInterface
     }
 
     /**
-     * @param array|Query|string $query
-     * @param array|int          $options
-     * @param BuilderInterface   $builder
+     * {@inheritdoc}
      */
     public function createSearch($query = '', $options = null, ?BuilderInterface $builder = null): Search
     {
@@ -437,13 +472,7 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Searches in this index.
-     *
-     * @param array|Query|string $query   Array with all query data inside or a Elastica\Query object
-     * @param array|int          $options Limit or associative array of options (option=>value)
-     * @param string             $method  Request method, see Request's constants
-     *
-     * @see \Elastica\SearchableInterface::search
+     * {@inheritdoc}
      */
     public function search($query = '', $options = null, string $method = Request::POST): ResultSet
     {
@@ -453,12 +482,7 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Counts results of query.
-     *
-     * @param array|Query|string $query  Array with all query data inside or a Elastica\Query object
-     * @param string             $method Request method, see Request's constants
-     *
-     * @see \Elastica\SearchableInterface::count
+     * {@inheritdoc}
      */
     public function count($query = '', string $method = Request::POST): int
     {
@@ -523,7 +547,8 @@ class Index implements SearchableInterface
 
         $data['actions'][] = ['add' => ['index' => $this->getName(), 'alias' => $name]];
 
-        $endpoint = new Update();
+        // TODO: Use only UpdateAliases when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(UpdateAliases::class) ? new UpdateAliases() : new Update();
         $endpoint->setBody($data);
 
         return $this->getClient()->requestEndpoint($endpoint);
@@ -536,7 +561,8 @@ class Index implements SearchableInterface
      */
     public function removeAlias(string $name): Response
     {
-        $endpoint = new Alias\Delete();
+        // TODO: Use only DeleteAlias when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(DeleteAlias::class) ? new DeleteAlias() : new Alias\Delete();
         $endpoint->setName($name);
 
         return $this->requestEndpoint($endpoint);
@@ -549,7 +575,8 @@ class Index implements SearchableInterface
      */
     public function getAliases(): array
     {
-        $endpoint = new Alias\Get();
+        // TODO: Use only GetAlias when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(GetAlias::class) ? new GetAlias() : new Alias\Get();
         $endpoint->setName('*');
 
         $responseData = $this->requestEndpoint($endpoint)->getData();
@@ -581,8 +608,11 @@ class Index implements SearchableInterface
      */
     public function clearCache(): Response
     {
+        // TODO: Use only ClearCache when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(ClearCache::class) ? new ClearCache() : new Clear();
+
         // TODO: add additional cache clean arguments
-        return $this->requestEndpoint(new Clear());
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
@@ -607,7 +637,8 @@ class Index implements SearchableInterface
      */
     public function setSettings(array $data): Response
     {
-        $endpoint = new Put();
+        // TODO: Use only PutSettings when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(PutSettings::class) ? new PutSettings() : new Put();
         $endpoint->setBody($data);
 
         return $this->requestEndpoint($endpoint);

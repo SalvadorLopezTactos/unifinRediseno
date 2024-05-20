@@ -74,6 +74,7 @@ class Scalar implements Change
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->getChangeArray();

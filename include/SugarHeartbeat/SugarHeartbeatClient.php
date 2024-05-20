@@ -23,7 +23,7 @@ class SugarHeartbeatClient extends \SoapClient
      *
      * @var string Endpoint url
      */
-    const DEFAULT_ENDPOINT = 'https://updates.sugarcrm.com/heartbeat/soap.php';
+    public const DEFAULT_ENDPOINT = 'https://updates.sugarcrm.com/heartbeat/soap.php';
     /**
      * @var array SoapClient options
      */
@@ -65,13 +65,26 @@ class SugarHeartbeatClient extends \SoapClient
      */
     protected function getOptions()
     {
-        return array_merge($this->defaultOptions, SugarConfig::getInstance()->get('heartbeat.options', array()));
+        $options = $this->defaultOptions;
+        // proxy settings
+        $proxy_config = Administration::getSettings('proxy');
+        if (!empty($proxy_config)
+            && !empty($proxy_config->settings['proxy_on'])
+            && $proxy_config->settings['proxy_on'] == 1) {
+            $options['proxy_host'] = $proxy_config->settings['proxy_host'];
+            $options['proxy_port'] = $proxy_config->settings['proxy_port'];
+            if (!empty($proxy_config->settings['proxy_auth'])) {
+                $options['proxy_login'] = $proxy_config->settings['proxy_username'];
+                $options['proxy_password'] = $proxy_config->settings['proxy_password'];
+            }
+        }
+        return array_merge($options, SugarConfig::getInstance()->get('heartbeat.options', array()));
     }
 
     /**
      * Proxy to sugarPing WSDL method
      *
-     * @return mixed
+     * @return string|SoapFault
      */
     public function sugarPing()
     {
@@ -84,20 +97,12 @@ class SugarHeartbeatClient extends \SoapClient
      *
      * @param string $key License key
      * @param array $info
-     * @return mixed
+     *
+     * @return string|SoapFault
      */
     public function sugarHome(string $key, array $info)
     {
         $data = base64_encode(serialize($info));
         return $this->__soapCall('sugarHome', array('key' => $key, 'data' => $data));
-    }
-
-    public function getError()
-    {
-        if (is_soap_fault($this)) {
-            return $this->__getLastResponse();
-        } else {
-            return false;
-        }
     }
 }

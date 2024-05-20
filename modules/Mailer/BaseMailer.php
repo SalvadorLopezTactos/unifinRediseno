@@ -20,7 +20,7 @@
 abstract class BaseMailer implements IMailer
 {
     // constants
-    const MailTransmissionProtocol = ""; // there is no protocol by default; all derived classes must set this
+    public const MailTransmissionProtocol = ""; // there is no protocol by default; all derived classes must set this
 
     // protected members
     protected $formatter;
@@ -142,7 +142,7 @@ abstract class BaseMailer implements IMailer
      */
     public function setMessageId($id)
     {
-        $messageId = sprintf('<%s.%s@%s>', time(), $id, $this->config->getHostname());
+        $messageId = sprintf('<%s.%s@%s>', abs((int)(1000 * microtime(true))), $id, $this->config->getHostname());
         $this->setHeader(EmailHeaders::MessageId, $messageId);
     }
 

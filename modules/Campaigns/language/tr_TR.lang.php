@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'Takip Edici URL:',
   'LBL_TRACKER_TEXT' => 'Takip Edici Link Metni:',
   'LBL_TRACKER_COUNT' => 'Takip Edici Sayısı:',
-  'LBL_REFER_URL' => 'Takip Edici Yönlendirme URL si:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kampanyalar',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'E-Posta Kampanyaları',
   'LBL_NEW_FORM_TITLE' => 'Yeni Kampanya',

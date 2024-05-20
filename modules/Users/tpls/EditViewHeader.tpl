@@ -62,6 +62,19 @@ var ERR_REENTER_PASSWORDS = '{$MOD.ERR_REENTER_PASSWORDS}';
             messages: '{$NON_EDITABLE_FIELDS_MSG}',
             autoClose: false
         });
+	
+        {* Dismiss alert when user clicks anywhere on the page or navigates away from page *}
+        document.addEventListener("click", () => {
+            app.alert.dismiss('non_editable_user_fields');
+        });
+
+        parent.document.addEventListener("click", () => {
+            app.alert.dismiss('non_editable_user_fields');
+        });
+
+        window.addEventListener("unload", () => {
+            app.alert.dismiss('non_editable_user_fields');
+        });
 {/if}
 
 var EditView_tabs = new YAHOO.widget.TabView("EditView_tabs");

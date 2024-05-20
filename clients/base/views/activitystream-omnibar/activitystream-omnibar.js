@@ -31,6 +31,9 @@
 
         app.view.View.prototype.initialize.call(this, options);
 
+        // taggable plugin will use square pills instead of avatar+text
+        this.useSquarePills();
+
         // Assets for the activity stream post avatar
         this.user_id = app.user.get('id');
         this.full_name = app.user.get('full_name');

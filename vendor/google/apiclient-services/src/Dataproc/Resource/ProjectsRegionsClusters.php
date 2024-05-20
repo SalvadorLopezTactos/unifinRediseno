@@ -53,6 +53,8 @@ class ProjectsRegionsClusters extends \Google\Service\Resource
    * @param Cluster $postBody
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string actionOnFailedPrimaryWorkers Optional. Failure action when
+   * primary worker creation fails.
    * @opt_param string requestId Optional. A unique ID used to identify the
    * request. If the server receives two CreateClusterRequest (https://cloud.googl
    * e.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.datap
@@ -147,8 +149,9 @@ class ProjectsRegionsClusters extends \Google\Service\Resource
    * resource exists and does not have a policy set. (clusters.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See Resource names
+   * (https://cloud.google.com/apis/design/resource_names) for the appropriate
+   * value for this field.
    * @param GetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -289,8 +292,9 @@ class ProjectsRegionsClusters extends \Google\Service\Resource
    * errors. (clusters.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See Resource names
+   * (https://cloud.google.com/apis/design/resource_names) for the appropriate
+   * value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -345,8 +349,9 @@ class ProjectsRegionsClusters extends \Google\Service\Resource
    * This operation may "fail open" without warning. (clusters.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See Resource names
+   * (https://cloud.google.com/apis/design/resource_names) for the appropriate
+   * value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse

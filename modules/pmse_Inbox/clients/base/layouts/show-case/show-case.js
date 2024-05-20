@@ -51,7 +51,18 @@
 
                     // This is the endpoint URL we want to consume
                     var resourcePath = 'pmse_Inbox/caseRecord/' + casModule + '/' + casModuleId;
-                    var url = app.api.buildURL(resourcePath, null, null, {view: 'record', erased_fields: true});
+                    //Forced all fields to load from the record view and the
+                    //quotes configured header/footer etc
+                    var optFields = '';
+                    if (opts.fields) {
+                        optFields = opts.fields.join(',');
+                    }
+                    var url = app.api.buildURL(
+                        resourcePath,
+                        null,
+                        null,
+                        {view: 'record', erased_fields: true, fields: optFields}
+                    );
                     // For some reason, options contains a method property that
                     // is causing the subsequent success call to be a READ HTTP
                     // Request Type. So delete the method property of options to
@@ -275,6 +286,7 @@
         this.recordContext.on('case:approve', _.bind(this.caseAction, this, 'Approve'));
         this.recordContext.on('case:reject', _.bind(this.caseAction, this, 'Reject'));
         this.recordContext.on('case:route', _.bind(this.caseAction, this, 'Route'));
+        this.recordContext.on('case:send_to_docusign', _.bind(this.caseAction, this, 'SendDocuSign'));
         this.recordContext.on('case:history', this.caseHistory, this);
         this.recordContext.on('case:status', this.caseStatus, this);
         this.recordContext.on('case:add:notes', this.caseAddNotes, this);
@@ -317,7 +329,7 @@
     },
 
     /**
-     * Validate the model when trying to approve/reject/route the case
+     * Validate the model when trying to approve/reject/route/sendToDs the case
      */
     caseAction: function (action) {
         var allFields = this.recordComponent.getFields(this.recordModule, this.recordModel);
@@ -402,6 +414,10 @@
             'Route': {
                 confirm: 'LBL_PA_PROCESS_ROUTE_QUESTION',
                 success: 'LBL_PA_PROCESS_ROUTED_SUCCESS'
+            },
+            'SendDocuSign': {
+                confirm: 'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION',
+                success: 'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS'
             }
         };
 
@@ -433,6 +449,17 @@
 
                     var self = this;
                     var pmseInboxUrl = app.api.buildURL('pmse_Inbox/engine_route', '', {}, {});
+
+                    if (action === 'SendDocuSign') {
+                        this.sendToDocuSign({
+                            pmseInboxUrl: pmseInboxUrl,
+                            data: data,
+                            buttonLangStrings: buttonLangStrings,
+                            action: action
+                        });
+
+                        return;
+                    }
 
                     app.api.call('update', pmseInboxUrl, data, {
                         success: function () {
@@ -474,6 +501,80 @@
                 app.router.navigate('Home', {trigger: true});
                 break;
         };
+    },
+
+    /**
+     * Send record to DocuSign
+     *
+     * @param {Object} options
+     */
+    sendToDocuSign: function(options) {
+        this.setupDocuSignDocumentCollection();
+
+        const ctxDocumentsCollection = app.controller.context.get('documentCollection');
+
+        const dsPayload = {
+            returnUrlParams: {
+                parentRecord: this.recordModel.module,
+                parentId: this.recordModel.get('id'),
+                token: app.api.getOAuthToken()
+            },
+            documents: _.pluck(ctxDocumentsCollection.models, 'id')
+        };
+
+        app.events.trigger('docusign:send:initiate', dsPayload);
+
+        //listen for ds action to complete in order to mark the case as done
+        this.listenTo(app.events, 'docusign:send:finished', function() {
+            app.api.call('update', options.pmseInboxUrl, options.data, {
+                success: _.bind(function() {
+                    app.alert.show('success_save_process', {
+                        level: 'success',
+                        messages: app.lang.get(options.buttonLangStrings[options.action].success, 'pmse_Inbox'),
+                        autoClose: true
+                    });
+                    this.recordModel.setSyncedAttributes(options.data);
+                    this.redirectCase();
+                }, this),
+                error: function(error) {
+                    app.alert.dismiss('upload');
+                    const message = (error && error.message) ? error.message : 'EXCEPTION_FATAL_ERROR';
+                    app.alert.show('error_save_process', {
+                        level: 'error',
+                        messages: message
+                    });
+                }
+            });
+        }.bind(this));
+    },
+
+    /**
+     * Setup a collection with documents to be send to DocuSign
+     */
+    setupDocuSignDocumentCollection: function() {
+        if (app.controller.context.get('documentCollection') instanceof app.data.beanCollection === false) {
+            const documentsCollection = app.data.createBeanCollection('Documents');
+            app.controller.context.set('documentCollection', documentsCollection);
+        }
+
+        let subpanels;
+        try {
+            subpanels = app.controller.layout
+                .getComponent('')
+                .getComponent('sidebar')
+                .getComponent('main-pane')
+                .getComponent('filterpanel')
+                .getComponent('subpanels');
+        } catch (e) {
+            return;
+        }
+
+        const subpanelWithDocuments = _.find(subpanels._components, function(subpanel) {
+            return subpanel.module === 'Documents';
+        });
+
+        const ctxDocumentsCollection = app.controller.context.get('documentCollection');
+        ctxDocumentsCollection.models = subpanelWithDocuments.collection.models;
     },
 
     /**

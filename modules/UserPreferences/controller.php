@@ -16,8 +16,8 @@ class UserPreferencesController extends SugarController
         $this->view = 'ajax';
         global $current_user;
         if(!empty($current_user)) {
-           $height = isset($_REQUEST['height']) ? $_REQUEST['height'] : '325px';
-           $width =  isset($_REQUEST['width']) ? $_REQUEST['width'] : '95%';
+            $height = $_REQUEST['height'] ?? '325px';
+            $width = $_REQUEST['width'] ?? '95%';
            $current_user->setPreference('text_editor_height', $height);
            $current_user->setPreference('text_editor_width', $width);
            $current_user->savePreferencesToDB();

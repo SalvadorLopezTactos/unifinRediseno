@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => '查看预测历史记录',
     'LBL_FORECAST_HISTORY' => '预测：历史记录',
     'LBL_FORECAST_HISTORY_TITLE' => '历史',
+    'LBL_TAB_COMMITMENT' => '提交',
+    'LBL_CURRENT' => '当前',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => '时段',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'修改人',
     'LBL_WK_VERSION' => '版本',
     'LBL_WK_REVISION' => '修订版本',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => '需要 Sugar Sell Premier 才能访问指标 API',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => '时段:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => '您要提交这些金额吗？',
     'ERR_FORECAST_AMOUNT' => '必须提交数字金额。',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => '包含的流水线',
+    'LBL_UPSIDE_PIPELINE' => '上部流水线',
+    'LBL_EXCLUDED_PIPELINE' => '排除的流水线',
+    'LBL_WON' => '谈成',
+    'LBL_LOST' => '丢单',
+    'LBL_ALL' => '全部',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => '过滤器指南',
+    'LBL_HELP_MAIN_BODY' => '所有指标仅包括属于所选用户的商业机会、时间段以及您应用的任何其他筛选条件',
+    'LBL_FORECAST_HELP' => '已经谈成或包含在 {{{forecastStage}}} 中的商业机会',
+    'LBL_INCLUDED_PIPELINE_HELP' => '打开具有 {{{commitStageValue}}} 的 {{{forecastStage}}} 商业机会',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => '打开包含的 {{{forecastStage}}} 中商业机会',
+    'LBL_UPSIDE_PIPELINE_HELP' => '打开具有 {{{commitStageValue}}} 的 {{{forecastStage}}} 商业机会',
+    'LBL_EXCLUDED_PIPELINE_HELP' => '打开具有 {{{commitStageValue}}} 的 {{{forecastStage}}} 商业机会',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => '打开排除的 {{{forecastStage}}} 中商业机会',
+    'LBL_WON_HELP' => '已经谈成的商业机会',
+    'LBL_LOST_HELP' => '已经丢单的商业机会',
+    'LBL_ALL_HELP' => '全部商业机会',
+
+
     // js error strings
     'LBL_FC_START_DATE' => '开始日期',
     'LBL_FC_USER' => '安排为',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => '提交',
     'LBL_TEAM_COMMITMENT' => '团队提交',
     'LBL_FORECASTED' => '预测',
+    'LBL_OPPORTUNITY_FORECAST' => '预测中的商业机会',
+    'LBL_REVENUELINEITEM_FORECAST' => '预测中的营收单项',
+    'LBL_LAST_COMMITMENT' => '上次承诺',
     'LBL_ADJUSTED_TOTAL' => '调整后的总额',
     'LBL_COMMIT_STAGE' => '提交阶段',
     'LBL_SALES_STAGE' => '销售阶段：',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '（调整后的）',
     'LBL_SAVE_DRAFT' => '保存',
     'LBL_CHANGES_BY' => '按 {0}改变',
-    'LBL_FORECAST_SETTINGS' => '设置',
+    'LBL_FORECAST_SETTINGS' => '预测设定',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => '预测设置',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '财政年度开始日期：',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '配置将在预测模块在使用的时间段。<br><br>请注意，初始设置后无法更改时间段设置。<br><br>首先，通过选择会计年度的开始日期。然后选择要预测时间段的类型。日期范围会根据您的选择自动计算时间期间。子时间周期是预测工作表的基础。<br><br>在可见的未来和过去的时间段将决定可见分时段预测模块的数量。用户能够查看和编辑在可见子期间的预测数字。',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '配置对{{forecastByModule}}进行分类的方式。<br><br>请注意，首次提交后无法更改范围设置。对于升级的实例，范围设置与现有预测数据锁定在一起。<br><br>您可以根据概率范围选择两个或多个类别，也可以创建不基于概率的类别。<br><br>在自定义类别的左侧有复选框；使用这些来决定哪些范围将包括在提交的预测金额中，并向经理报告。 <br><br>用户可以从工作表中手动更改{{forecastByModule}}的包含/排除状态和类别。',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '配置对 {{forecastByModule}} 进行分类的方式。<br><br>请注意，第一次提交后无法更改范围设置。对于升级的实例，范围设置与现有预测数据锁定。<br><br>您可以根据概率范围选择两个或多个类别，或创建不基于概率的类别。 <br><br>自定义类别左侧有复选框；使用这些复选框来决定哪些范围将包含在承诺并报告给经理的预测数量中。<br><br>用户可以从其工作表中手动更改 {{forecastByModule}} 的包含/排除状态和类别。',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => '选择您想让用户填写的每个 {{forecastByModuleSingular}} 预测列。请注意可能的金额会绑定{{forecastByModule}}中显示的金额，原因是不能隐藏这个可能列。',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '选择您想在预测模块中查看哪些列。将结合工作表字段列表，并允许用户选择如何配置其视图。',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => '我是预测帮助文本的一个占位符',

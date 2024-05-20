@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Šablóna? :',
     'LBL_DET_TEMPLATE_TYPE'=>'Typ dokumentu:',
     'LBL_TEAM'=> 'Tím:',
+    'LBL_IS_SHARED' => 'Dostupné externe:',
     'LBL_DOC_DESCRIPTION'=>'Popis:',
     'LBL_DOC_ACTIVE_DATE'=> 'Dátum zverejnenia:',
     'LBL_DOC_EXP_DATE'=> 'Dátum expirácie:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Odoslať do DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Synchronizovať s Diskom Google',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Synchronizovať všetko s Diskom Google',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Synchronizovať všetko s OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Synchronizovať s OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Synchronizovať všetko s Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Synchronizovať s Dropbox',
 );

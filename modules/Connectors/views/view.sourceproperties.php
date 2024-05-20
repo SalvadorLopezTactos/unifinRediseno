@@ -38,7 +38,7 @@ class ViewSourceProperties extends ViewList {
             // Get the required fields for the connector, if there are any
             $fields = $source->getRequiredConfigFields();
             foreach ($fields as $field_id) {
-                $label = isset($connector_language[$field_id]) ? $connector_language[$field_id] : $field_id;
+                $label = $connector_language[$field_id] ?? $field_id;
                 $required_fields[$field_id] = $label;
             }
 

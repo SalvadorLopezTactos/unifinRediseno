@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Бутони на формата',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Одобри/Отхвърли',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Маршрутизирай',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Изпращане към DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Други опции за маршрутизиране',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Проемни отговорника на записа',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Екип',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Обединяване на документи',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Избор...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Обединяване на документи към PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Изпращане на обединен документ по електронна поща',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Обединяване на документи',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Типът на концентриращия шлюз не съвпада с типа шлюз на входящия поток',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Разделящите шлюзове разширяват процесите в множество разклонения. Когато се използва концентриращ шлюз за повторно обединяване на тези разклонения в един път, трябва да се използва правилният тип концентриращ шлюз в зависимост от типа на разделящия шлюз, който е използван за създаване на разклоненията. За разклоненията, създадени с ексклузивни или основани на събитие разделящи шлюзове, използвайте ексклузивен концентриращ шлюз, за да ги обедините отново. За разклоненията, създадени с паралелни или инклузивни разделящи шлюзове, използвайте паралелен концентриращ шлюз, за да ги обедините отново.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Поле на модула',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Връзка на модул',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Потребител',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Роля',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Екип',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Активност на формуляр',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Бизнес правило',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Действие на бизнес правило',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Шаблон на електронно писмо',
 );

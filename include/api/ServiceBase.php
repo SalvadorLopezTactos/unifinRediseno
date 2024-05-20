@@ -27,7 +27,7 @@ abstract class ServiceBase implements LoggerAwareInterface
     public $action = 'view';
 
     abstract public function execute();
-    abstract protected function handleException(Exception $exception);
+    abstract protected function handleException(\Throwable $exception);
 
     protected function loadServiceDictionary($dictionaryName) {
         $dict = new $dictionaryName();

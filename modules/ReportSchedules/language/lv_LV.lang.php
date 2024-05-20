@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Pārskatu grafiku ierakstu instrumentu panelis',
     'LBL_FILE_TYPE' => 'Faila veids(i)',
+    'LBL_EMBED_REPORT' => 'Iegult ziņojumu e-pastā',
+    'LBL_EMBED_REPORT_INFO' => 'Piezīme: ja atskaite pārsniedz 200 rindas, mēs pievienosim ziņojumu kā CSV failu.',
 );

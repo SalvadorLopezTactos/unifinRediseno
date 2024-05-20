@@ -19,9 +19,9 @@
 class RecipientsCollection
 {
     // constants used for documenting which Add methods are valid
-    const FunctionAddTo  = "addTo";
-    const FunctionAddCc  = "addCc";
-    const FunctionAddBcc = "addBcc";
+    public const FunctionAddTo  = "addTo";
+    public const FunctionAddCc  = "addCc";
+    public const FunctionAddBcc = "addBcc";
 
     // private members
     private $to;

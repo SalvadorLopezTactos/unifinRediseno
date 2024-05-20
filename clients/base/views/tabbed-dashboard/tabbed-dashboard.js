@@ -218,7 +218,6 @@
         }
 
         if (!_.isUndefined(options.tabs)) {
-            this.$el.addClass('mb-2');
             this.tabs = options.tabs;
             this.context.set('tabs', this.tabs);
             this.context.set('activeTab', this.activeTab);
@@ -274,9 +273,12 @@
      */
     _getSideDrawer: function() {
         var dashboard = this.closestComponent('dashboard');
-        var dmComponent = dashboard.getComponent('dashlet-main');
+        if (dashboard) {
+            var dmComponent = dashboard.getComponent('dashlet-main');
 
-        return dmComponent.getComponent('side-drawer');
+            return dmComponent.getComponent('side-drawer');
+        }
+        return null;
     },
 
     /**

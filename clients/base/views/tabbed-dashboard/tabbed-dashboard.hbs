@@ -19,19 +19,17 @@
                     class="ellipsis_inline"
                     data-index="{{@index}}"
                     data-toggle="tab"
-                    data-original-title="{{str name}}"
+                    data-original-title="{{str name module params}}"
                 >
                     {{#if icon}}
                         {{#if icon.module}}
-                            <span class="label label-module label-module-sm label-{{icon.module}}">
-                                {{moduleIconLabel icon.module}}
-                            </span>
+                            {{moduleLabel icon.module 'sm'}}
                         {{/if}}
                         {{#if icon.image}}
                             {{{icon.image}}}
                         {{/if}}
                     {{/if}}
-                    <span class="tab-title font-semibold">{{str name}}</span>
+                    <span class="tab-title font-semibold">{{str name module params}}</span>
 
                     {{#each badges}}
                         {{field ../../this}}

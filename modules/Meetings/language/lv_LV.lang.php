@@ -222,4 +222,10 @@ Lai izveidotu {{meetings_singular_module}}:
 - Spiediet "Izvēlēties dalībnieku", lai pievienotu esošo lietotāju, kontaktpersonu vai interesentu modulim {{meetings_singular_module}}.
 - Spiediet uz "pluss" ikonas, kas atrodas pa labi no "Izvēlēties dalībnieku", lai izveidotu moduļa {{meetings_singular_module}} dalībnieku kā jaunu Sugar ierakstu.
 3. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta izveidi un atgrieztos iepriekšējā lapā.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Ir Smart Guide tikšanās',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Apakšuzdevumi',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Apakšzvani',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Apakštikšanās',
 );

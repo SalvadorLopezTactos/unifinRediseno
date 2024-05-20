@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Nenhum segredo de cliente definido',
     'LBL_RESEND_BUTTON_LABEL' => 'Reenviar',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Obter envelope',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Tipo de serviço em nuvem',
+    'LBL_CLOUD_PATH' => 'Caminho da nuvem',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Dashboard da lista de envelopes do DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Envelopes recentes do DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de focos de envelopes do DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'Documento de ',
+    'LBL_NEW_ENVELOPE' => 'Novo Envelope',
     'LBL_DOCUMENT_IS_NOW' => ' agora é ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'Erro do DocuSign. Não foi possível obter o ID da conta com base no token de acesso',
     'LBL_ERROR_RESEND' => 'Não foi possível realizar o reenvio do DocuSign. O estado do envelope deve ser "enviado"',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Actualização falhou',
     'LBL_ERROR_FETCH_TIME' => 'As regras do DocuSign não permitem que várias solicitações sejam enviadas para o mesmo envelope dentro de 15 minutos',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Ocorreu um erro. Não foi possível actualizar o envelope. Verifique os registos!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Ocorreu um erro. Não foi possível listar modelos. Verifique os registos!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Ocorreu um erro. Não foi possível obter o modelo. Verifique os registos!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Envelope não concluído',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'O estado do envelope no DocuSign é agora ',
     'LBL_OVERVIEW' => 'Visão Geral',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Adicionar Documento',
     'LBL_BUTTON_SEND' => 'Enviar',
     'LBL_BUTTON_CLEAR' => 'Limpar',
-    'LBL_MISSING_OBJECT' => 'O objecto do DocuSign não está na janela',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Usar modelo',
     'LBL_PLEASE_LOG_IN' => 'Inicie sessão no DocuSign primeiro!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Não é possível descarregar este documento. Foi criado por outro utilizador!',
     'LBL_SEND_NOT_ALLOWED' => 'Não é possível enviar este envelope. Foi criado por outro utilizador!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Assinado',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Não foi possível descarregar o documento. Verifique os registos!',
     'LBL_DOCUMENT_COMPLETED' => 'Concluído',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Informação de DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'é agora',
+    'LBL_SETTINGS_TITLE' => 'Definições do DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'Comportamento de selecção do destinatário',
+    'LBL_RECIPIENT_NAME' => 'Nome',
+    'LBL_RECIPIENT_EMAIL' => 'E-mail',
+    'LBL_RECIPIENT_TYPE' => 'Tipo',
+    'LBL_TEMPLATE_NAME' => 'Nome',
+    'LBL_RECIPIENT_SELECT' => 'Seleccionar...',
+    'LBL_RECIPIENT_ROLE' => 'Função',
+    'LBL_SELECT_BUTTON_LABEL' => 'Seleccionar',
+    'LBL_BACK_BUTTON_LABEL' => 'Voltar',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Falha ao obter potenciais destinatários!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Falha ao obter modelos!',
 ];

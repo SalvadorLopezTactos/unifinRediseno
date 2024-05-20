@@ -52,11 +52,6 @@
     _select2formatSelectionTemplate: null,
 
     /**
-     * Label for `Download all`.
-     */
-    download_label: '',
-
-    /**
      * Count of uploaded files.
      */
     uploaded: 0,
@@ -189,7 +184,6 @@
         if (this.action == 'noaccess') {
             return;
         }
-        this.download_label = (this.value && this.value.length > 1) ? 'LBL_DOWNLOAD_ALL' : 'LBL_DOWNLOAD_ONE';
         // Please, do not put this._super call before acl check,
         // due to _loadTemplate function logic from sidecar/src/view.js file
         this._super('_render', []);
@@ -365,6 +359,11 @@
             });
             return;
         }
+
+        if (app.config.platform === 'portal') {
+            data.record.portal_flag = 1;
+        }
+
         var file = this.getUploadedFileBean(data);
         this.addUploadedFileToCollection(this.model.get(this.name), file);
 
@@ -473,6 +472,15 @@
             },
             {iframe: this.$el}
         );
+    },
+
+    /**
+     * Check if a field has a value (selected file/files).
+     * @return {boolean} True if the field is empty.
+     */
+    isFieldEmpty: function() {
+        let value = this.model.get(this.name);
+        return _.isObject(value) && _.isEmpty(value.models);
     },
 
     /**

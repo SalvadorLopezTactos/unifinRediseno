@@ -26,7 +26,7 @@ class MappingWithSingleType extends Mapping
     /**
      * default type name for ES 6.x
      */
-    const DEFAULT_TYPE_NAME = '_doc';
+    public const DEFAULT_TYPE_NAME = '_doc';
 
     /**
      * overwrite the default behavior

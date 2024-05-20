@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Невалидна стойност за {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Стойността трябва да бъде между  {{min}} и {{max}}',
-    'LBL_HISTORY_LOG' => 'Последно изпращане',
+    'LBL_HISTORY_LOG' => 'Последен ангажимент',
     'LBL_NO_COMMIT' => 'Няма предишни изпращания',
 
     'LBL_MANGER_SAVED' => 'Мениджърът е съхранен'

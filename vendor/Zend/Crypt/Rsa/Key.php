@@ -28,6 +28,7 @@
  */
 class Zend_Crypt_Rsa_Key implements Countable
 {
+    public $_certificateString;
     /**
      * @var string
      */

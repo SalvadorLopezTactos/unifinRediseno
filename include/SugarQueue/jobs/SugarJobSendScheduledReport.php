@@ -9,7 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
+use Sugarcrm\Sugarcrm\Reports\ReportFactory;
+use Sugarcrm\Sugarcrm\Reports\Schedules\ReportSchedules;
+use Sugarcrm\Sugarcrm\Reports\Schedules\ReportSchedulesHelper;
+use Sugarcrm\Sugarcrm\Util\Uuid;
 
 /**
  * Class to run a job which should submit report to a single user and schedule next run time
@@ -35,6 +38,8 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
      */
     public function run($data)
     {
+        $reportFilename = null;
+        $csvFileName = null;
         global $current_user;
         global $current_language;
         global $locale;
@@ -43,6 +48,9 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
         $this->job->runnable_data = $data;
 
         $report_schedule_id = $data;
+
+        $dataTableHtml = '';
+        $chartImage = '';
 
         $reportSchedule = new ReportSchedule();
         $scheduleInfo = $reportSchedule->getInfo($report_schedule_id);
@@ -88,30 +96,55 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
             return false;
         } else {
             // default to PDF
-            $fileType = $scheduleInfo['file_type'] ? $scheduleInfo['file_type'] : 'PDF';
+            $fileType = $scheduleInfo['file_type'] ?: 'PDF';
+
+            $embedChart = false;
+            $embedDataTable = false;
+            $embedReport = $scheduleInfo['embed_report'];
+
+            if (($embedReport === 'Chart' || $embedReport === 'Chart and Data Table') &&
+                (!$reporter->chart_type || $reporter->chart_type !== 'none')) {
+                $embedChart = true;
+            }
+
+            if ($embedReport === 'Data Table' || $embedReport === 'Chart and Data Table') {
+                $embedDataTable = true;
+            }
+
+            if ($embedChart) {
+                $fileType = '';
+                $chartImage = $this->embedChart($reporter);
+            }
+
+            if ($embedDataTable) {
+                $data = $this->embedDataTable($reporter);
+                $fileType = $data['fileType'];
+                $dataTableHtml = $data['dataTableHtml'];
+            }
 
             $GLOBALS["log"]->debug("-----> Reporter settings attributes");
             $reporter->layout_manager->setAttribute("no_sort", 1);
 
             $GLOBALS["log"]->debug("-----> Reporter Handling PDF output");
             $filesToUnlink = [];
-            if ($fileType == 'PDF') {
-                require_once 'modules/Reports/templates/templates_tcpdf.php';
-                $reportFilename = template_handle_pdf($reporter, false);
-                $filesToUnlink[] = $reportFilename;
-            } elseif ($fileType == 'CSV') {
-                require_once 'modules/Reports/templates/templates_export.php';
-                $csvFileName = template_handle_export($reporter, false);
-                $filesToUnlink[] = $csvFileName;
-            } else { // both PDF and CSV
-                // necessary to make copy of reporter because after making PDF we clear $select_fields
-                $csvReporter = clone $reporter;
-                require_once 'modules/Reports/templates/templates_tcpdf.php';
-                $reportFilename = template_handle_pdf($reporter, false);
-                require_once 'modules/Reports/templates/templates_export.php';
-                $csvFileName = template_handle_export($csvReporter, false);
-                $filesToUnlink[] = $reportFilename;
-                $filesToUnlink[] = $csvFileName;
+
+            if (!empty($fileType)) {
+                if ($fileType == 'PDF') {
+                    require_once 'modules/Reports/templates/templates_tcpdf.php';
+                    $reportFilename = template_handle_pdf($reporter, false);
+                    $filesToUnlink[] = $reportFilename;
+                } elseif ($fileType == 'CSV') {
+                    require_once 'modules/Reports/templates/templates_export.php';
+                    $csvFileName = template_handle_export($reporter, false);
+                    $filesToUnlink[] = $csvFileName;
+                } else { // both PDF and CSV
+                    require_once 'modules/Reports/templates/templates_tcpdf.php';
+                    $reportFilename = template_handle_pdf($reporter, false);
+                    require_once 'modules/Reports/templates/templates_export.php';
+                    $csvFileName = template_handle_export($reporter, false);
+                    $filesToUnlink[] = $reportFilename;
+                    $filesToUnlink[] = $csvFileName;
+                }
             }
 
             // get the recipient's data...
@@ -142,13 +175,15 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                 // remove these characters from the attachment name
                 $attachmentName = str_replace($charsToRemove, "", $reportName . ' ' . $reportTime);
                 // replace spaces with the underscores
-                if ($fileType == 'PDF') {
-                    $this->attachFile($fileType, $mailer, $attachmentName, $reportFilename);
-                } elseif ($fileType == 'CSV') {
-                    $this->attachFile($fileType, $mailer, $attachmentName, $csvFileName);
-                } else {
-                    $this->attachFile('PDF', $mailer, $attachmentName, $reportFilename);
-                    $this->attachFile('CSV', $mailer, $attachmentName, $csvFileName);
+                if (!empty($fileType)) {
+                    if ($fileType == 'PDF') {
+                        $this->attachFile($fileType, $mailer, $attachmentName, $reportFilename);
+                    } elseif ($fileType == 'CSV') {
+                        $this->attachFile($fileType, $mailer, $attachmentName, $csvFileName);
+                    } else {
+                        $this->attachFile('PDF', $mailer, $attachmentName, $reportFilename);
+                        $this->attachFile('CSV', $mailer, $attachmentName, $csvFileName);
+                    }
                 }
 
                 $emailConfig = SugarConfig::getInstance()->get('emailTemplate');
@@ -158,13 +193,17 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                 $emailTemplate = BeanFactory::getBean('EmailTemplates', $templateID);
 
                 if (!empty($emailTemplate) && $emailTemplate->id) {
+                    $siteUrl = SugarConfig::getInstance()->get('site_url');
                     $variables = [
+                        '$site_url' => !empty($siteUrl) ? $siteUrl : '',
+                        '$report_id' => !empty($savedReport->id) ? $savedReport->id : '',
                         '$assigned_user' => !empty($recipientName) ? $recipientName : '',
                         '$report_name' => !empty($reportName) ? $reportName : '',
                         '$report_time' => !empty($reportTime) ? $reportTime : '',
                     ];
                     $subject = str_replace(array_keys($variables), array_values($variables), $emailTemplate->subject);
-                    $body = str_replace(array_keys($variables), array_values($variables), $emailTemplate->body);
+                    $emailBody = $dataTableHtml || $chartImage ? $emailTemplate->body_html : $emailTemplate->body;
+                    $body = str_replace(array_keys($variables), array_values($variables), $emailBody);
                 } else {
                     // set the subject of the email
                     $subject = $mod_strings["LBL_SUBJECT_SCHEDULED_REPORT"] . $reportName .
@@ -177,13 +216,38 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                         $body .= " {$recipientName}";
                     }
 
-                    $body .= ",\n\n" .
+                    $body .= ",<br><br>" .
                         $mod_strings["LBL_SCHEDULED_REPORT_MSG_INTRO"] .
-                        "\n\n" .
+                        "<br><br>" .
                         $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY1"] .
-                        $reportName . "\n\n" .
+                        $reportName . "<br><br>" .
                         $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY2"] .
-                        $reportTime;
+                        $reportTime .
+                        "<br><br>";
+                }
+
+                if ($chartImage) {
+                    $fileName = Uuid::uuid4() . '.png';
+                    $processChartImg = str_replace('data:image/png;base64,', '', $chartImage);
+
+                    //upload chart image locally
+                    $uploadFile = new UploadFile();
+                    $uploadFile->set_for_soap($fileName, base64_decode($processChartImg));
+                    $uploadFile->final_move($fileName);
+
+                    $fileLocation = $uploadFile->get_upload_path($fileName);
+                    $mimeType = $uploadFile->getMimeSoap($fileName);
+
+                    $embedImage = new EmbeddedImage($fileName, $fileLocation, $fileName, Encoding::Base64, $mimeType);
+                    $mailer->addAttachment($embedImage);
+
+                    $body .= "<img src='cid:$fileName'/><br>";
+
+                    $filesToUnlink[] = $fileLocation;
+                }
+
+                if ($dataTableHtml) {
+                    $body .= $dataTableHtml;
                 }
 
                 $textOnly = EmailFormatter::isTextOnly($body);
@@ -239,5 +303,70 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
         $attachmentName = str_replace(" ", "_", "{$attachmentName}.{$typeLower}");
         $attachment = new Attachment($filename, $attachmentName, Encoding::Base64, "application/{$typeLower}");
         $mailer->addAttachment($attachment);
+    }
+
+    /**
+     * Retrieves the html for data table
+     *
+     * @param Report $reporter
+     * @return string[]
+     */
+    private function embedDataTable(Report $reporter)
+    {
+        $fileType = '';
+
+        $scheduledReport = new ReportSchedules($reporter);
+        $dataTableHtml = $scheduledReport->getDataTableHtml();
+
+        if ($dataTableHtml === 'exceeded') {
+            $fileType = 'CSV';
+            $dataTableHtml = '';
+        }
+
+        return [
+            'fileType' => $fileType,
+            'dataTableHtml' => $dataTableHtml,
+        ];
+    }
+
+    /**
+     * Gets the chart data
+     *
+     * @param Report $reporter
+     * @return null|string
+     */
+    private function embedChart(Report $reporter): ?string
+    {
+        $helper = new ReportSchedulesHelper();
+        $sugarConfig = \SugarConfig::getInstance();
+        $siteUrl = $sugarConfig->get('site_url');
+
+        $reporter = ReportFactory::getReport('summary', ['record' => $reporter->saved_report_id]);
+        $chartConfig = $reporter->buildChartConfig();
+
+        $width = 800;
+        $height = 600;
+
+        $chartConfig['width'] = $width;
+        $chartConfig['height'] = $height;
+
+        $chartConfig['url'] = $siteUrl;
+
+        if (!empty($chartConfig['data']) && !empty($chartConfig['type']) && !empty($chartConfig['data']['datasets'])) {
+            $response = $helper->retrieveChartData($chartConfig);
+            $response = $response->getBody()->getContents();
+            $response = json_decode($response);
+
+            if (isset($response->success) && $response->success === true && isset($response->chart)) {
+                return $response->chart;
+            } else {
+                global $log;
+
+                $message = $response->message;
+                $log->fatal("Chart Service: {$message}");
+            }
+        }
+
+        return null;
     }
 }

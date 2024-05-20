@@ -50,7 +50,7 @@ class SugarSpot
     {
         $result = $seed->db->query("SELECT COUNT(*) as c FROM ($main_query) main");
         $row = $seed->db->fetchByAssoc($result);
-        return isset($row['c']) ? $row['c'] : 0;
+        return $row['c'] ?? 0;
     }
 
     /**
@@ -386,9 +386,7 @@ class SugarSpot
                 $selectFields = rtrim($selectFields,', ');
             }
 
-            $showDeleted = (isset($options['deleted']))
-                        ? $options['deleted']
-                            : 0;
+            $showDeleted = $options['deleted'] ?? 0;
 
             if (empty($where_clauses)) {
                 if ($allowBlankSearch) {
@@ -437,8 +435,7 @@ class SugarSpot
                 } else {
                     continue;
                 }
-            }
-            else if (count($where_clauses) > 1) {
+            } elseif ((is_countable($where_clauses) ? count($where_clauses) : 0) > 1) {
                 $query_parts = array();
 
                 $ret_array_start = $seed->create_new_list_query(
@@ -665,8 +662,8 @@ class SugarSpot
             $patterns[1] = substr($patterns[1], 0, (strlen($patterns[1]) - 1));
         }
 
-        $module_exists = stripos($key, (string) $patterns[1]); //primary module name.
-        $pattern_exists = stripos($key, (string) $patterns[0]); //pattern provided by the user.
+        $module_exists = stripos($key, $patterns[1]); //primary module name.
+        $pattern_exists = stripos($key, $patterns[0]); //pattern provided by the user.
         if ($module_exists !== false and $pattern_exists !== false) {
             $GLOBALS['matching_keys'] = array_merge(array(array('NAME' => $key, 'ID' => $key, 'VALUE' => $item1)), $GLOBALS['matching_keys']);
         }

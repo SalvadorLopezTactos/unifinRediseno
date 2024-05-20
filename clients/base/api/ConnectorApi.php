@@ -37,7 +37,7 @@ class ConnectorApi extends SugarApi
      */
     public function getConnectorManager()
     {
-        if (empty($this->connectorManger)) {
+        if (empty($this->connectorManager)) {
             $this->connectorManager = new ConnectorManager();
         }
         return $this->connectorManager;

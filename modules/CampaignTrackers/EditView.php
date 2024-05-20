@@ -66,10 +66,10 @@ $href = 'index.php?' . http_build_query([
     ]);
 $params[] = sprintf(
     '<a href="%s">%s</a>',
-    htmlspecialchars($href),
-    htmlspecialchars($campaignName)
+    htmlspecialchars($href, ENT_COMPAT),
+    htmlspecialchars($campaignName, ENT_COMPAT)
 );
-$params[] = htmlspecialchars($mod_strings['LBL_MODULE_NAME']);
+$params[] = htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT);
 $xtpl->assign('PAGE_TITLE', getClassicModuleTitle($focus->module_dir, $params, true));
 
 $request = InputValidation::getService();

@@ -173,7 +173,7 @@
             if (response === "true") {
                 var app = parent.SUGAR.App;
                 app.metadata.sync(function (){
-                    app.additionalComponents.header.getComponent('globalsearch').populateModules();
+                    app.additionalComponents['header-nav'].getComponent('globalsearch').populateModules();
                 });
 
                 window.location.assign('#Administration');

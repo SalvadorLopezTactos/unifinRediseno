@@ -213,7 +213,10 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
      * @return {boolean}
      */
     BaseChart.prototype.shouldSaveChart = function() {
-        return !!(this.params.reportView && this.params.imageExportType && !this.params.isOnDrillthrough);
+        const isClassicSave = this.params.reportView && this.params.imageExportType && !this.params.isOnDrillthrough;
+        const isNewSave = _.has(this.params, 'saveChartAsImage') && this.params.saveChartAsImage === true;
+
+        return !!(isClassicSave) || !!(isNewSave);
     };
 
     /**
@@ -222,6 +225,15 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
      */
     BaseChart.prototype.getSavableChartElement = function() {
         return document.getElementById(`${this.params.chartElementId}_print`);
+    };
+
+    /**
+     * Check if chart is savable from Sidecar
+     *
+     * @return {boolean}
+     */
+    BaseChart.prototype.isSavableChartFromSidecar = function() {
+        return (_.has(this.params, 'saveChartAsImage') && this.params.saveChartAsImage === true);
     };
 
     /**
@@ -252,10 +264,14 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
         }
 
         let savableChartElement = this.getSavableChartElement();
+        const saveFromSidecar = this.isSavableChartFromSidecar();
+
         SUGAR.charts.saveChartToImage(
             Chart.getChart(savableChartElement),
             this.params.saved_report_id,
-            this.params.imageExportType
+            this.params.imageExportType,
+            null,
+            saveFromSidecar
         );
         this.hasSavedChart = true;
         this.destroyChart(savableChartElement);
@@ -398,6 +414,9 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                         total = this.sumValues(this.data.datasets[0].data);
                     } else if (isGroupedBarChart) {
                         total = this.sumValues(this.data.datasets.map(dataset => dataset.data[tooltip.dataIndex]));
+                    } else if (this.mutatedBarChart) {
+                        const allValues = _.chain(this.data.datasets).pluck('data').flatten().value();
+                        total = this.sumValues(allValues);
                     } else {
                         total = this.sumValues(tooltip.dataset.data);
                     }
@@ -468,7 +487,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             color: this.getTextColor(),
             callback: (value, index, values) => {
                 let props = this.getProperties();
-                const round = value < 10 ? 2 : null;
+                const round = (value < 10 || props.yDataType === 'currency') ? 2 : null;
                 return this.formatNumericTicks(value, props.yDataType === 'currency', round);
             },
         };
@@ -616,6 +635,19 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
     };
 
     /**
+     * Gets the colors to use for data labels
+     *
+     * @return {Array}
+     */
+    BaseChart.prototype.getDataLabelsColor = function() {
+        const grayBlack = '#2b2d2e'; // @gray90
+        const grayWhite = '#e5eaed'; // @gray30
+        return _.map(this.getColors(), function(color) {
+            return this.app.utils.isWhiteColor(color) ? grayBlack : grayWhite;
+        }, this);
+    };
+
+    /**
      * Gets the color to use for border elements of the charts
      * @return {string}
      */
@@ -743,6 +775,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
     function BarChart(data, params) {
         BaseChart.call(this, data, params);
         this.chartType = 'bar';
+        this.hiddenData = {};
 
         if ((this.params.reportView && this.isDiscreteData()) || this.params.barType === 'stacked') {
             this.params.dataType = 'grouped';
@@ -765,6 +798,58 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
         this.wrapperProperties = this.getChartWrapperProperties();
     }
     BarChart.prototype = Object.create(BaseChart.prototype);
+
+    /**
+     * BarChart options and callbacks for building tooltips
+     * @return {Object}
+     */
+    BarChart.prototype.getTooltipOptions = function() {
+        let tooltipOptions = BaseChart.prototype.getTooltipOptions.call(this);
+
+        if (this.params.orientation !== 'horizontal') {
+
+            /**
+             * Positioner function that keeps tooltip on screen (x Axis)
+             *
+             * @param {Array} elements
+             * @param {Object} eventPosition
+             *
+             * @return {Object}
+             */
+            window.Chart.Tooltip.positioners.alwaysOnScreenPositioner = function(elements, eventPosition) {
+                let xPos = eventPosition.x;
+                let yPos = eventPosition.y;
+
+                // only do this if we target an element of the chart
+                if (elements.length > 0) {
+                    const element = _.first(elements).element;
+                    const chartPos = $(element.$context.chart.canvas).position();
+                    const tooltipPos = element.tooltipPosition();
+                    const tooltipWidth = this.width;
+
+                    // check if the tooltip goes of screen on the left side
+                    // only do this for a vertical chart
+                    const left = chartPos.left + tooltipPos.x - tooltipWidth;
+
+                    if (left < 0 && !element.horizontal) {
+                        // place it onto the right of the element and change the caret to the left part
+                        xPos = tooltipPos.x + tooltipWidth + element.width;
+                        this.xAlign = 'left';
+                    }
+                }
+
+                return {
+                    x: xPos,
+                    y: yPos,
+                };
+            };
+
+            tooltipOptions.position = 'alwaysOnScreenPositioner';
+            tooltipOptions.xAlign = 'right';
+        }
+
+        return tooltipOptions;
+    };
 
     /**
      * Gets the default CSS properties that should be applied to any
@@ -850,9 +935,12 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
     BarChart.prototype.getChartOptions = function() {
         let isHorizontal = this.params.orientation === 'horizontal';
 
-        // For basic bar charts or bar charts with only one dataset, don't show legend
-        if (!['grouped', 'stacked'].includes(this.params.barType) || this.isSingleDataset()) {
-            this.params.show_legend = false;
+        // For basic bar charts or bar charts with only one dataset we need to transform the data
+        // so that we can display the legend
+        const isSimpleChart = !['grouped', 'stacked'].includes(this.params.barType) || this.isSingleDataset();
+
+        if (isSimpleChart) {
+            this.mutateToStacked();
         }
 
         if (!isHorizontal) {
@@ -866,6 +954,13 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             data: this.data,
             plugins: [ChartDataLabels],
             options: {
+                animation: {
+                    onComplete: function(animation) {
+                        if (animation.initial) {
+                            animation.chart.update();
+                        }
+                    }
+                },
                 indexAxis: isHorizontal ? 'y' : 'x',
                 responsive: true,
                 maintainAspectRatio: false,
@@ -919,7 +1014,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                     },
                     tooltip: this.getTooltipOptions(),
                     datalabels: {
-                        color: this.getTextColor(),
+                        color: this.getDataLabelsColor(),
                         anchor: this.getLabelAnchorValue(),
                         align: this.getLabelAlignValue(),
                         rotation: this.getLabelRotationValue(),
@@ -937,10 +1032,16 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                                 return true;
                             }
 
-                            // Only display the label if it accounts for at least 10% of the chart's total height.
-                            // This is to avoid unreadable labels on small bars.
-                            let value = context.dataset.data[context.dataIndex];
-                            return value > (this.getLargestColumnTotal() / 10);
+                            // Avoid unreadable labels on small bars.
+                            const pixelsPerDigit = 10;
+                            const value = context.dataset.data[context.dataIndex];
+                            const minBarSize = 10;
+                            const targetBarSize = Math.round(value).toString().length * pixelsPerDigit;
+                            const datasetMeta = context.chart.getDatasetMeta(context.datasetIndex);
+                            const barWidth = datasetMeta.data[context.dataIndex].width;
+                            const barHeight = datasetMeta.data[context.dataIndex].height;
+
+                            return barWidth >= targetBarSize && value > 0 && barHeight > minBarSize;
                         }).bind(this),
                     },
                 },
@@ -986,6 +1087,60 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             );
         }
         return chartDetails;
+    };
+
+    /**
+     * Transform a basic bar chart into a stacked one so that we can use legend
+     */
+    BarChart.prototype.mutateToStacked = function() {
+        if (_.isUndefined(this.rawData) ||
+            (_.isArray(this.rawData.label) && this.rawData.label.length === 1)) {
+            return;
+        }
+        this.params.stacked = true;
+        this.mutatedBarChart = true;
+
+        let formattedDataset = [];
+
+        if (_.isUndefined(this.data)) {
+            return;
+        }
+
+        const dataset = _.first(this.data.datasets);
+
+        if (!_.isUndefined(dataset)) {
+            _.each(dataset.data, function(value, idx) {
+                const columns = this.data.labels.length;
+                let values = [];
+
+                for (let columnIdx = 0; columnIdx < columns; columnIdx++) {
+                    if (columnIdx === idx) {
+                        values.push(value);
+                    } else {
+                        values.push(0);
+                    }
+                }
+
+                const undefinedLabel = this.app.lang.get('LBL_CHART_NO_LABEL');
+                const isLabelDefined = dataset.label && _.isString(dataset.label);
+                let label = this.data.labels[idx];
+
+                if (isLabelDefined && dataset.label.toLowerCase() !== undefinedLabel.toLowerCase()) {
+                    label = dataset.label;
+                }
+
+                formattedDataset.push({
+                    backgroundColor: dataset.backgroundColor[idx],
+                    barPercentage: dataset.barPercentage,
+                    categoryPercentage: dataset.categoryPercentage,
+                    data: values,
+                    label: label,
+                    maxBarThickness: dataset.maxBarThickness,
+                });
+            }, this);
+
+            this.data.datasets = formattedDataset;
+        }
     };
 
     /**
@@ -1037,6 +1192,10 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
      * Updates the chart colors, if a chart segment has been selected
      */
     BarChart.prototype.updateChartColors = function() {
+        if (this.mutatedBarChart) {
+            return;
+        }
+
         let isSingleDataset = this.rawData.values &&
             this.rawData.values[0] &&
             this.rawData.values[0].values.length === 1;
@@ -1138,7 +1297,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                     },
                     tooltip: this.getTooltipOptions(),
                     datalabels: {
-                        color: this.getTextColor(),
+                        color: this.getDataLabelsColor(),
                         anchor: 'center',
                         padding: 4,
                         formatter: (function(value, context) {
@@ -1170,7 +1329,13 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                     chart.ctx.fillStyle = this.getTextColor();
 
                     let textX = Math.round((width - chart.ctx.measureText(this.params.hole).width) / 2);
-                    let textY = height / 2;
+                    let textY = 0;
+
+                    if (!_.isUndefined(chart.legend) && chart.legend.height > 0) {
+                        textY = chart.legend.height;
+                    }
+
+                    textY = (textY + height) / 2;
 
                     chart.ctx.fillText(this.params.hole, textX, textY);
                     chart.ctx.save();
@@ -1230,8 +1395,11 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             type: this.chartType,
             data: this.data,
             options: {
+                pointHitRadius: 5,
+                pointHoverRadius: 5,
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: this.params.maintainAspectRatio ? this.params.maintainAspectRatio : false,
+                aspectRatio: this.params.aspectRatio ? this.params.aspectRatio : 2,
                 scales: {
                     x: {
                         title: {
@@ -1398,12 +1566,16 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
         }
 
         let savableChartElement = this.getSavableChartElement();
+        const saveFromSidecar = this.isSavableChartFromSidecar();
+
         Chart2.helpers.each(Chart2.instances, (function(instance) {
             if (instance.canvas.id === savableChartElement.id) {
                 SUGAR.charts.saveChartToImage(
                     instance,
                     this.params.saved_report_id,
-                    this.params.imageExportType
+                    this.params.imageExportType,
+                    null,
+                    saveFromSidecar
                 );
             }
         }).bind(this));
@@ -1442,7 +1614,7 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                 onClick: this.getClickHandler(),
                 plugins: {
                     datalabels: {
-                        color: this.getTextColor(),
+                        color: this.getDataLabelsColor(),
                         align: 'center',
                         formatter: (function(value, context) {
                             let props = this.getProperties();
@@ -1733,7 +1905,12 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
             let chart = SUGAR.charts.getChartInstance(data, params);
 
             if (chart.shouldSaveChart()) {
-                let savableChart = SUGAR.charts.getChartInstance(data, params, true);
+                let paramsForSaveChart = this.sugarApp.utils.deepCopy(params);
+
+                //we will show the title only for the export file
+                paramsForSaveChart.show_title = true;
+
+                let savableChart = SUGAR.charts.getChartInstance(data, paramsForSaveChart, true);
                 savableChart.createSavableChart();
             }
 
@@ -2125,12 +2302,25 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
                         break;
                     case 'enum':
                     case 'radioenum':
-                        values.push(enums[def.table_key + ':' + def.name][label]);
+                        const data = enums[def.table_key + ':' + def.name][label];
+                        if (_.isArray(data)) {
+                            _.each(data, function(item) {
+                                values.push(item);
+                            });
+                        } else {
+                            values.push(data);
+                        }
+
                         break;
                     case 'date':
                         // convert to server format before sending
                         var date = new this.sugarApp.date(label, this.sugarApp.date.getUserDateFormat());
                         values.push(date.formatServer(true));
+                        break;
+                    case 'int':
+                        const numberSeparator = this.sugarApp.user.getPreference('number_grouping_separator');
+                        label = label.replaceAll(numberSeparator, '');
+                        values.push(label);
                         break;
                     default:
                         // returns [label]
@@ -2427,11 +2617,30 @@ function loadSugarChart(chartId, data, css, chartConfig, chartParams, callback) 
          * @param chartId
          * @param imageExt
          * @param saveTo
+         * @param saveFromSidecar
          */
-        saveChartToImage: function(chart, chartId, imageExt, saveTo) {
-            let uri = chart.toBase64Image(imageExt === 'jpg' ? 'image/jpeg' : 'image/png');
+        saveChartToImage: function(chart, chartId, imageExt, saveTo, saveFromSidecar) {
+            //we don't have a chart to print
+            //so there is nothing to be encoded and saved
+            if (!chart || chart && (chart.width === 0 && chart.height === 0)) {
+                return;
+            }
 
+            let uri = chart.toBase64Image(imageExt === 'jpg' ? 'image/jpeg' : 'image/png');
             let saveToUrl = saveTo || 'index.php?action=DynamicAction&DynamicAction=saveImage&module=Charts&to_pdf=1';
+
+            if (saveFromSidecar === true) {
+                // we have to get the bwc session id
+                this.sugarApp.bwc.login(false, function saveImage() {
+                    $.post(saveToUrl, {
+                        imageStr: uri,
+                        chart_id: chartId,
+                    });
+                });
+
+                return;
+            }
+
             $.post(saveToUrl, {
                 imageStr: uri,
                 chart_id: chartId,

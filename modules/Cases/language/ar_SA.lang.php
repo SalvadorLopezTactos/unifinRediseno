@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الحالات',
     'LBL_CASES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الحالات',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'تفاصيل الحالة',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'لوحة معلومات تركيز الحالات - وحدة التحكم',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم الحالات',
 
 	'ERR_DELETE_RECORD'					=> 'يجب تحديد رقم السجل لحذف الحساب.',
@@ -162,4 +162,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'تفاصيل SLA',
     'LBL_HOURS' => 'ساعات',
     'LBL_WIDGET_STATUS' => 'الحالة',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'تنظيم',
+    'LBL_CREATE_NEW' => 'إنشاء الآن',
+    'LBL_MANAGE' => 'إدارة',
+    'LBL_SEE_DETAILS' => 'عرض التفاصيل',
+    'LBL_HIDE_NEW' => 'إخفاء',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'الحالات',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'الحالة',
+    'LBL_KIOSK_CREATE' => 'إنشاء حالة',
+    'LBL_KIOSK_SUBJECT' => 'الموضوع',
+    'LBL_KIOSK_CASE_ID' => 'معرّف الحالة',
+    'LBL_KIOSK_STATUS' => 'الحالة',
+    'LBL_KIOSK_CATEGORY' => 'الفئة',
+    'LBL_KIOSK_SUBMITTED_BY' => 'إرشا في {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'الأولوية',
+    'LBL_KIOSK_CREATE_CASE' => 'اتصل بنا',
+    'LBL_KIOSK_DESCRIPTION' => 'الوصف',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'تم إرسال طلبك بنجاح.',
+    'LBL_KIOSK_ATTACHED' => 'كل المرفقات',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'المستخدمون الخارجيون',
 );

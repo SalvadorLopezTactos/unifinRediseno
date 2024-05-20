@@ -38,7 +38,7 @@ class MinRelatedExpression extends NumericExpression
             //If we don't have a context provided, we have to guess. This can be a large performance hit.
             $this->setContext();
         }
-        $toRate = isset($this->context->base_rate) ? $this->context->base_rate : null;
+        $toRate = $this->context->base_rate ?? null;
         $checkedTypeForCurrency = false;
         $relFieldIsCurrency = false;
 

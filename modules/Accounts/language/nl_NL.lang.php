@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Dashboard accountlijst',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Dashboard accountrecord',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer accounts',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Accountgegevens',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Focus drawer-accounts - console',
     'LBL_NEXT_RENEWAL_DATE' => 'Datum volgende verlenging',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Datum volgende verlenging',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Accountnaam/industrie',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Locatie',
     'LBL_PURCHASES' => 'Aankopen',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tijdlijn account',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiseren',
+    'LBL_CREATE_NEW' => 'Maak Nieuwe',
+    'LBL_MANAGE' => 'Beheren',
+    'LBL_SEE_DETAILS' => 'Bekijk details',
+    'LBL_HIDE_NEW' => 'Verbergen',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafieken',
@@ -207,4 +214,7 @@ Om een {{module_name}} aan te maken:
 2. Klik op "Opslaan" om het nieuwe record op te slaan en terug te keren naar de voorgaande pagina.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Organisatierapporten',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Externe gebruikers',
 );

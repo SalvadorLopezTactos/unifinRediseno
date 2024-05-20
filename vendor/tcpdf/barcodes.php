@@ -256,6 +256,7 @@ class TCPDFBarcode {
 	 * @access protected
 	 */
 	protected function barcode_code39($code, $extended=false, $checksum=false) {
+		$chr = [];
 		$chr['0'] = '111221211';
 		$chr['1'] = '211211112';
 		$chr['2'] = '112211112';
@@ -425,6 +426,7 @@ class TCPDFBarcode {
 	 * @access protected
 	 */
 	protected function barcode_code93($code) {
+		$chr = [];
 		$chr['0'] = '131112';
 		$chr['1'] = '111213';
 		$chr['2'] = '111312';
@@ -624,6 +626,7 @@ class TCPDFBarcode {
 	 * @access protected
 	 */
 	protected function barcode_msi($code, $checksum=false) {
+		$chr = [];
 		$chr['0'] = '100100100100';
 		$chr['1'] = '100100100110';
 		$chr['2'] = '100100110100';
@@ -683,6 +686,7 @@ class TCPDFBarcode {
 	 * @access protected
 	 */
 	protected function barcode_s25($code, $checksum=false) {
+		$chr = [];
 		$chr['0'] = '10101110111010';
 		$chr['1'] = '11101010101110';
 		$chr['2'] = '10111010101110';
@@ -754,6 +758,7 @@ class TCPDFBarcode {
 	 * @access protected
 	 */
 	protected function barcode_i25($code, $checksum=false) {
+		$chr = [];
 		$chr['0'] = '11221';
 		$chr['1'] = '21112';
 		$chr['2'] = '12112';
@@ -1832,8 +1837,8 @@ class TCPDFBarcode {
 		$k = 0;
 		$bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 3, 'bcode' => array());
 		for ($i = 0; $i < 65; ++$i) {
-			$asc = (($characters[$asc_chr[$i]] & pow(2, $asc_pos[$i])) > 0);
-			$dsc = (($characters[$dsc_chr[$i]] & pow(2, $dsc_pos[$i])) > 0);
+			$asc = (($characters[$asc_chr[$i]] & 2 ** $asc_pos[$i]) > 0);
+			$dsc = (($characters[$dsc_chr[$i]] & 2 ** $dsc_pos[$i]) > 0);
 			if ($asc AND $dsc) {
 				// full bar (F)
 				$p = 0;

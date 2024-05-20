@@ -105,7 +105,8 @@ class FieldsMetaData extends SugarBean {
         return null;
     }
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 	    $data = parent::get_list_view_data();
 	    $data['VNAME'] = translate($this->vname, $this->custom_module);
 	    $data['NAMELINK'] = '<input class="checkbox" type="checkbox" name="remove[]" value="' . $this->id . '">&nbsp;&nbsp;<a href="index.php?module=Studio&action=wizard&wizard=EditCustomFieldsWizard&option=EditCustomField&record=' . $this->id . '" >';

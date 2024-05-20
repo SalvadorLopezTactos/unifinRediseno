@@ -168,6 +168,9 @@ class TeamSet extends SugarBean{
             return $this->id;
         }else{
             $id = $this->db->fromConvert($row['id'], 'id');
+            $primaryTeamId = $this->primary_team_id ?? '';
+            $this->retrieve($id);
+            $this->primary_team_id = $this->primary_team_id === '' ? $primaryTeamId : '';
             return $id;
         }
     }
@@ -275,7 +278,7 @@ class TeamSet extends SugarBean{
             AND team_memberships.user_id = ? AND team_memberships.deleted=0 group by tst.team_set_id';
         /** @var \Doctrine\DBAL\Result $stmt */
         $stmt = $GLOBALS['db']->getConnection()->executeQuery($sql, [$user_id]);
-        $results = $stmt->fetchFirstColumn();
+        $results = $stmt->iterateColumn();
 
         $newResults = array();
         foreach ($results as $result) {

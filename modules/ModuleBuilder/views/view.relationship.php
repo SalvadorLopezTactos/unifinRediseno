@@ -17,6 +17,14 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 class ViewRelationship extends SugarView
 {
     /**
+     * @var \Sugar_Smarty|mixed
+     */
+    public $smarty;
+    /**
+     * @var bool|mixed
+     */
+    public $fromModuleBuilder;
+    /**
      * @see SugarView::_getModuleTitleParams()
      */
     protected function _getModuleTitleParams($browserTitle = false)
@@ -121,14 +129,14 @@ class ViewRelationship extends SugarView
                 if (!empty($definition['lhs_vname'])) {
                     $definition['lhs_label'] = translate($definition['lhs_vname']);
                 } else {
-                    $definition['lhs_label'] = isset($modStrings[$relationship->getTitleKey()])?$modStrings[$relationship->getTitleKey()] : $relationship->lhs_module;
+                    $definition['lhs_label'] = $modStrings[$relationship->getTitleKey()] ?? $relationship->lhs_module;
                 }
 
                 $modStrings = return_module_language( $selected_lang, $relationship->lhs_module, true );
                 if (!empty($definition['rhs_vname'])) {
                     $definition['rhs_label'] = translate($definition['rhs_vname']);
                 } else {
-                    $definition['rhs_label'] = isset($modStrings[$relationship->getTitleKey(true)])?$modStrings[$relationship->getTitleKey(true)] : $relationship->rhs_module;
+                    $definition['rhs_label'] = $modStrings[$relationship->getTitleKey(true)] ?? $relationship->rhs_module;
                 }
             } else {
                 $reqRhsModule = $this->request->getValidInputRequest('rhs_module', 'Assert\ComponentName');
@@ -197,8 +205,7 @@ class ViewRelationship extends SugarView
                 unset($cardinality[MB_MANYTOONE]);
             }
             if (!isset($cardinality[$relationship->getType()])) {
-                end($cardinality);
-                $definition['relationship_type' ] = key($cardinality);
+                $definition['relationship_type' ] = array_key_last($cardinality);
                 $relationship = RelationshipFactory::newRelationship($definition);
             }
 

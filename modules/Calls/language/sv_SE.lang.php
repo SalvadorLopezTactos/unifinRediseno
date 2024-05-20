@@ -194,4 +194,10 @@ För att skapa en {{calls_singular_module}}
   -Klicka på "Välj en inbjuden" för att lägga till en befintlig användare, kontakt eller lead i {{calls_singular_module}}.
   -Klicka på pluset till höger om "Välj en inbjuden" för att skapa en {{calls_singular_module}} åt en medverkande som en ny Sugar-post.
 3. Klicka på "Spara" för att slutföra den nya posten och återgå till föregående sida.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Är Smart Guide samtal",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Underordnade uppgifter',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Underordnade Möten',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Underordnade samtal',
 );

@@ -301,8 +301,8 @@ function get_bean_field_type($field_name_mapped, $bean_source_object)
 {
     $unknown = 'unknown';
     $field = $bean_source_object->field_defs[$field_name_mapped];
-    $type = (isset($field['type']) ? $field['type'] : $unknown);
-    $db_type = (isset($field['dbType']) ? $field['dbType'] : $unknown);
+    $type = ($field['type'] ?? $unknown);
+    $db_type = ($field['dbType'] ?? $unknown);
     return array('type' => $type, 'db_type' => $db_type);
 }
 

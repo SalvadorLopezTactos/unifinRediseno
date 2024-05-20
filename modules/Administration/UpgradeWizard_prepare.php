@@ -22,12 +22,12 @@ MlpLogger::replaceDefault();
 
 $historyId = InputValidation::getService()->getValidInputRequest('install_file');
 if (empty($historyId)) {
-    sugar_die(htmlspecialchars(translate('ERR_UW_NO_PACKAGE_FILE', 'Administration')));
+    sugar_die(htmlspecialchars(translate('ERR_UW_NO_PACKAGE_FILE', 'Administration'), ENT_COMPAT));
 }
 
 $upgradeHistory = BeanFactory::retrieveBean('UpgradeHistory', $historyId);
 if (empty($upgradeHistory->id)) {
-    sugar_die(htmlspecialchars(translate('ERR_UW_NO_PACKAGE_FILE', 'Administration')));
+    sugar_die(htmlspecialchars(translate('ERR_UW_NO_PACKAGE_FILE', 'Administration'), ENT_COMPAT));
 }
 $packageManager = new PackageManager();
 try {
@@ -53,7 +53,7 @@ $mode = InputValidation::getService()->getValidInputRequest(
     ''
 );
 if (empty($mode)) {
-    sugar_die(htmlspecialchars(translate('LBL_UPGRADE_WIZARD_NO_MODE_SPEC', 'Administration')));
+    sugar_die(htmlspecialchars(translate('LBL_UPGRADE_WIZARD_NO_MODE_SPEC', 'Administration'), ENT_COMPAT));
 }
 
 $installType = $historyManifest->getPackageType();
@@ -65,12 +65,12 @@ $licenseFile = $packageZipFile->getPackageDir() . DIRECTORY_SEPARATOR . 'LICENSE
 $readmeFile = $packageZipFile->getPackageDir() . DIRECTORY_SEPARATOR . 'README.txt';
 $isPackageTypeModule = $installType === PackageManifest::PACKAGE_TYPE_MODULE;
 if ($isPackageTypeModule && ($mode === 'Install' || $mode === 'Enable') && file_exists($licenseFile)) {
-    $licenseContent = htmlspecialchars(file_get_contents($licenseFile));
-    $moduleLicenseLabel = htmlspecialchars(translate('LBL_LICENSE', 'Administration'));
-    $moduleReadLicenseLabel = htmlspecialchars(translate('LBL_MODULE_LICENSE', 'Administration'));
-    $moduleLicenseAcceptLabel = htmlspecialchars(translate('LBL_ACCEPT', 'Administration'));
-    $moduleLicenseDenyLabel = htmlspecialchars(translate('LBL_DENY', 'Administration'));
-    $moduleLicenseError = htmlspecialchars(translate('ERR_UW_ACCEPT_LICENSE', 'Administration'));
+    $licenseContent = htmlspecialchars(file_get_contents($licenseFile), ENT_COMPAT);
+    $moduleLicenseLabel = htmlspecialchars(translate('LBL_LICENSE', 'Administration'), ENT_COMPAT);
+    $moduleReadLicenseLabel = htmlspecialchars(translate('LBL_MODULE_LICENSE', 'Administration'), ENT_COMPAT);
+    $moduleLicenseAcceptLabel = htmlspecialchars(translate('LBL_ACCEPT', 'Administration'), ENT_COMPAT);
+    $moduleLicenseDenyLabel = htmlspecialchars(translate('LBL_DENY', 'Administration'), ENT_COMPAT);
+    $moduleLicenseError = htmlspecialchars(translate('ERR_UW_ACCEPT_LICENSE', 'Administration'), ENT_COMPAT);
     if (!empty($licenseContent)) {
         $license = <<<HTML
 <div id="uw-license-block" style="text-align:left; width: 50%; margin-top: 15px;">
@@ -95,10 +95,10 @@ HTML;
             $readmeContent = file_get_contents($readmeFile);
         }
         if (!empty($readmeContent)) {
-            $readmeContent = htmlspecialchars($readmeContent);
-            $readmeLabel = htmlspecialchars(translate('LBL_README', 'Administration'));
-            $showMoreLabel = htmlspecialchars(translate('LBL_SHOW_MORE'));
-            $showLessLabel = htmlspecialchars(translate('LBL_SHOW_LESS'));
+            $readmeContent = htmlspecialchars($readmeContent, ENT_COMPAT);
+            $readmeLabel = htmlspecialchars(translate('LBL_README', 'Administration'), ENT_COMPAT);
+            $showMoreLabel = htmlspecialchars(translate('LBL_SHOW_MORE'), ENT_COMPAT);
+            $showLessLabel = htmlspecialchars(translate('LBL_SHOW_LESS'), ENT_COMPAT);
             $readme = <<<HTML
 <div id="uw-readme-block" style="text-align:left; width: 50%; margin-top: 15px;">
     <div style="display: block">
@@ -110,7 +110,7 @@ HTML;
         </div>
     </div>    
     <div id="readme-content-block" style="display: none;">
-        <p style="margin: 15px;">$readmeContent</p>
+        <textarea style="display: block; margin: 15px; height: 500px; width: 700px;" readonly>$readmeContent</textarea>
     </div>
 </div>
 HTML;
@@ -121,29 +121,29 @@ HTML;
 
 switch ($mode) {
     case 'Install':
-        $actionLabel = htmlspecialchars(translate('LBL_UW_PATCH_READY', 'Administration'));
+        $actionLabel = htmlspecialchars(translate('LBL_UW_PATCH_READY', 'Administration'), ENT_COMPAT);
         if ($installType === PackageManifest::PACKAGE_TYPE_LANGPACK) {
-            $actionLabel = htmlspecialchars(translate('LBL_UW_LANGPACK_READY', 'Administration'));
+            $actionLabel = htmlspecialchars(translate('LBL_UW_LANGPACK_READY', 'Administration'), ENT_COMPAT);
         }
         break;
     case 'Uninstall':
-        $actionLabel = htmlspecialchars(translate('LBL_UW_UNINSTALL_READY', 'Administration'));
+        $actionLabel = htmlspecialchars(translate('LBL_UW_UNINSTALL_READY', 'Administration'), ENT_COMPAT);
         if ($installType === PackageManifest::PACKAGE_TYPE_LANGPACK) {
-            $actionLabel = htmlspecialchars(translate('LBL_UW_LANGPACK_READY', 'Administration'));
+            $actionLabel = htmlspecialchars(translate('LBL_UW_LANGPACK_READY', 'Administration'), ENT_COMPAT);
         } elseif ($installType !==  PackageManifest::PACKAGE_TYPE_MODULE) {
-            $actionLabel = htmlspecialchars(translate('LBL_UW_FILES_REMOVED', 'Administration'));
+            $actionLabel = htmlspecialchars(translate('LBL_UW_FILES_REMOVED', 'Administration'), ENT_COMPAT);
         }
         break;
     case 'Disable':
-        $actionLabel = htmlspecialchars(translate('LBL_UW_DISABLE_READY', 'Administration'));
+        $actionLabel = htmlspecialchars(translate('LBL_UW_DISABLE_READY', 'Administration'), ENT_COMPAT);
         if ($installType === PackageManifest::PACKAGE_TYPE_LANGPACK) {
-            $actionLabel = htmlspecialchars(translate('LBL_UW_LANGPACK_READY_DISABLE', 'Administration'));
+            $actionLabel = htmlspecialchars(translate('LBL_UW_LANGPACK_READY_DISABLE', 'Administration'), ENT_COMPAT);
         }
         break;
     case 'Enable':
-        $actionLabel = htmlspecialchars(translate('LBL_UW_ENABLE_READY', 'Administration'));
+        $actionLabel = htmlspecialchars(translate('LBL_UW_ENABLE_READY', 'Administration'), ENT_COMPAT);
         if ($installType === PackageManifest::PACKAGE_TYPE_LANGPACK) {
-            $actionLabel = htmlspecialchars(translate('LBL_UW_LANGPACK_READY_ENABLE', 'Administration'));
+            $actionLabel = htmlspecialchars(translate('LBL_UW_LANGPACK_READY_ENABLE', 'Administration'), ENT_COMPAT);
         }
         break;
 }
@@ -151,8 +151,8 @@ switch ($mode) {
 $removeTables = $historyManifest->getManifestValue('remove_tables');
 $removeTablesContent = '';
 if ($removeTables === 'prompt' && $mode === 'Uninstall') {
-    $removeTablesLabel = htmlspecialchars(translate('ML_LBL_REMOVE_TABLES', 'Administration'));
-    $doNotRemoveTablesLabel = htmlspecialchars(translate('ML_LBL_DO_NOT_REMOVE_TABLES', 'Administration'));
+    $removeTablesLabel = htmlspecialchars(translate('ML_LBL_REMOVE_TABLES', 'Administration'), ENT_COMPAT);
+    $doNotRemoveTablesLabel = htmlspecialchars(translate('ML_LBL_DO_NOT_REMOVE_TABLES', 'Administration'), ENT_COMPAT);
 
     $removeTablesContent = <<<HTML
 <div style="width: 50%; display: block; margin-top: 15px;">
@@ -173,8 +173,8 @@ $overwriteFilesContent = '';
 if ($mode === "Disable" || $mode === "Enable") {
     $copyFiles = $historyManifest->getInstallDefsValue('copy');
     if (!empty($copyFiles)) {
-        $overwriteFilesLabel = htmlspecialchars(translate('LBL_OVERWRITE_FILES', 'Administration'));
-        $doNotOverwriteFilesLabel = htmlspecialchars(translate('LBL_DO_OVERWRITE_FILES', 'Administration'));
+        $overwriteFilesLabel = htmlspecialchars(translate('LBL_OVERWRITE_FILES', 'Administration'), ENT_COMPAT);
+        $doNotOverwriteFilesLabel = htmlspecialchars(translate('LBL_DO_OVERWRITE_FILES', 'Administration'), ENT_COMPAT);
 
         $overwriteFilesContent = <<<HTML
 <div style="width: 50%; display: block; margin-top: 15px;">
@@ -196,8 +196,8 @@ HTML;
     }
 }
 
-$commitButtonLabel = htmlspecialchars(translate('LBL_ML_COMMIT', 'Administration'));
-$cancelButtonLabel = htmlspecialchars(translate('LBL_ML_CANCEL', 'Administration'));
+$commitButtonLabel = htmlspecialchars(translate('LBL_ML_COMMIT', 'Administration'), ENT_COMPAT);
+$cancelButtonLabel = htmlspecialchars(translate('LBL_ML_CANCEL', 'Administration'), ENT_COMPAT);
 
 echo <<<HTML
 <div style="display:block; width: 100%;">
@@ -265,8 +265,11 @@ echo <<<HTML
         // async installation UI
         let packageId;
         let installationProcessDone;
+        let awaitPostInstall;
+        let awaitTimedOutProcess;
         let progressMessageEl = null;
         let progressMessageLogStat = {error: 0, message: 0, is_staging: false};
+        let installationProgressTimer;
         let progressMessage = function(flag) {
             if (flag) {
                 let template = app.template.getView('module-loader.process', 'Administration');
@@ -280,7 +283,9 @@ echo <<<HTML
         
         let navigateToInitialPage = function() {
             if (window.top) {
-                window.top.location.href = '#bwc/index.php?module=Administration&action=UpgradeWizard&view=module&reloadMetadata=true';
+                const urlPieces = [location.protocol, '//', location.host, location.pathname];
+                window.top.location.href = urlPieces.join('') 
+                    + '#bwc/index.php?module=Administration&action=UpgradeWizard&view=module&reloadMetadata=true';
             }
         }
         
@@ -298,6 +303,8 @@ echo <<<HTML
             progressMessageEl.find('#ml-installing-success-lbl').toggle();
             progressMessageEl.find('.alert-info').removeClass('alert-info').addClass('alert-success');
             progressMessageEl.find('button').toggle();
+            progressMessageEl.find('.progress .bar').css('width', '100%');
+            progressMessageEl.find('h5').html('100%');
         }
 
         let isInstallationFailed = false;
@@ -317,92 +324,106 @@ echo <<<HTML
         }
         
         let checkInstallationProgress = function() {
+            if (awaitPostInstall) {
+                return;
+            }
             let attributes = {
                 id: packageId
             };
             let url = app.api.buildURL('Administration/packages', 'installation-status', attributes);
             let errorCounter = 0;
             let dotRendered = false;
-            app.api.call('read', url, null, {
-                success: function(progress) {
-                    let ml = progressMessageEl.find('pre');
-                    
-                    if (progress.message) {
-                        for (let ts in progress.message) {
-                            ts = parseInt(ts, 10);
-                            if (ts > progressMessageLogStat.message) {
-                                progressMessageLogStat.message = ts;
-                                if (dotRendered) {
-                                    ml.append("\\n");
-                                }
-                                ml.append(progress.message[ts] + "\\n")
-                                    .scrollTop(function() { return this.scrollHeight; })
+            $.ajax({
+              url: url,
+              cache: false,
+              dataType: "json"
+            }).done(function(progress) {
+                let ml = progressMessageEl.find('pre');
+                
+                if (progress.message) {
+                    for (let ts in progress.message) {
+                        ts = parseInt(ts, 10);
+                        if (ts > progressMessageLogStat.message) {
+                            progressMessageLogStat.message = ts;
+                            if (dotRendered) {
+                                ml.append("\\n");
                             }
+                            ml.append(progress.message[ts] + "\\n")
+                                .scrollTop(function() { return this.scrollHeight; })
                         }
-                    }
-                    if (progress.error) {
-                        installationError(progress.error);
-                        navigateToInitialPage();
-                        return;
-                    }
-                    
-                    if (progress.error_page) {
-                        setTimeout(function() {
-                            progressMessage(false);
-                            if (installationProcessDone) {
-                                document.write(installationProcessDone);
-                            } else {
-                                errorMessage();
-                                navigateToInitialPage();
-                            }
-                        }, 500);
-                        return;
-                    }
-                    
-                    if (!progress.is_staged && progress.is_done) {
-                        installedSuccessfully();
-                        navigateToInitialPage();
-                        return;
-                    } else if (progress.is_done) {
-                        if (!progressMessageLogStat.is_staging) {
-                            progressMessageLogStat.is_staging = true;
-                            ml.append("checking the package ...");
-                        } else {
-                            dotRendered = true;
-                            ml.append(".");
-                        }
-                    } else {
-                        let c = parseInt(progress.current_step, 10);
-                        let t = parseInt(progress.total_steps, 10);
-                        let p = Math.floor((c / t) * 100);
-                        if (!isNaN(p) && t > 0) {
-                            progressMessageEl.find('.progress .bar').css('width', p + '%');
-                            progressMessageEl.find('h5').html(p + '%');
-                        }
-                    }
-                    
-                    if (installationProgressTimer) {
-                        setInstallationProgressCheck(true);
-                        if (installationProcessDone) {
-                            installationProgressTimer = null;
-                        }
-                    } else if (installationProcessDone) {
-                        installationError(app.lang.get('LBL_ML_INSTALLATION_FATAL', 'Administration'));
-                        navigateToInitialPage();
-                    }
-                },
-                error: function() {
-                    errorCounter++;
-                    if (errorCounter < 10 && installationProgressTimer) {
-                        setInstallationProgressCheck(true);
-                    } else {
-                        errorMessage();
-                        navigateToInitialPage();
                     }
                 }
-            }, {cache: false});
+                if (progress.error) {
+                    installationError(progress.error);
+                    navigateToInitialPage();
+                    return;
+                }
+                
+                if (progress.error_page) {
+                    setTimeout(function() {
+                        progressMessage(false);
+                        if (installationProcessDone) {
+                            document.write(installationProcessDone);
+                        } else {
+                            errorMessage();
+                            navigateToInitialPage();
+                        }
+                    }, 500);
+                    return;
+                }
+                
+                if (!progress.is_staged && progress.is_done) {
+                    installedSuccessfully();
+                    navigateToInitialPage();
+                    return;
+                } else if (progress.is_done) {
+                    if (!progressMessageLogStat.is_staging) {
+                        progressMessageLogStat.is_staging = true;
+                        ml.append("checking the package ...");
+                        ml.scrollTop(function() { return this.scrollHeight; });
+                    } else {
+                        dotRendered = true;
+                        ml.append(".");
+                    }
+                } else {
+                    let c = parseInt(progress.current_step, 10);
+                    let t = parseInt(progress.total_steps, 10);
+                    let p = Math.floor((c / t) * 100);
+                    if (!isNaN(p) && t > 0) {
+                        p = p === 100 ? 99 : p;
+                        progressMessageEl.find('.progress .bar').css('width', p + '%');
+                        progressMessageEl.find('h5').html(p + '%');
+                    }
+                    
+                    if (progress.await_post_install && !installationProcessDone && !awaitTimedOutProcess) {
+                        awaitPostInstall = true;
+                        ml.append("package post-install execution...");
+                        ml.scrollTop(function() { return this.scrollHeight; });
+                        return;
+                    }
+                }
+                
+                if (installationProgressTimer) {
+                    setInstallationProgressCheck(true);
+                    if (installationProcessDone) {
+                        installationProgressTimer = null;
+                    }
+                } else if (installationProcessDone) {
+                    installationError(app.lang.get('LBL_ML_INSTALLATION_FATAL', 'Administration'));
+                    navigateToInitialPage();
+                }
+            })
+            .fail(function() {
+                errorCounter++;
+                if (errorCounter < 10 && installationProgressTimer) {
+                    awaitPostInstall = false;
+                    setInstallationProgressCheck(true);
+                } else {
+                    errorMessage();
+                    navigateToInitialPage();
+                }
+            });
         }
-        let installationProgressTimer;
         let setInstallationProgressCheck = function(flag) {
             if (flag) {
                 setInstallationProgressCheck(false);
@@ -429,8 +450,24 @@ echo <<<HTML
             app.api.call('create', url, null, {
                 success: function(html) {
                     installationProcessDone = html;
+                    if (awaitPostInstall) {
+                        awaitPostInstall = false;
+                        checkInstallationProgress();
+                    }
                 },
                 error: function(response) {
+                    awaitPostInstall = false;
+                    if (response && response.status === 504) {
+                        awaitTimedOutProcess = true;
+                        let ml = progressMessageEl.find('pre');
+                        ml.append(
+                            "\\nResponse timeout!\\nThe process will continue. It it takes too long - please " 
+                            + "contact with Administrator\\n"
+                            ).scrollTop(function() { return this.scrollHeight; });
+                        checkInstallationProgress();
+                        return;
+                    }
+                    
                     setInstallationProgressCheck(false);
                     installationProgressTimer = null;
                     checkInstallationProgress();

@@ -177,7 +177,8 @@ class EmailTemplate extends SugarBean {
 	function fill_in_additional_parent_fields() {
 	}
 
-	function get_list_view_data() {
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $app_list_strings, $focus, $action, $currentModule;
 		$fields = $this->get_list_view_array();
 		$fields["DATE_MODIFIED"] = substr($fields["DATE_MODIFIED"], 0 , 10);
@@ -278,8 +279,6 @@ class EmailTemplate extends SugarBean {
     }
 
 	function parse_email_template($template_text_array, $focus_name, $focus, &$macro_nv) {
-
-
         $return_array = [];
 		global $beanFiles, $beanList, $app_list_strings;
 
@@ -327,7 +326,7 @@ class EmailTemplate extends SugarBean {
 			} else {
 				$matches=$this->parsed_entities[$key];
 				if(!empty($matches[0])) {
-                    $count=is_countable($matches[0]) ? count($matches[0]) : 0;
+                    $count = is_countable($matches[0]) ? count($matches[0]) : 0;
 				} else {
 					$count=0;
 				}
@@ -491,7 +490,7 @@ class EmailTemplate extends SugarBean {
             [$prospect, ['contact_', 'contact_account_',],],
         ];
 
-        foreach ($variableBeans as list($bean, $prefixes)) {
+        foreach ($variableBeans as [$bean, $prefixes]) {
             $repl_arr = EmailTemplate::addFieldsToReplacementArray($repl_arr, $bean, $prefixes[0], $prefixes[1]);
         }
 		// cn: end bug 9277 fix
@@ -637,7 +636,7 @@ class EmailTemplate extends SugarBean {
 			if($value != '' && is_string($value)) {
 				$string = str_replace("\$$name", $value, $string);
 			} else {
-				$string = str_replace("\$$name", ' ', $string);
+                $string = str_replace("\$$name", ' ', (string)$string);
 			}
 		}
 
@@ -746,7 +745,7 @@ class EmailTemplate extends SugarBean {
     public function cleanBean()
     {
         $this->storedVariables = array();
-        $this->body_html = preg_replace_callback('/\{::[^}]+::\}/', array($this, 'storeVariables'), $this->body_html);
+        $this->body_html = preg_replace_callback('/\{::[^}]+::\}/', array($this, 'storeVariables'), (string)$this->body_html);
         parent::cleanBean();
         $this->body_html = str_replace(array_values($this->storedVariables), array_keys($this->storedVariables), $this->body_html);
     }
@@ -796,9 +795,6 @@ class EmailTemplate extends SugarBean {
     public function isForgotPasswordTemplate(): bool
     {
         $pwdConf = $GLOBALS['sugar_config']['passwordsetting'];
-        return in_array(
-            $this->id,
-            [$pwdConf['generatepasswordtmpl'], $pwdConf['lostpasswordtmpl']]
-        );
+        return $this->id == $pwdConf['lostpasswordtmpl'];
     }
 }

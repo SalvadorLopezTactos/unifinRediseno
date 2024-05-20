@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'Γεωγραφικό πλάτος',
     'LBL_LONGITUDE' => 'Γεωγραφικό μήκος',
     'LBL_GEOCODED' => 'Γεωκωδικοποιημένη',
+    'LBL_ERROR_MESSAGE' => 'Μήνυμα Σφάλματος Γεωκώδικα',
 ];

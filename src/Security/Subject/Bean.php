@@ -38,6 +38,7 @@ abstract class Bean implements Subject
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

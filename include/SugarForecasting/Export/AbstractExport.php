@@ -14,6 +14,10 @@ abstract class SugarForecasting_Export_AbstractExport extends SugarForecasting_A
 {
 
     /**
+     * @var mixed
+     */
+    public $dataset;
+    /**
      * Where we store the data we want to use
      *
      * @var array
@@ -147,7 +151,7 @@ abstract class SugarForecasting_Export_AbstractExport extends SugarForecasting_A
     {
         $timePeriod = BeanFactory::newBean('TimePeriods');
         $timePeriod->retrieve($this->args['timeperiod_id']);
-        return str_replace(' ', '_', $timePeriod->name);
+        return str_replace(' ', '_', (string)$timePeriod->name);
     }
 
 

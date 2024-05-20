@@ -62,6 +62,7 @@ class ElasticsearchRoutingCommand extends Command implements InstanceModeInterfa
         }
 
         $table->render();
+        return 0;
     }
 
     /**

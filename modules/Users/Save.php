@@ -65,9 +65,9 @@ if (!function_exists('validateField')) {
     }
 }
 
-$display_tabs_def = isset($_REQUEST['display_tabs_def']) ? html_entity_decode($_REQUEST['display_tabs_def']) : '';
-$hide_tabs_def = isset($_REQUEST['hide_tabs_def']) ? html_entity_decode($_REQUEST['hide_tabs_def']): '';
-$remove_tabs_def = isset($_REQUEST['remove_tabs_def']) ? html_entity_decode($_REQUEST['remove_tabs_def']): '';
+$display_tabs_def = isset($_REQUEST['display_tabs_def']) ? html_entity_decode($_REQUEST['display_tabs_def'], ENT_COMPAT) : '';
+$hide_tabs_def = isset($_REQUEST['hide_tabs_def']) ? html_entity_decode($_REQUEST['hide_tabs_def'], ENT_COMPAT) : '';
+$remove_tabs_def = isset($_REQUEST['remove_tabs_def']) ? html_entity_decode($_REQUEST['remove_tabs_def'], ENT_COMPAT) : '';
 
 $DISPLAY_ARR = array();
 $HIDE_ARR = array();
@@ -231,8 +231,9 @@ if (!$focus->is_group && !$focus->portal_only) {
     }
 
     // set License types
+    $hasDuplicatedLicenseTypes = false;
     if (!empty($_POST['LicenseTypes'])) {
-        $focus->license_type = InputValidation::getService()->getValidInputPost('LicenseTypes', 'Assert\ArrayRecursive');
+        $focus->license_type = array_values(InputValidation::getService()->getValidInputPost('LicenseTypes', 'Assert\ArrayRecursive'));
     }
 
     if (empty($_POST['receive_notifications'])) {
@@ -311,6 +312,19 @@ if (!$focus->is_group && !$focus->portal_only) {
             $tabs->set_user_tabs($REMOVE_ARR['remove_tabs'], $focus, 'remove');
         } else {
             $tabs->set_user_tabs(array(), $focus, 'remove');
+        }
+    }
+
+    // Update the user preference for number_pinned_modules if necessary
+    if ($tabs->get_users_pinned_modules() && isset($_POST['number_pinned_modules'])) {
+        $newNumberPinned = intval(InputValidation::getService()->getValidInputPost('number_pinned_modules'));
+        $currNumberPinned = $focus->getPreference('number_pinned_modules');
+        if (empty($currNumberPinned)) {
+            $config = SugarConfig::getInstance();
+            $currNumberPinned = $config->get('maxPinnedModules') ?? $config->get('default_max_pinned_modules');
+        }
+        if ($newNumberPinned !== intval($currNumberPinned) && $newNumberPinned >= 1 && $newNumberPinned <= 100) {
+            $focus->setPreference('number_pinned_modules', $newNumberPinned);
         }
     }
 
@@ -536,8 +550,8 @@ if (!$focus->verify_data()) {
         (isset($_POST['new_password']) && !empty($_POST['new_password'])) &&
         (isset($_POST['password_change']) && $_POST['password_change'] == 'true')) {
         if (!$focus->change_password(
-            html_entity_decode($_POST['old_password']),
-            html_entity_decode($_POST['new_password'])
+            html_entity_decode($_POST['old_password'], ENT_COMPAT),
+            html_entity_decode($_POST['new_password'], ENT_COMPAT)
         )) {
             if (isset($_POST['page'])) {
                 $sendHeader = false;
@@ -572,21 +586,35 @@ if (!$focus->verify_data()) {
     ////	OUTBOUND EMAIL SAVES
     ///////////////////////////////////////////////////////////////////////////
 
-    // FIXME: this variable name is NSFW. See BR-3358
-    $sysOutboundAccunt = new OutboundEmail();
-
     // If a user is not allowed to use the default system outbound account then they will be
     // saving their own username/password for the system account
-    if (! $sysOutboundAccunt->isAllowUserAccessToSystemDefaultOutbound()) {
-        $userOverrideOE = $sysOutboundAccunt->getUsersMailerForSystemOverride($focus->id);
+    $sysOutboundAccount = new OutboundEmail();
+    if (! $sysOutboundAccount->isAllowUserAccessToSystemDefaultOutbound()) {
+        $userOverrideOE = $sysOutboundAccount->getUsersMailerForSystemOverride($focus->id);
         if ($userOverrideOE != null) {
             // User is allowed to clear username and pass so no need to check for blanks.
             if (isset($_REQUEST['mail_smtpuser'])) {
                 $userOverrideOE->mail_smtpuser = $_REQUEST['mail_smtpuser'];
             }
 
-            if (isset($_REQUEST['mail_smtppass'])) {
-                $userOverrideOE->mail_smtppass = $_REQUEST['mail_smtppass'];
+            // If the override account is set to use OAuth, remove any existing
+            // password information. Otherwise, remove any existing OAuth
+            // information. This is an edge case for when the system email
+            // account changes between OAuth and basic auth account types
+            if (isset($_REQUEST['mail_authtype']) && $_REQUEST['mail_authtype'] === 'oauth2') {
+                if (isset($_REQUEST['eapm_id'])) {
+                    $userOverrideOE->eapm_id = $_REQUEST['eapm_id'];
+                }
+                if (isset($_REQUEST['authorized_account'])) {
+                    $userOverrideOE->authorized_account = $_REQUEST['authorized_account'];
+                }
+                $userOverrideOE->mail_smtppass = null;
+            } else {
+                if (isset($_REQUEST['mail_smtppass'])) {
+                    $userOverrideOE->mail_smtppass = $_REQUEST['mail_smtppass'];
+                }
+                $userOverrideOE->eapm_id = null;
+                $userOverrideOE->authorized_account = null;
             }
 
             $userOverrideOE->populateFromUser($focus);
@@ -594,7 +622,7 @@ if (!$focus->verify_data()) {
         } else {
             // If a user name and password for the mail account is set, create the users override account.
             if (!(empty($_REQUEST['mail_smtpuser']) || empty($_REQUEST['mail_smtppass']))) {
-                $sysOutboundAccunt->createUserSystemOverrideAccount(
+                $sysOutboundAccount->createUserSystemOverrideAccount(
                     $focus->id,
                     $_REQUEST['mail_smtpuser'],
                     $_REQUEST['mail_smtppass']

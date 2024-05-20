@@ -148,7 +148,7 @@
   max-width: 300px;
 }
 
-.row-fluid .map-admin-side-pain {
+.row-fluid .map-admin-side-pane {
   position: absolute;
   right: 1.05%;
   top: 51px;
@@ -197,22 +197,22 @@
   box-shadow: none;
 }
 
-.map-admin-side-pain .reorderable-columns .record-edit-link-wrapper {
+.map-admin-side-pane .reorderable-columns .record-edit-link-wrapper {
   z-index: 2;
 }
 
-.map-admin-side-pain .reorderable-columns .record-edit-link-wrapper .sicon-edit {
+.map-admin-side-pane .reorderable-columns .record-edit-link-wrapper .sicon-edit {
   z-index: 2;
   top: 7px;
   left: -5px;
 }
 
-.map-admin-side-pain table.reorderable-columns th[data-fieldname]>div>input[class="maps-input-label"] {
+.map-admin-side-pane table.reorderable-columns th[data-fieldname]>div>input[class="maps-input-label"] {
   width: 95%;
   left: 8px;
 }
 
-.map-admin-side-pain table.reorderable-columns th[data-fieldname]>div>a[data-action="remove-column"] {
+.map-admin-side-pane table.reorderable-columns th[data-fieldname]>div>a[data-action="remove-column"] {
   z-index: 3;
 }
 
@@ -286,4 +286,27 @@
   .tbold;
 
   color: #52c8fb;
+}
+
+.maps-logger-background {
+  background-color: @primaryContentBackground;
+}
+
+.default-cursor {
+  cursor: default;
+}
+
+.subpanel-header.default-cursor {
+  .default-cursor;
+}
+
+.maps-bottom-border {
+  border: @borderWidget;
+  border-radius: @baseBorderRadius;
+  box-shadow: @shadowWidget;
+  border-color: @borderColor;
+}
+
+.maps-text-color-red {
+  color: @red;
 }

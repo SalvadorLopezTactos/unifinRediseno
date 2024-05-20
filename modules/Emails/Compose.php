@@ -294,7 +294,7 @@ function generateComposeDataPackage($data, $forFullCompose = true, $bean = null)
                     'parent_name' => $return['parent_name'],
                     'subject' => $return['name'],
                     'body' => $preBodyHTML . $return['description'],
-                    'attachments' => (isset($return['attachments']) ? $return['attachments'] : array()),
+                    'attachments' => ($return['attachments'] ?? array()),
                     'email_id' => $email_id,
                     'fromAccounts' => $return['fromAccounts'],
                 );

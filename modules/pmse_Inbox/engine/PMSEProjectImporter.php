@@ -441,7 +441,7 @@ class PMSEProjectImporter extends PMSEImporter
         LoggerManager::getLogger()->deprecated(
             sprintf(
                 'The isCopy flag in %s::%s is deprecated. Please use $i->setOption(\'isCopy\', true).',
-                __CLASS__,
+                self::class,
                 __METHOD__
             )
         );
@@ -517,7 +517,7 @@ class PMSEProjectImporter extends PMSEImporter
             $boundBean = BeanFactory::newBean('pmse_BpmnBound');
             $definitionBean = BeanFactory::newBean('pmse_BpmActivityDefinition');
 
-            list($element, $definition, $bound) = $this->getElementDefinition($element);
+            [$element, $definition, $bound] = $this->getElementDefinition($element);
 
             $element['prj_id'] = $keysArray['prj_id'];
             $element['pro_id'] = $keysArray['pro_id'];
@@ -591,7 +591,7 @@ class PMSEProjectImporter extends PMSEImporter
             $boundBean = BeanFactory::newBean('pmse_BpmnBound');
             $definitionBean = BeanFactory::newBean('pmse_BpmEventDefinition');
 
-            list($element, $definition, $bound) = $this->getElementDefinition($element);
+            [$element, $definition, $bound] = $this->getElementDefinition($element);
 
             $element['prj_id'] = $keysArray['prj_id'];
             $element['pro_id'] = $keysArray['pro_id'];
@@ -665,7 +665,7 @@ class PMSEProjectImporter extends PMSEImporter
             $boundBean = BeanFactory::newBean('pmse_BpmnBound');
             $definitionBean = BeanFactory::newBean('pmse_BpmGatewayDefinition');
 
-            list($element, $definition, $bound) = $this->getElementDefinition($element);
+            [$element, $definition, $bound] = $this->getElementDefinition($element);
 
             $element['prj_id'] = $keysArray['prj_id'];
             $element['pro_id'] = $keysArray['pro_id'];
@@ -728,7 +728,7 @@ class PMSEProjectImporter extends PMSEImporter
             $artifactBean = BeanFactory::newBean('pmse_BpmnArtifact');
             $boundBean = BeanFactory::newBean('pmse_BpmnBound');
 
-            list($element, $definition, $bound) = $this->getElementDefinition($element);
+            [$element, $definition, $bound] = $this->getElementDefinition($element);
 
             $element['prj_id'] = $keysArray['prj_id'];
             $element['pro_id'] = $keysArray['pro_id'];

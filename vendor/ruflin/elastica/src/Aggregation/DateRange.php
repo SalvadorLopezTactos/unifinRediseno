@@ -9,6 +9,8 @@ namespace Elastica\Aggregation;
  */
 class DateRange extends Range
 {
+    use Traits\MissingTrait;
+
     /**
      * Set the formatting for the returned date values.
      *
@@ -19,5 +21,13 @@ class DateRange extends Range
     public function setFormat(string $format): self
     {
         return $this->setParam('format', $format);
+    }
+
+    /**
+     * Set time zone.
+     */
+    public function setTimezone(string $timezone): self
+    {
+        return $this->setParam('time_zone', $timezone);
     }
 }

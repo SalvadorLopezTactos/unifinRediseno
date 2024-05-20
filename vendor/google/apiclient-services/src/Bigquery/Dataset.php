@@ -19,26 +19,79 @@ namespace Google\Service\Bigquery;
 
 class Dataset extends \Google\Collection
 {
-  protected $collection_key = 'access';
+  protected $collection_key = 'tags';
   protected $accessType = DatasetAccess::class;
   protected $accessDataType = 'array';
+  /**
+   * @var string
+   */
   public $creationTime;
   protected $datasetReferenceType = DatasetReference::class;
   protected $datasetReferenceDataType = '';
+  /**
+   * @var string
+   */
+  public $defaultCollation;
   protected $defaultEncryptionConfigurationType = EncryptionConfiguration::class;
   protected $defaultEncryptionConfigurationDataType = '';
+  /**
+   * @var string
+   */
   public $defaultPartitionExpirationMs;
+  /**
+   * @var string
+   */
   public $defaultTableExpirationMs;
+  /**
+   * @var string
+   */
   public $description;
+  /**
+   * @var string
+   */
   public $etag;
+  /**
+   * @var string
+   */
   public $friendlyName;
+  /**
+   * @var string
+   */
   public $id;
+  /**
+   * @var bool
+   */
+  public $isCaseInsensitive;
+  /**
+   * @var string
+   */
   public $kind;
+  /**
+   * @var string[]
+   */
   public $labels;
+  /**
+   * @var string
+   */
   public $lastModifiedTime;
+  /**
+   * @var string
+   */
   public $location;
-  public $satisfiesPZS;
+  /**
+   * @var string
+   */
+  public $maxTimeTravelHours;
+  /**
+   * @var bool
+   */
+  public $satisfiesPzs;
+  /**
+   * @var string
+   */
   public $selfLink;
+  protected $tagsType = DatasetTags::class;
+  protected $tagsDataType = 'array';
 
   /**
    * @param DatasetAccess[]
@@ -54,10 +107,16 @@ class Dataset extends \Google\Collection
   {
     return $this->access;
   }
+  /**
+   * @param string
+   */
   public function setCreationTime($creationTime)
   {
     $this->creationTime = $creationTime;
   }
+  /**
+   * @return string
+   */
   public function getCreationTime()
   {
     return $this->creationTime;
@@ -77,6 +136,20 @@ class Dataset extends \Google\Collection
     return $this->datasetReference;
   }
   /**
+   * @param string
+   */
+  public function setDefaultCollation($defaultCollation)
+  {
+    $this->defaultCollation = $defaultCollation;
+  }
+  /**
+   * @return string
+   */
+  public function getDefaultCollation()
+  {
+    return $this->defaultCollation;
+  }
+  /**
    * @param EncryptionConfiguration
    */
   public function setDefaultEncryptionConfiguration(EncryptionConfiguration $defaultEncryptionConfiguration)
@@ -90,101 +163,215 @@ class Dataset extends \Google\Collection
   {
     return $this->defaultEncryptionConfiguration;
   }
+  /**
+   * @param string
+   */
   public function setDefaultPartitionExpirationMs($defaultPartitionExpirationMs)
   {
     $this->defaultPartitionExpirationMs = $defaultPartitionExpirationMs;
   }
+  /**
+   * @return string
+   */
   public function getDefaultPartitionExpirationMs()
   {
     return $this->defaultPartitionExpirationMs;
   }
+  /**
+   * @param string
+   */
   public function setDefaultTableExpirationMs($defaultTableExpirationMs)
   {
     $this->defaultTableExpirationMs = $defaultTableExpirationMs;
   }
+  /**
+   * @return string
+   */
   public function getDefaultTableExpirationMs()
   {
     return $this->defaultTableExpirationMs;
   }
+  /**
+   * @param string
+   */
   public function setDescription($description)
   {
     $this->description = $description;
   }
+  /**
+   * @return string
+   */
   public function getDescription()
   {
     return $this->description;
   }
+  /**
+   * @param string
+   */
   public function setEtag($etag)
   {
     $this->etag = $etag;
   }
+  /**
+   * @return string
+   */
   public function getEtag()
   {
     return $this->etag;
   }
+  /**
+   * @param string
+   */
   public function setFriendlyName($friendlyName)
   {
     $this->friendlyName = $friendlyName;
   }
+  /**
+   * @return string
+   */
   public function getFriendlyName()
   {
     return $this->friendlyName;
   }
+  /**
+   * @param string
+   */
   public function setId($id)
   {
     $this->id = $id;
   }
+  /**
+   * @return string
+   */
   public function getId()
   {
     return $this->id;
   }
+  /**
+   * @param bool
+   */
+  public function setIsCaseInsensitive($isCaseInsensitive)
+  {
+    $this->isCaseInsensitive = $isCaseInsensitive;
+  }
+  /**
+   * @return bool
+   */
+  public function getIsCaseInsensitive()
+  {
+    return $this->isCaseInsensitive;
+  }
+  /**
+   * @param string
+   */
   public function setKind($kind)
   {
     $this->kind = $kind;
   }
+  /**
+   * @return string
+   */
   public function getKind()
   {
     return $this->kind;
   }
+  /**
+   * @param string[]
+   */
   public function setLabels($labels)
   {
     $this->labels = $labels;
   }
+  /**
+   * @return string[]
+   */
   public function getLabels()
   {
     return $this->labels;
   }
+  /**
+   * @param string
+   */
   public function setLastModifiedTime($lastModifiedTime)
   {
     $this->lastModifiedTime = $lastModifiedTime;
   }
+  /**
+   * @return string
+   */
   public function getLastModifiedTime()
   {
     return $this->lastModifiedTime;
   }
+  /**
+   * @param string
+   */
   public function setLocation($location)
   {
     $this->location = $location;
   }
+  /**
+   * @return string
+   */
   public function getLocation()
   {
     return $this->location;
   }
-  public function setSatisfiesPZS($satisfiesPZS)
+  /**
+   * @param string
+   */
+  public function setMaxTimeTravelHours($maxTimeTravelHours)
   {
-    $this->satisfiesPZS = $satisfiesPZS;
+    $this->maxTimeTravelHours = $maxTimeTravelHours;
   }
-  public function getSatisfiesPZS()
+  /**
+   * @return string
+   */
+  public function getMaxTimeTravelHours()
   {
-    return $this->satisfiesPZS;
+    return $this->maxTimeTravelHours;
   }
+  /**
+   * @param bool
+   */
+  public function setSatisfiesPzs($satisfiesPzs)
+  {
+    $this->satisfiesPzs = $satisfiesPzs;
+  }
+  /**
+   * @return bool
+   */
+  public function getSatisfiesPzs()
+  {
+    return $this->satisfiesPzs;
+  }
+  /**
+   * @param string
+   */
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
   }
+  /**
+   * @return string
+   */
   public function getSelfLink()
   {
     return $this->selfLink;
+  }
+  /**
+   * @param DatasetTags[]
+   */
+  public function setTags($tags)
+  {
+    $this->tags = $tags;
+  }
+  /**
+   * @return DatasetTags[]
+   */
+  public function getTags()
+  {
+    return $this->tags;
   }
 }
 

@@ -17,7 +17,7 @@ use Sugarcrm\Sugarcrm\MetaData\ViewdefManager;
  */
 class LeadViews
 {
-    const PRODUCT_DASHLETS = ['product-catalog', 'product-quick-picks'];
+    public const PRODUCT_DASHLETS = ['product-catalog', 'product-quick-picks'];
 
     /**
      * Toggles the Product Catalog and Product Catalog Quick Picks dashlets within the

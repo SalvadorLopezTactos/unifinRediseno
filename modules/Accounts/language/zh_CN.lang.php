@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => '帐户列表仪表板',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => '帐户记录仪表板',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => '账户焦点抽屉',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => '账户详细信息',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => '帐户重点仪表板 - 控制台',
     'LBL_NEXT_RENEWAL_DATE' => '下一次续订的日期',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => '下一次续订的日期',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => '账户名称/行业',
     'LBL_RENEWALS_CONSOLE_LOCATION' => '地点',
     'LBL_PURCHASES' => '购买',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => '帐户时间线',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => '组织',
+    'LBL_CREATE_NEW' => '新建',
+    'LBL_MANAGE' => '管理',
+    'LBL_SEE_DETAILS' => '查看详细信息',
+    'LBL_HIDE_NEW' => '隐藏',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => '图表',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. 点击“保存”以完成新纪录，并返回至上一页。',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => '客户报表',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => '外部用户',
 );

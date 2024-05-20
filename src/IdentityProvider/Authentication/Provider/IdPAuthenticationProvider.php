@@ -114,7 +114,7 @@ class IdPAuthenticationProvider implements AuthenticationProviderInterface
                 $user,
                 $token->getCredentials(),
                 $token->getProviderKey(),
-                $token->getRoles()
+                $token->getRoleNames()
             );
             $authenticatedToken->setAttributes($token->getAttributes());
 

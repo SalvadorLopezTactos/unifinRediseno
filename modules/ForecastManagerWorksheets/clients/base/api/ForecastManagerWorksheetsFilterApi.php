@@ -34,7 +34,6 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'exceptions' => array(
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
-                    'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
                 ),
             ),
@@ -49,7 +48,6 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'exceptions' => array(
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
-                    'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
                 ),
             ),
@@ -64,7 +62,6 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'exceptions' => array(
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
-                    'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
                 ),
             ),
@@ -79,7 +76,6 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'exceptions' => array(
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
-                    'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
                 ),
             ),
@@ -94,7 +90,6 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'exceptions' => array(
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
-                    'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
                 ),
             ),
@@ -109,7 +104,6 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'exceptions' => array(
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
-                    'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
                 ),
             ),
@@ -124,7 +118,6 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'exceptions' => array(
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
-                    'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
                 ),
             ),
@@ -139,7 +132,6 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'exceptions' => array(
                     'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
-                    'SugarApiExceptionNotAuthorized',
                     'SugarApiExceptionNotFound',
                 ),
             ),
@@ -249,12 +241,6 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
 
     protected function getDirectHierarchyUsers(ServiceBase $api, array $args)
     {
-        // we need to check if the $api->user is a manager
-        // if they are not a manager, throw back a 403 (Not Authorized) error
-        if (!User::isManager($api->user->id)) {
-            throw new SugarApiExceptionNotAuthorized();
-        }
-
         $args['filter'] = array();
 
         // if we did not find a user in the args array, set it to the current user's id
@@ -333,17 +319,10 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
      * @param mixed $user_id                    Passed in User ID, if false, it will use the current use from $api->user
      * @param mixed $timeperiod_id              TimePeriod Id, if false, the current time period will be found an used
      * @return array                            The Filer array to be passed back into the filerList Api
-     * @throws SugarApiExceptionNotAuthorized
      * @throws SugarApiExceptionInvalidParameter
      */
     protected function createFilter(ServiceBase $api, $user_id, $timeperiod_id)
     {
-        // we need to check if the $api->user is a manager
-        // if they are not a manager, throw back a 403 (Not Authorized) error
-        if (!User::isManager($api->user->id)) {
-            throw new SugarApiExceptionNotAuthorized();
-        }
-
         $filter = array();
 
         // default draft to be 1

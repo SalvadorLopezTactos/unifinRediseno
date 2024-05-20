@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informació d&#39;Usuari no trobada',
     'ERR_USER_NAME_EXISTS'              => 'El nom d&#39;usuari {0} ja existeix. No es permeten noms d&#39;usuari duplicats. Canviï el nom d&#39;usuari, ha de ser únic.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Cal desar la llicència de "Sugar Hint" amb un tipus de llicència compatible addicional',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Aquesta capacitat ja està inclosa en Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Aquest usuari ha estat bloquejat a l&#39;aplicació Sugar i no pot iniciar la sessió utilitzant la seva contrasenya actual.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Usuaris autoritzats només externament no tenen permès iniciar sessió amb les credencials de Sugar',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Clau de pas',
     'LBL_CHOOSE_A_KEY'					=> 'Establir una clau per evitar la publicació no autoritzada en el seu calendari',
     'LBL_NO_KEY'                        => 'La clau no està definida. Si us plau, estableix per activar la.',
-	'LBL_CHOOSE_WHICH'					=> 'Seleccionar les pestanyes a mostrar',
+    'LBL_CHOOSE_WHICH'                  => 'Seleccioneu quins mòduls són accessibles dins de la barra de navegació. Designeu l&#39;ordre en què voleu que apareguin els mòduls.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Quantitat de mòduls ancorats',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Escriviu la quantitat de mòduls disponibles que s&#39;ancoren quan la barra de navegació està contreta (p.ex., si introduïu 5, els primers cinc mòduls de la llista s&#39;ancoren). Us recomanem una quantitat que representi els mòduls que utilitzeu més freqüentment. Els valors superiors a 100 no es respectaran.',
 	'LBL_CITY'							=> 'Ciutat',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Esborra',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'Usuari SMTP',
 	'LBL_MAIL_SMTPTYPE'                => 'Tipus de Servidor SMTP:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'Especificació del servidor SMTP',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Compte de correu electrònic autoritzat',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Trieu el vostre proveïdor de correu electrònic:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Contrasenya de Yahoo! Mail:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'ID de Yahoo! Mail:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'usuaris/equips/rols',
     'LBL_LOADING_ITEMS' => 'Carregant dades...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Accés a la Smart Guide',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Smart Guide Últim Actiu',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Falta accés a la Smart Guide',
 ); // END STRINGS DEFS

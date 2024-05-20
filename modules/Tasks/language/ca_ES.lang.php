@@ -117,4 +117,13 @@ Per crear un {{module_name}}:
  - Feu clic a "Mostra més" per exposar camps addicionals si és necessari.
 2. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Tasca de Smart Guide',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'És una tasca de Smart Guide',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Data d&#39;inici d&#39;activitats de la Smart Guide',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Data de finalització de les activitats de Smart Guide',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Smart Guide - Dies per completar',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Reunions secundàries',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Trucades secundàries',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Tasques secundàries',
 );

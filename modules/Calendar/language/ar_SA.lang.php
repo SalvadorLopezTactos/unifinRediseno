@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => 'نوف',
     'LBL_DEC' => 'ديس',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'تمت إضافة التقويم بالفعل',
+    'LBL_CALENDAR_IS_SELECTED' => 'تم تحديد {{calendar}}',
+    'LBL_NO_USER_SELECTED' => 'يُرجى تحديد مستخدم أو فريق',
+    'LBL_NO_CALENDAR_SELECTED' => 'يُرجى تحديد تقويم',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'فشل حفظ التقويمات.',
+
 );
 
 $mod_list_strings = array(

@@ -58,7 +58,7 @@ class SugarFieldDatetimecombo extends SugarFieldBase {
 	       $displayParams['timeFormat'] = $timedate->get_user_time_format();
 
            $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
-           $id = isset($displayParams['idName']) ? $displayParams['idName'] : $vardef['name'];
+             $id = $displayParams['idName'] ?? $vardef['name'];
            $this->ss->assign('original_id', "{$id}");
            $this->ss->assign('id_range', "range_{$id}");
            $this->ss->assign('id_range_start', "start_range_{$id}");

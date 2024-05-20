@@ -12,13 +12,23 @@
 
 namespace Sugarcrm\Sugarcrm\Cache\Backend;
 
-use Symfony\Component\Cache\Simple\RedisCache;
+use Sugarcrm\Sugarcrm\Cache\Backend\Redis\RedisAdapter;
+use Symfony\Component\Cache\Psr16Cache;
 
 /**
  * Redis implementation of the cache backend
  *
  * @link http://pecl.php.net/package/redis
  */
-final class Redis extends RedisCache
+final class Redis extends Psr16Cache
 {
+    /**
+     * @param \Redis|\RedisArray|\RedisCluster|\Predis\Client $redisClient
+     * @param string $namespace
+     * @param int $defaultLifetime
+     */
+    public function __construct($redisClient, $namespace = '', $defaultLifetime = 0)
+    {
+        parent::__construct(new RedisAdapter($redisClient, $namespace, $defaultLifetime));
+    }
 }

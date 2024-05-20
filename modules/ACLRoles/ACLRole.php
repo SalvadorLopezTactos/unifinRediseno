@@ -252,27 +252,41 @@ public static function getAllRoles($returnAsArray = false)
         // Fallback to array key if translation is empty
         $a = empty($app_list_strings['moduleList'][$a]) ? $a : $app_list_strings['moduleList'][$a];
         $b = empty($app_list_strings['moduleList'][$b]) ? $b : $app_list_strings['moduleList'][$b];
-        if ($a == $b)
-            return 0;
-        return ($a < $b) ? -1 : 1;
+        return $a <=> $b;
     }
-/**
- * function mark_relationships_deleted($id)
- *
- * special case to delete acl_roles_actions relationship
- *
- * @param ACLRole GUID $id
- */
-function mark_relationships_deleted($id){
+
+    /**
+     * Clears ACL caches after Role deletion so that Users will pick up the
+     * latest ACL data
+     *
+     * @inheritdoc
+     */
+    public function mark_deleted($id)
+    {
+        $this->clearCaches();
+        $this->updateUsersACLInfo();
+
+        parent::mark_deleted($id);
+    }
+
+    /**
+     * function mark_relationships_deleted($id)
+     *
+     * special case to delete acl_roles_actions relationship
+     *
+     * @param ACLRole GUID $id
+     */
+    public function mark_relationships_deleted($id)
+    {
         //we need to delete the actions relationship by hand (special case)
         $date_modified = TimeDate::getInstance()->nowDb();
         $query =  "UPDATE acl_roles_actions SET deleted=1 , date_modified=? WHERE role_id = ? AND deleted=0";
 
         $conn = $this->db->getConnection();
-        $conn->executeQuery($query, array($date_modified, $id));
+        $conn->executeStatement($query, array($date_modified, $id));
 
         parent::mark_relationships_deleted($id);
-}
+    }
 
     /**
      * Updates users date_modified to make sure clients use latest version of ACLs

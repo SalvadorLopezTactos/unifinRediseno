@@ -12,6 +12,8 @@
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\IdmNonrecoverableException;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\ServiceAccountAuthenticationException;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\InvalidTokenException;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\AuthProviderOIDCManagerBuilder;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\AuthProviderApiLoginManagerBuilder;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\AuthProviderBasicManagerBuilder;
@@ -42,7 +44,7 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
 
     use LoggerAwareTrait;
 
-    const PORTAL_PLATFORM = 'portal';
+    public const PORTAL_PLATFORM = 'portal';
 
     protected const IDM_NONRECOVERABLE_ERROR = 'idm_nonrecoverable_error';
 
@@ -192,14 +194,20 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
             /** @var IntrospectToken $userToken */
             $userToken = $authManager->authenticate($introspectToken);
         } catch (AuthenticationException $e) {
+            $message = $e->getMessage();
             if ($e instanceof IdmNonrecoverableException) {
                 $error = static::IDM_NONRECOVERABLE_ERROR;
-                $message = $e->getMessage();
-                $this->logger->alert('IDM mode introspect nonrecoverable exception: ' . $e->getMessage());
+                $this->logger->warning('IDM mode introspect nonrecoverable exception: ' . $e->getMessage());
+            } elseif ($e instanceof ServiceAccountAuthenticationException) {
+                $error = self::ERROR_INVALID_GRANT;
+                $this->logger->warning('IDM mode introspect exception: ' . $e->getMessage());
+            } elseif ($e instanceof InvalidTokenException) {
+                $error = self::ERROR_INVALID_GRANT;
+                $this->logger->warning('Invalid token: ' . $e->getMessage());
             } else {
                 $error = self::ERROR_INVALID_GRANT;
                 $message = 'The access token provided has expired.';
-                $this->logger->debug('IDM mode introspect exception: ' . $e->getMessage());
+                $this->logger->warning('IDM mode introspect exception: ' . $e->getMessage());
             }
             throw new OAuth2AuthenticateException(
                 self::HTTP_UNAUTHORIZED,

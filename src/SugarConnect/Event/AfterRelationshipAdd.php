@@ -16,6 +16,9 @@ use Sugarcrm\Sugarcrm\SugarConnect\Publisher;
 use Sugarcrm\Sugarcrm\SugarConnect\Configuration\ConfigurationAwareInterface;
 use Sugarcrm\Sugarcrm\SugarConnect\Configuration\ConfigurationAwareTrait;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 class AfterRelationshipAdd implements Publisher, ConfigurationAwareInterface
 {
     use ConfigurationAwareTrait;

@@ -15,12 +15,12 @@ class SugarMinifyUtils
     /**
      * @string
      */
-    const CACHE_SUB_DIR = 'jsSourceMinifiedFiles';
+    public const CACHE_SUB_DIR = 'jsSourceMinifiedFiles';
 
     /**
      * @string
      */
-    const SOURCE_MD5_MAP_FILENAME = 'sourceMd5Map.php';
+    public const SOURCE_MD5_MAP_FILENAME = 'sourceMd5Map.php';
 
     /**
      * @var string
@@ -181,7 +181,7 @@ class SugarMinifyUtils
             }
 
             // Handle permission value here
-            $newPerm = $groupFilePermissions ? $groupFilePermissions : $defaultPerm;
+            $newPerm = $groupFilePermissions ?: $defaultPerm;
 
             // Set the perms for the new file
             @$func($targetGroupFile, $newPerm);

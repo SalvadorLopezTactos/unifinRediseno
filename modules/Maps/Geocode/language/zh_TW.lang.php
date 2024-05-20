@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => '緯度',
     'LBL_LONGITUDE' => '經度',
     'LBL_GEOCODED' => '已進行地理編碼',
+    'LBL_ERROR_MESSAGE' => '地理編碼錯誤消息',
 ];

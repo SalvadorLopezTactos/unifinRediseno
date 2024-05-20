@@ -194,4 +194,10 @@ Sugar users, contacts, and leads may be added as call invitees. {{plural_module_
 - לחץ על "הוסף נוכח" כדי להוסיף משתמש קיים, איש קשר או ליד ל-{{calls_singular_module}}.
 - לחץ על סמל הפלוס לימין "בחר נוכח" כדי ליצור נוכח {{calls_singular_module}} כרישום Sugar חדש.
 3. לחץ על "שמור" כדי לסיים את הרישום החדש ולחזור לדף הקודם.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "שיחה של מדריך חכם",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'משימות ילד',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'פגישות ילד',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'שיחות ילד',
 );

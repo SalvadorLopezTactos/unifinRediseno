@@ -224,11 +224,13 @@ function save_custom_app_list_strings(&$app_list_strings, $language)
  * @param new_dd_strings array  array of language strings to change
  * @param all_languages bool whether this is for all languages or the current language
  * @param string language where labels will be replaced.  Use the current language by default
+ * @param bool $postponeQRR skip QRR call because it will be executed inside the caller
  * @desc Saves language changes to dropdown labels (in app_list_strings) in an extension file
  *
  */
-function save_custom_dropdown_strings($new_dd_strings, $language = '', $all_languages = false)
+function save_custom_dropdown_strings($new_dd_strings, $language = '', $all_languages = false, $postponeQRR = false)
 {
+    $refresh = null;
     if (empty($new_dd_strings) || !is_array($new_dd_strings)) {
         return false;
     }
@@ -276,7 +278,7 @@ function save_custom_dropdown_strings($new_dd_strings, $language = '', $all_lang
         }
     }
     //run quick repair if there has been a change
-    if ($refresh) {
+    if ($refresh && !$postponeQRR) {
         $repairAndClear = new RepairAndClear();
         $actions = array('rebuildExtensions');
         $repairAndClear->repairAndClearAll($actions, $modules, false, false, '');
@@ -387,8 +389,7 @@ function dropdown_item_move_up($dropdown_type, $language, $index)
 	$app_list_strings_to_edit = return_app_list_strings_language($language);
 	$dropdown_array =$app_list_strings_to_edit[$dropdown_type];
 
-	if($index > 0 && $index < count($dropdown_array))
-	{
+    if ($index > 0 && $index < (is_countable($dropdown_array) ? count($dropdown_array) : 0)) {
 		$key = '';
 		$value = '';
 		$i = 0;
@@ -421,8 +422,7 @@ function dropdown_item_move_down($dropdown_type, $language, $index)
 	$app_list_strings_to_edit = return_app_list_strings_language($language);
 	$dropdown_array =$app_list_strings_to_edit[$dropdown_type];
 
-	if($index >= 0 && $index < count($dropdown_array) - 1)
-	{
+    if ($index >= 0 && $index < (is_countable($dropdown_array) ? count($dropdown_array) : 0) - 1) {
 		$key = '';
 		$value = '';
 		$i = 0;
@@ -471,8 +471,7 @@ function helper_dropdown_item_insert(&$dropdown_array, $index, $key, $value)
 	{
 		$dropdown_array = array_merge($pair, $dropdown_array);
 	}
-	if($index >= count($dropdown_array))
-	{
+    if ($index >= (is_countable($dropdown_array) ? count($dropdown_array) : 0)) {
 		$dropdown_array = array_merge($dropdown_array, $pair);
 	}
 	else
@@ -574,8 +573,7 @@ function dropdown_duplicate_check($dropdown_type, &$file_contents)
 		$result = array();
 		preg_match_all($pattern, $file_contents, $result);
 
-		if(count($result[0]) > 1)
-		{
+        if ((is_countable($result[0]) ? count($result[0]) : 0) > 1) {
 			$new_entry = $result[0][0];
 			$new_contents = preg_replace($pattern, '', $file_contents);
 
@@ -640,8 +638,7 @@ function app_string_duplicate_check($name, &$file_contents)
 		$result = array();
 		preg_match_all($pattern, $file_contents, $result);
 
-		if(count($result[0]) > 1)
-		{
+        if ((is_countable($result[0]) ? count($result[0]) : 0) > 1) {
 			$new_entry = $result[0][0];
 			$new_contents = preg_replace($pattern, '', $file_contents);
 

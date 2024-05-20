@@ -125,7 +125,7 @@ final class DenormalizationApi extends SugarApi
     public function preCheck(ServiceBase $api, array $args)
     {
         $this->ensureDeveloperUser();
-        list($bean, $fieldNameToProcess, $isDenormalization) = $this->parseArguments($args);
+        [$bean, $fieldNameToProcess, $isDenormalization] = $this->parseArguments($args);
 
         if (!$bean || !$fieldNameToProcess) {
             return ['message' => translate('LBL_MANAGE_RELATE_DENORMALIZATION_MSG_EMPTY_REQUEST', 'Administration')];
@@ -181,7 +181,7 @@ final class DenormalizationApi extends SugarApi
             ];
         }
 
-        list($bean, $fieldNameToProcess, $isDenormalization) = $this->parseArguments($args);
+        [$bean, $fieldNameToProcess, $isDenormalization] = $this->parseArguments($args);
 
         if (!$bean || is_null($fieldNameToProcess)) {
             return ['message' => translate('LBL_MANAGE_RELATE_DENORMALIZATION_MSG_EMPTY_REQUEST', 'Administration')];

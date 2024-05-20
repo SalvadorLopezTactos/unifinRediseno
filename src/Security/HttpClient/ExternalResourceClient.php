@@ -20,6 +20,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Sugarcrm\Sugarcrm\Security\Dns\Resolver;
 use Sugarcrm\Sugarcrm\Security\ValueObjects\ExternalResource;
 
 class ExternalResourceClient implements ClientInterface
@@ -27,30 +28,107 @@ class ExternalResourceClient implements ClientInterface
     /**
      * @var float Timeout in seconds
      */
-    private $timeout;
+    private float $timeout;
     /**
      * @var int
      */
-    private $maxRedirects;
+    private int $maxRedirects;
 
     /**
      * @var int
      */
-    private $redirectsCount;
+    private int $redirectsCount;
 
     /**
-     * @var ResponseFactoryInterface
+     * @var bool Forcing RFC compliance.
+     * Strict RFC compliant redirects mean that POST redirect requests are sent as POST requests vs
+     * doing what most browsers do which is redirect POST requests with GET requests
      */
-    private $responseFactory;
+    private bool $strictRedirects = false;
+
+    private ResponseFactoryInterface $responseFactory;
+
+    private ?Resolver $resolver = null;
+
+    /**
+     * @var array Socket context options
+     * @see https://www.php.net/manual/en/context.socket.php
+     */
+    private array $socketContextOptions = [];
+
+    /**
+     * @var array Context options for ssl:// and tls:// transports.
+     * @see https://www.php.net/manual/en/context.ssl.php
+     */
+    private array $sslContextOptions = [];
+
+    /**
+     * Stop retrying a failed request after exhausting the maximum number of
+     * retries.
+     */
+    private int $maxRetries;
+
+    /**
+     * Tracks the number the retries that have been attempted.
+     */
+    private int $retryCount;
+
     /**
      * @param float $timeout Read timeout in seconds, specified by a float (e.g. 10.5)
      * @param int $maxRedirects The max number of redirects to follow. Value 0 means that no redirects are followed
      */
     public function __construct(float $timeout = 10, int $maxRedirects = 3)
     {
-        $this->timeout = $timeout;
+        $this->setTimeout($timeout);
         $this->setMaxRedirects($maxRedirects);
+        $this->setMaxRetries(0);
         $this->redirectsCount = 0;
+        $this->retryCount = 0;
+    }
+
+    /**
+     * @param Resolver $resolver Set custom DoH resolver
+     * @return ExternalResourceClient
+     */
+    public function setResolver(Resolver $resolver): ExternalResourceClient
+    {
+        $this->resolver = $resolver;
+        return $this;
+    }
+
+    /**
+     * @param array $options Socket context option listing
+     * @return ExternalResourceClient
+     */
+    public function setSocketContextOptions(array $options): ExternalResourceClient
+    {
+        $this->socketContextOptions = $options;
+        return $this;
+    }
+
+    /**
+     * @param array $options SSL context option listing
+     * @return ExternalResourceClient
+     */
+    public function setSslContextOptions(array $options): ExternalResourceClient
+    {
+        // enforce safe defaults
+        $this->sslContextOptions = array_merge($options, [
+            'verify_peer' => true,
+            'verify_peer_name' => true,
+            'allow_self_signed' => false,
+        ]);
+        return $this;
+    }
+
+    /**
+     * Force RFC compliance
+     * @return $this
+     */
+    public function useStrictRedirects(): ExternalResourceClient
+    {
+        $this->strictRedirects = true;
+        return $this;
     }
 
     /**
@@ -75,6 +153,30 @@ class ExternalResourceClient implements ClientInterface
             throw new \InvalidArgumentException('The max number of redirects can not be less than zero');
         }
         $this->maxRedirects = $maxRedirects;
+        return $this;
+    }
+
+    /**
+     * Set the maximum number of retries for a failed request.
+     *
+     * An exponential backoff algorithm retries requests exponentially,
+     * increasing the waiting time between retries until all retries are
+     * exhausted.
+     *
+     * @see https://cloud.google.com/iot/docs/how-tos/exponential-backoff#example_algorithm
+     * @param int $maxRetries Stop retrying a failed request after this many
+     *                        retries.
+     *
+     * @return $this
+     */
+    public function setMaxRetries(int $maxRetries): ExternalResourceClient
+    {
+        if ($maxRetries < 0) {
+            throw new \InvalidArgumentException('The max number of retries cannot be less than zero');
+        }
+
+        $this->maxRetries = $maxRetries;
+
         return $this;
     }
 
@@ -105,7 +207,7 @@ class ExternalResourceClient implements ClientInterface
      */
     public function get(string $url, array $headers = []): ResponseInterface
     {
-        return $this->request('GET', $url, null, $headers);
+        return $this->request(Method::GET, $url, null, $headers);
     }
 
     /**
@@ -118,7 +220,7 @@ class ExternalResourceClient implements ClientInterface
      */
     public function post(string $url, $body, array $headers = []): ResponseInterface
     {
-        return $this->request('POST', $url, is_string($body)? $body : http_build_query((array) $body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
+        return $this->request(Method::POST, $url, is_string($body) ? $body : http_build_query((array) $body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
     }
 
     /**
@@ -131,7 +233,7 @@ class ExternalResourceClient implements ClientInterface
      */
     public function put(string $url, $body, array $headers = []): ResponseInterface
     {
-        return $this->request('PUT', $url, is_string($body)? $body : http_build_query((array) $body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
+        return $this->request(Method::PUT, $url, is_string($body) ? $body : http_build_query((array) $body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
     }
 
     /**
@@ -144,7 +246,7 @@ class ExternalResourceClient implements ClientInterface
      */
     public function patch(string $url, $body, array $headers = []): ResponseInterface
     {
-        return $this->request('PATCH', $url, is_string($body)? $body : http_build_query((array) $body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
+        return $this->request(Method::PATCH, $url, is_string($body) ? $body : http_build_query((array) $body), array_merge(['Content-type' => 'application/x-www-form-urlencoded'], $headers));
     }
 
     /**
@@ -155,7 +257,7 @@ class ExternalResourceClient implements ClientInterface
      */
     public function delete(string $url, array $headers = []): ResponseInterface
     {
-        return $this->request('DELETE', $url, null, $headers);
+        return $this->request(Method::DELETE, $url, null, $headers);
     }
 
     /**
@@ -166,7 +268,7 @@ class ExternalResourceClient implements ClientInterface
      */
     public function head(string $url, array $headers = []): ResponseInterface
     {
-        return $this->request('HEAD', $url, null, $headers);
+        return $this->request(Method::HEAD, $url, null, $headers);
     }
 
     /**
@@ -204,7 +306,7 @@ class ExternalResourceClient implements ClientInterface
         global $sugar_config;
         // Prevent SSRF against internal resources
         $privateIps = $sugar_config['security']['private_ips'] ?? [];
-        $externalResource = ExternalResource::fromString($url, $privateIps);
+        $externalResource = ExternalResource::fromString($url, $privateIps, $this->resolver);
         $proxy_config = Administration::getSettings('proxy');
         if (!empty($proxy_config->settings['proxy_auth'])) {
             $auth = base64_encode($proxy_config->settings['proxy_username'] . ':' . $proxy_config->settings['proxy_password']);
@@ -222,18 +324,21 @@ class ExternalResourceClient implements ClientInterface
                 'protocol_version' => 1.1,
                 'ignore_errors' => true,
             ],
-            'ssl' => [
+            'ssl' => array_merge($this->sslContextOptions, [
                 'peer_name' => $externalResource->getHost(),
-            ],
+            ]),
         ];
+        if (count($this->socketContextOptions)) {
+            $options['socket'] = $this->socketContextOptions;
+        }
 
         if (!empty($proxy_config->settings['proxy_on'])) {
-            $parts = parse_url($externalResource->getConvertedUrl());
             $proxyHost = $proxy_config->settings['proxy_host'];
             $proxyPort = $proxy_config->settings['proxy_port'];
             $options['http']['proxy'] = 'tcp://' . $proxyHost . ':' . $proxyPort;
             $options['https']['proxy'] = 'tcp://' . $proxyHost . ':' . $proxyPort;
-            $options[$parts['scheme'] ?? 'http']['request_fulluri'] = true;
+            $scheme = parse_url($externalResource->getConvertedUrl(), PHP_URL_SCHEME);
+            $options[$scheme]['request_fulluri'] = true;
         }
         $context = stream_context_create(
             $options
@@ -250,15 +355,42 @@ class ExternalResourceClient implements ClientInterface
             throw new RequestException('Failed to get response from ' . $externalResource->getConvertedUrl());
         }
 
+        $statusCode = $this->getStatusCode($http_response_header);
+
+        // Retry on server error with exponential backoff strategy.
+        if ($statusCode >= 500 && $this->maxRetries > 0 && $this->retryCount < $this->maxRetries) {
+            $backoffDelay = $this->getExponentialBackoffDelayInMicroseconds($this->retryCount);
+            usleep($backoffDelay);
+
+            $this->retryCount++;
+
+            try {
+                return $this->request($method, $url, $body, $headers);
+            } catch (RequestException $exception) {
+                $this->retryCount = 0;
+                throw $exception;
+            }
+        }
+
+        $this->retryCount = 0;
+
+        // Follow redirects.
         if ($this->maxRedirects > 0 && $this->redirectsCount < $this->maxRedirects) {
             foreach ($http_response_header as $header) {
                 $canonicalHeader = strtolower(trim($header));
                 if (substr($canonicalHeader, 0, 10) === 'location: ') {
                     $this->redirectsCount++;
                     /* update $url with where we were redirected to */
-                    $url = substr($canonicalHeader, 10);
+                    $redirectUrl = $externalResource->resolveLocation(substr($canonicalHeader, 10));
+                    if ($statusCode === 303 ||
+                        ($statusCode <= 302 && !$this->strictRedirects)
+                    ) {
+                        $safeMethods = ['GET', 'HEAD', 'OPTIONS'];
+                        $method = in_array($method, $safeMethods) ? $method : 'GET';
+                        $body = null;
+                    }
                     try {
-                        return $this->get($url);
+                        return $this->request($method, $redirectUrl, $body, $headers);
                     } catch (RequestException $exception) {
                         $this->redirectsCount = 0;
                         throw $exception;
@@ -278,27 +410,9 @@ class ExternalResourceClient implements ClientInterface
      */
     private function createResponse(array $responseHeaders, string $content): ResponseInterface
     {
-        $headers = [];
-        foreach ($responseHeaders as $header) {
-            $trimmed = trim($header);
-            if (0 === stripos($trimmed, 'http/')) {
-                $headers = [];
-                $headers[] = $trimmed;
-                continue;
-            }
-
-            if (false === strpos($trimmed, ':')) {
-                continue;
-            }
-            $headers[] = $trimmed;
-        }
+        $headers = $this->normalizeResponseHeaders($responseHeaders);
         $statusLine = array_shift($headers);
-        $parts = explode(' ', $statusLine, 3);
-        if (count($parts) < 2 || 0 !== stripos($parts[0], 'http/')) {
-            throw new \InvalidArgumentException(sprintf('"%s" is not a valid HTTP status line', $statusLine));
-        }
-        $code = $parts[1];
-        $reasonPhrase = $parts[2];
+        [$code, $reasonPhrase] = $this->getHttpStatus($statusLine);
         $response = $this->getResponseFactory()->createResponse();
         $response = $response->withStatus($code, $reasonPhrase);
         foreach ($headers as $header) {
@@ -309,6 +423,18 @@ class ExternalResourceClient implements ClientInterface
         $response->getBody()->write($content);
         $response->getBody()->rewind();
         return $response;
+    }
+
+    /**
+     * @param array $responseHeaders
+     * @return int
+     */
+    private function getStatusCode(array $responseHeaders): int
+    {
+        $headers = $this->normalizeResponseHeaders($responseHeaders);
+        $statusLine = array_shift($headers);
+        [$code] = $this->getHttpStatus($statusLine);
+        return (int) $code;
     }
 
     /**
@@ -355,5 +481,60 @@ class ExternalResourceClient implements ClientInterface
         return array_map(function ($k, $v) {
             return "$k: $v";
         }, array_keys($requestHeaders), array_values($requestHeaders));
+    }
+
+    /**
+     * @param array $responseHeaders
+     * @return array
+     */
+    protected function normalizeResponseHeaders(array $responseHeaders): array
+    {
+        $headers = [];
+        foreach ($responseHeaders as $header) {
+            $trimmed = trim($header);
+            if (0 === stripos($trimmed, 'http/')) {
+                $headers = [];
+                $headers[] = $trimmed;
+                continue;
+            }
+
+            if (false === strpos($trimmed, ':')) {
+                continue;
+            }
+            $headers[] = $trimmed;
+        }
+        return $headers;
+    }
+
+    /**
+     * @param $statusLine
+     * @return array
+     */
+    protected function getHttpStatus($statusLine): array
+    {
+        $parts = explode(' ', $statusLine, 3);
+        if (count($parts) < 2 || 0 !== stripos($parts[0], 'http/')) {
+            throw new \InvalidArgumentException(sprintf('"%s" is not a valid HTTP status line', $statusLine));
+        }
+        $code = $parts[1];
+        $reasonPhrase = $parts[2];
+        return array($code, $reasonPhrase);
+    }
+
+    /**
+     * Calculates the wait time for the next retry.
+     *
+     * @param int $attempt The retry attempt count.
+     *
+     * @return int The delay in microseconds.
+     */
+    private function getExponentialBackoffDelayInMicroseconds(int $attempt): int
+    {
+        $oneSecondInMicroseconds = 1000000;
+        $maxDelay = 64 * $oneSecondInMicroseconds;
+        $delay = pow(2, $attempt) * $oneSecondInMicroseconds;
+        $jitter = random_int(0, $oneSecondInMicroseconds);
+
+        return min($delay + $jitter, $maxDelay);
     }
 }

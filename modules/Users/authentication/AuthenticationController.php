@@ -31,6 +31,10 @@ use Psr\Log\LoggerAwareTrait;
 
 class AuthenticationController implements LoggerAwareInterface
 {
+    /**
+     * @var array<string, class-string<\Configurator>>|array<string, string>|mixed
+     */
+    public $nextStep;
     use LoggerAwareTrait;
 
 	public $loggedIn = false; //if a user has attempted to login

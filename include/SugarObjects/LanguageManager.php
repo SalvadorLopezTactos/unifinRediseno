@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\SystemProcessLock\SystemProcessLock;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 /**
@@ -35,15 +36,23 @@ class LanguageManager
 		$lang = $current_language;
         if(empty($lang))
             $lang = $GLOBALS['sugar_config']['default_language'];
-		
-		if(empty(self::$createdModules[$module]) && ($refresh || !file_exists(sugar_cached('modules/').$module.'/language/'.$lang.'.lang.php'))){
+
+        $cachedFile = sugar_cached('modules/') . $module . '/language/' . $lang . '.lang.php';
+        if (empty(self::$createdModules[$module]) && ($refresh || !file_exists($cachedFile))) {
 			$loaded_mod_strings = array();
 			$loaded_mod_strings = LanguageManager::loadTemplateLanguage($module , $templates, $lang , $loaded_mod_strings);
 			self::$createdModules[$module] = true;
-			LanguageManager::refreshLanguage($module,$lang, $loaded_mod_strings);
+
+            self::refreshLanguageSafe(
+                (string) $module,
+                (string) $lang,
+                (bool) $refresh,
+                $cachedFile,
+                (array) $loaded_mod_strings
+            );
 		}
 	}
-    
+
     /**
      * Resets the created modules array so that in-memory vardef rebuilds can
      * successfully pull of the refresh of metadata
@@ -80,7 +89,7 @@ class LanguageManager
 		        'include/SugarObjects/templates/' . $template . '/language/'.$lang.'.lang.php',
 		        'include/SugarObjects/implements/' . $template . '/language/'.$lang.'.lang.php'
 		    ) as $path) {
-		        require($path);
+                require $path;
 		        $templates[$template] = $mod_strings;
 		    }
 		}
@@ -101,7 +110,7 @@ class LanguageManager
 		// put the item in the sugar cache.
 		$key = self::getLanguageCacheKey($module,$lang);
 		sugar_cache_put($key,$loaded_mod_strings);
-        
+
 	}
 
 	/**
@@ -158,9 +167,9 @@ class LanguageManager
     /**
      * Gets the list of file paths to load for languages for a module in the order
      * that they should be loaded.
-     * 
+     *
      * DO NOT EVER CHANGE THE ORDER OF THESE FILES. EVER. SERIOUSLY, DON'T DO IT.
-     * 
+     *
      * @param string $module The name of the module to get the paths for
      * @param string $lang The language to get the files for
      * @return array
@@ -210,7 +219,7 @@ class LanguageManager
 
 		//search a predefined set of locations for the vardef files
 		foreach(SugarAutoLoader::existing($lang_paths) as $path){
-		    require($path);
+            require $path;
             if(!empty($mod_strings)){
 			    if (function_exists('sugarArrayMergeRecursive')){
 				    $loaded_mod_strings = sugarArrayMergeRecursive($loaded_mod_strings, $mod_strings);
@@ -250,16 +259,16 @@ class LanguageManager
             throw new \Exception('Path traversal attack vector detected');
         }
 
-		if($refresh || !file_exists($cachedfile)){
-			LanguageManager::refreshLanguage($module, $lang);
-		}
+        if ($refresh || !file_exists($cachedfile)) {
+            self::refreshLanguageSafe((string) $module, (string) $lang, (bool) $refresh, $cachedfile);
+        }
 
 		//at this point we should have the cache/modules/... file
 		//which was created from the refreshVardefs so let's try to load it.
 		if(file_exists($cachedfile)){
 			global $mod_strings;
 
-			require $cachedfile;
+            include $cachedfile;
 
 			// now that we hae loaded the data from disk, put it in the cache.
 			if(!empty($mod_strings))
@@ -317,7 +326,7 @@ class LanguageManager
 
 	/**
 	 * Gets an array of enabled and disabled languages
-	 * 
+     *
 	 * @return array Array containing an 'enabled' and 'disabled' set of arrays
 	 */
 	public static function getEnabledAndDisabledLanguages()
@@ -344,6 +353,31 @@ class LanguageManager
 
 	    return array('enabled' => $enabled, 'disabled' => $disabled);
 	}
+
+    protected static function refreshLanguageSafe(
+        string $module,
+        string $lang,
+        bool $needRefresh,
+        string $cachedFile,
+        array $loadedModStrings = array()
+    ): void {
+        $checkCondition = function () use ($needRefresh, $cachedFile) {
+            if ($needRefresh) {
+                return true;
+            }
+            return !file_exists($cachedFile);
+        };
+
+        $longRunningFunction = function (int $attempt) use ($module, $lang, $loadedModStrings) {
+            LanguageManager::refreshLanguage($module, $lang, $loadedModStrings);
+        };
+
+        $refuseFunction = $longRunningFunction;
+
+        // the following is designed to prevent process race conditions in a long-running process
+        $systemProcessLock = new SystemProcessLock(__METHOD__, $module . '.' . $lang);
+        $systemProcessLock->isolatedCall($checkCondition, $longRunningFunction, $refuseFunction);
+    }
 }
 
 function translated_prefix($key){

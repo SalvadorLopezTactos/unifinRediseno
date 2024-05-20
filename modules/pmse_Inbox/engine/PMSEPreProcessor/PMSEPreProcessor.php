@@ -11,6 +11,7 @@
  */
 
 
+use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Sugarcrm\Sugarcrm\ProcessManager;
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
@@ -518,7 +519,7 @@ class PMSEPreProcessor
 
         // Execute
         $stmt = $db->getConnection()
-                ->executeQuery($sql, [':module' => $module]);
+                ->executeQuery($sql, ['module' => $module]);
 
         // Loop and compare
         while ($row = $stmt->fetchAssociative()) {
@@ -697,7 +698,7 @@ class PMSEPreProcessor
             ON
                 rd.prj_id = prj.id
         WHERE
-            rd.deleted = 0 AND rd.pro_status != 'INACTIVE' AND (
+            rd.deleted = 0 AND (prj.deleted = 0 OR prj.deleted IS NULL) AND rd.pro_status != 'INACTIVE' AND (
                 (
                     (rd.evn_type = 'START' AND rd.evn_module = :module AND 
                     ($appliedTo)) OR
@@ -734,8 +735,8 @@ class PMSEPreProcessor
         $stmt = $db->getConnection()
             ->executeQuery(
                 $sql,
-                [':module' => $moduleName],
-                [':module' => \PDO::PARAM_STR]
+                ['module' => $moduleName],
+                ['module' => ParameterType::STRING]
             );
         return $stmt->fetchAllAssociative();
     }
@@ -815,7 +816,7 @@ class PMSEPreProcessor
 
                 break;
             case 'hook':
-                $event = isset($request->getArguments()['event']) ? $request->getArguments()['event'] : '';
+                $event = $request->getArguments()['event'] ?? '';
                 $flows = $this->getAllEvents($request->getBean(), $event);
                 break;
             case 'queue':

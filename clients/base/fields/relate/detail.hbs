@@ -12,7 +12,8 @@
 --}}
 <div class="relate-field-container">
     {{#if href}}
-        <a class="ellipsis_inline" data-placement="bottom" title="{{value}}" href="{{href}}">
+        <a class="ellipsis_inline" data-placement="bottom" title="{{value}}" href="{{href}}"
+           data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}">
             {{value}}
         </a>
         {{partial 'focus-icon' this this}}

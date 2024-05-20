@@ -12,6 +12,8 @@
 
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Job\RebuildJob;
 use Sugarcrm\Sugarcrm\ProductDefinition\Job\UpdateProductDefinitionJob;
+use Sugarcrm\Sugarcrm\Maps\Queue\Geocode\Scheduler as GeocodeScheduler;
+use Sugarcrm\Sugarcrm\Maps\Resolver as GeocodeResolver;
 
 require_once 'install/install_utils.php';
 
@@ -155,16 +157,26 @@ class Scheduler extends SugarBean {
 	 */
 	public function checkPendingJobs($queue)
 	{
-        $allSchedulers = $this->get_full_list('', "schedulers.status='Active' AND NOT EXISTS(SELECT id FROM {$this->job_queue_table} WHERE scheduler_id=schedulers.id AND status!='" . SchedulersJob::JOB_STATUS_DONE . "')") ?: [];
+        $query = new SugarQuery(DBManagerFactory::getInstance(isMts() ? 'listviews' : ''));
+        $query->from($this)
+            ->joinTable($this->job_queue_table, ['alias' => 'jq', 'joinType' => 'left'])
+            ->on()->equalsField('schedulers.id', 'jq.scheduler_id')
+            ->queryAnd()->notEquals('jq.status', SchedulersJob::JOB_STATUS_DONE);
+        $query->where()->isNull('jq.id');
+        $query->where()->equals('schedulers.status', 'Active');
 
-        $GLOBALS['log']->info('-----> Scheduler found [ '.(is_countable($allSchedulers) ? count($allSchedulers) : 0).' ] ACTIVE jobs');
+        $allSchedulers = $this->fetchFromQuery($query);
+
+        $GLOBALS['log']->info(
+            '-----> Scheduler found [ ' . (is_countable($allSchedulers) ? count($allSchedulers) : 0) . ' ] ACTIVE jobs'
+        );
 
 		if(!empty($allSchedulers)) {
 			foreach($allSchedulers as $focus) {
-				if($focus->fireQualified()) {
-				    $job = $focus->createJob();
+                if ($focus->fireQualified()) {
+                    $job = $focus->createJob();
                     $queue->submitJob($job);
-				}
+                }
 			}
 		} else {
 			$GLOBALS['log']->debug('----->No Schedulers found');
@@ -247,7 +259,7 @@ class Scheduler extends SugarBean {
 			$GLOBALS['log']->debug('----->got * months');
 		} elseif(strstr($mons, '*/')) {
 			$mult = str_replace('*/','',$mons);
-			$startMon = $timedate->fromDb(date_time_start)->month;
+            $startMon = $timedate->fromDb($focus->date_time_start)->month;
 			$startFrom = ($startMon % $mult);
 
 			for($i=$startFrom;$i<=12;$i+$mult) {
@@ -1098,6 +1110,34 @@ class Scheduler extends SugarBean {
         $scheduler->catch_up = '1';
         $schedulers[$scheduler->job] = $scheduler;
 
+        if (hasMapsLicense()) {
+            // Records Geocoder
+            $scheduler = BeanFactory::newBean('Schedulers');
+            $scheduler->name = $mod_strings['LBL_SUGAR_JOB_RECORDS_GEOCODING'];
+            $scheduler->job = 'class::' . GeocodeScheduler::class;
+            $scheduler->date_time_start = create_date(2022, 5, 22) . ' ' . create_time(0, 0, 1);
+            $scheduler->date_time_end = null;
+            $scheduler->job_interval = '*/30::*::*::*::*';
+            $scheduler->status = 'Active';
+            $scheduler->created_by = '1';
+            $scheduler->modified_user_id = '1';
+            $scheduler->catch_up = '1';
+            $schedulers[$scheduler->job] = $scheduler;
+
+            // Geocoder Resolver
+            $scheduler = BeanFactory::newBean('Schedulers');
+            $scheduler->name = $mod_strings['LBL_SUGAR_JOB_RESOLVER_GEOCODING'];
+            $scheduler->job = 'class::' . GeocodeResolver::class;
+            $scheduler->date_time_start = create_date(2022, 5, 22) . ' ' . create_time(0, 0, 1);
+            $scheduler->date_time_end = null;
+            $scheduler->job_interval = '*/40::*::*::*::*';
+            $scheduler->status = 'Active';
+            $scheduler->created_by = '1';
+            $scheduler->modified_user_id = '1';
+            $scheduler->catch_up = '1';
+            $schedulers[$scheduler->job] = $scheduler;
+        }
+
         return $schedulers;
     }
 
@@ -1117,7 +1157,7 @@ class Scheduler extends SugarBean {
 	/**
 	 * function overrides the one in SugarBean.php
 	 */
-	function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
 	{
 		global $mod_strings;
 		$temp_array = $this->get_list_view_array();

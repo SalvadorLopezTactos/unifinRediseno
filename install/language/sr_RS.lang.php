@@ -562,33 +562,15 @@ Odbij ovaj poziv:
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'E-poruke sa obaveštenjima o dodelama',
-        'subject' => 'SugarCRM – dodaljeni $module_name ',
-        'description' => 'Ovaj šablon se koristi kada sistem pošalje korisniku dodelu zadatka.',
-        'body' => '<div>
-<p>$assigned_by_user je dodelio/la &nbsp;$module_name korisniku &nbsp;$assigned_user.</p>
-
-<p>Možete da pregledate ovaj&nbsp;$module_name na:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user je dodelio/la $module_name korisniku $assigned_user.
-
-Možete da pregledate ovaj $module_name na:
-<$module_link>
-',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'E-poruke sa zakazanim izveštajima',
         'subject' => 'Zakazani izveštaj: $report_name od $report_time',
         'description' => 'Ovaj šablon se koristi kada sistem pošalje korisniku zakazani izveštaj.',
         'body' => '<div>
-<p>Zdravo $assigned_user,</p>
-<p>U prilogu je automatski generisani izveštaj koji je zakazan za vas.</p>
-<p>Naziv izveštaja: $report_name</p>
-<p>Datum i vreme izrade izveštaja: $report_time</p>
+<p>Zdravo $assigned_user,<br></p>
+<p>U prilogu je automatski generisani izveštaj koji je zakazan za vas.<br></p>
+<p>Naziv izveštaja: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Datum i vreme izrade izveštaja: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Zdravo $assigned_user,
@@ -614,14 +596,6 @@ Datum i vreme izrade izveštaja: $report_time',
             Prijavite se na Sugar kako biste videli komentar.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informacije o novom nalogu',
-        'description' => 'Ovaj šablon se koristi kada Administrator sistema šalje novu lozinku korisniku.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Ovo je privremeno korisničko ime i lozinka za Vaš nalog:</p><p>Korisničko ime : $contact_user_user_name </p><p>Lozinka : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Nakon prijave na sistem sa ovom lozinkom, potrebno je da promenite lozinku.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'Ovo je privremeno korisničko ime i lozinka za Vaš nalog:<br />Korisničko ime : $contact_user_user_name<br />Lozinka : $contact_user_user_hash<br /><br />$config_site_url<br /><br />Nakon prijave na sistem sa ovom lozinkom, potrebno je da promenite lozinku.',
-        'name' => 'Email sa sistemski generisanom lozinkom',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Resetovanje lozinke Vašeg naloga',
         'description' => "Ovaj šablon se koristi za slanje linka korisniku za resetovanje lozinke korisničkog naloga.",

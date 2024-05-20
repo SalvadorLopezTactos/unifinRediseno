@@ -15,7 +15,7 @@ require SugarAutoLoader::loadWithMetafiles('Project', 'projecttemplate_listviewd
 
 require_once 'include/SearchForm/SearchForm.php';
 
-echo getClassicModuleTitle(htmlspecialchars($mod_strings['LBL_MODULE_NAME']), array(htmlspecialchars($mod_strings['LBL_PROJECT_TEMPLATES_TITLE'])), true);
+echo getClassicModuleTitle(htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT), array(htmlspecialchars($mod_strings['LBL_PROJECT_TEMPLATES_TITLE'], ENT_COMPAT)), true);
 
 $header_text = '';
 
@@ -128,7 +128,7 @@ for ($i = 0; $i < (is_countable($lv->data['data']) ? count($lv->data['data']) : 
 $lv->ss->assign('act','ProjectTemplatesEditView');
 
 $savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
-echo get_form_header(htmlspecialchars($current_module_strings['LBL_LIST_FORM_TITLE'] . $savedSearchName), '', false);
+echo get_form_header(htmlspecialchars($current_module_strings['LBL_LIST_FORM_TITLE'] . $savedSearchName, ENT_COMPAT), '', false);
 
 echo $lv->display();
 

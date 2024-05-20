@@ -9,7 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Util\Uuid;
 
+use Sugarcrm\Sugarcrm\Reports\ReportFactory;
+use Sugarcrm\Sugarcrm\Reports\Constants\ReportType;
 
 class ReportsApi extends ModuleApi
 {
@@ -62,6 +65,93 @@ class ReportsApi extends ModuleApi
                 'shortHelp' => 'An API to get chart data for a saved report',
                 'longHelp' => 'modules/Reports/clients/base/api/help/report_chart_get_help.html',
             ),
+            'retrieveSavedReportRecordsById' => [
+                'reqType' => 'POST',
+                'path' => ['Reports', 'retrieveSavedReportsRecords'],
+                'pathVars' => ['module',],
+                'method' => 'retrieveSavedReportRecordsById',
+                'shortHelp' => 'An API to retrieve records list data for a saved report, alos support runtime filters',
+                'longHelp' => 'modules/Reports/clients/base/api/help/retrieve_saved_report_records_by_id.html',
+                'minVersion' => '11.17',
+            ],
+            'retrieveEnumFieldOptions' => [
+                'reqType' => 'POST',
+                'path' => ['Reports', '?', 'retrieveEnumFieldOptions'],
+                'pathVars' => ['module', 'record', ''],
+                'method' => 'retrieveEnumFieldOptions',
+                'shortHelp' => 'An API that retrieves the options of a complex enum field',
+                'longHelp' => 'modules/Reports/clients/base/api/help/retrieve_enum_field_options_post_help.html',
+                'minVersion' => '11.17',
+            ],
+            'updateReportFilters' => [
+                'reqType' => 'POST',
+                'path' => ['Reports', '?', 'updateReportFilters'],
+                'pathVars' => ['module', 'record', ''],
+                'method' => 'updateReportFilters',
+                'shortHelp' => 'An API that updates the runtime filters on Report\'s Cache',
+                'longHelp' => 'modules/Reports/clients/base/api/help/update_report_filters_post_help.html',
+                'minVersion' => '11.17',
+            ],
+            'retrieveReportPreviewData' => [
+                'reqType' => 'POST',
+                'path' => ['Reports', 'retrieveReportPreviewData'],
+                'pathVars' => ['module', ''],
+                'method' => 'retrieveReportPreviewData',
+                'shortHelp' => 'An API that builds and retrieves complete report preview data',
+                'longHelp' => 'modules/Reports/clients/base/api/help/retrieve_report_preview_post_help.html',
+                'minVersion' => '11.17',
+            ],
+            'retrievePanel' => [
+                'reqType' => 'GET',
+                'path' => ['Reports', 'panel', '?'],
+                'pathVars' => ['module', 'action', 'record'],
+                'method' => 'retrievePanel',
+                'shortHelp' => 'Retrieve report panel',
+                'longHelp' => 'modules/Reports/clients/base/api/help/report_panel_get_help.html',
+            ],
+            'retrieveDefaultPanel' => [
+                'reqType' => 'GET',
+                'path' => ['Reports', 'panelDefault', '?'],
+                'pathVars' => ['module', 'action', 'reportType'],
+                'method' => 'getDefaultReportPanel',
+                'shortHelp' => 'Retrieve default report panel',
+                'longHelp' => 'modules/Reports/clients/base/api/help/report_default_panel_get_help.html',
+            ],
+            'savePanel' => [
+                'reqType' => 'PUT',
+                'path' => ['Reports', 'panel', '?'],
+                'pathVars' => ['module', 'action', 'record'],
+                'method' => 'savePanel',
+                'shortHelp' => 'Save report panel',
+                'longHelp' => 'modules/Reports/clients/base/api/help/report_panel_put_help.html',
+            ],
+            'getActiveSavedReportsId' => [
+                'reqType' => 'GET',
+                'path' => ['Reports', 'activeSavedReport', '?'],
+                'pathVars' => ['module', 'action', 'record'],
+                'method' => 'getActiveSavedReportsId',
+                'shortHelp' => 'Retrieve Saved Reports Defs',
+                'longHelp' => 'modules/Reports/clients/base/api/help/report_active_saved_reports_help.html',
+                'minVersion' => '11.17',
+            ],
+            'getSavedReportFilterData' => [
+                'reqType' => 'GET',
+                'path' => ['Reports', '?', 'filter'],
+                'pathVars' => ['module', 'record', ''],
+                'method' => 'getSavedReportFilterData',
+                'shortHelp' => 'Retrieve Saved Report Filter Data',
+                'longHelp' => 'modules/Reports/clients/base/api/help/report_saved_report_filterdata_get_help.html',
+                'minVersion' => '11.17',
+            ],
+            'retrieveSavedReportChartById' => array(
+                'reqType' => 'POST',
+                'path' => array('Reports', '?', 'chart'),
+                'pathVars' => array('module', 'record', ''),
+                'method' => 'retrieveSavedReportChartById',
+                'shortHelp' => 'An API to retrieve chart data',
+                'longHelp' => 'modules/Reports/clients/base/api/help/retrieve_saved_report_chart_by_id_post_help.html',
+                'minVersion' => '11.17',
+            ),
         );
     }
 
@@ -82,169 +172,6 @@ class ReportsApi extends ModuleApi
         $loadedRecordList = RecordListFactory::getRecordList($id);
 
         return $loadedRecordList;
-    }
-
-    /**
-     * Gets group field def.
-     * @param array $reportDef
-     * @param string $field
-     * @return array|boolean
-     */
-    protected function getGroupFilterFieldDef($reportDef, $field)
-    {
-        $pos = strrpos($field, ':');
-        if ($pos !== false) {
-            $field_name = substr($field, $pos + 1);
-            $table_key = substr($field, 0, $pos);
-        } else {
-            $table_key = 'self';
-            $field_name = $field;
-        }
-        if (is_array($reportDef['group_defs'])) {
-            $report = null;
-            foreach ($reportDef['group_defs'] as $groupColumn) {
-                if ($groupColumn['table_key'] === $table_key && $groupColumn['name'] === $field_name) {
-                    if (empty($groupColumn['type'])) {
-                        if (!$report) {
-                            $report = new Report($reportDef);
-                        }
-                        if (!empty($report->full_bean_list[$table_key])) {
-                            $bean = $report->full_bean_list[$table_key];
-                            $fieldDef = $bean->getFieldDefinition($field_name);
-                            if (!empty($fieldDef['type'])) {
-                                $groupColumn['type'] = $fieldDef['type'];
-                            }
-                        }
-                    }
-                    return $groupColumn;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Adds group filters to report def
-     * @param Array $reportDef
-     * @param Array $groupFilters
-     * @throws SugarApiExceptionInvalidParameter
-     * @return Array
-     */
-    protected function addGroupFilters($reportDef, $groupFilters)
-    {
-        if (!is_array($groupFilters)) {
-            throw new SugarApiExceptionInvalidParameter('Invalid group filters: ' . $groupFilters);
-        }
-
-        // Construct a Report module filter from group filters
-        $adhocFilter = array();
-        foreach ($groupFilters as $filter) {
-            foreach ($filter as $field => $value) {
-                if (is_string($value)) {
-                    $value = array($value);
-                }
-                $fieldDef = $this->getGroupFilterFieldDef($reportDef, $field);
-                if ($fieldDef && !empty($fieldDef['type'])) {
-                    $filterRow = array(
-                        'adhoc' => true,
-                        'name' => $fieldDef['name'],
-                        'table_key' => $fieldDef['table_key'],
-                    );
-                    switch ($fieldDef['type']) {
-                        case 'enum':
-                            $filterRow['qualifier_name'] = 'one_of';
-                            $filterRow['input_name0'] = $value;
-                            break;
-                        case 'date':
-                        case 'datetime':
-                        case 'datetimecombo':
-                            if ((is_countable($value) ? count($value) : 0) == 1) {
-                                $filterRow['qualifier_name'] = 'on';
-                                $filterRow['input_name0'] = reset($value);
-                            } else {
-                                $filterRow['qualifier_name'] = 'between_dates';
-                                $filterRow['input_name0'] = $value[0];
-                                $filterRow['input_name1'] = $value[1];
-                            }
-                            break;
-                        case 'radioenum':
-                        case 'id':
-                            $filterRow['qualifier_name'] = 'is';
-                            $filterRow['input_name0'] = reset($value);
-                            break;
-                        default:
-                            $filterRow['qualifier_name'] = 'equals';
-                            $filterRow['input_name0'] = reset($value);
-                            break;
-                    }
-                    // special case when the input value is empty string
-                    // create a filter simiar to the "Is Empty" filter
-                    if (strlen(reset($value)) == 0) {
-                        $filterRow['qualifier_name'] = 'empty';
-                        $filterRow['input_name0'] = 'empty';
-                        $filterRow['input_name1'] = 'on';
-                    }
-                    array_push($adhocFilter, $filterRow);
-                } else {
-                    throw new SugarApiExceptionInvalidParameter('Invalid group filter field: ' . $field);
-                }
-            }
-        }
-
-        $adhocFilter['operator'] = 'AND';
-
-        // Make sure Filter_1 is defined
-        if (empty($reportDef['filters_def']) || !isset($reportDef['filters_def']['Filter_1'])) {
-            $reportDef['filters_def']['Filter_1'] = array();
-        }
-        $savedReportFilter = $reportDef['filters_def']['Filter_1'];
-
-        // For the conditions [] || {"Filter_1":{"operator":"AND"}}
-        if (empty($savedReportFilter) ||
-            (sizeof($savedReportFilter) == 1 && isset($savedReportFilter['operator']))
-        ) {
-            // Just set Filter_1 to adhocFilter
-            $newFilter = $adhocFilter;
-        } else {
-            // Concatenate existing and adhocFilter
-            $newFilter = array();
-            array_push($newFilter, $savedReportFilter);
-            array_push($newFilter, $adhocFilter);
-            $newFilter['operator'] = 'AND';
-        }
-
-        $reportDef['filters_def']['Filter_1'] = $newFilter;
-        return $reportDef;
-    }
-
-    /**
-     * Returns report def with new filters
-     * @param $api ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param $args array The arguments array passed in from the API containing the module and the record
-     * @throws SugarApiExceptionNotFound
-     * @throws SugarApiExceptionInvalidParameter
-     * @throws SugarApiException
-     * @return array
-     */
-    protected function getReportDef($api, $args)
-    {
-        $savedReport = $this->getReportRecord($api, $args);
-        $reportDef = json_decode($savedReport->content, true);
-
-        if (isset($args['use_saved_filters'])) {
-            if ($args['use_saved_filters'] === 'true') {
-                $reportCache = new ReportCache();
-                if ($reportCache->retrieve($savedReport->id)) {
-                    $reportDef['filters_def'] = $reportCache->contents_array['filters_def'];
-                }
-            }
-        }
-
-        if (isset($args['group_filters'])) {
-            $reportDef = $this->addGroupFilters($reportDef, $args['group_filters']);
-        }
-
-        return $reportDef;
     }
 
     /**
@@ -273,6 +200,55 @@ class ReportsApi extends ModuleApi
         );
     }
 
+    public function retrieveEnumFieldOptions(ServiceBase $api, array $args): array
+    {
+        $this->requireArgs($args, ['targetModule', 'targetField']);
+
+        $moduleAPI = new ModuleApi();
+        $enumValues = $moduleAPI->getEnumValues($api, [
+            'module' => $args['targetModule'],
+            'field' => $args['targetField'],
+        ]);
+
+        return $enumValues;
+    }
+
+    /**
+     * Returns the filter data of a report record by id
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     */
+    public function getSavedReportFilterData(ServiceBase $api, array $args): array
+    {
+        $reportType = array_key_exists('reportType', $args) ? $args['reportType'] : ReportType::DEFAULT;
+        $report = ReportFactory::getReport($reportType, $args);
+
+        $filterData = $report->getFilterData();
+
+        return $filterData;
+    }
+
+    /**
+     * Returns the filter/sorted data of a report record by id
+     *
+     * @param $api ServiceBase The API class of the request
+     * @param $args array The arguments array passed in from the API
+     * @throws SugarApiExceptionNotFound
+     * @throws SugarApiException
+     * @return array
+     */
+    public function retrieveSavedReportChartById(ServiceBase $api, array $args)
+    {
+        $this->requireArgs($args, ['record']);
+
+        $reportType = array_key_exists('reportType', $args) ? $args['reportType'] : ReportType::DEFAULT;
+        $report = ReportFactory::getReport($reportType, $args);
+
+        return $report->getChartData();
+    }
+
     /**
      * Returns the records associated with a saved report
      * @param $api ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
@@ -282,10 +258,14 @@ class ReportsApi extends ModuleApi
      * @throws SugarApiException
      * @return array records
      */
-    public function getReportRecords($api, $args)
+    public function getReportRecords(ServiceBase $api, array $args)
     {
-        $reportDef = $this->getReportDef($api, $args);
-        list($offset, $limit) = $this->getPagination($api, $args);
+        $reportType = $args['reportType'] ?? ReportType::DEFAULT;
+        $report = ReportFactory::getReport($reportType, $args);
+
+        $reportDef = $report->getReportDef();
+
+        [$offset, $limit] = $this->getPagination($api, $args);
         if ($limit > 0) {
             // check if there are more
             $limit++;
@@ -326,9 +306,13 @@ class ReportsApi extends ModuleApi
      * @throws SugarApiException
      * @return array data
      */
-    public function getRecordCount($api, $args)
+    public function getRecordCount(ServiceBase $api, array $args)
     {
-        $reportDef = $this->getReportDef($api, $args);
+        $reportType = array_key_exists('reportType', $args) ? $args['reportType'] : ReportType::DEFAULT;
+        $reporter = ReportFactory::getReport($reportType, $args);
+
+        $reportDef = $reporter->getReportDef();
+
         $report = new Report($reportDef);
         return array('record_count' => $report->getRecordCount());
     }
@@ -342,43 +326,132 @@ class ReportsApi extends ModuleApi
      * @throws SugarApiException
      * @return array
      */
-    public function getSavedReportChartById($api, $args)
+    public function getSavedReportChartById(ServiceBase $api, array $args)
     {
-        $chartReport = $this->getReportDef($api, $args);
+        $this->requireArgs($args, ['record']);
 
-        $returnData = array();
+        $reportType = array_key_exists('reportType', $args) ? $args['reportType'] : ReportType::DEFAULT;
+        $report = ReportFactory::getReport($reportType, $args);
 
-        $reporter = new Report($chartReport);
-        $reporter->saved_report_id = $args['record'];
+        return $report->getChartData();
+    }
 
-        if ($reporter && !$reporter->has_summary_columns()) {
-            return '';
+    /**
+     * Update Report's Cache Filters
+     *
+     * @return bool
+     */
+    public function updateReportFilters(ServiceBase $api, array $args): bool
+    {
+        $this->requireArgs($args, ['record', 'runtimeFilters']);
+
+        $reportType = array_key_exists('reportType', $args) ? $args['reportType'] : ReportType::DEFAULT;
+        $report = ReportFactory::getReport($reportType, $args);
+
+        $report->updateReportFilters($args['runtimeFilters']);
+
+        return true;
+    }
+
+    /**
+     * Retrieve full report preview data
+     *
+     * @param $api ServiceBase The API class of the request
+     * @param $args array The arguments array passed in from the API
+     *
+     * @return array
+     */
+    public function retrieveReportPreviewData(ServiceBase $api, array $args): array
+    {
+        $this->requireArgs($args, ['previewData']);
+
+        $previewData = $args['previewData'];
+
+        $previewData['use_saved_filters'] = true;
+
+        $reportDef = html_entity_decode($previewData['report_def'], ENT_COMPAT);
+        $filtersDef = html_entity_decode($previewData['filters_defs'], ENT_COMPAT);
+        $panelsDef = html_entity_decode($previewData['panels_def'], ENT_COMPAT);
+
+        $report = new Report($reportDef, $filtersDef, $panelsDef);
+
+        $reportType = $report->report_type ?: ReportType::DEFAULT;
+        $reporter = ReportFactory::getReport($reportType, $previewData);
+
+        $reporter->useCachedFilters(false);
+        $completeReportDef = $reporter->buildReportDef($report->report_def_str);
+
+        $reporter->setReportDef($completeReportDef);
+
+        $previewData = [
+            'filtersData' => $reporter->getFilterData(),
+            'chartData' => $reporter->getChartData(),
+            'tableData' => $reporter->getListData(true, true),
+            'reportId' => $previewData['record'],
+            'reportName' => $previewData['save_report_as'],
+            'reportType' => $report->report_type,
+            'showQuery' => array_key_exists('show_query', $previewData) ? $previewData['show_query'] : false,
+        ];
+
+        return $previewData;
+    }
+
+    /**
+     * Retrieves a saved report records, given a report ID and reportType in the args
+     *
+     * @param $api ServiceBase The API class of the request
+     * @param $args array The arguments array passed in from the API
+     *
+     * @throws SugarApiExceptionNotFound
+     * @throws SugarApiException
+     *
+     * @return array
+     */
+    public function retrieveSavedReportRecordsById(ServiceBase $api, array $args): array
+    {
+        $this->requireArgs($args, ['record', 'reportType']);
+        $reportType = $args['reportType'];
+
+        $report = ReportFactory::getReport($reportType, $args);
+
+        return $report->getListData(true, true);
+    }
+
+    /**
+     * Retrieves the active Saved Reports of a report
+     *
+     * @param $api ServiceBase The API class of the request
+     * @param $args array The arguments array passed in from the API
+     * @throws SugarApiExceptionNotFound
+     * @throws SugarApiException
+     *
+     * @return array
+     */
+    public function getActiveSavedReportsId(ServiceBase $api, array $args): array
+    {
+        $this->requireArgs($args, ['record']);
+
+        $reportType = array_key_exists('reportType', $args) ? $args['reportType'] : ReportType::DEFAULT;
+
+        $report = ReportFactory::getReport($reportType, $args);
+        $savedReportDef = $report->getSchedules();
+
+        // we can't use strict equal as trackAction can be either 'true' or bool(true)
+        // neither boolVal($args['trackAction']) nor (bool) $args['trackAction'] can be used here
+        if (array_key_exists('track', $args) &&
+             array_key_exists('trackAction', $args) &&
+                $args['track'] == 'true' && $args['trackAction']
+        ) {
+            $report->setTracker($args['trackAction']);
         }
 
-        // build report data since it isn't a SugarBean
-        $reportData = array();
-        $reportData['label'] = $reporter->name; // also report_def.report_name
-        $reportData['id'] = $reporter->saved_report_id;
-        $reportData['summary_columns'] = $reporter->report_def['summary_columns'];
-        $reportData['group_defs'] = $reporter->report_def['group_defs'];
-        $reportData['filters_def'] = $reporter->report_def['filters_def'];
-        $reportData['base_module'] = $reporter->report_def['module'];
-        $reportData['full_table_list'] = $reporter->report_def['full_table_list'];
+        $latestReportInfo = $report->getLastChangeInfo();
+        $report->updateReportCache();
 
-        // add reportData to returnData
-        $returnData['reportData'] = $reportData;
-
-        $chartDisplay = new ChartDisplay();
-        $chartDisplay->setReporter($reporter);
-
-        $chart = $chartDisplay->getSugarChart();
-        $chart->setReporter($reporter);
-
-        $json = json_decode($chart->buildJson($chart->generateXML(), true), true);
-
-        $returnData['chartData'] = $json;
-
-        return $returnData;
+        return [
+            'scheduler' => $savedReportDef,
+            'lastChangeInfo' => $latestReportInfo,
+        ];
     }
 
     /**
@@ -413,5 +486,183 @@ class ReportsApi extends ModuleApi
     {
         $report = new Report($reportDef);
         return $report->getRecordIds($offset, $limit);
+    }
+
+    /**
+     * Retrieve panel
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @throws SugarApiException
+     * @return string
+     */
+    public function retrievePanel(ServiceBase $api, array $args): string
+    {
+        $this->requireArgs($args, ['record']);
+
+        global $current_user;
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+
+        $qb->select(['contents'])
+            ->from('reports_panels', 'rp')
+            ->where($qb->expr()->eq('rp.report_id', $qb->createPositionalParameter($args['record'])))
+            ->andWhere($qb->expr()->eq('rp.user_id', $qb->createPositionalParameter($current_user->id)))
+            ->andWhere($qb->expr()->eq('rp.deleted', $qb->createPositionalParameter(0)));
+
+        $stmt = $qb->execute();
+
+        $result = $stmt->fetchAssociative();
+
+        if (is_array($result)) {
+            return $result['contents'];
+        }
+
+        return '';
+    }
+
+    /**
+     * Get default Report Panel
+     *
+     * This method is now deprecated.
+     * The default panel meta can be found inside record.php of Reports module
+     *
+     * @deprecated Since 12.3.0. Will be removed in 14.0.0.
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     *
+     * @return string
+     */
+    public function getDefaultReportPanel(ServiceBase $api, array $args): string
+    {
+        LoggerManager::getLogger()->deprecated('This endpoint is not supported after 12.2 and will be removed in 14.0');
+
+        $result = '';
+
+        $this->requireArgs($args, ['reportType']);
+        $reportType = $args['reportType'];
+
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+        $qb->select('contents');
+        $qb->from('reports_panels');
+        $qb->where($qb->expr()->eq('report_type', $qb->createPositionalParameter($reportType)));
+        $qb->andWhere($qb->expr()->eq('default_panel', $qb->createPositionalParameter(1)));
+        $qb->andWhere($qb->expr()->eq('deleted', $qb->createPositionalParameter(0)));
+        $res = $qb->execute();
+        $row = $res->fetchAssociative();
+
+        if (is_array($row) && array_key_exists('contents', $row)) {
+            $result = $row['contents'];
+        }
+
+        return $result;
+    }
+
+    /**
+     * Save panel
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @throws SugarApiException
+     * @return array
+     */
+    public function savePanel(ServiceBase $api, array $args): array
+    {
+        $this->requireArgs($args, ['record']);
+
+        $reportRaw = $this->reportHasPanel($args);
+        if (is_array($reportRaw)) {
+            $contents = json_decode($reportRaw['contents'], true);
+            $panelProperties = $this->updateReportPanel($args, $contents);
+        } else {
+            $panelProperties = $this->createReportPanel($args);
+        }
+
+        return $panelProperties;
+    }
+
+    /**
+     * Check if report has a panel configured already
+     *
+     * @param array $args
+     * @return array|false
+     */
+    protected function reportHasPanel(array $args)
+    {
+        global $current_user;
+
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+        $qb->select('contents');
+        $qb->from('reports_panels');
+        $qb->where($qb->expr()->eq('report_id', $qb->createPositionalParameter($args['record'])));
+        $qb->andWhere($qb->expr()->eq('user_id', $qb->createPositionalParameter($current_user->id)));
+        $qb->andWhere($qb->expr()->eq('deleted', $qb->createPositionalParameter(0)));
+        $res = $qb->execute();
+        $row = $res->fetchAssociative();
+
+        return $row;
+    }
+
+    /**
+     * Create report panel
+     *
+     * @param array $args
+     * @return array
+     */
+    protected function createReportPanel(array $args): array
+    {
+        global $current_user, $timedate;
+
+        $now = $timedate->asDb($timedate->getNow());
+
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+
+        $layoutConfig = $args['layoutConfig'];
+
+        $reportPanelId = Uuid::uuid4();
+        $qb->insert('reports_panels')
+            ->values([
+                'id' => $qb->createPositionalParameter($reportPanelId),
+                'report_id' => $qb->createPositionalParameter($args['record']),
+                'user_id' => $qb->createPositionalParameter($current_user->id),
+                'contents' => $qb->createPositionalParameter(json_encode($layoutConfig)),
+                'date_entered' => $qb->createPositionalParameter($now),
+                'date_modified' => $qb->createPositionalParameter($now),
+            ]);
+        $qb->execute();
+
+        return $layoutConfig;
+    }
+
+    /**
+     * Update reports panel
+     *
+     * @param array $args
+     * @param array $contents
+     *
+     * @return array
+     */
+    protected function updateReportPanel(array $args, array $contents): array
+    {
+        global $current_user, $timedate;
+
+        $now = $timedate->asDb($timedate->getNow());
+        $layoutConfig = $args['layoutConfig'];
+
+        foreach ($layoutConfig as $configKey => $configValue) {
+            $contents[$configKey] = $configValue;
+        }
+
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+        $qb->update('reports_panels')
+            ->set('reports_panels.contents', $qb->createPositionalParameter(json_encode($contents)))
+            ->set('reports_panels.date_modified', $qb->createPositionalParameter($now))
+            ->where($qb->expr()->eq('reports_panels.report_id', $qb->createPositionalParameter($args['record'])))
+            ->andWhere($qb->expr()->eq('reports_panels.user_id', $qb->createPositionalParameter($current_user->id)))
+            ->andWhere($qb->expr()->eq('reports_panels.deleted', $qb->createPositionalParameter(0)));
+
+        $qb->execute();
+
+        return $contents;
     }
 }

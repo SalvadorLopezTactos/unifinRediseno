@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Berichtzeitplanberichts-Dashboard',
     'LBL_FILE_TYPE' => 'Dateityp(en)',
+    'LBL_EMBED_REPORT' => 'Bericht in E-Mail einfügen',
+    'LBL_EMBED_REPORT_INFO' => 'Hinweis: Weist der Bericht mehr als 200 Zeilen auf, wird er als CSV-Datei angehängt.',
 );

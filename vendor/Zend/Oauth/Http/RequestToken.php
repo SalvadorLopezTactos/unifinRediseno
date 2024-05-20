@@ -145,6 +145,7 @@ class Zend_Oauth_Http_RequestToken extends Zend_Oauth_Http
      */
     protected function _attemptRequest(array $params)
     {
+        $httpClient = null;
         switch ($this->_preferredRequestScheme) {
             case Zend_Oauth::REQUEST_SCHEME_HEADER:
                 $httpClient = $this->getRequestSchemeHeaderClient($params);

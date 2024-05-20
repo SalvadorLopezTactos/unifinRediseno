@@ -66,7 +66,7 @@ class SugarFieldFloat extends SugarFieldInt
         ImportFieldSanitize $settings
         )
     {
-        $value = str_replace($settings->num_grp_sep,"",$value);
+        $value = str_replace((string)$settings->num_grp_sep, "", (string)$value);
         $dec_sep = $settings->dec_sep;
         if ( $dec_sep != '.' ) {
             $value = str_replace($dec_sep,".",$value);

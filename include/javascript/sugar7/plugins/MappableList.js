@@ -142,14 +142,16 @@
 
                 this.listMapView = this._getListMapComponent(this.layout);
 
-                if (this.listMapView && _.contains(allowedModules, this.module)) {
-                    this.meta.selection.actions.push(mapButton);
-                    this.meta.selection.actions.push(directionButton);
-
-                    this.delegateListFireEvents();
+                if (!this.listMapView || !this.meta || !_.contains(allowedModules, this.module)) {
+                    return;
                 }
 
-                if (this.type === 'recordlist' && this.meta && _.contains(allowedModules, this.module)) {
+                this.meta.selection.actions.push(mapButton);
+                this.meta.selection.actions.push(directionButton);
+
+                this.delegateListFireEvents();
+
+                if (this.type === 'recordlist') {
                     let insertAtIdx = this.meta.rowactions.actions.findIndex(function find(btn) {
                         return btn.name === 'delete_button' || btn.name === 'unlink_button';
                     });

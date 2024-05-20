@@ -13,9 +13,9 @@ namespace Sugarcrm\Sugarcrm\Hint;
 
 class NewsCategories
 {
-    const PEOPLE = 'People';
-    const FINANCE = 'Finance';
-    const OTHER = 'Other';
-    const GENERAL = 'General';
-    const PRESS_RELEASES = 'Press Releases';
+    public const PEOPLE = 'People';
+    public const FINANCE = 'Finance';
+    public const OTHER = 'Other';
+    public const GENERAL = 'General';
+    public const PRESS_RELEASES = 'Press Releases';
 }

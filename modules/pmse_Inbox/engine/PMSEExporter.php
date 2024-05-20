@@ -269,7 +269,7 @@ class PMSEExporter
     protected function getBeanData(SugarBean $bean)
     {
         // If there is a fetched row for this bean, grab the data
-        if ($bean->fetched_row !== false) {
+        if (!empty($bean->fetched_row)) {
             $ret = (array) $bean->fetched_row;
 
             // Add tags as a collection property of the bean

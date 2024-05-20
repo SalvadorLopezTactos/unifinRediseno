@@ -35,7 +35,7 @@ class SugarForecasting_Progress_Individual extends SugarForecasting_Progress_Abs
         $quotaData = $quota->getRollupQuota($this->getArg('timeperiod_id'), $this->getArg('user_id'));
 
         $progressData = array(
-            "quota_amount"      => isset($quotaData["amount"]) ? $quotaData["amount"] : 0
+            "quota_amount" => $quotaData["amount"] ?? 0,
         );
 
         // get what we are forecasting on

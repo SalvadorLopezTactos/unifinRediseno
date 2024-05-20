@@ -14,6 +14,7 @@ namespace Sugarcrm\Sugarcrm\ACL;
 
 use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 final class EncryptionKey
 {
@@ -29,7 +30,7 @@ final class EncryptionKey
         $this->keyStorage = $keyStorage;
     }
 
-    public function get(): Uuid
+    public function get(): UuidInterface
     {
         return $this->keyStorage->getKey() ?: $this->generateKey();
     }
@@ -37,9 +38,9 @@ final class EncryptionKey
     /**
      * Generates a new key and stores it in the storage
      *
-     * @return Uuid
+     * @return UuidInterface
      */
-    private function generateKey(): Uuid
+    private function generateKey(): UuidInterface
     {
         $key = Uuid::uuid4();
         $this->keyStorage->updateKey($key);

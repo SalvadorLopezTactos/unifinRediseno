@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Nenustatyta kliento paslapties',
     'LBL_RESEND_BUTTON_LABEL' => 'Persiųsti',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Gauti voką',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Debesies paslaugos tipas',
+    'LBL_CLOUD_PATH' => 'Debesies kelias',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => '„DocuSign“ vokų sąrašo prietaisas',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Naujausi „DocuSign“ vokai',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => '„DocuSign“ vokų fokusavimo stalčius',
 
-    'LBL_DOCUMENT_FROM' => 'Dokumento forma ',
+    'LBL_NEW_ENVELOPE' => 'Naujas vokas',
     'LBL_DOCUMENT_IS_NOW' => ' yra dabar ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => '„DocuSign“ klaida. Nepavyko gauti paskyros ID pagal prieigos raktą',
     'LBL_ERROR_RESEND' => 'Nepavyko pakartotinai išsiųsti „DocuSign“. Voko būsena turi būti „išsiųsta“',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Atnaujinimas nepavyko',
     'LBL_ERROR_FETCH_TIME' => '„DocuSign“ taisyklės neleidžia pateikti kelių užklausų į tą patį voką per 15 minučių',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Įvyko klaida. Nepavyko atnaujinti voko. Prašome patikrinti žurnalus!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Įvyko klaida. Nepavyko įtraukti šablonų į sąrašą. Patikrinkite žurnalus!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Įvyko klaida. Nepavyko gauti šablono. Patikrinkite žurnalus!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Vokas neužpildytas',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Voko būsena „DocuSign“ yra dabar ',
     'LBL_OVERVIEW' => 'Apžvalga',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Pridėti dokumentą',
     'LBL_BUTTON_SEND' => 'Siųsti',
     'LBL_BUTTON_CLEAR' => 'Išvalyti',
-    'LBL_MISSING_OBJECT' => '„DocuSign“ objekto nėra lange',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Naudoti šabloną',
     'LBL_PLEASE_LOG_IN' => 'Pirmiausia prisijunkite prie „DocuSign“!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Šio dokumento atsisiųsti negalite. Jį sukūrė kitas vartotojas!',
     'LBL_SEND_NOT_ALLOWED' => 'Negalite siųsti šio voko. Jį sukūrė kitas vartotojas!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Pasirašyta',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Nepavyko atsisiųsti dokumento. Patikrinkite žurnalus!',
     'LBL_DOCUMENT_COMPLETED' => 'Užbaigtas',
+
+    'LBL_NOTIFICATION_SEVERITY' => '„DocuSign“ informacija',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'yra dabar',
+    'LBL_SETTINGS_TITLE' => '„DocuSign“ nuostatos',
+    'LBL_RECIPIENT_SELECTION' => 'Gavėjo pasirinkimo elgesys',
+    'LBL_RECIPIENT_NAME' => 'Vardas',
+    'LBL_RECIPIENT_EMAIL' => 'El. pašto adresas',
+    'LBL_RECIPIENT_TYPE' => 'Tipas',
+    'LBL_TEMPLATE_NAME' => 'Vardas',
+    'LBL_RECIPIENT_SELECT' => 'Pasirinkti...',
+    'LBL_RECIPIENT_ROLE' => 'Vaidmuo',
+    'LBL_SELECT_BUTTON_LABEL' => 'Pasirinkti',
+    'LBL_BACK_BUTTON_LABEL' => 'Atgal',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Nepavyko gauti potencialių gavėjų!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Nepavyko gauti šablonų!',
 ];

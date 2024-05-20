@@ -19,20 +19,42 @@ namespace Google\Service\CloudBuild;
 
 class Results extends \Google\Collection
 {
-  protected $collection_key = 'images';
+  protected $collection_key = 'pythonPackages';
+  /**
+   * @var string
+   */
   public $artifactManifest;
   protected $artifactTimingType = TimeSpan::class;
   protected $artifactTimingDataType = '';
+  /**
+   * @var string[]
+   */
   public $buildStepImages;
+  /**
+   * @var string[]
+   */
   public $buildStepOutputs;
   protected $imagesType = BuiltImage::class;
   protected $imagesDataType = 'array';
+  protected $mavenArtifactsType = UploadedMavenArtifact::class;
+  protected $mavenArtifactsDataType = 'array';
+  /**
+   * @var string
+   */
   public $numArtifacts;
+  protected $pythonPackagesType = UploadedPythonPackage::class;
+  protected $pythonPackagesDataType = 'array';
 
+  /**
+   * @param string
+   */
   public function setArtifactManifest($artifactManifest)
   {
     $this->artifactManifest = $artifactManifest;
   }
+  /**
+   * @return string
+   */
   public function getArtifactManifest()
   {
     return $this->artifactManifest;
@@ -51,18 +73,30 @@ class Results extends \Google\Collection
   {
     return $this->artifactTiming;
   }
+  /**
+   * @param string[]
+   */
   public function setBuildStepImages($buildStepImages)
   {
     $this->buildStepImages = $buildStepImages;
   }
+  /**
+   * @return string[]
+   */
   public function getBuildStepImages()
   {
     return $this->buildStepImages;
   }
+  /**
+   * @param string[]
+   */
   public function setBuildStepOutputs($buildStepOutputs)
   {
     $this->buildStepOutputs = $buildStepOutputs;
   }
+  /**
+   * @return string[]
+   */
   public function getBuildStepOutputs()
   {
     return $this->buildStepOutputs;
@@ -81,13 +115,47 @@ class Results extends \Google\Collection
   {
     return $this->images;
   }
+  /**
+   * @param UploadedMavenArtifact[]
+   */
+  public function setMavenArtifacts($mavenArtifacts)
+  {
+    $this->mavenArtifacts = $mavenArtifacts;
+  }
+  /**
+   * @return UploadedMavenArtifact[]
+   */
+  public function getMavenArtifacts()
+  {
+    return $this->mavenArtifacts;
+  }
+  /**
+   * @param string
+   */
   public function setNumArtifacts($numArtifacts)
   {
     $this->numArtifacts = $numArtifacts;
   }
+  /**
+   * @return string
+   */
   public function getNumArtifacts()
   {
     return $this->numArtifacts;
+  }
+  /**
+   * @param UploadedPythonPackage[]
+   */
+  public function setPythonPackages($pythonPackages)
+  {
+    $this->pythonPackages = $pythonPackages;
+  }
+  /**
+   * @return UploadedPythonPackage[]
+   */
+  public function getPythonPackages()
+  {
+    return $this->pythonPackages;
   }
 }
 

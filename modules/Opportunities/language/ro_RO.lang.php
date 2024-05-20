@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Tabloul de bord Listă oportunități',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare oportunități',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Detalii oportunitate',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Sertar de focalizare oportunități - consolă',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare oportunități',
     'LBL_RENEWAL_OPPORTUNITY' => 'Oportunitate de reînnoire',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Alocat',
     'LBL_FORECAST' => 'Includeți în prognoza',
     'LBL_COMMIT_STAGE' => 'Consemna Etapa',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Previziune',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Stadiu previziune',
     'LBL_WORKSHEET' => 'Foaie de lucru',
     'LBL_PURCHASED_LINE_ITEMS' => 'Articole de linie achiziționate',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizare',
+    'LBL_CREATE_NEW' => 'Creare nou',
+    'LBL_MANAGE' => 'Gestionare',
+    'LBL_SEE_DETAILS' => 'Vizualizare detalii',
+    'LBL_HIDE_NEW' => 'Ascundere',
+
     'LBL_FORECASTED_LIKELY' => 'Prognozat probabil',
+    'LBL_LOST' => 'Pierdut',
     'LBL_RENEWAL' => 'Reînnoire',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Oportunități de reînnoire',
     'LBL_RENEWAL_PARENT' => 'Oportunitate principală',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Rol Oportunitate',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
+    'LBL_TAB_OPPORTUNITY' => 'Revizie {{module}}',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Făcând clic pe Confirmare, veţi şterge TOATE datele cu previzionări şi veţi modifica Fereastra Oportunităţi. Dacă nu asta aţi dorit, faceţi clic pe Anulare pentru a reveni la setările anterioare.',
@@ -211,25 +220,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'După ce iniţiaţi această modificare, în fundal vor fi create înregistrări de elemente de venit pentru fiecare {{module_name} existent. Atunci când elementele de venit sunt complete şi disponibile, va fi trimisă o notificare la adresa de e-mail de pe profilul dvs. de utilizator. De reţinut faptul că platforma dvs. trebuie configurată pentru a trimite e-mail-uri prin Admin > Setări E-mail pentru ca notificările să fie trimise.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzări individuale, de la început până la sfârșit. Fiecare înregistrare din {{module_name}} reprezintă o vânzare potențială și include informații relevante despre vânzare și alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc. Un modul {{module_name}} va trece în mod obișnuit prin câteva Etape de vânzări până când este marcat fie „Câștig închis”, fie „Pierdere închisă”. {{plural_module_name}} poate fi valorificat și mai mult folosind modulul {{forecasts_singular_module}} de la Sugar pentru a înțelege și pentru a prevedea tendințe de vânzări și pentru a viza atingerea cotelor de vânzări.',
+    'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale de la început până la sfârșit. Fiecare înregistrare din {{module_name}} reprezintă o vânzare potențială și include date de vânzare relevante, precum și date legate de alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc. Un {{module_name}} va parcurge de obicei câteva etape ale procesului de vânzare până când va fi marcat „Încheiat cu succes” sau „Încheiat fără succes”. {{plural_module_name}} pot fi valorificate și mai mult folosind modulul {{forecasts_singular_module}} oferit de Sugar pentru a înțelege și pentru a estima tendințe de vânzări, precum și pentru a direcționa activitatea cu scopul de a atinge cotele de vânzări.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzări individuale și elemente ce aparțin acestor vânzări, de la început până la sfârșit. Fiecare înregistrare din {{module_name}} reprezintă o vânzare potențială și include informații relevante despre vânzare și alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc. 
+    'LBL_HELP_RECORD' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale și articolele aferente vânzărilor respective de la început până la sfârșit. Fiecare înregistrare din {{module_name}} reprezintă o vânzare potențială și include date de vânzare relevante, precum și date legate de alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc.
 
-- Editați câmpurile acestei înregistrări apăsând pe fiecare câmp individual sau pe butonul Editare. 
-- Vizualizați sau modificați linkuri către alte înregistrări în panourile secundare, trecând fereastra din stânga jos în stadiul „Vizualizarea datelor”.
-- Creați şi vizualizați comentariile utilizatorilor şi istoricul modificărilor în {{activitystream_singular_module}} trecând fereastra din stânga jos în stadiul „Flux de activitate”.
+- Editați câmpurile acestei înregistrări făcând clic pe un câmp individual sau pe butonul Editare.
+- Vizualizați sau modificați link-uri către alte înregistrări în panourile secundare, comutând fereastra din stânga jos în modul „Vizualizare date”.
+- Creați și vizualizați comentariile utilizatorilor și înregistrați istoricul modificărilor în {{activitystream_singular_module}} comutând fereastra din stânga jos în modul „Flux de activitate”.
 - Urmăriți sau marcați ca favorit această înregistrare folosind pictogramele din dreapta numelui înregistrării.
-- Sunt disponibile acţiuni suplimentare în meniul cu listă verticală Acţiuni din dreapta butonului Editare.',
+- Sunt disponibile acțiuni suplimentare în meniul derulant Acțiuni din dreapta butonului Editare.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzări individuale și elemente ce aparțin acestor vânzări, de la început până la sfârșit. Fiecare înregistrare din {{module_name}} reprezintă o vânzare potențială și include informații relevante despre vânzare și alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc. 
+    'LBL_HELP_CREATE' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale și articolele aferente vânzărilor respective de la început până la sfârșit. Fiecare înregistrare din {{module_name}} reprezintă o vânzare potențială și include date de vânzare relevante, precum și date legate de alte înregistrări importante cum ar fi {{quotes_module}}, {{contacts_module}} etc.
 
-Pentru a crea un modul {{module_name}}:
-1. Introduceți valori în câmpuri, după cum doriți.
- - Câmpurile marcate cu „Obligatoriu” trebuie completate înainte de salvare.
- - Faceți clic pe „Afișați mai mult” pentru a afișa câmpuri suplimentare, dacă este necesar. 
-2. Faceți clic pe „Salvare” pentru a finaliza înregistrarea nouă și pentru a reveni la pagina anterioară.',
+Pentru a crea un {{module_name}}:
+1. Introduceți valori pentru câmpuri după cum doriți.
+ - Câmpurile marcate cu „Obligatoriu” trebuie să fie completate înainte de salvare.
+ - Faceți clic pe „Afișare mai multe” pentru a afișa câmpuri suplimentare dacă este necesar.
+2. Faceți clic pe „Salvare” pentru a finaliza noua înregistrare și pentru a reveni la pagina anterioară.',
 
 // END ENT/ULT
 

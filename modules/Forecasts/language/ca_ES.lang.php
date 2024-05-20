@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Veure l&#39;historial de previsions',
     'LBL_FORECAST_HISTORY' => 'Previsions: Històrial',
     'LBL_FORECAST_HISTORY_TITLE' => 'Previsions: Històrial',
+    'LBL_TAB_COMMITMENT' => 'Confirmació',
+    'LBL_CURRENT' => 'Actual',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Període de temps',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Modificat per',
     'LBL_WK_VERSION' => 'Versió',
     'LBL_WK_REVISION' => 'Revisió',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'L&#39;accés a l&#39;API de mètriques requereix Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Període de Temps:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Vol introduir aquestes quantitats com realitzades?',
     'ERR_FORECAST_AMOUNT' => 'La Quantitat Realitzada és un valor requerit, i ha de ser numèric.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Objectiu inclòs',
+    'LBL_UPSIDE_PIPELINE' => 'Objectiu a l&#39;alça',
+    'LBL_EXCLUDED_PIPELINE' => 'Objectiu exclòs',
+    'LBL_WON' => 'Guanyat',
+    'LBL_LOST' => 'Perdut',
+    'LBL_ALL' => 'Tot',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Guia dels filtres',
+    'LBL_HELP_MAIN_BODY' => 'Totes les mètriques només inclouen les Oportunitats que pertanyen als usuaris seleccionats, període de temps i qualsevol filtre addicional que heu aplicat',
+    'LBL_FORECAST_HELP' => 'Les oportunitats que ja heu guanyat o perdut o estan en una {{{forecastStage}}} inclosa',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Oportunitats obertes amb una {{{forecastStage}}} de {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Oportunitats obertes en una {{{forecastStage}}} inclosa',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Oportunitats obertes amb una {{{forecastStage}}} de {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Oportunitats obertes amb una {{{forecastStage}}} de {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Oportunitats obertes en una {{{forecastStage}}} exclosa',
+    'LBL_WON_HELP' => 'Oportunitats que ja s&#39;han guanyat',
+    'LBL_LOST_HELP' => 'Oportunitats que ja s&#39;han perdut',
+    'LBL_ALL_HELP' => 'Totes les oportunitats',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Data d&#39;inici',
     'LBL_FC_USER' => 'Programar per a',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Confirmació',
     'LBL_TEAM_COMMITMENT' => 'Confirmació de l&#39;equip',
     'LBL_FORECASTED' => 'Previst',
+    'LBL_OPPORTUNITY_FORECAST' => 'Previsió d&#39;oportunitats',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Previsió d&#39;elements de línia d&#39;ingressos',
+    'LBL_LAST_COMMITMENT' => 'Última confirmació',
     'LBL_ADJUSTED_TOTAL' => 'Total ajustat',
     'LBL_COMMIT_STAGE' => 'Etapa compromesa',
     'LBL_SALES_STAGE' => 'Etapa',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Ajustat)',
     'LBL_SAVE_DRAFT' => 'Desa',
     'LBL_CHANGES_BY' => 'Els canvis de {0}',
-    'LBL_FORECAST_SETTINGS' => 'Configuració',
+    'LBL_FORECAST_SETTINGS' => 'Configuració de la previsió',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Configuració de previsions',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data d&#39;inici d&#39;any fiscal',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Conﬁgureu el període de temps que es farà servir al mòdul de previsions. <br><br>Teniu en compte que la configuració del període de temps no es pot canviar després de la configuració inicial.<br><br>Comenceu per triar la data d&#39;inici de l&#39;any fiscal. A continuació trieu el tipus de període de temps per a la previsió. El interval de dates per als períodes de temps es calcularà automàticament en base a les seves seleccions. El subperíode de temps es la base del full de càlcul de la previsió. <br><br>els períodes de temps futurs i passats que es poden veure determinaran el nombre de subperíodes visibles al mòdul previsions. Els usuaris poden veure i editar els nombres de previsions als subperíodes visibles.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureu com us agradaria categoritzar {{forecastByModule}}. <br><br>Teniu en compte que la configuració de Rang no es pot canviar després de la primera confirmació. En el cas d&#39;instàncies millorades, la configuració del Rang està bloquejada amb les dades de Previsió existents.<br><br>Podeu seleccionar dues o més categories basades en rangs de probabilitat o crear categories que no es basen en la probabilitat. <br><br>Hi ha caselles a l&#39;esquerra de les vostres categories personalitzades; utilitzeu-les per decidir quins rangs s&#39;inclouran a la quantitat de Previsió compromesa i notificada als administradors. <br><br>Un usuari pot canviar l&#39;estat d&#39;inclusió/exclusió i la categoria de {{forecastByModule}} manualment des del seu full de càlcul.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureu com vos agradaria categoritzar {{forecastByModule}}. <br><br>Tingueu en compte que la configuració de l&#39;interval no es pot canviar després de la primera confirmació. Per a les instàncies actualitzades, la configuració d&#39;interval es bloqueja amb les dades de previsió existents.<br><br>Podeu seleccionar dues o més categories en funció dels intervals de probabilitat o crear categories que no es basin en la probabilitat. <br><br>Hi ha caselles de selecció a l&#39;esquerra de les categories personalitzades; utilitzeu-les per decidir quins intervals s&#39;inclouran dins de l&#39;import previst compromès i informat als gestors. <br><br>Un usuari pot canviar l&#39;estat d&#39;inclusió/exclusió i la categoria d&#39; {{forecastByModule}} manualment del seu full de càlcul.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Seleccioneu les columnes que us agradaria que emplenés l&#39;usuari per a les seves previsions de cada {{forecastByModuleSingular}}. Teniu en compte que la quantitat probable està relacionada amb la quantitat mostrada a {{forecastByModule}}, per la qual cosa no es pot ocultar la columna de probabilitat',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Seleccioneu les columnes que us agradaria veire al mòdul de previsions. La llista de camps combinarà els fulls de càlcul i permetrà als usuaris triar la manera de configurar la seva vista.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Soc un marcador de posició per al text que explica com fer previsions per',

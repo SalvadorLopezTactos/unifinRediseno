@@ -26,6 +26,9 @@ class MetaDataManagerMobile extends MetaDataManager
         'quote-data-grand-totals-footer',
         'quote-data-group-footer',
         'dashlet-inbox',
+        'docusign-drafts-list',
+        'docusign-envelopes-list',
+        'recipients-list',
     );
 
     protected $allowedModuleLayouts = array(
@@ -168,6 +171,7 @@ class MetaDataManagerMobile extends MetaDataManager
 
     public function getQuickcreateList($filter = true)
     {
+        $wireless_module_registry = [];
         // replicate the essential part of the behavior of the private loadMapping() method in SugarController
         foreach (SugarAutoLoader::existingCustom('include/MVC/Controller/wireless_module_registry.php') as $file) {
             require $file;

@@ -12,8 +12,20 @@
 
 namespace Sugarcrm\IdentityProvider\Encoder;
 
-class BCryptPasswordEncoder extends \Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder
+use Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher;
+use Symfony\Component\Security\Core\Encoder\LegacyEncoderTrait;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\SelfSaltingEncoderInterface;
+
+class BCryptPasswordEncoder implements PasswordEncoderInterface, SelfSaltingEncoderInterface
 {
+    use LegacyEncoderTrait;
+
+    public function __construct(int $cost = null)
+    {
+        $this->hasher = new NativePasswordHasher(null, null, $cost, \PASSWORD_BCRYPT);
+    }
+
     /**
      * {@inheritdoc}
      *
@@ -21,8 +33,8 @@ class BCryptPasswordEncoder extends \Symfony\Component\Security\Core\Encoder\BCr
      * @param string $raw     A raw password
      * @param string $salt    Salt parameter is ignored for SHA-2 as it's stored directly in the hash
      */
-    public function isPasswordValid($encoded, $raw, $salt)
+    public function isPasswordValid(string $encoded, string $raw, ?string $salt): bool
     {
-        return parent::isPasswordValid($encoded, $raw, $salt) || parent::isPasswordValid($encoded, md5($raw), $salt);
+        return $this->hasher->verify($encoded, $raw, $salt) || $this->hasher->verify($encoded, md5($raw), $salt);
     }
 }

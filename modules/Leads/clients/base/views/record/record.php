@@ -304,6 +304,10 @@ $viewdefs['Leads']['base']['view']['record'] = array(
                     ),
                 ),
                 'department',
+                [
+                    'name' => 'geocode_status',
+                    'licenseFilter' => ['MAPS'],
+                ],
                 'phone_work',
                 'campaign_name',
                 'phone_fax',

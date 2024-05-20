@@ -12,6 +12,9 @@
 
 namespace Sugarcrm\Sugarcrm\SugarConnect\Bean;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 final class Meeting extends Event
 {
 }

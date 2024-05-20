@@ -22,6 +22,7 @@ final class Rpc implements ApiClient
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

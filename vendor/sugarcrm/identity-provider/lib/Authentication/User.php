@@ -12,13 +12,13 @@
 
 namespace Sugarcrm\IdentityProvider\Authentication;
 
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class User.
  * Represents user instance.
  */
-class User implements AdvancedUserInterface
+class User implements UserInterface
 {
     const ROLE_COMMON = 'ROLE_COMMON';
 
@@ -115,6 +115,14 @@ class User implements AdvancedUserInterface
      */
     public function getUsername()
     {
+        return $this->getUserIdentifier();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUserIdentifier(): string
+    {
         return $this->username;
     }
 
@@ -126,45 +134,12 @@ class User implements AdvancedUserInterface
         $this->password = null;
     }
 
-
-    /**
-     * @inheritDoc
-     */
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isAccountNonLocked()
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isEnabled()
-    {
-        return true;
-    }
-
     /**
      * @return string
      */
     public function __toString()
     {
-        return $this->getUsername();
+        return $this->getUserIdentifier();
     }
 
     /**

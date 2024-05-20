@@ -94,7 +94,7 @@ if(isset( $_POST['Users0emailAddress0'])){
 
 ///////
 ///////////////////////////////////////////////////
-    $isLink = isset($_POST['link']) && $_POST['link'] == '1';
+    $isLink = true; //Due to GDPR restrictions, sys generated passwords are forbidden. User must get the link to set the password
     // if i need to generate a password (not a link)
     $password = $isLink ? '' : User::generatePassword();
 

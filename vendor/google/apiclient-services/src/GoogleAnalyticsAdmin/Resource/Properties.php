@@ -17,9 +17,15 @@
 
 namespace Google\Service\GoogleAnalyticsAdmin\Resource;
 
+use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionRequest;
+use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionResponse;
+use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaAttributionSettings;
+use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaDataRetentionSettings;
 use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaGoogleSignalsSettings;
 use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListPropertiesResponse;
 use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaProperty;
+use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaRunAccessReportRequest;
+use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaRunAccessReportResponse;
 
 /**
  * The "properties" collection of methods.
@@ -31,6 +37,24 @@ use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaProperty;
  */
 class Properties extends \Google\Service\Resource
 {
+  /**
+   * Acknowledges the terms of user data collection for the specified property.
+   * This acknowledgement must be completed (either in the Google Analytics UI or
+   * via this API) before MeasurementProtocolSecret resources may be created.
+   * (properties.acknowledgeUserDataCollection)
+   *
+   * @param string $property Required. The property for which to acknowledge user
+   * data collection.
+   * @param GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionResponse
+   */
+  public function acknowledgeUserDataCollection($property, GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionRequest $postBody, $optParams = [])
+  {
+    $params = ['property' => $property, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('acknowledgeUserDataCollection', [$params], GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionResponse::class);
+  }
   /**
    * Creates an "GA4" property with the specified location and attributes.
    * (properties.create)
@@ -80,6 +104,37 @@ class Properties extends \Google\Service\Resource
     return $this->call('get', [$params], GoogleAnalyticsAdminV1alphaProperty::class);
   }
   /**
+   * Lookup for a AttributionSettings singleton.
+   * (properties.getAttributionSettings)
+   *
+   * @param string $name Required. The name of the attribution settings to
+   * retrieve. Format: properties/{property}/attributionSettings
+   * @param array $optParams Optional parameters.
+   * @return GoogleAnalyticsAdminV1alphaAttributionSettings
+   */
+  public function getAttributionSettings($name, $optParams = [])
+  {
+    $params = ['name' => $name];
+    $params = array_merge($params, $optParams);
+    return $this->call('getAttributionSettings', [$params], GoogleAnalyticsAdminV1alphaAttributionSettings::class);
+  }
+  /**
+   * Returns the singleton data retention settings for this property.
+   * (properties.getDataRetentionSettings)
+   *
+   * @param string $name Required. The name of the settings to lookup. Format:
+   * properties/{property}/dataRetentionSettings Example:
+   * "properties/1000/dataRetentionSettings"
+   * @param array $optParams Optional parameters.
+   * @return GoogleAnalyticsAdminV1alphaDataRetentionSettings
+   */
+  public function getDataRetentionSettings($name, $optParams = [])
+  {
+    $params = ['name' => $name];
+    $params = array_merge($params, $optParams);
+    return $this->call('getDataRetentionSettings', [$params], GoogleAnalyticsAdminV1alphaDataRetentionSettings::class);
+  }
+  /**
    * Lookup for Google Signals settings for a property.
    * (properties.getGoogleSignalsSettings)
    *
@@ -105,11 +160,14 @@ class Properties extends \Google\Service\Resource
    *
    * @opt_param string filter Required. An expression for filtering the results of
    * the request. Fields eligible for filtering are: `parent:`(The resource name
-   * of the parent account) or `firebase_project:`(The id or number of the linked
+   * of the parent account/property) or `ancestor:`(The resource name of the
+   * parent account) or `firebase_project:`(The id or number of the linked
    * firebase project). Some examples of filters: ``` | Filter | Description |
    * |-----------------------------|-------------------------------------------| |
-   * parent:accounts/123 | The account with account id: 123. | | firebase_project
-   * :project-id | The firebase project with id: project-id. | |
+   * parent:accounts/123 | The account with account id: 123. | |
+   * parent:properties/123 | The property with property id: 123. | |
+   * ancestor:accounts/123 | The account with account id: 123. | |
+   * firebase_project:project-id | The firebase project with id: project-id. | |
    * firebase_project:123 | The firebase project with number: 123. | ```
    * @opt_param int pageSize The maximum number of resources to return. The
    * service may return fewer than this value, even if there are additional pages.
@@ -149,6 +207,76 @@ class Properties extends \Google\Service\Resource
     $params = ['name' => $name, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('patch', [$params], GoogleAnalyticsAdminV1alphaProperty::class);
+  }
+  /**
+   * Returns a customized report of data access records. The report provides
+   * records of each time a user reads Google Analytics reporting data. Access
+   * records are retained for up to 2 years. Data Access Reports can be requested
+   * for a property. The property must be in Google Analytics 360. This method is
+   * only available to Administrators. These data access records include GA4 UI
+   * Reporting, GA4 UI Explorations, GA4 Data API, and other products like
+   * Firebase & Admob that can retrieve data from Google Analytics through a
+   * linkage. These records don't include property configuration changes like
+   * adding a stream or changing a property's time zone. For configuration change
+   * history, see [searchChangeHistoryEvents](https://developers.google.com/analyt
+   * ics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents
+   * ). (properties.runAccessReport)
+   *
+   * @param string $entity The Data Access Report is requested for this property.
+   * For example if "123" is your GA4 property ID, then entity should be
+   * "properties/123".
+   * @param GoogleAnalyticsAdminV1alphaRunAccessReportRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return GoogleAnalyticsAdminV1alphaRunAccessReportResponse
+   */
+  public function runAccessReport($entity, GoogleAnalyticsAdminV1alphaRunAccessReportRequest $postBody, $optParams = [])
+  {
+    $params = ['entity' => $entity, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('runAccessReport', [$params], GoogleAnalyticsAdminV1alphaRunAccessReportResponse::class);
+  }
+  /**
+   * Updates attribution settings on a property.
+   * (properties.updateAttributionSettings)
+   *
+   * @param string $name Output only. Resource name of this attribution settings
+   * resource. Format: properties/{property_id}/attributionSettings Example:
+   * "properties/1000/attributionSettings"
+   * @param GoogleAnalyticsAdminV1alphaAttributionSettings $postBody
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string updateMask Required. The list of fields to be updated.
+   * Field names must be in snake case (e.g., "field_to_update"). Omitted fields
+   * will not be updated. To replace the entire entity, use one path with the
+   * string "*" to match all fields.
+   * @return GoogleAnalyticsAdminV1alphaAttributionSettings
+   */
+  public function updateAttributionSettings($name, GoogleAnalyticsAdminV1alphaAttributionSettings $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('updateAttributionSettings', [$params], GoogleAnalyticsAdminV1alphaAttributionSettings::class);
+  }
+  /**
+   * Updates the singleton data retention settings for this property.
+   * (properties.updateDataRetentionSettings)
+   *
+   * @param string $name Output only. Resource name for this DataRetentionSetting
+   * resource. Format: properties/{property}/dataRetentionSettings
+   * @param GoogleAnalyticsAdminV1alphaDataRetentionSettings $postBody
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string updateMask Required. The list of fields to be updated.
+   * Field names must be in snake case (e.g., "field_to_update"). Omitted fields
+   * will not be updated. To replace the entire entity, use one path with the
+   * string "*" to match all fields.
+   * @return GoogleAnalyticsAdminV1alphaDataRetentionSettings
+   */
+  public function updateDataRetentionSettings($name, GoogleAnalyticsAdminV1alphaDataRetentionSettings $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('updateDataRetentionSettings', [$params], GoogleAnalyticsAdminV1alphaDataRetentionSettings::class);
   }
   /**
    * Updates Google Signals settings for a property.

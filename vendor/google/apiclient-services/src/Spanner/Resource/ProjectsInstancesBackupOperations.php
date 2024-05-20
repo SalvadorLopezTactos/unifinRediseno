@@ -54,16 +54,19 @@ class ProjectsInstancesBackupOperations extends \Google\Service\Resource
    * if the operation is in progress, else true. * `metadata.@type` - the type of
    * metadata. For example, the type string for CreateBackupMetadata is
    * `type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata`.
-   * * `metadata.` - any field in metadata.value. * `error` - Error associated
+   * * `metadata.` - any field in metadata.value. `metadata.@type` must be
+   * specified first if filtering on metadata fields. * `error` - Error associated
    * with the long-running operation. * `response.@type` - the type of response. *
    * `response.` - any field in response.value. You can combine multiple
    * expressions by enclosing each expression in parentheses. By default,
    * expressions are combined with AND logic, but you can specify AND, OR, and NOT
    * logic explicitly. Here are a few examples: * `done:true` - The operation is
-   * complete. * `metadata.database:prod` - The database the backup was taken from
-   * has a name containing the string "prod". * `(metadata.@type=type.googleapis.c
-   * om/google.spanner.admin.database.v1.CreateBackupMetadata) AND` \
-   * `(metadata.name:howl) AND` \ `(metadata.progress.start_time <
+   * complete. * `(metadata.@type=type.googleapis.com/google.spanner.admin.databas
+   * e.v1.CreateBackupMetadata) AND` \ `metadata.database:prod` - Returns
+   * operations where: * The operation's metadata type is CreateBackupMetadata. *
+   * The source database name of backup contains the string "prod". * `(metadata.@
+   * type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadat
+   * a) AND` \ `(metadata.name:howl) AND` \ `(metadata.progress.start_time <
    * \"2018-03-28T14:50:00Z\") AND` \ `(error:*)` - Returns operations where: *
    * The operation's metadata type is CreateBackupMetadata. * The backup name
    * contains the string "howl". * The operation started before

@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'กุมภาพันธ์',
     'LBL_MARCH' => 'มีนาคม',
     'LBL_APRIL' => 'เมษายน',
-    'LBL_MAY' => 'พ.ค.',
+    'LBL_MAY' => 'พฤษภาคม',
     'LBL_JUNE' => 'มิถุนายน',
     'LBL_JULY' => 'กรกฎาคม',
     'LBL_AUGUST' => 'สิงหาคม',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'ต.ค.',
     'LBL_NOV' => 'พ.ย.',
     'LBL_DEC' => 'ธ.ค.',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'เพิ่มปฏิทินแล้ว',
+    'LBL_CALENDAR_IS_SELECTED' => 'เลือก {{calendar}} แล้ว',
+    'LBL_NO_USER_SELECTED' => 'โปรดเลือกผุ้ใช้หรือทีม',
+    'LBL_NO_CALENDAR_SELECTED' => 'โปรดเลือกปฏิทิน',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'บันทึกปฏิทินไม่สำเร็จ',
 
 );
 

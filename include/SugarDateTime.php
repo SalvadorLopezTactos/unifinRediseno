@@ -17,13 +17,22 @@
  */
 class SugarDateTime extends DateTime
 {
-    const DOW_SUN = 0;
-    const DOW_MON = 1;
-    const DOW_TUE = 2;
-    const DOW_WED = 3;
-    const DOW_THU = 4;
-    const DOW_FRI = 5;
-    const DOW_SAT = 6;
+    public const DOW_SUN = 0;
+    public const DOW_MON = 1;
+    public const DOW_TUE = 2;
+    public const DOW_WED = 3;
+    public const DOW_THU = 4;
+    public const DOW_FRI = 5;
+    public const DOW_SAT = 6;
+
+    /**
+     * @var array
+     */
+    public $def;
+    /**
+     * @var bool
+     */
+    public $isDate;
 
     // Recognized properties and their formats
 	protected $formats = array(
@@ -88,12 +97,6 @@ class SugarDateTime extends DateTime
     public static $use_php_parser = true;
 
     /**
-     * For testing - if we allowed to use strptime()
-     * @var bool
-     */
-    public static $use_strptime = true;
-
-    /**
 	 * Copy of DateTime::createFromFormat
 	 *
 	 * Needed to return right type of the object
@@ -105,83 +108,23 @@ class SugarDateTime extends DateTime
      *   or false on failure.
 	 * @see DateTime::createFromFormat
 	 */
+    #[\ReturnTypeWillChange]
 	public static function createFromFormat($format, $time, $timezone = null)
 	{
 	    if(empty($time) || empty($format)) {
 	        return false;
 	    }
-		if(self::$use_php_parser && is_callable(array("DateTime", "createFromFormat"))) {
-			// 5.3, hurray!
-			if(!empty($timezone)) {
-			    $d = parent::createFromFormat($format, $time, $timezone);
-			} else {
-			    $d = parent::createFromFormat($format, $time);
-			}
-		} else {
-			// doh, 5.2, will have to simulate
-			$d = self::_createFromFormat($format, $time, $timezone);
-		}
+        if (!empty($timezone)) {
+            $d = parent::createFromFormat($format, $time, $timezone);
+        } else {
+            $d = parent::createFromFormat($format, $time);
+        }
 		if(!$d) {
 			return false;
 		}
         $sd = new self($d->format(DateTimeInterface::ISO8601));
 		$sd->setTimezone($d->getTimezone());
 		return $sd;
-	}
-
-	/**
-	 * Internal _createFromFormat implementation for 5.2
-     * @internal
-	 * @param string $format Format like in date()
-	 * @param string $time Time string to parse
-	 * @param DateTimeZone $timezone TZ
-     * @return SugarDateTime
-     * @see DateTime::createFromFormat
-	 */
-	protected static function _createFromFormat($format, $time, DateTimeZone $timezone = null)
-	{
-		$res = new self();
-		if(!empty($timezone)) {
-		    $res->setTimezone($timezone);
-		}
-		if(self::$use_strptime && function_exists("strptime")) {
-    		$str_format = str_replace(array_keys(TimeDate::$format_to_str), array_values(TimeDate::$format_to_str), $format);
-    		// for a reason unknown to modern science, %P doesn't work in strptime
-    		$str_format = str_replace("%P", "%p", $str_format);
-    		// strip spaces before am/pm as our formats don't have them
-    		$time = preg_replace('/\s+(AM|PM)/i', '\1', $time);
-    		// TODO: better way to not risk locale stuff problems?
-    		$data = strptime($time, $str_format);
-    		if(empty($data)) {
-		        $GLOBALS['log']->error("Cannot parse $time for format $format");
-    		    return null;
-    		}
-    		if($data["tm_year"] == 0) {
-    		    unset($data["tm_year"]);
-    		}
-    		if($data["tm_mday"] == 0) {
-    		    unset($data["tm_mday"]);
-    		}
-    		if(isset($data["tm_year"])) {
-    		    $data["tm_year"] += 1900;
-    		}
-    		if(isset($data["tm_mon"])) {
-    		    $data["tm_mon"]++;
-    		}
-    		$data += self::$data_init; // fill in missing parts
-		} else {
-		    // Windows, etc. might not have strptime - we'd have to work harder here
-            $data = $res->_strptime($time, $format);
-		}
-		if(empty($data)) {
-		    $GLOBALS['log']->error("Cannot parse $time for format $format");
-		    return null;
-		}
-		if(isset($data["tm_year"])) {
-     	    $res->setDate($data["tm_year"], $data["tm_mon"], $data["tm_mday"]);
-		}
-    	$res->setTime($data["tm_hour"], $data["tm_min"], $data["tm_sec"]);
-		return $res;
 	}
 
 	/**
@@ -426,10 +369,11 @@ class SugarDateTime extends DateTime
 	function get_day_begin($day = null, $month = null, $year = null)
 	{
 	    $newdate = clone $this;
-	    $newdate->setDate(
-	         $year?$year:$this->year,
-	         $month?$month:$this->month,
-	         $day?$day:$this->day);
+        $newdate->setDate(
+            $year ?: $this->year,
+            $month ?: $this->month,
+            $day ?: $this->day
+        );
 	    $newdate->setTime(0, 0);
 	    return $newdate;
 	}
@@ -444,10 +388,11 @@ class SugarDateTime extends DateTime
 	function get_day_end($day = null, $month = null, $year = null)
 	{
 	    $newdate = clone $this;
-	    $newdate->setDate(
-	         $year?$year:$this->year,
-	         $month?$month:$this->month,
-	         $day?$day:$this->day);
+        $newdate->setDate(
+            $year ?: $this->year,
+            $month ?: $this->month,
+            $day ?: $this->day
+        );
 	    $newdate->setTime(23, 59, 59);
 	    return $newdate;
 	}
@@ -521,111 +466,8 @@ class SugarDateTime extends DateTime
 	    return $this->format('r');
 	}
 
-    /**
-     * Match between tm_ parts and date() format strings
-     * @var array
-     */
-	protected static $parts_match = array(
-            'Y' => 'tm_year',
-            'm' => 'tm_mon',
-            'n' => 'tm_mon',
-            'd' => 'tm_mday',
-            'H' => 'tm_hour',
-            'h' => 'tm_hour',
-            'i' => 'tm_min',
-            's' => 'tm_sec',
-    );
-
-    protected static $data_init = array(
-        "tm_hour" => 0,
-        "tm_min" => 0,
-        "tm_sec" => 0,
-    );
-
-    protected static $strptime_short_mon, $strptime_long_mon;
-	/**
-     * DateTime homebrew parser
-     *
-     * Since some OSes and PHP versions (please upgrade to 5.3!) do not support built-in parsing functions,
-     * we have to restort to this ugliness.
-     * @internal
-     * @param string $time  Time formatted string
-     * @param string $format Format, as accepted by strptime()
-     * @return array Parsed parts
-     */
-    protected function _strptime($time, $format)
-    {
-       $data = self::$data_init;
-       if(empty(self::$strptime_short_mon)) {
-           self::$strptime_short_mon = array_flip($this->_getStrings('dom_cal_month'));
-           unset(self::$strptime_short_mon[""]);
-       }
-       if(empty(self::$strptime_long_mon)) {
-           self::$strptime_long_mon = array_flip($this->_getStrings('dom_cal_month_long'));
-           unset(self::$strptime_long_mon[""]);
-       }
-
-        $regexp = TimeDate::get_regular_expression($format);
-        if(!preg_match('@'.$regexp['format'].'@', $time, $dateparts)) {
-            return false;
-        }
-
-        foreach(self::$parts_match as $part => $datapart) {
-            if (isset($regexp['positions'][$part]) && isset($dateparts[$regexp['positions'][$part]])) {
-                $data[$datapart] = (int)$dateparts[$regexp['positions'][$part]];
-            }
-        }
-        // now process non-numeric ones
-        if ( isset($regexp['positions']['F']) && !empty($dateparts[$regexp['positions']['F']])) {
-                       // FIXME: locale?
-            $mon = $dateparts[$regexp['positions']['F']];
-            if(isset(self::$sugar_strptime_long_mon[$mon])) {
-                $data["tm_mon"] = self::$sugar_strptime_long_mon[$mon];
-            } else {
-                return false;
-            }
-        }
-        if ( isset($regexp['positions']['M']) && !empty($dateparts[$regexp['positions']['M']])) {
-                       // FIXME: locale?
-            $mon = $dateparts[$regexp['positions']['M']];
-            if(isset(self::$sugar_strptime_short_mon[$mon])) {
-                $data["tm_mon"] = self::$sugar_strptime_short_mon[$mon];
-            } else {
-                return false;
-            }
-        }
-        if ( isset($regexp['positions']['a']) && !empty($dateparts[$regexp['positions']['a']])) {
-            $ampm = trim($dateparts[$regexp['positions']['a']]);
-            if($ampm == 'pm') {
-                if($data["tm_hour"] != 12) $data["tm_hour"] += 12;
-            } else if($ampm == 'am') {
-                if($data["tm_hour"] == 12) {
-                    // 12:00am is 00:00
-                    $data["tm_hour"] = 0;
-                }
-            } else {
-                return false;
-            }
-        }
-
-        if ( isset($regexp['positions']['A']) && !empty($dateparts[$regexp['positions']['A']])) {
-            $ampm = trim($dateparts[$regexp['positions']['A']]);
-            if($ampm == 'PM') {
-                if($data["tm_hour"] != 12) $data["tm_hour"] += 12;
-            } else if($ampm == 'AM') {
-                if($data["tm_hour"] == 12) {
-                    // 12:00am is 00:00
-                    $data["tm_hour"] = 0;
-                }
-            } else {
-                return false;
-            }
-        }
-
-        return $data;
-    }
-
     // 5.2 compatibility - 5.2 functions don't return $this, let's help them
+    // leave it as is because of different return on error: false on DateTime, $this on SugarDateTime
 
     /**
      * (non-PHPdoc)
@@ -635,7 +477,7 @@ class SugarDateTime extends DateTime
      * @param $day
      * @return SugarDateTime
      */
-    public function setDate ($year, $month, $day)
+    public function setDate($year, $month, $day): SugarDateTime
     {
         parent::setDate($year, $month, $day);
         return $this;
@@ -649,9 +491,9 @@ class SugarDateTime extends DateTime
      * @param int $sec
      * @return SugarDateTime
      */
-    public function setTime($hour, $minute, $sec = 0, $microseconds = 0)
+    public function setTime($hour, $minute, $sec = 0, $microseconds = 0): SugarDateTime
     {
-        parent::setTime($hour, $minute, $sec);
+        parent::setTime((int)$hour, (int)$minute, (int)$sec);
         return $this;
     }
 
@@ -661,6 +503,7 @@ class SugarDateTime extends DateTime
      * @param $modify
      * @return SugarDateTime
      */
+    #[\ReturnTypeWillChange]
     public function modify($modify)
     {
         parent::modify($modify);
@@ -673,7 +516,7 @@ class SugarDateTime extends DateTime
      * @param DateTimeZone $timezone
      * @return SugarDateTime
      */
-    public function setTimezone ($timezone)
+    public function setTimezone($timezone): SugarDateTime
     {
         if (!$timezone instanceof \DateTimeZone) {
             LoggerManager::getLogger()->fatal(

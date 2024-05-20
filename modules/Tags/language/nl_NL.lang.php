@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Dashboard tagsrecord',
     'LBL_MY_TAGS' => 'Mijn tags',
     'LBL_MY_FAVORITE_TAGS' => 'Mijn favoriete tags',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} Tags',
 );

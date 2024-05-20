@@ -11,6 +11,8 @@
  */
 $dictionary['RevenueLineItem'] = array(
     'table' => 'revenue_line_items',
+    'color' => 'ocean',
+    'icon' => 'sicon-revenue-line-items-lg',
     'archive' => false,
     'optimistic_locking' => true,
     'audited' => true,
@@ -780,7 +782,7 @@ $dictionary['RevenueLineItem'] = array(
             'studio' => true,
             'options' => 'numeric_range_search_dom',
             'audited' => false,
-            'formula' => 'ifElse(not(equal(indexOf($commit_stage, forecastIncludedCommitStages()), -1)), $likely_case, 0)',
+            'formula' => 'ifElse(equal(indexOf($commit_stage, forecastIncludedCommitStages()), -1), 0, $likely_case)',
             'calculated' => true,
             'enforced' => true,
             'related_fields' => [

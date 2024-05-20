@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'Tracker URL:',
   'LBL_TRACKER_TEXT' => 'Tracker Link Text:',
   'LBL_TRACKER_COUNT' => 'Tracker Count:',
-  'LBL_REFER_URL' => 'Tracker Redirect URL:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Campaigns',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Email Campaigns',
   'LBL_NEW_FORM_TITLE' => 'New Campaign',

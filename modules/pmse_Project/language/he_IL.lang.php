@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'כפתורי טופס',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'אשר/דחה',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'ניתוב',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'שלח ל-DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'אפשרויות ניתוב נוספות',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'שנה את בעל הרשומה',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'צוות',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'מיזוג מסמכים',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'בחר...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'מיזוג מסמכים ל-PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'שלח מסמך ממוזג בדוא"ל',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'מיזוג מסמכים',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'סוג השער המתכנס אינו תואם לסוג השער עבור תהליך נכנס',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'שערים מתפצלים ירחיבו תהליכים להסתעפויות מרובות. בעת השימוש בשער מתכנס כדי לכנס התפצלויות אלה שוב לנתיב אחד, יש להשתמש בסוג השער המתכנס הנכון, בהתאם לסוג השער המתפצל ששימש כדי ליצור את ההתפצלויות. עבור התפצלויות שנוצרו באמצעות שערים מתפצלים בלעדיים או מבוססי-אירועים, יש להשתמש בשער מתכנס בלעדי כדי לכנס אותן שוב. עבור התפצלויות שנוצרו באמצעות שערים מתפצלים מקבילים או כוללניים, השתמש בשער מתכנס מקביל כדי לכנס אותם שוב.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'שדה מודול',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'קשר עם מודול',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'משתמש',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'תפקיד',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'צוות',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'פעילות הטופס',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'כלל עסקי',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'פעולת כלל עסקי',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'תבנית דוא"ל',
 );

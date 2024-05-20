@@ -11,6 +11,8 @@
  */
 $dictionary['ProductTemplate'] = array(
     'table' => 'product_templates',
+    'color' => 'pink',
+    'icon' => 'sicon-catalog',
     'comment' => 'The Admin view of a Product in Product Catalog; used as template for a product instance',
     'audited' => true,
     'full_text_search' => true,

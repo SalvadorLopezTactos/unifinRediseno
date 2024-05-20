@@ -34,7 +34,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\MultiFieldProperty;
  */
 class DateRangeAggregation extends RangeAggregation
 {
-    const ELASTIC_DATETIME_FORMAT = 'Y-m-d H:i:s';
+    public const ELASTIC_DATETIME_FORMAT = 'Y-m-d H:i:s';
 
     /**
      * {@inheritdoc}

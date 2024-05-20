@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once dirname(__FILE__) . '/Scanner.php';
+require_once __DIR__ . '/Scanner.php';
 
 /**
  *

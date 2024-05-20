@@ -40,7 +40,7 @@ class SugarWidgetFieldRelate extends SugarWidgetReportField
             {
                 $html .= ' selected="selected"';
             }
-            $html .= '>' . htmlspecialchars($row['title']) . '</option>';
+            $html .= '>' . htmlspecialchars((string)$row['title'], ENT_COMPAT) . '</option>';
         }
 
         $html .= '</select>';
@@ -58,7 +58,7 @@ class SugarWidgetFieldRelate extends SugarWidgetReportField
         $title = $layout_def['rname'];
         $bean = isset($layout_def['module']) ? BeanFactory::newBean($layout_def['module']) : NULL;
         $table = empty($bean) ? $layout_def['table'] : $bean->table_name;
-        $concat_fields = isset($layout_def['db_concat_fields']) ? $layout_def['db_concat_fields'] : '';
+        $concat_fields = $layout_def['db_concat_fields'] ?? '';
 
         if (empty($concat_fields) && !empty($bean) && isset($bean->field_defs[$title]['db_concat_fields']))
         {
@@ -114,7 +114,7 @@ class SugarWidgetFieldRelate extends SugarWidgetReportField
     public function queryFilterone_of($layout_def, $rename_columns = true)
     {
         $ids = array();
-        $module = isset($layout_def['custom_module']) ? $layout_def['custom_module'] : $layout_def['module'];
+        $module = $layout_def['custom_module'] ?? $layout_def['module'];
         $seed = BeanFactory::newBean($module);
 
         foreach($layout_def['input_name0'] as $beanId)
@@ -161,10 +161,10 @@ class SugarWidgetFieldRelate extends SugarWidgetReportField
     {
         $reporter = $this->layout_manager->getAttribute("reporter");
         $field_def = $reporter->all_fields[$layout_def['column_key']];
-        $module = isset($field_def['ext2']) ? $field_def['ext2'] : $field_def['module'];
+        $module = $field_def['ext2'] ?? $field_def['module'];
         $seed = BeanFactory::newBean($module);
         $rvalue = $layout_def['input_name0'];
-        $rname = isset($field_def['rname']) ? $field_def['rname'] : 'name';
+        $rname = $field_def['rname'] ?? 'name';
         $ids = $this->getRelateIds($seed, $rname, $rvalue);
         if (!empty($ids)) {
             return $this->_get_column_select($layout_def) . " IN ('" . implode("', '", $ids) . "')";
@@ -198,6 +198,61 @@ class SugarWidgetFieldRelate extends SugarWidgetReportField
             }
         }
         return array_unique($ids);
+    }
+
+    /**
+     * Get relate value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return array
+     */
+    public function getFieldControllerData(array $layoutDef): array
+    {
+        $reporter = $this->layout_manager->getAttribute("reporter");
+        $fieldDef = $reporter->all_fields[$layoutDef['column_key']];
+
+        $fieldName = $fieldDef['name'];
+
+        if (array_key_exists('id_name', $fieldDef) && !empty($fieldDef['id_name'])) {
+            $fieldName = $fieldDef['id_name'];
+        }
+
+        $secondaryTable = $fieldDef['secondary_table'];
+        $secondaryWithRepRel = $secondaryTable . '_' . $fieldDef['rep_rel_name'];
+        $secondaryWithName = $fieldDef['secondary_table'] . '_' . $fieldName;
+
+        $valueKey = strtoupper($fieldDef['secondary_table'] . '_name');
+        $idKey = $this->getTruncatedColumnAlias(
+            strtoupper($layoutDef['table_alias']) . '_' . strtoupper($fieldName)
+        );
+
+        //#31797  , we should get the table alias in a global registered array:selected_loaded_custom_links
+        if (!empty($reporter->selected_loaded_custom_links) &&
+            !empty($reporter->selected_loaded_custom_links[$secondaryTable])) {
+            $valueKey = strtoupper(
+                $reporter->selected_loaded_custom_links[$secondaryTable]['join_table_alias'].'_name'
+            );
+        } elseif (isset($fieldDef['rep_rel_name']) && isset($reporter->selected_loaded_custom_links) &&
+            !empty($reporter->selected_loaded_custom_links[$secondaryWithRepRel])) {
+            $tableAlias = $reporter->selected_loaded_custom_links[$secondaryWithRepRel]['join_table_alias'];
+            $valueKey = strtoupper($tableAlias . '_name');
+        } elseif (!empty($reporter->selected_loaded_custom_links)
+            && !empty($reporter->selected_loaded_custom_links[$secondaryWithName])) {
+            $tableAlias = $reporter->selected_loaded_custom_links[$secondaryWithName]['join_table_alias'];
+            $valueKey = strtoupper($tableAlias . '_name');
+        }
+
+        $value = $layoutDef['fields'][$valueKey];
+        $id = $layoutDef['fields'][$idKey];
+        $relatedModule = $fieldDef['ext2'];
+
+
+        return [
+            'id' => $id,
+            'value' => $value,
+            'module' => $relatedModule,
+        ];
     }
 
 	//for to_pdf/to_csv
@@ -239,7 +294,11 @@ class SugarWidgetFieldRelate extends SugarWidgetReportField
         $recordField = $this->getTruncatedColumnAlias(strtoupper($layout_def['table_alias']).'_'.strtoupper($layout_def['name']));
 
         $record = $layout_def['fields'][$recordField];
-        $cell = "<a target='_blank' class=\"listViewTdLinkS1\" href=\"index.php?action=DetailView&module=".$field_def['ext2']."&record=$record\">";
+        if (in_array($field_def['ext2'], $GLOBALS['bwcModules'])) {
+            $cell = "<a target='_blank' class=\"listViewTdLinkS1\" href=\"index.php?action=DetailView&module=".$field_def['ext2']."&record=$record\">";
+        } else {
+            $cell = "<a target='_blank' class=\"listViewTdLinkS1\" href=\"#".$field_def['ext2']."/$record\">";
+        }
         $cell .= $layout_def['fields'][$display];
         $cell .= "</a>";
         return $cell;

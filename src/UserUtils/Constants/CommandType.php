@@ -16,19 +16,19 @@ namespace Sugarcrm\Sugarcrm\UserUtils\Constants;
  */
 abstract class CommandType
 {
-    const CopyDashboards = 'CopyDashboards';
-    const DeleteDashboards = 'DeleteDashboards';
-    const CopyFilters = 'CopyFilters';
-    const DeleteFilters = 'DeleteFilters';
-    const CloneDashboards = 'CloneDashboards';
-    const CloneFilters = 'CloneFilters';
-    const CloneFavoriteReports = 'CloneFavoriteReports';
-    const CloneSugarEmailClient = 'CloneSugarEmailClient';
-    const CloneScheduledReporting = 'CloneScheduledReporting';
-    const CloneNotifyOnAssignment = 'CloneNotifyOnAssignment';
-    const CloneRemindersOptions = 'CloneRemindersOptions';
-    const CloneDefaultTeams = 'CloneDefaultTeams';
-    const CloneNavigationBar = 'CloneNavigationBar';
-    const CloneUserSettings = 'CloneUserSettings';
-    const BroadcastMessage = 'BroadcastMessage';
+    public const CopyDashboards = 'CopyDashboards';
+    public const DeleteDashboards = 'DeleteDashboards';
+    public const CopyFilters = 'CopyFilters';
+    public const DeleteFilters = 'DeleteFilters';
+    public const CloneDashboards = 'CloneDashboards';
+    public const CloneFilters = 'CloneFilters';
+    public const CloneFavoriteReports = 'CloneFavoriteReports';
+    public const CloneSugarEmailClient = 'CloneSugarEmailClient';
+    public const CloneScheduledReporting = 'CloneScheduledReporting';
+    public const CloneNotifyOnAssignment = 'CloneNotifyOnAssignment';
+    public const CloneRemindersOptions = 'CloneRemindersOptions';
+    public const CloneDefaultTeams = 'CloneDefaultTeams';
+    public const CloneNavigationBar = 'CloneNavigationBar';
+    public const CloneUserSettings = 'CloneUserSettings';
+    public const BroadcastMessage = 'BroadcastMessage';
 }

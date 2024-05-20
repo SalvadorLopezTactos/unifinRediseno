@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Kullanıcı Bilgisi bulunamadı',
     'ERR_USER_NAME_EXISTS'              => '{0} kullanıcı adı zaten var. Yinelenen kullanıcı adlarına izin verilmiyor. Kullanıcı adını benzersiz olacak şekilde değiştirin.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” lisansı, ek uyumlu lisans türüyle kaydedilmelidir',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Bu özellik, Sugar Sell Premier&#39;e zaten dahil edilmiştir.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Bu kullanıcının Sugar uygulamasına girişi engellenmekte olup, var olan şifresi ile bağlanamaz.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Sadece yabancı yazar kullanıcısının Sugar kimlik bilgilerini kullanarak oturum açmasına izin verilmiyor',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Şifre',
     'LBL_CHOOSE_A_KEY'					=> 'İzinsiz olarak takviminizin yayınlanmasını engellemek için bir anahtar seçiniz',
     'LBL_NO_KEY'                        => 'Anahtar ayarlı değil. Yayınlamayı etkinleştirmek için anahtar belirleyin.',
-	'LBL_CHOOSE_WHICH'					=> 'Navigasyon barda gösterilecek sekmeleri seçiniz. Modüllerin görünmesini istediğiniz sıralamayı belirleyin.',
+    'LBL_CHOOSE_WHICH'                  => 'Yan gezinme çubuğunda hangi modüllere erişilebileceğini seçin. Modüllerin görünmesini istediğiniz sıralamayı belirleyin.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Sabitllenmiş Modüllerin Sayısı',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Gezinme çubuğu daraltıldığında sabitlemek için kullanılabilir modüllerin sayısını yazın (ör. 5 girilirse listenizdeki ilk beş modül sabitlenir). En sık kullandığınız modülleri temsil eden bir sayı girmenizi öneriyoruz. 100&#39;ün üzerindeki değerlere itibar edilmeyecek.',
 	'LBL_CITY'							=> 'Şehir',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Temizle',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP Kullanıcı ismi:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP Sunucu Türü:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP Sunucu Özellikleri',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Yetkili E-posta Hesabı',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'E-Posta sağlayıcınızı seçin:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! E-Posta Şifresi:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! E-Posta ID:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'kullanıcılar/takımlar/roller',
     'LBL_LOADING_ITEMS' => 'Veriler yükleniyor...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Akıllı Kılavuz Erişimi',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Akıllı Kılavuz Son Aktif',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Eksik Akıllı Kılavuz Erişimi',
 ); // END STRINGS DEFS

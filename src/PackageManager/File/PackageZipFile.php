@@ -27,15 +27,15 @@ class PackageZipFile
     /**
      * package pre/post action scripts
      */
-    const PRE_INSTALL_FILE = 'scripts/pre_install.php';
-    const POST_INSTALL_FILE = 'scripts/post_install.php';
-    const PRE_UNINSTALL_FILE = 'scripts/pre_uninstall.php';
-    const POST_UNINSTALL_FILE = 'scripts/post_uninstall.php';
+    public const PRE_INSTALL_FILE = 'scripts/pre_install.php';
+    public const POST_INSTALL_FILE = 'scripts/post_install.php';
+    public const PRE_UNINSTALL_FILE = 'scripts/pre_uninstall.php';
+    public const POST_UNINSTALL_FILE = 'scripts/post_uninstall.php';
 
     /**
      * script list
      */
-    const PACKAGE_SCRIPT_LIST = [
+    public const PACKAGE_SCRIPT_LIST = [
         self::PRE_INSTALL_FILE,
         self::POST_INSTALL_FILE,
         self::PRE_UNINSTALL_FILE,
@@ -45,7 +45,7 @@ class PackageZipFile
     /**
      * function name in scripts
      */
-    const PACKAGE_SCRIPTS_FUNCTION = [
+    public const PACKAGE_SCRIPTS_FUNCTION = [
         self::PRE_INSTALL_FILE => 'pre_install',
         self::POST_INSTALL_FILE => 'post_install',
         self::PRE_UNINSTALL_FILE => 'pre_uninstall',
@@ -55,13 +55,13 @@ class PackageZipFile
     /**
      * manifest file name in package zip file
      */
-    const PACKAGE_MANIFEST_FILE_NAME = 'manifest.php';
+    public const PACKAGE_MANIFEST_FILE_NAME = 'manifest.php';
 
     /**
      * old sugar creates package meta files to improve performance
      */
-    const PACKAGE_METADATA_FILE_ADDONS = ['manifest', 'icon'];
-    const PACKAGE_METADATA_MD5_FILE_EXT = 'md5';
+    public const PACKAGE_METADATA_FILE_ADDONS = ['manifest', 'icon'];
+    public const PACKAGE_METADATA_MD5_FILE_EXT = 'md5';
 
     /**
      * @var string
@@ -118,7 +118,7 @@ class PackageZipFile
             throw $exception;
         }
 
-        if (strpos($zipFile, \UploadStream::getDir()) !== false && version_compare(phpversion(), '7.4.16', '>=')) {
+        if (strpos($zipFile, \UploadStream::getDir()) !== false) {
             $this->zipFile = $this->fileConverter->revert($zipFile);
             register_shutdown_function([$this, 'unlinkZip']);
         } else {

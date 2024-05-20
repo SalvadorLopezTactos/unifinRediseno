@@ -137,6 +137,7 @@ class Context implements JsonSerializable
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         if (!$this->hasActiveSubject()) {

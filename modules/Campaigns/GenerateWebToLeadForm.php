@@ -125,19 +125,27 @@ $Web_To_Lead_Form_html .= "<tr align='center' style='color: rgb(0, 105, 225); fo
 
  //$Web_To_Lead_Form_html .= "\n<p>\n";
 
-if(!empty($_REQUEST['colsFirst']) && !empty($_REQUEST['colsSecond'])){
-    if ((is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0) < (is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0)) {
-        $columns= is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0;
- }
-    if ((is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0) > (is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0) || (is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0) == (is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0)) {
-        $columns= is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0;
- }
-}
-else if(!empty($_REQUEST['colsFirst'])){
-    $columns= is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0;
-}
-else if(!empty($_REQUEST['colsSecond'])){
-    $columns= is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0;
+if (!empty($_REQUEST['colsFirst']) && !empty($_REQUEST['colsSecond'])) {
+    if ((is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0) < (is_countable(
+        $_REQUEST['colsSecond']
+    ) ? count($_REQUEST['colsSecond']) : 0)) {
+        $columns = is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0;
+    }
+    if ((is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0) > (is_countable(
+        $_REQUEST['colsSecond']
+    ) ? count($_REQUEST['colsSecond']) : 0) || (is_countable($_REQUEST['colsFirst']) ? count(
+        $_REQUEST['colsFirst']
+    ) : 0) == (is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0)) {
+        $columns = is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0;
+    }
+} else {
+    if (!empty($_REQUEST['colsFirst'])) {
+        $columns = is_countable($_REQUEST['colsFirst']) ? count($_REQUEST['colsFirst']) : 0;
+    } else {
+        if (!empty($_REQUEST['colsSecond'])) {
+            $columns = is_countable($_REQUEST['colsSecond']) ? count($_REQUEST['colsSecond']) : 0;
+        }
+    }
 }
 
 $emailFieldPresent = false;
@@ -512,11 +520,11 @@ if(!empty($web_redirect_url)){
     $Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='redirect_url' name='redirect_url' value='$web_redirect_url'></td></tr>";
 }
 if (!empty($redirectRequestType)) {
-    $redirectRequestType = htmlspecialchars($redirectRequestType);
+    $redirectRequestType = htmlspecialchars($redirectRequestType, ENT_COMPAT);
     $Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='redirectRequestType' name='redirectRequestType' value='$redirectRequestType'></td></tr>";
 }
 
-$redirectIncludeParams = htmlspecialchars($redirectIncludeParams);
+$redirectIncludeParams = htmlspecialchars($redirectIncludeParams, ENT_COMPAT);
 $Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='redirectIncludeParams' name='redirectIncludeParams' value='$redirectIncludeParams'></td></tr>";
 
 if(!empty($web_assigned_user)){

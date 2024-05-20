@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Електронно табло със списък на бележките',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Електронно табло със запис на бележките',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на бележки',
+    'LBL_EXTERNAL_USER' => 'Външен потребител',
+    'LBL_EXTERNAL_USER_NAME' => 'Външен потребител',
 
     'LBL_RELATED_CONTACT' => 'Свързан контакт',
     'ERR_DELETE_RECORD' => 'Трябва да определите номер, за да изтриете този запис.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Тип на електронната поща',
     'LBL_EMAIL_ID' => 'Идентификатор на електронната поща',
     'LBL_PHONE' => 'Телефон:',
-    'LBL_PORTAL_FLAG' => 'Визуализиране в портала?',
+    'LBL_PORTAL_FLAG' => 'Налични външно',
     'LBL_EMBED_FLAG' => 'Прикрепи към електронно писмо?',
     'LBL_PRODUCT_ID' => 'ID на офериран продукт:',
     'LBL_QUOTE_ID' => 'Оферта:',

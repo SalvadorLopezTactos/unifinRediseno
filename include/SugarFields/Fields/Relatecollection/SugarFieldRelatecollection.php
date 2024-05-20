@@ -64,7 +64,7 @@ class SugarFieldRelatecollection extends SugarFieldBase
      */
     public function apiFormatField(array &$data, SugarBean $bean, array $args, $fieldName, $properties, array $fieldList = null, ServiceBase $service = null)
     {
-        list ($relName, $fields, $limit) = $this->parseProperties($properties);
+        [$relName, $fields, $limit] = $this->parseProperties($properties);
         $records = $this->getLinkedRecords($bean, $relName, $fields, $limit);
         $data[$fieldName] = array_values($records);
     }
@@ -80,7 +80,7 @@ class SugarFieldRelatecollection extends SugarFieldBase
         }
 
         // retrieve current linked objects
-        list ($relName, $fields, $limit, $create) = $this->parseProperties($properties);
+        [$relName, $fields, $limit, $create] = $this->parseProperties($properties);
         $currentList = $this->getLinkedRecords($bean, $relName, $fields, $limit);
 
         /*

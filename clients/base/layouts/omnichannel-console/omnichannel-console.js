@@ -156,6 +156,9 @@
         $(window).on('resize.omniConsole', _.bind(this._resize, this));
         this.boundOpen = _.bind(this.open, this);
         this.boundCloseImmediately = _.bind(this.closeImmediately, this);
+        this.sidebarNavWidth = '3.75rem';
+        this.directionUC = (app.lang.direction === 'rtl') ? 'Right' : 'Left';
+        this.direction = this.directionUC.toLowerCase();
 
         // Re-initialize the console's mode when AWS contacts change
         this.on('contact:view', this._initMode, this);
@@ -348,7 +351,7 @@
             this.currentState = 'opening';
             this._initMode();
             this.$el.css({
-                left: 0,
+                [this.direction]: this.sidebarNavWidth,
                 display: ''
             });
             this.currentState = 'idle';
@@ -357,6 +360,8 @@
             $main.on('drawer:add.omniConsole', this.boundCloseImmediately);
             this.trigger('omniconsole:open');
             this.removeToolbarActionListener();
+
+            app.events.trigger('omnichannel:opened');
         }
     },
 
@@ -393,6 +398,15 @@
      */
     isExpanded: function() {
         return this.getMode() !== this.modes.COMPACT;
+    },
+
+    /**
+     * Check if the console is expanded to full mode and not minimized
+     *
+     * @return {boolean} True if expanded and not minimized
+     */
+    isExpandedAndMaximized: function() {
+        return this.getMode() !== this.modes.COMPACT && !this.isMinimized;
     },
 
     /**
@@ -465,7 +479,7 @@
         $('#content')
             .removeClass('omniconsole-visible')
             .css({
-                marginLeft: '',
+                [`margin${this.directionUC}`]: '',
                 width: ''
             });
         $('.main-pane').css({
@@ -476,7 +490,7 @@
             marginLeft: '',
             width: ''
         });
-        this.$el.css('left', leftOffset);
+        this.$el.css(this.direction, leftOffset);
 
         this.currentState = '';
         this.isMinimized = true;
@@ -498,6 +512,8 @@
             app.events.off('sidebar:state:changed', null, this);
 
             this.handleResetOnClose();
+
+            app.events.trigger('omnichannel:closed');
         }
     },
 
@@ -680,11 +696,12 @@
         var $mainPane;
         var $activeDrawerMainPane;
         var $activeDrawerHeaderpane;
-        var cssCalc100MinusLeftOffset = `calc(100% - ${leftContentOffset}px)`;
-        var cssCalc100MinusLeftOffsetMinus34vw = `calc(100% - ${leftContentOffset}px - 34vw)`;
+        var cssCalc100MinusLeftOffset = `calc(100% - ${leftContentOffset}px - ${this.sidebarNavWidth})`;
+        var cssCalc100MinusLeftOffsetMinus34vw = `calc(100% - ${leftContentOffset}px - 34vw - ${this.sidebarNavWidth})`;
+        const cssCalc100MinusLeftOffsetMain = `calc(100% - ${leftContentOffset}px - 34vw)`;
 
         contentProps = {
-            marginLeft: leftContentOffset,
+            [`margin${this.directionUC}`]: leftContentOffset,
             width: isSidebarCollapsed ? '100%' : cssCalc100MinusLeftOffset
         };
         $('#content').css(contentProps);
@@ -719,7 +736,7 @@
 
             drawerMainPaneProps = {
                 marginLeft: leftContentOffset,
-                width: hasDrawerSidebar ? cssCalc100MinusLeftOffsetMinus34vw : cssCalc100MinusLeftOffset
+                width: hasDrawerSidebar ? cssCalc100MinusLeftOffsetMain : cssCalc100MinusLeftOffset
             };
 
             drawerHeaderpaneProps = {
@@ -743,11 +760,12 @@
 
         if (animate || this.isConfig) {
             this.$el.css({
-                left: 0,
-                width: this.currentMode === this.modes.COMPACT ? `${this.ccpSize.width}px` : '100%'
+                [this.direction]: this.sidebarNavWidth,
+                width: this.currentMode === this.modes.COMPACT ?
+                    `${this.ccpSize.width}px` : `calc(100% - ${this.sidebarNavWidth})`
             });
         } else {
-            this.$el.css('left', '0px');
+            this.$el.css('left', this.sidebarNavWidth);
         }
     },
 

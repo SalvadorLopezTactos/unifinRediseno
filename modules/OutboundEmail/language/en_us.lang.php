@@ -39,5 +39,5 @@ $mod_strings = array(
     'LBL_PRIMARY_TEAM' => 'Primary Team',
     'LBL_PREFERRED_SENDING_ACCOUNT' => 'Preferred Sending Account',
 
-    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Email Settings Focus Drawer',
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Email Settings Focus Dashboard',
 );

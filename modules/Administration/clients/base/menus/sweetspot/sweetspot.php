@@ -10,6 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+use Sugarcrm\Sugarcrm\Entitlements\Subscription;
+
+global $current_user;
 
 $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
 
@@ -50,7 +53,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=Teams&action=tba',
     ),
-    
+
     // Password Management
     array(
         'label' => 'LBL_MANAGE_PASSWORD_TITLE',
@@ -277,13 +280,13 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=ModuleBuilder&action=index&type=studio',
     ),
-    // Rename modules
+    // Modules Name and Icons
     array(
         'label' => 'LBL_RENAME_TABS',
         'acl_action' => 'studio',
         'module' => $moduleName,
         'icon' => 'sicon-settings',
-        'route' => '#bwc/index.php?action=wizard&module=Studio&wizard=StudioWizard&option=RenameTabs',
+        'route' => '#Administration/module-names-and-icons',
     ),
 
     // Module Builder
@@ -294,7 +297,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'icon' => 'sicon-settings',
         'route' => '#bwc/index.php?module=ModuleBuilder&action=index&type=mb',
     ),
-    // Display Modules and Subpanels
+    // Navigation Bar and Subpanels
     array(
         'label' => 'LBL_CONFIG_TABS',
         'acl_action' => 'studio',
@@ -441,5 +444,15 @@ if ($idpConfig->isIDMModeEnabled()) {
         'module' => $moduleName,
         'icon' => 'sicon-settings',
         'idm_mode_link' => $idpConfig->buildCloudConsoleUrl('/', [], $userId),
+    ];
+}
+
+// SugarOutfitters
+if ($current_user && !$current_user->hasLicenses([Subscription::SUGAR_SELL_ESSENTIALS_KEY])) {
+    $viewdefs[$moduleName]['base']['menu']['sweetspot'][] = [
+        'label' => 'LBL_SUGAR_OUTFITTER',
+        'icon' => 'sicon-marketplace',
+        'route' => 'https://www.sugaroutfitters.com/',
+        'openwindow' => true,
     ];
 }

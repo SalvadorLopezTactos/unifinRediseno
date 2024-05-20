@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Информационная панель списка заметок',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Информационная панель записей о примечаниях',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для заметок',
+    'LBL_EXTERNAL_USER' => 'Внешний пользователь',
+    'LBL_EXTERNAL_USER_NAME' => 'Внешний пользователь',
 
     'LBL_RELATED_CONTACT' => 'Связанный контакт',
     'ERR_DELETE_RECORD' => 'Вам следует указать номер записи перед удалением контрагента.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Тип электронной почты',
     'LBL_EMAIL_ID' => 'Идентификатор электронной почты',
     'LBL_PHONE' => 'Телефон:',
-    'LBL_PORTAL_FLAG' => 'Отобразить в портале?',
+    'LBL_PORTAL_FLAG' => 'Доступно извне',
     'LBL_EMBED_FLAG' => 'Вставить в Е-mail?',
     'LBL_PRODUCT_ID' => 'Продукт:',
     'LBL_QUOTE_ID' => 'Коммерческое предложение:',

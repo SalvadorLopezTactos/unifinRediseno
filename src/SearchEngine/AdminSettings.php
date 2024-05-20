@@ -25,7 +25,7 @@ class AdminSettings
      * The name of the ext file
      * @var string
      */
-    const EXT_FILE_NAME = 'full_text_search_admin.php';
+    public const EXT_FILE_NAME = 'full_text_search_admin.php';
 
     /**
      * The list of extra eligible modules, besides the modules listed in the studio page
@@ -53,7 +53,7 @@ class AdminSettings
      */
     public function getModuleList()
     {
-        list($enabled, $disabled) = $this->getModules();
+        [$enabled, $disabled] = $this->getModules();
 
         $list = array();
         $list['enabled_modules'] = $this->getModuleLabel($enabled);
@@ -99,8 +99,7 @@ class AdminSettings
 
         $list = array();
         foreach ($modules as $module) {
-            $label = isset($app_list_strings['moduleList'][$module]) ?
-                      $app_list_strings['moduleList'][$module] : $module;
+            $label = $app_list_strings['moduleList'][$module] ?? $module;
 
             $list[] = array("module" => $module, 'label' => $label);
         }

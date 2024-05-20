@@ -62,7 +62,7 @@ class EmailIdentity
      */
     public function setName($name) {
         // if $name is null, then trim will return an empty string, which is perfectly acceptable
-        $this->name = trim($name);
+        $this->name = trim((string)$name);
     }
 
     /**

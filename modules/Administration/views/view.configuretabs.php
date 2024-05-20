@@ -77,15 +77,22 @@ class ViewConfiguretabs extends SugarView
             }
         }
         
+        $users_pinned_modules = $controller->get_users_pinned_modules();
         $user_can_edit = $controller->get_users_can_edit();
-        $this->ss->assign('APP', $GLOBALS['app_strings']);
-        $this->ss->assign('MOD', $GLOBALS['mod_strings']);
-        $this->ss->assign('user_can_edit',  $user_can_edit);
-        $this->ss->assign('enabled_tabs', json_encode($enabled));
-        $this->ss->assign('disabled_tabs', json_encode($disabled));
-        $this->ss->assign('title',$this->getModuleTitle(false));
+        $number_pinned_modules = $controller->get_number_pinned_modules();
         
-        //get list of all subpanels and panels to hide 
+        $this->ss->assign([
+            'APP'                   => $GLOBALS['app_strings'],
+            'MOD'                   => $GLOBALS['mod_strings'],
+            'users_pinned_modules'  => $users_pinned_modules,
+            'user_can_edit'         => $user_can_edit,
+            'number_pinned_modules' => $number_pinned_modules,
+            'enabled_tabs'          => json_encode($enabled),
+            'disabled_tabs'         => json_encode($disabled),
+            'title'                 => $this->getModuleTitle(false),
+        ]);
+        
+        //get list of all subpanels and panels to hide
         $mod_list_strings_key_to_lower = array_change_key_case($app_list_strings['moduleList']);
         $panels_arr = SubPanelDefinitions::get_all_subpanels();
         $hidpanels_arr = SubPanelDefinitions::get_hidden_subpanels();

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="typeahead-wrapper"><ul class="typeahead dropdown-menu rounded-t-none search-results">
+<ul class="typeahead dropdown-menu rounded-t-none search-results m-0">
 {{#if collection.models}}
     {{#each collection.models}}
         <li class="search-result">
@@ -18,9 +18,8 @@
                 {{#if ../layout.v2}}
                     {{partial 'row' ../../this view=../../this model=this module=module}}
                 {{else}}
-                    <span class="label label-module label-module-mini label-{{module}}" title="{{getModuleName module plural=true}}">
-                        {{moduleIconLabel module}}
-                    </span>{{name}}{{#if field_name}}, {{field_name}}: {{field_value}}{{/if}}
+                    {{moduleLabel module 'sm' rel='tooltip' title=(getModuleName module plural=true)}}
+                    {{name}}{{#if field_name}}, {{field_name}}: {{field_value}}{{/if}}
                 {{/if}}
             {{#if viewAccess}}</a>{{else}}</div>{{/if}}
         </li>
@@ -43,4 +42,4 @@
             {{/if}}
         </li>
 {{/if}}
-</ul></div>
+</ul>

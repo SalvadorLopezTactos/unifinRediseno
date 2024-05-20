@@ -297,7 +297,7 @@ class aSubPanel
 				foreach($display_fields as $vname => $def)
 				{
 					$field = $def['name'];
-					$list_key = isset($listFieldMap[$key][$field]) ? $listFieldMap[$key][$field] : $field;
+                    $list_key = $listFieldMap[$key][$field] ?? $field;
 
 					if (isset($subpanel->panel_definition['list_fields'][$field]))
 					{
@@ -391,7 +391,7 @@ class aSubPanel
 	//get value of a property defined at the panel instance level.
 	function get_inst_prop_value ( $name )
 	{
-		return isset($this->_instance_properties[$name]) ? $this->_instance_properties [ $name ] : null;
+        return $this->_instance_properties [$name] ?? null;
 	}
 	//get value of a property defined at the panel definition level.
 	function get_def_prop_value ( $name )
@@ -655,7 +655,7 @@ class SubPanelDefinitions
         $this->_visible_tabs_array = array(); // bug 16820 - make sure this is an array for the later ksort
         if (isset ($this->layout_defs ['subpanel_setup'])) { // bug 17434 - belts-and-braces - check that we have some subpanels first
             //retrieve list of hidden subpanels
-            $hidden_panels = $this->get_hidden_subpanels();
+            $hidden_panels = static::get_hidden_subpanels();
 
             //activities is a special use case in that if it is hidden,
             //then the history tab should be hidden too.
@@ -755,6 +755,7 @@ class SubPanelDefinitions
     function open_layout_defs($reload = false, $layout_def_key = '', $original_only = false)
     {
 
+        $layout_defs = [];
         $mm = MetaDataManager::getManager();
 
         $layout_defs [$this->_focus->module_dir] = array();

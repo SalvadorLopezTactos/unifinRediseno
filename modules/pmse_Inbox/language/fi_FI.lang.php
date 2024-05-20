@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Historia',
     'LBL_PMSE_LABEL_NOTES' => 'Näytä muistiot',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Lisää muistio',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Lähetä DocuSign-palveluun',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Valitse...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Käyttäjä',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Haluatko varmasti hyväksyä tämän prosessin?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Haluatko varmasti hylätä tämän prosessin?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Haluatko varmasti ohjata tämän prosessin?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Haluatko varmasti lähettää tämän prosessin DocuSign-palveluun?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Prosessin hyväksyminen onnistui',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Prosessin hylkääminen onnistui',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Prosessin ohjaaminen onnistui',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Prosessi lähetettiin Docusign-palveluun',
     'LBL_PA_PROCESS_CLOSED' => 'Prosessi, jota yrität takastella, on suljettu.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Prosessi, jota yrität tarkastella, ei ole tällä hetkellä käytettävissä.',
 

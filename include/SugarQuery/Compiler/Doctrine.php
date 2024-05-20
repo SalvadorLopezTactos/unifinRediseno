@@ -481,7 +481,7 @@ class SugarQuery_Compiler_Doctrine
             return;
         }
 
-        $builder->setFirstResult($query->offset);
+        $builder->setFirstResult((int)$query->offset);
         $builder->setMaxResults($query->limit);
     }
 

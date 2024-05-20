@@ -88,12 +88,12 @@ class SubscriptionManager
     /**
      * timeout for the request
      */
-    const REQUEST_TIMEOUT = 10;
+    public const REQUEST_TIMEOUT = 10;
 
     /**
      * no data from license server, using default setting
      */
-    const USE_DEFAULT_SETTING = 'use_default';
+    public const USE_DEFAULT_SETTING = 'use_default';
 
     /**
      * no public ctor
@@ -549,7 +549,7 @@ class SubscriptionManager
     {
         $systemSubscriptions = $this->getSystemSubscriptions();
         if (isset($systemSubscriptions[$type])) {
-            return $systemSubscriptions[$type]['quantity'];
+            return $systemSubscriptions[$type]['quantity'] ?? 0;
         }
         return 0;
     }
@@ -567,6 +567,15 @@ class SubscriptionManager
         }
 
         return $results;
+    }
+
+    /**
+     * get mango keys, ignore non-crm keys, such as HINT, CONNECT etc.
+     * @return array
+     */
+    public function getSystemCRMKeys() : array
+    {
+        return $this->getMangoKeys($this->getSystemSubscriptions());
     }
 
     /**
@@ -749,6 +758,7 @@ class SubscriptionManager
             Subscription::SUGAR_SELL_ADVANCED_BUNDLE_KEY,
             Subscription::SUGAR_SELL_PREMIER_BUNDLE_KEY,
             Subscription::SUGAR_HINT_KEY,
+            Subscription::SUGAR_AUTOMATE_KEY,
             Subscription::SUGAR_DISCOVER_KEY,
             Subscription::SUGAR_CONNECT_KEY,
             Subscription::SUGAR_PREDICT_ADVANCED_KEY,
@@ -984,7 +994,7 @@ class SubscriptionManager
      * get invalid license types for all users
      * @return array
      */
-    protected function getInvalidUsersLicenseTypes() : array
+    public function getInvalidUsersLicenseTypes() : array
     {
         $invalidLicenseTypes = [];
         $userLicenseTypes = $this->getSystemUserCountByLicenseTypes();
@@ -1019,7 +1029,7 @@ class SubscriptionManager
             }
         }
 
-        return array_unique($subscriptions);
+        return array_values(array_unique($subscriptions));
     }
 
     /**

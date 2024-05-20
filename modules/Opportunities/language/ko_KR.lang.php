@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '영업기회 목록 대시보드',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '영업기회 기록 대시보드',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => '영업기회 세부 사항',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => '영업기회 포커스 서랍- 콘솔',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => '기회 포커스 서랍',
     'LBL_RENEWAL_OPPORTUNITY' => '기회 갱신',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => '배정',
     'LBL_FORECAST' => '예측에 포함',
     'LBL_COMMIT_STAGE' => '커밋 단계',
-    'LBL_COMMIT_STAGE_FORECAST' => '예상',
+    'LBL_COMMIT_STAGE_FORECAST' => '예측 단계',
     'LBL_WORKSHEET' => '워크시트',
     'LBL_PURCHASED_LINE_ITEMS' => '구매한 라인아이템',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => '조직',
+    'LBL_CREATE_NEW' => '새로 만들기',
+    'LBL_MANAGE' => '관리',
+    'LBL_SEE_DETAILS' => '세부내용 보기',
+    'LBL_HIDE_NEW' => '숨김',
+
     'LBL_FORECASTED_LIKELY' => '예측된 예상 수치',
+    'LBL_LOST' => '획득 실패',
     'LBL_RENEWAL' => '갱신',
     'LBL_RENEWAL_OPPORTUNITIES' => '갱신 기회',
     'LBL_RENEWAL_PARENT' => '상위 영업기회',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'영업기회 역할',
     'LBL_NOTES_SUBPANEL_TITLE' => '메모 목록',
+    'LBL_TAB_OPPORTUNITY' => '{{module}} 리뷰',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => '확인을 클릭해, 모든 예측 데이터를 삭제하고 기회보기를 변경하십시오. 이것을 원하지 않는 경우, 이전 설정으로 돌아가려면 취소를 클릭하십시오.',

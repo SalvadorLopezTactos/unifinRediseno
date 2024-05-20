@@ -105,7 +105,7 @@ class RegisterContactApi extends SugarApi
         $adminSettings = Administration::getSettings();
 
         if (!empty($adminSettings->settings['portal_defaultUser'])) {
-            $fields['assigned_user_id'] = html_entity_decode((string)$adminSettings->settings['portal_defaultUser']);
+            $fields['assigned_user_id'] = html_entity_decode((string)$adminSettings->settings['portal_defaultUser'], ENT_COMPAT);
         }
 
         // The field list that we want to add to Contact

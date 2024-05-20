@@ -19,7 +19,7 @@
 */
 class iCal extends vCal {
 
-    const UTC_FORMAT = 'Ymd\THi00\Z';
+    public const UTC_FORMAT = 'Ymd\THi00\Z';
 
     /**
     * Constructor for the iCal class.

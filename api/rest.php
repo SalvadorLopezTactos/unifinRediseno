@@ -12,7 +12,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  */
 
 ob_start();
-chdir(dirname(__FILE__).'/../');
+chdir(__DIR__.'/../');
 define('ENTRY_POINT_TYPE', 'api');
 require('include/entryPoint.php');
 SugarAutoLoader::load('custom/include/RestService.php');

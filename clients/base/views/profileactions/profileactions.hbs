@@ -12,7 +12,7 @@
 --}}
 <ul class="nav megamenu" id="userList">
     <li class="dropdown" id="userActions" data-menu="user-actions">
-        <div class="btn-group p-2">
+        <div class="btn-group pt-2 pb-1 px-2">
             <button data-toggle="dropdown" class="btn btn-invisible btn-link dropdown-toggle" rel="tooltip" data-placement="bottom" title="{{userName}}" track="click:userActions" aria-label="{{str 'LBL_USER_MENU'}}" role="button" aria-haspop="true" aria-expanded="false">
                 {{#if pictureUrl}}
                     <img src="{{pictureUrl}}" alt="{{userName}}" class="avatar avatar-btn">
@@ -29,18 +29,22 @@
                         {{else}}
                             <li class="megamenu-dropdown-container" role="menuitem">
                         {{/if}}
+                        {{#if route}}
                             <a href="{{route}}" class="megamenu-dropdown-item" {{#if openwindow}}target="_blank"{{/if}} track="click:userAction-{{label}}" tabindex="-1">
-                                {{#if img_url}}
-                                    <span>
-                                        <img src="{{img_url}}" alt="{{../../userName}}" class="avatar avatar-mini">
-                                    </span>
-                                {{else}}
-                                    {{#if icon}}
-                                        <i class="{{buildIcon icon}}"></i>
-                                    {{/if}}
+                        {{else}}
+                            <button class="megamenu-dropdown-item w-full" track="click:userAction-{{label}}" tabindex="-1">
+                        {{/if}}
+                            {{#if img_url}}
+                                <span>
+                                    <img src="{{img_url}}" alt="{{../../userName}}" class="avatar avatar-mini">
+                                </span>
+                            {{else}}
+                                {{#if icon}}
+                                    <i class="{{buildIcon icon}}"></i>
                                 {{/if}}
-                                {{str label}}
-                            </a>
+                            {{/if}}
+                            {{str label}}
+                        {{#if route}}</a>{{else}}</button>{{/if}}
                         </li>
                     {{/each}}
                 </ul>

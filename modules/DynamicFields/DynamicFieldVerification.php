@@ -16,7 +16,7 @@
  */
 class DynamicFieldVerification
 {
-    const ERROR_DATABASE_ROW_SIZE_LIMIT = 'ERROR_DATABASE_ROW_SIZE_LIMIT';
+    public const ERROR_DATABASE_ROW_SIZE_LIMIT = 'ERROR_DATABASE_ROW_SIZE_LIMIT';
 
     /** @var DBManager */
     private $db;

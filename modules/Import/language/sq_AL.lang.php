@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Vlera e kërkuar mungon',
     'LBL_ERROR_SYNC_USERS' => 'Vlera jovalide për të sinkronizuar në Outlook:',
     'LBL_ID_EXISTS_ALREADY' => 'ID veqse ekziston në këtë tabelë',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY ekziston tashmë në këtë tabelë',
     'LBL_ASSIGNED_USER' => 'Në qoftë se përdoruesi nuk ekziston përdor përdoruesin aktual',
     'LBL_SHOW_HIDDEN' => 'Trego fushat që nuk janë normalisht të importuar',
     'LBL_UPDATE_RECORDS' => 'Azhurno të dhënat ekzistuese në vend të importimit të tyre (Pa Anulim)',

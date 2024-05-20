@@ -96,13 +96,20 @@ abstract class MssqlManager extends DBManager
     );
 
     protected $connectOptions = null;
+    /**
+     * @var string
+     */
+    public $lastsql;
 
 	/**
      * @see DBManager::version()
      */
     public function version()
     {
-        return $this->getOne("SELECT @@VERSION as version");
+        if (!isset(static::$version)) {
+            static::$version = $this->getOne("SELECT @@VERSION as version");
+        }
+        return static::$version;
 	}
 
     /**
@@ -572,7 +579,7 @@ abstract class MssqlManager extends DBManager
         //check for the alias, it should contain comma, may contain space, \n, or \t
         $matches = array();
         preg_match($patt, $sql, $matches, PREG_OFFSET_CAPTURE);
-        $found_in_sql = isset($matches[0][1]) ? $matches[0][1] : false;
+        $found_in_sql = $matches[0][1] ?? false;
 
 
         //set default for found variable
@@ -927,7 +934,7 @@ WHERE TABLE_NAME = ?
             array_unshift($all_parameters, $string);
         }
 
-        switch (strtolower($type)) {
+        switch (strtolower($type ?? '')) {
             case 'today':
                 return "GETDATE()";
             case 'left':
@@ -1040,7 +1047,7 @@ WHERE TABLE_NAME = ?
      */
     public function isBlobType($type)
     {
-        $type = strtolower($type);
+        $type = strtolower($type ?? '');
         return $this->getColumnType($type) === 'image';
     }
 

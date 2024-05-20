@@ -10,16 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class='hint-config hint-preview' style='{{#if isDarkMode}}background-color: #16191D;{{/if}}'>
-    <ul class='nav nav-tabs hint-config-tabs' style='{{#if isDarkMode}}background-color: #000000;{{/if}}'>
+<div class='hint-config hint-preview'>
+    <ul class='nav nav-tabs hint-config-tabs'>
         {{#if shouldShowAccountsTab}}
-            <li {{#eq currentModule "Accounts"}}class="active"{{/eq}}><a href="#accounts" data-toggle="tab">{{str 'LBL_HINT_CONFIG_TAB_ACCOUNTS'}}</a></li>
+            <li {{#eq currentModule "Accounts"}}class="active font-semibold"{{/eq}}><a href="#accounts" data-toggle="tab">{{str 'LBL_HINT_CONFIG_TAB_ACCOUNTS'}}</a></li>
         {{/if}}
         {{#if shouldShowContactsTab}}
-            <li {{#eq currentModule "Contacts"}}class="active"{{/eq}}><a href="#contacts" data-toggle="tab">{{str 'LBL_HINT_CONFIG_TAB_CONTACTS'}}</a></li>
+            <li {{#eq currentModule "Contacts"}}class="active font-semibold"{{/eq}}><a href="#contacts" data-toggle="tab">{{str 'LBL_HINT_CONFIG_TAB_CONTACTS'}}</a></li>
         {{/if}}
         {{#if shouldShowLeadsTab}}
-            <li {{#eq currentModule "Leads"}}class="active"{{/eq}} ><a href="#leads" data-toggle="tab">{{str 'LBL_HINT_CONFIG_TAB_LEADS'}}</a></li>
+            <li {{#eq currentModule "Leads"}}class="active font-semibold"{{/eq}} ><a href="#leads" data-toggle="tab">{{str 'LBL_HINT_CONFIG_TAB_LEADS'}}</a></li>
         {{/if}}
     </ul>
 
@@ -30,12 +30,8 @@
                 <div class='row-fluid-no-drag'>
                     <div class='hint-preview-field-value span4 record-cell record-cell--hint_account_logo'
                          data-type='stage2_image' name='hint_account_logo' data-name='hint_account_logo'>
-                        <span class='detail' style='{{#if isDarkMode}}color: #FFFFFF;{{/if}}'>
-                        <div class='image_field image_detail' style='height: 0px;'>
-                            <div class='image_preview'>
-                                <img src='themes/Stage2/account_default.png'>
-                            </div>
-                        </div>
+                        <span class='detail'>
+                            {{moduleLabel 'Accounts' 'lg' rel='tooltip' title=(getModuleName 'Accounts') data-placement='right'}}
                         </span>
                     </div>
                 </div>
@@ -93,10 +89,17 @@
                         <div class='header hint-preview-contact' style='{{#if ../../isDarkMode}}background-color: #2B2D2E;{{/if}}'>
                             <div class='hint-preview-field-value record-cell record-cell--hint_photo'
                                  data-name='hint_photo' data-type='stage2_image'  name='hint_photo'>
-                                <span class='detail'>
-                                    <span class='label label-module label-module-lg label-Contacts' rel='tooltip' title='' data-placement='right' data-original-title='Contact'>
+                                 {{#eq ../../currentModule 'Contacts'}}
+                                    <span class='detail'>
+                                        {{moduleLabel 'Contacts' 'lg' rel='tooltip' title=(getModuleName 'Contacts') data-placement='right'}}
                                     </span>
-                                </span>
+                                 {{/eq}}
+
+                                  {{#eq ../../currentModule 'Leads'}}
+                                    <span class='detail'>
+                                        {{moduleLabel 'Leads' 'lg' rel='tooltip' title=(getModuleName 'Leads') data-placement='right'}}
+                                    </span>
+                                 {{/eq}}
                             </div>
                             <div class='hint-preview-field-value record-cell record-cell--full_name'
                                  data-name='full_name' data-type='fullname' name='full_name'>

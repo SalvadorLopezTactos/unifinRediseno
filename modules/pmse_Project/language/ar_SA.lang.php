@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'أزرار النموذج',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'موافقة/رفض',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'توجيه',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'إرسال إلى DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'خيارات التوجيه الأخرى',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'تغيير مالك السجل',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'الفريق',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'دمج المستندات',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'تحديد...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'دمج المستندات مع PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'إرسال مستند مدمج عبر البريد الإلكتروني',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'دمج المستندات',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'نوع بوابة التقارب لايطابق نوع بوابة تدفق وارد',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'توسع بوابات التقارب العمليات إلى فروع متعددة. عند استخدام بوابة تقارب لإعادة تقريب هذه الفروع إلى مسار واحد، يجب استخدام النوع الصحيح من بوابة التقارب اعتمادًا على نوع بوابة التقارب المستخجمة لإنشاء الفروع. بالنسبة إلى الفروع المنشأة ببوابات حصرية أو متقارية مستندة إلى الحدث، استخدم بوابة تقارب حصرية لإعادة تقريبها. للفروع المنشأة باستخدام بوابات تقارب متوازية أو شاملة، استخدم بوابة تقارب موازية لإعادة تقريبها.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'حقل الوحدة',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'علاقة الوحدة',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'المستخدم',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'الدور',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'الفريق',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'نشاط النموذج',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'قاعدة العمل',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'إجراء قاعدة العمل',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'قالب البريد الإلكتروني',
 );

@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות תגים',
     'LBL_MY_TAGS' => 'התגים שלי',
     'LBL_MY_FAVORITE_TAGS' => 'התגים המועדפים שלי',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} תגים',
 );

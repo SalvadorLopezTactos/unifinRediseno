@@ -152,6 +152,7 @@ class Zend_Gdata_Gapps_ServiceException extends Zend_Exception
      * @throws Zend_Gdata_App_Exception
      */
     public function importFromString($string) {
+        $php_errormsg = null;
         if ($string) {
             // Check to see if an AppsForYourDomainError exists
             //

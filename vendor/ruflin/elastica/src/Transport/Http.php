@@ -28,7 +28,7 @@ class Http extends AbstractTransport
     /**
      * Curl resource to reuse.
      *
-     * @var resource Curl resource to reuse
+     * @var \CurlHandle|resource|null Curl resource to reuse
      */
     protected static $_curlConnection;
 
@@ -37,7 +37,7 @@ class Http extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param array $params Host, Port, ...
+     * @param array<string, mixed> $params Host, Port, ...
      *
      * @throws ConnectionException
      * @throws ResponseException
@@ -75,37 +75,33 @@ class Http extends AbstractTransport
             );
         }
 
-        \curl_setopt($conn, CURLOPT_URL, $baseUri);
-        \curl_setopt($conn, CURLOPT_TIMEOUT, $connection->getTimeout());
-        \curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
+        \curl_setopt($conn, \CURLOPT_URL, $baseUri);
+        \curl_setopt($conn, \CURLOPT_TIMEOUT_MS, $connection->getTimeout() * 1000);
+        \curl_setopt($conn, \CURLOPT_FORBID_REUSE, 0);
 
         // Tell ES that we support the compressed responses
         // An "Accept-Encoding" header containing all supported encoding types is sent
         // curl will decode the response automatically if the response is encoded
-        \curl_setopt($conn, CURLOPT_ENCODING, '');
+        \curl_setopt($conn, \CURLOPT_ENCODING, '');
 
         /* @see Connection::setConnectTimeout() */
-        $connectTimeout = $connection->getConnectTimeout();
-        if ($connectTimeout > 0) {
-            \curl_setopt($conn, CURLOPT_CONNECTTIMEOUT, $connectTimeout);
+        $connectTimeoutMs = $connection->getConnectTimeout() * 1000;
+
+        // Let's only apply this value if the number of ms is greater than or equal to "1".
+        // In case "0" is passed as an argument, the value is reset to its default (300 s)
+        if ($connectTimeoutMs >= 1) {
+            \curl_setopt($conn, \CURLOPT_CONNECTTIMEOUT_MS, $connectTimeoutMs);
         }
 
-        $proxy = $connection->getProxy();
-
-        // See: https://github.com/facebook/hhvm/issues/4875
-        if (null === $proxy && \defined('HHVM_VERSION')) {
-            $proxy = \getenv('http_proxy') ?: null;
-        }
-
-        if (null !== $proxy) {
-            \curl_setopt($conn, CURLOPT_PROXY, $proxy);
+        if (null !== $proxy = $connection->getProxy()) {
+            \curl_setopt($conn, \CURLOPT_PROXY, $proxy);
         }
 
         $username = $connection->getUsername();
         $password = $connection->getPassword();
         if (null !== $username && null !== $password) {
-            \curl_setopt($conn, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-            \curl_setopt($conn, CURLOPT_USERPWD, "{$username}:{$password}");
+            \curl_setopt($conn, \CURLOPT_HTTPAUTH, $this->_getAuthType());
+            \curl_setopt($conn, \CURLOPT_USERPWD, "{$username}:{$password}");
         }
 
         $this->_setupCurl($conn);
@@ -115,9 +111,8 @@ class Http extends AbstractTransport
         $headers = [];
 
         if (!empty($headersConfig)) {
-            $headers = [];
             foreach ($headersConfig as $header => $headerValue) {
-                \array_push($headers, $header.': '.$headerValue);
+                $headers[] = $header.': '.$headerValue;
             }
         }
 
@@ -125,13 +120,15 @@ class Http extends AbstractTransport
         $data = $request->getData();
         $httpMethod = $request->getMethod();
 
-        if (!empty($data) || '0' === $data) {
+        $headers[] = 'Content-Type: '.$request->getContentType();
+
+        if (!empty($data)) {
             if ($this->hasParam('postWithRequestBody') && true == $this->getParam('postWithRequestBody')) {
                 $httpMethod = Request::POST;
             }
 
             if (\is_array($data)) {
-                $content = JSON::stringify($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $content = JSON::stringify($data, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
             } else {
                 $content = $data;
 
@@ -139,25 +136,24 @@ class Http extends AbstractTransport
                 $content = \str_replace('\/', '/', $content);
             }
 
-            \array_push($headers, \sprintf('Content-Type: %s', $request->getContentType()));
             if ($connection->hasCompression()) {
                 // Compress the body of the request ...
-                \curl_setopt($conn, CURLOPT_POSTFIELDS, \gzencode($content));
+                \curl_setopt($conn, \CURLOPT_POSTFIELDS, \gzencode($content));
 
                 // ... and tell ES that it is compressed
-                \array_push($headers, 'Content-Encoding: gzip');
+                $headers[] = 'Content-Encoding: gzip';
             } else {
-                \curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
+                \curl_setopt($conn, \CURLOPT_POSTFIELDS, $content);
             }
         } else {
-            \curl_setopt($conn, CURLOPT_POSTFIELDS, '');
+            \curl_setopt($conn, \CURLOPT_POSTFIELDS, '');
         }
 
-        \curl_setopt($conn, CURLOPT_HTTPHEADER, $headers);
+        \curl_setopt($conn, \CURLOPT_HTTPHEADER, $headers);
 
-        \curl_setopt($conn, CURLOPT_NOBODY, 'HEAD' == $httpMethod);
+        \curl_setopt($conn, \CURLOPT_NOBODY, 'HEAD' === $httpMethod);
 
-        \curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $httpMethod);
+        \curl_setopt($conn, \CURLOPT_CUSTOMREQUEST, $httpMethod);
 
         $start = \microtime(true);
 
@@ -171,7 +167,7 @@ class Http extends AbstractTransport
         // Checks if error exists
         $errorNumber = \curl_errno($conn);
 
-        $response = new Response($responseString, \curl_getinfo($conn, CURLINFO_HTTP_CODE));
+        $response = new Response($responseString, \curl_getinfo($conn, \CURLINFO_RESPONSE_CODE));
         $response->setQueryTime($end - $start);
         $response->setTransferInfo(\curl_getinfo($conn));
         if ($connection->hasConfig('bigintConversion')) {
@@ -196,7 +192,7 @@ class Http extends AbstractTransport
     /**
      * Called to add additional curl params.
      *
-     * @param resource $curlConnection Curl connection
+     * @param \CurlHandle|resource $curlConnection Curl connection
      */
     protected function _setupCurl($curlConnection): void
     {
@@ -212,7 +208,7 @@ class Http extends AbstractTransport
      *
      * @param bool $persistent False if not persistent connection
      *
-     * @return resource Connection resource
+     * @return \CurlHandle|resource Connection resource
      */
     protected function _getConnection(bool $persistent = true)
     {
@@ -221,5 +217,24 @@ class Http extends AbstractTransport
         }
 
         return self::$_curlConnection;
+    }
+
+    /**
+     * @return int
+     */
+    protected function _getAuthType()
+    {
+        switch ($this->_connection->getAuthType()) {
+            case 'digest':
+                return \CURLAUTH_DIGEST;
+            case 'gssnegotiate':
+                return \CURLAUTH_GSSNEGOTIATE;
+            case 'ntlm':
+                return \CURLAUTH_NTLM;
+            case 'basic':
+                return \CURLAUTH_BASIC;
+            default:
+                return \CURLAUTH_ANY;
+        }
     }
 }

@@ -576,6 +576,7 @@ class ReportListView  extends ListView {
 	
 	
 	function processDataSetNavigation(&$list, $xtemplateSection, $html_varName){
+        $export_link = null;
 		global $currentModule, $export_module, $sugar_config, $current_user;
 
 		if(!empty($this->export_type) && $this->export_type=="Normal"){	

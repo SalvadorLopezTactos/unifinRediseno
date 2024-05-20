@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Електронно табло със запис на етикетите',
     'LBL_MY_TAGS' => 'Моите етикети',
     'LBL_MY_FAVORITE_TAGS' => 'Моите предпочитани етикети',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} етикети',
 );

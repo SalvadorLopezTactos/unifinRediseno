@@ -32,7 +32,7 @@ class ExtAPIGoogleEmail extends ExternalAPIBase
     public $needsUrl = false;
     public $sharingOptions = null;
 
-    const APP_STRING_ERROR_PREFIX = 'ERR_GOOGLE_API_';
+    public const APP_STRING_ERROR_PREFIX = 'ERR_GOOGLE_API_';
 
     /**
      * Returns the Google Client object used to access Google servers, with

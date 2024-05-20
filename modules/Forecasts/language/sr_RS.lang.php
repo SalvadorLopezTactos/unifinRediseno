@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Pregledaj istoriju prognoza',
     'LBL_FORECAST_HISTORY' => 'Prognoze: Istorija',
     'LBL_FORECAST_HISTORY_TITLE' => 'Istorija',
+    'LBL_TAB_COMMITMENT' => 'Obaveza',
+    'LBL_CURRENT' => 'Trenutno',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Vremenski period',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Promenio',
     'LBL_WK_VERSION' => 'Verzija',
     'LBL_WK_REVISION' => 'Revizija',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Pristup API metrici zahteva Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Vremenski period:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Da li želite da prihvatite ove iznose?',
     'ERR_FORECAST_AMOUNT' => 'Prihvaćen iznos je obavezan i mora biti broj.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Uključeni kanal',
+    'LBL_UPSIDE_PIPELINE' => 'Potencijalni kanal',
+    'LBL_EXCLUDED_PIPELINE' => 'Isključeni kanal',
+    'LBL_WON' => 'Dobijen',
+    'LBL_LOST' => 'Izgubljen',
+    'LBL_ALL' => 'Svi',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Vodič za filtere',
+    'LBL_HELP_MAIN_BODY' => 'Sve metrike sadrže samo Prilike koje pripadaju izabranim korisnicima, vremenskom periodu i dodatnim filterima koje ste primenili',
+    'LBL_FORECAST_HELP' => 'Prilike koje ste dobili ili koje su u uključenom {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Otvorene prilike sa {{{forecastStage}}} od {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Otvorene prilike u uključenom {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Otvorene prilike sa {{{forecastStage}}} od {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Otvorene prilike sa {{{forecastStage}}} od {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Otvorene prilike u isključenom {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Prilike koje su već dobijene',
+    'LBL_LOST_HELP' => 'Prilike koje su već izgubljene',
+    'LBL_ALL_HELP' => 'Sve prodajne prilike',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Datum početka:',
     'LBL_FC_USER' => 'Zakazano za',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Obaveza',
     'LBL_TEAM_COMMITMENT' => 'Obaveza tima',
     'LBL_FORECASTED' => 'Predviđeno',
+    'LBL_OPPORTUNITY_FORECAST' => 'Prognoza prodajnih prilika',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Prognoza za stavke prihoda',
+    'LBL_LAST_COMMITMENT' => 'Poslednja obaveza',
     'LBL_ADJUSTED_TOTAL' => 'Prilagođeno ukupno',
     'LBL_COMMIT_STAGE' => 'Faza Izvršenja',
     'LBL_SALES_STAGE' => 'Faza',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Prilagodjen)',
     'LBL_SAVE_DRAFT' => 'Sačuvaj',
     'LBL_CHANGES_BY' => 'Promene po {0}',
-    'LBL_FORECAST_SETTINGS' => 'Podešavanja',
+    'LBL_FORECAST_SETTINGS' => 'Podešavanje prognoze',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Podešavanje Prognoze',

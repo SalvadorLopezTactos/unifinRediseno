@@ -18,6 +18,19 @@
 class PMSEHistoryLogWrapper
 {
     /**
+     * @var \stdClass|mixed
+     */
+    public $data;
+    /**
+     * @var \User|mixed
+     */
+    public $currentUser;
+    public $db;
+    /**
+     * @var mixed|array<string, mixed>
+     */
+    public $pmseModuleDisplayMeta;
+    /**
      *
      * @var string
      */
@@ -101,7 +114,7 @@ class PMSEHistoryLogWrapper
             $this->data->error = translate('LBL_PMSE_ADAM_WRAPPER_HISTORYLOG_ARGUMENTEMPTY', 'pmse_Project');
             $this->data->result = false;
         } else {
-            $this->case_id = (isset($args['filter']) ? $args['filter'] : 0);
+            $this->case_id = ($args['filter'] ?? 0);
             $this->data->case_fetch = $this->case_id;
             $this->data->result = $this->assemblyEntries();
             $this->data->success = sizeof($this->data->result) > 0;
@@ -457,9 +470,10 @@ class PMSEHistoryLogWrapper
         $q->where()->equals('cas_id', $case_id);
         $q->limit('1');
         $rows = $q->execute();
+
         // If the status is IN PROGRESS then the status is not shown.
         if (!empty($rows[0]) && !empty($rows[0]['cas_status']) && $rows[0]['cas_status'] != "IN PROGRESS") {
-            $statusEntry['image'] = "label label-module label-pmse_Inbox pull-left";
+            $statusEntry['image'] = $this->getModuleLabelClasses();
             $statusEntry['script'] = true;
             $statusEntry['show_user'] = false;
             $statusEntry['end_date'] = PMSEEngineUtils::getDateToFE($rows[0]['date_modified'], 'datetime');
@@ -476,6 +490,34 @@ class PMSEHistoryLogWrapper
         return [];
     }
 
+    private function getModuleLabelClasses()
+    {
+        $labelClasses = 'label label-module label-module-size-lg pull-left';
+
+        $displayMeta = $this->getPmseModuleDisplayMeta();
+        if ($displayMeta['color']) {
+            $labelClasses .= " label-module-color-{$displayMeta['color']}";
+        }
+        if ($displayMeta['display_type'] === 'icon') {
+            $labelClasses .= " sicon {$displayMeta['icon']}";
+        }
+
+        return $labelClasses;
+    }
+
+    private function getPmseModuleDisplayMeta()
+    {
+        if (empty($this->pmseModuleDisplayMeta)) {
+            $mm = MetadataManager::getManager();
+            $moduleMeta = $mm->getModuleData('pmse_Inbox');
+            $this->pmseModuleDisplayMeta = [
+                'color' => $moduleMeta['color'],
+                'icon' => $moduleMeta['icon'],
+                'display_type' => $moduleMeta['display_type'],
+            ];
+        }
+        return $this->pmseModuleDisplayMeta;
+    }
 
     /**
      * Get Module name by id. make the query and return the name of an sugar module
@@ -516,7 +558,7 @@ class PMSEHistoryLogWrapper
      */
     private function setProcessUser(&$entry)
     {
-        $entry['image'] = "label label-module label-pmse_Inbox pull-left";
+        $entry['image'] = $this->getModuleLabelClasses();
         $entry['user'] = translate('LBL_PMSE_LABEL_PROCESS_AUTHOR', 'pmse_Inbox');
         $entry['script'] = true;
         $entry['show_user'] = false;

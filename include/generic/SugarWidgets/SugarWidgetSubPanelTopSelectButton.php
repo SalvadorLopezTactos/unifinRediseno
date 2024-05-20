@@ -14,6 +14,19 @@
 
 class SugarWidgetSubPanelTopSelectButton extends SugarWidgetSubPanelTopButton
 {
+    /**
+     * @var mixed|array<string, mixed>
+     */
+    public $button_properties;
+    /**
+     * @var string|mixed
+     */
+    public $accesskey;
+    public $value;
+    /**
+     * @var mixed
+     */
+    public $module_name;
     protected $buttonSuffix = 'select_button';
 
 	//button_properties is a collection of properties associated with the widget_class definition. layoutmanager

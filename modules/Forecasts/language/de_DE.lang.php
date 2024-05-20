@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Prognose-Verlauf anzeigen',
     'LBL_FORECAST_HISTORY' => 'Prognose: Verlauf',
     'LBL_FORECAST_HISTORY_TITLE' => 'Umsatzplanung: Verlauf',
+    'LBL_TAB_COMMITMENT' => 'Engagement',
+    'LBL_CURRENT' => 'Aktuell',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Zeitraum',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Geändert von',
     'LBL_WK_VERSION' => 'Version',
     'LBL_WK_REVISION' => 'Revision',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Der Zugriff auf die Metriken-API erfordert Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Zeitraum:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Möchten Sie diese Beträge bestätigen?',
     'ERR_FORECAST_AMOUNT' => 'Der bestätigte Betrag wird benötigt und muss eine Zahl sein.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Enthaltene Pipeline',
+    'LBL_UPSIDE_PIPELINE' => 'Aufwärtspipeline',
+    'LBL_EXCLUDED_PIPELINE' => 'Ausgeschlossene Pipeline',
+    'LBL_WON' => 'Gewonnen',
+    'LBL_LOST' => 'Verloren',
+    'LBL_ALL' => 'Alle',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Leitfaden zu Filtern',
+    'LBL_HELP_MAIN_BODY' => 'Alle Metriken enthalten nur Chancen, die zu dem/den ausgewählten Benutzer(n) gehören, sowie den Zeitraum und alle zusätzlichen Filter, die Sie angewendet haben',
+    'LBL_FORECAST_HELP' => 'Chancen, die bereits gewonnen wurden oder in einer enthaltenen {{{forecastStage}}} sind',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Offene Chancen mit einem {{forecastStage}} von {{commitStageValue}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Öffne Chancen in einer enthaltenen {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Öffne Chancen mit einer {{{forecastStage}}} von {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Öffne Chancen in einer {{{forecastStage}}} von {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Öffne Chancen in einer ausgeschlossenen {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Changen, die bereits gewonnen wurden',
+    'LBL_LOST_HELP' => 'Chancen, die bereits verloren wurden',
+    'LBL_ALL_HELP' => 'Alle Chancen',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Startdatum',
     'LBL_FC_USER' => 'Zeitplan für',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Engagement',
     'LBL_TEAM_COMMITMENT' => 'Team-Engagement',
     'LBL_FORECASTED' => 'Vorhergesagt',
+    'LBL_OPPORTUNITY_FORECAST' => 'Möglichkeitenprognose',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Umsatzposten-Prognose',
+    'LBL_LAST_COMMITMENT' => 'Letzter Einsatz',
     'LBL_ADJUSTED_TOTAL' => 'Angepasste Summe',
     'LBL_COMMIT_STAGE' => 'Bestätigungsstatus',
     'LBL_SALES_STAGE' => 'Phase',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Angepasst)',
     'LBL_SAVE_DRAFT' => 'Speichern',
     'LBL_CHANGES_BY' => 'Änderungen von {0}',
-    'LBL_FORECAST_SETTINGS' => 'Einstellungen',
+    'LBL_FORECAST_SETTINGS' => 'Prognose-Einstellungen',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Prognose-Einrichtung',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Startdatum für Geschäftsjahr:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurieren Sie die Zeitspanne, die im Prognosemodul verwedet wird.<br><br>Beachten Sie, dass die Zeitspanne-Einstellungen nach der anfänglichen Einrichtung nicht mehr geändert werden können.<br><br>Für den Anfang wählen Sie das Anfangsdatum des Geschäftsjahres. Dann wählen Sie den Typ der Zeitspanne, über die Sie die Prognose erhalten möchten. Die Datumsabgrenzung wird automatisch kalkuliert, basierend auf Ihrer Auswahl. Die untergeordneten Zeitspannen sind die Basis für das Prognose-Arbeitsblatt.<br><br>Die darstellbaren zukünftigen und vergangenen Zeitspannen bestimmen die Anzahl der sichtbaren untergeordneten Zeitspannen im Prognosemodul.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Legen Sie fest, wie Sie {{forecastByModule}} kategorisieren möchten. <br><br>Bitte beachten Sie, dass die Bereichseinstellungen nach der ersten Übergabe nicht mehr geändert werden können. Bei aktualisierten Instanzen wird die Einstellung für den Bereich mit den vorhandenen Prognosedaten verknüpft.<br><br>Sie können zwei oder mehr Kategorien auf der Grundlage von Wahrscheinlichkeitsbereichen auswählen oder Kategorien erstellen, die nicht auf Wahrscheinlichkeiten basieren. <br><br>Links von Ihren benutzerdefinierten Kategorien befinden sich Kontrollkästchen, mit denen Sie festlegen können, welche Bereiche in den für die Prognose festgelegten und an die Manager gemeldeten Betrag einbezogen werden. <br><br>Ein Benutzer kann den Einschluss/Ausschluss-Status und die Kategorie von {{forecastByModule}} manuell in seinem Arbeitsblatt ändern.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurieren Sie, wie Sie {{forecastByModule}} kategorisieren möchten. <br><br>Bitte beachten Sie, dass die Bereichseinstellungen nach der ersten Übertragung nicht mehr geändert werden können. Bei aktualisierten Instanzen wird die Einstellung für den Bereich mit den vorhandenen Prognosedaten verknüpft.<br><br>Sie können zwei oder mehr Kategorien auf Grundlage von Wahrscheinlichkeitsbereichen auswählen oder Kategorien erstellen, die nicht auf Wahrscheinlichkeiten basieren. <br><br>Links von Ihren individuellen Kategorien befinden sich Kontrollkästchen, mit denen Sie festlegen können, für welche Bereiche der Prognosebetrag festgelegt und den Managern mitgeteilt werden soll. <br><br>Ein Benutzer kann den Ein-/Ausschluss-Status und die Kategorie von {{forecastByModule}} manuell über sein Arbeitsblatt ändern.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Wählen Sie die Spalten, welche die Benutzer für Prognosen für jedes {{forecastByModuleSingular}} ausfüllen müssen. Beachten Sie, dass die "wahrscheinliche" Summe mit der unter {{forecastByModule}} angezeigten Summe verbunden ist; deshalb kann diese Spalte nicht ausgeblendet werden.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Wahlen Sie die Spalten, die Sie im Prognose-Modul anzeigen möchten. Der Benutzer kann die Sicht des Arbeitsblatts mit der Liste von Feldern konfigurieren.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ich bin ein Platzhalter für Prognosen!',

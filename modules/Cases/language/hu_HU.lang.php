@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Esetek listája műszerfal',
     'LBL_CASES_RECORD_DASHBOARD' => 'Eset bejegyzések műszerfal',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Eset részletek',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Esetek fókusz vezérlőpult - konzol',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Figyelemfelhívás esetek',
 
 	'ERR_DELETE_RECORD'					=> 'Adjon meg egy azonosítót a kliens törléséhez!',
@@ -156,4 +156,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'SLA részletek',
     'LBL_HOURS' => 'Óra',
     'LBL_WIDGET_STATUS' => 'Állapot',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Rendezés',
+    'LBL_CREATE_NEW' => 'Új létrehozása',
+    'LBL_MANAGE' => 'Kezelés',
+    'LBL_SEE_DETAILS' => 'Részletek megtekintése',
+    'LBL_HIDE_NEW' => 'Elrejt',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Esetek',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Eset',
+    'LBL_KIOSK_CREATE' => 'Eset létrehozása',
+    'LBL_KIOSK_SUBJECT' => 'Tárgy',
+    'LBL_KIOSK_CASE_ID' => 'Eset azonosító',
+    'LBL_KIOSK_STATUS' => 'Állapot',
+    'LBL_KIOSK_CATEGORY' => 'Kategória',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Beküldve ekkor: {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioritás',
+    'LBL_KIOSK_CREATE_CASE' => 'Vegye fel a kapcsolatot velünk',
+    'LBL_KIOSK_DESCRIPTION' => 'Leírás',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'A kérése sikeresne beküldésre került.',
+    'LBL_KIOSK_ATTACHED' => 'Minden csatolmány',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Külső felhasználók',
 );

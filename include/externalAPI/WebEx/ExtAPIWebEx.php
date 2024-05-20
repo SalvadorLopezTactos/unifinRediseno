@@ -13,6 +13,20 @@
 
 class ExtAPIWebEx extends ExternalAPIBase implements WebMeeting {
 
+    public $schedule_xml;
+    public $unschedule_xml;
+    public $details_xml;
+    public $listmeeting_xml;
+    public $invite_xml;
+    public $uninvite_xml;
+    public $joinmeeting_xml;
+    public $hostmeeting_xml;
+    public $edit_xml;
+    public $getuser_xml;
+    /**
+     * @var string|mixed
+     */
+    public $account_url;
     protected $dateFormat = 'm/d/Y H:i:s';
     protected $urlExtension = '/WBXService/XMLService';
 

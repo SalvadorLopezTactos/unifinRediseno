@@ -193,6 +193,7 @@ $server->register(
 );
 
 function set_custom_field($session, $module_name, $type, $properties, $add_to_layout) {
+    $new_properties = [];
 	global $current_user;
 	global $beanList, $beanFiles;
 	global $custom_field_meta;

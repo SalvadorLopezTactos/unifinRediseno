@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Formularschaltflächen',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Annehmen/Ablehnen',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Weiterleiten',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'An DocuSign senden',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Andere Weiterleitungsoptionen',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Eintragseigentümer ändern',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Team',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumente zusammenführen',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Auswählen...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumente in PDF zusammenführen',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Zusammengeführtes Dokument per E-Mail senden',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumente zusammenführen',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Der zusammenlaufende Gateway-Typ stimmt nicht mit dem Gateway-Typ eines eingehenden Flusses überein',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Auseinanderlaufende Gateways erweitern Prozesse in mehrere Zweige. Wenn Sie ein zusammenlaufendes Gateway verwenden, um diese Zweige wieder in einen Pfad zusammenzuführen, muss der korrekte Typ des zusammenlaufenden Gateways verwendet werden. Dies hängt jeweils von dem Typ des auseinanderlaufenden Gateways ab, mit dem die Zweige erstellt wurden. Verwenden Sie für Zweige, die mit exklusiven oder Ereignis-basierten auseinanderlaufenden Gateways erstellt wurden, ein exklusives zusammenlaufendes Gateway, um diese erneut zusammenzuführen. Verwenden Sie für Zweige, die mit parallelen oder sogar auseinanderlaufenden Gateways erstellt wurden, ein paralleles zusammenlaufendes Gateway, um diese erneut zusammenzuführen.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Modulfeld',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Modulbeziehung',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Benutzer',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Rolle',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Team',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Formular Aktivität',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Geschäftsregel',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Geschäftsregel-Aktion',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-Mail-Vorlage',
 );

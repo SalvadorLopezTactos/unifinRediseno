@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Şablon? :',
     'LBL_DET_TEMPLATE_TYPE'=>'Doküman Tipi:',
     'LBL_TEAM'=> 'Takım:',
+    'LBL_IS_SHARED' => 'Harici Olarak Mevcut:',
     'LBL_DOC_DESCRIPTION'=>'Tanım:',
     'LBL_DOC_ACTIVE_DATE'=> 'Yayın Tarihi:',
     'LBL_DOC_EXP_DATE'=> 'Son Geçerlilik Tarihi:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'DocuSign&#39;a gönder',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Google Drive ile Senkronize Et',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Tümünü Google Drive ile Senkronize Et',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Tümünü OneDrive ile Senkronize Et',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'OneDrive ile Senkronize Et',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Tümünü Dropbox ile Senkronize Et',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Dropbox ile Senkronize Et',
 );

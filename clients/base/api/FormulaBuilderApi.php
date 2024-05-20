@@ -182,7 +182,7 @@ class FormulaBuilderApi extends SugarApi
             include "include/Expressions/updatecache.php";
         }
 
-        require $cacheFile;
+        include $cacheFile;
 
         if (is_iterable($FUNCTION_MAP)) {
             foreach ($FUNCTION_MAP as $functionName => $functionData) {

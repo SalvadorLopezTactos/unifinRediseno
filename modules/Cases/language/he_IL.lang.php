@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת מקרים',
     'LBL_CASES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת מקרים',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'פרטי אירוע',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'לוח מחוונים של פוקוס קריאות - מסוף',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס אירועים',
 
 	'ERR_DELETE_RECORD'					=> 'You must specify a record number to delete the account.',
@@ -162,4 +162,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'פרטי SLA',
     'LBL_HOURS' => 'שעות',
     'LBL_WIDGET_STATUS' => 'סטטוס',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'ארגון',
+    'LBL_CREATE_NEW' => 'צור חדש',
+    'LBL_MANAGE' => 'ניהול',
+    'LBL_SEE_DETAILS' => 'צפה בפרטים',
+    'LBL_HIDE_NEW' => 'הסתר',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'אירועים',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'אירוע',
+    'LBL_KIOSK_CREATE' => 'צור אירוע',
+    'LBL_KIOSK_SUBJECT' => 'נושא',
+    'LBL_KIOSK_CASE_ID' => 'מזהה אירוע',
+    'LBL_KIOSK_STATUS' => 'סטטוס',
+    'LBL_KIOSK_CATEGORY' => 'קטגוריה',
+    'LBL_KIOSK_SUBMITTED_BY' => 'הוגש ב-{{date}}',
+    'LBL_KIOSK_PRIORITY' => 'עדיפות',
+    'LBL_KIOSK_CREATE_CASE' => 'צור קשר',
+    'LBL_KIOSK_DESCRIPTION' => 'תיאור',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'הצלחת להגיש את הבקשה.',
+    'LBL_KIOSK_ATTACHED' => 'כל הפריטים המצורפים',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'משתמשים חיצוניים',
 );

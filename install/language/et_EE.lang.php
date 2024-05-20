@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS-i/FastCGI sapi kasutamisel optimaalse kogemuse saamiseks seadke fastcgi.logging oma php.ini failis väärtusele 0.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Installitud mittetoetatud PHP versioon: (vers',
     'LBL_DB_UNAVAILABLE'                => 'Andmebaas pole saadaval',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Andmebaasituge ei leitud. Veenduge, et teil oleksid olemas vajalikud draiverid ühe järgmise toetatud andmebaasitüübi jaoks: MySQL, MS SQLServer, Oracle või DB2. Olenevalt teie PHP versioonist võib olla tarvis php.ini-failis muuta laienduse kommentaar koodiks või õige kahendfailiga uuesti kompileerida. Lisateavet andmebaasitoe lubamise kohta leiate oma PHP juhendist.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Andmebaasituge ei leitud. Veenduge, et teil oleksid olemas vajalikud draiverid ühe järgmiste toetatud andmebaasitüüpide jaoks: MySQL, MS SQLServer, Oracle või DB2. Olenevalt teie PHP versioonist võib olla tarvis muuta php.ini-failis laienduse kommentaar koodiks või õige kahendfailiga uuesti kompileerida. Lisateavet andmebaasitoe lubamise kohta leiate oma PHP juhendist.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugari rakenduseks vajaliku XML parseri teegiga seotud funktsioone ei leitud. Olenevalt teie PHP versioonist võib teil olla vaja php.ini failis laiend lahti kommenteerida või rekompileerida õige kahendfailiga. Lisateabe saamiseks vaadake PHP juhendit.',
     'LBL_CHECKSYS_CSPRNG' => 'Juhusliku arvu generaator',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugari rakenduseks vajaliku mitmebaidiste stringide PHP laiendiga (mbstring) seotud funktsioone ei leitud. <br/><br/>Üldjuhul pole moodul mbstring PHP-s vaikimisi lubatud ja tuleb aktiveerida suvandiga --enable-mbstring when the PHP-kahendfaili loomisel. Lisateabe saamiseks mbstring toe lubamise kohta vaadake PHP juhendit.',
@@ -617,32 +617,15 @@ Keeldu kõnest
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Määratud teavitusmeilid',
-        'subject' => 'SugarCRM – Määratud $module_name ',
-        'description' => 'See mall on kasutusel, kui süsteem saadab kasutajale tööülesande.',
-        'body' => '<div>
-<p>$assigned_by_user määras &nbsp;$module_name kasutajale &nbsp;$assigned_user.</p>
-
-<p>Võite seda vaadata&nbsp;$module_name järgmisel lehel:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user määras $module_name kasutajale $assigned_user.
-
-Võite seda vaadata $module_name järgmisel lehel:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Ajastatud aruande meilid',
         'subject' => 'Ajastatud aruanne: $report_name ajal $report_time',
         'description' => 'See mall on kasutusel, kui süsteem saadab kasutajale ajastatud aruande.',
         'body' => '<div>
-<p>Tere $assigned_user</p>
-<p>Manuses on automaatselt koostatud aruanne, mis on teile planeeritud.</p>
-<p>Aruande nimi: $report_name</p>
-<p>Aruande kuupäev ja kellaaeg: $report_time</p>
+<p>Tere, $assigned_user<br></p>
+<p>Manuses on automaatselt koostatud aruanne, mis on teile planeeritud.<br></p>
+<p>Aruande nimi: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Aruande kuupäev ja kellaaeg: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Tere $assigned_user
@@ -667,21 +650,6 @@ Aruande kuupäev ja kellaaeg: $report_time',
             Kommentaari nägemiseks logige Sugarisse sisse.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Uue konto teave',
-        'description' => 'See mall on kasutusel, kui süsteemiadministraator saadab kasutajale uue parooli.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Siin on teie konto kasutajanimi ja ajutine parool:</p><p>Kasutajanimi: $contact_user_user_name </p><p>Parool: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Pärast ülaltoodud parooliga sisselogimist võidakse teilt nõuda uue parooli määramist.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Siin on teie konto kasutajanimi ja ajutine parool:
-Kasutajanimi: $contact_user_user_name
-Parool: $contact_user_user_hash
-
-$config_site_url
-
-Pärast ülaltoodud parooliga sisselogimist võidakse teilt nõuda uue parooli määramist.',
-        'name' => 'Süsteemi loodud parooli meil',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Lähtesta oma konto parool',
         'description' => "Seda malli kasutatakse lingi saatmiseks kasutajale, mida klõpsata kasutaja konto parooli lähtestamiseks.",

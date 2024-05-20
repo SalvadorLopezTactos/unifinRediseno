@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Dashboard de registo de Agendas de Relatórios',
     'LBL_FILE_TYPE' => 'Tipo(s) de ficheiro',
+    'LBL_EMBED_REPORT' => 'Relatório integrado no E-mail',
+    'LBL_EMBED_REPORT_INFO' => 'Nota: se o relatório exceder 200 linhas, anexaremos o relatório como ficheiro CSV.',
 );

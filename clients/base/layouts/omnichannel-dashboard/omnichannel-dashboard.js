@@ -78,11 +78,6 @@
     },
 
     /**
-     * The current search parameters of the search tab
-     */
-    searchParams: {},
-
-    /**
      * Holds the last searched collection on the search tab
      * We do this so that when you switch tabs, we can restore the previous collection when
      * returning to the search tab.
@@ -171,14 +166,18 @@
      * @param {Object} params the search parameters to set
      * @param {string} params.term the search term to set
      * @param {string} params.module_list the list of modules to search
-     * @param {Object} params.filters the search filters
      */
     setSearch: function(params) {
-        this.searchParams = {
-            term: params.term || null,
-            module_list: params.module_list || null,
-            filter: params.filters || null
-        };
+        params = params || {};
+        if (params.term) {
+            this.savedSearchTerm = params.term;
+        }
+        if (params.module_list) {
+            if (!this.searchCollection) {
+                this.searchCollection = app.data.createMixedBeanCollection();
+            }
+            this.searchCollection.selectedModules = params.module_list;
+        }
     },
 
     /**

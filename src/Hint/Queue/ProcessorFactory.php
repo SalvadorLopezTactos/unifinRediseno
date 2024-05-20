@@ -33,7 +33,7 @@ use Sugarcrm\Sugarcrm\Hint\Queue\Processor\InstanceEnableNotificationsProcessor;
 
 class ProcessorFactory
 {
-    const TYPE_TO_COMMAND_MAP = [
+    public const TYPE_TO_COMMAND_MAP = [
         EventTypes::INSTANCE_INIT => Commands::ISS_RECORD_NEW_INSTANCE,
         EventTypes::INSTANCE_INIT_CLONE => Commands::ISS_INIT_CLONE_INSTANCE,
         EventTypes::INSTANCE_RESYNC => Commands::ISS_SYNCHRONIZE_INSTANCE,

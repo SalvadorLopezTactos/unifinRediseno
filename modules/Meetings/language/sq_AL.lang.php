@@ -210,4 +210,10 @@ $mod_strings = array (
     - Kliko "Zgjidh një të ftuar" për të shtuar një përdorues, kontakt ose drejtues ekzistues në {{meetings_singular_module}}.
     - Kliko ikonën plus në të djathtë të "Zgjidh një të ftuar" për të krijuar një të ftuar {{meetings_singular_module}} si regjistër të ri në Sugar.
 3. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Është mbledhje për udhëzuesin inteligjent',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Detyrat për fëmijë',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Telefonatat për fëmijë',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Mbledhjet për fëmijë',
 );

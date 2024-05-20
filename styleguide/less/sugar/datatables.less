@@ -189,15 +189,11 @@
 
     &[data-type="avatar"] {
       .label-module {
-        height: 27px;
-        width: 27px;
-        font-size: 11px;
-        line-height: 11px;
-        padding: 3px 0 0 4px;
+        .label-module-size-sm();
       }
     }
 
-    > span:not(.overflow-visible) {
+    > span:not(.overflow-visible):not(.label-module) {
       overflow-x: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
@@ -531,8 +527,14 @@
         }
 
         &[data-type$="-cascade"] {
-          min-width: 210px;
-          height: 72px;
+          .h-auto();
+          .max-h-20();
+          .min-w-55();
+
+          .cascade-label-wrapper {
+            .mt-1();
+            .mb-0();
+          }
         }
 
         &[data-type="teamset"] {
@@ -622,6 +624,11 @@ FLEXLIST GENERIC */
     .dataTable {
       max-width: none;
       position: static;
+    }
+
+    .no-data-available {
+      line-height: 38px;
+      text-align: center;
     }
   }
 
@@ -871,14 +878,6 @@ FLEXLIST GENERIC */
     }
   }
 
-  &.double-height-row .dataTable td:first-child,
-  &.double-height-row .dataTable td:last-child {
-    > span.edit {
-      margin-top: -40px;
-      padding: 26px 8px;
-    }
-  }
-
   /*DUPLICATES*/
   .dataTable.duplicates {
     tr {
@@ -1051,8 +1050,6 @@ FLEXLIST GENERIC */
 
   /*FORECASTS MANAGER WORKSHEET*/
   &.forecast-manager-worksheet .dataTable {
-    border-top: @borderWidget;
-
     tr[name$="_commit_history"] td:first-child:last-child {
       padding: 0;
       height: auto;
@@ -1299,6 +1296,7 @@ span.email-has-attachments {
   th {
     /* new variable */
     background-color: @tableBackground;
+    background-clip: padding-box;
   }
 
   /* ---------
@@ -1309,6 +1307,7 @@ span.email-has-attachments {
 
     /*  TODO: This shouldn't be required but is a hack to prevent border rendering errors in firefox */
     border-left: 0 solid;
+    background-clip: padding-box;
   }
 
   /* ---------
@@ -1434,7 +1433,7 @@ div.audit-email {
     font-size: 13px;
     font-weight: bold;
     padding: 2px 4px;
-    background-color: @contentBackground;
+    background-color: @multiLineBackground;
   }
 
   td {
@@ -1594,6 +1593,12 @@ div.audit-email {
                 top: 0;
                 bottom: 0;
                 right: -1px;
+              }
+            }
+
+            &.edit {
+              td:first-child {
+                .bg-dropdown-link-background-hover();
               }
             }
           }

@@ -98,7 +98,8 @@ class Release extends SugarBean {
 
 	}
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $app_list_strings;
 		$temp_array = $this->get_list_view_array();
         $temp_array["ENCODED_NAME"]=$this->name;
@@ -129,5 +130,3 @@ class Release extends SugarBean {
 
 
 }
-
-?>

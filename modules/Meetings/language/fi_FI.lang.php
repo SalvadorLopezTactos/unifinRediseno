@@ -226,4 +226,10 @@ Sugarissa olevia käyttäjiä, kontakteja ja liidejä voidaan merkata kokoukseen
 - Klikkaa "Valitse kutsuttu" lisätäksesi olemassaolevan käyttäjän, kontaktin tai liidin {{meetings_singular_module}}.
 - Klikkaa "Valitse kutsuttu" -kohdan vieressä olevaa plus-painiketta luodaksesi {{meetings_singular_module}} kutsutun uudeksi Sugarin tietueeksi.
 3. Paina ‘Tallenna’ luodaksesi tietueen. Tämän jälkeen palaat edelliselle sivulle.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'On älykäs opas kokous',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Lapsi toiminnot',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Lapsi kutsut',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Lapsi palaverit',
 );

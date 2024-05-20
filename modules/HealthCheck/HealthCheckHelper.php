@@ -55,7 +55,7 @@ class HealthCheckHelper
     public function getScanner($type)
     {
         if (isset($this->registry[$type])) {
-            list($file, $class) = $this->registry[$type];
+            [$file, $class] = $this->registry[$type];
             require_once $file;
             return new $class();
         }
@@ -73,14 +73,14 @@ class HealthCheckHelper
     public function pingHeartbeat($data)
     {
         $client = new SugarHeartbeatClient();
-        $client->sugarPing();
+        $ping = $client->sugarPing();
 
-        if (!$client->getError()) {
+        if (!is_soap_fault($ping)) {
             $data = array_merge($this->getSystemInfo()->getInfo(), $data);
-            $client->sugarHome($this->getLicenseKey(), $data);
-            return $client->getError() == false;
+            $result = $client->sugarHome($this->getLicenseKey(), $data);
+            return !is_soap_fault($result);
         } else {
-            $GLOBALS['log']->error("HealthCheck: " . $client->getError());
+            $GLOBALS['log']->error("HealthCheck: " . $ping->getMessage());
         }
         return false;
     }

@@ -138,7 +138,7 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
             try {
                 $zipFile = new PackageZipFile($package->filename, $this->packageManager->getBaseTempDir());
                 $manifestFile = $zipFile->getPackageManifestFile();
-                list($manifestData, $installDefs, $upgradeManifest) = $this->checkAndLoadManifestFile($manifestFile);
+                [$manifestData, $installDefs, $upgradeManifest] = $this->checkAndLoadManifestFile($manifestFile);
             } catch (\Throwable $e) {
                 $this->deleteHistoryFromDb($package);
                 $this->removeFileRelatedMetadata($package->filename);
@@ -405,7 +405,7 @@ class SugarUpgradeUpdatePackages extends UpgradeScript
             try {
                 $zipFile = new PackageZipFile($package->filename, $this->packageManager->getBaseTempDir());
                 $manifestFile = $zipFile->getPackageManifestFile();
-                list($manifestData, $installDefs, $upgradeManifest) = $this->checkAndLoadManifestFile($manifestFile);
+                [$manifestData, $installDefs, $upgradeManifest] = $this->checkAndLoadManifestFile($manifestFile);
             } catch (\Throwable $e) {
                 $rawManifestData = unserialize(base64_decode($package->manifest), ['allowed_classes' => false]);
                 foreach (['manifest', 'installdefs', 'upgrade_manifest'] as $key) {

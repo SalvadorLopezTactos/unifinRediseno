@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Looja',
   'LBL_EDIT_LAYOUT' => 'Muuda paigutust' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Ainult administraatorid',
-  'LBL_CURRENCY_DEFAULT' => 'USA dollarid (vaikimisi)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Süsteemi valuuta (vaikimisi)',
 );
 ?>

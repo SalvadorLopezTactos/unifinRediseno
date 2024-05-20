@@ -15,6 +15,10 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 
 class PMSEEventDefinitionWrapper implements PMSEObservable
 {
+    /**
+     * @var Sugarcrm\Sugarcrm\ProcessManager\PMSE|mixed|\type
+     */
+    public $crmDataWrapper;
     private $event;
     private $eventDefinition;
     private $processDefinition;
@@ -124,9 +128,9 @@ class PMSEEventDefinitionWrapper implements PMSEObservable
     {
         $result = array();
         $this->event->retrieve_by_string_fields(array('evn_uid' => $args['record']));
-        if ($this->event->fetched_row != false) {
+        if (!empty($this->event->fetched_row)) {
             $this->eventDefinition->retrieve($this->event->id);
-            if ($this->eventDefinition->fetched_row != false) {
+            if (!empty($this->eventDefinition->fetched_row)) {
                 $result = array_merge($result, $this->eventDefinition->fetched_row);
                 $result['evn_uid'] = $this->event->fetched_row['evn_uid'];
             }
@@ -156,9 +160,7 @@ class PMSEEventDefinitionWrapper implements PMSEObservable
         if (isset($args['record']) && count($args) > 0) {
 
             if ($this->event->retrieve_by_string_fields(array('evn_uid' => $args['record']))) {
-
-                if ($this->event->fetched_row != false) {
-
+                if (!empty($this->event->fetched_row)) {
                     $args = $args['data'];
 
                     $this->eventDefinition->retrieve($this->event->id);

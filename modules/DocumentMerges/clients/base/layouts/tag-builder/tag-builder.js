@@ -20,7 +20,7 @@
      */
     initialize: function(options) {
         this._super('initialize', arguments);
-        this.hideApplicationHeaderAndFooter();
+        this.hideApplicationHeaderAndSidebar();
 
         this.listenTo(this.context, 'change:currentModule', this.hideOptions, this);
         this.listenTo(this.context, 'tag-builder-options:show', this.showOptions, this);
@@ -28,13 +28,14 @@
     },
 
     /**
-     * Hide application header and footer
+     * Hide application header and sidebar nav
      */
-    hideApplicationHeaderAndFooter: function() {
+    hideApplicationHeaderAndSidebar: function() {
         $('.navbar').remove();
-        $('#footer').remove();
+        $('#sidebar-nav').remove();
         $('#content').css({
             'top': '0px',
+            'left': '0px',
             'height': '100%',
             'overflow-x': 'hidden'
         });

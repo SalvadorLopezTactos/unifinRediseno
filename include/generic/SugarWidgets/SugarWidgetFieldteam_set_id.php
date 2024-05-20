@@ -57,6 +57,34 @@ class SugarWidgetFieldteam_set_id extends SugarWidgetReportField{
 		}
 }
 
+    /**
+     * Get teamset id value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        $result = '';
+
+        $value = $this->_get_list_value($layout_def);
+
+        if (!empty($value)) {
+            $teams = TeamSetManager::getTeamsFromSet($value);
+
+            if (!empty($teams)) {
+                foreach ($teams as $row) {
+                    $result .= $row['display_name'].", ";
+                }
+
+                $result = substr($result, 0, -2);
+            }
+        }
+
+        return $result;
+    }
+
 /**
  * Perform the Any type query
  *

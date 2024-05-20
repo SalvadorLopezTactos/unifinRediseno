@@ -23,9 +23,14 @@ require_once 'include/EditView/EditView2.php';
  */
 class MassUpdate
 {
-	/*
-	 * internal sugarbean reference
-	 */
+    /**
+     * @var bool
+     */
+    public $use_old_search;
+    public $searchFields;
+    /*
+    * internal sugarbean reference
+    */
 	var $sugarbean = null;
 
 	/**
@@ -130,17 +135,17 @@ class MassUpdate
 		$tempString = '';
 		else
         $tempString = '<form action="index.php" method="post" name="MassUpdate" id="MassUpdate" onsubmit="return check_form(\'MassUpdate\');">'
-        . '<input type="hidden" name="return_action" value="' . htmlspecialchars($action, ENT_QUOTES, 'UTF-8') . '" />'
-        . '<input type="hidden" name="return_module" value="' . htmlspecialchars($module, ENT_QUOTES, 'UTF-8') . '" />'
-        . '<input type="hidden" name="massupdate" value="true" />'
-        . '<input type="hidden" name="delete" value="false" />'
-        . '<input type="hidden" name="merge" value="false" />'
-        . '<input type="hidden" name="current_query_by_page" value="' . htmlspecialchars($query, ENT_QUOTES, 'UTF-8') . '" />'
-        . '<input type="hidden" name="module" value="' . htmlspecialchars($module, ENT_QUOTES, 'UTF-8') . '" />'
-        . '<input type="hidden" name="action" value="MassUpdate" />'
-        . '<input type="hidden" name="lvso" value="' . htmlspecialchars($lvso, ENT_QUOTES, 'UTF-8') . '" />'
-        . '<input type="hidden" name="' . htmlspecialchars($order_by_name, ENT_QUOTES, 'UTF-8') . '" value="' . htmlspecialchars($request_order_by_name, ENT_QUOTES, 'UTF-8') . '" />'
-            . '<input type="hidden" name="' . htmlspecialchars(CsrfAuthenticator::FORM_TOKEN_FIELD) . '" value="' . htmlspecialchars(CsrfAuthenticator::getInstance()->getFormToken()) . '" />';
+            . '<input type="hidden" name="return_action" value="' . htmlspecialchars((string)$action, ENT_QUOTES, 'UTF-8') . '" />'
+            . '<input type="hidden" name="return_module" value="' . htmlspecialchars((string)$module, ENT_QUOTES, 'UTF-8') . '" />'
+            . '<input type="hidden" name="massupdate" value="true" />'
+            . '<input type="hidden" name="delete" value="false" />'
+            . '<input type="hidden" name="merge" value="false" />'
+            . '<input type="hidden" name="current_query_by_page" value="' . htmlspecialchars((string)$query, ENT_QUOTES, 'UTF-8') . '" />'
+            . '<input type="hidden" name="module" value="' . htmlspecialchars((string)$module, ENT_QUOTES, 'UTF-8') . '" />'
+            . '<input type="hidden" name="action" value="MassUpdate" />'
+            . '<input type="hidden" name="lvso" value="' . htmlspecialchars($lvso, ENT_QUOTES, 'UTF-8') . '" />'
+            . '<input type="hidden" name="' . htmlspecialchars($order_by_name, ENT_QUOTES, 'UTF-8') . '" value="' . htmlspecialchars($request_order_by_name, ENT_QUOTES, 'UTF-8') . '" />'
+            . '<input type="hidden" name="' . htmlspecialchars(CsrfAuthenticator::FORM_TOKEN_FIELD, ENT_COMPAT) . '" value="' . htmlspecialchars(CsrfAuthenticator::getInstance()->getFormToken(), ENT_COMPAT) . '" />';
 
 		// cn: bug 9103 - MU navigation in emails is broken
 		if ($module == 'Emails') {
@@ -412,9 +417,13 @@ class MassUpdate
                         // triggered start events so they can continue to trigger.
                         Registry\Registry::getInstance()->drop('triggered_starts');
 						$newbean->save($check_notify);
+                        if ($newbean instanceof User && !empty($newbean->error_string)) {
+                            SugarApplication::appendErrorMessage($newbean->error_string);
+                            return $_POST['mass'];
+                        }
 						if (!empty($email_address_id)) {
                             $query = "UPDATE email_addresses SET opt_out = ? where id = ?";
-                            DBManagerFactory::getInstance()->getConnection()->executeQuery(
+                            DBManagerFactory::getInstance()->getConnection()->executeStatement(
                                 $query,
                                 [$optout_flag_value, $emailAddressRow['email_address_id']]
                             );
@@ -668,7 +677,11 @@ class MassUpdate
 							}else if(!empty($field['options'])) {
 								$even = !$even; $newhtml .= $this->addStatus($displayname,  $field["name"], translate($field["options"])); break;
 							}else if(!empty($field['function'])){
-								$functionValue = getFunctionValue(isset($field['function_bean']) ? $field['function_bean'] : null, $field['function'], array($this->sugarbean, $field['name'], '', 'MassUpdate'));
+                                $functionValue = getFunctionValue(
+                                    $field['function_bean'] ?? null,
+                                    $field['function'],
+                                    array($this->sugarbean, $field['name'], '', 'MassUpdate')
+                                );
 								$even = !$even; $newhtml .= $this->addStatus($displayname,  $field["name"], $functionValue); break;
 							}
 							break;
@@ -1265,7 +1278,7 @@ EOQ;
 		$javascriptend = <<<EOQ
 		 <script type="text/javascript">
 		Calendar.setup ({
-			inputField : "${varname}jscal_field", daFormat : "$cal_dateformat", ifFormat : "$cal_dateformat", showsTime : false, button : "${varname}jscal_trigger", singleClick : true, step : 1, weekNumbers:false
+			inputField : "{$varname}jscal_field", daFormat : "$cal_dateformat", ifFormat : "$cal_dateformat", showsTime : false, button : "{$varname}jscal_trigger", singleClick : true, step : 1, weekNumbers:false
 		});
 		</script>
 EOQ;
@@ -1294,6 +1307,7 @@ EOQ;
 	}
 
 	function addRadioenum($displayname, $varname, $options){
+        $_html_result = [];
 		 foreach ($options as $_key=>$_val){
             $_html_result[] = $this->addRadioenumItem($varname, $_key, $_val);
         }
@@ -1392,7 +1406,7 @@ EOQ;
         }
 
         $oldDateTime = $this->sugarbean->$field;
-        $oldTime = explode(" ", $oldDateTime);
+        $oldTime = explode(" ", (string)$oldDateTime);
         if (isset($oldTime[1])) {
         	$oldTime = $oldTime[1];
         } else {
@@ -1452,7 +1466,7 @@ EOQ;
         $searchForm->populateFromArray($query, null, true);
         $this->searchFields = $searchForm->searchFields;
         $where_clauses = $searchForm->generateSearchWhere(true, $module);
-        if (count($where_clauses) > 0 ) {
+        if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
             $this->where_clauses = '('. implode(' ) AND ( ', $where_clauses) . ')';
             $GLOBALS['log']->info("MassUpdate Where Clause: {$this->where_clauses}");
         } else {
@@ -1467,7 +1481,7 @@ EOQ;
  			require $searchdefs_file;
  		}
 
-        return isset($searchdefs) ? $searchdefs : array();
+        return $searchdefs ?? array();
     }
 
     protected function getSearchFields($module)

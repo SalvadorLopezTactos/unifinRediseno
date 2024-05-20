@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Tableau de bord de la liste des comptes',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de comptes',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Comptes',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Détails du compte',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Tiroir de rangement Comptes - Console',
     'LBL_NEXT_RENEWAL_DATE' => 'Date du prochain renouvellement',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date du prochain renouvellement',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Nom du compte/Activité',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Emplacement',
     'LBL_PURCHASES' => 'Achats',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Chronologie du compte',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiser',
+    'LBL_CREATE_NEW' => 'Créer un nouveau',
+    'LBL_MANAGE' => 'Gérer',
+    'LBL_SEE_DETAILS' => 'Afficher les détails',
+    'LBL_HIDE_NEW' => 'Masquer',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Graphiques',
@@ -207,4 +214,7 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
 2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Rapports sur les comptes',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Utilisateurs extérieurs',
 );

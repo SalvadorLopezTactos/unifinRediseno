@@ -13,6 +13,10 @@
 
 class ViewHistory extends SugarView
 {
+    /**
+     * @var string|mixed
+     */
+    public $layout;
     var $pageSize = 10 ;
 
     /**
@@ -151,14 +155,14 @@ class ViewHistory extends SugarView
 
         $isDefault = $sid == $this->history->getLast();
         echo "<input type='button' value='" . translate('LBL_BTN_CLOSE') . "' " .
-                "class='button' onclick='ModuleBuilder.tabPanel.removeTab(ModuleBuilder.tabPanel.get(\"activeTab\"));' style='margin:5px;'>" . 
-             "<input type='button' value='" . translate('LBL_MB_RESTORE') . "' " .
-                "class='button' onclick='ModuleBuilder.history.revert("
-            . htmlspecialchars(json_encode($this->module))
-            . ', ' . htmlspecialchars(json_encode($this->layout))
-            . ', ' . htmlspecialchars(json_encode($sid))
-            . ', ' . htmlspecialchars(json_encode($subpanel))
-            . ', ' . htmlspecialchars(json_encode($isDefault))
+            "class='button' onclick='ModuleBuilder.tabPanel.removeTab(ModuleBuilder.tabPanel.get(\"activeTab\"));' style='margin:5px;'>" .
+            "<input type='button' value='" . translate('LBL_MB_RESTORE') . "' " .
+            "class='button' onclick='ModuleBuilder.history.revert("
+            . htmlspecialchars(json_encode($this->module), ENT_COMPAT)
+            . ', ' . htmlspecialchars(json_encode($this->layout), ENT_COMPAT)
+            . ', ' . htmlspecialchars(json_encode($sid), ENT_COMPAT)
+            . ', ' . htmlspecialchars(json_encode($subpanel), ENT_COMPAT)
+            . ', ' . htmlspecialchars(json_encode($isDefault), ENT_COMPAT)
             . ");' style='margin:5px;'>";
         $this->history->restoreByTimestamp ( $sid ) ;
 

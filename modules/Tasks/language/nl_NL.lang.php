@@ -117,4 +117,13 @@ Om een {{module_name}} aan te maken:
  - Klik op "Toon meer" om extra velden te tonen.
 2. Klik op "Opslaan" om het nieuwe record op te slaan en terug te keren naar de voorgaande pagina.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Slimme gids-taak',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Is slimme gids-taak',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Startdatum van slimme gids-activiteit',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Afrondingsdatum van slimme gids-activiteit',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Slimme gids - dagen voor afronding',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Onderliggende afspraken',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Onderliggende gesprekken',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Onderliggende taken',
 );

@@ -59,15 +59,15 @@
         if (this.def.disable_num_format || _.isNull(value)|| _.isUndefined(value) || _.isNaN(value)) {
             return value;
         }
-
-        var number_grouping_separator = app.user.getPreference('number_grouping_separator') || ',';
-        var decimal_separator = app.user.getPreference('decimal_separator') || '.';
+        let numberGroupingSeparator = app.user.getPreference('number_grouping_separator');
+        numberGroupingSeparator = _.isString(numberGroupingSeparator) ? numberGroupingSeparator : ',';
+        let decimalSeparator = app.user.getPreference('decimal_separator') || '.';
 
         if (_.isUndefined(this.def.precision) || !this.def.precision) {
             return app.utils.addNumberSeparators(
                 value.toString(),
-                number_grouping_separator,
-                decimal_separator
+                numberGroupingSeparator,
+                decimalSeparator
             );
         }
 
@@ -75,8 +75,8 @@
             value,
             this.def.precision,
             this.def.precision,
-            number_grouping_separator,
-            decimal_separator
+            numberGroupingSeparator,
+            decimalSeparator
         );
     }
 })

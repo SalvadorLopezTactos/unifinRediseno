@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => '未設置客戶端密碼',
     'LBL_RESEND_BUTTON_LABEL' => '重新寄送',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => '獲取信封',
+    'LBL_CLOUD_SERVICE_TYPE' => '雲服務類型',
+    'LBL_CLOUD_PATH' => '雲路',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign 信封列表儀表板',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => '最近使用的 DocuSign 信封',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign 信封焦點抽屜',
 
-    'LBL_DOCUMENT_FROM' => '文檔來自 ',
+    'LBL_NEW_ENVELOPE' => '新信封',
     'LBL_DOCUMENT_IS_NOW' => ' 是現在 ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign 錯誤。無法獲取基於訪問令牌的帳戶編號',
     'LBL_ERROR_RESEND' => '無法進行 DocuSign 重新發送。信封狀態必須為“已發送”',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => '更新失敗',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign 規則不允許在 15 分鐘內對同一信封發出多個請求',
     'LBL_ERROR_UPDATING_ENVLOPE' => '發生錯誤。無法更新信封。請查看日誌！',
+    'LBL_ERROR_LISTING_TEMPLATES' => '發生錯誤。無法列出模板。請檢查日誌！',
+    'LBL_ERROR_FETCHING_TEMPLATE' => '發生錯誤。無法獲取模板。請檢查日誌！',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => '信封未完成',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'DocuSign 中的信封狀態現在為 ',
     'LBL_OVERVIEW' => '概觀',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => '新增文件',
     'LBL_BUTTON_SEND' => '傳送',
     'LBL_BUTTON_CLEAR' => '清除',
-    'LBL_MISSING_OBJECT' => 'DocuSign 對像不在窗口上',
+    'LBL_BUTTON_SELECT_TEMPLATE' => '使用模板',
     'LBL_PLEASE_LOG_IN' => '請先登錄 DocuSign！',
     'LBL_DOWNLOAD_NOT_ALLOWED' => '您無法下載此文檔。它已由其他用戶創建！',
     'LBL_SEND_NOT_ALLOWED' => '您無法寄出此信封。它已由其他用戶創建！',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => '已簽名',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => '無法下載文檔。請查看日誌！',
     'LBL_DOCUMENT_COMPLETED' => '已完成',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign 情報',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => '是現在',
+    'LBL_SETTINGS_TITLE' => 'DocuSign設置',
+    'LBL_RECIPIENT_SELECTION' => '收件人選擇行為',
+    'LBL_RECIPIENT_NAME' => '名稱',
+    'LBL_RECIPIENT_EMAIL' => '電子郵件',
+    'LBL_RECIPIENT_TYPE' => '類型',
+    'LBL_TEMPLATE_NAME' => '名稱',
+    'LBL_RECIPIENT_SELECT' => '選取...',
+    'LBL_RECIPIENT_ROLE' => '角色',
+    'LBL_SELECT_BUTTON_LABEL' => '選擇',
+    'LBL_BACK_BUTTON_LABEL' => '返回',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => '未能找到潛在的收件人！',
+    'LBL_FAILED_FETCH_TEMPLATES' => '未能獲取模板！',
 ];

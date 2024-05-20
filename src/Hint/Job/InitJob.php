@@ -22,13 +22,13 @@ class InitJob implements \RunnableSchedulerJob
     /**
      * Job name
      */
-    const NAME = 'Hint Init Job';
+    public const NAME = 'Hint Init Job';
 
     /**
      * SchedulersJob job_delay (seconds)
      * @var int
      */
-    const JOB_POSTPONE_TIMEOUT = 5 * 60;
+    public const JOB_POSTPONE_TIMEOUT = 5 * 60;
 
     /**
      * @var \SchedulersJob

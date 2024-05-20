@@ -29,59 +29,84 @@ class SugarUpgradeUpdateDenormalizationStateForAccountNameUpdate extends Upgrade
     public function run()
     {
         $targetVersion = '11.2.0';
+        $targetVersionPurchasedLineItems = '12.2.0';
+        $targetVersionQuotes = '12.2.0';
+        $modules = [];
+        $jobsAdded = [];
         if (version_compare($this->from_version, $targetVersion, '<')) {
             $this->log('Updating denormalization state for Contacts, Opportunities, RLI, Cases');
             $modules = [
-                'Contacts',
-                'Opportunities',
-                'RevenueLineItems',
-                'Cases',
+                'Contacts' => [
+                    'account_name',
+                ],
+                'Opportunities' => [
+                    'account_name',
+                ],
+                'RevenueLineItems' => [
+                    'account_name',
+                ],
+                'Cases' => [
+                    'account_name',
+                ],
             ];
-            $fieldName = 'account_name';
+        }
+        if (version_compare($this->from_version, $targetVersionPurchasedLineItems, '<')) {
+            $modules['PurchasedLineItems'] = [
+                'account_name',
+            ];
+        }
+        if (version_compare($this->from_version, $targetVersionQuotes, '<')) {
+            $modules['Quotes'] = [
+                'billing_account_name',
+            ];
+        }
 
-            $config = new FieldConfig();
-            $hookConfig = new DatabaseConfiguration();
-            $process = new Process();
-            $fields = $config->getList();
+        $config = new FieldConfig();
+        $hookConfig = new DatabaseConfiguration();
+        $process = new Process();
+        $fields = $config->getList();
 
-            // 1. update config format
-            foreach ($fields as $module => $moduleOptions) {
-                $moduleConfig = $hookConfig->getModuleConfiguration($module);
-                if (empty($moduleConfig)) {
-                    $administration = Administration::getSettings('denormalization');
-                    $savedFields = $administration->settings['denormalization_fields'] ?? [];
-                    unset($savedFields[$module]);
-                    $administration->saveSetting('denormalization', 'fields', array_filter($savedFields), 'base');
+        // 1. update config format
+        foreach ($fields as $module => $moduleOptions) {
+            $moduleConfig = $hookConfig->getModuleConfiguration($module);
+            if (empty($moduleConfig)) {
+                $administration = Administration::getSettings('denormalization');
+                $savedFields = $administration->settings['denormalization_fields'] ?? [];
+                unset($savedFields[$module]);
+                $administration->saveSetting('denormalization', 'fields', array_filter($savedFields), 'base');
+                continue;
+            }
+            foreach ($moduleConfig as $fieldName => $fieldConfig) {
+                $bean = BeanFactory::newBean($module);
+                $entity = new Entity($bean, $fieldName);
+                $relationshipName = $entity->relationship->name;
+                if (!empty($fieldConfig[$relationshipName])) {
                     continue;
                 }
-                foreach ($moduleConfig as $fieldName => $fieldConfig) {
-                    $bean = BeanFactory::newBean($module);
-                    $entity = new Entity($bean, $fieldName);
-                    $relationshipName = $entity->relationship->name;
-                    if (!empty($fieldConfig[$relationshipName])) {
-                        continue;
-                    }
-                    $administration = Administration::getSettings('denormalization');
-                    $savedFields = $administration->settings['denormalization_fields'] ?? [];
-                    unset($savedFields[$module][$fieldName]);
-                    $administration->saveSetting('denormalization', 'fields', array_filter($savedFields), 'base');
+                $administration = Administration::getSettings('denormalization');
+                $savedFields = $administration->settings['denormalization_fields'] ?? [];
+                unset($savedFields[$module][$fieldName]);
+                $administration->saveSetting('denormalization', 'fields', array_filter($savedFields), 'base');
 
-                    $hookConfig = new DatabaseConfiguration();
-                    $hookConfig->setFieldConfiguration($module, $fieldName, $relationshipName, $fieldConfig);
-                }
+                $hookConfig = new DatabaseConfiguration();
+                $hookConfig->setFieldConfiguration($module, $fieldName, $relationshipName, $fieldConfig);
             }
+        }
 
-            // 2. Revert previous denormalization changes
-            foreach ($modules as $module) {
+        // 2. Revert previous denormalization changes
+        foreach ($modules as $module => $fieldNames) {
+            foreach ($fieldNames as $fieldName) {
                 $bean = BeanFactory::newBean($module);
                 $entity = new Entity($bean, $fieldName);
                 $process->normalize($entity);
             }
+        }
 
-            // 3. set up denormalization for Contacts, Opportunities, RLI, Cases
-            $jobsAdded = [];
-            $adminUser = BeanFactory::newBean('Users')->getSystemUser();
-            foreach ($modules as $module) {
+        // 3. set up denormalization for Contacts, Opportunities, RLI, Cases
+        $jobsAdded = [];
+        $adminUser = BeanFactory::newBean('Users')->getSystemUser();
+        foreach ($modules as $module => $fieldNames) {
+            foreach ($fieldNames as $fieldName) {
                 $bean = BeanFactory::newBean($module);
                 $def = $bean->getFieldDefinition($fieldName);
                 if (!empty($def['is_denormalized'])) {
@@ -112,20 +137,20 @@ class SugarUpgradeUpdateDenormalizationStateForAccountNameUpdate extends Upgrade
                 $job->save();
                 $jobsAdded[$job->id] = false;
             }
+        }
 
-            if (!empty($jobsAdded)) {
-                /* @var $job SchedulersJob */
-                $job = BeanFactory::newBean('SchedulersJobs');
-                $job->name = 'Upgrade_Denormalization_Watcher';
-                $job->target = 'function::upgradeDenormalizationStateForSugar11';
-                $job->data = json_encode($jobsAdded);
-                $job->retry_count = 0;
-                $job->job_group = 'upgrade_to_' . $targetVersion;
-                $job->assigned_user_id = $adminUser->id;
+        if (!empty($jobsAdded)) {
+            /* @var $job SchedulersJob */
+            $job = BeanFactory::newBean('SchedulersJobs');
+            $job->name = 'Upgrade_Denormalization_Watcher';
+            $job->target = 'function::upgradeDenormalizationStateForSugar11';
+            $job->data = json_encode($jobsAdded);
+            $job->retry_count = 0;
+            $job->job_group = 'upgrade_to_' . $targetVersion;
+            $job->assigned_user_id = $adminUser->id;
 
-                $queue = new SugarJobQueue();
-                $queue->submitJob($job);
-            }
+            $queue = new SugarJobQueue();
+            $queue->submitJob($job);
         }
     }
 }

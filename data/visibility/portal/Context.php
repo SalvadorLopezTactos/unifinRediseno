@@ -14,6 +14,8 @@ namespace Sugarcrm\Sugarcrm\Visibility\Portal;
 
 class Context
 {
+    /** @var string */
+    public $contactId;
     /**
      * @var \SugarBean
      */

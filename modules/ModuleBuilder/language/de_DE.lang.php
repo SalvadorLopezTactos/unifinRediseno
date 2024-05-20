@@ -819,15 +819,12 @@ Neuen Benutzern die Registrierung erlauben',
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Erstellen Sie eine Formel, um festzustellen, ob dieses Feld in Layouts erforderlich ist.<br/>"
-    . "Erforderliche Felder folgen zwar der Formel in der browserbasierten mobilen Ansicht, <br/>"
-    . "jedoch nicht der Formel in nativen Anwendungen wie Sugar Mobile für iPhone. <br/>"
-    . "Sie folgen nicht der Formel im Sugar Self-Service Portal.",
-'LBL_POPHELP_READONLY'=>"Erstellen Sie eine Formel, um festzustellen, ob dieses Feld in Layouts nur Lesezugriff hat.<br/> "
-        . "Felder mit nur Lesezugriff folgen der Formel in der browserbasierten mobilen Ansicht,<br/>"
-        . "jedoch nicht der Formel in nativen Anwendungen wie such Mobile für iPhone. <br/>"
-        . "Sie folgen nicht der Formel im Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Wählen Sie diese Option, um dieses Feld bei der Suche nach Datensätzen über Global Search in diesem Modul zu verwenden.',
+    'LBL_POPHELP_REQUIRED'=>'Felder, die unter bestimmten Bedingungen erforderlich sind, können in den folgenden SugarBPM-Aktionstypen nicht verwendet werden: Bezugsdatensatz hinzufügen, Feld ändern. Bitte löschen Sie den Text "Erforderlich wenn", um dieses Feld in diesen Prozessdefinitionsaktionen zu verwenden',
+'LBL_POPHELP_READONLY'=>"Erstellen Sie eine Formel, um zu bestimmen, ob dieses Feld in Layouts schreibgeschützt ist.<br/>"
+        . "Schreibgeschützte Felder folgen zwar der Formel in der browserbasierten mobilen Ansicht, <br/>"
+        . "jedoch nicht der Formel in nativen Anwendungen wie Sugar Mobile für iPhone. <br/>"
+        . "They will not follow the formula in the Sugar Self-Service Portal.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Aktivieren Sie dieses Feld, wenn Sie in diesem Modul mit der globalen Suche nach Datensätzen suchen.',
 //Revert Module labels
 'LBL_RESET' => 'Zurücksetzen',
 'LBL_RESET_MODULE' => 'Modul zurücksetzen',
@@ -864,6 +861,7 @@ Neuen Benutzern die Registrierung erlauben',
                 'decimal'=>'Dezimalzahl',
                 'autoincrement' => 'Automatisch erhöhen',
                 'actionbutton' => 'Aktionsschaltfläche',
+                'geocodestatus' => 'Geocode-Status',
 ),
 'labelTypes' => array(
     "" => "Häufig verwendete Bezeichnungen",

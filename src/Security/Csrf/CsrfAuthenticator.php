@@ -54,13 +54,13 @@ class CsrfAuthenticator
      * Token id for form based CSRF
      * @var string
      */
-    const FORM_TOKEN_ID = 'session_form';
+    public const FORM_TOKEN_ID = 'session_form';
 
     /**
      * Input field name holding the token for forms
      * @var string
      */
-    const FORM_TOKEN_FIELD = 'csrf_token';
+    public const FORM_TOKEN_FIELD = 'csrf_token';
 
     /**
      * @var CsrfAuthenticator
@@ -118,7 +118,7 @@ class CsrfAuthenticator
             $manager = new CsrfTokenManager($tokenGenerator, $tokenStorage);
             $logger = new LoggerTransition(\LoggerManager::getLogger());
 
-            $class = \SugarAutoLoader::customClass('Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator');
+            $class = \SugarAutoLoader::customClass(\Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator::class);
             static::$instance = new $class($manager, $logger, $config);
         }
         return static::$instance;

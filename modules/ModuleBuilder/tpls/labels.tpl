@@ -25,7 +25,7 @@
     {else}
         <input class='button' name = 'publishBtn' id = "publishBtn" type='button' value='{$mod_strings.LBL_BTN_SAVEPUBLISH}' onclick='ModuleBuilder.handleSave("editlabels" );'>
         <input class='button' name = 'renameModBtn' id = "renameModBtn" type='button' value='{$mod_strings.LBL_BTN_RENAME_MODULE}'
-               onclick='document.location.href = "index.php?action=wizard&module=Studio&wizard=StudioWizard&option=RenameTabs"'>
+               onclick='javascript:parent.SUGAR.App.router.navigate(`Administration/module-names-and-icons`, { trigger: true });'>
     {/if}
     <div style="float: right">
         {html_options name='labels' options=$labels_choice selected=$labels_current onchange='this.form.action.value="EditLabels";ModuleBuilder.handleSave("editlabels")'}
@@ -85,7 +85,6 @@
     {/if}
 </form>
 <script>
-    //ModuleBuilder.helpRegisterByID('editlabels', 'a');
     ModuleBuilder.helpRegister('editlabels');
     ModuleBuilder.helpSetup('labelsHelp','default');
 </script>

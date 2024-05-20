@@ -224,4 +224,10 @@ Om een {{meetings_singular_module}} aan te maken:
 - Klik op "Selecteer een Genodigde" om een gebruiker, contact of lead aan het {{meetings_singular_module}} toe te voegen. 
 - Klik op het plus icoon aan de rechterzijde van "Selecteer een Genodigde" om een {{meetings_singular_module}} genodigde als een nieuwe Sugar record aan te maken.
 3. Klik op "Opslaan" om het nieuwe record af te ronden en terug te keren naar de voorgaande pagina.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Is slimme gids-afspraak',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Onderliggende taken',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Onderliggende gesprekken',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Onderliggende afspraken',
 );

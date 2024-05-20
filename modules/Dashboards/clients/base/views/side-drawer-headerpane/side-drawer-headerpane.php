@@ -39,7 +39,7 @@ $viewdefs['Dashboards']['base']['view']['side-drawer-headerpane'] = [
     "panels" => [
         [
             "name" => "header",
-            'breadcrumbs' => [
+            'tabs' => [
                 [
                     'name' => 'picture',
                     'type' => 'avatar',

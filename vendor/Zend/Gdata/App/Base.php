@@ -297,6 +297,7 @@ abstract class Zend_Gdata_App_Base
      */
     public function transferFromXML($xml)
     {
+        $php_errormsg = null;
         if ($xml) {
             // Load the feed as an XML DOMDocument object
             @ini_set('track_errors', 1);
@@ -477,7 +478,7 @@ abstract class Zend_Gdata_App_Base
         $method = 'get'.ucfirst($name);
         if (method_exists($this, $method)) {
             return call_user_func(array(&$this, $method));
-        } else if (property_exists($this, "_${name}")) {
+        } else if (property_exists($this, "_{$name}")) {
             return $this->{'_' . $name};
         } else {
             require_once 'vendor/Zend/Gdata/App/InvalidArgumentException.php';

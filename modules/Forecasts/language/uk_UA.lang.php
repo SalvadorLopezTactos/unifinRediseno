@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Переглянути історію прогнозу',
     'LBL_FORECAST_HISTORY' => 'Прогнози: Історія',
     'LBL_FORECAST_HISTORY_TITLE' => 'Історія',
+    'LBL_TAB_COMMITMENT' => 'Підтвердження',
+    'LBL_CURRENT' => 'Поточний',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Проміжок часу',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Змінено:',
     'LBL_WK_VERSION' => 'Версія',
     'LBL_WK_REVISION' => 'Редакція',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Для доступу до API показників потрібна версія Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Період:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Ви бажаєте підтвертити це значення?',
     'ERR_FORECAST_AMOUNT' => 'Підтвердження кількості необхідне і повинно бути  цілим числом',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Включена воронка продажів',
+    'LBL_UPSIDE_PIPELINE' => 'Воронка зростання продажів',
+    'LBL_EXCLUDED_PIPELINE' => 'Виключена воронка продажів',
+    'LBL_WON' => 'Успішні',
+    'LBL_LOST' => 'Втрачені',
+    'LBL_ALL' => 'Усі',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Інструкції щодо фільтрів',
+    'LBL_HELP_MAIN_BODY' => 'Усі показники включають лише угоди, що належать вибраним користувачам, за визначений період, а також відповідають іншим застосованим фільтрам',
+    'LBL_FORECAST_HELP' => 'Угоди, які вже успішно закриті або належать до включених {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Відкриті угоди з {{{forecastStage}}} за {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Відкриті угоди у включеному {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Відкриті угоди з {{{forecastStage}}} за {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Відкриті угоди з {{{forecastStage}}} за {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Відкриті угоди у виключеному {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Угоди, які вже закрито',
+    'LBL_LOST_HELP' => 'Угоди, які вже втрачено',
+    'LBL_ALL_HELP' => 'Усі угоди',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Дата початку',
     'LBL_FC_USER' => 'Розклад для',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Підтвердження',
     'LBL_TEAM_COMMITMENT' => 'Підтвердження команди',
     'LBL_FORECASTED' => 'Прогнозовано',
+    'LBL_OPPORTUNITY_FORECAST' => 'Прогноз щодо угод',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Прогноз щодо позиції доходів',
+    'LBL_LAST_COMMITMENT' => 'Останнє підтвердження',
     'LBL_ADJUSTED_TOTAL' => 'Усього скориговано',
     'LBL_COMMIT_STAGE' => 'Підтвердити стадію',
     'LBL_SALES_STAGE' => 'Стадія',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(З урахуванням)',
     'LBL_SAVE_DRAFT' => 'Зберегти',
     'LBL_CHANGES_BY' => 'Змінюється  {0}',
-    'LBL_FORECAST_SETTINGS' => 'Налаштування',
+    'LBL_FORECAST_SETTINGS' => 'Налаштування прогнозу',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Спрогнозувати',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Дата початку фінансового року',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Conﬁgure the Time Period that will be used in the Forecasts module. <br><br>Please note that Time Period settings cannot be changed after initial setup.<br><br>Start by choosing the Start Date of your ﬁscal year. Then choose the type of Time Period for the Forecast. The date range for the Time Periods will be automatically calculated based on your selections. The Sub Time Period is the base for the Forecast worksheet. <br><br>The viewable future and past Time Periods will determine the number of visible sub-periods in the Forecasts module. The users are able to view and edit the Forecast numbers in the visible sub-periods.<br /><br /><br /><br />Налаштуйте часовий діапазон, який буде використовуватися в модулі Прогнозів.<br><br>Будь ласка, зверніть увагу, що параметри  не можуть бути змінені після початкового налаштування.<br><br> Почніть з вибору Дати початку Вашого фінансового року. Потім виберіть тип діапазону, в рамках якого хочете робити прогноз. Діапазон дат для тимчасового діапазону автоматично вирахується на підставі обраного вибору. Додатковий часовий діапазон використовується в якості основи для роботи з листом прогнозів. Можливість перегляду майбутнього і минулого тимчасового діапазону визначить кількість видимих ​​додаткових діапазонів в модулі Прогнозів. Користувачам буде доступний перегляд і редагування даних прогнозу в рамках відомого тимчасового діапазону',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Налаштуйте бажаний спосіб категоризації {{forecastByModule}}. <br><br>Візьміть до уваги, що налаштування параметра "Діапазон" неможливо змінити після їх підтвердження. В оновлених екземплярах параметр "Діапазон" заблоковано в наявних даних у розділі "Прогноз".<br><br>Ви можете вибрати дві або більше категорій на основі діапазонів імовірностей або створити категорії, які не ґрунтуються на ймовірності.<br><br>Ліворуч від ваших користувацьких категорій є поля з прапорцями. Використовуючи їх, виберіть діапазони, які буде включено в підтверджену прогнозовану кількість і про які буде повідомлено керівникам.<br><br>Користувач може змінити статус включення/виключення та категорію {{forecastByModule}} вручну у своїх таблицях.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Налаштуйте спосіб розподілу {{forecastByModule}} за категоріями. <br><br>Зверніть увагу, що налаштування діапазону неможливо змінити після першого підтвердження. Для оновлених екземплярів у заблокованому налаштуванні діапазону використовуються наявні дані прогнозу.<br><br>Можна вибрати дві або декілька категорій залежно від діапазонів імовірності або створити категорії, які не ґрунтуються на ймовірності. <br><br>Ліворуч від користувацьких категорій є прапорці, які можна використати для визначення діапазонів, що будуть включені в обсяг підтвердження прогнозу й повідомлені менеджерам. <br><br>Користувач може змінити статус включення/виключення й категорію {{forecastByModule}} вручну зі свого робочого аркуша.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Виберіть колонки, які будуть потрібні користувачеві для заповнення при складанні прогнозів {{forecastByModuleSingular}}. Зауважте, ймовірна сума прив&#39;язана до суми, показаної в {{forecastByModule}}; з цієї причини колонка зі значенням ймовірної суми не може бути прихована.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Виберіть колонки для перегляду в модулі прогнозів. Перелік полів буде містити лист прогнозів і дозволить користувачеві вибрати те, яким чином налаштувати його вид / перегляд.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Вказівник місця заповнення в модулі Прогнозів для тексту пошуку довідки',

@@ -27,13 +27,13 @@ $GLOBALS['log']->info('Team Notice edit view');
 $params = array();
 $params[] = sprintf(
     '<a href="index.php?action=index&module=TeamNotices">%s</a>',
-    htmlspecialchars($mod_strings['LBL_MODULE_NAME'])
+    htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT)
 );
 if (empty($focus->id)) {
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL']);
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'], ENT_COMPAT);
 } else {
-    $params[] = htmlspecialchars($focus->name);
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL']);
+    $params[] = htmlspecialchars($focus->name, ENT_COMPAT);
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL'], ENT_COMPAT);
 }
 
 $xtpl = new XTemplate('modules/TeamNotices/EditView.html');

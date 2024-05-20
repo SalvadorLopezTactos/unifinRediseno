@@ -18,6 +18,9 @@ use Sugarcrm\Sugarcrm\SugarConnect\Configuration\ConfigurationAwareInterface;
 use Sugarcrm\Sugarcrm\SugarConnect\Configuration\ConfigurationAwareTrait;
 use Sugarcrm\Sugarcrm\SugarConnect\Configuration\Locator;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 final class Handler implements Publisher, ConfigurationAwareInterface
 {
     use ConfigurationAwareTrait;

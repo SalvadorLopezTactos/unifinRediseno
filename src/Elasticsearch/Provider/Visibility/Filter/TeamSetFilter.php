@@ -87,7 +87,7 @@ class TeamSetFilter implements FilterInterface
             group by tst.team_set_id';
             /** @var Result $stmt */
             $stmt = $GLOBALS['db']->getConnection()->executeQuery($sql, [$user->id]);
-            $results = $stmt->fetchFirstColumn();
+            $results = $stmt->iterateColumn();
             //Initialize with Global team set id by default
             $newResults = array('1');
             foreach ($results as $result) {

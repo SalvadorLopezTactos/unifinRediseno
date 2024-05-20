@@ -14,8 +14,8 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Cases List Dashboard',
     'LBL_CASES_RECORD_DASHBOARD' => 'Cases Record Dashboard',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Case Details',
-    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Cases Focus Drawer',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Cases Focus Dashboard - Console',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Cases Focus Dashboard',
 
 	'ERR_DELETE_RECORD'					=> 'You must specify a record number to delete the Account.',
 	'LBL_ACCOUNT_ID'					=> 'Account ID',
@@ -162,4 +162,29 @@ To create a {{module_name}}:
     'LBL_SLA_DETAILS' => 'SLA Details',
     'LBL_HOURS' => 'Hours',
     'LBL_WIDGET_STATUS' => 'Status *',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organize',
+    'LBL_CREATE_NEW' => 'Create New',
+    'LBL_MANAGE' => 'Manage',
+    'LBL_SEE_DETAILS' => 'View Details',
+    'LBL_HIDE_NEW' => 'Hide',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Cases',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Case',
+    'LBL_KIOSK_CREATE' => 'Create Case',
+    'LBL_KIOSK_SUBJECT' => 'Subject',
+    'LBL_KIOSK_CASE_ID' => 'Case ID',
+    'LBL_KIOSK_STATUS' => 'Status',
+    'LBL_KIOSK_CATEGORY' => 'Category',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Submitted on {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Priority',
+    'LBL_KIOSK_CREATE_CASE' => 'Contact Us',
+    'LBL_KIOSK_DESCRIPTION' => 'Description',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Your request was successfully submitted.',
+    'LBL_KIOSK_ATTACHED' => 'All Attached',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'External Users',
 );

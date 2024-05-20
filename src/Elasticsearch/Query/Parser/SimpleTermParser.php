@@ -20,7 +20,7 @@ namespace Sugarcrm\Sugarcrm\Elasticsearch\Query\Parser;
 class SimpleTermParser implements ParserInterface
 {
     // tokenizer is using 1, 15 ngram, make sure the length of term is less than 15
-    const MAX_TERM_SIZE = 15;
+    public const MAX_TERM_SIZE = 15;
 
     protected $defaultOperator;
     protected $useShortcutOperator = false;

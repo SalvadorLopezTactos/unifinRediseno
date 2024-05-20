@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Aruande graafikute kirjete töölaud',
     'LBL_FILE_TYPE' => 'Faili tüüp (tüübid)',
+    'LBL_EMBED_REPORT' => 'Manusta aruanne e-kirja',
+    'LBL_EMBED_REPORT_INFO' => 'Märkus: kui aruanne ületab 200 rida, manustame aruande CSV-failina.',
 );

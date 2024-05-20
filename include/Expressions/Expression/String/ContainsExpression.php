@@ -25,7 +25,7 @@ class ContainsExpression extends BooleanExpression {
 		$haystack = $params[0]->evaluate();
 		$needle	  = $params[1]->evaluate();
 
-        if ((string)$needle === '' || strpos($haystack, (string) $needle) === false) {
+        if ((string)$needle === '' || strpos($haystack, $needle) === false) {
             return AbstractExpression::$FALSE;
         } else {
             return AbstractExpression::$TRUE;

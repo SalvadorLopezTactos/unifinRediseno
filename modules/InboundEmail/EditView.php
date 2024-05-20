@@ -171,24 +171,24 @@ if(!empty($focus->stored_options)) {
 	$from_name = $storedOptions['from_name'];
 	$from_addr = $storedOptions['from_addr'];
 
-	$reply_to_name = (isset($storedOptions['reply_to_name'])) ? $storedOptions['reply_to_name'] : "";
-	$reply_to_addr = (isset($storedOptions['reply_to_addr'])) ? $storedOptions['reply_to_addr'] : "";
+    $reply_to_name = $storedOptions['reply_to_name'] ?? "";
+    $reply_to_addr = $storedOptions['reply_to_addr'] ?? "";
 
-	$trashFolder = (isset($storedOptions['trashFolder'])) ? $storedOptions['trashFolder'] : "";
-	$sentFolder = (isset($storedOptions['sentFolder'])) ? $storedOptions['sentFolder'] : "";
-	$distrib_method = (isset($storedOptions['distrib_method'])) ? $storedOptions['distrib_method'] : "";
-	$create_case_email_template = (isset($storedOptions['create_case_email_template'])) ? $storedOptions['create_case_email_template'] : "";
-	$email_num_autoreplies_24_hours = (isset($storedOptions['email_num_autoreplies_24_hours'])) ? $storedOptions['email_num_autoreplies_24_hours'] : $focus->defaultEmailNumAutoreplies24Hours;
+    $trashFolder = $storedOptions['trashFolder'] ?? "";
+    $sentFolder = $storedOptions['sentFolder'] ?? "";
+    $distrib_method = $storedOptions['distrib_method'] ?? "";
+    $create_case_email_template = $storedOptions['create_case_email_template'] ?? "";
+    $email_num_autoreplies_24_hours = $storedOptions['email_num_autoreplies_24_hours'] ?? $focus->defaultEmailNumAutoreplies24Hours;
 
 	if($storedOptions['only_since']) {
 		$only_since = 'CHECKED';
 	} else {
 		$only_since = '';
 	}
-	if(isset($storedOptions['filter_domain']) && !empty($storedOptions['filter_domain'])) {
-		$filterDomain = $storedOptions['filter_domain'];
+    if (isset($storedOptions['filter_domains']) && !empty($storedOptions['filter_domains'])) {
+        $filterDomains = $storedOptions['filter_domains'];
 	} else {
-		$filterDomain = '';
+        $filterDomains = '';
 	}
 	if(!isset($storedOptions['leaveMessagesOnMailServer']) || $storedOptions['leaveMessagesOnMailServer'] == 1) {
 		$leaveMessagesOnMailServer = 1;
@@ -201,7 +201,7 @@ if(!empty($focus->stored_options)) {
 	$reply_to_name = '';
 	$reply_to_addr = '';
 	$only_since = '';
-	$filterDomain = '';
+    $filterDomains = '';
 	$trashFolder = '';
 	$sentFolder = '';
 	$distrib_method ='';
@@ -274,7 +274,7 @@ $xtpl->assign('NAME', $focus->name);
 $xtpl->assign('STATUS', $status);
 $xtpl->assign('SERVER_URL', $focus->server_url);
 $xtpl->assign('USER', $focus->email_user);
-$xtpl->assign('ORIGIN_ID', isset($origin_id)?$origin_id:'');
+$xtpl->assign('ORIGIN_ID', $origin_id ?? '');
 // Don't send password back
 $xtpl->assign('HAS_PASSWORD', empty($focus->email_password)?0:1);
 $xtpl->assign('TRASHFOLDER', $trashFolder);
@@ -297,7 +297,7 @@ $xtpl->assign('MAILBOX_TYPE', htmlspecialchars($focus->mailbox_type, ENT_COMPAT,
 $xtpl->assign('TEMPLATE_ID', $focus->template_id);
 $xtpl->assign('EMAIL_TEMPLATE_OPTIONS', get_select_options_with_id($email_templates_arr, $focus->template_id));
 $xtpl->assign('ONLY_SINCE', $only_since);
-$xtpl->assign('FILTER_DOMAIN', $filterDomain);
+$xtpl->assign('FILTER_DOMAINS', $filterDomains);
 $xtpl->assign('EMAIL_NUM_AUTOREPLIES_24_HOURS', $email_num_autoreplies_24_hours);
 if(!empty($focus->port)) {
 	$xtpl->assign('PORT', $focus->port);
@@ -446,7 +446,7 @@ $tipsStrings = array(
     'LBL_CREATE_CASE_HELP',
     'LBL_CREATE_CASE_REPLY_TEMPLATE_HELP',
     'LBL_AUTOREPLY_HELP',
-    'LBL_FILTER_DOMAIN_DESC',
+    'LBL_FILTER_DOMAINS_DESC',
     'LBL_MAX_AUTO_REPLIES_DESC',
 );
 $smarty = null;

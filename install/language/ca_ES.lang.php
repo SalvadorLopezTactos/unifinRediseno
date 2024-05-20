@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Per a una òptima experiència d&#39;ús de IIS/FastCGI sapi, estableixi fastcgi.logging a 0 en el seu arxiu php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versió de PHP Instalada No Suportada: ( veure',
     'LBL_DB_UNAVAILABLE'                => 'Base de dades no disponible',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No s\'ha trobat el Suport de la base de dades. Assegureu-vos de tenir els controladors necessaris per a un dels següents tipus de bases de dades compatibles: MySQL, MS SQLServer, Oracle o DB2. Potser heu d\'eliminar el comentari de l\'extensió del fitxer php.ini, o tornar a compilar amb el fitxer binari correcte, en funció de la vostra versió de PHP. Consulteu el vostre Manual de PHP per obtenir-ne més informació de com habilitar el Suport de la base de dades.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No s\'ha trobat el suport de la base de dades. Assegureu-vos que teniu els controladors necessaris per a un dels següents tipus de bases de dades compatibles: MySQL, MS SQLServer, Oracle o DB2. És possible que hàgiu de descommentar l\'extensió al fitxer php.ini o recompilar-lo amb el fitxer binari adequat, segons la vostra versió de PHP. Consulteu el vostre manual de PHP per obtenir més informació sobre com habilitar el suport de base de dades.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Les funcions associades amb les Biblioteques d´Anàlisi de l´XML que són requerides per l´aplicació Sugar no han estat trobades. És possible que hagi de descomentar l´extensió a l´arxiu php.ini, o recompilar-lo amb l´arxiu binari apropiat, depenent de la versió de PHP. Si us plau, consulti el manual de PHP per a més informació.',
     'LBL_CHECKSYS_CSPRNG' => 'Generador de nombres aleatoris',
     'ERR_CHECKSYS_MBSTRING'             => 'Les funcions associades amb l´extensió de PHP per a Cadenes Multibyte (mbstring) que són requerides per l´aplicació Sugar no han estat trobades. <br/><br/> Normalment, el mòdul mbstring no està habilitat per defecte en PHP i ha de ser activat amb --enable-mbstring en la compilació de PHP. Si us plau, consulti el manual de PHP per a més informació sobre com habilitar el suport de mbstring.',
@@ -561,32 +561,15 @@ Rebutja aquesta trucada
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Correus electrònics de notificació d\'assignacions',
-        'subject' => 'SugarCRM - $module_name assignat ',
-        'description' => 'Aquesta plantilla s\'utilitza quan el sistema envia notificacions d\'assignació de tasques a un usuari.',
-        'body' => '<div>
-<p>$assigned_by_user ha assignat un&nbsp;$module_name a&nbsp;$assigned_user.</p>
-
-<p>Podeu revisar aquest&nbsp;$module_name en:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user ha assignat un $module_name a $assigned_user.
-
-Podeu revisar aquest $module_name en:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Correus electrònics d\'informes programats',
         'subject' => 'Informe programat: $report_name a les $report_time',
         'description' => 'Aquesta plantilla s\'utilitza quan el sistema envia notificacions d\'un informe programat a un usuari.',
         'body' => '<div>
-<p>Hola $assigned_user:</p>
-<p>S\'adjunta un informe generat automàticament que s\'ha programat per a vós.</p>
-<p>Nom de l\'informe: $report_name</p>
-<p>Data i hora d\'execució de l\'informe: $report_time</p>
+<p>Hola $assigned_user,<br></p>
+<p>S\'ha adjuntat un informe generat automàticament que s\'ha programat per a vostès.<br></p>
+<p>Nom de l\'informe: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Data i hora d\'execució de l\'informe: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Hola $assigned_user:
@@ -612,20 +595,6 @@ Data i hora d\'execució de l\'informe: $report_time',
             Inicieu la vostra sessió a Sugar per visualitzar el comentari.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informació nova del compte',
-        'description' => 'Aquesta plantilla s&#39;utilitza quan l&#39;administrador del sistema envia una nova contrasenya a un usuari.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Aquí tens el teu nom d&#39;usuari i contrasenya temporal:</p><p>Usuari : $contact_user_user_name </p><p>Contrasenya : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Després d&#39;iniciar sessió amb la contrasenya anterior, vostè pot ser requerit per restablir la contrasenya a un de la seva pròpia elecció.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'Aquí tens el teu nom d&#39;usuari i contrasenya temporal:
-Usuari : $contact_user_user_name
-Contrasenya : $contact_user_user_hash
-
-$config_site_url
-
-Després d&#39;iniciar sessió amb la contrasenya anterior, vostè pot ser requerit per restablir la contrasenya a un de la seva pròpia elecció.',
-        'name' => 'Correu electrònic de generació de contrasenya pel sistema',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Restablir contrasenya del seu compte',
         'description' => "Aquesta plantilla s&#39;utilitza per enviar un usuari faci clic a un enllaç per restablir la contrasenya del compte de l&#39;usuari.",

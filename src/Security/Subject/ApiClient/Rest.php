@@ -22,6 +22,7 @@ final class Rest implements ApiClient
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

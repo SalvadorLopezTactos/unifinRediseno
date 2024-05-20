@@ -156,7 +156,10 @@ Studio2 = {
                 }
             }
             if (has_tab == true) {
-                document.getElementById('le_paneltype_select_' + Studio2.firstPanelIdCount).disabled = true;
+                let el = document.getElementById(`le_paneltype_select_${Studio2.firstPanelIdCount}`);
+                if (el) {
+                    el.disabled = true;
+                }
             }
         }
 	},

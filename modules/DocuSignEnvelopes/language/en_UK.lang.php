@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'No client secret set',
     'LBL_RESEND_BUTTON_LABEL' => 'Resend',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Fetch envelope',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Cloud service type',
+    'LBL_CLOUD_PATH' => 'Cloud path',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign Envelopes List Dashboard',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Recent DocuSign Envelopes',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign Envelopes Focus Drawer',
 
-    'LBL_DOCUMENT_FROM' => 'Document from ',
+    'LBL_NEW_ENVELOPE' => 'New Envelope',
     'LBL_DOCUMENT_IS_NOW' => ' is now ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign error. Could not get account id based on access token',
     'LBL_ERROR_RESEND' => 'DocuSign resend could not be made. Envelope status must be &#39;sent&#39;',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Update failed',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign rules do not allow multiple requests to the same envelope within 15 minutes',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'An error happened. Envelope could not be updated. Please check logs!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'An error happened. Could not list templates. Please check logs!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'An error happened. Could not fetch template. Please check logs!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Envelope not completed',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Envelope status in DocuSign is now ',
     'LBL_OVERVIEW' => 'Overview',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Add Document',
     'LBL_BUTTON_SEND' => 'Send',
     'LBL_BUTTON_CLEAR' => 'Clear',
-    'LBL_MISSING_OBJECT' => 'DocuSign object is not on window',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Use template',
     'LBL_PLEASE_LOG_IN' => 'Please log in to DocuSign first!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'You can not download this document. It has been created by another user!',
     'LBL_SEND_NOT_ALLOWED' => 'You cannot send this envelope. It has been created by another user!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Signed',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Could not download the document. Please check logs!',
     'LBL_DOCUMENT_COMPLETED' => 'Completed',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign Info',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'is now',
+    'LBL_SETTINGS_TITLE' => 'DocuSign Settings',
+    'LBL_RECIPIENT_SELECTION' => 'Recipient selection behaviour',
+    'LBL_RECIPIENT_NAME' => 'Name',
+    'LBL_RECIPIENT_EMAIL' => 'Email',
+    'LBL_RECIPIENT_TYPE' => 'Type',
+    'LBL_TEMPLATE_NAME' => 'Name',
+    'LBL_RECIPIENT_SELECT' => 'Select...',
+    'LBL_RECIPIENT_ROLE' => 'Role',
+    'LBL_SELECT_BUTTON_LABEL' => 'Select',
+    'LBL_BACK_BUTTON_LABEL' => 'Back',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Failed to fetch potential recipients!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Failed to fetch templates!',
 ];

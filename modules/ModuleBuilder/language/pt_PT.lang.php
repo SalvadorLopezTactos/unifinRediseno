@@ -820,15 +820,12 @@ Se as Oportunidades estiverem Incluídas, as Contas devem ser obrigatórias ou r
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Criar uma fórmula para determinar se este campo é obrigatório em layouts.<br/>"
-    . "Os campos obrigatórios irão seguir a fórmula na vista móvel baseada em navegador, <br/>"
-    . "mas não irão seguir a fórmula nas aplicações nativas, como o Sugar Mobile para iPhone. <br/>"
-    . "Não irão seguir a fórmula no Portal de Self-Service da Sugar.",
-'LBL_POPHELP_READONLY'=>"Criar uma fórmula para determinar se este campo é apenas de leituta em layouts.<br/>"
-        . "Os campos de apenas leitura irão seguir a fórmula na vista móvel baseada em navegador, <br/>"
+    'LBL_POPHELP_REQUIRED'=>'Os campos condicionalmente obrigatórios não estão disponíveis para utilizar nos seguintes tipos de acção do SugarBPM: Adicionar Registo Relacionado e Alterar Campo. Remova o texto "Obrigatório se" para usar este campo nestas acções de definição de processo',
+'LBL_POPHELP_READONLY'=>"Criar uma fórmula para determinar se este campo é somente de leitura em layouts.<br/>"
+        . "Os campos somente de leitura irão seguir a fórmula na visualização móvel baseada em navegador, <br/>"
         . "mas não irão seguir a fórmula nas aplicações nativas, como o Sugar Mobile para iPhone. <br/>"
         . "Não irão seguir a fórmula no Portal de Self-Service da Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccione para utilizar este campo ao pesquisar registos usando a Pesquisa Global neste módulo.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccione para usar este campo ao pesquisar registos usando a Pesquisa Global neste módulo.',
 //Revert Module labels
 'LBL_RESET' => 'Reiniciar',
 'LBL_RESET_MODULE' => 'Reiniciar Módulo',
@@ -865,6 +862,7 @@ Se as Oportunidades estiverem Incluídas, as Contas devem ser obrigatórias ou r
                 'decimal'=>'Decimal',
                 'autoincrement' => 'Incremento automático',
                 'actionbutton' => 'Botão de Acção',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Rótulos usados frequentemente",

@@ -358,7 +358,7 @@ YAHOO.util.Event.onDOMReady(function(){
             return;
         }
         if (data.result) {
-            if (!data.hasRefreshToken) {
+            if (!data.hasRefreshToken && !data.hasFreshAccessToken) {
                 alert("The application is unable to work in offline mode. Please sign out and sign in again.");
             }
             $.get("index.php?module=Import&action=AuthenticatedSources", function(sources) {

@@ -10,12 +10,27 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<a class="actionLink megamenu-dropdown-item" data-module="{{def.module}}" data-layout="{{def.layout}}"
-   {{#if def.href}}href="{{def.href}}"{{else}}data-event="true" href="javascript:void(0);"{{/if}}
-   track="click:quickCreate-{{def.module}}" tabindex="-1"
->
-    {{#if def.icon}}
-        <i class="{{buildIcon def.icon}}"></i>
-    {{/if}}
-    {{label}}
-</a>
+{{#if def.href}}
+    <a class="actionLink ellipsis_inline megamenu-dropdown-item py-2 px-3 flex flex-row items-center text-xs text-default hover:bg-dropdown-link-background-hover"
+        data-module="{{def.module}}"
+        data-layout="{{def.layout}}"
+        href="{{def.href}}"
+        track="click:quickCreate-{{def.module}}"
+    >
+{{else}}
+    <button class="actionLink megamenu-dropdown-item w-full bg-transparent py-2 px-3 flex flex-row items-center text-xs text-default hover:bg-dropdown-link-background-hover"
+        data-module="{{def.module}}"
+        data-layout="{{def.layout}}"
+        data-event="true"
+        track="click:quickCreate-{{def.module}}"
+    >
+{{/if}}
+
+{{#if def.icon}}
+    <i class="{{buildIcon def.icon}} mr-2"></i>
+{{/if}}
+    <span class="ellipsis_inline" data-placement="bottom" title="{{str label def.module}}">
+        {{label}}
+    </span>
+
+{{#if def.href}}</a>{{else}}</button>{{/if}}

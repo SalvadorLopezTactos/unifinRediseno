@@ -90,7 +90,7 @@ $last_name_array = $sugar_demodata['last_name_array'];
 $last_name_max = $last_name_count - 1;
 	
 	$category = new ProductCategory();
-    $category->name = $last_name_array[random_int(0, $last_name_max)] .$sugar_demodata['category_ext_name'];
+    $category->name = $last_name_array[random_int(0, $last_name_max)] . $sugar_demodata['category_ext_name'];
 	$category->parent_id = $parent_id;
     $key = array_rand($sugar_demodata['users']);
     $category->assigned_user_id = $sugar_demodata['users'][$key]['id'];

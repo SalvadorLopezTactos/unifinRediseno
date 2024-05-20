@@ -117,4 +117,13 @@ $mod_strings = array (
  - Щоб переглянути додаткові поля, натисніть "Показати більше".
 2. Натисніть кнопку "Зберегти", щоб завершити створення нового запису й повернутися до попередньої сторінки.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Завдання Smart Guide',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Є завданням Smart Guide',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Дата початку активності Smart Guide',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Дата завершення активності Smart Guide',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Smart Guide — Кількість днів до завершення',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Дочірні зустрічі',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Дочірні виклики',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Дочірні завдання',
 );

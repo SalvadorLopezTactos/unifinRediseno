@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'模板？：',
     'LBL_DET_TEMPLATE_TYPE'=>'文档类型：',
     'LBL_TEAM'=> '团队:',
+    'LBL_IS_SHARED' => '外部可用：',
     'LBL_DOC_DESCRIPTION'=>'说明:',
     'LBL_DOC_ACTIVE_DATE'=> '发布日期：',
     'LBL_DOC_EXP_DATE'=> '失效日期：',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => '发送到 DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => '同步到谷歌云端硬盘',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => '全部同步到谷歌云端硬盘',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => '全部同步到 OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => '同步到 OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => '全部同步到 Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => '同步到 Dropbox',
 );

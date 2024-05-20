@@ -92,6 +92,7 @@ $mod_strings = array (
     'ERR_UW_PACKAGE_NEWER_VERSION_EXISTS'       => 'Υπάρχει νεώτερη έκδοση του πακέτου: {0}, καταργήστε την προηγούμενη προτού προσπαθήσετε να ανεβάσετε νέα.',
     'ERR_UW_PACKAGE_ALREADY_INSTALLED'          => 'Το πακέτο εγκαταστάθηκε.',
     'ERR_UW_PACKAGE_NOT_INSTALLED'              => 'Το πακέτο δεν έχει εγκατασταθεί.',
+    'ERR_UW_PACKAGE_INSTALLED_WITH_ERROR'       => 'Η εγκατάσταση του πακέτου είχε ως συνέπεια λάθος. Οι αλλαγέες διατηρούνται',
     'ERR_UW_PACKAGE_IS_UNINSTALLABLE'           => 'Το πακέτο δεν μπορεί να απεγκατασταθεί.',
     'ERR_UW_PACKAGE_ALREADY_ENABLED'            => 'Το πακέτο ενεργοποιήθηκε.',
     'ERR_UW_PACKAGE_ALREADY_DISABLED'           => 'Το πακέτο απενεργοποιήθηκε.',
@@ -130,7 +131,12 @@ $mod_strings = array (
     'LBL_ADMIN_WIZARD' => 'Εύκολη εγκατάσταση του συστήματος SugarCRM',
     'LBL_ADMINISTRATION_HOME_TITLE' => 'Σύστημα',
     'LBL_ADMINISTRATION_HOME_DESC' =>'Διαμορφώστε τις ρυθμίσεις στο ευρύ-σύστημα σύμφωνα με τις προδιαγραφές του οργανισμού σας. Οι χειριστές μπορούν να αλλάξουν κάποιες από τις τοπικές προεπιλεγμένες ρυθμίσεις μέσα στην σελίδα ρυθμίσεων του χρήστη.',
-    'LBL_ALLOW_USER_TABS' => 'Επιτρέπεται στους χρήστες να επιλέγουν ενότητες να εμφανίζονται στην μπάρα πλοήγησης',
+    'LBL_ALLOW_USERS_PINNED_MODULES' => 'Να επιτρέπεται στους χρήστες να ορίζουν αριθμούς καρφιτσωμένων ενοτήτων',
+    'LBL_ALLOW_USERS_AVAILABLE_MODULES' => 'Να επιτρέπεται στους χρήστες να επιλέγουν από διαθέσιμες ενότητες',
+    'LBL_NUMBER_PINNED_MODULES' => 'Αριθμός καρφιτσωμένων ενοτήτων',
+    'LBL_NUMBER_PINNED_MODULES_TOOLTIP' => 'Προτείνουμε ρύθμιση του παρόντος σε ρεαλιστικό αριθμό των πιο συχνά ' .
+        'χρησιμοποιούμενων ενοτήτων, καθώς είναι πιθανό ένας μεγάλος αριθμός να μην είναι ορατός στα περισσότερα μεγέθη προγραμμάτων περιήγησης. Τιμές άνω του ' .
+        '100 δεν θα γίνουν σεβαστές',
     'LBL_ALREADY_RUNNING'                  => 'Αυτός ο διακομιστής τρέχει ως Offline Client.',
     'LBL_APPLY_DST_FIX_DESC' => 'Αυτό το υποχρεωτικό βήμα θα ενημερώσει τον χρόνο διαχείρισης της λειτουργικότητας (MYSQL ONLY).',
     'LBL_APPLY_DST_FIX' => 'Εφαρμόστε τη Θερινή Ώρα',
@@ -145,7 +151,7 @@ $mod_strings = array (
     'LBL_IMPORT_METADATA_BUTTON_TITLE' => 'Εισαγωγή Αρχείου Μετα-δεδομένων IdP',
     'LBL_IMPORT_METADATA_BUTTON_LABEL' => 'Εισαγωγή Αρχείου Μετα-δεδομένων IdP',
     'LBL_CAT_VIEW'            => 'Κατηγορίες',
-    'LBL_CHANGE_NAME_MODULES'=>'Αλλάξτε τα ονόματα των ενοτήτων που εμφανίζονται μέσα από την εφαρμογή',
+    'LBL_CHANGE_NAME_MODULES'=> 'Αλλάξτε τα ονόματα των ενοτήτων που εμφανίζονται μέσα από την εφαρμογή',
     'LBL_CHECK_FOR_UPDATES'  => 'Έλεγχος για Ενημερώσεις',
     'LBL_CHECK_NOW_LABEL' =>'Έλεγχος Τώρα',
     'LBL_CHECK_NOW_TITLE' =>'Έλεγχος Τώρα',
@@ -171,17 +177,20 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'Αφαιρεί το εναποθηκευμένο αρχείο που χρησιμοποιείται για να αποθηκεύσει τα δεδομένα γραμματοσειρών PDF.',
     'LBL_CONFIG_CHECK' =>'Το αρχείο παραμέτρων ελέχθηκε',
     'LBL_CONFIG_FTS' => 'Διαμόρφωση Πλήρης Κειμένου Μηχανής Αναζήτησης',
-    'LBL_CONFIG_TABS'=>'Εμφάνιση Ενοτήτων και ΥποΠινάκων',
-	'LBL_CONFIG_TABS_DESC'=>'Μεταφορά και απόθεση των παρακάτω ονομάτων των ενοτήτων, για να τα ρυθμίσετε να εμφανίζονται ή να κρύβονται στην επάνω γραμμή πλοήγησης ή ως υποπίνακες. Για να ελέγξει την πρόσβαση στις ενότητες, χρησιμοποιείστε<a href="?module=ACLRoles&action=index">Διαχείριση Ρόλου.</a>',
-	'LBL_CONFIG_LANGS_DESC'=>'Μεταφορά και απόθεση των ονομάτων των παρακάτω γλωσσών για να τα ενεργοποιήσετε και να τα απενεργοποιήσετε.',
-	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'Επιλέξτε αυτή την επιλογή για να επιτρέψετε στους χρήστες να επιλέξουν ποιά καρτέλα ενότητας μπορούν να βλέπουν.  Όταν επιλεγεί, οι χρήστες θα έχουν τη δυνατότητα να επιλέγουν ποιες καρτέλες ενότητας είναι ορατές με τη διαχείριση των καρτελών μέσα στις "Ρυθμίσεις Χρήστη".',
-	'LBL_CONFIGURATOR_DESC'=>'Εγκατάσταση Config.php',
+    'LBL_CONFIG_TABS'=>'Γραμμή πλοήγησης και υποπίνακες',
+    'LBL_CONFIG_TABS_DESC_BRIEFLY'=>'Επιλέξτε ποιες ενότητες είναι διαθέσιμες στους χρήστες στη γραμμή πλοήγησης και ως υποπίνακες. Για να ελέγχετε την πρόσβαση των χρηστών στις ενότητες, χρησιμοποιήστε τη <a href="?module=ACLRoles&action=index">Διαχείριση ρόλων.</a>',
+    'LBL_CONFIG_TABS_DESC_DETAILED'=>'Σύρετε και αποθέστε ενότητες για να τις ορίσετε ως διαθέσιμες στη γραμμή πλοήγησης ή κρυμμένες. <br>
+        Το πεδίο Αριθμός καρφιτσωμένων ενοτήτων καθορίζει πόσες από τις διαθέσιμες ενότητες εμφανίζονται όταν η γραμμή
+        πλοήγησης είναι συμπτυγμένη (π.χ. αν καταχωριστεί ο αριθμός 5, οι πρώτες πέντε ενότητες στη λίστα σας είναι καρφιτσωμένες). Όταν τα πεδία πλαισίου
+        ελέγχου ενεργοποιούνται, οι χρήστες μπορούν να τροποποιήσουν τις ρυθμίσεις της γραμμής πλοήγησης μέσω του Προφίλ χρήστη.',
+    'LBL_CONFIG_LANGS_DESC'=>'Μεταφορά και απόθεση των ονομάτων των παρακάτω γλωσσών για να τα ενεργοποιήσετε και να τα απενεργοποιήσετε.',
+    'LBL_CONFIGURATOR_DESC'=>'Εγκατάσταση Config.php',
     'LBL_CONFIGURATOR_TITLE'=>'Διαμόρφωση',
     'LBL_CONFIGURE_GROUP_TABS_DESC' => 'Δημιουργία και επεξεργασία φίλτρων μενού ενότητας',
     'LBL_CONFIGURE_GROUP_TABS' => 'Διαμόρφωση Φίλτρων Μενού Ενότητας',
     'LBL_CONFIGURE_SETTINGS_TITLE' => 'Διαμόρφωση Παραμέτρων',
     'LBL_CONFIGURE_SETTINGS' => 'Διαμόρφωση Γενικών Παραμέτρων Συστήματος',
-    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Εμφάνιση Ενοτήτων και Υποπινάκων',
+    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Γραμμή πλοήγησης και υποπίνακες',
     'LBL_CONFIGURE_UPDATER'=>'Παραμετροποίηση Αναβαθμίσεων Εφαρμογής Sugar',
     'LBL_CONTRACT_TITLE'=>'Συμβάσεις',
     'LBL_CONTRACT_DESC'=>'Ορίστε τους τύπους των συμβάσεων για την ενότητα Συμβάσεων. Όταν οι χρήστες δημιουργούν μία σύμβαση, οι Τύποι εμφανίζονται στο αναδυόμενο μενού των συμβάσεων για επιλογή.',
@@ -226,6 +235,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_GETMYSQLTS' => 'Σχήμα Βάσης Δεδομένων',
     'LBL_DIAGNOSTIC_GETPHPINFO' => 'Λήψη phpinfo()',
     'LBL_DIAGNOSTIC_GETSUGARLOG' => 'Λήψη sugarcrm.log',
+    'LBL_DIAGNOSTIC_GETMLPLOG' => 'Λήψη package_install.log',
     'LBL_DIAGNOSTIC_GETTING' => 'Λήψη...',
     'LBL_DIAGNOSTIC_MD5'=>'MD5 info',
     'LBL_DIAGNOSTIC_MYSQLDUMPS'=>'Πίνακας Διαμόρφωσης Απόρριψης',
@@ -234,6 +244,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_NO_MYSQL' => 'Δεν έχετε MySQL. Οι λειτουργίες της MySQL έχουν απενεργοποιηθεί.',
     'LBL_DIAGNOSTIC_PHPINFO'=>'phpinfo()',
     'LBL_DIAGNOSTIC_SUGARLOG'=>'Σύνδεση Αρχείου SugarCRM',
+    'LBL_DIAGNOSTIC_MLPLOG'=>'Αρχείο καταγραφής εγκατάστασης πακέτου',
     'LBL_DIAGNOSTIC_TITLE'=>'Διαγνωστικά Εργαλεία',
     'LBL_DIAGNOSTIC_VARDEFS'=>'Σχήμα Εξόδου Sugar (VARDEFS)',
 	'LBL_DISABLED' => 'Απενεργοποιημένο',
@@ -361,11 +372,11 @@ $mod_strings = array (
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Για Δέσμευση του LDAP Χρήστη<br>Παραδείγματα:&nbsp;<b>AD:</b>&nbsp;userPrincipalName,&nbsp;<b>openLDAP:</b>&nbsp;userPrincipalName&nbsp;<b>Mac&nbsp;OS&nbsp;X:</b>&nbsp;uid',
     'LBL_LDAP_LOGIN_ATTRIBUTE_DESC'=>'Για Αναζήτηση του Χρήστη LDAP Παραδείγματα: [AD: userPrincipalName] [openLDAP: dn] [Mac OS X: dn]',
     'LBL_LDAP_ENCRYPTION_TYPE_DESC'=> 'Ο τύπος κρυπτογράφησης επηρεάζει το εάν η σύνδεσή σας στον διακομιστή LDAP θα ' .
-        'είναι ασφαλής ή όχι. Χρησιμοποιήστε το Καμία για κανονική μη-ασφαλή σύνδεση. Χρησιμοποιήστε το TLS για να ενισχύσετε την ασφάλεια της ' .
+        'είναι ασφαλής ή όχι. Χρησιμοποιήστε το Καμία για κανονική μη-ασφαλή σύνδεση. Χρησιμοποιήστε το StartTLS για να ενισχύσετε την ασφάλεια της ' .
         'κανονικής σας σύνδεσης. Χρησιμοποιήστε το SSL για ασφαλή σύνδεση επί του ldaps://',
     'LBL_LDAP_SERVER_HOSTNAME_DESC'=> 'Προσδιορίστε μόνο το LDAP όνομα κεντρικού υπολογιστή της διεύθυσης IP. ' .
         'Παράδειγμα: ldap.example.com, 10.11.45.75',
-    'LBL_LDAP_SERVER_PORT_DESC'=>'Παράδειγμα: 389 για μη-ασφαλή και TLS. 636 για SSL',
+    'LBL_LDAP_SERVER_PORT_DESC'=>'Παράδειγμα: 389 για μη ασφαλή και StartTLS. 636 για LDAPS',
     'LBL_LDAP_GROUP_NAME'=>'Όνομα Γκρουπ',
 	'LBL_LDAP_GROUP_NAME_DESC'=>'Παράδειγμα cn=sugarcrm',
     'LBL_LDAP_USER_DN_DESC'=>'Παράδειγμα: ou=people,dc=example,dc=com',
@@ -472,6 +483,8 @@ $mod_strings = array (
     'LBL_MANAGE_RELATE_DENORMALIZATION_PRE_CHECK_RESULTS' => 'Αποτελέσματα προ-ελέγχου',
     'LBL_MANAGE_RELATE_DENORMALIZATION_FIELDS_FOR' => 'Πεδία για',
     'LBL_MANAGE_RELATE_DENORMALIZATION_JOB_TITLE' => 'Προγραμματισμένη εργασία',
+    'LBL_SUGAR_OUTFITTER' => 'SugarOutfitters',
+    'LBL_SUGAR_OUTFITTER_TOOLTIP' => 'Περιηγηθείτε στο SugarOutfitters, την αγορά SugarCRM, για πρόσθετα που μπορούν να προσθέσουν νέες δυνατότητες στην παρουσία σας στο Sugar',
 
     'LBL_MANUAL_VALIDATION_TXT' => 'Εγχειρίδιο Επικύρωσης',
     'LBL_MANUAL_VALIDATION'=>'Εάν δοκιμάζετε τα επίμονα προβλήματα με την αυτόματη επικύρωση, παρακαλώ ελέγξτε τη διαμόρφωση Πληρεξούσιού σας <a href="index.php?module=Configurator&action=EditView">Ρυθμίσεις Συστήματος</a> στον πίνακα διαχειριστή.<br />	Εάν το περιβάλλον συστημάτων σας, απαγορεύει το σύστημά σας από την επικοινωνία με την επικύρωση αδειών διακομιστή μέσω του internet, πρέπει να συνεχίσετε με βήματα <a href="javascript:void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Χειροκίνητης Επικύρωσης</a>.',
@@ -552,6 +565,9 @@ $mod_strings = array (
     'LBL_MODULE_LICENSE'                        => 'Παρακαλώ διαβάστε την ακόλουθη Άδεια Χρήσης:',
     'LBL_MODULE_LOADER_TITLE' => 'Φορτωτής Ενότητας',
     'LBL_MODULE_LOADER' => 'Προσθήκη ή Διαγραφή Ενοτήτων από την εφαρμογή',
+    'LBL_MODULE_LOADER_LICENSE_WARNING' => 'Η δυνατότητα να <a href="{0}">ανεβάσετε</a> προσαρμοσμένα πακέτα αρχείων δεν είναι '
+        . 'διαθέσιμη για {1}. Για να δείτε ποιοι τύποι αδειών περιλαμβάνουν αυτήν τη λειτουργία Φορτωτή Ενότητας, ανατρέξτε στην '
+        . 'τεκμηρίωση <a href="{2}">Πλέγμα Τύπων Άδειας</a>.',
     'LBL_MODULE_NAME' => 'Διαχείριση',
     'LBL_MODULE_NAME_SINGULAR' => 'Διαχείριση',
     'LBL_MODULE_TITLE' => 'Διαχείριση: Αρχή',
@@ -666,8 +682,6 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Ανοικοδόμηση Αρχείων Γκρουπ JS',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Ξανά-συνενώνει και επανεγγράφει υπάρχοντα αρχεία ομάδας, με τις τελευταίες εκδόσεις των αρχείων της ομάδας',
-    'LBL_REPAIR_JS_FILES_TITLE' => 'Επισκευή αρχείων javascript',
-    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Επισκευή αρχείων JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Επεξεργασία αρχείων. Αυτό μπορεί να διαρκέσει αρκετά λεπτά. Πηγαίνοντας μακριά από αυτή τη σελίδα δεν θα ακυρώσει τη διαδικασία, αισθανθείτε ελεύθεροι να προχωρήσετε ή να περιμένετε για επιβεβαίωση...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Έγινε Επεξεργασία αρχείων.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Επιδιόρθωση Όχι-Πεζά Πεδία',
@@ -909,7 +923,7 @@ $mod_strings = array (
     'LBL_VALIDATION_FILE'=>'Κλειδί Αρχείου Επικύρωσης',
     'LBL_VALIDATION_SUCCESS_DATE'=>'Τελευταία επιτυχημένη επικύρωση :',
 	'LBL_VISIBLE_PANELS'=>'Εμφανιζόμενοι Υπο-πίνακες',
-    'LBL_VISIBLE_TABS'=>'Εμφανιζόμενες Ενότητες',
+    'LBL_AVAILABLE_MODULES' => 'Διαθέσιμες ενότητες',
     'LBL_WORKFLOW_DESC'                     => 'Διαχείριση συνθηκών ροής εργασίας, ειδοποιήσεων και δράσεων',
     'LBL_WORKFLOW_TITLE'                    => 'Διαχείριση ροής εργασίας',
     'LBL_WORKBENCH' => 'Πάγκος Εργασίας',
@@ -954,12 +968,10 @@ $mod_strings = array (
     'WARN_LICENSE_SEATS'=>  "Προειδοποίηση <b>:</b> Υπάρχουν ",
     'WARN_LICENSE_SEATS2' => " ενεργοί χρήστες όταν η συνδρομή σας δίνει τη δυνατότητα μόνο για ",
     'WARN_LICENSE_SEATS3' =>
-        ". <p class=\"error\">Παρακαλώ απενεργοποιήσετε ορισμένους χρήστες, επικοινωνήστε με το συνεργάτη ή αντιπρόσωπο πωλήσεων,"
-        . " ή στείλτε email στο sales@sugarcrm.com <a href='mailto:sales@sugarcrm.com'></a>.</p>"
-        . "<p class=\"error\">Για περισσότερες πληροφορίες, ανατρέξτε στο "
-        . "<a target=\"_blank\" "
-        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
-        . "Άρθρο</a> Κατανόηση των τύποων χρηστών και των αδειών Sugar.</p>",
+        ". <p class=\"error\">Απενεργοποιήστε ορισμένους χρήστες ή <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>επικοινωνήστε μαζί μας</a> για να προσθέσουμε περισσότερες άδειες.</p>",
+    'WARN_LICENSE_SEATS3_IDM' =>
+        ". <p class=\"error\">Απενεργοποιήστε ορισμένους χρήστες στις <a target=\"_blank\" href='%s'>Ρυθμίσεις SugarCloud</a> "
+        . "ή <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>επικοινωνήστε μαζί μας</a>για να προσθέσουμε περισσότερες άδειες.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "Προειδοποίηση: Ο αριθμός ενεργών χειριστών υπερβαίνει τον μέγιστο αριθμό αδειών που επιτρέπονται:",
     'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Προειδοποίηση:</b>Δεν θα είστε σε θέση να δημιουργήσετε πρόσθετες ενεργούς χρήστες."
         . " Παρακαλώ προμηθευτείτε περισσότερες συνδρομές.",
@@ -967,7 +979,7 @@ $mod_strings = array (
     'WARN_LICENSE_TYPE_SEATS_EDIT_MAXED' => 'Δεν μπορείτε να δημιουργήσετε επιπλέον %s χρηστών. Αγοράστε περισσότερες συνδρομές.',
     'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Προειδοποίηση:</b>Δεν θα είστε σε θέση να δημιουργήσετε πρόσθετες ενεργούς χρήστες."
         . " Παρακαλώ προμηθευτείτε περισσότερες συνδρομές.",
-    'WARN_REPAIR_CONFIG' => '<b>Προειδοποίηση:</b> Το αρχείο config.php πρέπει να επιδιορθωθεί. Χρησιμοποιήστε το σενάριο <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Rebuild Config File</a>  στη σελίδα επιδιόρθωση στην περιοχή Διαχειριστή για να επιδιορθώσετε το αρχείο διαμόρφωσης.',
+    'WARN_REPAIR_CONFIG' => '<b>Προειδοποίηση:</b> Το αρχείο config.php χρειάζεται επιδιόρθωση.  Χρησιμοποιήστε το σενάριο <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Αρχείο αναδόμησης διαμόρφωσης</a> στη σελίδα Επιδιόρθωσης στην περιοχή του Διαχειριστή για να επιδιορθώσετε το αρχείο διαμόρφωσης.',
     'WARN_UPGRADE_APP'=> "Μια ενημερωμένη έκδοση της εφαρμογής είναι τώρα διαθέσιμη.",
     'WARN_UPGRADE' => 'Προσοχή: Παρακαλώ αναβαθμίστε',
     'WARN_UPGRADENOTE' => 'Σημείωση:',
@@ -1041,11 +1053,11 @@ $mod_strings = array (
 
 'ML_PACKAGE_SCANNING'=> 'Σάρωση {PACKAGE}',
 'ML_INSTALLATION_FAILED'=> 'Η εγκατάσταση απέτυχε!',
-'ML_PACKAGE_NOT_CONFIRM'=> 'Το πακέτο που προσπαθείτε να εγκαταστήσετε δεν είναι σύμφωνο με τις καθιερωμένες πολιτικές του Sugar Open Cloud ή από τον διαχειριστή του συστήματός σας.',
+    'ML_PACKAGE_NOT_CONFIRM' => 'Το πακέτο που προσπαθείτε να εγκαταστήσετε δεν είναι σύμφωνο με τις καθιερωμένες πολιτικές από το SugarCloud ή από τον διαχειριστή του συστήματός σας.',
 'ML_TO_RESOLVE'=>'Για επίλυση αυτού του θέματος:',
-'ML_OBTAIN_NEW_PACKAGE'=>'Για το Sugar Open Cloud, οι πελάτες πρέπει να αποκτήσουν ένα νέο πακέτο από τον πάροχο του πακέτου που αντιμετωπίζει τα ζητήματα που περιγράφονται παρακάτω.',
+    'ML_OBTAIN_NEW_PACKAGE' => 'Οι πελάτες του SugarCloud πρέπει να λάβουν ένα νέο πακέτο από τον πάροχο πακέτων που αντιμετωπίζει τα ζητήματα που περιγράφονται παρακάτω.',
 'ML_RELAX_LOCAL'=>'Αν εκτελείτε το Sugar τοπικά, μπορείτε να χαλαρώσετε τους περιορισμούς του Φορτωτή Ενότητας σας, για να επιτρέψει στο πακέτο να εγκατασταθεί.',
-'ML_SUGAR_LOADING_POLICY'=>'Οι πολιτικές φόρτωσης του πακέτου Sugar Open Cloud είναι λεπτομερείς σε',
+    'ML_SUGAR_LOADING_POLICY'=>'Οι πολιτικές του SugarCloud περιγράφονται με λεπτομέρεια στο',
 'ML_SUGAR_KB'=>'SugarCRM Βάση Γνώσεων',
 'ML_SUGAR_DZ'=>'SugarCRM Ζώνη Προγραμματισμένων Εργασιών',
 'ML_PKG_SCAN_GUIDE'=>'Οδηγός πολιτικής σάρωσης πακέτου',
@@ -1248,6 +1260,7 @@ $mod_strings = array (
     'LBL_ASYNC_CALL_FAILED' => 'Ασύγχρονη Κλήση, Απέτυχε',
     'LBL_REPAIRXSSEXECUTE_FAILED' => 'Αποτυχία: Bean ή ID δεν ορίζονται',
     'LBL_DIAGNOSTICS_ERROR_SUGARLOG' => 'Δεν θα μπορούσε να αντιγράψει το sugarcrm.log σε {0}',
+    'LBL_DIAGNOSTICS_ERROR_MLPLOG' => 'Δεν είναι δυνατή η αντιγραφή του package_install.log σε {0}<br>',
     'LBL_DIAGNOSTICS_ERROR_PHPINFO' => 'Δεν είναι δυνατή η εγγραφή στο αρχείο {0}phpinfo.html',
     'LBL_DIAGNOSTICS_ERROR_LISTBEANFILES' => 'Δεν είναι δυνατή η εγγραφή στο αρχείο {0}beanFiles.html',
     'LBL_DIAGNOSTICS_ERROR_MD5' => 'Δεν θα μπορούσε να αντιγράψει files.md5 σε {0}<br>Παρακάμπτοντας md5 ελέγχους.<br>',
@@ -1359,10 +1372,28 @@ $mod_strings = array (
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT' => 'Αυτές οι ρυθμίσεις αντιπροσωπεύουν τυπικές οδηγίες Πολιτικής Ασφάλειας Περιεχομένου (CSP) που χρησιμοποιούνται από προγράμματα περιήγησης ιστού για τον έλεγχο των πόρων που επιτρέπεται να φορτώνονται σε μια ιστοσελίδα. Για περισσότερες πληροφορίες σχετικά με τις αποδεκτές τιμές και μορφές πεδίων, ανατρέξτε στην τεκμηρίωση <a href={{linkToDocumentation}} target="_blank">Συστήματος</a>. Μόλις ενημερωθούν οι ρυθμίσεις CSP, οι χρήστες θα πρέπει να ανανεώσουν το πρόγραμμα περιήγησής τους για να τεθούν σε ισχύ οι αλλαγές.',
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT_ADVANCED' => 'Αυτές οι ρυθμίσεις προορίζονται για χρήστες με προηγμένη κατανόηση των επιμέρους οδηγιών Πολιτικής Ασφάλειας Περιεχομένου (CSP). Η οδηγία CSP &#39;img-src&#39; ορίζεται στο Sugar από προεπιλογή και επιτρέπει τη φόρτωση όλων των εικόνων μέσω HTTP ή HTTPS. Για περισσότερες πληροφορίες σχετικά με τις αποδεκτές τιμές και μορφές πεδίων, ανατρέξτε στην τεκμηρίωση <a href={{linkToDocumentation}} target="_blank">Συστήματος</a>. Μόλις ενημερωθούν οι ρυθμίσεις CSP, οι χρήστες θα πρέπει να ανανεώσουν το πρόγραμμα περιήγησής τους για να τεθούν σε ισχύ οι αλλαγές.',
     //Maps
+    'LBL_MAPS_LOGGER_START_DATE' => 'Καταγράφει Την Ημερομηνία Έναρξης:',
+    'LBL_MAPS_LOGGER_DETAILED_LOGS' => 'Λεπτομερή Αρχεία Καταγραφής',
+    'LBL_MAPS_LOGGER_NO_LOGS_AVAILABLE' => 'Δεν υπάρχουν διαθέσιμα αρχεία καταγραφής.',
+    'LBL_MAPS_LOGGER_ENABLE_MODULES_FOR_LOG' => 'Ενεργοποίηση αρχείων καταγραφής για ενότητες:',
+    'LBL_MAPS_LOGGER_LOG_LEVEL' => 'Επιλέξτε Επίπεδο Καταγραφής...',
+    'LBL_MAPS_LOGGER_LOG_TYPE' => 'Επίπεδο καταγραφής:',
+    'LBL_MAPS_LOGGER_LOG_ALL_MESSAGES' => 'Όλα Τα Μηνύματα',
+    'LBL_MAPS_LOGGER_LOG_ERROR' => 'Λάθη',
+    'LBL_MAPS_LOGGER_LOG_SUCCESS' => 'Επιτυχία',
+    'LBL_MAPS_LOGGER_LBL_MODULE' => 'Ενότητα',
+    'LBL_MAPS_LOGGER_LBL_NAME' => 'Όνομα',
+    'LBL_MAPS_LOGGER_LBL_STATUS' => 'Κατάσταση',
+    'LBL_MAPS_LOGGER_LBL_GEOCODE' => 'Γεωκωδικοποιημένο',
+    'LBL_MAPS_LOGGER_YES' => 'Ναι',
+    'LBL_MAPS_LOGGER_NO' => 'Όχι',
+    'LBL_MAPS_LOGGER_OF' => 'από',
     'LBL_MAPS_ADMIN_CONFIG_TITLE' => 'Χάρτες',
+    'LBL_MAPS_ADMIN_LOG_VIEWER' => 'Πρόγραμμα προβολής αρχείων καταγραφής',
     'LBL_MAPS_ADD_NEW_MODULE_TO_GEOCODE' => 'Προσθήκη νέας μονάδας για γεωκωδικοποίηση',
     'LBL_MAPS_SELECT_NEW_MODULE_TO_GEOCODE' => 'Επιλέξτε μία μονάδα...',
     'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION' => 'Διαμόρφωση Χαρτών',
+    'LBL_MAPS_ADMIN_CONFIG_LOG_VIEWER_DESCRIPTION' => 'Πρόσβαση στα αρχεία καταγραφής γεωκωδικοποίησης',
     'LBL_MAPS_LOG_LEVEL_TITLE' => 'Επίπεδο καταγραφής',
     'LBL_MAPS_LOG_LVL_FATAL' => 'Μοιραίο',
     'LBL_MAPS_LOG_LVL_DEBUG' => 'Αποσφαλμάτωση',
@@ -1424,9 +1455,12 @@ $mod_strings = array (
     'LBL_CLOUD_DRIVE_DESCRIPTION' => 'Διαμορφώστε τις προεπιλεγμένες ρυθμίσεις διαδρομής για τις μονάδες cloud.',
     'LBL_GOOGLE_DRIVE_NAME' => 'Google Drive',
     'LBL_GOOGLE_DRIVE_TOOLTIP' => 'Διαμορφώστε τις προεπιλεγμένες διαδρομές του Google Drive',
+    'LBL_DROPBOX_DRIVE' => 'Dropbox Drive',
+    'LBL_DROPBOX_DRIVE_TOOLTIP' => 'Διαμορφώστε τις προεπιλεγμένες διαδρομές του Dropbox Drive',
     'LBL_GOOGLE_DRIVE_SAVE_BUTTON' => 'Αποθήκευση',
     'LBL_SELECT_ROOT_PATH' => 'Επιλέξτε Ριζική διαδρομή',
     'LBL_REMOVE_ROOT_PATH' => 'Κατάργηση Ριζικής διαδρομής',
+    'LBL_ROOT_PATH_REMOVED' => 'Η ριζική διαδρομή έχει αφαιρεθεί.',
     'LBL_VALIDATE_ROOT_PATH' => 'Επικύρωση Ριζικής διαδρομής',
     'LBL_PATHS_FOR_RECORD_VIEW' => 'Διαδρομές για προβολή εγγραφής',
     'LBL_DEFAULT_STARTING_PATH' => 'Προεπιλεγμένη διαδρομή εκκίνησης',
@@ -1440,14 +1474,16 @@ $mod_strings = array (
     'LBL_MICROSOFT_ONEDRIVE_TOOLTIP' => 'Διαμορφώστε τις προεπιλεγμένες διαδρομές του Microsoft OneΔrive',
     'LBL_DRIVE_PATH_CONFIG' => 'Διαμόρφωση διαδρομής Drive',
     'LBL_DRIVE_ROOT_PATH' => 'Ριζική διαδρομή',
+    'LBL_FIELDS_VARIABLE' => 'Μεταβλητή πεδίων',
+    'LBL_UNABLE_TO_RETRIEVE_ROOT_PATH' => 'Δεν είναι δυνατή η ανάκτηση της ριζικής διαδρομής',
     'LBL_HINT_NAME' => 'Πεδία συμβουλής',
     'LBL_HINT_DESCRIPTION' => 'Διαμορφώστε ποια πεδία εμφανίζονται στον πίνακα Συμβουλή και εμπλουτίζονται με Συμβουλή.',
-    'LBL_HINT_SECTION_HEADER' => 'Συμβουλή',
-    'LBL_HINT_SECTION_DESCRIPTION' => 'Διαμόρφωση ρυθμίσεων για τη Συμβουλή',
+    'LBL_HINT_SECTION_HEADER' => 'Sugar Hint',
+    'LBL_HINT_SECTION_DESCRIPTION' => 'Διαμορφώστε τις ρυθμίσεις για το Sugar Hint',
 
-    'LBL_HINT_CONFIG' => 'Διαμόρφωση του Hint',
+    'LBL_HINT_CONFIG' => 'Διαμόρφωση Sugar Hint',
     'LBL_HINT_CONFIG_NAME' => 'Διαμόρφωση του Hint',
-    'LBL_HINT_CONFIG_SAVED' => 'Οι ρυθμίσεις διαμόρφωσης του Hint έχουν αποθηκευτεί.',
+    'LBL_HINT_CONFIG_SAVED' => 'Οι ρυθμίσεις διαμόρφωσης Sugar Hint έχουν αποθηκευτεί.',
     'LBL_HINT_CONFIG_DESCRIPTION' => 'Ενημέρωση ρυθμίσεων Hint.',
     'LBL_HINT_CONFIG_LOGGER_SECTION_HEADER' => 'Καταγραφικό Hint',
 
@@ -1455,7 +1491,24 @@ $mod_strings = array (
     'LBL_HINT_RESYNC_DESCRIPTION' => 'Συγχρονίστε ξανά με την υπηρεσία Hint Insights για να διορθώσετε προβλήματα με τις ειδοποιήσεις, συμπεριλαμβανομένων των αλλαγών στις προτιμήσεις και των διευθύνσεων email που δεν ισχύουν.',
 
     'LBL_HINT_UNINSTALL' => 'Απεγκατάσταση',
-    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Απεγκαταστήστε το Hint, συμπεριλαμβανομένης της απενεργοποίησης ειδοποιήσεων από το Hint Insights.',
+    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Απεγκαταστήστε το Sugar Hint, συμπεριλαμβανομένης της απενεργοποίησης ειδοποιήσεων από το Sugar Hint Insights.',
 
     'LBL_HINT_CONFIG_NOTIFICATIONS_HEADER' => 'Ειδοποιήσεις',
+
+    'LBL_DOCUSIGN_GROUP' => 'DocuSign',
+    'LBL_DOCUSIGN_NAME' => 'Ρυθμίσεις',
+    'LBL_DOCUSIGN_TOOLTIP' => 'Διαμόρφωση DocuSign',
+    'LBL_DOCUSIGN_DESCRIPTION' => 'Ρύθμιση λειτουργιών DocuSign',
+    'LBL_SUGAR_MAPS' => 'Χάρτες Sugar',
+    'LBL_CLOUD_DRIVE' => 'Μονάδα cloud',
+
+    // Sugar Automate
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_TITLE' => 'Ρυθμίσεις Sugar Automate',
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_DESC' => 'Ρύθμιση για το πακέτο Sugar Automate',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'Πρότυπα',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'Διαχείριση προτύπων',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_NAME' => 'Διαμόρφωση ενοτήτων',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_DESC' => 'Διαμόρφωση ενεργοποιημένων ενοτήτων',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'Πρότυπα',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'Διαχείριση προτύπων',
 );

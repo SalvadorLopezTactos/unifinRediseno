@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logot',
 	'LBL_ADMIN_WIZARD' => 'Hallintatyökalu',
-	'LBL_ALLOW_USER_TABS' => 'Salli käyttäjien piilottaa välilehdet',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Järjestelmäasetukset',
 	'LBL_ENABLE_MAILMERGE' => 'Ota sähköpostin yhdistäminen käyttöön?',
 	'LBL_LOGVIEW' => 'Näytä loki',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Käytä tätä asetusta määrittämään kuukausien lukumäärä ennen nykyistä päivämäärää, kun puhelujen ja tapaamisien vapaa/varattu -tietoja julkaistaan.<br /> Voit asettaa vapaa/varattu -tietojen julkistamisen pois kirjoittamalla 0.  Minimi on 1 kuukausi, maksimi on 12 kuukautta.',
     'LBL_PDFMODULE_NAME' => 'Raportin PDF-malli',
     'SUGARPDF_BASIC_SETTINGS' => 'Dokumentin ominaisuudet',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Lisäasetukset',
     'SUGARPDF_LOGO_SETTINGS' => 'Kuvat',
-
-    'PDF_CREATOR' => 'PDF-luonti',
-    'PDF_CREATOR_INFO' => 'Määrittää dokumentin luovan sovelluksen. <br /> Tämä on tyypillisesti sen sovelluksen nimi, joka tuottaa PDF-tiedostot.',
 
     'PDF_AUTHOR' => 'Kirjoittaja',
     'PDF_AUTHOR_INFO' => 'Kirjoittaja näkyy asiakirjan ominaisuuksissa.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Valitse uusi kuva lainauksille',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Tiedostomuoto voi olla joko .jpg tai .png. (Vain .jpg EZPDF:lle) <br /> suositeltava koko on 867x60px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Lainaukset -kuvan leveys',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Muuta Lainaukset -PDF-dokumentissa näkyvän ladatun kuvan kokoa. (ainoastaan TCPDF)',
+    'PDF_TITLE' => 'Otsikko',
+    'PDF_TITLE_INFO' => 'Otsikko näkyy asiakirjan ominaisuuksissa.',
+
+    'PDF_SUBJECT' => 'Aihe',
+    'PDF_SUBJECT_INFO' => 'Aihe näkyy asiakirjan ominaisuuksissa.',
 
     'PDF_SMALL_HEADER_LOGO' => 'Raportit -PDF-dokumenteille',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Tämä kuva näkyy Raportti -PDF-dokumenttien oletusotsikossa. <br /> Tämä kuva näkyy myös Sugarin vasemmassa yläkulmassa.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Valitse raporteille uusi kuva.',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Tiedostomuoto voi olla joko .jpg tai .png. (Vain .jpg EZPDF:lle) <br /> suositeltava koko on 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Raporttien kuvan leveys',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Muuta ladattavan raportti -PDF-dokumentteissa näkyvän kuvan kokoa. (ainoastaan TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Otsikkomerkkijono',
-    'PDF_HEADER_STRING_INFO' => 'Otsikon kuvauksen merkkijono',
-
-    'PDF_HEADER_TITLE' => 'Otsikon teksti',
-    'PDF_HEADER_TITLE_INFO' => 'Merkkijono, joka tulostetaan dokumentin yläreunan otsikkoriville',
-
-    'PDF_FILENAME' => 'Oletustiedostonimi',
-    'PDF_FILENAME_INFO' => 'Oletustiedostonimi luoduille PDF-tiedostoille',
-
-    'PDF_TITLE' => 'Otsikko',
-    'PDF_TITLE_INFO' => 'Otsikko näkyy asiakirjan ominaisuuksissa.',
-
-    'PDF_SUBJECT' => 'Aihe',
-    'PDF_SUBJECT_INFO' => 'Aihe näkyy asiakirjan ominaisuuksissa.',
-
     'PDF_KEYWORDS' => 'Avainsana(t)',
     'PDF_KEYWORDS_INFO' => 'Dokumenttiin littyvät avainsanat, yleensä muodossa ‘keyword1 keyword2 ...’',
 
-    'PDF_COMPRESSION' => 'Pakkaus',
-    'PDF_COMPRESSION_INFO' => 'Kytkee päälle/pois sivun pakkauksen. <br/> Kun aktivoitu, sivun sisäinen esitys pakataan, mikä johtaa siihen, että tuloksena olevan dokumentin pakkaussuhde on noin 2.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG-laatu (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Aseta oletus-JPEG-laatu (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF-versio',
-    'PDF_PDF_VERSION_INFO' => 'Aseta PDF-versio (tarkista PDF-viitteestä kelvolliset arvot).',
-
-    'PDF_PROTECTION' => 'Dokumentin suojaus',
-    'PDF_PROTECTION_INFO' => 'Aseta dokumentin suojaus<br/>-copy: kopioi tekstin ja kuvat leikepöydällä<br/>- print: tulosta dokumentti<br/>- modify: muokkaa dokumenttia(lukuunottamatta huomautuksia ja lomakkeita)<br/>- annot-forms: lisää huomautuksia ja lomakkeita<br/>Huom: suojaus muokkauksia vastaan niille käyttäjille, joilla on koko versio Acrobat-tuotteeta.',
-
-    'PDF_USER_PASSWORD' => 'Käyttäjän salasana',
-    'PDF_USER_PASSWORD_INFO' => 'Mikäli et aseta salasanaa, asiakirja avautuu normaalisti. <br/>Jos asetat käyttäjän salasanan, PDF-lukija kysyy sitä ennen asiakirjan näyttämistä. <br/>Omistajan salasana eriää käyttäjän salasanasta, sillä sillä saa täydet käyttöoikeudet.',
-
-    'PDF_OWNER_PASSWORD' => 'Omistajan salasana',
-    'PDF_OWNER_PASSWORD_INFO' => 'Mikäli et aseta salasanaa, asiakirja avautuu normaalisti. <br/>Jos asetat käyttäjän salasanan, PDF-lukija kysyy sitä ennen asiakirjan näyttämistä. <br/>Omistajan salasanalla, mikäli se eriää käyttäjän salasanasta, voidaan saada täydet käyttöoikeudet.',
-
-    'PDF_ACL_ACCESS' => 'Käyttöoikeuksien kontrollointi',
-    'PDF_ACL_ACCESS_INFO' => 'Oletus käyttöoikeuksien kontrolli PDF-tiedostojen generointiin.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Solun korkeuden suhde',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Jos solun korkeus on pienempi kuin (Fontin korkeus kertaa solun korkeuden suhde), sitten (Fontin korkeus kertaa solun korkeuden suhde) käytetään solun korkeutena. <br>(Fontin korkeus kertaa solun korkeuden kerroin) käytetään myös solun korkeutena, kun korkeutta ei ole määritelty.',
-
-    'K_TITLE_MAGNIFICATION' => 'Nimen suurennus',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Nien suurennuskerroin pääfonttikokoon nähden.',
-
-    'K_SMALL_RATIO' => 'Pienen fontin kerroin',
-    'K_SMALL_RATIO_INFO' => 'Pienennyskerroin pienelle fontille.',
-
-    'HEAD_MAGNIFICATION' => 'Otsikon suurennus',
-    'HEAD_MAGNIFICATION_INFO' => 'Otsikoiden suurennustekijä.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Kuvan skaalauskerroin',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Kuvien skaalaamiseen käytetty kerroin',
-
-    'PDF_UNIT' => 'Yksikkö',
-    'PDF_UNIT_INFO' => 'dokumentin mittayksikkö',
 	'PDF_GD_WARNING'=>'Järjestelmään ei ole asennettu PHP:n GD-kirjastoa. Ilman GD-kirjastoa, PDF-dokumenteissa voidaan näyttää vain JPEG-muotoisia logoja.',
     'ERR_EZPDF_DISABLE'=>'Varoitus: EZPDF -luokka on poistettu käytöstä config-taulukossa ja se on asetettu PDF luokaksi. Tallenna tämä lomake asettaaksesi TCPDF PDF-luokaksi ja palaa vakaaseen tilaan.',
     'LBL_IMG_RESIZED'=>"(kuva skaalattu näyttämistä varten)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Lisää PDF-fontti',
     'LBL_PDF_PATCH' => 'Muutostiedosto',
-    'LBL_PDF_PATCH_INFO' => 'Merkistökoodauksen erityismukautus. Kirjoita PHP-taulukko.<br />Esimerkki: <br /> ISO-8859-1 ei sisällä euromerkkiä. Lisätäksesi sen kohtaan 164, kirjoita <code>array(164=>‘Euro’)</code>.',
     'LBL_PDF_ENCODING_TABLE' => 'Koodaustaulukko',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Koodaustaulukon nimi.<br>Tätä asetusta ei huomioida TrueType Unicode, OpenType Unicode ja symbolisille fonteille.<br>Koodaus määrittää koodin (0-255) ja fontin sisältämän merkin välisen yheyden.<br>Ensimmäiset 128 ovat kiinnitettyjä ja vastaavat ASCII:ta.',
     'LBL_PDF_FONT_FILE' => 'Fonttitiedosto',

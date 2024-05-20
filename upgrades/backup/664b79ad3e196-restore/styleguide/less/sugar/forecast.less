@@ -1,0 +1,165 @@
+/* FORECAST
+  ----------------*/
+
+.control-group.datefilter {
+  .controls {
+    margin: 0;
+  }
+
+  select {
+    width: 350px;
+  }
+}
+
+.control-group.filter {
+  .indicator {
+    cursor: pointer;
+  }
+}
+
+.show_custom_bucketsFields {
+  .noUiSliderEnds {
+    width: 240px;
+
+    .noUiSlider {
+      width: 240px;
+    }
+  }
+
+  #plhExclude,
+  #plhCustomWithoutProbability {
+    input[disabled="disabled"] {
+      visibility: hidden;
+    }
+  }
+
+  #plhCustomProbabilityRanges {
+    div.clearfix {
+      & > div:not(:last-child) {
+        margin-top: 35px;
+      }
+    }
+  }
+
+  #plhCustomWithoutProbability {
+    margin-bottom: 8px;
+
+    div.clearfix {
+      & > div {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  #plhCustomWithoutProbability,
+  #plhCustomProbabilityRanges {
+    div.clearfix {
+      div.btn_group {
+        float: left;
+        margin-top: 32px;
+      }
+    }
+  }
+}
+
+.forecast-details {
+  margin: 0;
+
+  .row-fluid {
+    padding: 10px;
+    border-bottom: @borderWidgetLight;
+    box-sizing: border-box;
+
+    &:not(:last-child) {
+      line-height: 28px;
+    }
+
+    &.deficitRow {
+      background-color: @primaryContentBackground;
+      border-top: @borderWidgetLight;
+      font-weight: 600;
+
+      &.font-green {
+        color: @green;
+      }
+
+      &.font-red {
+        color: @red;
+      }
+    }
+
+    &:last-child {
+      background-color: @primaryContentBackgroundAccent;
+
+      div[class*="span"] {
+        padding: 0 5px;
+        line-height: 18px;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 0;
+        }
+
+        > div:last-child {
+          font-size: @fontSizeSmall;
+          line-height: @fontSizeSmall + 5;
+          padding: 8px;
+          margin-top: 4px;
+          color: @white;
+          border-radius: @baseBorderRadius;
+        }
+      }
+    }
+
+    .forecast_details_label {
+      font-size: @fontSizeSmall;
+    }
+
+    .forecast_details_amount {
+      font-size: @fontSizeMedium;
+    }
+  }
+}
+
+#sales-stage-text {
+  p {
+    font-size: 15px;
+  }
+
+  label {
+    cursor: default;
+  }
+}
+
+.commit_stage_field > * {
+  overflow-y: hidden;
+}
+
+#config-accordion.Forecasts-config {
+  .accordion-inner {
+    padding: 10px 20px;
+  }
+}
+
+.forecast-value {
+  .text-xs {
+    .mr-4();
+  }
+}
+
+.forecast-value-input {
+  .relative();
+  .pl-4();
+
+  .clickToEdit {
+    span.edit-icon {
+      .absolute();
+
+      left: 0;
+      top: -2px;
+    }
+  }
+}

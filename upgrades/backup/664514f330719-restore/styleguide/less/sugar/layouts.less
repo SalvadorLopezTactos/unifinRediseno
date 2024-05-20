@@ -1,0 +1,164 @@
+/* LAYOUTS
+  ----------------*/
+
+/* twitter-bootstrap import START */
+
+// Container (centered, fixed-width layouts)
+.container {
+  .container-fixed();
+}
+
+// Fluid layouts (left aligned, with sidebar, min- & max-width content)
+.container-fluid {
+  margin-left: @gridGutterWidth;
+  margin-right: @gridGutterWidth;
+  .clearfix();
+}
+
+/* twitter-bootstrap import END */
+
+.container-fluid {
+  margin-top: 20px;
+}
+
+#content {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 1.875rem;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#content:empty,
+.nprogress-busy #content {
+  background: @contentLoadingBackground;
+}
+
+.main-pane {
+  position: absolute;
+  bottom: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 0 !important;
+
+  &:not(.bg-transparent) {
+    .bg-primary-content-background();
+  }
+
+  .list-view {
+    width: 100%;
+  }
+
+  &.main-pane.span12 {
+    width: 100%;
+  }
+
+  &.span8 {
+    width: 66vw;
+    left: 0;
+  }
+}
+
+// when omniconsole is visible, need to account for record width
+.omniconsole-visible {
+  .main-pane {
+    width: calc(~"100% - 320px");
+
+    &.span8 {
+      width: calc(~"66vw - 320px");
+    }
+  }
+}
+
+.touch {
+  .main-pane {
+    padding-top: 60px !important;
+    top: 0;
+    overflow-x: auto;
+  }
+
+  #content {
+    /* fixes iOS intermitent BWC portrait scroll issue */
+    position: absolute;
+    overflow-x: scroll;
+  }
+}
+
+.side.sidebar-content {
+  width: 34vw;
+  border-left: @borderWidget;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: @zindexSidebarContent;
+
+  &.hide {
+    display: none;
+  }
+}
+
+.navbar,
+#content,
+#footer footer {
+  min-width: 320px !important;
+}
+
+/* NEW SKIN START */
+
+#content {
+  /* override */
+  background: @contentBackground;
+}
+
+#header:not(.hide) + #content {
+  /* override */
+  top: 45px;
+}
+
+.main-pane {
+  /* override */
+  top: 49px;
+}
+
+/* NEW SKIN END */
+
+.banner-shifted {
+  #header:not(.hide) + #content {
+    /* override */
+    top: @bannerHeight + 45px;
+  }
+}
+
+/* Impersonation banner START */
+
+.impersonation-banner {
+  top: 0;
+  left: 0;
+  height: @bannerHeight;
+  color: @white;
+  justify-content: space-between;
+  z-index: @zindexImpersonationBanner;
+
+  .icon {
+    color: @white;
+  }
+
+  .text {
+    font-size: @fontSizeHeaderSubTitle;
+  }
+
+  .btn {
+    font-size: @fontSizeHeaderSubTitle;
+  }
+}
+
+/* Impersonation banner END */

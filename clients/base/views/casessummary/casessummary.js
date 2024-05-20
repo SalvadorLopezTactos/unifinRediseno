@@ -70,6 +70,15 @@
      */
     renderChart: function() {
         if (!this.isChartReady()) {
+            if (this.$el.parents().length > 0 && this.$el.is(':hidden') && !this.reRenderFlag) {
+                // Call this function one more time for cases
+                // if a chart should be rendered, but $el is still not displayed
+                _.debounce(() => {
+                    this.reRenderFlag = true;
+                    this.renderChart();
+                }, 3000);
+            }
+
             return;
         }
 

@@ -95,7 +95,7 @@ class SugarMetric_Provider_Log implements SugarMetric_Provider_Interface
      * @param Exception $exception
      * @return null
      */
-    public function handleException(Exception $exception)
+    public function handleException(\Throwable $exception)
     {
         $this->logger->{$this->logLevel}('Log Metric Provider: handleException with "' . $exception->getMessage() . '" is called');
     }

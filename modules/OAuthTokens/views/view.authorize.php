@@ -27,7 +27,7 @@ class OauthTokensViewAuthorize extends SugarView
         $sugar_smarty = new Sugar_Smarty();
         $sugar_smarty->assign('APP', $GLOBALS['app_strings']);
         $sugar_smarty->assign('MOD', $GLOBALS['mod_strings']);
-        $sugar_smarty->assign('token', htmlspecialchars($requestToken));
+        $sugar_smarty->assign('token', htmlspecialchars($requestToken, ENT_COMPAT));
         $sugar_smarty->assign('sid', session_id());
         $token = OAuthToken::load($requestToken);
         if(empty($token) || empty($token->consumer) || $token->tstate != OAuthToken::REQUEST || empty($token->consumer_obj)) {
@@ -35,7 +35,7 @@ class OauthTokensViewAuthorize extends SugarView
         }
 
         if(empty($_REQUEST['confirm'])) {
-            $sugar_smarty->assign('consumer', sprintf($GLOBALS['mod_strings']['LBL_OAUTH_CONSUMERREQ'], htmlspecialchars($token->consumer_obj->name)));
+            $sugar_smarty->assign('consumer', sprintf($GLOBALS['mod_strings']['LBL_OAUTH_CONSUMERREQ'], htmlspecialchars($token->consumer_obj->name, ENT_COMPAT)));
             echo $sugar_smarty->fetch('modules/OAuthTokens/tpl/authorize.tpl');
         } else {
             if ($_REQUEST['sid'] != session_id()) {
@@ -52,7 +52,7 @@ class OauthTokensViewAuthorize extends SugarView
                 $redirect_url .= "oauth_verifier=".$verify.'&oauth_token=' . $requestToken;
                 SugarApplication::redirect($redirect_url);
             }
-            $sugar_smarty->assign('VERIFY', htmlspecialchars($verify));
+            $sugar_smarty->assign('VERIFY', htmlspecialchars($verify, ENT_COMPAT));
             $sugar_smarty->assign('token', '');
             echo $sugar_smarty->fetch('modules/OAuthTokens/tpl/authorized.tpl');
         }

@@ -85,7 +85,7 @@ class UsersLastImport extends SugarBean
     {
         $query = "DELETE FROM {$this->table_name} WHERE assigned_user_id = ? ";
         $conn = $this->db->getConnection();
-        $conn->executeQuery($query, array($user_id));
+        $conn->executeStatement($query, array($user_id));
     }
 
     /**
@@ -103,12 +103,12 @@ FROM users_last_import
 WHERE assigned_user_id = ? AND id = ? AND deleted=0
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery(
                 $sql,
                 [$current_user->id, $id]
             );
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $this->_deleteRecord($row['bean_id'], $row['bean_type']);
         }
         return true;
@@ -129,12 +129,12 @@ FROM users_last_import
 WHERE assigned_user_id = ? AND import_module = ? AND deleted=0
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery(
                 $sql,
                 [$current_user->id, $module]
             );
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $this->_deleteRecord($row['bean_id'], $row['bean_type']);
         }
         return true;
@@ -171,7 +171,7 @@ WHERE email_addr_bean_rel.bean_id = ?
 AND email_addr_bean_rel.bean_module = ?
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery(
                 $sql,
                 [$bean_id, $focus->module_dir]
@@ -183,7 +183,7 @@ SQL;
                 ['bean_id' => $bean_id, 'bean_module' => $focus->module_dir]
             );
 
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $isEmailAddressIdExists = $this->db->getConnection()
                 ->executeQuery(
                     'SELECT NULL FROM email_addr_bean_rel WHERE email_address_id = ?',

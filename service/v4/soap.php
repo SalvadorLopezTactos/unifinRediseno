@@ -10,7 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-chdir(dirname(__FILE__).'/../../');
+chdir(__DIR__.'/../../');
 require 'include/entryPoint.php';
 require 'soap/SoapErrorDefinitions.php';
 require 'service/core/SugarSoapService.php';

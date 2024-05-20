@@ -49,7 +49,7 @@ class ConfiguratorViewEdit extends ViewEdit
         $sugarConfig = SugarConfig::getInstance();
         $focus = Administration::getSettings();
 
-        $devModeOn = isset($configurator->config['developerMode']) ? $configurator->config['developerMode'] : false;
+        $devModeOn = $configurator->config['developerMode'] ?? false;
         $this->ss->assign('SHOW_CATALOG_CONFIG', $devModeOn);
 
         $this->ss->assign('MOD', $mod_strings);
@@ -57,7 +57,7 @@ class ConfiguratorViewEdit extends ViewEdit
         $this->ss->assign('APP_LIST', $app_list_strings);
         $this->ss->assign('config', $configurator->config);
         $this->ss->assign('error', $configurator->errors);
-        $this->ss->assign("AUTO_REFRESH_INTERVAL_OPTIONS", get_select_options_with_id($app_list_strings['dashlet_auto_refresh_options_admin'], isset($configurator->config['dashlet_auto_refresh_min']) ? $configurator->config['dashlet_auto_refresh_min'] : 30));
+        $this->ss->assign("AUTO_REFRESH_INTERVAL_OPTIONS", get_select_options_with_id($app_list_strings['dashlet_auto_refresh_options_admin'], $configurator->config['dashlet_auto_refresh_min'] ?? 30));
         $this->ss->assign('LANGUAGES', get_languages());
         $this->ss->assign("JAVASCRIPT",get_set_focus_js(). get_configsettings_js());
         $this->ss->assign('company_logo', SugarThemeRegistry::current()->getImageURL('company_logo.png', true, true));

@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Informačný panel so zoznamom účtov',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Informačný panel so záznamom účtov',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na účty',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Podrobnosti o účte',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Informačný panel so zameraním na účty – Konzola',
     'LBL_NEXT_RENEWAL_DATE' => 'Dátum nasledujúceho obnovenia',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Dátum nasledujúceho obnovenia',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Názov účtu/odvetvia',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Poloha',
     'LBL_PURCHASES' => 'Nákupy',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Časová os účtu',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizovať',
+    'LBL_CREATE_NEW' => 'Vytvoriť nový',
+    'LBL_MANAGE' => 'Spravovať',
+    'LBL_SEE_DETAILS' => 'Zobraziť podrobnosti',
+    'LBL_HIDE_NEW' => 'Skryť',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafy',
@@ -207,4 +214,7 @@ Ak chcete vytvoriť modul {{module_name}}:
 2. Kliknite na možnosť "Uložiť" na dokončenie nového záznamu a návrat na predchádzajúcu stránku.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Hlásenia o účtoch',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Externí používatelia',
 );

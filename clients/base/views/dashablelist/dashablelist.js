@@ -196,10 +196,12 @@
      * @return {String} Whether or not the dashlet can be intelligent.
      */
     checkIntelligence: function() {
-        var isIntelligent = app.controller.context.get('layout') === 'record' &&
-            !_.contains(this.moduleBlacklist, app.controller.context.get('module'));
+        let context = app.controller.context;
+
+        let isIntelligent = (context.get('layout') === 'record' || context.get('targetLayout') === 'focus') &&
+            !_.contains(this.moduleBlacklist, context.get('module'));
+
         this.intelligent = isIntelligent ? '1' : '0';
-        return this.intelligent;
     },
 
     /**
@@ -216,11 +218,7 @@
         }
         intelligent = (intelligent === false || intelligent === '0') ? '0' : '1';
         var fieldEl = this.$('[data-name=linked_fields]');
-        if (visible === '1' && intelligent === '1' && !_.isEmpty(field.items)) {
-            fieldEl.show();
-        } else {
-            fieldEl.hide();
-        }
+        fieldEl.toggle(visible === '1' && intelligent === '1' && !_.isEmpty(field.items));
     },
 
     /**
@@ -261,6 +259,8 @@
                 this.updateLinkedFields(moduleName);
             }, this);
             this.settings.on('change:intelligent', function(model, intelligent) {
+                let moduleName = this.settings.get('module') || this.context.get('module');
+                this.updateLinkedFields(moduleName);
                 this.setLinkedFieldVisibility('1', intelligent);
             }, this);
             this.on('render', function() {
@@ -272,11 +272,10 @@
         this.metaFields = this._getColumnsForDisplay();
 
         if (this.settings.get('intelligent') == '1') {
-
-            var link = this.settings.get('linked_fields');
-            var model = app.controller.context.get('model');
-            var module = this.settings.get('module');
-            var options = {
+            let link = this.settings.get('linked_fields');
+            let model = this.model || app.controller.context.get('model');
+            let module = this.settings.get('module');
+            let options = {
                 link: {
                     name: link,
                     bean: model

@@ -39,7 +39,8 @@ class CampaignLog extends SugarBean {
         $this->disable_row_level_security=true;
     }
 
-    function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
         global $locale;
         $temp_array = $this->get_list_view_array();
         //make sure that both items in array are set to some value, else return null

@@ -16,7 +16,7 @@
 ({
     // Do not show focus drawer icons on links to records within the activity card itself,
     // only in the actions menu
-    disableFocusDrawer: true,
+    disableFocusDrawer: false,
 
     /**
      * @inheritdoc

@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Kontrolna tabla liste napomena',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise o napomenama',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za beleške',
+    'LBL_EXTERNAL_USER' => 'Eksterni korisnik',
+    'LBL_EXTERNAL_USER_NAME' => 'Eksterni korisnik',
 
     'LBL_RELATED_CONTACT' => 'Povezani kontakt',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali kompaniju.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Tip e-poruke',
     'LBL_EMAIL_ID' => 'ID e-poruke',
     'LBL_PHONE' => 'Telefon:',
-    'LBL_PORTAL_FLAG' => 'Da li da prikažem u portalu?',
+    'LBL_PORTAL_FLAG' => 'Dostupno eksterno',
     'LBL_EMBED_FLAG' => 'Ugradi u email?',
     'LBL_PRODUCT_ID' => 'ID broj proizvoda:',
     'LBL_QUOTE_ID' => 'ID broj ponude:',

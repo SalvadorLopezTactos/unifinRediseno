@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Trūksta privalomo lauko',
     'LBL_ERROR_SYNC_USERS' => 'Neteisingos reikšmės sinchronizuojamos į Outlook:',
     'LBL_ID_EXISTS_ALREADY' => 'ID jau egzistuoja šioje lentelėje',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY jau egzistuoja šioje lentelėje',
     'LBL_ASSIGNED_USER' => 'Jeigu tokio vartotojo nėra, naudoti esamą vartotoją',
     'LBL_SHOW_HIDDEN' => 'Rodo laukus, kurie standartiškai nėra importuojami',
     'LBL_UPDATE_RECORDS' => 'Atnaujinti egzistuojančius įrašus',

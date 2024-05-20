@@ -155,8 +155,6 @@ class QuotesApiHelper extends SugarBeanApiHelper
     protected function getAddressFormContact($quote_value, $fromBean, $primaryField, $altField)
     {
         return !empty($quote_value) ? $quote_value
-            : (isset($fromBean->$primaryField) ? $fromBean->$primaryField
-                : (isset($fromBean->$altField) ? $fromBean->$altField
-                    : ''));
+            : ($fromBean->$primaryField ?? $fromBean->$altField ?? '');
     }
 }

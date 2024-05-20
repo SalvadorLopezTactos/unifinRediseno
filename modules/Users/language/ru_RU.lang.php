@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Пользовательская информация не обнаружена',
     'ERR_USER_NAME_EXISTS'              => 'Имя пользователя {0} уже существует. Дублирование имен пользователей не допускается. Измените имя пользователя на уникальное.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Лицензию "Sugar Hint" необходимо сохранить вместе с дополнительным совместимым типом лицензии',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Эта возможность уже включена в Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Данный пользователь заблокирован и не может войти в систему, используя существующий пароль.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Пользователю, использующему только внешнюю аутентификацию, запрещено выполнять вход с помощью данных Sugar',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Пароль',
     'LBL_CHOOSE_A_KEY'					=> 'Укажите ключ для недопущения неавторизованных публикаций Вашего календаря',
     'LBL_NO_KEY'                        => 'Ключ не настроен. Пожалуйста, настройте ключ, чтобы активировать публикацию.',
-	'LBL_CHOOSE_WHICH'					=> 'Выбрать вкладки для отображения',
+    'LBL_CHOOSE_WHICH'                  => 'Выберите, какие модули будут доступны с боковой панели навигации. Определите желаемый порядок появления модулей.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Количество закрепленных модулей',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Введите количество доступных модулей, которое будет закреплено при сворачивании панели навигации (например, если вводится число 5, первые пять модулей в списке будут закреплены). Мы рекомендуем вводить количество наиболее часто используемых модулей. Значения выше 100 не будут приниматься во внимание.',
 	'LBL_CITY'							=> 'Город',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Очистить',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP-логин',
 	'LBL_MAIL_SMTPTYPE'                => 'Тип SMTP сервера:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'Настройка SMTP-сервера',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Авторизованная учетная запись электронной почты',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Выберите почтовую службу:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail - пароль:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail ID:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'пользователи/команды/роли',
     'LBL_LOADING_ITEMS' => 'Идет загрузка данных...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Доступ к умному руководству',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Последнее активное умное руководство',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Доступ к умному руководству отсутствует',
 ); // END STRINGS DEFS

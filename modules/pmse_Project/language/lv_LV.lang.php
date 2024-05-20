@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Formas pogas',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Apstiprināt/Noraidīt',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Pārsūtīt',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Nosūtīt uz DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Citas pārsūtīšanas opcijas',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Mainīt piešķirto lietotāju',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Darba grupa',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Dokumentu sapludināšana',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Atlasīt...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Dokumentu sapludināšana uz PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Nosūtīt sapludināto dokumentu pa e-pastu',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Dokumentu sapludināšana',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Saplūšanas vārtejas veids nesakrīt ar ienākošās plūsmas vārtejas veidu',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Sadales vārtejas sadala procesus vairākos zaros. Izmantojot saplūšanas vārteju, lai šos zarus atkārtoti apvienotu vienā ceļā, ir jāizmanto saplūšanas vārtejas pareizais veids atkarībā no sadales vārtejas veida, kas tika izmantots zaru izveidei. Tādu zaru atkārtotai apvienošanai, kas tika izveidoti, izmantojot ekskluzīvo vai uz notikumu bāzēto sadales vārteju, izmantojot ekskluzīvo saplūšanas vārteju. Lai atkārtoti apvienotu tādus zarus, kas tika izveidoti ar paralēlo vai inkluzīvo sadales vārteju, izmantojiet paralēlo saplūšanas vārteju.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Moduļa lauks',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Moduļu attiecības',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Lietotājs',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Loma',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Darba grupa',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Formas aktivitāte',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Biznesa noteikums',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Biznesa noteikuma darbība',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'E-pasta veidne',
 );

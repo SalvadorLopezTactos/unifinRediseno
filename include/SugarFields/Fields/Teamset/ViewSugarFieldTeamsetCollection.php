@@ -15,7 +15,12 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
 
-	var $add_user_private_team = true;
+    public $edit_tpl_path;
+    /**
+     * @var mixed
+     */
+    public $detail_tpl_path;
+    public $add_user_private_team = true;
     public $acl_team_set_id;
 	var $team_set_id = null;
 	var $team_id = null;
@@ -52,7 +57,7 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
                $this->displayParams['formName'] = $this->form_name;
                $this->tpl_path = $this->findTemplate('TeamsetCollectionEditView');
             } else {
-               $this->displayParams['formName'] = isset($this->displayParams['formName']) ? $this->displayParams['formName'] : "EditView";
+                $this->displayParams['formName'] = $this->displayParams['formName'] ?? "EditView";
                $this->tpl_path = $this->findTemplate('TeamsetCollectionEditView');
             }
             $this->ss->assign('quickSearchCode',$this->createQuickSearchCode());
@@ -337,6 +342,7 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
      * return the javascript code which define sqs_objects.
      */
     function createQuickSearchCode($returnAsJavascript = true){
+        $field = [];
         $fieldName = empty($this->displayParams['idName']) ? $this->name : $this->displayParams['idName'];
 		$sqs_objects = array();
         $qsd = QuickSearchDefaults::getQuickSearchDefaults();

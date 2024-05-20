@@ -11,7 +11,7 @@
 /**
  * Month Schedule View - extension of TimeLine View
  */
-;(function() {
+;(function(app) {
 
 kendo = window.kendo;
 
@@ -98,8 +98,11 @@ function datesHeader(columnLevels, columnCount) {
     for (columnIndex = 0; columnIndex < level.length; columnIndex++) {
         var column = level[columnIndex];
         var dayInWeek = column.date.getDay();//it starts from 1
-        var columnText = column.text;
-        columnText = kendo.toString(column.date, "dd MMMM yyyy");
+
+        const fullVerboseMonth = app.Calendar.utils.getKendoDateMapping(
+            app.user.getPreference('datepref'), 'fullVerboseMonth'
+        );
+        let columnText = kendo.toString(column.date, fullVerboseMonth);
 
         if (smartColspan === 0) {
             smartColspan = 7 - dayInWeek + 1;// the colspan has to be at least 1
@@ -282,4 +285,4 @@ window.monthSchedule = kendo.ui.monthSchedule = kendo.ui.TimelineMonthView.exten
     },
 });
 
-})();
+})(SUGAR.App);

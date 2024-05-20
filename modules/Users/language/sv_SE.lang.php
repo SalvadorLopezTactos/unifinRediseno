@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Användarinformation kunde ej hittas',
     'ERR_USER_NAME_EXISTS'              => 'Användarnamnet {0} finns redan. Du får inte ha samma som någon annan, så ändra det till nåt unikt.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licensen “Sugar Hint” måste sparas med ytterligare kompatibel licenstyp',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Denna funktion ingår redan i Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Denna användare har låsts ute av Sugar applikation och kan inte logga in genom att använda existerande lösenord.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Enadast externa godkända användare är tillåtna att logga in med Sugar-autentiseringsuppgifter',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Lösenord',
     'LBL_CHOOSE_A_KEY'					=> 'Välj en nyckel för att unvika obehörig publicering av din kalender',
     'LBL_NO_KEY'                        => 'Nyckeln är inte ifyllt. Vänligen fyll i nyckel för att aktivera publiceringen.',
-	'LBL_CHOOSE_WHICH'					=> 'Välj vilka flikar som ska visas',
+    'LBL_CHOOSE_WHICH'                  => 'Välj vilka moduler som är tillgängliga i sidonavigeringsfältet. Bestäm i vilken ordning modulerna ska visas.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Antal fastnålade moduler',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Ange antalet tillgängliga moduler som ska nålas fast när navigeringsfältet är dolt (dvs. om 5 anges nålas de första fem modulerna i din lista fast). Vi rekommenderar ett antal som representerar dina mest använda moduler. Värden över 100 godtas inte.',
 	'LBL_CITY'							=> 'Stad',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Rensa',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP användarnamn',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP Server typ:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP Server specifikation',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Auktoriserad e-postkonto',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Välj din Emailleverantör:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail Lösenord',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail ID',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'användare/team/roller',
     'LBL_LOADING_ITEMS' => 'Läser in data...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Smart Guide tillgång',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Smart Guide senast aktiv',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Åtkomst till Smart Guide saknas',
 ); // END STRINGS DEFS

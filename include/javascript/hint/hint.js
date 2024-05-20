@@ -264,7 +264,9 @@
              * @return {Object}
              */
             getPanelMetadata: function(module) {
-                var originalModule = SUGAR.App.controller.layout.model.module;
+                var originalModule = SUGAR.App.sideDrawer && SUGAR.App.sideDrawer.isOpen() ?
+                    SUGAR.App.sideDrawer._components[0].module :
+                    SUGAR.App.controller.layout.model.module;
                 var isPersonOrientedModule = !_.includes(['Accounts', 'Administration'], originalModule);
 
                 var panelToMapping = {
@@ -611,7 +613,9 @@
              * @return {bool}
              */
             shouldUseOldHintPreview: function(modelName) {
-                var layout = SUGAR.App.controller.layout;
+                var layout = SUGAR.App.sideDrawer && SUGAR.App.sideDrawer.isOpen() ?
+                    SUGAR.App.sideDrawer._components[0] :
+                    SUGAR.App.controller.layout;
                 if (layout && modelName) {
                     var isRecordViewlayoutType = layout.type === 'record';
                     var mainLayoutModuleName = layout.model.module;

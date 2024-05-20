@@ -63,13 +63,13 @@
                     if (_.contains(['multi-line', 'focus'], this.context.get('layout')) && settings.module === null) {
                         settings.module = this.module;
                     }
-                    if (settings.module) {
-                        this.model = this.context.parent.get("model");
+                    if (settings.module && this.context.parent) {
+                        this.model = this.context.parent.get('model');
                     }
                     if (this.meta && this.meta.config) {
                         viewName = 'config';
                         this.action = 'edit';
-                        this.model = this.context.parent.get("model");
+                        this.model = this.context.parent ? this.context.parent.get('model') : this.model;
                         //needed to allow the record hbs to render our settings rather than the context model
                         this.dashModel.set(settings);
                         this.dashModel.set("componentType", (this instanceof app.view.Layout) ? "layout" : "view");

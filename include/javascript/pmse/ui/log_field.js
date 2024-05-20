@@ -129,9 +129,13 @@ LogField.prototype.createHTML = function () {
     detailDiv.style.display = 'table-cell';
 
     if (this.script){
-        logPicture = this.createHTMLElement('div');
+        logPicture = this.createHTMLElement('span');
         logPicture.className = this.picture;
-        logPicture.innerHTML = 'PM';
+
+        let moduleMeta = App.metadata.getModule('pmse_Inbox');
+        if (moduleMeta.display_type === 'abbreviation') {
+            logPicture.innerHTML = App.lang.getModuleIconLabel('pmse_Inbox');
+        }
     } else {
         logPicture = this.createHTMLElement('img');
         logPicture.style.cssFloat = "left";

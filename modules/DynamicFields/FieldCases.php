@@ -111,6 +111,9 @@ function get_widget($type)
         case 'actionbutton':
             $local_temp = new TemplateActionButton();
             break;
+        case 'geocodestatus':
+            $local_temp = new TemplateGeocodeStatus();
+            break;
         default:
             if (SugarAutoLoader::requireWithCustom('modules/DynamicFields/templates/Fields/Template'. ucfirst($type) . '.php')) {
                 $class  = SugarAutoLoader::customClass('Template' . ucfirst($type));

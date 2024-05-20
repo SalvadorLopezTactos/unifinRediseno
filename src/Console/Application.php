@@ -13,6 +13,7 @@
 namespace Sugarcrm\Sugarcrm\Console;
 
 use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\ExplainCommand;
+use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\ShowBoostValueCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\SilentReindexMultiProcessCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Password\PasswordConfigCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Password\PasswordResetCommand;
@@ -97,6 +98,7 @@ class Application extends BaseApplication
             new ElasticsearchQueueCommand(),
             new ElasticsearchRoutingCommand(),
             new ExplainCommand(),
+            new ShowBoostValueCommand(),
             new ElasticsearchRefreshStatusCommand(),
             new ElasticsearchRefreshEnableCommand(),
             new ElasticsearchRefreshTriggerCommand(),
@@ -215,7 +217,7 @@ class Application extends BaseApplication
             if (empty($sugar_version) ||
                 empty($sugar_flavor)  ||
                 empty($sugar_build)   ||
-                strpos($sugar_version, '12.0.5') === 0
+                strpos($sugar_version, '13.0.3') === 0
             ) {
                 return $default;
             }

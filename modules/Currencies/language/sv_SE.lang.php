@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Skapad av',
   'LBL_EDIT_LAYOUT' => 'Redigera layout' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Endast administratörer',
-  'LBL_CURRENCY_DEFAULT' => 'US-dollar (standard)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Systemvaluta (standard)',
 );
 ?>

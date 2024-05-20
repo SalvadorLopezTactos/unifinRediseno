@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Veljača',
     'LBL_MARCH' => 'Ožujak',
     'LBL_APRIL' => 'Travanj',
-    'LBL_MAY' => 'Svi.',
+    'LBL_MAY' => 'Svibanj',
     'LBL_JUNE' => 'Lipanj',
     'LBL_JULY' => 'Srpanj',
     'LBL_AUGUST' => 'Kolovoz',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Lis.',
     'LBL_NOV' => 'Stu.',
     'LBL_DEC' => 'Pro.',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalendar je već dodan',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} je odabran',
+    'LBL_NO_USER_SELECTED' => 'Odaberite korisnika ili tim',
+    'LBL_NO_CALENDAR_SELECTED' => 'Odaberite kalendar',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nije uspjelo spremanje kalendara.',
 
 );
 

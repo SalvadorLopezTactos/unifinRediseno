@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Ažuriraj definiciju proizvoda',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Obrada rasporeda osjetljivih na vrijeme',
 'LBL_OOTB_DATA_ARCHIVER' => 'Pokreni arhiviranje/brisanje aktivnih podataka',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Primijeni prava u okviru pretplate kada se promijene',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geokoder za zapise',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Napredne mogućnosti',
 'LBL_TOGGLE_ADV' => 'Prikaz naprednih mogućnosti',
 'LBL_TOGGLE_BASIC' => 'Prikaz osnovnih mogućnosti',
+'LBL_UPDATEMOMENTUMCJ' => 'Ažuriranje tempa pametnih vodiča u tijeku',
 // Links
 'LNK_LIST_SCHEDULER' => 'Planeri',
 'LNK_NEW_SCHEDULER' => 'Stvori planer',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Pokreni arhiviranje/brisanje aktivnih podataka',
 'LBL_PMSEENGINECRON' => 'Planer SugarBPM',
 );
-

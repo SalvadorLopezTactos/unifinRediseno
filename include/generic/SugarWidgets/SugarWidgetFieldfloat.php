@@ -29,6 +29,21 @@ class SugarWidgetFieldFloat extends SugarWidgetFieldInt
  {
      return $this->displayList($layout_def);
  }
+
+    /**
+     * Get float value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return string
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        $value = $this->displayListPlain($layoutDef);
+
+        return $value;
+    }
+
  function queryFilterEquals(&$layout_def)
  {	
     return $this->_get_column_select($layout_def)."= ".$GLOBALS['db']->quote(unformat_number($layout_def['input_name0']))."\n";

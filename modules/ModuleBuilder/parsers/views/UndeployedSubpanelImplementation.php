@@ -20,6 +20,14 @@ require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class UndeployedSubpanelImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
+    //@codingStandardsIgnoreStart
+    public $_subpanelName;
+    //@codingStandardsIgnoreEnd
+    /**
+     * @var string|mixed
+     */
+    public $historyPathname;
+    public $module;
     /**
      * Fields that are on the existing layout that aren't really fields, like
      * action buttons, that still need to stay on the layout after saving
@@ -28,8 +36,8 @@ class UndeployedSubpanelImplementation extends AbstractMetaDataImplementation im
      */
     protected $nonFields = array();
 
-    const HISTORYFILENAME = 'restored.php' ;
-    const HISTORYVARIABLENAME = 'layout_defs' ;
+    public const HISTORYFILENAME = 'restored.php' ;
+    public const HISTORYVARIABLENAME = 'layout_defs' ;
 
     /*
      * Constructor

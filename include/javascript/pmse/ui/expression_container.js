@@ -253,6 +253,7 @@ ExpressionContainer.prototype.handleClick = function (element) {
             case "DropDown":
             case "Checkbox":
             case 'Radio':
+            case 'parent_type':
                 this.handleDropDownBuilder(globalParent, parentVariable, element);
                 break;
             case "user":

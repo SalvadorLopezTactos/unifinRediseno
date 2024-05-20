@@ -12,6 +12,11 @@
 
 class ModuleBuilderViewWizard extends SugarView
 {
+    /**
+     * @var \AjaxCompose|mixed
+     */
+    public $ajax;
+    public $package;
     private $view = null ; // the wizard view to display
     private $actions ;
     private $buttons ;
@@ -304,7 +309,7 @@ class ModuleBuilderViewWizard extends SugarView
         $this->buttons = array ( ) ;
 
         foreach ($nodes as $module) {
-            $title = (isset ( $module [ 'imageTitle' ] ) ? $module [ 'imageTitle' ] : $module [ 'module' ]) ;
+            $title = ($module [ 'imageTitle' ] ?? $module [ 'module' ]) ;
             $this->buttons [ $module [ 'name' ] ] = array ( 'action' => $module [ 'action' ] , 'imageTitle' => $title , 'help' => $title , 'size' => '48' ) ;
         }
     }

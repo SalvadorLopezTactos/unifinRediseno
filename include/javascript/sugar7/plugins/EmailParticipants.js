@@ -214,6 +214,9 @@
                     }
 
                     if (hasParent && parent && app.acl.hasAccessToModel('view', parent)) {
+                        if (parent.module === 'Users') {
+                            parent.module = 'Employees';
+                        }
                         model.href = '#' + app.router.buildRoute(parent.module, parent.get('id'));
                     }
 

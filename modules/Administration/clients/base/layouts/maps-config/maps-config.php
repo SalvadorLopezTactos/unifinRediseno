@@ -42,7 +42,7 @@ $viewdefs['Administration']['base']['layout']['maps-config'] = [
                         'layout' => [
                             'type' => 'base',
                             'name' => 'base',
-                            'css_class' => 'map-admin-side-pain span9',
+                            'css_class' => 'map-admin-side-pane span9',
                             'components' => [
                                 [
                                     'layout' => 'maps-module-setup',

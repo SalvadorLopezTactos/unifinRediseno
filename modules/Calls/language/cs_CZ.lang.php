@@ -184,4 +184,10 @@ Vytvoření modulu {{calls_singular_module}}:
    - Kliknutím na položku  „Vybrat účastníka“ přizvete existujícího uživatele, kontakt nebo příležitost do modulu {{calls_singular_module}}. 
    - Kliknutím na ikonu plus napravo od položky „Vybrat účastníka“ vytvořte účastníka {{calls_singular_module}} jako nový záznam v systému Sugar.
 3. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Je volání chytrého průvodce",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Podřízené úkoly',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Podřízené schůzky',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Podřízená volání',
 );

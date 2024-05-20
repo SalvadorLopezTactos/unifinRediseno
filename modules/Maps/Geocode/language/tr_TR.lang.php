@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'Enlem',
     'LBL_LONGITUDE' => 'Boylam',
     'LBL_GEOCODED' => 'Coğrafi kodlamalı',
+    'LBL_ERROR_MESSAGE' => 'Coğrafi Kod Hata Meseajı',
 ];

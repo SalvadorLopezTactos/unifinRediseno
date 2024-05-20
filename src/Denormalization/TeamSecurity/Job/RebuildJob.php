@@ -54,7 +54,7 @@ class RebuildJob implements \RunnableSchedulerJob
     {
         $start = time();
         $command = $this->command;
-        list($status, $message) = $command();
+        [$status, $message] = $command();
         $duration = time() - $start;
 
         $message .= sprintf(' (%s second(s) taken)', $duration);

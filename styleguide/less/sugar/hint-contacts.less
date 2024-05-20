@@ -1,10 +1,7 @@
 .hint-preview-contacts {
   margin: 0 14px;
   position: relative;
-  background: #fff;
-  border-left: 1px solid #dcdee2;
-  border-right: 1px solid #dcdee2;
-  border-color: @borderColor;
+  background-color: @inputBackground;
 }
 
 .hint-preview-contacts .loading {
@@ -30,7 +27,6 @@
 .hint-preview-contacts-list .item {
   height: 40px;
   padding: 10px;
-  background-color: var(--input-background);
   border-color: @borderColor;
 }
 
@@ -65,13 +61,8 @@
   background-color: #176de5;
 }
 
-.hint-preview-contacts-list .show_more {
-  background-color: var(--input-background);
-  border-top: 1px solid @borderColor;
-}
-
 .hint-preview-contacts-list .show_more .btn.btn-link {
-  font-family: "Open Sans", "HelveticaNeue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", "HelveticaNeue", Helvetica, Arial, sans-serif;
 }
 
 .hint-preview-contacts-src .image_field {
@@ -90,7 +81,7 @@
   position: relative;
   left: 50px;
   display: inline-block;
-  bottom: 40px;
+  bottom: 2.25rem;
 }
 
 .hint-preview-contacts-nameandphone .name {
@@ -109,7 +100,7 @@
   position: relative;
   left: 50px;
   display: inline-block;
-  bottom: 40px;
+  bottom: 2.25rem;
   margin-top: -10px;
   color: var(--text-color);
 }
@@ -117,5 +108,5 @@
 .hint-preview-contacts-titleandmail .email {
   padding-right: 50px;
   text-align: right;
-  font-family: "Open Sans", "HelveticaNeue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", "HelveticaNeue", Helvetica, Arial, sans-serif;
 }

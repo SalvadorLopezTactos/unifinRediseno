@@ -16,7 +16,7 @@
     {{#each values}}
         {{#if count}}
             <tr class="header" data-module="{{../module}}"><td colspan="2" class="panel header">
-                <div class="label label-module label-{{module}} pull-left" aria-hidden="true">{{moduleIconLabel module}}</div>
+                {{moduleLabel module 'sm' class='pull-left' aria-hidden='true'}}
                 <strong>{{str label ../module}} ({{count}})</strong>
             </td></tr>
             {{#if models}}

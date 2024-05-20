@@ -136,7 +136,7 @@ class ResultParser implements ParserInterface
         if (preg_match('/^.*' . Mapping::PREFIX_SEP . '([^.]*).*$/', $field, $matches)) {
             $field = $matches[1];
         }
-        return isset($remap[$field]) ? $remap[$field] : $field;
+        return $remap[$field] ?? $field;
     }
 
     /**
@@ -171,7 +171,7 @@ class ResultParser implements ParserInterface
     protected function getPreTag()
     {
         $tags = $this->highlighter->getPreTags();
-        return isset($tags[0]) ? $tags[0]: '';
+        return $tags[0] ?? '';
     }
 
     /**
@@ -181,6 +181,6 @@ class ResultParser implements ParserInterface
     protected function getPostTag()
     {
         $tags = $this->highlighter->getPostTags();
-        return isset($tags[0]) ? $tags[0]: '';
+        return $tags[0] ?? '';
     }
 }

@@ -102,8 +102,8 @@ class CalendarController extends SugarController
         $this->view_object_map['currentModule'] = $this->currentBean->module_dir;
         $this->view_object_map['currentBean'] = $this->currentBean;
 
-        $editAllRecurrences = isset($_REQUEST['edit_all_recurrences']) ? $_REQUEST['edit_all_recurrences'] : false;
-        $dateStart = isset($_REQUEST['date_start']) ? $_REQUEST['date_start'] : false;
+        $editAllRecurrences = $_REQUEST['edit_all_recurrences'] ?? false;
+        $dateStart = $_REQUEST['date_start'] ?? false;
         $this->view_object_map['repeatData'] = CalendarUtils::getRepeatData($this->currentBean, $editAllRecurrences, $dateStart);
     }
 

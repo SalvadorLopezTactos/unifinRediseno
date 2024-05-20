@@ -57,6 +57,9 @@
 
         app.view.View.prototype.initialize.call(this, options);
 
+        // taggable plugin will use square pills instead of avatar+text
+        this.useSquarePills();
+
         var lastComment = this.model.get("last_comment");
         this.commentsCollection = app.data.createRelatedCollection(this.model, "comments");
 

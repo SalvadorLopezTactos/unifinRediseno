@@ -12,6 +12,9 @@
 
 namespace Sugarcrm\Sugarcrm\SugarConnect\Configuration;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 trait ConfigurationAwareTrait
 {
     /**

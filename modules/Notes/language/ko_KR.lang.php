@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => '노트 목록 대시보드',
     'LBL_NOTES_RECORD_DASHBOARD' => '노트 기록 대시보드',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '노트 포커스 서랍',
+    'LBL_EXTERNAL_USER' => '외부 사용자',
+    'LBL_EXTERNAL_USER_NAME' => '외부 사용자',
 
     'LBL_RELATED_CONTACT' => '관련 문의',
     'ERR_DELETE_RECORD' => '거래처를 삭제하시려면 정확한 자료 고유번호를 입력하셔야합니다.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => '이메일 유형',
     'LBL_EMAIL_ID' => '이메일 ID',
     'LBL_PHONE' => '전화번호:',
-    'LBL_PORTAL_FLAG' => '포탈에 게시하시겠습니까?',
+    'LBL_PORTAL_FLAG' => '외부 사용 가능',
     'LBL_EMBED_FLAG' => '이메일에 삽입하시겠습니까?',
     'LBL_PRODUCT_ID' => '제품 ID',
     'LBL_QUOTE_ID' => '견적 ID',

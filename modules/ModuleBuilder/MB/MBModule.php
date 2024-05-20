@@ -21,6 +21,25 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class MBModule
 {
+    /**
+     * @var string|mixed|mixed[]
+     */
+    public $key_name;
+    public $package;
+    public $package_key;
+    public $package_path;
+    /**
+     * @var \UndeployedRelationships|mixed
+     */
+    public $relationships;
+    /**
+     * @var \MBVardefs|mixed
+     */
+    public $mbvardefs;
+    /**
+     * @var mixed[]|array<string, string>|mixed
+     */
+    public $providedSubpanels;
     public $name = '' ;
     public $config = array(
         'team_security' => 1,
@@ -60,12 +79,14 @@ class MBModule
      */
     public $mblanguage;
 
+    public $help = [];
+
     function __construct ($name , $path , $package , $package_key)
     {
         global $mod_strings;
     	$this->config [ 'templates' ] = array ( 'basic' => 1 ) ;
 
-        $this->name = MBModule::getDBName ( $name ) ;
+        $this->name = self::getDBName($name);
         $this->key_name = $package_key . '_' . $name ;
         $this->package = $package ;
         $this->package_key = $package_key ;
@@ -82,9 +103,9 @@ class MBModule
         $this->load () ;
     }
 
-    function getDBName ($name)
+    public static function getDBName($name)
     {
-        return preg_replace ( "/[^\w]+/", "_", $name ) ;
+        return preg_replace("/[^\w]+/", "_", $name);
     }
 
     function getModuleName()
@@ -119,7 +140,15 @@ class MBModule
         }
         $label = (!empty ($this->config ['label'])) ? $this->config ['label'] : $this->name;
         $label_singular = !empty($this->config['label_singular']) ? $this->config['label_singular'] : $label;
-        $this->mblanguage = new MBLanguage ($this->name, $this->path, $label, $this->key_name, $label_singular);
+        $abbreviation = $this->config['label_abbreviation'] ?? self::getModuleAbbreviatedLabel($label);
+        $this->mblanguage = new MBLanguage(
+            $this->name,
+            $this->path,
+            $label,
+            $this->key_name,
+            $label_singular,
+            $abbreviation
+        );
         foreach ( $this->iTemplate as $temp )
         {
             if (! empty ( $this->config [ $temp ] ))
@@ -146,6 +175,9 @@ class MBModule
     {
         if (empty($this->config['label_singular']) && !empty($this->config['label'])) {
             $this->config['label_singular'] = $this->config ['label'];
+        }
+        if (empty($this->config['label_abbreviation']) && !empty($this->config['label'])) {
+            $this->config['label_abbreviation'] = self::getModuleAbbreviatedLabel($this->config['label']);
         }
     }
 
@@ -284,7 +316,7 @@ class MBModule
      */
     public function addLabel(string $displayLabel): void
     {
-        $this->setLabel('en_us', $this->getDBName($displayLabel), translate($displayLabel));
+        $this->setLabel('en_us', static::getDBName($displayLabel), translate($displayLabel));
         $this->save();
     }
 
@@ -364,12 +396,12 @@ class MBModule
             // for that here. This accounts for that
             $this->copyClients();
             // End bug 56675
-            if (0 != strcmp ( $old_config_md5, $this->config_md5 ))
-            {
+            if (0 !== strcmp((string)$old_config_md5, (string)$this->config_md5)) {
                 $this->mblanguage->reload () ;
             }
             $this->mblanguage->label = $this->config [ 'label' ] ;
             $this->mblanguage->label_singular = !empty($this->config['label_singular']) ? $this->config['label_singular'] : $this->config['label'];
+            $this->mblanguage->abbreviation = $this->config['label_abbreviation'] ?? self::getModuleAbbreviatedLabel($this->config['label']);
             //pass in the key_name incase it has changed mblanguage will check if it is different and handle it accordingly
             $this->mblanguage->save ( $this->key_name ) ;
 
@@ -1262,5 +1294,26 @@ class MBModule
         }
 
         return $path;
+    }
+
+    /**
+     * Returns the abbreviated version of the given module name. The
+     * abbreviation is as follows:
+     *
+     * -If a module name is one word:
+     *      -(First character of word) + (Second character of word)
+     * -If a module name is more than one word:
+     *      -(First character of first word) + (First character of second word)
+     *
+     * @param string $moduleLabel The full label of the module name
+     * @return string The abbreviated version of the module label
+     */
+    public static function getModuleAbbreviatedLabel($moduleLabel)
+    {
+        $spaceIndex = sugarStrpos($moduleLabel, ' ');
+        if ($spaceIndex !== false && $spaceIndex !== sugarStrlen($moduleLabel) - 1) {
+            return sugarSubstr($moduleLabel, 0, 1) . sugarSubstr($moduleLabel, $spaceIndex + 1, 1);
+        }
+        return sugarSubstr($moduleLabel, 0, 2);
     }
 }

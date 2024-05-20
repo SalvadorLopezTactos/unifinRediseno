@@ -179,6 +179,17 @@ return [
                                                     'acl_action' => 'create',
                                                     'acl_module' => 'Notes',
                                                 ],
+                                                [
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'createRecord',
+                                                    'params' => [
+                                                        'link' => 'tasks',
+                                                        'module' => 'Tasks',
+                                                    ],
+                                                    'label' => 'LBL_CREATE_TASK2',
+                                                    'acl_action' => 'create',
+                                                    'acl_module' => 'Tasks',
+                                                ],
                                             ],
                                         ],
                                         [

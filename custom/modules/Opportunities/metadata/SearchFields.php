@@ -250,4 +250,8 @@ $searchFields['Opportunities'] = array (
   array (
     'query_type' => 'default',
   ),
+  'lost' => 
+  array (
+    'query_type' => 'default',
+  ),
 );

@@ -34,7 +34,7 @@ class BugsApi extends ModuleApi
     {
         $msg = sprintf(
             '%s::%s is deprecated and will be removed in a future release.',
-            __CLASS__,
+            self::class,
             __METHOD__
         );
         $msg .= ' For Portal specific API customizations please use ModulePortalApi.';

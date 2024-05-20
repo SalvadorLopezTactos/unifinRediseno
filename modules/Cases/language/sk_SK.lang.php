@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Informačný panel so zoznamom prípadov',
     'LBL_CASES_RECORD_DASHBOARD' => 'Informačný panel so záznamom prípadov',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Podrobnosti prípadu',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Informačný panel so zameraním na prípady – Konzola',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na prípady',
 
 	'ERR_DELETE_RECORD'					=> 'Ak chcete zmazať účet, musíte zadať číslo záznamu.',
@@ -162,4 +162,29 @@ Ak chcete vytvoriť modul {{module_name}}:
     'LBL_SLA_DETAILS' => 'Podrobnosti o SLA',
     'LBL_HOURS' => 'Hodiny',
     'LBL_WIDGET_STATUS' => 'Stav',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizovať',
+    'LBL_CREATE_NEW' => 'Vytvoriť nový',
+    'LBL_MANAGE' => 'Spravovať',
+    'LBL_SEE_DETAILS' => 'Zobraziť podrobnosti',
+    'LBL_HIDE_NEW' => 'Skryť',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Prípady',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Prípad',
+    'LBL_KIOSK_CREATE' => 'Vytvoriť prípad',
+    'LBL_KIOSK_SUBJECT' => 'Predmet',
+    'LBL_KIOSK_CASE_ID' => 'ID prípadu',
+    'LBL_KIOSK_STATUS' => 'Stav',
+    'LBL_KIOSK_CATEGORY' => 'Kategória',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Odoslané dňa {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Priorita',
+    'LBL_KIOSK_CREATE_CASE' => 'Kontaktujte nás',
+    'LBL_KIOSK_DESCRIPTION' => 'Popis',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Vaša požiadavka bola úspešne odoslaná.',
+    'LBL_KIOSK_ATTACHED' => 'Všetko pripojené',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Externí používatelia',
 );

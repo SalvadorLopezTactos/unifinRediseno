@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Atvejų sąrašo ataskaitų sritis',
     'LBL_CASES_RECORD_DASHBOARD' => 'Atvejų duomenų ataskaitų sritis',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Išsami atvejo informacija',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Atvejų „Focus“ stalčius – konsolė',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Aptarnavimo „Focus“ stalčius',
 
 	'ERR_DELETE_RECORD'					=> 'Privalote nurodyti įrašo numerį, kad būtų galima ištrinti klientą.',
@@ -162,4 +162,29 @@ To create a {{module_name}}:
     'LBL_SLA_DETAILS' => 'Išsami SLA informacija',
     'LBL_HOURS' => 'Valandos',
     'LBL_WIDGET_STATUS' => 'Būsena',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizuoti',
+    'LBL_CREATE_NEW' => 'Sukurti naują',
+    'LBL_MANAGE' => 'Valdyti',
+    'LBL_SEE_DETAILS' => 'Ataskaita išsamiau',
+    'LBL_HIDE_NEW' => 'Slėpti',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Atvejai',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Atvejis',
+    'LBL_KIOSK_CREATE' => 'Kurti atvejį',
+    'LBL_KIOSK_SUBJECT' => 'Tema',
+    'LBL_KIOSK_CASE_ID' => 'Atvejo ID',
+    'LBL_KIOSK_STATUS' => 'Būsena',
+    'LBL_KIOSK_CATEGORY' => 'Kategorija',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Pateikta {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Svarba',
+    'LBL_KIOSK_CREATE_CASE' => 'Susisiekite su mumis',
+    'LBL_KIOSK_DESCRIPTION' => 'Aprašas',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Jūsų prašymas sėkmingai pateiktas.',
+    'LBL_KIOSK_ATTACHED' => 'Visi pridedami',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Išoriniai vartotojai',
 );

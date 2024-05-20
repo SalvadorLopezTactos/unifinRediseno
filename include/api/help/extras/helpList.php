@@ -130,10 +130,10 @@ if (substr($_SERVER['REQUEST_URI'], -1) == '/') {
                 <div class="row-fluid">
 
                     <div class="span3">
-                        <?php echo htmlspecialchars($endpoint['reqType']) ?>
+                        <?php echo htmlspecialchars($endpoint['reqType'], ENT_COMPAT) ?>
                         <span id="help_link_<?php echo $i ?>" class="btn-link" type="button" data-toggle="collapse"
                               data-target="#endpoint_<?php echo $i ?>_full">
-                            <?php echo htmlspecialchars($endpoint['fullPath']) ?>
+                            <?php echo htmlspecialchars($endpoint['fullPath'], ENT_COMPAT) ?>
                         </span>
                     </div>
 
@@ -143,7 +143,7 @@ if (substr($_SERVER['REQUEST_URI'], -1) == '/') {
                     </div>
 
                     <div class="span3">
-                        <?php echo htmlspecialchars($endpoint['shortHelp']) ?>
+                        <?php echo htmlspecialchars($endpoint['shortHelp'], ENT_COMPAT) ?>
                     </div>
 
                     <div class="span2">
@@ -186,14 +186,14 @@ if (substr($_SERVER['REQUEST_URI'], -1) == '/') {
 
                             <div class="pull-right muted">
                                 <i class="fa fa-file"></i>
-                                <?php echo "./" . htmlspecialchars($endpoint['longHelp']); ?>
+                                <?php echo "./" . htmlspecialchars($endpoint['longHelp'], ENT_COMPAT); ?>
                             </div>
 
                         </div>
 
                         <div class="pull-right">
                             <i class="fa fa-file"></i>
-                            <?php echo "./" . htmlspecialchars($endpoint['file']); ?>
+                            <?php echo "./" . htmlspecialchars($endpoint['file'], ENT_COMPAT); ?>
                         </div>
                         <?php } ?>
 

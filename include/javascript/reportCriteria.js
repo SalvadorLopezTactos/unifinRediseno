@@ -425,9 +425,10 @@ function addColumnSelectFilter(cell,filter, row) {
 	cell.innerHTML=buildSelectHTML(select_html_info, true);
 	filters_arr[filters_count_map[current_filter_id]].column_select = cell.getElementsByTagName('select')[0];
 
-	var column_text_cell = document.createElement('td');
-	column_text_cell.innerHTML = "&nbsp;>&nbsp;" + column_text_cell.innerHTML + selectedLabel;
-	row.appendChild(column_text_cell);
+    let column_text_cell = document.createElement('td');
+    column_text_cell.innerHTML = '&nbsp;>&nbsp;';
+    column_text_cell.append(document.createTextNode(selectedLabel));
+    row.appendChild(column_text_cell);
 
 }
 

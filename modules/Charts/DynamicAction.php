@@ -26,7 +26,7 @@ $allowed_mime_types = [
     'png' => 'image/png',
 ];
 
-list($mtype, $image) = explode(',', $_POST['imageStr']);
+[$mtype, $image] = explode(',', $_POST['imageStr']);
 
 /* we got from client something likes data:image/png;base64 */
 $mtype_processed = [];

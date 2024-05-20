@@ -31,8 +31,6 @@ class AdministrationController extends SugarController
 {
     public function action_savetabs()
     {
-
-
         global $current_user, $app_strings, $modInvisList;
         $request = InputValidation::getService();
         
@@ -52,11 +50,14 @@ class AdministrationController extends SugarController
         array_unshift($enabled_tabs, 'Home');
         $tabs = new TabController();
         $tabs->set_system_tabs($enabled_tabs);
-        $tabs->set_users_can_edit(isset($_REQUEST['user_edit_tabs']) && $_REQUEST['user_edit_tabs'] == 1);
+        
+        $tabs->set_users_can_edit(1 == $request->getValidInputRequest('user_edit_tabs'));
+        $tabs->set_users_pinned_modules(1 == $request->getValidInputRequest('users_pinned_modules'));
+        $tabs->set_number_pinned_modules($request->getValidInputRequest('number_pinned_modules'));
 
         // handle the subpanels
         if (isset($_REQUEST['disabled_tabs'])) {
-            $disabledTabs = json_decode(html_entity_decode(InputValidation::getService()->getValidInputRequest('disabled_tabs'), ENT_QUOTES));
+            $disabledTabs = json_decode(html_entity_decode($request->getValidInputRequest('disabled_tabs'), ENT_QUOTES));
             $disabledTabsKeyArray = TabController::get_key_array($disabledTabs);
             //Never show Project subpanels if Project module is hidden
             if (!in_array('project', $disabledTabsKeyArray) && in_array('Project', $modInvisList)) {
@@ -175,7 +176,7 @@ class AdministrationController extends SugarController
      */
     public function action_ScheduleFTSIndex()
     {
-        list($type, $config) = $this->getFtsSettingsFromRequest($_REQUEST);
+        [$type, $config] = $this->getFtsSettingsFromRequest($_REQUEST);
 
         // Save current configuration first
         $this->saveFtsConfig($type, $config);
@@ -206,7 +207,7 @@ class AdministrationController extends SugarController
         if (!is_admin($current_user)) {
             sugar_die($app_strings['ERR_NOT_ADMIN']);
         }
-        list($type, $config) = $this->getFtsSettingsFromRequest($_REQUEST);
+        [$type, $config] = $this->getFtsSettingsFromRequest($_REQUEST);
         $valid = $this->verifyFtsConnectivity($type, $this->mergeFtsConfig($type, $config));
 
         // Set label
@@ -248,11 +249,14 @@ class AdministrationController extends SugarController
         }
 
         // Check connectivity before saving
-        list($type, $config) = $this->getFtsSettingsFromRequest($_REQUEST);
-        $valid = $this->verifyFtsConnectivity($type, $this->mergeFtsConfig($type, $config));
+        [$type, $config] = $this->getFtsSettingsFromRequest($_REQUEST);
+        $valid = true;
+        if ($this->hasConfigChanged($type, $config)) {
+            $valid = $this->verifyFtsConnectivity($type, $this->mergeFtsConfig($type, $config));
 
-        // Save configuration
-        $this->saveFtsConfig($type, $config);
+            // Save configuration
+            $this->saveFtsConfig($type, $config);
+        }
 
         // Update the module vardefs to enable/disable fts
         $enabledModules = $this->getModuleList($_REQUEST['enabled_modules']);
@@ -270,6 +274,22 @@ class AdministrationController extends SugarController
         }
     }
 
+    /**
+     * check if config has been modified
+     * @param string $type
+     * @param array $config
+     * @return bool
+     */
+    protected function hasConfigChanged(string $type, array $config) : bool
+    {
+        $currentConfig = SugarConfig::getInstance()->get("full_text_engine.{$type}", array());
+        foreach ($config as $key => $value) {
+            if ($value != ($currentConfig[$key] ?? '')) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * action_saveunifiedsearchsettings
      *
@@ -329,10 +349,22 @@ class AdministrationController extends SugarController
      * @param array $config
      * @return array
      */
-    protected function saveFtsConfig($type, array $config)
+    protected function saveFtsConfig($type, array $config) : array
     {
-        $config = $this->mergeFtsConfig($type, $config);
+        if (isMts() || !(isset($config['host']) || isset($config['port']))) {
+            // disable save in MTS env
+            return $config;
+        }
 
+        if (isset($config['host'])) {
+            $config['host'] = decodeLocalhost($config['host']);
+        }
+
+        if (!$this->hasConfigChanged($type, $config)) {
+            return $config;
+        }
+
+        $config = $this->mergeFtsConfig($type, $config);
         $cfg = $this->getConfigurator();
         $cfg->config['full_text_engine'] = array($type => $config);
         $cfg->handleOverride();
@@ -368,7 +400,11 @@ class AdministrationController extends SugarController
         $config = array('host' => '', 'port' => '');
         foreach (array_keys($config) as $key) {
             if (!empty($request[$key])) {
-                $config[$key] = $request[$key];
+                if ($key === 'host') {
+                    $config[$key] = decodeLocalhost($request[$key]);
+                } else {
+                    $config[$key] = $request[$key];
+                }
             }
         }
         return array($type, $config);

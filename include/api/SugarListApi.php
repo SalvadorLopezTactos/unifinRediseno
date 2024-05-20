@@ -73,7 +73,7 @@ abstract class SugarListApi extends SugarApi {
             foreach ( $orderBys as $order ) {
                 if ( strpos($order,':') ) {
                     // It has a :, it's specifying ASC / DESC
-                    list($column,$direction) = explode(':',$order);
+                    [$column, $direction] = explode(':', $order);
                     if ( strtolower($direction) == 'desc' ) {
                         $direction = 'DESC';
                     } else {

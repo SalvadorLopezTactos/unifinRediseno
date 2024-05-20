@@ -117,7 +117,7 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::getAccessTokenOptions
+     * @covers ::getAccessToken
      */
     public function testGetAccessTokenOptions()
     {

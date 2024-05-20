@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Nödvändigt värde saknas',
     'LBL_ERROR_SYNC_USERS' => 'Ogiltigt värde att synka till Outlook:',
     'LBL_ID_EXISTS_ALREADY' => 'ID finns redan i denna annan tabell',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY finns redan i den här tabellen',
     'LBL_ASSIGNED_USER' => 'On användaren inte finns använd den nuvarande användaren',
     'LBL_SHOW_HIDDEN' => 'Visa fält som inte normalt är importeringsbara',
     'LBL_UPDATE_RECORDS' => 'Uppdatera befintliga poster istället för importera dom (Ingen ångra)',

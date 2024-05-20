@@ -32,7 +32,7 @@ class AggregationStack implements \IteratorAggregate
     /**
      * {@inheritdoc}
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->stack);
     }
@@ -54,7 +54,7 @@ class AggregationStack implements \IteratorAggregate
      */
     public function getById($id)
     {
-        return (isset($this->stack[$id])) ? $this->stack[$id] : false;
+        return $this->stack[$id] ?? false;
     }
 
     /**

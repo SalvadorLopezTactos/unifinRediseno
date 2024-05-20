@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Actualizare definire produs',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Programe bazate pe timp de proces',
 'LBL_OOTB_DATA_ARCHIVER' => 'Rulare arhivări/ștergeri date active',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Aplicați drepturile de abonament atunci când sunt modificate',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geocodificator înregistrări',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Optiune avansate',
 'LBL_TOGGLE_ADV' => 'Arata optiunile avansate',
 'LBL_TOGGLE_BASIC' => 'Arata optiunile de baza',
+'LBL_UPDATEMOMENTUMCJ' => 'Actualizați impulsul ghidurilor inteligente în curs de desfășurare',
 // Links
 'LNK_LIST_SCHEDULER' => 'Programatori',
 'LNK_NEW_SCHEDULER' => 'Creati',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Rulare arhivări/ștergeri date active',
 'LBL_PMSEENGINECRON' => 'Programator SugarBPM',
 );
-

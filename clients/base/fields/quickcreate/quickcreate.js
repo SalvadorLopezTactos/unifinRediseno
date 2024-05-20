@@ -68,12 +68,14 @@
                 onConfirm: _.bind(function() {
                     app.drawer.reset(false);
                     this.createRelatedRecord(module);
+                    app.events.trigger('sidebar-nav:expand:toggle', false);
                 }, this)
             });
         } else {
             // TODO: SP-1568 - We don't yet deal with bwc model changed attributes so
             // this will navigate to new create page WITHOUT alert for unsaved changes
             this.createRelatedRecord(module);
+            app.events.trigger('sidebar-nav:expand:toggle', false);
         }
     },
     /**

@@ -14,6 +14,10 @@
 class ReportsDashletsApi extends SugarApi
 {
 
+    /**
+     * @var mixed
+     */
+    public $title;
     public function registerApiRest()
     {
         return array(

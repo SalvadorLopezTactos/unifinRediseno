@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => '사례 목록 대시보드',
     'LBL_CASES_RECORD_DASHBOARD' => '사례 기록 대시보드',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => '케이스 세부사항',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => '사례 포커스 서랍 - 콘솔',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => '사례 포커스 서랍',
 
 	'ERR_DELETE_RECORD'					=> '거래처를 삭제하시려면 정확한 고유번호를 입력하셔야합니다.',
@@ -156,4 +156,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'SLA 세부 사항',
     'LBL_HOURS' => '시간',
     'LBL_WIDGET_STATUS' => '상태',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => '조직',
+    'LBL_CREATE_NEW' => '새로 만들기',
+    'LBL_MANAGE' => '관리',
+    'LBL_SEE_DETAILS' => '세부내용 보기',
+    'LBL_HIDE_NEW' => '숨김',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => '사례',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => '사례',
+    'LBL_KIOSK_CREATE' => '사례 만들기',
+    'LBL_KIOSK_SUBJECT' => '제목',
+    'LBL_KIOSK_CASE_ID' => '사례 ID',
+    'LBL_KIOSK_STATUS' => '상태',
+    'LBL_KIOSK_CATEGORY' => '범주',
+    'LBL_KIOSK_SUBMITTED_BY' => '{{date}}에 제출됨',
+    'LBL_KIOSK_PRIORITY' => '중요도',
+    'LBL_KIOSK_CREATE_CASE' => '계속',
+    'LBL_KIOSK_DESCRIPTION' => '설명',
+    'LBL_KIOSK_CREATE_SUCCESS' => '요청이 제출되었습니다.',
+    'LBL_KIOSK_ATTACHED' => '모두 첨부됨',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => '외부 사용자',
 );

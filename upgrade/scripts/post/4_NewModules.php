@@ -32,7 +32,7 @@ class SugarUpgradeNewModules extends UpgradeScript
         }
         $this->log("New modules to add: ".var_export($newModules, true));
 
-        $keyList = array('moduleList', 'moduleListSingular');
+        $keyList = array('moduleList', 'moduleListSingular', 'moduleIconList');
 
         foreach (get_languages() as $langKey => $langName) {
             if(!file_exists("custom/include/language/$langKey.lang.php")) {

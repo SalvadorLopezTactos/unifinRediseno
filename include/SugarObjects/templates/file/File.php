@@ -98,6 +98,7 @@ class File extends Basic
      */
     public function deleteAttachment($isduplicate = "false")
     {
+        $removeFile = null;
         if ($this->ACLAccess('edit')) {
             if ($isduplicate == "true") {
                 return true;

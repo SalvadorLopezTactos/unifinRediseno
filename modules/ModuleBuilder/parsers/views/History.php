@@ -19,6 +19,12 @@ require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 class History implements HistoryInterface
 {
 
+    /**
+     * @var mixed|int
+     */
+    //@codingStandardsIgnoreStart
+    public $_historyLimit;
+    //@codingStandardsIgnoreEnd
     private $_dirname ; // base directory for the history files
     private $_basename ; // base name for a history file, for example, listviewdef.php
     private $_list ; // the history - a list of history files
@@ -37,7 +43,7 @@ class History implements HistoryInterface
 
         $this->_basename = basename ( $this->_previewFilename ) ;
         $this->_dirname = dirname ( $this->_previewFilename );
- 	    $this->_historyLimit = isset ( $GLOBALS [ 'sugar_config' ] [ 'studio_max_history' ] ) ? $GLOBALS [ 'sugar_config' ] [ 'studio_max_history' ] : 50 ;
+        $this->_historyLimit = $GLOBALS ['sugar_config'] ['studio_max_history'] ?? 50;
 
         // create the history directory if it does not already exist
         if (!is_dir($this->_dirname)) {

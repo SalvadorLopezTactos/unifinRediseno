@@ -24,11 +24,11 @@ use Symfony\Component\Security\Core\Authentication\Provider\LdapBindAuthenticati
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Ldap\Exception\ConnectionException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class LdapAuthenticationProvider extends LdapBindAuthenticationProvider
 {
@@ -107,7 +107,7 @@ class LdapAuthenticationProvider extends LdapBindAuthenticationProvider
     {
         try {
             $user = parent::retrieveUser($username, $token);
-        } catch (UsernameNotFoundException $e) {
+        } catch (UserNotFoundException $e) {
             $user = $this->userProvider->loadUserByToken($token);
         }
 
@@ -176,7 +176,7 @@ class LdapAuthenticationProvider extends LdapBindAuthenticationProvider
                 throw new BadCredentialsException('The presented password is invalid.', 0, $e);
             }
         }
-        
+
         if (!empty($this->ldapConfig['groupMembership'])) {
             $this->groupCheck($user);
         }

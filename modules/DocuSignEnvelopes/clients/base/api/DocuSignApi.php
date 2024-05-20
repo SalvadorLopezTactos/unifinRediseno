@@ -10,13 +10,20 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-include_once 'vendor/docusign/autoload.php';
-
 use DocuSign\eSign as DocuSign;
 use Sugarcrm\Sugarcrm\Util\Uuid;
+use Sugarcrm\Sugarcrm\DocuSign\DocuSignUtils;
 
 class DocuSignApi extends SugarApi
 {
+    /**
+     * @var mixed
+     */
+    public $envelopeId;
+    /**
+     * @var int
+     */
+    public $limit;
     /**
      * {@inheritDoc}
      */
@@ -161,6 +168,61 @@ class DocuSignApi extends SugarApi
                     'docusignenvelopes_checkeapm_get_help.html',
                 'minVersion' => '11.16',
             ],
+            'getGlobalConfig' => [
+                'reqType' => 'GET',
+                'path' => ['DocuSign', 'getGlobalConfig'],
+                'pathVars' => ['', ''],
+                'method' => 'getGlobalConfig',
+                'shortHelp' => 'Get global configs',
+                'longHelp' =>
+                    'modules/DocuSignEnvelopes/clients/base/api/help/' .
+                    'docusignenvelopes_getGlobalConfig_get_help.html',
+                'minVersion' => '11.18',
+            ],
+            'setGlobalConfig' => [
+                'reqType' => 'POST',
+                'path' => ['DocuSign', 'setGlobalConfig'],
+                'pathVars' => ['', ''],
+                'method' => 'setGlobalConfig',
+                'shortHelp' => 'Set global configs',
+                'longHelp' =>
+                    'modules/DocuSignEnvelopes/clients/base/api/help/' .
+                    'docusignenvelopes_setGlobalConfig_post_help.html',
+                'minVersion' => '11.18',
+            ],
+            'listPossibleRecipients' => [
+                'reqType' => 'GET',
+                'path' => ['DocuSign', 'getListOfPossibleRecipients'],
+                'pathVars' => ['', ''],
+                'method' => 'getListOfPossibleRecipients',
+                'shortHelp' => 'Returns a list of possible recipients',
+                'longHelp' =>
+                    'modules/DocuSignEnvelopes/clients/base/api/help/' .
+                    'docusignenvelopes_listPossibleRecipients_get_help.html',
+                'minVersion' => '11.18',
+            ],
+            'listTemplates' => [
+                'reqType' => 'GET',
+                'path' => ['DocuSign', 'listTemplates'],
+                'pathVars' => ['', ''],
+                'method' => 'listTemplates',
+                'shortHelp' => 'Fetch user templates from DocuSign',
+                'longHelp' =>
+                    'modules/DocuSignEnvelopes/clients/base/api/help/' .
+                    'docusignenvelopes_list_templates_get_help.html',
+                'minVersion' => '11.18',
+            ],
+            'templateDetails' => [
+                'reqType' => 'POST',
+                'path' => ['DocuSign', 'getTemplateDetails'],
+                'pathVars' => ['', ''],
+                'method' => 'getTemplateDetails',
+                'shortHelp' => 'Fetch template details',
+                'longHelp' =>
+                    'modules/DocuSignEnvelopes/clients/base/api/help/' .
+                    'docusignenvelopes_get_template_details_get_help.html',
+                'minVersion' => '11.18',
+            ],
         ];
     }
 
@@ -179,7 +241,7 @@ class DocuSignApi extends SugarApi
 
         $res = [];
 
-        $eapmExists = $this->checkEAPM($api, $args);
+        $eapmExists = DocuSignUtils::checkEAPM();
         if (!$eapmExists) {
             $errorMessage = translate('LBL_PLEASE_LOG_IN', 'DocuSignEnvelopes');
             $log->error($errorMessage);
@@ -232,10 +294,16 @@ class DocuSignApi extends SugarApi
                 $newEnvelopeBean->parent_id = $returnUrlParams['parentId'];
                 $newEnvelopeBean->team_set_id = $current_user->team_set_id;
                 $newEnvelopeBean->team_id = $current_user->team_id;
+                if (isset($args['cloudServiceName'])) {
+                    $newEnvelopeBean->cloud_service_type = $args['cloudServiceName'];
+                }
+                if (isset($args['cloudPath'])) {
+                    $newEnvelopeBean->cloud_path = $args['cloudPath'];
+                }
                 $newEnvelopeBean->save();
             }
             $returnUrlParams = http_build_query($returnUrlParams);
-            
+
             $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
             $sidecarConfig = $moduleInstallerClass::getBaseConfig();
 
@@ -405,7 +473,7 @@ class DocuSignApi extends SugarApi
         $sq = new SugarQuery();
         $sq->select(['status'])->fieldRaw('count(id)', 'count');
         $sq->from($envelopeSeed);
-        $sq->groupBy(['status']);
+        $sq->groupBy('status');
 
         if (isset($args['recordModule']) && $args['recordModule'] !== 'Home') {
             $where = $sq->where();
@@ -445,8 +513,8 @@ class DocuSignApi extends SugarApi
                 'message' => translate('LBL_ERROR_ENVELOPE_NOT_COMPLETED', 'DocuSignEnvelopes'),
             ];
         }
-        
-        $eapmExists = $this->checkEAPM($api, $args);
+
+        $eapmExists = DocuSignUtils::checkEAPM();
         if (!$eapmExists) {
             $errorMessage = translate('LBL_PLEASE_LOG_IN', 'DocuSignEnvelopes');
             return [
@@ -455,150 +523,23 @@ class DocuSignApi extends SugarApi
             ];
         }
 
-        $extApi = new ExtAPIDocuSign();
+        $documentDownloadedRes = DocuSignUtils::downloadCompletedDocument($envelopeBean);
 
-        $options = [
-            'envelopeId' => $envelopeBean->envelope_id,
-        ];
-
-        try {
-            $documentInfo = $extApi->getCompletedDocumentInfo($options);
-            if (isset($documentInfo['status']) && $documentInfo['status'] === 'error') {
-                throw new Exception($documentInfo['message']);
-            }
-
-            $documentBean = $this->createDocumentInSugar(
-                $documentInfo['documentName'] . ' - ' . translate('LBL_DOCUMENT_COMPLETED', 'DocuSignEnvelopes'),
-                $documentInfo['body'],
-                $documentInfo['completedDateTime']
-            );
-            if (is_array($documentBean)) {
-                return [
-                    'status' => 'error',
-                    'message' => $documentBean['error'],
-                ];
-            }
-            $envelopeBean->document_id = $documentBean->id;
-        } catch (Exception $e) {
-            return [
-                'status' => 'error',
-                'message' => $e->getMessage(),
-            ];
+        if (is_array($documentDownloadedRes)) {
+            return $documentDownloadedRes;
         }
 
-        $envelopeBean->save();
-
-        $parentBean = BeanFactory::retrieveBean($envelopeBean->parent_type, $envelopeBean->parent_id);
-        $this->addToRelationship($parentBean, 'Documents', $documentBean->id);
+        $envelopeBean->retrieve();
+        if (!empty($envelopeBean->cloud_service_type) && !empty($envelopeBean->document_id)) {
+            $resUpload = DocuSignUtils::uploadDocumentInCloud($envelopeBean, $envelopeBean->document_id);
+            if (is_array($resUpload)) {
+                return $resUpload;
+            }
+        }
 
         return [
             'status' => 'success',
         ];
-    }
-
-    /**
-     * Creates a Document record in Sugar
-     *
-     * @method createDocumentInSugar
-     * @param string $docName
-     * @param string $docPdfBytes
-     * @param string $completedDateTime
-     * @return Documents Document bean
-     */
-    public function createDocumentInSugar($docName, $docPdfBytes, $completedDateTime = '')
-    {
-        global $log, $current_user;
-        try {
-            $revisionId = Uuid::uuid4();
-
-            $doc = new Document();
-            $doc->document_name = $docName;
-            $doc->doc_type = 'Sugar';
-            $doc->team_id = $current_user->team_id;
-            $doc->team_set_id = $current_user->team_set_id;
-            $doc->assigned_user_id = $current_user->id;
-            if (!empty($completedDateTime)) {
-                global $timedate;
-                $completedDateTimeObj = new DateTime($completedDateTime);
-                $completedDate = $completedDateTimeObj->format($timedate->dbDayFormat);
-                
-                $doc->active_date = $completedDate;//publish date
-            }
-            $doc->document_revision_id = $revisionId;
-            $doc->save();
-
-            $uploadFile = new UploadFile('completed_doc_file');
-            $uploadFile->file = $docPdfBytes;
-            $uploadFile->use_soap = true;//needed to make the final move
-
-            $docRevision = new DocumentRevision();
-            $docRevision->id = $revisionId;
-            $docRevision->new_with_id = true;
-            $docRevision->filename = $docName . '.pdf';//all ds completed documents are PDFs
-            $docRevision->file_mime_type = 'application/pdf';
-            $docRevision->file_ext = 'pdf';
-            $docRevision->doc_type = 'Sugar';
-            $docRevision->revision = 1;
-            $docRevision->document_id = $doc->id;
-            $docRevision->save();
-            
-            $uploadFile->final_move($docRevision->id);
-        } catch (Exception $ex) {
-            $log->error('DocuSign Exception: ' . $ex->getMessage());
-        }
-
-        return $doc;
-    }
-
-    /**
-     * Adds a record to a given relationship
-     *
-     * @param SugarBean $bean - The current record
-     * @param string $relatedModule
-     * @param string $relatedId
-     */
-    private function addToRelationship(SugarBean $bean, string $relatedModule, string $relatedId): void
-    {
-        foreach ($bean->field_defs as $fieldName => $def) {
-            //if the field doesn't have a relationship def. It is not a rel/link field.
-            if (!isset($def['relationship'])) {
-                continue;
-            }
-
-            $relationship = $this->getRelationshipName($def, $relatedModule, $bean);
-            if ($bean->load_relationship($relationship)) {
-                $bean->{$relationship}->add($relatedId);
-            }
-        }
-    }
-
-    /**
-     * Gets the name of the relationship given the defintion of a link field and a module
-     *
-     * @param array fieldDef
-     * @param string relatedModule
-     * @param Sugarbean bean
-     *
-     * @return string|null
-     */
-    private function getRelationshipName(array $linkDef, string $relatedModule, SugarBean $bean): ?string
-    {
-        $relationshipName = null;
-        $rel = SugarRelationshipFactory::getInstance()->getRelationship($linkDef['relationship']);
-
-        if ($rel) {
-            $lhsModule = $rel->getLHSModule();
-            $rhsModule = $rel->getRHSModule();
-
-            if ($lhsModule === $relatedModule || $rhsModule === $relatedModule) {
-                $bean->load_relationship($linkDef['relationship']) ?
-                    $relationshipName = $linkDef['relatonship'] :
-                    ($bean->load_relationship($linkDef['name']) ?
-                        $relationshipName = $linkDef['name'] : $relationshipName = null);
-            }
-        }
-
-        return $relationshipName;
     }
 
     /**
@@ -636,7 +577,7 @@ HTML;
         global $log;
         $envelopeBean = BeanFactory::retrieveBean('DocuSignEnvelopes', $args['sugarEnvelopeId']);
 
-        $eapmExists = $this->checkEAPM($api, $args);
+        $eapmExists = DocuSignUtils::checkEAPM();
         if (!$eapmExists) {
             $errorMessage = translate('LBL_PLEASE_LOG_IN', 'DocuSignEnvelopes');
             $log->error($errorMessage);
@@ -748,7 +689,7 @@ HTML;
 
         $extApi = new ExtAPIDocuSign();
 
-        $eapmExists = $this->checkEAPM($api, $args);
+        $eapmExists = DocuSignUtils::checkEAPM();
         if (!$eapmExists) {
             $errorMessage = translate('LBL_PLEASE_LOG_IN', 'DocuSignEnvelopes');
             $log->error($errorMessage);
@@ -770,7 +711,7 @@ HTML;
         try {
             $extApi->resendEnvelope($envelopeBean);
         } catch (DocuSign\Client\ApiException $ex) {
-            $exceptionMessage  = $ex->getMessage();
+            $exceptionMessage = $ex->getMessage();
             $responseObject = $ex->getResponseObject();
             if ($responseObject instanceof DocuSign\Model\ErrorDetails) {
                 $exceptionMessage = $responseObject->getMessage();
@@ -816,7 +757,7 @@ HTML;
 
         $extApi = new ExtAPIDocuSign();
 
-        $eapmExists = $this->checkEAPM($api, $args);
+        $eapmExists = DocuSignUtils::checkEAPM();
         if (!$eapmExists) {
             $errorMessage = translate('LBL_PLEASE_LOG_IN', 'DocuSignEnvelopes');
             $log->error($errorMessage);
@@ -937,9 +878,378 @@ HTML;
      */
     public function checkEAPM(ServiceBase $api, array $args)
     {
-        $extApi = new ExtAPIDocuSign();
-        $userEAPM = $extApi->getUserEAPM();
+        return DocuSignUtils::checkEAPM();
+    }
 
-        return  $userEAPM instanceof EAPM;
+    /**
+     * Get global config
+     *
+     * @param ServiceBase $api
+     * @param Array $args
+     * @return Array
+     */
+    public function getGlobalConfig(ServiceBase $api, $args): array
+    {
+        $docusignGlobalConfigs = DocuSignUtils::getDocusignGlobalConfigs();
+
+        return $docusignGlobalConfigs;
+    }
+
+    /**
+     * Set global config
+     *
+     * @param ServiceBase $api
+     * @param Array $args
+     * @return Array
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function setGlobalConfig(ServiceBase $api, $args)
+    {
+        if (!$api->user->isAdmin()) {
+            throw new SugarApiExceptionNotAuthorized(
+                $GLOBALS['app_strings']['EXCEPTION_CHANGE_MODULE_CONFIG_NOT_AUTHORIZED'],
+                ['moduleName' => 'DocuSignEnvelopes']
+            );
+        }
+
+        $this->requireArgs($args, ['recipientSelection']);
+
+        $docusignGlobalConfigs = DocuSignUtils::getDocusignGlobalConfigs();
+        $docusignGlobalConfigs['recipientSelection'] = $args['recipientSelection'];
+
+        DocuSignUtils::saveGlobalDocusignConfigs($docusignGlobalConfigs);
+
+        return $docusignGlobalConfigs;
+    }
+
+    /**
+     * Get list of possible recipients
+     *
+     * The return will contain everything needed in order to create models
+     *
+     * @param ServiceBase $api
+     * @param Array $args
+     * @return Array
+     */
+    public function getListOfPossibleRecipients($api, $args)
+    {
+        $this->requireArgs($args, ['module', 'id']);
+
+        $recipients = [];
+        $module = $args['module'];
+
+        $contextBean = BeanFactory::getBean($module, $args['id']);
+
+        $offset = isset($args['offset']) ? intval($args['offset']) : 0;
+
+        // add embeded email if any
+        $modulesWithEmailEmbeded = ['Accounts', 'Contacts', 'Prospects', 'Leads'];
+        if (in_array($module, $modulesWithEmailEmbeded) && !empty($contextBean->email1)) {
+            if (!empty($contextBean->first_name) || !empty($contextBean->last_name)) {
+                $name = trim($contextBean->first_name . ' ' . $contextBean->last_name);
+                $firstName = $contextBean->first_name;
+                $lastName = $contextBean->last_name;
+            } else {
+                $name = $contextBean->name;
+                $firstName = '';
+                $lastName = '';
+            }
+
+            $recipients[] = [
+                'id' => $contextBean->id,
+                'name' => $name,
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'email' => $contextBean->email1,
+                'module' => $contextBean->module_dir,
+                '_module' => $contextBean->module_dir,
+                'type' => 'signer',
+            ];
+        }
+
+        //add related record emails
+        foreach ($modulesWithEmailEmbeded as $moduleWithEmailEmbeded) {
+            $this->addRelatedRecordEmails($module, $moduleWithEmailEmbeded, $contextBean, $recipients);
+        }
+
+        // add emails from relations
+        foreach ($modulesWithEmailEmbeded as $moduleWithEmailEmbeded) {
+            $this->addEmailsFromRelations($module, $moduleWithEmailEmbeded, $contextBean, $recipients);
+        }
+
+        $numberOfRecipientsInAPage = intval($GLOBALS['sugar_config']['list_max_entries_per_page']);
+        $nextOffset = $offset + $numberOfRecipientsInAPage;
+        if ((is_countable($recipients) ? count($recipients) : 0) < $nextOffset) {
+            $nextOffset = -1;
+        }
+        $totalNumberOfRecipients = is_countable($recipients) ? count($recipients) : 0;
+        $recipients = array_slice($recipients, $offset, $numberOfRecipientsInAPage);
+
+        return [
+            'recipients' => $recipients,
+            'totalNumberOfRecipients' => $totalNumberOfRecipients,
+            'nextOffset' => $nextOffset,
+        ];
+    }
+
+    /**
+     * Returns related id_name fields of context record so we get their emails
+     *
+     * @param $contextModule string module where dashlet is located. We'll search relates on this module
+     * @param $moduleWithEmail string module name where we check for email
+     * @return Array
+     */
+    public function getRelatedFieldsIdNames($contextModule, $moduleWithEmail) : array
+    {
+        global $dictionary;
+        $res = [];
+
+        $object = \BeanFactory::getObjectName($contextModule);
+        $fields = $dictionary[$object]['fields'];
+        foreach ($fields as $fieldName => $fieldDef) {
+            if ($fieldDef['type'] === 'relate' &&
+                array_key_exists('module', $fieldDef) &&
+                $fieldDef['module'] === $moduleWithEmail) {
+                $res[] = $fieldDef['id_name'];
+            }
+        }
+
+        return $res;
+    }
+
+    /**
+     * Add related record emails
+     *
+     * @param string $module
+     * @param string $moduleWithEmailEmbeded
+     * @param SugarBean $contextBean
+     * @param Array $recipients
+     */
+    public function addRelatedRecordEmails(
+        string $module,
+        string $moduleWithEmailEmbeded,
+        SugarBean $contextBean,
+        array &$recipients
+    ) {
+        $relatedIdNames = $this->getRelatedFieldsIdNames($module, $moduleWithEmailEmbeded);
+
+        foreach ($relatedIdNames as $relatedIdName) {
+            $emailAdded = $this->checkItemAdded($recipients, $contextBean->$relatedIdName);
+            if ($emailAdded || empty($contextBean->$relatedIdName)) {
+                continue;
+            }
+
+            $relatedRecord = BeanFactory::getBean($moduleWithEmailEmbeded, $contextBean->$relatedIdName);
+            if (empty($relatedRecord->email1)) {
+                continue;
+            }
+
+            if (!empty($relatedRecord->first_name) || !empty($relatedRecord->last_name)) {
+                $name = $relatedRecord->first_name . ' ' . $relatedRecord->last_name;
+                $firstName = $relatedRecord->first_name;
+                $lastName = $relatedRecord->last_name;
+            } else {
+                $name = $relatedRecord->name;
+                $firstName = '';
+                $lastName = '';
+            }
+            $recipients[] = [
+                'id' => $relatedRecord->id,
+                'name' => $name,
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'email' => $relatedRecord->email1,
+                'module' => $moduleWithEmailEmbeded,
+                '_module' => $moduleWithEmailEmbeded,
+                'type' => 'signer',
+            ];
+        }
+    }
+
+    /**
+     * Add emails from relations
+     *
+     * @param string $module
+     * @param string $moduleWithEmailEmbeded
+     * @param SugarBean $contextBean
+     * @param Array $recipients
+     */
+    public function addEmailsFromRelations(
+        string $module,
+        string $moduleWithEmailEmbeded,
+        SugarBean $contextBean,
+        array &$recipients
+    ) {
+        $links = $this->getLinkNames($module, $moduleWithEmailEmbeded);
+        foreach ($links as $link) {
+            if (!$contextBean->load_relationship($link)) {
+                continue;
+            }
+
+            $records = $contextBean->$link->getBeans();
+            $formattedBeans = $this->formatBeans($GLOBALS['service'], [], $records);
+            foreach ($formattedBeans as $formattedBean) {
+                $emailAdded = $this->checkItemAdded($recipients, $formattedBean['id']);
+                if ($emailAdded) {
+                    continue;
+                }
+
+                if (empty($formattedBean['email1'])) {
+                    continue;
+                }
+
+                $formattedBean['module'] = $moduleWithEmailEmbeded;
+                $formattedBean['email'] = $formattedBean['email1'];
+                $recipients[] = [
+                    'id' => $formattedBean['id'],
+                    'name' => $formattedBean['name'],
+                    'email' => $formattedBean['email1'],
+                    'module' => $moduleWithEmailEmbeded,
+                    '_module' => $moduleWithEmailEmbeded,
+                    'type' => 'signer',
+                ];
+            }
+        }
+    }
+    /**
+     * Check if item is already in the result
+     *
+     * @param Array $result
+     * @param string $relatedId
+     * @return bool
+     */
+    public function checkItemAdded(array $result, string $relatedId) : bool
+    {
+        foreach ($result as $row) {
+            if ($row['id'] === $relatedId) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /*
+     * Returns link names of relations between context module and related module given which has email embedded
+     *
+     * @params $contextModule string
+     * @params $moduleWithEmail string target module
+     */
+    public function getLinkNames($contextModule, $moduleWithEmail)
+    {
+        global $dictionary;
+        $res = [];
+
+        $object = \BeanFactory::getObjectName($contextModule);
+        $fields = $dictionary[$object]['fields'];
+        foreach ($fields as $fieldName => $fieldDef) {
+            if ($fieldDef['type'] === 'link') {
+                if ((array_key_exists('module', $fieldDef) && $fieldDef['module'] === $moduleWithEmail) ||
+                    (array_key_exists('bean_name', $fieldDef) && $fieldDef['bean_name'] === $moduleWithEmail)
+                ) {
+                    $res[] = $fieldName;
+                }
+            }
+        }
+
+        return $res;
+    }
+
+    /**
+     * List templates
+     *
+     * @param ServiceBase $api
+     * @param Array $args
+     * @return Array
+     */
+    public function listTemplates(ServiceBase $api, array $args)
+    {
+        global $log;
+
+        $templates = [];
+        $extApi = new ExtAPIDocuSign();
+
+        $eapmExists = DocuSignUtils::checkEAPM();
+        if (!$eapmExists) {
+            $errorMessage = translate('LBL_PLEASE_LOG_IN', 'DocuSignEnvelopes');
+            $log->error($errorMessage);
+            return [
+                'status' => 'error',
+                'message' => $errorMessage,
+            ];
+        }
+
+        try {
+            $templates = $extApi->listTemplates();
+            if (isset($templates['status']) && $templates['status'] === 'error') {
+                throw new Exception($templates['message']);
+            }
+        } catch (Exception $ex) {
+            $exceptionMessage = $ex->getMessage();
+            if (empty($exceptionMessage)) {
+                $exceptionMessage = translate('LBL_ERROR_LISTING_TEMPLATES', 'DocuSignEnvelopes');
+            }
+            $log->error("Could not fetch templates. Error received from Api: {$exceptionMessage}");
+            return [
+                'status' => 'error',
+                'message' => $exceptionMessage,
+            ];
+        }
+
+        return [
+            'templates' => $templates,
+        ];
+    }
+
+    /**
+     * Request from docusign for template details
+     * @param ServiceBase $api
+     * @param Array $args
+     * @return Array
+     */
+    public function getTemplateDetails(ServiceBase $api, array $args)
+    {
+        $templates = [];
+        $res = [];
+        global $log;
+
+        $this->requireArgs($args, ['template']);
+
+        $extApi = new ExtAPIDocuSign();
+        $templateId = $args['template']['id'];
+
+        $eapmExists = DocuSignUtils::checkEAPM();
+        if (!$eapmExists) {
+            $errorMessage = translate('LBL_PLEASE_LOG_IN', 'DocuSignEnvelopes');
+            $log->error($errorMessage);
+            return [
+                'status' => 'error',
+                'message' => $errorMessage,
+            ];
+        }
+
+        try {
+            $extRes = $extApi->getTemplateDetails($templateId);
+            if (isset($templates['status']) && $templates['status'] === 'error') {
+                throw new Exception($templates['message']);
+            }
+        } catch (Exception $ex) {
+            $exceptionMessage = $ex->getMessage();
+            if (empty($exceptionMessage)) {
+                $exceptionMessage = translate('LBL_ERROR_FETCHING_TEMPLATE', 'DocuSignEnvelopes');
+            }
+            $log->error("Could not fetch template. Error received from Api: {$exceptionMessage}");
+            return [
+                'status' => 'error',
+                'message' => $exceptionMessage,
+            ];
+        }
+
+        $res["id"] = $templateId;
+        $res["name"] = $args["template"]["name"];
+        $res["roles"] = $extRes['roles'];
+        $res["predefined_recipients"] = $extRes['predefined_recipients'];
+
+        return $res;
     }
 }

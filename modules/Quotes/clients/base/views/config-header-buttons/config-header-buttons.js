@@ -38,6 +38,23 @@
                 column.css_class = 'service-duration-field';
                 column.inline = true;
             }
+            if (column.name === 'discount_field') {
+                column.css_class += ' discount-field quote-discount-percent';
+                column.fields = [{
+                    name: 'discount_amount',
+                    label: 'LBL_DISCOUNT_AMOUNT',
+                    type: 'discount-amount',
+                    discountFieldName: 'discount_select',
+                    related_fields: ['currency_id'],
+                    convertToBase: true,
+                    base_rate_field: 'base_rate',
+                    showTransactionalAmount: true
+                }, {
+                    name: 'discount_select',
+                    type: 'discount-select',
+                    options: [],
+                }];
+            }
         }, this);
         var saveObj = this.model.toJSON();
         var lineNum;

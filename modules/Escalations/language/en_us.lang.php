@@ -31,7 +31,7 @@ $mod_strings = [
     'LBL_ESCALATIONS_LIST_DASHBOARD' => 'Escalations List Dashboard',
     'LBL_ESCALATIONS_RECORD_DASHBOARD' => 'Escalations Record Dashboard',
     'LBL_RECENTLY_CREATED_ESCALATIONS_DASHLET' => 'Recent Escalations',
-    'LBL_ESCALATIONS_FOCUS_DRAWER_DASHBOARD' => 'Escalations Focus Drawer',
+    'LBL_ESCALATIONS_FOCUS_DRAWER_DASHBOARD' => 'Escalations Focus Dashboard',
 
     // Dashlets
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Escalation Timeline',

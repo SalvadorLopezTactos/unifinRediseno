@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => '如需獲得最佳體驗，請使用 IIS/FastCGI sapi，並在 php.ini 檔案中將 fastcgi.logging 設定為 0。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '已安裝不支援的 PHP 版本：（版本',
     'LBL_DB_UNAVAILABLE'                => '資料庫不可用',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '找不到數據庫支持。請確保您具有以下受支持的數據庫類型之一所需的驅動程序：MySQL、MS SQLServer、Oracle 或 DB2。您可能需要在 php.ini 文件中取消對擴展的註釋，或使用正確的二進製文件重新編譯，具體取決於您的 PHP 版本。有關如何啟用數據庫支持的更多信息，請參考您的 PHP 手冊。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '找不到資料庫支援。請確保為以下其中一個受支援資料庫類型提供必要的驅動程式：MySQL、MS SQLServer、Oracle 或 DB2。您可能需要取消 php.ini 檔案中的副檔名註釋，或使用正確的二進位檔案重新編譯，具體取決於您的 PHP 版本。有關如何啟用資料庫支援的更多資訊，請參閱 PHP 手冊。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => '未找到 Sugar 應用程式需要的與 XML 剖析器程式庫關聯的函數。您可能需要根據您的 PHP 版本，取消註解 php.ini 檔案的擴充，或使用正確的二進位檔案重新編譯。請參考 PHP 手冊了解更多資訊。',
     'LBL_CHECKSYS_CSPRNG' => '亂數產生器',
     'ERR_CHECKSYS_MBSTRING'             => '未找到 Sugar 應用程式需要的與多位元組字串 PHP 擴充 (mbstring) 關聯的函數。<br/><br/>一般，mbstring 模組在 PHP 中預設為不啟用，它必須在建立 PHP 二進位時用 --enable-mbstring 啟用。請參考 PHP 手冊了解如何啟用 mbstring 支援的更多資訊。',
@@ -635,32 +635,15 @@ $assigned_by_user 邀請你參加通話
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => '工作分派通知郵件',
-        'subject' => 'SugarCRM - 已簽約 $module_name ',
-        'description' => '當系統通知用戶分配任務時，會使用此範本。',
-        'body' => '<div>
-<p>$assigned_by_user 已指派 &nbsp;$module_name 給 &nbsp;$assigned_user.</p>
-
-<p>你可以檢視這個 &nbsp;$module_name 於此:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user 已指派 $module_name 給ˋ $assigned_user.
-
-你可以檢視這個 $module_name 於此:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => '已規劃的電子郵件報告',
         'subject' => '已規劃的報告：$report_name（$report_time現在）',
         'description' => '當系統通知用戶已規劃的報告時，會使用此範本。',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>附檔是為你自動生成的報告。</p>
-<p>報告名稱: $report_name</p>
-<p>報告開始日期與時間: $report_time</p>
+<p>尊敬的 $assigned_user,<br></p>
+<p>附件是計劃為您自動生成的報告。 <br></p>
+<p>報告名稱：<a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>報告運行日期和時間：$report_time<br></p>
 </div>',
         'txt_body' =>
             'Hello $assigned_user,
@@ -686,21 +669,6 @@ $assigned_by_user 邀請你參加通話
             請登入Sugar確認留言。',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => '新帳戶資訊',
-        'description' => '此範本將在系統管理員向使用者傳送新密碼時使用。',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>以下是您的帳戶使用者名稱和臨時密碼：</p><p>使用者名稱：$contact_user_user_name </p><p>密碼：$contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>使用上述密碼登入後，可能要求您將其重設為自己選擇的密碼。</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-以下是您的帳戶使用者名稱和臨時密碼：
-使用者名稱：$contact_user_user_name
-密碼：$contact_user_user_hash
-
-$config_site_url
-
-使用上述密碼登入後，可能要求您將其重設為自己選擇的密碼。',
-        'name' => '系統產生的密碼電子郵件',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => '重設您的帳戶密碼',
         'description' => "此範本用於向使用者傳送連結，按一下此連結可重設使用者帳戶密碼。",

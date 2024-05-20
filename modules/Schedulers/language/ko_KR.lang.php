@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => '제품 정의 업데이트',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => '처리 시간 인식 일정',
 'LBL_OOTB_DATA_ARCHIVER' => '활성화된 데이터 아카이브/삭제 실행',
+'LBL_OOTB_LICENSE_INSTALLER' => '구독 권한 변경 시 적용',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => '지오코더 기록',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> '고급 선택사항',
 'LBL_TOGGLE_ADV' => '고급 선택사항 보이기',
 'LBL_TOGGLE_BASIC' => '기본 선택사항 보이기',
+'LBL_UPDATEMOMENTUMCJ' => '진행 중인 Smart Guide 모멘텀 업데이트',
 // Links
 'LNK_LIST_SCHEDULER' => '일정 관리',
 'LNK_NEW_SCHEDULER' => '신규 일정관리 만들기',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => '활성화된 데이터 아카이브/삭제 실행',
 'LBL_PMSEENGINECRON' => 'SugarBPM 일정관리',
 );
-

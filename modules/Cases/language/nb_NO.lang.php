@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Dashbord for saksliste',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashbord for saksoppføring',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Saksdetaljer',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Oppgaver fokusskuff - Konsoll',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Saker fokusskuff',
 
 	'ERR_DELETE_RECORD'					=> 'Du må oppgi et registreringsnummer for å slette denne bedrift.',
@@ -156,4 +156,29 @@ For å opprette {{module_name}}:
     'LBL_SLA_DETAILS' => 'SLA-detaljer',
     'LBL_HOURS' => 'Timer',
     'LBL_WIDGET_STATUS' => 'Status',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiser',
+    'LBL_CREATE_NEW' => 'Opprett ny',
+    'LBL_MANAGE' => 'Administrer',
+    'LBL_SEE_DETAILS' => 'Vis detaljer',
+    'LBL_HIDE_NEW' => 'Skjul',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Saker',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Sak',
+    'LBL_KIOSK_CREATE' => 'Opprett sak',
+    'LBL_KIOSK_SUBJECT' => 'Emne',
+    'LBL_KIOSK_CASE_ID' => 'Sak-ID',
+    'LBL_KIOSK_STATUS' => 'Status',
+    'LBL_KIOSK_CATEGORY' => 'Kategori',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Sendt inn: {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioritet',
+    'LBL_KIOSK_CREATE_CASE' => 'Kontakt oss',
+    'LBL_KIOSK_DESCRIPTION' => 'Beskrivelse',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Din forespørsel ble sendt.',
+    'LBL_KIOSK_ATTACHED' => 'Alle vedlagt',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Eksterne brukere',
 );

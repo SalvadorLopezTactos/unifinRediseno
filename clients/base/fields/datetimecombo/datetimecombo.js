@@ -92,36 +92,6 @@
     },
 
     /**
-     * @inheritdoc
-     *
-     * Note, this is only for the datepicker, not the timepicker.
-     */
-    _getAppendToTarget: function() {
-        var $currentComponent = this.$el;
-
-        // this algorithm does not work on list view
-        if (this.view && (this.view.type === 'recordlist' || this.view.type === 'subpanel-list')) {
-            return this._super('_getAppendToTarget');
-        }
-
-        // First, attempt to attach to a parent element with an appropriate data-type attribute.
-        // bootstrap-datepicker requires that the append-to target be relatively positioned:
-        // https://stackoverflow.com/questions/27966645/bootstrap-datepicker-appearing-at-incorrect-location-in-a-modal
-        while ($currentComponent.length > 0) {
-            var dataType = $currentComponent && $currentComponent.attr('data-type');
-            if (dataType === this.type) {
-                $currentComponent.css('position', 'relative');
-                return $currentComponent;
-            } else {
-                $currentComponent = $currentComponent ? $currentComponent.parent() : {};
-            }
-        }
-
-        // fall back to parent implementation if necessary
-        return this._super('_getAppendToTarget');
-    },
-
-    /**
      * Handler to show time picker on icon click.
      *
      * We trigger the focus on element instead of the jqueryfied element, to
@@ -187,6 +157,9 @@
 
         this.def.time || (this.def.time = {});
 
+        //Retrieve an element to which the timepicker should be appended.
+        let appendToTarget = this._getAppendToTarget() || this.$el;
+
         options = {
             timeFormat: this.getUserTimeFormat(),
             scrollDefaultNow: _.isUndefined(this.def.time.scroll_default_now) ?
@@ -197,7 +170,7 @@
                 false :
                 !!this.def.time.disable_text_input,
             className: this.def.time.css_class || 'prevent-mousedown',
-            appendTo: this.$el,
+            appendTo: appendToTarget,
             lang: lang
         };
 

@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'Latitud',
     'LBL_LONGITUDE' => 'Longitud',
     'LBL_GEOCODED' => 'Geocodificado',
+    'LBL_ERROR_MESSAGE' => 'Mensaje de error de geocodificación',
 ];

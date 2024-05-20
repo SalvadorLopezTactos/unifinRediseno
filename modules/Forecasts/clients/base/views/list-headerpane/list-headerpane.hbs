@@ -10,20 +10,30 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="headerpane">
-    <h1>
-        <div class="record-cell">
-            <span class="module-title pull-left">{{{title}}}</span>
-            {{#if meta.tree}}
-                {{#each meta.tree}}
-                    {{field ../this}}
-                {{/each}}
-            {{/if}}
-        </div>
-        <div class="btn-toolbar pull-right dropdown">
-            {{#each meta.buttons}}
-                {{field ../this}}
-            {{/each}}
-        </div>
-    </h1>
+
+<div class="headerpane listheaderpane">
+    <div class="box user">
+        <span class="module-title pull-left">{{{title}}}</span>
+        {{#each meta.tree}}
+            {{field ../this}}
+        {{/each}}
+    </div>
+
+    <div class="box quarter-picker">
+        {{#each this.meta.timeperiod}}
+            {{field ../this model=../this.tpModel}}
+        {{/each}}
+    </div>
+
+    <div class="box datapoints">
+        {{#each this.meta.header-datapoints}}
+            {{field ../this model=../this.model}}
+        {{/each}}
+    </div>
+
+    <div class="box btn-toolbar dropdown">
+        {{#each meta.buttons}}
+            {{field ../this}}
+        {{/each}}
+    </div>
 </div>

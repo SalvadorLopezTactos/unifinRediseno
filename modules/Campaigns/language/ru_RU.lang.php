@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'URL трекера:',
   'LBL_TRACKER_TEXT' => 'Текст ссылки трекера:',
   'LBL_TRACKER_COUNT' => 'Количество трекеров:',
-  'LBL_REFER_URL' => 'Redirect URL трекера:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Маркетинговые кампании',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Рассылки электронной почты',
   'LBL_NEW_FORM_TITLE' => 'Новая кампания',

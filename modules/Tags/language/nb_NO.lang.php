@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Registredashbord for etiketter',
     'LBL_MY_TAGS' => 'Mine etiketter',
     'LBL_MY_FAVORITE_TAGS' => 'Mine favorittetiketter',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} Tagger',
 );

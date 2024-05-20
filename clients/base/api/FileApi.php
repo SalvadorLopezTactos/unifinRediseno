@@ -83,13 +83,13 @@ class FileApi extends SugarApi {
     public function saveFilePut(ServiceBase $api, array $args, $stream = 'php://input')
     {
         // Mime type, set to null for grabbing it later if not sent
-        $filetype = isset($_SERVER['HTTP_CONTENT_TYPE']) ? $_SERVER['HTTP_CONTENT_TYPE'] : null;
+        $filetype = $_SERVER['HTTP_CONTENT_TYPE'] ?? null;
 
         // Set the filename, first from the passed args then from the request itself
         if (isset($args['filename'])) {
             $filename = $args['filename'];
         } else {
-            $filename = isset($_SERVER['HTTP_FILENAME']) ? $_SERVER['HTTP_FILENAME'] : create_guid();
+            $filename = $_SERVER['HTTP_FILENAME'] ?? create_guid();
         }
 
         // Legacy support for base64 encoded file data

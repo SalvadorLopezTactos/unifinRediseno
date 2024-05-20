@@ -194,4 +194,10 @@ $mod_strings = array (
 - انقر فوق "تحديد الحضور" لإضافة مستخدم حالي، أو جهة اتصال، أو عميل محتمل إلى {{calls_singular_module}}.
 - انقر على أيقونة علامة الزائد إلى اليمين من "تحديد حاضر" من أجل إنشاء حاضر {{calls_singular_module}} كسجل جديد في Sugar.
 3. انقر فوق "حفظ" لإنهاء السجل الجديد وللعودة إلى الصفحة السابقة.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "هي مكالمة دليل ذكي",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'المهام الفرعية',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'الاجتماعات الفرعية',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'المكالمات الفرعية',
 );

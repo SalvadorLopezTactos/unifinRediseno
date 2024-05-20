@@ -13,6 +13,10 @@
 class SugarJobCreatePurchasesAndPLIs implements RunnableSchedulerJob
 {
     /**
+     * @var bool
+     */
+    public $runnable_ran;
+    /**
      * @var SchedulersJob
      */
     protected $job;
@@ -42,7 +46,7 @@ class SugarJobCreatePurchasesAndPLIs implements RunnableSchedulerJob
             return false;
         }
 
-        $args = json_decode(html_entity_decode($data), true);
+        $args = json_decode(html_entity_decode($data, ENT_COMPAT), true);
         $this->runnable_ran = true;
 
         // Process the chunk of RLI IDs with RLI::processRliIds method

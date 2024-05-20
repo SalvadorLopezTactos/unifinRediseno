@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Секретный ключ клиента не задан',
     'LBL_RESEND_BUTTON_LABEL' => 'Отправить повторно',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Получить конверт',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Тип облачного сервиса',
+    'LBL_CLOUD_PATH' => 'Облачный путь',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Информационная панель списка конвертов DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Недавние конверты DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для конвертов DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'Документ от ',
+    'LBL_NEW_ENVELOPE' => 'Новый конверт',
     'LBL_DOCUMENT_IS_NOW' => ' является теперь ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'Ошибка DocuSign. Не удалось получить ID учетной записи на основе метки доступа',
     'LBL_ERROR_RESEND' => 'Не удалось выполнить повторную отправку DocuSign. Статус конверта должен иметь значение "отправлено"',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Ошибка обновления',
     'LBL_ERROR_FETCH_TIME' => 'Правила DocuSign не разрешают отправлять несколько запросов к одному конверту в течение 15 минут',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Произошла ошибка. Не удалось обновить конверт. Проверьте журналы!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Произошла ошибка. Не удалось перечислить шаблоны. Проверьте журналы!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Произошла ошибка. Не удалось получить шаблон. Проверьте журналы!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Конверт не заполнен',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Статус конверта в DocuSign теперь ',
     'LBL_OVERVIEW' => 'Обзор',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Добавить документ',
     'LBL_BUTTON_SEND' => 'Отправить',
     'LBL_BUTTON_CLEAR' => 'Очистить',
-    'LBL_MISSING_OBJECT' => 'Объект DocuSign не находится в окне',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Использовать шаблон',
     'LBL_PLEASE_LOG_IN' => 'Сначала войдите в DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Вы не можете скачать этот документ. Он был создан другим пользователем!',
     'LBL_SEND_NOT_ALLOWED' => 'Вы не можете отправить этот конверт. Он был создан другим пользователем!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Подписано',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Не удалось загрузить документ. См. журналы!',
     'LBL_DOCUMENT_COMPLETED' => 'Завершено',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Информация DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'является теперь',
+    'LBL_SETTINGS_TITLE' => 'Настройки DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'Поведение при выборе получателя',
+    'LBL_RECIPIENT_NAME' => 'Имя',
+    'LBL_RECIPIENT_EMAIL' => 'Электронная почта',
+    'LBL_RECIPIENT_TYPE' => 'Тип',
+    'LBL_TEMPLATE_NAME' => 'Название',
+    'LBL_RECIPIENT_SELECT' => 'Выбрать...',
+    'LBL_RECIPIENT_ROLE' => 'Роль',
+    'LBL_SELECT_BUTTON_LABEL' => 'Выбрать',
+    'LBL_BACK_BUTTON_LABEL' => 'Назад',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Не удалось получить потенциальных получателей!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Не удалось получить шаблоны!',
 ];

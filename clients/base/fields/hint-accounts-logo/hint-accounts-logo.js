@@ -56,11 +56,7 @@
         if (_.isEmpty(this.value)) {
             var template = app.template.getField(this.type, 'module-icon', this._getModuleName());
             if (template) {
-                this.$('.image_field').replaceWith(template({
-                    module: this._getModuleName(),
-                    labelSizeClass: 'label-module-lg',
-                    tooltipPlacement: app.lang.direction === 'ltr' ? 'right' : 'left'
-                }));
+                this.$('.image_field').replaceWith(template(this._getModuleIconMeta()));
             }
         } else {
             var layout = app.controller.layout.name;
@@ -71,6 +67,34 @@
             this.$('img').addClass('hide').on('load', $.proxy(this.resizeWidget, this));
         }
         return this;
+    },
+
+    /**
+     * Gets the metadata to pass to the module-icon template based on the
+     * module settings
+     *
+     * @return {Object} the set of module-icon template metadata
+     * @private
+     */
+    _getModuleIconMeta: function() {
+        let module = this._getModuleName();
+        let moduleMeta = app.metadata.getModule(module);
+        let classes = `label-module-color-${moduleMeta.color}`;
+        let content = '';
+
+        if (moduleMeta.display_type === 'abbreviation') {
+            content = app.lang.getModuleIconLabel(this.module);
+        } else {
+            classes += ` sicon ${moduleMeta.icon}`;
+        }
+
+        return {
+            module: module,
+            labelSizeClass: 'label-module-lg',
+            tooltipPlacement: app.lang.direction === 'ltr' ? 'right' : 'left',
+            content: content,
+            classes: classes
+        };
     },
 
     /**

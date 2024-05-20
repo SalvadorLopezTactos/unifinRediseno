@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Wyświetl historię prognoz',
     'LBL_FORECAST_HISTORY' => 'Prognozy: Historia',
     'LBL_FORECAST_HISTORY_TITLE' => 'Historia',
+    'LBL_TAB_COMMITMENT' => 'Zaangażowanie',
+    'LBL_CURRENT' => 'Bieżące',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Przedział czasu',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Zmodyfikowano przez',
     'LBL_WK_VERSION' => 'Wersja',
     'LBL_WK_REVISION' => 'Wersja',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Dostęp do interfejsu API wskaźników wymaga Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Przedział czasu:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Czy chcesz zadeklarować te kwoty?',
     'ERR_FORECAST_AMOUNT' => 'Zadeklarowana kwota jest wymagana i powinna ona być liczbą.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Uwzględniony lejek sprzedaży',
+    'LBL_UPSIDE_PIPELINE' => 'Odwrócony lejek sprzedaży',
+    'LBL_EXCLUDED_PIPELINE' => 'Wykluczony lejek sprzedaży',
+    'LBL_WON' => 'Zakończone powodzeniem',
+    'LBL_LOST' => 'Zakończone porażką',
+    'LBL_ALL' => 'Wszystko',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Poradnik dotyczący filtrów',
+    'LBL_HELP_MAIN_BODY' => 'Wszystkie wskaźniki uwzględniają tylko możliwości należące do wybranych użytkowników, okresu i wszelkich dodatkowych zastosowanych filtrów',
+    'LBL_FORECAST_HELP' => 'Możliwości, które zostały już zakończone powodzeniem lub są w uwzględnionym etapie {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Otwarte możliwości z etapu {{{forecastStage}}} o wartości {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Otwarte możliwości w uwzględnionym etapie {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Otwarte możliwości z etapu {{{forecastStage}}} o wartości {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Otwarte możliwości z etapu {{{forecastStage}}} o wartości {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Otwarte możliwości w wykluczonym etapie {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Możliwości, które zostały już zakończone powodzeniem',
+    'LBL_LOST_HELP' => 'Możliwości, które zostały już zakończone niepowodzeniem',
+    'LBL_ALL_HELP' => 'Wszystkie możliwości',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Data rozpoczęcia',
     'LBL_FC_USER' => 'Harmonogram dla',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Zaangażowanie',
     'LBL_TEAM_COMMITMENT' => 'Zaangażowanie zespołu',
     'LBL_FORECASTED' => 'Prognozowane',
+    'LBL_OPPORTUNITY_FORECAST' => 'Prognoza możliwości',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Prognoza pozycji przychodu',
+    'LBL_LAST_COMMITMENT' => 'Ostatnie zaangażowanie',
     'LBL_ADJUSTED_TOTAL' => 'Skorygowana suma',
     'LBL_COMMIT_STAGE' => 'Etap wykonania',
     'LBL_SALES_STAGE' => 'Etap',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Dostosowane)',
     'LBL_SAVE_DRAFT' => 'Zapisz',
     'LBL_CHANGES_BY' => 'Zmodyfikowano przez {0}',
-    'LBL_FORECAST_SETTINGS' => 'Ustawienia',
+    'LBL_FORECAST_SETTINGS' => 'Ustawienia prognoz',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Ustawienia prognoz',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Początek roku podatkowego:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Skonfiguruj przedział czasu, który będzie używany w module Prognozy.<br><br>Ustawień przedziału czasu nie można zmienić po wstępnej konfiguracji.<br><br>Najpierw wybierz datę rozpoczęcia roku podatkowego. Następnie wybierz typ przedziału czasu prognozowania. Zakres dat dla przedziałów czasu będzie automatycznie obliczany na podstawie Twoich wyborów. Okres podrzędny przedziału czasu jest podstawą dla arkusza roboczego prognozy.<br><br>Widoczne przyszłe i przeszłe przedziały czasu określą liczbę widocznych podokresów w module Prognozy. Użytkownicy mogą przeglądać i edytować prognozowane kwoty w widocznych okresach podrzędnych.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Skonfiguruj to, jak chcesz skategoryzować {{forecastByModule}}. <br><br>Pamiętaj, że po pierwszym wykonaniu nie można zmieniać ustawienia Zakres. W przypadku zaktualizowanych wystąpień ustawienie Zakres jest zablokowane w istniejących danych prognoz.<br><br>Możesz wybrać co najmniej dwie kategorie w oparciu o zakresy prawdopodobieństwa lub utworzyć kategorie, które nie są oparte na prawdopodobieństwie. <br><br>Po lewej stronie od niestandardowych kategorii są pola wyboru; użyj ich do wybrania, które zakresy zostaną uwzględnione w prognozach przeprowadzonych i przesłanych do menedżerów. <br><br>Użytkownik może ręcznie zmienić status uwzględnienia/wykluczenia i kategorię {{forecastByModule}} z poziomu arkuszy.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Skonfiguruj sposób, w jaki chcesz przypisywać kategorie do rekordów typu {{forecastByModule}}. <br><br>Należy pamiętać, że ustawień zakresu nie można zmienić po pierwszym zatwierdzeniu. W przypadku uaktualnionych wystąpień ustawienie zakresu jest zablokowane w odniesieniu do istniejących danych prognozy. <br><br>Istnieje możliwość wyboru co najmniej dwóch kategorii w oparciu o zakresy prawdopodobieństwa lub utworzenia kategorii, które nie są oparte na prawdopodobieństwie. <br><br>Po lewej stronie kategorii niestandardowych są pola wyboru. Służą one do określania, które zakresy zostaną uwzględnione w ramach kwoty prognozy zatwierdzonej i zgłoszonej menedżerom. <br><br>Użytkownik może zmienić stan dołączania/wykluczania i kategorię rekordów typu {{forecastByModule}} ręcznie z poziomu ich arkusza.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Wybierz kolumny, które użytkownik powinien uzupełnić dla swoich prognoz dla każdej prognozy {{forecastByModuleSingular}}. Zwróć uwagę, że Prawdopodobna kwota jest związana z kwotą widoczną w prognozie {{forecastByModule}}; z tego powodu kolumna Prawdopodobne nie może być ukryta.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Wybierz, które kolumny mają być widoczne w module Prognozy. Lista pól połączy arkusz i zezwoli użytkownikowi na wybranie sposobu konfiguracji widoku.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Wypełniacz tekstu dla: Prognozy - Jak to się robi?',

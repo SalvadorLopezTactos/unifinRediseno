@@ -46,13 +46,13 @@ require_once 'vendor/Zend/Version.php';
 class Zend_Gdata_AuthSub
 {
 
-    const AUTHSUB_REQUEST_URI      = 'https://www.google.com/accounts/AuthSubRequest';
+    public const AUTHSUB_REQUEST_URI      = 'https://www.google.com/accounts/AuthSubRequest';
 
-    const AUTHSUB_SESSION_TOKEN_URI = 'https://www.google.com/accounts/AuthSubSessionToken';
+    public const AUTHSUB_SESSION_TOKEN_URI = 'https://www.google.com/accounts/AuthSubSessionToken';
 
-    const AUTHSUB_REVOKE_TOKEN_URI  = 'https://www.google.com/accounts/AuthSubRevokeToken';
+    public const AUTHSUB_REVOKE_TOKEN_URI  = 'https://www.google.com/accounts/AuthSubRevokeToken';
 
-    const AUTHSUB_TOKEN_INFO_URI    = 'https://www.google.com/accounts/AuthSubTokenInfo';
+    public const AUTHSUB_TOKEN_INFO_URI    = 'https://www.google.com/accounts/AuthSubTokenInfo';
 
      /**
       * Creates a URI to request a single-use AuthSub token.
@@ -128,7 +128,7 @@ class Zend_Gdata_AuthSub
             foreach (explode("\n", $response->getBody()) as $l) {
                 $l = chop($l);
                 if ($l) {
-                    list($key, $val) = explode('=', chop($l), 2);
+                    [$key, $val] = explode('=', chop($l), 2);
                     $goog_resp[$key] = $val;
                 }
             }

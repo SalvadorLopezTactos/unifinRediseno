@@ -63,15 +63,6 @@
     float: left;
   }
 
-  .datapoints {
-    float: right;
-    text-align: right;
-
-    div.pull-right .info:last-child .datapoint {
-      border-right: 0;
-    }
-  }
-
   .datapoint {
     min-width: 120px;
   }
@@ -182,6 +173,8 @@
 
 .topline,
 .info .results.extend {
+  .overflow-auto();
+
   .sicon {
     &.font-green {
       color: @green;
@@ -206,13 +199,11 @@
 .info {
   .results.extend {
     max-height: 118px;
-    background-color: @gray70;
+    background-color: var(--history-log-background);
     background-color: @gray80 e("\9");
     background-image: none;
-    color: @gray30;
-    text-shadow: 0 1px 1px @gray80;
+    color: var(--history-log-color);
     outline: 0;
-    box-shadow: inset 0 1px 3px @gray70;
     position: relative;
     margin: 0;
     padding: 0;
@@ -224,6 +215,8 @@
   }
 
   .last-commit {
+    border-bottom: @borderWidgetLight;
+
     .datapoint {
       float: left;
       min-width: 120px;

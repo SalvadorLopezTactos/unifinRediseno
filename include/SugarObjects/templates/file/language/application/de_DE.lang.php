@@ -20,7 +20,7 @@ strtolower($object_name).'_category_dom' =>
     array (
     '' => '',
     'Marketing' => 'Marketingseite',
-    'Knowledege Base' => 'Wissensdatenbank',
+    'Knowledge Base' => 'Wissendatenbank',
     'Sales' => 'Verkaufsseite',
   ),
 

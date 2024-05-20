@@ -43,7 +43,7 @@ class ContentTransferEncoding implements HeaderInterface
 
     public static function fromString($headerLine)
     {
-        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        [$name, $value] = GenericHeader::splitHeaderLine($headerLine);
         $value = HeaderWrap::mimeDecodeValue($value);
 
         // check to ensure proper header type for this factory
@@ -120,7 +120,7 @@ class ContentTransferEncoding implements HeaderInterface
     {
         $transferEncoding = trim($transferEncoding);
         foreach (static::$allowedTransferEncodings as $validEncoding) {
-            if (strpos($transferEncoding, (string) $validEncoding) !== false) {
+            if (strpos($transferEncoding, $validEncoding) !== false) {
                 $this->transferEncoding = $validEncoding;
                 return true;
             }

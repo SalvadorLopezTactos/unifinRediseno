@@ -206,7 +206,7 @@ function retrieve_modified_relationships($module_name, $related_module, $relatio
                         $fieldname = "m1.".$mod->db->getValidDBName($field);
                     } else {
                         // There is a dot in here somewhere.
-                        list($table_part,$field_part) = explode('.',$field);
+                        [$table_part, $field_part] = explode('.', $field);
                         $fieldname = $mod->db->getValidDBName($table_part).".".$mod->db->getValidDBName($field_part);
     			    }
     			    $field_select .= $fieldname;
@@ -496,5 +496,3 @@ function get_linked_records($get_module, $from_module, $get_id) {
 
 	return $id_arr;
 }
-
-?>

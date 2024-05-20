@@ -11,7 +11,11 @@
  */
 
 class SetOptionsAction extends AbstractAction{
-	protected $keysExpression =  "";
+    /**
+     * @var string[]|string|mixed
+     */
+    public $labelsExpression;
+    protected $keysExpression = "";
 	protected $labelsExpressions =  "";
 
     /**

@@ -29,7 +29,7 @@ class AccessConfigurator
     /**
      * access control configuration file.
      */
-    const ACCESS_CONFIG_FILE = 'access_config.json';
+    public const ACCESS_CONFIG_FILE = 'access_config.json';
 
     /**
      * instance

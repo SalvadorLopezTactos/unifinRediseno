@@ -21,6 +21,10 @@ require_once('service/core/SugarWebServiceImpl.php');
  */
 abstract class SugarSoapService extends SugarWebService
 {
+    /**
+     * @var mixed|bool
+     */
+    public $in_service;
     use SoapLogTrait;
 
     /**

@@ -19,6 +19,14 @@
 class SugarQuery_Builder_Field
 {
     /**
+     * @var bool|string
+     */
+    public $jta;
+    /**
+     * @var string|mixed
+     */
+    public $standardTable;
+    /**
      * @var SugarQuery
      */
     public $query;
@@ -125,7 +133,7 @@ class SugarQuery_Builder_Field
         $def = array();
 
         if (strstr($this->field, '.')) {
-            list($this->table, $this->field) = explode('.', $this->field);
+            [$this->table, $this->field] = explode('.', $this->field);
         }
 
         if ($bean &&
@@ -302,7 +310,10 @@ class SugarQuery_Builder_Field
      */
     public function shouldMarkNonDb()
     {
-        if ((isset($this->def['source']) && $this->def['source'] == 'non-db')
+        if ((isset($this->def['source'])
+                && ($this->def['source'] === 'non-db'
+                || $this->def['source'] === 'function')
+            )
             && empty($this->def['rname_link'])
             && empty($this->def['db_concat_fields'])
         ) {

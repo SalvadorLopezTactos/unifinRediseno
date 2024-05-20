@@ -16,7 +16,7 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class WebLogicHook extends SugarBean implements RunnableSchedulerJob
 {
-    const DEFAULT_CURL_TIMEOUT = 10;
+    public const DEFAULT_CURL_TIMEOUT = 10;
 
     public $id;
     public $name;

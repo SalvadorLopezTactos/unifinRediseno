@@ -36,18 +36,22 @@ use Google\Client;
  */
 class CloudRetail extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
   public $projects_locations_catalogs;
+  public $projects_locations_catalogs_attributesConfig;
   public $projects_locations_catalogs_branches_operations;
   public $projects_locations_catalogs_branches_products;
   public $projects_locations_catalogs_completionData;
+  public $projects_locations_catalogs_controls;
   public $projects_locations_catalogs_operations;
   public $projects_locations_catalogs_placements;
+  public $projects_locations_catalogs_servingConfigs;
   public $projects_locations_catalogs_userEvents;
   public $projects_locations_operations;
+  public $projects_operations;
 
   /**
    * Constructs the internal representation of the CloudRetail service.
@@ -106,6 +110,26 @@ class CloudRetail extends \Google\Service
                   'type' => 'string',
                 ],
               ],
+            ],'getAttributesConfig' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'getCompletionConfig' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'getDefaultBranch' => [
               'path' => 'v2/{+catalog}:getDefaultBranch',
               'httpMethod' => 'GET',
@@ -158,6 +182,74 @@ class CloudRetail extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'updateAttributesConfig' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'updateCompletionConfig' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_locations_catalogs_attributesConfig = new CloudRetail\Resource\ProjectsLocationsCatalogsAttributesConfig(
+        $this,
+        $this->serviceName,
+        'attributesConfig',
+        [
+          'methods' => [
+            'addCatalogAttribute' => [
+              'path' => 'v2/{+attributesConfig}:addCatalogAttribute',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'attributesConfig' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'removeCatalogAttribute' => [
+              'path' => 'v2/{+attributesConfig}:removeCatalogAttribute',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'attributesConfig' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'replaceCatalogAttribute' => [
+              'path' => 'v2/{+attributesConfig}:replaceCatalogAttribute',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'attributesConfig' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],
           ]
         ]
@@ -190,6 +282,16 @@ class CloudRetail extends \Google\Service
           'methods' => [
             'addFulfillmentPlaces' => [
               'path' => 'v2/{+product}:addFulfillmentPlaces',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'product' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'addLocalInventories' => [
+              'path' => 'v2/{+product}:addLocalInventories',
               'httpMethod' => 'POST',
               'parameters' => [
                 'product' => [
@@ -296,6 +398,16 @@ class CloudRetail extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'removeLocalInventories' => [
+              'path' => 'v2/{+product}:removeLocalInventories',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'product' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'setInventory' => [
               'path' => 'v2/{+name}:setInventory',
               'httpMethod' => 'POST',
@@ -324,6 +436,86 @@ class CloudRetail extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_locations_catalogs_controls = new CloudRetail\Resource\ProjectsLocationsCatalogsControls(
+        $this,
+        $this->serviceName,
+        'controls',
+        [
+          'methods' => [
+            'create' => [
+              'path' => 'v2/{+parent}/controls',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'controlId' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'delete' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'get' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'list' => [
+              'path' => 'v2/{+parent}/controls',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'patch' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],
@@ -383,6 +575,122 @@ class CloudRetail extends \Google\Service
               'httpMethod' => 'POST',
               'parameters' => [
                 'placement' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'search' => [
+              'path' => 'v2/{+placement}:search',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'placement' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_locations_catalogs_servingConfigs = new CloudRetail\Resource\ProjectsLocationsCatalogsServingConfigs(
+        $this,
+        $this->serviceName,
+        'servingConfigs',
+        [
+          'methods' => [
+            'addControl' => [
+              'path' => 'v2/{+servingConfig}:addControl',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'servingConfig' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'create' => [
+              'path' => 'v2/{+parent}/servingConfigs',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'servingConfigId' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'delete' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'get' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'list' => [
+              'path' => 'v2/{+parent}/servingConfigs',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'patch' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'predict' => [
+              'path' => 'v2/{+placement}:predict',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'placement' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'removeControl' => [
+              'path' => 'v2/{+servingConfig}:removeControl',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'servingConfig' => [
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
@@ -475,6 +783,48 @@ class CloudRetail extends \Google\Service
         ]
     );
     $this->projects_locations_operations = new CloudRetail\Resource\ProjectsLocationsOperations(
+        $this,
+        $this->serviceName,
+        'operations',
+        [
+          'methods' => [
+            'get' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'list' => [
+              'path' => 'v2/{+name}/operations',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_operations = new CloudRetail\Resource\ProjectsOperations(
         $this,
         $this->serviceName,
         'operations',

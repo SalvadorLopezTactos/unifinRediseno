@@ -117,4 +117,13 @@ To create a {{module_name}}:
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => '„Smart Guide“ užduotis',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Yra „Smart Guide“ užduotis',
+    'LBL_CJ_ACTIVITY_START_DATE' => '„Smart Guide“ veiklos pradžios data',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => '„Smart Guide“ veiklos pabaigos data',
+    'LBL_CJ_DAYS_TO_COMPLETE' => '„Smart Guide“ – likusios dienos',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Vaikų susitikimai',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Vaikų skambučiai',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Vaikų užduotys',
 );

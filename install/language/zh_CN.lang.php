@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => '为了获得IIS/FastCGI sapi的最佳效果，请在您的php.ini文件中设置fastcgi.logging为0。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '不支持当前PHP版本：（版本',
     'LBL_DB_UNAVAILABLE'                => '数据库不可用',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '找不到数据库支持。请确保您具有以下受支持的数据库类型之一所需的驱动程序：MySQL、MS SQLServer、Oracle 或 DB2。您可能需要在 php.ini 文件中取消对扩展的注释，或使用正确的二进制文件重新编译，具体取决于您的 PHP 版本。有关如何启用数据库支持的更多信息，请参考您的 PHP 手册。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '找不到数据库支持。请确保为以下受支持的数据库类型之一提供了必要的驱动程序：MySQL、MS SQLServer、Oracle 或 DB2。您可能需要取消 php.ini 文件中的扩展名注释，或者使用正确的二进制文件重新编译，具体取决于您的 php 版本。有关如何启用数据库支持的更多信息，请参阅 PHP 手册。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => '找不到Sugar应用程序需要的XML解析库功能。您可能要移除php.ini文件中有关扩展的注释，或重新编译正确的二进制文件，具体视您的PHP版本而定。欲知详情，请参考您的PHP手册。',
     'LBL_CHECKSYS_CSPRNG' => '随机数字生成器',
     'ERR_CHECKSYS_MBSTRING'             => '找不到Sugar应用程序需要的多字节字符串扩展(mbstring)功能。<br/><br/>一般来说，PHP默认不启用mbstring模块并且必须使用PHP自建的库--enable-mbstring来启动。欲知详情，请参考您的PHP手册。',
@@ -576,32 +576,15 @@ $assigned_by_user 邀请您参加通话
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => '指派通知电子邮件',
-        'subject' => 'SugarCRM - 分配的 $module_name ',
-        'description' => '当系统向用户发送任务分配时使用此模板。',
-        'body' => '<div>
-<p>$assigned_by_user 已分配 &nbsp;$module_name 给 &nbsp;$assigned_user.</p>
-
-<p>您可查看此&nbsp;$module_name 查看位置：<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user 已分配 $module_name 给 $assigned_user.
-
-您可以查看此 $module_name 查看位置：
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => '计划报表电子邮件',
         'subject' => '截至 $report_time 的计划报表 $report_name',
         'description' => '当系统向用户发送计划报表时使用此模板。',
         'body' => '<div>
-<p>尊敬的 $assigned_user,</p>
-<p>附件是按计划自动生成的报表。</p>
-<p>报表名称：$report_name</p>
-<p>报表运行日期和时间：$report_time</p>
+<p>尊敬的 $assigned_user,<br></p>
+<p>附件是计划为您自动生成的报告。<br></p>
+<p>报告名称：<a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>报告运行日期和时间：$report_time<br></p>
 </div>',
         'txt_body' =>
             '尊敬的 $assigned_user,
@@ -627,19 +610,6 @@ $assigned_by_user 邀请您参加通话
           请登录 Sugar 查看评论。',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => '新帐户信息',
-        'description' => '这个模板是管理员用来发送新密码给用户的。',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>这里是您的用户名和临时密码：</p><p>用户名 : $contact_user_user_name </p><p>密码 : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>当您使用上述密码登录后。您也许将被要求重新设置您的密码。</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'下面是您的帐户用户名和帐户临时密码：
-用户名 : $contact_user_user_name
-密码 : $contact_user_user_hash
-$config_site_url
-
-使用上述密码登录后，您将被要求重置您的密码。',
-        'name' => '系统生成的密码邮件',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => '重置您的帐户密码',
         'description' => "这个模板是用来提供给用户一个可以点击并重置他们密码的链接。",

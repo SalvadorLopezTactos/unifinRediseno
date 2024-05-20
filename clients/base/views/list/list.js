@@ -239,8 +239,8 @@
             }, this);
         }
 
-        this.context.on('focusRow', this.focusRow, this);
-        this.context.on('unfocusRow', this.unhighlightRows, this);
+        this.context.on('focusRow', (id) => this.focusRow(id));
+        this.context.on('unfocusRow', () => this.unhighlightRows());
     },
 
     /**
@@ -449,6 +449,10 @@
 
     _dispose: function() {
         this._fields = null;
+        if (this.context) {
+            this.context.off('focusRow');
+            this.context.off('unfocusRow');
+        }
         app.view.View.prototype._dispose.call(this);
     },
 

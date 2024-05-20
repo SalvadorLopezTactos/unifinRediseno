@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Info o uživateli nenalezeno',
     'ERR_USER_NAME_EXISTS'              => 'Jméno uživatele {0} již existuje. Duplicitní jména uživatelů nejsou povolena. Změňte jméno uživatele tak, aby bylo jedinečné.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licence „Nápověda systému Sugar“ musí být uložena s dalším kompatibilním typem licence',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Tato možnost je již součástí sady Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Tento uživatel je zamknut a tímto heslem se nepřihlásí .',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Uživateli majícímu pouze externí ověření není povoleno se přihlásit pomocí přihlašovacích údajů systému Sugar',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Heslo',
     'LBL_CHOOSE_A_KEY'					=> 'Vyberte si klíč, kterým si chcete chránit svůj kalendář.',
     'LBL_NO_KEY'                        => 'Klíč není nastaven. Prosím nastavte klíč k tomu, aby šlo publikovat.',
-	'LBL_CHOOSE_WHICH'					=> 'Zvolte které záložky zobrazit',
+    'LBL_CHOOSE_WHICH'                  => 'Vyberte, které moduly jsou přístupné v postranním navigačním panelu. Určete pořadí, v jakém se mají moduly zobrazovat.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Počet připnutých modulů',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Napište počet dostupných modulů, které se mají připnout při sbalení navigačního panelu (např. pokud zadáte 5, připne se prvních pět modulů v seznamu). Doporučujeme číslo, které představuje vaše nejčastěji používané moduly. Hodnoty vyšší než 100 nebudou dodrženy.',
 	'LBL_CITY'							=> 'Město',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Smazat',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP uživatelské jméno:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP typ serveru:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'Specifikace serveru SMTP',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Autorizovaný e-mailový účet',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Vyber Email providera:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail heslo:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'ID služby Yahoo! Mail:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'uživatelé/týmy/role',
     'LBL_LOADING_ITEMS' => 'Načítání dat...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Přístup k chytrému průvodci',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Poslední aktivní chytrý průvodce',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Chybějící přístup k chytrému průvodci',
 ); // END STRINGS DEFS

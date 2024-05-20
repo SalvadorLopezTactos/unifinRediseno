@@ -155,7 +155,7 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Шаблони',
     'LBL_RECORD_OTHER_TAB' => 'Інше',
     'LBL_EVENT_START' => 'Початок',
-    'LBL_EVENT_END' => 'Дата завершення',
+    'LBL_EVENT_END' => 'Завершення',
     'LBL_EVENT_END' => 'Завершення',
     'LBL_DAY_EVENT_TEMPLATE' => 'Подія дня',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Подія тижня',
@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Лютий',
     'LBL_MARCH' => 'Березень',
     'LBL_APRIL' => 'Квітень',
-    'LBL_MAY' => 'Трав.',
+    'LBL_MAY' => 'Травень',
     'LBL_JUNE' => 'Червень',
     'LBL_JULY' => 'Липень',
     'LBL_AUGUST' => 'Серпень',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Жовт.',
     'LBL_NOV' => 'Лист.',
     'LBL_DEC' => 'Груд.',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Календар уже додано',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} вибрано',
+    'LBL_NO_USER_SELECTED' => 'Виберіть користувача або команду',
+    'LBL_NO_CALENDAR_SELECTED' => 'Виберіть календар',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Не вдалося зберегти календарі.',
 
 );
 

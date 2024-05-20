@@ -117,4 +117,13 @@ Mooduli {{module_name}} loomiseks tehke järgmist.
  - Vajaduse korral lisaväljade avaldamiseks klõpsake suvandit Kuva rohkem.
 2. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu Salvesta.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Smart Guide&#39;i ülesanne',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'On Smart Guide&#39;i ülesanne',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Smart Guide&#39;i tegevuse alguskuupäev',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Smart Guide&#39;i tegevuse lõpetamise kuupäev',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Nutika juhis – päevi lõpuni',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Tütarkohtumised',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Tütarkõned',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Tütarülesanded',
 );

@@ -14,6 +14,7 @@ namespace Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage;
 
 use Configurator;
 use InvalidArgumentException;
+use Ramsey\Uuid\UuidInterface;
 use Ramsey\Uuid\Uuid;
 use SugarConfig;
 use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage;
@@ -36,9 +37,12 @@ final class Configuration implements KeyStorage
     /**
      * {@inheritDoc}
      */
-    public function getKey() : ?Uuid
+    public function getKey() : ?UuidInterface
     {
         $key = $this->config->get('cache.encryption_key');
+        if ($key === null) {
+            return null;
+        }
 
         try {
             return Uuid::fromString($key);
@@ -50,7 +54,7 @@ final class Configuration implements KeyStorage
     /**
      * {@inheritDoc}
      */
-    public function updateKey(Uuid $key) : void
+    public function updateKey(UuidInterface $key) : void
     {
         $configurator = new Configurator();
         $configurator->config['cache']['encryption_key'] = $key->toString();

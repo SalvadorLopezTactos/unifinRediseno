@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'Otsija URL: ',
   'LBL_TRACKER_TEXT' => 'Otsija lingi tekst: ',
   'LBL_TRACKER_COUNT' => 'Otsija arv: ',
-  'LBL_REFER_URL' => 'Otsija ümbersuunamise URL: ',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kampaaniad',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Meilikampaaniad',
   'LBL_NEW_FORM_TITLE' => 'Uus kampaania',

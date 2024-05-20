@@ -130,7 +130,8 @@ class WorkFlowAlert extends SugarBean {
 	}
 	
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $app_strings, $mod_strings;
 		global $app_list_strings;
 		global $current_module_strings;
@@ -195,7 +196,6 @@ class WorkFlowAlert extends SugarBean {
 }
 
 function get_field_value_array($base_module, $inclusion_type=false){
-	
         $inclusion_array = null;
 	if($inclusion_type!=false){
 		

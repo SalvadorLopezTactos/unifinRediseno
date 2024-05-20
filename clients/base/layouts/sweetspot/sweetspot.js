@@ -163,7 +163,7 @@
      *   otherwise.
      */
     isReady: function() {
-        return app.api.isAuthenticated() && app.isSynced && app.additionalComponents.header.isVisible();
+        return app.api.isAuthenticated() && app.isSynced && app.additionalComponents['header-nav'].isVisible();
     },
 
     /**

@@ -15,6 +15,16 @@ require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class SearchViewMetaDataParser extends ListLayoutMetaDataParser
 {
+    //@codingStandardsIgnoreStart
+    /**
+     * @var mixed|mixed[]
+     */
+    public $_searchLayout;
+    /**
+     * @var mixed[]|array<string, mixed>|mixed
+     */
+    public $_saved;
+    //@codingStandardsIgnoreEnd
     static $variableMap = array (
     						MB_BASICSEARCH => 'basic_search' ,
     						MB_ADVANCEDSEARCH => 'advanced_search' ,

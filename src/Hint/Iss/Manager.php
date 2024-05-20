@@ -22,9 +22,9 @@ class Manager implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    const ISS_SERVICE_PATH = '/hint/interest-subscription-service/v1';
-    const ISS_ACTION_COMMANDS = 'recordCommands';
-    const ISS_ACTION_AUTH = 'createToken';
+    public const ISS_SERVICE_PATH = '/hint/interest-subscription-service/v1';
+    public const ISS_ACTION_COMMANDS = 'recordCommands';
+    public const ISS_ACTION_AUTH = 'createToken';
 
     /**
      * ISS host

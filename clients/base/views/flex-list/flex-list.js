@@ -242,9 +242,6 @@
             var tableHeight = table.height();
             var tableOffsetTop = table.offset().top;
 
-            // The displacement of the table, using table height and it's distance from the top of the page
-            var tableOffset = windowHeight - tableHeight - Math.abs(tableOffsetTop);
-
             /**
              * There are 3 cases to check here:
              * 1. If only the first subset of records are loaded and the table is shorter than the height of the table
@@ -258,9 +255,6 @@
                 return (tableHeight + tableOffsetTop) < dropdownDisplacement;
             } else if ((tableHeight - Math.abs(tableOffsetTop) < dropdownDisplacement)) {
                 return true;
-            } else {
-                var footerHeight = $('#footer').children('footer').first().height();
-                return (windowHeight - footerHeight) < dropdownDisplacement;
             }
         }
 

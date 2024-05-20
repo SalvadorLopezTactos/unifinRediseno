@@ -183,6 +183,68 @@ class SugarWidgetFieldEnum extends SugarWidgetReportField
 		return $cell;
 	}
 
+
+    /**
+     * Get enum value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        $fieldDef = [];
+        $value = null;
+        $val = null;
+        if (!empty($layoutDef['column_key'])) {
+            $fieldDef = $this->reporter->all_fields[$layoutDef['column_key']];
+        } elseif (!empty($layoutDef['fields'])) {
+            $fieldDef = $layoutDef['fields'];
+        }
+
+        if (!empty($layoutDef['table_key'])
+            && (empty($fieldDef['fields']) || empty($fieldDef['fields'][0]) || empty($fieldDef['fields'][1]))
+        ) {
+            $value = $this->_get_list_value($layoutDef);
+        } elseif (!empty($layoutDef['name']) && !empty($layoutDef['fields'])) {
+            $key = strtoupper($layoutDef['name']);
+            $value = $layoutDef['fields'][$key];
+        }
+
+        $cell = '';
+        $list = getOptionsFromVardef($fieldDef);
+
+        if ((is_string($value) || is_int($value)) && $list && array_key_exists($value, $list)) {
+            //for enum controller we need the key instead of value
+            $cell = $value;
+        } elseif (is_array($list)) {
+            // $list returned from getOptionsFromVardef could also be array containing translation for options.
+            $cell = $list;
+        }
+
+        if (is_array($cell)) {
+            //#22632
+            $value = unencodeMultienum($value);
+            $cell = array();
+
+            foreach ($value as $val) {
+                $returnVal = translate($fieldDef['options'], $fieldDef['module'], $val);
+
+                if (!is_array($returnVal)) {
+                    array_push($cell, translate($fieldDef['options'], $fieldDef['module'], $val));
+                }
+            }
+
+            $cell = implode(", ", $cell);
+
+            if ($cell === '' && $val !== '') {
+                $cell = $val;
+            }
+        }
+
+        return $cell;
+    }
+
 	public function queryOrderBy($layout_def) {
 		$field_def = $this->reporter->all_fields[$layout_def['column_key']];
 		if (!empty ($field_def['sort_on'])) {

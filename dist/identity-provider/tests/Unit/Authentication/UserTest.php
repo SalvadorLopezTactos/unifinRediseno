@@ -65,7 +65,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testGetUsername()
     {
-        $this->assertEquals('user1', $this->user->getUsername());
+        $this->assertEquals('user1', $this->user->getUserIdentifier());
     }
 
     public function testGetSalt()
@@ -97,38 +97,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $user->removeAttribute('attr2');
         $this->assertFalse($user->hasAttribute('attr2'));
-    }
-
-    /**
-     * @covers ::isAccountNonExpired
-     */
-    public function testIsAccountNonExpired()
-    {
-        $this->assertTrue($this->user->isAccountNonExpired());
-    }
-
-    /**
-     * @covers ::isAccountNonLocked
-     */
-    public function testIsAccountNonLocked()
-    {
-        $this->assertTrue($this->user->isAccountNonLocked());
-    }
-
-    /**
-     * @covers ::isCredentialsNonExpired
-     */
-    public function testIsCredentialsNonExpired()
-    {
-        $this->assertTrue($this->user->isCredentialsNonExpired());
-    }
-
-    /**
-     * @covers ::isEnabled
-     */
-    public function testIsEnabled()
-    {
-        $this->assertTrue($this->user->isEnabled());
     }
 
     /**

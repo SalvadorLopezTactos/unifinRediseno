@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Des',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Ja s&#39;ha afegit el calendari',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} està seleccionat',
+    'LBL_NO_USER_SELECTED' => 'Seleccioneu un Usuari o Equip',
+    'LBL_NO_CALENDAR_SELECTED' => 'Seleccioneu un calendari',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Error en desar els calendaris.',
+
 );
 
 $mod_list_strings = array(

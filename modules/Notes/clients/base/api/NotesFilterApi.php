@@ -18,6 +18,9 @@ class NotesFilterApi extends FilterApi
     {
         $api = parent::registerApiRest();
         $api['filterModuleAll']['path'] = ['Notes'];
+        $api['filterModuleAllCount']['path'] = ['Notes', 'count'];
+        $api['filterModulePostCount']['path'] = ['Notes', 'filter', 'count'];
+        $api['filterModuleCount']['path'] = ['Notes', 'filter', 'count'];
 
         return $api;
     }

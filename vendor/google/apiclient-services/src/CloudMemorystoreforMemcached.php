@@ -35,7 +35,7 @@ use Google\Client;
  */
 class CloudMemorystoreforMemcached extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
@@ -190,6 +190,16 @@ class CloudMemorystoreforMemcached extends \Google\Service
                 'updateMask' => [
                   'location' => 'query',
                   'type' => 'string',
+                ],
+              ],
+            ],'rescheduleMaintenance' => [
+              'path' => 'v1/{+instance}:rescheduleMaintenance',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'instance' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
                 ],
               ],
             ],'updateParameters' => [

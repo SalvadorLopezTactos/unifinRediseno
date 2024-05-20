@@ -1,5 +1,7 @@
 <?php
- if(!defined('sugarEntry'))define('sugarEntry', true);
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,7 +21,23 @@ require_once('service/core/SugarRestServiceImpl.php');
  *
  */
 class SugarRestService extends SugarWebService{
-	protected $implementationClass = 'SugarRestServiceImpl';
+    /**
+     * @var string|mixed
+     */
+    public $responseClass;
+    /**
+     * @var string|mixed
+     */
+    public $serverClass;
+    /**
+     * @var mixed|object
+     */
+    public $implementation;
+    /**
+     * @var mixed|string
+     */
+    public $registryClass;
+    protected $implementationClass = 'SugarRestServiceImpl';
 	protected $restURL = "";
 	protected $registeredFunc = array();
 
@@ -65,7 +83,7 @@ class SugarRestService extends SugarWebService{
 		$this->responseClass = $this->_getTypeName(@$_REQUEST['response_type']);
 		$this->serverClass = $this->_getTypeName(@$_REQUEST['input_type']);
 		$GLOBALS['log']->info('SugarRestService->__construct serverclass = ' . $this->serverClass);
-		require_once('service/core/REST/'. $this->serverClass . '.php');
+        require_once 'service/core/REST/' . $this->serverClass . '.php';
 		$GLOBALS['log']->info('End: SugarRestService->__construct');
 	} // ctor
 
@@ -88,7 +106,7 @@ class SugarRestService extends SugarWebService{
 	 */
 	function serve(){
 		$GLOBALS['log']->info('Begin: SugarRestService->serve');
-		require_once('service/core/REST/'. $this->responseClass . '.php');
+        require_once 'service/core/REST/' . $this->responseClass . '.php';
 		$response  = $this->responseClass;
 
 		$responseServer = new $response($this->implementation);
@@ -149,7 +167,6 @@ class SugarRestService extends SugarWebService{
 		$this->implementationClass = $className;
 		$this->implementation = new $this->implementationClass();
 		$this->server = new $this->serverClass($this->implementation);
-		$this->server->registerd = $this->registeredFunc;
 		$GLOBALS['log']->info('End: SugarRestService->registerImplClass');
 	} // fn
 

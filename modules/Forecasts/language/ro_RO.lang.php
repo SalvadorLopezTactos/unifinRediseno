@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Vizualizare istoric previziuni',
     'LBL_FORECAST_HISTORY' => 'Previziuni: istoric',
     'LBL_FORECAST_HISTORY_TITLE' => 'Istoric',
+    'LBL_TAB_COMMITMENT' => 'Angajament',
+    'LBL_CURRENT' => 'Curent',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Perioada de timp',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Modificat de',
     'LBL_WK_VERSION' => 'Versiune',
     'LBL_WK_REVISION' => 'Revizie',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Accesul la API metrică necesită Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Perioada de timp:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Vrei sa iti asumi aceste sume?',
     'ERR_FORECAST_AMOUNT' => 'Suma asumata este camp obligatoriu si trebuie sa fie formata doar din cifre.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Portofoliu inclus',
+    'LBL_UPSIDE_PIPELINE' => 'Portofoliu partea superioară',
+    'LBL_EXCLUDED_PIPELINE' => 'Portofoliu exclus',
+    'LBL_WON' => 'Câștigat',
+    'LBL_LOST' => 'Pierdut',
+    'LBL_ALL' => 'Toate',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Îndrumare privind filtrele',
+    'LBL_HELP_MAIN_BODY' => 'Toate datele metrice includ Oportunități care aparțin utilizatorului(ilor) selectat(ți), perioada și orice filtre suplimentare pe care le-ați aplicat',
+    'LBL_FORECAST_HELP' => 'Oportunitățile care au fost câștigate deja sau care se află într-un {{{forecastStage}}} inclus',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Oportunități deschise cu un {{{forecastStage}}} de {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Oportunități deschise într-un {{{forecastStage}}} inclus',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Oportunități deschise cu un {{{forecastStage}}} de {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Oportunități deschise cu un {{{forecastStage}}} de {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Oportunități deschise într-un {{{forecastStage}}} exclus',
+    'LBL_WON_HELP' => 'Oportunități care au fost câștigate deja',
+    'LBL_LOST_HELP' => 'Oportunități care au fost pierdute deja',
+    'LBL_ALL_HELP' => 'Toate oportunitățile',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Data Începerii',
     'LBL_FC_USER' => 'Programeaza pentru',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Confirmare',
     'LBL_TEAM_COMMITMENT' => 'Confirmare echipă',
     'LBL_FORECASTED' => 'Prognozat',
+    'LBL_OPPORTUNITY_FORECAST' => 'Previziune oportunități',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Previziune articol linii de venit',
+    'LBL_LAST_COMMITMENT' => 'Ultimul angajament',
     'LBL_ADJUSTED_TOTAL' => 'Total ajustat',
     'LBL_COMMIT_STAGE' => 'Stadiu asumare',
     'LBL_SALES_STAGE' => 'Stadiu',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => ' (Ajustat)',
     'LBL_SAVE_DRAFT' => 'Salvare',
     'LBL_CHANGES_BY' => 'Schimbari efectuate de {0}',
-    'LBL_FORECAST_SETTINGS' => 'Setari',
+    'LBL_FORECAST_SETTINGS' => 'Setări previziuni',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Setare previziuni',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data de incepere a anului fiscal:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configureaza perioada de timp care va fi folosita in modulul Previziuni. <br><br>Atentie: Setarile pentru perioada de timp nu pot fi schimbate dupa setarea initiala.<br><br>Incepe prin a alege data de start a anului fiscal. Apoi alege tipul de perioada de timp pentru previziuni. Marja datelor pentru perioadele de timp va fi calculata automat pe baza selectiilor tale. Perioada de timp secundara este baza pentru tabelul de previziuni. <br><br>Perioada viitoare ce poate fi vizualizata si perioadele de timp trecute vor determina numarul de perioade secundare din modulul Previziuni. Utilizatorii pot vedea si modifica cifrele din previziuni in perioadele secundare vizibile.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurați modul în care doriți să clasificați {{forecastByModule}}. <br><br>Vă rugăm să rețineți că setările pentru interval nu pot fi modificate după prima confirmare. Pentru instanțe actualizate, setarea pentru interval este blocată cu datele de previziuni existente.<br><br>Puteți selecta două sau mai multe categorii bazate pe intervalele de probabilitate sau puteți crea categorii care nu sunt bazate pe probabilitate. <br><br>În stânga lângă categoriile dumneavoastră personalizate sunt căsuțe de selectare; folosiți-le pentru a decide ce intervale vor fi incluse în cantitatea de previziuni confirmate și raportate managerilor. <br><br>Un utilizator poate schimba starea de inclus/exclus și categoria {{forecastByModule}} în mod manual din foaia sa de lucru.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurați modul în care doriți să clasificați în categorii {{forecastByModule}}. <br><br>Rețineți că setările pentru Interval nu pot fi schimbate după prima confirmare. Pentru instanțele actualizate, setarea pentru Interval este blocată cu datele existente privind Previziunile.<br><br>Puteți să selectați două sau mai multe categorii în funcție de intervalele de probabilitate sau să creați categorii care nu se bazează pe probabilitate. <br><br>În partea stângă a categoriilor personalizate se află casete de selectare pe care le puteți utiliza pentru a decide ce intervale să includeți în valoarea de Previziune confirmată și raportată către manageri. <br><br>Un utilizator poate schimba manual starea de includere/excludere și categoria {{forecastByModule}} din foaia de lucru proprie.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Selecteaza coloana pe care vrei ca utilizatorul sa o completeze pentru previziunile fiecarei {{forecastByModuleSingular}}. Atentie: Suma Previzibila este legata de suma afisata in {{forecastByModule}}; din acest motiv coloana Previzibil nu poate fi ascunsa.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Selecteaza coloanele pe care vrei sa le vizualizezi in modulul Previziuni. Lista campurilor va combina tabelul si va permite utilizatorilor sa aleaga felul in care vor sa isi configureze forma.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Sunt un substituent pentru Previziune după cum se trimit mesaje text!',

@@ -26,7 +26,6 @@ Class ScalarFormat {
 	var $interval;	
 	
 	function format_scalar($scalar, $scalar_type, $scalar_value){
-		
         $display = null;
 		$split_query = preg_split('{{sc}}', $scalar_value);
 		
@@ -82,8 +81,6 @@ Class ScalarFormat {
 	}
 
 	function format_quarter($scalar_type){
-		
-		
         $quarter_value = null;
 		$scalar_unixstamp  = mktime(0, 0, 0, date("m")+($this->interval*3),  date("d"),  date("Y"));
 		
@@ -148,17 +145,3 @@ Class ScalarFormat {
 
 //end class ScalarFormat
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

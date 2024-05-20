@@ -19,9 +19,33 @@ namespace Google\Service\Eventarc;
 
 class Destination extends \Google\Model
 {
+  /**
+   * @var string
+   */
+  public $cloudFunction;
   protected $cloudRunType = CloudRun::class;
   protected $cloudRunDataType = '';
+  protected $gkeType = GKE::class;
+  protected $gkeDataType = '';
+  /**
+   * @var string
+   */
+  public $workflow;
 
+  /**
+   * @param string
+   */
+  public function setCloudFunction($cloudFunction)
+  {
+    $this->cloudFunction = $cloudFunction;
+  }
+  /**
+   * @return string
+   */
+  public function getCloudFunction()
+  {
+    return $this->cloudFunction;
+  }
   /**
    * @param CloudRun
    */
@@ -35,6 +59,34 @@ class Destination extends \Google\Model
   public function getCloudRun()
   {
     return $this->cloudRun;
+  }
+  /**
+   * @param GKE
+   */
+  public function setGke(GKE $gke)
+  {
+    $this->gke = $gke;
+  }
+  /**
+   * @return GKE
+   */
+  public function getGke()
+  {
+    return $this->gke;
+  }
+  /**
+   * @param string
+   */
+  public function setWorkflow($workflow)
+  {
+    $this->workflow = $workflow;
+  }
+  /**
+   * @return string
+   */
+  public function getWorkflow()
+  {
+    return $this->workflow;
   }
 }
 

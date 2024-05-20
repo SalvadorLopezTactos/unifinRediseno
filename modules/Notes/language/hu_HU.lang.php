@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Megjegyzések listája műszerfal',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Feljegyzések bejegyzések műszerfal',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Megjegyzések figyelemfelhívás',
+    'LBL_EXTERNAL_USER' => 'Külső felhasználó',
+    'LBL_EXTERNAL_USER_NAME' => 'Külső felhasználó',
 
     'LBL_RELATED_CONTACT' => 'Kapcsolódó kapcsolat',
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a kliens törléséhez!',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'E-mail típusa',
     'LBL_EMAIL_ID' => 'E-mail azonosítója',
     'LBL_PHONE' => 'Telefon:',
-    'LBL_PORTAL_FLAG' => 'Megjelenjen a portálon?',
+    'LBL_PORTAL_FLAG' => 'Előrhető külső forrásból',
     'LBL_EMBED_FLAG' => 'Beágyazza emailbe?',
     'LBL_PRODUCT_ID' => 'Termék azonosító:',
     'LBL_QUOTE_ID' => 'Árajánlat azonosító:',

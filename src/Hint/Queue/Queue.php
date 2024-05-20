@@ -223,8 +223,8 @@ WHERE q.processing_instance IS NOT NULL
 ORDER BY q.group_ms ASC, q.event_number ASC
 QUERY;
 
-            $events = $this->db->fetchAll($fetchQuery);
-
+            $events = $this->db->executeQuery($fetchQuery);
+            $events = $events->fetchAllAssociative();
             $this->logger->debug(sprintf('Event queue: %d events were fetched', count($events)));
 
             return $events;
@@ -301,7 +301,7 @@ QUERY;
     {
         $query = 'SELECT 1 FROM hint_events_queue WHERE processing_instance IS NOT NULL';
 
-        return (bool)$this->db->fetchColumn($query);
+        return (bool)$this->db->fetchOne($query);
     }
 
     /**

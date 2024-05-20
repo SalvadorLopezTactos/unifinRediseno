@@ -34,7 +34,7 @@ use Google\Client;
  */
 class SQLAdmin extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
   /** Manage your Google SQL Service instances. */
@@ -748,14 +748,6 @@ class SQLAdmin extends \Google\Service
                   'type' => 'string',
                   'required' => true,
                 ],
-                'skipVerification' => [
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ],
-                'syncMode' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
               ],
             ],'verifyExternalSyncSettings' => [
               'path' => 'v1/projects/{project}/instances/{instance}/verifyExternalSyncSettings',
@@ -770,14 +762,6 @@ class SQLAdmin extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
-                ],
-                'syncMode' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-                'verifyConnectionOnly' => [
-                  'location' => 'query',
-                  'type' => 'boolean',
                 ],
               ],
             ],
@@ -928,6 +912,26 @@ class SQLAdmin extends \Google\Service
                   'type' => 'string',
                 ],
               ],
+            ],'get' => [
+              'path' => 'v1/projects/{project}/instances/{instance}/users/{name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'project' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'instance' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'insert' => [
               'path' => 'v1/projects/{project}/instances/{instance}/users',
               'httpMethod' => 'POST',
@@ -956,47 +960,6 @@ class SQLAdmin extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
-                ],
-                'body.etag' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-                'body.host' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-                'body.instance' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-                'body.kind' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-                'body.name' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-                'body.password' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-                'body.project' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-                'body.sqlserverUserDetails.disabled' => [
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ],
-                'body.sqlserverUserDetails.serverRoles' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ],
-                'body.type' => [
-                  'location' => 'query',
-                  'type' => 'string',
                 ],
               ],
             ],'update' => [

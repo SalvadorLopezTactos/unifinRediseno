@@ -101,7 +101,7 @@ class FileValidator extends ConstraintValidator
         // normalized format needs to start with baseDir value
         $baseDirCompliant = false;
         foreach ($constraint->baseDirs as $baseDir) {
-            if (strpos($normalized, (string) $baseDir) === 0) {
+            if (strpos($normalized, $baseDir) === 0) {
                 $baseDirCompliant = true;
                 break;
             }

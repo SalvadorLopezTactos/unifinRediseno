@@ -41,6 +41,12 @@
     ],
 
     /**
+     * This causes the focus drawer to close when a drawer with this
+     * layout closes
+     */
+    closeFocusDrawer: true,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -85,6 +91,17 @@
             // cache the values inverted to help with reverse lookup
             this.enums[key] = _.invert(data);
 
+            // update if enum has repeated values
+            if (_.keys(this.enums[key]).length !== _.keys(data).length) {
+                this.enums[key] = {};
+                _.each(data, function(v, k) {
+                    if (_.isUndefined(this.enums[key][v])) {
+                        this.enums[key][v] = [];
+                    }
+                    this.enums[key][v].push(k);
+                }, this);
+            }
+
             // I love that I have to simulate Promise.all but anyways, once
             // we have all our enum data, then make the record list request
             if (count === 0) {
@@ -117,10 +134,17 @@
         var filterDef = SUGAR.charts.buildFilter(reportDef, params, this.enums);
         this.context.set('filterDef', filterDef);
         var useSavedFilters = this.context.get('useSavedFilters') || false;
+        const useCustomReportDef = this.context.get('useCustomReportDef');
 
         var endpoint = function(method, model, options, callbacks) {
             var params = _.extend(options.params || {},
                 {view: 'list', group_filters: filterDef, use_saved_filters: useSavedFilters});
+
+            if (useCustomReportDef) {
+                params.filtersDef = reportDef.filters_def;
+                params.intelligent = reportDef.intelligent;
+            }
+
             var url = app.api.buildURL('Reports', 'records', {id: reportId}, params);
             return app.api.call('read', url, null, callbacks);
         };
@@ -142,6 +166,9 @@
                 app.alert.dismiss('listfromreport_loading');
             }
         };
+
+        this.context.trigger('drawer:reports:list:updated');
+
         var collection = this.context.get('collection');
         collection.module = chartModule;
         collection.model = app.data.getBeanClass(chartModule);

@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Noteliste-dashboard',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Betjeningspanel for noteoptegnelser',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Noter',
+    'LBL_EXTERNAL_USER' => 'Ekstern bruger',
+    'LBL_EXTERNAL_USER_NAME' => 'Ekstern bruger',
 
     'LBL_RELATED_CONTACT' => 'Relaterede kontakt',
     'ERR_DELETE_RECORD' => 'Du skal angive et postnummer for at slette virksomheden.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'E-mailtype',
     'LBL_EMAIL_ID' => 'E-mail-ID',
     'LBL_PHONE' => 'Telefon:',
-    'LBL_PORTAL_FLAG' => 'Vis i portal?',
+    'LBL_PORTAL_FLAG' => 'Tilgængeligt eksternt',
     'LBL_EMBED_FLAG' => 'Indsæt i e-mail?',
     'LBL_PRODUCT_ID' => 'Produkt-id:',
     'LBL_QUOTE_ID' => 'Tilbuds-id:',

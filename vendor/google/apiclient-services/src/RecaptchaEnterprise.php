@@ -34,12 +34,15 @@ use Google\Client;
  */
 class RecaptchaEnterprise extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
   public $projects_assessments;
   public $projects_keys;
+  public $projects_relatedaccountgroupmemberships;
+  public $projects_relatedaccountgroups;
+  public $projects_relatedaccountgroups_memberships;
 
   /**
    * Constructs the internal representation of the RecaptchaEnterprise service.
@@ -171,6 +174,92 @@ class RecaptchaEnterprise extends \Google\Service
                   'required' => true,
                 ],
                 'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'retrieveLegacySecretKey' => [
+              'path' => 'v1/{+key}:retrieveLegacySecretKey',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'key' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_relatedaccountgroupmemberships = new RecaptchaEnterprise\Resource\ProjectsRelatedaccountgroupmemberships(
+        $this,
+        $this->serviceName,
+        'relatedaccountgroupmemberships',
+        [
+          'methods' => [
+            'search' => [
+              'path' => 'v1/{+project}/relatedaccountgroupmemberships:search',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'project' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_relatedaccountgroups = new RecaptchaEnterprise\Resource\ProjectsRelatedaccountgroups(
+        $this,
+        $this->serviceName,
+        'relatedaccountgroups',
+        [
+          'methods' => [
+            'list' => [
+              'path' => 'v1/{+parent}/relatedaccountgroups',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_relatedaccountgroups_memberships = new RecaptchaEnterprise\Resource\ProjectsRelatedaccountgroupsMemberships(
+        $this,
+        $this->serviceName,
+        'memberships',
+        [
+          'methods' => [
+            'list' => [
+              'path' => 'v1/{+parent}/memberships',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
                   'location' => 'query',
                   'type' => 'string',
                 ],

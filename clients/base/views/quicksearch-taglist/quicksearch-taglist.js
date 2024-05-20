@@ -14,12 +14,21 @@
  * @extends View.View
  */
 ({
-    className: 'table-cell',
+    className: 'quicksearch-taglist',
 
     events: {
         'click .tag-remove': 'removeTagClicked',
-        'click .tag-name': 'highlightTagClicked'
+        'click .tag-name': 'highlightTagClicked',
+        'click .tag-dropdown': 'moduleDropdownClick',
+        'click li.tag-name': 'removeDropdownTag'
     },
+
+    /**
+     * Flag to determine if the tags need to be shown in a dropdown list
+     *
+     * @property {boolean}
+     */
+    dropdownList: false,
 
     /**
      * @inheritdoc
@@ -55,11 +64,62 @@
         }, this);
 
         app.events.on('app:sync:complete', function() {
-            this.layout.off('route:search', this.populateTagsFromContext);
-            this.layout.on('route:search', this.populateTagsFromContext, this);
+            this.stopListening(this.populateTagsFromContext);
+            this.listenTo(this.layout, 'route:search', this.populateTagsFromContext);
+            this.listenTo(
+                this.layout,
+                'navigate:next:component navigate:previous:component navigate:to:component quicksearch:tag:close',
+                this.collapseDropdownMenu
+            );
         }, this);
 
         this.context.on('tagsearch:fire:new', this.populateTagsFromContext, this);
+
+        // On expansion of quicksearch, show the tags dropdown & buttons.
+        this.layout.on('quicksearch:expanded', this.showDropdownButton, this);
+
+        // On collapse of quicksearch, hide the tags dropdown & buttons.
+        this.layout.on('quicksearch:collapse', this.hideDropdownButton, this);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    render: function() {
+        let tagsLength = this.selectedTags.length;
+        this.dropdownList = tagsLength > 3;
+        this.dropdownName = app.lang.get('LBL_MORE_TAGS', 'Tags', {
+            tagsNumber: tagsLength
+        });
+        this._super('render');
+    },
+
+    /**
+     * Hide the tags dropdown button and icons from being displayed.
+     */
+    hideDropdownButton: function() {
+        this.$el.hide();
+    },
+
+    /**
+     * Displays the tags dropdown button and icons.
+     */
+    showDropdownButton: function() {
+        this.$el.show();
+    },
+
+    /**
+     * Open or close dropdown menu options when clicked
+     */
+    moduleDropdownClick: function() {
+        this.$el.find('.tag-group-wrapper').toggleClass('open');
+    },
+
+    /**
+      * Close dropdown menu
+     */
+    collapseDropdownMenu: function() {
+        this.$el.find('.tag-group-wrapper').removeClass('open');
     },
 
     /**
@@ -219,6 +279,15 @@
     },
 
     /**
+     * Click handler for removal of each element from the dropdown menu
+     * @param {Event} e
+     */
+    removeDropdownTag: function(e) {
+        this.removeTagClicked(e);
+        this.render();
+    },
+
+    /**
      * Click handler for tag removal element
      * @param {Event} e
      */
@@ -330,6 +399,14 @@
         this.activeIndex = null;
         this.$('.tag-wrapper').removeClass('highlight');
         this.disposeKeydownEvent();
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.stopListening();
+        this._super('_dispose');
     },
 
     /**

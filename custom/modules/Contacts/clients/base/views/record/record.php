@@ -1,21 +1,21 @@
 <?php
-// created: 2020-10-12 12:18:14 
+// created: 2024-05-20 10:34:39
 $viewdefs['Contacts']['base']['view']['record'] = array (
-  'buttons' =>
+  'buttons' => 
   array (
-    0 =>
+    0 => 
     array (
       'type' => 'button',
       'name' => 'cancel_button',
       'label' => 'LBL_CANCEL_BUTTON_LABEL',
       'css_class' => 'btn-invisible btn-link',
       'showOn' => 'edit',
-      'events' =>
+      'events' => 
       array (
         'click' => 'button:cancel_button:click',
       ),
     ),
-    1 =>
+    1 => 
     array (
       'type' => 'rowaction',
       'event' => 'button:save_button:click',
@@ -25,15 +25,15 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
       'showOn' => 'edit',
       'acl_action' => 'edit',
     ),
-    2 =>
+    2 => 
     array (
       'type' => 'actiondropdown',
       'name' => 'main_dropdown',
       'primary' => true,
       'showOn' => 'view',
-      'buttons' =>
+      'buttons' => 
       array (
-        0 =>
+        0 => 
         array (
           'type' => 'rowaction',
           'event' => 'button:edit_button:click',
@@ -41,14 +41,14 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'label' => 'LBL_EDIT_BUTTON_LABEL',
           'acl_action' => 'edit',
         ),
-        1 =>
+        1 => 
         array (
           'type' => 'shareaction',
           'name' => 'share',
           'label' => 'LBL_RECORD_SHARE_BUTTON',
           'acl_action' => 'view',
         ),
-        2 =>
+        2 => 
         array (
           'type' => 'pdfaction',
           'name' => 'download-pdf',
@@ -56,7 +56,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'action' => 'download',
           'acl_action' => 'view',
         ),
-        3 =>
+        3 => 
         array (
           'type' => 'pdfaction',
           'name' => 'email-pdf',
@@ -64,11 +64,11 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'action' => 'email',
           'acl_action' => 'view',
         ),
-        4 =>
+        4 => 
         array (
           'type' => 'divider',
         ),
-        5 =>
+        5 => 
         array (
           'type' => 'manage-subscription',
           'name' => 'manage_subscription_button',
@@ -76,18 +76,18 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'showOn' => 'view',
           'value' => 'edit',
         ),
-        6 =>
+        6 => 
         array (
           'type' => 'vcard',
           'name' => 'vcard_button',
           'label' => 'LBL_VCARD_DOWNLOAD',
           'acl_action' => 'edit',
         ),
-        7 =>
+        7 => 
         array (
           'type' => 'divider',
         ),
-        8 =>
+        8 => 
         array (
           'type' => 'rowaction',
           'event' => 'button:find_duplicates_button:click',
@@ -95,7 +95,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'label' => 'LBL_DUP_MERGE',
           'acl_action' => 'edit',
         ),
-        9 =>
+        9 => 
         array (
           'type' => 'rowaction',
           'event' => 'button:duplicate_button:click',
@@ -104,7 +104,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'acl_module' => 'Contacts',
           'acl_action' => 'create',
         ),
-        10 =>
+        10 => 
         array (
           'type' => 'rowaction',
           'event' => 'button:historical_summary_button:click',
@@ -112,7 +112,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'label' => 'LBL_HISTORICAL_SUMMARY',
           'acl_action' => 'view',
         ),
-        11 =>
+        11 => 
         array (
           'type' => 'rowaction',
           'event' => 'button:audit_button:click',
@@ -120,11 +120,11 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'label' => 'LNK_VIEW_CHANGE_LOG',
           'acl_action' => 'view',
         ),
-        12 =>
+        12 => 
         array (
           'type' => 'divider',
         ),
-        13 =>
+        13 => 
         array (
           'type' => 'rowaction',
           'event' => 'button:delete_button:click',
@@ -132,7 +132,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'label' => 'LBL_DELETE_BUTTON_LABEL',
           'acl_action' => 'delete',
         ),
-        14 =>
+        14 => 
         array (
           'name' => 'send_survey',
           'type' => 'rowaction',
@@ -140,7 +140,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'acl_action' => 'send_survey',
           'event' => 'button:send_survey:click',
         ),
-        15 =>
+        15 => 
         array (
           'name' => 'send_poll',
           'type' => 'rowaction',
@@ -150,48 +150,48 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
         ),
       ),
     ),
-    3 =>
+    3 => 
     array (
       'name' => 'sidebar_toggle',
       'type' => 'sidebartoggle',
     ),
   ),
-  'panels' =>
+  'panels' => 
   array (
-    0 =>
+    0 => 
     array (
       'name' => 'panel_header',
       'header' => true,
-      'fields' =>
+      'fields' => 
       array (
-        0 =>
+        0 => 
         array (
           'name' => 'picture',
           'type' => 'avatar',
           'size' => 'large',
           'dismiss_label' => true,
         ),
-        1 =>
+        1 => 
         array (
           'name' => 'name',
           'label' => 'LBL_NAME',
           'dismiss_label' => true,
           'type' => 'fullname',
-          'fields' =>
+          'fields' => 
           array (
             0 => 'salutation',
             1 => 'first_name',
             2 => 'last_name',
           ),
         ),
-        2 =>
+        2 => 
         array (
           'name' => 'favorite',
           'label' => 'LBL_FAVORITE',
           'type' => 'favorite',
           'dismiss_label' => true,
         ),
-        3 =>
+        3 => 
         array (
           'name' => 'follow',
           'label' => 'LBL_FOLLOW',
@@ -201,14 +201,14 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
         ),
       ),
     ),
-    1 =>
+    1 => 
     array (
       'name' => 'panel_body',
       'label' => 'LBL_RECORD_BODY',
       'columns' => 2,
       'labelsOnTop' => true,
       'placeholders' => true,
-      'fields' =>
+      'fields' => 
       array (
         0 => 'title',
         1 => 'phone_mobile',
@@ -216,7 +216,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
         3 => 'do_not_call',
         4 => 'account_name',
         5 => 'email',
-        6 =>
+        6 => 
         array (
           'name' => 'tag',
           'span' => 12,
@@ -224,7 +224,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
         7 => 'business_center_name',
       ),
     ),
-    2 =>
+    2 => 
     array (
       'columns' => 2,
       'name' => 'panel_hidden',
@@ -232,41 +232,41 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
       'hide' => true,
       'labelsOnTop' => true,
       'placeholders' => true,
-      'fields' =>
+      'fields' => 
       array (
-        0 =>
+        0 => 
         array (
           'name' => 'primary_address',
           'type' => 'fieldset',
           'css_class' => 'address',
           'label' => 'LBL_PRIMARY_ADDRESS',
-          'fields' =>
+          'fields' => 
           array (
-            0 =>
+            0 => 
             array (
               'name' => 'primary_address_street',
               'css_class' => 'address_street',
               'placeholder' => 'LBL_PRIMARY_ADDRESS_STREET',
             ),
-            1 =>
+            1 => 
             array (
               'name' => 'primary_address_city',
               'css_class' => 'address_city',
               'placeholder' => 'LBL_PRIMARY_ADDRESS_CITY',
             ),
-            2 =>
+            2 => 
             array (
               'name' => 'primary_address_state',
               'css_class' => 'address_state',
               'placeholder' => 'LBL_PRIMARY_ADDRESS_STATE',
             ),
-            3 =>
+            3 => 
             array (
               'name' => 'primary_address_postalcode',
               'css_class' => 'address_zip',
               'placeholder' => 'LBL_PRIMARY_ADDRESS_POSTALCODE',
             ),
-            4 =>
+            4 => 
             array (
               'name' => 'primary_address_country',
               'css_class' => 'address_country',
@@ -274,50 +274,50 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
             ),
           ),
         ),
-        1 =>
+        1 => 
         array (
           'name' => 'alt_address',
           'type' => 'fieldset',
           'css_class' => 'address',
           'label' => 'LBL_ALT_ADDRESS',
-          'fields' =>
+          'fields' => 
           array (
-            0 =>
+            0 => 
             array (
               'name' => 'alt_address_street',
               'css_class' => 'address_street',
               'placeholder' => 'LBL_ALT_ADDRESS_STREET',
             ),
-            1 =>
+            1 => 
             array (
               'name' => 'alt_address_city',
               'css_class' => 'address_city',
               'placeholder' => 'LBL_ALT_ADDRESS_CITY',
             ),
-            2 =>
+            2 => 
             array (
               'name' => 'alt_address_state',
               'css_class' => 'address_state',
               'placeholder' => 'LBL_ALT_ADDRESS_STATE',
             ),
-            3 =>
+            3 => 
             array (
               'name' => 'alt_address_postalcode',
               'css_class' => 'address_zip',
               'placeholder' => 'LBL_ALT_ADDRESS_POSTALCODE',
             ),
-            4 =>
+            4 => 
             array (
               'name' => 'alt_address_country',
               'css_class' => 'address_country',
               'placeholder' => 'LBL_ALT_ADDRESS_COUNTRY',
             ),
-            5 =>
+            5 => 
             array (
               'name' => 'copy',
               'label' => 'NTC_COPY_PRIMARY_ADDRESS',
               'type' => 'copy',
-              'mapping' =>
+              'mapping' => 
               array (
                 'primary_address_street' => 'alt_address_street',
                 'primary_address_city' => 'alt_address_city',
@@ -331,12 +331,12 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
         2 => 'phone_fax',
         3 => 'phone_work',
         4 => 'twitter',
-        5 =>
+        5 => 
         array (
           'name' => 'dnb_principal_id',
           'readonly' => true,
         ),
-        6 =>
+        6 => 
         array (
           'name' => 'description',
           'span' => 12,
@@ -345,73 +345,81 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
         8 => 'sync_contact',
         9 => 'lead_source',
         10 => 'assigned_user_name',
-        11 =>
+        11 => 
         array (
           'name' => 'campaign_name',
           'span' => 12,
         ),
-        12 =>
+        12 => 
         array (
           'name' => 'preferred_language',
           'type' => 'language',
         ),
         13 => 'portal_name',
         14 => 'portal_active',
-        15 =>
+        15 => 
         array (
           'name' => 'portal_password',
           'type' => 'change-password',
         ),
-        16 =>
+        16 => 
         array (
           'name' => 'date_modified_by',
           'readonly' => true,
           'inline' => true,
           'type' => 'fieldset',
           'label' => 'LBL_DATE_MODIFIED',
-          'fields' =>
+          'fields' => 
           array (
-            0 =>
+            0 => 
             array (
               'name' => 'date_modified',
             ),
-            1 =>
+            1 => 
             array (
               'type' => 'label',
               'default_value' => 'LBL_BY',
             ),
-            2 =>
+            2 => 
             array (
               'name' => 'modified_by_name',
             ),
           ),
         ),
         17 => 'team_name',
-        18 =>
+        18 => 
         array (
           'name' => 'date_entered_by',
           'readonly' => true,
           'inline' => true,
           'type' => 'fieldset',
           'label' => 'LBL_DATE_ENTERED',
-          'fields' =>
+          'fields' => 
           array (
-            0 =>
+            0 => 
             array (
               'name' => 'date_entered',
             ),
-            1 =>
+            1 => 
             array (
               'type' => 'label',
               'default_value' => 'LBL_BY',
             ),
-            2 =>
+            2 => 
             array (
               'name' => 'created_by_name',
             ),
           ),
         ),
         19 => 'portal_user_company_name',
+        20 => 
+        array (
+          'name' => 'geocode_status',
+          'licenseFilter' => 
+          array (
+            0 => 'MAPS',
+          ),
+        ),
       ),
     ),
   ),

@@ -20,9 +20,9 @@ use Sugarcrm\Sugarcrm\ProcessManager\Registry;
  */
 class OutboundEmail extends SugarBean
 {
-    const TYPE_USER = 'user';
-    const TYPE_SYSTEM = 'system';
-    const TYPE_SYSTEM_OVERRIDE = 'system-override';
+    public const TYPE_USER = 'user';
+    public const TYPE_SYSTEM = 'system';
+    public const TYPE_SYSTEM_OVERRIDE = 'system-override';
 
     /**
      * @var bool
@@ -75,6 +75,7 @@ class OutboundEmail extends SugarBean
         'mail_smtpport',
         'mail_smtpauth_req',
         'mail_smtpssl',
+        'mail_authtype',
     );
 
     public $name;
@@ -495,8 +496,8 @@ class OutboundEmail extends SugarBean
             if(empty($a)) {
                 if ($create) {
                     $admin = Administration::getSettings();
-                    $name = isset($admin->settings['notify_fromname']) ? $admin->settings['notify_fromname'] : 'system';
-                    $email = isset($admin->settings['notify_fromaddress']) ? $admin->settings['notify_fromaddress'] : '';
+                    $name = $admin->settings['notify_fromname'] ?? 'system';
+                    $email = $admin->settings['notify_fromaddress'] ?? '';
                     $emailId = '';
 
                     if (!empty($email)) {

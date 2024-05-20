@@ -13,6 +13,8 @@
 $dictionary['Email'] = array(
     'favorites' => true,
     'table' => 'emails',
+    'color' => 'ocean',
+    'icon' => 'sicon-email-lg',
     'acls' => array(
         'SugarACLEmails' => true,
         'SugarACLDraftEmails' => true,

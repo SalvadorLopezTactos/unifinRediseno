@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Historik',
     'LBL_PMSE_LABEL_NOTES' => 'Vis noter',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Tilføj noter',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Send til DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Vælg...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Bruger',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Er du sikker på, at du ønsker at godkende denne proces?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Er du sikker på, at du ønsker at afvise denne proces?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Er du sikker på, at du ønsker at route denne proces?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Er du sikker på, du ønsker at sende for at DocuSign denne proces?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Processen er blevet godkendt med succes',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Processen er blev afvist med succes',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Processen er blevet routet med succes',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Processen er blevet sendt til DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'Processen du forsøger at se er lukket.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Processen du forsøger at se er ikke tilgængelig i øjeblikket.',
 

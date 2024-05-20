@@ -13,6 +13,8 @@
 
 $dictionary['Shift'] = [
     'table' => 'shifts',
+    'color' => 'green',
+    'icon' => 'sicon-scheduler',
     'audited' => true,
     'activity_enabled' => false,
     'unified_search' => true,

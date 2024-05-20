@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Відомості про користувача не знайдено',
     'ERR_USER_NAME_EXISTS'              => 'Ім&#39;я користувача {0} вже існує. Використовувати однакові імена користувача не дозволено. Укажіть унікальне ім&#39;я користувача.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Ліцензію Sugar Hint слід зберегти зі сумісним типом додаткової ліцензії',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Цю можливість уже включено в Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Даний користувач заблокований і не може увійти в систему, використовуючи існуючий пароль.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Користувачу, який використовує лише зовнішню автентифікацію, заборонено виконувати вхід за допомогою даних Sugar',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Пароль',
     'LBL_CHOOSE_A_KEY'					=> 'Вкажіть ключ для недопущення неавторизованих публікацій Вашого календаря',
     'LBL_NO_KEY'                        => 'Ключ не встановлено. Будь ласка, встановіть ключ для активації публікації.',
-	'LBL_CHOOSE_WHICH'					=> 'Виберіть, які модулі доступні у верхній навігаційній панелі. Призначити порядок, в якому ви б хотіли щоб ці  модулі з&#39;являлись.',
+    'LBL_CHOOSE_WHICH'                  => 'Виберіть, які модулі будуть доступні на боковій панелі навігації. Визначте порядок, у якому мають з’являтися ці модулі.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Кількість закріплених модулів',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Введіть кількість доступних модулів, які будуть закріплені, коли панель навігації згорнуто (наприклад, якщо введено число 5, перші п’ять модулів у списку будуть закріплені). Рекомендуємо вказати число, що відповідає кількості модулів, які використовуються найчастіше. Значення понад 100 не братимуться до уваги.',
 	'LBL_CITY'							=> 'Місто',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Очистити',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'Ім&#39;я користувача SMTP:',
 	'LBL_MAIL_SMTPTYPE'                => 'Тип сервера SMTP:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP Server Specification',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Авторизований обліковий запис електронної пошти',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Виберіть провайдера вашої електронної пошти:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Пароль електронної пошти:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Пошта (ID):',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'користувачі/команди/ролі',
     'LBL_LOADING_ITEMS' => 'Завантаження даних…',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Доступ до Smart Guide',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Останній активний Smart Guide',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Відсутній доступ до Smart Guide',
 ); // END STRINGS DEFS

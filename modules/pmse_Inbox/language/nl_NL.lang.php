@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Geschiedenis',
     'LBL_PMSE_LABEL_NOTES' => 'Notities weergeven',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Notities toevoegen',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Stuur naar DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Selecteer...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Gebruiker',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Weet u zeker dat u dit proces wilt goedkeuren?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Weet u zeker dat u dit proces wilt weigeren?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Weet u zeker dat u dit proces wilt routeren?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Weet u zeker dat u dit proces naar DocuSign wilt sturen?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Proces is succesvol goedgekeurd',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Proces is succesvol geweigerd',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Proces is succesvol gerouteerd',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Proces is succesvol verzonden naar DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'Het proces dat u probeert te bekijken is gesloten.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Het proces dat u probeert te bekijken is momenteel niet beschikbaar.',
 

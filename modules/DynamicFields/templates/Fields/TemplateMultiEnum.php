@@ -92,7 +92,7 @@ class TemplateMultiEnum extends TemplateEnum{
 		{
 			// turn off error reporting in case we are unpacking a value that hasn't been packed...
 			// this is kludgy, but unserialize doesn't throw exceptions correctly
-            if (strpos($this->ext4, 'a:') === 0) {
+            if (strpos((string)$this->ext4, 'a:') === 0) {
                 $unpacked = @unserialize($this->ext4, ['allowed_classes' => false]);
 			} else {
 			    $unpacked = false;
@@ -127,11 +127,11 @@ class TemplateMultiEnum extends TemplateEnum{
 		{
 			if ( is_array ( $this->default ) )
 				$this->default = encodeMultienumValue($this->default);
-			$this->ext4 = ( isset ( $this->dependency ) ) ? serialize ( array ( 'default' => $this->default , 'dependency' => html_entity_decode($this->dependency) ) )  : $this->default ;
+            $this->ext4 = isset($this->dependency) ? serialize(['default' => $this->default, 'dependency' => html_entity_decode($this->dependency, ENT_COMPAT)]) : $this->default;
 		} else
 		{
 			if ( isset ( $this->dependency ) )
-				$this->ext4 = serialize ( array ( 'dependency' => html_entity_decode($this->dependency) ) ) ;
+                $this->ext4 = serialize(['dependency' => html_entity_decode($this->dependency, ENT_COMPAT)]);
 		}
 		parent::save($df);
 	}

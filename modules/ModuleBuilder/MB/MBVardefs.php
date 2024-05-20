@@ -13,6 +13,10 @@
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class MBVardefs{
+    /**
+     * @var mixed
+     */
+    public $key_name;
 	var $templates = array();
 	var $iTemplates = array();
 	var $vardefs = array();

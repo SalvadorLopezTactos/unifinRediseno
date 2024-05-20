@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => '笔记列表仪表板',
     'LBL_NOTES_RECORD_DASHBOARD' => '备注记录仪表板',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '注释焦点抽屉',
+    'LBL_EXTERNAL_USER' => '外部用户',
+    'LBL_EXTERNAL_USER_NAME' => '外部用户',
 
     'LBL_RELATED_CONTACT' => '相关联系人',
     'ERR_DELETE_RECORD' => '必须指定记录编号才能删除帐户。',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => '电子邮件类型',
     'LBL_EMAIL_ID' => '电子邮件编号',
     'LBL_PHONE' => '电话：',
-    'LBL_PORTAL_FLAG' => '在门户中显示？',
+    'LBL_PORTAL_FLAG' => '外部可用',
     'LBL_EMBED_FLAG' => '嵌入到电子邮件中？',
     'LBL_PRODUCT_ID' => '已报价单项编号：',
     'LBL_QUOTE_ID' => '报价编号：',

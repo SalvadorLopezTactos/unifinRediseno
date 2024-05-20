@@ -18,8 +18,29 @@
   color: #00636e;
 }
 
+.hint-config.hint-preview {
+  background-color: @contentBackground;
+}
+
 .hint-config-tabs {
   padding-left: 20px;
+  background-color: @inputBackground;
+}
+
+.hint-config-tabs {
+  li.active {
+    border-bottom-width: 4px;
+    border-color: @darkModeBlue;
+  }
+}
+
+.nav-tabs.hint-config-tabs > .active > a {
+  color: @darkModeBlue;
+}
+
+.nav-tabs.hint-config-tabs > li > a:hover {
+  color: @gray30;
+  background-color: @darkBlue;
 }
 
 .hint-config-tabs a {
@@ -62,5 +83,5 @@
 .hint-config-directions {
   padding-top: 10px;
   color: #00636e;
-  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
 }

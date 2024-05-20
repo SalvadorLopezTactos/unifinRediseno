@@ -93,6 +93,10 @@
             };
         }
 
+        options.complete = _.bind(function() {
+            this.render();
+        }, this);
+
         if (this.model.favorite(!this.model.isFavorite(), options) === false) {
             app.logger.error("Unable to set '" + this.model.module + "' record '" + this.model.id + "' as favorite");
             return;

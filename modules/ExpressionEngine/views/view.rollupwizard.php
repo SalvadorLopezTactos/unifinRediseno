@@ -13,6 +13,15 @@
 
 class ViewRollupWizard extends SugarView
 {
+    /**
+     * @var string|\MBPackage
+     */
+    public $package;
+    /**
+     * @var mixed[]|mixed
+     */
+    public $selLink;
+    public $tmodule;
     var $vars = array("tmodule", "selLink", 'type');
 
     public function __construct()
@@ -42,8 +51,7 @@ class ViewRollupWizard extends SugarView
 
         //Preload the related fields from the first relationship
         if (!empty($links)) {
-            reset($links);
-            $selected_link = isset($links[$this->selLink]) ? $links[$this->selLink] : $links[key($links)];
+            $selected_link = $links[$this->selLink] ?? $links[array_key_first($links)];
             foreach ($links as $link_key => $link) {
                 $rfields = FormulaHelper::getRelatableFieldsForLink($link, $this->package, array("number"));
                 if (!empty($rfields)) {

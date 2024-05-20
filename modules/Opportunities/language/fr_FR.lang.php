@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Tableau de bord de la liste d&#39;affaires',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement d&#39;affaires',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Détails de l&#39;affaire',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Tiroir de rangement Affaires - Console',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Affaires',
     'LBL_RENEWAL_OPPORTUNITY' => 'Possibilité de renouvellement',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Soumis',
     'LBL_FORECAST' => 'Incluse dans Prévision',
     'LBL_COMMIT_STAGE' => 'Étape de soumission',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Prévision',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Étape de prévision',
     'LBL_WORKSHEET' => 'Feuille de travail',
     'LBL_PURCHASED_LINE_ITEMS' => 'Lignes d&#39;achats',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiser',
+    'LBL_CREATE_NEW' => 'Créer un nouveau',
+    'LBL_MANAGE' => 'Gérer',
+    'LBL_SEE_DETAILS' => 'Afficher les détails',
+    'LBL_HIDE_NEW' => 'Masquer',
+
     'LBL_FORECASTED_LIKELY' => 'Prévisions probables',
+    'LBL_LOST' => 'Perdu',
     'LBL_RENEWAL' => 'Renouvellement',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Possibilités de renouvellement',
     'LBL_RENEWAL_PARENT' => 'Affaire parent',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Rôle pour cette Affaire',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
+    'LBL_TAB_OPPORTUNITY' => 'Vérifier le module {{module}}',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'En cliquant sur Confirmer, vous effacerez TOUTES les données des Prévisions et modifierez la vue des Affaires. Si vous ne souhaitez pas faire cela veuillez cliquer sur Annuler.',
@@ -211,22 +220,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Une fois que vous avez lancé cette modification, des enregistrements de ligne de revenu seront créés pour chaque module {{module_name}} existant en tâche de fond. Lorsque les lignes de revenu seront complètes et disponibles, une notification sera envoyée à l&#39;adresse email de votre profil utilisateur. Veuillez noter que votre instance doit être configurée pour envoyer un email via Admin > Configuration email pour que la notification soit envoyée.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera à travers plusieurs étapes de vente jusqu&#39;à être marqué « Gagné » ou « Perdu ». {{plural_module_name}} peut être exploité encore plus en utilisation le module de {{forecasts_singular_module}} de Sugar pour comprendre et prédire les tendances de ventes, ainsi que pour axer le travail sur l&#39;atteinte de quotas de vente.',
+    'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente future et comprend des données de vente pertinentes ainsi que liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera typiquement à travers plusieurs étapes de vente jusqu&#39;à être marqué soit comme « Clôturé gagné » soit comme « Clôturé perdu ». {{plural_module_name}} peut être exploité davantage en utilisant le module de {{forecasts_singular_module}} de Sugar pour comprendre et prédire les tendances de vente ainsi que pour orienter le travail afin d&#39;obtenir des quotas de vente.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
+    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes correspondant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente future et comprend des données de vente pertinentes ainsi que liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
 
-- Éditer les champs de cet enregistrement en cliquant sur un champ individuel ou sur le bouton Éditer. 
-- Afficher ou modifier les liaisons avec les autres enregistrements via le sous-panel en bas à gauche "Vue données". 
-- Afficher et participer aux commentaires et à l&#39;historique des modifications d&#39;enregistrements dans le {{activitystream_singular_module}} en sélectionnant "Flux d&#39;activité" dans le volet inférieur gauche. - Suivre ou mettre en favori l&#39;enregistrement en utilisant les icônes prévues à cet effet à droite du nom de l&#39;enregistrement. - Des actions complémentaires sont disponibles dans la liste déroulante des actions à droite du bouton Éditer.',
+- Éditer chaque champs en cliquant directement sur le champ concerné ou en cliquant sur le bouton Éditer. 
+- Afficher ou modifier les liaisons avec d&#39;autres enregistrements dans les sous-panneaux en activant "Vue des données" dans le volet inférieur gauche.
+- Afficher et participer aux commentaires et enregistrer l&#39;historique des modifications dans le module {{activitystream_singular_module}} en activant " Flux d&#39;activité " dans le volet inférieur gauche.
+- Suivre ou mettre en favoris l&#39;enregistrement en utilisant les icônes prévues à cet effet à droite du nom de l&#39;enregistrement. 
+- Des actions complémentaires sont disponibles dans la listes déroulantes des actions à droite du bouton Éditer.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
+    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes correspondant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente future et comprend des données de vente pertinentes ainsi que liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc.
 
 Pour créer un enregistrement {{module_name}}, les étapes suivantes sont nécessaires : 
 1. Remplir les champs souhaités. 
-- Les champs identifiés comme "Obligatoire" doivent être complétés avant la sauvegarde. 
-- Cliquer sur "Afficher plus" pour afficher plus de champs, si nécessaire. 
+ - Les champs identifiés comme "Obligatoire" doivent être complétés avant la sauvegarde. 
+ - Cliquer sur "Voir plus" pour afficher plus de champs, si nécessaire. 
 2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
 
 // END ENT/ULT

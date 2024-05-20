@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Panel för fallistor',
     'LBL_CASES_RECORD_DASHBOARD' => 'Panel för fallposter',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Ärendedetaljer',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Fokuslåda för boxar - konsol',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för ärenden',
 
 	'ERR_DELETE_RECORD'					=> 'Ett objektnummer måste specificeras för att kunna radera organisationen.',
@@ -157,4 +157,29 @@ För att skapa en {{module_name}}:
     'LBL_SLA_DETAILS' => 'SLA-detaljer',
     'LBL_HOURS' => 'Timmar',
     'LBL_WIDGET_STATUS' => 'Status',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organisera',
+    'LBL_CREATE_NEW' => 'Skapa ny',
+    'LBL_MANAGE' => 'Hantera',
+    'LBL_SEE_DETAILS' => 'Visa detaljer',
+    'LBL_HIDE_NEW' => 'Dölj',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Ärenden',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Ärende',
+    'LBL_KIOSK_CREATE' => 'Skapa ärende',
+    'LBL_KIOSK_SUBJECT' => 'Ämne',
+    'LBL_KIOSK_CASE_ID' => 'Ärende-ID',
+    'LBL_KIOSK_STATUS' => 'Status',
+    'LBL_KIOSK_CATEGORY' => 'Kategori',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Inskickat den {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioritet',
+    'LBL_KIOSK_CREATE_CASE' => 'Kontakta oss',
+    'LBL_KIOSK_DESCRIPTION' => 'Beskrivning',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Din begäran har skickats.',
+    'LBL_KIOSK_ATTACHED' => 'Alla Bifogade',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Externa användare',
 );

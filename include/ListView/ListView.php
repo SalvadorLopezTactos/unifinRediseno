@@ -21,6 +21,33 @@ require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
  */
 class ListView
 {
+    public $source_module;
+    /**
+     * @var mixed
+     */
+    public $subpanel_module;
+    /**
+     * @var mixed
+     */
+    public $subpanel_id;
+    public $appendToBaseUrl;
+    /**
+     * @var mixed|string
+     */
+    public $sortby;
+    public $local_module_strings;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $response;
+    /**
+     * @var mixed|string|null|string[]
+     */
+    public $base_URL;
+    /**
+     * @var bool|mixed
+     */
+    public $show_plus;
     /**
      * @var Request
      */
@@ -307,7 +334,7 @@ function process_dynamic_listview($source_module, $sugarbean,$subpanel_def)
                 $thepanel = $subpanel_def->get_header_panel_def();
             }
 
-            $this->xTemplate->assign("COL_COUNT", count($thepanel->get_list_fields()));
+            $this->xTemplate->assign("COL_COUNT", is_countable($thepanel->get_list_fields()) ? count($thepanel->get_list_fields()) : 0);
             $this->xTemplate->parse($xTemplateSection . ".nodata");
         }
 
@@ -470,7 +497,7 @@ function process_dynamic_listview($source_module, $sugarbean,$subpanel_def)
                         $vardef = $aItem->field_defs[strtolower($list_field['name'])];
 
                         if (isset($vardef['type'])) {
-                            $fieldType = isset($vardef['custom_type']) ? $vardef['custom_type'] : $vardef['type'];
+                            $fieldType = $vardef['custom_type'] ?? $vardef['type'];
                             $tmpField = SugarFieldHandler::getSugarField($fieldType, true);
                         } else {
                             $tmpField = null;
@@ -965,7 +992,7 @@ function getUserVariable($localVarName, $varName) {
 
         foreach($priority_map as $p) {
             if (array_key_exists($p, $sortOrderList)) {
-                $order = strtolower($sortOrderList[$p]);
+                $order = strtolower((string)$sortOrderList[$p]);
                 if (in_array($order, array('asc', 'desc'))) {
                     return $order;
                 }
@@ -1056,7 +1083,7 @@ function getUserVariable($localVarName, $varName) {
 		$this->setSessionVariable("detailview", "record", $sugarbean->id);
 
         $current_offset = intval($this->getOffset($html_var));
-		$module = isset($_REQUEST['module']) ? $_REQUEST['module'] : '';
+        $module = $_REQUEST['module'] ?? '';
 		$response = array();
 
         // choose sort order
@@ -1064,7 +1091,7 @@ function getUserVariable($localVarName, $varName) {
         $sort_order['default'] = 'asc';
 
         // explicit request parameter gets priority over all
-        $sort_order['request'] = isset($_REQUEST['sort_order']) ? $_REQUEST['sort_order'] : null;
+        $sort_order['request'] = $_REQUEST['sort_order'] ?? null;
 
         // see if the session data has a sort order
         if (isset($_SESSION['last_sub' . $this->subpanel_module . '_order']))
@@ -1085,8 +1112,7 @@ function getUserVariable($localVarName, $varName) {
         }
 
         // does the metadata have a default sort order?
-        $sort_order['subpaneldefs'] = isset($subpanel_def->_instance_properties['sort_order']) ?
-            $subpanel_def->_instance_properties['sort_order'] : null;
+        $sort_order['subpaneldefs'] = $subpanel_def->_instance_properties['sort_order'] ?? null;
 
         $this->sort_order = $this->calculateSortOrder($sort_order);
 
@@ -1146,7 +1172,7 @@ function getUserVariable($localVarName, $varName) {
             foreach(array_merge($_GET, $_POST) as $name=>$value) {
                 //echo ("$name = $value <br/>");
                 if(!empty($value) && $name != 'sort_order' //&& $name != ListView::getSessionVariableName($html_varName,"ORDER_BY")
-                        && $name != ListView::getSessionVariableName($html_varName,"offset")
+                        && $name != $this->getSessionVariableName($html_varName, "offset")
                         /*&& substr_count($name, "ORDER_BY")==0*/ && !in_array($name, $blockVariables))
                 {
                     if(is_array($value)) {
@@ -1178,7 +1204,7 @@ function getUserVariable($localVarName, $varName) {
                 if(isset($_REQUEST['module'])) $baseurl .= '&module='.$_REQUEST['module'];
             }
 
-            $baseurl .= "&".ListView::getSessionVariableName($html_varName,"offset")."=";
+            $baseurl .= "&".$this->getSessionVariableName($html_varName, "offset")."=";
             $cache[$html_varName] = $baseurl;
             return $baseurl;
     }
@@ -1229,11 +1255,11 @@ function getUserVariable($localVarName, $varName) {
                 $dynamic_url .='&'. $this->getSessionVariableName($html_varName,'ORDER_BY') . '='. $this->getSessionVariable($html_varName,'ORDER_BY').'&sort_order='.$this->sort_order.'&to_pdf=true&action=SubPanelViewer&subpanel=' . $this->subpanel_module;
             }
 
-            $current_URL = htmlentities($this->base_URL.$current_offset.$dynamic_url);
-            $start_URL = htmlentities($this->base_URL."0".$dynamic_url);
-            $previous_URL  = htmlentities($this->base_URL.$previous_offset.$dynamic_url);
-            $next_URL  = htmlentities($this->base_URL.$next_offset.$dynamic_url);
-            $end_URL  = htmlentities($this->base_URL.'end'.$dynamic_url);
+            $current_URL = htmlentities($this->base_URL . $current_offset . $dynamic_url, ENT_COMPAT);
+            $start_URL = htmlentities($this->base_URL . "0" . $dynamic_url, ENT_COMPAT);
+            $previous_URL = htmlentities($this->base_URL . $previous_offset . $dynamic_url, ENT_COMPAT);
+            $next_URL = htmlentities($this->base_URL . $next_offset . $dynamic_url, ENT_COMPAT);
+            $end_URL = htmlentities($this->base_URL . 'end' . $dynamic_url, ENT_COMPAT);
 
             if(!empty($this->start_link_wrapper)) {
                 $current_URL = $this->start_link_wrapper.$current_URL.$this->end_link_wrapper;
@@ -1254,10 +1280,10 @@ function getUserVariable($localVarName, $varName) {
                 $uids = empty($uid) || $massUpdateRun ? '' : implode(',', $uid);
                 $select_entire_list = $massUpdateRun ? 0 : (int)$this->request->getValidInputRequest('select_entire_list');
 
-                echo '<textarea style="display: none" name="uid">' . htmlspecialchars($uids) . '</textarea>' .
-                    '<input type="hidden" name="select_entire_list" value="'. $select_entire_list .'">'.
-                    '<input type="hidden" name="' . htmlspecialchars($moduleString) . '" value="0">' .
-                    '<input type="hidden" name="' . htmlspecialchars($moduleStringOrder) .'" value="0">';
+                echo '<textarea style="display: none" name="uid">' . htmlspecialchars($uids, ENT_COMPAT) . '</textarea>' .
+                    '<input type="hidden" name="select_entire_list" value="' . $select_entire_list . '">' .
+                    '<input type="hidden" name="' . htmlspecialchars($moduleString, ENT_COMPAT) . '" value="0">' .
+                    '<input type="hidden" name="' . htmlspecialchars($moduleStringOrder, ENT_COMPAT) .'" value="0">';
 
             }
 
@@ -1737,13 +1763,14 @@ function getUserVariable($localVarName, $varName) {
     {
 
 
+        $cell_width = null;
         $layout_manager = $this->getLayoutManager();
         $layout_manager->setAttribute('order_by_link',$this->processOrderBy($html_var));
         $layout_manager->setAttribute('context','HeaderCell');
         $layout_manager->setAttribute('image_path',$this->local_image_path);
         $layout_manager->setAttribute('html_varName',$html_var);
         $layout_manager->setAttribute('module_name', $source_module);
-        list($orderBy,$desc) = $this->getOrderByInfo($html_var);
+        [$orderBy, $desc] = $this->getOrderByInfo($html_var);
 
         if($orderBy == 'amount*1')
         {
@@ -1830,7 +1857,7 @@ function getUserVariable($localVarName, $varName) {
         if (is_object($seed) && isset($seed->object_name) && $seed->object_name == 'WorkFlow') {
             $tab=array();
             $access = get_workflow_admin_modules_for_user($current_user);
-            for ($i = 0; $i < count($list); $i++) {
+            for ($i = 0; $i < (is_countable($list) ? count($list) : 0); $i++) {
                 if(!empty($access[$list[$i]->base_module])){
                     $tab[]=$list[$i];
                 }
@@ -1891,7 +1918,7 @@ function getUserVariable($localVarName, $varName) {
 	function getArrowEnd() {
 		$imgFileParts = pathinfo(SugarThemeRegistry::current()->getImageURL("arrow.gif"));
 
-        list($width,$height) = ListView::getArrowImageSize();
+        [$width, $height] = $this->getArrowImageSize();
 
 		return '.'.$imgFileParts['extension']."' width='$width' height='$height' align='absmiddle' alt=".translate('LBL_SORT').">";
     }
@@ -1903,7 +1930,7 @@ function getUserVariable($localVarName, $varName) {
         }
         $imgFileParts = pathinfo(SugarThemeRegistry::current()->getImageURL("arrow{$upDown}.gif"));
 
-        list($width,$height) = ListView::getArrowUpDownImageSize($upDown);
+        [$width, $height] = ListView::getArrowUpDownImageSize($upDown);
 
         //get the right alt tag for the sort
         $sortStr = translate('LBL_ALT_SORT');
@@ -1963,7 +1990,7 @@ function getUserVariable($localVarName, $varName) {
 
         $this->xTemplateAssign("arrow_start", $this->getArrowStart());
 
-        list($orderBy,$desc) = $this->getOrderByInfo($html_varName);
+        [$orderBy, $desc] = $this->getOrderByInfo($html_varName);
 
 		$imgArrow = "_up";
 		if($desc) {

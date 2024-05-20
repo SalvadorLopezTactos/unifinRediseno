@@ -14,6 +14,9 @@ namespace Sugarcrm\Sugarcrm\SugarConnect\Client\Http;
 
 use Psr\Http\Message\RequestInterface;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 class ProxyMiddleware
 {
     /**

@@ -38,7 +38,7 @@ class HandlerFilterIterator extends \FilterIterator
     /**
      * {@inheritdoc}
      */
-    public function accept()
+    public function accept(): bool
     {
         return in_array($this->interface, class_implements($this->current()));
     }

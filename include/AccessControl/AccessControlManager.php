@@ -30,11 +30,12 @@ use Sugarcrm\Sugarcrm\Entitlements\Subscription;
  */
 class AccessControlManager
 {
-    const MODULES_KEY = 'MODULES';
-    const DASHLETS_KEY = 'DASHLETS';
-    const RECORDS_KEY = 'RECORDS';
-    const FIELDS_KEY = 'FIELDS';
-    const WIDGETS_KEY = 'WIDGETS';
+    public const MODULES_KEY = 'MODULES';
+    public const DASHLETS_KEY = 'DASHLETS';
+    public const RECORDS_KEY = 'RECORDS';
+    public const FIELDS_KEY = 'FIELDS';
+    public const WIDGETS_KEY = 'WIDGETS';
+    public const FEATURES_KEY = 'FEATURES';
 
     /**
      * flag to allow admin user to override access control
@@ -114,6 +115,7 @@ class AccessControlManager
         $this->registerVoter(self::MODULES_KEY, SugarVoter::class);
         $this->registerVoter(self::RECORDS_KEY, SugarRecordVoter::class);
         $this->registerVoter(self::FIELDS_KEY, SugarFieldVoter::class);
+        $this->registerVoter(self::FEATURES_KEY, SugarFeatureVoter::class);
     }
 
     /**
@@ -279,6 +281,34 @@ class AccessControlManager
 
         return $this->allowAccess(self::FIELDS_KEY, $module, $field);
     }
+
+    /**
+     * check allow Feature access
+     *
+     * @param string $module module name
+     * @return bool
+     */
+    public function allowFeatureAccess(?string $feature)
+    {
+        if (empty($feature)) {
+            return true;
+        }
+
+        if ($this->isAdminWork) {
+            return true;
+        }
+
+        // check feature access
+        if ($this->allowAdminOverride) {
+            $this->allowAdminOverride = false;
+            $allowed = $this->allowAccess(self::FEATURES_KEY, $feature, null);
+            $this->allowAdminOverride = true;
+            return $allowed;
+        }
+
+        return $this->allowAccess(self::FEATURES_KEY, $feature, null);
+    }
+
 
     /**
      * allow admin override access control

@@ -65,7 +65,7 @@
      */
     loadFolders: function(currentFolderId, sharedWithMe, driveId) {
         this.currentFolderId = currentFolderId || this.context.get('parentId');
-
+        const limit = 100;
         const url = app.api.buildURL('CloudDrive', 'list/folders');
 
         app.alert.show('folders-loading', {
@@ -77,6 +77,8 @@
             sharedWithMe: sharedWithMe || false,
             driveId: driveId,
             type: this.driveType,
+            folderPath: this.currentPathFolders,
+            limit: limit,
         }, {
             success: _.bind(function(result) {
                 app.alert.dismiss('folders-loading');

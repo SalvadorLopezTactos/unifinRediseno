@@ -54,6 +54,10 @@ abstract class AbstractExpression
 
 	// instance variables
 	var $params;
+    /**
+     * @var object|bool
+     */
+    public $context;
 
 	/**
 	 * Constructs an Expression object given the parameters.

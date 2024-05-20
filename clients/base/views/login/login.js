@@ -33,7 +33,9 @@
         'click [name=login_button]': 'login',
         'keypress': 'handleKeypress',
         "click [name=external_login_button]": "external_login",
-        "click [name=login_form_button]": "login_form"
+        'click [name=login_form_button]': 'login_form',
+        'click [data-action=languageList] .dropdown-menu a': 'setLanguage',
+        'click [data-action=mobile]': 'navigateToMobile'
     },
 
     /**
@@ -130,6 +132,7 @@
         options.context.prepare(true);
 
         this._super('initialize', [options]);
+        $(window).on(`resize.${this.cid}`, _.debounce(_.bind(this.adjustMenuHeight, this), 100));
 
         var config = app.metadata.getConfig();
         if (config && app.config.forgotpasswordON === true) {
@@ -201,6 +204,87 @@
         }
         app.alert.dismiss(this._alertKeys.offsetProblem);
         return this;
+    },
+
+    /**
+     * Action when mobile button is clicked
+     */
+    navigateToMobile: function() {
+        if (document.cookie.indexOf('sugar_mobile=') !== -1) {
+            // kill sugar_mobile=0 cookie
+            document.cookie = 'sugar_mobile=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        // navigate to the same route of mobile site
+        window.location = app.utils.buildUrl('mobile/') + window.location.hash;
+    },
+
+    /**
+     * @override
+     * @private
+     */
+    _renderHtml: function() {
+        this.isAuthenticated = app.api.isAuthenticated();
+        this.currentLang = app.lang.getLanguage() || 'en_us';
+        this.languageList = this.formatLanguageList();
+        this._super('_renderHtml');
+        this.$('[data-toggle="dropdown"]').dropdown();
+        this.adjustMenuHeight();
+    },
+
+    /**
+     * When a user selects a language in the dropdown, set this language.
+     * Note that on login, user's preferred language will be updated to this language
+     *
+     * @param {Event} e
+     */
+    setLanguage: function(e) {
+        let $li = this.$(e.currentTarget);
+        let langKey = $li.data('lang-key');
+        let currentLanguageForDom = _.first(langKey.split('_'));
+        // Use the simple language code as per HTML qualifications
+        document.documentElement.lang = currentLanguageForDom;
+        app.alert.show('language', {level: 'warning', title: app.lang.get('LBL_LOADING_LANGUAGE'), autoclose: false});
+        app.user.setPreference('language', langKey);
+        app.lang.setLanguage(langKey, function() {
+            app.alert.dismiss('language');
+        });
+    },
+
+    /**
+     * Calculate and adjust height of the selection according to window height
+     */
+    adjustMenuHeight: function() {
+        if (this.$('[data-action=languageList]').length === 0) {
+            return;
+        }
+        let linkButton = this.$('[data-action=languageList]');
+        let dropupMenu = this.$('[data-action=languageList] .dropdown-menu.bottom-up');
+        let linkBottomPosition = parseInt(linkButton.height() - linkButton.position().top, 10);
+        let dropupOffset = parseInt(dropupMenu.css('bottom'), 10);
+        let borderTop = parseInt(dropupMenu.css('border-top-width'), 10);
+        let menuHeight = Math.round($(window).height() - borderTop - dropupOffset - linkBottomPosition);
+        dropupMenu.css('max-height', menuHeight);
+    },
+
+    /**
+     * Formats the language list for the template
+     *
+     * @return {Array} of languages
+     */
+    formatLanguageList: function() {
+        // Format the list of languages for the template
+        let list = [];
+        let languages = app.lang.getAppListStrings('available_language_dom');
+
+        _.each(languages, function(label, key) {
+            if (key !== '') {
+                list.push({
+                    key: key,
+                    value: label
+                });
+            }
+        });
+        return list;
     },
 
     /**
@@ -376,5 +460,13 @@
             layout: "login",
             create: true
         });
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        $(window).off(`resize.${this.cid}`);
+        this._super('_dispose');
     }
 })

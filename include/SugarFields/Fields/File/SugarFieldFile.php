@@ -65,7 +65,7 @@ class SugarFieldFile extends SugarFieldBase
     {
         $this->fillInOptions($vardef, $displayParams);
 
-        $keys = $this->getAccessKey($vardef, 'FILE', $vardef['module']);
+        $keys = $this->getAccessKey($vardef, 'FILE', $vardef['module'] ?? null);
         $displayParams['accessKeySelect'] = $keys['accessKeySelect'];
         $displayParams['accessKeySelectLabel'] = $keys['accessKeySelectLabel'];
         $displayParams['accessKeySelectTitle'] = $keys['accessKeySelectTitle'];

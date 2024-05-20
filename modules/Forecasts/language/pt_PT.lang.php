@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Histórico de Previsões',
     'LBL_FORECAST_HISTORY' => 'Previsões: Histórico',
     'LBL_FORECAST_HISTORY_TITLE' => 'Previsões: Histórico',
+    'LBL_TAB_COMMITMENT' => 'Compromisso',
+    'LBL_CURRENT' => 'Actual',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Período Temporal',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Modificado Por',
     'LBL_WK_VERSION' => 'Versão',
     'LBL_WK_REVISION' => 'Revisão',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'O acesso à API de métrica requer Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Período Temporal:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Pretende ter como finais estes valores?',
     'ERR_FORECAST_AMOUNT' => 'O Valor Final é obrigatório, e deverá ser um número.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Pipeline incluído',
+    'LBL_UPSIDE_PIPELINE' => 'Pipeline superior',
+    'LBL_EXCLUDED_PIPELINE' => 'Pipeline excluído',
+    'LBL_WON' => 'Ganha',
+    'LBL_LOST' => 'Perdida',
+    'LBL_ALL' => 'Tudo',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Guia sobre filtros',
+    'LBL_HELP_MAIN_BODY' => 'Todas as métricas incluem apenas Oportunidades pertencentes ao(s) utilizador(es) seleccionado(s), período de tempo e quaisquer filtros adicionais que tenha aplicado',
+    'LBL_FORECAST_HELP' => 'Oportunidades que já foram ganhas ou que estão numa {{{forecastStage}}} incluída',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Abrir Oportunidades com uma {{{forecastStage}}} de {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Abrir Oportunidades numa {{{forecastStage}}} incluída',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Abrir Oportunidades com uma {{{forecastStage}}} de {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Abrir Oportunidades com uma {{{forecastStage}}} de {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Abrir Oportunidades numa {{{forecastStage}}} excluída',
+    'LBL_WON_HELP' => 'Oportunidades que já foram ganhas',
+    'LBL_LOST_HELP' => 'Oportunidades que já foram perdidas',
+    'LBL_ALL_HELP' => 'Todas as oportunidades',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Data de Início',
     'LBL_FC_USER' => 'Calendarizado Para',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Compromisso',
     'LBL_TEAM_COMMITMENT' => 'Compromisso da equipa',
     'LBL_FORECASTED' => 'Previsto',
+    'LBL_OPPORTUNITY_FORECAST' => 'Previsão de oportunidade',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Previsão de Itens de Linhas de Receita',
+    'LBL_LAST_COMMITMENT' => 'Último compromisso',
     'LBL_ADJUSTED_TOTAL' => 'Total ajustado',
     'LBL_COMMIT_STAGE' => 'Etapa de Commit',
     'LBL_SALES_STAGE' => 'Fase',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Ajustado)',
     'LBL_SAVE_DRAFT' => 'Guardar',
     'LBL_CHANGES_BY' => 'Alterações efetuadas por {0}',
-    'LBL_FORECAST_SETTINGS' => 'Definições',
+    'LBL_FORECAST_SETTINGS' => 'Definições da Previsão',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Configurações de Previsão',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data de início do ano fiscal:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configure o período de tempo que vai ser utilizado no módulo Previsões. <br><br>Tenha em atenção que as definições do Período de Tempo não podem ser alteradas após a configuração inicial.<br><br>Comece por escolher a Data de Início do seu ano fiscal. Em seguida, escolha o tipo de Período de Tempo da Previsão. O intervalo de datas para os Períodos de Tempo será automaticamente calculado com base nas suas seleções. O Subperíodo de Tempo é a base para a folha de cálculo da Previsão. <br><br>Os períodos visíveis tanto no futuro como no passado ​​irão determinar o número de subperíodos visíveis no módulo de Previsões. Os utilizadores serão capazes de ver e editar os números de Previsão no subperíodos visíveis.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure como gostaria de categorizar o {{forecastByModule}}. <br><br>Observe que as definições de Intervalo não podem ser alteradas depois da primeira confirmação. Nas instâncias actualizadas, a definição de Intervalo é bloqueada com os dados de Previsão existentes.<br><br>Pode seleccionar duas ou mais categorias com base em intervalos de probabilidade ou criar categorias que não sejam baseadas na probabilidade. <br><br>Existem caixas de selecção à esquerda das suas categorias personalizadas; use-as para decidir quais os intervalos que serão incluídos no valor da Previsão enviado e notificado aos administradores. <br><br>O utilizador pode alterar manualmente o estado de inclusão/exclusão e a categoria de {{forecastByModule}} manualmente na respectiva folha de cálculo.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure a forma como gostaria de categorizar {{forecastByModule}}. <br><br>Observe que as definições de Intervalo não podem ser alteradas após a primeira confirmação. Para instâncias atualizadas, a definição Intervalo está bloqueada com os dados de Previsão existentes.<br><br>Pode selecionar duas ou mais categorias com base nos intervalos de probabilidade ou criar categorias não baseadas em probabilidade. <br><br>Há caixas de seleção à esquerda das suas categorias personalizadas; utilize-as para decidir que intervalos serão incluídos na quantidade de Previsão confirmada e comunicada aos gestores. <br><br>Um utilizador pode alterar manualmente o estado incluir/excluir e a categoria de {{forecastByModule}} a partir da respetiva folha de trabalho.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Selecione as colunas que gostaria que o utilizador preenchesse para cada uma das suas previsões {{forecastByModuleSingular}}. Por favor repare que o valor Provável está associado ao valor exibido no {{forecastByModule}}; por esta razão a coluna Provável não pode ser oculta.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Selecione as colunas que você gostaria de ver no módulo de Previsão. A lista dos campos irá juntar-se à folha de trabalho e permitir que o utilizador escolha como configurar a sua visualização.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Eu sou um espaço reservado para um texto explicativo sobre a Previsão de Vendas Por!',

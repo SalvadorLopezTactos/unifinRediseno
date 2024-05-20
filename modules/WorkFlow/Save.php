@@ -92,7 +92,7 @@ if (!empty($_POST['is_duplicate']) && $_POST['is_duplicate'] == "true") {
             $copyWorkflow->parent_id = $newActionId;
             $copyWorkflowId = $copyWorkflow->save();
 
-            $query = "SELECT id FROM workflow_alertshells WHERE parent_id = '{$row[id]}' ";
+            $query = "SELECT id FROM workflow_alertshells WHERE parent_id = '{$row['id']}' ";
             $result2 = $focus->db->query($query);
             while (($alertshell=$focus->db->fetchByAssoc($result2)) != null) {
                 $copyAlertshell = BeanFactory::getBean('WorkFlowAlertShells', $alertshell['id']);
@@ -100,7 +100,7 @@ if (!empty($_POST['is_duplicate']) && $_POST['is_duplicate'] == "true") {
                 $copyAlertshell->parent_id = $copyWorkflowId;
                 $copyAlertshellId = $copyAlertshell->save();
 
-                $query = "SELECT id FROM workflow_alerts WHERE parent_id = '{$alertshell[id]}' ";
+                $query = "SELECT id FROM workflow_alerts WHERE parent_id = '{$alertshell['id']}' ";
                 $result3 = $focus->db->query($query);
                 while (($alert=$focus->db->fetchByAssoc($result3)) != null) {
                     $copyAlert = BeanFactory::getBean('WorkFlowAlerts', $alert['id']);

@@ -77,6 +77,12 @@
 
         this._super('_render');
 
+        if (this.module !== 'Metrics' || $('[aria-controls="list_layout"].active').length) {
+            $('.sidebar-toggle', this.$el).show();
+        } else {
+            $('.sidebar-toggle', this.$el).hide();
+        }
+
         return this;
     },
 

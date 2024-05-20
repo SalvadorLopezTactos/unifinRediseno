@@ -117,4 +117,13 @@ Lai izveidotu {{module_name}}:
 - Ja nepieciešams redzēt papildu laukus, spiediet "Rādīt vairāk".
 2. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta izveidi un atgrieztos iepriekšējā lapā.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Smart Guide uzdevums',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Ir Smart Guide uzdevums',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Smart Guide aktivitātes sākuma datums',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Smart Guide aktivitātes pabeigšanas datums',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Smart Guide - dienas līdz pabeigšanai',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Apakštikšanās',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Apakšzvani',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Apakšuzdevumi',
 );

@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Pardavimų sąrašo ataskaitų sritis',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Pardavimų duomenų ataskaitų sritis',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Išsami informacija apie galimybes',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Galimybių „Focus“ stalčius – konsolė',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ galimybės',
     'LBL_RENEWAL_OPPORTUNITY' => 'Atnaujinimo galimybė',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Atsakingas',
     'LBL_FORECAST' => 'Įtraukti į prognozę',
     'LBL_COMMIT_STAGE' => 'Įsipareigojimo stadija',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Forecast',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Prognozės etapas',
     'LBL_WORKSHEET' => 'Lentelė',
     'LBL_PURCHASED_LINE_ITEMS' => 'Pirkimo eilutės prekės',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizuoti',
+    'LBL_CREATE_NEW' => 'Sukurti naują',
+    'LBL_MANAGE' => 'Valdyti',
+    'LBL_SEE_DETAILS' => 'Ataskaita išsamiau',
+    'LBL_HIDE_NEW' => 'Slėpti',
+
     'LBL_FORECASTED_LIKELY' => 'Prognozuojama panašiai',
+    'LBL_LOST' => 'Nelaimėta',
     'LBL_RENEWAL' => 'Atnaujinimas',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Atnaujinimo galimybės',
     'LBL_RENEWAL_PARENT' => 'Pagrindinė galimybė',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Opportunity Role',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Užrašai',
+    'LBL_TAB_OPPORTUNITY' => '{{module}} apžvalga',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. If this is not what you intended, click cancel to return to previous settings.',
@@ -211,25 +220,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'After you initiate this change, Revenue Line Item records will be created for each existing {{module_name}} in the background. When the Revenue Line Items are complete and available, a notification will be sent to the email address on your user profile. Please note that your instance must be configured to send email via Admin > Email Settings in order for the notification to be sent.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} leidžia stebėti individualius pardavimus nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas nurodo būsimą pardavimą ir pateikia atitinkamus pardavimo duomenis, taip pat susijusius su kitais svarbiais įrašais, tokiais kaip {{quotes_module}}, {{contacts_module}} ir t. t. Modulis {{module_name}} paprastai pereina keletą pardavimo etapų, kol jis pažymimas „Uždarytas kaip laimėtas“ arba „Uždarytas kaip nelaimėtas“. Modulį {{plural_module_name}} galima išnaudoti dar geriau naudojant „Sugar“ {{forecasts_singular_module}} modulį, kad suprastumėte ir nuspėtumėte pardavimo tendencijas, taip pat sutelktumėte dėmesį į pardavimo planų pasiekimą.',
+    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} suteikia galimybę nuo pradžios iki pabaigos stebėti atskirus pardavimus ir tiems pardavimams priklausančius eilutės elementus. Kiekvienas {{module_name}} įrašas reiškia būsimą pardavimą ir apima reikiamus pardavimo duomenis, taip pat susijusius su kitais svarbiais įrašais, tokiais kaip {{quotes_module}}, {{contacts_module}} ir kt. {{module_name}} paprastai pereis per kelis pardavimo etapus, kol bus pažymėtas „Uždaryta, laimėta“ arba „Uždaryta, pralaimėta“. {{plural_module_name}} galima dar labiau panaudoti naudojant „Sugar“ {{forecasts_singular_module}} modulį, kad suprastumėte ir numatytumėte pardavimo tendencijas bei sutelktumėte dėmesį į pardavimo kvotas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} leidžia nuo pradžios iki pabaigos stebėti atskirus pardavimus ir tiems pardavimams priklausančius eilutės elementus. Kiekvienas „{{module_name}}“ įrašas nurodo būsimą pardavimą ir pateikia atitinkamus pardavimo duomenis, taip pat susijusius su kitais svarbiais įrašais, tokiais kaip {{quotes_module}}, {{contacts_module}} ir kt.
+    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} suteikia galimybę nuo pradžios iki pabaigos stebėti atskirus pardavimus ir tiems pardavimams priklausančius eilutės elementus. Kiekvienas {{module_name}} įrašas reiškia būsimą pardavimą ir apima reikiamus pardavimo duomenis, taip pat susijusius su kitais svarbiais įrašais, tokiais kaip {{quotes_module}}, {{contacts_module}} ir kt.
 
 - Redaguokite šio įrašo laukus spustelėdami atskirą lauką arba mygtuką „Redaguoti“.
-- Peržiūrėkite arba keiskite nuorodas į kitus įrašus subpaneliuose, perjungdami apatinę kairę sritį į parinktį „Duomenų rodinys“.
-- Komentuokite patys ir peržiūrėkite vartotojų komentarus ir įrašykite pakeitimų istoriją {{activitystream_singular_module}} perjungdami apatinę kairę sritį į parinktį „Veiklos srautas“.
-- Sekite arba pasižymėkite šį įrašą kaip mėgstamiausią naudodami piktogramas, esančias įrašo pavadinimo dešinėje pusėje.
-- Papildomų veiksmų galima atlikti pasirinkus išskleidžiamąjį veiksmų meniu, esantį mygtuko „Redaguoti“ dešinėje pusėje.',
+- Peržiūrėkite arba modifikuokite nuorodas į kitus papildomų skydų įrašus, perjungdami apatinę kairę sritį į „Duomenų rodinys“.
+- Atlikite ir peržiūrėkite vartotojų komentarus ir įrašykite pakeitimų istoriją {{activitystream_singular_module}} perjungdami apatinę kairę sritį į „Veiklos srautas“.
+- Stebėkite šį įrašą arba įtraukite jį į parankinius naudodami piktogramas, esančias įrašo pavadinimo dešinėje.
+- Papildomus veiksmus galima atlikti išskleidžiamajame meniu „Redaguoti“ dešinėje.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Naudodami {{plural_module_name}} modulį galite stebėti atskirus pardavimus ir jiems priklausančių eilučių prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas nurodo galimą pardavimą ir apima susijusius pardavimo duomenis bei kitus svarbius įrašus, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
+    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} suteikia galimybę nuo pradžios iki pabaigos stebėti atskirus pardavimus ir tiems pardavimams priklausančius eilutės elementus. Kiekvienas {{module_name}} įrašas reiškia būsimą pardavimą ir apima reikiamus pardavimo duomenis, taip pat susijusius su kitais svarbiais įrašais, tokiais kaip {{quotes_module}}, {{contacts_module}} ir kt.
 
 Norėdami sukurti {{module_name}}:
 1. Nurodykite norimas laukų reikšmes.
- - Laukus, pažymėtus kaip „Būtinas“, prieš išsaugant reikia užpildyti.
- - Jei reikia, kad būtų parodyti papildomi laukai, spustelėkite „Rodyti daugiau“.
-2. Spustelėję „Išsaugoti“ užbaigsite naują įrašą ir grįšite į ankstesnį puslapį.',
+ - Laukai, pažymėti „Būtina“, turi būti užpildyti prieš išsaugant.
+ - Jei reikia, atidarykite papildomus laukus, spustelėkite „Rodyti daugiau“.
+2. Norėdami užbaigti naują įrašą ir grįžti į ankstesnį puslapį, spustelėkite „Išsaugoti“.',
 
 // END ENT/ULT
 

@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Az optimális élmény érdekében használjon IIS/FastCGI sapi-t; állítsa 0-ra a fastcgi.logging paramétert a php.ini fájl-ban!',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nem támogatott PHP verzió van telepítve: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Adatbázis nem elérhető',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Adatbázistámogatás nem található. Kérjük, győzödjön meg róla, hogy rendelkezik a szükséges illesztőprogramokkal az egyik támogatott adatbázistípushoz: MySQL, MS SQLServer, Oracle vagy DB2. Elképzelhető, hogy ki kell vennie a megjegyzést a php.ini fájlból vagy újra össze kell állítania azt a helyes bináris fájllal a PHP-verziójától függően. Kérjek, tekintse meg a PHP útmutatót, ha több információra van szüksége az Adatbázistámogatás engedélyezésével kapcsolatban.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Adatbázis-támogatás nem található. Kérjük, győzödjön meg róla, hogy rendelkezik a megfelelő illesztőprogramokkal a következő adatbázis-típusok egyikéhez: MySQL, MS SQLServer, Oracle vagy DB2. Elképzelhető, hogy ki kell vennie a megjegyzést a php.ini fájl kiterjesztésévől, vagy újra össze kell állítania a megfelelő bináris fájlt a PHP-verziójától függően. Kérjük, tekintse meg a PHP kézikönyvet, ha többet szeretne megtudni az adatbázistámgoatás engedélyezéséről.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Egyes XML-feldolgozó könyvtárakhoz kapcsolódó funkciók, amelyek szükségesek a SugarCRM-hez, nem találhatók. Az Ön PHP verziójától függően vagy a php-ini fájlban kell módosításokat végezni, vagy a vonatkozó bináris fájlt kell ismételten összeállítani. Kérem, olvasson utána a PHP felhasználói kézikönyvében!',
     'LBL_CHECKSYS_CSPRNG' => 'Véletlenszerű számgenerátor',
     'ERR_CHECKSYS_MBSTRING'             => 'Egyes Multibyte Strings (mbstring) PHP kiterjesztéshez kapcsolódó funkciók, amelyek szükségesek a SugarCRM-hez, nem találhatók. <br /><br />Az alapértelmezett beállítások szerint az mbstring modul le van tiltva a PHP-ben, amit aktiválni kell az --enable-mbstring kifejezéssel. Kérem, olvasson utána a PHP felhasználói kézikönyvében, hogy lehet bekapcsolni az mbstring támogatást!',
@@ -561,32 +561,15 @@ Hívás elutasítása
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Hozzárendelési értesítés emailek',
-        'subject' => 'SugarCRM - $module_name hozzárendelve ',
-        'description' => 'A rendszer ezt a sablont alkalmazza, amikor feladathozzárendelést küld egy felhasználónak.',
-        'body' => '<div>
-<p>$assigned_by_user hozzárendelt egy&nbsp;$module_name modult a következő felhasználóhoz:&nbsp;$assigned_user.</p>
-
-<p>Ezt a(z)&nbsp;$module_name modult áttekintheti itt:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user hozzárendelt egy $module_name modult a következő felhasználóhoz: $assigned_user.
-
-Ezt a(z) $module_name modult áttekintheti itt:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Beütemezett jelentés emailek',
         'subject' => 'Beütemezett jelentés: $report_name, dátum: $report_time',
         'description' => 'A rendszer ezt a sablont alkalmazza, amikor beütemezett jelentést küld egy felhasználónak.',
         'body' => '<div>
-<p>Tisztelt $assigned_user,</p>
-<p>Csatolmányként küldünk egy automatikusan generált jelentést, amelyet beütemeztek az Ön számára.</p>
-<p>Jelentés neve: $report_name</p>
-<p>Jelentés futtatásának dátuma és ideje: $report_time</p>
+<p>Tisztelt $assigned_user!<br></p>
+<p>Csatolmányként küldünk egy automatikusan generált jelentést, amelyet beütemeztek az Ön számára.<br></p>
+<p>Jelentés neve: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Jelentés futtatásának dátuma és ideje: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Tisztelt $assigned_user,
@@ -612,14 +595,6 @@ Jelentés futtatásának dátuma és ideje: $report_time',
             A megjegyzés megtekintéséhez lépjen be a Sugar rendszerbe.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Új kliens információ',
-        'description' => 'A sablont akkor használják, amikor a rendszergazda új jelszót küld egy felhasználónak.',
-        'body' => 'Ez az Ön felhasználóneve és ideiglenes jelszava:<br />Felhasználónév: $contact_user_user_name<br />Jelszó: $contact_user_user_hash<br /><br />$config_site_url<br /><br />Miután belépett a fenti jelszót használva, szükséges lehet a jelszót megváltoztatni saját választása szerint.',
-        'txt_body' =>
-'Ez az Ön felhasználóneve és ideiglenes jelszava: Felhasználónév: contact_user_user_name Jelszó: contact_user_user_hash config_site_url Miután belépett a fenti jelszót használva, szükséges lehet a jelszót megváltoztatni saját választása szerint.',
-        'name' => 'Rendszer által generált jelszó email',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Kliens jelszavának visszaállítása',
         'description' => "A sablont akkor használják, amikor egy felhasználónak emailt küldenek, jelszavának visszaállítására mutató linkkel.",

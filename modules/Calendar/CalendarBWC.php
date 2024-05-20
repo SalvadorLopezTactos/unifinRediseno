@@ -223,8 +223,8 @@ class CalendarBWC
      */
     public function calculate_day_range()
     {
-        list($hour_start,$minute_start) =  explode(":", $this->day_start_time);
-        list($hour_end,$minute_end) =  explode(":", $this->day_end_time);
+        [$hour_start, $minute_start] =  explode(":", $this->day_start_time);
+        [$hour_end, $minute_end] =  explode(":", $this->day_end_time);
         $this->scroll_slot = intval($hour_start * (60 / $this->time_step) + ($minute_start / $this->time_step));
         $this->celcount = (($hour_end * 60 + $minute_end) - ($hour_start * 60 + $minute_start)) / $this->time_step;
     }

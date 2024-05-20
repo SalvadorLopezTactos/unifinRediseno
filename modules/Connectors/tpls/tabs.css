@@ -48,6 +48,17 @@ div.add_table {
     background: var(--content-background);
 }
 
+.navigation_bar_subpanels .add_table {
+    margin-bottom: 20px;
+}
+
+.navigation_bar_subpanels .add_table label {
+    font-weight: bold;
+}
+
+.navigation_bar_subpanels .add_table label input[type=checkbox] {
+    margin: -2px 4px 0 0;
+}
 
 ul.draglist {
     position: relative;

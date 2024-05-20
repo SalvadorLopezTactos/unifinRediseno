@@ -11,12 +11,14 @@
 
 namespace Symfony\Component\ExpressionLanguage;
 
+use Symfony\Contracts\Service\ResetInterface;
+
 /**
  * Compiles a node to PHP code.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Compiler
+class Compiler implements ResetInterface
 {
     private $source;
     private $functions;
@@ -26,7 +28,7 @@ class Compiler
         $this->functions = $functions;
     }
 
-    public function getFunction($name)
+    public function getFunction(string $name)
     {
         return $this->functions[$name];
     }
@@ -34,13 +36,16 @@ class Compiler
     /**
      * Gets the current PHP code after compilation.
      *
-     * @return string The PHP code
+     * @return string
      */
     public function getSource()
     {
         return $this->source;
     }
 
+    /**
+     * @return $this
+     */
     public function reset()
     {
         $this->source = '';
@@ -76,11 +81,9 @@ class Compiler
     /**
      * Adds a raw string to the compiled code.
      *
-     * @param string $string The string
-     *
      * @return $this
      */
-    public function raw($string)
+    public function raw(string $string)
     {
         $this->source .= $string;
 
@@ -90,11 +93,9 @@ class Compiler
     /**
      * Adds a quoted string to the compiled code.
      *
-     * @param string $value The string
-     *
      * @return $this
      */
-    public function string($value)
+    public function string(string $value)
     {
         $this->source .= sprintf('"%s"', addcslashes($value, "\0\t\"\$\\"));
 
@@ -111,14 +112,14 @@ class Compiler
     public function repr($value)
     {
         if (\is_int($value) || \is_float($value)) {
-            if (false !== $locale = setlocale(LC_NUMERIC, 0)) {
-                setlocale(LC_NUMERIC, 'C');
+            if (false !== $locale = setlocale(\LC_NUMERIC, 0)) {
+                setlocale(\LC_NUMERIC, 'C');
             }
 
             $this->raw($value);
 
             if (false !== $locale) {
-                setlocale(LC_NUMERIC, $locale);
+                setlocale(\LC_NUMERIC, $locale);
             }
         } elseif (null === $value) {
             $this->raw('null');

@@ -222,4 +222,10 @@ Para criar um {{meetings_singular_module}}:
     - Clique em "Selecionar um Participante" para adicionar um usuário, contato ou potencial existente, ao {{meetings_singular_module}}.
     - Clique no ícone de mais à direita de "Selecionar um Participante" para criar um participante do {{meetings_singular_module}} como um novo registro do Sugar.
 3. Clique em "Salvar" para finalizar o novo registro e retorne à página anterior.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'É reunião do guia inteligente',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Tarefas secundárias',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Chamadas secundárias',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Reuniões secundárias',
 );

@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Näytä ennustehistoria',
     'LBL_FORECAST_HISTORY' => 'Ennusteet: Historia',
     'LBL_FORECAST_HISTORY_TITLE' => 'Historia',
+    'LBL_TAB_COMMITMENT' => 'Sitoumus',
+    'LBL_CURRENT' => 'Nykyinen',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Ajanjakso',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Muokkaaja:',
     'LBL_WK_VERSION' => 'Versio',
     'LBL_WK_REVISION' => 'Revisio',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Pääsy mittaussovellusliittymään vaatii Sugar Sell Premierin',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Ajanjakso:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Haluatko varmasti commitoida nämä määrät?',
     'ERR_FORECAST_AMOUNT' => 'Commitin määrä vaaditaan, ja sen on oltava numero.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Sisällytetty suppilo',
+    'LBL_UPSIDE_PIPELINE' => 'Yläpuolen suppilo',
+    'LBL_EXCLUDED_PIPELINE' => 'Ei sisällytetty suppilo',
+    'LBL_WON' => 'Voitettu',
+    'LBL_LOST' => 'Hävitty',
+    'LBL_ALL' => 'Kaikki',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Suodatinohje',
+    'LBL_HELP_MAIN_BODY' => 'Kaikki mittarit sisältävät vain valituille käyttäjille kuuluvat mahdollisuudet, ajanjakson ja kaikki muut käyttämäsi suodattimet',
+    'LBL_FORECAST_HELP' => 'Myyntimahdollisuudet, jotka on jo voitettu tai jotka ovat {{{forecastStage}}}-vaiheessa',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Avaa myyntimahdollisuuksia tasolla {{{forecastStage}}} / {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Avaa myyntimahdollisuuksia sisältyvässä {{{forecastStage}}}-vaiheessa',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Avaa myyntimahdollisuuksia {{{forecastStage}}} / {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Avaa myyntimahdollisuuksia {{{forecastStage}}} / {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Avaa myyntimahdollisuuksia ei sisältyvässä {{{forecastStage}}}-vaiheessa',
+    'LBL_WON_HELP' => 'Myyntimahdollisuudet, jotka on jo voitettu',
+    'LBL_LOST_HELP' => 'Myyntimahdollisuudet, jotka on jo hävitty',
+    'LBL_ALL_HELP' => 'Kaikki myyntimahdollisuudet',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Aloituspäivä',
     'LBL_FC_USER' => 'Ajoita:',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Sitoumus',
     'LBL_TEAM_COMMITMENT' => 'Tiimin sitoumus',
     'LBL_FORECASTED' => 'Ennustettu',
+    'LBL_OPPORTUNITY_FORECAST' => 'Myyntimahdollisuuden ennuste',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Tuoterivin kohteiden ennuste',
+    'LBL_LAST_COMMITMENT' => 'Edellinen sitoumus',
     'LBL_ADJUSTED_TOTAL' => 'Muutettu kokonaismäärä',
     'LBL_COMMIT_STAGE' => 'Commitin vaihe',
     'LBL_SALES_STAGE' => 'Vaihe',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Säädetty)',
     'LBL_SAVE_DRAFT' => 'Tallenna',
     'LBL_CHANGES_BY' => '{0}:n muutokset',
-    'LBL_FORECAST_SETTINGS' => 'Asetukset',
+    'LBL_FORECAST_SETTINGS' => 'Ennusteen asetukset',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Ennusteen asennus',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Tilivuoden alkupäivä:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfiguroi Ennusteet-moduulissa käytettävä ajanjakso.<br /><br />Aloita valitsemalla tilivuoden alkupäivä. Valitse sitten ennustettavan ajanjakson tyyppi. Ajanjakson päivämäärät lasketaan automaattisesti valintojesi perusteella. Ali-ajanjakso on ennustetyökirjan pohja.<br /><br />Näytettävät tulevat ja menneet ajanjaksot määrittävät näkyvien alijaksojen määrän Ennusteet-moduulissa. Käyttäjät voivat nähdä ja muokata ennustelukuja näkyvissä alijaksoissa.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Määritä, kuinka haluat luokitella kohteen {{forecastByModule}}. <br><br>Ota huomioon, että alueen asetuksia ei voi muuttaa ensimmäisen vahvistuksen jälkeen. Jos kyseessä on päivitetty instanssi, alueasetus lukitaan olemassa olevilla ennusteen tiedoilla.<br><br>Voit valita kaksi luokkaa tai useampia luokkia todennäköisyyden mukaan tai luoda luokkia, jotka eivät perustu todennäköisyyteen. <br><br>Omien luokkiesi vasemmalla puolella on valintaruutuja. Valitse niillä, mitkä alueet sisällytetään lähetettyyn ennustemäärään ja raportoidaan päälliköille. <br><br>Käyttäjä voi muuttaa sisällytä-/älä sisällytä -tilan ja kohteen {{forecastByModule}} luokan manuaalisesti työkirjassaan.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Määritä, miten haluat luokitella kohteen {{forecastByModule}}. <br><br>Huomaathan, että Väli-asetuksia ei voi muuttaa ensimmäisen vahvistamisen jälkeen. Päivitetyissä ilmentymissä Väli-asetus on lukittu sisältäen olemassa olevat ennustetiedot.<br><br>Voit valita kaksi tai useampia luokkia todennäköisyysväleihin perustuen tai luoda luokkia, jotka eivät perustu todennäköisyyteen. <br><br>Mukautettujen luokkien vasemmalla puolella on valintaruutuja; päätä näillä, mitkä välit sisällytetään käytettyyn ennustesummaan ja ilmoitetaan hallinnolle. <br><br>Käyttäjä voi muuttaa kohteen {{forecastByModule}} sisällytä- / jätä pois -tilaa ja luokkaa manuaalisesti työkirjasta.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Valitse ne sarakkeet, jotka haluaisit käyttäjien täydentävän heidän ennusteissaan jokaiselle {{forecastByModuleSingular}}lle. Huomioi, että todennäköinen arvo on sidottuna {{forecastByModuleSingular}}issä näkyviin määrään. Tästä syystä ‘Todennäköinen’-saraketta ei voida piilottaa.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Valitse ne sarakkeet, jotka haluaisit näyttää Ennusteet-moduulissa. Kenttälista yhdistää työkirjan, ja antaa käyttäjän valita, miten näkymä konfiguroidaan.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Olen ‘Ennusta seuraavan mukaan’ -aputekstin paikanvaraaja! :D',

@@ -227,6 +227,12 @@
         if(this.fields.length == 0) {
             this.hide();
         }
+
+        if (this.$el.closest('.paginated-flex-list').length) {
+            let hReduction = $('.flex-table-pagination').height() + this.$el.height() + 'px';
+            $('.flex-list-view').height('calc(100% - ' + hReduction);
+        }
+
         return result;
     },
     isVisible: function() {
@@ -961,6 +967,10 @@
         this.$el.hide();
 
         this.clearAndRestorePreviousShortcuts();
+
+        if (this.$el.closest('.paginated-flex-list').length) {
+            $('.flex-list-view').height('');
+        }
     },
     /**
      * Create new shortcut session.

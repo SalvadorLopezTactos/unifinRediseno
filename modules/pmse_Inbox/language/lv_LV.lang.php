@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Vēsture',
     'LBL_PMSE_LABEL_NOTES' => 'Rādīt piezīmes',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Pievienot piezīmes',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Nosūtīt uz DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Atlasīt...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Lietotājs',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Vai tiešām vēlaties apstiprināt šo procesu?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Vai tiešām vēlaties noraidīt šo procesu?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Vai tiešām vēlaties pārsūtīt šo procesu?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Vai tiešām vēlaties nosūtīt uz DocuSign šo procesu?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Process ir sekmīgi apstiprināts',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Process ir sekmīgi noraidīts',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Process ir sekmīgi pārsūtīts',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Process ir veiksmīgi nosūtīts uz DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'Process, ko mēģināt skatīt, ir slēgts.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Process, ko mēģināt skatīt, šobrīd nav pieejams.',
 

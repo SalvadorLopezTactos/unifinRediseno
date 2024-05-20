@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logo',
 	'LBL_ADMIN_WIZARD' => 'Vrajitor Admin',
-	'LBL_ALLOW_USER_TABS' => 'Permite tuturor utilizatorilor sa ascunda taburile',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Setări sistem',
 	'LBL_ENABLE_MAILMERGE' => 'Permite imbinarea corespondentei',
 	'LBL_LOGVIEW' => 'Configurare Setări Log',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Utilizaţi această setare pentru a determina numărul de luni înainte de data curentă că informaţiile liber / ocupat pentru apelurile şi întâlniri este publicat.<br />Pentru a activa gratuit / publicare Ocupat off, introduce "0". Minim este de 1 lună; maximă este de 12 luni.',
     'LBL_PDFMODULE_NAME' => 'Setări PDF',
     'SUGARPDF_BASIC_SETTINGS' => 'Proprietăţi document',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Setari avansate',
     'SUGARPDF_LOGO_SETTINGS' => 'Imagini',
-
-    'PDF_CREATOR' => 'Creator PDF',
-    'PDF_CREATOR_INFO' => 'Defineşte creatorul documentului.<br />Aceasta este de obicei numele aplicaţiei care generează PDF.',
 
     'PDF_AUTHOR' => 'Autor:',
     'PDF_AUTHOR_INFO' => 'Autorul apare în proprietăţile documentului.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Selectaţi noua imagine pentru oferte',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Formatul de fişier poate fi fie jpg sau.. PNG. (Numai. Jpg pentru EZPDF)<br />Dimensiunea recomandată este de 867x74 px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Lățime imagine oferte',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Modifică scara imaginii încărcate care apare în Documente PDF de ofertă. (numai TCPDF)',
+    'PDF_TITLE' => 'Titlu:',
+    'PDF_TITLE_INFO' => 'Titlul apare în proprietăţile documentului.',
+
+    'PDF_SUBJECT' => 'Subiect',
+    'PDF_SUBJECT_INFO' => 'Subiectul apare în proprietăţile documentului.',
 
     'PDF_SMALL_HEADER_LOGO' => 'Rapoarte pentru documente PDF',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Această imagine apare în antet implicit în rapoartele documente PDF.<br />Această imagine, de asemenea, apare în colţul din stânga-sus al aplicatiei Sugar',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Selectaţi noua imagine pentru Rapoarte',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Formatul de fişier poate fi fie jpg sau.. PNG. (Numai. Jpg pentru EZPDF)<br />Dimensiunea recomandată este de 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Rapoarte Lăţimea imaginii',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Modifica scara de imagine încărcată care apare în rapoartele documentelor PDF. (TCPDF numai)',
-
-
-    'PDF_HEADER_STRING' => 'Antet String',
-    'PDF_HEADER_STRING_INFO' => 'Antet descriere şir',
-
-    'PDF_HEADER_TITLE' => 'Titlu Antet',
-    'PDF_HEADER_TITLE_INFO' => 'Şir pentru a imprima ca titlu pe antetul documentului',
-
-    'PDF_FILENAME' => 'Nume de fişier implicit',
-    'PDF_FILENAME_INFO' => 'Filename implicit pentru fişierele PDF generate',
-
-    'PDF_TITLE' => 'Titlu:',
-    'PDF_TITLE_INFO' => 'Titlul apare în proprietăţile documentului.',
-
-    'PDF_SUBJECT' => 'Subiect',
-    'PDF_SUBJECT_INFO' => 'Subiectul apare în proprietăţile documentului.',
-
     'PDF_KEYWORDS' => 'Cuvinte cheie',
     'PDF_KEYWORDS_INFO' => 'Cuvintele cheie asociat cu documentul, în general, sub forma "descriptor1 descriptor2 ..."',
 
-    'PDF_COMPRESSION' => 'Comprimare',
-    'PDF_COMPRESSION_INFO' => 'Când este activat, reprezentarea internă a fiecărei pagini este comprimat, ceea ce duce la un raport de compresie de aproximativ 2 pentru documentul rezultat.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG Quality (1-100',
-    'PDF_JPEG_QUALITY_INFO' => 'Setaţi implicit JPEG de compresie de calitate (1-100)',
-
-    'PDF_PDF_VERSION' => 'Versiunea PDF',
-    'PDF_PDF_VERSION_INFO' => 'Setaţi versiunea PDF ( verificaţi PDF  pentru valorile valabile).',
-
-    'PDF_PROTECTION' => 'Protectia documentului',
-    'PDF_PROTECTION_INFO' => 'Set documentul privind protecţia<br />- Copie: copia text şi imagini la clipboard<br />- Print: print document<br />- Modifica: modifica (cu excepţia pentru adnotări şi forme)<br />- Annot-forme: adăugaţi adnotări şi forme<br />Notă: protecţia împotriva modificarii este pentru persoanele care au produs Acrobat complet.',
-
-    'PDF_USER_PASSWORD' => 'Utilizator, parola',
-    'PDF_USER_PASSWORD_INFO' => 'Dacă nu setati  orice parolă, documentul se va deschide ca de obicei.<br />Dacă aţi setat o parolă de utilizator, PDF viewer o va cere pentru el înainte de afişarea documentului.<br />Parola de master, dacă este diferită de la un utilizator la altul, poate fi folosita pentru a obţine acces deplin',
-
-    'PDF_OWNER_PASSWORD' => 'Parola proprie',
-    'PDF_OWNER_PASSWORD_INFO' => 'Dacă nu setati  orice parolă, documentul se va deschide ca de obicei.<br />Dacă aţi setat o parolă de utilizator, PDF viewer o va cere pentru el înainte de afişarea documentului.<br />Parola de master, dacă este diferită de la un utilizator la altul, poate fi folosita pentru a obţine acces deplin',
-
-    'PDF_ACL_ACCESS' => 'Control Acces',
-    'PDF_ACL_ACCESS_INFO' => 'Control implicit al accesului pentru generarea PDF.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Ratie  Înălţime  Celulă',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Dacă înălţimea unei celule este mai mica decât (Font Înălţime x Cell înălţime Ratio), apoi (Font Înălţime x Înălţime Cell Ratio) este folosit ca înălţimea celulei.',
-
-    'K_TITLE_MAGNIFICATION' => 'Mărire Titlu',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Marirea titlului respecta marimea initiala a fontului.',
-
-    'K_SMALL_RATIO' => 'Factor Font mic',
-    'K_SMALL_RATIO_INFO' => 'Factor de reducere pentru font mic.',
-
-    'HEAD_MAGNIFICATION' => 'Mărire Antet',
-    'HEAD_MAGNIFICATION_INFO' => 'factor de amplificare pentru titluri.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Ratie scara imagine',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Ratie folosita sa scaleze imaginile',
-
-    'PDF_UNIT' => 'Unitate',
-    'PDF_UNIT_INFO' => 'unitate de măsură document',
 	'PDF_GD_WARNING'=>'Nu ai biblioteca GD instalata pentru PHP. Fără biblioteca GD instalata, doar logo-uri JPEG pot fi afişate în documentele PDF.',
     'ERR_EZPDF_DISABLE'=>'Atentie: Clasa EZPDF este dezactivata din tabelul de configurare şi e stabilita ca clasa PDF. Vă rugăm să "Salvati" acest formular pentru a seta ca TCPDF clasa PDF şi a reveni într-o stare stabilă.',
     'LBL_IMG_RESIZED'=>"(Redimensionate pentru afişare)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Adauga un font PDF',
     'LBL_PDF_PATCH' => 'Plasture',
-    'LBL_PDF_PATCH_INFO' => 'modificarea Custom de codare. Scrie o matrice PHP.<br />Exemplu:<br />ISO-8859-1 nu conţine simbolul euro. Pentru a adăuga aceasta în poziţia 164, scrie "array (164 => \\ &#39;Euro \\&#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'Tabel Encoding',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Numele tabelului de codare.<br />Această opţiune este ignorată pentru TrueType Unicode, Unicode fonturi OpenType şi simbolice.<br />Codarea defineşte asocierea dintre un cod (de la 0 la 255) şi un caracter conţinute în font.<br />Primele 128 sunt fixe şi corespund ASCII.',
     'LBL_PDF_FONT_FILE' => 'Fisier Font',

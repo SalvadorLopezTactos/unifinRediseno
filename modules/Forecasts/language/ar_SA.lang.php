@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'عرض سجل التوقع',
     'LBL_FORECAST_HISTORY' => 'التوقعات: السجل',
     'LBL_FORECAST_HISTORY_TITLE' => 'السجل',
+    'LBL_TAB_COMMITMENT' => 'الالتزام',
+    'LBL_CURRENT' => 'الحالي',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'الفترة الزمنية',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'تم التعديل بواسطة',
     'LBL_WK_VERSION' => 'الإصدار',
     'LBL_WK_REVISION' => 'مراجعة',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'الوصول إلى واجهة برمجة تطبيقات القياسات يتطلب Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'الفترة الزمنية:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'هل ترغب في تأكيد هذه المبالغ؟',
     'ERR_FORECAST_AMOUNT' => 'يلزم توفير مبلغ التأكيد ويجب أن يكون رقمًا.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'التدفقات المضمنة',
+    'LBL_UPSIDE_PIPELINE' => 'التدفقات التي تتجاوز التوقعات',
+    'LBL_EXCLUDED_PIPELINE' => 'التدفقات المستبعدة',
+    'LBL_WON' => 'ربح',
+    'LBL_LOST' => 'خسارة',
+    'LBL_ALL' => 'الكل',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'توجيه بشأن عوامل التصفية',
+    'LBL_HELP_MAIN_BODY' => 'كل المقاييس تتضمن فقط الفرص التي تنتمي إلى المستخدم (المستخدمين) المحددين والفترة الزمنية وأي عوامل تصفية أخرى طبقتها',
+    'LBL_FORECAST_HELP' => 'الفرص التي ربحت بالفعل أو المضمنة في {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'الفرص المفتوحة في مرحلة {{{forecastStage}}} من {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'الفرص المفتوحة في مرحلة {{{forecastStage}}} مضمنة',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'الفرص المفتوحة في مرحلة {{{forecastStage}}} من {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'الفرص المفتوحة في مرحلة {{{forecastStage}}} من {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'الفرص المفتوحة في مرحلة {{{forecastStage}}} مستبعدة',
+    'LBL_WON_HELP' => 'الفرص التي ربحت بالفعل',
+    'LBL_LOST_HELP' => 'الفرص التي خسرت بالفعل',
+    'LBL_ALL_HELP' => 'كل الفرص',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'تاريخ البدء',
     'LBL_FC_USER' => 'جدولة لـ',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'الالتزام',
     'LBL_TEAM_COMMITMENT' => 'التزام الفريق',
     'LBL_FORECASTED' => 'المتوقع',
+    'LBL_OPPORTUNITY_FORECAST' => 'تنبؤ الفرصة',
+    'LBL_REVENUELINEITEM_FORECAST' => 'تنبؤ بند العائد',
+    'LBL_LAST_COMMITMENT' => 'آخر التزام',
     'LBL_ADJUSTED_TOTAL' => 'الإجمالي المعدل',
     'LBL_COMMIT_STAGE' => 'تأكيد المرحلة',
     'LBL_SALES_STAGE' => 'مرحلة',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => ' (معدَّل)',
     'LBL_SAVE_DRAFT' => 'حفظ',
     'LBL_CHANGES_BY' => 'تغير بواسطة {0}',
-    'LBL_FORECAST_SETTINGS' => 'الإعدادات',
+    'LBL_FORECAST_SETTINGS' => 'إعدادات التنبؤ',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'إعدادات التوقعات',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'تاريخ بدء السنة المالية:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'تكوين الفترة الزمنية التي سوف تستخدم في وحدة التوقعات. <br><br>يُرجى ملاحظة أنه لا يمكن تغيير إعدادات الفترة الزمنية بعد الإعداد الأولي.<br><br>ابدأ باختيار تاريخ بدء السنة المالية الخاصة بك. ثم اختيار نوع الفترة الزمنية الخاصة بالتوقع. سوف يتم حساب نطاق تاريخ الفترات الزمنية تلقائيًا استنادًا إلى تحديداتك. الفترة الزمنية الفرعية هي أساس قائمه التوقعات. <br><br>سوف تحدد الفترات الزمنية الفرعية الماضية والمستقبلية القابلة للعرض عدد الفترات الفرعية المرئية في وحدة التوقعات. لدى المستخدمين إمكانية عرض عدد التوقعات وتعديلها في الفترات الفرعية المرئية.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'قم بتكوين الطريقة التي ترغب بتصنيف {{forecastByModule}} بها. <br><br>الرجاء ملاحظة أن إعدادات "النطاق" لا يمكن تغييرها بعد تقديم أول التزام. بالنسبة إلى الأمثلة المحدثة، يتم قفل إعداد "النطاق" على بيانات التوقع الحالية. <br><br>يمكنك تحديد فئتين أو أكثر استنادًا إلى نطاقات الاحتمالية أو إنشاء فئات غير مستندة إلى الاحتمالية. <br><br>توجد خانات اختيار على يسار الفئات المخصصة؛ استخدمها لتحديد النطاقات التي سيتم تضمينها داخل مبلغ التوقع الملتزم به والمُبلغ إلى المديرين. <br><br>يمكن لمستخدم تغيير حالة التضمين/الاستبعاد وفئة {{forecastByModule}} يدويًا من داخل ورقة العمل الخاصة به.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'قم بتكوين الطريقة التي ترغب بتصنيف {{forecastByModule}} بها. <br><br>الرجاء ملاحظة أن إعدادات "النطاق" لا يمكن تغييرها بعد تقديم أول تعهد. بالنسبة إلى الأمثلة المحدثة، يتم قفل إعداد "النطاق" على بيانات التوقع الحالية. <br><br>يمكنك تحديد فئتين أو أكثر استنادًا إلى نطاقات الاحتمالية أو إنشاء فئات غير مستندة إلى الاحتمالية. <br><br>توجد خانات اختيار على يسار الفئات المخصصة؛ استخدمها لتحديد النطاقات التي سيتم تضمينها داخل مبلغ التوقع المُتعهد به والمُبلغ إلى المديرين. <br><br>يمكن لمستخدم تغيير حالة التضمين/الاستبعاد وفئة {{forecastByModule}} يدويًا من داخل ورقة العمل الخاصة به.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'قم بتحديد الأعمدة التي ترغب في أن يقوم المستخدم بتعبئتها التوقعات الخاصة بها لكل {{forecastByModuleSingular}}. يُرجى ملاحظة أن المبلغ المحتمل مرتبط بالمبلغ الظاهر في {{forecastByModule}}؛ ولهذا السبب لا يمكن إخفاء عمود المحتمل.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'قم بتحديد الأعمدة التي ترغب في إظهارها في وحدة التوقع. سوف يتم دمج ورقة العمل والسماح للمستخدم باختيار كيفية تكوين طريقة عرضها.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'أنا عنصر نائب للتوقع من خلال تعليمات النص!',

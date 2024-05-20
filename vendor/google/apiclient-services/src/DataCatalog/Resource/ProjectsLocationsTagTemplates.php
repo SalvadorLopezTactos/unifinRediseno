@@ -103,8 +103,9 @@ class ProjectsLocationsTagTemplates extends \Google\Service\Resource
    * groups. (tagTemplates.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param GetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -130,10 +131,11 @@ class ProjectsLocationsTagTemplates extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string updateMask Names of fields whose values to overwrite on a
-   * tag template. Currently, only `display_name` can be overwritten. If this
-   * parameter is absent or empty, all modifiable fields are overwritten. If such
-   * fields are non-required and omitted in the request body, their values are
-   * emptied.
+   * tag template. Currently, only `display_name` and `is_publicly_readable` can
+   * be overwritten. If this parameter is absent or empty, all modifiable fields
+   * are overwritten. If such fields are non-required and omitted in the request
+   * body, their values are emptied. Note: Updating the `is_publicly_readable`
+   * field may require up to 12 hours to take effect in search results.
    * @return GoogleCloudDatacatalogV1TagTemplate
    */
   public function patch($name, GoogleCloudDatacatalogV1TagTemplate $postBody, $optParams = [])
@@ -154,8 +156,9 @@ class ProjectsLocationsTagTemplates extends \Google\Service\Resource
    * (tagTemplates.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -176,8 +179,9 @@ class ProjectsLocationsTagTemplates extends \Google\Service\Resource
    * (tagTemplates.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse

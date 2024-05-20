@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Quadre de comandament del llistat de casos',
     'LBL_CASES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de casos',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalls del cas',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Calaix centrat als casos - Consola',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als casos',
 
 	'ERR_DELETE_RECORD'					=> 'Per suprimir el compte, heu d&#39;especificar un número de registre.',
@@ -162,4 +162,29 @@ Per crear un {{module_name}}:
     'LBL_SLA_DETAILS' => 'Detalls d&#39;SLA',
     'LBL_HOURS' => 'Hores',
     'LBL_WIDGET_STATUS' => 'Estat',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organitza',
+    'LBL_CREATE_NEW' => 'Crear nou',
+    'LBL_MANAGE' => 'Gestiona',
+    'LBL_SEE_DETAILS' => 'Mostra els detalls',
+    'LBL_HIDE_NEW' => 'Amaga',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Casos',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Cas',
+    'LBL_KIOSK_CREATE' => 'Crea un cas',
+    'LBL_KIOSK_SUBJECT' => 'Assumpte',
+    'LBL_KIOSK_CASE_ID' => 'ID del cas',
+    'LBL_KIOSK_STATUS' => 'Estat',
+    'LBL_KIOSK_CATEGORY' => 'Categoria',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Enviat el {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioritat',
+    'LBL_KIOSK_CREATE_CASE' => 'Contacta amb nosaltres',
+    'LBL_KIOSK_DESCRIPTION' => 'Descripció',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'La seva petició s&#39;ha enviat correctament.',
+    'LBL_KIOSK_ATTACHED' => 'Tots els adjunts',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Usuaris externs',
 );

@@ -86,7 +86,7 @@ class SugarFieldDatetime extends SugarFieldBase {
     function getSearchViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
         if($this->isRangeSearchView($vardef)) {
            $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
-           $id = isset($displayParams['idName']) ? $displayParams['idName'] : $vardef['name'];
+            $id = $displayParams['idName'] ?? $vardef['name'];
            $this->ss->assign('original_id', "{$id}");
            $this->ss->assign('id_range', "range_{$id}");
            $this->ss->assign('id_range_start', "start_range_{$id}");
@@ -219,6 +219,7 @@ class SugarFieldDatetime extends SugarFieldBase {
      */
     public function fixForFilter(&$value, $columnName, SugarBean $bean, SugarQuery $q, SugarQuery_Builder_Where $where, $op)
     {
+        $dateParsed = [];
         if($op === '$daterange') {
             return true;
         }
@@ -366,9 +367,9 @@ class SugarFieldDatetime extends SugarFieldBase {
         $db = DBManagerFactory::getInstance();
 
         //If it's in ISO format, convert it to db format
-        if(preg_match('/(\d{4})\-?(\d{2})\-?(\d{2})T(\d{2}):?(\d{2}):?(\d{2})\.?\d*([Z+-]?)(\d{0,2}):?(\d{0,2})/i', $value)) {
+        if (preg_match('/(\d{4})\-?(\d{2})\-?(\d{2})T(\d{2}):?(\d{2}):?(\d{2})\.?\d*([Z+-]?)(\d{0,2}):?(\d{0,2})/i', (string)$value)) {
            $value = $timedate->fromIso($value)->asDb();
-        } else if(preg_match("/" . TimeDate::DB_DATE_FORMAT . "/", $value)) {
+        } elseif (preg_match("/" . TimeDate::DB_DATE_FORMAT . "/", (string)$value)) {
            $value = $timedate->fromDbDate($value)->asDb();
         }
 

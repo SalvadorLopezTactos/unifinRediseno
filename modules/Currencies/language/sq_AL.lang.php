@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Krijuar nga',
   'LBL_EDIT_LAYOUT' => 'Ndrysho formatin' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Vetëm administratorët',
-  'LBL_CURRENCY_DEFAULT' => 'Dollar amerikan (standard)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Monedha e sistemit (Paracaktuar)',
 );
 ?>

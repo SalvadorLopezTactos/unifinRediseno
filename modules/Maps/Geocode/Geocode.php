@@ -38,4 +38,5 @@ class Geocode extends SugarBean
     public $latitude;
     public $longitude;
     public $geocoded;
+    public $error_message;
 }

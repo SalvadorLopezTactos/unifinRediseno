@@ -288,7 +288,7 @@ EOQ;
 }
 
 if (!isset($exec) || $exec) {
-    $silent = isset($GLOBALS['updateSilent']) ? $GLOBALS['updateSilent'] : true;
+    $silent = $GLOBALS['updateSilent'] ?? true;
     create_cache_directory("Expressions/functions_cache.js");
     buildCache(sugar_cached("Expressions"), $silent, true);
 }

@@ -17,7 +17,11 @@ require_once('include/EditView/EditView2.php');
  * @api
  */
 class SubpanelQuickEdit{
-	var $defaultProcess = true;
+    /**
+     * @var \EditView|mixed
+     */
+    public $ev;
+    public $defaultProcess = true;
 
     public function __construct($module, $view = 'QuickEdit', $proccessOverride = false)
 	{

@@ -118,11 +118,12 @@ class AuthZ
 
         unset($authZBody['token']);
 
+        $encodedRequest = json_encode($authZBody);
+
         $statusCode = $response->getStatusCode();
         if ($statusCode >= Response::HTTP_BAD_REQUEST) {
             $this->logger->error(
-                'Request is not allowed by AuthZ',
-                ['request' => $authZBody, 'responseCode' => $statusCode]
+                sprintf('Request %s is not allowed by AuthZ. StatusCode: %d', $encodedRequest, $statusCode)
             );
             return false;
         }
@@ -136,7 +137,9 @@ class AuthZ
 
         if (isset($result['authorized'])) {
             if (!$result['authorized']) {
-                $this->logger->error('Request is not allowed by AuthZ', $authZBody);
+                $this->logger->error(
+                    sprintf('Request %s is not allowed by AuthZ %s', $encodedRequest, $data)
+                );
             }
             $this->cache->set($cacheKey, $result['authorized'], $this->cacheTTL);
             return $result['authorized'];

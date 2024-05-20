@@ -11,14 +11,16 @@ use Elastica\Exception\InvalidException;
  */
 class Range extends AbstractSimpleAggregation
 {
+    use Traits\KeyedTrait;
+
     /**
      * Add a range to this aggregation.
      *
-     * @param float|int $fromValue low end of this range, exclusive (greater than or equal to)
-     * @param float|int $toValue   high end of this range, exclusive (less than)
-     * @param string    $key       customized key value
+     * @param float|int|string|null $fromValue low end of this range, exclusive (greater than or equal to)
+     * @param float|int|string|null $toValue   high end of this range, exclusive (less than)
+     * @param string|null           $key       customized key value
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return $this
      */
@@ -46,12 +48,14 @@ class Range extends AbstractSimpleAggregation
     }
 
     /**
-     * If set to true, a unique string key will be associated with each bucket, and ranges will be returned as an associative array.
-     *
      * @return $this
+     *
+     * @deprecated since version 7.1.0, use the "setKeyed()" method instead.
      */
     public function setKeyedResponse(bool $keyed = true): self
     {
-        return $this->setParam('keyed', $keyed);
+        \trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "setKeyed()" instead. It will be removed in 8.0.', __METHOD__);
+
+        return $this->setKeyed($keyed);
     }
 }

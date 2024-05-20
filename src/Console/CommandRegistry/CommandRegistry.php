@@ -30,8 +30,8 @@ use Symfony\Component\Console\Command\Command;
  */
 class CommandRegistry implements CommandRegistryInterface
 {
-    const MODE_STANDALONE = 'StandaloneMode';
-    const MODE_INSTANCE = 'InstanceMode';
+    public const MODE_STANDALONE = 'StandaloneMode';
+    public const MODE_INSTANCE = 'InstanceMode';
 
     /**
      * @var CommandRegistry

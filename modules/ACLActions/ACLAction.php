@@ -189,10 +189,10 @@ class ACLAction  extends SugarBean
         $query .= " ORDER BY category";
 
         $db = DBManagerFactory::getInstance();
-        $stmt = $db->getConnection()
+        $result = $db->getConnection()
             ->executeQuery($query, $params);
         $default_actions = [];
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $acl = BeanFactory::newBean('ACLActions');
             $acl->populateFromRow($row);
             $default_actions[] = $acl;
@@ -240,7 +240,7 @@ class ACLAction  extends SugarBean
                     return self::$acls[$user_id];
                 } elseif ($category !== null && isset(self::$acls[$user_id][$category])) {
                     LoggerManager::getLogger()->fatal(
-                        __CLASS__ . '::' . __METHOD__
+                        self::class . '::' . __METHOD__
                         . ' call with more than 2 parameters is deprecated.'
                         . ' Please get all actions and specify in the caller which part is needed.'
                     );
@@ -318,9 +318,7 @@ class ACLAction  extends SugarBean
         // Fallback to array key if translation is empty
         $a = empty($app_list_strings['moduleList'][$a]) ? $a : $app_list_strings['moduleList'][$a];
         $b = empty($app_list_strings['moduleList'][$b]) ? $b : $app_list_strings['moduleList'][$b];
-        if ($a == $b)
-            return 0;
-        return ($a < $b) ? -1 : 1;
+        return $a <=> $b;
     }
 
     /**
@@ -502,12 +500,12 @@ WHERE
     AND acl_roles_users.deleted = ?
 SQL;
         $conn = DBManagerFactory::getInstance()->getConnection();
-        $stmt = $conn->executeQuery(
+        $result = $conn->executeQuery(
             $query,
             [$user_id, 0]
         );
         $actions = [];
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $actions[] = $row;
         }
         return self::keepMostRestrictiveActions($actions);

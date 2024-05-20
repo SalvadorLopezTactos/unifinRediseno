@@ -31,5 +31,20 @@
                 this.model.set(this.name, app.lang.getAppListStrings('iso_currency_name')[iso4217]);
             }
         });
+
+        // Set the system currency name
+        this.listenTo(this.model, 'change:name', (model, name) => {
+            if (name !== '' && model.get('id') === '-99') {
+                model.set(this.name, app.lang.get('LBL_CURRENCY_DEFAULT', 'Currencies'));
+            }
+        });
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.stopListening();
+        this._super('_dispose');
     }
 })

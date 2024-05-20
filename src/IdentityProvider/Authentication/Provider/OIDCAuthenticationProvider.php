@@ -19,6 +19,8 @@ use Sugarcrm\IdentityProvider\Authentication\UserMapping\MappingInterface;
 use Sugarcrm\IdentityProvider\STS\EndpointInterface;
 use Sugarcrm\IdentityProvider\Srn\Converter;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\IdmNonrecoverableException;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\InvalidTokenException;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\ServiceAccountAuthenticationException;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\OAuth2\Client\Provider\IdmProvider;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\Checker;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\ServiceAccount;
@@ -71,6 +73,11 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
     protected $SAChecker;
 
     /**
+     * @var \LoggerManager
+     */
+    protected $logger;
+
+    /**
      * List of handlers that can be used to handle tokens.
      * Actually, they correspond to steps of SAML authentication flow.
      *
@@ -103,6 +110,18 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         $this->userChecker = $userChecker;
         $this->userMapping = $userMapping;
         $this->SAChecker = $SAChecker;
+    }
+
+    /**
+     * to get logger
+     * @return \LoggerManager
+     */
+    protected function getLogger() : \LoggerManager
+    {
+        if (empty($this->logger)) {
+            $this->logger = \LoggerManager::getLogger();
+        }
+        return $this->logger;
     }
 
     /**
@@ -186,11 +205,19 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
      */
     protected function introspectToken(TokenInterface $token)
     {
+        $user = null;
+        $resultToken = null;
         $accessToken = new AccessToken(['access_token' => $token->getCredentials()]);
         $result = $this->oAuthProvider->introspectToken($accessToken);
 
-        if (empty($result) || empty($result['active'])) {
-            throw new AuthenticationException('OIDC Token is not valid');
+        if (empty($result) || !is_array($result)) {
+            $this->getLogger()->fatal('Wrong response from STS');
+            throw new AuthenticationException('Wrong response from STS');
+        }
+
+        if (empty($result['active'])) {
+            $this->getLogger()->fatal('IDM access token is expired: ' . json_encode($result));
+            throw new InvalidTokenException('IDM access token is expired');
         }
 
         if (empty($result['sub'])) {
@@ -213,8 +240,8 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
 
         if ($user->isServiceAccount()) {
             if (!$this->SAChecker->isAllowed($token->getCredentials(), $result)) {
-                throw new AuthenticationException(
-                    sprintf('Service account is not allowed: %s', $result['sub'])
+                throw new ServiceAccountAuthenticationException(
+                    sprintf('Service account %s is not allowed for this sugarcrm instance', $result['sub'])
                 );
             }
             if (!empty($result['ext']['dataSourceSRN'])) {
@@ -249,6 +276,11 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         }
 
         $userInfo = $this->oAuthProvider->getUserInfo($accessToken);
+        if (!empty($userInfo)) {
+            $this->getLogger()->debug('user info: ' . is_array($userInfo) ? json_encode($userInfo) : $userInfo);
+        } else {
+            $this->getLogger()->fatal('Can not retrieve user info from STS for subject: ' . $result['sub'] ?? 'empty subject');
+        }
         $user->setAttribute('oidc_data', $this->userMapping->map($userInfo));
         $user->setAttribute('updated_at', $userInfo['updated_at']);
         $user->setAttribute('oidc_identify', $this->userMapping->mapIdentity($result));

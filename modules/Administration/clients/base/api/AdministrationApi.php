@@ -1158,6 +1158,8 @@ class AdministrationApi extends SugarApi
             //              [1] => label,
             //              [2] => description,
             //              [3] => link,
+            //              [5] => onclick,
+            //              [6] => target,
             //          ]
             //      ]
             // ]
@@ -1217,6 +1219,12 @@ class AdministrationApi extends SugarApi
                         } else {
                             $option['icon'] = 'sicon-sugar-logo-12';
                             $option['customIcon'] = '';
+                        }
+                        if (!empty($section[5])) {
+                            $option['onclick'] = $section[5];
+                        }
+                        if (!empty($section[6])) {
+                            $option['target'] = $section[6];
                         }
 
                         array_push($newDefs['options'], $option);

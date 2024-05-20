@@ -17,6 +17,9 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 class RetryMiddleware
 {
     /**

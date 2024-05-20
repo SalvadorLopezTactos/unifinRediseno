@@ -43,7 +43,7 @@ class ForecastHooks extends AbstractForecastHooks
         }
         if (static::isForecastSetup() && empty($bean->commit_stage) && $bean->probability !== '') {
             //Retrieve Forecasts_category_ranges and json decode as an associative array
-            $forecast_ranges = isset(static::$settings['forecast_ranges']) ? static::$settings['forecast_ranges'] : '';
+            $forecast_ranges = static::$settings['forecast_ranges'] ?? '';
             $category_ranges = isset(static::$settings[$forecast_ranges . '_ranges']) ?
                 (array)static::$settings[$forecast_ranges . '_ranges'] : array();
             foreach ($category_ranges as $key => $entry) {

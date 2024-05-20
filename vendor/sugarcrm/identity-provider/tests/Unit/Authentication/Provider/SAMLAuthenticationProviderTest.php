@@ -36,7 +36,7 @@ use PHPUnit_Framework_TestCase;
 /**
  * Class covers all step of SAML authentication.
  *
- * @coversDefaultClass Sugarcrm\IdentityProvider\Authentication\Provider\SAMLAuthenticationProvider
+ * @coversDefaultClass \Sugarcrm\IdentityProvider\Authentication\Provider\SAMLAuthenticationProvider
  */
 class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
 {
@@ -76,7 +76,7 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
 
         $this->user = $this->createMock(User::class);
         $this->samlUserProvider = $this->createMock(SAMLUserProvider::class);
-        $this->samlUserProvider->method('loadUserByUsername')->willReturn($this->user);
+        $this->samlUserProvider->method('loadUserByIdentifier')->willReturn($this->user);
         $this->samlUserChecker = $this->getMockBuilder(UserCheckerInterface::class)->getMock();
         $this->session = $this->createMock(SessionInterface::class);
         $this->response = $this->createMock(Response::class);
@@ -391,7 +391,7 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
                 ]
             );
         $this->samlUserProvider->expects($this->once())
-            ->method('loadUserByUsername')
+            ->method('loadUserByIdentifier')
             ->with('identityValue')
             ->willReturn($user);
 
@@ -481,7 +481,7 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
     public function testConsumeWithUserAttributes($settings, $mapping, $response, $expectedAttributes)
     {
         $userProvider = $this->createMock(SAMLUserProvider::class);
-        $userProvider->method('loadUserByUsername')->willReturn(new User('foo'));
+        $userProvider->method('loadUserByIdentifier')->willReturn(new User('foo'));
         $samlProvider = new SAMLAuthenticationProvider(
             $settings,
             $userProvider,
@@ -558,6 +558,10 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
         $this->samlUserChecker->expects($this->once())
             ->method('checkPostAuth')
             ->with($this->user);
+        $this->userMapping->method('mapIdentity')->willReturn([
+            'field' => 'username',
+            'value' => 'phpunit'
+        ]);
         $samlProvider = new SAMLAuthenticationProvider(
             $settings,
             $this->samlUserProvider,
@@ -584,6 +588,10 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
         $this->samlUserChecker
             ->method('checkPostAuth')
             ->will($this->throwException(new AuthenticationException('User was not matched to db-user')));
+        $this->userMapping->method('mapIdentity')->willReturn([
+            'field' => 'username',
+            'value' => 'phpunit'
+        ]);
         $samlProvider = new SAMLAuthenticationProvider(
             $settings,
             $this->samlUserProvider,

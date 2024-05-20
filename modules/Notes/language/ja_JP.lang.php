@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'メモリストのダッシュ ボード',
     'LBL_NOTES_RECORD_DASHBOARD' => '注記レコードダッシュボード',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '注記 フォーカス ドロワ',
+    'LBL_EXTERNAL_USER' => '外部ユーザー',
+    'LBL_EXTERNAL_USER_NAME' => '外部ユーザー',
 
     'LBL_RELATED_CONTACT' => '関連する担当者',
     'ERR_DELETE_RECORD' => 'あなたがアカウントを削除するには、レコード番号を指定する必要があります。',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Eメールのタイプ',
     'LBL_EMAIL_ID' => 'Eメール ID',
     'LBL_PHONE' => '電話:',
-    'LBL_PORTAL_FLAG' => 'ポータルで表示？',
+    'LBL_PORTAL_FLAG' => '外部で利用可能',
     'LBL_EMBED_FLAG' => 'Eメールに埋め込み？',
     'LBL_PRODUCT_ID' => '商品ID:',
     'LBL_QUOTE_ID' => '見積ID:',

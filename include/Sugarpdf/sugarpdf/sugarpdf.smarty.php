@@ -78,14 +78,12 @@ class SugarpdfSmarty extends Sugarpdf{
             $securityPolicy->static_classes = [null];
             // explicitly allow list of PHP functions (equals to defaults):
             $securityPolicy->php_functions = ['isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time',];
-            // remove PHP tags
-            $securityPolicy->php_handling = Smarty::PHP_REMOVE;
             $securityPolicy->allow_super_globals = false;
             $securityPolicy->allow_constants = false;
             // disable all stream wrappers
             $securityPolicy->streams = null;
             // 'math' internally uses eval()
-            $securityPolicy->disabled_tags = ['eval', 'fetch', 'include_php', 'math', ];
+            $securityPolicy->disabled_tags = ['eval', 'fetch', 'include_php', 'math', 'php', ];
             /**
              * Disable 'template_object' to prevent tricks like:  {$name=$smarty.template_object->disableSecurity()} {include "file://etc/passwd"}
              * Disable 'current_dir' to prevent filesystem info leakage

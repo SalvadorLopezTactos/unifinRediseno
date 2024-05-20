@@ -41,8 +41,8 @@ class ForecastManagerWorksheetsExportApi extends ExportApi
             throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $seed->object_name);
         }
 
-        $args['timeperiod_id'] = isset($args['timeperiod_id']) ? $args['timeperiod_id'] : TimePeriod::getCurrentId();
-        $args['user_id'] = isset($args['user_id']) ? $args['user_id'] : $api->user->id;
+        $args['timeperiod_id'] = $args['timeperiod_id'] ?? TimePeriod::getCurrentId();
+        $args['user_id'] = $args['user_id'] ?? $api->user->id;
         // don't allow encoding to html for data used in export
         $args['encode_to_html'] = false;
 

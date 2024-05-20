@@ -55,18 +55,25 @@
         };
 
         if (this.checkAccess()) {
-            // get the context model
-            var ctxModel = options.context.get('model'),
-                metadata = app.metadata.getModule(this.module);
-            // empty the model
-            ctxModel.clear({silent: true});
-
-            if (_.has(metadata, 'config')) {
-                // load the model with module's config
-                ctxModel.set(metadata.config);
-            }
-
+            this.setContextModel(options);
             this.loadConfig(options);
+        }
+    },
+
+    /**
+     * Sets context model.
+     * @param {Object} options
+     */
+    setContextModel: function(options) {
+        // get the context model
+        var ctxModel = options.context.get('model');
+        var metadata = app.metadata.getModule(this.module);
+        // empty the model
+        ctxModel.clear({silent: true});
+
+        if (_.has(metadata, 'config')) {
+            // load the model with module's config
+            ctxModel.set(metadata.config);
         }
     },
 

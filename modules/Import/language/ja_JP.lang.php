@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => '必須な値が欠けています',
     'LBL_ERROR_SYNC_USERS' => '不正な値のためOutlookに同期できません:',
     'LBL_ID_EXISTS_ALREADY' => 'テーブルにIDがすでに存在しています',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'テーブルに SYNC_KEY がすでに存在しています',
     'LBL_ASSIGNED_USER' => 'もしユーザが存在しなければ現在のユーザが利用されます',
     'LBL_SHOW_HIDDEN' => '通常ではインポートできないフィールドの表示',
     'LBL_UPDATE_RECORDS' => 'インポートする代わりに既存のレコードを更新する (Undoできません)',

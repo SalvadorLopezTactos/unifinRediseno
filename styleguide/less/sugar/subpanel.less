@@ -33,11 +33,11 @@
       height: 42px;
       border: none;
       border-top: @borderWidget;
-      background-color: @primaryContentBackground;
+      background-color: @primaryContentHoverBackground;
     }
 
     .more.btn-link:hover {
-      background-color: @tableRowHover;
+      background-color: @primaryContentHoverBackground;
     }
 
     .list-view {
@@ -227,10 +227,17 @@
 
       tr {
         td.sticky-column:not(.stick-first) {
-          background: none;
-
           > span {
             background-color: @primaryContentBackground;
+          }
+        }
+
+        &.highlighted {
+          &.current {
+            td,
+            td.sticky-column > span {
+              background-color: @tableRowHover;
+            }
           }
         }
 

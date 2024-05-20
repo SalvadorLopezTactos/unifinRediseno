@@ -43,7 +43,7 @@ class SearchFields implements \IteratorAggregate
      * {@inheritdoc}
      * @return SearchField[]
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->searchFields);
     }

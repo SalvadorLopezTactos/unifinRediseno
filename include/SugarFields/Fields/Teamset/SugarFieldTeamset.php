@@ -275,6 +275,7 @@ class SugarFieldTeamset extends SugarFieldBase {
 	}
 
 	function initClassicView($fields, $formName='EditView'){
+        $displayParams = [];
 		$this->view = new ViewSugarFieldTeamsetCollection();
         if(!$this->add_user_private_team)
         {
@@ -359,7 +360,7 @@ class SugarFieldTeamset extends SugarFieldBase {
 	 *
 	 */
 	function getMassUpdateViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex, $searchView = false) {
-    	$_REQUEST['bean_id'] = isset($_REQUEST['record']) ? $_REQUEST['record'] : '';
+        $_REQUEST['bean_id'] = $_REQUEST['record'] ?? '';
 		$this->view = new MassUpdateSugarFieldTeamsetCollection();
 		$displayParams['formName'] = 'MassUpdate';
 		$this->view->displayParams = $displayParams;
@@ -583,7 +584,7 @@ class SugarFieldTeamset extends SugarFieldBase {
 
         $additionalValues = array();
         if (!empty($team_ids)) {
-            $selectedTeamIds = $this->getSelectedTeamIdsFromRequest($field, $params);
+            $selectedTeamIds = static::getSelectedTeamIdsFromRequest($field, $params);
             if (!empty($selectedTeamIds)) {
                 $additionalValues['selected_teams'] = $selectedTeamIds;
             } else {
@@ -757,7 +758,7 @@ class SugarFieldTeamset extends SugarFieldBase {
         $selectedTeamIds = $ret['selectedTeamIds'];
         $primaryTeamId = $ret['primaryTeamId'];
 
-        if ( count($teamIds) == 0 ) {
+        if ((is_countable($teamIds) ? count($teamIds) : 0) == 0) {
             // There are no teams being set, set the defaults and move on
             $bean->setDefaultTeam();
             return;

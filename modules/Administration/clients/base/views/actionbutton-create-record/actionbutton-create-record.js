@@ -713,16 +713,23 @@
      *
      */
     _populateRelationships: function() {
+        const targetModule = this._properties.module;
+        const moduleName = app.lang.getModuleName(targetModule, {
+            plural: true
+        });
+
         var currentModuleName = this._module;
         var currentModuleFields = app.metadata.getModule(currentModuleName).fields;
         var relationships = {};
 
         _.each(currentModuleFields, _.bind(function getLinks(linkData) {
-            if (linkData.type == 'link' &&
-                (app.lang.get(linkData.vname, currentModuleName) === this._properties.module ||
-                    linkData.module === this._properties.module)) {
-                relationships[linkData.name] = app.lang.get(linkData.vname, currentModuleName) +
-                    ' (' + linkData.name + ')';
+            const moduleLabel = app.lang.get(linkData.vname, currentModuleName);
+
+            if (linkData.type === 'link' && (
+                    moduleLabel === targetModule ||
+                    moduleLabel === moduleName ||
+                    linkData.module === targetModule)) {
+                relationships[linkData.name] = moduleLabel + ' (' + linkData.name + ')';
             }
         }, this));
 

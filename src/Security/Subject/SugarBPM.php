@@ -21,6 +21,7 @@ final class SugarBPM extends Bean
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $parent = parent::jsonSerialize();

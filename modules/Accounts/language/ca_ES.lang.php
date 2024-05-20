@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Quadre de comandament de llista de comptes',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Quadre de comandament de registre de comptes',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als comptes',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Detalls del compte',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Calaix centrat als comptes - Consola',
     'LBL_NEXT_RENEWAL_DATE' => 'Data de la propera renovació',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Data de la propera renovació',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Nom de compte/Indústria',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Ubicació',
     'LBL_PURCHASES' => 'Compres',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Línia temporal del compte',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organitza',
+    'LBL_CREATE_NEW' => 'Crear un nou',
+    'LBL_MANAGE' => 'Gestiona',
+    'LBL_SEE_DETAILS' => 'Mostra els detalls',
+    'LBL_HIDE_NEW' => 'Amaga',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Gràfics',
@@ -207,4 +214,7 @@ Per crear un {{module_name}}:
 2. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Informes de comptes',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Usuaris externs',
 );

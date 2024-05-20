@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
-<span class="sugar_field" id="{{sugarvar key='name'}}">{{if empty($displayParams.textonly)}}{{sugarvar key='value' htmlentitydecode='true'}}{{else}}{{sugarvar key='value'}}{{/if}}</span>
+<span class="sugar_field" id="{{sugarvar key='name'}}">{{sugarvar key='value'}}</span>
 {{if !empty($displayParams.enableConnectors)}}
 {assign var="value" value={{sugarvar key='value' string='true'}} }
 {if !empty($value)}

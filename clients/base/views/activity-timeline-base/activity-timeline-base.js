@@ -25,7 +25,7 @@
     moduleIcons: {
         Calls: 'sicon-phone-lg',
         Emails: 'sicon-email-lg',
-        Meetings: 'sicon-calendar-lg',
+        Meetings: 'sicon-meetings-lg',
         Messages: 'sicon-message-lg',
         Notes: 'sicon-note-lg',
         Cases: 'sicon-case-lg',

@@ -64,7 +64,8 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'The password you entered did not meet the password requirements.  Please try again.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'User Information not found',
     'ERR_USER_NAME_EXISTS'              => 'The user name {0} already exists. Duplicate user names are not allowed. Change the user name to be unique.',
-    'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” license must be saved with additional compatible license type',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => '[{0}] license must be assigned with a CRM product license',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'This capability is already included in Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'This user is locked out of the Sugar application and cannot log in using his/her existing password.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'External auth only user is not allowed to login using Sugar credentials',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Password',
     'LBL_CHOOSE_A_KEY'					=> 'Choose a key to prevent unauthorized publishing of your calendar',
     'LBL_NO_KEY'                        => 'Key is not set. Please set key to enable publishing.',
-	'LBL_CHOOSE_WHICH'					=> 'Select which modules are accessible within the top navigation bar. Designate the order in which you would like the modules to appear.',
+    'LBL_CHOOSE_WHICH'                  => 'Select which modules are accessible within the side navigation bar. Designate the order in which you would like the modules to appear.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Number of Pinned Modules',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Write the number of available modules to pin when the navigation bar is collapsed (e.g., if 5 is entered, the first five modules in your list are pinned). We recommend a number that represents your most frequently used modules. Values over 100 will not be respected.',
 	'LBL_CITY'							=> 'City',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Clear',
@@ -545,6 +548,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP Username:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP Server Type:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP Server Specification',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Authorized Email Account',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Choose your Email provider:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail Password:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail ID:',
@@ -700,4 +704,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'users/teams/roles',
     'LBL_LOADING_ITEMS' => 'Loading data...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Smart Guide Access',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Smart Guide Last Active',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Missing Smart Guide Access',
 ); // END STRINGS DEFS

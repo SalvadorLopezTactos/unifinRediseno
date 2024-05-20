@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Dashbord for kontoliste',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Dashbord for kontooppføring',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Kontoer fokusskuff',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Kontodetaljer',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Kontoer fokusskuff - Konsoll',
     'LBL_NEXT_RENEWAL_DATE' => 'Dato for neste fornyelse',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Dato for neste fornyelse',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Kontonavn/bransje',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Plassering',
     'LBL_PURCHASES' => 'Kjøp',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Kontotidslinje',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiser',
+    'LBL_CREATE_NEW' => 'Opprett ny',
+    'LBL_MANAGE' => 'Administrer',
+    'LBL_SEE_DETAILS' => 'Vis detaljer',
+    'LBL_HIDE_NEW' => 'Skjul',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagrammer',
@@ -201,4 +208,7 @@ For å opprette {{module_name}}:
 2. Klikk "Lagre" for å sluttføre den nye posten og gå tilbake til forrige side.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Bedriftsrapporter',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Eksterne brukere',
 );

@@ -199,7 +199,7 @@ class EmailMan extends SugarBean{
 		return $query;
 	}
 
-    function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
     	global $locale, $current_user;
         $temp_array = parent::get_list_view_array();
@@ -293,7 +293,6 @@ SQL;
      * @return
      */
     function create_ref_email($marketing_id,$subject,$body_text,$body_html,$campagin_name,$from_address,$sender_id,$notes,$macro_nv,$newmessage,$from_address_name) {
-
         $rel_name = null;
        global $mod_Strings, $timedate;
        $upd_ref_email=false;
@@ -342,7 +341,7 @@ SQL;
                 $retId = $this->ref_email->save();
 
                 foreach($notes as $note) {
-                    list($filename, $mime_type) = $this->getFileInfo($note);
+                        [$filename, $mime_type] = $this->getFileInfo($note);
                     $noteAudit = BeanFactory::newBean('Notes');
                     $noteAudit->email_id = $retId;
                     $noteAudit->email_type = $this->ref_email->module_dir;
@@ -451,7 +450,7 @@ SQL;
         $retId                   = $email->save();
 
         foreach ($this->notes_array as $note) {
-            list($filename, $mime_type) = $this->getFileInfo($note);
+            [$filename, $mime_type] = $this->getFileInfo($note);
             // create "audit" email without duping off the file to save on disk space
             $noteAudit              = BeanFactory::newBean('Notes');
             $noteAudit->email_id = $retId;
@@ -604,7 +603,7 @@ SQL;
 			$at_pos=strrpos($lower_email_address,'@');
 			if ($at_pos !== false) {
 				foreach ($this->restricted_domains as $domain=>$value) {
-                    $pos=strrpos($lower_email_address, (string) $domain);
+					$pos=strrpos($lower_email_address,$domain);
 					if ($pos !== false && $pos > $at_pos) {
 						//found
 						$this->set_as_sent($lower_email_address, true,null,null,'blocked');
@@ -912,7 +911,7 @@ SQL;
     {
         $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
         $conn = $this->db->getConnection();
-        $conn->executeQuery($query, array($this->id));
+        $conn->executeStatement($query, array($this->id));
     }
 
     /**

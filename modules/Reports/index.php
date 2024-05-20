@@ -39,7 +39,7 @@ if ( isset($_REQUEST['id'])) {
 
 	if ( isset($_REQUEST['filter_key']) && isset($_REQUEST['filter_value'])) {
 		$new_filter = array();
-		list($new_filter['table_name'],$new_filter['name']) = explode(':',$_REQUEST['filter_key']);
+            [$new_filter['table_name'], $new_filter['name']] = explode(':', $_REQUEST['filter_key']);
 		$new_filter['qualifier_name'] = 'is';
 		$new_filter['input_name0'] = array($_REQUEST['filter_value']);
 
@@ -57,9 +57,9 @@ if ( isset($_REQUEST['id'])) {
 } else {
 	$report_def = array();
 	if ( ! empty($_REQUEST['report_def'])) {
-		$report_def = html_entity_decode($_REQUEST['report_def']);
-		$panels_def = html_entity_decode($_REQUEST['panels_def']);
-		$filters_def = html_entity_decode($_REQUEST['filters_defs']);
+            $report_def = html_entity_decode($_REQUEST['report_def'], ENT_COMPAT);
+            $panels_def = html_entity_decode($_REQUEST['panels_def'], ENT_COMPAT);
+            $filters_def = html_entity_decode($_REQUEST['filters_defs'], ENT_COMPAT);
        	$args['reporter'] =  new Report($report_def, $filters_def, $panels_def);
 
     	if (! empty($_REQUEST['save_report_as'])) {
@@ -103,9 +103,9 @@ control($args);
         if (empty($_REQUEST['search_form_only'])) {
             $params = array();
             if (!empty($_REQUEST['favorite'])) {
-                $params[] = htmlspecialchars($mod_strings['LBL_FAVORITES_TITLE']);
+                $params[] = htmlspecialchars($mod_strings['LBL_FAVORITES_TITLE'], ENT_COMPAT);
             } else {
-                $params[] = htmlspecialchars($app_strings['LBL_SEARCH']);
+                $params[] = htmlspecialchars($app_strings['LBL_SEARCH'], ENT_COMPAT);
             }
 
             //Override the create url
@@ -324,7 +324,7 @@ function control(&$args)
                 $result = $saved_report->mark_published("yes");
                 if ($result == -1)
                 {
-                    $error_msg = htmlspecialchars($mod_strings['MSG_UNABLE_PUBLISH_ANOTHER']);
+                    $error_msg = htmlspecialchars($mod_strings['MSG_UNABLE_PUBLISH_ANOTHER'], ENT_COMPAT);
                 }
         }
         else if ( $_REQUEST['publish'] == 'no')
@@ -334,7 +334,7 @@ function control(&$args)
                 $result = $saved_report->mark_published("no");
                 if ($result == -1)
                 {
-                    $error_msg = htmlspecialchars($mod_strings['MSG_UNABLE_PUBLISH_YOU_OWN']);
+                    $error_msg = htmlspecialchars($mod_strings['MSG_UNABLE_PUBLISH_YOU_OWN'], ENT_COMPAT);
 
                 }
         }

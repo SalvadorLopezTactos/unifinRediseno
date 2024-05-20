@@ -169,7 +169,7 @@ echo '<tr>
 				</td>
 				<td valign="top">
 					<div id="sf_deletedFoldersList" style="display:none;">
-					' . htmlspecialchars($deletedFoldersList).'
+					' . htmlspecialchars($deletedFoldersList, ENT_COMPAT).'
 					</div>
 				</td>
 			</tr>
@@ -209,7 +209,7 @@ echo '	</table>';
 ///////////////////////////////////////////////////////////////////////////////
 ////	COMPLETE RENDERING OF THE POPUP
 printf('<input type="hidden" id="sf_returnstatus" name="returnstatus" value="%s">', $returnArray['status']);
-printf('<input type="hidden" id="sf_foldersList" name="foldersList" value="%s">', htmlspecialchars($foldersList));
+printf('<input type="hidden" id="sf_foldersList" name="foldersList" value="%s">', htmlspecialchars($foldersList, ENT_COMPAT));
 printf(
     '<input type="hidden" id="sf_selectedfoldersList" name="selectedfoldersList" value="%s">',
     htmlspecialchars(implode(',', $requestMailBox ?? []), ENT_QUOTES, 'UTF-8')

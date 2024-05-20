@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Notizenlisten-Dashboard',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Notizenbericht-Dashboard',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Notizen',
+    'LBL_EXTERNAL_USER' => 'Externer Benutzer',
+    'LBL_EXTERNAL_USER_NAME' => 'Externer Benutzer',
 
     'LBL_RELATED_CONTACT' => 'Zugehöriger Kontakt',
     'ERR_DELETE_RECORD' => 'Zum Löschen der Firma muss eine Datensatznummer angegeben werden.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'E-Mail-Typ',
     'LBL_EMAIL_ID' => 'E-Mail',
     'LBL_PHONE' => 'Telefon:',
-    'LBL_PORTAL_FLAG' => 'Im Portal anzeigen?',
+    'LBL_PORTAL_FLAG' => 'Extern verfügbar',
     'LBL_EMBED_FLAG' => 'In E-Mail einfügen?',
     'LBL_PRODUCT_ID' => 'Produkt-ID:',
     'LBL_QUOTE_ID' => 'Angebots-ID:',

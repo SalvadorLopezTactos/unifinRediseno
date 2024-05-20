@@ -34,7 +34,7 @@ class PMSEElementException extends Exception
     // custom string representation of object
     public function __toString()
     {
-        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
+        return self::class . ": [{$this->code}]: {$this->message}\n";
     }
 
     public function getFlowData()

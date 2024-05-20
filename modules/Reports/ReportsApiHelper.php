@@ -28,8 +28,8 @@ class ReportsApiHelper extends SugarBeanApiHelper
         if (isset($submittedData['name']) && $submittedData['name'] !== $bean->name) {
             $fieldName = 'content';
             // if content is sent over, we want to update that, otherwise get the data from the bean
-            $content = isset($submittedData[$fieldName]) ? $submittedData[$fieldName] : $bean->$fieldName;
-            $tmpContent = json_decode($content, true);
+            $content = $submittedData[$fieldName] ?? $bean->$fieldName;
+            $tmpContent = json_decode((string)$content, true);
             $tmpContent['report_name'] = $submittedData['name'];
             $submittedData[$fieldName] = JSON::encode($tmpContent);
         }

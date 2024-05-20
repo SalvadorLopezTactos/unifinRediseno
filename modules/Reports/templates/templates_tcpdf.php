@@ -51,6 +51,7 @@ function process($pdf, $reportname, $stream){
  * @return stream or string
  */
 function template_handle_pdf(&$reporter, $stream = true) {
+    $type = null;
     $reporter->enable_paging = false;
     $reporter->plain_text_output = true;
 

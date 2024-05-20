@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Tlačidlá formulára',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Schváliť/odmietnuť',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Smerovať',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Odoslať do DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Iné možnosti smerovania',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Zmeniť priradenie k používateľovi',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Tím',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Zlúčenie dokumentov',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Vyberte...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Zlúčenie dokumentov do PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Odoslať zlúčený dokument e-mailom',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Zlúčenie dokumentov',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Typ zbiehavej brány nezodpovedá typu brány prichádzajúceho toku',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Rozbiehavé brány rozširujú procesy do niekoľkých vetiev. Pri použití zbiehavej brány na opätovné zbiehanie týchto vetiev späť do jednej cesty sa musí použiť správny typ zbiehavej brány, a to v závislosti od typu rozbiehavej brány, ktorá sa použila na vytvorenie vetiev. Pri vetvách vytvorených pomocou exkluzívnej rozbiehavej brány alebo rozbiehavej brány na báze udalostí použite na ich opätovné zbiehanie exkluzívnu zbiehavú bránu. Pri vetvách vytvorených pomocou paralelnej alebo inkluzívnej rozbiehavej brány použite na ich opätovné zbiehanie paralelnú zbiehavú bránu.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Pole modulu',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Vzťah modulu',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Používateľ',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Rola',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Tím',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Aktivita formulára',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Obchodné pravidlo',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Akcia obchodného pravidla',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Šablóna e-mailu',
 );

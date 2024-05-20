@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Létrehozva',
   'LBL_EDIT_LAYOUT' => 'Elrendezés szerkesztése' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Csak rendszergazdáknak',
-  'LBL_CURRENCY_DEFAULT' => 'USA dollár (alapértelmezett)',
-
+  'LBL_CURRENCY_DEFAULT' => 'A rendszer valutája (alapértelmezett)',
 );
 ?>

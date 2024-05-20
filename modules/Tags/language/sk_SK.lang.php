@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Informačný panel so záznamom štítkov',
     'LBL_MY_TAGS' => 'Moje štítky',
     'LBL_MY_FAVORITE_TAGS' => 'Moje obľúbené štítky',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} značiek',
 );

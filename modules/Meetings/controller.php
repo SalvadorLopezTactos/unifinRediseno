@@ -16,7 +16,7 @@ class MeetingsController extends SugarController
     {
         $this->view = 'edit';
        
-        $editAllRecurrences = isset($_REQUEST['edit_all_recurrences']) ? $_REQUEST['edit_all_recurrences'] : false;
+        $editAllRecurrences = $_REQUEST['edit_all_recurrences'] ?? false;
         $this->view_object_map['repeatData'] = CalendarUtils::getRepeatData($this->bean, $editAllRecurrences);
         
         return true;

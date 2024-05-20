@@ -212,7 +212,7 @@ class Factory
     protected static function getFieldEvaluatorType($def)
     {
         // Get the proper type for this field from the vardef
-        $type = isset($def['custom_type']) ? $def['custom_type'] : $def['type'];
+        $type = $def['custom_type'] ?? $def['type'];
         if (isset(static::$fieldEvaluatorTypeMap[$type])) {
             return static::$fieldEvaluatorTypeMap[$type];
         }

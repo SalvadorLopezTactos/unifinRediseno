@@ -25,7 +25,7 @@ class ProfitMargin {
 	function get_edit_html($pricing_factor) {
 		global $current_language;
 		$template_mod_strings = return_module_language($current_language, "ProductTemplates");
-		return "${template_mod_strings['LBL_POINTS']} <input language='javascript' onkeyup='set_discount_price(this.form)' id='pricing_factor_ProfitMargin' type='text' tabindex='1' size='4' maxlength='4' value='".$pricing_factor."'>";
+        return "{$template_mod_strings['LBL_POINTS']} <input language='javascript' onkeyup='set_discount_price(this.form)' id='pricing_factor_ProfitMargin' type='text' tabindex='1' size='4' maxlength='4' value='" . $pricing_factor . "'>";
 	}
 	
 	function get_detail_html($formula, $factor) {

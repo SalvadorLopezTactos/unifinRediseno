@@ -23,21 +23,21 @@ use Sugarcrm\Sugarcrm\SystemProcessLock\SystemProcessLock;
  */
 class SubscriptionPrefetcher
 {
-    const PREFETCH_INTERVAL = 'PT5M';
+    public const PREFETCH_INTERVAL = 'PT5M';
 
     /**
      * timeout for the request
      */
-    const REQUEST_TIMEOUT = 10;
+    public const REQUEST_TIMEOUT = 10;
 
-    const ENDPOINT = 'rest/subscription/';
-    const KEY_LICENSE = 'key';
-    const KEY_LAST_CHECK = 'subscription_checked_at';
-    const KEY_DOWNLOADED_CONTENT = 'subscription_downloaded';
-    const KEY_STORED_CONTENT = 'subscription';
+    public const ENDPOINT = 'rest/subscription/';
+    public const KEY_LICENSE = 'key';
+    public const KEY_LAST_CHECK = 'subscription_checked_at';
+    public const KEY_DOWNLOADED_CONTENT = 'subscription_downloaded';
+    public const KEY_STORED_CONTENT = 'subscription';
 
-    const ERR_IN_PROGRESS = 'SUBSCRIPTION_LOADING_IN_PROGRESS';
-    const ERR_EMPTY_LICENSE_KEY = 'LICENSE_KEY_IS_EMPTY';
+    public const ERR_IN_PROGRESS = 'SUBSCRIPTION_LOADING_IN_PROGRESS';
+    public const ERR_EMPTY_LICENSE_KEY = 'LICENSE_KEY_IS_EMPTY';
 
     /** @var \Administration */
     private $adminBean;

@@ -35,7 +35,7 @@ abstract class SugarACLStrategy
         if(isset($context['user'])) {
             return $context['user'];
         }
-        return isset($GLOBALS['current_user'])?$GLOBALS['current_user']:null;
+        return $GLOBALS['current_user'] ?? null;
     }
 
     /**

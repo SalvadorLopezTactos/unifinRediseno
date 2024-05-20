@@ -145,7 +145,7 @@ class SugarFieldCollection extends SugarFieldBase {
                     // Retrieve the changed fields
                     if(isset($_POST["update_fields_{$field}_collection"]) && !empty($_POST["update_fields_{$field}_collection"])){
                         $JSON = getJSONobj();
-                        $update_fields = $JSON->decode(html_entity_decode($_POST["update_fields_{$field}_collection"]));
+                        $update_fields = $JSON->decode(html_entity_decode($_POST["update_fields_{$field}_collection"], ENT_COMPAT));
                     }
                     // Update the changed fields
                     foreach($update_fields as $kk=>$vv){

@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'február',
     'LBL_MARCH' => 'március',
     'LBL_APRIL' => 'április',
-    'LBL_MAY' => 'Máj',
+    'LBL_MAY' => 'május',
     'LBL_JUNE' => 'június',
     'LBL_JULY' => 'július',
     'LBL_AUGUST' => 'augusztus',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Okt',
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Dec',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'A naptár már hozzáadásra került',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} kiválasztva',
+    'LBL_NO_USER_SELECTED' => 'Kérjük, válasszon ki egy felhasználót vagy egy csapatot',
+    'LBL_NO_CALENDAR_SELECTED' => 'Kérem, válasszon ki egy naptárat',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Naptárak mentése sikertelen.',
 
 );
 

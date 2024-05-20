@@ -190,7 +190,7 @@ class ContentSecurityPolicy
 
     private static function getDefaults(): array
     {
-        $sugarDomains = '*.sugarcrm.com *.salesfusion.com *.salesfusion360.com *.sugarapps.com *.sugarapps.eu sugarcrm-release-archive.s3.amazonaws.com';
+        $sugarDomains = '*.sugarcrm.com *.salesfusion.com *.salesfusion360.com *.sugarapps.com *.sugarapps.eu *.sugarapps.com.au sugarcrm-release-archive.s3.amazonaws.com';
         $pendoDomains = 'https://*.pendo.io pendo-io-static.storage.googleapis.com pendo-static-5197307572387840.storage.googleapis.com pendo-eu-static.storage.googleapis.com pendo-eu-static-5197307572387840.storage.googleapis.com';
         $bingDomains = '*.bing.com *.virtualearth.net';
         $trustedDomains = $sugarDomains . ' ' . $pendoDomains . ' ' . $bingDomains;

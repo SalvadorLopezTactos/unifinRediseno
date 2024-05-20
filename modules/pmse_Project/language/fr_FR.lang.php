@@ -119,7 +119,7 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_REMOVE_ALL_START_CRITERIA' => 'Le module a changé et par conséquence des critères seront supprimés étant donné qu&#39;il n&#39;y a plus de champs liés à ce module.',
     'LBL_PMSE_MESSAGE_INVALID_CONNECTION' => 'Connexion invalide',
 
-    'LBL_PMSE_CONTEXT_MENU_SETTINGS' => 'Paramétrage...',
+    'LBL_PMSE_CONTEXT_MENU_SETTINGS' => 'Paramètres...',
     'LBL_PMSE_CONTEXT_MENU_DELETE' => 'Supprimer',
 
     'LBL_PMSE_FORM_LABEL_MODULE' => 'Module',
@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Buttons de formulaire',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Approuver / Rejetter',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Route',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Envoyer à DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Autre options de routage',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Changer le propriétaire de l&#39;enregistrement',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Équipe',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Fusion de documents',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Sélection...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Fusionner des documents au format PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Envoyer le document fusionné par e-mail',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Fusion de documents',
 
@@ -247,8 +249,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_LABEL_EVENT' => 'Evènement',
     'LBL_PMSE_FORM_LABEL_APPLIES_TO' => 'Appliquer à',
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Nouveaux enregistrements seulement',
-    'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'A la mise à jour des enregistrements seulement',
-    'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Enregistrements mis à jours (Tout mettre à jour - Afficher l&#39;aide)',
+    'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Enregistrements mis à jour seulement (Première mise à jour - Afficher l&#39;aide)',
+    'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Enregistrements mis à jour seulement (Toutes les mises à jour - Afficher l&#39;aide)',
     'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nouveaux enregistrements ou première mise à jour',
     'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nouveaux enregistrements et toutes les mises à jour',
     'LBL_PMSE_FORM_OPTION_RELATIONSHIP_CHANGE' => 'Changement de relation',
@@ -350,7 +352,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_CURRENCY_CURRENCY' => 'Devise',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_CURRENCY_AMOUNT' => 'Montant',
     'LBL_PMSE_EXPCONTROL_EVALUATIONS_TITLE' => 'Evaluation',
-    'LBL_PMSE_EXPCONTROL_CONSTANTS_TITLE' => 'Contantes',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TITLE' => 'Constantes',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_THAN' => 'Est inférieur à',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_THAN_DATE' => 'Avant',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_THAN' => 'Est inférieur ou égal à',
@@ -365,7 +367,7 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_CONTAINS_TEXT' => 'ne contient pas',
 
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES' => 'modifications',
-    'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'modifications pour',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'modifications depuis',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'modifications vers',
 
     'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'comprend tous',
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Le type de passerelle convergente ne correspond pas au type de passerelle d&#39;un flux d&#39;entrée',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Des passerelles divergentes étendent les processus à plusieurs branches. Lors de l&#39;utilisation d&#39;une passerelle convergente pour faire converger de nouveau ces branches dans un chemin, le type de passerelle convergente approprié doit être utilisé, en fonction du type de passerelle divergente qui a servi à créer les branches. Pour les branches créées avec des passerelles divergentes exclusives ou basées sur des événements, utilisez une passerelle convergente exclusive pour les faire converger de nouveau. Pour les branches créées avec des passerelles parallèles ou inclusives divergentes, utilisez une passerelle parallèle convergente pour les faire converger de nouveau.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Champ du module',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Relation avec le module',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Utilisateur',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Rôle',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Équipe',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Activité du formulaire',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Règle de gestion',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Action de la règle de gestion',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Modèle d&#39;email',
 );

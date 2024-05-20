@@ -281,7 +281,7 @@ class PMSEEvalCriteria
                     break;
                 }
                 while ((count($array) - 1) >= $j) {
-                    $ele = isset($array[$j]) ? $array[$j] : '';
+                    $ele = $array[$j] ?? '';
                     if ("$ele" == $sig && "$ele" != 'NOT') {
                         $array[$j - 1] = $this->routeFunctionOperator($funOpe, $array[$j - 1], $array[$j],
                             $array[$j + 1]);

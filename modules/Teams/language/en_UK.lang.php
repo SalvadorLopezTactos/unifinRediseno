@@ -64,19 +64,37 @@ $mod_strings = array(
     'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Select modules to enable',
     'LBL_TBA_CONFIGURATION_TITLE' => 'Enabling team-based permissions will allow you to assign specific access rights to teams and users for individual modules, through Role Management.',
     'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
-Disabling team-based permissions for a module will revert any data associated with team-based permissions for that module, including any Process Definitions or Processes using the feature. This includes any Roles using the "Owner & Selected team" option for that module, and any team-based permissions data for records in that module. We also recommend that you use Quick Repair and Rebuild tool to clear your system cache after disabling team-based permissions for any module.
+Disabling team-based permissions for a module will revert any data associated with team-based permissions for that
+ module, including any Process Definitions or Processes using the feature. This includes any Roles using the
+ "Owner & Selected team" option for that module, and any team-based permissions data for records in that module.
+ We also recommend that you use the Quick Repair and Rebuild tool to clear your system cache after disabling team-based
+ permissions for any module.
 STR
 ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
-<strong>Warning:</strong> Disabling team-based permissions for a module will revert any data associated with team-based permissions for that module, including any Process Definitions or Processes using the feature. This includes any Roles using the "Owner & Selected team" option for that module, and any team-based permissions data for records in that module. We also recommend that you use Quick Repair and Rebuild tool to clear your system cache after disabling team-based permissions for any module.
+<strong>Warning:</strong> Disabling team-based permissions for a module will revert any data associated with
+ team-based permissions for that module, including any Process Definitions or Processes using the feature. This
+ includes any Roles using the "Owner & Selected team" option for that module, and any team-based permissions data
+ for records in that module. We also recommend that you use the Quick Repair and Rebuild tool to clear your system cache
+ after disabling team-based permissions for any module.
 STR
 ,
     'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
-Disabling team-based permissions for a module will revert any data associated with team-based permissions for that module, including any Process Definitions or Processes using the feature. This includes any Roles using the "Owner & Selected team" option for that module, and any team-based permissions data for records in that module. We also recommend that you use Quick Repair and Rebuild tool to clear your system cache after disabling team-based permissions for any module. If you do not have access to use Quick Repair and Rebuild, contact an administrator with access to the Repair menu.
+Disabling team-based permissions for a module will revert any data associated with team-based permissions for that
+ module, including any Process Definitions or Processes using the feature. This includes any Roles using the
+ "Owner & Selected team" option for that module, and any team-based permissions data for records in that module.
+ We also recommend that you use the Quick Repair and Rebuild tool to clear your system cache after disabling team-based
+ permissions for any module. If you do not have access to use Quick Repair and Rebuild, contact an administrator with
+ access to the Repair menu.
 STR
 ,
     'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
-<strong>Warning:</strong> Disabling team-based permissions for a module will revert any data associated with team-based permissions for that module, including any Process Definitions or Processes using the feature. This includes any Roles using the "Owner & Selected team" option for that module, and any team-based permissions data for records in that module. We also recommend that you use Quick Repair and Rebuild tool to clear your system cache after disabling team-based permissions for any module. If you do not have access to use Quick Repair and Rebuild, contact an administrator with access to the Repair menu.
+<strong>Warning:</strong> Disabling team-based permissions for a module will revert any data associated with
+ team-based permissions for that module, including any Process Definitions or Processes using the feature. This
+ includes any Roles using the "Owner & Selected team" option for that module, and any team-based permissions data for
+ records in that module. We also recommend that you use the Quick Repair and Rebuild tool to clear your system cache after
+ disabling team-based permissions for any module. If you do not have access to use Quick Repair and Rebuild, contact
+ an administrator with access to the Repair menu.
 STR
 ,
 );

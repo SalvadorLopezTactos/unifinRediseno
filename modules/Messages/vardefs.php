@@ -11,6 +11,8 @@
  */
 $dictionary['Message'] = [
     'table' => 'messages',
+    'color' => 'army',
+    'icon' => 'sicon-message-lg',
     'audited' => true,
     'activity_enabled' => false,
     'unified_search' => true,

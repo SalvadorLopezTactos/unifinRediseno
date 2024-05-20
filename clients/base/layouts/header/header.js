@@ -57,6 +57,7 @@
     resize: function() {
         var resizeWidth = this.getModuleListWidth();
         this.trigger('view:resize', resizeWidth);
+        this.context.trigger('view:resize', resizeWidth);
     },
 
     /**

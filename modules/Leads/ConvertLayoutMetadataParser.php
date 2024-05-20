@@ -13,6 +13,16 @@
 
 class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
 {
+    /**
+     * @var \SugarBean|null|mixed
+     */
+    public $seed;
+    /**
+     * @var \History|mixed
+     */
+    //@codingStandardsIgnoreStart
+    public $_history;
+    //@codingStandardsIgnoreEnd
     protected $pathMap = array(
         MB_BASEMETADATALOCATION => '',
         MB_CUSTOMMETADATALOCATION => 'custom/',
@@ -360,7 +370,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
     {
         global $beanList, $dictionary;
 
-        $beanName = (isset($beanList[$module])) ? $beanList[$module] : '';
+        $beanName = $beanList[$module] ?? '';
         return (isset($dictionary[$beanName]) &&
             isset($dictionary[$beanName]['duplicate_check']) &&
             isset($dictionary[$beanName]['duplicate_check']['enabled']) &&
@@ -436,7 +446,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         $hiddenFields = array();
 
         $excludeFields = $this->getExcludedFields($module);
-        $hiddenFieldsDef = isset($defaultDef['hiddenFields']) ? $defaultDef['hiddenFields'] : array();
+        $hiddenFieldsDef = $defaultDef['hiddenFields'] ?? array();
         $hiddenFieldsDef = array_merge($hiddenFieldsDef, $excludeFields);
 
         foreach ($hiddenFieldsDef as $fieldName => $module) {
@@ -455,6 +465,6 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
      * @return array
      */
     public function getExcludedFields($module) {
-        return isset($this->excludedFields[$module]) ? $this->excludedFields[$module] : array();
+        return $this->excludedFields[$module] ?? array();
     }
 }

@@ -118,4 +118,13 @@ Para criar um {{module_name}}:
 - Clique em "Visualizar mais" para expor campos adicionais, se necessário. 
 2. Clique em "Salvar" para finalizar o novo registro e voltar para a página anterior.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Tarefa do guia inteligente',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'É tarefa do guia inteligente',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Data de início da atividade do guia inteligente',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Data de conclusão da atividade do guia inteligente',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Guia inteligente - Dias para concluir',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Reuniões secundárias',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Chamadas secundárias',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Tarefas secundárias',
 );

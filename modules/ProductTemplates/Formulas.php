@@ -70,10 +70,10 @@ function get_edit($formulas, $formula) {
 	//begin by creating all the divs for each formula's price factor
 	foreach ($formulas as $name=>$content) {
 		if ($name == $formula) {
-			$the_script  .= "<div align='center' id='edit_$name' style='display:inline'> ${content['edit_html']}</div> \n";
+            $the_script .= "<div align='center' id='edit_$name' style='display:inline'> {$content['edit_html']}</div> \n";
 		}
 		else {
-			$the_script  .= "<div align='center' id='edit_$name' style='display:none'> ${content['edit_html']}</div> \n";
+            $the_script .= "<div align='center' id='edit_$name' style='display:none'> {$content['edit_html']}</div> \n";
 		}
 	}
 	$the_script .= "<script type='text/javascript' language='Javascript'> \n";
@@ -98,7 +98,7 @@ function get_edit($formulas, $formula) {
 	$the_script .= "	switch(form.pricing_formula.value) { \n";
 	foreach ($formulas as $name=>$content) {
 		$the_script .= "		case '$name': \n";
-		$the_script .= "			${content['formula_js']} \n";
+        $the_script .= "			{$content['formula_js']} \n";
 		$the_script .= "			form.pricing_factor.value = form.pricing_factor_$name.value; \n";
 		$the_script .= "		  	return true; \n";
 }

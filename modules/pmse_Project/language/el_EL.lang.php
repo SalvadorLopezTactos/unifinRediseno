@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Τύπος Κουμπιού',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Έγκριση/Απόρριψη',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Διαδρομή',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Αποστολή στο DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Άλλες Επιλογές Δρομολόγησης',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Αλλαγή Ιδιοκτήτη Αρχείων',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Ομάδα',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Συγχώνευση εγγράφου',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Επιλέξτε...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Συγχώνευση εγγράφου σε PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Αποστολή συγχωνευμένου εγγράφου μέσω email',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Συγχώνευση εγγράφου',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Ο τύπος της πύλης σύγκλισης δεν ταιριάζει με τον τύπο πύλης συγκεκριμένης εισερχόμενης ροής',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Οι πύλες απόκλισης επεκτείνουν τις διαδικασίες σε πολλαπλούς κλάδους. Όταν χρησιμοποιείτε μια πύλη σύγκλισης για να συγκλίνετε εκ νέου αυτούς τους κλάδους πίσω σε μία διαδρομή, πρέπει να χρησιμοποιηθεί ο σωστός τύπος πύλης σύγκλισης, ανάλογα με τον τύπο αποκλίνουσας πύλης που χρησιμοποιήθηκε για τη δημιουργία των κλάδων. Για τους κλάδους που δημιουργούνται με αποκλειστικές πύλες απόκλισης ή με πύλες απόκλισης βάσει συμβάντων, χρησιμοποιήστε μια αποκλειστική πύλη σύγκλισης για να τους συγκλίνετε. Για κλάδους που έχουν δημιουργηθεί με παράλληλες ή ενσωματωμένες πύλες απόκλισης, χρησιμοποιήστε μια παράλληλη πύλη σύγκλισης για να τις συγκλίνετε εκ νέου.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Πεδίο ενότητας',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Σχέση ενότητας',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Χειριστής',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Ρόλος',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Ομάδα',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Φόρμα δραστηριότητας',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Επιχειρηματικός κανόνας',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Ενέργεια επιχειρηματικού κανόνα',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Πρότυπο email',
 );

@@ -116,6 +116,7 @@ class ElasticsearchRefreshTriggerCommand extends Command implements InstanceMode
         }
 
         $table->render();
+        return 0;
     }
 
     /**

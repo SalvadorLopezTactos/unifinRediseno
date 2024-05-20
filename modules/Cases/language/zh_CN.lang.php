@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => '客户反馈列表仪表板',
     'LBL_CASES_RECORD_DASHBOARD' => '客户反馈记录仪表板',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => '客户反馈细节',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => '案例重点仪表板 - 控制台',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => '客户反馈焦点抽屉',
 
 	'ERR_DELETE_RECORD'					=> '必须指定记录编号才能删除帐户。',
@@ -162,4 +162,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'SLA 详细信息',
     'LBL_HOURS' => '小时',
     'LBL_WIDGET_STATUS' => '状态',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => '组织',
+    'LBL_CREATE_NEW' => '新建',
+    'LBL_MANAGE' => '管理',
+    'LBL_SEE_DETAILS' => '查看详细信息',
+    'LBL_HIDE_NEW' => '隐藏',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => '案例',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => '案例',
+    'LBL_KIOSK_CREATE' => '创建案例',
+    'LBL_KIOSK_SUBJECT' => '主题',
+    'LBL_KIOSK_CASE_ID' => '案例ID',
+    'LBL_KIOSK_STATUS' => '状态',
+    'LBL_KIOSK_CATEGORY' => '类别',
+    'LBL_KIOSK_SUBMITTED_BY' => '提交于 {{date}}',
+    'LBL_KIOSK_PRIORITY' => '优先级',
+    'LBL_KIOSK_CREATE_CASE' => '联系我们',
+    'LBL_KIOSK_DESCRIPTION' => '描述',
+    'LBL_KIOSK_CREATE_SUCCESS' => '您的请求已成功提交。',
+    'LBL_KIOSK_ATTACHED' => '全部附上',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => '外部用户',
 );

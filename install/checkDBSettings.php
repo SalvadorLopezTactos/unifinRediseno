@@ -220,8 +220,13 @@ global $mod_strings;
     if ((is_countable($errors) ? count($errors) : 0) == 0) {
         echo 'dbCheckPassed';
         installLog("SUCCESS:: no errors detected!");
-    } elseif (((is_countable($errors) ? count($errors) : 0) == 1 && (isset($errors["ERR_DB_EXISTS_PROCEED"]) || isset($errors["ERR_DB_EXISTS_WITH_CONFIG"]))) ||
-    ((is_countable($errors) ? count($errors) : 0) == 2 && isset($errors["ERR_DB_EXISTS_PROCEED"]) && isset($errors["ERR_DB_EXISTS_WITH_CONFIG"])) ) {
+    } elseif (((is_countable($errors) ? count(
+        $errors
+    ) : 0) == 1 && (isset($errors["ERR_DB_EXISTS_PROCEED"]) || isset($errors["ERR_DB_EXISTS_WITH_CONFIG"]))) || ((is_countable(
+        $errors
+    ) ? count(
+        $errors
+    ) : 0) == 2 && isset($errors["ERR_DB_EXISTS_PROCEED"]) && isset($errors["ERR_DB_EXISTS_WITH_CONFIG"]))) {
         ///throw alert asking to overwwrite db
         echo 'preexeest';
         installLog("WARNING:: no errors detected, but DB tables will be dropped!, issuing warning to user");

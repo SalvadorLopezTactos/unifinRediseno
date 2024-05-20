@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => 'Noi',
     'LBL_DEC' => 'Dec',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Calendarul a fost deja adăugat',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} este selectat',
+    'LBL_NO_USER_SELECTED' => 'Vă rugăm să selectați un Utilizator sau o Echipă',
+    'LBL_NO_CALENDAR_SELECTED' => 'Vă rugăm să selectați un calendar',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Nu s-a reușit salvarea Calendarelor.',
+
 );
 
 $mod_list_strings = array(

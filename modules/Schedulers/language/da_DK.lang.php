@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Opdatér produktdefinition',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Tidsplaner med fokus på behandlingstid',
 'LBL_OOTB_DATA_ARCHIVER' => 'Kør aktive dataarkiver/sletninger',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Anvend abonnementsrettigheder, når de bliver ændret',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geokoder for poster',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Avancerede indstillinger',
 'LBL_TOGGLE_ADV' => 'Avancerede indstillinger',
 'LBL_TOGGLE_BASIC' => 'Grundlæggende indstillinger',
+'LBL_UPDATEMOMENTUMCJ' => 'Opdater momentum for igangværende Smart Guides',
 // Links
 'LNK_LIST_SCHEDULER' => 'Planlæggere',
 'LNK_NEW_SCHEDULER' => 'Opret planlægger',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'Kør aktive dataarkiver/sletninger',
 'LBL_PMSEENGINECRON' => 'SugarBPM-planlægger',
 );
-

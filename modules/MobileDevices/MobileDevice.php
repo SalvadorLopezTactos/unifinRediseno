@@ -36,7 +36,10 @@ class MobileDevice extends Basic
     {
         $service = $this->getService();
         if ($service && $this->getCurrentUser()->hasRegisteredDevices()) {
-            $service->setActive($this->getCurrentUser()->id, false);
+            $result = $service->setActive($this->getCurrentUser()->id, false);
+            if ($result === false) {
+                $this->markDeletedAll($this->getCurrentUser()->id);
+            }
         }
     }
 
@@ -48,7 +51,10 @@ class MobileDevice extends Basic
     {
         $service = $this->getService();
         if ($service && $this->getCurrentUser()->hasRegisteredDevices()) {
-            $service->setActive($this->getCurrentUser()->id, true);
+            $result = $service->setActive($this->getCurrentUser()->id, true);
+            if ($result === false) {
+                $this->markDeletedAll($this->getCurrentUser()->id);
+            }
         }
     }
 
@@ -68,19 +74,22 @@ class MobileDevice extends Basic
         // avoiding use of db unique key since we are using soft delete
         $id = $this->getIdOfSameCombo();
         if (!empty($id)) {
-            // don't proceed if
-            // 1. we are creating a new record, or
-            // 2. we are updating, and the existing one with the same combination is not the one we are updating
-            if (!$this->isUpdate() || $this->id != $id) {
+            $result = $this->relayUpdateRequest($this->device_id);
+            if ($result === false) {
+                parent::mark_deleted($id);
+            } elseif ($result === true) {
+                parent::mark_undeleted($id);
+            }
+            if ($result !== true) {
                 return null;
             }
         }
 
-        if (!$this->relayRequest()) {
+        if (!$this->relayRegisterRequest()) {
             return null;
         }
 
-        return parent::save($check_notify);
+        return parent::save(false);
     }
 
     /**
@@ -107,21 +116,28 @@ class MobileDevice extends Basic
     }
 
     /**
-     * Relays the register/update request to the SugarPush service
+     * Relays the register request to the SugarPush service
      * @return bool
      */
-    protected function relayRequest() : bool
+    protected function relayRegisterRequest() : bool
     {
-        $ret = false;
-        $service = $this->getService();
-        if ($service) {
-            if ($this->isUpdate()) {
-                $ret = $service->update($this->device_platform, $this->fetched_row['device_id'], $this->device_id);
-            } else {
-                $ret = $service->register($this->device_platform, $this->device_id);
-            }
+        if ($service = $this->getService()) {
+            return $service->register($this->device_platform, $this->device_id);
         }
-        return $ret;
+
+        return false;
+    }
+
+    /**
+     * Relays the update request to the SugarPush service
+     */
+    protected function relayUpdateRequest(string $oldId, string $newId = '') : ?bool
+    {
+        if ($service = $this->getService()) {
+            return $service->update($this->device_platform, $oldId, $newId);
+        }
+
+        return null;
     }
 
     /**
@@ -145,5 +161,15 @@ class MobileDevice extends Basic
         $rows = $query->execute();
 
         return empty($rows[0]['id']) ? '' : $rows[0]['id'];
+    }
+
+    protected function markDeletedAll(string $userId): void
+    {
+        $query = DBManagerFactory::getConnection()->createQueryBuilder();
+        $query->update($this->getTableName())
+            ->set('deleted', 1)
+            ->where('assigned_user_id = ?')
+            ->setParameter(0, $userId)
+            ->executeStatement();
     }
 }

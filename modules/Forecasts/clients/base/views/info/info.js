@@ -15,11 +15,6 @@
  */
 ({
     /**
-     * Timeperiod model
-     */
-    tpModel: undefined,
-
-    /**
      * @inheritdoc
      *
      */
@@ -31,9 +26,7 @@
             options.meta.datapoints.reverse();
         }
 
-        this.tpModel = new Backbone.Model();
         this._super("initialize", [options]);
-        this.resetSelection(this.context.get("selectedTimePeriod"));
 
         // Use the next commit model as this view's model
         this.model = this.context.get('nextCommitModel');
@@ -44,20 +37,141 @@
      *
      */
     bindDataChange: function(){
-        this.tpModel.on("change", function(model){
-            this.context.trigger(
-                'forecasts:timeperiod:changed',
-                model,
-                this.getField('selectedTimePeriod').tpTooltipMap[model.get('selectedTimePeriod')]);
-        }, this);
-
-        this.context.on("forecasts:timeperiod:canceled", function(){
-            this.resetSelection(this.tpModel.previous("selectedTimePeriod"));
-        }, this);
-
         this.listenTo(this.context, 'forecasts:worksheet:totals:initialized', this._handleWorksheetTotalsInitialized);
         this.listenTo(this.context, 'forecasts:commit-models:loaded', this._handleCommitModelsLoaded);
         this.listenTo(this.context, 'button:cancel_button:click', this._handleCancelClicked);
+        this.listenTo(this.context, 'change:selectedUser', this.loadIncludeData);
+        this.listenTo(this.context, 'change:selectedTimePeriod',  this.loadIncludeData);
+        this.listenTo(this.context, 'change:forecastType',  this.loadIncludeData);
+    },
+
+    /**
+     * @inheritdoc
+     *
+     */
+    loadData: function() {
+        this._super('loadData');
+        this.loadIncludeData();
+    },
+
+    /**
+     * Loads the included Opp and RLI data for the currently viewed forecast.
+     */
+    loadIncludeData: function() {
+        if (this.context.get('forecastType') === 'Direct') {
+            let totals = {};
+            let forecastConfig = app.metadata.getModule('Forecasts').config;
+            let oppFields = {};
+
+            _.each(this.meta.datapoints, function(datapoint) {
+                oppFields[datapoint.name] = datapoint.total_field || datapoint.name;
+            });
+
+            let oppRequest = this.getRequest('Opportunities', oppFields);
+            let data = {
+                'requests': [oppRequest]
+            };
+
+            if (forecastConfig.forecast_by === 'RevenueLineItems') {
+                let rliFields = {};
+                _.each(this.meta.datapoints, function(datapoint) {
+                    rliFields[datapoint.name] = datapoint.name;
+                });
+
+                let rliRequests = this.getRequest('RevenueLineItems', rliFields);
+                data.requests.push(rliRequests);
+            }
+
+            let url = app.api.buildURL('bulk');
+            let callbacks = {
+                success: _.bind(function(data) {
+                    let totals = {};
+                    _.each(this.meta.datapoints, function(datapoint) {
+                        totals[datapoint.name] = _.first(data).contents.metrics[datapoint.name].values.sum;
+                    });
+
+                    if (forecastConfig.forecast_by === 'RevenueLineItems') {
+                        _.each(this.meta.datapoints, function(datapoint) {
+                            totals['rli_' + datapoint.name] = data[1].contents.metrics[datapoint.name].values.sum;
+                        });
+                    }
+
+                    this.syncedTotals = totals;
+                    this._syncDatapointValues();
+                    this.context.trigger('forecasts:worksheet:totals', totals, 'test');
+                },this)
+            };
+            app.api.call('create', url, data, callbacks);
+        }
+    },
+
+    /**
+     * Gets the request used in a bulk request for a module specific metric
+     * request
+     *
+     * @param {string} module
+     * @param {string} fields
+     * @return {Object} An object that represents an api request for the bulk
+     *      api.
+     */
+    getRequest: function(module, fields) {
+        let selectedUser = this.context.get('selectedUser');
+        let url = app.api.buildURL('Forecasts/metrics');
+        url = url.substr(5);
+        let metrics = this.buildMetrics(fields);
+        let data = {
+            'filter': [],
+            'module': module,
+            'user_id': selectedUser ? selectedUser.id : '',
+            'time_period': this.context.get('selectedTimePeriod'),
+            'type': this.context.get('forecastType'),
+            'metrics': metrics
+        };
+
+        return {
+            'url': url,
+            'method': 'POST',
+            'data': data
+        };
+    },
+    /**
+     * Returns the metrics for an array of fields
+     *
+     * @param {Array} fields
+     * @return Array
+     */
+    buildMetrics: function(fields) {
+
+        let metrics = [];
+        _.each(fields, function(field, name) {
+            metrics.push(this.buildMetric(name, field));
+        }, this);
+
+        return metrics;
+    },
+
+    /**
+     * Returns the metric which filters on included commit stages
+     *
+     * @param {string} name
+     * @param {string} sumField
+     * @return {Object}
+     */
+    buildMetric: function(name, sumField) {
+
+        let includeStages = app.metadata.getModule('Forecasts').config.commit_stages_included || ['include'];
+        let filter = [
+            {
+                'commit_stage': {
+                    '$in': includeStages
+                }
+            }
+        ];
+        return {
+            'name': name,
+            'filter': filter,
+            'sum_fields': sumField
+        };
     },
 
     /**
@@ -121,20 +235,6 @@
         if (nextCommitModel instanceof Backbone.Model) {
             nextCommitModel.revertAttributes();
         }
-    },
-
-    /**
-     * Sets the timeperiod to the selected timeperiod, used primarily for resetting
-     * the dropdown on nav cancel
-     */
-    resetSelection: function(timeperiod_id){
-        this.tpModel.set({selectedTimePeriod:timeperiod_id}, {silent:true});
-        _.find(this.fields, function(field){
-            if(_.isEqual(field.name, "selectedTimePeriod")){
-                field.render();
-                return true;
-            }
-        });
     },
 
     /**

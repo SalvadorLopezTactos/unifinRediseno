@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Nedostaje obavezna vrednost',
     'LBL_ERROR_SYNC_USERS' => 'Vrednost nije validna za sinhronizaciju sa Outlook-om:',
     'LBL_ID_EXISTS_ALREADY' => 'U ovoj tabeli već postoji ID broj',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY već postoji u ovoj tabeli',
     'LBL_ASSIGNED_USER' => 'Ako korisnik ne postoji koristite trenutnog korisnika',
     'LBL_SHOW_HIDDEN' => 'Prikaži polja koja obično nisu za uvoz',
     'LBL_UPDATE_RECORDS' => 'Ažuriraj postojeće zapise umesto da ih uvezeš (Nema Poništi)',

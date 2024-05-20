@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Nie ustawiono klucza tajnego klienta',
     'LBL_RESEND_BUTTON_LABEL' => 'Wyślij ponownie',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Pobierz kopertę',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Typ usługi chmury',
+    'LBL_CLOUD_PATH' => 'Ścieżka do chmury',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Pulpit listy kopert DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Ostatnie koperty DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy kopert DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'Dokument z ',
+    'LBL_NEW_ENVELOPE' => 'Nowa koperta',
     'LBL_DOCUMENT_IS_NOW' => ' jest teraz ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'Błąd DocuSign. Nie można pobrać ID konta na podstawie tokenu dostępu',
     'LBL_ERROR_RESEND' => 'Nie można ponownie wysłać DocuSign. Koperta musi mieć stan „wysłane”',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Aktualizacja się nie powiodła',
     'LBL_ERROR_FETCH_TIME' => 'Reguły DocuSign nie zezwalają na wysyłanie wielu żądań do tej samej koperty w ciągu 15 minut',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Wystąpił błąd. Nie można zaktualizować koperty. Sprawdź dzienniki.',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Wystąpił błąd. Nie można wyświetlić szablonów. Sprawdź dzienniki.',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Wystąpił błąd. Nie można pobrać szablonu. Sprawdź dzienniki.',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Koperta nieukończona',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Status koperty w DocuSign to teraz ',
     'LBL_OVERVIEW' => 'Informacje ogólne',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Dodaj dokument',
     'LBL_BUTTON_SEND' => 'Wyślij',
     'LBL_BUTTON_CLEAR' => 'Wyczyść',
-    'LBL_MISSING_OBJECT' => 'Brak obiektu DocuSign w oknie',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Użyj szablonu',
     'LBL_PLEASE_LOG_IN' => 'Najpierw zaloguj się do DocuSign.',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Nie można pobrać tego dokumentu. Został utworzony przez innego użytkownika.',
     'LBL_SEND_NOT_ALLOWED' => 'Nie można wysłać tej koperty. Została utworzona przez innego użytkownika.',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Podpisane',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Nie można pobrać dokumentu. Sprawdź dzienniki.',
     'LBL_DOCUMENT_COMPLETED' => 'Ukończone',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Informacje o DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'jest teraz',
+    'LBL_SETTINGS_TITLE' => 'Ustawienia DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'Działanie wyboru odbiorcy',
+    'LBL_RECIPIENT_NAME' => 'Imię i nazwisko',
+    'LBL_RECIPIENT_EMAIL' => 'Adres e-mail',
+    'LBL_RECIPIENT_TYPE' => 'Typ',
+    'LBL_TEMPLATE_NAME' => 'Nazwa',
+    'LBL_RECIPIENT_SELECT' => 'Wybierz...',
+    'LBL_RECIPIENT_ROLE' => 'Rola',
+    'LBL_SELECT_BUTTON_LABEL' => 'Wybierz',
+    'LBL_BACK_BUTTON_LABEL' => 'Wstecz',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Pobranie potencjalnych odbiorców nie powiodło się.',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Pobranie szablonów nie powiodło się.',
 ];

@@ -187,4 +187,10 @@ $mod_strings = array (
 - “참석자 선택”을 클릭하여 기존 사용자, 연락처 또는 리드를  {{calls_singular_module}} 에 추가합니다.
 - “참석자 선택”의 오른쪽에있는더하기아이콘을클릭하여새로운슈가기록으로 {{calls_singular_module}} 참석자를 만듭니다.
 3. “저장하기”를 클릭하여 새 기록을 완성하고 이전 페이지로 돌아갑니다.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Smart Guide 통화입니다",
+    'LBL_PARENT_CALL_OF_TASK_REL' => '하위 업무',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => '하위 회의',
+    'LBL_PARENT_CALL_OF_CALL_REL' => '하위 통화',
 );

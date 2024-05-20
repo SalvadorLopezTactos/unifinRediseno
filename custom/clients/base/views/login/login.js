@@ -30,7 +30,8 @@
      * @inheritdoc
      */
     events: {
-        'click [name=login_button]': 'pre_login',
+        //'click [name=login_button]': 'pre_login',
+        'click [name=login_button]': 'login',
         //'keypress': 'handleKeypress',
         "click [name=external_login_button]": "external_login",
         "click [name=login_form_button]": "login_form",

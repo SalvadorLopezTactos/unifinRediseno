@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '機會清單儀表板',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '機會記錄儀表板',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => '商機詳細訊息',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => '機會焦點儀表板 - 控制台',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => '商業機會焦點抽屜',
     'LBL_RENEWAL_OPPORTUNITY' => '續訂商機機會',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => '已提交',
     'LBL_FORECAST' => '包括於預測中',
     'LBL_COMMIT_STAGE' => '提交階段',
-    'LBL_COMMIT_STAGE_FORECAST' => '預測',
+    'LBL_COMMIT_STAGE_FORECAST' => '預測範圍',
     'LBL_WORKSHEET' => '工作表',
     'LBL_PURCHASED_LINE_ITEMS' => '購買項目',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => '組織',
+    'LBL_CREATE_NEW' => '建立新的',
+    'LBL_MANAGE' => '管理',
+    'LBL_SEE_DETAILS' => '檢視詳細資料',
+    'LBL_HIDE_NEW' => '隱藏',
+
     'LBL_FORECASTED_LIKELY' => '預測可能性',
+    'LBL_LOST' => '流失的客戶',
     'LBL_RENEWAL' => '續訂',
     'LBL_RENEWAL_OPPORTUNITIES' => '續訂商機',
     'LBL_RENEWAL_PARENT' => '父級商機',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'商機角色',
     'LBL_NOTES_SUBPANEL_TITLE' => '附註',
+    'LBL_TAB_OPPORTUNITY' => '{{module}} 評論',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => '按一下「確認」，將會清除「所有預測」資料並變更「商機檢視」。如果您不無需執行此動作，則按一下取消返回之前的設定。',
@@ -211,25 +220,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '在您開始此變更后，會在後台建立各現有 {{module_name}} 的「營收項目」記錄。在「營收項目」完成且可用后，會向您使用者設定檔上的電子郵件地址傳送通知。請注意，實例必須設定為透過「管理」>「電子郵件設定」傳送電子郵件，以便能夠傳送通知。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}}模塊允許您從開始到結束跟踪個別銷售。每個{{module_name}}記錄代表預期銷售，包括相關銷售數據以及與其他重要記錄相關的數據，如{{quotes_module}}、{{contacts_module}}等。 {{module_name}}通常會經過幾個銷售階段，直到它被標記為“已結算獲得”或“已結算損失”。 {{plural_module_name}}可以通過使用 Sugar 的{{forecasts_singular_module}}模塊來了解和預測銷售趨勢，並專注於實現銷售配額的工作，從而進一步發揮作用。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模組允許您全程追蹤個別銷售。每條 {{module_name}} 記錄代表一次潛在銷售，包括相關的銷售資料以及與 {{quotes_module}}、 {{contacts_module}} 等其他重要記錄相關的銷售資料。{{module_name}} 通常會經過幾個銷售階段，直到其被標記為「已結束並贏得客戶」或「已結束但客戶流失」。透過使用 Sugar 的 {{forecasts_singular_module}} 模組可以進一步利用 {{plural_module_name}}，瞭解和預測銷售趨勢，以及集中精力實現銷售配額。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 模塊允許您全程追踪個人銷售和這些銷售的明細項目。每個 {{module_name}} 記錄都代表一次預期銷售，包括相關銷售數據，且與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關。
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 模組允許您全程追蹤個別銷售以及屬於這些銷售的明細項目。每條 {{module_name}} 記錄代表一次潛在銷售，包括相關銷售資料以及與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關的銷售資料。
 
-- 通過點擊單個字段或“編輯”按鈕，編輯此記錄的字段。
-- 通過將左下角窗格切換至“數據視圖”，查看或修改子麵板中其他記錄的鏈接。
-- 通過將左下角窗格切換至“活動流”，在 {{activitystream_singular_module}} 中撰寫和查看用戶註釋以及記錄更改歷史。
-- 使用記錄名稱右側的圖標關注此記錄或將其新增至收藏夾。
-- “編輯”按鈕右側的下拉“操作”菜單提供其他操作選項。',
+- 按一下個別欄位或「編輯」按鈕可編輯此記錄的欄位。
+- 將左下方窗格切換到「資料檢視」可檢視或修改子面板中指向其他記錄的連結。
+- 將左下方窗格切換到「活動流」，在 {{activitystream_singular_module}} 中執行與檢視使用者註解並記錄變更歷史。
+- 使用記錄名稱右側的圖示追蹤此記錄或將此記錄新增至我的最愛。
+- 「編輯」按鈕右側的下拉式「動作」功能表中提供了其他動作。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 模塊允許您全程追踪個人銷售和這些銷售的明細項目。每個 {{module_name}} 記錄都代表一次預期銷售，包含相關銷售數據，且與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 模組允許您全程追蹤個別銷售以及屬於這些銷售的明細項目。每條 {{module_name}} 記錄代表一次潛在銷售，包括相關銷售資料以及與 {{quotes_module}}、{{contacts_module}} 等其他重要記錄相關的銷售資料。
 
-若要創建 {{module_name}}：
-1. 按需提供字段值。
- - 標記為“必填”的字段在保存前必須先填寫完整。
- - 如有需要，點擊“顯示更多”以顯示其他字段。
-2. 點擊“保存”以完成新記錄，並返回至上一頁。',
+要建立 {{module_name}}：
+1. 按需提供各個欄位的值。
+－標記為「必填」的欄位必須在儲存前先填妥。
+－如有需要，按一下「顯示更多」以顯示其他欄位。
+2. 按一下「儲存」以完成新記錄，並返回至上一頁。',
 
 // END ENT/ULT
 

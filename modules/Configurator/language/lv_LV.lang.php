@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logotipi',
 	'LBL_ADMIN_WIZARD' => 'Administrēšanas vednis',
-	'LBL_ALLOW_USER_TABS' => 'Ļaut lietotājiem slēpt cilnes',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Sistēmas iestatījumi',
 	'LBL_ENABLE_MAILMERGE' => 'Atļaut pasta sapludināšanu?',
 	'LBL_LOGVIEW' => 'Skatīt žurnālu',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Izmantojiet šo parametru lai noteiktu cik mēnešus uz priekš no šodienas, tiks parādīta kalendāra brīvā/aizņemtā laika informācija.<BR>Lai to atslēgtu ievadiet "0".  Parametrā var norādīt no 1 līdz 12 mēnešiem.',
     'LBL_PDFMODULE_NAME' => 'PDF uzstādījumi',
     'SUGARPDF_BASIC_SETTINGS' => 'Dokumenta parametri',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Paplašinātie iestatījumi',
     'SUGARPDF_LOGO_SETTINGS' => 'Attēli',
-
-    'PDF_CREATOR' => 'PDF ģenerators',
-    'PDF_CREATOR_INFO' => 'Norāda dokumenta ģeneratoru. <br> Parasti tas ir lietojumprogrammas nosaukums PDF ģenerēšanai.',
 
     'PDF_AUTHOR' => 'Autors',
     'PDF_AUTHOR_INFO' => 'Autors parādās dokumenta parametros.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Izvēlēties jaunu attēlu piedāvājumiem',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Faila formāts var būt .jpg vai .png. (Priekš  EZPDF tikai .jpg)<BR>Ieteicamais izmērs ir 867x60 px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Piedāvājumu attēla platums',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Izmainīt augšupielādēto attēlu mērogu, kurš parādās Piedāvājumu PDF dokumentos. (tikai TCPDF)',
+    'PDF_TITLE' => 'Virsraksts',
+    'PDF_TITLE_INFO' => 'Virsraksts parādās dokumentu parametros',
+
+    'PDF_SUBJECT' => 'Temats',
+    'PDF_SUBJECT_INFO' => 'Temats  parādās dokumentu parametros',
 
     'PDF_SMALL_HEADER_LOGO' => 'Atskaišu PDF dokumentiem',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Šīs attēls parādās noklusētajā PDF atskaišu dokumentu galvenē.<br> Šis attēls parādās arī Sugar lietojumprogrammas kreisajā augšējā stūrī',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Atlasīt jaunu attēlu atskaitēm',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Faila formāts var būt .jpg vai .png. (Priekš  EZPDF tikai .jpg)<BR>Ieteicamais izmērs ir  212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Atskaišu attēla platums',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Izmaina augšupielādētā attēla, kurš parādās Atskaišu PDF dokumentos, mērogu. (Tikai TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Galvenes rinda',
-    'PDF_HEADER_STRING_INFO' => 'Galvenes apraksta rinda',
-
-    'PDF_HEADER_TITLE' => 'Galvenes virsraksts',
-    'PDF_HEADER_TITLE_INFO' => 'Rinda tiks drukāta, kā virsraksts dokumenta galvenē',
-
-    'PDF_FILENAME' => 'Noklusētais faila nosaukums',
-    'PDF_FILENAME_INFO' => 'Noklusētais faila nosaukums ģenerētiem PDF failiem',
-
-    'PDF_TITLE' => 'Virsraksts',
-    'PDF_TITLE_INFO' => 'Virsraksts parādās dokumentu parametros',
-
-    'PDF_SUBJECT' => 'Temats',
-    'PDF_SUBJECT_INFO' => 'Temats  parādās dokumentu parametros',
-
     'PDF_KEYWORDS' => 'Atslēgvārdi',
     'PDF_KEYWORDS_INFO' => 'Piesaisti atslēgvārdus dokumentam. Parasti sekojošā veidā  "atslēgasvārds1 atslēgasvārds2..."',
 
-    'PDF_COMPRESSION' => 'Saspiešana',
-    'PDF_COMPRESSION_INFO' => 'Aktivizē vai deaktivizē lapas saspiešanu <br>Kad aktivizēts,  katras lapas iekšējais attēlojums tiek  saspiests un kopumā dokuments tiek saspiests apmēram 2 reizes mazāks.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG kvalitāte (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Iestatīt noklusēto JPEG saspiešanas kvalitāti (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF Versija',
-    'PDF_PDF_VERSION_INFO' => 'Norādiet PDF versiju (pārbaudi PDF atsauci derīgām vērtībām).',
-
-    'PDF_PROTECTION' => 'Dokumenta aizsardzība',
-    'PDF_PROTECTION_INFO' => 'Uzstādiet dokumenta aizsardzību<br>- kopēt: kopēt tekstu un attēlus starpliktuvē<br>- drukāt: drukāt dokumentu<br>- modificēt: modificēt to (izņemot anotācijas un formas)<br>- annot-forms: pievienot anotācijas un formas<br>Piezīme: Aizsardzība ir pret lietotājiem, kas lieto pilno Acobat produkta versiju.',
-
-    'PDF_USER_PASSWORD' => 'Lietotāja parole',
-    'PDF_USER_PASSWORD_INFO' => 'Ja parole netiks norādīta, dokumentu varēs atvērt kā parasti. <br>Ja tiks norādīta parole tad PDF lasītājs  prasīs to ievadīt pirms parādīt dokumentu. <br> No lietotāja paroles atšķirīgu saimnieka paroli var lietot lai iegūtu pilnas pieejas tiesības dokumentam.',
-
-    'PDF_OWNER_PASSWORD' => 'Īpašnieka parole',
-    'PDF_OWNER_PASSWORD_INFO' => 'Ja nenorādīsiet paroli dokuments tiks atvērts kā parasti. <br>Ja norādīsiet lietotāja paroli, PDF lasītājs prasīs to ievadīt pirms dokumenta parādīšanas. <br>Ja tiek norādīta no lietotāja paroles atšķirīga saimnieka parole, ar to var piešķirt pilnas dokumenta lietošanas tiesības.',
-
-    'PDF_ACL_ACCESS' => 'Pieejas kontrole',
-    'PDF_ACL_ACCESS_INFO' => 'Noklusētā pieejas kontrole PDF ģenerēšanai.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Rūts augstuma mērogs',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Ja šūnas augstums ir mazāks kā (Fonta augstums x Šūnas augstuma proporcija), tad šūnas augstumam tiek izmantota (Font augstums x Šūnas augstuma proporcija). <br> (Fonta augstums x Šūnas augstuma proporcija) tiek izmantota kā augstums kad augstums nav definēts.',
-
-    'K_TITLE_MAGNIFICATION' => 'Virsraksta palielināšana',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Virsrakstu palielinātājs ievēro pamata fonta izmēru',
-
-    'K_SMALL_RATIO' => 'Mazo fontu faktors',
-    'K_SMALL_RATIO_INFO' => 'Samazināšanas faktors mazajam fontam',
-
-    'HEAD_MAGNIFICATION' => 'Galvenes palielināšana',
-    'HEAD_MAGNIFICATION_INFO' => 'Palielināšanas faktors virsrakstiem',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Attēla mēroga proporcija',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Proporcija attēlu mērogošanai',
-
-    'PDF_UNIT' => 'Vienība',
-    'PDF_UNIT_INFO' => 'dokumenta mērvienība',
 	'PDF_GD_WARNING'=>'PHP nav uzstādīta GD bibliotēka. Bez GD bibliotēkas uzstādīšanas, PDF dokumentos var attēlot tikai JPEG logotipi.',
     'ERR_EZPDF_DISABLE'=>'Uzmanību: EZPDF klase ir atslēgta konfigurācijas tabulā un ir uzstādīta kā PDF klase. Saglabājiet šo formu lai uzstādītu TCPDF kā PDF klasi un atgrieztos stabilā stāvoklī.',
     'LBL_IMG_RESIZED'=>"(izmērs pielāgots ekrānam)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Pievienot PDF fontu',
     'LBL_PDF_PATCH' => 'Labojums',
-    'LBL_PDF_PATCH_INFO' => 'Pielāgota kodējuma modificēšana. Veidojiet PHP masīvu.<br>Piemēram :<br>ISO-8859-1 nesatur euro simbolu. Lai to pievienotu 164. pozīcijā rakstiet: "array(164=>\\$#39;Euro\\$#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'Kodēšanas tabula',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Kodējuma tabulas nosaukumus.<br>TrueType Unicode, OpenType Unicode un Symbolic fontos šī opcija netiek ņemta vērā.<br>Kodējums nosaka saistību starp kodu (no 0 līdz 255)  un fontā esošo simbolu.<br>Pirmie 128 ir fiksēti un atbilst ASCII.',
     'LBL_PDF_FONT_FILE' => 'Fonta fails',

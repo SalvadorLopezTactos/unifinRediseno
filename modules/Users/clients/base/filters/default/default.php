@@ -27,5 +27,10 @@ $viewdefs['Users']['base']['filter']['default'] = array(
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
         ),
+        'department' => [],
+        'title' => [],
+        'address_country' => [],
+        'user_name' => [],
+        'customer_journey_access' => [],
     ),
 );

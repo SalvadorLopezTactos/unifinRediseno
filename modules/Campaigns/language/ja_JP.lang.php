@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'トラッカーURL:',
   'LBL_TRACKER_TEXT' => 'トラッカーリンクテキスト:',
   'LBL_TRACKER_COUNT' => 'トラッカーカウント:',
-  'LBL_REFER_URL' => 'リダイレクトURL:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'キャンペーン',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Eメールキャンペーン',
   'LBL_NEW_FORM_TITLE' => 'キャンペーン作成',

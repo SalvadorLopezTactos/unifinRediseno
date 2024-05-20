@@ -34,7 +34,8 @@ class SearchMerge extends ListViewMerge{
 	 * @param STRING $custom_file - path to the custom file
 	 */
 	protected function loadData($module, $original_file, $new_file, $custom_file){
-		EditViewMerge::loadData($module, $original_file, $new_file, $custom_file);
+        //this is not a static call, it's parent::parent::loadData() call. See https://github.com/rectorphp/rector/issues/7974
+        EditViewMerge::loadData($module, $original_file, $new_file, $custom_file);
 		$this->originalData = array($module=>array( $this->viewDefs=>$this->originalData[$module]));
 		$this->customData = array($module=>array( $this->viewDefs=>$this->customData[$module]));
 		$this->newData = array($module=>array( $this->viewDefs=>$this->newData[$module]));
@@ -156,4 +157,3 @@ class SearchMerge extends ListViewMerge{
 	}	
 	
 }
-?>

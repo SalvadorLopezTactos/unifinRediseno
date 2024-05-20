@@ -59,6 +59,12 @@ class PMSELogicHook
         if (!PMSEEngineUtils::hasActiveProcesses($bean)) {
             return true;
         }
+
+        $relatedModule = $arguments['related_module'] ?? '';
+        if (!in_array($relatedModule, PMSEEngineUtils::getSupportedModules())) {
+            return true;
+        }
+
         //Define PA Hook Handler
         $handler = ProcessManager\Factory::getPMSEObject('PMSEHookHandler');
         return $handler->runStartEventAfterRelationship($bean, $event, $arguments);

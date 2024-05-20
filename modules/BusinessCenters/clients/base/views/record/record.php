@@ -392,6 +392,10 @@ $viewdefs['BusinessCenters']['base']['view']['record'] = [
                         ],
                     ],
                 ],
+                [
+                    'name' => 'geocode_status',
+                    'licenseFilter' => ['MAPS'],
+                ],
                 'team_name',
                 'assigned_user_name',
                 [

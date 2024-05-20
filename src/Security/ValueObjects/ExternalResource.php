@@ -15,6 +15,9 @@ declare(strict_types=1);
 
 namespace Sugarcrm\Sugarcrm\Security\ValueObjects;
 
+use Sugarcrm\Sugarcrm\Security\Dns\Resolver;
+use Sugarcrm\Sugarcrm\Security\Dns\ResolverFactory;
+
 final class ExternalResource
 {
     /** @var string */
@@ -26,6 +29,11 @@ final class ExternalResource
     /** @var string */
     private $convertedUrl;
 
+    /**
+     * @var string
+     */
+    private $origUrl;
+
     private function __construct()
     {
     }
@@ -35,7 +43,7 @@ final class ExternalResource
      * @param array $privateIps
      * @return static
      */
-    public static function fromString(string $url, array $privateIps = []): self
+    public static function fromString(string $url, array $privateIps = [], ?Resolver $resolver = null): self
     {
         if (false === filter_var($url, FILTER_VALIDATE_URL)) {
             throw new \InvalidArgumentException('Invalid url was provided.');
@@ -44,39 +52,34 @@ final class ExternalResource
         $parts = parse_url($url);
         $host = $parts['host'] ?? null;
         $scheme = $parts['scheme'] ?? null;
-        $canonicalUrl = self::buildUrl($parts);
 
-        if (!self::isUrlValid($url, $canonicalUrl, $host, $scheme)) {
-            throw new \InvalidArgumentException('Invalid url was provided.');
+        if (empty($host) || !in_array($scheme, ['http', 'https'], true)) {
+            throw new \InvalidArgumentException('Invalid url was provided');
         }
 
-        $ip = gethostbyname($host);
+        // If host is not IP then resolve it
+        if (false === filter_var($host, FILTER_VALIDATE_IP)) {
+            $ip = self::resolveToIp($host, $resolver);
+        } else {
+            $ip = $host;
+        }
 
-        if (!$host || $host === $ip || self::isIpPrivate($ip, $privateIps)) {
-            throw new \InvalidArgumentException('Invalid url was provided.');
+        if (self::isIpPrivate($ip, $privateIps)) {
+            throw new \InvalidArgumentException('The target IP belongs to private network');
         }
 
         $urlValueObject = new self();
         $urlValueObject->ip = $ip;
         $urlValueObject->host = $host;
         $urlValueObject->convertedUrl = self::buildUrl($parts, $ip);
-
+        $urlValueObject->origUrl = $url;
         return $urlValueObject;
     }
 
-    /**
-     * @param string $url
-     * @param string $canonicalUrl
-     * @param string|null $host
-     * @param string|null $scheme
-     * @return bool
-     */
-    private static function isUrlValid(string $url, string $canonicalUrl, ?string $host, ?string $scheme): bool
+    private static function resolveToIp(string $hostname, ?Resolver $resolver): string
     {
-        return false === strpos($url, chr(0))
-            && $url === $canonicalUrl
-            && !empty($host)
-            && in_array($scheme, ['http', 'https'], true);
+        $resolver = $resolver ?? ResolverFactory::getInstance();
+        return $resolver->resolveToIp($hostname);
     }
 
     /**
@@ -94,7 +97,7 @@ final class ExternalResource
 
         if ($longIp !== -1) {
             foreach ($privateIps as $privateIp) {
-                list ($start, $end) = explode('|', $privateIp);
+                [$start, $end] = explode('|', $privateIp);
 
                 if ($longIp >= ip2long($start) && $longIp <= ip2long($end)) {
                     return true;
@@ -103,6 +106,65 @@ final class ExternalResource
         }
 
         return false;
+    }
+
+    /**
+     * Resolves a relative URL according to RFC 2396 section 5.2
+     * @param string $url
+     * @return string
+     */
+    public function resolveLocation(string $url): string
+    {
+        $base = $this->origUrl;
+        if ($url === '') {
+            return $base;
+        }
+        // already absolute url
+        if (preg_match('~^[a-z]+:~i', $url)) {
+            return $url;
+        }
+        $base = parse_url($base);
+        if (strpos($url, '#') === 0) {
+            $base['fragment'] = substr($url, 1);
+            return self::buildUrl($base);
+        }
+        unset($base['fragment']);
+        unset($base['query']);
+        if (substr($url, 0, 2) === "//") {
+            return self::buildUrl(array(
+                'scheme' => $base['scheme'],
+                'path' => substr($url, 2),
+            ));
+        }
+        if (strpos($url, "/") === 0) {
+            $base['path'] = $url;
+        } else {
+            $path = explode('/', $base['path']);
+            $url_path = explode('/', $url);
+            array_pop($path);
+            $end = array_pop($url_path);
+            foreach ($url_path as $segment) {
+                if ($segment == '.') {
+                    continue;
+                }
+                if ($segment === '..' && $path && $path[count($path) - 1] !== '..') {
+                    array_pop($path);
+                } else {
+                    $path[] = $segment;
+                }
+            }
+            if ($end === '.') {
+                $path[] = '';
+            } else {
+                if ($end === '..' && $path && $path[count($path) - 1] !== '..') {
+                    $path[count($path) - 1] = '';
+                } else {
+                    $path[] = $end;
+                }
+            }
+            $base['path'] = implode('/', $path);
+        }
+        return self::buildUrl($base);
     }
 
     /**
@@ -115,16 +177,16 @@ final class ExternalResource
         $scheme  = isset($parts['scheme']) ? $parts['scheme'] . '://' : '';
 
         if ($ip === null) {
-            $host = isset($parts['host']) ? $parts['host'] : '';
+            $host = $parts['host'] ?? '';
         } else {
             $host = $ip;
         }
 
         $port = isset($parts['port']) ? ':' . $parts['port'] : '';
-        $user = isset($parts['user']) ? $parts['user'] : '';
+        $user = $parts['user'] ?? '';
         $pass = isset($parts['pass']) ? ':' . $parts['pass']  : '';
         $pass = ($user || $pass) ? "$pass@" : '';
-        $path = isset($parts['path']) ? $parts['path'] : '';
+        $path = $parts['path'] ?? '';
         $query    = isset($parts['query']) ? '?' . $parts['query'] : '';
         $fragment = isset($parts['fragment']) ? '#' . $parts['fragment'] : '';
 

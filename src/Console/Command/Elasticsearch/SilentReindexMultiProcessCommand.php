@@ -23,6 +23,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use RuntimeException;
 use Symfony\Component\Process;
+use Symfony\Component\Process\PhpExecutableFinder;
 
 /**
  *
@@ -37,7 +38,7 @@ use Symfony\Component\Process;
  */
 class SilentReindexMultiProcessCommand extends Command implements InstanceModeInterface
 {
-    const DEFAULT_NUMBER_OF_PROCESSES = 10;
+    public const DEFAULT_NUMBER_OF_PROCESSES = 10;
 
     /**
      * @var Container
@@ -123,7 +124,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
 
         $bucketId = -1;
         if ($input->getOption('bucket')) {
-            $bucketId = $input->getOption('bucket');
+            $bucketId = (int) $input->getOption('bucket');
             if ($bucketId <= 0 || $bucketId > 100) {
                 throw new RuntimeException("the bucket ID is out of range (1, 100): $bucketId");
             }
@@ -157,14 +158,37 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
 
                 // create commands
                 for ($bucketId = 1; $bucketId <= $numProcesses; $bucketId++) {
-                    $commandCmdStr = '.' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'sugarcrm';
-                    $commandArgStr = escapeshellarg($thisCommandName) . ' --bucket ' . escapeshellarg($bucketId);
-                    if ($input->getOption('modules')) {
-                        $commandArgStr .= ' --modules ' . escapeshellarg($input->getOption('modules'));
+                    if (!empty($_SERVER['_']) && isset($_SERVER['argv'][0]) && $_SERVER['_'] == $_SERVER['argv'][0]) {
+                        $commandCmd = [$_SERVER['argv'][0]];
+                    } elseif (!empty($_SERVER['argv'][0]) && strpos($_SERVER['argv'][0], 'bin' . DIRECTORY_SEPARATOR . 'sugarcrm') !== false) {
+                        if (defined('SHADOW_INSTANCE_DIR')) {
+                            // MTS
+                            $commandCmd = ['shadowy', $_SERVER['argv'][0]];
+                        } elseif (!empty($_SERVER['_'])) {
+                            // Linux
+                            $commandCmd = [$_SERVER['_'], $_SERVER['argv'][0]];
+                        } else {
+                            // other OS, such as Windows
+                            $phpBinaryFinder = new PhpExecutableFinder();
+                            $phpExe = $phpBinaryFinder->find();
+                            $commandCmd = [$phpExe, $_SERVER['argv'][0]];
+                        }
+                    } else {
+                        $commandCmd = ['.' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'sugarcrm'];
                     }
-                    $commandStr = escapeshellcmd($commandCmdStr) . ' ' . $commandArgStr;
-                    $this->writeln("execute command: $commandStr");
-                    $processes[] = new Process\Process($commandStr);
+                    $commandArgs = [$thisCommandName, '--bucket', $bucketId];
+                    if ($input->getOption('modules')) {
+                        $commandArgs[] = '--modules';
+                        $commandArgs[] = $input->getOption('modules');
+                    }
+                    $command = array_merge($commandCmd, $commandArgs);
+                    $cwd = null;
+                    if (defined('SHADOW_INSTANCE_DIR')) {
+                        $cwd = SHADOW_INSTANCE_DIR;
+                    }
+                    $process = new Process\Process($command, $cwd, null, null, 7200);
+                    $this->writeln("execute command: " . $process->getCommandLine());
+                    $processes[] = $process;
                 }
 
                 // start processes
@@ -179,7 +203,10 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
                         if (!$process->isRunning()) {
                             $bucketId = $id + 1;
                             $this->writeln("process: $bucketId");
-                            $this->writeln($process->getOutput());
+                            $this->writeln('output from the process: ' . $process->getOutput());
+                            if (!$process->isSuccessful()) {
+                                $this->writeln("process: $bucketId: exit code: " . $process->getExitCode() . ' text: ' . $process->getExitCodeText());
+                            }
                             unset($processes[$id]);
                             $count--;
                         }
@@ -196,6 +223,7 @@ class SilentReindexMultiProcessCommand extends Command implements InstanceModeIn
             $duration = time() - $start;
             $this->writeln("Reindexing complete, duration: $duration seconds");
         }
+        return 0;
     }
 
     /**

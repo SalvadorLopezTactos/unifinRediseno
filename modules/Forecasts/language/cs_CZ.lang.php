@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Zobrazit historii předpovědi',
     'LBL_FORECAST_HISTORY' => 'Historie předpovědi',
     'LBL_FORECAST_HISTORY_TITLE' => 'Historie',
+    'LBL_TAB_COMMITMENT' => 'Závazek',
+    'LBL_CURRENT' => 'Stávající',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Časové období',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Modifikováno kym',
     'LBL_WK_VERSION' => 'Verze',
     'LBL_WK_REVISION' => 'Revize',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Přístup k rozhraní API pro metriky vyžaduje verzi Sugar Sell Premier.',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Časová perioda:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Chcete schválit tyto částky?',
     'ERR_FORECAST_AMOUNT' => 'Závazný Počet je povinné číselný údaj.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Zahrnutý obchodní plán',
+    'LBL_UPSIDE_PIPELINE' => 'Zvýrazněný obchodní plán',
+    'LBL_EXCLUDED_PIPELINE' => 'Vyloučený obchodní plán',
+    'LBL_WON' => 'Získané',
+    'LBL_LOST' => 'Ztracené',
+    'LBL_ALL' => 'Vše',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Průvodce filtry',
+    'LBL_HELP_MAIN_BODY' => 'Všechny metriky zahrnují pouze příležitosti, které patří vybraným uživatelům, časovému období a jakýmkoli dalším použitým filtrům.',
+    'LBL_FORECAST_HELP' => 'Příležitosti, které již byly získány nebo které jsou zahrnuty do {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Otevřené příležitosti s fází {{{forecastStage}}} – {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Otevřené příležitosti v zahrnuté fázi {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Otevřené příležitosti s fází {{{forecastStage}}} – {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Otevřené příležitosti s fází {{{forecastStage}}} – {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Otevřené příležitosti ve vyloučené fázi {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Příležitosti, které již byly získány',
+    'LBL_LOST_HELP' => 'Příležitosti, které již byly ztraceny',
+    'LBL_ALL_HELP' => 'Všechny příležitosti',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Začátek',
     'LBL_FC_USER' => 'Plán pro',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Závazek',
     'LBL_TEAM_COMMITMENT' => 'Týmový závazek',
     'LBL_FORECASTED' => 'Prognózováno',
+    'LBL_OPPORTUNITY_FORECAST' => 'Předpověď příležitostí',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Předpověď řádkové položky tržeb',
+    'LBL_LAST_COMMITMENT' => 'Poslední závazek',
     'LBL_ADJUSTED_TOTAL' => 'Upravená celková hodnota',
     'LBL_COMMIT_STAGE' => 'Fáze schválení',
     'LBL_SALES_STAGE' => 'Fáze',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Upravena)',
     'LBL_SAVE_DRAFT' => 'Uložit',
     'LBL_CHANGES_BY' => 'Změněno {0}',
-    'LBL_FORECAST_SETTINGS' => 'Nastavení',
+    'LBL_FORECAST_SETTINGS' => 'Nastavení předpovědí',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Nastavení prognóz',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Datum začátku fiskálního roku:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Nastavte časové období, které bude použité v modulu předpovědí.<br /><br />Začněte výběrem počátečního data vašeho fiskálního roku. Pak vyberte typ časového období, přes které chcete předpovídat. Rozpětí data časových období bude automaticky vypočítáno na základě vašeho výběru. Sub-časové období je základem pro předpovědní list.<br /><br />Zobrazitelná budoucnost a minulá časová období určí počet viditelných sub-období v modulu předpovědí. Uživatelé mohou zobrazit a upravit čísla předpovědí ve viditelných sub-obdobích.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Proveďte konfiguraci, jak chcete kategorizovat {{forecastByModule}}. <br><br>Vezměte prosím na vědomí, že nastavení rozsahu nelze po prvním potvrzení změnit. U upgradovaných instancí je nastavení rozsahu uzamčeno s existujícími údaji o prognóze.<br><br>Můžete vybrat dvě nebo více kategorií na základě rozsahů pravděpodobnosti, nebo vytvořit kategorie, které nejsou založeny na pravděpodobnosti. <br><br>Vlevo od vašich vlastních kategorií jsou zaškrtávací políčka. Použijte je k tomu, abyste rozhodli, které rozsahy budou zahrnuty do schválené částky předpovědi a oznámeny manažerům. <br><br>Uživatel může změnit stav zařadit/vyloučit a kategorii {{forecastByModule}} ručně ze svého listu.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Nakonfigurujte, jak chcete modul {{forecastByModule}} kategorizovat.<br><br>Nastavení rozsahu však po prvním potvrzení nelze změnit. V případě upgradovaných instancí budou nastavení rozsahu uzamčena s existujícími daty prognózy.<br><br>Můžete vybrat dvě nebo více kategorií na základě rozsahů pravděpodobnosti nebo vytvořit kategorie, které nejsou založeny na pravděpodobnosti.<br><br>Vlevo od vlastních kategorií jsou zaškrtávací políčka. Pomocí nich můžete určit, které rozsahy budou zahrnuty do potvrzené částky prognózy a nahlášeny vedoucím. <br><br>Uživatel může stav zahrnutí/vyloučení a kategorii modulu {{forecastByModule}} změnit ručně v pracovním listu.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Vyberte sloupce, které chcete, aby uživatelé vyplnili pro jejich předpovědi každého {{forecastByModuleSingular}}. Prosím mějte na paměti, že pravděpodobná částka je svázaná s částkou zobrazenou v {{forecastByModule}}; z toho důvodu nemůže být sloupec Pravděpodobná částka skryt.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Vyberte, které sloupce byste chtěli zobrazit v modulu předpovědí. Seznam polí bude kombinovat list a umožní uživateli vybrat, jak nakonfigurovat jeho pohled.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Jsem zástupným textem pro text Předpověď podle how-to!',

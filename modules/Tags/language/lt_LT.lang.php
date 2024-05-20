@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Žymų įrašų ataskaitų sritis',
     'LBL_MY_TAGS' => 'Mano žymos',
     'LBL_MY_FAVORITE_TAGS' => 'Mano mėgstamiausios žymos',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} žymos',
 );

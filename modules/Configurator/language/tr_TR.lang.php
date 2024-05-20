@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logolar',
 	'LBL_ADMIN_WIZARD' => 'Admin Sihirbazı',
-	'LBL_ALLOW_USER_TABS' => 'Sekmeleri gizlemeleri için kullanıcılara izin ver',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Sistem Ayarları',
 	'LBL_ENABLE_MAILMERGE' => 'E-Posta Birleştirme Etkinleştirilsin mi?',
 	'LBL_LOGVIEW' => 'Log&#39;u Göster',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Bu ayarı bildirilen toplantılar ve telefon aramaları konusunda kaç ay öncesinden Uygun/Meşgul durumunun belirlenmesi kullanın.<BR>Uygun/Meşgul bildirisini kapatmak için "0" girin. Minimum 1 ay; maksimum 12 Ay.',
     'LBL_PDFMODULE_NAME' => 'PDF Ayarları',
     'SUGARPDF_BASIC_SETTINGS' => 'Doküman Özellikleri',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Gelişmiş Ayarlar',
     'SUGARPDF_LOGO_SETTINGS' => 'Görüntüler',
-
-    'PDF_CREATOR' => 'PDF Oluşturucusu',
-    'PDF_CREATOR_INFO' => 'Doküman oluşturucusunu tanımlar.<br>Genellikle, PDF üreten uygulamaların ismidir.',
 
     'PDF_AUTHOR' => 'Yazar',
     'PDF_AUTHOR_INFO' => 'Doküman özelliklerinde gözüken yazar.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Teklifler için Yeni İmaj Seçiniz',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Dosya formatı ya jpg ya da .png olabilir. (Sadece EZPDF için .jpg) <br>Önerilen büyüklük 867x74 pikseldir.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Teklif İmajı Genişliği',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Teklif PDF Dokümanlarında yer alan yüklenmiş imajın ölçüsünü değiştir. (Sadece TCPDF)',
+    'PDF_TITLE' => 'Başlık',
+    'PDF_TITLE_INFO' => 'Doküman özelliklerinde gözüken başlık.',
+
+    'PDF_SUBJECT' => 'Konu',
+    'PDF_SUBJECT_INFO' => 'Doküman özelliklerinde gözüken konu.',
 
     'PDF_SMALL_HEADER_LOGO' => 'Rapor PDF Dokümanları için',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Bu imaj Rapor PDF Dokümanlarındaki yer alan varsayılan başlık içinde gözükür.<br>Bu imaj aynı zamanda Sugar uygulamasının en üst sol köşesinde de ortaya çıkmaktadır.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Raporlar için Yeni İmaj seçiniz',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Dosya formatı ya .jpg ya da .png olabilir. (Sadece EZPDF için .jpg) <br>Önerilen büyüklü 212x40 pikseldir.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Raporların İmajlarının Genişliği',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Teklif PDF Dokümanlarında yer alan yüklenmiş imajın ölçüsünü değiştir. (Sadece TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Başlık String',
-    'PDF_HEADER_STRING_INFO' => 'Başlık Tanım  String&#39;i',
-
-    'PDF_HEADER_TITLE' => 'Başlık',
-    'PDF_HEADER_TITLE_INFO' => 'Doküman başlığı gibi yazdırmak için string et',
-
-    'PDF_FILENAME' => 'Varsayılan Dosya İsmi',
-    'PDF_FILENAME_INFO' => 'PDF dosyaları oluşturmak için varsayılan dosya isimleri',
-
-    'PDF_TITLE' => 'Başlık',
-    'PDF_TITLE_INFO' => 'Doküman özelliklerinde gözüken başlık.',
-
-    'PDF_SUBJECT' => 'Konu',
-    'PDF_SUBJECT_INFO' => 'Doküman özelliklerinde gözüken konu.',
-
     'PDF_KEYWORDS' => 'Anahtar kelime(ler)',
     'PDF_KEYWORDS_INFO' => 'Doküman ile bağdaştırılan Anahtar Sözcükler. Genellikle "anahtar sözcük 1 anahtar sözcük 2..." şeklindedir',
 
-    'PDF_COMPRESSION' => 'Baskı',
-    'PDF_COMPRESSION_INFO' => 'Sayfa baskılarını ya aktif yada pasif hale getir.<br>Aktif hale getirildiğinde, baskı oranı yaklaşık 2 olan potansiyellerin  sonuçlanması için her sayfa için olan dahili temsil basılır.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG Kalitesi (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Varsayılan JPEG baskı kalitesini ayarla (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF Versiyonu',
-    'PDF_PDF_VERSION_INFO' => 'PDF versiyonunu ayarla (geçerli değerler için PDF referansını kontrol et).',
-
-    'PDF_PROTECTION' => 'Doküman Koruma',
-    'PDF_PROTECTION_INFO' => 'Doküman Koruma Ayarı<br>-Kopyala: metin ve imajı geçici taşıma panosuna kopyala<br>-Print et: Dokümanı print et<br>-Değiştir: Değiştir (Dipnotlar ve Formlar hariç)<br>-Dipnot-Formları: Dipnot ve form ekle<br>Not: Değişime karşı koruma Acrobat ürününün tümüne sahip olan kişiler içindir.',
-
-    'PDF_USER_PASSWORD' => 'Kullanıcı Şifresi',
-    'PDF_USER_PASSWORD_INFO' => 'Eğer herhangi bir şifre oluşturmazsanız, doküman genele açılır.<br>Eğer bir kullanıcı şifresi oluşturursanız, PDF görüntüleyici dokümanı görüntülemeden önce soracaktır.<br>Ana şifre, bir kullanıcıdan farklı ise, tam erişim için kullanılabilir.',
-
-    'PDF_OWNER_PASSWORD' => 'Sahip Şifresi',
-    'PDF_OWNER_PASSWORD_INFO' => 'Eğer herhangi bir şifre oluşturmazsanız, doküman genele açılır.<br>Eğer bir kullanıcı şifresi oluşturursanız, PDF görüntüleyici dokümanı görüntülemeden önce soracaktır.<br>Ana şifre, bir kullanıcıdan farklı ise, tam erişim için kullanılabilir.',
-
-    'PDF_ACL_ACCESS' => 'Erişim Kontrolü',
-    'PDF_ACL_ACCESS_INFO' => 'PDF üretimi için Varsayılan Erişim Kontrolü.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Hücre Yükseklik Oranı',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Eğer hücre yüksekliği (Yazı Tipi Yüksekliği x Hücre Yükseklik Oranı)den küçük ise (Yazı Tipi Yüksekliği x Hücre Yükseklik Oranı) hücre yüksekliği gibi kullanılır.<br>(Yazı Tipi Yüksekliği x Hücre Yükseklik Oranı)  yükseklik tanımlanmadığından aynı zamanda hücre yüksekliği olarak kullanılır.',
-
-    'K_TITLE_MAGNIFICATION' => 'Başlık Büyütme',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Başlık büyütme ana yazı tipi büyüklüğüne uyar.',
-
-    'K_SMALL_RATIO' => 'Küçük Yazı Tipi Faktörü',
-    'K_SMALL_RATIO_INFO' => 'Küçük yazı tipi için azaltma faktörü.',
-
-    'HEAD_MAGNIFICATION' => 'Konu Başlığı Büyütme',
-    'HEAD_MAGNIFICATION_INFO' => 'Başlıklar için Büyütme Faktörü.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'İmaj Ölçü Oranı',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Oran imajların ölçülmesi için kullanılır',
-
-    'PDF_UNIT' => 'Birim',
-    'PDF_UNIT_INFO' => 'Doküman Ölçü Birimi',
 	'PDF_GD_WARNING'=>'PHP için indirilen GD belgeliğine sahip değilsiniz. GD belgeliği indirilmeden, sadece JPEG logoları PDF dokümanlarındaki görüntülenebilir.',
     'ERR_EZPDF_DISABLE'=>'Uyarı: EZPDF sınıfı yapılandırma tablosunda devre dışı bırakılmış ve PDF sınıfı olarak ayarlanmış durumda. Lütfen TCPDF PDF Sınıfı olarak ayarlamak ve tutarlı aşamaya geçmek için "Kaydet" butonuna basın.',
     'LBL_IMG_RESIZED'=>"(görüntü için yeniden boyutlandırıldı)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'PDF Fontu ekle',
     'LBL_PDF_PATCH' => 'Yama',
-    'LBL_PDF_PATCH_INFO' => 'Şifrelemenin değişimini özelleştir. Bir PHP dizisi yazınız.<br>Örnek:<br>ISO-8859-1 Avro sembolü içermemektedir. 164 pozisyonu eklemek için, "array(164=>&#92;&#39;Euro&#92;&#39;)" yazınız.',
     'LBL_PDF_ENCODING_TABLE' => 'Şifreleme Tablosu',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Şifreleme Tablosunun İsmi.<br>Bu opsiyon TrueType Unicode, OpenType Unicode ve sembolik yazı tipleri için  yok sayıldı.<br>Şifreleme, kod (0 dan 255 kadar) ile yazı tipinde içerilen bir karakter arasında birleşimi tanımlar.<br>İlk 128 sabitlenir ve ASCII  uyar.',
     'LBL_PDF_FONT_FILE' => 'Yazı Tipi Dosyası',

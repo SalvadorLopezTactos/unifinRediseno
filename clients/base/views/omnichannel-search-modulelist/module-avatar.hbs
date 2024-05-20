@@ -12,10 +12,13 @@
 --}}
 {{#each icon}}
     {{#if module}}
-        <span class="label label-module label-module-sm label-{{module}}" title="{{getModuleName module plural=true}}">{{moduleIconLabel module}}</span>
+        {{moduleLabel module 'sm' class="align-middle mr-0.5" title=(getModuleName module plural=true)}}
     {{else}}
-        {{#if multiple}}
-            <span class="label non-module-label" aria-label="{{str 'LBL_GLOBAL_SEARCH_MODULE_FILTER'}}" title="{{str 'LBL_MULTIPLE_MODULES'}}">{{str 'LBL_MULTIPLE_MODULES'}}</span>
+        {{#if multipleLabel}}
+            <span class="label non-module-label"
+                  aria-label="{{str 'LBL_GLOBAL_SEARCH_MODULE_FILTER'}}" title="{{multipleLabel}}">
+                {{multipleLabel}}
+            </span>
         {{else}}
             <span class="label non-module-label" aria-label="{{str 'LBL_GLOBAL_SEARCH_MODULE_FILTER'}}" title="{{str 'LBL_MODULE_ALL'}}">{{str 'LBL_MODULE_ALL'}}</span>
         {{/if}}

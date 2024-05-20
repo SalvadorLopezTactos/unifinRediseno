@@ -34,12 +34,13 @@ use Google\Client;
  */
 class Assuredworkloads extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
   public $organizations_locations_operations;
   public $organizations_locations_workloads;
+  public $organizations_locations_workloads_violations;
 
   /**
    * Constructs the internal representation of the Assuredworkloads service.
@@ -175,6 +176,76 @@ class Assuredworkloads extends \Google\Service
                   'required' => true,
                 ],
                 'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'restrictAllowedResources' => [
+              'path' => 'v1/{+name}:restrictAllowedResources',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->organizations_locations_workloads_violations = new Assuredworkloads\Resource\OrganizationsLocationsWorkloadsViolations(
+        $this,
+        $this->serviceName,
+        'violations',
+        [
+          'methods' => [
+            'acknowledge' => [
+              'path' => 'v1/{+name}:acknowledge',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'get' => [
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'list' => [
+              'path' => 'v1/{+parent}/violations',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'interval.endTime' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'interval.startTime' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
                   'location' => 'query',
                   'type' => 'string',
                 ],

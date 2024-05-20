@@ -19,19 +19,21 @@
     /**
      * @inheritdoc
      */
-    initialize: function(options) {
-        this._super('initialize', [options]);
+    bindDataChange: function() {
+        this._super('bindDataChange');
 
-        //Check if the record is copied
-        if (typeof this.context.get('copiedFromModelId') == 'string') {
-            this._updateFieldDropdown();
-        } else {
-            this.listenTo(this.model, 'sync', function() {
+        if (this.model) {
+            //Check if the record is copied
+            if (typeof this.context.get('copiedFromModelId') === 'string') {
                 this._updateFieldDropdown();
-            }.bind(this));
-        }
+            } else {
+                this.listenTo(this.model, 'sync', function() {
+                    this._updateFieldDropdown();
+                }.bind(this));
+            }
 
-        this.listenTo(this.model, 'change:calendar_module', _.bind(this._updateFieldDropdown, this));
+            this.listenTo(this.model, 'change:calendar_module', _.bind(this._updateFieldDropdown, this));
+        }
     },
 
     /**
@@ -105,5 +107,11 @@
         }
 
         this.render();
+    },
+
+    /**
+     * Load enum options will not be needed on this field type
+     */
+    loadEnumOptions: function(fetch, callback, error) {
     }
 });

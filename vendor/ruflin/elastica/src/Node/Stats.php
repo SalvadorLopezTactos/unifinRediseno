@@ -4,6 +4,7 @@ namespace Elastica\Node;
 
 use Elastica\Node as BaseNode;
 use Elastica\Response;
+use Elasticsearch\Endpoints\Nodes\Stats as NodesStats;
 
 /**
  * Elastica cluster node object.
@@ -52,13 +53,13 @@ class Stats
      * Several arguments can be use
      * get('index', 'test', 'example')
      *
-     * @return array Node stats for the given field or null if not found
+     * @return array|null Node stats for the given field or null if not found
      */
-    public function get()
+    public function get(...$args)
     {
         $data = $this->getData();
 
-        foreach (\func_get_args() as $arg) {
+        foreach ($args as $arg) {
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
@@ -106,8 +107,9 @@ class Stats
      */
     public function refresh(): Response
     {
-        $endpoint = new \Elasticsearch\Endpoints\Cluster\Nodes\Stats();
-        $endpoint->setNodeID($this->getNode()->getName());
+        // TODO: Use only NodesStats when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(NodesStats::class) ? new NodesStats() : new \Elasticsearch\Endpoints\Cluster\Nodes\Stats();
+        $endpoint->setNodeId($this->getNode()->getName());
 
         $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
         $data = $this->getResponse()->getData();

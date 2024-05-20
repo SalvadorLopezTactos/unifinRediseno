@@ -28,18 +28,6 @@ return [
                                 'width' => 12,
                             ],
                         ],
-                        [
-                            [
-                                'view' => [
-                                    'type' => 'forecasts-chart',
-                                    'label' => 'LBL_DASHLET_FORECASTS_CHART_NAME',
-                                ],
-                                'context' => [
-                                    'module' => 'Forecasts',
-                                ],
-                                'width' => 12,
-                            ],
-                        ],
                     ],
                     'width' => 12,
                 ],

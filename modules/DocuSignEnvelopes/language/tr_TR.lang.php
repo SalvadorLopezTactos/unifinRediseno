@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Belirlenmiş müşteri şifresi yok',
     'LBL_RESEND_BUTTON_LABEL' => 'Tekrar gönder',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Zarfı getir',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Bulut hizmeti türü',
+    'LBL_CLOUD_PATH' => 'Bulut yolu',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign Zarfları Listesi Panosu',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'En Son DocuSign Zarfları',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign Zarfları Odak Bölmesi',
 
-    'LBL_DOCUMENT_FROM' => 'Şuradan gelen belge: ',
+    'LBL_NEW_ENVELOPE' => 'Yeni Zarf',
     'LBL_DOCUMENT_IS_NOW' => 'şimdi',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign hatası. Erişim anahtarına dayalı hesap numarası alınamadı.',
     'LBL_ERROR_RESEND' => 'DocuSign yeniden gönderme işlemi gerçekleştirilemedi. Zarf durumu &#39;gönderildi&#39; olmalıdır.',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Güncelleme yapılamadı',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign kuralları, 15 dakika içerisinde aynı zarf için birden fazla talebe izin vermiyor.',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Bir hata yaşandı. Zarf güncellenemedi. Lütfen günlükleri kontrol edin!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Bir hata yaşandı. Şablonlar listelenemedi. Lütfen günlükleri kontrol edin!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Bir hata yaşandı. Şablon getirilemedi. Lütfen günlükleri kontrol edin!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Zarf tamamlanmadı',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'DocuSign&#39;daki zarf durumu şimdi ',
     'LBL_OVERVIEW' => 'Genel Bilgi',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Belge Ekle',
     'LBL_BUTTON_SEND' => 'Gönder',
     'LBL_BUTTON_CLEAR' => 'Temizle',
-    'LBL_MISSING_OBJECT' => 'DocuSign nesnesi pencerede değil',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Şablon kullan',
     'LBL_PLEASE_LOG_IN' => 'Lütfen önce DocuSign&#39;a giriş yapın!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Bu belgeyi indiremezsiniz. Başka bir kullanıcı tarafından oluşturuldu!',
     'LBL_SEND_NOT_ALLOWED' => 'Bu zarfı gönderemezsiniz. Başka bir kullanıcı tarafından oluşturdu!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'İmzalandı',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Belge indirilemedi. Lütfen günlükleri kontrol edin!',
     'LBL_DOCUMENT_COMPLETED' => 'Tamamlandı',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign Bilgisi',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'şimdi',
+    'LBL_SETTINGS_TITLE' => 'DocuSign Ayarları',
+    'LBL_RECIPIENT_SELECTION' => 'Alıcı seçim davranışı',
+    'LBL_RECIPIENT_NAME' => 'Ad',
+    'LBL_RECIPIENT_EMAIL' => 'E-Posta',
+    'LBL_RECIPIENT_TYPE' => 'Tür',
+    'LBL_TEMPLATE_NAME' => 'Ad',
+    'LBL_RECIPIENT_SELECT' => 'Seç…',
+    'LBL_RECIPIENT_ROLE' => 'Görev',
+    'LBL_SELECT_BUTTON_LABEL' => 'Seç',
+    'LBL_BACK_BUTTON_LABEL' => 'Geri',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Potansiyel alıcılar alınamadı!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Şablonlar alınamadı!',
 ];

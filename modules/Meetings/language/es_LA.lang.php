@@ -219,4 +219,10 @@ Para crear un {{meetings_singular_module}}:
 - Haga clic en el símbolo + a la derecha de "Seleccionar un invitado" para crear un invitado {{meetings_singular_module}} como nuevo registro de Sugar.
 3. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior.
     - Escoja "Guardar y ver" para abrir una nueva reunión en la vista del registro.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Es Smart Guide Meeting',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Tareas secundarias',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Llamadas secundarias',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Reuniones secundarias',
 );

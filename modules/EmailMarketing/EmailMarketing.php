@@ -52,7 +52,7 @@ class EmailMarketing extends SugarBean
 		return $this->name;
 	}
 
-    public function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
 
         $temp_array = $this->get_list_view_array();
@@ -89,12 +89,12 @@ class EmailMarketing extends SugarBean
             }
             $param = $id;
         }
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery(
                 $query,
                 [$param]
             );
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             if (!empty($temp_array['PROSPECT_LIST_NAME'])) {
                 $temp_array['PROSPECT_LIST_NAME'] .= "<BR>";
             }

@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Tunnistetietueiden työpöytä',
     'LBL_MY_TAGS' => 'Omat tunnisteet',
     'LBL_MY_FAVORITE_TAGS' => 'Suosikkitunnisteet',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} Tunnisteet',
 );

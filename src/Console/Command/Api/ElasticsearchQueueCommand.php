@@ -64,7 +64,7 @@ class ElasticsearchQueueCommand extends Command implements InstanceModeInterface
             $table->addRow(new TableSeparator());
         }
 
-        $total = isset($result['total']) ? $result['total'] : 0;
+        $total = $result['total'] ?? 0;
         $table->addRow(array('Total', $total));
         $table->render();
 

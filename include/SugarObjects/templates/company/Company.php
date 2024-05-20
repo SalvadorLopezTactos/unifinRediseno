@@ -67,9 +67,9 @@ class Company extends Basic
 	}
 
 	/**
- 	 * @see parent::get_list_view_data()
+     * @see parent::get_list_view_data($filter_fields = [])
  	 */
-	public function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
 	{
 		global $current_user;
 

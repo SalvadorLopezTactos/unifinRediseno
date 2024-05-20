@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once dirname(__FILE__)  . '/UpgradeDriver.php';
+require_once __DIR__  . '/UpgradeDriver.php';
 
 /**
  * Command-line upgrader
@@ -69,7 +69,7 @@ class CliUpgrader extends UpgradeDriver
     /**
      * {@inheritDoc}
      */
-    const VERSION_FILE = 'version.json';
+    public const VERSION_FILE = 'version.json';
 
     /*
      * CLI arguments: Zipfile Logfile Sugardir Adminuser [Stage]
@@ -113,7 +113,7 @@ class CliUpgrader extends UpgradeDriver
     protected static function usage()
     {
         global $argv;
-        list($version, $build) = self::getVersion();
+        [$version, $build] = self::getVersion();
         $usage = <<<eoq2
 CLI Upgrader v.$version (build $build)
 Usage:
@@ -393,7 +393,7 @@ eoq2;
                 $pharPath = null;
             }
 
-            $context['script'] = $pharPath ? $pharPath : __FILE__;
+            $context['script'] = $pharPath ?: __FILE__;
         }
         $context['argv'] = $argv;
         $this->context = $context;
@@ -425,7 +425,7 @@ eoq2;
         $upgrader->parseArgs($argv);
         $upgrader->verifyArguments();
         $upgrader->init();
-        list($version, $build) = self::getVersion();
+        [$version, $build] = self::getVersion();
         $upgrader->log("CliUpgrader v.$version (build $build) starting");
         if (isset($upgrader->context['stage'])) {
             $stage = $upgrader->context['stage'];
@@ -586,7 +586,7 @@ eoq2;
          */
         $sugar_version = '9.9.9';
         include "sugar_version.php";
-        if (file_exists(dirname(__FILE__).'/SugarSystemInfo.php') && version_compare($sugar_version, '7.2.2', '<')) {
+        if (file_exists(__DIR__.'/SugarSystemInfo.php') && version_compare($sugar_version, '7.2.2', '<')) {
             require_once 'SugarSystemInfo.php';
         }
         

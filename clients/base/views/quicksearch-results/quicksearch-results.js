@@ -18,6 +18,7 @@
         'click .view-all-results': 'viewAllResultsClicked'
     },
 
+    className: 'typeahead-wrapper ',
     /**
      * @inheritdoc
      */
@@ -80,6 +81,9 @@
             this.disposeKeydownEvent();
         }, this);
 
+
+        $(window).on('resize', _.bind(_.debounce(this.resizeDropdown, 400), this));
+
         app.events.on('app:sync:complete', this._clearFieldsMeta, this);
     },
 
@@ -89,6 +93,44 @@
      */
     _clearFieldsMeta: function() {
         this._fieldsMeta = {};
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _render: function() {
+        this._super('_render');
+        this.resizeDropdown();
+    },
+
+    /**
+     * Resizes the dropdown to match width of search bar and module dropdown
+     */
+    resizeDropdown: function() {
+        if (this.$el) {
+            let quickFilterGroup = this.$el.siblings('.quicksearch-filter-group');
+            let quickSearchModuleWrapper = quickFilterGroup.find('.quicksearch-modulelist-wrapper');
+            let quickSearchTagList = quickFilterGroup.find('.quicksearch-taglist');
+            let quickSearchButtonWrapper = this.$el.siblings('.quicksearch-button-wrapper');
+            let moduleDropdown = quickSearchModuleWrapper.find('.module-wrapper');
+            let typeahead = this.$('.typeahead');
+
+            if (app.lang.direction === 'rtl') {
+                typeahead.css(
+                    {
+                        'left': quickSearchButtonWrapper.width() - 2,
+                        'right': quickFilterGroup.width() -  moduleDropdown.width() - quickSearchTagList.width() + 2
+                    }
+                );
+            } else {
+                typeahead.css(
+                    {
+                        'left': quickFilterGroup.width() -  moduleDropdown.width() - quickSearchTagList.width() + 2,
+                        'right': quickSearchButtonWrapper.width() - 2
+                    }
+                );
+            }
+        }
     },
 
     /**
@@ -310,5 +352,13 @@
     unbind: function() {
         this.disposeKeydownEvent();
         this._super('unbind');
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.off(window, this.resizeDropdown);
+        this._super('_dispose');
     }
 })

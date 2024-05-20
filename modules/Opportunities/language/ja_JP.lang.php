@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '商談リスト ダッシュ ボード',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '商談レコードダッシュ ボード',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => '商談詳細',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => '商談フォーカス ドロワ - コンソール',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => '商談フォーカス ドロワ',
     'LBL_RENEWAL_OPPORTUNITY' => '商談の更新',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'コミット済',
     'LBL_FORECAST' => '売上予測',
     'LBL_COMMIT_STAGE' => 'コミットステージ',
-    'LBL_COMMIT_STAGE_FORECAST' => '売上予測',
+    'LBL_COMMIT_STAGE_FORECAST' => '売上予測ステージ',
     'LBL_WORKSHEET' => 'ワークシート',
     'LBL_PURCHASED_LINE_ITEMS' => '購入商品',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => '編成',
+    'LBL_CREATE_NEW' => '新規作成',
+    'LBL_MANAGE' => '管理',
+    'LBL_SEE_DETAILS' => 'レポートの詳細',
+    'LBL_HIDE_NEW' => '非表示',
+
     'LBL_FORECASTED_LIKELY' => '予想される可能性が高い',
+    'LBL_LOST' => '失注',
     'LBL_RENEWAL' => '更新',
     'LBL_RENEWAL_OPPORTUNITIES' => '商談の更新',
     'LBL_RENEWAL_PARENT' => '親商談',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'商談での役割',
     'LBL_NOTES_SUBPANEL_TITLE' => 'メモ',
+    'LBL_TAB_OPPORTUNITY' => '{{module}} のレビュー',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => '確認をクリックすると、すべての売上予測データを消去し、商談ビューを変更します。これが意図したものではない場合は、キャンセルをクリックして以前の設定に戻ります。',
@@ -211,25 +220,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'この変更を開始した後、既存の{{module_name}} の商談品目のレコードが作成されます。商談品目が完了し使用可能の場合、通知がユーザプロファイルのEメールアドレスに送信されます。インスタンスは通知が送信されるために　管理＞Eメール設定　でEメールを送信するように設定する必要がありますのでご注意ください。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールにより、個々の販売を最初から最後まで追跡することができます。各{{module_name}} レコードは販売見込みを表し、また関連する売上データや、{{quotes_module}}、{{contacts_module}} などの他の重要なレコードに関連するデータを含みます。{{module_name}}は、通常、複数の販売ステージを経て、「商談成立」または「成約不成立」のいずれかになります。{{plural_module_name}}は、Sugar の{{forecasts_singular_module}}モジュールを使用して、さらに活用して販売傾向を理解・予測するだけでなく、販売ノルマを達成する作業に重点を置くことができます。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールにより、個々の販売を最初から最後まで追跡できます。各 {{module_name}} のレコードは販売見込みを表し、関連する販売データと {{quotes_module}}、{{contacts_module}} などの他の重要なレコードに関連するデータが含まれています。{{module_name}} は、通常、いくつかの販売ステージを経て、[受注] または [失注] と表示されます。{{plural_module_name}} は、Sugar の {{forecasts_singular_module}} モジュールを使って、販売傾向を把握・予測し、販売ノルマを達成するために作業を集中させることで、さらに活用できます。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} により、個別の商談とそれらの商談に関わる商品の品目を最初から最後まで追跡することが可能になります。各{{module_name}} レコードは販売見込みを表し、また関連する売上データや、{{quotes_module}}、{{contacts_module}} などの他の重要なレコードに関連するデータを含みます。
+    'LBL_HELP_RECORD' => '{{plural_module_name}} モジュールを使用すると、個々の売上とその売上に属する商品を最初から最後まで追跡することができます。各 {{module_name}} レコードは販売見込みを表し、関連する販売データだけでなく、{{quotes_module}} や {{contacts_module}} など他の重要なレコードに関連するデータも含まれます。
 
-- 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。
-- 左下のペインを「データビュー」にトグルすることによって、サブパネル内のリンクや他のレコードへのリンクを表示または変更します。
-- 左下のペインを「アクティビティストリーム」をトグルすることによって、{{activitystream_singular_module}}にあるユーザのコメントやレコード変更履歴を作成および表示します。
-- レコード名の右にあるアイコンを使用して、このレコードをフォローするか、お気に入りにします。
-- 追加のアクションは、「編集」ボタンの右にあるドロップダウンの操作メニューで利用できます。',
+- 個々のフィールドまたは [編集] ボタンをクリックして、このレコードのフィールドを編集できます。
+- 左下のペインを [データビュー] に切り替えて、サブパネル内の他のレコードへのリンクを表示または変更することができます。
+- 左下のペインを [アクティビティストリーム] に切り替えることで、{{activitystream_singular_module}} 内のユーザーコメントとレコードの変更履歴を作成、表示することができます。
+- レコード名の右側にあるアイコンを使用して、このレコードをフォローまたはお気に入りに追加することができます。
+- その他のアクションは、[編集] ボタンの右側にあるドロップダウンの [操作] メニューにあります。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールにより、個別の商談を最初から最後まで追跡することが可能になります。各{{module_name}} レコードは販売見込みを表し、また関連する売上データや、{{quotes_module}}、{{contacts_module}} などの他の重要なレコードに関連するデータを含みます。
+    'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールを使用すると、個々の売上とそれらの売上に属する商品を最初から最後まで追跡できます。各 {{module_name}} レコードは販売見込みを表し、関連する販売データだけでなく、{{quotes_module}} や {{contacts_module}} などの他の重要なレコードに関連するデータも含まれます。
 
-{{module_name}} を作成するには:
+{{module_name}} の作成方法:
 1. 必要に応じてフィールドに値を入力します。
- - 「必須」フィールドは保存前に入力完了してください。
- - 必要に応じて、追加のフィールドを展開する「さらに表示」をクリックします。
-2. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。',
+ - [必須] とマークされたフィールドは入力してから保存する必要があります。
+ - 必要に応じて [さらに表示] をクリックすると追加フィールドが表示されます。
+2. [保存] をクリックすると、新しいレコードが確定されて前のページに戻ります。',
 
 // END ENT/ULT
 

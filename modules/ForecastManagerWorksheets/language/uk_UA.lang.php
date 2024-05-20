@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Неприпустиме значення для {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Значення має бути між {{min}} та {{max}}',
-    'LBL_HISTORY_LOG' => 'Останнє підтвердження:',
+    'LBL_HISTORY_LOG' => 'Останнє підтвердження',
     'LBL_NO_COMMIT' => 'Без попереднього підтвердження',
 
     'LBL_MANGER_SAVED' => 'Manager збережено'

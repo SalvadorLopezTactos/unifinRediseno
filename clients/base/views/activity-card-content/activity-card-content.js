@@ -35,7 +35,7 @@
      */
     initialize: function(options) {
         this._super('initialize', [options]);
-        this.toggleShowMore = _.debounce(this.toggleShowMore, 10);
+        this.renderToggleShowMore = _.debounce(this.renderToggleShowMore, 10);
         this.initDateDetails();
     },
 
@@ -65,7 +65,26 @@
      */
     _render: function() {
         this._super('_render');
-        this.toggleShowMore();
+        this.renderToggleShowMore();
+    },
+
+    /**
+     * show/hide More button on render
+     */
+    renderToggleShowMore: function() {
+        if (this.disposed) {
+            return;
+        }
+        this.$('.activity-card-show-less').hide();
+        var more = this.$('.activity-card-show-more');
+        var curHeight = this.$('.activity-card-content-body').height();
+        if (this.$('.panel-attachments img').length) {
+            this.$('.panel-attachments img').on('load', function() {
+                curHeight + this.height < 300 ? more.hide() : more.show();
+            });
+        } else {
+            curHeight < 300 ? more.hide() : more.show();
+        }
     },
 
     /**

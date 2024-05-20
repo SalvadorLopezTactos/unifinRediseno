@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => '{필드 명}에 유효하지 않은 값',
     'LBL_EDITABLE_INVALID_RANGE' => '값이 {최소}과 {최대} 사이여야 합니다.',
-    'LBL_HISTORY_LOG' => '마지막 약속내용',
+    'LBL_HISTORY_LOG' => '마지막 기여',
     'LBL_NO_COMMIT' => '지난 약속사항이 없습니다.',
 
     'LBL_MANGER_SAVED' => '관리자 저장'

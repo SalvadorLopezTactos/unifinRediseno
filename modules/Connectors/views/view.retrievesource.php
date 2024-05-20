@@ -97,7 +97,6 @@ class ViewRetrieveSource extends ViewList
      * @return displayColumns A PHP array of display columns
      */
     private function getDisplayColumns($source_instance, $beans) {
-
         $listViewDefs = [];
     	$source_id = $_REQUEST['source_id'];
 
@@ -125,7 +124,7 @@ class ViewRetrieveSource extends ViewList
         	foreach($listViewDefs[$source_id] as $key=>$listDef) {
                 $check_key = strtolower($key);
         		if(isset($output_list[$check_key])) {
-        		   $width = isset($listDef['width']) ? $listDef['width'] : round((95 / count($listViewDefs)), 1);
+                    $width = $listDef['width'] ?? round((95 / count($listViewDefs)), 1);
 
         		   //Use the Connector's field label, but fall back on the bean's label if we need to
         		   $label = isset($connector_field_defs[$key]['vname']) ? $connector_strings[$connector_field_defs[$key]['vname']] : $sugar_bean_field_defs[$output_list[$check_key]]['vname'];

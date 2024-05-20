@@ -87,6 +87,14 @@
          */
         this._allPossibleViews = ['day', 'workWeek', 'week', 'expandedMonth', 'agenda', 'timeline', 'monthSchedule'];
 
+        this.DAY_VIEW = 'day';
+        this.WEEK_VIEW = 'week';
+        this.WORK_WEEK_VIEW = 'workWeek';
+        this.EXPANDED_MONTH_VIEW = 'expandedMonth';
+        this.AGENDA_VIEW = 'agenda';
+        this.TIMELINE_VIEW = 'timeline';
+        this.MONTH_SCHEDULE_VIEW = 'monthSchedule';
+
         /**
          * Calendar's views
          */
@@ -124,6 +132,9 @@
 
         this.keyToStoreCalendarConfigurations = this.options.context.get('keyToStoreCalendarConfigurations');
         this.keyToStoreCalendarView = app.Calendar.utils.buildUserKeyForStorage(this.location);
+        this.keyToStoreCalendarBusinessHours = 'calendarBusinessHours';
+
+        this._setBusinessHours();
     },
 
     /**
@@ -168,7 +179,7 @@
                 showWorkHours: true,
             };
 
-            if (view === 'monthSchedule') {
+            if (view === this.MONTH_SCHEDULE_VIEW) {
                 newView.showWorkHours = false;
             }
             if (defaultView === view) {
@@ -298,7 +309,7 @@
                     //on expected cells
                     let schedulerViewType = this.scheduler._selectedView.name;
                     schedulerViewType = this.getViewType(schedulerViewType);
-                    if (schedulerViewType == 'expandedMonth') {
+                    if (schedulerViewType === this.EXPANDED_MONTH_VIEW) {
                         let calendarDef = _.find(this.calendarDefs, function(calendarDef) {
                             return calendarDef.calendarId === row.calendarId;
                         });
@@ -461,13 +472,13 @@
         let cells;
         let viewName = this.scheduler.view().name;
         const viewType = this.scheduler.view().type;
-        if (viewType == 'expandedMonth') {
+        if (viewType === this.EXPANDED_MONTH_VIEW) {
             viewName = 'Month';
-        } else if (viewName == 'monthSchedule') {
+        } else if (viewName === this.MONTH_SCHEDULE_VIEW) {
             viewName = 'Scheduler';
         }
 
-        if (viewName == 'agenda') {
+        if (viewName === this.AGENDA_VIEW) {
             cells = this.$('div.k-task .event-template');
         } else {
             cells = this.$('div[role=gridcell] > .event-template');
@@ -486,7 +497,7 @@
                 htmlContent = '<div class="templateHtmlWrapper" style="color:' + color + ';">' +
                     '<div class="calendarEventBody">' + DOMPurify.sanitize(htmlContent) + '</div></div>';
 
-                if (viewName == 'agenda') {
+                if (viewName === this.AGENDA_VIEW) {
                     this.$('div.k-task[data-uid=' + event.uid + ']').each(function() {
                         $(this).css('background-color', event.color);
                     });
@@ -520,7 +531,7 @@
 
         _.each(cells, function(cell) {
             let uid;
-            if (viewName == 'agenda') {
+            if (viewName === this.AGENDA_VIEW) {
                 uid = $(cell)
                     .parent()
                     .parent()
@@ -533,24 +544,24 @@
 
             let event = this.scheduler.occurrenceByUid(uid);
             switch (viewName) {
-                case 'day':
+                case this.DAY_VIEW:
                     $(cell).html(prependCircle(event.day_event_template, event));
                     break;
-                case 'week':
-                case 'workWeek':
+                case this.WEEK_VIEW:
+                case this.WORK_WEEK_VIEW:
                     $(cell).html(prependCircle(event.week_event_template, event));
                     break;
-                case 'expandedMonth':
+                case this.EXPANDED_MONTH_VIEW:
                 case 'Month':
                     $(cell).html(prependCircle(event.month_event_template, event));
                     break;
-                case 'agenda':
+                case this.AGENDA_VIEW:
                     $(cell).html(prependCircle(event.agenda_event_template, event));
                     break;
-                case 'timeline':
+                case this.TIMELINE_VIEW:
                     $(cell).html(prependCircle(event.timeline_event_template, event));
                     break;
-                case 'monthSchedule':
+                case this.MONTH_SCHEDULE_VIEW:
                 case 'Scheduler':
                     $(cell).html(prependCircle(event.schedulermonth_event_template, event));
                     break;
@@ -601,7 +612,7 @@
 
         const tooltip = app.template.getView('scheduler.tooltip', 'Calendar')();
 
-        if (this.scheduler.view().name == 'agenda') {
+        if (this.scheduler.view().name === this.AGENDA_VIEW) {
             this.$('.k-scheduler-content').kendoTooltip({
                     filter: '.k-task',
                     content: tooltip,
@@ -823,8 +834,20 @@
                     title: 'calendarId',
                     dataSource: resourcesDS
                 },
-            ]
+            ],
+            majorTimeHeaderTemplate: this._getMajorTimeHeaderTemplate(),
         }, this.customKendoOptions);
+
+        const selectedView = _.find(this.views, (view) => view.selected).type;
+        if (selectedView !== this.MONTH_SCHEDULE_VIEW) {
+            kendoOptions.dateHeaderTemplate = this._getDateHeaderTemplate(
+                _.find(this.views, (view) => view.selected).type
+            );
+        }
+
+        if (selectedView !== this.EXPANDED_MONTH_VIEW) {
+            kendoOptions.selectedDateFormat = this._getSelectedDateFormat(selectedView);
+        }
 
         //finally, kendo initialization
         this.$('#' + this._schedulerCssId).kendoScheduler(kendoOptions);
@@ -1167,7 +1190,7 @@
     _contextMenuOpen: function(e) {
         //on Agenda View edit event is not triggered so we have to trigger it here
         const schedulerView = this.scheduler.view();
-        if (schedulerView.name == 'agenda') {
+        if (schedulerView.name === this.AGENDA_VIEW) {
             const uid = $(e.event.target)
                 .closest('.k-task')
                 .data('uid');
@@ -1191,7 +1214,7 @@
                 calendars = this.context.get('myAvailableCalendars');
             }
             const availableCalendars = _.filter(calendars, function(calendar) {
-                return app.acl.hasAccess('view', calendar.module);
+                return app.acl.hasAccess('view', calendar.module) && calendar.allow_create;
             });
 
             _.each(
@@ -1318,7 +1341,7 @@
         let schedulerViewType = this.scheduler._selectedView.name;
         schedulerViewType = this.getViewType(schedulerViewType);
 
-        if (schedulerViewType == 'expandedMonth' || schedulerViewType == 'monthSchedule') {
+        if (schedulerViewType === this.EXPANDED_MONTH_VIEW || schedulerViewType === this.MONTH_SCHEDULE_VIEW) {
             let originalEvent = this._eventsLoaded.events.find((evt) => evt.recordId === e.event.recordId);
             if (!originalEvent) {
                 e.preventDefault();
@@ -1354,7 +1377,7 @@
                     endDefFieldType != 'date') {
                     endDate.subtract(1, 'days');
                 }
-            } else if (schedulerViewType == 'monthSchedule' && originalEvent.isAllDay) {
+            } else if (schedulerViewType === this.MONTH_SCHEDULE_VIEW && originalEvent.isAllDay) {
                 endDate.subtract(1, 'days');
             }
 
@@ -1597,18 +1620,41 @@
     /**
      * Navigate handler
      *
+     * @param {Object} options
+     */
+    _navigateHandler: function(options) {
+        if (options.action === 'changeView') {
+            if (options.view === this.MONTH_SCHEDULE_VIEW) {
+                delete this.scheduler.options.dateHeaderTemplate;
+            } else {
+                this.scheduler.options.dateHeaderTemplate = this._getDateHeaderTemplate(options.view);
+            }
+
+            if (options.view === this.EXPANDED_MONTH_VIEW) {
+                delete this.scheduler.options.selectedDateFormat;
+            } else {
+                this.scheduler.options.selectedDateFormat = this._getSelectedDateFormat(options.view);
+            }
+        }
+
+        this._navigationLoadData(options);
+    },
+
+    /**
+     * Load data after navigation
+     *
      * Wait for UI navigation to complete, then load data if not already loaded
      *
-     * @param {Object} e
+     * @param {Object} options
      */
-    _navigateHandler: _.debounce(function(e) {
+    _navigationLoadData: _.debounce(function(options) {
         let schedulerView = this.scheduler.view();
         const intervalDates = {
             start: moment(schedulerView.startDate()).format('YYYY-MM-DD'),
             end: moment(schedulerView.endDate()).format('YYYY-MM-DD')
         };
 
-        let selectedDate = new Date(e.date.getTime());;
+        let selectedDate = new Date(options.date.getTime());;
         schedulerView = this.scheduler.view();
 
         schedulerView.select({
@@ -1660,33 +1706,33 @@
     getViewType: function(viewName) {
         let type;
         switch (viewName) {
-            case 'day':
+            case this.DAY_VIEW:
             case 'DayView':
-                type = 'day';
+                type = this.DAY_VIEW;
                 break;
-            case 'week':
+            case this.WEEK_VIEW:
             case 'WeekView':
-                type = 'week';
+                type = this.WEEK_VIEW;
                 break;
-            case 'workWeek':
+            case this.WORK_WEEK_VIEW:
             case 'WorkWeekView':
-                type = 'workWeek';
+                type = this.WORK_WEEK_VIEW;
                 break;
             case 'month':
-            case 'expandedMonth':
+            case this.EXPANDED_MONTH_VIEW:
             case 'Month':
-                type = 'expandedMonth';
+                type = this.EXPANDED_MONTH_VIEW;
                 break;
-            case 'agenda':
-                type = 'agenda';
+            case this.AGENDA_VIEW:
+                type = this.AGENDA_VIEW;
                 break;
-            case 'timeline':
+            case this.TIMELINE_VIEW:
             case 'TimelineView':
-                type = 'timeline';
+                type = this.TIMELINE_VIEW;
                 break;
-            case 'monthSchedule':
+            case this.MONTH_SCHEDULE_VIEW:
             case 'Scheduler':
-                type = 'monthSchedule';
+                type = this.MONTH_SCHEDULE_VIEW;
                 break;
         }
         return type;
@@ -1701,27 +1747,27 @@
     getViewTitle: function(viewName) {
         let title;
         switch (viewName) {
-            case 'day':
+            case this.DAY_VIEW:
                 title = app.lang.getModString('LBL_CALENDAR_VIEW_DAY', 'Calendar');
                 break;
-            case 'week':
+            case this.WEEK_VIEW:
                 title = app.lang.getModString('LBL_CALENDAR_VIEW_WEEK', 'Calendar');
                 break;
-            case 'workWeek':
+            case this.WORK_WEEK_VIEW:
                 title = app.lang.getModString('LBL_CALENDAR_VIEW_WORKWEEK', 'Calendar');
                 break;
             case 'month':
             case 'Month':
-            case 'expandedMonth':
+            case this.EXPANDED_MONTH_VIEW:
                 title = app.lang.getModString('LBL_CALENDAR_VIEW_MONTH', 'Calendar');
                 break;
-            case 'agenda':
+            case this.AGENDA_VIEW:
                 title = app.lang.getModString('LBL_CALENDAR_VIEW_AGENDA', 'Calendar');
                 break;
-            case 'timeline':
+            case this.TIMELINE_VIEW:
                 title = app.lang.getModString('LBL_CALENDAR_VIEW_TIMELINE', 'Calendar');
                 break;
-            case 'monthSchedule':
+            case this.MONTH_SCHEDULE_VIEW:
             case 'Scheduler':
                 title = app.lang.getModString('LBL_CALENDAR_VIEW_SCHEDULERMONTH', 'Calendar');
                 break;
@@ -1857,15 +1903,15 @@
         this.addBusinessHoursElementOnDom();
 
         //update modal
-        const calendarBusinessHours = app.cache.get('calendarBusinessHours');
+        const calendarBusinessHours = app.user.lastState.get(this.keyToStoreCalendarBusinessHours);
 
         $('[name=startTime]').timepicker({
-            timeFormat: 'H:i',
+            timeFormat: app.user.getPreference('timepref'),
             disableTextInput: true
         });
 
         $('[name=endTime]').timepicker({
-            timeFormat: 'H:i',
+            timeFormat: app.user.getPreference('timepref'),
             disableTextInput: true
         });
 
@@ -1923,16 +1969,19 @@
      * Save business hours to local storage
      */
     _saveBusinessHours: function() {
-        const startTime = $('[name=startTime]').val();
-        const endTime = $('[name=endTime]').val();
+        let startTime = $('[name=startTime]').val();
+        let endTime = $('[name=endTime]').val();
 
         if (startTime && endTime) {
+            startTime = app.date(startTime, app.date.convertFormat(app.user.getPreference('timepref')));
+            endTime = app.date(endTime, app.date.convertFormat(app.user.getPreference('timepref')));
+
             const businessHours = {
-                start: startTime,
-                end: endTime
+                start: startTime.format('HH:mm'),
+                end: endTime.format('HH:mm')
             };
 
-            app.cache.set('calendarBusinessHours', businessHours);
+            app.user.lastState.set(this.keyToStoreCalendarBusinessHours, businessHours);
 
             $('[data-content=business-hours-modal]').remove();
             $('.modal-backdrop').remove();
@@ -1947,7 +1996,7 @@
                 this.confirmationPopupView.dispose();
             }
 
-            this.context.off('change:calendars');
+            this.stopListening(this.context, 'change:calendars');
 
             this.$('#' + this._schedulerCssId).find('.k-scheduler-layout').remove();
             this.$('#' + this._schedulerCssId).find('.k-scheduler-footer').remove();
@@ -1960,38 +2009,97 @@
     },
 
     /**
-     * Get business hours
-     *
-     * @param {string} workHour
-     * @return {Object}
+     * Set business hours
      */
-    _getBusinessHours: function(workHour) {
-        let businessHours = app.cache.get('calendarBusinessHours');
-        let businessDate = new Date();
-        let businessHour;
-        let businessMin;
+    _setBusinessHours: function() {
+        let businessHours = app.user.lastState.get(this.keyToStoreCalendarBusinessHours);
 
         if (!businessHours) {
-            const defaultBusinessHours = {
+            businessHours = {
                 start: '09:00',
                 end: '17:00'
             };
-            app.cache.set('calendarBusinessHours', defaultBusinessHours);
-
-            businessHours = app.cache.get('calendarBusinessHours');
+            app.user.lastState.set(this.keyToStoreCalendarBusinessHours, businessHours);
         }
+    },
 
-        if (workHour === 'start') {
-            businessHour = businessHours.start.split(':')[0];
-            businessMin = businessHours.start.split(':')[1];
-            businessDate.setHours(businessHour, businessMin);
+    /**
+     * Get business hours
+     *
+     * @param {string} momentIdentifier
+     * @return {Object}
+     */
+    _getBusinessHours: function(momentIdentifier) {
+        const businessHours = app.user.lastState.get(this.keyToStoreCalendarBusinessHours);
+        return new Date(`2000-01-01 ${businessHours[momentIdentifier]}`);
+    },
+
+    /**
+     * Get date header template
+     *
+     * @param {string} view
+     * @return {string}
+     */
+    _getDateHeaderTemplate: function(view) {
+        let dataHeaderTemplate = '';
+        let kendoDateFormat = '';
+
+        if (view === this.TIMELINE_VIEW) {
+            kendoDateFormat = app.Calendar.utils.getKendoDateMapping(
+                app.user.getPreference('datepref'), 'dayAndVerboseMonth'
+            );
+            dataHeaderTemplate = kendo.template(
+                `<span class='k-link k-nav-day'>#=kendo.format('{0:${kendoDateFormat}}', date)#</span>`
+            );
+        } else if (view === this.MONTH_SCHEDULE_VIEW) {
+            kendoDateFormat = app.Calendar.utils.getKendoDateMapping(app.user.getPreference('datepref'), 'dayAndMonth');
+            dataHeaderTemplate = kendo.template(
+                `<span class='k-link k-nav-day'>#=kendo.format('{0:m}', date)#</span>`
+            );
         } else {
-            businessHour = businessHours.end.split(':')[0];
-            businessMin = businessHours.end.split(':')[1];
-            businessDate.setHours(businessHour, businessMin);
+            kendoDateFormat = app.Calendar.utils.getKendoDateMapping(app.user.getPreference('datepref'), 'dayAndMonth');
+            dataHeaderTemplate = kendo.template(`#var dateString = isMobile ? kendo.toString(date,'ddd')[0] :
+                kendo.toString(date,'ddd ${kendoDateFormat}'); #<span class='k-link k-nav-day'>#=dateString#</span>`);
         }
 
-        return businessDate;
+        return dataHeaderTemplate;
+    },
+
+    /**
+     * Get major time header template
+     *
+     * @return {string}
+     */
+    _getMajorTimeHeaderTemplate: function() {
+        let kendoTimeFormat = app.Calendar.utils.getKendoTimeMapping(app.user.getPreference('timepref'));
+        return `#=kendo.toString(date, '${kendoTimeFormat}')#`;
+    },
+
+    /**
+     * Get selected date format
+     *
+     * @param {string} view
+     * @return {string}
+     */
+    _getSelectedDateFormat: function(view) {
+        const userDatePref = app.Calendar.utils.getKendoDateMapping(
+            app.user.getPreference('datepref'), 'fullVerboseMonth'
+        );
+        let selectedDateFormat = '';
+        switch (view) {
+            case this.DAY_VIEW:
+            case this.TIMELINE_VIEW:
+                selectedDateFormat = `{0:dddd, ${userDatePref}}`;
+                break;
+            case this.WORK_WEEK_VIEW:
+            case this.WEEK_VIEW:
+            case this.AGENDA_VIEW:
+            case this.MONTH_SCHEDULE_VIEW:
+                selectedDateFormat = `{0:dddd, ${userDatePref}} - {1:dddd, ${userDatePref}}`;
+                break;
+        }
+
+        return selectedDateFormat;
     },
 
     /**
@@ -2034,7 +2142,7 @@
             this.confirmationPopupView.dispose();
         }
 
-        this.context.off('change:calendars');
+        this.stopListening(this.context);
 
         this.cleanupScheduler();
 

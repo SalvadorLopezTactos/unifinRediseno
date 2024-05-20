@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'No s&#39;ha establert cap secret del client',
     'LBL_RESEND_BUTTON_LABEL' => 'Torna-ho a enviar',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Recupera el sobre',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Tipus de servei al núvol',
+    'LBL_CLOUD_PATH' => 'Ruta del núvol',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Quadre de comandament de la llista de sobres de DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Sobres de DocuSign recents',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als sobres de DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'Document de ',
+    'LBL_NEW_ENVELOPE' => 'Nou sobre',
     'LBL_DOCUMENT_IS_NOW' => ' és ara ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'Error a DocuSign. No s&#39;ha pogut obtenir l&#39;ID del compte basat en el token d&#39;accés',
     'LBL_ERROR_RESEND' => 'No s&#39;ha pogut reenviar a DocuSign. L&#39;estat del sobre ha de ser &#39;enviat&#39;',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'L´actualització ha fallat',
     'LBL_ERROR_FETCH_TIME' => 'Les regles de DocuSign no permeten fer múltiples solicituds al mateix sobre en menys de 15 minuts',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'S&#39;ha produït un error, No s&#39;ha pogut actualitzar el sobre. Reviseu els registres!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'S&#39;ha produït un error. No s&#39;han pogut llistar les plantilles. Si us plau, comproveu els registres.',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'S&#39;ha produït un error. No s&#39;ha pogut recollir la plantilla. Si us plau, comproveu els registres.',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'No s&#39;ha completat el sobre',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'L&#39;estat del sobre a DocuSign es ara ',
     'LBL_OVERVIEW' => 'Visió general',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Afegeix un document',
     'LBL_BUTTON_SEND' => 'Envia',
     'LBL_BUTTON_CLEAR' => 'Esborra',
-    'LBL_MISSING_OBJECT' => 'L&#39;objecte de DocuSign no està a la finestra',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Fes servir la plantilla',
     'LBL_PLEASE_LOG_IN' => 'Primer inicieu la sessió a DocuSign.',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'No podeu baixar aquest document. L&#39;ha creat un altre usuari.',
     'LBL_SEND_NOT_ALLOWED' => 'No podeu enviar aquest sobre. L&#39;ha creat un altre usuari.',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Signat',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'No s&#39;ha pogut baixar el document. Reviseu els registres.',
     'LBL_DOCUMENT_COMPLETED' => 'Completat',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Informació de DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'és ara',
+    'LBL_SETTINGS_TITLE' => 'Configuració de DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'Comportament de selecció de destinataris',
+    'LBL_RECIPIENT_NAME' => 'Nom',
+    'LBL_RECIPIENT_EMAIL' => 'Correu electrònic',
+    'LBL_RECIPIENT_TYPE' => 'Tipus',
+    'LBL_TEMPLATE_NAME' => 'Nom',
+    'LBL_RECIPIENT_SELECT' => 'Selecciona...',
+    'LBL_RECIPIENT_ROLE' => 'Funció',
+    'LBL_SELECT_BUTTON_LABEL' => 'Selecciona',
+    'LBL_BACK_BUTTON_LABEL' => 'Enrere',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Error en recuperar els destinataris potencials!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Error en recuperar les plantilles!',
 ];

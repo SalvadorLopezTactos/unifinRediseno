@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Tablero de Lista de Oportunidades',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Tablero de Registro de Oportunidades',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Detalles de oportunidad',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Panel de enfoque en las oportunidades - Consola',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Oportunidades',
     'LBL_RENEWAL_OPPORTUNITY' => 'Oportunidad de Renovación',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Comprometido',
     'LBL_FORECAST' => 'Incluyen en el pronóstico',
     'LBL_COMMIT_STAGE' => 'Fase de Compromiso',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Pronóstico',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Etapa de la previsión',
     'LBL_WORKSHEET' => 'Hoja de Trabajo',
     'LBL_PURCHASED_LINE_ITEMS' => 'Partidas individuales adquiridas',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizar',
+    'LBL_CREATE_NEW' => 'Crear nuevo',
+    'LBL_MANAGE' => 'Gestionar',
+    'LBL_SEE_DETAILS' => 'Ver detalles',
+    'LBL_HIDE_NEW' => 'Ocultar',
+
     'LBL_FORECASTED_LIKELY' => 'Pronosticado probablemente',
+    'LBL_LOST' => 'Perdido',
     'LBL_RENEWAL' => 'Renovación',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Oportunidades de renovación',
     'LBL_RENEWAL_PARENT' => 'Oportunidad de padre',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Rol en Oportunidad',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notas',
+    'LBL_TAB_OPPORTUNITY' => 'Revisión de {{module}}',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Al dar clic en Confirmar borrarás toda la información de pronósticos y también cambiará tu vista de Oportunidades. Si no deseas eso, dar clic en cancelar para regresar a la configuración previa.',
@@ -211,25 +220,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Después de que haya iniciado este cambio, los registros de Sub-Oportunidades serán creados para cada {{module_name}} existente. Cuando las Sub-Oportunidades estén completadas y disponibles, será enviada una notificación al correo electrónico de registrado en tu perfil. Por favor toma en cuenta que la instancia debe estar configurada a través de Admin > Ajustes Email para que la notificaciónes sean enviadas.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite hacer seguimiento de principio a fin de ventas individuales. Cada registro de {{module_name}} representa una venta potencial e incluye datos pertinentes de la venta, y también se relaciona con otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. Generalmente, un {{module_name}} avanzará por varias etapas de ventas hasta que se marque como "Cerrada ganada" o "Cerrada perdida". {{plural_module_name}} se puede aprovechar aún más mediante el uso del módulo {{forecasts_singular_module}}ing de Sugar para comprender y predecir tendencias de ventas, así como enfocarse en trabajo para lograr cotizaciones de ventas.',
+    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales de principio a fin. Cada registro {{module_name}} representa una venta potencial e incluye datos de venta relevantes, así como relacionados con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalmente avanzará a través de varias etapas de ventas hasta que se marque como "Cerrado ganado" o "Cerrado perdido". {{plural_module_name}} puede aprovecharse aún más utilizando el módulo de {{forecasts_singular_module}} de Sugar para comprender y predecir las tendencias de ventas, así como enfocar el trabajo para lograr las cuotas de ventas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar el seguimiento de principio a fin de ventas y partidas individuales relacionadas con dichas ventas. Cada registro de {{module_name}} representa una venta potencial e incluye datos pertinentes de la venta, y también se relaciona con otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y las partidas individuales pertenecientes a esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos de venta relevantes, además de los relacionados con otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
-- Edite los campos de este registro haciendo clic en un campo individual o el botón Editar.
-- Vea o modifique enlaces a otros registros en los subpaneles cambiando el panel de la parte inferior izquierda a "Vista de datos".
-- Comente o vea comentarios de usuarios y el historial de cambios del registro en {{activitystream_singular_module}}; para ello, cambie el panel de la parte inferior izquierda a "Flujo de actividades".
-- Siga o guarde como favorito el registro utilizando los iconos a la derecha del nombre del registro.
+- Edite los campos de este registro haciendo clic en un campo individual o en el botón Editar.
+- Vea o modifique enlaces a otros registros en los subpaneles moviendo el panel inferior izquierdo a "Vista de datos".
+- Haga comentarios y vea los de los usuarios y el historial de cambio de registros en {{activitystream_singular_module}} moviendo el panel inferior izquierdo a "Flujo de actividades".
+- Siga o coloque como favorito este registro utilizando los íconos a la derecha del nombre del registro.
 - Hay acciones adicionales disponibles en el menú desplegable Acciones a la derecha del botón Editar.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite realizar el seguimiento de principio a fin de ventas y partidas individuales relacionadas con dichas ventas. Cada registro de {{module_name}} representa una venta potencial e incluye datos pertinentes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y las partidas individuales pertenecientes a esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos de venta relevantes, además de los relacionados con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
 
 Para crear un {{module_name}}:
-1. Proporcione valores para los campos según se desee.
- - Los campos marcados como "Requerido" deben completarse antes de guardarlos.
- - Haga clic en "Mostrar más" para desplegar campos adicionales en caso de ser necesario.
-2. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior.',
+1. Proporcione los valores para los campos según desee.
+ - Debe completar los campos marcados como "Obligatorio" antes de guardar.
+ - Haga clic en "Mostrar más" para mostrar campos adicionales si fuese necesario.
+2. Haga clic en "Guardar" para finalizar el registro nuevo y volver a la página anterior.',
 
 // END ENT/ULT
 

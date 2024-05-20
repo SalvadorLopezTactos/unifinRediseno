@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Prognosehistorikk',
     'LBL_FORECAST_HISTORY' => 'Prognoser: Historikk',
     'LBL_FORECAST_HISTORY_TITLE' => 'Prognoser: Historikk',
+    'LBL_TAB_COMMITMENT' => 'Forpliktelse',
+    'LBL_CURRENT' => 'Nåværende',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Tidsperiode',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Endret av',
     'LBL_WK_VERSION' => 'Versjon',
     'LBL_WK_REVISION' => 'Revisjon',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Tilgang til statistikk-API krever Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Tidsperiode:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Vil du engasjere disse mengdene?',
     'ERR_FORECAST_AMOUNT' => 'Engasjeringsmengden er påkrevd og må være et tall.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Inkludert salgstrakt',
+    'LBL_UPSIDE_PIPELINE' => 'Oppsidesalgstrakt',
+    'LBL_EXCLUDED_PIPELINE' => 'Ekskludert salgstrakt',
+    'LBL_WON' => 'Vunnet',
+    'LBL_LOST' => 'Tapt',
+    'LBL_ALL' => 'Alle',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Guide til filtre',
+    'LBL_HELP_MAIN_BODY' => 'Alle beregninger inkluderer bare muligheter som tilhører valgte bruker(e), tidsperiode og eventuelle tilleggsfiltre du har brukt',
+    'LBL_FORECAST_HELP' => 'Muligheter som allerede er vunnet eller er i en inkludert {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Åpne muligheter med en {{{forecastStage}}} på {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Åpne muligheter i en inkludert {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Åpne muligheter med en {{{forecastStage}}} på {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Åpne muligheter med en {{{forecastStage}}} på {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Åpne muligheter i en ekskludert {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Muligheter som allerede er vunnet',
+    'LBL_LOST_HELP' => 'Muligheter som allerede har gått tapt',
+    'LBL_ALL_HELP' => 'Alle muligheter',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Startdato',
     'LBL_FC_USER' => 'Planlagt for',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Forpliktelse',
     'LBL_TEAM_COMMITMENT' => 'Teamforpliktelse',
     'LBL_FORECASTED' => 'Prognostisert',
+    'LBL_OPPORTUNITY_FORECAST' => 'Mulighetsprognose',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Prognose for inntektslinjeelement',
+    'LBL_LAST_COMMITMENT' => 'Siste forpliktelse',
     'LBL_ADJUSTED_TOTAL' => 'Justert total',
     'LBL_COMMIT_STAGE' => 'Forpliktet stadie',
     'LBL_SALES_STAGE' => 'Fase',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Justert)',
     'LBL_SAVE_DRAFT' => 'Lagre',
     'LBL_CHANGES_BY' => 'Endringer ved {0}',
-    'LBL_FORECAST_SETTINGS' => 'Innstillinger',
+    'LBL_FORECAST_SETTINGS' => 'Prognoseinnstillinger',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Prognose oppsett',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Regnskapsår startdato:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurer tidsperioden som vil bli brukt i Prognose modulen. <br /><br />Vær oppmerksom på at tidsperiode innstillinger ikke kan endres etter første oppsettet. <br /><br />Start med å velge startdatoen for regnskapsåret. Deretter velger du hvilken type tidsperiode for prognosen. Datointervallet for tidsperioden vil bli beregnet automatisk basert på dine valg. Undertidsperioden er base for prognose regnearket. <br /><br />Den synlige fremtid og fortids tidsperioder vil avgjøre antallet synlige underperioder i Prognose modulen. Brukerne er i stand til å se og redigere prognose tallene i de synlige delperiodene.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurer hvordan du vil kategorisere {{forecastByModule}}. <br><br>Merk deg at rekkeviddeinnstillingene ikke kan endres etter den første forpliktelsen For oppdaterte hendelser er rekkeviddeinnstillingen låst med eksisterende prognosedata.<br><br>Du kan velge to eller flere kategorier basert på sannsynlighetsrekkevidder eller opprette kategorier som ikke er basert på sannsynlighet. <br><br>Det finnes avmerkingsbokser til venstre for dine standardkategorier; bruk disse til å beslutte hvilke rekkevidder som inkluderes i prognosemengden som forpliktes og rapporteres til ledere. <br><br>En bruker kan endre inkluder/ekskluder status og kategori for {{forecastByModule}} manuelt fra sitt regneark.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurer hvordan du vil kategorisere {{forecastByModule}}. <br><br>Merk at områdeinnstillingene ikke kan endres etter den første lagringen. For oppgraderte forekomster er områdeinnstillingen lagret med eksisterende prognosedata.<br><br>Du kan velge to eller flere kategorier basert på sannsynlighetsområder eller opprette kategorier som ikke er basert på sannsynlighet. <br><br>Det finnes avmerkingsboksen til venstre for dine egendefinerte kategorier; bruk disse for å velge hvilke områder som vil være inkludert i det prognosebeløpet og rapportert til sjefer. <br><br>En bruker kan endre inkluder/ekskluder-statusen og kategorien til {{forecastByModule}} manuelt fra arbeidsarket.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Velg kolonnene du ønsker at brukeren kan fylle ut for sine Prognoser for hver {{forecastByModuleSingular}}. Vær oppmerksom på de sannsynlige beløp som er knyttet til det beløpet som vises i {{forecastByModule}}; på grunn av dette kan ikke sannsynlighet kolonnen skjules.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Velg hvilke kolonner du ønsker å se i Prognose modulen. Listen over felt vil kombinere regnearket og tillater brukeren å velge hvordan den konfigurerer sin visning.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Jeg er et eksempel for prognosen ved hvordan-tekste!',

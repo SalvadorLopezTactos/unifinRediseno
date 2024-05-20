@@ -126,6 +126,43 @@ $viewdefs['Opportunities']['base']['view']['selection-list'] = array(
                     'default' => false,
                     'readonly' => true,
                 ),
+                [
+                    'name' => 'forecasted_likely',
+                    'comment' => 'Rollup of included RLIs on the Opportunity',
+                    'readonly' => true,
+                    'related_fields' =>
+                        [
+                            0 => 'currency_id',
+                            1 => 'base_rate',
+                        ],
+                    'label' => 'LBL_FORECASTED_LIKELY',
+                    'span' => 6,
+                ],
+                [
+                    'name' => 'commit_stage',
+                    'type' => 'enum-cascade',
+                    'disable_field' => 'closed_won_revenue_line_items',
+                    'disable_positive' => true,
+                    'related_fields' =>
+                        [
+                            0 => 'probability',
+                            1 => 'closed_won_revenue_line_items',
+                        ],
+                    'span' => 6,
+                ],
+                [
+                    'name' => 'lost',
+                    'label' => 'LBL_LOST',
+                    'enabled' => true,
+                    'related_fields' =>
+                        [
+                            0 => 'currency_id',
+                            1 => 'base_rate',
+                        ],
+                    'readonly' => true,
+                    'currency_format' => true,
+                    'default' => false,
+                ],
             ),
         ),
     ),

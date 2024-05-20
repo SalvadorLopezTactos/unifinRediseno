@@ -18,6 +18,7 @@ use Exception;
 use RunnableSchedulerJob;
 use SchedulersJob;
 use Sugarcrm\Sugarcrm\Maps\GCSClient;
+use Sugarcrm\Sugarcrm\Maps\FilterUtils as MapsFilterUtils;
 
 /**
  *
@@ -55,19 +56,25 @@ class Resolver implements RunnableSchedulerJob
      */
     public function run($data)
     {
-        if (!hasMapsLicense()) {
+        $batchId = null;
+        if (!hasSystemMapsLicense()) {
             return $this->job->failJob(translate('LBL_MAPS_NO_LICENSE_ACCESS'));
         }
 
         $data = $this->gcsClient->getData();
+        $message = '';
 
-        $batchId = $data['batchId'];
-        $message = "Batch ${batchId} is not ready";
+        if (array_key_exists('batchId', $data)) {
+            $batchId = $data['batchId'];
+            $message = "Batch {$batchId} is not ready";
+        }
 
-        if ($data['response']['status'] === Constants::GEOCODE_SCHEDULER_STATUS_COMPLETED) {
-            $this->geocodeSugarRecords($data);
+        if (array_key_exists('response', $data)) {
+            if ($data['response']['status'] === Constants::GEOCODE_SCHEDULER_STATUS_COMPLETED) {
+                $this->geocodeSugarRecords($data);
 
-            $message = "Batch ${batchId} was resolved";
+                $message = "Batch {$batchId} was resolved";
+            }
         }
 
         return $this->job->succeedJob($message);
@@ -93,9 +100,22 @@ class Resolver implements RunnableSchedulerJob
             $geocodeRecord->latitude = $record['lat'];
             $geocodeRecord->longitude = $record['long'];
             $geocodeRecord->status = $record['status'];
-            $geocodeRecord->postalcode = $record['postalcode'];
-            $geocodeRecord->country = $record['country'];
+
+            if (array_key_exists('postalcode', $record)) {
+                $geocodeRecord->postalcode = $record['postalcode'];
+            }
+
+            if (array_key_exists('country', $record)) {
+                $geocodeRecord->country = $record['country'];
+            }
+
+            if (array_key_exists('error_message', $record)) {
+                $geocodeRecord->error_message = $record['error_message'];
+            }
+
             $geocodeRecord->geocoded = $geocoded;
+
+            MapsFilterUtils::updateGeocodeStatuses([$geocodeRecord->id], $geocodeRecord->status);
 
             $geocodeRecord->save();
         }

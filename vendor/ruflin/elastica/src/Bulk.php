@@ -9,6 +9,7 @@ use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\RequestEntityTooLargeException;
 use Elastica\Script\AbstractScript;
 
 class Bulk
@@ -31,11 +32,6 @@ class Bulk
     protected $_index;
 
     /**
-     * @var string|null
-     */
-    protected $_type;
-
-    /**
      * @var array request parameters to the bulk api
      */
     protected $_requestParams = [];
@@ -47,7 +43,13 @@ class Bulk
 
     public function __toString(): string
     {
-        return $this->toString();
+        $data = '';
+
+        foreach ($this->getActions() as $action) {
+            $data .= (string) $action;
+        }
+
+        return $data;
     }
 
     /**
@@ -157,22 +159,22 @@ class Bulk
     }
 
     /**
-     * @param Document[] $scripts
-     * @param mixed|null $opType
+     * @param AbstractScript[] $scripts
+     * @param string|null      $opType
      *
      * @return $this
      */
     public function addScripts(array $scripts, $opType = null): self
     {
-        foreach ($scripts as $document) {
-            $this->addScript($document, $opType);
+        foreach ($scripts as $script) {
+            $this->addScript($script, $opType);
         }
 
         return $this;
     }
 
     /**
-     * @param array|\Elastica\Document|\Elastica\Script\AbstractScript $data
+     * @param AbstractScript|array|Document $data
      *
      * @return $this
      */
@@ -260,14 +262,14 @@ class Bulk
         return $this->setRequestParam('timeout', $time);
     }
 
+    /**
+     * @deprecated since version 7.1.3, use the "__toString()" method or cast to string instead.
+     */
     public function toString(): string
     {
-        $data = '';
-        foreach ($this->getActions() as $action) {
-            $data .= $action->toString();
-        }
+        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated, use "__toString()" or cast to string instead. It will be removed in 8.0.', __METHOD__);
 
-        return $data;
+        return (string) $this;
     }
 
     public function toArray(): array
@@ -284,10 +286,7 @@ class Bulk
 
     public function send(): ResponseSet
     {
-        $path = $this->getPath();
-        $data = $this->toString();
-
-        $response = $this->_client->request($path, Request::POST, $data, $this->_requestParams, Request::NDJSON_CONTENT_TYPE);
+        $response = $this->_client->request($this->getPath(), Request::POST, (string) $this, $this->_requestParams, Request::NDJSON_CONTENT_TYPE);
 
         return $this->_processResponse($response);
     }
@@ -298,6 +297,10 @@ class Bulk
      */
     protected function _processResponse(Response $response): ResponseSet
     {
+        switch ($response->getStatus()) {
+            case 413: throw new RequestEntityTooLargeException();
+        }
+
         $responseData = $response->getData();
 
         $actions = $this->getActions();
@@ -323,9 +326,7 @@ class Bulk
                         if (!$data->hasId() && isset($bulkResponseData['_id'])) {
                             $data->setId($bulkResponseData['_id']);
                         }
-                        if (isset($bulkResponseData['_version'])) {
-                            $data->setVersion($bulkResponseData['_version']);
-                        }
+                        $data->setVersionParams($bulkResponseData);
                     }
                 }
 

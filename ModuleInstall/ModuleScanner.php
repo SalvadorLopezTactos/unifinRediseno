@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\FeatureToggle\FeatureFlag;
+use Sugarcrm\Sugarcrm\FeatureToggle\Features\EnhancedModuleChecks;
+use Sugarcrm\Sugarcrm\FeatureToggle\Features\StrictManifestChecks;
 use Sugarcrm\Sugarcrm\Security\ModuleScanner\CodeScanner;
 use Sugarcrm\Sugarcrm\Security\ModuleScanner\ManifestScanner;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\DropdownList as ConstraintsDropdownList;
@@ -78,10 +82,10 @@ class ModuleScanner{
         'sugarmin',
         'sugarcronparalleljobs',
         'sugarcronjobs',
-        'symfony\component\security\core\authentication\token\abstracttoken',
-        'symfony\component\security\core\authentication\token\remembermetoken',
         'symfony\component\expressionlanguage\serializedparsedexpression',
         'pdo',
+        'symfony\component\security\core\authentication\token\abstracttoken',
+        'symfony\component\security\core\authentication\token\remembermetoken',
     );
 	private $blackList = array(
     'popen',
@@ -532,7 +536,7 @@ class ModuleScanner{
 			echo '#' . $b . '<br>';
 
 		}
-		echo "'''Default Black Listed Functions'''<br>";
+        echo "'''Default Deny Listed Functions'''<br>";
 		foreach($this->blackList as $b){
 			echo '#' . $b . '<br>';
 
@@ -576,12 +580,16 @@ class ModuleScanner{
             }
         }
         $classesBlackList = array_diff($this->classBlackList, $this->classBlackListExempt);
-        if (!empty($GLOBALS['sugar_config']['moduleInstaller']['enableEnhancedModuleChecks'])) {
+        $features = Container::getInstance()->get(FeatureFlag::class);
+        if ($features->isEnabled(EnhancedModuleChecks::getName())) {
             $this->blackList = array_merge($this->blackList, $this->unsafeHttpClientFunctions);
         }
+
         $functionsBlackList = array_diff($this->blackList, $this->blackListExempt);
         $this->codeScanner = new CodeScanner($classesBlackList, $functionsBlackList, $this->methodsBlackList);
-        $this->manifestScanner = new ManifestScanner();
+        if ($features->isEnabled(StrictManifestChecks::getName())) {
+            $this->manifestScanner = new ManifestScanner();
+        }
 	}
 
 	private $issues = array();
@@ -740,6 +748,10 @@ class ModuleScanner{
                     $this->healthCheck->scanFileForDeprecatedHBSCode($next, $nextFileContents);
                 }
 
+                if ($this->isCustomLESSFile($next)) {
+                    $this->healthCheck->scanFileForDeprecatedLESSColorVariables($next, $nextFileContents);
+                }
+
                 if ($this->isExtensionPhpFile($next)) {
                     $this->healthCheck->scanForOutputConstructs($nextFileContents, $next, true);
                 }
@@ -838,6 +850,16 @@ class ModuleScanner{
     }
 
     /**
+     * Determines whether the filename is a custom LESS file
+     * @param string $file Path to the file
+     * @return bool
+     */
+    protected function isCustomLESSFile(string $file): bool
+    {
+        return (bool) preg_match('~custom/themes/.*?.less$~', $file);
+    }
+
+    /**
      * Checks if a file is a language file from manifest installdefs
      * @param string $file path to file
      * @return bool true if file is a language file from manifest.
@@ -923,7 +945,7 @@ class ModuleScanner{
 	}
 
     /**
-     * scan vardef file, make sure the function used are not in black list
+     * scan vardef file, make sure the function used are not in denylist
      * @param $file
      * @return array
      */
@@ -1064,18 +1086,27 @@ class ModuleScanner{
         return [];
     }
 
-	/**
-	 *This function will scan the Manifest for disabled actions specified in $GLOBALS['sugar_config']['moduleInstaller']['disableActions']
-	 *if $GLOBALS['sugar_config']['moduleInstaller']['disableRestrictedCopy'] is set to false or not set it will call on scanCopy to ensure that it is not overriding files
-	 */
+    /**
+     *This function will scan the Manifest for disabled actions specified in $GLOBALS['sugar_config']['moduleInstaller']['disableActions']
+     *if $GLOBALS['sugar_config']['moduleInstaller']['disableRestrictedCopy'] is set to false or not set it will call on scanCopy to ensure that it is not overriding files
+     */
     public function scanManifest($manifestPath)
     {
+        $issues = [];
         if (!file_exists($manifestPath)) {
             $this->issues['manifest'][$manifestPath] = translate('ML_NO_MANIFEST');
             return false;
         }
-        if ($issues = $this->strictManifestScan($manifestPath)) {
-            return false;
+        if (isset($this->manifestScanner)) {
+            if ($issues = $this->strictManifestScan($manifestPath)) {
+                return false;
+            }
+        } else {
+            $fileIssues = $this->scanFile($manifestPath);
+            //if the manifest contains malicious code do not open it
+            if (!empty($fileIssues)) {
+                return $fileIssues;
+            }
         }
         $this->lockConfig();
         [$manifest, $installdefs] = MSLoadManifest($manifestPath);
@@ -1118,7 +1149,7 @@ class ModuleScanner{
                 if ($to === '') {
                     $to = ".";
                 }
-                $this->scanCopy($from, $to);
+                $this->scanCopy($from, clean_path($to));
             }
         }
         if (count($issues) > 0) {

@@ -193,6 +193,7 @@ function create_custom_directory($file)
  */
 function generateMD5array($path, $ignore_dirs = array('cache', 'upload'))
 {
+    $current_dir_content = [];
 	$dh  = opendir($path);
 	while (false !== ($filename = readdir($dh)))
 	{
@@ -414,7 +415,7 @@ function get_mime_content_type_from_filename($filename)
 
 function cleanFileName($name)
 {
-    return preg_replace('/[^\w-._]+/i', '', $name);
+    return preg_replace('/[^\w\-._]+/i', '', $name);
 }
 
 /**
@@ -519,7 +520,7 @@ function check_file_name($filename)
         return false;
     }
 
-    if (strpos($filename, '/') === 0) {
+    if (is_absolute_path($filename)) {
         $GLOBALS['log']->fatal('Absolute path detected in filename ' . $filename);
         return false;
     }
@@ -530,4 +531,28 @@ function check_file_name($filename)
     }
 
     return true;
+}
+
+/**
+ * Check path for absolute path
+ * @param string $path
+ * @return bool
+ */
+function is_absolute_path(string $path): bool
+{
+    $path = trim($path);
+
+    if (strpos($path, '/') === 0) {
+        return true;
+    }
+
+    if (strpos($path, '\\') === 0) {
+        return true;
+    }
+
+    if (preg_match('/^[A-Za-z]\:/', $path)) {
+        return true;
+    }
+
+    return false;
 }

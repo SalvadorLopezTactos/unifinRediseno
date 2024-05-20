@@ -82,12 +82,12 @@ $sugar_smarty->assign('ACTION_NAMES', $names);
 $params = array();
 $params[] = sprintf(
     '<a href="index.php?module=ACLRoles&action=index">%s</a>',
-    htmlspecialchars($mod_strings['LBL_MODULE_NAME'])
+    htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT)
 );
 if(empty($role->id)){
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL']);
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'], ENT_COMPAT);
 }else{
-    $params[] = htmlspecialchars($role->get_summary_text());
+    $params[] = htmlspecialchars($role->get_summary_text(), ENT_COMPAT);
 }
 echo getClassicModuleTitle('ACLRoles', $params, true);
 

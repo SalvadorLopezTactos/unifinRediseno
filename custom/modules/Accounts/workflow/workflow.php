@@ -25,14 +25,14 @@ include_once("include/workflow/custom_utils.php");
 	 //Secondary Triggers 
 
 	global $triggeredWorkflows;
-	if (!isset($triggeredWorkflows['2a68c268_12f3_11ef_8eed_b6b41b25c921'])){
-		$triggeredWorkflows['2a68c268_12f3_11ef_8eed_b6b41b25c921'] = true;
+	if (!isset($triggeredWorkflows['d96b3080_16c6_11ef_a070_b6b41b25c921'])){
+		$triggeredWorkflows['d96b3080_16c6_11ef_a070_b6b41b25c921'] = true;
 	    unset($alertshell_array);
-		$action_meta_array['Accounts0_action0']['trigger_id'] = '2a68c268_12f3_11ef_8eed_b6b41b25c921';
+		$action_meta_array['Accounts0_action0']['trigger_id'] = 'd96b3080_16c6_11ef_a070_b6b41b25c921';
 	$action_meta_array['Accounts0_action0']['action_id'] = '161c7f1f-0aee-47f9-5414-558ae285e632';
 	 $action_meta_array['Accounts0_action0']['workflow_id'] = '5174bed4-6d7a-6dd6-8c84-5580cd5bbc54';
 	 process_workflow_actions($focus, $action_meta_array['Accounts0_action0']); 
- 	$action_meta_array['Accounts0_action1']['trigger_id'] = '2a68c268_12f3_11ef_8eed_b6b41b25c921';
+ 	$action_meta_array['Accounts0_action1']['trigger_id'] = 'd96b3080_16c6_11ef_a070_b6b41b25c921';
 	$action_meta_array['Accounts0_action1']['action_id'] = 'f2619411-cc47-0ec7-3fc4-558ae3183309';
 	 $action_meta_array['Accounts0_action1']['workflow_id'] = '5174bed4-6d7a-6dd6-8c84-5580cd5bbc54';
 	 process_workflow_actions($focus, $action_meta_array['Accounts0_action1']); 

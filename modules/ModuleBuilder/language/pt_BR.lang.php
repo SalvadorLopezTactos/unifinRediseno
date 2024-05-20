@@ -818,10 +818,7 @@ Se Oportunidades estiver incluído, Contas ou deve ser obrigatório ou deve ser 
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Criar uma fórmula para determinar se este campo é obrigatório em layouts.<br/>"
-    . "Os campos obrigatórios seguirão a fórmula na visualização móvel baseada em navegador, <br/>"
-    . "mas não seguirão a fórmula nas aplicações nativas, como o Sugar Mobile para iPhone. <br/>"
-    . "Não seguirão a fórmula no Portal de Self-Service da Sugar.",
+    'LBL_POPHELP_REQUIRED'=>'Os campos obrigatórios condicionalmente não estão disponíveis para uso nos seguintes tipos de ação do SugarBPM: adicionar registro relacionado e alterar campo. Remova o texto "Obrigatório se" para usar este campo nessas ações de definição de processo',
 'LBL_POPHELP_READONLY'=>"Criar uma fórmula para determinar se este campo é somente leitura em layouts.<br/>"
         . "Os campos somente leitura seguirão a fórmula na visualização móvel baseada em navegador, <br/>"
         . "mas não seguirão a fórmula nas aplicações nativas, como o Sugar Mobile para iPhone. <br/>"
@@ -863,6 +860,7 @@ Se Oportunidades estiver incluído, Contas ou deve ser obrigatório ou deve ser 
                 'decimal'=>'Decimal',
                 'autoincrement' => 'AutoIncrement',
                 'actionbutton' => 'BotãodeAção',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Rótulos usados frequentemente",

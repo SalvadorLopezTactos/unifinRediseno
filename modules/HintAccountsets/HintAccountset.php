@@ -17,7 +17,7 @@ use Sugarcrm\Sugarcrm\Util\Uuid;
 
 class HintAccountset extends \Basic
 {
-    const MODULE_NAME = 'HintAccountsets';
+    public const MODULE_NAME = 'HintAccountsets';
 
     public $id;
     public $type;

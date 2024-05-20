@@ -44,10 +44,10 @@ if (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] === 'true') {
 $params = [];
 $params[] = sprintf(
     '<a href="index.php?module=WorkFlow&action=index">%s</a>',
-    htmlspecialchars($mod_strings['LBL_MODULE_NAME'])
+    htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT)
 );
 if (empty($focus->id)) {
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL']);
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'], ENT_COMPAT);
 } else {
     $href = 'index.php?' . http_build_query([
             'module' => 'WorkFlow',
@@ -57,10 +57,10 @@ if (empty($focus->id)) {
 
     $params[] = sprintf(
         '<a href="%s">%s</a>',
-        htmlspecialchars($href),
-        htmlspecialchars($focus->name)
+        htmlspecialchars($href, ENT_COMPAT),
+        htmlspecialchars($focus->name, ENT_COMPAT)
     );
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL']);
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL'], ENT_COMPAT);
 }
 
 $GLOBALS['log']->info('WorkFlow edit view');
@@ -103,7 +103,7 @@ if (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] === 'true') {
     $xtpl->assign('IS_DUPLICATE', 'true');
     $xtpl->assign('DISABLE_BASE_MODULE', 'disabled');
     $xtpl->assign('BASE_MODULE_FIELDNAME', 'base_module_disabled');
-    $xtpl->assign('DUPLICATE_BASE_MODULE', '<input name="base_module" type="hidden" value="' . htmlspecialchars($focus->base_module) .'" >');
+    $xtpl->assign('DUPLICATE_BASE_MODULE', '<input name="base_module" type="hidden" value="' . htmlspecialchars($focus->base_module, ENT_COMPAT) .'" >');
 } else {
     $xtpl->assign('BASE_MODULE_FIELDNAME', 'base_module');
 }
@@ -126,8 +126,8 @@ $xtpl->assign('RECORD_TYPE', get_select_options_with_id($app_list_strings['wflow
 $xtpl->assign('BASE_MODULE', get_select_options_with_id($focus->get_module_array(), $focus->base_module));
 
 
-$cancel = '<input title="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_TITLE']) . '" id="cancel_workflow"
-        accessKey="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_KEY']) .'" class="button" ';
+$cancel = '<input title="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_TITLE'], ENT_COMPAT) . '" id="cancel_workflow"
+        accessKey="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_KEY'], ENT_COMPAT) .'" class="button" ';
 if (isset($_REQUEST['return_action'])) {
     $json = getJSONobj();
     $onClick = 'this.form.action.value=' . $json->encode($returnAction) . ';';
@@ -137,9 +137,9 @@ if (isset($_REQUEST['return_action'])) {
             $onClick .= 'this.form.record.value=' . $json->encode($_REQUEST['return_id']) . ';';
         }
     }
-    $cancel .= 'onclick="' . htmlspecialchars($onClick) . '"';
+    $cancel .= 'onclick="' . htmlspecialchars($onClick, ENT_COMPAT) . '"';
 }
-$cancel .= ' type="submit" name="button" value="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL']) . '" >';
+$cancel .= ' type="submit" name="button" value="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL'], ENT_COMPAT) . '" >';
 
 $escapedHTML = static function ($html): string {
     return htmlspecialchars($html, ENT_QUOTES);

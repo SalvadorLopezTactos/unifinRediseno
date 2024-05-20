@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Asiakasluettelon työpöytä',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Asiakastietueiden työpöytä',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Asiakkaat-tietueen tietolaatikko',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Asiakkaan tiedot',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Asiakkaiden keskitetty koontinäyttö – konsoli',
     'LBL_NEXT_RENEWAL_DATE' => 'Seuraava uusimispäivä',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Seuraava uusimispäivä',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Asiakkaan nimi / Toimiala',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Sijainti',
     'LBL_PURCHASES' => 'Ostot',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Tilin aikajana',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Järjestä',
+    'LBL_CREATE_NEW' => 'Luo uusi',
+    'LBL_MANAGE' => 'Hallinnoi',
+    'LBL_SEE_DETAILS' => 'Näytä tiedot',
+    'LBL_HIDE_NEW' => 'Piilota',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Kaaviot',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. Paina ‘Tallenna’ luodaksesi tietueen. Tämän jälkeen palaat edelliselle sivulle.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Asiakkaiden raportit',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Ulkoiset käyttäjät',
 );

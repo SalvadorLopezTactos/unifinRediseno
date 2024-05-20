@@ -102,14 +102,14 @@ class PMSEDynaForm
         }
         $params['name'] = 'Default';
         $params['description'] = 'Default';
-        $params['prj_id'] = isset($keys['prj_id']) ? $keys['prj_id'] : null;
+        $params['prj_id'] = $keys['prj_id'] ?? null;
         $params['pro_id'] = isset($keys['pro_id']) ? $keys['prj_id'] : null;
         $params['dyn_module'] = $this->baseModule;
         $params['dyn_name'] = "Default";
         $params['dyn_description'] = "Default";
         $moduleViewDefs = get_custom_file_if_exists('modules/' . $baseModule . '/metadata/editviewdefs.php');
         $viewdefs = array();
-        if (!@include_once($moduleViewDefs)) {
+        if (!@include_once $moduleViewDefs) {
             return false;
         } else {
             $params['dyn_view_defs'] = array('BpmView' => $viewdefs[$baseModule]['EditView']);

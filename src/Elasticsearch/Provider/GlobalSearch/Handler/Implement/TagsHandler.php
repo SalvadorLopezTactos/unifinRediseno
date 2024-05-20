@@ -32,7 +32,7 @@ class TagsHandler extends AbstractHandler implements
      * Field name to use for tag Ids
      * @var string
      */
-    const TAGS_FIELD = 'tags';
+    public const TAGS_FIELD = 'tags';
 
     /**
      * @var \Tag

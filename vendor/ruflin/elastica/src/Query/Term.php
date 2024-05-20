@@ -12,8 +12,6 @@ namespace Elastica\Query;
 class Term extends AbstractQuery
 {
     /**
-     * Constructs the Term query object.
-     *
      * @param array $term Calls setTerm with the given $term array
      */
     public function __construct(array $term = [])
@@ -37,9 +35,9 @@ class Term extends AbstractQuery
     /**
      * Adds a term to the term query.
      *
-     * @param string       $key   Key to query
-     * @param array|string $value Values(s) for the query. Boost can be set with array
-     * @param float        $boost OPTIONAL Boost value (default = 1.0)
+     * @param string                $key   Key to query
+     * @param bool|float|int|string $value Values(s) for the query
+     * @param float                 $boost OPTIONAL Boost value (default = 1.0)
      *
      * @return $this
      */

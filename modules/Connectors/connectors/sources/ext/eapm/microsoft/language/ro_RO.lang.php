@@ -11,13 +11,14 @@
  */
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
-$readableProductNames =
-    getReadableProductNames(SubscriptionManager::instance()->getTopLevelUserSubscriptions($GLOBALS['current_user']));
-$readableProductNames = urlencode(implode(',', $readableProductNames));
+global $current_user;
+
+$productCodes = $current_user->getProductCodes();
+$productCodes = urlencode(implode(',', $productCodes));
 
 $url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
     $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&modul=Connectors&route=Microsoft' .
-    '&products=' . $readableProductNames;
+    '&products=' . $productCodes;
 
 $connector_strings = array(
     'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .

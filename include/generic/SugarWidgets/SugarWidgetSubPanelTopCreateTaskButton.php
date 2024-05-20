@@ -15,8 +15,13 @@
 
 class SugarWidgetSubPanelTopCreateTaskButton extends SugarWidgetSubPanelTopButtonQuickCreate
 {
+    /**
+     * @var string|mixed
+     */
+    public $subpanelDiv;
     public function &_get_form($defines, $additionalFormFields = null, $asUrl = false)
 	{
+        $button = null;
 		global $app_strings;
 		global $currentModule;
 

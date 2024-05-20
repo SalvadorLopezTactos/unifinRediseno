@@ -87,6 +87,106 @@ class ChartDisplay
     }
 
     /**
+     * Sort chart by first group using data series function
+     *
+     * @param array $reportDef
+     */
+    public function sortByDataSeries(array &$reportDef)
+    {
+        if (!$this->chartRows && !is_array($this->chartRows) && count($this->chartRows) < 1) {
+            return;
+        }
+
+        if (!array_key_exists('numerical_chart_column', $reportDef) || !$reportDef['numerical_chart_column']) {
+            return;
+        }
+
+        $this->sortFirstGroup($reportDef);
+    }
+
+    /**
+     * Sort chart by first group using data series function
+     *
+     * @param array $reportDef
+     */
+    protected function sortFirstGroup(array $reportDef)
+    {
+        if (!array_key_exists('order_by', $reportDef)) {
+            return;
+        }
+
+        $orderBy = $reportDef['order_by'];
+
+        if (!is_array($orderBy)) {
+            return;
+        }
+
+        if (count($orderBy) < 1) {
+            return;
+        }
+
+        $dataSeries = $orderBy[0];
+
+        if (array_key_exists('group_function', $dataSeries)) {
+            $this->sortFirstGroupUsingDataSeries($dataSeries);
+        }
+    }
+
+    /**
+     * Sort the first group based on the function
+     *
+     * @param array $orderBy
+     */
+    private function sortFirstGroupUsingDataSeries(array $orderBy)
+    {
+        $sortDir = $orderBy['sort_dir'];
+
+        uksort(
+            $this->chartRows,
+            function ($first, $second) use ($sortDir) {
+                $firstItemGroup = $this->chartRows[$first];
+                $secondItemGroup = $this->chartRows[$second];
+                $firstItemsCollector = 0;
+                $secondItemsCollector = 0;
+
+                if (!is_array($firstItemGroup) || !is_array($secondItemGroup)) {
+                    return;
+                }
+
+                foreach ($firstItemGroup as $firstItem) {
+                    if (is_array($firstItem) && array_key_exists('numerical_value', $firstItem)) {
+                        $firstItemsCollector += $firstItem['numerical_value'];
+                    }
+                }
+
+                foreach ($secondItemGroup as $secondItem) {
+                    if (is_array($secondItem) && array_key_exists('numerical_value', $secondItem)) {
+                        $secondItemsCollector += $secondItem['numerical_value'];
+                    }
+                }
+
+                return $this->sortComparation($sortDir, $firstItemsCollector, $secondItemsCollector);
+            }
+        );
+    }
+
+    /**
+     * Comparation for sorting
+     *
+     * @param string $sortDir
+     *
+     * @return bool
+     */
+    private function sortComparation(string $sortDir, $firstItemsCollector, $secondItemsCollector)
+    {
+        if ($sortDir === 'd') {
+            return $secondItemsCollector > $firstItemsCollector;
+        }
+
+        return $firstItemsCollector > $secondItemsCollector;
+    }
+
+    /**
      * Get the Reporter (Report Object)
      *
      * @return Report
@@ -133,6 +233,10 @@ class ChartDisplay
                 $yDataType = 'numeric';
             }
             $xDataType = 'numeric';
+
+            if (empty($yDataType) && $this->isChartColumnCurrency()) {
+                $yDataType = 'currency';
+            }
 
             // no drillthru for bwc modules
             $allowDrillthru = !isModuleBWC($this->reporter->module);
@@ -209,9 +313,9 @@ class ChartDisplay
      */
     protected function parseReportHeaders()
     {
-        $group_key = (isset($this->reporter->report_def['group_defs'][0]['table_key']) ? $this->reporter->report_def['group_defs'][0]['table_key'] : '') .
+        $group_key = ($this->reporter->report_def['group_defs'][0]['table_key'] ?? '') .
             ':' .
-            (isset($this->reporter->report_def['group_defs'][0]['name']) ? $this->reporter->report_def['group_defs'][0]['name'] : '');
+            ($this->reporter->report_def['group_defs'][0]['name'] ?? '');
 
         if (!empty ($this->reporter->report_def['group_defs'][0]['qualifier'])) {
             $group_key .= ':' . $this->reporter->report_def['group_defs'][0]['qualifier'];
@@ -254,7 +358,7 @@ class ChartDisplay
      */
     protected function parseChartTitle()
     {
-        global $current_language, $do_thousands;
+        global $current_language, $do_thousands, $current_user;
         if (isset($this->reporter->report_def['layout_options'])) {
             // This is for matrix report
             $this->reporter->run_total_query();
@@ -305,9 +409,15 @@ class ChartDisplay
         //grab the currency symbol for this chart
         $symbol = $this->print_currency_symbol();
 
-        //if there is no symbol, then precision should be 0 as this is not a currency
+        //if there is no symbol, then precision should be saved as this is not a currency
         if(empty($symbol)) {
-            $precision = 0;
+            $round = $precision = strpos(strrev($total), ".");
+        } else {
+            $currentUserPrecision = $current_user->getPreference('default_currency_significant_digits');
+
+            if ($currentUserPrecision && !$do_thousands) {
+                $precision = $currentUserPrecision;
+            }
         }
 
         $this->chartTitle = $mod_strings['LBL_TOTAL_IS']
@@ -360,13 +470,13 @@ class ChartDisplay
                     $chart_rows[$groupText][$groupBaseText]['numerical_value'] = intval($row_remap['numerical_value']);
                 }
             }
-            $chart_rows[$row_remap['group_text']][$row_remap['group_base_text']]['raw_value'] = isset($row_remap['raw_value']) ? $row_remap['raw_value'] : '';
+            $chart_rows[$row_remap['group_text']][$row_remap['group_base_text']]['raw_value'] = $row_remap['raw_value'] ?? '';
             $chart_rows[$row_remap['group_text']][$row_remap['group_base_text']]['group_base_text'] = $row_remap['group_base_text'];
         }
 
         //Determine if the original report def has a grouping level greater than one
         if (isset($this->reporter->report_def['group_defs'])) {
-            $this->stackChart = (count($this->reporter->report_def['group_defs']) > 1) ? true : false;
+            $this->stackChart = ((is_countable($this->reporter->report_def['group_defs']) ? count($this->reporter->report_def['group_defs']) : 0) > 1) ? true : false;
         }
 
         switch ($this->chartType) {
@@ -449,7 +559,11 @@ class ChartDisplay
     {
         $report_defs = $this->reporter->report_def;
         $currency_symbol = '';
-        if (isset($report_defs['numerical_chart_column_type']) && $report_defs['numerical_chart_column_type'] == 'currency') {
+
+        if ((isset($report_defs['numerical_chart_column_type']) &&
+            $report_defs['numerical_chart_column_type'] == 'currency') ||
+            $this->isChartColumnCurrency()
+        ) {
             $currency = BeanFactory::newBean('Currencies')->getUserCurrency();
 
             $currency_symbol = $currency->symbol;
@@ -458,6 +572,57 @@ class ChartDisplay
         }
 
         return $currency_symbol;
+    }
+
+    /**
+     * Check if the used field in numerical chart column type is currency
+     */
+    protected function isChartColumnCurrency(): bool
+    {
+        $report = $this->reporter;
+
+        $reportDefs = (array) $report->report_def;
+
+        if (!array_key_exists('numerical_chart_column', $reportDefs)) {
+            return false;
+        }
+
+        $allFields = $report->all_fields;
+
+        if (!is_array($allFields)) {
+            return false;
+        }
+
+        $numericalChartColumn = $reportDefs['numerical_chart_column'];
+        $numericalChartComponents = explode(':', $numericalChartColumn);
+
+        if (count($numericalChartComponents) < 2) {
+            return false;
+        }
+
+        if (end($numericalChartComponents) !== 'count') {
+            array_pop($numericalChartComponents);
+            $fieldName = array_pop($numericalChartComponents);
+            $tableListKeyColumn = array_pop($numericalChartComponents);
+
+            $fieldKey = $tableListKeyColumn . ':' . $fieldName;
+
+            if (!array_key_exists($fieldKey, $allFields)) {
+                return false;
+            }
+
+            $fieldMeta = $allFields[$fieldKey];
+
+            if (!is_array($fieldMeta) || !array_key_exists('type', $fieldMeta)) {
+                return false;
+            }
+
+            if ($fieldMeta['type'] === 'currency') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -484,17 +649,30 @@ class ChartDisplay
 
         $row_remap['group_text'] = $group_text = (isset($this->reporter->chart_group_position) && !is_array($this->reporter->chart_group_position)) ? chop($row['cells'][$this->reporter->chart_group_position]['val']) : '';
         $row_remap['group_key'] = ((isset($this->reporter->chart_group_position) && !is_array($this->reporter->chart_group_position)) ? $row['cells'][$this->reporter->chart_group_position]['key'] : '');
-        $row_remap['count'] = (isset($row['count'])) ? $row['count'] : 0;
+        $row_remap['count'] = $row['count'] ?? 0;
         $row_remap['group_label'] = ((isset($this->reporter->chart_group_position) && !is_array($this->reporter->chart_group_position)) ? $this->reporter->chart_header_row[$this->reporter->chart_group_position]['label'] : '');
         $row_remap['numerical_label'] = $this->reporter->chart_header_row[$this->reporter->chart_numerical_position]['label'];
         $row_remap['numerical_key'] = $this->reporter->chart_header_row[$this->reporter->chart_numerical_position]['column_key'];
         $row_remap['module'] = $this->reporter->module;
-        if (count($this->reporter->report_def['group_defs']) > 1) { // multiple group by, use second group by as legend
-            $second_group_by_key = $this->reporter->report_def['group_defs'][1]['table_key'] . ':' . $this->reporter->report_def['group_defs'][1]['name'];
+
+        $groupDefs = $this->reporter->report_def['group_defs'];
+
+        if ((is_countable($groupDefs) ? count($groupDefs) : 0) > 1) {
+            // multiple group by, use second group by as legend
+            $secondGroupIndex = 1;
+            $secondGroupDef = $groupDefs[$secondGroupIndex];
+            $secondGroupByKey = $secondGroupDef['table_key'] . ':' . $secondGroupDef['name'];
+
+            $secondGroupDef['table_alias'] = $this->reporter->getTableFromField($secondGroupDef);
+            $columnClass = $this->reporter->layout_manager->getClassFromWidgetDef($secondGroupDef);
+            $columnAlias = strtoupper($columnClass->_get_column_alias($secondGroupDef));
+
             foreach ($row['cells'] as $cell) {
-                if ($cell['key'] == $second_group_by_key) {
+                if ((isset($cell['alias']) && $cell['alias'] === $columnAlias) ||
+                    ($cell['key'] === $secondGroupByKey)) {
                     $row_remap['group_base_text'] = $cell['val'];
-                    $row_remap['raw_value'] = isset($cell['raw_value']) ? $cell['raw_value'] : '';
+                    $row_remap['raw_value'] = $cell['raw_value'] ?? '';
+                    break;
                 }
             }
         } else { // single group by
@@ -589,7 +767,7 @@ class ChartDisplay
             if ($max < 1) {
                 return $max;
             }
-            $base = pow(10, floor(log10($max)));
+            $base = 10 ** floor(log10($max));
             return ceil($max / $base) * $base;
         } else {
             return 0;

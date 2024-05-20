@@ -16,12 +16,16 @@
  */
 abstract class UpgradeDriver
 {
-    const STATE_FILE = "upgrade_state.php";
+    /**
+     * @var array<string, mixed>|mixed[]
+     */
+    public $mod_strings;
+    public const STATE_FILE = "upgrade_state.php";
 
-    const DEFAULT_HEALTHCHECK_PATH = '/HealthCheck';
+    public const DEFAULT_HEALTHCHECK_PATH = '/HealthCheck';
 
     // Stops upgrade process despite step result.
-    const STOP_SIGNAL = 23;
+    public const STOP_SIGNAL = 23;
 
     /**
      * If upgrade is successful
@@ -324,7 +328,7 @@ abstract class UpgradeDriver
     public function __construct()
     {
         // disable access control, mark it as admin work
-        if (class_exists('Sugarcrm\Sugarcrm\AccessControl\AccessControlManager')) {
+        if (class_exists(\Sugarcrm\Sugarcrm\AccessControl\AccessControlManager::class)) {
             Sugarcrm\Sugarcrm\AccessControl\AccessControlManager::instance()->setAdminWork(true);
         }
     }
@@ -340,7 +344,7 @@ abstract class UpgradeDriver
         $this->context['extract_dir'] = $this->context['temp_dir'];
         $this->ensureDir($this->context['temp_dir']);
         $this->context['state_file'] = $this->cacheDir('upgrades/') . self::STATE_FILE;
-        $this->context['upgrader_dir'] = dirname(__FILE__);
+        $this->context['upgrader_dir'] = __DIR__;
         $this->loadState();
         $this->context['backup_dir'] = "upgrades/backup/" . pathinfo(
                 $this->context['zip'],
@@ -519,9 +523,9 @@ abstract class UpgradeDriver
             $this->error("{$this->context['source_dir']}/config.php can not be loaded!", true);
             return;
         }
-        include($this->context['source_dir'] . "/config.php");
+        include $this->context['source_dir'] . "/config.php";
         if (is_readable($this->context['source_dir'] . "/config_override.php")) {
-            include($this->context['source_dir'] . "/config_override.php");
+            include $this->context['source_dir'] . "/config_override.php";
         }
         $GLOBALS['sugar_config'] = $sugar_config;
         // by-ref so we can modify it
@@ -942,7 +946,7 @@ abstract class UpgradeDriver
         }
 
         // validate manifest
-        list($this->from_version, $this->from_flavor) = $this->getFromVersion();
+        [$this->from_version, $this->from_flavor] = $this->getFromVersion();
 
         $res = $this->validateManifest();
         if ($res !== true) {
@@ -1078,7 +1082,7 @@ abstract class UpgradeDriver
             $langdirs[] = $this->context['source_dir'] . "/modules/UpgradeWizard/language";
             $langdirs[] = $this->context['source_dir'] . "/custom/modules/UpgradeWizard/language";
         }
-        $langdirs[] = dirname(__FILE__) . "/language";
+        $langdirs[] = __DIR__ . "/language";
 
         foreach ($langdirs as $langdir) {
             if (!file_exists($langdir)) {
@@ -1267,7 +1271,7 @@ abstract class UpgradeDriver
         // CRYS-741 On windows $_SERVER['PHP_SELF'] is 'C:\i.....'; in console, not url like for web request.
         // Because of that it's not valid for security check for SAFED_GET mask
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && file_exists('include/utils.php')) {
-            list($from_version, $from_flavor) = $this->loadFromVersion();
+            [$from_version, $from_flavor] = $this->loadFromVersion();
             if (version_compare($from_version, '7.2.0', '<')) {
                 $utils_fix = file_get_contents('include/utils.php');
                 if (preg_match('/(clean_special_arguments)(.+)(if\(isset\(\$_SERVER\[\'PHP_SELF\'\]\)\))/is', $utils_fix, $match_array)
@@ -1644,7 +1648,7 @@ abstract class UpgradeDriver
             $this->to_flavor = strtolower($this->manifest['flavor']);
         } else {
             if (!empty($this->context['new_source_dir'])) {
-                list(, $to_flavor) = $this->getToVersion();
+                [, $to_flavor] = $this->getToVersion();
                 $this->to_flavor = $to_flavor;
             } else {
                 $this->to_flavor = $this->from_flavor;
@@ -1769,7 +1773,7 @@ abstract class UpgradeDriver
         global $sugar_version;
 
         //read the existing configs from the file config.php & config_override.php
-        list($oldConfig, $overrideConfig) = $this->readConfigFiles();
+        [$oldConfig, $overrideConfig] = $this->readConfigFiles();
 
         //compose the configs to be saved
         $configs = $this->genConfigs($oldConfig, $overrideConfig, $this->config);
@@ -1865,7 +1869,7 @@ abstract class UpgradeDriver
                 case "pre":
                     // Run pre-upgrade
                     $this->initSugar();
-                    list($this->from_version, $this->from_flavor) = $this->getFromVersion();
+                    [$this->from_version, $this->from_flavor] = $this->getFromVersion();
                     $this->state['old_version'] = array($this->from_version, $this->from_flavor);
                     $this->saveState();
                     if (!$this->runScripts("pre")) {
@@ -1884,7 +1888,7 @@ abstract class UpgradeDriver
                     // Run post-upgrade
                     $this->initSugar();
                     $this->cleanCaches();
-                    list($this->from_version, $this->from_flavor) = $this->state['old_version'];
+                    [$this->from_version, $this->from_flavor] = $this->state['old_version'];
                     if (!$this->runScripts("post")) {
                         $this->error("Post-upgrade stage failed! Error executing post scripts");
                         return false;
@@ -1953,7 +1957,7 @@ abstract class UpgradeDriver
 
     }
 
-    const VERSION_FILE = 'version.json';
+    public const VERSION_FILE = 'version.json';
 
     /**
      * Get version and build number for this package
@@ -1963,7 +1967,7 @@ abstract class UpgradeDriver
     {
         $version = self::$version;
         $build = self::$build;
-        $vfile = dirname(__FILE__) . "/" . self::VERSION_FILE;
+        $vfile = __DIR__ . "/" . self::VERSION_FILE;
         if (file_exists($vfile)) {
             $data = json_decode(file_get_contents($vfile), true);
             if (!empty($data['version'])) {
@@ -1990,7 +1994,7 @@ abstract class UpgradeDriver
      */
     public function healthcheck()
     {
-        list($version,) = $this->getFromVersion();
+        [$version, ] = $this->getFromVersion();
         return $this->doHealthcheck();
     }
 
@@ -2046,6 +2050,9 @@ abstract class UpgradeDriver
  *
  * @property DBManager db
  * @property array context
+ *
+ * @method void log($msg)
+ * @method bool error($msg, bool $setError = false)
  */
 abstract class UpgradeScript
 {
@@ -2053,22 +2060,22 @@ abstract class UpgradeScript
      * Script updates core files
      * Should not be run on db-only updates
      */
-    const UPGRADE_CORE = 1;
+    public const UPGRADE_CORE = 1;
     /**
      * Script updates DB data
      * Should be run on all updates
      */
-    const UPGRADE_DB = 2;
+    public const UPGRADE_DB = 2;
     /**
      * Script updates customization or config files
      * Should not be run on db-only updates, but should be run on shadow upgrades
      */
-    const UPGRADE_CUSTOM = 4;
+    public const UPGRADE_CUSTOM = 4;
     /**
      * Script does unknown updates
      * Should always be run
      */
-    const UPGRADE_ALL = 0xFF;
+    public const UPGRADE_ALL = 0xFF;
 
     /**
      * Sorting order, lower is first

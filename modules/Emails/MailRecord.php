@@ -31,9 +31,9 @@ class MailRecord
         "sent",
     );
 
-    const ATTACHMENT_TYPE_UPLOAD = 'upload';
-    const ATTACHMENT_TYPE_DOCUMENT = 'document';
-    const ATTACHMENT_TYPE_TEMPLATE = 'template';
+    public const ATTACHMENT_TYPE_UPLOAD = 'upload';
+    public const ATTACHMENT_TYPE_DOCUMENT = 'document';
+    public const ATTACHMENT_TYPE_TEMPLATE = 'template';
 
     public $mockEmailBean = null; // For Testing Purposes Only
 
@@ -221,7 +221,7 @@ class MailRecord
             self::ATTACHMENT_TYPE_TEMPLATE => 'templateAttachments',
         );
         foreach ($attachments as $key => $value) {
-            $requestKey = isset($requestKeys[$key]) ? $requestKeys[$key] : $key;
+            $requestKey = $requestKeys[$key] ?? $key;
             $request[$requestKey] = implode('::', $attachments[$key]);
         }
 

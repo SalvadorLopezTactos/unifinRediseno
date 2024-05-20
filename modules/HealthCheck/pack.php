@@ -22,7 +22,7 @@ function packHealthCheck(ZipArchive $zip, $manifest = array(), $installdefs = ar
 
     $params = array_merge($defaults, $params);
 
-    list($zip, $installdefs) = packSortingHat($zip, $params, $installdefs, 'modules/HealthCheck/');
+    [$zip, $installdefs] = packSortingHat($zip, $params, $installdefs, 'modules/HealthCheck/');
 
     $files = array(
         // misc
@@ -51,7 +51,7 @@ function packHealthCheck(ZipArchive $zip, $manifest = array(), $installdefs = ar
         'modules/HealthCheck/smarty.phar',
     );
 
-    $chdir = dirname(__FILE__) . "/../..";
+    $chdir = __DIR__ . "/../..";
 
     $manifest = array_merge(
         $manifest,

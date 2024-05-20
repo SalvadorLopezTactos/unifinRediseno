@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'Gjerësia gjeografike',
     'LBL_LONGITUDE' => 'Gjatësia gjeografike',
     'LBL_GEOCODED' => 'Gjeokoduar',
+    'LBL_ERROR_MESSAGE' => 'Mesazhi i gabimit të gjeokodit',
 ];

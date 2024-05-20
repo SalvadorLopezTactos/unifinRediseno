@@ -117,4 +117,13 @@ So erstellen Sie ein {{module_name}}:
 - Klicken Sie auf "Mehr anzeigen", um weitere Felder zu erfassen. 
 2. Klicken Sie auf "Speichern", um den Datensatz fertigzustellen und auf die letzte Seite zurück zu kommen.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Smart Guide Aufgabe',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Ist Smart Guide Aufgabe',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Startdatum der Smart Guide Aktivität',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Abschlussdatum der Smart Guide Aktivität',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Smart Guide - Tage bis zum Abschluss',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Untergeordnete Meetings',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Untergeordnete Anrufe',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Untergeordnete Aufgaben',
 );

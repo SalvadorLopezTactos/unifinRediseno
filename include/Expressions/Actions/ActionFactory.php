@@ -46,7 +46,7 @@ class ActionFactory
 		    $entry = basename($path);
 		    if (strtolower(substr($entry, -4)) != ".php" || in_array($entry, ActionFactory::$exclude_files))
 		    	continue;
-		    require_once($path);
+            require_once $path;
 
 		    $className = substr($entry, 0, strlen($entry) - 4);
 		    $actionName = call_user_func(array($className, "getActionName"));
@@ -71,7 +71,7 @@ class ActionFactory
 			ActionFactory::loadFunctionList();
 		if (isset(ActionFactory::$loaded_actions[$name]))
 		{
-			require_once(ActionFactory::$loaded_actions[$name]['file']);
+            require_once ActionFactory::$loaded_actions[$name]['file'];
 			$class = ActionFactory::$loaded_actions[$name]['class'];
 			return new $class($params);
 		}
@@ -79,4 +79,3 @@ class ActionFactory
 		return false;
 	}
 }
-?>

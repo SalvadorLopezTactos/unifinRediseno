@@ -141,7 +141,7 @@
                 }
                 link = link || this.context.get('link');
                 //FIXME: `this.context` should always be used - SC-2550
-                var context = (this.context.get('name') === 'tabbed-dashlet') ?
+                var context = ['tabbed-dashlet', 'record-drawer'].includes(this.context.get('name')) ?
                     this.context : (this.context.parent || this.context);
                 var parentModel = context.get('model') || context.parent.get('model'),
                     model = this.createLinkModel(parentModel, link),

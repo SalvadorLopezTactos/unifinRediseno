@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'URL Σημείου Εντοπισμού:',
   'LBL_TRACKER_TEXT' => 'Σύνδεσμος Κειμένου Σημείου Εντοπισμού:',
   'LBL_TRACKER_COUNT' => 'Αρίθμηση Σημείου Εντοπισμού:',
-  'LBL_REFER_URL' => 'Ανακατεύθυνση URL Σημείου Εντοπισμού:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Εκστρατείες',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Εκστρατείες Email',
   'LBL_NEW_FORM_TITLE' => 'Νέα Εκστρατεία',

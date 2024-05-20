@@ -26,7 +26,7 @@ use Psr\Log\LogLevel;
  */
 class BulkHandler
 {
-    const EXPLICIT_INDEX_KEY = '_explicit_';
+    public const EXPLICIT_INDEX_KEY = '_explicit_';
 
     /**
      * @var Container
@@ -237,7 +237,7 @@ class BulkHandler
     {
         foreach ($exception->getResponseSet()->getBulkResponses() as $response) {
             $data = $response->getData();
-            $status = isset($data['status']) ? $data['status'] : 500;
+            $status = $data['status'] ?? 500;
 
             // Skip record/response if status is crisp and clean
             if ($status >= 200 && $status <= 300) {
@@ -247,9 +247,9 @@ class BulkHandler
             $errorMsg = sprintf(
                 'Unrecoverable indexing failure [%s]: %s -> %s -> %s -> %s',
                 $status,
-                isset($data['_index']) ? $data['_index'] : 'unknown index',
-                isset($data['_type']) ? $data['_type'] : 'unknown type',
-                isset($data['_id']) ? $data['_id'] : 'unknown id',
+                $data['_index'] ?? 'unknown index',
+                $data['_type'] ?? 'unknown type',
+                $data['_id'] ?? 'unknown id',
                 isset($data['error']) ? $this->formatExceptionError($data['error']) : 'unknown'
             );
             $this->log(LogLevel::CRITICAL, $errorMsg);

@@ -122,6 +122,13 @@ $dictionary['ACLAction'] = array(
     'source'=>'non-db',
 	'vname'=>'LBL_USERS',
   ),
+        'access_override' => [
+            'name' => 'access_override',
+            'type' => 'int',
+            'source' => 'non-db',
+            'link' => 'roles',
+            'rname_link' => 'access_override',
+        ],
 ),
 'acls' => array('SugarACLAdminOnly' => array('adminFor' => 'Users')),
 

@@ -17,7 +17,7 @@
  */
 class HealthCheck extends Basic
 {
-    const CACHE_DIR = 'healthcheck';
+    public const CACHE_DIR = 'healthcheck';
 
     public $module_dir = 'HealthCheck';
     public $object_name = 'HealthCheck';

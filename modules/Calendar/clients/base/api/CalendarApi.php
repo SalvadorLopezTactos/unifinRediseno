@@ -17,6 +17,10 @@ include_once 'include/workflow/alert_utils.php';
 
 class CalendarApi extends FilterApi
 {
+    /**
+     * @var \LoggerManager|mixed
+     */
+    public $logger;
     public function registerApiRest() {
         return array(
             'invitee_search' => array(
@@ -548,7 +552,7 @@ class CalendarApi extends FilterApi
                     'eventUsers' => [$rawEvent['assigned_user_id']],
                     'assignedUserName' => $assignedUser->name,
                     'assignedUserId' => $assignedUser->id,
-                    'invitees' => isset($invitees[$rawEvent['id']]) ? $invitees[$rawEvent['id']] : [],
+                    'invitees' => $invitees[$rawEvent['id']] ?? [],
                     'name' => $rawEvent[$calendarBean->subject],
                     'title' => $rawEvent[$calendarBean->subject],
                     'color' => $calendarBean->color,
@@ -825,7 +829,7 @@ class CalendarApi extends FilterApi
 
             if ($args['calendarFilter'] == 'my_calendars') {
                 foreach ($calendars as $calId => &$calendar) {
-                    $calendar['userId'] = $current_user->id;
+                    $calendar['userId'] = 'current_user';
                     $calendar['userName']  = $current_user->name;
                 }
             } elseif ($args['calendarFilter'] == 'other_calendars') {
@@ -1286,7 +1290,7 @@ class CalendarApi extends FilterApi
         $calendarModulesInDb = $this->queryCalendarModules();
         if (is_array($calendarModulesInDb) == true && count($calendarModulesInDb) > 0) {
             foreach ($calendarModulesInDb as $row) {
-                if ($this->hasAccess($row['calendar_module'], 'save')) {
+                if ($this->hasAccess($row['calendar_module'], 'save') && $row['allow_create']) {
                     $objName = BeanFactory::getObjectName($row['calendar_module']);
                     $result['modules'][$row['calendar_module']] = [
                         'objName' => $objName,
@@ -1324,7 +1328,7 @@ class CalendarApi extends FilterApi
         $seed = BeanFactory::newBean('Calendar');
 
         $sq = new SugarQuery();
-        $sq->select('calendar_module');
+        $sq->select(['calendar_module', 'allow_create']);
         $sq->from($seed, ['erased_fields' => false]);
         $sq->distinct(true);
 
@@ -1443,7 +1447,7 @@ class CalendarApi extends FilterApi
             }
 
             foreach ($fieldValues as $fieldValue) {
-                if (stripos($fieldValue, (string) $query) !== false) {
+                if (stripos($fieldValue, $query) !== false) {
                     $matchedFields[$searchField] = array($fieldValue);
                 }
             }

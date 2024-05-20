@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => '歷史',
     'LBL_PMSE_LABEL_NOTES' => '顯示附註',
     'LBL_PMSE_LABEL_ADD_NOTES' => '新增附註',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => '發送到 DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => '選取...',
     'LBL_PMSE_FORM_LABEL_USER' => '使用者',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => '確定要核准此流程嗎？',
     'LBL_PA_PROCESS_REJECT_QUESTION' => '確定要拒絕此流程嗎？',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => '確定要路由此流程嗎？',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => '您確定要發送到DocuSign此進程嗎？',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => '流程已成功核准',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => '流程已成功拒絕',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => '流程已成功路由',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => '進程已成功發送到DocuSign',
     'LBL_PA_PROCESS_CLOSED' => '您嘗試檢視的流程已關閉。',
     'LBL_PA_PROCESS_UNAVAILABLE' => '您嘗試檢視的流程此時不可用。',
 

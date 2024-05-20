@@ -17,7 +17,7 @@ class HintNewsNotification extends \Basic implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    const MODULE_NAME = 'HintNewsNotifications';
+    public const MODULE_NAME = 'HintNewsNotifications';
 
     public $id;
     public $assigned_user_id;
@@ -38,7 +38,7 @@ class HintNewsNotification extends \Basic implements LoggerAwareInterface
     public $table_name = 'hint_news_notifications';
     public $object_name = 'HintNewsNotification';
 
-    const BEAN_PROPS = [
+    public const BEAN_PROPS = [
         'assigned_user_id',
         'category',
         'title',

@@ -14,11 +14,14 @@ $dictionary['Case'] = array(
     'table' => 'cases',
     'audited' => true,
     'escalatable' => true,
+    'color' => 'orange',
+    'icon' => 'sicon-case-lg',
     'activity_enabled' => true,
     'unified_search' => true,
     'full_text_search' => true,
     'unified_search_default_enabled' => true,
     'duplicate_merge' => true,
+    'console_tab_badges' => true,
     'comment' => 'Cases are issues or problems that a customer asks a support representative to resolve',
     'change_timer_fields' => [
         'status',
@@ -235,6 +238,13 @@ $dictionary['Case'] = array(
             'bean_name' => 'Escalation',
             'source' => 'non-db',
             'vname' => 'LBL_ESCALATIONS',
+        ],
+        'external_users' => [
+            'name' => 'external_users',
+            'type' => 'link',
+            'relationship' => 'external_users_cases',
+            'source' => 'non-db',
+            'vname' => 'LBL_EXTERNAL_USERS',
         ],
         'tasks' => array(
             'name' => 'tasks',
@@ -652,9 +662,11 @@ VardefManager::createVardef('Cases', 'Case', array(
     'assignable',
     'team_security',
     'issue',
+    'external_source',
     'audit',
     'sla_fields',
     'escalatable',
+    'customer_journey_parent',
 ), 'case');
 
 //jc - adding for refactor for import to not use the required_fields array

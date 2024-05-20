@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Kreirajte formulu kojom se utvrđuje da li je ovo polje obavezno u rasporedima.<br/>"
-    . "Obavezna polja će pratiti formulu u mobilnom prikazu zasnovanom na pregledaču,<br/>"
-    . "ali neće pratiti formulu u izvornim aplikacijama, kao što su Sugar Mobile za iPhone.<br/>"
-    . "Neće pratiti formulu na Sugar samouslužnom portalu.",
+    'LBL_POPHELP_REQUIRED'=>'Polja koja su kondicionalno obavezna nisu dostupna za upotrebu u sledećeim SugarBPM tipovima akcija: Dodaj povezane zapise, Promeni polje. Uklonite tekst „Obavezno ako” da biste koristili ovo polje u ovim aktivnostimo definicije procesa',
 'LBL_POPHELP_READONLY'=>"Kreirajte formulu kojom se utvrđuje da li je ovo polje samo za čitanje u rasporedima.<br/>"
-        . "Polja samo za čitanje će pratiti formulu u mobilnom prikazu zasnovanom na pregledaču,<br/>"
+        . "Polja koja su samo za čitanje će pratiti formulu u mobilnom prikazu zasnovanom na pregledaču,<br/>"
         . "ali neće pratiti formulu u izvornim aplikacijama, kao što su Sugar Mobile za iPhone.<br/>"
         . "Neće pratiti formulu na Sugar samouslužnom portalu.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Odaberite kako biste koristili ovo polje pri pretraživanju zapisa pomoću globalnog pretraživanja na ovom modulu.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Izaberite ovo polje kada tražite zapise pomoću Globalne pretrage na ovom modulu.',
 //Revert Module labels
 'LBL_RESET' => 'Resetuj',
 'LBL_RESET_MODULE' => 'Resetuj modul',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Decimalni',
                 'autoincrement' => 'Samopovećanje',
                 'actionbutton' => 'ActionButton',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Često korišćene labele.",

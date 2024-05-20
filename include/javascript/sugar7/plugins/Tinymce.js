@@ -278,13 +278,20 @@
              * config.images_upload_handler = _.bind(this.tinyMCEImagePasteCallback, this);
              *
              * @param {Object} blobInfo Blob containing a pasted image.
-             * @param {Function} success Success callback.
-             * @param {Function} failure Failure callback.
+             * @return {Promise}
              */
-            tinyMCEImagePasteCallback: function(blobInfo, success, failure) {
+            tinyMCEImagePasteCallback: function(blobInfo) {
                 var embeddedFile = app.data.createBean('EmbeddedFiles');
-                embeddedFile.save({name: blobInfo.filename()}, {
-                    success: _.bind(this._savePastedImage, this, blobInfo, success, failure)
+
+                return new Promise((resolve) => {
+                    embeddedFile.save({name: blobInfo.filename()}, {
+                        success: (model) => {
+                            this._savePastedImage(blobInfo, model)
+                                .then((src) => {
+                                    resolve(src);
+                                });
+                        }
+                    });
                 });
             },
 
@@ -292,58 +299,58 @@
              * Handler to save pasted image.
              *
              * @param {Object} blobInfo Blob containing a pasted image.
-             * @param {Function} success Success callback.
-             * @param {Function} failure Failure callback.
              * @param {EmbeddedFile} model Model to save.
+             * @return {Promise}
              * @private
              */
-            _savePastedImage: function(blobInfo, success, failure, model) {
-                // we need to use the same data structure for a file input to use our file api
-                var imageData = [
-                    {
-                        files: [
-                            blobInfo.blob()
-                        ]
-                    }
-                ];
-                model.uploadFile(
-                    this.fileFieldName,
-                    imageData,
-                    {
-                        success: _.bind(function(rsp) {
-                            var url = app.api.buildFileURL(
-                                {
-                                    module: 'EmbeddedFiles',
-                                    id: rsp.record.id,
-                                    field: this.fileFieldName
-                                },
-                                {
-                                    htmlJsonFormat: false,
-                                    passOAuthToken: false,
-                                    cleanCache: true,
-                                    forceDownload: false
+            _savePastedImage: function(blobInfo, model) {
+                return new Promise((resolve, reject) => {
+                    // we need to use the same data structure for a file input to use our file api
+                    var imageData = [
+                        {
+                            files: [
+                                blobInfo.blob()
+                            ]
+                        }
+                    ];
+                    model.uploadFile(
+                        this.fileFieldName,
+                        imageData,
+                        {
+                            success: _.bind(function(rsp) {
+                                var url = app.api.buildFileURL(
+                                    {
+                                        module: 'EmbeddedFiles',
+                                        id: rsp.record.id,
+                                        field: this.fileFieldName
+                                    },
+                                    {
+                                        htmlJsonFormat: false,
+                                        passOAuthToken: false,
+                                        cleanCache: true,
+                                        forceDownload: false
+                                    }
+                                );
+
+                                if (this.newImages) {
+                                    this.newImages.push(rsp.record.id);
                                 }
-                            );
+                                resolve(url);
+                            }, this),
+                            error: _.bind(function() {
+                                app.alert.show('upload-error', {
+                                    level: 'error',
+                                    messages: 'ERROR_UPLOAD_FAILED'
+                                });
 
-                            // set url
-                            success(url);
-                            this.newImages.push(rsp.record.id);
-
-                            // set alt, width, height
-                            var img = tinymce.activeEditor.selection.getNode().querySelector('img');
-                            img.setAttribute('alt', rsp[this.fileFieldName].name);
-                            img.setAttribute('width', img.naturalWidth);
-                            img.setAttribute('height', img.naturalHeight);
-                        }, this),
-                        error: _.bind(function() {
-                            app.alert.show('upload-error', {
-                                level: 'error',
-                                messages: 'ERROR_UPLOAD_FAILED'
-                            });
-                            failure('', {remove: true});
-                        }, this)
-                    }
-                );
+                                reject({
+                                    message: app.lang.get('ERROR_UPLOAD_FAILED'),
+                                    remove: true,
+                                });
+                            }, this)
+                        }
+                    );
+                });
             },
 
             /**

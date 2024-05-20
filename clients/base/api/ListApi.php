@@ -41,7 +41,7 @@ class ListApi extends SugarListApi {
                 // Search by first_name, last_name
                 if ( strpos($args['q'],' ') !== false ) {
                     // There is a space in there, search by first name and last name
-                    list($leftPart,$rightPart) = explode(' ',$args['q']);
+                    [$leftPart, $rightPart] = explode(' ', $args['q']);
                     $leftPart = $GLOBALS['db']->quote($leftPart);
                     $rightPart = $GLOBALS['db']->quote($rightPart);
                     

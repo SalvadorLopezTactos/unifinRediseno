@@ -250,7 +250,9 @@ function template_summary_list_view(&$reporter,&$args) {
 	if (!isset($reporter->report_def['layout_options'])) {
 		echo $report_smarty->fetch("modules/Reports/templates/_template_summary_list_view.tpl");
 	} else {
-        if (((is_countable($group_def_array) ? count($group_def_array) : 0) == 1) || ((is_countable($group_def_array) ? count($group_def_array) : 0) > 3)) {
+        if (((is_countable($group_def_array) ? count($group_def_array) : 0) == 1) || ((is_countable(
+            $group_def_array
+        ) ? count($group_def_array) : 0) > 3)) {
 			echo $report_smarty->fetch("modules/Reports/templates/_template_summary_list_view.tpl");
         } elseif ((is_countable($group_def_array) ? count($group_def_array) : 0) == 2) {
 			echo $report_smarty->fetch("modules/Reports/templates/_template_summary_list_view_2gpby.tpl");		
@@ -663,7 +665,7 @@ function getSummaryColumnLableToNameArray($summary_columns_array) {
 
 	$labelToName = array();
     for ($i = 0; $i < (is_countable($summary_columns_array) ? count($summary_columns_array) : 0); $i++) {
-		$labelToName[$summary_columns_array[$i]['label']] = (isset($summary_columns_array[$i]['group_function']) ? $summary_columns_array[$i]['group_function'] : $summary_columns_array[$i]['name']);
+        $labelToName[$summary_columns_array[$i]['label']] = ($summary_columns_array[$i]['group_function'] ?? $summary_columns_array[$i]['name']);
 	} // for
 	return $labelToName;
 }
@@ -954,7 +956,8 @@ function whereToStartGroupByRow(&$reporter, $count, $rowsAndColumnsData, $row) {
     for ($i = 0; $i < (is_countable($group_def_array) ? count($group_def_array) : 0); $i++) {
         $key = $reporter->group_defs_Info[getGroupByKey($group_def_array[$i])]['index'];
         for ($j = 0; $j < (is_countable($rowsAndColumnsData) ? count($rowsAndColumnsData) : 0); $j++) {
-            if (isset($rowsAndColumnsData[$j][$group_def_array[$i]['label']]) && $rowsAndColumnsData[$j][$group_def_array[$i]['label']] == $row['cells'][$key]) {
+			if (isset($rowsAndColumnsData[$j][$group_def_array[$i]['label']]) && $rowsAndColumnsData[$j][$group_def_array[$i]['label']] == $row['cells'][$key])
+			{
 				return $j;
 			}
 		}
@@ -1168,7 +1171,9 @@ function template_no_results() {
 function template_list_view_no_results($args) {
     global $mod_strings;
 	$returnString = "<tr class=\"evenListRowS1\">";
-    for ($i = 0; $i < (is_countable($args['reporter']->report_def['display_columns']) ? count($args['reporter']->report_def['display_columns']) : 0); $i++) {
+    for ($i = 0; $i < (is_countable($args['reporter']->report_def['display_columns']) ? count(
+        $args['reporter']->report_def['display_columns']
+    ) : 0); $i++) {
 		$returnString = $returnString . "<td>&nbsp;&nbsp;&nbsp;{$mod_strings['LBL_NO_REPORTS']}</td>";
 	}
 	$returnString = $returnString."</tr>";
@@ -1178,7 +1183,9 @@ function template_list_view_no_results($args) {
 function template_summary_view_no_results($args) {
     global $mod_strings;
 	$returnString = "<tr class=\"evenListRowS1\">";
-    for ($i = 0; $i < (is_countable($args['reporter']->report_def['summary_columns']) ? count($args['reporter']->report_def['summary_columns']) : 0); $i++) {
+    for ($i = 0; $i < (is_countable($args['reporter']->report_def['summary_columns']) ? count(
+        $args['reporter']->report_def['summary_columns']
+    ) : 0); $i++) {
 		$returnString = $returnString . "<td>&nbsp;&nbsp;&nbsp;{$mod_strings['LBL_NO_REPORTS']}</td>";
 	}
 	$returnString = $returnString."</tr>";
@@ -1188,7 +1195,9 @@ function template_summary_view_no_results($args) {
 function template_summary_combo_view_no_results($args) {
     global $mod_strings;
 	$returnString = "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"1\" class=\"reportlistView\"><tr class=\"evenListRowS1\">";
-    for ($i = 0; $i < (is_countable($args['reporter']->report_def['display_columns']) ? count($args['reporter']->report_def['display_columns']) : 0); $i++) {
+    for ($i = 0; $i < (is_countable($args['reporter']->report_def['display_columns']) ? count(
+        $args['reporter']->report_def['display_columns']
+    ) : 0); $i++) {
 		$returnString = $returnString . "<td>&nbsp;&nbsp;&nbsp;{$mod_strings['LBL_NO_REPORTS']}</td>";
 	}
 	$returnString = $returnString."</tr>";
@@ -1197,7 +1206,11 @@ function template_summary_combo_view_no_results($args) {
 
 
 function template_pagination_row(&$args) {
-    return "<tr class=\"pagination\"><td colspan='".(is_countable($args['reporter']->report_def['display_columns']) ? count($args['reporter']->report_def['display_columns']) : 0)."'align=\"right\">".template_pagination($args)."</td></tr>";
+    return "<tr class=\"pagination\"><td colspan='" . (is_countable(
+        $args['reporter']->report_def['display_columns']
+    ) ? count($args['reporter']->report_def['display_columns']) : 0) . "'align=\"right\">" . template_pagination(
+        $args
+    ) . "</td></tr>";
 }
 
 function template_end_table(&$args) {

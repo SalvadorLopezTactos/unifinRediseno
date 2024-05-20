@@ -1,0 +1,222 @@
+// Setting widths for filter row fields
+.console-config .row-fluid div {
+  min-width: 120px;
+  display: inline-block;
+}
+
+.console-config .row-fluid .filter-selector div {
+  width: 100%;
+}
+
+// Hiding filter row fields
+.console-config .row-fluid .hide {
+  display: none;
+}
+
+// Hides "From/To" labels of values from "between" operators to save space
+.console-config .row-fluid .add-on {
+  display: none;
+}
+
+// Fixes issue with select2 fields automatically opening a search dropdown on creation
+.console-config .filter-selector .select2-drop {
+  display: none;
+}
+
+// Setting proper alignments of filter row fields
+.console-config .row-fluid .filter-actions.btn-group {
+  width: auto;
+  vertical-align: top;
+}
+
+.console-config .row-fluid .span4 {
+  margin-left: 0;
+  float: none;
+  vertical-align: top;
+}
+
+.console-config-fields .bordered {
+  border: 1px solid @gray60;
+  cursor: pointer;
+  padding: 5px;
+  color: @blue;
+  border-radius: 5px;
+}
+
+.console-config-fields {
+  & * .fieldset-field {
+    width: 50%;
+  }
+}
+
+.multi-line-list-view {
+  overflow: auto;
+  flex: 1;
+
+  &.console-preview {
+    .multi-line-table {
+      border: @borderWidget;
+      width: 30%;
+
+      th,
+      td {
+        vertical-align: middle;
+        font-weight: normal;
+        line-height: 16px;
+        padding: 6px 4px 6px 14px;
+      }
+
+      tbody tr:not(:last-child) {
+        border-bottom: @borderWidget;
+      }
+
+      .cell-bar--long,
+      .cell-bar--short {
+        border-radius: 4px;
+        height: 10px;
+        margin: 6px 0;
+        background-color: @configPillBackground;
+      }
+
+      .cell-bar--long {
+        width: 120px;
+      }
+
+      .cell-bar--short {
+        width: 80px;
+      }
+    }
+  }
+}
+
+.agent_workbench_dashboard,
+.console_dashboard {
+  .multi-line-list-view {
+    background: @contentBackground;
+
+    .dataTable {
+      &.table-striped.sticky-first-column {
+        thead {
+          tr {
+            th[data-fieldname]:not(.stick-left) {
+              &:nth-child(2) {
+                .sticky();
+
+                left: @multiLineFirstColumnLeft;
+                z-index: 10;
+
+                &.column-border::after {
+                  .h-full();
+                  .absolute();
+
+                  content: '';
+                  width: 1px;
+                  background-color: @borderColor;
+                  min-width: 1px;
+                  max-width: 1px;
+                  border-right: none;
+                  top: 0;
+                  bottom: 0;
+                  right: -1px;
+                }
+              }
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            td:nth-child(2) {
+              .sticky();
+
+              left: @multiLineFirstColumnLeft;
+              z-index: 10;
+              overflow: visible;
+
+              &.column-border::after {
+                .absolute();
+
+                content: '';
+                width: 1px;
+                background-color: @borderColor;
+                min-width: 1px;
+                max-width: 1px;
+                top: 0;
+                bottom: 0;
+                right: -1px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    td.left-column .fieldset.btn-group {
+      .static();
+    }
+
+    &.frozen-list-headers {
+      thead {
+        .sticky();
+
+        top: 0;
+        z-index: 12;
+      }
+    }
+
+    thead {
+      .left-column {
+        .sticky();
+
+        left: 0;
+        z-index: 12;
+        height: 28px;
+        min-width: 38px;
+      }
+    }
+
+    tbody .left-column {
+      .sticky();
+
+      left: 0;
+      border-top: @borderWidget;
+      height: 44px;
+
+      &:focus-within {
+        z-index: 11;
+      }
+
+      .dropdown-menu {
+        left: 9px;
+        top: 34px;
+      }
+
+      .dropup {
+        .dropdown-menu {
+          top: auto;
+        }
+      }
+    }
+  }
+}
+
+.console-config-instructions {
+  background-color: @secondaryContentBackground;
+  color: @infoText;
+  padding: 20px;
+
+  ul {
+    margin-left: 15px;
+    margin-bottom: 0;
+
+    li.unstyled {
+      list-style: none;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+    font-weight: bold;
+    color: @infoText;
+  }
+}

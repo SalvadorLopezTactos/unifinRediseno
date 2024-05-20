@@ -13,14 +13,14 @@ namespace Sugarcrm\Sugarcrm\DocumentMerge\Client\Constants;
 
 abstract class MergeType
 {
-    const Merge = 'merge';
-    const Convert = 'convert';
-    const MultiMerge = 'multimerge';
-    const MultiConvert = 'multimerge_convert';
-    const LabelsGenerate = 'labelsgenerate';
-    const LabelsGenerateConvert = 'labelsgenerate_convert';
-    const Presentation = 'presentation';
-    const PresentationConvert = 'presentation_convert';
-    const Spreadsheet = 'excel';
-    const SpreadsheetConvert = 'excel_convert';
+    public const Merge = 'merge';
+    public const Convert = 'convert';
+    public const MultiMerge = 'multimerge';
+    public const MultiConvert = 'multimerge_convert';
+    public const LabelsGenerate = 'labelsgenerate';
+    public const LabelsGenerateConvert = 'labelsgenerate_convert';
+    public const Presentation = 'presentation';
+    public const PresentationConvert = 'presentation_convert';
+    public const Spreadsheet = 'excel';
+    public const SpreadsheetConvert = 'excel_convert';
 }

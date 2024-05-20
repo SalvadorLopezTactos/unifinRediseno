@@ -858,7 +858,8 @@ ExpressionControl.prototype._onPanelValueGeneration = function () {
                 case "button-panel-operators":
                     if (data.value == 'close') {
                         that._closeParentPanels();
-                    } else if (data.value === 'Run Time') {
+                    } else if (data.value === 'Run Time'
+                        || data.value === App.lang.get('LBL_PMSE_RUNTIME_BUTTON', 'pmse_Project')) {
                         itemData = {
                             expType: 'CONSTANT',
                             expSubtype: "date",

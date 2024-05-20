@@ -15,11 +15,15 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
- require_once('include/formbase.php');
- class FileController extends SugarController{
 
- 	function action_save(){
+require_once 'include/formbase.php';
+
+class FileController extends SugarController
+{
+    public $object_name;
+
+    public function action_save()
+    {
  		$move=false;
  		$file = new File();
  		$file = populateFromPost('', $file);
@@ -37,6 +41,5 @@
 			$upload_file->final_move($file->id);
 		}
  		handleRedirect($return_id, $this->object_name);
- 	}
-
- }
+    }
+}

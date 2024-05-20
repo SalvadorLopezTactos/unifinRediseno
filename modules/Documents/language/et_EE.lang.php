@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Mall?:',
     'LBL_DET_TEMPLATE_TYPE'=>'Dokumendi tüüp:',
     'LBL_TEAM'=> 'Meeskond:',
+    'LBL_IS_SHARED' => 'Saadaval väliselt:',
     'LBL_DOC_DESCRIPTION'=>'Kirjeldus:',
     'LBL_DOC_ACTIVE_DATE'=> 'Avaldamiskuupäev:',
     'LBL_DOC_EXP_DATE'=> 'Aegumiskuupäev:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Saada DocuSigni',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Sünkrooni Google Drive&#39;iga',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Sünkrooni kõik Google Drive&#39;iga',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Sünkrooni kõik OneDrive&#39;iga',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Sünkrooni OneDrive&#39;iga',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Sünkrooni kõik Dropboxiga',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Sünkrooni Dropboxiga',
 );

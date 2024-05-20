@@ -12,6 +12,8 @@
 
 $dictionary['OutboundEmail'] = [
     'table' => 'outbound_email',
+    'color' => 'ocean',
+    'icon' => 'sicon-email-lg',
     'archive' => false,
     'hidden_to_role_assignment' => true,
     'acls' => [

@@ -15,13 +15,21 @@ use Sugarcrm\Sugarcrm\Security\Validator\Constraints\ComponentName;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 
 class DynamicField {
-
+    /**
+     * @var \Sugarcrm\Sugarcrm\Security\InputValidation\Request|mixed
+     */
+    public $request;
+    /**
+     * @var mixed|string|mixed[]
+     */
+    public $module;
+    public $avail_fields;
     public $module_dir = 'DynamicFields';
     var $use_existing_labels = false; // this value is set to true by install_custom_fields() in ModuleInstaller.php; everything else expects it to be false
     var $base_path = "";
 
-    const TYPE_SIGNED = 'signed';
-    const TYPE_UNSIGNED = 'unsigned';
+    public const TYPE_SIGNED = 'signed';
+    public const TYPE_UNSIGNED = 'unsigned';
 
     /**
      * @var SugarBean
@@ -563,10 +571,10 @@ class DynamicField {
         $fmd->ext1 = $field->ext1;
         $fmd->ext2 = $field->ext2;
         $fmd->ext3 = $field->ext3;
-        $fmd->ext4 = (isset($field->ext4) ? $field->ext4 : '');
+        $fmd->ext4 = ($field->ext4 ?? '');
         $fmd->comments = $field->comment;
         $fmd->massupdate = $field->massupdate;
-        $fmd->importable = ( isset ( $field->importable ) ) ? $field->importable : null ;
+        $fmd->importable = $field->importable ?? null ;
         $fmd->duplicate_merge = $field->duplicate_merge;
         $fmd->pii = $field->pii;
         // pii field is always auditable

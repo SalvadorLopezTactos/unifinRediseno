@@ -86,7 +86,7 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
             true,
             string_format(
                 $GLOBALS['app_strings']['ERR_DB_QUERY'],
-                array(__CLASS__, $query)
+                array(self::class, $query)
             )
         );
         return !empty($result);
@@ -131,7 +131,7 @@ class ProductsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
             true,
             string_format(
                 $GLOBALS['app_strings']['ERR_DB_QUERY'],
-                array(__CLASS__, $query)
+                array(self::class, $query)
             )
         );
         return !empty($result);

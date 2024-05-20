@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => '{{field_name}} kehtetu väärtus',
     'LBL_EDITABLE_INVALID_RANGE' => 'Väärtus peab olema vahemikus {{min}} kuni {{max}}',
-    'LBL_HISTORY_LOG' => 'Viimane plaanitud',
+    'LBL_HISTORY_LOG' => 'Viimane kohustus',
     'LBL_NO_COMMIT' => 'Eelmine plaanimine puudub',
 
     'LBL_MANGER_SAVED' => 'Haldus salvestatud'

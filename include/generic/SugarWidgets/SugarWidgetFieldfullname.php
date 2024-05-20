@@ -26,4 +26,13 @@ class SugarWidgetFieldFullname extends SugarWidgetFieldName
         }
         return $GLOBALS['locale']->formatName($module, $data);
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getFieldControllerData(array $layoutDef): array
+    {
+        return parent::getFieldControllerData($layoutDef);
+    }
 }

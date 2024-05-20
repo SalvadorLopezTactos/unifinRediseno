@@ -86,6 +86,6 @@ class MixedAuthenticationProvider implements AuthenticationProviderInterface
      */
     public function supports(TokenInterface $token)
     {
-        return $token instanceof MixedUsernamePasswordToken && $this->providerKey == $token->getProviderKey();
+        return $token instanceof MixedUsernamePasswordToken && $this->providerKey === $token->getFirewallName();
     }
 }

@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'标识',
 	'LBL_ADMIN_WIZARD' => '管理向导',
-	'LBL_ALLOW_USER_TABS' => '允许用户隐藏标签',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => '系统设置',
 	'LBL_ENABLE_MAILMERGE' => '启用邮件合并？',
 	'LBL_LOGVIEW' => '查看日志',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => '此设置用来决定电话和会议的闲忙信息更新时间范围。<BR>关闭闲忙信息更新请输入"0"。最小值1个月；最大值 12 个月。',
     'LBL_PDFMODULE_NAME' => 'PDF报告模板',
     'SUGARPDF_BASIC_SETTINGS' => '文档属性',
-    'SUGARPDF_ADVANCED_SETTINGS' => '高级设置',
     'SUGARPDF_LOGO_SETTINGS' => '图标',
-
-    'PDF_CREATOR' => 'PDF创建程序',
-    'PDF_CREATOR_INFO' => '指定使用哪种程序制作文档。 <br>即用哪种程序生成PDF文件。',
 
     'PDF_AUTHOR' => '作者',
     'PDF_AUTHOR_INFO' => '文件属性中显示文档作者。',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => '选择报价的新图标',
     'PDF_NEW_HEADER_LOGO_INFO' => '图片格式可以为 .png 或 .jpg. (EZPDF 只能使用 .jpg)<BR>推荐尺寸为 867x60 px。',
 
-    'PDF_HEADER_LOGO_WIDTH' => '报价图标的宽度',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => '大图标图像宽度。 (只针对 TCPDF)',
+    'PDF_TITLE' => '标题',
+    'PDF_TITLE_INFO' => '出现在文档属性中的标题。',
+
+    'PDF_SUBJECT' => '主题',
+    'PDF_SUBJECT_INFO' => '制定文档的主题。',
 
     'PDF_SMALL_HEADER_LOGO' => '当前图标',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'PDF文件页面页眉中显示的图标。',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => '上传新图标',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => '图片格式可以为 .png 或 .jpg. (EZPDF 只能使用 .jpg)推荐尺寸为 212x40 px。',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => '报告的图标宽度',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => '改变报告PDF文件中上传图片的比例。（只针对TCPDF）',
-
-
-    'PDF_HEADER_STRING' => '页眉字符串',
-    'PDF_HEADER_STRING_INFO' => '页眉描述字符串',
-
-    'PDF_HEADER_TITLE' => '文件头标题',
-    'PDF_HEADER_TITLE_INFO' => '文档页眉中作为标题打印的字符串',
-
-    'PDF_FILENAME' => '默认文件名',
-    'PDF_FILENAME_INFO' => '生成 PDF 时默认的文件名',
-
-    'PDF_TITLE' => '标题',
-    'PDF_TITLE_INFO' => '出现在文档属性中的标题。',
-
-    'PDF_SUBJECT' => '主题',
-    'PDF_SUBJECT_INFO' => '制定文档的主题。',
-
     'PDF_KEYWORDS' => '关键字',
     'PDF_KEYWORDS_INFO' => '关联文档的关键词，格式通常为 "关键词 1 关键词 2 ..."',
 
-    'PDF_COMPRESSION' => '压缩',
-    'PDF_COMPRESSION_INFO' => '启用或禁用页面压缩。 <br>启用压缩时，每个内部页面均被压缩，对文档压缩率约为2。',
-
-    'PDF_JPEG_QUALITY' => 'JPEG 质量 (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => '设置默认JPEG 压缩质量(1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF 版本',
-    'PDF_PDF_VERSION_INFO' => '设定 PDF 版本（参考 PDF 手册以确定正确的数值）。',
-
-    'PDF_PROTECTION' => '文档保护',
-    'PDF_PROTECTION_INFO' => '设定文档保护<br>- copy：复制文字与图片到剪贴板<br>- print: 打印文档<br>- modify：编辑 (除注释与表格)<br>- annot-forms: 添加注释与表格<br>注：文档保护主要针对拥有Acrobat完整版产品的用户对文档的修改。',
-
-    'PDF_USER_PASSWORD' => '用户密码',
-    'PDF_USER_PASSWORD_INFO' => '如果您不设定任何密码，文档将正常打开。<br>如果您设定了用户密码，在显示文档前，系统将会要求 PDF 的查看者提供密码。 <br>管理密码， 如果与用户密码不一致，用来赋予用户全部的权限。',
-
-    'PDF_OWNER_PASSWORD' => '所有者密码',
-    'PDF_OWNER_PASSWORD_INFO' => '如果您不设定任何密码，文档将正常打开。 <br>如果您设定了用户密码，在显示文档前，系统将会要求 PDF 的查看者提供密码。 <br>管理密码， 如果与用户密码不一致，用来赋予用户全部的权限。',
-
-    'PDF_ACL_ACCESS' => '访问控制',
-    'PDF_ACL_ACCESS_INFO' => '生成 PDF 文件的默认访问控制。',
-
-    'K_CELL_HEIGHT_RATIO' => '单元格高度系数',
-    'K_CELL_HEIGHT_RATIO_INFO' => '如果单元格高度小于(字体高度 x 单元高度系数)，则(字体高度 x 单元高度系数) 将作为单元格高度。<br>当未设定单元格高度时，(字体高度 x 单元高度系数) 也会用作单元格高度。',
-
-    'K_TITLE_MAGNIFICATION' => '标题放大率',
-    'K_TITLE_MAGNIFICATION_INFO' => '标题放大后的字体大小。',
-
-    'K_SMALL_RATIO' => '小字体系数',
-    'K_SMALL_RATIO_INFO' => '减小系数以获得更小的字体。',
-
-    'HEAD_MAGNIFICATION' => '标题放大率',
-    'HEAD_MAGNIFICATION_INFO' => '标题放大系数。',
-
-    'PDF_IMAGE_SCALE_RATIO' => '图片缩放比例',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => '用来缩放图片的比例',
-
-    'PDF_UNIT' => '单元',
-    'PDF_UNIT_INFO' => '文件单元',
 	'PDF_GD_WARNING'=>'您没有安装PHP的GD库。没有GD库的支持，只有JPEG格式的LOGO能在PDF中正确显示。',
     'ERR_EZPDF_DISABLE'=>'警告：EZPDF在配置表中被禁用。请单击"保存"以设置TCPDF作为PDF输出类。',
     'LBL_IMG_RESIZED'=>"（改变大小）",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => '增加PDF字体',
     'LBL_PDF_PATCH' => '补丁',
-    'LBL_PDF_PATCH_INFO' => '自定义编码。写入PHP数组。<br>例如 :<br>ISO-8859-1 不包含欧洲符号。写入 "array(164=>\\\'Euro\\\')" 将其添加到位置164.',
     'LBL_PDF_ENCODING_TABLE' => '编码表',
     'LBL_PDF_ENCODING_TABLE_INFO' => '编码表的名称。<br>TrueType 统一码、OpenType 统一码和符号性字体将忽略此选项。<br>编码集定义了编码和 (从 0 到 255) 字体中字符的关系.<br>前 128 位是固定的，与 ASCII 对应。',
     'LBL_PDF_FONT_FILE' => '字体文件',

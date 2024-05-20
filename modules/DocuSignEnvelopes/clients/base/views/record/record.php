@@ -183,6 +183,16 @@ $viewdefs[$module_name]['base']['view']['record'] = [
                     ],
                     'label' => 'LBL_COMMENTLOG',
                 ],
+                [
+                    'name' => 'cloud_service_type',
+                    'span' => 6,
+                    'label' => 'LBL_CLOUD_SERVICE_TYPE',
+                ],
+                [
+                    'name' => 'cloud_path',
+                    'span' => 6,
+                    'label' => 'LBL_CLOUD_PATH',
+                ],
             ],
         ],
         [

@@ -109,9 +109,11 @@
                 var collection = app.utils.getSubpanelCollection(this.context, 'ForecastManagerWorksheets'),
                     quota = 0.00;
 
-                _.each(collection.models, function(model) {
-                    quota = app.math.add(quota, model.get('quota'));
-                }, this);
+                if (!_.isUndefined(collection) && !_.isUndefined(collection.models)) {
+                    _.each(collection.models, function(model) {
+                        quota = app.math.add(quota, model.get('quota'));
+                    }, this);
+                }
                 this.quotaAmount = quota;
                 this.render();
             }

@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Loggor',
 	'LBL_ADMIN_WIZARD' => 'Administratörs guide',
-	'LBL_ALLOW_USER_TABS' => 'Tillåt användare att konfigurera flikar',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Systeminställningar',
 	'LBL_ENABLE_MAILMERGE' => 'Tillåt sammanfogning av mail?',
 	'LBL_LOGVIEW' => 'Konfigurera logginställningar',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Använd den här inställningen för att bestämma antalet månader före aktuellt datum för lediga/ upptagna för samtal och möten som ska publiceras. För att stänga av lediga/upptagna publiceringar, skriv "0". Minimum är 1 månad och max 12 månader.',
     'LBL_PDFMODULE_NAME' => 'PDF Inställningar',
     'SUGARPDF_BASIC_SETTINGS' => 'Dokumentegenskaper',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Avancerade inställningar',
     'SUGARPDF_LOGO_SETTINGS' => 'Bilder',
-
-    'PDF_CREATOR' => 'PDF skapare',
-    'PDF_CREATOR_INFO' => 'Definierar skaparen av ett dokument.<br />Detta är oftast namnet på applikationen som skapar PDF filen.',
 
     'PDF_AUTHOR' => 'Författare',
     'PDF_AUTHOR_INFO' => 'Författaren syns i dokumentets egenskaper',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Välj ny bild för offerter',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Filformatet kan vara antingen .jpg eller .png (Endast .jpg för EZPDF)',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Offert bild bredd',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Ändra skalan på den uppladdade bilden som syns i offerter PDF dokument. (Endast TCPDF)',
+    'PDF_TITLE' => 'Titel',
+    'PDF_TITLE_INFO' => 'Titel som syns i dokumentet egenskaperna',
+
+    'PDF_SUBJECT' => 'Ämne',
+    'PDF_SUBJECT_INFO' => 'Rubrik som syns i dokument egenskaperna.',
 
     'PDF_SMALL_HEADER_LOGO' => 'För rapport PDF Dokument',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Denna bild syns i default sidhuvud på rapport PDF dokument',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Välj ny bild för rapporter',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Filformatet kan vara antingen .jpg eller .png (Endast .jpg för EZPDF)<br />Rekommenderad storlek är 212x40px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Rapporter bild bredd',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Ändra skalan på den uppladdade bilden som syns i Rapport PDF dokument. (Endast TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Sidhuvud sträng',
-    'PDF_HEADER_STRING_INFO' => 'Sidhuvud beskrivnings sträng',
-
-    'PDF_HEADER_TITLE' => 'Sidhuvud titel',
-    'PDF_HEADER_TITLE_INFO' => 'Sträng att skriva ut som titel på dokumentets sidhuvud',
-
-    'PDF_FILENAME' => 'Default filnamn',
-    'PDF_FILENAME_INFO' => 'Default filnamn för genererade PDF filer',
-
-    'PDF_TITLE' => 'Titel',
-    'PDF_TITLE_INFO' => 'Titel som syns i dokumentet egenskaperna',
-
-    'PDF_SUBJECT' => 'Ämne',
-    'PDF_SUBJECT_INFO' => 'Rubrik som syns i dokument egenskaperna.',
-
     'PDF_KEYWORDS' => 'Nyckelord',
     'PDF_KEYWORDS_INFO' => 'Associera nyckelord med dokumentet, vanligtvis i formen "nyckelord1 nyckelord2 ..."',
 
-    'PDF_COMPRESSION' => 'Kompression',
-    'PDF_COMPRESSION_INFO' => 'Aktiverar eller inaktiverar sid kompression.<br />När den är aktiverad så är den interna representationen på varje sida komprimerad, vilket leder till en kompressions proportion om ca 2 för dokumentet.',
-
-    'PDF_JPEG_QUALITY' => 'JPEG kvalitet (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Sätt standard JPEG kompression kvalitet (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF-version',
-    'PDF_PDF_VERSION_INFO' => 'Ange PDF versionen (kontrollera PDF referensen för giltiga värden).',
-
-    'PDF_PROTECTION' => 'Dokumentskydd',
-    'PDF_PROTECTION_INFO' => 'Sätt dokumentskydd<br />- kopiera: kopiera text och bilder till klippbordet<br />- skriv ut: skriva ut dokumentet<br />- ändra: ändra dokumentet (förutom kommentarer och formulär)<br />- kommentarer-formulär: ändra kommenterar och formulär.<br />Kommentar: skyddet mot förändringar är för människor som använder den fulla versionen av Acrobat.',
-
-    'PDF_USER_PASSWORD' => 'Användarlösenord',
-    'PDF_USER_PASSWORD_INFO' => 'Om du inte sätter ett lösenord så kan dokumentet öppnas som vanligt.<br />Om du sätter ett användarlösenord, så kommer PDF visaren att fråga efter det innan dokumentet visas.<br />Huvudlösenordet, om annorlunda än användarens kan användas för att få full åtkomst.',
-
-    'PDF_OWNER_PASSWORD' => 'Ägarlösenord',
-    'PDF_OWNER_PASSWORD_INFO' => 'Om du inte sätter ett lösenord så kan dokumentet öppnas som vanligt.<br />Om du sätter ett användarlösenord, så kommer PDF visaren att fråga efter det innan dokumentet visas.<br />Huvudlösenordet, om annorlunda än användarens kan användas för att få full åtkomst.',
-
-    'PDF_ACL_ACCESS' => 'Åtkomstkontroll',
-    'PDF_ACL_ACCESS_INFO' => 'Default access kontroll för skapande av PDF',
-
-    'K_CELL_HEIGHT_RATIO' => 'Block höjds proportioner',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Om höjden på ett block är mindre än (typsnittshöjden * blockhöjds faktorn) så används (typsnittshöjden * blockhöjdsfaktorn) höjd på blocket.<br />(Typsnittshöjd * blockhöjds faktor) används också som höjden på ett block utan någon höjd angiven.',
-
-    'K_TITLE_MAGNIFICATION' => 'Titel förstoring',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Titel förstoring huvud typsnittsstorlek',
-
-    'K_SMALL_RATIO' => 'Font proportioner för "small"',
-    'K_SMALL_RATIO_INFO' => 'Minskningsfaktor för små typsnitt',
-
-    'HEAD_MAGNIFICATION' => 'Huvudförstoring',
-    'HEAD_MAGNIFICATION_INFO' => 'Förstoringsfaktor för titlar',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Bildskalnings proportioner',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Proportion att användas vid skalning av bilder',
-
-    'PDF_UNIT' => 'Enhet',
-    'PDF_UNIT_INFO' => 'dokumentsenhet för mätning',
 	'PDF_GD_WARNING'=>'Du har inte GD biblioteket installerat för PHP. Utan GD biblioteket installerat så kan endast JPEG loggor visas i PDF dokument.',
     'ERR_EZPDF_DISABLE'=>'Varning: EZPDF klassen är inaktiverad i konfigurationstabellen men är satt som PDF klass. Var god spara detta formulär för att sätta TCPDF som PDF klassen och återgå till stabil miljö.',
     'LBL_IMG_RESIZED'=>"(storlek anpassad för visning)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Lägg till en PDF font',
     'LBL_PDF_PATCH' => 'Fix',
-    'LBL_PDF_PATCH_INFO' => 'Skräddarsydda modifieringar på kodning. Skriv en PHP lista.<br />Exempel: ISO-8859-1 innehåller inte euro symbol. För att lägga till den på position 164, skriv "array(164=>\\&#39;Euro\\&#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'Encoding tabell',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Namn på kodningstabell.<br />Denna möjlighet är ignorerade för TrueType Unicode, OpenType Unicode och symbolic typsnitt.<br />Kodningsdefinitionen är mellan 0-255) och bokstäver i typsnittet.<br />De första 128 är dedikerade och matchar ASCII.',
     'LBL_PDF_FONT_FILE' => 'Font fil',

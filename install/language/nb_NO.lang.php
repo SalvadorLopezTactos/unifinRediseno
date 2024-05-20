@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'For den optimale bruken av IIS/FastCGI sapi, angi fastcgi.logging til 0 i php.ini-filen.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Ikke-støttet PHP-versjon installert: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Databasen er utilgjengelig',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databasestøtte ble ikke funnet. Sørg for at du har påkrevde drivere for en av følgende støttede databasetyper: MySQL, MS SQLServer, Oracle, eller DB2. Du må kanskje avkommentere utvdelsen i php.ini-filen, eller kompilere på nytt med rett binær fil, avhengig av din versjon av PHP. Se PHP-håndboken for mer informasjon om hvordan du aktiverer databasestøtte.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databasestøtte ble ikke funnet.  Sørg for at du har nødvendige stasjoner for en av følgende databasetyper: MySQL, MS SQLServer, Oracle eller DB2.  Du må kanskje fjerne kommentaren til utvidelsen i php.ini-filen, eller kompilere på nytt med riktig binær fil, avhengig av din versjon av PHP.  Se PHP-håndboken for mer informasjon om hvordan du aktiverer databasestøtte.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Finner ikke funksjonene tilknyttet XML-analysebibliotekene som Sugar-programmet trenger. Du må kanskje avkommentere utvidelsen i php.ini-filen, eller omkompilere med rett binærfil, avhengig av din  PHP-versjon. Se PHP-veiledningen for mer informasjon.',
     'LBL_CHECKSYS_CSPRNG' => 'Slumptallsgeneratoren',
     'ERR_CHECKSYS_MBSTRING'             => 'Funksjoner knyttet til Multibyte Strings PHP-forlengelsen (mbstring) som Sugar-programmet trenger ble ikke funnet. <br/> <br/> Vanligvis er ikke mbstring-modulen aktivert som standard i PHP, og må aktiveres med --enable-mbstring når PHP binære bygges. Se PHP-veiledningen for mer informasjon om hvordan du aktiverer mbstring-støtte.',
@@ -561,32 +561,15 @@ Avvis dette anropet
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'E-poster med tildelingsvarsel',
-        'subject' => 'SugarCRM - tilordnet $module_name ',
-        'description' => 'Denne malen bruks når systemet sender en oppgavetilordning til en bruker.',
-        'body' => '<div>
-<p>$assigned_by_user har tilordnet et&nbsp;$module_name til&nbsp;$assigned_user.</p>
-
-<p>Du kan gjennomgå dette&nbsp;$module_name på:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user har tilordnet et $module_name til $assigned_user.
-
-Du kan gå gjennom dette $module_name på:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'E-poster om planlagt rapport',
         'subject' => 'Planlagt rapport: $report_name fra $report_time',
         'description' => 'Denne malen bruks når systemet sender en planlagt rapport til en bruker.',
         'body' => '<div>
-<p>Hallo $assigned_user,</p>
-<p>Vedlagt er en automatisk generert rapport som har blitt planlagt for deg.</p>
-<p>Rapportnavn: $report_name</p>
-<p>Dato og klokkeslett for rapportkjøring: $report_time</p>
+<p>Hallo $assigned_user,<br></p>
+<p>Vedlagt er en automatisk generert rapport som er planlagt for deg.<br></p>
+<p>Rapportnavn: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Rapportkjøring dato og klokkeslett: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Hallo $assigned_user,
@@ -612,21 +595,6 @@ Dato og klokkeslett for rapportkjøring: $report_time',
             Logg på Sugar for å vise kommentaren.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Ny kontoinformasjon',
-        'description' => 'Denne malen brukes når systemadministratoren sender et nytt passord til en bruker.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Her er ditt kontobrukernavn og midlertidige passord:</p><p>Brukernavn : $contact_user_user_name </p><p>Passord : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Etter du logger inn med passordet ovenfor, blir du kanskje bedt om å endre passordet.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Her er ditt kontobrukernavn og midlertidige passord:
-Brukernavn: $contact_user_user_name
-Passord: $contact_user_user_hash
-
-$config_site_url
-
-Etter du har logget på med passordet ovenfor, bes du kanskje om å endre passordet.',
-        'name' => 'Systemgenerert passord-e-post',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Tilbakestill kontopassordet',
         'description' => "Denne malen brukes til å sende en bruker en lenk for å tilbakestille brukerens passord.",

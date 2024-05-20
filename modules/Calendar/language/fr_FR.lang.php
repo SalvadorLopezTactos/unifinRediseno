@@ -90,7 +90,7 @@ $mod_strings = array (
     'LBL_INFO_RELATED_TO' => 'Relatif à',
 
     'LBL_NO_USER' => 'Aucune correspondance pour le champ : Assigné à',
-    'LBL_SUBJECT' => 'Objet',
+    'LBL_SUBJECT' => 'Sujet',
     'LBL_DURATION' => 'Durée',
     'LBL_STATUS' => 'Statut',
     'LBL_DATE_TIME' => 'Date et Heure',
@@ -164,7 +164,7 @@ $mod_strings = array (
     'LBL_TIMELINE_EVENT_TEMPLATE' => 'Événement chronologique',
     'LBL_SCHEDULERMONTH_EVENT_TEMPLATE' => 'Événement du planificateur',
     'LBL_ICAL_EVENT_TEMPLATE' => 'Événement iCal',
-    'LBL_SUBJECT' => 'Objet',
+    'LBL_SUBJECT' => 'Sujet',
     'LBL_CALENDAR_TYPE' => 'Type de calendrier',
     'LBL_COLOR' => 'Couleur',
     'LBL_DURATION_MINUTES' => 'Durée en minutes',
@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Février',
     'LBL_MARCH' => 'Mars',
     'LBL_APRIL' => 'Avril',
-    'LBL_MAY' => 'Mai',
+    'LBL_MAY' => 'Peut',
     'LBL_JUNE' => 'Juin',
     'LBL_JULY' => 'Juillet',
     'LBL_AUGUST' => 'Août',
@@ -318,7 +318,7 @@ $mod_strings = array (
     'LBL_FEB' => 'Fév',
     'LBL_MAR' => 'Mars',
     'LBL_APR' => 'Avr',
-    'LBL_MAY' => 'Mai',
+    'LBL_MAY' => 'Peut',
     'LBL_JUN' => 'Juin',
     'LBL_JUL' => 'Juil',
     'LBL_AUG' => 'Août',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Oct',
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Déc',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Calendrier déjà ajouté',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} est sélectionné',
+    'LBL_NO_USER_SELECTED' => 'Veuillez sélectionner un utilisateur ou une équipe',
+    'LBL_NO_CALENDAR_SELECTED' => 'Veuillez sélectionner un calendrier',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Échec de l&#39;enregistrement des calendriers.',
 
 );
 

@@ -14,6 +14,32 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 class Report
 {
+    /**
+     * @var mixed|int
+     */
+    public $report_max;
+    /**
+     * @var int|mixed
+     */
+    public $report_offset;
+    /**
+     * @var mixed|string
+     */
+    public $report_def_str;
+    /**
+     * @var mixed|string
+     */
+    public $child_filter_by;
+    /**
+     * @var mixed|string
+     */
+    public $child_filter;
+    public $total_count;
+    public $addedColumn;
+    /**
+     * @var mixed[]|string
+     */
+    public $child_filter_name;
     var $result;
     var $summary_result;
     var $total_result;
@@ -28,16 +54,12 @@ class Report
     var $group_fields_map = array();
     var $summary_fields_map = array();
     var $full_table_list = array();
+    public $summary_order_by;
 
     /**
      * @var SugarBean[]
      */
     public $full_bean_list = array();
-
-    /**
-     * @var string[]
-     */
-    private $filterTableList = array();
 
     /**
      * @var string
@@ -183,6 +205,13 @@ class Report
      */
     protected $request;
 
+    /**
+     * Query is used for chart
+     *
+     * @var boolean
+    */
+    protected $chartQuery = false;
+
     public function __construct($report_def_str = '', $filters_def_str = '', $panels_def_str = '')
     {
         global $current_user, $current_language, $app_list_strings;
@@ -195,7 +224,7 @@ class Report
 
         //Scheduled reports don't have $_REQUEST.
         if ((!isset($_REQUEST['module']) || $_REQUEST['module'] == 'Reports') && !defined('SUGAR_PHPUNIT_RUNNER')) {
-            $this->cache_modules_def_js();
+            self::cache_modules_def_js();
         }
 
         $mod_strings = return_module_language($current_language, 'Reports');
@@ -217,11 +246,23 @@ class Report
             $this->report_def = $report_def_str;
             $this->report_def_str = $json->encode($report_def_str);
         } else {
-            if ($this->is_old_content($report_def_str)) {
+            if (self::is_old_content($report_def_str)) {
                 $this->handleException('this report was created with an older version of reports. please upgrade');
             }
             $this->report_def_str = $report_def_str;
             $this->report_def = $json->decode($this->report_def_str);
+        }
+
+        //move group summary columns to the bottom
+        if (!empty($this->report_def['summary_columns'])) {
+            $groupColumns = [];
+            foreach ($this->report_def['summary_columns'] as $key => $column) {
+                if (!empty($column['group_function'])) {
+                    $groupColumns[] = $column;
+                    unset($this->report_def['summary_columns'][$key]);
+                }
+            }
+            $this->report_def['summary_columns'] = array_merge($this->report_def['summary_columns'], $groupColumns);
         }
 
         // 5.1 Report Format - only called by the Wizard.
@@ -283,8 +324,7 @@ class Report
         {
             $this->full_table_list['self']['value'] = $this->module;
             $this->full_table_list['self']['module'] = $this->module;
-            $this->full_table_list['self']['label'] = isset($app_list_strings['moduleList'][$this->module])
-                    ? $app_list_strings['moduleList'][$this->module] : $this->module;
+            $this->full_table_list['self']['label'] = $app_list_strings['moduleList'][$this->module] ?? $this->module;
             $this->full_table_list['self']['parent'] = '';
             $this->full_table_list['self']['children'] = array();
         }
@@ -724,6 +764,8 @@ class Report
         $this->row_end = 0;
         $this->summary_row_count = 0;
         $this->summary_row_end = 0;
+        $this->select_already_defined_hash = [];
+        $this->chartQuery = false;
     }
 
     function run_summary_combo_query($run_main_query = true)
@@ -1198,7 +1240,6 @@ class Report
                 }
                 $this->register_field_for_query($current_filter);
                 $select_piece = "(" . $this->layout_manager->widgetQuery($current_filter) . ")";
-                $this->filterTableList[$current_filter['table_key']] = $current_filter['table_key'];
                 $where_clause .= $select_piece;
             }
             if ($isSubCondition == 1) {
@@ -1264,7 +1305,7 @@ class Report
         $this->where = $where_clause;
     }
 
-    function filtersIterateForUI($filters, &$verdef_arr_for_filters)
+    private function filtersIterateForUI($filters, &$verdef_arr_for_filters)
     {
         $operator = $filters['operator'];
         for ($i = 0; $i < (is_countable($filters) ? count($filters) : 0) - 1; $i++) {
@@ -1312,8 +1353,7 @@ class Report
             $tableArray = $this->report_def['full_table_list'][$tableKey];
             //This is used for old data. the 'label' in old data is not translated at all.
             $reportDisplayTableName = ($tableKey == "self")
-                    ? (isset($app_list_strings['moduleList'][$tableArray['label']])
-                            ? $app_list_strings['moduleList'][$tableArray['label']] : $tableArray['label'])
+                    ? ($app_list_strings['moduleList'][$tableArray['label']] ?? $tableArray['label'])
                     : $tableArray['name'];
             $columnKeyArray = explode(":", $columnKey);
             if (isset($verdef_arr_for_filters[$columnKeyArray[sizeof($columnKeyArray) - 1]])) {
@@ -1396,7 +1436,9 @@ class Report
         }
 
 
-        for ($i = 0; $i < (is_countable($this->report_def['group_defs']) ? count($this->report_def['group_defs']) : 0); $i++) {
+        for ($i = 0; $i < (is_countable($this->report_def['group_defs']) ? count(
+            $this->report_def['group_defs']
+        ) : 0); $i++) {
             $def_qualifier = '';
             if (!empty($this->report_def['group_defs'][$i]['qualifier'])) {
                 $def_qualifier = $this->report_def['group_defs'][$i]['qualifier'];
@@ -1461,128 +1503,128 @@ class Report
                 if ($display_column['name'] == 'count') {
                 if ('self' != $display_column['table_key'])
                 {
-                    // use table name itself, not it's alias
-                    $table_name = $this->alias_lookup[$display_column['table_key']];
+                        // use table name itself, not it's alias
+                        $table_name = $this->alias_lookup[$display_column['table_key']];
                 }
                 else
                 {
                     // use table alias
-                    if(isset($this->full_table_list['self']['params']['join_table_alias'])) {
+                        if (isset($this->full_table_list['self']['params']['join_table_alias'])) {
                         $table_name = $this->full_table_list['self']['params']['join_table_alias'];
                     } else {
                         $table_name = $this->full_bean_list['self']->table_name;
                     }
                 }
-                $select_piece = "COUNT($table_name.id) {$table_name}__allcount, COUNT(DISTINCT  $table_name.id) {$table_name}__count ";
-                $got_count = 1;
+                    $select_piece = "COUNT($table_name.id) {$table_name}__allcount, COUNT(DISTINCT  $table_name.id) {$table_name}__count ";
+                    $got_count = 1;
             }
             else {
-                if ($field_list_name == 'total_select_fields' && empty($display_column['group_function'])) {
-                    continue;
-                }
-                $this->register_field_for_query($display_column);
+                    if ($field_list_name == 'total_select_fields' && empty($display_column['group_function'])) {
+                        continue;
+                    }
+                    $this->register_field_for_query($display_column);
 
-                // this hack is so that the id field for every table is always selected
-                if (empty($display_column['table_key'])) {
-                    $this->handleException('table_key doesnt exist for %s', $display_column['name']);
-                }
+                    // this hack is so that the id field for every table is always selected
+                    if (empty($display_column['table_key'])) {
+                        $this->handleException('table_key doesnt exist for %s', $display_column['name']);
+                    }
 
                 if($display_column['type'] == 'fullname') {
-                    $name = "{$key}_{$display_column['name']}";
-                    $this->report_def[$name] = $this->createNameList($display_column['table_key']);
-                    $this->create_select($name, $field_list_name);
-                    continue;
+                        $name = "{$key}_{$display_column['name']}";
+                        $this->report_def[$name] = $this->createNameList($display_column['table_key']);
+                        $this->create_select($name, $field_list_name);
+                        continue;
                 }
 
-                if (empty($got_join[$display_column['table_key']])) {
+                    if (empty($got_join[$display_column['table_key']])) {
                     $id_column = array();
-                    $got_join[$display_column['table_key']] = 1;
+                        $got_join[$display_column['table_key']] = 1;
 
-                    if (!empty($display_column['column_key']) && !empty($this->all_fields[$display_column['column_key']]) && !empty($this->all_fields[$display_column['column_key']]['custom_type'])) {
-                        $do_id = 0;
+                        if (!empty($display_column['column_key']) && !empty($this->all_fields[$display_column['column_key']]) && !empty($this->all_fields[$display_column['column_key']]['custom_type'])) {
+                            $do_id = 0;
                     }
                     else {
-                        $do_id = 1;
-                    }
-                    // Bug 45019: don't add ID column if this column is the ID column
-                    if (($field_list_name != 'total_select_fields' && $field_list_name != 'summary_select_fields') && $do_id) {
-                        $id_column['name'] = 'id';
-                        $id_column['type'] = 'id';
-                        $id_column['table_key'] = $display_column['table_key'];
-                        if (preg_match('/_cstm/', $display_column['table_alias']) > 0) {
-                            // bug #49475
-                            $id_column['table_alias'] = $this->focus->table_name;
-                        } else {
-                            $id_column['table_alias'] = $display_column['table_alias'];
+                            $do_id = 1;
                         }
-                        $id_column['column_key'] = $id_column['table_key'] . ':' . $id_column['name'];
-                        $select_piece = $this->layout_manager->widgetQuery($id_column);
-                        if (!$this->select_already_defined($select_piece, $field_list_name)) {
-                            array_push($this->$field_list_name, $select_piece);
+                        // Bug 45019: don't add ID column if this column is the ID column
+                        if (($field_list_name != 'total_select_fields' && $field_list_name != 'summary_select_fields') && $do_id) {
+                            $id_column['name'] = 'id';
+                            $id_column['type'] = 'id';
+                            $id_column['table_key'] = $display_column['table_key'];
+                            if (preg_match('/_cstm/', $display_column['table_alias']) > 0) {
+                                // bug #49475
+                                $id_column['table_alias'] = str_replace('_cstm', '', $display_column['table_alias']);
+                            } else {
+                                $id_column['table_alias'] = $display_column['table_alias'];
+                            }
+                            $id_column['column_key'] = $id_column['table_key'] . ':' . $id_column['name'];
+                            $select_piece = $this->layout_manager->widgetQuery($id_column);
+                            if (!$this->select_already_defined($select_piece, $field_list_name)) {
+                                array_push($this->$field_list_name, $select_piece);
+                            }
                         }
                     }
-                }
-                // specify "currency_alias" parameter for fields of currency type
-                if (!empty($display_column['column_key']) && !empty($this->all_fields[$display_column['column_key']])
-                    && $display_column['type'] == 'currency') {
-                    $field_def = $this->all_fields[$display_column['column_key']];
-                    $hasBaseRate = !empty($this->full_bean_list[$display_column['table_key']]
-                        ->field_defs['base_rate']);
-                    // When base rate exists in the module, we want to use the base rate from the module
-                    // rather than using the conversion rate from currencies table. We don't need to join
-                    // currencies table in this case.
-                    if (strpos($field_def['name'], '_usdoll') === false && !$hasBaseRate) {
-                        $display_column['currency_alias'] = $display_column['table_alias'] . '_currencies';
+                    // specify "currency_alias" parameter for fields of currency type
+                    if (!empty($display_column['column_key']) && !empty($this->all_fields[$display_column['column_key']])
+                        && $display_column['type'] == 'currency') {
+                            $field_def = $this->all_fields[$display_column['column_key']];
+                            $hasBaseRate = !empty($this->full_bean_list[$display_column['table_key']]
+                            ->field_defs['base_rate']);
+                        // When base rate exists in the module, we want to use the base rate from the module
+                        // rather than using the conversion rate from currencies table. We don't need to join
+                        // currencies table in this case.
+                            if (strpos($field_def['name'], '_usdoll') === false && !$hasBaseRate) {
+                                $display_column['currency_alias'] = $display_column['table_alias'] . '_currencies';
+                            }
                     }
+                    if (!empty($display_column['qualifier']) && $display_column['qualifier'] == 'fiscalQuarter') {
+                        $display_column['timeperiods_count'] = $tp_count++;
+                    }
+                    $select_piece = $this->layout_manager->widgetQuery($display_column);
                 }
-                if (!empty($display_column['qualifier']) && $display_column['qualifier'] == 'fiscalQuarter') {
-                    $display_column['timeperiods_count'] = $tp_count++;
-                }
-                $select_piece = $this->layout_manager->widgetQuery($display_column);
-            }
-            if (!$this->select_already_defined($select_piece, $field_list_name)) {
-                array_push($this->$field_list_name, $select_piece);
-            }
-
-            if (!empty($display_column['column_key']) && !empty($this->all_fields[$display_column['column_key']])) {
-                $field_def = $this->all_fields[$display_column['column_key']];
-                if (!empty($field_def['ext2'])) {
-                    $select_piece = $this->getExt2FieldDefSelectPiece($field_def);
+                if (!$this->select_already_defined($select_piece, $field_list_name)) {
                     array_push($this->$field_list_name, $select_piece);
                 }
-            }
 
-            // for SUM currency fields add params to join 'currencies' table
-            if (!empty($display_column['column_key'])
-                && !empty($this->all_fields[$display_column['column_key']])
-                && !empty($display_column['group_function'])
-                && isset($display_column['field_type'])
-                && $display_column['field_type'] == 'currency'
-                && strpos($display_column['name'], '_usdoll') === false
-                && isset($display_column['currency_alias'])
-                && !isset($this->currency_join[$key][$display_column['currency_alias']])
-            ) {
-                $table_key = $this->full_bean_list[$display_column['table_key']]->table_name;
-
-                $bean_table_alias = $display_column['table_key'] === 'self'
-                    ? $table_key : $this->getRelatedAliasName($display_column['table_key']);
-
-                // by default, currency table is joined to the alias of primary table
-                $table_alias = $bean_table_alias;
-
-                // but if the field is contained in a custom table, use it's alias for join
-                $field_def = $this->all_fields[$display_column['column_key']];
-                if ($field_def['real_table'] != $table_key) {
-                    $columns = $this->db->get_columns($field_def['real_table']);
-                    if (isset($columns['currency_id'])) {
-                        $table_alias = $display_column['table_alias'];
+                if (!empty($display_column['column_key']) && !empty($this->all_fields[$display_column['column_key']])) {
+                    $field_def = $this->all_fields[$display_column['column_key']];
+                    if (!empty($field_def['ext2'])) {
+                        $select_piece = $this->getExt2FieldDefSelectPiece($field_def);
+                        array_push($this->$field_list_name, $select_piece);
                     }
                 }
 
-                // create additional join of currency table for each module containing currency fields
-                $this->currency_join[$key][$display_column['currency_alias']] = $table_alias;
+                // for SUM currency fields add params to join 'currencies' table
+                if (!empty($display_column['column_key'])
+                    && !empty($this->all_fields[$display_column['column_key']])
+                    && !empty($display_column['group_function'])
+                    && isset($display_column['field_type'])
+                    && $display_column['field_type'] == 'currency'
+                    && strpos($display_column['name'], '_usdoll') === false
+                    && isset($display_column['currency_alias'])
+                    && !isset($this->currency_join[$key][$display_column['currency_alias']])
+                ) {
+                    $table_key = $this->full_bean_list[$display_column['table_key']]->table_name;
+
+                    $bean_table_alias = $display_column['table_key'] === 'self'
+                        ? $table_key : $this->getRelatedAliasName($display_column['table_key']);
+
+                    // by default, currency table is joined to the alias of primary table
+                    $table_alias = $bean_table_alias;
+
+                    // but if the field is contained in a custom table, use it's alias for join
+                    $field_def = $this->all_fields[$display_column['column_key']];
+                    if ($field_def['real_table'] != $table_key) {
+                        $columns = $this->db->get_columns($field_def['real_table']);
+                        if (isset($columns['currency_id'])) {
+                            $table_alias = $display_column['table_alias'];
+                        }
+                    }
+
+                    // create additional join of currency table for each module containing currency fields
+                    $this->currency_join[$key][$display_column['currency_alias']] = $table_alias;
+                }
             }
-        }
         }
 
         // 'register' the joins for the other column defs since we need to join all for summary to work.. else the count and maybe other group functions won't work.
@@ -1605,32 +1647,54 @@ class Report
 
     function create_order_by()
     {
-        $generated_order_by = '';
+        $this->buildOrderBy('order_by', 'order_by_arr');
+
+        // Only do this for Summation reports and for charts (charts use summary queries)
+        if (!($this->report_def['report_type'] === 'summary' && empty($this->report_def['display_columns'])) &&
+            !$this->chartQuery) {
+            return;
+        }
+
+        $this->buildOrderBy('summary_order_by', 'summary_order_by_arr');
+    }
+
+    /**
+     * Build order by
+     *
+     * @param string $orderByKey
+     * @param string $orderByArrKey
+     */
+    private function buildOrderBy($orderByKey, $orderByArrKey)
+    {
         $this->layout_manager->setAttribute('context', 'OrderBy');
-        $this->order_by = '';
-        $this->order_by_arr = array();
-        $this->summary_order_by_arr = array();
-        if (!empty($this->report_def['order_by'][0])) {
-            $order_by = $this->report_def['order_by'][0];
+        $this->{$orderByKey} = '';
+        $this->{$orderByArrKey} = [];
 
-            $this->register_field_for_query($order_by);
+        $orderBy = false;
+        $multipleOrderBy = false;
 
-            $generated_order_by = $this->layout_manager->widgetQuery($order_by);
-            if($generated_order_by != "") {
-                array_push($this->order_by_arr, $generated_order_by);
-            }
-        }
-        $this->summary_order_by = '';
-
-        // Only do this for Summation reports.
-        if ($this->report_def['report_type'] == 'summary' && empty($this->report_def['display_columns'])) {
-            if (!empty($this->report_def['summary_order_by'][0])) {
-                $summary_order_by = $this->report_def['summary_order_by'][0];
-                $this->register_field_for_query($summary_order_by);
-                array_push($this->summary_order_by_arr, $this->layout_manager->widgetQuery($summary_order_by));
-            }
+        if (array_key_exists($orderByKey, $this->report_def)) {
+            $orderBy = $this->report_def[$orderByKey];
         }
 
+        if (array_key_exists('multipleOrderBy', $this->report_def)) {
+            $multipleOrderBy = $this->report_def['multipleOrderBy'];
+        }
+
+        if (is_array($orderBy)) {
+            foreach ($orderBy as $index => $orderByFieldData) {
+                if (!empty($orderByFieldData) && ($multipleOrderBy || $index < 1)) {
+                    $this->register_field_for_query($this->report_def[$orderByKey][$index]);
+
+                    $generatedOrderBy = $this->layout_manager->widgetQuery($this->report_def[$orderByKey][$index]);
+
+                    //we are not using strict equal in order to keep BWC
+                    if ($generatedOrderBy != '') {
+                        array_push($this->{$orderByArrKey}, $generatedOrderBy);
+                    }
+                }
+            }
+        }
     }
 
 
@@ -1936,7 +2000,7 @@ class Report
     {
         $has_space = strrpos($field, " ");
         // Check if the field has space - i.e. it's "table.field alias"
-        if ($has_space && !stristr("' '", (string) $field)) {
+        if ($has_space && !stristr("' '", $field)) {
             $aggregate_func = strtolower(substr($field, 0, 4));
             if ($aggregate_func == 'max(' || $aggregate_func == 'min(' || $aggregate_func == 'avg(' || $aggregate_func == 'sum(') {
                 return $field;
@@ -1988,6 +2052,7 @@ class Report
 
     function create_query($query_name = 'query', $field_list_name = 'select_fields')
     {
+
         $query = "SELECT ";
         $field_list_name_array = $this->$field_list_name;
         foreach ($field_list_name_array as $field) {
@@ -2370,9 +2435,16 @@ class Report
      * @param string $column_field_name
      * @param bool $skip_non_summary_columns
      * @param bool $exporting If true, return plaintext output instead of HTML.
+     * @param string $layoutManagerProcessor choose the process method for widget fields
      * @return int|array The next database row, or 0 if there are no more rows.
      */
-    function get_next_row($result_field_name = 'result', $column_field_name = 'display_columns', $skip_non_summary_columns = false, $exporting = false)
+    public function get_next_row(
+        $result_field_name = 'result',
+        $column_field_name = 'display_columns',
+        $skip_non_summary_columns = false,
+        $exporting = false,
+        $layoutManagerProcessor = 'widgetDisplay'
+    )
     {
         global $current_user;
         $chart_cells = array();
@@ -2426,10 +2498,15 @@ class Report
             $this->register_field_for_query($display_column);
 
             if ($skip_non_summary_columns && empty($display_column['group_function'])) {
-                if ($exporting || $this->plain_text_output)
+                if ($exporting || $this->plain_text_output) {
                     array_push($cells, ' ');
-                else
+                } elseif ($layoutManagerProcessor === 'widgetReportForSideCar') {
+                    //since we need only the data, we have to skip the ui elements
+                    continue;
+                } else {
                     array_push($cells, '&nbsp;');
+                }
+
                 continue;
             }
             $display_column['fields'] = $fields;
@@ -2447,6 +2524,10 @@ class Report
             }
             else {
                 $this->layout_manager->setAttribute('context', 'List');
+            }
+
+            if ($layoutManagerProcessor === 'widgetReportForSideCar') {
+                $display_column = $this->consolidateDisplayColumnForSideCar($display_column);
             }
 
             // Make sure 'AVG' aggregate is shown as float, regardless of the original field type
@@ -2481,14 +2562,14 @@ class Report
                             $display = $this->currency_obj->getDefaultCurrencyName();
                             break;
                         default:
-                            $display = $this->layout_manager->widgetDisplay($display_column);
+                            $display = $this->layout_manager->{$layoutManagerProcessor}($display_column);
                     }
                     $display_column['fields'][$field_name] = $display;
                 } else {
                     if (!empty($field_name) && isset($display_column['fields'][$field_name])) {
                         $display_column['fields'][$field_name] = $this->db->fromConvert($display_column['fields'][$field_name], $display_column['type']);
                     }
-                    $display = $this->layout_manager->widgetDisplay($display_column);
+                    $display = $this->layout_manager->{$layoutManagerProcessor}($display_column);
                 }
 
             } else {
@@ -2506,9 +2587,16 @@ class Report
                 if (isset($display_column['fields'][$field_name])) {
                     $display = $display_column['fields'][$field_name];
                 }
+
+                //we have to use the widgetReportForSideCar in order to get the desired data for sidecar
+                if ($layoutManagerProcessor === 'widgetReportForSideCar') {
+                    $display = $this->layout_manager->{$layoutManagerProcessor}($display_column);
+                }
             }
 
-            if ($display_column['type'] == 'currency' && (strpos($display_column['name'], '_usdoll') !== false || !empty($display_column['group_function']))) {
+            if ($layoutManagerProcessor !== 'widgetReportForSideCar' &&
+                $display_column['type'] == 'currency' &&
+                (strpos($display_column['name'], '_usdoll') !== false || !empty($display_column['group_function']))) {
                 // convert base to user preferred if set in user prefs
                 if($current_user->getPreference('currency_show_preferred')) {
                     $userCurrency = SugarCurrency::getUserLocaleCurrency();
@@ -2518,16 +2606,51 @@ class Report
                     $raw_display = $display_column['fields'][$field_name];
                     $display = SugarCurrency::formatAmountUserLocale($raw_display, SugarCurrency::getBaseCurrency()->id);
                 }
+            } elseif ($layoutManagerProcessor === 'widgetReportForSideCar' && $display && is_array($display) &&
+                array_key_exists('value', $display) && $display_column['type'] == 'currency' &&
+                (strpos($display_column['name'], '_usdoll') !== false || !empty($display_column['group_function']))) {
+                // convert base to user preferred if set in user prefs
+                if ($current_user->getPreference('currency_show_preferred')) {
+                    $userCurrency = SugarCurrency::getUserLocaleCurrency();
+                    $raw_display = SugarCurrency::convertWithRate(
+                        $display_column['fields'][$field_name],
+                        1.0,
+                        $userCurrency->conversion_rate
+                    );
+                    $displayCurrency = SugarCurrency::formatAmountUserLocale($raw_display, $userCurrency->id);
+                    $display['value'] = $displayCurrency;
+                    $raw_display = $display;
+                } else {
+                    $raw_display = $display_column['fields'][$field_name];
+                    $displayCurrency = SugarCurrency::formatAmountUserLocale(
+                        $raw_display,
+                        SugarCurrency::getBaseCurrency()->id
+                    );
+                    $display['value'] = $displayCurrency;
+                }
             } else {
                 $raw_display = $display;
             }
 
             if (isset($display_column['type']) && $display_column['type'] == 'float') {
-                $display = $this->layout_manager->widgetDisplay($display_column);
+                $display = $this->layout_manager->{$layoutManagerProcessor}($display_column);
             }
 
-            if (isset($display_column['type'])) {
+            if ($layoutManagerProcessor === 'widgetReportForSideCar' &&
+                !array_key_exists('module', $display_column) &&
+                array_key_exists('type', $display_column) && $display_column['type'] === 'int' &&
+                array_key_exists('name', $display_column) && $display_column['name'] === 'count') {
+                //on Grand Total section we have to prepare the count as a field for sidecar
+                $widgetReportValue = $display;
 
+                $display = [];
+                $display['type'] = $display_column['type'];
+                $display['name'] = $display_column['name'];
+                $display['vname'] = $display_column['label'];
+                $display['value'] = $widgetReportValue;
+            }
+
+            if ($layoutManagerProcessor !== 'widgetReportForSideCar' && isset($display_column['type'])) {
                 $alias = $this->alias_lookup[$display_column['table_key']];
                 $array_key = strtoupper($alias . '__count');
 
@@ -2554,19 +2677,13 @@ class Report
 
             //  for charts
             if ($column_field_name == 'summary_columns' && $this->do_chart) {
-                $raw_value = "";
-                $keys = array_keys($fields);
-                foreach ($this->report_def['summary_columns'] as $index => $column) {
-                    if ($column['name'] == $display_column['name'] && isset($keys[$index])
-                    && isset($fields[$keys[$index]])) {
-                        $raw_value = $fields[$keys[$index]];
-                        break;
-                    }
-                }
+                $columnClass = $this->layout_manager->getClassFromWidgetDef($display_column);
+                $columnAlias = strtoupper($columnClass->_get_column_alias($display_column));
                 $cell_arr = array(
                     'val' => $raw_display,
                     'key' => $display_column['column_key'],
-                    'raw_value' => $raw_value
+                    'alias' => $columnAlias,
+                    'raw_value' => $fields[$columnAlias] ?? '',
                 );
                 array_push($chart_cells, $cell_arr);
             }
@@ -2619,6 +2736,62 @@ class Report
         }
 
         return $row;
+    }
+
+    /**
+     * Consolidate Display Column For SideCar
+     *
+     * In order to be able to use the field in sidecar, we have to alter
+     * the metadata of display column to be used by the field controller
+     *
+     * @param array $displayColumn
+     *
+     * @return array
+     */
+    private function consolidateDisplayColumnForSideCar(array $displayColumn): array
+    {
+        $displayColumn['table_alias'] = $this->getTableFromField($displayColumn);
+        $currentFieldDef = $this->getFieldDefFromLayoutDef($displayColumn);
+
+        if ($currentFieldDef) {
+            $fieldDefSource = '';
+            $baseFieldDef = $currentFieldDef;
+
+            if (array_key_exists('column_key', $displayColumn) &&
+                array_key_exists($displayColumn['column_key'], $this->all_fields) &&
+                array_key_exists('ext2', $this->all_fields[$displayColumn['column_key']])
+            ) {
+                $baseFieldDef = $this->all_fields[$displayColumn['column_key']];
+
+                $displayColumn['type'] = $baseFieldDef['type'];
+                $displayColumn['name'] = $baseFieldDef['name'];
+                $displayColumn['module'] = $baseFieldDef['module'];
+                $displayColumn['vname'] = $baseFieldDef['vname'];
+
+                $fieldDefSource = array_key_exists('source', $baseFieldDef) ? $baseFieldDef['source'] : '';
+            } else {
+                $fieldDefSource = array_key_exists('source', $baseFieldDef) ? $baseFieldDef['source'] : '';
+
+                $displayColumn['type'] = $baseFieldDef['type'];
+                $displayColumn['module'] = $baseFieldDef['module'];
+            }
+
+            if (!empty($fieldDefSource) && ($fieldDefSource === 'custom_fields' ||
+                ($fieldDefSource === 'non-db' && !empty($baseFieldDef['ext2']) &&
+                !empty($baseFieldDef['id']))) && !empty($baseFieldDef['real_table'])
+            ) {
+                $displayColumn['table_alias'] .= '_cstm';
+            }
+
+            $displayColumn['column_key'] = $this->_get_full_key($displayColumn);
+            $displayColumn['onlyValue'] = false;
+        } elseif (!$currentFieldDef && is_array($displayColumn) && array_key_exists('type', $displayColumn)
+            && empty($displayColumn['type'])  && $displayColumn['name'] === 'count'
+        ) {
+            $displayColumn['type'] = 'int';
+        }
+
+        return $displayColumn;
     }
 
     /**
@@ -2712,7 +2885,7 @@ class Report
         }
     }
 
-    function cache_modules_def_js()
+    public static function cache_modules_def_js()
     {
         global $current_language, $current_user;
         $cacheDefsJs = sugar_cached('modules/modules_def_' . $current_language . '_' . md5($current_user->id) . '.js');
@@ -2741,7 +2914,7 @@ class Report
         }
     }
 
-    function is_old_content($content)
+    private static function is_old_content($content)
     {
 
         if (preg_match('/report_type\=/', $content)) {
@@ -2753,6 +2926,7 @@ class Report
 
     function run_chart_queries()
     {
+        $this->chartQuery = true;
 
         $this->run_summary_query();
 
@@ -2876,7 +3050,7 @@ class Report
             $row = array_combine(
                 array_map(
                     function ($key) use ($alias_map) {
-                        return isset($alias_map[$key]) ? $alias_map[$key] : $key;
+                        return $alias_map[$key] ?? $key;
                     },
                     array_keys($row)
                 ),
@@ -2915,14 +3089,7 @@ class Report
     {
         $recordIds = array();
         $this->create_where();
-        $full_table_list = array_keys($this->full_table_list);
-        $this->filterTableList['self'] = 'self';
-        $optionalTables = array_diff($full_table_list, $this->filterTableList);
-        foreach ($optionalTables as $table_key) {
-            if ($this->full_table_list[$table_key]['optional']) {
-                unset($this->full_table_list[$table_key]);
-            }
-        }
+
         $this->create_from();
         $id = $this->focus->table_name . '.id';
         $where = $this->getRecordWhere();

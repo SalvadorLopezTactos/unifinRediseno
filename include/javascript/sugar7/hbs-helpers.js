@@ -215,6 +215,29 @@
         });
 
         /**
+         * Helper implements a utility that allows a block of template to be run a given number of times
+         * @param n number of times the block should run
+         * Usage:
+         *
+         *   {{#times <number>}}
+         *      ...
+         *   {{/times}}
+         *
+         * Example:
+         *   {{#times count>}}
+         *      ...
+         *   {{/times}}
+         * @return {string} Result of the `block` being executed n times
+         */
+        Handlebars.registerHelper('times', function(n, block) {
+            let accum = '';
+            for (let i = 0; i < n; i++) {
+                accum += block.fn(i);
+            }
+            return accum;
+        });
+
+        /**
          * Helpers implements a utility that allows different versions of icons to be rendered.
          * @param iconClass defined icon class passed in through metadata
          * @return {string} iconClass with its based font class
@@ -230,6 +253,180 @@
             return iconClass.includes('sicon') ?
                 `sicon ${iconClass}` :
                 `fa ${iconClass}`;
+        });
+
+        /**
+         * Helper that returns the HTML to display a module label. Takes in the
+         * module name and the size of the label to create, but also supports
+         * any number of optional HTML attributes to apply to the element.
+         * Label color and contents (either text or a SugarIcon) are
+         * automatically added based on the stored module settings in metadata.
+         *
+         * Usage:
+         *
+         * {{moduleLabel <module> <size> <attr>="<value>"...}}
+         *
+         * Example:
+         *
+         * {{moduleLabel 'Accounts' 'lg' rel="tooltip" data-placement="right" title="tooltip"}}
+         *
+         * When the Accounts color is set to "green" and is set to show by
+         * the abbreviation "Ac", the above returns:
+         *
+         * <span class="label-module label-module-size-lg
+         *     label-module-color-green" rel="tooltip"
+         *     data-placement="right" title="tooltip">
+         *     Ac
+         * </span>
+         *
+         * @param {string} module The name of the module
+         * @param {string} size The size of the label to create ('sm' or 'lg'), default is 'sm'
+         * @param {Object} options The optional params, supporting any key/value HTML attribute pairs
+         */
+        Handlebars.registerHelper('moduleLabel', function(module, size, options) {
+            let contents = '';
+            let attributes = _.clone(options.hash) || {};
+            attributes.class = attributes.class ? `${attributes.class} label label-module` : 'label label-module';
+
+            // Determine the size based on the passed in option
+            size = _.contains(['sm', 'lg'], size) ? size : 'sm';
+            attributes.class += ` label-module-size-${size}`;
+
+            // Determine the color and contents based on module metadata
+            let moduleMeta = app.metadata.getModule(module) || {};
+
+            let color = moduleMeta.color || 'ocean';
+            attributes.class += ` label-module-color-${color}`;
+
+            if (moduleMeta.display_type === 'abbreviation') {
+                contents = app.lang.getModuleIconLabel(module);
+            } else {
+                let icon = moduleMeta.icon || 'sicon-default-module-lg';
+                attributes.class += ` sicon ${icon}`;
+            }
+
+            // Build the attributes string and return the element HTML
+            attributes = _.reduce(attributes, function(string, value, key) {
+                return `${string} ${key}="${value}"`;
+            }, '');
+
+            return new Handlebars.SafeString(
+                `<span ${attributes.trim()}>${contents.trim()}</span>`
+            );
+        });
+
+        /**
+         * Helper that returns the class list needed to build the container for
+         * a module label. The classes will create the container with the given
+         * size, and the color scheme of the given module.
+         *
+         * Usage:
+         *
+         * {{moduleLabelContainer 'Accounts' 'lg'}}
+         *
+         * When the Accounts color is set to "green", the above returns:
+         *
+         * label-module label-module-size-lg label-module-color-green
+         *
+         * @param {string} module The name of the module
+         * @param {string} size The size of the label to create ('sm' or 'lg'), default is 'sm'
+         */
+        Handlebars.registerHelper('moduleLabelContainer', function(module, size) {
+            let moduleMeta = app.metadata.getModule(module) || {};
+            let color = moduleMeta.color || 'ocean';
+            size = _.contains(['sm', 'lg'], size) ? size : 'sm';
+            return `label label-module label-module-size-${size} label-module-color-${color}`;
+        });
+
+        /**
+         * Creates a field widget.
+         *
+         * Example:
+         * ```
+         * {{reportField view model=mymodel index=1 template=edit parent=fieldset}}
+         * ```
+         *
+         * @param {View} view Parent view
+         * @param {Object} [options] Optional params to pass to the field.
+         * @param {Backbone.Model} [options.model] The model associated with the field.
+         * @param {string} [options.template] The name of the template to be used.
+         * @param {Field} [options.parent] The parent field of this field.
+         * @return {Handlebars.SafeString} HTML placeholder for the widget.
+         */
+        Handlebars.registerHelper('reportField', function(view, options) {
+            const parentModel = options.hash.model;
+            const index = options.hash.index;
+            const html = options.hash.html;
+            const model = parentModel.get(index);
+
+            // we need to dereference this, because we might change its type
+            let self = this;
+
+            // do try-catch because JSON.parse might throw error on some poorly formatted strings
+            try {
+                self = app.utils.deepCopy(this);
+            } catch (e) {
+                // we don't need to do anything on error catch
+                // it will use the first init of currentContext
+            }
+
+            // change type to text when we encounter a relate field without id
+            if (_.isEmpty(model.get('id')) && self.link) {
+                self.type = 'text';
+                self.link = false;
+            }
+
+            if (self.type === 'currency') {
+                // do not show transactional values on reports
+                self.showTransactionalAmount = false;
+                self.skip_preferred_conversion = true;
+            }
+
+            const field = SUGAR.App.view.createField({
+                def: self,
+                viewDefs: self,
+                view: view,
+                model: model,
+                viewName: options.hash.template
+            });
+
+            if (options.hash.parent && _.isArray(options.hash.parent.fields)) {
+                options.hash.parent.fields.push(field);
+            }
+
+            if (html) {
+                if (field.type === 'enum') {
+                    if (_.has(self, 'options')) {
+                        field.items = app.lang.getAppListStrings(self.options);
+                    } else if (_.has(self, 'function') && !_.isUndefined(view.data.functionOptions) &&
+                        !_.isUndefined(view.data.functionOptions[self.function])) {
+                        field.items = view.data.functionOptions[self.function];
+                    }
+                }
+                field.render();
+
+                if (field.type === 'image' && field.value) {
+                    field.resizeWidget();
+                }
+
+                return field.$el.html();
+            }
+
+            return field.getPlaceholder();
+        });
+
+        /**
+         * Sanitize user-controlled HTML
+         *
+         * Usage:
+         * {{#sanitize}}
+         *     {{{value}}}
+         * {{/sanitize}}
+         *
+         * @return {Handlebars.SafeString} sanitized HTML.
+         */
+        Handlebars.registerHelper('sanitize', function(options) {
+            return new Handlebars.SafeString(DOMPurify.sanitize(options.fn(this), {ADD_ATTR: ['target']}));
         });
     });
 })(SUGAR.App);

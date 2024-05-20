@@ -212,6 +212,12 @@
         }
       }
     }
+
+    .dataTable.table-striped thead {
+      th:nth-last-child(2)::after {
+        display: block;
+      }
+    }
   }
 
   /* reset grid */
@@ -295,8 +301,7 @@ body.sugar-dark-theme {
     .headerpane {
       width: calc(~"34.042553198% + 1px");
       right: auto;
-      padding: 0 5px;
-      margin-left: -1px;
+      padding: 0 5px 0 4px;
       z-index: 1;
 
       .record-cell {
@@ -622,6 +627,8 @@ body.sugar-dark-theme {
 .agent_workbench_dashboard,
 .console_dashboard {
   .toggleless-filterpanel {
+    background: @multiLineBackground;
+
     .filter-definition-container {
       max-height: 215px;
       .overflow-auto();
@@ -722,10 +729,14 @@ body.sugar-dark-theme {
   .console_dashboard {
     display: flex;
     flex-direction: column;
-    height: calc(~'100% - 48px');
+    height: calc(~'100% - 40px');
+
+    .grid-stack-item {
+      .pt-3();
+    }
 
     .grid-stack-item:last-child {
-      padding-bottom: 20px;
+      .mb-5();
     }
   }
 

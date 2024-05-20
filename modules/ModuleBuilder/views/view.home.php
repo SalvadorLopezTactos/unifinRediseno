@@ -11,7 +11,12 @@
  */
 class ViewHome extends SugarView
 {
-	/**
+    /**
+     * @var mixed|array<mixed, array<string, string>>|array<mixed, array<string, string|class-string<\ModuleBuilder>>>|array<mixed, array<string, mixed>>
+     */
+    public $buttons;
+
+    /**
 	 * @see SugarView::_getModuleTitleParams()
 	 */
 	protected function _getModuleTitleParams($browserTitle = false)

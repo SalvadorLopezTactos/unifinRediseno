@@ -71,7 +71,7 @@ class SugarWidgetFieldCurrency extends SugarWidgetFieldInt
 	        $field_name = $layout_def['name'];
 	        $module = $field_def['module'];
 
-            $div_id = htmlspecialchars($module . "&$record&$field_name");
+            $div_id = htmlspecialchars($module . "&$record&$field_name", ENT_COMPAT);
             return <<<HTML
 <div id="{$div_id}">{$display}</div>
 HTML;
@@ -99,9 +99,33 @@ HTML;
 
         return SugarCurrency::formatAmountUserLocale($value, $format_id);
     }
+
+    /**
+     * Get currency value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        $value = $this->displayListPlain($layoutDef);
+
+        return $value;
+    }
+
  function queryFilterEquals(&$layout_def)
  {
-     return $this->_get_column_select($layout_def)."=".$GLOBALS['db']->quote(unformat_number($layout_def['input_name0']))."\n";
+        $column = $this->_get_column_select($layout_def);
+        $value = (float)unformat_number($layout_def['input_name0'] ?? '');
+
+        $bottomInterval = $value - 0.01;
+        $topInterval = $value + 0.01;
+
+        $bottomCondition = '(' . $column . '>' . $GLOBALS['db']->quote($bottomInterval);
+        $topCondition = $column . '<' . $GLOBALS['db']->quote($topInterval) . ')';
+
+        return $bottomCondition . ' AND ' . $topCondition . ' ';
  }
 
  function queryFilterNot_Equals(&$layout_def)
@@ -234,7 +258,7 @@ HTML;
         }
         else
         {
-            $key = strtoupper(isset($layout_def['varname']) ? $layout_def['varname'] : $this->_get_column_alias($layout_def));
+            $key = strtoupper($layout_def['varname'] ?? $this->_get_column_alias($layout_def));
             if ( $this->isSystemCurrency($layout_def) )
             {
                 $currency_id = '-99';

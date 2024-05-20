@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'היסטוריה',
     'LBL_PMSE_LABEL_NOTES' => 'הצג פתקים',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'הוסף פתקים',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'שלח ל-DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'בחר...',
     'LBL_PMSE_FORM_LABEL_USER' => 'משתמש',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'האם אתה בטוח שברצונך לאשר תהליך זה?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'האם אתה בטוח שברצונך לדחות תהליך זה?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'האם אתה בטוח שברצונך לנתב תהליך זה?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'בטוח שברצונך לשלוח את התהליך ל-DocuSign?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'התהליך אושר בהצלחה',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'התהליך נדחה בהצלחה',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'התהליך נותב בהצלחה',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'הצלחת לשלוח את התהליך ל-DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'התהליך שאתה מנסה להציג סגור.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'התהליך שאתה מנסה להציג אינו זמין כעת.',
 

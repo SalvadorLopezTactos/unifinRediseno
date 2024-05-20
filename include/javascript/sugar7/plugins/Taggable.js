@@ -11,23 +11,20 @@
 (function (app) {
     // This plugin depends on the Filters module being enabled.
     app.events.on("app:init", function () {
-        var tagTemplate = Handlebars.compile('<span class="label label-{{module}} sugar_tag"><a href="#{{buildRoute module=module id=id}}">{{name}}</a></span>'),
-            tagInEditTemplate = Handlebars.compile('<span class="label label-{{module}} sugar_tag" contenteditable="false"><a>{{name}}</a></span>'),
-            tagListOptionTemplate = Handlebars.compile('<li{{#if noAccess}} class="disabled"{{/if}}><a><div class="label label-module-mini label-{{module}} pull-left">{{moduleIconLabel module}}</div>{{{htmlName}}}{{#if noAccess}}<div class="add-on">{{str "LBL_NO_ACCESS_LOWER"}}</div>{{/if}}</a></li>'),
-            tagTextTemplate = Handlebars.compile('@[{{module}}:{{id}}:{{name}}]'),
-            taggingHtml = '<span class="sugar_tagging">&nbsp;</span>',
-            tagListContainerHtml = '<ul class="dropdown-menu activitystream-tag-dropdown"></ul>',
-            mention = '@',
-            reference = '#',
-            keycode_at = 64,
-            keycode_hash = 35,
-            keycode_esc = 27,
-            keycode_enter = 13,
-            keycode_tab = 9,
-            keycode_up = 38,
-            keycode_down = 40,
-            tagRegExp = /@\[([\w]+):([\d\w\-]+):(.+?)\]/g,
-            nbspRegExp = /&nbsp;/g;
+        let tagTextTemplate = Handlebars.compile('@[{{module}}:{{id}}:{{name}}]');
+        let taggingHtml = '<span class="sugar_tagging">&nbsp;</span>';
+        let tagListContainerHtml = '<ul class="dropdown-menu activitystream-tag-dropdown"></ul>';
+        let mention = '@';
+        let reference = '#';
+        let keycodeAt = 64;
+        let keycodeHash = 35;
+        let keycodeEsc = 27;
+        let keycodeEnter = 13;
+        let keycodeTab = 9;
+        let keycodeUp = 38;
+        let keycodeDown = 40;
+        let tagRegExp = /@\[([\w]+):([\d\w\-]+):(.+?)\]/g;
+        let nbspRegExp = /&nbsp;/g;
 
         app.plugins.register('Taggable', ['view', 'field'], {
             events: {
@@ -60,6 +57,43 @@
                         component._resetTaggable();
                     }
                 });
+
+                this.useAvatarNamePills();
+            },
+
+            /**
+             * Use avatar and text pills
+             */
+            useAvatarNamePills: function() {
+                this.tagTemplate = Handlebars.compile(
+                    '<span class="label label-module-color-{{color}} sugar_tag">' +
+                    '<a href="#{{buildRoute module=module id=id}}">{{name}}</a></span>'
+                );
+                this.tagInEditTemplate = Handlebars.compile(
+                    '<span>{{moduleLabel module "sm" class="mr-2" contenteditable="false"}}<a>{{name}}</a></span>'
+                );
+                this.tagListOptionTemplate = Handlebars.compile('<li{{#if noAccess}} class="disabled"{{/if}}>' +
+                    '<a>{{moduleLabel module "sm" class="pull-left mr-2"}}{{{htmlName}}}{{#if noAccess}}' +
+                    '<div class="add-on">{{str "LBL_NO_ACCESS_LOWER"}}</div>{{/if}}</a></li>');
+            },
+
+            /**
+             * Use square pills
+             */
+            useSquarePills: function() {
+                this.tagTemplate = Handlebars.compile(
+                    '<span class="label label-{{module}} sugar_tag">' +
+                    '<a href="#{{buildRoute module=module id=id}}">{{name}}</a></span>'
+                );
+                this.tagInEditTemplate = Handlebars.compile(
+                    '<span class="label label-{{module}} sugar_tag" contenteditable="false">' +
+                    '<a>{{name}}</a></span>'
+                );
+                this.tagListOptionTemplate = Handlebars.compile(
+                    '<li{{#if noAccess}} class="disabled"{{/if}}><a>' +
+                    '{{moduleLabel module "sm" class="pull-left mr-2 initial"}}{{{htmlName}}}{{#if noAccess}}' +
+                    '<div class="add-on">{{str "LBL_NO_ACCESS_LOWER"}}</div>{{/if}}</a></li>'
+                );
             },
 
             /**
@@ -116,7 +150,7 @@
                 ];
 
                 if (text && (text.length > 0)) {
-                    html = text.replace(tagRegExp, function(str, module, id, name) {
+                    html = text.replace(tagRegExp, _.bind(function(str, module, id, name) {
                         // Support for Value Erased and No data available
                         if (_.contains(labelNames, name)) {
                             name = app.lang.get(name, module);
@@ -127,8 +161,10 @@
                         name = new Handlebars.SafeString(name);
 
                         module = (module === 'Users') ? 'Employees' : module;
-                        return tagTemplate({module: module, id: id, name: name});
-                    });
+
+                        let moduleMeta = app.metadata.getModule(module);
+                        return this.tagTemplate({module: module, id: id, name: name, color: moduleMeta.color});
+                    }, this));
                 }
 
                 return html.trim();
@@ -164,8 +200,8 @@
                 if (!this._taggableEnabled) {
                     // enable taggable typeahead when @ or # is pressed
                     switch (event.which) {
-                        case keycode_at:
-                        case keycode_hash:
+                        case keycodeAt:
+                        case keycodeHash:
                             this._enableTaggable();
                             break;
                     }
@@ -184,9 +220,9 @@
                 if (this._taggableEnabled && !this._taggableListOpen) {
                     switch (event.which) {
                         // reset typeahead when escape, enter, or tab is pressed
-                        case keycode_esc:
-                        case keycode_enter:
-                        case keycode_tab:
+                        case keycodeEsc:
+                        case keycodeEnter:
+                        case keycodeTab:
                             event.preventDefault();
                             this._resetTaggable();
                             break;
@@ -197,23 +233,23 @@
                 if (this._taggableEnabled && (this._taggableListOpen === true)) {
                     switch (event.which) {
                         // remove typeahead when escape key is pressed
-                        case keycode_esc:
+                        case keycodeEsc:
                             event.preventDefault();
                             this._resetTaggable();
                             break;
                         // select the currently selected tag
-                        case keycode_enter:
-                        case keycode_tab:
+                        case keycodeEnter:
+                        case keycodeTab:
                             event.preventDefault();
                             this._getCurrentlyActiveOption().click();
                             break;
                         // select the option above the currently selected tag
-                        case keycode_up:
+                        case keycodeUp:
                             event.preventDefault();
                             this._selectNextListOption(false);
                             break;
                         // select the option below the currently selected tag
-                        case keycode_down:
+                        case keycodeDown:
                             event.preventDefault();
                             this._selectNextListOption(true);
                             break;
@@ -257,7 +293,8 @@
                 if (this._taggableEnabled) {
                     // Do not perform search if enter, tab, up arrow, or down arrow has been pressed while tag search
                     // result is open.
-                    if (this._taggableListOpen && (event.which === keycode_enter || event.which === keycode_tab || event.which == keycode_up || event.which == keycode_down)) {
+                    let denyKeyCodes = [keycodeEnter, keycodeTab, keycodeUp, keycodeDown];
+                    if (this._taggableListOpen && _.contains(denyKeyCodes, event.which)) {
                         return;
                     }
 
@@ -434,7 +471,7 @@
                     } else {
                         selection = window.getSelection();
                         range = selection.getRangeAt(0);
-                        $tagHtml = $(tagInEditTemplate(taggableData));
+                        $tagHtml = $(this.tagInEditTemplate(taggableData));
 
                         range.selectNode($tagToReplace.get(0));
                         range.insertNode($tagHtml.get(0));
@@ -594,7 +631,7 @@
                             noAccess: (model.get('has_access') === false)
                         };
 
-                        $tagListOption = $(tagListOptionTemplate(data)).data(data);
+                        $tagListOption = $(this.tagListOptionTemplate(data)).data(data);
                         $tagList.append($tagListOption);
                     }, this);
 

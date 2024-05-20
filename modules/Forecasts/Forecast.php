@@ -66,6 +66,12 @@ class Forecast extends SugarBean
      */
     public static $settings = array();
 
+    private static $settingsDefaults = [
+        'is_setup' => 0,
+        'sales_stage_won' => [],
+        'sales_stage_lost' => [],
+    ];
+
 	public function __construct()
 	{
 		global $current_user;
@@ -187,7 +193,7 @@ class Forecast extends SugarBean
     }
 
 
-    function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
         $forecast_fields = $this->get_list_view_array();
 
@@ -295,7 +301,7 @@ class Forecast extends SugarBean
         /* @var $admin Administration */
         if (empty(static::$settings) || $reload === true) {
             $admin = BeanFactory::newBean('Administration');
-            static::$settings = $admin->getConfigForModule('Forecasts');
+            static::$settings = array_merge(self::$settingsDefaults, $admin->getConfigForModule('Forecasts'));
         }
 
         return static::$settings;
@@ -309,6 +315,43 @@ class Forecast extends SugarBean
     {
         $forecast_config = Forecast::getSettings();
         return !empty($forecast_config['is_setup']);
+    }
+
+    /**
+     * Recursively retrieves User IDs of all Users under the reports_to
+     * hierarchy of the Users with the given IDs
+     *
+     * @param array $userIds the IDs of the Users whose reportee IDs should be retrieved
+     * @param integer $levels if null, infinite levels of the hierarchy will be searched.
+     *                        if an integer, only $levels levels of the hierarchy will be searched
+     * @return array the unique list of IDs of Users that fall under the reports_to hierarchy
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public static function getAllReporteesIds($userIds, $levels = null)
+    {
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+        $qb->from('users');
+        $qb->select('id');
+        $qb->where(
+            $qb->expr()->in(
+                'reports_to_id',
+                $qb->createPositionalParameter($userIds, \Doctrine\DBAL\Connection::PARAM_STR_ARRAY)
+            )
+        );
+        $qb->andWhere($qb->expr()->eq('deleted', 0));
+        $result = $qb->execute()->fetchAllAssociative();
+        $ids = array_column($result, 'id');
+
+        if (!empty($ids)) {
+            if (is_integer($levels) && $levels > 0) {
+                $ids = array_merge($ids, self::getAllReporteesIds($ids, $levels - 1));
+            } else {
+                $ids = array_merge($ids, self::getAllReporteesIds($ids));
+            }
+        }
+
+        return array_unique($ids);
     }
 }
 function getTimePeriodsDropDownForForecasts(){

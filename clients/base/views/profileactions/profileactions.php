@@ -52,6 +52,16 @@ $viewdefs['base']['view']['profileactions'] = array_merge(
             'acl_action' => 'admin',
             'icon' => 'sicon-settings',
         ),
+        [
+            'label' => 'LNK_MOBILE',
+            'css_class' => 'profileactions-mobile',
+            'icon' => 'sicon-mobile-lg',
+        ],
+        [
+            'label' => 'LBL_SHORTCUTS',
+            'css_class' => 'profileactions-shortcuts',
+            'icon' => 'sicon-shortcuts-lg',
+        ],
         array(
             'route' => '#about',
             'label' => 'LNK_ABOUT',

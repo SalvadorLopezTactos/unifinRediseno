@@ -17,112 +17,197 @@
 
 namespace Google\Service\Networkconnectivity;
 
-class Spoke extends \Google\Collection
+class Spoke extends \Google\Model
 {
-  protected $collection_key = 'linkedVpnTunnels';
+  /**
+   * @var string
+   */
   public $createTime;
+  /**
+   * @var string
+   */
   public $description;
+  /**
+   * @var string
+   */
   public $hub;
+  /**
+   * @var string[]
+   */
   public $labels;
-  public $linkedInterconnectAttachments;
-  protected $linkedRouterApplianceInstancesType = RouterApplianceInstance::class;
-  protected $linkedRouterApplianceInstancesDataType = 'array';
-  public $linkedVpnTunnels;
+  protected $linkedInterconnectAttachmentsType = LinkedInterconnectAttachments::class;
+  protected $linkedInterconnectAttachmentsDataType = '';
+  protected $linkedRouterApplianceInstancesType = LinkedRouterApplianceInstances::class;
+  protected $linkedRouterApplianceInstancesDataType = '';
+  protected $linkedVpnTunnelsType = LinkedVpnTunnels::class;
+  protected $linkedVpnTunnelsDataType = '';
+  /**
+   * @var string
+   */
   public $name;
+  /**
+   * @var string
+   */
   public $state;
+  /**
+   * @var string
+   */
   public $uniqueId;
+  /**
+   * @var string
+   */
   public $updateTime;
 
+  /**
+   * @param string
+   */
   public function setCreateTime($createTime)
   {
     $this->createTime = $createTime;
   }
+  /**
+   * @return string
+   */
   public function getCreateTime()
   {
     return $this->createTime;
   }
+  /**
+   * @param string
+   */
   public function setDescription($description)
   {
     $this->description = $description;
   }
+  /**
+   * @return string
+   */
   public function getDescription()
   {
     return $this->description;
   }
+  /**
+   * @param string
+   */
   public function setHub($hub)
   {
     $this->hub = $hub;
   }
+  /**
+   * @return string
+   */
   public function getHub()
   {
     return $this->hub;
   }
+  /**
+   * @param string[]
+   */
   public function setLabels($labels)
   {
     $this->labels = $labels;
   }
+  /**
+   * @return string[]
+   */
   public function getLabels()
   {
     return $this->labels;
   }
-  public function setLinkedInterconnectAttachments($linkedInterconnectAttachments)
+  /**
+   * @param LinkedInterconnectAttachments
+   */
+  public function setLinkedInterconnectAttachments(LinkedInterconnectAttachments $linkedInterconnectAttachments)
   {
     $this->linkedInterconnectAttachments = $linkedInterconnectAttachments;
   }
+  /**
+   * @return LinkedInterconnectAttachments
+   */
   public function getLinkedInterconnectAttachments()
   {
     return $this->linkedInterconnectAttachments;
   }
   /**
-   * @param RouterApplianceInstance[]
+   * @param LinkedRouterApplianceInstances
    */
-  public function setLinkedRouterApplianceInstances($linkedRouterApplianceInstances)
+  public function setLinkedRouterApplianceInstances(LinkedRouterApplianceInstances $linkedRouterApplianceInstances)
   {
     $this->linkedRouterApplianceInstances = $linkedRouterApplianceInstances;
   }
   /**
-   * @return RouterApplianceInstance[]
+   * @return LinkedRouterApplianceInstances
    */
   public function getLinkedRouterApplianceInstances()
   {
     return $this->linkedRouterApplianceInstances;
   }
-  public function setLinkedVpnTunnels($linkedVpnTunnels)
+  /**
+   * @param LinkedVpnTunnels
+   */
+  public function setLinkedVpnTunnels(LinkedVpnTunnels $linkedVpnTunnels)
   {
     $this->linkedVpnTunnels = $linkedVpnTunnels;
   }
+  /**
+   * @return LinkedVpnTunnels
+   */
   public function getLinkedVpnTunnels()
   {
     return $this->linkedVpnTunnels;
   }
+  /**
+   * @param string
+   */
   public function setName($name)
   {
     $this->name = $name;
   }
+  /**
+   * @return string
+   */
   public function getName()
   {
     return $this->name;
   }
+  /**
+   * @param string
+   */
   public function setState($state)
   {
     $this->state = $state;
   }
+  /**
+   * @return string
+   */
   public function getState()
   {
     return $this->state;
   }
+  /**
+   * @param string
+   */
   public function setUniqueId($uniqueId)
   {
     $this->uniqueId = $uniqueId;
   }
+  /**
+   * @return string
+   */
   public function getUniqueId()
   {
     return $this->uniqueId;
   }
+  /**
+   * @param string
+   */
   public function setUpdateTime($updateTime)
   {
     $this->updateTime = $updateTime;
   }
+  /**
+   * @return string
+   */
   public function getUpdateTime()
   {
     return $this->updateTime;

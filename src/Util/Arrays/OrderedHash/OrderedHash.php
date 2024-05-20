@@ -117,7 +117,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
     public function bottom()
     {
         if ($this->isEmpty()) {
-            throw new \RuntimeException(sprintf('%s is empty', __CLASS__));
+            throw new \RuntimeException(sprintf('%s is empty', self::class));
         }
 
         return $this->head;
@@ -128,7 +128,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->elements);
     }
@@ -138,6 +138,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      *
      * @return Element
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->current;
@@ -166,6 +167,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      *
      * @return null|string|int
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         $current = $this->current();
@@ -199,7 +201,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
     /**
      * Moves the iterator to the next element.
      */
-    public function next()
+    public function next(): void
     {
         $current = $this->current();
 
@@ -214,7 +216,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      * @param string|int $key
      * @return bool
      */
-    public function offsetExists($key)
+    public function offsetExists($key): bool
     {
         return array_key_exists($key, $this->elements);
     }
@@ -226,6 +228,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      * @return null|Element NULL is returned when the element isn't found.
      * @throws \OutOfRangeException Thrown when the key is not a string or integer.
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($key)
     {
         if (!(is_string($key) || is_int($key))) {
@@ -244,7 +247,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      * @param mixed $value
      * @throws \OutOfRangeException Thrown when the key is not a string or integer.
      */
-    public function offsetSet($key, $value)
+    public function offsetSet($key, $value): void
     {
         if (!(is_string($key) || is_int($key))) {
             throw new \OutOfRangeException('Offset invalid or out of range');
@@ -265,7 +268,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      * @uses OrderedHash::offsetGet to retrieve the element to remove.
      * @param string|int $key
      */
-    public function offsetUnset($key)
+    public function offsetUnset($key): void
     {
         $element = $this->offsetGet($key);
 
@@ -305,7 +308,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
     public function pop()
     {
         if ($this->isEmpty()) {
-            throw new \RuntimeException(sprintf('%s is empty', __CLASS__));
+            throw new \RuntimeException(sprintf('%s is empty', self::class));
         }
 
         $tail = $this->top();
@@ -340,7 +343,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
     /**
      * Sets the iterator to the beginning of the hash.
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->current = $this->bottom();
     }
@@ -354,7 +357,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
     public function shift()
     {
         if ($this->isEmpty()) {
-            throw new \RuntimeException(sprintf('%s is empty', __CLASS__));
+            throw new \RuntimeException(sprintf('%s is empty', self::class));
         }
 
         $head = $this->bottom();
@@ -394,7 +397,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
     public function top()
     {
         if ($this->isEmpty()) {
-            throw new \RuntimeException(sprintf('%s is empty', __CLASS__));
+            throw new \RuntimeException(sprintf('%s is empty', self::class));
         }
 
         return $this->tail;
@@ -416,7 +419,7 @@ class OrderedHash implements \Iterator, \ArrayAccess, \Countable
      *
      * @return bool
      */
-    public function valid()
+    public function valid(): bool
     {
         return !is_null($this->current());
     }

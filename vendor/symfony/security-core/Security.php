@@ -13,6 +13,7 @@ namespace Symfony\Component\Security\Core;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -20,12 +21,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @final
  */
-class Security
+class Security implements AuthorizationCheckerInterface
 {
-    const ACCESS_DENIED_ERROR = '_security.403_error';
-    const AUTHENTICATION_ERROR = '_security.last_error';
-    const LAST_USERNAME = '_security.last_username';
-    const MAX_USERNAME_LENGTH = 4096;
+    public const ACCESS_DENIED_ERROR = '_security.403_error';
+    public const AUTHENTICATION_ERROR = '_security.last_error';
+    public const LAST_USERNAME = '_security.last_username';
+    public const MAX_USERNAME_LENGTH = 4096;
 
     private $container;
 
@@ -34,17 +35,16 @@ class Security
         $this->container = $container;
     }
 
-    /**
-     * @return UserInterface|null
-     */
-    public function getUser()
+    public function getUser(): ?UserInterface
     {
         if (!$token = $this->getToken()) {
             return null;
         }
 
         $user = $token->getUser();
-        if (!\is_object($user)) {
+
+        // @deprecated since Symfony 5.4, $user will always be a UserInterface instance
+        if (!$user instanceof UserInterface) {
             return null;
         }
 
@@ -56,19 +56,14 @@ class Security
      *
      * @param mixed $attributes
      * @param mixed $subject
-     *
-     * @return bool
      */
-    public function isGranted($attributes, $subject = null)
+    public function isGranted($attributes, $subject = null): bool
     {
         return $this->container->get('security.authorization_checker')
             ->isGranted($attributes, $subject);
     }
 
-    /**
-     * @return TokenInterface|null
-     */
-    public function getToken()
+    public function getToken(): ?TokenInterface
     {
         return $this->container->get('security.token_storage')->getToken();
     }

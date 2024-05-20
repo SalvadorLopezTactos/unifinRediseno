@@ -29,13 +29,15 @@ function packSortingHat(Phar $archive, $params, $installdefs = null, $internalPa
 
     $params = array_merge($defaults, $params);
 
-    file_put_contents(dirname(__FILE__) . '/Scanner/version.json', json_encode($params, true));
+    file_put_contents(__DIR__ . '/Scanner/version.json', json_encode($params, true));
 
     $files = array(
         'Scanner/Scanner.php',
         'Scanner/ScannerCli.php',
         'Scanner/ScannerWeb.php',
         'Scanner/ScannerMeta.php',
+        'Scanner/Checks/Dbal.php',
+        'Scanner/Checks/PasswordHashAlgo.php',
         'Scanner/package-checklist.php',
         'Scanner/version.json',
         'language/en_us.lang.php',
@@ -44,7 +46,7 @@ function packSortingHat(Phar $archive, $params, $installdefs = null, $internalPa
         $archive->addFile($f, str_replace('phar://' . __DIR__ . '/smarty.phar/', '', $f));
     }
     foreach ($files as $file) {
-        $archive->addFile(dirname(__FILE__) . '/' . $file, $internalPath . $file);
+        $archive->addFile(__DIR__ . '/' . $file, $internalPath . $file);
         if(is_array($installdefs)) {
             $installdefs['copy'][] = array("from" => "<basepath>/$internalPath$file", "to" => $internalPath . $file);
         }
@@ -91,8 +93,8 @@ require_once "Scanner/ScannerCli.php"; HealthCheckScannerCli::start($argv); __HA
 STUB;
 $phar->setStub($stub);
 
-if (file_exists(dirname(__FILE__) . '/Scanner/version.json')) {
-    unlink(dirname(__FILE__) . '/Scanner/version.json');
+if (file_exists(__DIR__ . '/Scanner/version.json')) {
+    unlink(__DIR__ . '/Scanner/version.json');
 }
 
 exit(0);

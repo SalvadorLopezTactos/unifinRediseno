@@ -448,7 +448,7 @@ $mod_strings = array(
     'ERR_INVALID_EMAIL_ADDRESS' => 'Invalid email address',
     'ERR_INVALID_SENDER' => "The sender's email address is invalid. Please correct this and try again.",
 
-    'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Emails Focus Drawer',
+    'LBL_EMAILS_FOCUS_DRAWER_DASHBOARD' => 'Emails Focus Dashboard',
 
     'LBL_EMAILS_RECORD_DASHBOARD' => 'Emails Record Dashboard',
 

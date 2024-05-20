@@ -54,7 +54,7 @@ require_once 'vendor/Zend/Gdata/Extension/Rating.php';
  */
 class Zend_Gdata_YouTube_ActivityEntry extends Zend_Gdata_Entry
 {
-    const ACTIVITY_CATEGORY_SCHEME =
+    public const ACTIVITY_CATEGORY_SCHEME =
         'http://gdata.youtube.com/schemas/2007/userevents.cat';
 
     /**

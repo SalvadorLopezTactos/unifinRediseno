@@ -40,7 +40,7 @@ class ReportsSugarpdfSummary_combo extends ReportsSugarpdfReports
                 // check image size is not '0'
                 if (file_exists($imageFile) && getimagesize($imageFile) > 0) {
                     $this->AddPage();
-                    list($width, $height) = getimagesize($imageFile);
+                    [$width, $height] = getimagesize($imageFile);
                     $imageWidthAsUnits = $this->pixelsToUnits($width);
                     $imageHeightAsUnits = $this->pixelsToUnits($height);
 

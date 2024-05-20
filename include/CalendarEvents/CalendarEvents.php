@@ -83,10 +83,10 @@ class CalendarEvents
         $params['until'] = $this->formatDateTime('date', $parentBean->repeat_until, 'user');
         $params['dow'] = $parentBean->repeat_dow;
 
-        $params['selector'] = isset($parentBean->repeat_selector) ? $parentBean->repeat_selector : '';
-        $params['days'] = isset($parentBean->repeat_days) ? $parentBean->repeat_days : '';
-        $params['ordinal'] = isset($parentBean->repeat_ordinal) ? $parentBean->repeat_ordinal : '';
-        $params['unit'] = isset($parentBean->repeat_unit) ? $parentBean->repeat_unit : '';
+        $params['selector'] = $parentBean->repeat_selector ?? '';
+        $params['days'] = $parentBean->repeat_days ?? '';
+        $params['ordinal'] = $parentBean->repeat_ordinal ?? '';
+        $params['unit'] = $parentBean->repeat_unit ?? '';
 
         return $params;
     }
@@ -148,7 +148,7 @@ class CalendarEvents
         $sf = SugarFieldHandler::getSugarField('tag');
         $parentTags = $sf->getOriginalTags($parentTagBeans);
         $childTags = $sf->getOriginalTags($childTagBeans);
-        list($addTags, $removeTags) = $sf->getChangedValues($childTags, $parentTags);
+        [$addTags, $removeTags] = $sf->getChangedValues($childTags, $parentTags);
 
         // Handle removal of tags
         $sf->removeTagsFromBean($childBean, $childTagBeans, 'tag_link', $removeTags);

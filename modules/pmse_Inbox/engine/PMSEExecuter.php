@@ -528,9 +528,7 @@ class PMSEExecuter
         switch ($executionMode) {
             case 'RESUME_EXECUTION':
                 $executionResult = $pmseElement->run($flowData, $bean, $externalAction, $arguments);
-                $executionResult['flow_action'] = isset($executionResult['flow_action']) ?
-                    $executionResult['flow_action'] :
-                    'UPDATE';
+                $executionResult['flow_action'] = $executionResult['flow_action'] ?? 'UPDATE';
                 $executionResult['flow_id'] = $flowData['id'];
                 break;
             case 'ASYNC':
@@ -556,6 +554,11 @@ class PMSEExecuter
     public function validateExecutionTime($elementElapsedTime)
     {
         $this->executionTime += $elementElapsedTime;
+        if (php_sapi_name() == 'cli') {
+            // If it's from command line such as cron, do not limit the execution time
+            // as it may need to handle many BPM processes.
+            return $this->executionTime;
+        }
         $maxExecutionTime = ini_get('max_execution_time');
         if ($maxExecutionTime == 0) {
             $maxExecutionTime = $this->maxExecutionTimeout;

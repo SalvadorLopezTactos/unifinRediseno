@@ -20,13 +20,13 @@
   */
 class TimeDate
 {
-	const DB_DATE_FORMAT = 'Y-m-d';
-	const DB_TIME_FORMAT = 'H:i:s';
+    public const DB_DATE_FORMAT = 'Y-m-d';
+    public const DB_TIME_FORMAT = 'H:i:s';
     // little optimization
-	const DB_DATETIME_FORMAT = 'Y-m-d H:i:s';
-	const RFC2616_FORMAT = 'D, d M Y H:i:s \G\M\T';
+    public const DB_DATETIME_FORMAT = 'Y-m-d H:i:s';
+    public const RFC2616_FORMAT = 'D, d M Y H:i:s \G\M\T';
 
-    const SECONDS_IN_A_DAY = 86400;
+    public const SECONDS_IN_A_DAY = 86400;
 
     // Standard DB date/time formats
     // they are constant, vars are for compatibility
@@ -997,7 +997,7 @@ class TimeDate
     protected function _get_midnight($format = null)
     {
         $zero = new DateTime("@0", self::$gmtTimezone);
-        return $zero->format($format?$format:$this->get_time_format());
+        return $zero->format($format ?: $this->get_time_format());
     }
 
     /**
@@ -1016,7 +1016,7 @@ class TimeDate
      */
     protected function _convert($date, $fromFormat, $fromTZ, $toFormat, $toTZ, $expand = false)
     {
-        $date = trim($date);
+        $date = trim((string)$date);
         if (empty($date)) {
             return $date;
         }
@@ -1354,6 +1354,7 @@ class TimeDate
      */
     public function getDayStartEndGMT($date, User $user = null)
     {
+        $result = [];
         if ($date instanceof DateTime) {
             $min = clone $date;
             $min->setTimezone($this->_getUserTZ($user));
@@ -1602,7 +1603,7 @@ class TimeDate
 		}
 		elseif ( isset( $time['ts']))
 		{
-			return $this->fromTimestamp($time['ts']);
+            return static::fromTimestamp($time['ts']);
 		}
 		elseif ( isset( $time['date_str']))
 		{
@@ -1654,7 +1655,7 @@ class TimeDate
 	 */
 	public function getDatePart($datetime)
 	{
-	    list($date, $time) = $this->split_date_time($datetime);
+        [$date, $time] = $this->split_date_time($datetime);
 	    return $date;
 	}
 
@@ -1666,7 +1667,7 @@ class TimeDate
 	 */
 	public function getTimePart($datetime)
 	{
-	    list($date, $time) = $this->split_date_time($datetime);
+        [$date, $time] = $this->split_date_time($datetime);
 	    return $time;
 	}
 
@@ -1909,6 +1910,7 @@ class TimeDate
      */
     function handleOffsetMax($date)
     {
+        $gmtDateTime = [];
         $min = new DateTime($date, $this->_getUserTZ());
         $min->setTime(0, 0);
         $max = new DateTime($date, $this->_getUserTZ());
@@ -1995,12 +1997,12 @@ class TimeDate
         // get DST start
         while (isset($transitions[$idx]) && !$transitions[$idx]["isdst"]) $idx++;
         if(isset($transitions[$idx])) {
-        	$result["start"] = $this->fromTimestamp($transitions[$idx]["ts"])->asDb();
+            $result["start"] = static::fromTimestamp($transitions[$idx]["ts"])->asDb();
         }
         // get DST end
         while (isset($transitions[$idx]) && $transitions[$idx]["isdst"]) $idx++;
         if(isset($transitions[$idx])) {
-        	$result["end"] = $this->fromTimestamp($transitions[$idx]["ts"])->asDb();
+            $result["end"] = static::fromTimestamp($transitions[$idx]["ts"])->asDb();
         }
         return $result;
     }

@@ -146,9 +146,9 @@ class SugarUpgradeFixupEmailAddressDuplication extends UpgradeScript
                         $qb->expr()->eq('eabr.deleted', 0)
                     )
                 );
-                $qb->setParameter(1, $dup['email_address_id']);
-                $qb->setParameter(2, $dup['bean_module']);
-                $qb->setParameter(3, $dup['bean_id']);
+                $qb->setParameter(0, $dup['email_address_id']);
+                $qb->setParameter(1, $dup['bean_module']);
+                $qb->setParameter(2, $dup['bean_id']);
                 $res = $qb->execute();
 
                 $eabrCount = $dup['eabr_count'];

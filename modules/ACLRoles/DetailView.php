@@ -22,7 +22,7 @@ $categories = ACLRole::getRoleActions($_REQUEST['record']);
 $names = ACLAction::setupCategoriesMatrix($categories);
 
 // Skipping modules that have 'hidden_to_role_assignment' property
-$hidden_categories = array(
+$hidden_categories = [
     "Campaigns",
     "EmailTemplates",
     "EmailMarketing",
@@ -30,14 +30,21 @@ $hidden_categories = array(
     "PdfManager",
     "Reports",
     "ReportSchedules",
-);
+    'Metrics',
+];
+$metadataManager = MetaDataManager::getManager('base');
 foreach ($categories as $name => $category) {
     $objName = BeanFactory::getObjectName($name) ?: $name;
     if (isset($dictionary[$objName])) {
-        if (!empty($dictionary[$objName]['hidden_to_role_assignment'])) {
+        $vardefs = $dictionary[$objName];
+    } else {
+        $vardefs = $metadataManager->getVarDef($name);
+    }
+    if (!empty($vardefs)) {
+        if (!empty($vardefs['hidden_to_role_assignment'])) {
             unset($categories[$name]);
         }
-        if (!empty($dictionary[$objName]['hide_fields_to_edit_role'])) {
+        if (!empty($vardefs['hide_fields_to_edit_role'])) {
             $hidden_categories[] = $name;
         }
     }
@@ -78,8 +85,8 @@ foreach ($buttons as $button) {
 }
 
 echo getClassicModuleTitle("ACLRoles", [
-    sprintf('<a href="index.php?module=ACLRoles&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'])),
-    htmlspecialchars($role->get_summary_text()),
+    sprintf('<a href="index.php?module=ACLRoles&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'], ENT_COMPAT)),
+    htmlspecialchars($role->get_summary_text(), ENT_COMPAT),
 ], true);
 
 $hide_hide_supanels = true;

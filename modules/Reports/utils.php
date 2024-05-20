@@ -64,10 +64,10 @@ class ReportsUtilities
         $mod_strings = return_module_language($this->language, 'Reports');
         $subject = $mod_strings['ERR_REPORT_DEACTIVATED_SUBJECT'];
 
-        $report_id = htmlspecialchars($report_id);
-        $reportName = htmlspecialchars($reportName);
+        $report_id = htmlspecialchars($report_id, ENT_COMPAT);
+        $reportName = htmlspecialchars($reportName, ENT_COMPAT);
 
-        $reportUrl = $sugar_config['site_url'] . '/index.php#bwc/index.php?module=Reports&action=DetailView&record=' . urlencode($report_id);
+        $reportUrl = $sugar_config['site_url'] . '/Reports/' . urlencode($report_id);
         $body = string_format(
             $mod_strings['ERR_REPORT_DEACTIVATED'],
             array('<a href="' . $reportUrl . '">' . $reportName . '</a>', $report_id)

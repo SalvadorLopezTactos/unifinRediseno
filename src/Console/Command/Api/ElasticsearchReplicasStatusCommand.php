@@ -111,6 +111,7 @@ class ElasticsearchReplicasStatusCommand extends Command implements InstanceMode
         }
 
         $table->render();
+        return 0;
     }
 
     /**

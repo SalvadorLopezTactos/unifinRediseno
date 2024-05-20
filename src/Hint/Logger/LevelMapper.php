@@ -16,7 +16,7 @@ use Psr\Log\LogLevel;
 final class LevelMapper
 {
     // SugarLogger level to PSR LogLevel
-    const SUGAR_TO_PSR_MAP = [
+    public const SUGAR_TO_PSR_MAP = [
         'debug' => LogLevel::DEBUG,
         'info'  => LogLevel::INFO,
         'warn' => LogLevel::WARNING,
@@ -27,7 +27,7 @@ final class LevelMapper
     ];
 
     // PSR LogLevel to SugarLogger level
-    const PSR_TO_SUGAR_MAP = [
+    public const PSR_TO_SUGAR_MAP = [
         LogLevel::EMERGENCY => 'fatal',
         LogLevel::ALERT => 'fatal',
         LogLevel::CRITICAL => 'fatal',

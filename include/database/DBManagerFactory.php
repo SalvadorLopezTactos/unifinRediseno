@@ -11,7 +11,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Doctrine\DBAL\ColumnCase;
 use Doctrine\DBAL\DriverManager as DoctrineDriverManager;
+use Doctrine\DBAL\Portability\Connection as PortableConnection;
+use Doctrine\DBAL\Portability\Middleware as PortableMiddleware;
 use Doctrine\DBAL\Logging\SQLLogger;
 use Psr\Log\LoggerInterface;
 use Sugarcrm\Sugarcrm\Dbal\Connection;
@@ -197,16 +200,16 @@ class DBManagerFactory
             'connection' => $instance->getDatabase(),
         );
 
+        $configuration = new Doctrine\DBAL\Configuration();
         // we only need the to fix case on Oracle and IBM DB2, and we do not on SQL Server,
         // as its built-in stored procedures produce upper-cased keys which SqlSrvManager expects and can handle
         if ($instance->variant === 'oci8' || $instance->variant === 'ibm_db2') {
-            $params = array_merge($params, array(
-                'portability' => Connection::PORTABILITY_FIX_CASE,
-                'fetch_case' => \Doctrine\DBAL\ColumnCase::LOWER,
-            ));
+            $configuration->setMiddlewares([
+                new PortableMiddleware(PortableConnection::PORTABILITY_FIX_CASE, ColumnCase::LOWER),
+            ]);
         }
 
-        $conn = DoctrineDriverManager::getConnection($params);
+        $conn = DoctrineDriverManager::getConnection($params, $configuration);
 
         $logger = self::getDbalLogger();
         $conn->getConfiguration()->setSQLLogger($logger);
@@ -288,7 +291,7 @@ class DBManagerFactory
         while(($name = readdir($scandir)) !== false) {
             if(substr($name, -11) != "Manager.php") continue;
             if($name == "DBManager.php") continue;
-            require_once("$dir/$name");
+            require_once "$dir/$name";
             $classname = substr($name, 0, -4);
             if(!class_exists($classname)) continue;
             $re = new ReflectionClass($classname);
@@ -332,8 +335,8 @@ class DBManagerFactory
         $result = array();
         foreach($drivers as $type => $tdrivers) {
             if(empty($tdrivers)) continue;
-            if(count($tdrivers) > 1) {
-                usort($tdrivers, array(__CLASS__, "_compareDrivers"));
+            if ((is_countable($tdrivers) ? count($tdrivers) : 0) > 1) {
+                usort($tdrivers, array(self::class, "_compareDrivers"));
             }
             $result[$type] = $tdrivers[0];
         }

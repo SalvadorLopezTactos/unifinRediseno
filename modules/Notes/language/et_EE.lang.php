@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Märkmete loendi töölaud',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Märkuste kirjete töölaud',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Märkmete fookuse sahtel',
+    'LBL_EXTERNAL_USER' => 'Väline kasutaja',
+    'LBL_EXTERNAL_USER_NAME' => 'Väline kasutaja',
 
     'LBL_RELATED_CONTACT' => 'Seotud kontakt',
     'ERR_DELETE_RECORD' => 'Konto kustutamiseks täpsustage kirje numbrit.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'E-kirja tüüp',
     'LBL_EMAIL_ID' => 'E-kirja ID',
     'LBL_PHONE' => 'Telefoninumber:',
-    'LBL_PORTAL_FLAG' => 'Kas kuvada portaalis?',
+    'LBL_PORTAL_FLAG' => 'Saadaval väliselt',
     'LBL_EMBED_FLAG' => 'Kas manustada e-kirja?',
     'LBL_PRODUCT_ID' => 'Pakkumuse artikli ID:',
     'LBL_QUOTE_ID' => 'Pakkumuse ID:',

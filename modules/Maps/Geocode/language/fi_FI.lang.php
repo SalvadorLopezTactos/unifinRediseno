@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'Leveysaste',
     'LBL_LONGITUDE' => 'Pituusaste',
     'LBL_GEOCODED' => 'Geokoodattu',
+    'LBL_ERROR_MESSAGE' => 'Geokoodaus-virheviesti',
 ];

@@ -15,6 +15,7 @@ namespace Sugarcrm\Sugarcrm\CloudDrive;
 use Sugarcrm\Sugarcrm\CloudDrive\Constants\DriveType;
 use Sugarcrm\Sugarcrm\CloudDrive\Drives\GoogleDrive;
 use Sugarcrm\Sugarcrm\CloudDrive\Drives\OneDrive;
+use Sugarcrm\Sugarcrm\CloudDrive\Drives\DropboxDrive;
 
 class DriveFactory
 {
@@ -22,7 +23,7 @@ class DriveFactory
      * Get the correct drive type
      *
      * @param string $type
-     * @return GoogleDrive|OneDrive|void
+     * @return GoogleDrive|OneDrive|Dropbox|void
      */
     public static function getDrive(string $type)
     {
@@ -31,6 +32,8 @@ class DriveFactory
                 return new GoogleDrive();
             case DriveType::ONEDRIVE:
                 return new OneDrive();
+            case DriveType::DROPBOX:
+                return new DropboxDrive();
         }
     }
 }

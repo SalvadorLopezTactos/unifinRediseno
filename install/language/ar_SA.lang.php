@@ -641,32 +641,15 @@ $assigned_by_user دعاك إلى اتصال
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'بريد إلكتروني بإشعارات المهام',
-        'subject' => 'SugarCRM - مهمة $module_name المُعينة ',
-        'description' => 'يُستخدم هذا القالب عند إرسال النظام تعيين مهمة إلى مستخدم.',
-        'body' => '<div>
-<p>$assigned_by_user عيّن &nbsp;$module_name إلى&nbsp;$assigned_user.</p>
-
-<p>يمكنك مراجعة&nbsp;$module_name في:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user عَيَّن $module_name إلى $assigned_user.
-
-يمكنك مراجعة $module_name في:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'بريد إلكتروني بالتقرير المجدول',
         'subject' => 'التقرير المجدول: $report_name في $report_time',
         'description' => 'يُستخدم هذا القالب عند إرسال النظام تقرير مجدول إلى مستخدم.',
         'body' => '<div>
-<p>مرحبًا $assigned_user،</p>
-<p>مرفق هنا تقرير منشأ تلقائيًا كان قد تم جدولته لك.</p>
-<p>اسم التقرير: $report_name</p>
-<p>تاريخ ووقت تشغيل التقرير: $report_time</p>
+<p>مرحبًا $assigned_user,<br></p>
+<p>مرفق هنا تقرير منشأ تلقائيًا كان قد تم جدولته لك.<br></p>
+<p>اسم التقرير: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>تاريخ ووقت تشغيل التقرير: $report_time<br></p>
 </div>',
         'txt_body' =>
             'مرحبًا $assigned_user،
@@ -692,21 +675,6 @@ $assigned_by_user دعاك إلى اتصال
             الرجاء تسجيل الدخول إلى Sugar لعرض التعليق.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'بيانات حساب جديد',
-        'description' => 'يُستخدم هذا القالب عند إرسال مسؤول النظام لكلمة مرور جديدة لمستخدم.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>إليك اسم المستخدم وكلمة المرور المؤقتة لحسابك:</p><p>اسم المستخدم: $contact_user_user_name </p><p>كلمة المرور: $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>بعد تسجيلك الدخول باستخدام كلمة المرور الموضحة أعلاه، ربما يُطلب منك إعادة تعيين كلمة المرور إلى أخرى حسب اختيارك.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-ها هو اسم المستخدم وكلمة المرور المؤقتة الخاصة بحسابك:
-اسم المستخدم: $contact_user_user_name
-كلمة المرور : $contact_user_user_hash
-
-$config_site_url
-
-بعد قيامك بتسجيل الدخول باستخدام كلمة المرور الموضحة أعلاه، ربما يُطلب منك إعادة تعيين كلمة المرور إلى كلمة مرور أخرى حسب اختيارك.',
-        'name' => 'بريد إلكتروني بكلمة مرور أنشأها النظام',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'أعد تعيين كلمة المرور لحسابك',
         'description' => "يُستخدم هذا القالب لإرسال رابط للمستخدم للنقر فوقه لإعادة تعيين كلمة مرور حساب المستخدم.",

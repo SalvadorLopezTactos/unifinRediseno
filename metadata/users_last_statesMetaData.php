@@ -42,4 +42,21 @@ $dictionary['users_last_states'] = [
             'reportable' => false,
         ],
     ],
+    'indices' => [
+        [
+            'name' => 'users_last_statespk',
+            'type' => 'primary',
+            'fields' => [
+                'id',
+            ],
+        ],
+        [
+            'name' => 'idx_users_last_states',
+            'type' => 'index',
+            'fields' => [
+                'user_id',
+                'platform',
+            ],
+        ],
+    ],
 ];

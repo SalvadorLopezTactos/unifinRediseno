@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['Administration']['base']['layout']['administration'] = [
-    'css_class' => 'administration bg-secondary-content-background h-full',
+    'css_class' => 'administration bg-secondary-content-background',
     'components' => [
         [
             'view' => 'administration-headerpane',

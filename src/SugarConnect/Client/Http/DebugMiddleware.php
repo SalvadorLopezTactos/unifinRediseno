@@ -17,6 +17,9 @@ use GuzzleHttp\Promise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 class DebugMiddleware
 {
     /**

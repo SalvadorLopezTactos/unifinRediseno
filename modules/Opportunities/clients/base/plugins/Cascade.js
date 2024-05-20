@@ -281,11 +281,6 @@
              */
             _afterRender: function() {
                 this.bindEditActions();
-
-                // On list views, make sure the row is large enough to fit the checkbox and field
-                if (this.view.el.classList.contains('flex-list-view')) {
-                    this.view.el.classList.add('double-height-row');
-                }
             },
 
             /**

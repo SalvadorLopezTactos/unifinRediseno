@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"أنشئ صيغة لتحديد ما إذا كان هذا الحقل مطلوبًا في التخطيطات أم لا.<br/>"
-    . "ستتبع الحقول المطلوبة الصيغة في طريقة عرض الهواتف المحمولة المستندة إلى المتصفح، <br/>"
-    . "لكن لن تتبع الصيغة في التطبيقات الأصلية، مثل Sugar Mobile لهواتف iPhone. <br/>"
-    . "لن تتبع الحقول الصيغة في بوابة Sugar Self-Service Portal.",
+    'LBL_POPHELP_REQUIRED'=>'الحقول المشروط توافرها غير متاحة للاستخدام في أنواع إجراءات SugarBPM التالية: إضافة سجل مرتبط وتغيير الحقل. الرجاء إزالة نص "مطلوب إذا" لاستخدام هذا الحقل في هذه الإجراءات لتعريف العمليات',
 'LBL_POPHELP_READONLY'=>"أنشئ صيغة لتحديد ما إذا كان هذا الحقل للقراءة فقط في التخطيطات أم لا.<br/>"
-        . "ستتبع حقول القراءة فقط الصيغة في طريقة عرض الهواتف المحمولة المستندة إلى المتصفح، <br/>"
+        . "ستتبع حقول القراءة فقط الصيغة في طريقة العرض المتنقلة المستندة إلى المستعرض، <br/>"
         . "لكن لن تتبع الصيغة في التطبيقات الأصلية، مثل Sugar Mobile لهواتف iPhone. <br/>"
         . "لن تتبع الحقول الصيغة في بوابة Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'حدد لاستخدام هذا الحقل عند البحث عن سجلات باستخدام "البحث العام" على هذه الوحدة.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'حدد لاستخدام هذا الحقل عند البحث عن سجلات باستخدام البحث العام على هذه الوحدة.',
 //Revert Module labels
 'LBL_RESET' => 'إعادة تعيين',
 'LBL_RESET_MODULE' => 'إعادة تعيين الوحدة',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'عشري',
                 'autoincrement' => 'زيادة تلقائية',
                 'actionbutton' => 'زر الإجراء',
+                'geocodestatus' => 'حالة الترميز الجغرافي',
 ),
 'labelTypes' => array(
     "" => "التسميات شائعة الاستخدام",

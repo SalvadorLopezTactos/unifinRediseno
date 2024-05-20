@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informaţii utilizator nu au fost găsite',
     'ERR_USER_NAME_EXISTS'              => 'Numele de utilizator {0} există deja. Numele de utilizator duplicate nu sunt permise. Modificaţi numele de utilizator pentru a fi unic.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licența „Sugar Hint” trebuie să fie salvată cu un tip de licență suplimentar compatibil',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Această capacitate este deja inclusă în Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Acest utilizator este blocat din aplicatia Sugar şi nu se poate autentifica folosind  parola lui / ei existent.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Utilizatorul cu drepturi exclusiv de autor extern nu are permisiunea de a se autentifica folosind acreditări Sugar',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Parola:',
     'LBL_CHOOSE_A_KEY'					=> 'Alegeţi o cheie pentru a preveni publicarea neautorizată a calendarului dvs.',
     'LBL_NO_KEY'                        => 'Cheia nu este setata. Vă rugăm să setați cheia pentru a permite publicare.',
-	'LBL_CHOOSE_WHICH'					=> 'Alege tab-uri care sunt afişate',
+    'LBL_CHOOSE_WHICH'                  => 'Selectați care module sunt accesibile din bara de navigare laterală. Stabiliți ordinea în care doriți să apară modulele.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Număr de module fixate',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Notați numărul de module disponibile de fixat când bara de navigare este restrânsă (de exemplu, dacă s-a introdus valoarea 5, primele cinci module din lista dvs. sunt fixate). Recomandăm o valoare care reprezintă numărul de module cel mai des utilizate de dvs. Valorile peste 100 nu vor fi respectate.',
 	'LBL_CITY'							=> 'Oraş',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Şterge',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'Nume Utilizator SMTP:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP Server Tip:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP Server Specificaţii',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Cont e-mail autorizat',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Alegeti furnizorul dumneavoastra de Email',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Parola Yahoo!Mail',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'ID Yahoo!Mail',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'utilizatori/echipe/roluri',
     'LBL_LOADING_ITEMS' => 'Se încarcă datele...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Acces la ghid inteligent',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Ghid inteligent activ ultima dată',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Acces lipsă la ghid inteligent',
 ); // END STRINGS DEFS

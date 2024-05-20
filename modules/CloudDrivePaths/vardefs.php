@@ -12,6 +12,8 @@
 $dictionary['CloudDrivePath'] = [
     'table' => 'cloud_drive_paths',
     'archive' => false,
+    'color' => 'pacific',
+    'icon' => 'sicon-cloud',
     'audited' => false,
     'activity_enabled' => false,
     'full_text_search' => false,

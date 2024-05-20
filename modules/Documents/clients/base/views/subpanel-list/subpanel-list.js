@@ -44,10 +44,17 @@
             'name': 'sync_to_google',
             'label': 'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL',
             'acl_action': 'view',
+        }, {
+            'type': 'rowaction',
+            'event': 'button:sync_to_dropbox:click',
+            'name': 'sync_to_google',
+            'label': 'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL',
+            'acl_action': 'view',
         });
 
         this.listenTo(this.context, 'button:sync_to_google:click', _.bind(this.syncDocToDrive, this, 'google'));
         this.listenTo(this.context, 'button:sync_to_onedrive:click', _.bind(this.syncDocToDrive, this, 'onedrive'));
+        this.listenTo(this.context, 'button:sync_to_dropbox:click', _.bind(this.syncDocToDrive, this, 'dropbox'));
     },
 
     /**
@@ -56,7 +63,9 @@
      * @param string type
      */
     syncDocToDrive: function(type, model) {
-        const driveDashletCid = this._searchForDashlet(type);
+        const driveDashlet = this._searchForDashlet(type);
+        const driveDashletCid = driveDashlet.cid;
+        const driveDashletPath = driveDashlet.pathFolders;
 
         if (!driveDashletCid) {
             app.alert.show('drive-error', {
@@ -83,6 +92,7 @@
             path: path,
             driveId: cache.driveId,
             type: type,
+            folderPath: driveDashletPath,
         }, {
             success: _.bind(this.syncDriveDashlet, this, driveDashletCid),
             error: function(error) {

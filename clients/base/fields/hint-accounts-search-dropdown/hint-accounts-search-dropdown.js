@@ -94,12 +94,7 @@
     populateList: function(accounts) {
         this.accounts = accounts;
         var list = this.$el.find(this.listSelector);
-        if (accounts) {
-            $('.search-dropdown-list').css('border-color', '#FFFFFF');
-            if (this.isDarkMode) {
-                $('.search-dropdown-list').css('border-top-color', '#000000');
-            }
-        }
+
         list.html('');
         _.each(accounts, function(account) {
             list.append('<li data-key=\"' + account.name + '\">' +

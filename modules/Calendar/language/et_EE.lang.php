@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Dets',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalender oli juba lisatud',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} on valitud',
+    'LBL_NO_USER_SELECTED' => 'Valige Kasutaja või Meeskond',
+    'LBL_NO_CALENDAR_SELECTED' => 'Valige kalender',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Kalendrite salvestamine ebaõnnestus.',
+
 );
 
 $mod_list_strings = array(

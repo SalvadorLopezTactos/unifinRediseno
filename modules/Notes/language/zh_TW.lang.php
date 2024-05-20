@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => '筆記清單儀表板',
     'LBL_NOTES_RECORD_DASHBOARD' => '備註記錄儀表板',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '註釋焦點抽屜',
+    'LBL_EXTERNAL_USER' => '外部使用者',
+    'LBL_EXTERNAL_USER_NAME' => '外部使用者',
 
     'LBL_RELATED_CONTACT' => '相關連絡人',
     'ERR_DELETE_RECORD' => '您必須指定記錄編號才能刪除「帳戶」。',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => '電子郵件類型',
     'LBL_EMAIL_ID' => '電子郵件ID',
     'LBL_PHONE' => '電話：',
-    'LBL_PORTAL_FLAG' => '在「入口網站」中顯示？',
+    'LBL_PORTAL_FLAG' => '外部可用',
     'LBL_EMBED_FLAG' => '內嵌至電子郵件？',
     'LBL_PRODUCT_ID' => '報價明細項目 ID：',
     'LBL_QUOTE_ID' => '報價 ID：',

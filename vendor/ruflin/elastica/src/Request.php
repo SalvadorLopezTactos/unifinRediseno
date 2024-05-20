@@ -2,7 +2,9 @@
 
 namespace Elastica;
 
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\ResponseException;
 
 /**
  * Elastica Request object.
@@ -20,18 +22,18 @@ class Request extends Param
     public const NDJSON_CONTENT_TYPE = 'application/x-ndjson';
 
     /**
-     * @var \Elastica\Connection
+     * @var Connection|null
      */
     protected $_connection;
 
     /**
      * Construct.
      *
-     * @param string $path        Request path
-     * @param string $method      OPTIONAL Request method (use const's) (default = self::GET)
-     * @param array  $data        OPTIONAL Data array
-     * @param array  $query       OPTIONAL Query params
-     * @param string $contentType Content-Type sent with this request
+     * @param string       $path        Request path
+     * @param string       $method      OPTIONAL Request method (use const's) (default = self::GET)
+     * @param array|string $data        OPTIONAL Data array
+     * @param array        $query       OPTIONAL Query params
+     * @param string       $contentType Content-Type sent with this request
      */
     public function __construct(string $path, string $method = self::GET, $data = [], array $query = [], ?Connection $connection = null, string $contentType = self::DEFAULT_CONTENT_TYPE)
     {
@@ -46,12 +48,9 @@ class Request extends Param
         $this->setContentType($contentType);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->toString();
+        return JSON::stringify($this->toArray());
     }
 
     /**
@@ -75,7 +74,7 @@ class Request extends Param
     /**
      * Sets the request data.
      *
-     * @param array $data Request data
+     * @param array|string $data Request data
      *
      * @return $this
      */
@@ -87,7 +86,7 @@ class Request extends Param
     /**
      * Return request data.
      *
-     * @return array Request data
+     * @return array|string Request data
      */
     public function getData()
     {
@@ -172,6 +171,9 @@ class Request extends Param
 
     /**
      * Sends request to server.
+     *
+     * @throws ResponseException
+     * @throws ConnectionException
      */
     public function send(): Response
     {
@@ -197,10 +199,14 @@ class Request extends Param
     /**
      * Converts request to curl request format.
      *
+     * @deprecated since version 7.1.3, use the "__toString()" method or cast to string instead.
+     *
      * @return string
      */
     public function toString()
     {
-        return JSON::stringify($this->toArray());
+        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated, use "__toString()" or cast to string instead. It will be removed in 8.0.', __METHOD__);
+
+        return (string) $this;
     }
 }

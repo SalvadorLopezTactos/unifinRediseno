@@ -13,6 +13,14 @@
 
 class ViewProperty extends SugarView
 {
+    public $editModule;
+    public $editPackage;
+    public $id;
+    public $subpanel;
+    /**
+     * @var mixed[]|array<string, mixed>|mixed
+     */
+    public $properties;
     public function __construct()
     {
         parent::__construct();

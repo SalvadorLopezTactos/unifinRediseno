@@ -604,32 +604,15 @@ Atmesti šį skambutį
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Pranešimo apie paskyrimą el. laiškai',
-        'subject' => '„SugarCRM“ – priskirtas $module_name ',
-        'description' => 'Šis šablonas naudojamas, kai sistema siunčia vartotojui priskirtą užduotį.',
-        'body' => '<div>
-<p>$assigned_by_user priskyrė&nbsp;$module_name vartotojui&nbsp;$assigned_user.</p>
-
-<p>Galite peržiūrėti&nbsp;$module_name spustelėję nuorodą:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user priskyrė $module_name vartotojui $assigned_user.
-
-Galite peržiūrėti $module_name spustelėję nuorodą:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Suplanuotų ataskaitų el. laiškai',
         'subject' => 'Suplanuota ataskaita: $report_name $report_time',
         'description' => 'Šis šablonas naudojamas, kai sistema siunčia vartotojui suplanuotą ataskaitą.',
         'body' => '<div>
-<p>Sveiki, $assigned_user!</p>
-<p>Prisegta suplanuota ir automatiškai sukurta ataskaita.</p>
-<p>Ataskaitos pavadinimas: $report_name</p>
-<p>Ataskaitos vykdymo data ir laikas: $report_time</p>
+<p>Sveiki, $assigned_user!<br></p>
+<p>Prisegta suplanuota ir automatiškai sukurta ataskaita.<br></p>
+<p>Ataskaitos pavadinimas: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Ataskaitos vykdymo data ir laikas: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Sveiki, $assigned_user!
@@ -655,21 +638,6 @@ Ataskaitos vykdymo data ir laikas: $report_time',
             Norėdami peržiūrėti komentarą, prisijunkite prie „Sugar“.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Naujos paskyros informacija',
-        'description' => 'Šis šablonas naudojamas, kai sistemos administratorius siunčia vartotojui naują slaptažodį.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Štai jūsų paskyros vartotojo vardas ir laikinas slaptažodis:</p><p>Vartotojo vardas: $contact_user_user_name </p><p>Slaptažodis: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Prisiregistravus šiuo nurodytu slaptažodžiu, gali reikėti tą slaptažodį nustatyti iš naujo, įvedant savo norimą slaptažodį.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Štai jūsų paskyros vartotojo vardas ir laikinas slaptažodis:
-Vartotojo vardas: $contact_user_user_name
-Slaptažodis: $contact_user_user_hash
-
-$config_site_url
-
-Prisiregistravus šiuo nurodytu slaptažodžiu, gali reikėti tą slaptažodį nustatyti iš naujo, įvedant savo norimą slaptažodį.',
-        'name' => 'Sistemos sugeneruotas slaptažodis el. paštu',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Iš naujo nustatyti paskyros slaptažodį',
         'description' => "Šis šablonas bus naudojamas siunčiant vartotojui nuorodą, kurią spustelėjęs, vartotojas galės iš naujo nustatyti savo paskyros slaptažodį.",

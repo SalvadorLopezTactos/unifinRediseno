@@ -100,6 +100,7 @@
                     'forecastType': app.utils.getForecastType(changed.is_manager, changed.showOpps)
                 };
                 this.model.set(update);
+                this.context.trigger('filter:selectedUser:changed');
             }, this);
 
             // if the model changes, run a fetch
@@ -158,7 +159,9 @@
                 // create an anonymous function to combine the two calls where this is used
                 var onSuccess = _.bind(function() {
                     this.context.set('selectedTimePeriod', model.get('selectedTimePeriod'));
+                    app.user.lastState.set('Forecasts:time-period', model.get('selectedTimePeriod'));
                     this._saveTimePeriodStatEndDates(startEndDates['start'], startEndDates['end']);
+                    this.context.trigger('filter:selectedTimePeriod:changed');
                 }, this);
 
                 if (this.isDirty) {
@@ -298,11 +301,12 @@
         var ranges_key = app.user.lastState.buildKey('worksheet-filter', 'filter', 'ForecastWorksheets'),
             default_selection = app.user.lastState.get(ranges_key) || data.defaultSelections.ranges;
 
+        const timeperiodId = app.user.lastState.get('Forecasts:time-period') || data.defaultSelections.timeperiod_id.id;
         // set items on the context from the initData payload
         ctx.set({
             // set the value to null since it can be undefined
             currentForecastCommitDate: null,
-            selectedTimePeriod: data.defaultSelections.timeperiod_id.id,
+            selectedTimePeriod: timeperiodId,
             selectedRanges: default_selection,
             selectedTimePeriodStartEnd: this._saveTimePeriodStatEndDates(
                 data.defaultSelections.timeperiod_id.start,
@@ -312,10 +316,13 @@
             _isInvalidModel: _.bind(this._isInvalidModel, this)
         }, {silent: true});
 
-        ctx.get('model').set({'selectedTimePeriod': data.defaultSelections.timeperiod_id.id}, {silent: true});
+        const selectedUser = app.user.lastState.get('Forecasts:selected-user') || app.user.toJSON();
+        selectedUser.reportees = [];
+
+        ctx.get('model').set({'selectedTimePeriod': timeperiodId}, {silent: true});
 
         // set the selected user to the context
-        app.utils.getSelectedUsersReportees(app.user.toJSON(), ctx);
+        app.utils.getSelectedUsersReportees(selectedUser, ctx);
     },
 
     /**
@@ -447,7 +454,15 @@
             }, this);
         }
 
+        app.alert.show('commit_alert', {
+            level: 'process',
+            title: app.lang.get('LBL_SAVING'),
+            autoClose: false
+        });
+
         forecast.save(forecastData, { success: _.bind(function(model, response) {
+            app.alert.dismiss('commit_alert');
+
             // we need to make sure we are not disposed, this handles any errors that could come from the router and window
             // alert events
             if (!this.disposed) {

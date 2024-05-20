@@ -12,6 +12,8 @@
 
 $dictionary['pmse_Emails_Templates'] = array(
     'table' => 'pmse_emails_templates',
+    'color' => 'orange',
+    'icon' => 'sicon-process-email-templates-lg',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => true,

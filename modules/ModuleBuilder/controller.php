@@ -50,6 +50,19 @@ class ModuleBuilderController extends SugarController
         // Turns the queue runner back on and calls it to let it do its thing
         MetaDataManager::setRunQueueOnCallOn();
         MetaDataManager::runCacheRefreshQueue();
+        if (isset($_REQUEST['role']) && isset($_REQUEST['view_module'])) {
+            $rac = new RepairAndClear();
+            $modules = [];
+            if (is_string($_REQUEST['view_module'])) {
+                $modules = [$_REQUEST['view_module']];
+            } elseif (is_array($_REQUEST['view_module'])) {
+                $modules = $_REQUEST['view_module'];
+            }
+            if (!empty($modules)) {
+                $selectedActions = ['clearAll'];
+                $rac->repairAndClearAll($selectedActions, $modules, true, false);
+            }
+        }
     }
 
     /**
@@ -170,7 +183,7 @@ class ModuleBuilderController extends SugarController
         $name = $this->request->getValidInputRequest('name', 'Assert\ComponentName');
 
         $mb = new ModuleBuilder ();
-        $load = $originalName ? $originalName : $name;
+        $load = $originalName ?: $name;
         if (!empty ($load)) {
             $mb->getPackage($load);
 
@@ -235,7 +248,7 @@ class ModuleBuilderController extends SugarController
                     }
                     $packageManager->deletePackage($upgradeHistory);
                 } catch (ModuleInstallerException $e) {
-                    die(htmlspecialchars($e->getMessage()));
+                    die(htmlspecialchars($e->getMessage(), ENT_COMPAT));
                 } catch (Exception $e) {
                     $log->error('Deploy package error: ' . $e->getMessage());
                 }
@@ -255,7 +268,7 @@ class ModuleBuilderController extends SugarController
                 );
                 $packageManager->installPackage($upgradeHistory);
             } catch (ModuleInstallerException $e) {
-                die(htmlspecialchars($e->getMessage()));
+                die(htmlspecialchars($e->getMessage(), ENT_COMPAT));
             } catch (Exception $e) {
                 $log->error('Deploy package error: ' . $e->getMessage());
             }
@@ -337,7 +350,7 @@ class ModuleBuilderController extends SugarController
         $package = $this->request->getValidInputRequest('package', 'Assert\ComponentName');
 
         $mb = new ModuleBuilder ();
-        $load = $originalName ? $originalName : $name;
+        $load = $originalName ?: $name;
         if (!empty ($load)) {
             $mb->getPackage($package);
             $mb->packages [$package]->getModule($load);
@@ -394,7 +407,7 @@ class ModuleBuilderController extends SugarController
     {
         $viewModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
         if ($viewModule && !empty($_REQUEST ['labelValue'])) {
-            $_REQUEST ["label_" . $_REQUEST ['label']] = $_REQUEST ['labelValue'];
+            $_REQUEST ["label_" . $_REQUEST ['label']] = $_REQUEST ['labelValue'] ?? '';
 
             // Since the following loop will change aspects of the $_REQUEST
             // array read it into a copy to preserve state on $_REQUEST
@@ -427,8 +440,8 @@ class ModuleBuilderController extends SugarController
             array('pattern' => '/^[a-z][a-z0-9_-]*$/i')
         ));
 
-        $author = $_REQUEST ['author'];
-        $description = $_REQUEST ['description'];
+        $author = $_REQUEST ['author'] ?? '';
+        $description = $_REQUEST ['description'] ?? '';
         ob_clean();
         if (!empty ($modules) && !empty ($name)) {
 
@@ -850,7 +863,7 @@ class ModuleBuilderController extends SugarController
 
     public function action_CloneField()
     {
-        $this->view_object_map ['field_name'] = $_REQUEST ['name'];
+        $this->view_object_map ['field_name'] = $_REQUEST ['name'] ?? '';
         $this->view_object_map ['is_clone'] = true;
         $this->view = 'modulefield';
     }
@@ -880,12 +893,12 @@ class ModuleBuilderController extends SugarController
     public function action_saveProperty()
     {
         $subpanel = $this->request->getValidInputRequest('subpanel', 'Assert\ComponentName');
-        $module = $subpanel ? $subpanel : $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        $module = $subpanel ?: $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
 
         $viewPackage = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
         $parser = new ParserLabel ($module, $viewPackage);
         // if no language provided, then use the user's current language which is most likely what they intended
-        $language = (isset($_REQUEST ['selected_lang'])) ? $_REQUEST ['selected_lang'] : $GLOBALS['current_language'];
+        $language = $_REQUEST ['selected_lang'] ?? $GLOBALS['current_language'];
         $parser->handleSave($_REQUEST, $language);
         $json = getJSONobj();
         echo $json->encode(array("east" => array("action" => "deactivate")));
@@ -909,7 +922,7 @@ class ModuleBuilderController extends SugarController
 
     public function action_saveLayout()
     {
-        $parserview = $_REQUEST['view'];
+        $parserview = $_REQUEST['view'] ?? '';
         if (isset($_REQUEST['PORTAL'])) {
             $client = 'portal';
             $this->view = 'portallayoutview' ;
@@ -935,7 +948,7 @@ class ModuleBuilderController extends SugarController
         $parser = ParserFactory::getParser(
             $parserview,
             $_REQUEST['view_module'],
-            isset($_REQUEST ['view_package']) ? $_REQUEST ['view_package'] : null,
+            $_REQUEST ['view_package'] ?? null,
             null,
             $client,
             $params
@@ -945,7 +958,7 @@ class ModuleBuilderController extends SugarController
 
         if (!empty($_REQUEST ['sync_detail_and_edit']) && $_REQUEST['sync_detail_and_edit'] != false && $_REQUEST['sync_detail_and_edit'] != "false") {
             if (strtolower($parser->_view) == MB_EDITVIEW) {
-                $parser2 = ParserFactory::getParser(MB_DETAILVIEW, $_REQUEST ['view_module'], isset ($_REQUEST ['view_package']) ? $_REQUEST ['view_package'] : null);
+                $parser2 = ParserFactory::getParser(MB_DETAILVIEW, $_REQUEST ['view_module'], $_REQUEST ['view_package'] ?? null);
                 $parser2->setUseTabs($parser->getUseTabs());
                 $parser2->writeWorkingFile();
             }
@@ -954,7 +967,7 @@ class ModuleBuilderController extends SugarController
 
     public function action_saveAndPublishLayout()
     {
-        $parserview = $_REQUEST['view'];
+        $parserview = $_REQUEST['view'] ?? '';
         if (isset($_REQUEST['PORTAL'])) {
             $client = 'portal';
             $this->view = 'portallayoutview' ;
@@ -980,7 +993,7 @@ class ModuleBuilderController extends SugarController
         $parser = ParserFactory::getParser(
             $parserview,
             $_REQUEST['view_module'],
-            isset ($_REQUEST ['view_package']) ? $_REQUEST ['view_package'] : null,
+            $_REQUEST ['view_package'] ?? null,
             null,
             $client,
             $params
@@ -994,7 +1007,11 @@ class ModuleBuilderController extends SugarController
 
         if (!empty($_REQUEST [ 'sync_detail_and_edit' ]) && $_REQUEST['sync_detail_and_edit'] != false && $_REQUEST['sync_detail_and_edit'] != "false") {
             if (strtolower ($parser->_view) == MB_EDITVIEW) {
-                $parser2 = ParserFactory::getParser ( MB_DETAILVIEW, $_REQUEST [ 'view_module' ], isset ( $_REQUEST [ 'view_package' ] ) ? $_REQUEST [ 'view_package' ] : null ) ;
+                $parser2 = ParserFactory::getParser(
+                    MB_DETAILVIEW,
+                    $_REQUEST ['view_module'],
+                    $_REQUEST ['view_package'] ?? null
+                );
                 $parser2->setUseTabs($parser->getUseTabs());
                 $parser2->handleSave () ;
             }
@@ -1238,13 +1255,13 @@ class ModuleBuilderController extends SugarController
 
     public function action_copyLayout()
     {
-        $module = $_REQUEST['view_module'];
-        $view = $_REQUEST['view'];
-        $role = $_REQUEST['role'];
-        $source = $_REQUEST['source'];
-        $layoutOption = $_REQUEST['layoutOption'];
-        $dropdownField = $_REQUEST['dropdownField'];
-        $dropdownValue = $_REQUEST['dropdownValue'];
+        $module = $_REQUEST['view_module'] ?? '';
+        $view = $_REQUEST['view'] ?? '';
+        $role = $_REQUEST['role'] ?? '';
+        $source = $_REQUEST['source'] ?? '';
+        $layoutOption = $_REQUEST['layoutOption'] ?? '';
+        $dropdownField = $_REQUEST['dropdownField'] ?? '';
+        $dropdownValue = $_REQUEST['dropdownValue'] ?? '';
         $sourceDir = [];
         $destDir = [];
 

@@ -59,7 +59,7 @@ class bc_survey_submission extends Basic {
         return false;
     }
 
-    function get_list_view_data() {
+    function get_list_view_data($filter_fields = []) {
         $temp_array = parent::get_list_view_data();
         $survey_sub = new bc_survey_submission();
         $survey_sub->retrieve($this->id);

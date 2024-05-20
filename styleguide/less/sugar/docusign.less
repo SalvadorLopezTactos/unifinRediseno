@@ -29,7 +29,8 @@
   }
 
   .addDocument,
-  .sendEnvelope {
+  .sendEnvelope,
+  .selectTemplate {
     line-height: 18px;
   }
 
@@ -89,5 +90,25 @@
   .documents_docusign_content .table tr td,
   .drafts_docusign_content .table tr td {
     height: 28px !important;
+  }
+}
+
+.templates-list .flex-list-view[class$="-actions"]:not(.scroll-width)
+  .flex-list-view-content .dataTable td:last-child:not(.alert) {
+  height: 28px;
+}
+
+body.safari-browser {
+  .docusign {
+    .dataTable {
+      th,
+      td {
+        &.sticky-column {
+          &.stick-first {
+            left: 0;
+          }
+        }
+      }
+    }
   }
 }

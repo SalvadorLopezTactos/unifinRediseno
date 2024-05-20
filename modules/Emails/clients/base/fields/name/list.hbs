@@ -21,6 +21,7 @@
     {{/if}}
     {{#if href}}
         <a class="ellipsis_inline" href="{{#if def.events}}javascript:void(0);{{else}}{{href}}{{/if}}"
+            data-link-target="{{linkTarget}}" data-module="{{module}}" data-model-id="{{modelId}}"
             data-placement="bottom" title="{{value}}"
         >
             {{value}}

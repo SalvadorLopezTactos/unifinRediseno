@@ -15,7 +15,9 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Notes List Dashboard',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Notes Record Dashboard',
-    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Notes Focus Drawer',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Notes Focus Dashboard',
+    'LBL_EXTERNAL_USER' => 'External User',
+    'LBL_EXTERNAL_USER_NAME' => 'External User',
 
     'LBL_RELATED_CONTACT' => 'Related Contact',
     'ERR_DELETE_RECORD' => 'You must specify a record number to delete the Account.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Email Type',
     'LBL_EMAIL_ID' => 'Email ID',
     'LBL_PHONE' => 'Phone:',
-    'LBL_PORTAL_FLAG' => 'Display in Portal?',
+    'LBL_PORTAL_FLAG' => 'Available Externally',
     'LBL_EMBED_FLAG' => 'Embed in email?',
     'LBL_PRODUCT_ID' => 'Quoted Line Item ID:',
     'LBL_QUOTE_ID' => 'Quote ID:',

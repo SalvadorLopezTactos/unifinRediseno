@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Πίνακας λίστας λογαριασμών',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Πίνακας Εγγραφής Λογαριασμών',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης λογαριασμών',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Στοιχεία λογαριασμού',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Συρτάρι εστίασης λογαριασμών - Κονσόλα',
     'LBL_NEXT_RENEWAL_DATE' => 'Ημερομηνία της επόμενης ανανέωσης',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Ημερομηνία της επόμενης ανανέωσης',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Όνομα/Βιομηχανία Λογαριασμού',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Τοποθεσία',
     'LBL_PURCHASES' => 'Αγορές',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Χρονολόγιο λογαριασμού',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Οργανώστε',
+    'LBL_CREATE_NEW' => 'Δημιουργία Νέου',
+    'LBL_MANAGE' => 'Διαχειριστείτε',
+    'LBL_SEE_DETAILS' => 'Δείτε Λεπτομέρειες',
+    'LBL_HIDE_NEW' => 'Αποκρύψτε',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Γραφήματα',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. Κάντε κλικ στην επιλογή "Αποθήκευση" για να οριστικοποιήσετε τη νέα εγγραφή και να επιστρέψετε στην προηγούμενη σελίδα.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Αναφορές Λογαριασμών',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Εξωτερικοί χρήστες',
 );

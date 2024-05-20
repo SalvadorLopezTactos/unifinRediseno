@@ -27,7 +27,7 @@ global $current_user, $focus;
 echo getClassicModuleTitle(
     'Administration',
     array(
-        '<a href="#Administration">' . htmlspecialchars(translate('LBL_MODULE_NAME', 'Administration')) . '</a>',
+        '<a href="#Administration">' . htmlspecialchars(translate('LBL_MODULE_NAME', 'Administration'), ENT_COMPAT) . '</a>',
         $mod_strings['LBL_MODULE_NAME'],
     ),
     false
@@ -73,10 +73,10 @@ $lc->lookupCurrencies();
     if ((isset($_REQUEST['doAction']) && $_REQUEST['doAction'] === 'merge') || (isset($isMerge) && !$isMerge)) {
         $merge_button = '<form name= "MERGE" method="POST" action="index.php">
             <input type="hidden" name="module" value="Currencies"> 
-            <input type="hidden" name="record" value="' . htmlspecialchars($focus_id) . '">
+            <input type="hidden" name="record" value="' . htmlspecialchars($focus_id, ENT_COMPAT) . '">
             <input type="hidden" name="action" value="index">
             <input type="hidden" name="merge" value="true">
-            <input title="' . htmlspecialchars($mod_strings['LBL_MERGE']) . '"  class="button"  type="submit" name="button" value="' . htmlspecialchars($mod_strings['LBL_MERGE']) . '" >
+            <input title="' . htmlspecialchars($mod_strings['LBL_MERGE'], ENT_COMPAT) . '"  class="button"  type="submit" name="button" value="' . htmlspecialchars($mod_strings['LBL_MERGE'], ENT_COMPAT) . '" >
         </form>';
     }
     if (isset($isMerge) && $isMerge) {
@@ -90,14 +90,14 @@ $lc->lookupCurrencies();
             <td>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                        <td>' . htmlspecialchars($mod_strings['LBL_MERGE_TXT']) . '</td>
+                        <td>' . htmlspecialchars($mod_strings['LBL_MERGE_TXT'], ENT_COMPAT) . '</td>
                         <td width="20%"><select name="mergeTo">' . $currencyList->getSelectOptions() . '</select></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <input title="' . htmlspecialchars($mod_strings['LBL_MERGE']) . '" class="button" type="submit" name="domerge" value="' . htmlspecialchars($mod_strings['LBL_MERGE']) . '">
-                            <input title="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_TITLE']) . '" accessKey="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_KEY']) . '" class="button" type="submit" name="button" value="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL']) . '">
+                            <input title="' . htmlspecialchars($mod_strings['LBL_MERGE'], ENT_COMPAT) . '" class="button" type="submit" name="domerge" value="' . htmlspecialchars($mod_strings['LBL_MERGE'], ENT_COMPAT) . '">
+                            <input title="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_TITLE'], ENT_COMPAT) . '" accessKey="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_KEY'], ENT_COMPAT) . '" class="button" type="submit" name="button" value="' . htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL'], ENT_COMPAT) . '">
                         </td>
                     </tr>
                 </table>
@@ -109,7 +109,7 @@ $lc->lookupCurrencies();
     }
     $editButtonHTML = '<form name="EditView" method="POST" action="index.php" >
     <input type="hidden" name="module" value="Currencies">
-    <input type="hidden" name="record" value="' . htmlspecialchars($focus_id) . '">
+    <input type="hidden" name="record" value="' . htmlspecialchars($focus_id, ENT_COMPAT) . '">
     <input type="hidden" name="action">
     <input type="hidden" name="edit">
     <input type="hidden" name="return_module" value="Currencies">
@@ -131,9 +131,9 @@ $lc->lookupCurrencies();
     }
 
     if (empty($focus->id)) {
-        echo get_form_header(htmlspecialchars($app_strings['LBL_CREATE_BUTTON_LABEL']) . ' Currency' . $headerHTML, $editButtonHTML, false);
+        echo get_form_header(htmlspecialchars($app_strings['LBL_CREATE_BUTTON_LABEL'], ENT_COMPAT) . ' Currency' . $headerHTML, $editButtonHTML, false);
     } else {
-        echo get_form_header(htmlspecialchars($app_strings['LBL_EDIT_BUTTON_LABEL']) . ' &raquo; ' . htmlspecialchars($focus->name) . $headerHTML, $editButtonHTML, false);
+        echo get_form_header(htmlspecialchars($app_strings['LBL_EDIT_BUTTON_LABEL'], ENT_COMPAT) . ' &raquo; ' . htmlspecialchars($focus->name, ENT_COMPAT) . $headerHTML, $editButtonHTML, false);
     }
 $sugar_smarty = new Sugar_Smarty();
 

@@ -155,7 +155,7 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Skabeloner',
     'LBL_RECORD_OTHER_TAB' => 'Andet',
     'LBL_EVENT_START' => 'Start',
-    'LBL_EVENT_END' => 'Afslut',
+    'LBL_EVENT_END' => 'Slut',
     'LBL_EVENT_END' => 'Slut',
     'LBL_DAY_EVENT_TEMPLATE' => 'Dagsbegivenhed',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Ugens begivenhed',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Okt',
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Dec',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalender er allerede tilføjet',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} er valgt',
+    'LBL_NO_USER_SELECTED' => 'Vælg venligst en bruger eller et team',
+    'LBL_NO_CALENDAR_SELECTED' => 'Vælg venligst en kalender',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Kunne ikke gemme kalendere.',
 
 );
 

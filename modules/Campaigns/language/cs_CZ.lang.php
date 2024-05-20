@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'URL sledování:',
   'LBL_TRACKER_TEXT' => 'Text odkazu sledovače:',
   'LBL_TRACKER_COUNT' => 'Počet sledovačů:',
-  'LBL_REFER_URL' => 'URL pro přesměrování na sledovač:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kampaně',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Emailové kampaně',
   'LBL_NEW_FORM_TITLE' => 'Nová kampaň',

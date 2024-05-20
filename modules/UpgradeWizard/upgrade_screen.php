@@ -221,7 +221,12 @@ $(window).bind("load", function () {
                 if (displayNumber) {
                     html.push(i + 1, ". ");
                 }
-                html.push(htmlentities(item.title, 'ENT_NOQUOTES'), "</h1><p>", htmlentities(item.descr, 'ENT_NOQUOTES'));
+                html.push(
+                    htmlentities(item.title, 'ENT_NOQUOTES'),
+                    "</h1><p><span class='pre-line'>",
+                    htmlentities(item.descr, 'ENT_NOQUOTES'),
+                    "</span>"
+                );
                 if (item.kb) {
                     html.push("<a target='_blank' href='", item.kb, "'> Learn more...</a>");
                 }
@@ -366,7 +371,7 @@ $(window).bind("load", function () {
         $('input[type="file"]').on('change', function() {
             var $this = $(this),
                 text = ($this.val().split('\\').pop() || 'No file chosen...');
-            $this.parent().parent().next().text(text);
+            $('#uploadFileName').text(text);
         });
 
         $('[data-step="2"] a[name="next_button"]')
@@ -386,7 +391,8 @@ $(window).bind("load", function () {
 <div class="upgrade">
     <div id="alerts" class="alert-top">
         <div class="alert-wrapper">
-            <div class="alert alert-danger alert-block" data-flag="3">
+            <div class="alert alert-danger alert-block" data-flag="3"
+                 style="max-height: 120px; overflow: hidden; width: 100%">
                 <button class="btn btn-link btn-invisible close" data-action="close">
                 </button>
                 <strong>Error</strong>
@@ -429,14 +435,11 @@ $(window).bind("load", function () {
                     <input type="hidden" name="action" value="unpack">
                 <p>
                     <span class="upload-file">
-                        <span class="upload-field-custom btn btn-primary" style="width: 84px;">
-                          <label class="file-upload focus btn-primary">
-                              <span style="width: 84px;"><strong>Choose File</strong></span>
-
-                              <input type="file" name="zip" style="width: 0px; height: 0px;">
-                          </label>
-                        </span>
-                        <span>No file chosen...</span>
+                        <label for="uploadInput" class="upload-field-custom btn btn-primary" style="width: 84px;font-size: 12px;line-height: 18px;margin: 0 4px;">
+                          <span style="width: 84px;"><strong>Choose File</strong></span>
+                          <input type="file" id="uploadInput" name="zip" class="hidden">
+                        </label>
+                        <span id="uploadFileName">No file chosen...</span>
                     </span>
                 </p>
                 </form>

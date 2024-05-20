@@ -71,6 +71,7 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface
      */
     public function getTimePeriodName($count, $timeperiod = null)
     {
+        $tpStMonthDt = null;
         $timedate = TimeDate::getInstance();
         $start_date = $this->start_date;
 

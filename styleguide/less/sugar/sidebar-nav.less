@@ -1,0 +1,231 @@
+/* SIDEBAR NAV
+  ----------------*/
+.banner-shifted {
+  .sidebar-nav {
+    top: @bannerHeight;
+    height: calc(100% ~"-" @bannerHeight);
+  }
+}
+
+.sidebar-nav-overlay {
+  z-index: (@zindexSidebarNav - 1);
+}
+
+.sidebar-nav {
+  z-index: @zindexSidebarNav;
+  transition: transform 300ms ease-in-out;
+
+  .sidebar-nav-item-group {
+    &:not(:first-child) {
+      border-top: 1px solid @sidebarNavGroupDividerColor;
+    }
+  }
+
+  .sidebar-nav-item {
+    transition: transform 300ms ease-in-out;
+    min-height: 2.5rem;
+
+    a {
+      text-decoration: none;
+    }
+
+    .sidebar-nav-item-kebab {
+      .hide();
+
+      right: 0;
+    }
+
+    .sidebar-nav-item-kebab-disabled {
+      .hide();
+
+      right: 0;
+    }
+
+    &:hover,
+    &:focus-within {
+      .sidebar-nav-item-kebab:not(.hide) {
+        .show();
+
+        .sicon {
+          color: @white;
+        }
+
+        &:hover,
+        &:focus-within {
+          background-color: @lightBlue;
+
+          .sicon {
+            color: @darkBlue;
+          }
+        }
+      }
+
+      .sidebar-nav-item-kebab-disabled:not(.hide) {
+        .show();
+      }
+    }
+
+    &.active {
+      .bg-sidebar-nav-background-hover();
+    }
+
+    .sidebar-nav-item-sugarcrm-logo {
+      height: 1.17rem;
+      margin-left: -0.16rem;
+      margin-top: -0.04rem;
+    }
+
+    .sicon.omnichannel-logged-in {
+      .rounded-lg();
+
+      left: 2rem;
+      height: 0.625rem;
+      width: 0.625rem;
+
+      &::before {
+        top: -1px;
+        .absolute();
+      }
+    }
+  }
+
+  .sidebar-nav-item-group-modules {
+    .sidebar-nav-item {
+      &:not(.active):not(.default) {
+        .hide();
+      }
+    }
+  }
+
+  // When fully collapsed
+  &:not(.expanded):not(.expanding):not(.collapsing) {
+    transform: translateX(-11.25rem);
+
+    .sidebar-nav-item {
+      .w-15();
+
+      transform: translateX(11.25rem);
+    }
+
+    .expanded {
+      .hide();
+    }
+
+    .sidebar-nav-item-group-modules {
+      .sidebar-nav-item {
+        &:not(.active):not(.pinned) {
+          .hide();
+        }
+      }
+    }
+  }
+
+  // When fully expanded
+  &.expanded:not(.collapsing):not(.expanding) {
+    .collapsed {
+      .hide();
+    }
+
+    .sidebar-nav-item-group-modules {
+      .overflow-y-auto();
+    }
+  }
+
+  // While expanding
+  &.expanding {
+    .collapsed {
+      .hide();
+    }
+
+    .sidebar-nav-item-group-modules {
+      .sidebar-nav-item {
+        &:not(.active):not(.pinned) {
+          .hide();
+        }
+      }
+    }
+  }
+
+  // While collapsing
+  &.collapsing {
+    transform: translateX(-11.25rem);
+
+    .sidebar-nav-item {
+      transform: translateX(11.25rem);
+    }
+
+    .collapsed {
+      .hide();
+    }
+
+    .sidebar-nav-item-group-modules {
+      .sidebar-nav-item {
+        &:not(.active):not(.pinned) {
+          .hide();
+        }
+      }
+    }
+  }
+}
+
+.sidebar-nav-flyout {
+  z-index: 1035;
+  box-shadow: 0 0.25rem 0.25rem var(--shadow-color);
+
+  #help_sidebar-nav-item + & .popover-content {
+    .overflow-y-hidden();
+  }
+
+  &.popover.right {
+    .ml-0();
+
+    .flyout-close {
+      right: 4px;
+      top: 4px;
+      z-index: 2000;
+
+      &:hover {
+        .sicon {
+          color: @sicon-hover-color;
+        }
+      }
+    }
+  }
+
+  .sidebar-nav-flyout-actions {
+    ul {
+      list-style: none;
+
+      li {
+        a {
+          text-decoration: none;
+
+          &:hover {
+            .sicon {
+              color: @sicon-hover-color;
+            }
+          }
+
+          &.active {
+            .sicon {
+              color: @sicon-active-color;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .helplet {
+    a:hover {
+      color: @linkColorHover;
+    }
+  }
+}
+
+.expanded {
+  .sidebar-nav-flyout {
+    box-shadow: 0 0.25rem 0.25rem var(--sidebar-nav-flyout-shadow-color);
+  }
+}
+

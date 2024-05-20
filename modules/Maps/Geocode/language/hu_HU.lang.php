@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'Szélesség',
     'LBL_LONGITUDE' => 'Hosszúság',
     'LBL_GEOCODED' => 'Geokódolva',
+    'LBL_ERROR_MESSAGE' => 'Geokódolás hibaüzenet',
 ];

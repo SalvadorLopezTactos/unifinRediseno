@@ -123,7 +123,7 @@ class Note extends SugarBean
 
         if (file_exists($filePath)) {
             $this->file_mime_type = get_file_mime_type($filePath, 'application/octet-stream');
-            $this->file_ext = pathinfo($this->filename, PATHINFO_EXTENSION);
+            $this->file_ext = pathinfo((string)$this->filename, PATHINFO_EXTENSION);
             $this->file_size = filesize($filePath);
             if (!$this->isUpdate()) {
                 // new attachment-only note
@@ -200,7 +200,7 @@ class Note extends SugarBean
                 ->setParameter('assigned_user_id', $this->assigned_user_id)
                 ->setParameter('ids', $attachmentChunk, $conn::PARAM_STR_ARRAY);
 
-            $affectedRows = $builder->execute();
+            $affectedRows = $builder->executeStatement();
 
             if ($affectedRows === 0) {
                 continue;
@@ -325,7 +325,7 @@ class Note extends SugarBean
         }
     }
 
-    function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
         $note_fields = $this->get_list_view_array();
         global $app_list_strings, $focus, $action, $currentModule,$mod_strings, $sugar_config;

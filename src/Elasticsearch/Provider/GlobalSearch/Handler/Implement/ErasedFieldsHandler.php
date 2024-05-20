@@ -35,7 +35,7 @@ class ErasedFieldsHandler extends AbstractHandler implements
      * Field name
      * @var string
      */
-    const ERASEDFIELDS_FIELD = 'erased_fields';
+    public const ERASEDFIELDS_FIELD = 'erased_fields';
 
     /**
      * {@inheritdoc}

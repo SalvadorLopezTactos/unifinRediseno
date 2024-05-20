@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => '태그 기록 대시보드',
     'LBL_MY_TAGS' => '내 태그',
     'LBL_MY_FAVORITE_TAGS' => '내 즐겨찾기 태그',
+    'LBL_MORE_TAGS' => '{{tagsNumber}}개 태그',
 );

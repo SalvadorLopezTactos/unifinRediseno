@@ -44,7 +44,6 @@ function translate_operator($operator, $type = "php")
 }
 
 function setup_filter_records($target_list, $target_exp_array, $type="php"){
-	
     $optional_where = [];
 	$optional_where['lhs_field'] = $target_exp_array['lhs_field'];
 	$optional_where['operator'] = translate_operator($target_exp_array['operator'], $type);
@@ -186,7 +185,6 @@ function compare_values_number($lhs_field, $operator, $rhs_value){
 
 
 function process_rel_type($target_type, $target_filter, $target_list, $action_array, $type_override=false){
-	
     $new_list = [];
 	if($type_override==true){
 		$type_value = $target_type;

@@ -11,6 +11,30 @@
  */
 class ParserModifyListView extends ModuleBuilderParser
 {
+    /**
+     * @var string|mixed|array<string, mixed>|mixed[]
+     */
+    public $module_name;
+    /**
+     * @var \SugarBean|null|mixed
+     */
+    public $module;
+    /**
+     * @var mixed|array<string, mixed>
+     */
+    public $originalListViewDefs;
+    /**
+     * @var string|mixed
+     */
+    public $customFile;
+    /**
+     * @var string|mixed
+     */
+    public $language_module;
+    /**
+     * @var mixed[]|array<string, mixed>|mixed|array<string, array<string, mixed>>
+     */
+    public $availableFields;
 	var $listViewDefs = false ;
 	var $defaults = array ( ) ;
 	var $additional = array ( ) ;
@@ -140,7 +164,7 @@ class ParserModifyListView extends ModuleBuilderParser
 			{
             // bug 19656: this test changed after 5.0.0b - we now remove all ID type fields - whether set as type, or dbtype, from the fielddefs
             if ($this->isValidField($key, $def)){
-					$label = (isset ( $def [ 'vname' ] )) ? $def [ 'vname' ] : (isset($def [ 'label' ]) ? $def['label'] : $def['name']) ;
+                    $label = $def ['vname'] ?? $def['label'] ?? $def['name'];
 					$this->availableFields [ $fieldName ] = array ( 'width' => '10' , 'label' => $label ) ;
 				}
 			}

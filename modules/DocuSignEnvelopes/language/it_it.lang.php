@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Nessun client secret impostato',
     'LBL_RESEND_BUTTON_LABEL' => 'Reinvia',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Recupera busta',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Tipo di servizio cloud',
+    'LBL_CLOUD_PATH' => 'Percorso cloud',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Dashboard elenco buste DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Buste DocuSign recenti',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Cassetto buste DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'Documento da ',
+    'LBL_NEW_ENVELOPE' => 'Nuova busta',
     'LBL_DOCUMENT_IS_NOW' => ' è ora ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'Errore DocuSign. Impossibile ottenere l&#39;Id account in base al token di accesso',
     'LBL_ERROR_RESEND' => 'Non è stato possibile effettuare nuovamente l&#39;invio di DocuSign. Lo stato della busta deve essere "inviato"',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Aggiornamento Fallito',
     'LBL_ERROR_FETCH_TIME' => 'Le regole di DocuSign non consentono più richieste alla stessa busta entro 15 minuti',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Si è verificato un errore. Non è stato possibile aggiornare la busta. Si prega di controllare i log!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Si è verificato un errore. Impossibile elencare i modelli. Si prega di controllare i registri!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Si è verificato un errore. Impossibile recuperare il modello. Si prega di controllare i registri!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Busta non completata',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Lo stato della busta in DocuSign è ora ',
     'LBL_OVERVIEW' => 'Panoramica',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Aggiungi documento',
     'LBL_BUTTON_SEND' => 'Invia',
     'LBL_BUTTON_CLEAR' => 'Cancella',
-    'LBL_MISSING_OBJECT' => 'L&#39;oggetto DocuSign non è nella finestra',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Usa modello',
     'LBL_PLEASE_LOG_IN' => 'Accedi prima a DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Non è possibile scaricare questo documento. È stato creato da un altro utente!',
     'LBL_SEND_NOT_ALLOWED' => 'Non è possibile inviare questa busta. È stata creata da un altro utente!',
@@ -113,4 +117,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Firmato',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Impossibile scaricare il documento. Si prega di controllare i log!',
     'LBL_DOCUMENT_COMPLETED' => 'Completato',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Info su DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'è ora',
+    'LBL_SETTINGS_TITLE' => 'Impostazioni DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'Comportamento di selezione del destinatario',
+    'LBL_RECIPIENT_NAME' => 'Nome',
+    'LBL_RECIPIENT_EMAIL' => 'E-mail',
+    'LBL_RECIPIENT_TYPE' => 'Tipo',
+    'LBL_TEMPLATE_NAME' => 'Nome',
+    'LBL_RECIPIENT_SELECT' => 'Seleziona...',
+    'LBL_RECIPIENT_ROLE' => 'Ruolo',
+    'LBL_SELECT_BUTTON_LABEL' => 'Seleziona',
+    'LBL_BACK_BUTTON_LABEL' => 'Indietro',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Recupero dei potenziali destinatari non riuscito!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Impossibile recuperare i modelli!',
 ];

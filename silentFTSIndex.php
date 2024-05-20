@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('sugarEntry'))define('sugarEntry', true);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -17,7 +18,7 @@ use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
 
 
 //change directories to where this file is located.
-chdir(dirname(__FILE__));
+chdir(__DIR__);
 define('ENTRY_POINT_TYPE', 'api');
 require_once('include/entryPoint.php');
 

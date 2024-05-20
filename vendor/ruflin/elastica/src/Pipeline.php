@@ -5,9 +5,12 @@ namespace Elastica;
 use Elastica\Exception\InvalidException;
 use Elastica\Processor\AbstractProcessor;
 use Elasticsearch\Endpoints\AbstractEndpoint;
+use Elasticsearch\Endpoints\Ingest\DeletePipeline;
+use Elasticsearch\Endpoints\Ingest\GetPipeline;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Delete;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Get;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
+use Elasticsearch\Endpoints\Ingest\PutPipeline;
 
 /**
  * Elastica Pipeline object.
@@ -32,6 +35,7 @@ class Pipeline extends Param
 
     /**
      * @var AbstractProcessor[]
+     * @phpstan-var array{processors?: AbstractProcessor[]}
      */
     protected $_processors = [];
 
@@ -59,8 +63,9 @@ class Pipeline extends Param
             throw new InvalidException('You should set a valid processor of type Elastica\Processor\AbstractProcessor.');
         }
 
-        $endpoint = new Put();
-        $endpoint->setID($this->id);
+        // TODO: Use only PutPipeline when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(PutPipeline::class) ? new PutPipeline() : new Put();
+        $endpoint->setId($this->id);
         $endpoint->setBody($this->toArray());
 
         return $this->requestEndpoint($endpoint);
@@ -73,8 +78,9 @@ class Pipeline extends Param
      */
     public function getPipeline(string $id): Response
     {
-        $endpoint = new Get();
-        $endpoint->setID($id);
+        // TODO: Use only GetPipeline when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(GetPipeline::class) ? new GetPipeline() : new Get();
+        $endpoint->setId($id);
 
         return $this->requestEndpoint($endpoint);
     }
@@ -86,8 +92,9 @@ class Pipeline extends Param
      */
     public function deletePipeline(string $id): Response
     {
-        $endpoint = new Delete();
-        $endpoint->setID($id);
+        // TODO: Use only DeletePipeline when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(DeletePipeline::class) ? new DeletePipeline() : new Delete();
+        $endpoint->setId($id);
 
         return $this->requestEndpoint($endpoint);
     }
@@ -106,7 +113,7 @@ class Pipeline extends Param
 
     public function addProcessor(AbstractProcessor $processor): self
     {
-        if (empty($this->_processors)) {
+        if (!$this->_processors) {
             $this->_processors['processors'] = $processor->toArray();
             $this->_params['processors'] = [];
         } else {
@@ -129,7 +136,7 @@ class Pipeline extends Param
     }
 
     /**
-     * @param AbstractProcessor[]
+     * @param AbstractProcessor[] $processors
      */
     public function setProcessors(array $processors): self
     {

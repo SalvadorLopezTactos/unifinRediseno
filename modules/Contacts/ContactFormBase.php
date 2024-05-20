@@ -22,6 +22,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 class ContactFormBase extends PersonFormBase {
 
+    public $bean;
 var $moduleName = 'Contacts';
 var $objectName = 'Contact';
 
@@ -93,33 +94,33 @@ if(!empty($mod)){
 if ($formname == 'EmailEditView')
 {
 		$form = <<<EOQ
-		<input type="hidden" name="${prefix}record" value="">
-		<input type="hidden" name="${prefix}email2" value="">
-		<input type="hidden" name="${prefix}phone_work" value="">
-		<input type="hidden" name="${prefix}assigned_user_id" value='${user_id}'>
+		<input type="hidden" name="{$prefix}record" value="">
+		<input type="hidden" name="{$prefix}email2" value="">
+		<input type="hidden" name="{$prefix}phone_work" value="">
+		<input type="hidden" name="{$prefix}assigned_user_id" value='{$user_id}'>
 		$lbl_first_name<br>
-		<input name="${prefix}first_name" type="text" value="" size=10><br>
+		<input name="{$prefix}first_name" type="text" value="" size=10><br>
 		$lbl_last_name&nbsp;<span class="required">$lbl_required_symbol</span><br>
-		<input name='${prefix}last_name' type="text" value="" size=10><br>
+		<input name='{$prefix}last_name' type="text" value="" size=10><br>
 		$lbl_email_address&nbsp;<span class="required">$lbl_required_symbol</span><br>
-		<input name='${prefix}email1' type="text" value=""><br><br>
+		<input name='{$prefix}email1' type="text" value=""><br><br>
 
 EOQ;
 }
 else
 {
 		$form = <<<EOQ
-		<input type="hidden" name="${prefix}record" value="">
-		<input type="hidden" name="${prefix}email2" value="">
-		<input type="hidden" name="${prefix}assigned_user_id" value='${user_id}'>
+		<input type="hidden" name="{$prefix}record" value="">
+		<input type="hidden" name="{$prefix}email2" value="">
+		<input type="hidden" name="{$prefix}assigned_user_id" value='{$user_id}'>
 		$lbl_first_name<br>
-		<input name="${prefix}first_name" type="text" value=""><br>
+		<input name="{$prefix}first_name" type="text" value=""><br>
 		$lbl_last_name&nbsp;<span class="required">$lbl_required_symbol</span><br>
-		<input name='${prefix}last_name' type="text" value=""><br>
+		<input name='{$prefix}last_name' type="text" value=""><br>
 		$lbl_phone<br>
-		<input name='${prefix}phone_work' type="text" value=""><br>
+		<input name='{$prefix}phone_work' type="text" value=""><br>
 		$lbl_email_address<br>
-		<input name='${prefix}email1' type="text" value=""><br><br>
+		<input name='{$prefix}email1' type="text" value=""><br><br>
 
 EOQ;
 }
@@ -154,13 +155,13 @@ $lbl_save_button_label = $app_strings['LBL_SAVE_BUTTON_LABEL'];
 $the_form = get_left_form_header($mod_strings['LBL_NEW_FORM_TITLE']);
 $the_form .= <<<EOQ
 
-		<form name="${prefix}ContactSave" onSubmit="return check_form('${prefix}ContactSave')" method="POST" action="index.php">
-			<input type="hidden" name="${prefix}module" value="Contacts">
-			<input type="hidden" name="${prefix}action" value="Save">
+		<form name="{$prefix}ContactSave" onSubmit="return check_form('{$prefix}ContactSave')" method="POST" action="index.php">
+			<input type="hidden" name="{$prefix}module" value="Contacts">
+			<input type="hidden" name="{$prefix}action" value="Save">
 EOQ;
-$the_form .= $this->getFormBody($prefix,'Contacts', "${prefix}ContactSave");
+        $the_form .= $this->getFormBody($prefix, 'Contacts', "{$prefix}ContactSave");
 $the_form .= <<<EOQ
-		<input title="$lbl_save_button_title" accessKey="$lbl_save_button_key" class="button" type="submit" name="${prefix}button" value="  $lbl_save_button_label  " >
+		<input title="$lbl_save_button_title" accessKey="$lbl_save_button_key" class="button" type="submit" name="{$prefix}button" value="  $lbl_save_button_label  " >
 		</form>
 
 EOQ;

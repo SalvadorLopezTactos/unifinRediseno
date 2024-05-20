@@ -65,8 +65,15 @@ class SugarACLOutboundEmail extends SugarACLStrategy
                         // The name and teams cannot be changed.
                         return !in_array($context['field'], ['name', 'team_id', 'team_set_id', 'team_name']);
                     case OutboundEmail::TYPE_SYSTEM_OVERRIDE:
-                        // Only the username and password can be changed.
-                        return in_array($context['field'], ['id', 'mail_smtpuser', 'mail_smtppass']);
+                        // Only the account credentials information can be changed.
+                        return in_array($context['field'], [
+                            'id',
+                            'mail_smtpuser',
+                            'mail_smtppass',
+                            'eapm_id',
+                            'authorized_account',
+                            'email_authorize',
+                        ]);
                     default:
                         // Anything can change for user records.
                         return true;

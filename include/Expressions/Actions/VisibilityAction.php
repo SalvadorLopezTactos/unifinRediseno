@@ -12,6 +12,10 @@
 
 class VisibilityAction extends AbstractAction
 {
+    /**
+     * @var mixed|string
+     */
+    public $view;
     protected $targetField = array();
     protected $expression = "";
 
@@ -20,7 +24,7 @@ class VisibilityAction extends AbstractAction
         $this->params = $params;
         $this->targetField = $params['target'];
         $this->expression = str_replace("\n", "", $params['value']);
-        $this->view = isset($params['view']) ? $params['view'] : "";
+        $this->view = $params['view'] ?? "";
     }
 
     /**
@@ -90,31 +94,48 @@ class VisibilityAction extends AbstractAction
                 var panel_class = 'record-panel-content';
                 var element = $(target);
                 var wasHidden = element.hasClass(inv_class);
-                var field = context.view.getField(this.target);
                 var row = element.parents('.row-fluid')[0];
 
-                if (field && _.isUndefined(field.wasRequired)) {
-                    field.wasRequired = field.def.required;
-                }
-                if (hide) {
-                    context.addClass(this.target, inv_class, true);
-                    //Disable the field to prevent tabbing into the edit mode of the field
-                    context.setFieldDisabled(this.target, true);
-                    if (field.wasRequired === true) {
+                // If the field is not on the view, nothing to do with it
+                let field = context.view.getField(this.target, context.model);
+                if (field) {
+                    // Track on the field that its visibility was changed by this action
+                    field.dependencyStates = field.dependencyStates || {};
+                    field.dependencyStates.visible = !hide;
+
+                    if (hide) {
+                        // Hide the field
+                        context.addClass(this.target, inv_class, true);
+
+                        // Store the current requiredness of the field in
+                        // dependencyStates, and make the field not required
+                        field.dependencyStates.required = field.dependencyStates.required ?? !!field.def.required;
                         context.setFieldRequired(this.target, false);
+
+                        // Disable the field to prevent tabbing into the edit mode of the field
+                        context.setFieldDisabled(this.target, true);
+                    } else {
+                        // Show the field
+                        context.removeClass(this.target, inv_class, true);
+
+                        // Enforce any field requiredness set by SetRequiredAction
+                        if (!_.isUndefined(field.dependencyStates.required)) {
+                            context.setFieldRequired(this.target, field.dependencyStates.required);
+                        }
+
+                        // Set field editability appropriately
+                        var isEditable = !(field.def.calculated && field.def.enforced) && !field.def.readOnlyProp;
+                        context.setFieldDisabled(this.target, !isEditable);
+
+                        // Show the field flash if the field is newly visible
+                        if (wasHidden) {
+                            SUGAR.forms.FlashField(target, null, this.target);
+                        }
                     }
                 }
-                else {
-                    context.removeClass(this.target, inv_class, true);
-                    var isEditable = (!field.def.calculated || !field.def.enforced) && !field.def.readOnlyProp;
-                    context.setFieldDisabled(this.target, !isEditable);
-                    if (wasHidden) {
-                        SUGAR.forms.FlashField(target, null, this.target);
-                    }
-                    if (field.wasRequired === true) {
-                        context.setFieldRequired(this.target, true);
-                    }
-                }
+
+                // Check the row and/or panel that the field is in. If all fields
+                // on the row/panel are hidden, hide the whole row/panel
                 if (row) {
                     this.checkRowSidecar(row, inv_class);
                     this.checkPanelSidecar(row.parentElement, inv_class, panel_class);

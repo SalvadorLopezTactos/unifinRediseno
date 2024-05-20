@@ -28,10 +28,10 @@ class SubStrExpression extends StringExpression
         $strLength = $params[2]->evaluate();
 
         if (!is_numeric($fromIdx))
-          throw new Exception($this->getOperationName() . ": Parameter FROM must be a number.");
+          throw new Exception(static::getOperationName() . ": Parameter FROM must be a number.");
 
         if (!is_numeric($strLength))
-          throw new Exception($this->getOperationName() . ": Parameter LENGTH must be a number.");
+          throw new Exception(static::getOperationName() . ": Parameter LENGTH must be a number.");
 
         return sugarSubstr($str, $fromIdx, $strLength);
     }

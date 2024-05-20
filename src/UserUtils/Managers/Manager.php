@@ -21,6 +21,8 @@ use SugarJobQueue;
  */
 class Manager
 {
+    /** @var bool */
+    protected $useScheduledJob;
     /**
      * The maximum number of users without using a scheduled job
      */

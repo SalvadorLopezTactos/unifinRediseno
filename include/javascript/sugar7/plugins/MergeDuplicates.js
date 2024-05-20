@@ -209,6 +209,7 @@
                     layout: 'merge-duplicates',
                     context: {
                         primary: primary || null,
+                        module: this.module,
                         selectedDuplicates: models
                     }
                 }, _.bind(function(refresh, primary) {

@@ -28,15 +28,11 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     protected $_position = 0;
 
     /**
-     * Response.
-     *
-     * @var \Elastica\Response Response object
+     * @var Response
      */
     protected $_response;
 
     /**
-     * Constructs ResultSet object.
-     *
      * @param BaseResultSet[] $resultSets
      */
     public function __construct(Response $response, array $resultSets)
@@ -79,7 +75,10 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
 
     /**
      * {@inheritdoc}
+     *
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->_resultSets[$this->key()];
@@ -135,7 +134,10 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
 
     /**
      * {@inheritdoc}
+     *
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->_resultSets[$offset] ?? null;

@@ -14,6 +14,13 @@
 class ParserModifyLayoutView extends ModuleBuilderParser
 {
 
+    //@codingStandardsIgnoreStart
+    public $_baseDirectory;
+    /**
+     * @var string|class-string<\EditView>|mixed|mixed[]
+     */
+    public $_sourceView;
+    //@codingStandardsIgnoreEnd
     var $maxColumns; // number of columns in this layout
     var $usingWorkingFile = false; // if a working file exists (used by view.edit.php among others to determine the title for the layout edit panel)
     var $language_module; // set to module name for studio, passed to the smarty template and used by sugar_translate
@@ -379,7 +386,7 @@ class ParserModifyLayoutView extends ModuleBuilderParser
             if ((!empty($def['studio']) && $def['studio'] == 'visible')
             || (empty($def['studio']) &&  (empty($def ['source']) || $def ['source'] == 'db' || $def ['source'] == 'custom_fields') && $def ['type'] != 'id' && strcmp($field, 'deleted') != 0 && (empty($def ['dbType']) || $def ['dbType'] != 'id') && (empty($def ['dbtype']) || $def ['dbtype'] != 'id')))
             {
-                $label = isset($def['vname']) ? $def['vname'] : $def['name'];
+                $label = $def['vname'] ?? $def['name'];
                 $modelFields [$field] = array('name' => $field, 'label' => $label);
             }
             else

@@ -26,15 +26,15 @@ if (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] === 'true') {
 
 $params = [];
 if (empty($focus->id)) {
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL']);
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'], ENT_COMPAT);
 } else {
     $href = 'index.php?' . http_build_query([
             'module' => 'ReportMaker',
             'action' => 'DetailView',
             'record' => $focus->id,
         ]);
-    $params[] = sprintf('<a href="%s">%s</a>', htmlspecialchars($href), htmlspecialchars($focus->get_summary_text()));
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL']);
+    $params[] = sprintf('<a href="%s">%s</a>', htmlspecialchars($href, ENT_COMPAT), htmlspecialchars($focus->get_summary_text(), ENT_COMPAT));
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL'], ENT_COMPAT);
 }
 echo getClassicModuleTitle('ReportMaker', $params, true);
 

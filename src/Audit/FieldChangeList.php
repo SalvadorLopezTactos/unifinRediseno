@@ -66,6 +66,7 @@ class FieldChangeList implements JsonSerializable, IteratorAggregate, \Countable
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return array_map(
@@ -79,7 +80,7 @@ class FieldChangeList implements JsonSerializable, IteratorAggregate, \Countable
     /**
      * {@inheritDoc}
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new ArrayIterator($this->changes);
     }
@@ -100,7 +101,7 @@ class FieldChangeList implements JsonSerializable, IteratorAggregate, \Countable
     /**
      * @inheritdoc
      */
-    public function count()
+    public function count(): int
     {
         return count($this->changes);
     }

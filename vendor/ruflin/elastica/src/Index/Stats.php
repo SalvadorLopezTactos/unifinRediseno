@@ -2,7 +2,7 @@
 
 namespace Elastica\Index;
 
-use Elastica\Index as BaseIndex;
+use Elastica\Index;
 use Elastica\Response;
 
 /**
@@ -31,16 +31,14 @@ class Stats
     /**
      * Index.
      *
-     * @var BaseIndex Index object
+     * @var Index
      */
     protected $_index;
 
     /**
      * Construct.
-     *
-     * @param BaseIndex $index Index object
      */
-    public function __construct(BaseIndex $index)
+    public function __construct(Index $index)
     {
         $this->_index = $index;
         $this->refresh();
@@ -62,11 +60,11 @@ class Stats
      *
      * @return mixed Data array entry or null if not found
      */
-    public function get()
+    public function get(...$args)
     {
         $data = $this->getData();
 
-        foreach (\func_get_args() as $arg) {
+        foreach ($args as $arg) {
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
@@ -79,10 +77,8 @@ class Stats
 
     /**
      * Returns the index object.
-     *
-     * @return BaseIndex Index object
      */
-    public function getIndex(): BaseIndex
+    public function getIndex(): Index
     {
         return $this->_index;
     }

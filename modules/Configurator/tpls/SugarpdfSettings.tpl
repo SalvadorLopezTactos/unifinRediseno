@@ -82,31 +82,6 @@
             </td>
         </tr>
     </table>
-<!--
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="edit view">
-        <tr>
-            <th align="left" scope="row" colspan="4"><h4 >{$MOD.SUGARPDF_ADVANCED_SETTINGS}</h4></th>
-        </tr>
-        <tr>
-            <td scope="row" scope="row">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                {counter start=0 assign='count'}
-                {foreach from=$SugarpdfSettings item=property key=name}
-                    {if $property.class == "advanced"}
-                        {counter}
-                        {include file="modules/Configurator/tpls/SugarpdfSettingsFields.tpl"}
-                    {/if}
-                {/foreach}
-                {if $count is odd}
-                        <td  ></td>
-                        <td  ></td>
-                    </tr>
-                {/if}
-            </table>
-            </td>
-        </tr>
-    </table>
--->
     </td>
     </tr>
 </table>

@@ -15,6 +15,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 class TemplateAutoIncrement extends TemplateRange
 {
+    public $max;
     public $type = 'autoincrement';
     public $auto_increment = true;
     public $disable_num_format = true;
@@ -24,6 +25,8 @@ class TemplateAutoIncrement extends TemplateRange
     * @var int|null
     */
     public $len = null;
+    /** @var array */
+    public $validation;
 
     public function __construct()
     {
@@ -56,14 +59,14 @@ class TemplateAutoIncrement extends TemplateRange
         $vardef = parent::get_field_def();
         $vardef['auto_increment'] = $this->auto_increment;
         $vardef['dbType'] = 'int';
-        $vardef['disable_num_format'] = isset($this->disable_num_format) ? $this->disable_num_format : $this->ext3;
+        $vardef['disable_num_format'] = $this->disable_num_format ?? $this->ext3;
         $vardef['importable'] = false;
         $vardef['readonly'] = true;
 
         $vardef['auto_increment_platform_options'] = ['unique' => true];
 
         $vardef['min'] = 1;
-        $vardef['max'] = isset($this->max) ? $this->max : $this->ext2;
+        $vardef['max'] = $this->max ?? $this->ext2;
         if ($vardef['min'] !== false || $vardef['max'] !== false) {
             $vardef['validation'] = array(
                 'type' => 'range',

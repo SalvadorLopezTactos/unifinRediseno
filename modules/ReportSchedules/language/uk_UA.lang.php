@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Інформаційна панель записів щодо планів звітів',
     'LBL_FILE_TYPE' => 'Тип(-и) файлу',
+    'LBL_EMBED_REPORT' => 'Вставити звіт в електронне повідомлення',
+    'LBL_EMBED_REPORT_INFO' => 'Примітка. Якщо кількість рядків у звіті перевищує 200, звіт буде прикріплено як файл CSV.',
 );

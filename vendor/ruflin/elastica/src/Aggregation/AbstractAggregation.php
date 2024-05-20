@@ -5,6 +5,7 @@ namespace Elastica\Aggregation;
 use Elastica\Exception\InvalidException;
 use Elastica\NameableInterface;
 use Elastica\Param;
+use Elastica\Util;
 
 abstract class AbstractAggregation extends Param implements NameableInterface
 {
@@ -59,7 +60,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
     /**
      * Add a sub-aggregation.
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return $this
      */
@@ -87,7 +88,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
      */
     public function setMeta(array $meta): self
     {
-        if (empty($meta)) {
+        if (!$meta) {
             return $this->clearMeta();
         }
 
@@ -128,14 +129,18 @@ abstract class AbstractAggregation extends Param implements NameableInterface
     {
         $array = parent::toArray();
 
-        if (\array_key_exists('global_aggregation', $array)) {
-            // compensate for class name GlobalAggregation
-            $array = ['global' => new \stdClass()];
-        }
         if (\count($this->_aggs)) {
             $array['aggs'] = $this->_convertArrayable($this->_aggs);
         }
 
         return $array;
+    }
+
+    protected function _getBaseName()
+    {
+        $shortName = (new \ReflectionClass($this))->getShortName();
+        $shortName = \preg_replace('/Aggregation$/', '', $shortName);
+
+        return Util::toSnakeCase($shortName);
     }
 }

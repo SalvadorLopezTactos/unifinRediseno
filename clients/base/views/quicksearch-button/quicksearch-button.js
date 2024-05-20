@@ -14,7 +14,7 @@
  * @extends View.View
  */
 ({
-    className: 'quicksearch-button-wrapper',
+    className: 'quicksearch-button-wrapper min-w-0 flex-1',
 
     events: {
         'click [data-action=search_icon]' : 'searchIconClickHandler'

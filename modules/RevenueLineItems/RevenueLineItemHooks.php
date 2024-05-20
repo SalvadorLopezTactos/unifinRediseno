@@ -42,34 +42,6 @@ class RevenueLineItemHooks
     }
 
     /**
-     * Before we save, we need to check to see if this rli is in a closed state. If so,
-     * set it to the proper included/excluded state in case mass_update tried to set it to something wonky
-     * @param RevenueLineItem $bean
-     * @param string $event
-     * @param array $args
-     */
-    public static function beforeSaveIncludedCheck($bean, $event, $args)
-    {
-        $settings = Forecast::getSettings(true);
-
-        if ($settings['is_setup'] && $event == 'before_save') {
-            $won = $settings['sales_stage_won'];
-            $lost = $settings['sales_stage_lost'];
-
-            //Check to see if we are in a won state. if so, set the probability to 100 and commit_stage to include.
-            //if not, set the probability to 0 and commit_stage to exclude
-            if (in_array($bean->sales_stage, $won)) {
-                $bean->probability = 100;
-                $bean->commit_stage = 'include';
-            } else if (in_array($bean->sales_stage, $lost)) {
-                $bean->probability = 0;
-                $bean->commit_stage = 'exclude';
-            }
-        }
-    }
-
-
-    /**
      * Generate Purchases/PLIs for the RLI only if all of the following are true
      * 1. We're in Opps+RLIs mode
      * 2. "Generate Purchase" is changing to "Yes"

@@ -12,6 +12,8 @@
 $dictionary['ProspectList'] = array(
     'favorites'        => true,
     'table'            => 'prospect_lists',
+    'color' => 'army',
+    'icon' => 'sicon-target-lists-lg',
     'unified_search'   => true,
     'full_text_search' => true,
     'fields'           => array(

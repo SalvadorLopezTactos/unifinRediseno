@@ -17,7 +17,9 @@
     plugins: ['Dropdown'],
 
     events: {
-        'click .profileactions-reset-mfa': 'resetMultifactorAuthentication'
+        'click .profileactions-reset-mfa': 'resetMultifactorAuthentication',
+        'click .profileactions-shortcuts': 'openShortcutsDrawer',
+        'click .profileactions-mobile': 'navigateToMobile',
     },
 
     initialize: function(options) {
@@ -25,6 +27,39 @@
         app.events.on("app:sync:complete", this.render, this);
         app.events.on("bwc:avatar:removed", this.bwcAvatarRemoved, this);
         app.user.on("change:picture", this.setCurrentUserData, this);
+        app.shortcuts.registerGlobal({
+            id: 'Shortcut:Help',
+            keys: '?',
+            component: this,
+            description: 'LBL_SHORTCUT_HELP',
+            handler: this.openShortcutsDrawer
+        });
+    },
+
+    /**
+     * Open shortcut help drawer.
+     */
+    openShortcutsDrawer: function() {
+        let activeDrawerLayout = app.drawer.getActive();
+        if (!activeDrawerLayout || activeDrawerLayout.type !== 'shortcuts') {
+            app.drawer.open({
+                layout: 'shortcuts'
+            });
+        } else {
+            app.drawer.close();
+        }
+    },
+
+    /**
+     * Function to navigate to mobile view
+     */
+    navigateToMobile: function() {
+        if (document.cookie.indexOf('sugar_mobile=') !== -1) {
+            // kill sugar_mobile=0 cookie
+            document.cookie = 'sugar_mobile=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        // navigate to the same route of mobile site
+        window.location = app.utils.buildUrl('mobile/') + window.location.hash;
     },
 
     /**
@@ -41,6 +76,9 @@
             this.menulist = this.filterAvailableMenu(app.utils.deepCopy(this.meta));
         }
         this._super('_renderHtml');
+        if (!app.shortcuts.isEnabled()) {
+            this.$('.profileactions-shortcuts').addClass('hide');
+        }
     },
 
     /**

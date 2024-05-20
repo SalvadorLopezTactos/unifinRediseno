@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logá',
 	'LBL_ADMIN_WIZARD' => 'Sprievodca administráciou',
-	'LBL_ALLOW_USER_TABS' => 'Umožní používateľom skryť záložky',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Nastavenia systému',
 	'LBL_ENABLE_MAILMERGE' => 'Povoliť zlučovanie pošty?',
 	'LBL_LOGVIEW' => 'Zobraziť denník',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Toto nastavenie použite na určenie počtu mesiacov pred aktuálnym dátumom, keď bude zverejnená informácia Voľné/Obsadené pre volania a schôdzky.<BR>Ak chcete vypnúť zverejnenie informácie  Voľné/Obsadené, zadajte hodnotu "0". Minimum je 1 mesiac, maximum 12 mesiacov.',
     'LBL_PDFMODULE_NAME' => 'Nahlásiť šablónu PDF',
     'SUGARPDF_BASIC_SETTINGS' => 'Vlastnosti dokumentu',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Pokročilé nastavenia',
     'SUGARPDF_LOGO_SETTINGS' => 'Obrázky',
-
-    'PDF_CREATOR' => 'Tvorca PDF',
-    'PDF_CREATOR_INFO' => 'Definuje tvorcu dokumentu.<br>Toto je zvyčajne názov aplikácie, ktorá generuje PDF.',
 
     'PDF_AUTHOR' => 'Autor',
     'PDF_AUTHOR_INFO' => 'Autor sa zobrazí vo vlastnostiach dokumentu.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Vyberte nový obrázok pre ponuky',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Formát súboru môže byť buď .jpg, alebo.png. (Iba .jpg pre EZPDF)<BR>Odporúčaná veľkosť je 867x60 px.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Šírka obrázka ponúk',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Zmení mierku nahratého obrázka, ktorý sa zobrazí v PDF dokumentoch ponúk. (iba TCPDF)',
+    'PDF_TITLE' => 'Titulok',
+    'PDF_TITLE_INFO' => 'Titulok sa zobrazí vo vlastnostiach dokumentu.',
+
+    'PDF_SUBJECT' => 'Predmet',
+    'PDF_SUBJECT_INFO' => 'Predmet sa objaví vo vlastnostiach dokumentu.',
 
     'PDF_SMALL_HEADER_LOGO' => 'Aktuálny obrázok',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Tento obrázok sa zobrazí v hlavičke na stránkach PDF dokumentov.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Vyberte nový obrázok',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Vyberte nový obrázok, ktorým chcete nahradiť aktuálny. Formát súboru môže byť buď .jpg alebo .png. (Iba .jpg pre EZPDF.) Odporúčaná veľkosť je 212x40 px.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Poskytuje informácie o šírke obrázka',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Zmení mierku nahratého obrázka, ktorý sa zobrazí v PDF dokumentoch hlásení. (iba TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'Hlavička',
-    'PDF_HEADER_STRING_INFO' => 'Popis hlavičky',
-
-    'PDF_HEADER_TITLE' => 'Názov hlavičky',
-    'PDF_HEADER_TITLE_INFO' => 'Reťazec, ktorý sa vytlačí ako titulok v hlavičke dokumentu',
-
-    'PDF_FILENAME' => 'Predvolený názov súboru',
-    'PDF_FILENAME_INFO' => 'Predvolený názov súboru pre generované PDF súbory',
-
-    'PDF_TITLE' => 'Titulok',
-    'PDF_TITLE_INFO' => 'Titulok sa zobrazí vo vlastnostiach dokumentu.',
-
-    'PDF_SUBJECT' => 'Predmet',
-    'PDF_SUBJECT_INFO' => 'Predmet sa objaví vo vlastnostiach dokumentu.',
-
     'PDF_KEYWORDS' => 'Kľúčové slová',
     'PDF_KEYWORDS_INFO' => 'Kľúčové slová pridružené k dokumentu, zvyčajne vo formáte "kľúčové slovo1 kľúčové slovo2..."',
 
-    'PDF_COMPRESSION' => 'Kompresia',
-    'PDF_COMPRESSION_INFO' => 'Aktivuje alebo deaktivuje kompresiu stránky.<br>Ak je kompresia povolená, vnútorné zobrazenie každej stránky je komprimované, čo vo výslednom dokumente vedie k pomeru kompresie cca 2.',
-
-    'PDF_JPEG_QUALITY' => 'Kvalita JPEG (1 – 100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Nastavenie predvolenej kvality kompresie JPEG (1 – 100)',
-
-    'PDF_PDF_VERSION' => 'Verzia PDF',
-    'PDF_PDF_VERSION_INFO' => 'Nastavenie PDF verzie (pozrite si PDF referenciu, kde nájdete platné hodnoty).',
-
-    'PDF_PROTECTION' => 'Ochrana dokumentu',
-    'PDF_PROTECTION_INFO' => 'Nastavenie ochrany dokumentov<br>– kópia: kopírovanie textov a obrázkov do schránky<br>– tlač: tlač dokumentu<br>– upraviť: úprava (s výnimkou anotácií a formulárov)<br>– formy anotácií: pridanie anotácií a foriem<br>Poznámka: ochrana proti úpravám je určená pre používateľov, ktorí vlastnia plnú verziu aplikácie Acrobat.',
-
-    'PDF_USER_PASSWORD' => 'Heslo používateľa',
-    'PDF_USER_PASSWORD_INFO' => 'Ak nenastavíte žiadne heslo, dokument sa otvorí ako zvyčajne. <br>Ak nastavíte heslo používateľa, prehliadač PDF bude na zobrazenie dokumentu toto heslo vyžadovať. <br>Master heslo, ak je odlišné od hesla používateľa, možno použiť na získanie úplného prístupu.',
-
-    'PDF_OWNER_PASSWORD' => 'Heslo vlastníka',
-    'PDF_OWNER_PASSWORD_INFO' => 'Ak nenastavíte žiadne heslo, dokument sa otvorí ako zvyčajne. <br>Ak nastavíte heslo používateľa, prehliadač PDF bude na zobrazenie dokumentu toto heslo vyžadovať. <br>Master heslo, ak je odlišné od hesla používateľa, možno použiť na získanie úplného prístupu.',
-
-    'PDF_ACL_ACCESS' => 'Riadenie prístupu',
-    'PDF_ACL_ACCESS_INFO' => 'Predvolené riadenie prístupu na generovanie PDF.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Pomer výšky bunky',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Ak je výška bunky menšia ako (pomer výšky písma x výšky bunky), potom (pomer výšky písma x výšky bunky) sa použije ako výška bunky.<br>(Pomer výšky písma x výšky bunky) sa použije ako výška bunky, aj keď nie definovaná žiadna výška.',
-
-    'K_TITLE_MAGNIFICATION' => 'Zväčšenie titulku',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Zväčšenie titulku zachová hlavnú veľkosť písma.',
-
-    'K_SMALL_RATIO' => 'Faktor malého písma',
-    'K_SMALL_RATIO_INFO' => 'Faktor redukcie pre malé písmo.',
-
-    'HEAD_MAGNIFICATION' => 'Zväčšenie riadku v hlavičke',
-    'HEAD_MAGNIFICATION_INFO' => 'Faktor zväčšenie pre titulky.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Pomer obrázka',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Pomer používaný na nastavenie veľkosti obrázkov',
-
-    'PDF_UNIT' => 'Jednotka',
-    'PDF_UNIT_INFO' => 'jednotka miery dokumentu',
 	'PDF_GD_WARNING'=>'Pre PHP nemusíte mať nainštalovanú knižnicu GD. Bez nainštalovanej knižnice GD je v dokumentoch PDF možné zobraziť len logá vo formáte JPEG.',
     'ERR_EZPDF_DISABLE'=>'Upozornenie: Trieda EZPDF je v tabuľke nastavení blokovaná a nastavená ako PDF trieda. Uložte tento formulár, aby ste nastavili TCPDF ako PDF triedu a vrátili sa do stabilného stavu.',
     'LBL_IMG_RESIZED'=>"(veľkosť prispôsobená na zobrazenie)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Pridať PDF písmo',
     'LBL_PDF_PATCH' => 'Oprava',
-    'LBL_PDF_PATCH_INFO' => 'Vlastná úprava kódovania. Zapíšte PHP pole.<br>Príklad:<br>ISO-8859-1 neobsahuje symbol eura. Ak ho chcete pridať na pozíciu 164, napíšte "array(164=>\\\'Euro\\\')".',
     'LBL_PDF_ENCODING_TABLE' => 'Kódovanie tabuľky',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Názov kódovania tabuľky.<br>Táto voľba je ignorovaná pre TrueType Unicode, OpenType Unicode a symbolických písma.<br>Kódovanie určuje vzťah medzi kódom (od 0 do 255) a znakom obsiahnutým v písme.<br>Prvých 128 znakov sú pevne stanovené a zodpovedajú sústave ASCII.',
     'LBL_PDF_FONT_FILE' => 'Súbor písma',

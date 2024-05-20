@@ -13,26 +13,26 @@
 <div class="row-fluid helplet-container">
     <div class="helplet">
         <div data-helplet="content" class="helplet-content">
-            {{#if meta.resources}}
+            {{#if resources}}
                 <ul class="resource-list m-0">
-                    {{#each meta.resources}}
-                        <li class="resource {{css_class}}">
+                    {{#each resources}}
+                        <li class="resource py-1.5 {{css_class}}">
                             {{#if id}}
-                            <a class="btn btn-link btn-invisible" href="javascript:void(0);" data-action="{{id}}">
+                            <a class="btn btn-link btn-invisible ml-0 py-1 pr-1.5 pl-0" href="javascript:void(0);" data-action="{{id}}">
                             {{else}}
-                            <a class="btn btn-link btn-invisible" href="{{url}}" target="_blank">
+                            <a class="btn btn-link btn-invisible ml-0 py-1 pr-1.5 pl-0" href="{{url}}" target="_blank">
                             {{/if}}
-                                <span class="label label-module label-module-sm pull-left help-link help-link-{{type}} {{color}}">
-                                </span>
-                                <div class="resource-info">
-                                    {{str link module}}
-                                </div>
+                                {{#if icon}}
+                                    <i class="{{buildIcon icon}} py-0.5 px-2.5 text-sm"></i>
+                                {{/if}}
+
+                                {{str link module}}
                             </a>
                         </li>
                     {{/each}}
                 </ul>
             {{else}}
-                <div class="helplet-body">
+                <div class="helplet-body max-h-60 overflow-y-auto">
                     <p>{{{helpObject.more_help}}}</p>
                     {{#if helpObject.body}}
                         <p class="body-text">{{nl2br helpObject.body}}</p>

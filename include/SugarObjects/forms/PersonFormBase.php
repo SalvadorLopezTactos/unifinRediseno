@@ -70,14 +70,14 @@ function buildTableForm($rows)
 	if ($action == 'ShowDuplicates')
 	{
         $this->request = InputValidation::getService();
-		$form .= "<input title='${app_strings['LBL_SAVE_BUTTON_TITLE']}' accessKey='${app_strings['LBL_SAVE_BUTTON_KEY']}' class='button' onclick=\"this.form.action.value='Save';\" type='submit' name='button' value='  ${app_strings['LBL_SAVE_BUTTON_LABEL']}  '>\n";
+            $form .= "<input title='{$app_strings['LBL_SAVE_BUTTON_TITLE']}' accessKey='{$app_strings['LBL_SAVE_BUTTON_KEY']}' class='button' onclick=\"this.form.action.value='Save';\" type='submit' name='button' value='  {$app_strings['LBL_SAVE_BUTTON_LABEL']}  '>\n";
         if (!empty($_REQUEST['return_module']) && !empty($_REQUEST['return_action']) && !empty($_REQUEST['return_id']))
         {
-                $form .= "<input title='${app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='${app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.module.value='" . $this->request->getValidInputRequest('return_module', 'Assert\Mvc\ModuleName') . "';this.form.action.value='" . htmlspecialchars(trim(json_encode($_REQUEST['return_action'], JSON_HEX_APOS), '"')) . "';this.form.record.value='" . $this->request->getValidInputRequest('return_id', 'Assert\Guid') . "'\" type='submit' name='button' value='  ${app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
+                $form .= "<input title='{$app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='{$app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.module.value='" . $this->request->getValidInputRequest('return_module', 'Assert\Mvc\ModuleName') . "';this.form.action.value='" . htmlspecialchars(trim(json_encode($_REQUEST['return_action'], JSON_HEX_APOS), '"'), ENT_COMPAT) . "';this.form.record.value='" . $this->request->getValidInputRequest('return_id', 'Assert\Guid') . "'\" type='submit' name='button' value='  {$app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
         } else if (!empty($_POST['return_module']) && !empty($_POST['return_action'])) {
-                $form .= "<input title='${app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='${app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.module.value='" . $this->request->getValidInputPost('return_module', 'Assert\Mvc\ModuleName') . "';this.form.action.value='" . htmlspecialchars(trim(json_encode($_POST['return_action'], JSON_HEX_APOS), '"')) . "';\" type='submit' name='button' value='  ${app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
+                $form .= "<input title='{$app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='{$app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.module.value='" . $this->request->getValidInputPost('return_module', 'Assert\Mvc\ModuleName') . "';this.form.action.value='" . htmlspecialchars(trim(json_encode($_POST['return_action'], JSON_HEX_APOS), '"'), ENT_COMPAT) . "';\" type='submit' name='button' value='  {$app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
         } else {
-            $form .= "<input title='${app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='${app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.action.value='ListView';\" type='submit' type='submit' name='button' value='  ${app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
+                $form .= "<input title='{$app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='{$app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.action.value='ListView';\" type='submit' type='submit' name='button' value='  {$app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
         }
     } else {
 		$form .= "<input type='submit' class='button' name='Continue{$this->objectName}' value='{$mod_strings[$newLinkLabel]}'>";
@@ -117,20 +117,20 @@ function buildTableForm($rows)
 		$form .= "<tr class='$rowColor'>";
 		if ($action != 'ShowDuplicates')
 		{
-			$form .= "<td width='1%' nowrap='nowrap'><a href='#' onClick=\"document.forms['dup{$this->moduleName}'].selected{$this->objectName}.value='${row['id']}';document.forms['dup{$this->moduleName}'].submit() \">[{$app_strings['LBL_SELECT_BUTTON_LABEL']}]</a>&nbsp;&nbsp;</td>\n";
+                $form .= "<td width='1%' nowrap='nowrap'><a href='#' onClick=\"document.forms['dup{$this->moduleName}'].selected{$this->objectName}.value='{$row['id']}';document.forms['dup{$this->moduleName}'].submit() \">[{$app_strings['LBL_SELECT_BUTTON_LABEL']}]</a>&nbsp;&nbsp;</td>\n";
 		}
 		$wasSet = false;
 
 		foreach ($row as $key=>$value){
 				if($key != 'id'){
 					if(isset($_POST['popup']) && $_POST['popup']==true){
-						$form .= "<td scope='row'><a  href='#' onclick=\"window.opener.location='index.php?module={$this->moduleName}&action=DetailView&record=${row['id']}'\">$value</a></td>\n";
+                        $form .= "<td scope='row'><a  href='#' onclick=\"window.opener.location='index.php?module={$this->moduleName}&action=DetailView&record={$row['id']}'\">$value</a></td>\n";
 					}
 					else if(!$wasSet){
-						$form .= "<td scope='row'><a target='_blank' href='index.php?module={$this->moduleName}&action=DetailView&record=${row['id']}'>$value</a></td>\n";
+                        $form .= "<td scope='row'><a target='_blank' href='index.php?module={$this->moduleName}&action=DetailView&record={$row['id']}'>$value</a></td>\n";
 						$wasSet = true;
 					}else{
-					    $form .= "<td><a target='_blank' href='index.php?module={$this->moduleName}&action=DetailView&record=${row['id']}'>$value</a></td>\n";
+                        $form .= "<td><a target='_blank' href='index.php?module={$this->moduleName}&action=DetailView&record={$row['id']}'>$value</a></td>\n";
 					}
 				}
 		}
@@ -145,13 +145,13 @@ function buildTableForm($rows)
 	$form .= "<tr class='pagination'><td colspan='$cols'><table width='100%' cellspacing='0' cellpadding='0' border='0'><tr><td>";
 	if ($action == 'ShowDuplicates')
 	{
-		$form .= "<input title='${app_strings['LBL_SAVE_BUTTON_TITLE']}' accessKey='${app_strings['LBL_SAVE_BUTTON_KEY']}' class='button' onclick=\"this.form.action.value='Save';\" type='submit' name='button' value='  ${app_strings['LBL_SAVE_BUTTON_LABEL']}  '>\n";
+            $form .= "<input title='{$app_strings['LBL_SAVE_BUTTON_TITLE']}' accessKey='{$app_strings['LBL_SAVE_BUTTON_KEY']}' class='button' onclick=\"this.form.action.value='Save';\" type='submit' name='button' value='  {$app_strings['LBL_SAVE_BUTTON_LABEL']}  '>\n";
         if (!empty($_REQUEST['return_module']) && !empty($_REQUEST['return_action']) && !empty($_REQUEST['return_id']))
-            $form .= "<input title='${app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='${app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.module.value='" . $this->request->getValidInputRequest('return_module', 'Assert\Mvc\ModuleName') . "';this.form.action.value='" . htmlspecialchars(trim(json_encode($_REQUEST['return_action'], JSON_HEX_APOS), '"')) . "';this.form.record.value='" . $this->request->getValidInputRequest('return_id', 'Assert\Guid') . "';\" type='submit' name='button' value='  ${app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
+            $form .= "<input title='{$app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='{$app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.module.value='" . $this->request->getValidInputRequest('return_module', 'Assert\Mvc\ModuleName') . "';this.form.action.value='" . htmlspecialchars(trim(json_encode($_REQUEST['return_action'], JSON_HEX_APOS), '"'), ENT_COMPAT) . "';this.form.record.value='" . $this->request->getValidInputRequest('return_id', 'Assert\Guid') . "';\" type='submit' name='button' value='  {$app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
         else if (!empty($_POST['return_module']) && !empty($_POST['return_action']))
-            $form .= "<input title='${app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='${app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.module.value='" . $this->request->getValidInputPost('return_module', 'Assert\Mvc\ModuleName') . "';this.form.action.value='" . htmlspecialchars(trim(json_encode($_POST['return_action'], JSON_HEX_APOS), '"')) . "';\" type='submit' name='button' value='  ${app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
+            $form .= "<input title='{$app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='{$app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.module.value='" . $this->request->getValidInputPost('return_module', 'Assert\Mvc\ModuleName') . "';this.form.action.value='" . htmlspecialchars(trim(json_encode($_POST['return_action'], JSON_HEX_APOS), '"'), ENT_COMPAT) . "';\" type='submit' name='button' value='  {$app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
         else
-            $form .= "<input title='${app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='${app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.action.value='ListView';\" type='submit' type='submit' name='button' value='  ${app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
+            $form .= "<input title='{$app_strings['LBL_CANCEL_BUTTON_TITLE']}' accessKey='{$app_strings['LBL_CANCEL_BUTTON_KEY']}' class='button' onclick=\"this.form.action.value='ListView';\" type='submit' type='submit' name='button' value='  {$app_strings['LBL_CANCEL_BUTTON_LABEL']}  '>";
     }
 	else
 	{
@@ -216,7 +216,7 @@ SQL;
                     [$this->moduleName, $emails],
                     [null, Connection::PARAM_STR_ARRAY]
                 );
-            foreach ($stmt as $row) {
+            foreach ($stmt->iterateAssociative() as $row) {
                 if (!isset($rows[$row['id']])) {
                     $query2 = <<<SQL
 SELECT id, first_name, last_name, title

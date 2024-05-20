@@ -89,12 +89,12 @@ class PMSEUserTask extends PMSEEvent
                 }
                 break;
             case 'REASSIGN':
-                $flowData['cas_adhoc_type'] = isset($arguments['adhoc_type']) ? $arguments['adhoc_type'] : $flowData['cas_adhoc_type'];
-                $flowData['user_name'] = isset($arguments['user_name']) ? $arguments['user_name'] : '';
-                $flowData['full_name'] = isset($arguments['full_name']) ? $arguments['full_name'] : '';
-                $flowData['taskName'] = isset($arguments['taskName']) ? $arguments['taskName'] : '';
+                $flowData['cas_adhoc_type'] = $arguments['adhoc_type'] ?? $flowData['cas_adhoc_type'];
+                $flowData['user_name'] = $arguments['user_name'] ?? '';
+                $flowData['full_name'] = $arguments['full_name'] ?? '';
+                $flowData['taskName'] = $arguments['taskName'] ?? '';
                 $flowData['evn_type'] = 'REASSIGN';
-                $flowData['idInbox'] = isset($arguments['flow_id']) ? $arguments['flow_id'] : '';
+                $flowData['idInbox'] = $arguments['flow_id'] ?? '';
                 $this->userAssignmentHandler->adhocReassign(
                     $flowData,
                     $arguments['adhoc_user'],

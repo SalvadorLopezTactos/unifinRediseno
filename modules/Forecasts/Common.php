@@ -166,15 +166,21 @@ class Common {
 		return $my_forecasted_timeperiods;
 	}
 
-	function get_user_name($user_id) {
-		global $locale;
-		$query = "SELECT  first_name, last_name FROM users WHERE deleted=0 and id = '$user_id'";
-		$result = $this->db->query($query,true," Error fetching user name: ");
+    public function get_user_name($user_id)
+    {
+        global $locale;
 
-		if (($row  =  $this->db->fetchByAssoc($result)) != null) {
+        $sql = 'SELECT  first_name, last_name FROM users WHERE deleted=0 and id = ?';
+
+        $row = DBManagerFactory::getInstance()
+            ->getConnection()
+            ->executeQuery($sql, [$user_id])
+            ->fetchAssociative();
+
+        if ($row !== false) {
             return $locale->formatName('Users', $row);
-		}
-	}
+        }
+    }
 
 	function get_reports_to_id($user_id) {
 		$query = "SELECT reports_to_id FROM users WHERE id = '$user_id'";

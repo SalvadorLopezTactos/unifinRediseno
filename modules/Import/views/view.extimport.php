@@ -29,8 +29,8 @@ class ImportViewExtimport extends ImportView
     public function __construct($bean = null, $view_object_map = array())
     {
         parent::__construct($bean, $view_object_map);
-        $this->externalSource = isset($_REQUEST['external_source']) ? $_REQUEST['external_source'] : '';
-        $this->offset = isset($_REQUEST['offset']) ? $_REQUEST['offset'] : '0';
+        $this->externalSource = $_REQUEST['external_source'] ?? '';
+        $this->offset = $_REQUEST['offset'] ?? '0';
         $this->recordsPerImport = !empty($_REQUEST['records_per_import']) ? $_REQUEST['records_per_import'] : $this->recordsPerImport;
         $this->importSource = $this->getExternalSourceAdapter();
         $this->importSource->setCurrentOffset($this->offset);
@@ -51,7 +51,7 @@ class ImportViewExtimport extends ImportView
             $this->handleImportError($mod_strings['LBL_EXTERNAL_ERROR_NO_SOURCE']);
         }
 
-        $columncount = isset($_REQUEST['columncount']) ? $_REQUEST['columncount'] : '';
+        $columncount = $_REQUEST['columncount'] ?? '';
         $fieldKeyTranslator = $this->getSugarToExternalFieldMapping($columncount);
 
         try

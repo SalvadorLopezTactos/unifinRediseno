@@ -22,12 +22,6 @@ $viewdefs['base']['view']['user-locale-wizard-page'] = array(
             'placeholders' => true,
             'fields' => array(
                 array(
-                    'name' => 'timezone',
-                    'type' => 'enum',
-                    'label' => "LBL_WIZ_TIMEZONE",
-                    'required' => true,
-                ),
-                array(
                     'name' => 'timepref',
                     'type' => 'enum',
                     'label' => "LBL_WIZ_TIMEFORMAT",

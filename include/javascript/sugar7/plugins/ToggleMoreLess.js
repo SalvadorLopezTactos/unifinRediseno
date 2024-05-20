@@ -86,8 +86,10 @@
              * @param {Event} evt Mouse Event.
              */
             moreLessClicked: function(evt) {
-                var moreLess = this.$(evt.currentTarget).data('moreless');
-                this.toggleMoreLess(moreLess);
+                if (_.isUndefined(this._CJ) || _.isNull(this._CJ)) {
+                    let moreLess = this.$(evt.currentTarget).data('moreless');
+                    this.toggleMoreLess(moreLess);
+                }
             },
 
             /**

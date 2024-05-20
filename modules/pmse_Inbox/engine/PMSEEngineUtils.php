@@ -31,7 +31,7 @@ class PMSEEngineUtils
     /**
      * Cache key for the list of modules that are engaged in active processes
      */
-    const MODULES_WHITELIST_CACHE_KEY = 'pmse_logic_hook_modules_whitelist';
+    public const MODULES_WHITELIST_CACHE_KEY = 'pmse_logic_hook_modules_whitelist';
 
     /**
      * Lists of SugarBPM supported module names keyed to the module type (target vs related)
@@ -163,6 +163,7 @@ class PMSEEngineUtils
         'Users',
         'Employees',
         'DataPrivacy',
+        'ExternalUsers',
     );
 
     /**
@@ -171,6 +172,7 @@ class PMSEEngineUtils
      */
     public static $relatedBlacklistedModules = array(
         'DataPrivacy',
+        'ExternalUsers',
     );
 
     /**
@@ -207,7 +209,7 @@ class PMSEEngineUtils
      * @var array
      */
     public static $specialFields = array(
-        'All' => array('created_by_name', 'modified_by_name', 'primary_contact_name'),
+        'All' => array('created_by_name', 'modified_by_name', 'primary_contact_name', 'reports_to_name'),
         'BR' => array('assigned_user_id', 'email1', 'outlook_id'),
         'BRR' => array('assigned_user_id', 'email1', 'outlook_id'),
         'ET' => array('email1', 'portal_name', 'portal_app'),
@@ -267,7 +269,7 @@ class PMSEEngineUtils
      */
     public static function getBusinessTimePattern(bool $checkOnly = true) : String
     {
-        $bcPattern = implode('', array_keys(self::$BusinessCenterTimeUnits));
+        $bcPattern = implode(array_keys(self::$BusinessCenterTimeUnits));
         if ($checkOnly) {
             return "/\d+{$bcPattern}/";
         } else {
@@ -1483,7 +1485,7 @@ class PMSEEngineUtils
                 // For a field validation list, run through until you hit a false,
                 // otherwise let the rest of the validation processes run
                 foreach ($def['processes'] as $method) {
-                    if (method_exists(__CLASS__, $method)) {
+                    if (method_exists(self::class, $method)) {
                         if (self::$method() === false) {
                             return false;
                         }
@@ -1743,7 +1745,7 @@ class PMSEEngineUtils
             $bean = self::getProperProcessBean($module, $element['act_field_module']);
 
             // Get the field information for this action
-            $fieldData = json_decode(html_entity_decode($element['act_fields']), true);
+            $fieldData = json_decode(html_entity_decode($element['act_fields'], ENT_COMPAT), true);
 
             // In some cases $fieldData comes back null, so we need to check
             // if it is actually an array before trying to use it as one
@@ -2037,9 +2039,9 @@ class PMSEEngineUtils
 
         if (!empty($module)) {
             if ($plural) {
-                $label = isset($app_list_strings['moduleList'][$module]) ? $app_list_strings['moduleList'][$module] : $module;
+                $label = $app_list_strings['moduleList'][$module] ?? $module;
             } else {
-                $label = isset($app_list_strings['moduleListSingular'][$module]) ? $app_list_strings['moduleListSingular'][$module] : $module;
+                $label = $app_list_strings['moduleListSingular'][$module] ?? $module;
             }
         }
 
@@ -2221,7 +2223,7 @@ class PMSEEngineUtils
      */
     public static function isUserActive(User $user)
     {
-        return $user->status === 'Active' && $user->employee_status === 'Active';
+        return $user->status === 'Active' && ($user->employee_status === 'Active' || !empty($user->is_group));
     }
 
     /**

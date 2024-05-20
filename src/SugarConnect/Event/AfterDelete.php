@@ -12,6 +12,9 @@
 
 namespace Sugarcrm\Sugarcrm\SugarConnect\Event;
 
+/**
+ * @deprecated Will be removed in the next release.
+ */
 final class AfterDelete extends AfterSave
 {
 }

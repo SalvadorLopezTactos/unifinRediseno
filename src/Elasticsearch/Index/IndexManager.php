@@ -38,19 +38,19 @@ class IndexManager
      * Key for `$this->config` containing the default configuration settings
      * which apply to all indices.
      */
-    const DEFAULT_INDEX_SETTINGS_KEY = 'default';
+    public const DEFAULT_INDEX_SETTINGS_KEY = 'default';
 
     /**
      * default max number of fields for an index
      * this value could be overwritten by
      * `$sugar_config['default']['index.mapping.total_fields.limit']`
      */
-    const DEFAULT_MAX_NUMBER_OF_FIELDS = 2000;
+    public const DEFAULT_MAX_NUMBER_OF_FIELDS = 2000;
 
     /**
      * default value for config entry 'enable_one_index'
      */
-    const CONFIG_ENABLE_ONE_INDEX = false;
+    public const CONFIG_ENABLE_ONE_INDEX = false;
 
     /**
      * @var Container

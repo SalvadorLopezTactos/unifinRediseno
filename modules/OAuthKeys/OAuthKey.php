@@ -73,8 +73,8 @@ class OAuthKey extends Basic
         $qoat = "DELETE FROM oauth_tokens WHERE consumer = ? ";
 
         $conn = $this->db->getConnection();
-        $conn->executeQuery($query, array($this->id));
-        $conn->executeQuery($qoat, array($this->id));
+        $conn->executeStatement($query, array($this->id));
+        $conn->executeStatement($qoat, array($this->id));
 	}
 
 }

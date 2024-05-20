@@ -15,6 +15,10 @@ require_once('include/workflow/workflow_utils.php');
 
 
 class WorkFlowGlue {
+    /**
+     * @var mixed|string
+     */
+    public $temp_eval;
     /** @var DBManager */
 	var $db;
 
@@ -486,11 +490,11 @@ SELECT * from workflow_alerts
 WHERE workflow_alerts.deleted = '0'
 AND workflow_alerts.parent_id = ?
 SQL;
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery($query, [$alertshell_id]);
 
 		// Get the id and the name.
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
 			$user_array_name = "user_".$user_alert_count;
 
 			$alert_user_array .= "\t '".$user_array_name."' => array ( \n\n";
@@ -630,14 +634,14 @@ include_once("include/workflow/alert_utils.php");
 
 		$action_module = $action_array['action_module'];
 		if (empty($beanList[$action_module])) {
-		    if (!empty($beanList[ucfirst(strtolower($action_module))])) {
+            if (!empty($beanList[ucfirst(strtolower((string)$action_module))])) {
 		        $action_module = ucfirst(strtolower($action_module));
 		    }
 		}
 
 		$action_shell_array .= "\t\t 'action_type' => '".$action_array['action_type']."', \n";
 		$action_shell_array .= "\t\t 'action_module' => '".$action_module."', \n";
-		$action_shell_array .= "\t\t 'rel_module' => '".strtolower($action_array['rel_module'])."', \n";
+        $action_shell_array .= "\t\t 'rel_module' => '" . strtolower((string)$action_array['rel_module']) . "', \n";
 		$action_shell_array .= "\t\t 'rel_module_type' => '".$action_array['rel_module_type']."', \n";
 
 
@@ -674,12 +678,12 @@ AND workflow_actions.parent_id = ?
 AND workflow_actions.set_type = 'Basic'
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery($query, [$actionshell_id]);
         $action_component_array .= "\t 'basic' => array ( \n\n";
         $action_component_array_ext = "";
         // Get the id and the name.
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             ///Start - Add the individual action components
             $action_component_array .= "\t\t '" . $row['field'] . "' => " . $this->write_escape($row['value']) . ",\n";
             if ($row['ext1'] != "") {
@@ -705,11 +709,11 @@ AND workflow_actions.parent_id = ?
 AND workflow_actions.set_type = 'Advanced'
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery($query, [$actionshell_id]);
         $action_component_array .= "\t 'advanced' => array ( \n\n";
         // Get the id and the name.
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $action_component_array .= "\t '".$row['field']."' => array ( \n\n";
             ///Start - Add the individual action components
             $action_component_array .= "\t\t\t 'value' => " . $this->write_escape($row['value']) . ",\n";
@@ -736,10 +740,10 @@ AND expressions.parent_id = ?
 AND expressions.parent_type = ?
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery($query, [$target_id, $parent_type]);
 		// Get the id and the name.
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
 			$target_component_array .= $this->build_trigger_array_component($array_name, $row);
 
 		//end while filters
@@ -787,7 +791,6 @@ SQL;
 
 
 	function build_trigger_triggers($array_position_name, $triggershell_id){
-
         $base_array = [];
         $this->trigger_meta_data .=  var_export($array_position_name, true)  . " => \n\n";
         $this->trigger_meta_data .= "array ( \n\n";
@@ -827,10 +830,10 @@ WHERE expressions.deleted = '0'
 AND expressions.parent_exp_id = ?
 SQL;
 
-        $stmt = $this->db->getConnection()
+        $result = $this->db->getConnection()
             ->executeQuery($query);
         // Get the id and the name.
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $this->trigger_meta_data .= $this->build_trigger_array_component("filter" . $filter_count, $row);
 
 		++$filter_count;

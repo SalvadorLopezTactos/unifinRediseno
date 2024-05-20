@@ -116,7 +116,8 @@ class Manufacturer extends SugarBean {
 
 	}
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		$temp_array = $this->get_list_view_array();
         $temp_array["ENCODED_NAME"]=$this->name;
     	return $temp_array;

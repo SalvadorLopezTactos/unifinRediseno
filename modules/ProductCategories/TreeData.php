@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Doctrine\DBAL\Result;
+
 require_once('vendor/ytree/Node.php');
 
 
@@ -46,7 +49,7 @@ SELECT * FROM product_categories
 WHERE (parent_id IS NULL OR parent_id = '') AND deleted = 0 
 ORDER BY list_order
 SQL;
-        $stmt = $GLOBALS['db']->getConnection()
+        $result = $GLOBALS['db']->getConnection()
             ->executeQuery($query);
     } else {
         $query = <<<SQL
@@ -54,17 +57,20 @@ SELECT * FROM product_categories
 WHERE parent_id = ? AND deleted=0 
 ORDER BY list_order
 SQL;
-        $stmt = $GLOBALS['db']->getConnection()
+        $result = $GLOBALS['db']->getConnection()
             ->executeQuery(
                 $query,
                 [$parent_id]
             );
     }
-    foreach ($stmt as $row) {
+    /** @var Result $result */
+    foreach ($result->iterateAssociative() as $row) {
         $node = new Node($row['id'], $row['name']);
         $node->set_property("href", $href_string);
 
-        if ((is_countable($open_nodes_ids) ? count($open_nodes_ids) : 0) > 0 and $row['id']==current($open_nodes_ids)) {
+        if ((is_countable($open_nodes_ids) ? count($open_nodes_ids) : 0) > 0 and $row['id'] == current(
+            $open_nodes_ids
+        )) {
             $node->expanded = true;
             $node->dynamic_load = false;
             $current_id=current($open_nodes_ids);

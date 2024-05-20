@@ -36,13 +36,13 @@ foreach ($result->iterateAssociative() as $row) {
 		$team->new_user_created($user);
 		// BUG 10339: do not display messages for upgrade wizard
 		if(!isset($_REQUEST['upgradeWizard'])){
-            printf('%s %s<br>', htmlspecialchars($mod_strings['LBL_UPGRADE_TEAM_CREATE']), htmlspecialchars($row['user_name']));
+            printf('%s %s<br>', htmlspecialchars($mod_strings['LBL_UPGRADE_TEAM_CREATE'], ENT_COMPAT), htmlspecialchars($row['user_name'], ENT_COMPAT));
 		}
 	}else{
-        printf('%s %s<br>', htmlspecialchars($row2['name']), htmlspecialchars($mod_strings['LBL_UPGRADE_TEAM_EXISTS']));
+        printf('%s %s<br>', htmlspecialchars($row2['name'], ENT_COMPAT), htmlspecialchars($mod_strings['LBL_UPGRADE_TEAM_EXISTS'], ENT_COMPAT));
 	}
 
 	$globalteam->add_user_to_team($row['id']);
 }
 
-echo '<br>' . htmlspecialchars($mod_strings['LBL_DONE']);
+echo '<br>' . htmlspecialchars($mod_strings['LBL_DONE'], ENT_COMPAT);

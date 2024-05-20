@@ -149,28 +149,28 @@ SQL;
             }
 
             //fill in first option value
-            $options_str .= '<option value="' . htmlspecialchars($row['id']) .'"';
+            $options_str .= '<option value="' . htmlspecialchars($row['id'], ENT_COMPAT) .'"';
             // if the marketing id is same as selected marketing id, set this option to render as "selected"
             if (!empty($selected_marketing_id) && $selected_marketing_id == $row['id']) {
-                $options_str .= ' selected>' . htmlspecialchars($row['name']) .'</option>';
+                $options_str .= ' selected>' . htmlspecialchars($row['name'], ENT_COMPAT) .'</option>';
             // if the marketing id is empty then set this first option to render as "selected"
             }elseif(empty($selected_marketing_id) && $focus->campaign_type == 'NewsLetter'){
-                $options_str .= ' selected>' . htmlspecialchars($row['name']) .'</option>';
+                $options_str .= ' selected>' . htmlspecialchars($row['name'], ENT_COMPAT) .'</option>';
             // if the marketing is not empty, but not same as selected marketing id, then..
             //.. do not set this option to render as "selected"
             }else{
-                $options_str .= '>' . htmlspecialchars($row['name']) .'</option>';
+                $options_str .= '>' . htmlspecialchars($row['name'], ENT_COMPAT) .'</option>';
             }
         }
         //process rest of records, if they exist
         while ($row = $focus->db->fetchByAssoc($result)){
             //add to list of option values
-            $options_str .= '<option value="' . htmlspecialchars($row['id']) .'"';
+            $options_str .= '<option value="' . htmlspecialchars($row['id'], ENT_COMPAT) .'"';
             //if the marketing id is same as selected marketing id, then set this option to render as "selected"
             if (!empty($selected_marketing_id) && $selected_marketing_id == $row['id']) {
-                $options_str .= ' selected>' . htmlspecialchars($row['name']) .'</option>';
+                $options_str .= ' selected>' . htmlspecialchars($row['name'], ENT_COMPAT) .'</option>';
             }else{
-                $options_str .= ' >' . htmlspecialchars($row['name']) .'</option>';
+                $options_str .= ' >' . htmlspecialchars($row['name'], ENT_COMPAT) .'</option>';
             }
          }
          $options_str .="</select>";

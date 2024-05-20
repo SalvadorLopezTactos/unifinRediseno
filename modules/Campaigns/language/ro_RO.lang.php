@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'URL al Tracker-ului: ',
   'LBL_TRACKER_TEXT' => 'Text link Tracker: ',
   'LBL_TRACKER_COUNT' => 'Numărătoare Tracker: ',
-  'LBL_REFER_URL' => 'URL redirecţionare Tracker: ',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Campanii',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Email campanie',
   'LBL_NEW_FORM_TITLE' => 'Angajat Nou',

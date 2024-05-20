@@ -15,6 +15,11 @@ use Ivory\HttpAdapter\Message\Request as HttpAdapterRequest;
 use Ivory\HttpAdapter\Message\Response as HttpAdapterResponse;
 use Ivory\HttpAdapter\Message\Stream\StringStream;
 
+\trigger_deprecation('ruflin/elastica', '7.1.1', 'The "%s" class is deprecated. It will be removed in 8.0.', HttpAdapter::class);
+
+/**
+ * @deprecated since version 7.1.1
+ */
 class HttpAdapter extends AbstractTransport
 {
     /**
@@ -30,7 +35,7 @@ class HttpAdapter extends AbstractTransport
     /**
      * Construct transport.
      */
-    public function __construct(?Connection $connection = null, HttpAdapterInterface $httpAdapter)
+    public function __construct(?Connection $connection, HttpAdapterInterface $httpAdapter)
     {
         parent::__construct($connection);
         $this->httpAdapter = $httpAdapter;
@@ -41,10 +46,10 @@ class HttpAdapter extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param array $params Host, Port, ...
+     * @param array<string, mixed> $params Host, Port, ...
      *
      * @throws \Elastica\Exception\ConnectionException
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
      */
     public function exec(ElasticaRequest $elasticaRequest, array $params): Response
@@ -94,7 +99,7 @@ class HttpAdapter extends AbstractTransport
         $method = $elasticaRequest->getMethod();
         $headers = $connection->hasConfig('headers') ?: [];
         if (!empty($data) || '0' === $data) {
-            if (ElasticaRequest::GET == $method) {
+            if (ElasticaRequest::GET === $method) {
                 $method = ElasticaRequest::POST;
             }
 
@@ -104,7 +109,7 @@ class HttpAdapter extends AbstractTransport
             }
 
             if (\is_array($data)) {
-                $body = JSON::stringify($data, JSON_UNESCAPED_UNICODE);
+                $body = JSON::stringify($data, \JSON_UNESCAPED_UNICODE);
             } else {
                 $body = $data;
             }

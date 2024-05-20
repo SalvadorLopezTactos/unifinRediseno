@@ -222,4 +222,10 @@ To create a {{meetings_singular_module}}:
     - Click "Select an Attendee" to add an existing user, contact, or lead to the {{meetings_singular_module}}.
     - Click the plus icon to the right of "Select an Attendee" to create a {{meetings_singular_module}} attendee as a new Sugar record.
 3. Click "Save" to finalize the new record and return to the previous page.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'On Nutika juhise kohtumine',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Tütarülesanded',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Tütarkõned',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Tütarkohtumised',
 );

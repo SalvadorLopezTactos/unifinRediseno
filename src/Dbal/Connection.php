@@ -13,8 +13,10 @@
 namespace Sugarcrm\Sugarcrm\Dbal;
 
 use Doctrine\DBAL\Cache\QueryCacheProfile;
-use Doctrine\DBAL\Portability\Connection as BaseConnection;
+use Doctrine\DBAL\Connection as BaseConnection;
 use Doctrine\DBAL\Exception as DBALException;
+use Doctrine\DBAL\Result;
+use LoggerManager;
 use Sugarcrm\Sugarcrm\Dbal\Query\QueryBuilder;
 
 /**
@@ -35,7 +37,7 @@ class Connection extends BaseConnection
     /**
      * {@inheritDoc}
      */
-    public function executeQuery($query, array $params = array(), $types = array(), QueryCacheProfile $qcp = null)
+    public function executeQuery($query, array $params = array(), $types = array(), QueryCacheProfile $qcp = null): Result
     {
         try {
             return parent::executeQuery($query, $params, $types, $qcp);
@@ -48,10 +50,25 @@ class Connection extends BaseConnection
     /**
      * {@inheritDoc}
      */
-    public function executeUpdate($query, array $params = array(), array $types = array())
+    public function executeUpdate($query, array $params = array(), array $types = array()): int
     {
         try {
             return parent::executeStatement($query, $params, $types);
+        } catch (DBALException $e) {
+            $this->logException($e);
+            throw $e;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function executeStatement($query, array $params = array(), array $types = array()): int
+    {
+        try {
+            return parent::executeStatement($query, $params, $types);
+        } catch (DBALException\UniqueConstraintViolationException $e) {
+            throw $e;
         } catch (DBALException $e) {
             $this->logException($e);
             throw $e;
@@ -65,6 +82,23 @@ class Connection extends BaseConnection
      */
     protected function logException(DBALException $e)
     {
-        $GLOBALS['log']->fatal($e->getMessage());
+        LoggerManager::getLogger()->fatal($this->formatExceptionMessage($e));
+    }
+
+    /**
+     * @param DBALException $e
+     * @return string
+     */
+    protected function formatExceptionMessage(DBALException $e): string
+    {
+        $message = $e->getMessage();
+        if ($e instanceof DBALException\DriverException && $e->getQuery() !== null) {
+            $message .= '; Query: ' . $e->getQuery()->getSQL();
+            $params = $e->getQuery()->getParams();
+            if (count($params) > 0) {
+                $message .= '; Params: ' . var_export($params, true);
+            }
+        }
+        return $message;
     }
 }

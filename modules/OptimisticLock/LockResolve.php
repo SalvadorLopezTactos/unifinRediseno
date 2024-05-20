@@ -12,8 +12,8 @@
 function display_conflict_between_objects($object_1, $object_2, $field_defs,$module_dir, $display_name){
     $mod_strings = return_module_language($GLOBALS['current_language'], 'OptimisticLock');
     $title = '<tr><td >&nbsp;</td>';
-    $object1_row= '<tr class="oddListRowS1"><td><b>' . htmlspecialchars($mod_strings['LBL_YOURS']) . '</b></td>';
-    $object2_row= '<tr class="evenListRowS1"><td><b>' . htmlspecialchars($mod_strings['LBL_IN_DATABASE']) . '</b></td>';
+    $object1_row= '<tr class="oddListRowS1"><td><b>' . htmlspecialchars($mod_strings['LBL_YOURS'], ENT_COMPAT) . '</b></td>';
+    $object2_row= '<tr class="evenListRowS1"><td><b>' . htmlspecialchars($mod_strings['LBL_IN_DATABASE'], ENT_COMPAT) . '</b></td>';
     $exists = false;
 
     foreach ($field_defs as $name => $ignore) {
@@ -24,10 +24,10 @@ function display_conflict_between_objects($object_1, $object_2, $field_defs,$mod
         }
         if ($value != $object_2->$name && !($object_2->$name instanceof Link2)) {
             $title .= '<td ><b>&nbsp;' .
-                htmlspecialchars(translate($field_defs[$name]['vname'], $module_dir)) .
+                htmlspecialchars(translate($field_defs[$name]['vname'], $module_dir), ENT_COMPAT) .
                 '</b></td>';
-            $object1_row .= '<td>&nbsp;' . htmlspecialchars($value). '</td>';
-            $object2_row .= '<td>&nbsp;' . htmlspecialchars($object_2->$name) . '</td>';
+            $object1_row .= '<td>&nbsp;' . htmlspecialchars($value, ENT_COMPAT). '</td>';
+            $object2_row .= '<td>&nbsp;' . htmlspecialchars($object_2->$name, ENT_COMPAT) . '</td>';
             $exists = true;
         }
     }
@@ -48,10 +48,10 @@ function display_conflict_between_objects($object_1, $object_2, $field_defs,$mod
                 'action' => 'DetailView',
                 'record' => $object_2->id,
             ]);
-        $lblConflictExists = htmlspecialchars($mod_strings['LBL_CONFLICT_EXISTS']);
-        $display_name = htmlspecialchars($display_name);
-        $lblAcceptYours = htmlspecialchars($mod_strings['LBL_ACCEPT_YOURS']);
-        $lblAcceptDatabase = htmlspecialchars($mod_strings['LBL_ACCEPT_DATABASE']);
+        $lblConflictExists = htmlspecialchars($mod_strings['LBL_CONFLICT_EXISTS'], ENT_COMPAT);
+        $display_name = htmlspecialchars($display_name, ENT_COMPAT);
+        $lblAcceptYours = htmlspecialchars($mod_strings['LBL_ACCEPT_YOURS'], ENT_COMPAT);
+        $lblAcceptDatabase = htmlspecialchars($mod_strings['LBL_ACCEPT_DATABASE'], ENT_COMPAT);
 
         $html = <<<HTML
                     <b>{$lblConflictExists}

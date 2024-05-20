@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\IdentityProvider\Srn\Converter as SrnConverter;
+use Sugarcrm\IdentityProvider\Srn\Manager as SrnManager;
 
 class UsersApi extends ModuleApi
 {
@@ -72,7 +74,7 @@ class UsersApi extends ModuleApi
      */
     public function retrieveRecord(ServiceBase $api, array $args)
     {
-        if (!($api->user->isAdminForModule('Users') || $api->user->isDeveloperForModule('Users') || $api->user->id === $args['record'])) {
+        if (!($api->user->isAdminForModule('Users') || $api->user->isDeveloperForModule('Users') || $api->user->id === $args['record'] || $this->isSudoUserRetrievingSelf($api->user, $args['record']))) {
             throw new SugarApiExceptionNotAuthorized();
         }
         return parent::retrieveRecord($api, $args);
@@ -169,6 +171,32 @@ class UsersApi extends ModuleApi
     protected function validateLicenseTypes($licenseTypes) : bool
     {
         $seed = BeanFactory::newBean('Users');
-        return $seed->validateLicenseTypes($seed->processLicenseTypes($licenseTypes));
+        return $seed->validateLicenseTypes($seed->processLicenseTypes($licenseTypes, false));
+    }
+
+    /**
+     * check if sudoer is trying to recieve information about self to display it in impersonation banner
+     * @param User $user
+     * @param $record
+     * @return bool
+     */
+    protected function isSudoUserRetrievingSelf(User $user, $record): bool
+    {
+        if ($user->sudoer === null) {
+            return false;
+        }
+        try {
+            $srn = SrnConverter::fromString($user->sudoer);
+        } catch (Exception $e) {
+            return false;
+        }
+        if (!SrnManager::isUser($srn)) {
+            return false;
+        }
+        $userResources = $srn->getResource();
+        if (empty($userResources[1])) {
+            return false;
+        }
+        return $userResources[1] === $record;
     }
 }

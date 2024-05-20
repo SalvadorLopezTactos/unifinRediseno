@@ -27,7 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Quotes List Dashboard',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Quotes Record Dashboard',
-    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Quotes Focus Drawer',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Quotes Focus Dashboard',
 
     'LBL_CONTRACTS'=>'Contracts',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contracts',

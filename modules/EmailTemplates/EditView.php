@@ -82,7 +82,7 @@ if ($has_campaign || $inboundEmail) {
 $params = array();
 
 if (empty($focus->id)) {
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL']);
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'], ENT_COMPAT);
 } else {
     $href = 'index.php?' . http_build_query([
             'module' => $focus->module_dir,
@@ -91,10 +91,10 @@ if (empty($focus->id)) {
         ]);
     $params[] = sprintf(
         '<a href="%s">%s</a>',
-        htmlspecialchars($href),
-        htmlspecialchars($focus->name)
+        htmlspecialchars($href, ENT_COMPAT),
+        htmlspecialchars($focus->name, ENT_COMPAT)
     );
-    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL']);
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_EDIT_BUTTON_LABEL'], ENT_COMPAT);
 }
 
 $pageTitle = getClassicModuleTitle($focus->module_dir, $params, true);
@@ -151,7 +151,7 @@ if ($has_campaign || $inboundEmail) {
         $cancel_script .= $json->encode($_REQUEST['return_id']);
     }
 }
-$cancel_script_html = htmlspecialchars($cancel_script);
+$cancel_script_html = htmlspecialchars($cancel_script, ENT_COMPAT);
 //Setup assigned user name
 $popup_request_data = array(
     'call_back_function' => 'set_return',
@@ -314,7 +314,7 @@ $lblContactAndOthers = implode('/', [
 // The insert variable drodown should be conditionally displayed.
 // If it's campaign then hide the Account.
 if ($has_campaign) {
-    $dropdown = '<option value="Contacts">' . htmlspecialchars($lblContactAndOthers) . '</option>';
+    $dropdown = '<option value="Contacts">' . htmlspecialchars($lblContactAndOthers, ENT_COMPAT) . '</option>';
     $xtpl->assign('DROPDOWN', $dropdown);
     $xtpl->assign('DEFAULT_MODULE', 'Contacts');
 } else {
@@ -365,9 +365,9 @@ if (!empty($etid)) {
                 'id' => $the_note->id,
                 'type' => 'Notes',
             ]);
-        $attachments .= '<input type="checkbox" name="remove_attachment[]" value="' . htmlspecialchars($the_note->id) . '" /> '
-            . htmlspecialchars($app_strings['LNK_REMOVE']) . '&nbsp;&nbsp;'
-            . '<a href="' . htmlspecialchars($secureLink) . '" target="_blank">' . htmlspecialchars($the_note->filename) . '</a><br>';
+        $attachments .= '<input type="checkbox" name="remove_attachment[]" value="' . htmlspecialchars($the_note->id, ENT_COMPAT) . '" /> '
+            . htmlspecialchars($app_strings['LNK_REMOVE'], ENT_COMPAT) . '&nbsp;&nbsp;'
+            . '<a href="' . htmlspecialchars($secureLink, ENT_COMPAT) . '" target="_blank">' . htmlspecialchars($the_note->filename, ENT_COMPAT) . '</a><br>';
     }
 }
 $attJs = '<script type="text/javascript">'

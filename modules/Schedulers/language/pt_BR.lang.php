@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Atualizar definição do produto',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Cronogramas de processos cientes do tempo',
 'LBL_OOTB_DATA_ARCHIVER' => 'Executar exclusões/arquivamentos de dados ativos',
+'LBL_OOTB_LICENSE_INSTALLER' => 'Aplicar direitos de assinatura quando forem alterados',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'Geocodificador de registros',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> 'Opções avançadas',
 'LBL_TOGGLE_ADV' => 'Mostrar opções avançadas',
 'LBL_TOGGLE_BASIC' => 'Mostrar opções básicas',
+'LBL_UPDATEMOMENTUMCJ' => 'Atualize o impulso dos guias inteligentes em andamento',
 // Links
 'LNK_LIST_SCHEDULER' => 'Agendadores',
 'LNK_NEW_SCHEDULER' => 'Criar agendador',
@@ -180,4 +182,3 @@ Para sair, digite 'quit'. Para desligar o serviço, 'shutdown'.
 'LBL_SUGARJOBDATAARCHIVER' => 'Executar exclusões/arquivamentos de dados ativos',
 'LBL_PMSEENGINECRON' => 'Agendador do SugarBPM',
 );
-

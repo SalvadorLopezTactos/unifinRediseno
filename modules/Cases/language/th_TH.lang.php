@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'แดชบอร์ดรายการปัญหา',
     'LBL_CASES_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกปัญหา',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'รายละเอียดเคส',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'แดชบอร์ดเน้นที่เคส - คอนโซล',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'ระบบลิ้นชักเคส',
 
 	'ERR_DELETE_RECORD'					=> 'คุณต้องระบุเลขที่ระเบียนเพื่อลบบัญชี',
@@ -162,4 +162,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'รายละเอียด SLA',
     'LBL_HOURS' => 'ชั่วโมง',
     'LBL_WIDGET_STATUS' => 'สถานะ',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'จัดระเบียบ',
+    'LBL_CREATE_NEW' => 'สร้างใหม่',
+    'LBL_MANAGE' => 'จัดการ',
+    'LBL_SEE_DETAILS' => 'ดูรายละเอียด',
+    'LBL_HIDE_NEW' => 'ซ่อน',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'เคส',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'เคส',
+    'LBL_KIOSK_CREATE' => 'สร้างเคส',
+    'LBL_KIOSK_SUBJECT' => 'หัวเรื่อง',
+    'LBL_KIOSK_CASE_ID' => 'ID เคส',
+    'LBL_KIOSK_STATUS' => 'สถานะ',
+    'LBL_KIOSK_CATEGORY' => 'หมวดหมู่',
+    'LBL_KIOSK_SUBMITTED_BY' => 'ส่งวันที่ {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'ลำดับความสำคัญ',
+    'LBL_KIOSK_CREATE_CASE' => 'ติดต่อเรา',
+    'LBL_KIOSK_DESCRIPTION' => 'คำอธิบาย',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'ส่งคำขอของคุณสำเร็จแล้ว',
+    'LBL_KIOSK_ATTACHED' => 'ทั้งหมดที่แนบมา',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'ผู้ใช้จากภายนอก',
 );

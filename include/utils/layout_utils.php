@@ -298,7 +298,7 @@ EOHTML;
 
     if ($includeJS)
     {
-        $charset = isset($app_strings['LBL_CHARSET']) ? $app_strings['LBL_CHARSET'] : $sugar_config['default_charset'];
+        $charset = $app_strings['LBL_CHARSET'] ?? $sugar_config['default_charset'];
         echo '<meta http-equiv="Content-Type" content="text/html; charset="{' . $charset . '}">';
         echo '<script type="text/javascript" src="' . getJSPath('include/javascript/jquery/jquery-min.js') . '"></script>';
         echo '<script type="text/javascript" src="'

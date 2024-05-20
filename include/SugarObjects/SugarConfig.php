@@ -62,7 +62,7 @@ class SugarConfig implements SplSubject
     /**
      * {@inheritDoc}
      */
-    public function attach(SplObserver $observer)
+    public function attach(SplObserver $observer): void
     {
         $this->observers->attach($observer);
     }
@@ -70,7 +70,7 @@ class SugarConfig implements SplSubject
     /**
      * {@inheritDoc}
      */
-    public function detach(SplObserver $observer)
+    public function detach(SplObserver $observer): void
     {
         $this->observers->detach($observer);
     }
@@ -78,7 +78,7 @@ class SugarConfig implements SplSubject
     /**
      * {@inheritDoc}
      */
-    public function notify()
+    public function notify(): void
     {
         foreach ($this->observers as $observer) {
             $observer->update($this);

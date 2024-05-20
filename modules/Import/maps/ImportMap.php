@@ -149,7 +149,7 @@ class ImportMap extends SugarBean
             return call_user_func_array(array('parent', __FUNCTION__), func_get_args());
         }
         // keep backwards compatibility, old method expected these arguments
-        list($owner_id, $name, $module, $source, $has_header, $delimiter, $enclosure) = func_get_args();
+        [$owner_id, $name, $module, $source, $has_header, $delimiter, $enclosure] = func_get_args();
         $olddefault_values = $this->default_values;
         $oldcontent = $this->content;
 
@@ -381,7 +381,7 @@ class ImportMap extends SugarBean
         $mapping = array();
         $pairs = str_getcsv(trim($csvString), $this->delimiter, $this->enclosure);
         foreach ($pairs as $pair) {
-            list($name, $value) = explode('=', $pair);
+            [$name, $value] = explode('=', $pair);
             $mapping[trim($name)] = $value;
         }
         return $mapping;

@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Informačný panel so záznamom plánov hlásení',
     'LBL_FILE_TYPE' => 'Typ(-y) súboru',
+    'LBL_EMBED_REPORT' => 'Vložiť hlásenie do e-mailu',
+    'LBL_EMBED_REPORT_INFO' => 'Poznámka: Ak hlásenie presiahne 200 riadkov, pripojíme ho ako súbor CSV.',
 );

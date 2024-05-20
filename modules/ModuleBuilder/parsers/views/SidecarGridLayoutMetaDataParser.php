@@ -14,6 +14,14 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
     /**
+     * @var mixed|string
+     */
+    public $headerPanelIndex;
+    /**
+     * @var mixed[]
+     */
+    public $fieldsRemovedFromAvailability;
+    /**
      * Invalid field types for various sidecar clients. Format can be either
      * $client => array('type', 'type') or
      * $client => array('edit' => array('type', 'type'), 'detail' => array('type', 'type'))
@@ -466,7 +474,11 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
 
                         // If there are additional fielddefs provided for the field, combine them with the
                         // filtered fielddefs
-                        if (!empty($fieldName) && !empty($source) && !empty($this->additionalFieldDefs[$fieldName])) {
+                        if (!empty($fieldName)
+                            && !empty($source)
+                            && is_array($source)
+                            && !empty($this->additionalFieldDefs[$fieldName])
+                            && is_array($this->additionalFieldDefs[$fieldName])) {
                             $source = array_merge($source, $this->additionalFieldDefs[$fieldName]);
                         }
 

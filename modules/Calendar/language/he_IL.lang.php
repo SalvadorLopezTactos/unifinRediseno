@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => 'נוב&#39;',
     'LBL_DEC' => 'דצמ&#39;',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'לוח השנה כבר נוסף',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} נבחר',
+    'LBL_NO_USER_SELECTED' => 'נא לבחור משתמש או צוות',
+    'LBL_NO_CALENDAR_SELECTED' => 'נא לבחור לוח שנה',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'שמירת לוחות השנה נכשלה.',
+
 );
 
 $mod_list_strings = array(

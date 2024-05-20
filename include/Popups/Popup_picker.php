@@ -35,7 +35,7 @@ class Popup_Picker
 		}
 
 		if(empty($popupMeta)){
-		    $popupMeta = SugarAutoLoader::loadPopupMeta($currentModule, isset($_REQUEST['metadata'])?$_REQUEST['metadata']:null);
+            $popupMeta = SugarAutoLoader::loadPopupMeta($currentModule, $_REQUEST['metadata'] ?? null);
 		}
 		$this->_popupMeta = $popupMeta;
 
@@ -74,6 +74,9 @@ class Popup_Picker
 	 */
 	function process_page()
 	{
+        $createButton = null;
+        $addformheader = null;
+        $addform = null;
 		global $theme;
 		global $mod_strings;
 		global $app_strings;

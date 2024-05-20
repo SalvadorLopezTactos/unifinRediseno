@@ -14,7 +14,7 @@ class SugarUpgradeReplaceMobileRegex extends UpgradeScript
 {
     public $order = 2000;
     public $type = self::UPGRADE_CUSTOM;
-    const MOBILE_PLATFORM_FILENAME = 'mobile/error-not-supported-platform.html';
+    public const MOBILE_PLATFORM_FILENAME = 'mobile/error-not-supported-platform.html';
 
     public function run()
     {

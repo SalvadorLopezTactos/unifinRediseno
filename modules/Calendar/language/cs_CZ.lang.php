@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Únor',
     'LBL_MARCH' => 'Březen',
     'LBL_APRIL' => 'Duben',
-    'LBL_MAY' => 'Kvě',
+    'LBL_MAY' => 'Květen',
     'LBL_JUNE' => 'Červen',
     'LBL_JULY' => 'Červenec',
     'LBL_AUGUST' => 'Srpen',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Říj',
     'LBL_NOV' => 'Lis',
     'LBL_DEC' => 'Pro',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalendář byl již přidán',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} je vybrán',
+    'LBL_NO_USER_SELECTED' => 'Vyberte uživatele nebo tým',
+    'LBL_NO_CALENDAR_SELECTED' => 'Vyberte kalendář',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Kalendáře se nepodařilo uložit.',
 
 );
 

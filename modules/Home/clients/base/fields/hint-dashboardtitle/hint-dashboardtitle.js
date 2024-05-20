@@ -76,7 +76,9 @@
         this._super('toggleClicked', [event]);
         var isNotAdded = this.$('.dropdown-menu [data-id=\'stage2\']').length < 1;
         if (this.isRecordView() && isNotAdded) {
-            var template = '<li><a href=\'javascript:void(0);\' data-id=\'stage2\'>Hint</a></li>';
+            var template = `<li><a href=\'javascript:void(0);\' data-id=\'stage2\'>${Handlebars.Utils.escapeExpression(
+                app.lang.get('LBL_HINT_PANEL')
+            )}</a></li>`;
             this.$('.dropdown-menu').prepend(template);
         }
     },

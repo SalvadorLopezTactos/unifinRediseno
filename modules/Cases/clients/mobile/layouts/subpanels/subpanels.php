@@ -64,9 +64,23 @@ $viewdefs['Cases']['mobile']['layout']['subpanels'] = array(
         ),
         [
             'layout' => 'subpanel',
+            'label' => 'LBL_KBCONTENTS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'kbcontents',
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
             'label' => 'LBL_PURCHASES_SUBPANEL_TITLE',
             'context' => [
                 'link' => 'purchases',
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_MESSAGES_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'messages',
             ],
         ],
         [

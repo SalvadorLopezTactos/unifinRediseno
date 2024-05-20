@@ -12,6 +12,10 @@
 
 class SetRequiredAction extends AbstractAction
 {
+    /**
+     * @var mixed|string
+     */
+    public $targetLabel;
     protected $expression = "";
 
     /**
@@ -23,7 +27,7 @@ class SetRequiredAction extends AbstractAction
     {
         $this->params = $params;
         $this->targetField = $params['target'];
-        $this->targetLabel = isset($params['label']) ? $params['label'] : $params['target'] . '_label';
+        $this->targetLabel = $params['label'] ?? $params['target'] . '_label';
         $this->expression = str_replace("\n", "", $params['value']);
     }
 
@@ -69,11 +73,22 @@ SUGAR.util.extend(SUGAR.forms.SetRequiredAction, SUGAR.forms.AbstractAction, {
                 context.view.once('render', function(){this.exec(context);}, this);
                 return;
             }
-            context.setFieldRequired(this.variable, this.required);
+
+            // If the field is not on the view, nothing to do with it
+            let field = context.view.getField(this.variable, context.model);
+            if (field) {
+                // Track on the field that its requiredness was changed by this action
+                field.dependencyStates = field.dependencyStates || {};
+                field.dependencyStates.required = SUGAR.expressions.Expression.isTruthy(this.required);
+
+                // Set the actual requiredness of the field if it is not hidden via visibility dependency
+                if (field.dependencyStates.visible !== false) {
+                    context.setFieldRequired(this.variable, this.required);
+                }
+            }
         } else {
             this.bwcExec(context, this.required);
         }
-
     },
      bwcExec : function(context, required) {
         var el = SUGAR.forms.AssignmentHandler.getElement(this.variable);

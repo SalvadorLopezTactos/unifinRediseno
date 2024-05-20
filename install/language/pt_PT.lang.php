@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Para uma utilização optimizada do sapi IIS/FastCGI, defina fastcgi.logging como 0 no seu ficheiro php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versão de PHP Instalada Não Suportada: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Base de dados indisponível',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Não foi encontrado Suporte da Base de Dados. Certifique-se de que possui os controladores necessários para um dos seguintes Tipos de Base de Dados suportados: MySQL, MS SQLServer, Oracle ou DB2. Talvez seja necessário anular o comentário da extensão no ficheiro php.ini ou recompilar com o ficheiro binário correcto, dependendo da sua versão de PHP. Consulte o seu Manual do PHP para obter mais informações sobre como activar o Suporte da Base de Dados.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Não foi encontrado Suporte da Base de Dados. Certifique-se de que possui os controladores necessários para um dos seguintes Tipos de Base de Dados suportados: MySQL, MS SQLServer, Oracle ou DB2. Talvez precise de anular o comentário à extensão no ficheiro php.ini ou recompilar com o ficheiro binário correcto, dependendo da sua versão do PHP. Consulte o seu Manual do PHP para obter mais informações sobre como activar o Suporte da Base de Dados.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funções associadas às XML Parser Libraries que são necessárias à aplicação Sugar não foram encontradas. Talvez seja necessário anular o comentário da extensão no ficheiro php.ini ou recompilar com ficheiro binário correto, dependendo da sua versão de PHP. Por favor consulte o Manual do PHP para mais informações.',
     'LBL_CHECKSYS_CSPRNG' => 'Gerador de números aleatórios',
     'ERR_CHECKSYS_MBSTRING'             => 'Funções associadas com a extensão Multibyte Strings PHP (mbstring) que são necessárias à aplicação Sugar não foram encontradas. <br/><br/>Geralmente, o módulo mbstring não está ativado por defeito no PHP e deve ser ativado com --enable-mbstring quando o binário PHP é construído. Por favor consulte o Manual do PHP para mais informações sobre como ativar o suporte mbstring.',
@@ -567,32 +567,15 @@ Recusar esta chamada
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'E-mails de notificação de atribuição',
-        'subject' => 'SugarCRM - $module_name atribuído ',
-        'description' => 'Este modelo é usado quando o Sistema envia uma atribuição de tarefa a um utilizador.',
-        'body' => '<div>
-<p>$assigned_by_user atribuiu um&nbsp;$module_name a&nbsp;$assigned_user.</p>
-
-<p>Pode rever este&nbsp;$module_name em:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user atribuiu um $module_name a $assigned_user.
-
-Pode rever este $module_name em:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'E-mails de relatórios agendados',
         'subject' => 'Relatório agendado: $report_name de $report_time',
         'description' => 'Este modelo é usado quando o Sistema envia um relatório agendado a um utilizador.',
         'body' => '<div>
-<p>Olá $assigned_user,</p>
-<p>Em anexo, encontra-se um relatório gerado automaticamente agendado para si.</p>
-<p>Nome do relatório: $report_name</p>
-<p>Data e hora de criação do relatório: $report_time</p>
+<p>Olá $assigned_user,<br></p>
+<p>Em anexo, encontra-se um relatório gerado automaticamente agendado para si.<br></p>
+<p>Nome do relatório: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Data e hora de criação do relatório: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Olá $assigned_user,
@@ -618,21 +601,6 @@ Data e hora de criação do relatório: $report_time',
             Inicie sessão no Sugar para ver o comentário.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informação da nova conta',
-        'description' => 'Este modelo é utilizado quando o Administrador de Sistema envia a nova palavra-passe para um utilizador.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Aqui está o nome de utilizador e a palavra-passe temporária da sua conta:</p><p>Nome de Utilizador : $contact_user_user_name </p><p>Palavra-passe: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Depois de iniciar sessão com a palavra-passe indicada acima, poderá ser pedido para alterar a palavra-passe por uma à sua escolha.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Aqui está o nome de utilizador e a palavra-passe temporária da sua conta:
-Nome de Utilizador: $contact_user_user_name
-Palavra-passe: $contact_user_user_hash
-
-$config_site_url
-
-Depois de iniciar sessão com a palavra-passe indicada acima, poderá ser necessário indicar uma nova palavra-passe à sua escolha.',
-        'name' => 'E-mail de palavra-passe gerada pelo sistema',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Redefinir a palavra-passe da conta',
         'description' => "Este modelo é utilizado para enviar para o utilizador um link para clicar e indicar uma nova palavra-passe da conta do utilizador.",

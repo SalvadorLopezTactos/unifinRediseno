@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Кнопки форми',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Затвердити/Відхилити',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Маршрут',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Надіслати в DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Інші параметри маршрутизації',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Змінити власника запису',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Команда',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Об&#39;єднання документів',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Вибрати…',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Об&#39;єднання документів у PDF-файл',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Надіслати об’єднаний документ електронною поштою',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Об&#39;єднання документів',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Тип шлюзу сходження не відповідає типу шлюзу вхідного потоку',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Шлюзи розходження ділять процеси на кілька гілок. У разі використання шлюзу сходження для повторного зведення цих гілок назад в один шлях слід використовувати відповідний тип шлюзу сходження в залежності від типу шлюзу розходження, який використовувався для створення гілок. Щоб звести гілки, створені за допомогою ексклюзивного або подієвого шлюзу розходження, слід використовувати ексклюзивний шлюз сходження. Щоб звести гілки, створені за допомогою паралельного або інклюзивного шлюзу розходження, використовуйте паралельний шлюз сходження.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Поле модуля',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Зв’язок із модулем',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Користувач',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Роль',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Команда',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Активність форми',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Бізнес-правило',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Дія бізнес-правила',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Шаблон електронної пошти',
 );

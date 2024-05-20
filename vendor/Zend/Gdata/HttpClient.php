@@ -210,7 +210,7 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
             if ($this->getAuthSubPrivateKeyId() != null) {
                 // secure AuthSub
                 $time = time();
-                $nonce = mt_rand(0, 999999999);
+                $nonce = random_int(0, 999999999);
                 $dataToSign = $method . ' ' . $url . ' ' . $time . ' ' . $nonce;
 
                 // compute signature

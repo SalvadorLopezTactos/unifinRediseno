@@ -34,6 +34,7 @@ use Google\Service\BigtableAdmin\SetIamPolicyRequest;
 use Google\Service\BigtableAdmin\Table;
 use Google\Service\BigtableAdmin\TestIamPermissionsRequest;
 use Google\Service\BigtableAdmin\TestIamPermissionsResponse;
+use Google\Service\BigtableAdmin\UndeleteTableRequest;
 
 /**
  * The "tables" collection of methods.
@@ -155,8 +156,9 @@ class ProjectsInstancesTables extends \Google\Service\Resource
    * if the resource exists but does not have a policy set. (tables.getIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * requested. See the operation documentation for the appropriate value for this
-   * field.
+   * requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param GetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -185,7 +187,8 @@ class ProjectsInstancesTables extends \Google\Service\Resource
    * @opt_param string pageToken The value of `next_page_token` returned by a
    * previous call.
    * @opt_param string view The view to be applied to the returned tables' fields.
-   * Only NAME_ONLY view (default) and REPLICATION_VIEW are supported.
+   * Only NAME_ONLY view (default), REPLICATION_VIEW and ENCRYPTION_VIEW are
+   * supported.
    * @return ListTablesResponse
    */
   public function listProjectsInstancesTables($parent, $optParams = [])
@@ -238,8 +241,9 @@ class ProjectsInstancesTables extends \Google\Service\Resource
    * policy. (tables.setIamPolicy)
    *
    * @param string $resource REQUIRED: The resource for which the policy is being
-   * specified. See the operation documentation for the appropriate value for this
-   * field.
+   * specified. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
@@ -255,8 +259,9 @@ class ProjectsInstancesTables extends \Google\Service\Resource
    * (tables.testIamPermissions)
    *
    * @param string $resource REQUIRED: The resource for which the policy detail is
-   * being requested. See the operation documentation for the appropriate value
-   * for this field.
+   * being requested. See [Resource
+   * names](https://cloud.google.com/apis/design/resource_names) for the
+   * appropriate value for this field.
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse
@@ -266,6 +271,22 @@ class ProjectsInstancesTables extends \Google\Service\Resource
     $params = ['resource' => $resource, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('testIamPermissions', [$params], TestIamPermissionsResponse::class);
+  }
+  /**
+   * Restores a specified table which was accidentally deleted. (tables.undelete)
+   *
+   * @param string $name Required. The unique name of the table to be restored.
+   * Values are of the form
+   * `projects/{project}/instances/{instance}/tables/{table}`.
+   * @param UndeleteTableRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Operation
+   */
+  public function undelete($name, UndeleteTableRequest $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('undelete', [$params], Operation::class);
   }
 }
 

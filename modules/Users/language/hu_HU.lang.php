@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'A felhasználó adatai nem találhatók',
     'ERR_USER_NAME_EXISTS'              => 'A(z) {0} felhasználónév már létezik. Azonos felhasználói nevek nem engedélyezettek. Változtassa egyedivé a felhasználónevet.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'A "Sugar Hint" licencet további kompatibilis licenctípusokkal kell elmenteni',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'A Sugar Sell Premier már tartalmazza ezt a funkciót.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Ez a felhasználó ki van zárva a Sugar alkalmazásból, így nem tud bejelentkezni jelenlegi jelszavával.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'A kizárólag külső hitelesítést alkalmazó felhasználók nem jelentkezhetnek be Sugar azonosítókkal',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Jelszó',
     'LBL_CHOOSE_A_KEY'					=> 'Válasszon egy kulcsot, hogy elkerülje a személyes naptárjának illetéktelen közzétételét',
     'LBL_NO_KEY'                        => 'A kulcs nincs beállítva. A közzététel érdekében állítsa be!',
-	'LBL_CHOOSE_WHICH'					=> 'Válassza ki, mely modulok legyenek elérhetők a navigációs sávon keresztül! Adja meg a modulok kívánt sorrendjét!',
+    'LBL_CHOOSE_WHICH'                  => 'Válassza ki, mely modulok legyenek elérhetők az oldalsó navigációs sávon keresztül! Adja meg a modulok kívánt sorrendjét!',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Kitűzött modulok száma',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Adja meg, hogy hány modul legyen elérhető összecsukott navigációs sáv mellett (pl. ha az 5-öt adja meg, akkor a listán található első öt modul lesz kitűzve). Egy olyan számot javasolunk, ami lefedi a leggyakrabban használt modulainak számát. A 100 feletti értékek érvénytelenek.',
 	'LBL_CITY'							=> 'Város',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Töröl',
@@ -543,6 +546,7 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP felhasználónév:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP szerver típusa:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP szerver specifikációja',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Engedélyezett e-mail cím',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Válassza ki az e-mail szolgáltatóját:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail jelszó:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail azonosító:',
@@ -689,4 +693,9 @@ $mod_strings = array (
     'LBL_UTILS_USER_TEAMS_ROLES' => 'felhasználók/csoportok/szerepkörök',
     'LBL_LOADING_ITEMS' => 'Adatok betöltése...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Smart Guide hozzáférés',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Smart Guide aktivitás',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Hiányzó Smart Guide hozzáférés',
 ); // END STRINGS DEFS

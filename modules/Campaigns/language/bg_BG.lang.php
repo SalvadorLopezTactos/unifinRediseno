@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'Маркер:',
   'LBL_TRACKER_TEXT' => 'Текст на препратка за проследяване:',
   'LBL_TRACKER_COUNT' => 'Tracker Count:',
-  'LBL_REFER_URL' => 'Tracker Redirect URL:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Кампании',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Кампания посредством електронна поща',
   'LBL_NEW_FORM_TITLE' => 'Нова кампания',

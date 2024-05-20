@@ -90,7 +90,7 @@ class PMSEEventObserver implements PMSEObserver
             $eventDefinition = $subject->getEventDefinition();
             $eventDefinitionData = $eventDefinition->fetched_row;
             $processDefinition = $subject->getProcessDefinition();
-            $processDefinitionData = ($processDefinition->fetched_row) ? $processDefinition->fetched_row : array();
+            $processDefinitionData = $processDefinition->fetched_row ?: array();
             $completeData = $eventData + $eventDefinitionData + $processDefinitionData;
             $this->relatedDependency->processRelatedDependencies($completeData);
         }

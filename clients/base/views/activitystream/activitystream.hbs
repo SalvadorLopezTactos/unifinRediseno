@@ -19,9 +19,9 @@
         {{/if}}
     </a>
 {{else}}
-    <div class="label label-module label-module-md label-{{model.attributes.display_parent_type}} pull-left" rel="tooltip" data-placement="right" title="{{moduleIconToolTip model.attributes.display_parent_type}}">
-        {{moduleIconLabel model.attributes.display_parent_type}}
-    </div>
+    {{#with model.attributes}}
+        {{moduleLabel display_parent_type 'lg' class='pull-left' rel="tooltip" data-placement="right" title=(moduleIconToolTip display_parent_type)}}
+    {{/with}}
 {{/eq}}
 <p>
     {{#if tpl}}

@@ -406,8 +406,13 @@ class PMSEEmailHandler
     public function processRoleEmails($bean, $entry, $flowData)
     {
         $res = array();
-        $role = $this->retrieveBean('ACLRoles', $entry->value);
-        $userList = $role->get_linked_beans('users','User');
+        if ($entry->value === 'is_admin') {
+            $userList = $this->getAdminBeans();
+        } else {
+            $role = $this->retrieveBean('ACLRoles', $entry->value);
+            $userList = $role->get_linked_beans('users', 'User');
+        }
+
         foreach ($userList as $user) {
             if ($this->isUserActiveForEmail($user)) {
                 $item = new stdClass();
@@ -417,6 +422,35 @@ class PMSEEmailHandler
             }
         }
         return $res;
+    }
+
+    /**
+     * Return list of Admin Beans
+     *
+     * @return array
+     * @throws SugarQueryException
+     */
+    private function getAdminBeans() : array
+    {
+        $query = new SugarQuery();
+
+        $query
+            ->from(BeanFactory::newBean('Users'))
+            ->where()
+            ->equals('status', 'Active')
+            ->equals('is_admin', '1');
+        $data = $query->execute();
+
+        $userList = [];
+        foreach ($data as $row) {
+            $bean = BeanFactory::newBean('Users');
+            $bean->populateFromRow($row);
+            $bean->populateFetchedEmail('bean_field');
+            $bean->emailAddress->handleLegacyRetrieve($bean);
+            $userList[] = $bean;
+        }
+
+        return $userList;
     }
 
     public function processRecipientEmails($bean, $entry, $flowData)
@@ -668,6 +702,20 @@ class PMSEEmailHandler
         $mailObject->setTextBody($email->body);
         $mailObject->setSubject($email->subject);
 
+        // if we need to attach a generated document
+        if ($email->doc_merge_attach_id) {
+            $document = BeanFactory::retrieveBean('Documents', $email->doc_merge_attach_id);
+            $documentRevisionId = $document->document_revision_id;
+
+            $fileLocation = "upload://{$documentRevisionId}";
+            $filename = $document->filename;
+            $mimeType = $document->file_mime_type;
+
+            if ($document) {
+                $mailObject->addAttachment(new Attachment($fileLocation, $filename, Encoding::Base64, $mimeType));
+            }
+        }
+
         try {
             $mailObject->send();
             return true;
@@ -723,12 +771,11 @@ class PMSEEmailHandler
             return null;
         }
 
-        list($evnDefBean, $templateBean, $targetBean, $emailMessageBean) = $beans;
+        [$evnDefBean, $templateBean, $targetBean, $emailMessageBean] = $beans;
 
         $addresses = $this->getRecipients($evnDefBean, $targetBean, $flowData);
         $sender = $this->getSenderFromEventDefinition($evnDefBean, $targetBean);
         $outboundId = $this->getOutBoundEmailIdFromEventDefinition($evnDefBean);
-
         return $this->saveEmailBean($targetBean, $templateBean, $sender, $addresses, $emailMessageBean, $outboundId);
     }
 
@@ -750,7 +797,7 @@ class PMSEEmailHandler
             return null;
         }
 
-        list($templateBean, $targetBean, $emailMessageBean, $assignee) = $beans;
+        [$templateBean, $targetBean, $emailMessageBean, $assignee] = $beans;
 
         $addresses = new stdClass();
         $addresses->to = $this->getUserEmails($assignee, '');
@@ -820,6 +867,15 @@ class PMSEEmailHandler
         $emailMessageBean->outbound_email_id = $outboundId;
         $emailMessageBean->flow_id = $this->flowData['id'];
 
+        /**
+         * if the message is triggered from a doc_merge action
+         * make sure we setup the attachement id
+         */
+        if (isset($this->flowData)
+            && isset($this->flowData['doc_merge_attach_id'])) {
+            $emailMessageBean->doc_merge_attach_id = $this->flowData['doc_merge_attach_id'];
+        }
+
         return $emailMessageBean->save();
     }
 
@@ -874,7 +930,7 @@ class PMSEEmailHandler
      */
     public function getRecipients($eventDefinitionBean, $targetBean, $flowData)
     {
-        $json = htmlspecialchars_decode($eventDefinitionBean->evn_params);
+        $json = htmlspecialchars_decode($eventDefinitionBean->evn_params, ENT_COMPAT);
         return $this->processEmailsFromJson($targetBean, $json, $flowData);
     }
 
@@ -992,7 +1048,7 @@ class PMSEEmailHandler
     {
         $sender = [];
         if (!empty($evnDefBean->evn_params)) {
-            $addressesJSON = htmlspecialchars_decode($evnDefBean->evn_params);
+            $addressesJSON = htmlspecialchars_decode($evnDefBean->evn_params, ENT_COMPAT);
             $addresses = json_decode($addressesJSON);
             $fromId = !empty($addresses->from->id) ? $addresses->from->id : null;
             $replyToId = !empty($addresses->replyTo->id) ? $addresses->replyTo->id : null;
@@ -1012,7 +1068,7 @@ class PMSEEmailHandler
     private function getOutBoundEmailIdFromEventDefinition($evnDefBean)
     {
         if (!empty($evnDefBean->evn_params)) {
-            $addressesJSON = htmlspecialchars_decode($evnDefBean->evn_params);
+            $addressesJSON = htmlspecialchars_decode($evnDefBean->evn_params, ENT_COMPAT);
             $addresses = json_decode($addressesJSON);
             $id = !empty($addresses->from->id) ? $addresses->from->id : null;
             //Check if this is an outbound account

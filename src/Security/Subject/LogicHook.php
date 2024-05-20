@@ -51,6 +51,7 @@ final class LogicHook implements Subject
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

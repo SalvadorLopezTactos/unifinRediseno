@@ -66,6 +66,14 @@ class ReportSchedule extends Basic
                 $this->next_run = $this->getNextRunDate($this->date_start, 0);
             }
         }
+
+        //handling user id as it was handled on save_schedule.
+        global $current_user;
+
+        if (empty($this->user_id) && !empty($current_user)) {
+            $this->user_id = $current_user->id;
+        }
+
         return parent::save($check_notify);
     }
 
@@ -516,7 +524,7 @@ QUERY;
      */
     public function getInfo($id)
     {
-        $query = "SELECT report_id, next_run, time_interval, file_type
+        $query = "SELECT report_id, next_run, time_interval, file_type, embed_report
         FROM {$this->table_name}
         WHERE id = " . $this->db->quoted($id);
         $result = $this->db->query($query);

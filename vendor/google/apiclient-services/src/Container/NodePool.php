@@ -26,20 +26,51 @@ class NodePool extends \Google\Collection
   protected $conditionsDataType = 'array';
   protected $configType = NodeConfig::class;
   protected $configDataType = '';
+  /**
+   * @var int
+   */
   public $initialNodeCount;
+  /**
+   * @var string[]
+   */
   public $instanceGroupUrls;
+  /**
+   * @var string[]
+   */
   public $locations;
   protected $managementType = NodeManagement::class;
   protected $managementDataType = '';
   protected $maxPodsConstraintType = MaxPodsConstraint::class;
   protected $maxPodsConstraintDataType = '';
+  /**
+   * @var string
+   */
   public $name;
+  protected $networkConfigType = NodeNetworkConfig::class;
+  protected $networkConfigDataType = '';
+  /**
+   * @var int
+   */
   public $podIpv4CidrSize;
+  /**
+   * @var string
+   */
   public $selfLink;
+  /**
+   * @var string
+   */
   public $status;
+  /**
+   * @var string
+   */
   public $statusMessage;
+  protected $updateInfoType = UpdateInfo::class;
+  protected $updateInfoDataType = '';
   protected $upgradeSettingsType = UpgradeSettings::class;
   protected $upgradeSettingsDataType = '';
+  /**
+   * @var string
+   */
   public $version;
 
   /**
@@ -84,26 +115,44 @@ class NodePool extends \Google\Collection
   {
     return $this->config;
   }
+  /**
+   * @param int
+   */
   public function setInitialNodeCount($initialNodeCount)
   {
     $this->initialNodeCount = $initialNodeCount;
   }
+  /**
+   * @return int
+   */
   public function getInitialNodeCount()
   {
     return $this->initialNodeCount;
   }
+  /**
+   * @param string[]
+   */
   public function setInstanceGroupUrls($instanceGroupUrls)
   {
     $this->instanceGroupUrls = $instanceGroupUrls;
   }
+  /**
+   * @return string[]
+   */
   public function getInstanceGroupUrls()
   {
     return $this->instanceGroupUrls;
   }
+  /**
+   * @param string[]
+   */
   public function setLocations($locations)
   {
     $this->locations = $locations;
   }
+  /**
+   * @return string[]
+   */
   public function getLocations()
   {
     return $this->locations;
@@ -136,45 +185,103 @@ class NodePool extends \Google\Collection
   {
     return $this->maxPodsConstraint;
   }
+  /**
+   * @param string
+   */
   public function setName($name)
   {
     $this->name = $name;
   }
+  /**
+   * @return string
+   */
   public function getName()
   {
     return $this->name;
   }
+  /**
+   * @param NodeNetworkConfig
+   */
+  public function setNetworkConfig(NodeNetworkConfig $networkConfig)
+  {
+    $this->networkConfig = $networkConfig;
+  }
+  /**
+   * @return NodeNetworkConfig
+   */
+  public function getNetworkConfig()
+  {
+    return $this->networkConfig;
+  }
+  /**
+   * @param int
+   */
   public function setPodIpv4CidrSize($podIpv4CidrSize)
   {
     $this->podIpv4CidrSize = $podIpv4CidrSize;
   }
+  /**
+   * @return int
+   */
   public function getPodIpv4CidrSize()
   {
     return $this->podIpv4CidrSize;
   }
+  /**
+   * @param string
+   */
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
   }
+  /**
+   * @return string
+   */
   public function getSelfLink()
   {
     return $this->selfLink;
   }
+  /**
+   * @param string
+   */
   public function setStatus($status)
   {
     $this->status = $status;
   }
+  /**
+   * @return string
+   */
   public function getStatus()
   {
     return $this->status;
   }
+  /**
+   * @param string
+   */
   public function setStatusMessage($statusMessage)
   {
     $this->statusMessage = $statusMessage;
   }
+  /**
+   * @return string
+   */
   public function getStatusMessage()
   {
     return $this->statusMessage;
+  }
+  /**
+   * @param UpdateInfo
+   */
+  public function setUpdateInfo(UpdateInfo $updateInfo)
+  {
+    $this->updateInfo = $updateInfo;
+  }
+  /**
+   * @return UpdateInfo
+   */
+  public function getUpdateInfo()
+  {
+    return $this->updateInfo;
   }
   /**
    * @param UpgradeSettings
@@ -190,10 +297,16 @@ class NodePool extends \Google\Collection
   {
     return $this->upgradeSettings;
   }
+  /**
+   * @param string
+   */
   public function setVersion($version)
   {
     $this->version = $version;
   }
+  /**
+   * @return string
+   */
   public function getVersion()
   {
     return $this->version;

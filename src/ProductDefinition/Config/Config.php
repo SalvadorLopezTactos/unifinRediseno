@@ -19,16 +19,15 @@ class Config
     /**
      * Mango config.php key
      */
-    const SUGAR_CONFIG_KEY = 'product_definition';
+    public const SUGAR_CONFIG_KEY = 'product_definition';
 
     /**
      * default product definition
      */
-    const DEFAULT_CONFIG = [
+    public const DEFAULT_CONFIG = [
         'type' => 'Http',
         'options' => [
             'base_uri' => Source\HttpSource::DEFAULT_BASE_URI,
-            'fallback_version' => Source\HttpSource::DEFAULT_FALLBACK_VERSION,
         ],
     ];
 

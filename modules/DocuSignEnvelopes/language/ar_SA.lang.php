@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'لم يتم تعيين سر عميل',
     'LBL_RESEND_BUTTON_LABEL' => 'إعادة إرسال',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'إحضار المغلف',
+    'LBL_CLOUD_SERVICE_TYPE' => 'نوع الخدمة السحابية',
+    'LBL_CLOUD_PATH' => 'المسار السحابي',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'لوحة معلومات قائمة مغلفات DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'مغلفات DocuSign الأخيرة',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم مغلفات DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'مستند من ',
+    'LBL_NEW_ENVELOPE' => 'مغلف جديد',
     'LBL_DOCUMENT_IS_NOW' => ' الآن ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'خطأ DocuSign. تعذر الحصول على معرف الحساب المستند إلى الرمز المميز للوصول',
     'LBL_ERROR_RESEND' => 'تعذر إعادة إرسال DocuSign. يجب أن تكون حالة المغلف "تم الإرسال"',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'فشل التحديث',
     'LBL_ERROR_FETCH_TIME' => 'لا تسمح قواعد DocuSign بطلبات متعددة للمغلف نفسه في غضون 15 دقيقة',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'حدث خطأ. تعذر تحديث المغلف. الرجاء مراجعة السجلات!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'حدث خطأ. تعذر سرد القوالب. الرجاء مراجعة السجلات!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'حدث خطأ. تعذر جلب القالب. الرجاء مراجعة السجلات!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'لم يتم إكمال المغلف',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'حالة المغلف في DocuSign هي الآن ',
     'LBL_OVERVIEW' => 'نظرة عامة',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'إضافة مستند',
     'LBL_BUTTON_SEND' => 'إرسال',
     'LBL_BUTTON_CLEAR' => 'مسح',
-    'LBL_MISSING_OBJECT' => 'كائن DocuSign ليس على النافذة',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'استخدام القالب',
     'LBL_PLEASE_LOG_IN' => 'الرجاء تسجيل الدخول إلى DocuSign أولاً!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'لا يمكنك تنزيل هذا المستند. مستخدم آخر أنشأ المستند!',
     'LBL_SEND_NOT_ALLOWED' => 'لا يمكنك إرسال هذا المغلف. مستخدم آخر أنشأ المغلف!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'تم التوقيع',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'تعذر تنفيذ المستند. الرجاء مراجعة السجلات!',
     'LBL_DOCUMENT_COMPLETED' => 'تم الإكمال',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'معلومات DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'الآن',
+    'LBL_SETTINGS_TITLE' => 'إعدادات DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'أسلوب اختيار المستلم',
+    'LBL_RECIPIENT_NAME' => 'الاسم',
+    'LBL_RECIPIENT_EMAIL' => 'البريد الإلكتروني',
+    'LBL_RECIPIENT_TYPE' => 'النوع',
+    'LBL_TEMPLATE_NAME' => 'الاسم',
+    'LBL_RECIPIENT_SELECT' => 'حدد...',
+    'LBL_RECIPIENT_ROLE' => 'الدور',
+    'LBL_SELECT_BUTTON_LABEL' => 'تحديد',
+    'LBL_BACK_BUTTON_LABEL' => 'للخلف',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'فشل في جلب المستلمين المحتملين!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'فشل في جلب القوالب!',
 ];

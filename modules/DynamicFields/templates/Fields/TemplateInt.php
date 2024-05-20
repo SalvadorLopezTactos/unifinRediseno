@@ -16,6 +16,17 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 class TemplateInt extends TemplateRange
 {
+    /**
+     * @var mixed|bool
+     */
+    public $auto_increment;
+    public $disable_num_format;
+    public $min;
+    public $max;
+    /**
+     * @var mixed
+     */
+    public $autoinc_start;
 	var $type = 'int';
 
     /**
@@ -24,6 +35,8 @@ class TemplateInt extends TemplateRange
     public $len = null;
 
     var $supports_unified_search = true;
+    /** @var array */
+    public $validation;
 
 	public function __construct(){
 		parent::__construct();
@@ -56,10 +69,10 @@ class TemplateInt extends TemplateRange
 
     function get_field_def(){
 		$vardef = parent::get_field_def();
-		$vardef['disable_num_format'] = isset($this->disable_num_format) ? $this->disable_num_format : $this->ext3;//40005
+        $vardef['disable_num_format'] = $this->disable_num_format ?? $this->ext3;//40005
 
-        $vardef['min'] = isset($this->min) ? $this->min : $this->ext1;
-        $vardef['max'] = isset($this->max) ? $this->max : $this->ext2;
+        $vardef['min'] = $this->min ?? $this->ext1;
+        $vardef['max'] = $this->max ?? $this->ext2;
         $vardef['min'] = filter_var($vardef['min'], FILTER_VALIDATE_INT);
         $vardef['max'] = filter_var($vardef['max'], FILTER_VALIDATE_INT);
         if ($vardef['min'] !== false || $vardef['max'] !== false)

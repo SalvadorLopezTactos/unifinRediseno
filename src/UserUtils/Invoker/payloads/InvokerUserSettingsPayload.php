@@ -18,13 +18,6 @@ namespace Sugarcrm\Sugarcrm\UserUtils\Invoker\payloads;
 class InvokerUserSettingsPayload extends InvokerBasePayload
 {
     /**
-     * The user settings in the command
-     *
-     * @var array
-     */
-    private $userSettings;
-
-        /**
      * Constructor
      *
      * @param array $options

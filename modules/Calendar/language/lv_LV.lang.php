@@ -327,6 +327,13 @@ $mod_strings = array (
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Dec',
 
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalendārs jau bija pievienots',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} ir atlasīts',
+    'LBL_NO_USER_SELECTED' => 'Atlasiet lietotāju vai darba grupu',
+    'LBL_NO_CALENDAR_SELECTED' => 'Atlasiet kalendāru',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Neizdevās saglabāt kalendārus.',
+
 );
 
 $mod_list_strings = array(

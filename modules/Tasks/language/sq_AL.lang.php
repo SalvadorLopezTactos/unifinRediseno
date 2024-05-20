@@ -111,4 +111,13 @@ Për të krijuar një {{module_name}}:
 - Kliko "Trego më shumë" për të paraqitur fushat shtesë nëse është e nevojshme. 
 2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Detyra e udhëzuesit inteligjent',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Është detyrë e udhëzuesit inteligjent',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Data e nisjes së aktivitetit të udhëzuesit inteligjent',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Data e përfundimit të aktivitetit të udhëzuesit inteligjent',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Udhëzuesi inteligjent - Ditët deri në përfundim',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Mbledhjet për fëmijë',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Telefonatat për fëmijë',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Detyrat për fëmijë',
 );

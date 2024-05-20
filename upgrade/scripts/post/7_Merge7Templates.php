@@ -121,7 +121,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
     protected function mergeView($filename, $old_viewdefs)
     {
         $this->log("Merging view $filename");
-        list($modules, $module_name, $clients, $platform, $views, $viewname) = explode(DIRECTORY_SEPARATOR, $filename);
+        [$modules, $module_name, $clients, $platform, $views, $viewname] = explode(DIRECTORY_SEPARATOR, $filename);
 
         $new_viewdefs = $this->loadFile($filename, $module_name, $platform, $viewname);
         $custom_viewdefs = $this->loadFile("custom/$filename", $module_name, $platform, $viewname);
@@ -174,10 +174,10 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
      */
     public function mergePanelDefs($old_viewdefs, $new_viewdefs, $custom_viewdefs)
     {
-        list($old_fields, $old_panel_labels) = $this->fieldList(
+        [$old_fields, $old_panel_labels] = $this->fieldList(
             $old_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels']
         );
-        list($new_fields, $new_panel_labels) = $this->fieldList(
+        [$new_fields, $new_panel_labels] = $this->fieldList(
             $new_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels']
         );
 
@@ -197,7 +197,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
         );
 
         // Index custom fields too
-        list($custom_fields, $custom_panel_labels) = $this->fieldList(
+        [$custom_fields, $custom_panel_labels] = $this->fieldList(
             $custom_viewdefs[$this->moduleName][$this->clientType]['view'][$this->viewName]['panels']
         );
 
@@ -359,9 +359,7 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
             }
         }
         if (empty($panels[$pindex])) {
-            // if we do not have this index, use last panel
-            end($panels);
-            $pindex = key($panels);
+            $pindex = array_key_last($panels);
         }
         // add to panel by index
         $panels[$pindex]['fields'][] = $field;

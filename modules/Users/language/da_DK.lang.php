@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Brugeroplysningerne blev ikke fundet',
     'ERR_USER_NAME_EXISTS'              => 'Brugernavnet {0} eksisterer allerede. Dublet brugernavne er ikke tilladt. Ædr brugernavnet så det bliver unikt.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licensen “Sugar Hint” skal gemmes sammen med en yderligere kompatibel licenstype',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Denne funktion er allerede inkluderet i Sugar Sell Premier.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Brugerens adgang til Sugar-programmet er spærret, og brugeren kan ikke logge på ved hjælp af sin eksisterende adgangskode.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Bruger der kun har ekstern tilladelse, må ikke logge på ved hjælp af Sugar legitimationsoplysninger',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Adgangskode',
     'LBL_CHOOSE_A_KEY'					=> 'Vælg en nøgle for at forhindre uautoriseret udgivelse af din kalender',
     'LBL_NO_KEY'                        => 'Nøgle er ikke indstillet. Indstil for at aktivere udgivelse.',
-	'LBL_CHOOSE_WHICH'					=> 'Vælge, hvilke faner der skal vises',
+    'LBL_CHOOSE_WHICH'                  => 'Vælg, hvilke moduler der er tilgængelige i sidenavigationsbjælken. Tildel den rækkefølge, hvori du gerne vil vise modulerne.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Antal definerede moduler',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Skriv antallet af tilgægelige moduler, der skal definewres, når navigationsbjælken er lukket (f.eks. hvis 5 indtastes, defineres de første fem moduler i din liste). Vi anbefaler et antal som repræsenterer de moduler, du bruger mest ofte. Værdier over 100 vil ikke blive respekteret.',
 	'LBL_CITY'							=> 'By',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Ryd',
@@ -545,6 +548,7 @@ Klik på Annuller for at lukke siden uden omfordeling af poster.',
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP Brugernavn:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP-server-type:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP-server specifikation',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Godkendt e-mailkonto',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Vælg din e-mail-udbyder:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail adgangskode:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail id:',
@@ -699,4 +703,9 @@ Klik på Annuller for at lukke siden uden omfordeling af poster.',
     'LBL_UTILS_USER_TEAMS_ROLES' => 'brugere/team/roller',
     'LBL_LOADING_ITEMS' => 'Indlæser data ...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Smart Guide-adgang',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Smart Guide - sidst aktiv',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Manglende Smart Guide-adgang',
 ); // END STRINGS DEFS

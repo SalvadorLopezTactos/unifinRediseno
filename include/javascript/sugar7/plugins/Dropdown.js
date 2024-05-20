@@ -114,7 +114,8 @@
              * @private
              */
             _getDropdownItems: function() {
-                return this.$(this.dropdownItemSelector || '[role=menu] li:not(.divider) a:visible');
+                let selector = '[role=menu] li:not(.divider) a:visible, [role=menu] li:not(.divider) button:visible';
+                return this.$(this.dropdownItemSelector || selector);
             },
 
             /**

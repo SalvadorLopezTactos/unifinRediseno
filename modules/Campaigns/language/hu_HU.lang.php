@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'Követő URL:',
   'LBL_TRACKER_TEXT' => 'Követő link szöveg:',
   'LBL_TRACKER_COUNT' => 'Követő szám:',
-  'LBL_REFER_URL' => 'Követő átirányítás URL:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kampányok',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Email kampányok',
   'LBL_NEW_FORM_TITLE' => 'Új kampány',

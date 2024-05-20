@@ -18,7 +18,7 @@ class SugarFieldEnum extends SugarFieldBase {
     {
         if (!empty($vardef['function']['returns']) && $vardef['function']['returns'] === 'html') {
             $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
-            return '<span id="' . htmlspecialchars($vardef['name']) . '">' . $this->fetch($this->findTemplate('DetailViewFunction')) . '</span>';
+            return '<span id="' . htmlspecialchars($vardef['name'], ENT_COMPAT) . '">' . $this->fetch($this->findTemplate('DetailViewFunction')) . '</span>';
         } else {
             return parent::getDetailViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex);
         }
@@ -55,7 +55,7 @@ class SugarFieldEnum extends SugarFieldBase {
 
     function getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex){
     	$this->ss->assign('field_options', is_array($vardef['options']) ? $vardef['options'] : $GLOBALS['app_list_strings'][$vardef['options']]);
-    	$this->ss->assign('selected', isset($vardef['value'])?$vardef['value']:'');
+        $this->ss->assign('selected', $vardef['value'] ?? '');
     	if(!empty($vardef['function']['returns']) && $vardef['function']['returns']== 'html'){
     		  $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         	  return $this->fetch($this->findTemplate('WirelessEditViewFunction'));

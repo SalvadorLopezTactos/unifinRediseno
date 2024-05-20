@@ -124,7 +124,7 @@
              */
             filterConfigFieldsForDashlet() {
                 this.meta.panels.forEach(panel => {
-                    panel.fields = panel.fields.filter(field => {
+                    panel.fields = _.filter(panel.fields, function(field) {
                         return field.showOnConfig ? app.config[field.showOnConfig] : true;
                     });
                 });

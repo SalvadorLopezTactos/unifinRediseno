@@ -16,10 +16,14 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
+trigger_deprecation('symfony/security-core', '5.3', 'The "%s" class is deprecated, use the new authenticator system instead.', AnonymousAuthenticationProvider::class);
+
 /**
  * AnonymousAuthenticationProvider validates AnonymousToken instances.
  *
  * @author Fabien Potencier <fabien@symfony.com>
+ *
+ * @deprecated since Symfony 5.3, use the new authenticator system instead
  */
 class AnonymousAuthenticationProvider implements AuthenticationProviderInterface
 {
@@ -34,7 +38,7 @@ class AnonymousAuthenticationProvider implements AuthenticationProviderInterface
     /**
      * @param string $secret The secret shared with the AnonymousToken
      */
-    public function __construct($secret)
+    public function __construct(string $secret)
     {
         $this->secret = $secret;
     }

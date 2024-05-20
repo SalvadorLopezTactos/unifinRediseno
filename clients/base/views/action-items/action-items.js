@@ -21,7 +21,9 @@
  *              'icon' => 'the_icon',
  *              'tooltip' => 'the_tooltip',
  *              'href' => 'the_href',
- *              'label' => 'the_label'
+ *              'label' => 'the_label',
+ *               'onclick' => 'the_onclick'
+ *              'target' => 'the_target'
  *          ]
  *      ]
  *  [

@@ -17,6 +17,10 @@ use Sugarcrm\Sugarcrm\UserUtils\Invoker\payloads\InvokerUserSettingsPayload;
 class UserSettingsManager extends Manager
 {
     /**
+     * @var mixed[]|mixed
+     */
+    public $userSettings;
+    /**
      * The destination users
      *
      * @var array

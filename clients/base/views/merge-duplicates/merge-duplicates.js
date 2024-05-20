@@ -1399,7 +1399,7 @@
         }
 
         var module = app.data.getRelatedModule(this.module, link.name);
-        if (_.isEmpty(app.metadata.getModule(module))) {
+        if (!module || !app.acl.hasAccess('edit', module)) {
             return false;
         }
 

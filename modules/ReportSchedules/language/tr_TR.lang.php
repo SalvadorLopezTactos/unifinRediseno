@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Rapor Planları Kayıt Panosu',
     'LBL_FILE_TYPE' => 'Dosya Türü/Türleri',
+    'LBL_EMBED_REPORT' => 'Raporu E-postaya yerleştir',
+    'LBL_EMBED_REPORT_INFO' => 'Not: Rapor 200 satırı geçerse raporu CSV dosyası olarak ekleyeceğiz.',
 );

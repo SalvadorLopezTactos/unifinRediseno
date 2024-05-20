@@ -147,7 +147,7 @@ class Registry implements RegistryInterface
      */
     public function getChanges($key)
     {
-        return isset($this->changes[$key]) ? $this->changes[$key] : array();
+        return $this->changes[$key] ?? array();
     }
 
     /**

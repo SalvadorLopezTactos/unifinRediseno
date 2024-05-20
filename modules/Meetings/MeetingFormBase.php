@@ -65,18 +65,18 @@ $time_ampm = $timedate->AMPMMenu($prefix, $timedate->nowDbTime());
 			// $cal_lang =(empty($cal_codes[$current_language])) ? $cal_codes[$default_language] : $cal_codes[$current_language];
 $jsCalendarImage = SugarThemeRegistry::current()->getImageURL('jscalendar.gif');
 			$form = <<<EOF
-					<input type="hidden" name="${prefix}record" value="">
-					<input type="hidden" name="${prefix}status" value="${default_status}">
-					<input type="hidden" name="${prefix}parent_type" value="${default_parent_type}">
-					<input type="hidden" name="${prefix}assigned_user_id" value='${user_id}'>
-					<input type="hidden" name="${prefix}duration_hours" value="1">
-					<input type="hidden" name="${prefix}duration_minutes" value="00">
+					<input type="hidden" name="{$prefix}record" value="">
+					<input type="hidden" name="{$prefix}status" value="{$default_status}">
+					<input type="hidden" name="{$prefix}parent_type" value="{$default_parent_type}">
+					<input type="hidden" name="{$prefix}assigned_user_id" value='{$user_id}'>
+					<input type="hidden" name="{$prefix}duration_hours" value="1">
+					<input type="hidden" name="{$prefix}duration_minutes" value="00">
 					<p>$lbl_subject<span class="required">$lbl_required_symbol</span><br>
-					<input name='${prefix}name' size='25' maxlength='255' type="text"><br>
+					<input name='{$prefix}name' size='25' maxlength='255' type="text"><br>
 					$lbl_date&nbsp;<span class="required">$lbl_required_symbol</span>&nbsp;<span class="dateFormat">$ntc_date_format</span><br>
-					<input name='${prefix}date_start' id='jscal_field' onblur="parseDate(this, '$cal_dateformat');" type="text" maxlength="10" value="${default_date_start}"> <!--not_in_theme!--><img src="{$jscalendarImage}" alt="{$app_strings['LBL_ENTER_DATE']}"  id="jscal_trigger" align="absmiddle"><br>
+					<input name='{$prefix}date_start' id='jscal_field' onblur="parseDate(this, '$cal_dateformat');" type="text" maxlength="10" value="{$default_date_start}"> <!--not_in_theme!--><img src="{$jscalendarImage}" alt="{$app_strings['LBL_ENTER_DATE']}"  id="jscal_trigger" align="absmiddle"><br>
 					$lbl_time&nbsp;<span class="required">$lbl_required_symbol</span>&nbsp;<span class="dateFormat">$ntc_time_format</span><br>
-					<input name='${prefix}time_start' type="text" maxlength='5' value="${default_time_start}">{$time_ampm}</p>
+					<input name='{$prefix}time_start' type="text" maxlength='5' value="{$default_time_start}">{$time_ampm}</p>
 					<script type="text/javascript">
 					Calendar.setup({
 						inputField : "jscal_field", daFormat : "$cal_dateformat", ifFormat : "$cal_dateformat", showsTime : false, button : "jscal_trigger", singleClick : true, step : 1, weekNumbers:false
@@ -120,10 +120,10 @@ $the_form = get_left_form_header($mod_strings['LBL_NEW_FORM_TITLE']);
 $the_form .= <<<EOQ
 
 
-		<form name="${prefix}MeetingSave" onSubmit="return check_form('${prefix}MeetingSave')" method="POST" action="index.php">
-			<input type="hidden" name="${prefix}module" value="Meetings">
+		<form name="{$prefix}MeetingSave" onSubmit="return check_form('{$prefix}MeetingSave')" method="POST" action="index.php">
+			<input type="hidden" name="{$prefix}module" value="Meetings">
 
-			<input type="hidden" name="${prefix}action" value="Save">
+			<input type="hidden" name="{$prefix}action" value="Save">
 
 EOQ;
 $the_form	.= $this->getFormBody($prefix, 'Meetings',"{$prefix}MeetingSave" );

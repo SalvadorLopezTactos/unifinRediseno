@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => 'Szükséges érték hiányzik',
     'LBL_ERROR_SYNC_USERS' => 'Outlookba nem szinkronizálható érték:',
     'LBL_ID_EXISTS_ALREADY' => 'Ez az azonosító már létezik ebben a táblázatban',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY már létezik ebben a táblázatban',
     'LBL_ASSIGNED_USER' => 'Ha a felhasználó nem létezik, használja az aktuális felhasználót',
     'LBL_SHOW_HIDDEN' => 'Azon mezők megjelenítése, amelyek alapvetően nem importálhatók',
     'LBL_UPDATE_RECORDS' => 'Rekordok importálása helyett frissítse a korábbiakat (nem visszavonható)',

@@ -11,6 +11,8 @@
  */
 $dictionary['Task'] = array(
     'table' => 'tasks',
+    'color' => 'purple',
+    'icon' => 'sicon-task-lg',
     'audited' => true,
     'unified_search' => true,
     'full_text_search' => true,
@@ -460,6 +462,7 @@ VardefManager::createVardef(
         'default',
         'assignable',
         'team_security',
+        'customer_journey_activity',
     )
 );
 

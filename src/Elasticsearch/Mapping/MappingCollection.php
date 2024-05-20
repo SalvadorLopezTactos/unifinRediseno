@@ -17,6 +17,7 @@ namespace Sugarcrm\Sugarcrm\Elasticsearch\Mapping;
  * Mapping collection iterator
  *
  */
+#[\AllowDynamicProperties]
 class MappingCollection implements \IteratorAggregate
 {
     /**
@@ -33,7 +34,7 @@ class MappingCollection implements \IteratorAggregate
      * {@inheritdoc}
      * @return Mapping[]
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this);
     }

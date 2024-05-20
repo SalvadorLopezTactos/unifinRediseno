@@ -56,7 +56,7 @@ function template_handle_export(Report &$reporter, bool $stream = true)
             return writeToCSVFile($transContent, $reporter->name);
         }
     } else {
-        $user_agent = (isset($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
+        $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
         if ($locale->getExportCharset() == 'UTF-8' &&
             ! preg_match('/macintosh|mac os x|mac_powerpc/i', $user_agent)) {
             $BOM = "\xEF\xBB\xBF";

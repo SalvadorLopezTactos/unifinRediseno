@@ -90,7 +90,7 @@ class Parser {
 
             // $FUNCTION_MAP is pulled in from the file.
             if (empty($FUNCTION_MAP)) {
-                require $cacheFile;
+                include $cacheFile;
             }
             static::$function_cache = $FUNCTION_MAP;
         }

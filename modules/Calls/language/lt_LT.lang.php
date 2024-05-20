@@ -194,4 +194,10 @@ To create a {{calls_singular_module}}:
     - Click "Select an Attendee" to add an existing user, contact, or lead to the {{calls_singular_module}}.
     - Click the plus icon to the right of "Select an Attendee" to create a {{calls_singular_module}} attendee as a new Sugar record.
 3. Click "Save" to finalize the new record and return to the previous page.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Yra „Smart Guide“ skambutis",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Vaikų užduotys',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Vaikų susitikimai',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Vaikų skambučiai',
 );

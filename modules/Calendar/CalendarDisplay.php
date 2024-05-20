@@ -12,7 +12,15 @@
 
 class CalendarDisplay {
 
-	/**
+    /**
+     * @var \CalendarBWC|mixed
+     */
+    public $cal;
+    /**
+     * @var string
+     */
+    public $dashlet_id;
+    /**
 	 * colors of items on calendar
 	 */
 	public $activity_colors = array(
@@ -161,8 +169,8 @@ class CalendarDisplay {
 	protected function load_settings_template($ss)
 	{
         $match = [];
-		list($d_start_hour,$d_start_min) =  explode(":",$this->cal->day_start_time);
-		list($d_end_hour,$d_end_min) =  explode(":",$this->cal->day_end_time);
+        [$d_start_hour, $d_start_min] = explode(":", $this->cal->day_start_time);
+        [$d_end_hour, $d_end_min] = explode(":", $this->cal->day_end_time);
 
 		global $app_strings,$app_list_strings,$beanList;
 		global $timedate;

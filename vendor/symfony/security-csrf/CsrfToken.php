@@ -21,20 +21,16 @@ class CsrfToken
     private $id;
     private $value;
 
-    /**
-     * @param string $id    The token ID
-     * @param string $value The actual token value
-     */
-    public function __construct($id, $value)
+    public function __construct(string $id, ?string $value)
     {
-        $this->id = (string) $id;
-        $this->value = (string) $value;
+        $this->id = $id;
+        $this->value = $value ?? '';
     }
 
     /**
      * Returns the ID of the CSRF token.
      *
-     * @return string The token ID
+     * @return string
      */
     public function getId()
     {
@@ -44,7 +40,7 @@ class CsrfToken
     /**
      * Returns the value of the CSRF token.
      *
-     * @return string The token value
+     * @return string
      */
     public function getValue()
     {
@@ -54,7 +50,7 @@ class CsrfToken
     /**
      * Returns the value of the CSRF token.
      *
-     * @return string The token value
+     * @return string
      */
     public function __toString()
     {

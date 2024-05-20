@@ -187,10 +187,10 @@ class EmailReminder
             AND date_start >= ?
             AND date_start <= ?
         ";
-        $stmt = $db->getConnection()
+        $result = $db->getConnection()
             ->executeQuery($query, [$this->now, $this->max]);
         $meetings = array();
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $remind_ts = $GLOBALS['timedate']->fromDb($db->fromConvert($row['date_start'],'datetime'))->modify("-{$row['email_reminder_time']} seconds")->ts;
             $now_ts = $GLOBALS['timedate']->getNow()->ts;
             if ( $now_ts >= $remind_ts ) {
@@ -216,10 +216,10 @@ class EmailReminder
             AND date_start >= ?
             AND date_start <= ?
         ";
-        $stmt = $db->getConnection()
+        $result = $db->getConnection()
             ->executeQuery($query, [$this->now, $this->max]);
         $calls = array();
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $remind_ts = $GLOBALS['timedate']->fromDb($db->fromConvert($row['date_start'],'datetime'))->modify("-{$row['email_reminder_time']} seconds")->ts;
             $now_ts = $GLOBALS['timedate']->getNow()->ts;
             if ( $now_ts >= $remind_ts ) {
@@ -258,9 +258,9 @@ FROM {$field_part}s_users
 WHERE {$field_part}_id = ? AND accept_status != 'decline' AND deleted = 0
 SQL;
 
-        $stmt = $db->getConnection()
+        $result = $db->getConnection()
             ->executeQuery($query, [$id]);
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $user = BeanFactory::getBean('Users', $row['user_id']);
             if ( !empty($user->email1) ) {
                 $arr = array(
@@ -278,9 +278,9 @@ FROM {$field_part}s_contacts
 WHERE {$field_part}_id = ? AND accept_status != 'decline' AND deleted = 0
 SQL;
 
-        $stmt = $db->getConnection()
+        $result = $db->getConnection()
             ->executeQuery($query, [$id]);
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $contact = BeanFactory::getBean('Contacts', $row['contact_id']);
             if ( !empty($contact->email1) ) {
                 $arr = array(
@@ -298,9 +298,9 @@ FROM {$field_part}s_leads
 WHERE {$field_part}_id = ? AND accept_status != 'decline' AND deleted = 0
 SQL;
 
-        $stmt = $db->getConnection()
+        $result = $db->getConnection()
             ->executeQuery($query, [$id]);
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $lead = BeanFactory::getBean('Leads', $row['lead_id']);
             if ( !empty($lead->email1) ) {
                 $arr = array(

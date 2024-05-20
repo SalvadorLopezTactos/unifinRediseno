@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => '更新產品描述',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => '與時間相關的流程安排',
 'LBL_OOTB_DATA_ARCHIVER' => '運行活動數據存檔/刪除',
+'LBL_OOTB_LICENSE_INSTALLER' => '更改時應用訂閱權利',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => '記錄地理編碼',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> '進階選項',
 'LBL_TOGGLE_ADV' => '顯示進階選項',
 'LBL_TOGGLE_BASIC' => '顯示基礎選項',
+'LBL_UPDATEMOMENTUMCJ' => '更新進行中智慧指南的動量',
 // Links
 'LNK_LIST_SCHEDULER' => '排程器',
 'LNK_NEW_SCHEDULER' => '建立排程器',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => '運行活動數據存檔/刪除',
 'LBL_PMSEENGINECRON' => 'SugarBPM排程器',
 );
-

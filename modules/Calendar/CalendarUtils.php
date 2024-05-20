@@ -358,7 +358,7 @@ class CalendarUtils
 
         // $clone is a new bean being created - so throw away the cloned fetched_row attribute that incorrectly makes it
         // look like an existing bean.
-        $clone->fetched_row = false;
+        $clone->fetched_row = [];
 
         foreach ($timeArray as $dateStart) {
             //TODO: CHECK DATETIME VARIABLE
@@ -506,11 +506,11 @@ class CalendarUtils
 
         $query = "SELECT id FROM {$bean->table_name} WHERE repeat_parent_id = ? AND deleted = 0 ORDER BY date_start";
         $conn = $db->getConnection();
-        $stmt = $conn->executeQuery($query, [$beanId]);
+        $result = $conn->executeQuery($query, [$beanId]);
         $date_modified = $GLOBALS['timedate']->nowDb();
 
         $new_parent_id = false;
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             $id = $row['id'];
             if (!$new_parent_id) {
                 $new_parent_id = $id;

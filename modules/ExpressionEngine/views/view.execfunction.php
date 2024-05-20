@@ -11,6 +11,7 @@
  */
 class ViewExecFunction extends ViewAjax
 {
+    public $params;
     var $vars = array("tmodule", "id", "params", "function");
 
     public function __construct()
@@ -29,7 +30,7 @@ class ViewExecFunction extends ViewAjax
         //First load the primary bean
         $focus = BeanFactory::getBean($this->tmodule, $this->id);
 
-        $params = implode(",", json_decode(html_entity_decode($this->params)));
+        $params = implode(",", json_decode(html_entity_decode($this->params, ENT_COMPAT)));
         $result = Parser::evaluate("{$this->function}($params)", $focus)->evaluate();
         //If the target field isn't a date, convert it to a user formated string
         if ($result instanceof DateTime)

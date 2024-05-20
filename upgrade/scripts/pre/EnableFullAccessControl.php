@@ -22,7 +22,7 @@ class SugarUpgradeEnableFullAccessControl extends UpgradeScript
     public function run()
     {
         // disable access control, mark it as admin work
-        if (class_exists('Sugarcrm\Sugarcrm\AccessControl\AccessControlManager')) {
+        if (class_exists(\Sugarcrm\Sugarcrm\AccessControl\AccessControlManager::class)) {
             Sugarcrm\Sugarcrm\AccessControl\AccessControlManager::instance()->setAdminWork(true);
         }
     }

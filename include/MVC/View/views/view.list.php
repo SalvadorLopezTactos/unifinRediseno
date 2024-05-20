@@ -12,6 +12,11 @@
  */
 
 class ViewList extends SugarView{
+    /**
+     * @var \SugarBean|null|mixed
+     */
+    public $saved_search;
+    public $view;
     var $type ='list';
     var $lv;
     var $searchForm;
@@ -38,7 +43,7 @@ class ViewList extends SugarView{
         if( empty($metadataFile) )
             sugar_die($GLOBALS['app_strings']['LBL_NO_ACTION'] );
 
-        require($metadataFile);
+        require $metadataFile;
 
         $this->listViewDefs = $listViewDefs;
         $this->bean->ACLFilterFieldList($this->listViewDefs[$module], array("owner_override" => true));
@@ -128,7 +133,7 @@ class ViewList extends SugarView{
         $this->prepareSearchForm();
 
         if(isset($this->options['show_title']) && $this->options['show_title']) {
-            $moduleName = isset($this->seed->module_dir) ? $this->seed->module_dir : $GLOBALS['mod_strings']['LBL_MODULE_NAME'];
+            $moduleName = $this->seed->module_dir ?? $GLOBALS['mod_strings']['LBL_MODULE_NAME'];
             echo $this->getModuleTitle(true);
         }
     }
@@ -202,7 +207,9 @@ class ViewList extends SugarView{
 
             $where_clauses = $this->searchForm->generateSearchWhere(true, $this->seed->module_dir);
 
-            if (count($where_clauses) > 0 )$this->where = '('. implode(' ) AND ( ', $where_clauses) . ')';
+            if ((is_countable($where_clauses) ? count($where_clauses) : 0) > 0) {
+                $this->where = '(' . implode(' ) AND ( ', $where_clauses) . ')';
+            }
             $GLOBALS['log']->info("List View Where Clause: $this->where");
         }
         if($this->use_old_search){

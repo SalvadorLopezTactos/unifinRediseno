@@ -152,7 +152,7 @@ class SidecarTheme
     {
         // the key is based on the filename, cannot exceed 255 chars
         $uniqueProcessKey = substr($lessFile, -255);
-        $systemProcessLock = new SystemProcessLock(__METHOD__, $uniqueProcessKey);
+        $systemProcessLock = new SystemProcessLock(__METHOD__, $uniqueProcessKey, ['lock_timeout_seconds' => 60]);
 
         $shouldBeExecutedAnyway = $GLOBALS['current_user']->isAdmin()
             || AccessControlManager::instance()->getAdminWork()
@@ -275,6 +275,7 @@ class SidecarTheme
      */
     public function saveThemeVariables($reset = false)
     {
+        $lessdefs = [];
         // take the contents from /themes/clients/base/default/variables.php
         $baseDefaultTheme = new SidecarTheme(PlatformName::base());
         $baseDefaultThemePaths = $baseDefaultTheme->getPaths();

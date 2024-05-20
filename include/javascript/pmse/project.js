@@ -472,9 +472,6 @@ AdamProject.prototype.updateElement = function (updateElement) {
         list = this.getUpdateList(element.type);
         if (list[element.id]) {
             $.extend(true, list[element.id], object);
-            if (element.type === 'Connection') {
-                list[element.id].flo_state = object.flo_state;
-            }
         } else {
             object.action = "UPDATE";
             list[element.id] = object;

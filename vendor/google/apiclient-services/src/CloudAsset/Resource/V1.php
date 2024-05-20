@@ -61,7 +61,7 @@ class V1 extends \Google\Service\Resource
    * earlier than the current time; otherwise, an INVALID_ARGUMENT error will be
    * returned.
    * @opt_param string analysisQuery.identitySelector.identity Required. The
-   * identity appear in the form of members in [IAM policy
+   * identity appear in the form of principals in [IAM policy
    * binding](https://cloud.google.com/iam/reference/rest/v1/Binding). The
    * examples of supported forms are: "user:mike@example.com",
    * "group:admins@example.com", "domain:google.com", "serviceAccount:my-project-
@@ -84,13 +84,18 @@ class V1 extends \Google\Service\Resource
    * another IAM policy states service account SA has permission P to the GCP
    * folder F, then user A potentially has access to the GCP folder F. And those
    * advanced analysis results will be included in
-   * AnalyzeIamPolicyResponse.service_account_impersonation_analysis. Default is
-   * false.
+   * AnalyzeIamPolicyResponse.service_account_impersonation_analysis. Only the
+   * following permissions are considered in this analysis: *
+   * `iam.serviceAccounts.actAs` * `iam.serviceAccounts.signBlob` *
+   * `iam.serviceAccounts.signJwt` * `iam.serviceAccounts.getAccessToken` *
+   * `iam.serviceAccounts.getOpenIdToken` *
+   * `iam.serviceAccounts.implicitDelegation` Default is false.
    * @opt_param bool analysisQuery.options.expandGroups Optional. If true, the
    * identities section of the result will expand any Google groups appearing in
    * an IAM policy binding. If IamPolicyAnalysisQuery.identity_selector is
    * specified, the identity in the result will be determined by the selector, and
-   * this flag is not allowed to set. Default is false.
+   * this flag is not allowed to set. If true, the default max expansion per group
+   * is 1000 for AssetService.AnalyzeIamPolicy][]. Default is false.
    * @opt_param bool analysisQuery.options.expandResources Optional. If true and
    * IamPolicyAnalysisQuery.resource_selector is not specified, the resource
    * section of the result will expand any resource attached to an IAM policy to
@@ -104,7 +109,9 @@ class V1 extends \Google\Service\Resource
    * Folder and organization resource cannot be used together with this option.
    * For example, if the request analyzes for which users have permission P on a
    * GCP project with this option enabled, the results will include all users who
-   * have permission P on that project or any lower resource. Default is false.
+   * have permission P on that project or any lower resource. If true, the default
+   * max expansion per resource is 1000 for AssetService.AnalyzeIamPolicy][] and
+   * 100000 for AssetService.AnalyzeIamPolicyLongrunning][]. Default is false.
    * @opt_param bool analysisQuery.options.expandRoles Optional. If true, the
    * access section of result will expand any roles appearing in IAM policy
    * bindings to include their permissions. If
@@ -112,11 +119,11 @@ class V1 extends \Google\Service\Resource
    * the result will be determined by the selector, and this flag is not allowed
    * to set. Default is false.
    * @opt_param bool analysisQuery.options.outputGroupEdges Optional. If true, the
-   * result will output group identity edges, starting from the binding's group
-   * members, to any expanded identities. Default is false.
+   * result will output the relevant membership relationships between groups and
+   * other groups, and between groups and principals. Default is false.
    * @opt_param bool analysisQuery.options.outputResourceEdges Optional. If true,
-   * the result will output resource edges, starting from the policy attached
-   * resource, to any expanded resources. Default is false.
+   * the result will output the relevant parent/child relationships between
+   * resources. Default is false.
    * @opt_param string analysisQuery.resourceSelector.fullResourceName Required.
    * The [full resource name] (https://cloud.google.com/asset-inventory/docs
    * /resource-name-format) of a resource of [supported resource
@@ -130,6 +137,19 @@ class V1 extends \Google\Service\Resource
    * Otherwise, your query's execution will continue until the RPC deadline. If
    * it's not finished until then, you will get a DEADLINE_EXCEEDED error. Default
    * is empty.
+   * @opt_param string savedAnalysisQuery Optional. The name of a saved query,
+   * which must be in the format of: *
+   * projects/project_number/savedQueries/saved_query_id *
+   * folders/folder_number/savedQueries/saved_query_id *
+   * organizations/organization_number/savedQueries/saved_query_id If both
+   * `analysis_query` and `saved_analysis_query` are provided, they will be merged
+   * together with the `saved_analysis_query` as base and the `analysis_query` as
+   * overrides. For more details of the merge behavior, please refer to the
+   * [MergeFrom](https://developers.google.com/protocol-
+   * buffers/docs/reference/cpp/google.protobuf.message#Message.MergeFrom.details)
+   * page. Note that you cannot override primitive fields with default value, such
+   * as 0 or empty string, etc., because we use proto3, which doesn't support
+   * field presence yet.
    * @return AnalyzeIamPolicyResponse
    */
   public function analyzeIamPolicy($scope, $optParams = [])
@@ -220,6 +240,18 @@ class V1 extends \Google\Service\Resource
    * (inclusive). If not specified, the current timestamp is used instead.
    * @opt_param string readTimeWindow.startTime Start time of the time window
    * (exclusive).
+   * @opt_param string relationshipTypes Optional. A list of relationship types to
+   * output, for example: `INSTANCE_TO_INSTANCEGROUP`. This field should only be
+   * specified if content_type=RELATIONSHIP. * If specified: it outputs specified
+   * relationships' history on the [asset_names]. It returns an error if any of
+   * the [relationship_types] doesn't belong to the supported relationship types
+   * of the [asset_names] or if any of the [asset_names]'s types doesn't belong to
+   * the source types of the [relationship_types]. * Otherwise: it outputs the
+   * supported relationships' history on the [asset_names] or returns an error if
+   * any of the [asset_names]'s types has no relationship support. See
+   * [Introduction to Cloud Asset Inventory](https://cloud.google.com/asset-
+   * inventory/docs/overview) for all supported asset types and relationship
+   * types.
    * @return BatchGetAssetsHistoryResponse
    */
   public function batchGetAssetsHistory($parent, $optParams = [])
@@ -233,12 +265,12 @@ class V1 extends \Google\Service\Resource
    * location/BigQuery table. For Cloud Storage location destinations, the output
    * format is newline-delimited JSON. Each line represents a
    * google.cloud.asset.v1.Asset in the JSON format; for BigQuery table
-   * destinations, the output table stores the fields in asset proto as columns.
-   * This API implements the google.longrunning.Operation API , which allows you
-   * to keep track of the export. We recommend intervals of at least 2 seconds
-   * with exponential retry to poll the export operation result. For regular-size
-   * resource parent, the export operation usually finishes within 5 minutes.
-   * (v1.exportAssets)
+   * destinations, the output table stores the fields in asset Protobuf as
+   * columns. This API implements the google.longrunning.Operation API, which
+   * allows you to keep track of the export. We recommend intervals of at least 2
+   * seconds with exponential retry to poll the export operation result. For
+   * regular-size resource parent, the export operation usually finishes within 5
+   * minutes. (v1.exportAssets)
    *
    * @param string $parent Required. The relative name of the root asset. This can
    * only be an organization number (such as "organizations/123"), a project ID
@@ -304,14 +336,14 @@ class V1 extends \Google\Service\Resource
    * policies#how_to_construct_a_query) for more information. If not specified or
    * empty, it will search all the IAM policies within the specified `scope`. Note
    * that the query string is compared against each Cloud IAM policy binding,
-   * including its members, roles, and Cloud IAM conditions. The returned Cloud
+   * including its principals, roles, and Cloud IAM conditions. The returned Cloud
    * IAM policies will only contain the bindings that match your query. To learn
-   * more about the IAM policy structure, see [IAM policy
-   * doc](https://cloud.google.com/iam/docs/policies#structure). Examples: *
-   * `policy:amy@gmail.com` to find IAM policy bindings that specify user
-   * "amy@gmail.com". * `policy:roles/compute.admin` to find IAM policy bindings
-   * that specify the Compute Admin role. * `policy:comp*` to find IAM policy
-   * bindings that contain "comp" as a prefix of any word in the binding. *
+   * more about the IAM policy structure, see the [IAM policy
+   * documentation](https://cloud.google.com/iam/help/allow-policies/structure).
+   * Examples: * `policy:amy@gmail.com` to find IAM policy bindings that specify
+   * user "amy@gmail.com". * `policy:roles/compute.admin` to find IAM policy
+   * bindings that specify the Compute Admin role. * `policy:comp*` to find IAM
+   * policy bindings that contain "comp" as a prefix of any word in the binding. *
    * `policy.role.permissions:storage.buckets.update` to find IAM policy bindings
    * that specify a role containing "storage.buckets.update" permission. Note that
    * if callers don't have `iam.roles.get` access to a role's included
@@ -330,7 +362,7 @@ class V1 extends \Google\Service\Resource
    * that are set on resources "instance1" or "instance2" and also specify user
    * "amy". * `roles:roles/compute.admin` to find IAM policy bindings that specify
    * the Compute Admin role. * `memberTypes:user` to find IAM policy bindings that
-   * contain the "user" member type.
+   * contain the principal type "user".
    * @return SearchAllIamPoliciesResponse
    */
   public function searchAllIamPolicies($scope, $optParams = [])
@@ -399,31 +431,39 @@ class V1 extends \Google\Service\Resource
    * that have a label "env" and its value is "prod". * `labels.env:*` to find
    * Cloud resources that have a label "env". * `kmsKey:key` to find Cloud
    * resources encrypted with a customer-managed encryption key whose name
-   * contains the word "key". * `state:ACTIVE` to find Cloud resources whose state
-   * contains "ACTIVE" as a word. * `NOT state:ACTIVE` to find Cloud resources
-   * whose state doesn't contain "ACTIVE" as a word. * `createTime<1609459200` to
-   * find Cloud resources that were created before "2021-01-01 00:00:00 UTC".
-   * 1609459200 is the epoch timestamp of "2021-01-01 00:00:00 UTC" in seconds. *
-   * `updateTime>1609459200` to find Cloud resources that were updated after
+   * contains the word "key". * `relationships:instance-group-1` to find Cloud
+   * resources that have relationships with "instance-group-1" in the related
+   * resource name. * `relationships:INSTANCE_TO_INSTANCEGROUP` to find compute
+   * instances that have relationships of type "INSTANCE_TO_INSTANCEGROUP". *
+   * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find compute
+   * instances that have relationships with "instance-group-1" in the compute
+   * instance group resource name, for relationship type
+   * "INSTANCE_TO_INSTANCEGROUP". * `state:ACTIVE` to find Cloud resources whose
+   * state contains "ACTIVE" as a word. * `NOT state:ACTIVE` to find Cloud
+   * resources whose state doesn't contain "ACTIVE" as a word. *
+   * `createTime<1609459200` to find Cloud resources that were created before
    * "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of "2021-01-01
-   * 00:00:00 UTC" in seconds. * `Important` to find Cloud resources that contain
-   * "Important" as a word in any of the searchable fields. * `Impor*` to find
-   * Cloud resources that contain "Impor" as a prefix of any word in any of the
-   * searchable fields. * `Important location:(us-west1 OR global)` to find Cloud
-   * resources that contain "Important" as a word in any of the searchable fields
-   * and are also located in the "us-west1" region or the "global" location.
+   * 00:00:00 UTC" in seconds. * `updateTime>1609459200` to find Cloud resources
+   * that were updated after "2021-01-01 00:00:00 UTC". 1609459200 is the epoch
+   * timestamp of "2021-01-01 00:00:00 UTC" in seconds. * `Important` to find
+   * Cloud resources that contain "Important" as a word in any of the searchable
+   * fields. * `Impor*` to find Cloud resources that contain "Impor" as a prefix
+   * of any word in any of the searchable fields. * `Important location:(us-west1
+   * OR global)` to find Cloud resources that contain "Important" as a word in any
+   * of the searchable fields and are also located in the "us-west1" region or the
+   * "global" location.
    * @opt_param string readMask Optional. A comma-separated list of fields
    * specifying which fields to be returned in ResourceSearchResult. Only '*' or
    * combination of top level fields can be specified. Field names of both
    * snake_case and camelCase are supported. Examples: `"*"`, `"name,location"`,
    * `"name,versionedResources"`. The read_mask paths must be valid field paths
    * listed but not limited to (both snake_case and camelCase are supported): *
-   * name * assetType * project * displayName * description * location * labels *
-   * networkTags * kmsKey * createTime * updateTime * state * additionalAttributes
-   * * versionedResources If read_mask is not specified, all fields except
-   * versionedResources will be returned. If only '*' is specified, all fields
-   * including versionedResources will be returned. Any invalid field path will
-   * trigger INVALID_ARGUMENT error.
+   * name * assetType * project * displayName * description * location * tagKeys *
+   * tagValues * tagValueIds * labels * networkTags * kmsKey * createTime *
+   * updateTime * state * additionalAttributes * versionedResources If read_mask
+   * is not specified, all fields except versionedResources will be returned. If
+   * only '*' is specified, all fields including versionedResources will be
+   * returned. Any invalid field path will trigger INVALID_ARGUMENT error.
    * @return SearchAllResourcesResponse
    */
   public function searchAllResources($scope, $optParams = [])

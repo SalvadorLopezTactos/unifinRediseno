@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Υποθέσεων',
     'LBL_CASES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφών Υποθέσεων',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Λεπτομέρειες υπόθεσης',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Συρτάρι εστίασης περιπτώσεων - Κονσόλα',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης υποθέσεων',
 
 	'ERR_DELETE_RECORD'					=> 'Πρέπει να προσδιορίσετε έναν αριθμό εγγραφής για να διαγράψετε τον λογαριασμό.',
@@ -162,4 +162,29 @@ $mod_strings = array (
     'LBL_SLA_DETAILS' => 'Λεπτομέρειες SLA',
     'LBL_HOURS' => 'Ώρες',
     'LBL_WIDGET_STATUS' => 'Κατάσταση',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Οργανώστε',
+    'LBL_CREATE_NEW' => 'Δημιουργήστε νέο',
+    'LBL_MANAGE' => 'Διαχειριστείτε',
+    'LBL_SEE_DETAILS' => 'Δείτε Λεπτομέρειες',
+    'LBL_HIDE_NEW' => 'Αποκρύψτε',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Υποθέσεις',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Υπόθεση',
+    'LBL_KIOSK_CREATE' => 'Δημιουργία Υπόθεσης',
+    'LBL_KIOSK_SUBJECT' => 'Θέμα',
+    'LBL_KIOSK_CASE_ID' => 'Ταυτότητα Υπόθεσης',
+    'LBL_KIOSK_STATUS' => 'Κατάσταση',
+    'LBL_KIOSK_CATEGORY' => 'Κατηγορία',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Υποβλήθηκε στις {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Προτεραιότητα',
+    'LBL_KIOSK_CREATE_CASE' => 'Επικοινωνήστε μαζί μας',
+    'LBL_KIOSK_DESCRIPTION' => 'Περιγραφή',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Το αίτημά σας υποβλήθηκε με επιτυχία.',
+    'LBL_KIOSK_ATTACHED' => 'Όλα Συνημμένα',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Εξωτερικοί χρήστες',
 );

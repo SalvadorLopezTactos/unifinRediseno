@@ -17,74 +17,34 @@ $viewdefs['Forecasts']['base']['view']['list-headerpane'] = array(
             'acl_action' => 'is_manager'
         )
     ),
-    'buttons' => array(
+    'timeperiod' => [
         [
-            'name' => 'cancel_button',
-            'events' => [
-                'click' => 'button:cancel_button:click',
-            ],
-            'type' => 'button',
-            'label' => 'LBL_CANCEL_BUTTON_LABEL',
-            'css_class' => 'btn-invisible btn-link',
-            'acl_action' => 'current_user',
+            'name' => 'selectedTimePeriod',
+            'label' => 'LBL_TIMEPERIOD_NAME',
+            'type' => 'timeperiod',
+            'css_class' => 'forecastsTimeperiod',
+            'dropdown_class' => 'topline-timeperiod-dropdown',
+            'dropdown_width' => 'auto',
+            'view' => 'edit',
+            // options are set dynamically in the view
+            'default' => true,
+            'enabled' => true,
         ],
+    ],
+    'header-datapoints' => array(
         array(
-            'name' => 'save_draft_button',
-            'events' => array(
-                'click' => 'button:save_draft_button:click',
-            ),
-            'tooltip' => 'LBL_SAVE_TOOLTIP',
-            'type' => 'button',
-            'label' => 'LBL_SAVE_DRAFT',
-            'css_class' => 'btn-secondary save-draft-button',
-            'acl_action' => 'current_user',
+            'name' => 'likely_case',
+            'label' => 'LBL_COMMITMENT',
+            'type' => 'header-datapoint',
+            'click_to_edit' => false,
         ),
         array(
-            'type' => 'actiondropdown',
-            'name' => 'main_dropdown',
-            'primary' => true,
-            'buttons' => array(
-                array(
-                    'name' => 'commit_button',
-                    'type' => 'button',
-                    'label' => 'LBL_QC_COMMIT_BUTTON',
-                    'events' => array(
-                        'click' => 'button:commit_button:click',
-                    ),
-                    'tooltip' => 'LBL_COMMIT_TOOLTIP_REP',
-                    'css_class' => 'btn-primary disabled commit-button',
-                    'acl_action' => 'current_user',
-                    'primary' => true
-                ),
-                array(
-                    'name' => 'assign_quota',
-                    'type' => 'assignquota',
-                    'label' => 'LBL_ASSIGN_QUOTA_BUTTON',
-                    'events' => array(
-                        'click' => 'button:assign_quota:click',
-                    ),
-                    'acl_action' => 'manager_current_user',
-                ),
-                array(
-                    'name' => 'export_button',
-                    'type' => 'rowaction',
-                    'label' => 'LBL_EXPORT_CSV',
-                    'event' => 'button:export_button:click',
-                ),
-                array(
-                    'name' => 'settings_button',
-                    'type' => 'rowaction',
-                    'label' => 'LBL_FORECAST_SETTINGS',
-                    'acl_action' => 'developer',
-                    'route' => array(
-                        'action'=>'config'
-                    ),
-                    'events' => array(
-                        'click' => 'button:settings_button:click',
-                    ),
-                ),
-            ),
+            'name' => 'quota',
+            'label' => 'LBL_QUOTA',
+            'type' => 'header-quotapoint',
         ),
+    ),
+    'buttons' => array(
         array(
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',

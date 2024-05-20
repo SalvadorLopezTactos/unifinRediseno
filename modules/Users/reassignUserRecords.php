@@ -47,7 +47,7 @@ if (!empty($return_module)) {
 
 ?>
 <h2 class="moduleTitle" style="margin-bottom:0;">
-    <?= htmlspecialchars($mod_strings_users['LBL_REASS_SCRIPT_TITLE']);?>
+    <?= htmlspecialchars($mod_strings_users['LBL_REASS_SCRIPT_TITLE'], ENT_COMPAT);?>
 </h2>
 <?php
 // Include Metadata for processing
@@ -69,15 +69,15 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
         <table cellspacing="1" cellpadding="1" border="0">
             <tr>
                 <td>
-                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_DESC_PART1']);?>
+                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_DESC_PART1'], ENT_COMPAT);?>
                     <br/><br/>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="submit" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE']); ?>" name="steponesubmit"/>
-                    &nbsp;<input type=button class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CLEAR']); ?>" onclick="clearCurrentRecords();"/>
-                    <input type="button" class="button" value="<?= htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL']); ?>" onclick="document.location=<?= htmlspecialchars(json_encode($cancel_location, JSON_HEX_TAG, JSON_HEX_QUOT)); ?>;">
+                    <input type="submit" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE'], ENT_COMPAT); ?>" name="steponesubmit"/>
+                    &nbsp;<input type=button class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CLEAR'], ENT_COMPAT); ?>" onclick="clearCurrentRecords();"/>
+                    <input type="button" class="button" value="<?= htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL'], ENT_COMPAT); ?>" onclick="document.location=<?= htmlspecialchars(json_encode($cancel_location, JSON_HEX_TAG, JSON_HEX_QUOT), ENT_COMPAT); ?>;">
                 </td>
             </tr>
         </table>
@@ -85,7 +85,7 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
             <tr>
                 <td>
                     <br>
-                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_USER_FROM']); ?>
+                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_USER_FROM'], ENT_COMPAT); ?>
                     <br>
                     <select name="fromuser" id="fromuser">
                         <?php
@@ -95,7 +95,7 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                     </select>
                     <br>
                     <br>
-                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_USER_TO']); ?>
+                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_USER_TO'], ENT_COMPAT); ?>
                     <br>
                     <select name="touser" id="touser">
                         <?php
@@ -108,7 +108,7 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                     </select>
                     <br>
                     <br>
-                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_TEAM_TO']); ?>
+                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_TEAM_TO'], ENT_COMPAT); ?>
                     <br>
                     <?php
                     $teamSetField = new SugarFieldTeamset('Teamset');
@@ -119,7 +119,7 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                     echo $teamSetField->getClassicView();
                     ?>
                     <br>
-                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_MOD_REASSIGN']); ?>
+                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_MOD_REASSIGN'], ENT_COMPAT); ?>
                     <br>
                     <select size="6" name="modules[]" multiple="true" id="modulemultiselect" onchange="updateDivDisplay(this);">
                         <?= getModuleMultiSelectOptions(); ?>
@@ -135,9 +135,9 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                         //Leon bug 20739
                         $t_mod_strings = return_module_language($GLOBALS['current_language'], $modFilter);
                         ?>
-                    <div id="reassign_<?= htmlspecialchars($modFilter);?>" style="display:<?= htmlspecialchars($display);?>">
+                    <div id="reassign_<?= htmlspecialchars($modFilter, ENT_COMPAT);?>" style="display:<?= htmlspecialchars($display, ENT_COMPAT);?>">
                         <h5 style="padding-left:0; margin-bottom:4px;">
-                            <?= htmlspecialchars($app_list_strings['moduleList'][$modFilter]);?> <?= htmlspecialchars($mod_strings_users['LBL_REASS_FILTERS']);?>
+                            <?= htmlspecialchars($app_list_strings['moduleList'][$modFilter], ENT_COMPAT);?> <?= htmlspecialchars($mod_strings_users['LBL_REASS_FILTERS'], ENT_COMPAT);?>
                         </h5>
                         <?php
                         foreach ($fieldArray['fields'] as $meta) :
@@ -146,7 +146,7 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                             $sizeHtml = !empty($meta['size']) ? 'size="' . intval($meta['size']) . '"' : '';
                             //Leon bug 20739
                             ?>
-                            <?= htmlspecialchars($t_mod_strings[$meta['vname']]);?><br>
+                            <?= htmlspecialchars($t_mod_strings[$meta['vname']], ENT_COMPAT);?><br>
                             <?php
                             $extraHtml = '';
                             switch ($meta['type']) {
@@ -170,10 +170,10 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
                                     continue 2;
                             }
                             ?>
-                            <<?= htmlspecialchars($tag);?> <?=$sizeHtml;?> name="<?= htmlspecialchars($name);?>" <?= htmlspecialchars($multi);?>>
+                            <<?= htmlspecialchars($tag, ENT_COMPAT);?> <?=$sizeHtml;?> name="<?= htmlspecialchars($name, ENT_COMPAT);?>" <?= htmlspecialchars($multi, ENT_COMPAT);?>>
                             <?=$extraHtml;?>
                             <br>
-<?php
+                            <?php
                         endforeach;
                         ?>
                     </div>
@@ -186,9 +186,9 @@ if (empty($fromuser) && !isset($_GET['execute'])) :
         <table cellspacing="1" cellpadding="1" border="0">
             <tr>
                 <td>
-                    <input type="submit" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE']); ?>" name="steponesubmit">
-                    <input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CLEAR']); ?>" onclick="clearCurrentRecords();">
-                    <input type="button" class="button" value="<?= htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL']); ?>" onclick="document.location=<?= htmlspecialchars(json_encode($cancel_location, JSON_HEX_TAG, JSON_HEX_QUOT)); ?>">
+                    <input type="submit" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE'], ENT_COMPAT); ?>" name="steponesubmit">
+                    <input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CLEAR'], ENT_COMPAT); ?>" onclick="clearCurrentRecords();">
+                    <input type="button" class="button" value="<?= htmlspecialchars($app_strings['LBL_CANCEL_BUTTON_LABEL'], ENT_COMPAT); ?>" onclick="document.location=<?= htmlspecialchars(json_encode($cancel_location, JSON_HEX_TAG, JSON_HEX_QUOT), ENT_COMPAT); ?>">
                 </td>
             </tr>
         </table>
@@ -212,14 +212,14 @@ else :
 
         global $current_user;
 // Set the from and to user names so that we can display them in the results
-        $stmt = $db->getConnection()
+        $result = $db->getConnection()
             ->executeQuery(
                 'SELECT user_name, id FROM users WHERE id IN (?)',
                 [[$fromuser, $touser]],
                 [Connection::PARAM_STR_ARRAY]
             );
 
-        foreach ($stmt as $row) {
+        foreach ($result->iterateAssociative() as $row) {
             if ($row['id'] == $fromuser) {
                 $fromusername = $row['user_name'];
             }
@@ -239,13 +239,13 @@ else :
 
         $toteamname = TeamSetManager::getCommaDelimitedTeams($team_set_id, $team_id, true);
         ?>
-        <?= htmlspecialchars($mod_strings_users['LBL_REASS_DESC_PART2']);?>
+        <?= htmlspecialchars($mod_strings_users['LBL_REASS_DESC_PART2'], ENT_COMPAT);?>
 <form action="index.php?module=Users&action=reassignUserRecords&execute=true" method="post">
-    <br><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TITLE']);?>
+    <br><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TITLE'], ENT_COMPAT);?>
     <ul>
-        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_ONE']);?></li>
-        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TWO']);?></li>
-        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_THREE']);?></li>
+        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_ONE'], ENT_COMPAT);?></li>
+        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_TWO'], ENT_COMPAT);?></li>
+        <li><?= htmlspecialchars($mod_strings_users['LBL_REASS_NOTES_THREE'], ENT_COMPAT);?></li>
     </ul>
         <?php
         require_once 'include/SugarSmarty/plugins/function.sugar_help.php';
@@ -254,7 +254,7 @@ else :
         ?>
     <br>
     <input type="checkbox" name="verbose">
-        <?= htmlspecialchars($mod_strings_users['LBL_REASS_VERBOSE_OUTPUT']);?>
+        <?= htmlspecialchars($mod_strings_users['LBL_REASS_VERBOSE_OUTPUT'], ENT_COMPAT);?>
         <?=$help_img;?>
     <br>
         <?php
@@ -273,7 +273,10 @@ else :
         $_SESSION['reassignRecords']['tousername'] = $tousername;
 
         foreach ($modules as $module) :
-            if (!array_key_exists($module, $beanListFlip)) {
+            if ($beanListFlip instanceof \ArrayObject) {
+                $beanListFlip = $beanListFlip->getArrayCopy();
+            }
+            if (empty($beanListFlip) || !is_array($beanListFlip) || !array_key_exists($module, $beanListFlip)) {
                 continue;
             }
 
@@ -286,23 +289,23 @@ else :
             $moduleLabel = $app_list_strings['moduleList'][$module] ?? $module;
             ?>
             <h5>
-                <?= htmlspecialchars($mod_strings_users['LBL_REASS_ASSESSING']); ?> <?= htmlspecialchars($moduleLabel); ?>
+                <?= htmlspecialchars($mod_strings_users['LBL_REASS_ASSESSING'], ENT_COMPAT); ?> <?= htmlspecialchars($moduleLabel, ENT_COMPAT); ?>
             </h5>
             <table border="0" cellspacing="0" cellpadding="0" class="detail view">
                 <tr>
                     <td>
                         <?php
-                        list($q_tables, $q_where) = processConditions($object, $fromuser, $moduleFilters, $module, $_POST);
+                        [$q_tables, $q_where] = processConditions($object, $fromuser, $moduleFilters, $module, $_POST);
                         $_SESSION['reassignRecords']['modules']['list'][] = $module;
                         $count = $db->getOne("SELECT COUNT(*) AS count FROM $q_tables $q_where");
                         ?>
                         <?= $count; ?>
-                        <?= htmlspecialchars($mod_strings_users['LBL_REASS_RECORDS_FROM']); ?>
-                        <?= htmlspecialchars($moduleLabel); ?>
-                        <?= htmlspecialchars($mod_strings_users['LBL_REASS_WILL_BE_UPDATED']); ?>
+                        <?= htmlspecialchars($mod_strings_users['LBL_REASS_RECORDS_FROM'], ENT_COMPAT); ?>
+                        <?= htmlspecialchars($moduleLabel, ENT_COMPAT); ?>
+                        <?= htmlspecialchars($mod_strings_users['LBL_REASS_WILL_BE_UPDATED'], ENT_COMPAT); ?>
                         <br>
-                        <input type="checkbox" name="<?= htmlspecialchars($module); ?>_workflow">
-                        <?= htmlspecialchars($mod_strings_users['LBL_REASS_WORK_NOTIF_AUDIT']); ?>
+                        <input type="checkbox" name="<?= htmlspecialchars($module, ENT_COMPAT); ?>_workflow">
+                        <?= htmlspecialchars($mod_strings_users['LBL_REASS_WORK_NOTIF_AUDIT'], ENT_COMPAT); ?>
                         <br>
                     </td>
                 </tr>
@@ -310,9 +313,9 @@ else :
             <?php
         endforeach;
         ?>
-    <br><input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_GO_BACK']);?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords';">
-    &nbsp;<input type="submit" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE']);?>">
-    &nbsp;<input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_RESTART']);?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords&clear=true';">
+    <br><input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_GO_BACK'], ENT_COMPAT);?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords';">
+    &nbsp;<input type="submit" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_CONTINUE'], ENT_COMPAT);?>">
+    &nbsp;<input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_RESTART'], ENT_COMPAT);?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords&clear=true';">
 </form>
         <?php
     else :
@@ -355,7 +358,7 @@ else :
             $workflow = !empty($_POST[$module . "_workflow"]);
             ?>
             <h5>
-                <?= htmlspecialchars($mod_strings_users['LBL_PROCESSING']);?> <?= htmlspecialchars($moduleLabel);?>
+                <?= htmlspecialchars($mod_strings_users['LBL_PROCESSING'], ENT_COMPAT);?> <?= htmlspecialchars($moduleLabel, ENT_COMPAT);?>
             </h5>
             <?php
 
@@ -378,15 +381,15 @@ else :
             if (!empty($teamSetSelectedId) && $tbaConfigurator->isEnabledForModule($module)) {
                 $q_set .= ', acl_team_set_id = ' . $db->quoted($teamSetSelectedId);
             }
-            list($q_tables, $q_where) = processConditions($object, $fromuser, $moduleFilters, $module, $POST->getArrayCopy());
+            [$q_tables, $q_where] = processConditions($object, $fromuser, $moduleFilters, $module, $POST->getArrayCopy());
             // nutmeg sfa-219 : Fix reassignment of records when user set to Inactive
             if ($module == 'ForecastWorksheets') {
                 $affected_rows = ForecastWorksheet::reassignForecast($fromuser, $touser);
                 printf(
                     '%s: %s %s<br>',
-                    htmlspecialchars($mod_strings_users['LBL_UPDATE_FINISH']),
-                    htmlspecialchars($affected_rows),
-                    htmlspecialchars($mod_strings_users['LBL_AFFECTED'])
+                    htmlspecialchars($mod_strings_users['LBL_UPDATE_FINISH'], ENT_COMPAT),
+                    htmlspecialchars($affected_rows, ENT_COMPAT),
+                    htmlspecialchars($mod_strings_users['LBL_AFFECTED'], ENT_COMPAT)
                 );
                 continue;
             } else {
@@ -407,9 +410,9 @@ else :
                         if (!$workflow) :
                             printf(
                                 '%s: %s %s<br>',
-                                htmlspecialchars($mod_strings_users['LBL_UPDATE_FINISH']),
-                                htmlspecialchars($affected_rows),
-                                htmlspecialchars($mod_strings_users['LBL_AFFECTED'])
+                                htmlspecialchars($mod_strings_users['LBL_UPDATE_FINISH'], ENT_COMPAT),
+                                htmlspecialchars($affected_rows, ENT_COMPAT),
+                                htmlspecialchars($mod_strings_users['LBL_AFFECTED'], ENT_COMPAT)
                             );
                         else :
                             $succeed = [];
@@ -463,7 +466,7 @@ else :
                                         $toNameHtml,
                                     ] = array_map(
                                         function (string $item): string {
-                                            return htmlspecialchars($item);
+                                            return htmlspecialchars($item, ENT_COMPAT);
                                         },
                                         [
                                             $mod_strings_users['LBL_REASS_SUCCESS_ASSIGN'],
@@ -480,7 +483,7 @@ else :
 $successLabel $objectNameHtml"<i><a href="{$hrefAttr}">{$linkNameHtml}</a></i>" 
 $fromLabelHtml $fromNameHtml $toLabelHtml $toNameHtml
 HTML;
-                                    $successMessage .= $toteam != '0' ? sprintf(', %s %s.', htmlspecialchars($mod_strings_users['LBL_REASS_TEAM_SET_TO']), htmlspecialchars($toteamname)) : '.';
+                                    $successMessage .= $toteam != '0' ? sprintf(', %s %s.', htmlspecialchars($mod_strings_users['LBL_REASS_TEAM_SET_TO'], ENT_COMPAT), htmlspecialchars($toteamname, ENT_COMPAT)) : '.';
                                     $succeed[] = $successMessage;
                                 } else {
                                     $href = 'index.php?'
@@ -493,9 +496,9 @@ HTML;
                                         );
                                     $failed[] = sprintf(
                                         '%s "<i><a href="%s">%s</a></i>".',
-                                        htmlspecialchars($mod_strings_users['LBL_REASS_FAILED_SAVE']),
-                                        htmlspecialchars($href),
-                                        htmlspecialchars($linkname)
+                                        htmlspecialchars($mod_strings_users['LBL_REASS_FAILED_SAVE'], ENT_COMPAT),
+                                        htmlspecialchars($href, ENT_COMPAT),
+                                        htmlspecialchars($linkname, ENT_COMPAT)
                                     );
                                 }
                             }
@@ -503,9 +506,9 @@ HTML;
                             if (isset($_POST['verbose']) && $_POST['verbose'] == "on") {
                                 ?>
                                 <h5>
-                                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_THE_FOLLOWING']); ?>
-                                    <?= htmlspecialchars($app_list_strings['moduleList'][$module]); ?>
-                                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_HAVE_BEEN_UPDATED']); ?>
+                                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_THE_FOLLOWING'], ENT_COMPAT); ?>
+                                    <?= htmlspecialchars($app_list_strings['moduleList'][$module], ENT_COMPAT); ?>
+                                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_HAVE_BEEN_UPDATED'], ENT_COMPAT); ?>
                                 </h5>
                                 <?php
 
@@ -514,14 +517,14 @@ HTML;
                                 }
 
                                 if (empty($succeed)) {
-                                    echo htmlspecialchars($mod_strings_users['LBL_REASS_NONE']) . '<br>';
+                                    echo htmlspecialchars($mod_strings_users['LBL_REASS_NONE'], ENT_COMPAT) . '<br>';
                                 }
 
                                 ?>
                                 <h5>
-                                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_THE_FOLLOWING']); ?>
-                                    <?= htmlspecialchars($app_list_strings['moduleList'][$module]); ?>
-                                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_CANNOT_PROCESS']); ?>
+                                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_THE_FOLLOWING'], ENT_COMPAT); ?>
+                                    <?= htmlspecialchars($app_list_strings['moduleList'][$module], ENT_COMPAT); ?>
+                                    <?= htmlspecialchars($mod_strings_users['LBL_REASS_CANNOT_PROCESS'], ENT_COMPAT); ?>
                                 </h5>
                                 <?php
                                 foreach ($failed as $failure) {
@@ -529,12 +532,12 @@ HTML;
                                 }
 
                                 if (empty($failed)) {
-                                    echo htmlspecialchars($mod_strings_users['LBL_REASS_NONE']) . '<br>';
+                                    echo htmlspecialchars($mod_strings_users['LBL_REASS_NONE'], ENT_COMPAT) . '<br>';
                                 }
                             } else {
-                                echo htmlspecialchars($mod_strings_users['LBL_REASS_UPDATE_COMPLETE']) . '<br>';
-                                echo '&nbsp;&nbsp;' . count($succeed) . ' ' . htmlspecialchars($mod_strings_users['LBL_REASS_SUCCESSFUL']) . '<br>';
-                                echo '&nbsp;&nbsp;' . count($failed) . ' ' . htmlspecialchars($mod_strings_users['LBL_REASS_FAILED']);
+                                echo htmlspecialchars($mod_strings_users['LBL_REASS_UPDATE_COMPLETE'], ENT_COMPAT) . '<br>';
+                                echo '&nbsp;&nbsp;' . count($succeed) . ' ' . htmlspecialchars($mod_strings_users['LBL_REASS_SUCCESSFUL'], ENT_COMPAT) . '<br>';
+                                echo '&nbsp;&nbsp;' . count($failed) . ' ' . htmlspecialchars($mod_strings_users['LBL_REASS_FAILED'], ENT_COMPAT);
                             }
                             ?>
                             <br>
@@ -549,7 +552,7 @@ HTML;
         Activity::restoreToPreviousState();
         ?>
         <br>
-        <input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_RETURN']); ?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords'">
+        <input type="button" class="button" value="<?= htmlspecialchars($mod_strings_users['LBL_REASS_BUTTON_RETURN'], ENT_COMPAT); ?>" onclick="document.location='index.php?module=Users&action=reassignUserRecords'">
         <?php
     endif;
 endif;

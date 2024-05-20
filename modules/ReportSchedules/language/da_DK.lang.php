@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser for rapporttidsplan',
     'LBL_FILE_TYPE' => 'Filtyper',
+    'LBL_EMBED_REPORT' => 'Indlejr rapport i e-mail',
+    'LBL_EMBED_REPORT_INFO' => 'Bemærk: Hvis rapporten overstiger 200 rækker, vil vi vedhæfte rapporten som en CSV-fil.',
 );

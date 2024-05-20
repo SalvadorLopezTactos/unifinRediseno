@@ -50,9 +50,11 @@
 
               hideBwcDiv.innerHTML = '&shy;<style> #bwc-frame { visibility: hidden; } </style>';
               hideBwcDiv.id = 'hide-bwc-iframe-loading';
+              hideBwcDiv.style.display = 'none';
 
               hideMarketingContentDiv.innerHTML = '&shy;<style> #marketing-content { visibility: hidden; } </style>';
               hideMarketingContentDiv.id = 'hide-marketing-content-loading';
+              hideMarketingContentDiv.style.display = 'none';
 
               ref.parentNode.insertBefore(hideBwcDiv, ref);
               ref.parentNode.insertBefore(hideMarketingContentDiv, ref);
@@ -82,12 +84,12 @@
                     </noscript>
                 </div>
                 <div id="impersonation-banner"></div>
-                <div id="header"></div>
+                <div id="sidebar-nav"></div>
+                <div id="header-nav"></div>
                 <div id="content"></div>
                 <div id="sweetspot"></div>
                 <div id="drawers"></div>
                 <div id="side-drawer"></div>
-                <div id="footer"></div>
             </div>
         </div>
         <!-- App Scripts -->

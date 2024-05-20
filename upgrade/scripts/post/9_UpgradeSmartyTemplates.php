@@ -46,7 +46,7 @@ class SugarUpgradeUpgradeSmartyTemplates extends UpgradeScript
                 continue;
             }
             if (false === strpos($curFile, '/_smarty3_/db/')) {
-                list(,$pathToTemplate) = explode('/_smarty3_/', $curFile);
+                [, $pathToTemplate] = explode('/_smarty3_/', $curFile);
                 copy($curFile, $pathToTemplate);
             } else {
                 $id = basename($curFile);

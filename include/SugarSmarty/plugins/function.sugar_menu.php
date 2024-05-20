@@ -77,7 +77,7 @@ function smarty_function_sugar_menu($params, &$smarty)
         }
         $output .= SugarHtml::createOpenTag('li', !empty($params['itemOptions']) ? $params['itemOptions'] : array())
             .$item['html'];
-        if(isset($item['items']) && count($item['items'])) {
+        if (isset($item['items']) && (is_countable($item['items']) ? count($item['items']) : 0)) {
             $output .= smarty_function_sugar_menu(array(
                 'items' => $item['items'],
                 'htmlOptions' => !empty($params['submenuHtmlOptions']) ? $params['submenuHtmlOptions'] : (!empty($item['submenuHtmlOptions']) ? $item['submenuHtmlOptions'] : array())

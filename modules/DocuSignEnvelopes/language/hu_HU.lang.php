@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Nincs ügyféltitok beállítva',
     'LBL_RESEND_BUTTON_LABEL' => 'Újraküldés',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Boríték begyűjtése',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Felhőszolgáltatás típusa',
+    'LBL_CLOUD_PATH' => 'Felhőútvonal',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'DocuSign borítékok listájának kezelőfelülete',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Legutóbbi DocuSign borítékok',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'DocuSign borítékok fókuszfiókja',
 
-    'LBL_DOCUMENT_FROM' => 'Dokumetum feladója ',
+    'LBL_NEW_ENVELOPE' => 'Új boríték',
     'LBL_DOCUMENT_IS_NOW' => ' most ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign hiba. Nem sikerült beszerezni a fiókazonosítót a hozzáférési token alapján',
     'LBL_ERROR_RESEND' => 'A DocuSign újraküldés sikertelen. A boríték állapotának "elküldöttnek" kell lennie',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Frissítés sikertelen',
     'LBL_ERROR_FETCH_TIME' => 'A DocuSign szabályai nem teszik lehetőve, hogy ugyanarra a borítékra 15 percen belül több kérelem érkezzen',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Hiba történt. Nem sikerült a boríték frissítése. Kérjük, ellenőrizze a naplófájlokat!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Hiba történt. Nem sikerült listázni a sablonokat. Kérjük, ellenőrizze a naplófájlokat!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Hiba történt. Nem sikerült betölteni a sablonokat. Kérjük, ellenőrizze a naplófájlokat!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'A boríték nem teljes',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'A boríték állapota a DocuSignban most ',
     'LBL_OVERVIEW' => 'Áttekintés',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Dokumentum hozzáadása',
     'LBL_BUTTON_SEND' => 'Küldés',
     'LBL_BUTTON_CLEAR' => 'Töröl',
-    'LBL_MISSING_OBJECT' => 'A DocuSign objektum nincs az ablakban',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Sablon használata',
     'LBL_PLEASE_LOG_IN' => 'Kérjük, először jelentkezzen be a DocuSignba!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Nem tudja letölteni ezt a dokuemtumot. Egy másik felhasználó hozta létre!',
     'LBL_SEND_NOT_ALLOWED' => 'Nem tudja elküldeni ezt a borítékot. Egy másik felhasználó hozta létre!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Aláírt',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Nem sikerült letölteni a dokumentumot. Kérjük, ellenőrizze a naplójfált!',
     'LBL_DOCUMENT_COMPLETED' => 'Befejezett',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign Info',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'most',
+    'LBL_SETTINGS_TITLE' => 'DocuSign beállításai',
+    'LBL_RECIPIENT_SELECTION' => 'A kiválasztott címzettek viselkedése',
+    'LBL_RECIPIENT_NAME' => 'Név',
+    'LBL_RECIPIENT_EMAIL' => 'E-mail',
+    'LBL_RECIPIENT_TYPE' => 'Típus',
+    'LBL_TEMPLATE_NAME' => 'Időszak',
+    'LBL_RECIPIENT_SELECT' => 'Kiválasztás...',
+    'LBL_RECIPIENT_ROLE' => 'Szerepkör',
+    'LBL_SELECT_BUTTON_LABEL' => 'Kiválasztás',
+    'LBL_BACK_BUTTON_LABEL' => 'Vissza',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'A lehetséges címzettek betöltése sikertelen!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'A sablonok betöltése sikertelen!',
 ];

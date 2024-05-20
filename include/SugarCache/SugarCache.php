@@ -18,7 +18,7 @@ use Psr\SimpleCache\CacheInterface;
  */
 class SugarCache
 {
-    const EXTERNAL_CACHE_NULL_VALUE = "SUGAR_CACHE_NULL_ZZ";
+    public const EXTERNAL_CACHE_NULL_VALUE = "SUGAR_CACHE_NULL_ZZ";
 
     protected static $_cacheInstance;
 

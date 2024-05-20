@@ -543,6 +543,10 @@
             // if no access to module, remove the href
             this.href = undefined;
         }
+
+        this.module = module;
+        this.modelId = id;
+        this.linkTarget = 'focus';
     },
 
     // Derived controllers can override these if related module and id in another

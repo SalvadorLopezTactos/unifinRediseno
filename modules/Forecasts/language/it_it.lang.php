@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Visualizza Cronologia Previsioni',
     'LBL_FORECAST_HISTORY' => 'Previsioni: Cronologia',
     'LBL_FORECAST_HISTORY_TITLE' => 'Cronologia',
+    'LBL_TAB_COMMITMENT' => 'Conferma',
+    'LBL_CURRENT' => 'Attuale',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Arco Temporale',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Modificato da',
     'LBL_WK_VERSION' => 'Versione',
     'LBL_WK_REVISION' => 'Revisione',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'L&#39;accesso all&#39;API delle metriche richiede Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Arco Temporale:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Desideri confermare questi importi?',
     'ERR_FORECAST_AMOUNT' => 'Confermare importo, deve essere un numero.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Pipeline inclusa',
+    'LBL_UPSIDE_PIPELINE' => 'Pipeline al rialzo',
+    'LBL_EXCLUDED_PIPELINE' => 'Pipeline esclusa',
+    'LBL_WON' => 'Vinto',
+    'LBL_LOST' => 'Persa',
+    'LBL_ALL' => 'Tutti',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Guida sui filtri',
+    'LBL_HELP_MAIN_BODY' => 'Tutte le metriche includono solo le opportunità appartenenti agli utenti selezionati, il periodo di tempo ed eventuali filtri aggiuntivi che hai applicato',
+    'LBL_FORECAST_HELP' => 'Opportunità che sono già state vinte o sono incluse {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Opportunità aperte con un {{{forecastStage}}} di {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Opportunità aperte in un {{{forecastStage}}} incluso',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Opportunità aperte con un {{{forecastStage}}} di {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Opportunità aperte con un {{{forecastStage}}} di {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Opportunità aperte in un {{{forecastStage}}} escluso',
+    'LBL_WON_HELP' => 'Opportunità già vinte',
+    'LBL_LOST_HELP' => 'Opportunità già perse',
+    'LBL_ALL_HELP' => 'Tutte le opportunità',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Data Inizio',
     'LBL_FC_USER' => 'Programmata per',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Conferma',
     'LBL_TEAM_COMMITMENT' => 'Conferma gruppo',
     'LBL_FORECASTED' => 'Previsto',
+    'LBL_OPPORTUNITY_FORECAST' => 'Opportunità in Previsione',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Previsione Elementi dell´Opportunità',
+    'LBL_LAST_COMMITMENT' => 'Ultima Conferma',
     'LBL_ADJUSTED_TOTAL' => 'Totale modificati',
     'LBL_COMMIT_STAGE' => 'Fase di Conferma',
     'LBL_SALES_STAGE' => 'Fase',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Adeguato)',
     'LBL_SAVE_DRAFT' => 'Salva',
     'LBL_CHANGES_BY' => 'Modifiche da {0}',
-    'LBL_FORECAST_SETTINGS' => 'Impostazioni',
+    'LBL_FORECAST_SETTINGS' => 'Impostazioni Previsione',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Setup Previsioni',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data inizio anno fiscale:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configura l´arco temporale che verrà utilizzato nel modulo Previsioni.<br><br>Inizia selezionando la Data Inizio del tuo anno fiscale. Poi seleziona il tipo di arco temporale per il quale vuoi fare la previsione. L´intervallo di tempo per l´arco temporale verrà calcolato automaticamente in base alle tue selezioni. Il Sotto-Arco temporale è la base della matrice della Previsione.<br><br>Gli archi temporali visibili futuri e passati determineranno il numero di sotto-periodi visibili nel modulo Previsioni. Gli utenti possono visualizzare e modificare i numeri previsti nei sotto-periodi visibili.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configura come desideri classificare {{forecastByModule}}. <br><br>Tieni presente che le impostazioni dell&#39;intervallo non possono essere modificate dopo la prima conferma. Per le istanze aggiornate, l&#39;impostazione Intervallo è bloccata con i dati di Previsione esistenti.<br><br>Puoi selezionare due o più categorie in base a intervalli di probabilità o creare categorie che non sono basate sulla probabilità. <br><br>Ci sono caselle di controllo a sinistra delle tue categorie personalizzate; utilizzarle per decidere quali intervalli saranno inclusi nell&#39;importo previsto confermato e segnalato ai gestori. <br><br>Un utente può modificare manualmente lo stato di inclusione/esclusione e la categoria di {{forecastByModule}} dal proprio foglio di lavoro.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurare il modo in cui categorizzare {{forecastByModule}}.<br><br> Tenere presente che non è possibile cambiare l&#39;impostazione Intervallo dopo la prima conferma. Per le istanze aggiornate, l&#39;impostazione Intervallo viene bloccate con i dati di Previsione esistenti.<br><br>È possibile selezionare due o più categorie in base agli intervalli di probabilità oppure creare delle categorie che non si basano sulla probabilità.<br><br>A sinistra delle categorie personalizzate sono presenti delle caselle di controllo, utilizzabili per decidere quali intervalli includere nell&#39;importo della Previsione confermato e rendicontato ai dirigenti.<br><br>Un utente può cambiare manualmente lo stato di inclusione/esclusione e la categoria di {{forecastByModule}} dal proprio foglio di lavoro.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Seleziona le colonne che vuoi che gli utenti possano compilare per le loro previsioni di ciascuna {{forecastByModuleSingular}}.Si prega di notare che l´importo Probabile è legato all´importo mostrato in {{forecastByModule}}; per questo motivo la colonna Probabile non può essere nascosta.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Seleziona le colonne da visualizzare nel modulo Previsioni. L´elenco di campi costituirà la matrice e consentirà all´utente di scegliere come configurare la sua vista.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Sono un segnaposto per il testo Forecast By how-to!',

@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Pulsanti Form',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Approva/Rifiuta',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Strada',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Invia a DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Altre Opzioni Routing',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Cambia Proprietario Record',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Gruppo',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Unione documenti',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Seleziona...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Unisci documento a PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Invia documento unito via e-mail',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Unione documenti',
 
@@ -373,7 +375,7 @@ $mod_strings = array (
 
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'il o dopo il',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'il o prima del',
-    'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'è uguale a',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'non è uguale a',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'non è',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'non uguale a',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Il tipo di gateway convergente non corrisponde al tipo di gateway di un flusso in entrata',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'I gateway divergenti espandono il processo in più rami. Quando si utilizza un gateway convergente per fare in modo che questi rami convergano nuovamente in un unico percorso, è necessario utilizzare il tipo corretto di gateway convergente, a seconda del tipo di gateway divergente utilizzato per creare i rami. Per i rami creati con gateway esclusivi o basati su eventi, utilizzare un gateway convergente esclusivo per convergere nuovamente i rami. Per i rami creati con gateway divergenti paralleli o inclusivi, utilizzare un gateway convergente parallelo per convergere nuovamente i rami.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Campo del modulo',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Relazione con il modulo',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Utente',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Ruolo',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Gruppo',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Attività modulo',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Regola aziendale',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Azione regola aziendale',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Modello Email',
 );

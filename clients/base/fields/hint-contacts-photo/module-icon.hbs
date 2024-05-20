@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<span class="label label-module
-{{#if labelSizeClass}}{{labelSizeClass}}
-{{/if}}label-{{module}}" rel="tooltip" title="{{moduleIconToolTip module}}" data-placement="{{tooltipPlacement}}">
-    {{moduleIconLabel module}}
+<span class="label label-module {{labelSizeClass}}{{#if classes}} {{classes}}{{/if}}" rel="tooltip" title="{{moduleIconToolTip module}}" data-placement="{{tooltipPlacement}}">
+    {{content}}
 </span>

@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Talepler Listesi Panosu',
     'LBL_CASES_RECORD_DASHBOARD' => 'Talepler Kaydı Panosu',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Talep Detayları',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Taleplerin Odak Bölmesi - Konsol',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Talepler Odak Bölmesi',
 
 	'ERR_DELETE_RECORD'					=> 'Müşteriyi silmek için bir kayıt numarası girmelisiniz.',
@@ -163,4 +163,29 @@ Sugar içinde {{plural_module_name}} kaydı oluşturmak için farklı yöntemler
     'LBL_SLA_DETAILS' => 'SLA Bilgileri',
     'LBL_HOURS' => 'Saat',
     'LBL_WIDGET_STATUS' => 'Durum',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Düzenle',
+    'LBL_CREATE_NEW' => 'Yeni Oluştur',
+    'LBL_MANAGE' => 'Yönet',
+    'LBL_SEE_DETAILS' => 'Detayları Görüntüle',
+    'LBL_HIDE_NEW' => 'Gizle',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Talepler',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Talep',
+    'LBL_KIOSK_CREATE' => 'Talep Oluştur',
+    'LBL_KIOSK_SUBJECT' => 'Konu',
+    'LBL_KIOSK_CASE_ID' => 'Talep ID',
+    'LBL_KIOSK_STATUS' => 'Durum',
+    'LBL_KIOSK_CATEGORY' => 'Kategori',
+    'LBL_KIOSK_SUBMITTED_BY' => '{{date}} tarihinde gönderildi',
+    'LBL_KIOSK_PRIORITY' => 'Öncelik',
+    'LBL_KIOSK_CREATE_CASE' => 'Bizimle İletişime Geçin',
+    'LBL_KIOSK_DESCRIPTION' => 'Açıklama',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Talebiniz başarıyla gönderildi.',
+    'LBL_KIOSK_ATTACHED' => 'Tümü Eklendi',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Harici Kullanıcılar',
 );

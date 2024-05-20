@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Електронно табло със запис на графици на справки',
     'LBL_FILE_TYPE' => 'Тип(ове) файлове',
+    'LBL_EMBED_REPORT' => 'Вгради справка в електронно писмо',
+    'LBL_EMBED_REPORT_INFO' => 'Забележка: Ако справката надвишава 200 реда, ще я прикачим като CSV файл.',
 );

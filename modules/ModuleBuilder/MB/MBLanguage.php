@@ -15,6 +15,28 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class MBLanguage{
+    public $path;
+    public $name;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $key_name;
+    /**
+     * @var mixed
+     */
+    public $label;
+    /**
+     * @var mixed
+     */
+    public $label_singular;
+    /**
+     * @var string
+     */
+    public $abbreviation;
+    /**
+     * @var array<string, mixed>|array<string, mixed[]>|mixed[]|mixed
+     */
+    public $strings;
 		var $iTemplates = array();
 		var $templates = array();
 
@@ -29,13 +51,14 @@ class MBLanguage{
      */
     protected $packagePath;
 
-    public function __construct($name, $path, $label, $key_name, $label_singular)
+    public function __construct($name, $path, $label, $key_name, $label_singular, $abbreviation = '')
     {
         $this->path = $path;
         $this->name = $name;
         $this->key_name = $key_name;
         $this->label = $label;
         $this->label_singular = $label_singular;
+        $this->abbreviation = $abbreviation;
         $this->packagePath = $this->getPackagePath($path);
     }
 
@@ -67,7 +90,6 @@ class MBLanguage{
 		}
 
     public function loadAppListStrings($file){
-        $app_list_strings = null;
         if (!file_exists($file)) {
             return;
         }
@@ -80,9 +102,9 @@ class MBLanguage{
             if(substr($e, 0, 1) != '.' && is_file($file . '/' . $e)) {
                 include FileLoader::validateFilePath($file.'/'. $e);
                 if (empty($this->appListStrings[$e])) {
-                    $this->appListStrings[$e] = $app_list_strings;
+                    $this->appListStrings[$e] = $app_list_strings ?? [];
                 } else {
-                    $this->appListStrings[$e] = array_merge($this->appListStrings[$e], $app_list_strings);
+                    $this->appListStrings[$e] = array_merge($this->appListStrings[$e], $app_list_strings ?? []);
                 }
             }
         }
@@ -145,6 +167,7 @@ class MBLanguage{
     {
         $header = file_get_contents('modules/ModuleBuilder/MB/header.php');
         $save_path = $this->path . '/language';
+        $dirCleanupList = [];
         mkdir_recursive($save_path);
         foreach ($this->strings as $lang => $values) {
             //Check if the module Label or Singular Label has changed.
@@ -199,6 +222,7 @@ class MBLanguage{
             $values = sugarLangArrayMerge($values, $app_list_strings);
             $values['moduleList'][$key_name] = $this->label;
             $values['moduleListSingular'][$key_name] = $this->label_singular;
+            $values['moduleIconList'][$key_name] = $this->abbreviation;
 
             $appFile = $header . "\n";
             $this->getGlobalAppListStringsForMB($values);
@@ -221,8 +245,11 @@ class MBLanguage{
                     $appFile .= override_value_to_string_recursive2('app_list_strings', $key, $arr);
                 }
             }
-            sugar_file_put_contents_atomic($app_save_path . '/' . $lang, $appFile);
+            sugar_file_put_contents_atomic($neededFile, $appFile);
+            $dirCleanupList[dirname($neededFile)] = dirname($neededFile);
         }
+        $dirCleanupList[$this->packagePath] = $this->packagePath;
+        $this->cleanupTempFiles($dirCleanupList);
     }
 
     /**
@@ -234,6 +261,7 @@ class MBLanguage{
     {
         $header = file_get_contents('modules/ModuleBuilder/MB/header.php');
         $app_save_path = $this->packagePath . '/language/application';
+        $dirCleanupList = [];
         foreach ($this->appListStrings as $lang => $values) {
             $file = $app_save_path . '/' . $lang;
             if (file_exists($file)) {
@@ -249,8 +277,11 @@ class MBLanguage{
                     $contents .= override_value_to_string_recursive2('app_list_strings', $key, $array);
                 }
                 sugar_file_put_contents_atomic($file, $contents);
+                $dirCleanupList[dirname($file)] = dirname($file);
             }
         }
+        $dirCleanupList[$this->packagePath] = $this->packagePath;
+        $this->cleanupTempFiles($dirCleanupList);
     }
 
 		/**
@@ -270,10 +301,17 @@ class MBLanguage{
 			}
 		}
 
-		function build($path){
-			if(file_exists($this->path.'/language/'))
-			copy_recursive($this->path.'/language/', $path . '/language/');
-		}
+    public function build($path)
+    {
+        $slash = DIRECTORY_SEPARATOR;
+        $sourcePath = realpath($this->path . $slash . 'language');
+        $destPath = $path . $slash . 'language'; //Destination path may not exist yet, realpath() returns false
+        $pkgPath = realpath($this->path);
+        $this->cleanupTempFiles([$pkgPath => $pkgPath]);
+        if (file_exists($sourcePath)) {
+            copy_recursive($sourcePath, $destPath);
+        }
+    }
 
         public function loadTemplates()
         {
@@ -327,5 +365,31 @@ class MBLanguage{
     {
         $split = preg_split('#/#', $this->path);
         return isset($split[3]) ? MB_PACKAGE_PATH . '/' . $split[3] : false;
+    }
+
+    /**
+     * @param array $dirCleanupList
+     */
+    private function cleanupTempFiles(array $dirCleanupList): void
+    {
+        foreach ($dirCleanupList as $dirName) {
+            $dirName = realpath($dirName);
+            if (empty($dirName)) {
+                continue;
+            }
+            $it = new RegexIterator(
+                new RecursiveIteratorIterator(
+                    new RecursiveDirectoryIterator(
+                        $dirName,
+                        FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::SKIP_DOTS
+                    )
+                ),
+                '#^.*' . DIRECTORY_SEPARATOR . 'sugar[\w\d]*$#'
+            );
+            foreach ($it as $filepath) {
+                $filename = realpath($filepath->getPathname());
+                unlink($filename);
+            }
+        }
     }
 }

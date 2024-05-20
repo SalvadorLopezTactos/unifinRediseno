@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Nie je nastavené žiadne utajenie klienta',
     'LBL_RESEND_BUTTON_LABEL' => 'Odoslať znova',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Získať obálku',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Typ cloudovej služby',
+    'LBL_CLOUD_PATH' => 'Cesta ku cloudu',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Informačný panel zoznamu obálok DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Nedávne obálky DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania obálok DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'Dokument od ',
+    'LBL_NEW_ENVELOPE' => 'Nová obálka',
     'LBL_DOCUMENT_IS_NOW' => ' je teraz ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'Chyba DocuSign. Nepodarilo sa získať ID účtu na základe prístupového tokenu',
     'LBL_ERROR_RESEND' => 'Opätovné odoslanie DocuSign sa nepodarilo vykonať. Stav obálky musí byť „odoslané“',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Aktualizácia zlyhala',
     'LBL_ERROR_FETCH_TIME' => 'Pravidlá DocuSign nepovoľujú viac požiadaviek na tú istú obálku v priebehu 15 minút',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Došlo k chybe. Obálku sa nepodarilo aktualizovať. Skontrolujte denníky!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Došlo k chybe. Nepodarilo sa uviesť šablóny. Skontrolujte denníky!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Došlo k chybe. Nepodarilo sa získať šablónu. Skontrolujte denníky!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Obálka nie je dokončená',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Stav obálky v DocuSign je teraz ',
     'LBL_OVERVIEW' => 'Prehľad',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Pridať dokument',
     'LBL_BUTTON_SEND' => 'Odoslať',
     'LBL_BUTTON_CLEAR' => 'Zmazať',
-    'LBL_MISSING_OBJECT' => 'Objekt DocuSign nie je v okne',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Použiť šablónu',
     'LBL_PLEASE_LOG_IN' => 'Najprv sa prihláste do DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Tento dokument si nemôžete stiahnuť. Vytvoril ho iný používateľ!',
     'LBL_SEND_NOT_ALLOWED' => 'Túto obálku nemôžete odoslať. Vytvoril ju iný používateľ!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Podpísané',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Dokument sa nepodarilo stiahnuť. Skontrolujte denníky!',
     'LBL_DOCUMENT_COMPLETED' => 'Dokončené',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Informácie DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'je teraz',
+    'LBL_SETTINGS_TITLE' => 'Nastavenia DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'Správanie pri výbere príjemcu',
+    'LBL_RECIPIENT_NAME' => 'Meno',
+    'LBL_RECIPIENT_EMAIL' => 'E-mail',
+    'LBL_RECIPIENT_TYPE' => 'Typ',
+    'LBL_TEMPLATE_NAME' => 'Meno',
+    'LBL_RECIPIENT_SELECT' => 'Vyberte...',
+    'LBL_RECIPIENT_ROLE' => 'Rola',
+    'LBL_SELECT_BUTTON_LABEL' => 'Vybrať',
+    'LBL_BACK_BUTTON_LABEL' => 'Späť',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Nepodarilo sa získať potenciálnych príjemcov!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Nepodarilo sa získať šablóny!',
 ];

@@ -54,6 +54,12 @@ $viewdefs['Documents']['base']['view']['subpanel-list'] = array(
                     'enabled' => true,
                     'default' => true,
                 ),
+                array(
+                    'name' => 'is_shared',
+                    'label' => 'LBL_IS_SHARED',
+                    'enabled' => true,
+                    'default' => false,
+                ),
             ),
         ),
     ),

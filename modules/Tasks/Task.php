@@ -126,7 +126,8 @@ class Task extends SugarBean {
         }
     }
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 		global $action, $currentModule, $focus, $current_module_strings, $app_list_strings, $timedate;
 
 		$override_date_for_subpanel = false;
@@ -193,8 +194,6 @@ class Task extends SugarBean {
         $notifyUser = $task->current_notify_user;
         $prefDate = $notifyUser->getUserDateTimePreferences();
 		$xtpl->assign("TASK_SUBJECT", $task->name);
-		$account = BeanFactory::getBean('Accounts', $task->parent_id);
-		$xtpl->assign("TASK_ACCOUNT", $account->name);
 		//MFH #13507
 		$xtpl->assign("TASK_PRIORITY", (isset($task->priority)?$app_list_strings['task_priority_dom'][$task->priority]:""));
 

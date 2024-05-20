@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Luo asettelumalli, joka määrittää, onko tämä pakollinen kenttä.<br/>"
-    . "Pakolliset kentät noudattavat selainpohjaisesessa mobiilinäkymässä olevaa mallia, <br/>"
-    . "mutta ne eivät noudata alkuperäisissä sovelluksissa, kuten Sugar Mobile iPhone-laitteille, olevaa mallia.<br/>"
-    . "Ne eivät noudata Sugarin itsepalveluportaalissa olevaa mallia.",
-'LBL_POPHELP_READONLY'=>"Luo asettelumalli, joka määrittää, onko tämä vain luku -muotoinen kenttä.<br/>"
-        . "Vain luku -muotoiset kentät noudattavat selainpohjaisesessa mobiilinäkymässä olevaa mallia, <br/>"
+    'LBL_POPHELP_REQUIRED'=>'Vaihtoehtoiset kentät eivät ole käytettävissä seuraavissa SugarBPM-toimintatyypeissä: Lisää liittyvä tietue, Muuta kenttää. Poista "Vaaditaan, jos" -teksti käyttääksesi tätä kenttää näissä prosessin määrittelevissä toimissa.',
+'LBL_POPHELP_READONLY'=>"Luo kaava, joka määrittää, onko tämä kenttä vain luku -muotoinen asetteluissa.<br/>"
+        . "Vain luku -kentät noudattavat kaavaa selainpohjaisessa mobiilinäkymässä, <br/>"
         . "mutta ne eivät noudata alkuperäisissä sovelluksissa, kuten Sugar Mobile iPhone-laitteille, olevaa mallia.<br/>"
         . "Ne eivät noudata Sugarin itsepalveluportaalissa olevaa mallia.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Käytä tätä kenttää, kun haet tietueita yleishaulla tässä moduulissa.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Valitse käyttääksesi tätä kenttää haettaessa tietueita käyttäen globaalia hakua tässä moduulissa.',
 //Revert Module labels
 'LBL_RESET' => 'Palauta',
 'LBL_RESET_MODULE' => 'Palauta moduuli',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Desimaalinumero',
                 'autoincrement' => 'Automaattinen lisäys',
                 'actionbutton' => 'Toimintapainike',
+                'geocodestatus' => 'Geokoodauksen tila',
 ),
 'labelTypes' => array(
     "" => "Usein käytetyt selitteet",

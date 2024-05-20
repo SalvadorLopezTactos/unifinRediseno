@@ -30,8 +30,8 @@ class DataArchiver extends SugarBean
     public $process_tyoe;
     public $filter_def;
 
-    const PROCESS_TYPE_ARCHIVE = 'archive';
-    const PROCESS_TYPE_DELETE = 'delete';
+    public const PROCESS_TYPE_ARCHIVE = 'archive';
+    public const PROCESS_TYPE_DELETE = 'delete';
 
     public $object_name = 'DataArchiver';
     public $table_name = 'data_archivers';

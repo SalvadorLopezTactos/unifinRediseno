@@ -62,7 +62,9 @@ class EmployeesViewEdit extends ViewEdit {
         $isIDMModeEnabled = (new Authentication\Config(\SugarConfig::getInstance()))->isIDMModeEnabled();
         if ($isIDMModeEnabled && !$this->ev->isEmployeeEditable()) {
             $this->ss->assign('SHOW_NON_EDITABLE_FIELDS_ALERT', $isIDMModeEnabled);
-            if ($GLOBALS['current_user']->isAdminForModule('Users')) {
+            /** @var User $currentUser */
+            $currentUser = $GLOBALS['current_user'];
+            if ($currentUser->isAdmin() || ($currentUser->isAdminForModule('Users') && $currentUser->isIdmUserManager)) {
                 $tenantSrn = Srn\Converter::fromString($idpConfig->getIDMModeConfig()['tid']);
                 $srnManager = new Srn\Manager([
                     'partition' => $tenantSrn->getPartition(),

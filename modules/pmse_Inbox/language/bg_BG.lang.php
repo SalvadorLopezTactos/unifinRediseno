@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'История',
     'LBL_PMSE_LABEL_NOTES' => 'Покажи бележките',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Добави бележки',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Изпращане към DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Избор...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Потребител',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Сигурни ли сте, че искате да одобрите този процес?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Сигурни ли сте, че искате да отхвърлите този процес?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Сигурни ли сте, че искате да маршрутизирате този процес?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Сигурни ли сте, че искате да изпратите този процес към DocuSign?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Процесът е одобрен успешно',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Процесът е отхвърлен успешно',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Процесът е маршрутизиран успешно',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Процесът е изпратен успешно към DocuSign',
     'LBL_PA_PROCESS_CLOSED' => 'Процесът, който се опитвате да видите, е приключил.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Процесът, който се опитвате да видите, не е наличен в момента.',
 

@@ -31,6 +31,8 @@ require_once 'include/utils/file_utils.php';
 use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\CSP\ContentSecurityPolicy;
 use Sugarcrm\Sugarcrm\CSP\Directive;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\FeatureToggle\FeaturesContext;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
@@ -42,6 +44,30 @@ define('DISABLED_PATH', 'Disabled');
 
 class ModuleInstaller
 {
+    /**
+     * @var \ModuleScanner|mixed
+     */
+    public $ms;
+    /**
+     * @var \DBManager|mixed
+     */
+    public $db;
+    /**
+     * @var mixed|array<string, mixed>
+     */
+    public $extensions;
+    /**
+     * @var mixed
+     */
+    public $id_name;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $installed_modules;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $tab_modules;
     var $modules = array();
     var $silent = false;
     var $base_dir  = '';
@@ -96,6 +122,9 @@ class ModuleInstaller
         // allow installer install everything
         $this->adminWork = new AdminWork();
         $this->adminWork->startAdminWork();
+
+        $features = Container::getInstance()->get(FeaturesContext::class);
+        LoggerManager::getLogger()->debug('Enabled features: ' . implode(', ', $features->getAllEnabled()));
 
         $this->ms = new ModuleScanner();
         $this->modules = static::getModuleDirs();
@@ -327,18 +356,24 @@ class ModuleInstaller
         extract($data);
         if(isset($this->installdefs['pre_execute']) && is_array($this->installdefs['pre_execute'])){
             foreach($this->installdefs['pre_execute'] as $includefile){
-                require_once(str_replace('<basepath>', $this->base_dir, $includefile));
+                require_once str_replace('<basepath>', $this->base_dir, $includefile);
             }
         }
     }
 
-    function post_execute(){
+    public function post_execute()
+    {
         $data = $this->readManifest();
         extract($data);
-        if(isset($this->installdefs['post_execute']) && is_array($this->installdefs['post_execute'])){
-            foreach($this->installdefs['post_execute'] as $includefile){
-                require_once(str_replace('<basepath>', $this->base_dir, $includefile));
+        if (isset($this->installdefs['post_execute']) && is_array($this->installdefs['post_execute'])) {
+            $this->setInstallationAwaitPostInstall();
+            ob_start(function ($val) {
+                $this->log($val);
+            }, 64);
+            foreach ($this->installdefs['post_execute'] as $includefile) {
+                require_once str_replace('<basepath>', $this->base_dir, $includefile);
             }
+            ob_end_clean();
         }
     }
 
@@ -795,7 +830,7 @@ class ModuleInstaller
                     continue;
                 }
                 $user->retrieve($userId);
-                $prefsInSession = isset($_SESSION[$user->user_name . '_PREFERENCES']) ? $_SESSION[$user->user_name . '_PREFERENCES'] : null;
+                $prefsInSession = $_SESSION[$user->user_name . '_PREFERENCES'] ?? null;
                 $prefs = $user->getPreference('globalSearch', 'search');
 
                 if (is_array($prefs) && array_key_exists($beanDefs['module'], $prefs)) {
@@ -947,7 +982,7 @@ class ModuleInstaller
                 $this->$install();
             } else {
                 if(!empty($ext["section"])) {
-                    $module = isset($ext['module'])?$ext['module']:'';
+                    $module = $ext['module'] ?? '';
                     $this->installExt($ext["section"], $ext["extdir"], $module);
                 }
             }
@@ -964,7 +999,7 @@ class ModuleInstaller
                 $this->$func();
             } else {
                 if(!empty($ext["section"])) {
-                    $module = isset($ext['module'])?$ext['module']:'';
+                    $module = $ext['module'] ?? '';
                     $this->uninstallExt($ext["section"], $ext["extdir"], $module);
                 }
             }
@@ -1000,7 +1035,7 @@ class ModuleInstaller
                 $this->$func();
             } else {
                 if(!empty($ext["section"])) {
-                    $module = isset($ext['module'])?$ext['module']:'';
+                    $module = $ext['module'] ?? '';
                     $this->disableExt($ext["section"], $ext["extdir"], $module);
                 }
             }
@@ -1017,7 +1052,7 @@ class ModuleInstaller
                 $this->$func();
             } else {
                 if(!empty($ext["section"])) {
-                    $module = isset($ext['module'])?$ext['module']:'';
+                    $module = $ext['module'] ?? '';
                     $this->enableExt($ext["section"], $ext["extdir"], $module);
                 }
             }
@@ -1355,8 +1390,9 @@ class ModuleInstaller
         if($dir == '.' && is_dir($from)){
             $dir = $to;
         }
-        if(!sugar_is_dir($dir, 'instance'))
+        if (!sugar_is_dir($dir)) {
             mkdir_recursive($dir, true);
+        }
         /* BEGIN - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
         if(empty($backup_path)) {
             /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
@@ -1559,7 +1595,7 @@ class ModuleInstaller
                 $table = $rel_data['table'];
 
                 if (!$this->db->tableExists($table)) {
-                    $indices = isset($rel_data['indices']) ? $rel_data['indices'] : [];
+                    $indices = $rel_data['indices'] ?? [];
                     $this->db->createTableParams($table, $rel_data['fields'], $indices);
                 }
             }
@@ -2121,7 +2157,7 @@ class ModuleInstaller
     function remove_acl_actions() {
         global $beanFiles, $beanList, $current_user;
         include('include/modules.php');
-        include_once 'modules/ACL/remove_actions.php';
+        include_once "modules/ACL/remove_actions.php";
         removeACLActions($current_user, $beanList, $beanFiles, $this->silent);
     }
 
@@ -2463,7 +2499,7 @@ class ModuleInstaller
             // This forces new beans to refresh their vardefs because at this
             // point the global dictionary for this object may be set with just
             // relationship fields.
-            $rv = isset($GLOBALS['reload_vardefs']) ? $GLOBALS['reload_vardefs'] : null;
+            $rv = $GLOBALS['reload_vardefs'] ?? null;
             $GLOBALS['reload_vardefs'] = true;
 
             $this->log( translate('LBL_MI_IN_BEAN') . " $bean");
@@ -2517,7 +2553,7 @@ class ModuleInstaller
 
     function log($str){
         if ($this->isInstalling) {
-            $this->addInstallationMessage(htmlentities($str));
+            $this->addInstallationMessage(htmlentities($str, ENT_COMPAT));
         }
         $GLOBALS['log']->debug('ModuleInstaller:'. $str);
         if(!$this->silent){
@@ -3241,7 +3277,7 @@ class ModuleInstaller
             ),
             'alertsEl' => '#alerts',
             'alertAutoCloseDelay' => 2500,
-            'serverUrl' => $config->get('site_url') . '/rest/v11_16',
+            'serverUrl' => $config->get('site_url') . '/rest/v11_20',
             'siteUrl' => $config->get('site_url'),
             'unsecureRoutes' => [
                 'signup',
@@ -3293,14 +3329,10 @@ class ModuleInstaller
                     'target' => '#impersonation-banner',
                     'layout' => 'impersonation-banner',
                 ),
-                'header' => array(
-                    'target' => '#header',
-                    'layout' => 'header'
-                ),
-                'footer' => array(
-                    'target' => '#footer',
-                    'layout' => 'footer'
-                ),
+                'header-nav' => [
+                    'target' => '#header-nav',
+                    'layout' => 'header-nav',
+                ],
                 'drawer' => array(
                     'target' => '#drawers',
                     'layout' => 'drawer'
@@ -3313,10 +3345,14 @@ class ModuleInstaller
                     'target' => '#side-drawer',
                     'layout' => 'side-drawer',
                 ],
+                'sidebar-nav' => [
+                    'target' => '#sidebar-nav',
+                    'layout' => 'sidebar-nav',
+                ],
             ),
             'alertsEl' => '#alerts',
             'alertAutoCloseDelay' => 2500,
-            'serverUrl' => 'rest/v11_16',
+            'serverUrl' => 'rest/v11_20',
             'siteUrl' => '',
             'unsecureRoutes' => array(
                 'login',
@@ -3418,7 +3454,7 @@ class ModuleInstaller
     protected function updateRoles()
     {
         // Try to maintain state of the request since we need to modify it
-        $uw = isset($_REQUEST['upgradeWizard']) ? $_REQUEST['upgradeWizard'] : null;
+        $uw = $_REQUEST['upgradeWizard'] ?? null;
 
         // This tells the install actions script to NOT output anything
         $_REQUEST['upgradeWizard'] = true;
@@ -3862,6 +3898,7 @@ class ModuleInstaller
             'current_step' => $uh['current_step'] ?? 0,
             'total_steps' => $uh['total_steps'] ?? 0,
             'is_done' => $uh['is_done'] ?? false,
+            'await_post_install' => $uh['await_post_install'] ?? false,
         ];
     }
 
@@ -3909,6 +3946,13 @@ class ModuleInstaller
         $this->isInstalling = false;
     }
 
+    private function setInstallationAwaitPostInstall(): void
+    {
+        $data = $this->getInstallationProgress();
+        $data['await_post_install'] = true;
+        $this->setInstallationProgressData($data);
+    }
+
     private function setInstallationProgressData(array $data): void
     {
         $this->upgradeHistory->updateProcessStatus($data);
@@ -3931,14 +3975,14 @@ class ModuleInstaller
             $upgradeHistory = BeanFactory::retrieveBean('UpgradeHistory', $packageId);
             if (!$upgradeHistory instanceof UpgradeHistory || empty($upgradeHistory->id)) {
                 $GLOBALS['log']->fatal("No upgrade history found");
-                sugar_die(htmlspecialchars(translate('ERR_UW_NO_PACKAGE_FILE', 'Administration')));
+                sugar_die(htmlspecialchars(translate('ERR_UW_NO_PACKAGE_FILE', 'Administration'), ENT_COMPAT));
             } else {
                 $installFile = $upgradeHistory->getFileName();
             }
         }
         if (empty($installFile)) {
             $GLOBALS['log']->fatal("No install file found");
-            sugar_die(htmlspecialchars(translate('ERR_UW_NO_INSTALL_FILE', 'Administration')));
+            sugar_die(htmlspecialchars(translate('ERR_UW_NO_INSTALL_FILE', 'Administration'), ENT_COMPAT));
         }
         return $installFile;
     }

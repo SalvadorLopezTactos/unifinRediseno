@@ -619,32 +619,15 @@ Odmietnuť toto volanie
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'E-maily s upozornením o priradení',
-        'subject' => 'SugarCRM – priradený $module_name ',
-        'description' => 'Táto šablóna sa používa, keď systém posiela používateľovi priradenie úlohy.',
-        'body' => '<div>
-<p>$assigned_by_user priradil(-a)&nbsp;$module_name k&nbsp;$assigned_user.</p>
-
-<p>Tento&nbsp;$module_name môžete preskúmať na:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user priradil(-a) $module_name k $assigned_user.
-
-Tento $module_name môžete preskúmať na:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'E-maily s naplánovaným hlásením',
         'subject' => 'Naplánované hlásenie: $report_name k $report_time',
         'description' => 'Táto šablóna sa používa, keď systém posiela používateľovi naplánované hlásenie.',
         'body' => '<div>
-<p>Dobrý deň $assigned_user,</p>
-<p>pripojené je automaticky generované hlásenie, ktoré bolo naplánované pre vás.</p>
-<p>Názov hlásenia: $report_name</p>
-<p>Dátum a čas spustenia hlásenia: $report_time</p>
+<p>Dobrý deň $assigned_user,<br></p>
+<p>pripojené je automaticky generované hlásenie, ktoré bolo naplánované pre vás.<br></p>
+<p>Názov hlásenia: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Dátum a čas spustenia hlásenia: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Dobrý deň $assigned_user,
@@ -670,20 +653,6 @@ Dátum a čas spustenia hlásenia: $report_time',
             Prihláste sa do aplikácie Sugar, aby ste mohli zobraziť príslušný komentár.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Nové informácie o účte',
-        'description' => 'Táto šablóna sa používa, keď administrátor systému pošle nové heslo používateľovi.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Tu je vaše meno používateľa pre účet a dočasné heslo:</p><p>Meno používateľa: $contact_user_user_name </p><p>Heslo: $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Po prihlásení pomocou tohto hesla sa môže zobraziť výzva, aby ste nastavili svoje vlastné heslo.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'Tu je vaše meno používateľa pre účet a dočasné heslo:
-Meno používateľa: $contact_user_user_name
-Heslo: $contact_user_user_hash
-
-$config_site_url
-
-Po prihlásení pomocou tohto hesla sa môže zobraziť výzva, aby ste nastavili svoje vlastné heslo.',
-        'name' => 'Systémom generovaný e-mail s heslom',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Obnoviť heslo k účtu',
         'description' => "Táto šablóna sa používa na odosielanie prepojenia používateľovi, na ktoré musí kliknúť a obnoviť heslo používateľa účtu.",

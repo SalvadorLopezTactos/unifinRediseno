@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Nadzorna ploča za popis slučajeva',
     'LBL_CASES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o slučajevima',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalji o slučaju',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Ladica fokusa za slučajeve - konzola',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za slučajeve',
 
 	'ERR_DELETE_RECORD'					=> 'Morate navesti broj zapisa da biste izbrisali račun.',
@@ -162,4 +162,29 @@ Da biste stvorili {{module_name}}:
     'LBL_SLA_DETAILS' => 'Detalji sporazuma o razini usluga',
     'LBL_HOURS' => 'Sati',
     'LBL_WIDGET_STATUS' => 'Status',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiziraj',
+    'LBL_CREATE_NEW' => 'Stvori novo',
+    'LBL_MANAGE' => 'Upravljaj',
+    'LBL_SEE_DETAILS' => 'Prikaži detalje',
+    'LBL_HIDE_NEW' => 'Sakrij',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Slučajevi',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Slučaj',
+    'LBL_KIOSK_CREATE' => 'Stvori slučaj',
+    'LBL_KIOSK_SUBJECT' => 'Predmet',
+    'LBL_KIOSK_CASE_ID' => 'ID slučaja',
+    'LBL_KIOSK_STATUS' => 'Status',
+    'LBL_KIOSK_CATEGORY' => 'Kategorija',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Poslano {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioritet',
+    'LBL_KIOSK_CREATE_CASE' => 'Obratite nam se',
+    'LBL_KIOSK_DESCRIPTION' => 'Opis',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Vaš je zahtjev uspješno podnesen.',
+    'LBL_KIOSK_ATTACHED' => 'Sve priloženo',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Vanjski korisnici',
 );

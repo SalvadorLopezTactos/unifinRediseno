@@ -43,7 +43,7 @@ class ConnectorsController extends SugarController {
         $searchdefs = ConnectorUtils::getSearchDefs();
 		$merge_module = $_REQUEST['merge_module'];
 		$record_id = $_REQUEST['record'];
-		$searchDefs = isset($searchdefs) ? $searchdefs : array();
+        $searchDefs = $searchdefs ?? array();
 		unset($_SESSION['searchDefs'][$merge_module][$record_id]);
 		$sMap = array();
 
@@ -101,7 +101,7 @@ class ConnectorsController extends SugarController {
 
 			$label = $field;
 			if(isset($fieldDefs[$key])) {
-			   $label = isset($connector_strings[$fieldDefs[$key]['vname']]) ? $connector_strings[$fieldDefs[$key]['vname']] : $label;
+                $label = $connector_strings[$fieldDefs[$key]['vname']] ?? $label;
 			}
 
 			$val = $result->$field;
@@ -135,7 +135,7 @@ class ConnectorsController extends SugarController {
             $searchdefs = ConnectorUtils::getSearchDefs();
 			$merge_module = $this->request->getValidInputRequest('merge_module', 'Assert\Mvc\ModuleName', '');
 			$seed = BeanFactory::newBean($merge_module);
-			$_searchDefs = isset($searchdefs) ? $searchdefs : array();
+            $_searchDefs = $searchdefs ?? array();
 			$_trueFields = array();
 			$source = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
 
@@ -557,9 +557,7 @@ class ConnectorsController extends SugarController {
             // if we touched it AND it has EAPM data
             if(isset($sources[$connector_name]) && !empty($data["eapm"])) {
                 // Grab the old value if it is set
-                $oldValue = isset($connectors[$connector_name]["eapm"]["enabled"]) ?
-                            $connectors[$connector_name]["eapm"]["enabled"] :
-                            null;
+                $oldValue = $connectors[$connector_name]["eapm"]["enabled"] ?? null;
 
                 // Set from the request
                 $connectors[$connector_name]["eapm"]["enabled"] = !empty($request[$connector_name."_external"]);

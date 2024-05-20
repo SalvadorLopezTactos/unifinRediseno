@@ -30,7 +30,7 @@ $viewdefs['Audit']['base']['view']['activity-card-content'] = [
                 [
                     'name' => 'after',
                     'type' => 'base',
-                    'css_class' => 'bg-pill-background change-after-value',
+                    'css_class' => 'change-after-value',
                 ],
             ],
         ],

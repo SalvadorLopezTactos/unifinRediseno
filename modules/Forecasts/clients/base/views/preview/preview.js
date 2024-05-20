@@ -31,12 +31,14 @@
      * @inheritdoc
      */
     closePreview: function() {
-        this.originalModel = undefined;
-        this._super("closePreview");
+        if (!_.isUndefined(this.originalModel)) {
+            this.originalModel = undefined;
+            this._super('closePreview');
+        }
     },
 
     /**
-     * Override _renderPreview to pull in the parent_type and parent_id when we are running a fetch
+     * Override _renderPreview to pull in the _module and id when we are running a fetch
      *
      * @param model
      * @param collection
@@ -71,7 +73,7 @@
         }
 
         if (fetch) {
-            var mdl = app.data.createBean(model.get('parent_type'), {'id' : model.get('parent_id')});
+            let mdl = app.data.createBean(model.get('_module'), {'id': model.get('id')});
             this.originalModel = model;
             mdl.fetch({
                 //Show alerts for this request
@@ -161,9 +163,9 @@
             return;
         }
         this.switching = true;
-        // get the parent_id from the specific module
-        if( data.direction === "left" && (currID === _.first(this.collection.models).get("parent_id")) ||
-            data.direction === "right" && (currID === _.last(this.collection.models).get("parent_id")) ) {
+        // get the id from the specific module
+        if (data.direction === 'left' && (currID === _.first(this.collection.models).get('id')) ||
+            data.direction === 'right' && (currID === _.last(this.collection.models).get('id'))) {
             this.switching = false;
             return;
         }
@@ -185,8 +187,8 @@
                 this.model = app.data.createBean(targetModule);
 
                 if( _.isUndefined(this.collection.models[currIndex].get("target_id")) ) {
-                    // get the parent_id
-                    this.model.set("id", this.collection.models[currIndex].get("parent_id"));
+                    // get the id
+                    this.model.set('id', this.collection.models[currIndex].get('id'));
                 } else {
                     this.model.set("postId", this.collection.models[currIndex].get("id"));
                     this.model.set("id", this.collection.models[currIndex].get("target_id"));
@@ -199,7 +201,7 @@
                         model.set("_module", targetModule);
                         self.model = null;
                         //Reset the preview
-                        app.events.trigger("preview:render", model, null, false);
+                        app.events.trigger('preview:render', model, null, false, currID, true);
                         self.switching = false;
                     }
                 });

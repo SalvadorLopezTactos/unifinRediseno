@@ -790,7 +790,7 @@ $mod_strings = array(
 //POPUP HELP
 'LBL_POPHELP_FIELD_DATA_TYPE'=>'Select the appropriate data type based on the type of data that will be entered into the field.',
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configure the field to be full text searchable.',
-'LBL_POPHELP_FTS_FIELD_BOOST' => 'Boosting is the process of enhancing the relevancy of a record\\\'s fields.<br />Fields with a higher boost level will be given greater weight when the search is performed. When a search is performed, matching records containing fields with a greater weight will appear higher in the search results.<br />The default value is 1.0 which stands for a neutral boost. To apply a positive boost any float value higher than 1 is accepted. For a negative boost use values lower than 1. For example a value of 1.35 will positively boost a field by 135%. Using a value of 0.60 will apply a negative boost.<br />Note that in previous versions it was required to perform a full text search reindex. This is no longer required.',
+'LBL_POPHELP_FTS_FIELD_BOOST' => 'Boosting is the process of enhancing the relevancy of a record\\\'s fields.<br />Fields with a higher boost level will be given greater weight when the search is performed. When a search is performed, matching records containing fields with a greater weight will appear higher in the search results.<br />The default value is 1.0 which stands for a neutral boost. To apply a positive boost, any float value higher than 1 is accepted. For a negative boost, use values lower than 1. For example a value of 1.35 will positively boost a field by 135%. Using a value of 0.60 will apply a negative boost.<br />Note that in previous versions it was required to perform a full text search reindex. This is no longer required.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Yes</b>: The field will be included in an import operation.<br><b>No</b>: The field will not be included in an import.<br><b>Required</b>: A value for the field must be provided in any import.',
 'LBL_POPHELP_PII'=>'This field will be automatically marked for audit and available in the Personal Info view.<br>Personal Information fields can also be permanently erased when the record is related to a Data Privacy erasure request.<br>Erasure is done via the Data Privacy module and can be executed by admins or users in the Data Privacy Manager role.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Enter a number for Width, as measured in pixels.<br> The uploaded image will be scaled to this Width.',
@@ -808,10 +808,7 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Create a formula to determine whether this field is required in layouts.<br/>"
-    . "Required fields will follow the formula in the browser-based mobile view, <br/>"
-    . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
-    . "They will not follow the formula in the Sugar Self-Service Portal.",
+    'LBL_POPHELP_REQUIRED'=>'Fields that are conditionally required are not available for use in the following SugarBPM action types: Add Related Record, Change Field. Please remove the "Required If" text to use this field in these process definition actions',
 'LBL_POPHELP_READONLY'=>"Create a formula to determine whether this field is read only in layouts.<br/>"
         . "Read only fields will follow the formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
@@ -820,7 +817,7 @@ $mod_strings = array(
 //Revert Module labels
 'LBL_RESET' => 'Reset',
 'LBL_RESET_MODULE' => 'Reset Module',
-'LBL_REMOVE_CUSTOM' => 'Remove Customisations',
+'LBL_REMOVE_CUSTOM' => 'Remove Customizations',
 'LBL_CLEAR_RELATIONSHIPS' => 'Clear Relationships',
 'LBL_RESET_LABELS' => 'Reset Labels',
 'LBL_RESET_LAYOUTS' => 'Reset Layouts',
@@ -828,7 +825,7 @@ $mod_strings = array(
 'LBL_CLEAR_EXTENSIONS' => 'Clear Extensions',
 
 'LBL_HISTORY_TIMESTAMP' => 'TimeStamp',
-'LBL_HISTORY_TITLE' => 'history',
+'LBL_HISTORY_TITLE' => ' history',
 
 'fieldTypes' => array(
                 'varchar'=>'TextField',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Decimal',
                 'autoincrement' => 'AutoIncrement',
                 'actionbutton' => 'ActionButton',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Frequently used labels",
@@ -865,7 +863,7 @@ $mod_strings = array(
 'LBL_CONFIRM_SAVE_DROPDOWN' =>"You are selecting this item for removal from the dropdown list. Any dropdown fields using this list with this item as a value will no longer display the value, and the value will no longer be able to be selected from the dropdown fields. Are you sure you want to continue?",
 'LBL_POPHELP_VALIDATE_US_PHONE'=>"Select to validate this field for the entry of a 10-digit<br>" .
                                  "phone number, with allowance for the country code 1, and<br>" .
-                                 "to apply a U.S. format to the phone number when the record<br>" .
+                                 "to apply a UK format to the phone number when the record<br>" .
                                  "is saved. The following format will be applied: (xxx) xxx-xxxx.",
 'LBL_ALL_MODULES'=>'All Modules',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',

@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Para resultados más óptimos al utilizar IIS/FastCGI sapi, establezca fastcgi.logging en 0 en su archivo php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versión de PHP Instalada No Compatible: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Base de datos no disponible',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No se ha encontrado la Asistencia de la base de datos. Asegúrese de tener los controladores necesarios para uno de los siguientes tipos de Bases de datos compatibles: MySQL, MS SQLServer, Oracle o DB2. Tal vez necesite eliminar los comentarios de la extensión del archivo php.ini o volverlo a compilar con el archivo binario correcto, según su versión de PHP. Consulte su Manual de PHP para obtener más información sobre cómo habilitar la Asistencia de la base de datos.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No se ha encontrado la asistencia de la base de datos. Asegúrese de tener los controladores necesarios para uno de los siguientes tipos de bases de datos compatibles: MySQL, MS SQLServer, Oracle o DB2. Tal vez necesite eliminar los comentarios de la extensión del archivo php.ini, o volverlo a compilar con el archivo binario correcto, según su versión de PHP. Consulte su Manual de PHP para obtener más información sobre cómo habilitar la asistencia de la base de datos.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Las funciones asociadas con las Bibliotecas de Análisis de XML que son requeridas por la aplicación Sugar no se han encontrado.  Es posible que tenga que eliminar el comentario de la extensión del archivo php.ini, o recompilarlo con el archivo binario apropiado, dependiendo de la versión de PHP.  Por favor, consulte el manual de PHP para más información.',
     'LBL_CHECKSYS_CSPRNG' => 'Generador de números aleatorios',
     'ERR_CHECKSYS_MBSTRING'             => 'Las funciones asociadas con la extensión de PHP para Cadenas Multibytes (mbstring) que son requeridas por la aplicación Sugar no se han encontrado. <br/><br/>Normalmente, el módulo mbstring no está habilitado por defecto en PHP y se debe activar con --habilitar-mbstring cuando el binario de PHP está incorporado. Por favor, consulte el manual de PHP para más información sobre cómo habilitar el soporte de mbstring.',
@@ -622,32 +622,15 @@ Declinar esta llamada
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Correos Electrónicos de Notificaciones de Asignación',
-        'subject' => 'SugarCRM - $module_name Asignada ',
-        'description' => 'Esta plantilla se utiliza cuando el Sistema envía a un usuario una asignación de tarea.',
-        'body' => '<div>
-<p>$assigned_by_user asignó una&nbsp;$module_name a&nbsp;$assigned_user.</p>
-
-<p>Puede revisar esta&nbsp;$module_name en:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user asignó una $module_name a $assigned_user.
-
-Puede revisar esta $module_name en:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Correos Electrónicos de Informe Planificado',
         'subject' => 'Informe Planificado: $report_name a partir de $report_time',
         'description' => 'Esta plantilla se utiliza cuando el Sistema envía a un usuario un informe planificado.',
         'body' => '<div>
-<p>Hola $assigned_user,</p>
-<p>Se adjunta un informe generado automáticamente que se planificó para usted.</p>
-<p>Nombre del Informe: $report_name</p>
-<p>Fecha y Hora de Ejecución del Informe: $report_time</p>
+<p>Hola $assigned_user:<br></p>
+<p>Se adjunta un informe generado automáticamente que se planificó para usted.<br></p>
+<p>Nombre del informe: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Fecha y hora de ejecución del informe: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Hola $assigned_user,
@@ -673,22 +656,6 @@ Fecha y Hora de Ejecución del Informe: $report_time',
             Inicie sesión en Sugar para ver el comentario.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Información de la cuenta nueva',
-        'description' => 'Esta plantilla se utiliza cuando el Administrador del Sistema envía una nueva contraseña al usuario.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Aquí encontrará su nombre de usuario y contraseña temporal:</p><p>Nombre de usuario : $contact_user_user_name </p><p>Contraseña : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>
-Después de registrarse en el sistema con esta contraseña temporal, deberá ingresar una nueva contraseña que usted elija.</p> </td></tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Aquí está su nombre de usuario y una contraseña temporal:
-Nombre de usuario : $contact_user_user_name Contraseña : $contact_user_user_hash 
-
-
-$config_site_url
-
-Después de registrarse en el sistema con esta contraseña temporal, deberá ingresar una nueva contraseña.',
-        'name' => 'Contraseña del correo electrónico generada por el sistema',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Restablecer la contraseña de su cuenta',
         'description' => "Esta plantilla se utiliza para enviar al usuario un enlace para restablecer la contraseña de su cuenta.",

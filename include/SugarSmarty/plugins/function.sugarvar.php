@@ -101,7 +101,7 @@ function smarty_function_sugarvar($params, &$smarty)
 	if(empty($params['stringFormat']) && empty($params['string'])) {
 		$_contents = '{' . $_contents;
 		if(!empty($params['htmlentitydecode'])){
-		    $_contents .= '|escape:\'htmlentitydecode\'';
+            $_contents .= '|unescape:\'htmlall\'';
 		}
 		if(!empty($displayParams['htmlescape'])){
 		    $_contents .= '|escape:\'html\'';

@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Maps;
 
+use SugarBean;
 use BeanFactory;
 use SugarQuery;
 use Sugarcrm\Sugarcrm\Maps\Logger;
@@ -50,9 +51,7 @@ class FilterUtils
             }
 
             return $coords;
-        } catch (\Exception $e) {
-            $logger->error("Maps: Failed to get coords from zip for zipCode: {$zipCode} country: {$country}");
-        } catch (\Throwable $e) {
+        } catch (\Exception|\Throwable $e) {
             $logger->error("Maps: Failed to get coords from zip for zipCode: {$zipCode} country: {$country}");
         }
 
@@ -167,5 +166,32 @@ class FilterUtils
     {
         $geocodeBean = BeanFactory::newBean(Constants::GEOCODE_MODULE);
         return $geocodeBean->table_name;
+    }
+
+    /**
+     * Update the geocode status of the parent record
+     *
+     * @param array $geocodeBeansIds
+     * @param string $status
+     */
+    public static function updateGeocodeStatuses(array $geocodeBeansIds, string $status)
+    {
+        foreach ($geocodeBeansIds as $geocodeBeanId) {
+            $geocodeBean = BeanFactory::retrieveBean(Constants::GEOCODE_MODULE, $geocodeBeanId);
+            $parentRecord = BeanFactory::retrieveBean($geocodeBean->parent_type, $geocodeBean->parent_id);
+
+            if (!$parentRecord) {
+                return;
+            }
+
+            foreach ($parentRecord->field_defs as $fieldName => $fieldMeta) {
+                if ($fieldMeta['type'] === 'geocodestatus') {
+                    $parentRecord->{$fieldName} = $status;
+                }
+            }
+
+            $parentRecord->processed = true;
+            $parentRecord->save();
+        }
     }
 }

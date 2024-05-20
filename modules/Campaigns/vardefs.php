@@ -12,6 +12,8 @@
 $dictionary['Campaign'] = array (
     'audited' => true,
     'activity_enabled' => true,
+    'color' => 'yellow',
+    'icon' => 'sicon-campaigns-lg',
     'comment' => 'Campaigns are a series of operations undertaken to accomplish a purpose, usually acquiring leads',
     'table' => 'campaigns',
     'unified_search' => true,

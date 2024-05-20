@@ -194,4 +194,10 @@ Lai izveidotu {{calls_singular_module}}:
 - Spiediet "Izvēlēties dalībnieku", lai pievienotu esošo lietotāju, kontaktpersonu vai interesentu modulim {{calls_singular_module}}.
 - Spiediet uz "pluss" ikonas, kas atrodas pa labi no "Izvēlēties dalībnieku", lai izveidotu moduļa {{calls_singular_module}} dalībnieku kā jaunu Sugar ierakstu.
 3. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta izveidi un atgrieztos iepriekšējā lapā.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Ir Smart Guide zvans",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Apakšuzdevumi',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Apakštikšanās',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Apakšzvani',
 );

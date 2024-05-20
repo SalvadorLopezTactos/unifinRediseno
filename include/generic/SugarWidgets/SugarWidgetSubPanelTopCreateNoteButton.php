@@ -15,8 +15,16 @@
 
 class SugarWidgetSubPanelTopCreateNoteButton extends SugarWidgetSubPanelTopButtonQuickCreate
 {
-	function &_get_form($defines, $additionalFormFields = null)
-	{
+    /**
+     * @var class-string<\history>|mixed
+     */
+    public $subpanelDiv;
+
+    //@codingStandardsIgnoreStart
+    public function &_get_form($defines, $additionalFormFields = null)
+    {
+    //@codingStandardsIgnoreEnd
+        $button = null;
 		global $app_strings;
 		global $currentModule;
 

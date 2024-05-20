@@ -36,6 +36,9 @@ $server->addFunction('sync_get_modified_relationships');
  * @return
  */
 function sync_get_modified_relationships($session, $module_name, $related_module,$from_date,$to_date,$offset, $max_results, $deleted, $module_id = '', $select_fields = array(), $ids = array(), $relationship_name = '', $deletion_date = '', $php_serialize = 1){
+    $date_query = null;
+    $query = null;
+    $xml = null;
 	global  $beanList, $beanFiles;
     $select_fields = object_to_array_deep($select_fields);
     $ids = object_to_array_deep($ids);
@@ -124,6 +127,9 @@ function sync_get_modified_relationships($session, $module_name, $related_module
 $server->addFunction('get_modified_entries');
 
 function get_modified_entries($session, $module_name, $ids, $select_fields ){
+    $params = [];
+    $table_name = null;
+    $xml = null;
     $ids = object_to_array_deep($ids);
     $select_fields = object_to_array_deep($select_fields);
 
@@ -218,6 +224,7 @@ function get_modified_entries($session, $module_name, $ids, $select_fields ){
 $server->addFunction('get_attendee_list');
 
 function get_attendee_list($session, $module_name, $id){
+    $xml = null;
 	$error = new SoapError();
 	$field_list = array();
 	$output_list = array();

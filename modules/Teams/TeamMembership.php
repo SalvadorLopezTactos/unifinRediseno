@@ -40,7 +40,8 @@ class TeamMembership extends SugarBean {
         $this->disable_row_level_security =true;
     }
 
-    function get_list_view_data() {
+    public function get_list_view_data($filter_fields = [])
+    {
         $team_fields = $this->get_list_view_array();
         return $team_fields;
     }

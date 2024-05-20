@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Кнопки формы',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Утвердить/Отклонить',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Маршрут',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Отправить в DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Другие параметры маршрутизации',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Изменить владельца записи',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Команда',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Объединение документов',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Выбрать…',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Объединение документов в PDF-файл',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Отправить объединенный документ по электронной почте',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Объединение документов',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Тип шлюза схождения не соответствует типу шлюза входящего потока',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Шлюзы расхождения разделяют процессы на несколько ветвей. При использовании шлюза схождения для повторного сведения этих ветвей обратно в один путь необходимо использовать соответствующий тип шлюза схождения в зависимости от типа шлюза расхождения, который использовался для создания ветвей. Чтобы свести ветви, созданные при помощи эксклюзивного или событийного шлюза расхождения, следует использовать эксклюзивный шлюз схождения. Чтобы свести ветви, созданные с помощью параллельного или инклюзивного шлюза расхождения, используйте параллельный шлюз схождения.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Поле модуля',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Связь между модулями',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Пользователь',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Роль',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Команда',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Активность формы',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Бизнес-правило',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Действие бизнес-правила',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Шаблон письма',
 );

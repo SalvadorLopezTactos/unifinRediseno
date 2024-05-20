@@ -12,6 +12,40 @@
 
 
 class SugarWidgetFieldMultiEnum extends SugarWidgetFieldEnum {
+    /**
+     * Handler for multiselect "equals" filter
+     *
+     * @param mixed $layout_def
+     */
+    public function queryFilterequals($layoutDef)
+    {
+        $fieldValue = $layoutDef['input_name0'];
+
+        if (is_string($fieldValue)) {
+            $fieldValue = explode(',', $fieldValue);
+        }
+
+        $values = [];
+        foreach ($fieldValue as $value) {
+            array_push($values, "'".trim($GLOBALS['db']->quote($value))."'");
+        }
+
+        $colName = $this->_get_column_select($layoutDef) . " LIKE " ;
+
+        $query = "";
+        foreach ($values as $key => $item) {
+            $query .= $colName;
+            $value = preg_replace("/^'/", "'%^", $item, 1);
+            $value = preg_replace("/'$/", "^%'", $value, 1);
+            $query .= $value;
+            if ($key != (count($values) - 1)) {
+                $query.= " AND " ;
+            }
+        }
+
+        return '('.$query.')';
+    }
+
     public function queryFilternot_one_of($layout_def)
     {
 		$arr = array ();

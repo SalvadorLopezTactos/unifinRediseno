@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 class FieldViewer{
+    /**
+     * @var \Sugar_Smarty|mixed
+     */
+    public $ss;
     public static $fieldNameBlacklist = array(
         'date_entered', 'date_modified', 'modified_user_id', 'created_by', 'deleted'
     );

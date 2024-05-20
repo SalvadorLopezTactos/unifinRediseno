@@ -222,4 +222,10 @@ Sugar 使用者、連絡人和潛在客戶可新增為會議受邀者。{{plural
     - 按一下「選擇出席者」以將現有使用者、連絡人或潛在客戶新增至 {{meetings_singular_module}}。
     - 按一下「選擇出席者」右側的加號圖示，將 {{meetings_singular_module}} 出席者建立為新 Sugar 記錄。
 3. 按一下「儲存」，以完成新記錄並返回至上一頁。',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => '為智慧指南會議',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => '子項工作',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => '子項通話',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => '子項會議',
 );

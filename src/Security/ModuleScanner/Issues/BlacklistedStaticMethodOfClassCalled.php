@@ -28,6 +28,6 @@ final class BlacklistedStaticMethodOfClassCalled implements Issue
 
     public function getMessage(): string
     {
-        return sprintf('Code attempted to call blacklisted static method "%s::%s" on line %s', $this->class, $this->method, $this->line);
+        return sprintf('Code attempted to call denylisted static method "%s::%s" on line %s', $this->class, $this->method, $this->line);
     }
 }

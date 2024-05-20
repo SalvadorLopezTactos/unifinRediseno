@@ -13,6 +13,8 @@
 
 $dictionary['pmse_Inbox'] = array(
     'table' => 'pmse_inbox',
+    'color' => 'orange',
+    'icon' => 'sicon-processes-lg',
     'audited' => false,
     'activity_enabled' => true,
     'reassignable' => false,

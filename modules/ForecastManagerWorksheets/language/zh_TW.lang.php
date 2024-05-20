@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => '{{field_name}} 值無效',
     'LBL_EDITABLE_INVALID_RANGE' => '必須為 {{min}} 到 {{max}} 之間的值',
-    'LBL_HISTORY_LOG' => '上次提交',
+    'LBL_HISTORY_LOG' => '最後提交',
     'LBL_NO_COMMIT' => '無上次提交記錄',
 
     'LBL_MANGER_SAVED' => '管理員已儲存'

@@ -32,8 +32,8 @@ require_once 'vendor/Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Ip extends Zend_Validate_Abstract
 {
-    const INVALID        = 'ipInvalid';
-    const NOT_IP_ADDRESS = 'notIpAddress';
+    public const INVALID        = 'ipInvalid';
+    public const NOT_IP_ADDRESS = 'notIpAddress';
 
     /**
      * @var array
@@ -61,6 +61,7 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
      */
     public function __construct($options = array())
     {
+        $temp = [];
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {

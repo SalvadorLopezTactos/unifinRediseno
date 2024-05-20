@@ -74,15 +74,15 @@ class BeanFactory {
             // In API mode, we can cache all beans unless specifically told not
             // to retrieve a cached version.
             $encode = false;
-            $can_cache = isset($params['use_cache']) ? $params['use_cache'] : true;
+            $can_cache = $params['use_cache'] ?? true;
         } else {
             // In GUI mode, we will cache only encoded beans unless specifically
             // told not to retrieve a cached version.
-            $encode = isset($params['encode']) ? $params['encode'] : true;
+            $encode = $params['encode'] ?? true;
             $can_cache = isset($params['use_cache']) ? $params['use_cache'] && $encode : $encode;
         }
 
-    	$deleted = isset($params['deleted']) ? $params['deleted'] : $deleted;
+        $deleted = $params['deleted'] ?? $deleted;
 
         if (!isset(self::$loadedBeans[$module])) {
             self::$loadedBeans[$module] = array();
@@ -199,7 +199,7 @@ class BeanFactory {
 
         if (func_num_args() < 2) {
             $log->deprecated('The usage of ' . __METHOD__ . '() without the ID is deprecated. Use '
-                . __CLASS__ . '::newBean() instead.');
+                . self::class . '::newBean() instead.');
         }
 
         // Check if params is an array, if not use old arguments
@@ -383,7 +383,7 @@ class BeanFactory {
         // will be used as its value, and all others will be lost. So here the last key is 'Users'
         // and it will be used, which is what we desire. Also added unit tests to verify this.
         $list = array_flip($objectList + $beanList);
-        return isset($list[$objectName]) ? $list[$objectName] : false;
+        return $list[$objectName] ?? false;
     }
 
     /**

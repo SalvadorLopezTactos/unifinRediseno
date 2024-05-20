@@ -16,6 +16,21 @@ require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class ViewLayoutView extends SugarView
 {
+    /**
+     * @var mixed
+     */
+    public $editModule;
+    /**
+     * @var mixed|mixed[]
+     */
+    public $editLayout;
+    public $package;
+    /**
+     * @var bool|mixed
+     */
+    public $fromModuleBuilder;
+    public $translatedEditModule;
+    public $sm;
     /** @var GridLayoutMetaDataParser */
     protected $parser;
 
@@ -452,7 +467,7 @@ class ViewLayoutView extends SugarView
         }
         // Determining if a specific role based/dropdown based layout already exist. Preselect values accordingly
         if (empty($params['layoutOption'])) {
-             $params['layoutOption'] = $this->existingLayout ? $this->existingLayout : 'std';
+             $params['layoutOption'] = $this->existingLayout ?: 'std';
         }
         // Similarly checking if there are existing dropdown field custom records, when there are multiple
         // preselect the first
@@ -462,8 +477,8 @@ class ViewLayoutView extends SugarView
             foreach ($dropdownFields as $field) {
                 $isEmpty = true;
                 if (is_dir($folderDropdown . '/' . $field['name'])) {
-                    $dirs = scandir($folderDropdown . '/' . $field['name']);
-                    $isEmpty = ((is_countable($dirs) ? count($dirs) : 0) === 2);
+                    $ddFiles = scandir($folderDropdown . '/' . $field['name']);
+                    $isEmpty = ((is_countable($ddFiles) ? count($ddFiles) : 0) === 2);
                 }
                 if (!$isEmpty) {
                     $params['dropdownField'] = $field['name'];

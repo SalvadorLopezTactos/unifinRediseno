@@ -13,6 +13,15 @@
 
 class SugarWidgetSubPanelTopCreateCampaignLogEntryButton extends SugarWidgetSubPanelTopButton
 {
+    public $value;
+    /**
+     * @var string|mixed
+     */
+    public $module_name;
+    /**
+     * @var mixed[]|mixed|array<string, mixed>
+     */
+    public $button_properties;
     protected $buttonSuffix = '_select_button';
 
     public function display(array $widget_data, $additionalFormFields = array())

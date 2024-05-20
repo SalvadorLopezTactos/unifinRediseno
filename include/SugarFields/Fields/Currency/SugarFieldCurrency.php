@@ -64,7 +64,7 @@ class SugarFieldCurrency extends SugarFieldFloat
         $currency_id = $settings->currency_id;
 
         // Remove the grouping separator
-        $value = str_replace($settings->num_grp_sep, '', $value);
+        $value = str_replace((string)$settings->num_grp_sep, '', (string)$value);
 
         // change the decimal separator to a . if it's not already one
         if ($settings->dec_sep != '.') {
@@ -112,14 +112,14 @@ class SugarFieldCurrency extends SugarFieldFloat
 
         if (isset($vardef['convertToBase']) && $vardef['convertToBase']) {
             // convert amount to base
-            $baseRate = isset($row['base_rate']) ? $row['base_rate'] : $focus->base_rate;
+            $baseRate = $row['base_rate'] ?? $focus->base_rate;
             $value = SugarCurrency::convertWithRate($value, $baseRate);
             $currency_id = '-99';
         } elseif (isset($vardef['is_base_currency']) && $vardef['is_base_currency']) {
             $currency_id = '-99';
         } else {
             //If the row has a currency_id set, use that instead of the $focus->currency_id value
-            $currency_id = isset($row['currency_id']) ? $row['currency_id'] : $focus->currency_id;
+            $currency_id = $row['currency_id'] ?? $focus->currency_id;
         }
         return SugarCurrency::formatAmountUserLocale($value, $currency_id);
     }

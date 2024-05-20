@@ -11,6 +11,8 @@
  */
 $dictionary['Product'] = array(
     'table' => 'products',
+    'color' => 'purple',
+    'icon' => 'sicon-quoted-line-items-lg',
     'optimistic_locking' => true,
     'audited' => true,
     'activity_enabled' => true,
@@ -987,6 +989,14 @@ $dictionary['Product'] = array(
                 'product_template_id',
             ),
         ),
+        [
+            'name' => 'idx_del_p_rli_id',
+            'type' => 'index',
+            'fields' => [
+                'deleted',
+                'parent_rli_id',
+            ],
+        ],
     ),
     'relationships' => array(
         'product_notes' => array(

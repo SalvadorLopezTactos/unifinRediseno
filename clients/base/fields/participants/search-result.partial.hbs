@@ -10,9 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<span class="label label-module label-module-mini label-{{module}}" title="{{getModuleName module plural=true}}">
-    {{moduleIconLabel module}}
-</span>
+{{moduleLabel module 'sm' class='mr-1' title=(getModuleName module plural=true)}}
 {{#if name_is_erased}}
     <span class="label">
 {{/if}}

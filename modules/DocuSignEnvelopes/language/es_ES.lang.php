@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Ningún secreto de cliente establecido',
     'LBL_RESEND_BUTTON_LABEL' => 'Reenviar',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Recuperar sobre',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Tipo de servicio en la nube',
+    'LBL_CLOUD_PATH' => 'Ruta de la nube',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Cuadro de mando de la lista de sobres de DocuSign',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Sobres recientes de DocuSign',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en los sobres de DocuSign',
 
-    'LBL_DOCUMENT_FROM' => 'El documento de ',
+    'LBL_NEW_ENVELOPE' => 'Nuevo sobre',
     'LBL_DOCUMENT_IS_NOW' => ' está ahora ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'Error de DocuSign. No se ha podido obtener el id de la cuenta basado en el token de acceso',
     'LBL_ERROR_RESEND' => 'No se ha podido efectuar el reenvío de DocuSign. El estado del sobre debe ser &#39;enviado&#39;',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'La actualización ha fallado',
     'LBL_ERROR_FETCH_TIME' => 'Las reglas de DocuSign no permiten varias solicitudes al mismo sobre en menos de 15 minutos',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Ha ocurrido un error. No se ha podido actualizar el sobre. Compruebe los registros.',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Ha ocurrido un error. No se han podido enumerar las plantillas. Compruebe los registros.',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Ha ocurrido un error. No se ha podido recuperar la plantilla. Compruebe los registros.',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Sobre no completado',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'El estado del sobre en DocuSign es ahora ',
     'LBL_OVERVIEW' => 'Resumen',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Agregar Documento',
     'LBL_BUTTON_SEND' => 'Enviar',
     'LBL_BUTTON_CLEAR' => 'Borrar',
-    'LBL_MISSING_OBJECT' => 'El objeto de DocuSign no está en la ventana',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Usar plantilla',
     'LBL_PLEASE_LOG_IN' => 'Primero inicie sesión en DocuSign.',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'No puede descargar este documento. Lo ha creado otro usuario.',
     'LBL_SEND_NOT_ALLOWED' => 'No puede enviar este sobre. Lo ha creado otro usuario.',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Firmado',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'No se ha podido descargar el documento. Compruebe los registros.',
     'LBL_DOCUMENT_COMPLETED' => 'Completado',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'Información de DocuSign',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'está ahora',
+    'LBL_SETTINGS_TITLE' => 'Configuración de DocuSign',
+    'LBL_RECIPIENT_SELECTION' => 'Comportamiento de selección de destinatarios',
+    'LBL_RECIPIENT_NAME' => 'Nombre',
+    'LBL_RECIPIENT_EMAIL' => 'Correo electrónico',
+    'LBL_RECIPIENT_TYPE' => 'Tipo',
+    'LBL_TEMPLATE_NAME' => 'Nombre',
+    'LBL_RECIPIENT_SELECT' => 'Seleccionar...',
+    'LBL_RECIPIENT_ROLE' => 'Función',
+    'LBL_SELECT_BUTTON_LABEL' => 'Seleccionar',
+    'LBL_BACK_BUTTON_LABEL' => 'Atrás',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Error al acceder a los destinatarios potenciales.',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Error al acceder a las plantillas.',
 ];

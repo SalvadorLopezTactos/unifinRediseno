@@ -660,7 +660,7 @@ class PMSECaseFlowHandler
         }
 
         $preparedFlow = array();
-        $preparedFlow['id'] = isset($flowData['id']) ? $flowData['id'] : '';
+        $preparedFlow['id'] = $flowData['id'] ?? '';
         $preparedFlow['cas_id'] = $flowData['cas_id'];
         $preparedFlow['cas_index'] = $flowData['max_index'] + 1;
         $preparedFlow['cas_previous'] = $flowData['cas_current_index'];
@@ -687,12 +687,12 @@ class PMSECaseFlowHandler
         // If there is an id but not a create date and create user, then it is new with id
         $preparedFlow['new_with_id'] = !empty($flowData['id']) && (empty($flowData['date_entered']) && empty($flowData['created_by']));
         //Set these attributes if a related record is being evaluated
-        $preparedFlow['rel_process_module'] = isset($flowData['rel_process_module']) ? $flowData['rel_process_module'] : '';
-        $preparedFlow['rel_element_relationship'] = isset($flowData['rel_element_relationship']) ? $flowData['rel_element_relationship'] : '';
-        $preparedFlow['rel_element_module'] = isset($flowData['rel_element_module']) ? $flowData['rel_element_module'] : '';
+        $preparedFlow['rel_process_module'] = $flowData['rel_process_module'] ?? '';
+        $preparedFlow['rel_element_relationship'] = $flowData['rel_element_relationship'] ?? '';
+        $preparedFlow['rel_element_module'] = $flowData['rel_element_module'] ?? '';
         //Set these attributes if a start event is being evaluated
-        $preparedFlow['evn_criteria'] = isset($flowData['evn_criteria']) ? $flowData['evn_criteria'] : '';
-        $preparedFlow['evn_params'] = isset($flowData['evn_params']) ? $flowData['evn_params'] : '';
+        $preparedFlow['evn_criteria'] = $flowData['evn_criteria'] ?? '';
+        $preparedFlow['evn_params'] = $flowData['evn_params'] ?? '';
 
         return $preparedFlow;
     }
@@ -827,7 +827,7 @@ class PMSECaseFlowHandler
     {
         if (empty($cas_id)) {
             //Log a fatal and return
-            LoggerManager::getLogger()->fatal('Process Management Change Case did not receive an ID');
+            LoggerManager::getLogger()->fatal('SugarBPM Change Case did not receive an ID');
             return;
         }
 
@@ -865,7 +865,7 @@ class PMSECaseFlowHandler
     {
         if (empty($cas_id)) {
             //Log a fatal and return
-            LoggerManager::getLogger()->fatal('Process Management Case Close did not receive an ID');
+            LoggerManager::getLogger()->fatal('SugarBPM Case Close did not receive an ID');
             return;
         }
 
@@ -903,7 +903,7 @@ class PMSECaseFlowHandler
             $val = is_numeric($v[1]) ? $v[1] : $db->quoted($v[1]);
 
             // If there was a third element passed in the array, that is the operator
-            $op = isset($v[2]) ? $v[2] : '=';
+            $op = $v[2] ?? '=';
 
             // Finish the expression
             $wheres[] = "{$v[0]} $op $val";

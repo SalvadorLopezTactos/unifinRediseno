@@ -15,6 +15,7 @@ use Sugarcrm\Sugarcrm\DocumentMerge\ServiceFactory;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Util\Uuid;
 use Sugarcrm\Sugarcrm\DocumentMerge\Client\Constants\MergeType;
+use Sugarcrm\Sugarcrm\ProcessManager;
 
 /**
  * An api class for handling the document merging
@@ -28,7 +29,7 @@ class DocumentMergeApi extends SugarApi
      *
      * @var array
      */
-    const FILE_TYPES = [
+    public const FILE_TYPES = [
         'pdf' => 'PDF',
         'docx' => 'DOC',
         'xlsx' => 'XLS',
@@ -40,7 +41,7 @@ class DocumentMergeApi extends SugarApi
      *
      * @var const
      */
-    const MAX_RETRIEVE = 20;
+    public const MAX_RETRIEVE = 20;
 
     public function registerApiRest()
     {
@@ -115,14 +116,16 @@ class DocumentMergeApi extends SugarApi
 
         //handle for multimerge
         $data['modelIds'] = [];
-        if ($args['selectedRecords']) {
+        if (array_key_exists('selectedRecords', $args) && $args['selectedRecords']) {
             $data['selectedRecords'] = $args['selectedRecords'];
             foreach ($data['selectedRecords'] as $record) {
                 $data['modelIds'][] = $record['id'];
             }
         }
 
-        $mergeRequestId = $this->createMergeRequest($data);
+        // not going through normal request, because it only comes from pmse.
+        $flowData = $args['flowData'];
+        $mergeRequestId = $this->createMergeRequest($data, $flowData);
         $data['mergeRequestId'] = $mergeRequestId;
 
         $payload = (AdapterFactory::getDataAdapterInstance($data))->getData();
@@ -249,9 +252,10 @@ class DocumentMergeApi extends SugarApi
      * Create a DocumentMerge record
      *
      * @param array data
+     * @param string flowData
      * @return string
      */
-    protected function createMergeRequest(array $data): string
+    protected function createMergeRequest(array $data, ?string $flowData): string
     {
         global $current_user;
 
@@ -273,6 +277,11 @@ class DocumentMergeApi extends SugarApi
         $documentMergeBean->name = $data['templateName'];
         $documentMergeBean->assigned_user_id = $current_user->id;
         $documentMergeBean->record_ids = $data['selectedRecords'] ? json_encode($data['selectedRecords']) : '';
+
+        // do this only if there is flow data coming from pmse
+        if (is_string($flowData)) {
+            $documentMergeBean->flow_data = $flowData;
+        }
 
         $documentMergeBean->save();
 
@@ -431,6 +440,25 @@ class DocumentMergeApi extends SugarApi
         }
 
         $bean->save();
+
+        //check if we need to send the document as an email attachement
+        if ($bean->status === 'success' && is_string($bean->flow_data)) {
+            $flowData = json_decode($bean->flow_data, true);
+            $evnDefBean = BeanFactory::retrieveBean('pmse_BpmEventDefinition', $flowData['bpmn_id']);
+
+            if (!$evnDefBean) {
+                return;
+            }
+            if (!is_string($evnDefBean->evn_params)) {
+                return;
+            }
+            $evnParams = json_decode($evnDefBean->evn_params, true);
+            if ($evnParams['act_send_email']) {
+                $flowData['doc_merge_attach_id'] = $bean->generated_document_id;
+                $emailHandler = ProcessManager\Factory::getPMSEObject('PMSEEmailHandler');
+                $emailHandler->queueEmail($flowData);
+            }
+        }
     }
 
     /**
@@ -658,7 +686,7 @@ class DocumentMergeApi extends SugarApi
 
             if ($lhsModule === $relationshipModule || $rhsModule === $relationshipModule) {
                 $bean->load_relationship($linkDef['relationship'])
-                    ? $relationshipName = $linkDef['relatonship'] :
+                    ? $relationshipName = $linkDef['relationship'] :
                         ($bean->load_relationship($linkDef['name']) ? $relationshipName = $linkDef['name'] : $relationshipName = null);
             }
         }

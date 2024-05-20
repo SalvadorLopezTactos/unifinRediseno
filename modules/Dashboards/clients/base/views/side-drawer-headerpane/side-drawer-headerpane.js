@@ -20,47 +20,102 @@
     extendsFrom: 'DashboardsDashboardHeaderpaneView',
 
     events: {
+        'mousemove .record-edit-link-wrapper, .record-lock-link-wrapper': 'handleMouseMove',
+        'mouseleave .record-edit-link-wrapper, .record-lock-link-wrapper': 'handleMouseLeave',
         'click [name=edit_button]': 'editClicked',
         'click [name=save_button]': 'saveClicked',
         'click [name=cancel_button]': 'cancelClicked',
         'click [name=create_cancel_button]': 'createCancelClicked',
-        'click [name=edit_overview_tab_button]': 'editOverviewTabClicked',
-        'click div.bread:not(:last-child), li.bread': 'breadcrumbClicked',
+        'click [name=edit_overview_tab_button]': 'editOverviewTabClicked'
     },
 
     /**
      * @inheritdoc
      */
-    initialize: function(options) {
-        this._setBreadcrumbs();
-        this._super('initialize', [options]);
-        $(window).on('resize.' + this.cid, _.bind(_.debounce(this._resetBreadcrumbs, 100), this));
-        app.events.on('breadcrumbs:reset', _.bind(this._resetBreadcrumbs, this));
+    _setMaxWidthForEllipsifiedCell: function($ellipsisCell, width) {
+        $ellipsisCell.css({'max-width': width});
     },
 
     /**
-     * Re-render header when window size changes
-     * @private
+     * Adjusts dropdown menu position.
      */
-    _resetBreadcrumbs: function() {
-        if (this.disposed || app.drawer.isOpening() || app.drawer.isClosing()) {
+    adjustDropdownMenu: function() {
+        let $title = this.$('.record-cell');
+        let $menu = this.$('.dropdown-menu');
+        // dropdown toggle is 28px wide
+        // dropdown menu is shown to the right of the toggle by default
+        if (($title.outerWidth() - 28 + $menu.width()) > this._containerWidth) {
+            if ($menu.width() < $title.width()) {
+                // show dropdown menu to the left of the toggle
+                $menu.css({right: 0, left: 'auto'});
+            } else {
+                let maxWidth = this._containerWidth - $title.outerWidth() + 28;
+                $menu.css({'max-width': maxWidth});
+            }
+        } else {
+            $menu.removeAttr('style');
+        }
+    },
+
+    /**
+     * @override
+     */
+    bindDataChange: function() {
+        if (!this.model) {
             return;
         }
-        this.truncatedBreadcrumbs = [];
-        this.breadcrumbLastModels = [];
-        this._setBreadcrumbs();
-        this._renderHeader();
+
+        this.model.on('change', this._updateTabTitle, this);
+        this.context.on('side-drawer-headerpane:empty-tab-title', this._setEmptyTabTitle, this);
+        this.layout.on('headerpane:adjust_fields', this.adjustDropdownMenu, this);
     },
 
     /**
-     * Function to handle the breadcrumb click
-     * @param event
+     * Update dashboard and record name for active tab.
      */
-    breadcrumbClicked: function(event) {
-        var index = parseInt(event.currentTarget.getAttribute('data-index'));
-        var contextDef = app.sideDrawer._breadcrumbs.find(breadcrumb => breadcrumb.id === index);
-        app.sideDrawer._breadcrumbs = app.sideDrawer._breadcrumbs.slice(0, index - 1);
-        app.sideDrawer.open(contextDef, null, true);
+    _updateTabTitle: function() {
+        let activeTab = app.sideDrawer.getActiveTab();
+        if (activeTab && activeTab.isFocusDashboard && !activeTab.hasTitle) {
+            activeTab.dashboardName = app.lang.get(this.model.get('name'), activeTab.context.module);
+            if (!activeTab.recordName && activeTab.context.model) {
+                activeTab.recordName = activeTab.context.model.get('name');
+            }
+            if (!activeTab.context.dataTitle) {
+                let moduleMeta = app.metadata.getModule(activeTab.context.module);
+                let labelColor = (moduleMeta) ? `label-module-color-${moduleMeta.color}` :
+                                                `label-${activeTab.context.module}`;
+                activeTab.context.dataTitle = {
+                    module: app.lang.get('LBL_MODULE_NAME_SINGULAR', activeTab.context.module),
+                    view: app.lang.get('LBL_RECORD'),
+                    name: activeTab.recordName,
+                    labelColor: labelColor
+                };
+            }
+            activeTab.hasTitle = true;
+            app.sideDrawer.renderTabs();
+        }
+    },
+
+    /**
+     * Set default title name if tab is empty
+     */
+    _setEmptyTabTitle: function() {
+        let activeTab = app.sideDrawer.getActiveTab();
+        if (activeTab && activeTab.context && activeTab.context.module) {
+            let moduleMeta = app.metadata.getModule(activeTab.context.module);
+            let labelColor = (moduleMeta) ? `label-module-color-${moduleMeta.color}` :
+                                            `label-${activeTab.context.module}`;
+            activeTab.dashboardName = app.lang.get('LBL_NO_DASHBOARD_CONFIGURED');
+            activeTab.context.dataTitle = {
+                module: app.lang.get('LBL_MODULE_NAME_SINGULAR', activeTab.context.module),
+                view: app.lang.get('LBL_RECORD'),
+                name: activeTab.recordName,
+                labelColor: labelColor
+            };
+            activeTab.hasTitle = true;
+            app.sideDrawer.renderTabs();
+        }
+
     },
 
     /**
@@ -72,50 +127,18 @@
             this.action = 'edit';
         } else {
             this.createView = false;
-            this.dashboardTitle = !this.context.get('emptyDashboard');
+            this.dashboardTitle = !this.context.get('emptyDashboard') && app.sideDrawer.getActiveTab() &&
+                app.sideDrawer.getActiveTab().isFocusDashboard;
             this.action = 'view';
         }
         this._super('_render');
     },
 
     /**
-     * Set breadcrumbs in different arrays depending upon the size and number of breadcrumbs.
-     *
-     * @private
-     */
-    _setBreadcrumbs: function() {
-        if (!app.sideDrawer.isOpen() || _.isNull(this.options.layout.$el)) {
-            return;
-        }
-        var breadcrumbs = app.sideDrawer._breadcrumbs;
-        breadcrumbs.forEach((breadcrumb, i) => {
-            breadcrumb.id = i + 1;
-        });
-        var breadcrumbsWidth = breadcrumbs.length * 140;
-        var headerWidth = this.options.layout.$el.width() / 2;
-        this.breadcrumbModels = breadcrumbs;
-        this.singleBreadcrumb = this.breadcrumbModels.length === 1;
-        if (breadcrumbs.length > 1) {
-            if (headerWidth < 450) {
-                this.breadcrumbModels = [_.first(breadcrumbs)];
-                this.breadcrumbLastModels = breadcrumbs.slice(breadcrumbs.length - 1);
-                if (breadcrumbs.length > 2) {
-                    this.truncatedBreadcrumbs = breadcrumbs.slice(1, breadcrumbs.length - 1);
-                }
-            } else if (breadcrumbsWidth > headerWidth) {
-                this.breadcrumbModels = [_.first(breadcrumbs)];
-                this.breadcrumbLastModels = breadcrumbs.slice(breadcrumbs.length - 2);
-                this.truncatedBreadcrumbs = breadcrumbs.slice(1, breadcrumbs.length - 2);
-            }
-        }
-    },
-
-    /**
      * @inheritdoc
      */
-    _dispose: function() {
-        $(window).off('resize.' + this.cid);
-        app.events.off('breadcrumbs:reset', _.bind(this._resetBreadcrumbs, this));
-        this._super('_dispose');
-    },
+    unbind: function() {
+        this._super('unbind');
+        this.layout.off('headerpane:adjust_fields', this.adjustDropdownMenu);
+    }
 })

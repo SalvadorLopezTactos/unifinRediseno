@@ -73,9 +73,45 @@ class RecentApi extends SugarApi
             $options['moduleList'] = array_filter(explode(',', $args['module_list']));
         }
 
+        if (isset($args['view'])) {
+            $platform = $this->getPlatform($args);
+
+            $mm = $this->getMetaDataManager($platform);
+
+            foreach ($options['moduleList'] as $module) {
+                $moduleViewFields = $mm->getModuleViewFields($module, $args['view']);
+                foreach ($moduleViewFields as $field) {
+                    if (!isset($options['select'])) {
+                        $options['select'] = [];
+                    }
+                    if (!in_array($field, $options['select'])) {
+                        $options['select'][] = $field;
+                    }
+                }
+            }
+        }
+
+
         return $options;
     }
 
+    /**
+     * Get platform
+     *
+     * @param array $args
+     * @return string
+     */
+    private function getPlatform(array $args) : string
+    {
+        $platform = 'base';
+        if (isset($args['platform'])) {
+            $platform = basename($args['platform']);
+        } elseif (isset($_SESSION['platform'])) {
+            $platform = $_SESSION['platform'];
+        }
+
+        return $platform;
+    }
     /**
      * Filters the list of modules to the ones that the user has access to and
      * that exist on the moduleList.
@@ -108,6 +144,10 @@ class RecentApi extends SugarApi
         $this->requireArgs($args, array('module_list'));
 
         $options = $this->parseArguments($args);
+
+        if (isset($args['platform'])) {
+            $api->platform = $args['platform'];
+        }
 
         $moduleList = $this->filterModules($options['moduleList'], $acl);
 
@@ -173,11 +213,24 @@ class RecentApi extends SugarApi
         $query = new SugarQuery();
         $query->from($seed, $options);
         $query->where()->in('id', $ids);
-        return $seed->fetchFromQuery($query, [
+
+        $fields = [];
+        $mandatoryFields = [
             'id',
             'name',
             'date_modified',
-        ], $options);
+            'team_set_id',
+        ];
+        if (isset($options['select'])) {
+            foreach ($options['select'] as $fieldName) {
+                if (isset($seed->field_defs[$fieldName])) {
+                    $fields[] = $fieldName;
+                }
+            }
+        }
+        $fields = array_unique(array_merge($fields, $mandatoryFields));
+
+        return $seed->fetchFromQuery($query, $fields, $options);
     }
 
     /**

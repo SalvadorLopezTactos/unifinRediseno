@@ -18,6 +18,14 @@ require_once 'modules/OAuthTokens/OAuthToken.php';
 class SugarOAuthServer
 {
     /**
+     * @var \OAuthKey|mixed
+     */
+    public $consumer;
+    /**
+     * @var \Zend_Oauth_Provider|mixed
+     */
+    public $provider;
+    /**
      * OAuth token
      * @var OAuthToken
      */
@@ -144,7 +152,7 @@ class SugarOAuthServer
 		        $this->provider->setRequestTokenPath($req_path);  // No token needed for this end point
 	        }
 	    	$this->provider->checkOAuthRequest(null, $this->decodePostGet());
-	    	if(mt_rand() % 10 == 0) {
+            if (random_int(0, mt_getrandmax()) % 10 == 0) {
 	    	    // cleanup 1 in 10 times
 	    	    OAuthToken::cleanup();
 	    	}

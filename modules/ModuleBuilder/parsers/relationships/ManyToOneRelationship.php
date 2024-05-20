@@ -21,6 +21,10 @@ class ManyToOneRelationship extends AbstractRelationship
 {
 	
 
+    /**
+     * @var \OneToManyRelationship|mixed
+     */
+    public $one_to_many;
     /*
      * Constructor
      * @param array $definition Parameters passed in as array defined in parent::$definitionKeys
@@ -31,18 +35,18 @@ class ManyToOneRelationship extends AbstractRelationship
         
     	parent::__construct ( $definition ) ;
     	$onetomanyDef = array_merge($definition, array(
-	        'rhs_label'    => isset($definition['lhs_label'])    ? $definition['lhs_label']    : null,
-	        'lhs_label'    => isset($definition['rhs_label'])    ? $definition['rhs_label']    : null,
-	        'lhs_subpanel' => isset($definition['rhs_subpanel']) ? $definition['rhs_subpanel'] : null,
-	        'rhs_subpanel' => isset($definition['lhs_subpanel']) ? $definition['lhs_subpanel'] : null,
-	        'lhs_module'   => isset($definition['rhs_module'])   ? $definition['rhs_module']   : null,
-	        'lhs_table'    => isset($definition['rhs_table'])    ? $definition['rhs_table']    : null,
-	        'lhs_key'      => isset($definition['rhs_key'])      ? $definition['rhs_key']      : null,
-	        'rhs_module'   => isset($definition['lhs_module'])   ? $definition['lhs_module']   : null,
-	        'rhs_table'    => isset($definition['lhs_table'])    ? $definition['lhs_table']    : null,
-	        'rhs_key'      => isset($definition['lhs_key'])      ? $definition['lhs_key']      : null,
-	        'join_key_lhs' => isset($definition['join_key_rhs']) ? $definition['join_key_rhs'] : null,
-	        'join_key_rhs' => isset($definition['join_key_lhs']) ? $definition['join_key_lhs'] : null,
+            'rhs_label' => $definition['lhs_label'] ?? null,
+            'lhs_label' => $definition['rhs_label'] ?? null,
+            'lhs_subpanel' => $definition['rhs_subpanel'] ?? null,
+            'rhs_subpanel' => $definition['lhs_subpanel'] ?? null,
+            'lhs_module' => $definition['rhs_module'] ?? null,
+            'lhs_table' => $definition['rhs_table'] ?? null,
+            'lhs_key' => $definition['rhs_key'] ?? null,
+            'rhs_module' => $definition['lhs_module'] ?? null,
+            'rhs_table' => $definition['lhs_table'] ?? null,
+            'rhs_key' => $definition['lhs_key'] ?? null,
+            'join_key_lhs' => $definition['join_key_rhs'] ?? null,
+            'join_key_rhs' => $definition['join_key_lhs'] ?? null,
 	        'relationship_type' => MB_ONETOMANY,
         ));
         $this->one_to_many = new OneToManyRelationship($onetomanyDef);
@@ -134,4 +138,3 @@ class ManyToOneRelationship extends AbstractRelationship
         return $this->buildWirelessSubpanelDefinitions();
     }
 }
-?>

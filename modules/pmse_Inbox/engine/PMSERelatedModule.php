@@ -183,7 +183,7 @@ class PMSERelatedModule
         // Send back the filtered list of beans now, recursively
         return $this->getChainedRelationshipBeans(
             $filteredBeans,
-            isset($def->chainedRelationship) ? $def->chainedRelationship : null
+            $def->chainedRelationship ?? null
         );
     }
 
@@ -333,7 +333,7 @@ class PMSERelatedModule
 
         if (!$removeTarget) {
             // Send text with pluralized module name
-            $filterText = isset($app_list_strings['moduleList'][$filter]) ? $app_list_strings['moduleList'][$filter] : $filter;
+            $filterText = $app_list_strings['moduleList'][$filter] ?? $filter;
             $filterArray = array(
                 'value' => $filter,
                 'text' => '<' . $filterText . '>',

@@ -46,6 +46,7 @@ class CmisRuntimeException extends Exception {}
 
 class CMISRepositoryWrapper
 {
+    public $auth_options;
     // Handles --
     //   Workspace -- but only endpoints with a single repo
     //   Entry -- but only for objects
@@ -369,6 +370,7 @@ class CMISRepositoryWrapper
     }
     static function extractObjectFromNode($xmlnode)
     {
+        $children_feed_c = null;
         // Extracts the contents of an Object and organizes them into:
         //  -- Links
         //  -- Properties
@@ -432,6 +434,8 @@ class CMISRepositoryWrapper
     }
     static function extractTypeDefFromNode($xmlnode)
     {
+        $children_feed_c = null;
+        $children_feed_l = null;
         // Extracts the contents of an Object and organizes them into:
         //  -- Links
         //  -- Properties
@@ -765,10 +769,13 @@ class CMISService extends CMISRepositoryWrapper
 	        $myURL = $this->getTypeLink($typeId, "down-tree");
 	        $myURL = CMISRepositoryWrapper :: getOpUrl ($myURL, $hash_values);
         } else {
-        	$myURL = $this->processTemplate($this->workspace->collections['http://docs.oasis-open.org/ns/cmis/link/200908/typedescendants'], $varmap);
+            $myURL = static::processTemplate(
+                $this->workspace->collections['http://docs.oasis-open.org/ns/cmis/link/200908/typedescendants'],
+                $varmap
+            );
         }
         $ret = $this->doGet($myURL);
-        $typs = $this->extractTypeFeed($ret->body);
+        $typs = static::extractTypeFeed($ret->body);
         $this->cacheTypeFeedInfo($typs);
         return $typs;
     }
@@ -782,10 +789,10 @@ class CMISService extends CMISRepositoryWrapper
 	        //TODO: Need GenURLQueryString Utility
         } else {
             //TODO: Need right URL
-        	$myURL = $this->processTemplate($this->workspace->collections['types'], $varmap);
+            $myURL = static::processTemplate($this->workspace->collections['types'], $varmap);
         }
         $ret = $this->doGet($myURL);
-        $typs = $this->extractTypeFeed($ret->body);
+        $typs = static::extractTypeFeed($ret->body);
         $this->cacheTypeFeedInfo($typs);
         return $typs;
     }
@@ -794,9 +801,9 @@ class CMISService extends CMISRepositoryWrapper
     { // Nice to have
         $varmap = $options;
         $varmap["id"] = $typeId;
-        $myURL = $this->processTemplate($this->workspace->uritemplates['typebyid'], $varmap);
+        $myURL = static::processTemplate($this->workspace->uritemplates['typebyid'], $varmap);
         $ret = $this->doGet($myURL);
-        $obj = $this->extractTypeDef($ret->body);
+        $obj = static::extractTypeDef($ret->body);
         $this->cacheTypeInfo($obj);
         return $obj;
     }
@@ -805,7 +812,7 @@ class CMISService extends CMISRepositoryWrapper
     { // Nice to have
         $myURL = $this->getLink($objectId, "describedby");
         $ret = $this->doGet($myURL);
-        $obj = $this->extractTypeDef($ret->body);
+        $obj = static::extractTypeDef($ret->body);
         $this->cacheTypeInfo($obj);
         return $obj;
     }
@@ -817,7 +824,7 @@ class CMISService extends CMISRepositoryWrapper
         $myURL = $this->getLink($folderId, "http://docs.oasis-open.org/ns/cmis/link/200908/foldertree");
         $myURL = CMISRepositoryWrapper :: getOpUrl ($myURL, $hash_values);
         $ret = $this->doGet($myURL);
-        $objs = $this->extractObjectFeed($ret->body);
+        $objs = static::extractObjectFeed($ret->body);
         $this->cacheFeedInfo($objs);
         return $objs;
     }
@@ -829,7 +836,7 @@ class CMISService extends CMISRepositoryWrapper
         $myURL = $this->getLink($folderId, "down-tree");
         $myURL = CMISRepositoryWrapper :: getOpUrl ($myURL, $hash_values);
         $ret = $this->doGet($myURL);
-        $objs = $this->extractObjectFeed($ret->body);
+        $objs = static::extractObjectFeed($ret->body);
         $this->cacheFeedInfo($objs);
         return $objs;
     }
@@ -839,7 +846,7 @@ class CMISService extends CMISRepositoryWrapper
         $myURL = $this->getLink($folderId, "down");
         //TODO: Need GenURLQueryString Utility
         $ret = $this->doGet($myURL);
-        $objs = $this->extractObjectFeed($ret->body);
+        $objs = static::extractObjectFeed($ret->body);
         $this->cacheFeedInfo($objs);
         return $objs;
     }
@@ -859,7 +866,7 @@ class CMISService extends CMISRepositoryWrapper
         $myURL = $this->getLink($objectId, "up");
         //TODO: Need GenURLQueryString Utility
         $ret = $this->doGet($myURL);
-        $objs = $this->extractObjectFeed($ret->body);
+        $objs = static::extractObjectFeed($ret->body);
         $this->cacheFeedInfo($objs);
         return $objs;
     }
@@ -868,7 +875,7 @@ class CMISService extends CMISRepositoryWrapper
     {
         $obj_url = $this->workspace->collections['checkedout'];
         $ret = $this->doGet($obj_url);
-        $objs = $this->extractObjectFeed($ret->body);
+        $objs = static::extractObjectFeed($ret->body);
         $this->cacheFeedInfo($objs);
         return $objs;
     }
@@ -908,7 +915,7 @@ xmlns:cmisra="http://docs.oasisopen.org/ns/cmis/restatom/200908/">
         $hash_values['q'] = $statement;
         $post_value = CMISRepositoryWrapper :: processTemplate($query_template, $hash_values);
         $ret = $this->doPost($this->workspace->collections['query'], $post_value, MIME_CMIS_QUERY);
-        $objs = $this->extractObjectFeed($ret->body);
+        $objs = static::extractObjectFeed($ret->body);
         $this->cacheFeedInfo($objs);
         return $objs;
     }
@@ -1059,9 +1066,9 @@ xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
     {
         $varmap = $options;
         $varmap["id"] = $objectId;
-        $obj_url = $this->processTemplate($this->workspace->uritemplates['objectbyid'], $varmap);
+        $obj_url = static::processTemplate($this->workspace->uritemplates['objectbyid'], $varmap);
         $ret = $this->doGet($obj_url);
-        $obj = $this->extractObject($ret->body);
+        $obj = static::extractObject($ret->body);
         $this->cacheObjectInfo($obj);
         return $obj;
     }
@@ -1070,9 +1077,9 @@ xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
     {
         $varmap = $options;
         $varmap["path"] = $this->handleSpaces($path);
-        $obj_url = $this->processTemplate($this->workspace->uritemplates['objectbypath'], $varmap);
+        $obj_url = static::processTemplate($this->workspace->uritemplates['objectbypath'], $varmap);
         $ret = $this->doGet($obj_url);
-        $obj = $this->extractObject($ret->body);
+        $obj = static::extractObject($ret->body);
         $this->cacheObjectInfo($obj);
         return $obj;
     }
@@ -1087,7 +1094,7 @@ xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
     {
         $myURL = $this->getLink($objectId, LINK_ALLOWABLE_ACTIONS);
         $ret = $this->doGet($myURL);
-        $result = $this->extractAllowableActions($ret->body);
+        $result = static::extractAllowableActions($ret->body);
         return $result;
     }
 
@@ -1154,7 +1161,7 @@ xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
         $ret = $this->doPost($myURL, $post_value, MIME_ATOM_XML_ENTRY);
         // print "DO_POST\n";
         // print_r($ret);
-        $obj = $this->extractObject($ret->body);
+        $obj = static::extractObject($ret->body);
         $this->cacheObjectInfo($obj);
         return $obj;
     }
@@ -1225,7 +1232,7 @@ xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
         $put_value = CMISRepositoryWrapper :: processTemplate($entry_template, $hash_values);
 	 	// print $put_value; // RRM DEBUG
         $ret = $this->doPut($obj_url, $put_value, MIME_ATOM_XML_ENTRY);
-        $obj = $this->extractObject($ret->body);
+        $obj = static::extractObject($ret->body);
         $this->cacheObjectInfo($obj);
         return $obj;
     }

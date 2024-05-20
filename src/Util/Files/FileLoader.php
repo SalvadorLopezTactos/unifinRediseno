@@ -52,7 +52,7 @@ class FileLoader
         // add upload directory to the allowed list
         if ($upload) {
             $uploadDir = ini_get('upload_tmp_dir');
-            $baseDirs[] = self::getRealPath($uploadDir ? $uploadDir : sys_get_temp_dir());
+            $baseDirs[] = self::getRealPath($uploadDir ?: sys_get_temp_dir());
         }
 
         $constraint = new File(array('baseDirs' => $baseDirs));
@@ -78,7 +78,7 @@ class FileLoader
     public static function varFromInclude($file, $returnVar)
     {
         $result = self::varsFromInclude($file, array($returnVar));
-        return isset($result[$returnVar]) ? $result[$returnVar] : null;
+        return $result[$returnVar] ?? null;
     }
 
     /**
@@ -95,7 +95,7 @@ class FileLoader
         include self::validateFilePath($file);
         $returnVarsResult = array();
         foreach ($returnVars as $returnVar) {
-            $returnVarsResult[$returnVar] = isset(${$returnVar}) ? ${$returnVar} : null;
+            $returnVarsResult[$returnVar] = ${$returnVar} ?? null;
         }
         return $returnVarsResult;
     }

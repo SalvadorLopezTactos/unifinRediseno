@@ -155,7 +155,7 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Πρότυπα',
     'LBL_RECORD_OTHER_TAB' => 'Άλλο',
     'LBL_EVENT_START' => 'Έναρξη',
-    'LBL_EVENT_END' => 'Λήξη',
+    'LBL_EVENT_END' => 'Τέλος',
     'LBL_EVENT_END' => 'Τέλος',
     'LBL_DAY_EVENT_TEMPLATE' => 'Εκδήλωση ημέρας',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Εκδήλωση εβδομάδας',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Οκτ',
     'LBL_NOV' => 'Νοέ',
     'LBL_DEC' => 'Δεκ',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Το ημερολόγιο έχει ήδη προστεθεί',
+    'LBL_CALENDAR_IS_SELECTED' => 'Το {{calendar}} είναι επιλεγμένο',
+    'LBL_NO_USER_SELECTED' => 'Επιλέξτε Χρήστη ή Ομάδα',
+    'LBL_NO_CALENDAR_SELECTED' => 'Επιλέξτε ένα ημερολόγιο',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Απέτυχε η αποθήκευση των Ημερολογίων.',
 
 );
 

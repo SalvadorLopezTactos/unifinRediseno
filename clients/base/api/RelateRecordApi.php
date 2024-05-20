@@ -201,6 +201,7 @@ class RelateRecordApi extends SugarApi
 
         $relatedArray = $this->getRecordByRelation($api, $args, true);
 
+        $primaryBean = $this->reloadBean($primaryBean);
         return $this->formatNearAndFarRecords($api, $args, $primaryBean, $relatedArray);
     }
 
@@ -217,7 +218,7 @@ class RelateRecordApi extends SugarApi
      */
     public function createRelatedBean(ServiceBase $api, array $args, SugarBean $primaryBean)
     {
-        list($linkName) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'create');
+        [$linkName] = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'create');
 
         /** @var Link2 $link */
         $link = $primaryBean->$linkName;
@@ -269,7 +270,7 @@ class RelateRecordApi extends SugarApi
 
         $primaryBean = $this->loadBean($api, $args);
 
-        list($linkName) = $this->checkRelatedSecurity(
+        [$linkName] = $this->checkRelatedSecurity(
             $api,
             $args,
             $primaryBean,
@@ -292,6 +293,7 @@ class RelateRecordApi extends SugarApi
                 continue;
             }
 
+            $relatedBean = $this->reloadBean($relatedBean);
             $result['related_records'][] = $this->formatBean($api, $args, $relatedBean);
         }
         //Clean up any hanging related records.
@@ -301,6 +303,7 @@ class RelateRecordApi extends SugarApi
             return [];
         }
 
+        $primaryBean = $this->reloadBean($primaryBean);
         $result['record'] = $this->formatBean($api, $args, $primaryBean);
 
         return $result;
@@ -346,7 +349,7 @@ class RelateRecordApi extends SugarApi
         $api->action = 'save';
         $primaryBean = $this->loadBean($api, $args);
 
-        list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view','edit');
+        [$linkName, $relatedBean] = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'edit');
 
         // Make sure the link isn't a readonly link
         if (isset($primaryBean->field_defs[$linkName])) {
@@ -368,13 +371,13 @@ class RelateRecordApi extends SugarApi
         $relatedBean->retrieve($args['remote_id']);
 
         //if a filename guid exists, then use moduleapi to make final move from tmp dir if applicable
-        if (isset($args['filename_guid'])) {
+        if (!empty($args['attachments'])) {
             $moduleApi = $this->getModuleApi($api, $linkName);
-            $relArgs = array(
+            $relArgs = [
                 'module' => $relatedBean->module_name,
                 'record' => $relatedBean->id,
-                'filename_guid' => $args['filename_guid'],
-            );
+                'attachments' => $args['attachments'],
+            ];
             $moduleApi->updateRecord($api, $relArgs);
         }
 
@@ -399,12 +402,13 @@ class RelateRecordApi extends SugarApi
                 // This function add() is actually 'addOrUpdate'. Here we use it for update only.
                 $primaryBean->$linkName->add(array($relatedBean),$relatedData);
 
+                $relatedBean = $this->reloadBean($relatedBean);
+
                 // BR-2964, related objects are not populated
                 $primaryBean->$linkName->refreshRelationshipFields($relatedBean);
 
                 // BR-2937 The edit view cache issue for relate documents of a module
                 // nomad still needs this related array
-
                 $relatedArray = $this->formatBean($api, $args, $relatedBean);
             }
             // If the relationship has been removed, we don't need to update the relationship fields
@@ -422,6 +426,7 @@ class RelateRecordApi extends SugarApi
         // This forces a re-retrieval of the bean from the database
         BeanFactory::unregisterBean($relatedBean);
 
+        $primaryBean = $this->reloadBean($primaryBean);
         return $this->formatNearAndFarRecords($api,$args,$primaryBean,$relatedArray);
     }
 
@@ -461,8 +466,8 @@ class RelateRecordApi extends SugarApi
 
         // Get fresh copies of primary and related beans so that the newly deleted relationship
         // shows as deleted. See BR-1055, BR-1630
-        $primaryBean = BeanFactory::getBean($primaryBean->module_name, $primaryBean->id, array('use_cache' => false));
-        $relatedBean = BeanFactory::getBean($relatedBean->module_name, $relatedBean->id, array('use_cache' => false));
+        $primaryBean = $this->reloadBean($primaryBean);
+        $relatedBean = $this->reloadBean($relatedBean);
 
         //Because the relationship is now deleted, we need to pass the $relatedBean data into formatNearAndFarRecords
         return $this->formatNearAndFarRecords($api,$args,$primaryBean, $this->formatBean($api, $args, $relatedBean));
@@ -491,7 +496,7 @@ class RelateRecordApi extends SugarApi
 
         $primaryBean = $this->loadBean($api, $args);
 
-        list($linkName) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
+        [$linkName] = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
 
         $recordList = RecordListFactory::getRecordList($args['remote_id']);
         $relatedBeans = $primaryBean->$linkName->add($recordList['records']);
@@ -506,6 +511,8 @@ class RelateRecordApi extends SugarApi
         SugarRelationship::resaveRelatedBeans();
 
         Activity::restoreToPreviousState();
+
+        $primaryBean = $this->reloadBean($primaryBean);
         $result['record'] = $this->formatBean($api, $args, $primaryBean);
 
         return $result;
@@ -545,7 +552,7 @@ class RelateRecordApi extends SugarApi
         );
 
         foreach ($templates as $template) {
-            list($directoryTemplate, $classTemplate) = $template;
+            [$directoryTemplate, $classTemplate] = $template;
             $class = sprintf($classTemplate, $module);
             $file = sprintf($directoryTemplate, $module, $api->platform) . $class . '.php';
             if (file_exists($file)) {
@@ -587,7 +594,7 @@ class RelateRecordApi extends SugarApi
     {
         $primaryBean = $this->loadBean($api, $args);
 
-        list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
+        [$linkName, $relatedBean] = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
 
         /** @var Link2 $link */
         $link = $primaryBean->$linkName;
@@ -615,5 +622,18 @@ class RelateRecordApi extends SugarApi
         }
 
         return $this->formatBean($api, $args, $relatedBean);
+    }
+
+    /**
+     * @param SugarBean $bean
+     * @return SugarBean|null
+     * @throws SugarApiExceptionNotFound
+     */
+    protected function reloadBean(?SugarBean $bean): ?SugarBean
+    {
+        if ($bean === null) {
+            return null;
+        }
+        return BeanFactory::getBean($bean->getModuleName(), $bean->id, ['use_cache' => false]);
     }
 }

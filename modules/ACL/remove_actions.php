@@ -24,7 +24,7 @@ function removeACLActions($current_user, $beanList, $beanFiles, $silent)
                     if (!in_array($actionobj->category, $arr)) {
                         array_push($arr, $actionobj->category);
                         if (!$silent) {
-                            echo 'Removing for ' . htmlspecialchars($actionobj->category) . '<br>';
+                            echo 'Removing for ' . htmlspecialchars($actionobj->category, ENT_COMPAT) . '<br>';
                         }
                     }
                 }

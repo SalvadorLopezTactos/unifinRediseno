@@ -16,13 +16,20 @@
 ({
     extendsFrom: 'QuickcreateField',
 
+    events: {
+        'click [data-event]': '_handleEventItemClick',
+    },
+
     /**
      * @inheritdoc
      */
     initialize: function(options) {
         this.plugins = _.union(this.plugins || [], ['EmailClientLaunch']);
         this._super('initialize', [options]);
+    },
 
+    bindDataChange: function() {
+        this._super('bindDataChange');
         if (this.context && this.context.has('model')) {
             // call updateEmailLinks if the user changes something on the context model
             // so if user changes the email address we make sure we've got the latest
@@ -32,6 +39,13 @@
 
         app.routing.before('route', this._beforeRouteChanged, this);
         app.router.on('route', this._routeChanged, this);
+    },
+
+    /**
+     * Trigger sidebar collapse event
+     */
+    _handleEventItemClick: function() {
+        app.events.trigger('sidebar-nav:expand:toggle', false);
     },
 
     /**
@@ -62,6 +76,15 @@
             this.context.get('model').on('change', this.updateEmailLinks, this);
         }
         this.updateEmailLinks();
+    },
+
+    /**
+     * @inheritdoc
+     * @private
+     */
+    _render: function() {
+        this.usingInternalEmailClient = this.useSugarEmailClient();
+        this._super('_render');
     },
 
     /**

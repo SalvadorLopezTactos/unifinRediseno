@@ -92,7 +92,7 @@ function smarty_function_sugar_evalcolumn_old($params, &$smarty)
 function searchReplace($value, &$rowData) {
     preg_match_all('/\{\$(.*)\}/U', $value, $matches);
 
-    for($wp = 0; $wp < count($matches[0]); $wp++) {
+    for ($wp = 0; $wp < (is_countable($matches[0]) ? count($matches[0]) : 0); $wp++) {
         if(isset($rowData[$matches[1][$wp]])) 
             $value = str_replace($matches[0][$wp], $rowData[$matches[1][$wp]], $value);
         else 

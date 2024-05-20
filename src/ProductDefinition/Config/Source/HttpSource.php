@@ -23,17 +23,19 @@ class HttpSource implements SourceInterface
     /**
      * Http client client timeout
      */
-    const HTTP_CLIENT_TIMEOUT = 2;
+    public const HTTP_CLIENT_TIMEOUT = 2;
 
     /**
      * Default server uri
      */
-    const DEFAULT_BASE_URI = 'https://updates.sugarcrm.com/spds/';
+    public const DEFAULT_BASE_URI = 'https://updates.sugarcrm.com/spds/';
 
     /**
      * Default fallback version
+     * This should be 1 minor version below the current version (or the current minor version for the fixpack)
+     * e.g. 12.2.0 for Sugar 12.3.0; 12.0.0 for Sugar 12.0.4
      */
-    const DEFAULT_FALLBACK_VERSION = '12.0.0';
+    public const DEFAULT_FALLBACK_VERSION = '13.0.0';
 
     /**
      * Http client
@@ -71,9 +73,7 @@ class HttpSource implements SourceInterface
         }
         $this->setHttpClient(new HttpClient($httpOptions));
 
-        if (!empty($options['fallback_version']) && $this->getSugarVersion() !== $options['fallback_version']) {
-            $this->fallbackVersion = $options['fallback_version'];
-        }
+        $this->fallbackVersion = static::DEFAULT_FALLBACK_VERSION;
     }
 
     /**
@@ -173,10 +173,7 @@ class HttpSource implements SourceInterface
     {
         try {
             $response = $this->client->request('GET', $version);
-        } catch (\Exception $e) {
-            $this->getLogger()->error('Can\'t download product definition for version: ' . $version);
-            return null;
-        } catch (GuzzleException $e) {
+        } catch (\Exception|GuzzleException $e) {
             $this->getLogger()->error('Can\'t download product definition for version: ' . $version);
             return null;
         }

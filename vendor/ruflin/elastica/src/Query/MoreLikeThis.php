@@ -2,6 +2,8 @@
 
 namespace Elastica\Query;
 
+use Elastica\Document;
+
 /**
  * More Like This query.
  *
@@ -26,7 +28,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set the "like" value.
      *
-     * @param self|string $like
+     * @param Document|self|string $like
      *
      * @return $this
      */
@@ -164,12 +166,12 @@ class MoreLikeThis extends AbstractQuery
         // If _source is provided, perform MLT on a document provided as an input
         if (!empty($array['more_like_this']['like']['_id'])) {
             $doc = $array['more_like_this']['like'];
-            $doc = \array_intersect_key($doc, ['_index' => 1, '_type' => 1, '_id' => 1]);
+            $doc = \array_intersect_key($doc, ['_index' => 1, '_id' => 1]);
             $array['more_like_this']['like'] = $doc;
         } elseif (!empty($array['more_like_this']['like']['_source'])) {
             $doc = $array['more_like_this']['like'];
             $doc['doc'] = $array['more_like_this']['like']['_source'];
-            unset($doc['_id'], $doc['_source']);
+            unset($doc['_id'], $doc['_source'], $doc['if_seq_no'], $doc['if_primary_term']);
 
             $array['more_like_this']['like'] = $doc;
         }

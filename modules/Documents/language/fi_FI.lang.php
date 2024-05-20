@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Mallipohja? :',
     'LBL_DET_TEMPLATE_TYPE'=>'Dokumentin tyyppi:',
     'LBL_TEAM'=> 'Tiimi',
+    'LBL_IS_SHARED' => 'Saatavana ulkoisesti:',
     'LBL_DOC_DESCRIPTION'=>'Kuvaus:',
     'LBL_DOC_ACTIVE_DATE'=> 'Julkaisupäivämäärä:',
     'LBL_DOC_EXP_DATE'=> 'Viimeinen voimassaolopäivä:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Lähetä DocuSign-palveluun',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Synkronoi Google Driveen',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Synkronoi kaikki Google Driveen',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Synkronoi kaikki OneDriveen',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Synkronoi OneDriveen',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Synkronoi kaikki Dropboxiin',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Synkronoi Dropboxiin',
 );

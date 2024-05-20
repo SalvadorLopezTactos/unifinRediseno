@@ -12,6 +12,8 @@
 
 class tracker_queries_monitor extends Monitor implements Trackable {
 
+    public $date_modified;
+    public $query_id;
     var $cached_data = array();
 
     /**
@@ -30,7 +32,7 @@ class tracker_queries_monitor extends Monitor implements Trackable {
             $write_entries = array();
 
             foreach($this->cached_data as $entry) {
-                $query = str_replace(array("\r", "\n", "\r\n", "\t"), ' ', $entry['text']);
+                $query = str_replace(["\r", "\n", "\r\n", "\t"], ' ', (string)$entry['text']);
                 $query = preg_replace("/\s{2,}/", ' ', $query);
                 $query = TrackerUtility::getGenericSQL($query);
                 $entry['text'] = $query;

@@ -15,6 +15,7 @@
  */
 class PopupQuickCreate extends SubpanelQuickCreate{
 
+    public $ev;
     public function __construct($module, $view = 'QuickCreate')
     {
 		$this->defaultProcess = false;

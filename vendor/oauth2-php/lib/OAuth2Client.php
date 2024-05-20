@@ -13,12 +13,12 @@ abstract class OAuth2Client {
 	/**
 	 * The default Cache Lifetime (in seconds).
 	 */
-	const DEFAULT_EXPIRES_IN = 3600;
+	public const DEFAULT_EXPIRES_IN = 3600;
 	
 	/**
 	 * The default Base domain for the Cookie.
 	 */
-	const DEFAULT_BASE_DOMAIN = '';
+	public const DEFAULT_BASE_DOMAIN = '';
 	
 	/**
 	 * Array of persistent variables stored.
@@ -39,7 +39,7 @@ abstract class OAuth2Client {
 	 * The value of the variable.
 	 */
 	public function getVariable($name, $default = NULL) {
-		return isset($this->conf[$name]) ? $this->conf[$name] : $default;
+		return $this->conf[$name] ?? $default;
 	}
 
 	/**
@@ -153,9 +153,9 @@ abstract class OAuth2Client {
 			$session['access_token'] = $access_token['access_token'];
 			$session['base_domain'] = $this->getVariable('base_domain', self::DEFAULT_BASE_DOMAIN);
 			$session['expires'] = isset($access_token['expires_in']) ? time() + $access_token['expires_in'] : time() + $this->getVariable('expires_in', self::DEFAULT_EXPIRES_IN);
-			$session['refresh_token'] = isset($access_token['refresh_token']) ? $access_token['refresh_token'] : '';
-			$session['scope'] = isset($access_token['scope']) ? $access_token['scope'] : '';
-			$session['secret'] = md5(base64_encode(pack('N6', mt_rand(), mt_rand(), mt_rand(), mt_rand(), mt_rand(), uniqid())));
+			$session['refresh_token'] = $access_token['refresh_token'] ?? '';
+			$session['scope'] = $access_token['scope'] ?? '';
+			$session['secret'] = md5(base64_encode(pack('N6', random_int(0, mt_getrandmax()), random_int(0, mt_getrandmax()), random_int(0, mt_getrandmax()), random_int(0, mt_getrandmax()), random_int(0, mt_getrandmax()), uniqid())));
 			
 			// Provide our own signature.
 			$sig = self::generateSignature($session, $this->getVariable('client_secret'));
@@ -325,7 +325,7 @@ abstract class OAuth2Client {
 	 */
 	public function getAccessToken() {
 		$session = $this->getSession();
-		return isset($session['access_token']) ? $session['access_token'] : NULL;
+		return $session['access_token'] ?? NULL;
 	}
 
 	/**
@@ -473,7 +473,7 @@ abstract class OAuth2Client {
 		
 		if (curl_errno($ch) == 60) { // CURLE_SSL_CACERT
 			error_log('Invalid or no certificate authority found, using bundled information');
-			curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/fb_ca_chain_bundle.crt');
+			curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . '/fb_ca_chain_bundle.crt');
 			$result = curl_exec($ch);
 		}
 		
@@ -485,7 +485,7 @@ abstract class OAuth2Client {
 		curl_close($ch);
 		
 		// Split the HTTP response into header and body.
-		list($headers, $body) = explode("\r\n\r\n", $result);
+		[$headers, $body] = explode("\r\n\r\n", $result);
 		$headers = explode("\r\n", $headers);
 		
 		// We catch HTTP/1.1 4xx or HTTP/1.1 5xx error response.
@@ -539,8 +539,8 @@ abstract class OAuth2Client {
 		$base_domain = $this->getVariable('base_domain', self::DEFAULT_BASE_DOMAIN);
 		if ($session) {
 			$value = '"' . http_build_query($session, NULL, '&') . '"';
-			$base_domain = isset($session['base_domain']) ? $session['base_domain'] : $base_domain;
-			$expires = isset($session['expires']) ? $session['expires'] : time() + $this->getVariable('expires_in', self::DEFAULT_EXPIRES_IN);
+			$base_domain = $session['base_domain'] ?? $base_domain;
+			$expires = $session['expires'] ?? time() + $this->getVariable('expires_in', self::DEFAULT_EXPIRES_IN);
 		}
 		
 		// Prepend dot if a domain is found.
@@ -554,7 +554,7 @@ abstract class OAuth2Client {
 		if (headers_sent())
 			error_log('Could not set cookie. Headers already sent.');
 		else
-			setcookie($cookie_name, $value, $expires, '/', $base_domain);
+			setcookie($cookie_name, $value, ['expires' => $expires, 'path' => '/', 'domain' => $base_domain]);
 	}
 
 	/**
@@ -651,7 +651,7 @@ abstract class OAuth2Client {
 	 * The URL for the given parameters.
 	 */
 	protected function getUri($path = '', $params = array()) {
-		$url = $this->getVariable('services_uri') ? $this->getVariable('services_uri') : $this->getVariable('base_uri');
+		$url = $this->getVariable('services_uri') ?: $this->getVariable('base_uri');
 		
 		if (!empty($path))
 			if (substr($path, 0, 4) == "http")

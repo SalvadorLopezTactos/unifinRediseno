@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Muistiinpanoluettelon työpöytä',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Muistiinpanotietueiden työpöytä',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Muistiinpanot-tietolaatikko',
+    'LBL_EXTERNAL_USER' => 'Ulkoinen käyttäjä',
+    'LBL_EXTERNAL_USER_NAME' => 'Ulkoinen käyttäjä',
 
     'LBL_RELATED_CONTACT' => 'Liittyvä kontakti',
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa asiakkaan.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Sähköpostin tyyppi',
     'LBL_EMAIL_ID' => 'Sähköpostin tunnus',
     'LBL_PHONE' => 'Puhelin:',
-    'LBL_PORTAL_FLAG' => 'Näytä Portalissa?',
+    'LBL_PORTAL_FLAG' => 'Saatavana ulkoisesti',
     'LBL_EMBED_FLAG' => 'Upota sähköpostiin?',
     'LBL_PRODUCT_ID' => 'Tarjotun tuotteen ID:',
     'LBL_QUOTE_ID' => 'Tarjouksen ID:',

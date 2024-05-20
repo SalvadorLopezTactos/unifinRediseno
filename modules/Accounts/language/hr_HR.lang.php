@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Nadzorna ploča za popis računa',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapis o računu',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za račune',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Detalji računa',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Ladica fokusa za račune - konzola',
     'LBL_NEXT_RENEWAL_DATE' => 'Datum sljedeće obnove',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Datum sljedeće obnove',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Naziv računa / industrija',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Lokacija',
     'LBL_PURCHASES' => 'Kupovine',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Vremenska linija računa',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organiziraj',
+    'LBL_CREATE_NEW' => 'Stvori novo',
+    'LBL_MANAGE' => 'Upravljaj',
+    'LBL_SEE_DETAILS' => 'Prikaži detalje',
+    'LBL_HIDE_NEW' => 'Sakrij',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikoni',
@@ -207,4 +214,7 @@ Da biste stvorili {{module_name}}:
 2. Kliknite na „Spremi” da biste završili novi zapis i vratili se na prethodnu stranicu.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Izvješća računa',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Vanjski korisnici',
 );

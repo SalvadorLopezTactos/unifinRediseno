@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Keine Benutzerinformationen gefunden',
     'ERR_USER_NAME_EXISTS'              => 'Diesen Benutzernamen {0} gibt es bereits. Doppelte Benutzernamen sind nicht zulässig. Ändern Sie den Benutzernamen.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Die „Sugar Hint“-Lizenz muss mit einem zusätzlichen kompatiblen Lizenztyp gespeichert werden.',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'Diese Funktion ist bereits in Sugar Sell Premier enthalten.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Dieser Benutzer ist in der Sugar-Anwendung gesperrt und kann sich mit seinem aktuellen Passwort nicht anmelden.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Nur extern autorisierter Benutzer ist nicht berechtigt, sich mit Sugar-Anmeldeinformationen anzumelden',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Passwort',
     'LBL_CHOOSE_A_KEY'					=> 'Wählen Sie einen Schlüssel, um ein unautorisiertes Veröffentlichen Ihres Kalenders zu verhindern',
     'LBL_NO_KEY'                        => 'Kein Schlüssel konfiguriert. Bitte geben Sie einen Schlüssel an, um die Veröffentlichung zu aktivieren.',
-	'LBL_CHOOSE_WHICH'					=> 'Wählen Sie aus, welche Module über die obere Navigationsleiste verfügbar sind. Legen Sie die Reihenfolge fest, in der diese angezeigt werden sollen.',
+    'LBL_CHOOSE_WHICH'                  => 'Wählen Sie aus, welche Module über die seitliche Navigationsleiste verfügbar sind. Legen Sie die Reihenfolge fest, in der diese angezeigt werden sollen.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Anzahl der angehefteten Module',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Geben Sie die Anzahl der verfügbaren Module ein, die angeheftet werden sollen, wenn die Navigationsleiste eingeklappt wird (wenn Sie z.B. 5 eingeben, werden die ersten fünf Module in Ihrer Liste angeheftet). Wir empfehlen einen Wert, der Ihren am häufigsten verwendeten Modulen entspricht. Werte über 100 werden nicht berücksichtigt.',
 	'LBL_CITY'							=> 'Stadt',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Leeren',
@@ -545,6 +548,7 @@ Klicken Sie aus "Abbrechen", um die Seite zu schließen, ohne Datensätze zu ver
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP-Benutzername:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP-Servertyp:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP-Server-Spezifikation',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Autorisiertes E-Mail-Konto',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Wählen Sie Ihren E-Mail-Anbieter:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail-Passwort:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail-Benutzername:',
@@ -700,4 +704,9 @@ Klicken Sie aus "Abbrechen", um die Seite zu schließen, ohne Datensätze zu ver
     'LBL_UTILS_USER_TEAMS_ROLES' => 'Benutzer/Teams/Rollen',
     'LBL_LOADING_ITEMS' => 'Laden. Bitte warten...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Smart Guide Zugang',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Smart Guide Zuletzt aktiv',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Fehlender Smart Guide Zugang',
 ); // END STRINGS DEFS

@@ -9,6 +9,9 @@ namespace Elastica\Aggregation;
  */
 class Histogram extends AbstractSimpleAggregation
 {
+    use Traits\KeyedTrait;
+    use Traits\MissingTrait;
+
     /**
      * @param string     $name     the name of this aggregation
      * @param string     $field    the name of the field on which to perform the aggregation
@@ -28,7 +31,7 @@ class Histogram extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setInterval($interval): self
+    public function setInterval($interval)
     {
         return $this->setParam('interval', $interval);
     }

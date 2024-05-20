@@ -24,11 +24,16 @@ use Sugarcrm\Sugarcrm\Security\Subject\ApiClient\Rest as RestApiClient;
 class RestService extends ServiceBase
 {
     /**
+     * @var mixed|string
+     */
+    public $resourceURIBase;
+    public $dict;
+    /**
      * X-Header containging the clients metadata hash
      */
-    const HEADER_META_HASH = "X_METADATA_HASH";
-    const USER_META_HASH = 'X_USERPREF_HASH';
-    const DOWNLOAD_COOKIE = 'download_token';
+    public const HEADER_META_HASH = "X_METADATA_HASH";
+    public const USER_META_HASH = 'X_USERPREF_HASH';
+    public const DOWNLOAD_COOKIE = 'download_token';
 
     public $user;
     /**
@@ -56,7 +61,7 @@ class RestService extends ServiceBase
      * The maximum version accepted
      * @var string
      */
-    protected $max_version = '11.16';
+    protected $max_version = '11.20';
 
     /**
      * An array of api settings
@@ -449,9 +454,10 @@ class RestService extends ServiceBase
      *
      * @param Exception $exception
      */
-    protected function handleException(Exception $exception)
+    protected function handleException(\Throwable $exception)
     {
         $GLOBALS['logic_hook']->call_custom_logic('', "handle_exception", $exception);
+        $httpError = 200;
         if ( is_a($exception,"SugarApiException") ) {
             $httpError = $exception->getHttpCode();
             $errorLabel = $exception->getErrorLabel();
@@ -476,7 +482,11 @@ class RestService extends ServiceBase
         }
         $this->response->setStatus($httpError);
 
-        $GLOBALS['log']->error('An exception happened: ( '.$httpError.': '.$errorLabel.')'.$message);
+        if ($httpError >= 500) {
+            $GLOBALS['log']->fatal('An exception happened: (' . $httpError . ': ' . $errorLabel . ') ' . $message);
+        } else {
+            $GLOBALS['log']->error('An exception happened: (' . $httpError . ': ' . $errorLabel . ') ' . $message);
+        }
         // For edge cases when an HTML response is needed as a wrapper to JSON
         if (isset($_REQUEST['format']) && $_REQUEST['format'] == 'sugar-html-json') {
             $this->response->setType(RestResponse::JSON_HTML, true);
@@ -562,7 +572,7 @@ class RestService extends ServiceBase
             if ($csrfTokens) {
                 $_SESSION[CsrfTokenStorage::SESSION_NAMESPACE] = $csrfTokens;
             }
-            $exception = (isset($e)) ? $e : false;
+            $exception = $e ?? false;
 
             return array('isLoggedIn' => false, 'exception' => $exception);
         }
@@ -788,7 +798,7 @@ class RestService extends ServiceBase
             $apiBase = 'api/rest.php/';
 
             // Check rewritten URLs AND request uri vs script name
-            if (isset($_REQUEST['__sugar_url']) && strpos($_SERVER['REQUEST_URI'], (string) $_SERVER['SCRIPT_NAME']) === false) {
+            if (isset($_REQUEST['__sugar_url']) && strpos($_SERVER['REQUEST_URI'], $_SERVER['SCRIPT_NAME']) === false) {
                 // This is a forwarded rewritten URL
                 $apiBase = 'rest/';
             }

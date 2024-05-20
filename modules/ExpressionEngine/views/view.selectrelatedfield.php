@@ -13,6 +13,15 @@
 
 class ViewSelectRelatedField extends SugarView
 {
+    /**
+     * @var string|\MBPackage
+     */
+    public $package;
+    /**
+     * @var mixed[]|mixed
+     */
+    public $selLink;
+    public $tmodule;
     var $vars = array("tmodule", "selLink");
 
     public function __construct()
@@ -41,8 +50,7 @@ class ViewSelectRelatedField extends SugarView
         //Preload the related fields from the first relationship
         if (!empty($links))
         {
-            reset($links);
-            $link = isset($links[$this->selLink]) ? $links[$this->selLink]: $links[key($links)];
+            $link = $links[$this->selLink] ?? $links[array_key_first($links)];
             $rfields = FormulaHelper::getRelatableFieldsForLink($link, $this->package);
         }
 

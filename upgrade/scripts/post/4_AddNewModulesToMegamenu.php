@@ -104,6 +104,14 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
             'modules' => ['Escalations'],
             'forceVisible' => true,
         ],
+        // 12.3.0 new Smart Guide and Smart Guide Stages Modules
+        [
+            'name' => 'Smart Guide and Smart Guide Stages Modules',
+            'fromVersion' => ['12.3.0', '<'],
+            'toFlavor' => ['ent'],
+            'modules' => ['DRI_Workflows','DRI_SubWorkflows'],
+            'forceVisible' => true,
+        ],
     ];
 
     public function run()

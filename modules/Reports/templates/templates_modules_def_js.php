@@ -87,7 +87,7 @@ var link_defs_<?php echo $module_name_escaped; ?> = new Object();
 
         //if the relationship module does not match the current module and a relationship side is defined
         //then use the linked field module title if available.
-        $relationship_module = isset($linked_field['module']) ? $linked_field['module'] : '' ;
+        $relationship_module = $linked_field['module'] ?? '' ;
         $relateFieldLabel = strtoupper('LBL_' . $field . '_FROM_' . $relationship_module . '_TITLE');
         if ((!empty($relationship_module) && !empty($field)) &&
             $currentModule != $relationship_module &&
@@ -240,7 +240,7 @@ foreach (safeIsIterable($trans_options) ? $trans_options : [] as $option_value =
 // BEGIN HALF-FIX
 				        if(is_array($option_text))
 				        {
-				          $option_text = 'Array';
+                            $option_text = $trans_options[$option_value];
 				        }
     if (!is_scalar($option_text) || !is_scalar($option_value)) {
         LoggerManager::getLogger()->fatal(
@@ -306,7 +306,7 @@ field_defs_<?php echo $module_name_escaped; ?>[ "<?php echo $field_def['name']; 
 
 				        if(is_array($option_text))
 				        {
-				          $option_text = 'Array';
+                            $option_text = $trans_options[$option_value];
 				        }
 				        $option_text = html_entity_decode($option_text,ENT_QUOTES);
 				        $option_text = addslashes($option_text);
@@ -352,8 +352,8 @@ module_defs['<?php echo $module_name_escaped; ?>'].default_table_columns = defau
 module_defs['<?php echo $module_name_escaped; ?>'].summary_field_defs = new Object();
 module_defs['<?php echo $module_name_escaped; ?>'].group_by_field_defs = new Object();
 module_defs['<?php echo $module_name_escaped; ?>'].default_summary_columns = default_summary_columns;
-module_defs['<?php echo $module_name_escaped; ?>'].label = "<?php echo addslashes(
-    isset($app_list_strings['moduleList'][$module_name]) ? $app_list_strings['moduleList'][$module_name] : $module_name);?>";
+module_defs['<?php echo $module_name_escaped; ?>'].label = "<?php
+    echo addslashes($app_list_strings['moduleList'][$module_name] ?? $module_name);?>";
 <?php
 	}
 
@@ -445,7 +445,7 @@ for(module_name in module_defs)
 			}
 
 		}
-		else if(field_type == 'date' || field_type == 'datetime' || field_type == 'datetimecombo')
+        else if(['date', 'datetime', 'datetimecombo', 'service-enddate'].includes(field_type))
 		{
 
 			// create a new "column" for each datetimecombo summary type
@@ -563,6 +563,7 @@ qualifiers[qualifiers.length] = {name:'tp_next_year',value:'<?php echo $mod_stri
 
 filter_defs['date'] = qualifiers;
 filter_defs['datetime'] = qualifiers;
+filter_defs['service-enddate'] = qualifiers;
 
 var qualifiers =  new Array();
 qualifiers[qualifiers.length] = {name:'on',value:'<?php echo $mod_strings['LBL_ON']; ?>'};
@@ -656,6 +657,12 @@ qualifiers[qualifiers.length] = {name:'equals',value:'<?php echo $mod_strings['L
 qualifiers[qualifiers.length] = {name:'empty',value:'<?php echo $mod_strings['LBL_IS_EMPTY']; ?>'};
 qualifiers[qualifiers.length] = {name:'not_empty',value:'<?php echo $mod_strings['LBL_IS_NOT_EMPTY']; ?>'};
 filter_defs['bool'] = qualifiers;
+
+var qualifiers = new Array();
+qualifiers[qualifiers.length] = {name:'equals',value:'<?= $mod_strings['LBL_EQUALS']; ?>'};
+qualifiers[qualifiers.length] = {name:'empty',value:'<?= $mod_strings['LBL_IS_EMPTY']; ?>'};
+qualifiers[qualifiers.length] = {name:'not_empty',value:'<?= $mod_strings['LBL_IS_NOT_EMPTY']; ?>'};
+filter_defs['tinyint'] = qualifiers;
 
 var date_group_defs =  new Array();
 date_group_defs[date_group_defs.length] = {name:'day', value:'<?php echo $mod_strings['LBL_BY_DAY']; ?>'};
@@ -765,7 +772,7 @@ for (module_name in module_defs) {
         var field_def = module_defs[module_name].field_defs[field_name];
         var field_type = field_def.type;
 
-        if (field_type == 'date' || field_type == 'datetime' || field_type == 'datetimecombo') {
+        if (['date', 'datetime', 'datetimecombo', 'service-enddate'].includes(field_type)) {
             // Just loop over the fiscal group bys
             for (stype in fiscalSummary) {
                 module_defs[module_name].group_by_field_defs[field_def.name + ':' + stype] = {
@@ -787,6 +794,7 @@ date_group_defs = date_group_defs.concat(fiscalGroupings);
 var fiscalFilters = {$jsonFiscalFiltersArray};
 filter_defs['date'] = filter_defs['date'].concat(fiscalFilters);
 filter_defs['datetime'] = filter_defs['datetime'].concat(fiscalFilters);
+filter_defs['service-enddate'] = filter_defs['service-enddate'].concat(fiscalFilters);
 filter_defs['datetimecombo'] = filter_defs['datetimecombo'].concat(fiscalFilters);
 EOT;
 

@@ -59,7 +59,7 @@ abstract class SugarForecasting_AbstractForecastArgs
      */
     public function getArg($key)
     {
-        return isset($this->args[$key]) ? $this->args[$key] : "";
+        return $this->args[$key] ?? "";
     }
 
     /**

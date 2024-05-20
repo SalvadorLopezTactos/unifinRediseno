@@ -155,8 +155,8 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Mallit',
     'LBL_RECORD_OTHER_TAB' => 'Muu',
     'LBL_EVENT_START' => 'Alkaa',
-    'LBL_EVENT_END' => 'Päättyy',
-    'LBL_EVENT_END' => 'Päättyy',
+    'LBL_EVENT_END' => 'Loppu',
+    'LBL_EVENT_END' => 'Loppu',
     'LBL_DAY_EVENT_TEMPLATE' => 'Päivittäinen tapahtuma',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Viikoittainen tapahtuma',
     'LBL_MONTH_EVENT_TEMPLATE' => 'Kuukausittainen tapahtuma',
@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'helmikuu',
     'LBL_MARCH' => 'maaliskuu',
     'LBL_APRIL' => 'huhtikuu',
-    'LBL_MAY' => 'toukokuu',
+    'LBL_MAY' => 'Voi',
     'LBL_JUNE' => 'kesäkuu',
     'LBL_JULY' => 'heinäkuu',
     'LBL_AUGUST' => 'elokuu',
@@ -318,7 +318,7 @@ $mod_strings = array (
     'LBL_FEB' => 'helmikuu',
     'LBL_MAR' => 'maaliskuu',
     'LBL_APR' => 'huhtikuu',
-    'LBL_MAY' => 'toukokuu',
+    'LBL_MAY' => 'Voi',
     'LBL_JUN' => 'kesäkuu',
     'LBL_JUL' => 'heinäkuu',
     'LBL_AUG' => 'elokuu',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'lokakuu',
     'LBL_NOV' => 'marraskuu',
     'LBL_DEC' => 'joulukuu',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Kalenteri on jo lisätty',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} on valittuna',
+    'LBL_NO_USER_SELECTED' => 'Valitse käyttäjä tai tiimi',
+    'LBL_NO_CALENDAR_SELECTED' => 'Valitse kalenteri',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Kalenterien tallentaminen epäonnistui.',
 
 );
 

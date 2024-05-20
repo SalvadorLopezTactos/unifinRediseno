@@ -194,4 +194,10 @@ Da biste stvorili {{calls_singular_module}}:
     - Kliknite na „Odaberi sudionika” da biste dodali postojećeg korisnika, kontakt ili potencijalnog klijenta modulu {{calls_singular_module}}.
     - Kliknite na ikonu sa znakom + desno od gumba „Odaberi sudionika” da biste stvorili sudionika modula {{calls_singular_module}} kao novi zapis u aplikaciji Sugar.
 3. Kliknite na „Spremi” da biste završili novi zapis i vratili se na prethodnu stranicu.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Je poziv pametnog vodiča",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Podređeni zadaci',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Podređeni sastanci',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Podređeni pozivi',
 );

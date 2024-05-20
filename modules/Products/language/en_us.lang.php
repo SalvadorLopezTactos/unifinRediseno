@@ -14,7 +14,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Quoted Line Items List Dashboard',
     'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Quoted Line Items Record Dashboard',
-    'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Quoted Line Items Focus Drawer',
+    'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Quoted Line Items Focus Dashboard',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Campaign Quoted Line Item',
     'LBL_MODULE_NAME' => 'Quoted Line Items',

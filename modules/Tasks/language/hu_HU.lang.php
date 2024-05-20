@@ -111,4 +111,13 @@ $mod_strings = array (
 - Ha hiányzó mezőt talál, kattintson a "Több mutatása" opcióra a további mezők felfedéséhez! 
 2. Kattintson a "Mentés" gombra a rekord mentéséhez és a korábbi nézethez való visszatéréshez.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Smart Guide feladat',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Smart Guide feladat',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Smart Guide tevékenység kezdőidőpontja',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Smart Guide tevékeny teljesítésének időpontja',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Smart Guide - teljesítésig hátralévő napok száma',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => 'Gyermek megbeszélések',
+    'LBL_PARENT_TASK_OF_CALL_REL' => 'Gyermek hívások',
+    'LBL_PARENT_TASK_OF_TASK_REL' => 'Gyermek feladatok',
 );

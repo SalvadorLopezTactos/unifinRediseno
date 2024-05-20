@@ -14,6 +14,8 @@ $viewdefs['base']['filter']['operators'] = array(
     'multienum' => array(
         '$contains' => 'LBL_OPERATOR_CONTAINS',
         '$not_contains' => 'LBL_OPERATOR_NOT_CONTAINS',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'enum' => array(
         '$in' => 'LBL_OPERATOR_CONTAINS',
@@ -24,22 +26,32 @@ $viewdefs['base']['filter']['operators'] = array(
     'varchar' => array(
         '$equals' => 'LBL_OPERATOR_MATCHES',
         '$starts' => 'LBL_OPERATOR_STARTS_WITH',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'name' => array(
         '$equals' => 'LBL_OPERATOR_MATCHES',
         '$starts' => 'LBL_OPERATOR_STARTS_WITH',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'email' => array(
         '$equals' => 'LBL_OPERATOR_MATCHES',
         '$starts' => 'LBL_OPERATOR_STARTS_WITH',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'text' => array(
         '$equals' => 'LBL_OPERATOR_MATCHES',
         '$starts' => 'LBL_OPERATOR_STARTS_WITH',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'textarea' => array(
         '$equals' => 'LBL_OPERATOR_MATCHES',
         '$starts' => 'LBL_OPERATOR_STARTS_WITH',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'currency' => array(
         '$equals' => 'LBL_OPERATOR_EQUALS',
@@ -59,6 +71,20 @@ $viewdefs['base']['filter']['operators'] = array(
         '$gte' => 'LBL_OPERATOR_GREATER_THAN_OR_EQUALS',
         '$lte' => 'LBL_OPERATOR_LESS_THAN_OR_EQUALS',
         '$between' => 'LBL_OPERATOR_BETWEEN',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
+    ),
+    'autoincrement' => array(
+        '$equals' => 'LBL_OPERATOR_EQUALS',
+        '$not_equals' => 'LBL_OPERATOR_NOT_EQUALS',
+        '$in' => 'LBL_OPERATOR_CONTAINS',
+        '$gt' => 'LBL_OPERATOR_GREATER_THAN',
+        '$lt' => 'LBL_OPERATOR_LESS_THAN',
+        '$gte' => 'LBL_OPERATOR_GREATER_THAN_OR_EQUALS',
+        '$lte' => 'LBL_OPERATOR_LESS_THAN_OR_EQUALS',
+        '$between' => 'LBL_OPERATOR_BETWEEN',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'double' => array(
         '$equals' => 'LBL_OPERATOR_EQUALS',
@@ -77,6 +103,8 @@ $viewdefs['base']['filter']['operators'] = array(
         '$gte' => 'LBL_OPERATOR_GREATER_THAN_OR_EQUALS',
         '$lte' => 'LBL_OPERATOR_LESS_THAN_OR_EQUALS',
         '$between' => 'LBL_OPERATOR_BETWEEN',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'decimal' => array(
         '$equals' => 'LBL_OPERATOR_EQUALS',
@@ -86,6 +114,8 @@ $viewdefs['base']['filter']['operators'] = array(
         '$gte' => 'LBL_OPERATOR_GREATER_THAN_OR_EQUALS',
         '$lte' => 'LBL_OPERATOR_LESS_THAN_OR_EQUALS',
         '$between' => 'LBL_OPERATOR_BETWEEN',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'date' => array(
         '$equals' => 'LBL_OPERATOR_EQUALS',
@@ -105,6 +135,8 @@ $viewdefs['base']['filter']['operators'] = array(
         'this_year' => 'LBL_OPERATOR_THIS_YEAR',
         'next_year' => 'LBL_OPERATOR_NEXT_YEAR',
         '$dateBetween' => 'LBL_OPERATOR_BETWEEN',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'datetime' => array(
         '$starts' => 'LBL_OPERATOR_EQUALS',
@@ -124,6 +156,8 @@ $viewdefs['base']['filter']['operators'] = array(
         'this_year' => 'LBL_OPERATOR_THIS_YEAR',
         'next_year' => 'LBL_OPERATOR_NEXT_YEAR',
         '$dateBetween' => 'LBL_OPERATOR_BETWEEN',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'datetimecombo' => array(
         '$starts' => 'LBL_OPERATOR_EQUALS',
@@ -143,6 +177,8 @@ $viewdefs['base']['filter']['operators'] = array(
         'this_year' => 'LBL_OPERATOR_THIS_YEAR',
         'next_year' => 'LBL_OPERATOR_NEXT_YEAR',
         '$dateBetween' => 'LBL_OPERATOR_BETWEEN',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'bool' => array(
         '$equals' => 'LBL_OPERATOR_IS'
@@ -150,6 +186,8 @@ $viewdefs['base']['filter']['operators'] = array(
     'relate' => array(
         '$in' => 'LBL_OPERATOR_CONTAINS',
         '$not_in' => 'LBL_OPERATOR_NOT_CONTAINS',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'teamset' => array(
         '$in' => 'LBL_OPERATOR_CONTAINS',
@@ -158,10 +196,14 @@ $viewdefs['base']['filter']['operators'] = array(
     'phone' => array(
         '$starts' => 'LBL_OPERATOR_STARTS_WITH',
         '$equals' => 'LBL_OPERATOR_IS',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'radioenum' => array(
         '$equals' => 'LBL_OPERATOR_IS',
         '$not_equals' => 'LBL_OPERATOR_IS_NOT',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'parent' => array(
         '$equals' => 'LBL_OPERATOR_IS',

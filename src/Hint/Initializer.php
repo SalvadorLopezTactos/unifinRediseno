@@ -76,6 +76,7 @@ class Initializer implements LoggerAwareInterface
      */
     public function initClonedInstance($oldTriple, $newTriple)
     {
+        $cloneCompletionLog = null;
         if ($this->justLicenseChanged($oldTriple, $newTriple)) {
             $this->logger->info('Recording license update change');
             // when the license is changed update the license in ISS and DE.
@@ -478,9 +479,8 @@ class Initializer implements LoggerAwareInterface
         $nonInactiveUsersQuery = new \SugarQuery();
         $nonInactiveUsersQuery->select(['id']);
         // using status Active should screen out fake users like the snip user
-        $nonInactiveUsersQuery->from($user)->where()->queryAnd()
-            ->condition('status', '=', 'Active')
-            ->condition('deleted', '=', '0');
+        $nonInactiveUsersQuery->from($user)->where()->condition('status', '=', 'Active');
+        $nonInactiveUsersQuery->from($user)->where()->queryAnd()->equals('deleted', '0');
 
         $assignedUserIds = array_column($query->execute(), 'id');
         $nonInactiveUserIds = array_column($nonInactiveUsersQuery->execute(), 'id');

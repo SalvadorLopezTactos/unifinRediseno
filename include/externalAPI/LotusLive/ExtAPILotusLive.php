@@ -23,6 +23,23 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument {
 
+    /**
+     * @var mixed|array<string, mixed>
+     */
+    public $api_data;
+    /**
+     * @var mixed
+     */
+    public $meetingID;
+    /**
+     * @var mixed
+     */
+    public $joinURL;
+    /**
+     * @var mixed
+     */
+    public $subscriberID;
+
     static protected $llMimeWhitelist = array(
         'application/msword',
         'application/pdf',
@@ -359,6 +376,7 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
     public function shareDoc($documentId, $emails){}
 
     public function loadDocCache($forceReload = false) {
+        $docCache = [];
         global $db, $current_user;
 
         create_cache_directory('/include/externalAPI/');
@@ -398,7 +416,7 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
             $result = array();
 
             $idTmp = $xp->query('.//atom:id',$fileNode);
-            list($dontcare,$result['id']) = explode("!",$idTmp->item(0)->textContent);
+            [$dontcare, $result['id']] = explode("!", $idTmp->item(0)->textContent);
 
             $nameTmp = $xp->query('.//atom:title',$fileNode);
             $result['name'] = $nameTmp->item(0)->textContent;
@@ -542,6 +560,7 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
    	 */
    	protected function getErrorStringFromCode($error='')
    	{
+        $language_key = null;
         //For non-string or empty error number/message, just return a generic message for now
         if(empty($error) || !is_string($error))
         {

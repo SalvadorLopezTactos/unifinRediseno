@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => '标签记录仪表板',
     'LBL_MY_TAGS' => '我的标签',
     'LBL_MY_FAVORITE_TAGS' => '我的收藏夹标签',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} 标签',
 );

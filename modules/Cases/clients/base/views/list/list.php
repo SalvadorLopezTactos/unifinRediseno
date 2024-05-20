@@ -17,13 +17,14 @@ $viewdefs['Cases']['base']['view']['list'] = array(
             'label' => 'LBL_PANEL_1',
             'fields' =>
             array(
-                array(
+                [
                     'name' => 'case_number',
                     'label' => 'LBL_LIST_NUMBER',
+                    'link' => true,
                     'default' => true,
                     'enabled' => true,
                     'readonly' => true,
-                ),
+                ],
                 array(
                     'name' => 'name',
                     'label' => 'LBL_LIST_SUBJECT',

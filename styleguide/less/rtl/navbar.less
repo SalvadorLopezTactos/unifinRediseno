@@ -1,4 +1,7 @@
 .navbar.navbar-fixed-top {
+  left: 0;
+  right: @sidebarNavWidth;
+
   .navbar-inner {
     .nav.megamenu {
       float: right;
@@ -117,8 +120,6 @@
 
 .navbar {
   .search {
-    padding: 0 22px 0 6px;
-
     .navbar-search {
       border-left: none;
       border-right: @borderWidget;
@@ -144,9 +145,6 @@
     }
 
     .quicksearch-button-wrapper {
-      right: auto;
-      left: 4px;
-
       > .btn {
         margin-right: 0;
       }
@@ -175,6 +173,13 @@
   .nav #createList {
     border-right: @borderWidget;
     border-left: 0;
+  }
+
+  .nav-collapse {
+    > div:nth-last-child(2) {
+      margin-left: 0;
+      margin-right: auto;
+    }
   }
 
   #userList .dropdown .btn-group {

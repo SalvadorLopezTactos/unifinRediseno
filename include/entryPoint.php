@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Deprecation\Symfony as SymfonyDeprecationHandler;
+use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 /**
@@ -69,8 +71,6 @@ if(empty($GLOBALS['installing']) && !file_exists('config.php'))
 	exit ();
 }
 
-error_reporting(error_reporting() & ~E_DEPRECATED);
-
 require __DIR__ . '/../vendor/autoload.php';
 
 if(empty($GLOBALS['installing']) &&empty($sugar_config['dbconfig']['db_name']))
@@ -109,6 +109,10 @@ setPhpIniSettings();
 
 require_once('sugar_version.php'); // provides $sugar_version, $sugar_db_version, $sugar_flavor
 
+if ($sugar_config['symfony_deprecation_log'] ?? false) {
+    new SymfonyDeprecationHandler(LoggerFactory::getLogger('deprecation'));
+}
+
 // Initialize InputValdation service as soon as possible. Up to this point
 // it is expected that no code has altered any input superglobals.
 InputValidation::initService();
@@ -128,7 +132,7 @@ UploadStream::register();
 ///////////////////////////////////////////////////////////////////////////////
 ////    Handle loading and instantiation of various Sugar* class
 if (!defined('SUGAR_PATH')) {
-    define('SUGAR_PATH', realpath(dirname(__FILE__) . '/..'));
+    define('SUGAR_PATH', realpath(__DIR__ . '/..'));
 }
 if(empty($GLOBALS['installing'])){
 ///////////////////////////////////////////////////////////////////////////////
@@ -158,7 +162,7 @@ $timedate = TimeDate::getInstance();
 $GLOBALS['timedate'] = $timedate;
 
     if (!empty($sugar_config['dbal_deprecation_log'])) {
-        \Doctrine\Deprecations\Deprecation::enableWithPsrLogger(\Sugarcrm\Sugarcrm\Logger\Factory::getLogger('deprecation'));
+        \Doctrine\Deprecations\Deprecation::enableWithPsrLogger(LoggerFactory::getLogger('deprecation'));
     }
 
 $db = DBManagerFactory::getInstance();

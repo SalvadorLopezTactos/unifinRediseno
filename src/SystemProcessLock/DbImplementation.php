@@ -30,10 +30,15 @@ class DbImplementation
 {
     private const TABLE = 'system_process_lock';
     private $connection;
+    public $isAvailable = false;
 
     public function __construct()
     {
-        $this->connection = DBManagerFactory::getInstance()->getConnection();
+        $dbManagerFactory = DBManagerFactory::getInstance();
+        if ($dbManagerFactory) {
+            $this->connection = $dbManagerFactory->getConnection();
+            $this->isAvailable = $dbManagerFactory->tableExists(self::TABLE);
+        }
     }
 
     public function lock(string $uniqueId, string $additionalKey, int $timeoutSeconds): bool

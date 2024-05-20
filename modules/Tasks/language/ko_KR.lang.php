@@ -111,4 +111,13 @@ $mod_strings = array (
 - 필요한경우추가필드를노출하려면 "더보기"를클릭합니다. 
 2. “저장하기”를 클릭하여 새 기록을 완성하고 이전 페이지로 돌아갑니다.',
 
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_TYPE' => 'Smart Guide 업무',
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Smart Guide 업무입니다',
+    'LBL_CJ_ACTIVITY_START_DATE' => 'Smart Guide 활동 시작일',
+    'LBL_CJ_ACTIVITY_COMPLETION_DATE' => 'Smart Guide 활동 완료일',
+    'LBL_CJ_DAYS_TO_COMPLETE' => 'Smart Guide - 완료까지 일수',
+    'LBL_PARENT_TASK_OF_MEETING_REL' => '하위 회의',
+    'LBL_PARENT_TASK_OF_CALL_REL' => '하위 통화',
+    'LBL_PARENT_TASK_OF_TASK_REL' => '하위 업무',
 );

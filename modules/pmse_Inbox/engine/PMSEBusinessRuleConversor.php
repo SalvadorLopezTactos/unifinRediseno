@@ -168,7 +168,7 @@ class PMSEBusinessRuleConversor
                  * rules store that value in expField instead of expCurrency, but also checking
                  * for expCurrency allows this to work if that is ever fixed.
                  */
-                $criteriaToken->expCurrency = (isset($parsed->expCurrency)) ? $parsed->expCurrency : $parsed->expField;
+                $criteriaToken->expCurrency = $parsed->expCurrency ?? $parsed->expField;
                 break;
             default:
                 $criteriaToken->expSubtype = $valueToken->type;

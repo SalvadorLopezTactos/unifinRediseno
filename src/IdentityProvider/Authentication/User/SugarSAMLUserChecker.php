@@ -63,9 +63,9 @@ class SugarSAMLUserChecker extends UserChecker
     /**
      * Find or create Sugar User.
      *
-     * @param User $user
+     * @param UserInterface $user
      */
-    protected function loadSugarUser(User $user)
+    protected function loadSugarUser(UserInterface $user)
     {
         $nameIdentifier = $user->getUsername();
         $provision = $user->getAttribute('provision');

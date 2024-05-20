@@ -34,7 +34,7 @@ if(empty($sugarbean->id)) {
     $sugarbean->new_with_id = true;
 }
 
-$check_notify = isset($GLOBALS['check_notify']) ? $GLOBALS['check_notify'] : false;
+$check_notify = $GLOBALS['check_notify'] ?? false;
 $sugarbean->save($check_notify);
 $return_id = $sugarbean->id;
 
@@ -54,4 +54,3 @@ if (!empty($_POST['type']) && $_POST['type'] !== $_POST['old_type']) {
 	}
 }
 handleRedirect($return_id, 'Contracts');
-?>

@@ -15,6 +15,9 @@ if(empty($dictionary['User'])){
 }
 $dictionary['Employee']=$dictionary['User'];
 
+$dictionary['Employee']['color'] = 'teal';
+$dictionary['Employee']['icon'] = 'sicon-user-group-lg';
+
 // Enable the employee module for full text search
 $dictionary['Employee']['full_text_search'] = true;
 

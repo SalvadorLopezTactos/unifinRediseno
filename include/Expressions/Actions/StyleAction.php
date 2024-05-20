@@ -11,7 +11,11 @@
  */
 
 class StyleAction extends AbstractAction{
-	protected $expression =  "";
+    /**
+     * @var mixed[]|string[][]|string[]|mixed
+     */
+    public $attributes;
+    protected $expression = "";
 	
     public function __construct($params)
     {
@@ -96,11 +100,11 @@ SUGAR.util.extend(SUGAR.forms.StyleAction, SUGAR.forms.AbstractAction, {
 	 *
 	 */
 	function getDefinition() {
-		return array(	
-			"action" => $this->getActionName(), 
-	        "target" => $this->targetField, 
-	        "attrs" => $this->attributes,
-	    );
+        return array(
+            "action" => static::getActionName(),
+            "target" => $this->targetField,
+            "attrs" => $this->attributes,
+        );
 	}
 	
 	static function getActionName() {

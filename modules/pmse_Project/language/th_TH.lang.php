@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'ปุ่มของฟอร์ม',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'อนุมัติ/ปฏิเสธ',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'กำหนดเส้นทาง',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'ส่งไปยัง DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'ตัวเลือกการกำหนดเส้นทางอื่น',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'เปลี่ยนผู้ใช้ที่ระบุ',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'ทีม',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'ผสานเอกสาร',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'เลือก...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'ผสานเอกสารเป็น PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'ส่งเอกสารที่ผสานทางอีเมล',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'ผสานเอกสาร',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'ประเภทเกตเวย์ที่บรรจบกันไม่ตรงกับประเภทเกตเวย์ของโฟลว์ขาเข้า',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'เกตเวย์ที่แยกกันขยายกระบวนการไปยังหลายสาขา เมื่อเราใช้เกตเวย์แบบบรรจบกันเพื่อรวมสาขาเหล่านี้กลับมาเป็นเส้นทางเดียวกัน เราจะต้องใช้ประเภทเกตเวย์แบบบรรจบกันที่ถูกต้อง ซึ่งจะขึ้นอยู่กับประเภทของเกตเวย์แบบบรรจบกันที่ใช้ในการสร้างสาขาเหล่านั้น ทั้งนี้ สำหรับสาขาที่สร้างด้วยเกตเวย์แบบบรรจบกันที่ตั้งอยู่บนเกตเวย์เฉพาะตัว หรือเกตเวย์ตามเหตุการณ์ ให้ใช้เกตเบย์เฉพาะตัวในการรวมมันเข้ากันอีกครั้ง และสำหรับสาขาที่สร้างด้วยเกตเวย์ขนาน หรือเกตเวย์แบบรวม ให้ใช้เกตเวย์ขนานในการรวมเกตเวย์เพื่อบรรจบมันเข้าไว้ด้วยกันอีกครั้ง',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'ฟิลด์โมดูล',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'ความสัมพันธ์โมดูล',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'ผู้ใช้',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'บทบาท',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'ทีม',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'กิจกรรมแบบฟอร์ม',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'กฎทางธุรกิจ',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'การดำเนินการด้านกฎธุรกิจ',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'เทมเพลตอีเมล',
 );

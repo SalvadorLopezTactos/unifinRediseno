@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"このフィールドがレイアウトで必須かどうかを決定する数式を作成します。<br/>"
-    . "必須フィールドは、ブラウザベースのモバイルビューの数式に従いますが、<br/>"
-    . "sugar Mobile for iPhoneなどのネイティブアプリケーション内の数式に従いません。<br/>"
-    . "これはSugarセルフサービスポータル内の数式を継承しません。",
-'LBL_POPHELP_READONLY'=>"このフィールドがレイアウトで読み取り専用かどうかを決定する数式を作成します。<br/>"
+    'LBL_POPHELP_REQUIRED'=>'条件付きで必須となるフィールドは、次のSugarBPMのアクションタイプでは使用できません：「関連するレコードを追加」、「フィールドを変更」。これらのプロセス定義アクションでこのフィールドを使用するには、「次の場合は必須」テキストを削除してください。',
+'LBL_POPHELP_READONLY'=>"レイアウトでこのフィールドを読み取り専用にするかどうかを決定する数式を作成します。<br/>"
         . "読み取り専用フィールドは、ブラウザベースのモバイルビューの数式に従いますが、<br/>"
-        . "Sugar Mobile for iPhoneなどのネイティブアプリケーション内の数式に従いません。<br/>"
-        . "これはSugarセルフサービスポータル内の数式を継承しません。",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'このモジュールのグローバル検索を使用してレコードを検索するときに、このフィールドを使用するように選択します。',
+        . "Sugar Mobile for iPhoneなどのネイティブアプリケーション内の数式には従いません。<br/>"
+        . "またこれは、Sugarセルフサービスポータル内の数式に従いません。",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'このモジュールのグローバル検索を使用してレコードを検索するときに、このフィールドを使用することを選択します。',
 //Revert Module labels
 'LBL_RESET' => 'リセット',
 'LBL_RESET_MODULE' => 'モジュールをリセット',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'小数点',
                 'autoincrement' => '自動インクレメント',
                 'actionbutton' => 'ActionButton',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "よく利用されるラベル",

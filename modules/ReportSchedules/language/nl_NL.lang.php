@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Dashboard record rapportschema&#39;s',
     'LBL_FILE_TYPE' => 'Bestandstype(&#39;s)',
+    'LBL_EMBED_REPORT' => 'Rapport insluiten in e-mail',
+    'LBL_EMBED_REPORT_INFO' => 'Opmerking: als het rapport groter is dan 200 rijen, voegen we het rapport als CSV-bestand toe.',
 );

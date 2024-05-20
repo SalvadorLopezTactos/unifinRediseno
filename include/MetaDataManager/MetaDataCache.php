@@ -75,7 +75,7 @@ class MetaDataCache implements LoggerAwareInterface
 
     public function reset()
     {
-        $this->clearCacheTable();
+        static::clearCacheTable();
     }
 
     /**

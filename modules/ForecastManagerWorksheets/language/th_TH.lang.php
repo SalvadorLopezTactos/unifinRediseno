@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'ค่าไม่ถูกต้องสำหรับ {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'ค่าต้องอยู่ระหว่าง {{min}} และ {{max}}',
-    'LBL_HISTORY_LOG' => 'คอมมิตครั้งล่าสุด',
+    'LBL_HISTORY_LOG' => 'คำมั่นก่อนหน้า',
     'LBL_NO_COMMIT' => 'ไม่มีการคอมมิตก่อนหน้า',
 
     'LBL_MANGER_SAVED' => 'บันทึกผู้จัดการแล้ว'

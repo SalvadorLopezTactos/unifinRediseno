@@ -251,12 +251,35 @@
             app.events.trigger('ccp:initiated');
 
             agent.onStateChange(function(agentStateChange) {
-                var isOffline = agentStateChange.newState.toLowerCase() === connect.AgentStateType.OFFLINE;
-                var configMode = (isOffline) ? 'init' : 'disabled';
-
-                $('.omni-button .config-menu').attr('data-mode', configMode);
+                let isOffline = agentStateChange.newState.toLowerCase() === connect.AgentStateType.OFFLINE;
+                let omnichannelConfigButton = $('#omnichannel_sidebar-nav-item .sidebar-nav-item-kebab');
+                let omnichannelDisabledButton = $('#omnichannel_sidebar-nav-item .sidebar-nav-item-kebab-disabled');
+                if (isOffline) {
+                    self._toggleDisplay(omnichannelDisabledButton, false);
+                    self._toggleDisplay(omnichannelConfigButton, true);
+                } else {
+                    self._toggleDisplay(omnichannelDisabledButton, true);
+                    self._toggleDisplay(omnichannelConfigButton, false);
+                }
             });
         });
+    },
+
+    /**
+     * Toggle show/hide on the element
+     *
+     * @param {Event} element to show/hide
+     * @param {boolean} display True to show and False to hide
+     * @private
+     */
+    _toggleDisplay: function(element, display) {
+        if (display) {
+            element.removeClass('hide');
+            element.addClass('show');
+        } else {
+            element.removeClass('show');
+            element.addClass('hide');
+        }
     },
 
     /**
@@ -507,7 +530,8 @@
                 // context in which they were matched
                 var models = this._formatRecordMatchResults(results);
                 var context = this._getRecordMatchContext(contact);
-                this.layout.trigger('contact:records:matched', contact, models, context);
+                var moduleList = this._getSearchModules();
+                this.layout.trigger('contact:records:matched', contact, models, context, moduleList);
             }, this)
         };
 
@@ -1168,6 +1192,7 @@
      * @param {Object} contact Connect-streams Contact object.
      */
     saveModelError: function(contact) {
+        this.hideSavingMessage();
         app.logger.error('Failed to update call/chat record for ' + contact.getContactId());
     },
 
@@ -1200,22 +1225,130 @@
      * @param {boolean} contactClosed True if coming from the _closeConnectionRecord chain.
      */
     saveModel: function(model, contact, contactClosed = false) {
+        if (contactClosed) {
+            this.hideSavingMessage();
+            app.alert.dismiss('ccp-validation');
+        }
+
+        const omniDetailView = this.layout.getComponent('omnichannel-detail');
+        if (omniDetailView) {
+            omniDetailView.clearValidationErrors();
+        }
+
         // if there's no model id, don't save the model
         if (!model.id) {
             return;
         }
 
+        model.doValidate(this.getValidationFields(model), (isValid, errors) => {
+            this.saveOnValidate(model, contact, contactClosed, isValid, errors);
+        });
+    },
+
+    /**
+     * Save a model after validation process
+     *
+     * @param {Bean} model The model to be saved.
+     * @param {Object} contact Connect-streams Contact object.
+     * @param {boolean} contactClosed True if coming from the _closeConnectionRecord chain.
+     * @param {boolean} isValid Status of validation
+     * @param {Array} errors List of errors
+     */
+    saveOnValidate: function(model, contact, contactClosed, isValid, errors) {
         var options = {
             silent: true,
             showAlerts: false,
             error: _.bind(this.saveModelError, this, contact)
         };
 
-        if (_.contains(['Held', 'Completed'], model.get('status'))) {
-            options.success = _.bind(this.saveModelSuccess, this, model, contactClosed);
+        options.success = () => {
+            this.showSavingMessage(true);
+
+            if (_.contains(['Held', 'Completed'], model.get('status'))) {
+                this.saveModelSuccess(model, contactClosed);
+            }
+        };
+
+        if (isValid) {
+            this.showSavingMessage();
+            model.save(null, options);
+        } else {
+            this.onValidationFailed(model, options, errors, contactClosed);
+        }
+    },
+
+    /**
+     * Show an error message if there is an error during validation process.
+     * Set previous value for invalid field if other field was saved
+     *
+     * @param {Bean} model Current model
+     * @param {Object} options Options for the saving
+     * @param {Array} errors List of errors
+     * @param {boolean} contactClosed True if coming from the _closeConnectionRecord chain.
+     */
+    onValidationFailed: function(model, options, errors, contactClosed) {
+        const changedAttrs = model.changedAttributes(model.getSynced());
+        const invalidAttrs = _.keys(errors || {});
+        const validAttrs = _.omit(changedAttrs, invalidAttrs);
+
+        if (!_.isEmpty(validAttrs)) {
+            // Use old valid value for an invalid field in case
+            // if a data from other field was changed and it's valid (this data should be saved)
+            this.showSavingMessage();
+
+            const invA = invalidAttrs[0];
+            const prevValue = model.getSynced()[invA];
+            model.set(invA, prevValue);
+            model.save(null, options);
         }
 
-        model.save(null, options);
+        if (!contactClosed) {
+            app.alert.show('ccp-validation', {
+                level: 'error',
+                messages: app.lang.get('ERR_RESOLVE_ERRORS'),
+            });
+        }
+    },
+
+    /**
+     * Return list of fields those should be validated
+     *
+     * @param {Bean} model Current model
+     * @return {Array} List of fields for the validation
+     */
+    getValidationFields: function(model) {
+        const omniDetailView = this.layout.getComponent('omnichannel-detail');
+
+        if (!omniDetailView || !omniDetailView.meta) {
+            return [];
+        }
+
+        const fields = omniDetailView.meta.fields || [];
+        const keys = fields.map((v) => v.name);
+
+        return _.pick(model.fields, keys);
+    },
+
+    /**
+     * Hide saving message
+     */
+    hideSavingMessage: function() {
+        const blockEl = $('.omni-detail-title .loading');
+        blockEl.removeClass(['saving', 'saved']);
+    },
+
+    /**
+     * Show saving message
+     *
+     * @param {boolean} saved True if saving process is completed
+     */
+    showSavingMessage: function(saved = false) {
+        const blockEl = $('.omni-detail-title .loading');
+        const textEl = blockEl.find('> span');
+
+        blockEl.removeClass(['saving', 'saved']);
+        blockEl.addClass(saved ? 'saved' : 'saving');
+        textEl.html(app.lang.get(saved ? 'LBL_SAVED' : 'LBL_SAVING'));
     },
 
     /**

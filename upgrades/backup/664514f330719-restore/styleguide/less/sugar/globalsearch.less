@@ -1,0 +1,552 @@
+/* GLOBAL SEARCH
+  ----------------*/
+
+.navbar {
+  .search {
+    padding: 0 6px;
+    position: relative;
+    min-width: 170px !important;
+
+    // Tags UL dropdown menu
+    .quicksearch-tags {
+      display: block;
+      height: 2.25rem;
+      top: 100%;
+      right: 0;
+      margin-top: 0;
+      font-size: 0;
+      background: @primaryContentBackground;
+      border: @borderWidget;
+      border-radius: 0 0 3px 3px;
+      box-sizing: border-box;
+      // Match left margin from ul element styling.
+      margin-left: 25px;
+
+      .tags {
+        .tag-wrapper {
+          .mt-2();
+          .mb-0\.5();
+          .ml-1();
+          .px-0\.5();
+
+          .tag-name {
+            line-height: 0.175rem;
+
+            a {
+              .p-1();
+              .border-t-0();
+
+              background-color: @gray80;
+            }
+          }
+        }
+      }
+
+      &.hide {
+        display: none;
+      }
+
+      .qs-tag-icon > .sicon {
+        color: @sicon-color;
+      }
+
+      .qs-tags-row {
+        font-size: 12px;
+        display: inline-block;
+        border-right: 2px solid @borderColor;
+        position: relative;
+
+        &.active {
+          background: @dropdownLinkBackgroundHover;
+        }
+
+        a {
+          color: @textColor;
+          padding: 0;
+          border-top: 0;
+        }
+      }
+    }
+
+    // Typeahead UL dropdown menu
+    .typeahead {
+      height: auto;
+      top: 100%;
+      right: -1px;
+      left: 1px;
+      overflow: hidden;
+
+      li {
+        min-width: 120px;
+        padding: 0;
+      }
+
+      li > a,
+      li > div.qs-row {
+        padding: 6px 0 2px 7px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        min-height: 22px;
+      }
+
+      li.no-results,
+      li.view-all-results a {
+        padding: 8px 10px;
+      }
+    }
+
+    // Override the styling of the .navbar-search
+    // if tag results are shown
+    &.quicksearch-tags-open {
+      .navbar-search {
+        border-bottom: none;
+        border-radius: 5px 5px 0 0;
+      }
+
+      .quicksearch-tags-wrapper::after {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 34px;
+        background-color: @transparent;
+        pointer-events: all;
+      }
+
+      // A non-ideal solution for the rendering position of the search results list. This is necessary
+      // because we need to give some room to the tags list before the typeahead/results list. Using
+      // top: 100% on the typeahead normally allows us to always render under the navbar, and using
+      // top: 175% here we are doing the same thing, just allowing some room for the tags list.
+      .typeahead {
+        top: 175%;
+      }
+    }
+  }
+}
+
+// Navbar search input and controls
+.navbar-search {
+  float: none;
+  margin: 0;
+  white-space: nowrap;
+  // Module type table cell
+  .quicksearch-modulelist-wrapper {
+    vertical-align: top;
+    cursor: pointer;
+
+    .module-dropdown {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      font-size: 0;
+    }
+
+    .label {
+      margin-right: 3px;
+      cursor: inherit;
+    }
+
+    .non-module-label {
+      font-weight: 500;
+      padding: 4px 6px;
+      line-height: 10px;
+      min-width: 25px;
+    }
+
+    .fa.fa-caret-down {
+      color: @gray70;
+    }
+
+    &.open {
+      .fa.fa-caret-down {
+        color: @black;
+      }
+    }
+
+    .module-dropdown-button {
+      margin-top: 0;
+      margin-left: 0;
+      padding: 0;
+      cursor: inherit;
+      vertical-align: top;
+
+      &:focus {
+        outline-offset: -2px;
+        outline: dotted 1px #717171;
+        outline-color: -moz-mac-focusring;
+        outline-color: -webkit-focus-ring-color;
+      }
+    }
+
+    .module-dropdown-list {
+      position: fixed;
+      left: auto;
+      right: auto;
+      top: 50px;
+      width: 200px;
+      overflow-y: auto;
+      height: calc(~"100% - 100px");
+    }
+
+    .menu-item {
+      padding: 8px 10px;
+      // border-bottom: 1px solid #e4e4e4;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      &:focus,
+      &:hover {
+        text-decoration: none;
+        filter: none;
+
+        .sicon.sicon-check {
+          color: @white;
+        }
+      }
+
+      .sicon.sicon-check {
+        color: @gray70;
+        visibility: hidden;
+        margin-right: 10px;
+      }
+
+      &.selected {
+        font-weight: 600;
+
+        .sicon.sicon-check {
+          visibility: visible;
+        }
+      }
+    }
+  }
+  // Inner wrapper for each individual tag result pill
+  .tag-wrapper {
+    position: relative;
+    display: inline;
+    margin: 2px 4px;
+    padding: 2px 4px 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 12px;
+    color: @white;
+    white-space: nowrap;
+    background: @gray80;
+    border: none;
+    border-radius: 11px;
+    box-shadow: none;
+
+    &.highlight {
+      background: @black;
+    }
+
+    div.tag-name {
+      display: inline;
+      font-size: 11px;
+      line-height: 13px;
+    }
+
+    a.tag-remove {
+      position: static;
+      display: inline;
+      width: 12px;
+      height: 13px;
+      top: 4px;
+      right: 3px;
+      left: 3px;
+      font-family: FontAwesome;
+      font-size: 12px;
+      font-weight: normal;
+      text-decoration: none;
+      line-height: 12px;
+      color: fade(@white, 70%);
+      background: none;
+    }
+
+    a,
+    a.tag-remove:hover {
+      color: @white;
+    }
+
+    a.tag-remove::before {
+      content: "\f057";
+    }
+  }
+  // Input field table cell
+  .quicksearch-bar-wrapper {
+    width: 100%;
+  }
+  // Input field
+  .search-query {
+    border: none;
+    float: none;
+    color: @textColor;
+    min-height: 28px;
+    min-width: 140px;
+    text-overflow: ellipsis;
+    width: 100%;
+    box-sizing: border-box;
+    transition: none;
+    .placeholder(@placeholderText);
+  }
+}
+
+// Global search icon button
+.quicksearch-button-wrapper {
+  position: absolute;
+  top: 8px;
+  right: 4px;
+
+  .btn:focus:not(.disabled):not(:active) {
+    .tab-focus();
+  }
+
+  > .btn {
+    padding: 7px;
+
+    .fa-search {
+      display: inline-block;
+      text-shadow: none;
+    }
+  }
+
+  &:hover > .btn .fa-search {
+    color: @gray90;
+    text-decoration: none;
+  }
+
+  &.open > .btn .fa-search,
+  &.open:hover > .btn .fa-search {
+    color: @white;
+  }
+
+  > .btn .sicon-close,
+  > .btn .fa-times {
+    display: inline-block;
+    color: @gray70;
+    text-shadow: none;
+  }
+
+  &:hover > .btn .sicon-close,
+  &:hover > .btn .fa-times {
+    color: @gray90;
+    text-decoration: none;
+  }
+
+  &.open > .btn .sicon-close,
+  &.open > .btn .fa-times,
+  &.open:hover > .btn .sicon-close,
+  &.open:hover > .btn .fa-times {
+    color: @white;
+  }
+}
+
+//CSS required for the results page
+ul.search-results:not(.dropdown-menu) {
+  .no-results {
+    text-align: center;
+    margin-top: 15px;
+  }
+}
+
+li.search-result {
+  padding-left: 12px;
+  min-height: 45px;
+  line-height: 12px;
+  position: relative;
+  padding-top: 14px;
+  padding-right: 50px;
+
+  .primary {
+    > h3 {
+      margin-left: 10px;
+      font-size: @baseFontSize;
+      margin-top: 0;
+      line-height: 18px;
+      font-weight: normal;
+      display: inline-block;
+
+      .ellipsis_inline {
+        display: inherit !important;
+      }
+    }
+  }
+
+  .secondary {
+    position: relative;
+    bottom: 10px;
+    line-height: 16px;
+    margin-left: 42px;
+  }
+
+  &.highlighted {
+    &.current {
+      .btn.preview-list-item,
+      .rowaction.btn:not(.btn-invisible) {
+        background: @gray80;
+      }
+
+      .fa-eye {
+        color: @gray20;
+      }
+
+      background: @dropdownLinkBackgroundHover;
+    }
+  }
+}
+
+.search-list {
+  > .rowaction {
+    float: right;
+    position: absolute;
+    right: 14px;
+    top: 14px;
+  }
+}
+
+.search-more-results {
+  margin-left: 6px;
+}
+
+.sidebar-content {
+  .dashboard .facets-dashboard {
+    .dashlet-header {
+      .h-9();
+    }
+
+    .well .dashlet-container + .dashlet-container {
+      padding-top: 10px;
+    }
+
+    .dashlet-title {
+      cursor: default;
+    }
+
+    .dashlet:not(.collapsed):not(.empty) {
+      min-height: 0;
+    }
+
+    .dashlet-content {
+      > div {
+        max-height: 170px !important;
+        overflow: auto;
+      }
+    }
+
+    .facet-item {
+      cursor: pointer;
+      height: 18px;
+      padding: 12px;
+      font-size: 13px;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      .sicon,
+      .fa.fa-check {
+        visibility: hidden;
+        margin-right: 8px;
+      }
+
+      &.selected {
+        font-weight: bold;
+
+        .sicon,
+        .fa.fa-check {
+          visibility: visible;
+        }
+      }
+    }
+
+    .dashlet-content {
+      .disabled {
+        color: @gray70;
+
+        .facet-item {
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  .dashboard {
+    span.search-dashboard-headerpane > div {
+      padding: 3px 24px 4px 2px;
+      border-left: 1px solid transparent;
+    }
+  }
+}
+
+/* NEW SKIN START */
+
+.navbar {
+  .search {
+    .typeahead {
+      /* override */
+      max-height: 343px;
+    }
+  }
+}
+
+// Navbar search input and controls
+.navbar-search {
+  /* override */
+  height: 44px;
+
+  /* override */
+  border-radius: 0;
+
+  /* override */
+  border: none;
+
+  /* additive */
+  border-left: 1px solid @navbarSearchBorder;
+
+  // Module type table cell
+  .quicksearch-modulelist-wrapper {
+    .menu-item {
+      &:focus,
+      &:hover {
+        /* override */
+        color: @navbarDropdownLinkHover;
+
+        /* additive */
+        background: @navbarDropdownItemHover;
+
+        i.fa {
+          /* additive */
+          color: @navbarDropdownLinkHover;
+        }
+      }
+
+      &:active {
+        /* additive */
+        color: @navbarDropdownLinkHover;
+        background: @navbarDropdownBackgroundActive;
+
+        i.fa {
+          color: @navbarDropdownLinkHover;
+        }
+      }
+    }
+  }
+
+  // Input field
+  .search-query {
+    /* override */
+    margin: 15px 0 0;
+    padding: 0 20px 12px 6px;
+
+    /* additive */
+    box-shadow: none;
+  }
+}
+
+/* NEW SKIN END */

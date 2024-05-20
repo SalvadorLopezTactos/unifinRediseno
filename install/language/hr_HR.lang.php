@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Za optimalno iskustvo upotrebe sučelja IIS/FastCGI sapi postavite fastcgi.logging na 0 u svojoj datoteci php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalirana nepodržana verzija PHP-a: ( ver.',
     'LBL_DB_UNAVAILABLE'                => 'Baza podataka nije dostupna',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nije pronađena Podrška za bazu podataka. Provjerite imate li upravljačke programe potrebne za jednu od sljedećih podržanih vrsta baza podataka: MySQL, MS SQLServer, Oracle ili DB2. Možda ćete trebati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s pravilnom binarnom datotekom ovisno o vašoj verziji PHP-a. Ako trebate više informacija o tome kako omogućiti Podršku za bazu podataka, proučite priručnik za PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podrška za bazu podataka nije pronađena. Provjerite imate li potrebne upravljačke programe za jednu od sljedećih podržanih vrsta baza podataka: MySQL, MS SQLServer, Oracle ili DB2. Možda ćete trebati ukloniti proširenje u datoteci php.ini iz komentara ili je prevesti s pravom binarnom datotekom, ovisno o vašoj verziji PHP-a. Više informacija o tome kako omogućiti podršku za bazu podataka potražite u vodiču za PHP.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funkcije povezane s bibliotekama za raščlanjivanje XML koje su potrebne za aplikaciju Sugar nisu pronađene. Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s ispravnom binarnom datotekom ovisno o vašoj verziji PHP-a. Više informacija potražite u svojem priručniku za PHP.',
     'LBL_CHECKSYS_CSPRNG' => 'Generator slučajnih brojeva',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkcije povezane s proširenjem Multibyte Strings PHP (mbstring) koje su potrebne za aplikaciju Sugar nisu pronađene. <br/><br/>Modul mbstring inače nije zadano uključen u PHP-u i mora ga se aktivirati s pomoću opcije --enable-mbstring nakon ugradnje binarne datoteke PHP. Više informacija o tome kako uključiti podršku za mbstring potražite u svojem priručniku za PHP.',
@@ -640,32 +640,15 @@ Odbijte ovaj poziv:
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Obavijesti o dodjeljivanju putem e-pošte',
-        'subject' => 'SugarCRM – Dodijeljen modul $module_name ',
-        'description' => 'Ovaj se predložak upotrebljava kada sustav korisniku šalje dodijeljeni zadatak.',
-        'body' => '<div>
-<p>$assigned_by_user je dodijelio modul&nbsp;$module_name korisniku&nbsp;$assigned_user.</p>
-
-<p>Modul&nbsp;$module_name možete pregledati na:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user je dodijelio modul $module_name korisniku $assigned_user.
-
-Modul $module_name možete pregledati na:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Poruka e-pošte o zakazanom izvješću',
         'subject' => 'Zakazano izvješće: $report_name od $report_time',
         'description' => 'Ovaj se predložak upotrebljava kada sustav korisniku šalje zakazano izvješće.',
         'body' => '<div>
-<p>Pozdrav $assigned_user,</p>
-<p>u prilogu se nalazi automatski generirano izvješće koje je zakazano za Vas.</p>
-<p>Naziv izvješća: $report_name</p>
-<p>Datum i vrijeme izvođenja izvješća: $report_time</p>
+<p>Pozdrav, $assigned_user,<br></p>
+<p>u prilogu se nalazi automatski generirano izvješće koje je zakazano za Vas.<br></p>
+<p>Naziv izvješća: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Datum i vrijeme izvođenja izvješća: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Pozdrav $assigned_user,
@@ -691,21 +674,6 @@ Datum i vrijeme izvođenja izvješća: $report_time',
             Prijavite se na Sugar kako biste vidjeli komentar.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informacije o novom računu',
-        'description' => 'Ovaj predložak upotrebljava se kad administrator sustava korisniku pošalje novu lozinku.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>U nastavku slijede vaše korisničko ime i privremena lozinka za račun:</p><p>Korisničko ime : $contact_user_user_name </p><p>Lozinka : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>Nakon što se prijavite s pomoću navedene lozinke, možda ćete morati ponovno postaviti lozinku na neku po vašem izboru.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-U nastavku slijede vaše korisničko ime i privremena lozinka za račun:
-Korisničko ime : $contact_user_user_name
-Lozinka : $contact_user_user_hash
-
-$config_site_url
-
-Nakon što se prijavite s pomoću navedene lozinke, možda ćete morati ponovno postaviti lozinku na neku po vašem izboru.',
-        'name' => 'E-pošta s lozinkom koju generira sustav',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Ponovno postavite svoju lozinku za račun',
         'description' => "Ovaj se predložak upotrebljava za slanje poveznice za ponovno postavljanje lozinke korisničkog računa korisniku.",

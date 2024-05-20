@@ -35,7 +35,7 @@ class Addon
      * list of attrubutes for calculation
      * @var string[]
      */
-    const ATTRIBUTES =
+    public const ATTRIBUTES =
     [
         'quantity',
         'start_date_c',
@@ -45,7 +45,7 @@ class Addon
     /**
      * attribute name for bundled products in license data
      */
-    const BUNDLED_PRODUCTS_KEY = 'bundled_products';
+    public const BUNDLED_PRODUCTS_KEY = 'bundled_products';
 
     /**
      * ctor

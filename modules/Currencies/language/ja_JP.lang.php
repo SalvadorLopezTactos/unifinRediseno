@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => '作成者',
   'LBL_EDIT_LAYOUT' => 'レイアウト編集' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => '管理者のみ',
-  'LBL_CURRENCY_DEFAULT' => '米ドル (デフォルト)',
-
+  'LBL_CURRENCY_DEFAULT' => 'システム通貨（デフォルト）',
 );
 ?>

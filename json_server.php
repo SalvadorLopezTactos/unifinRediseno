@@ -54,8 +54,8 @@ function populateBean(&$focus) {
 function authenticate() {
 	global $sugar_config;
 
-	$user_unique_key =(isset($_SESSION['unique_key'])) ? $_SESSION['unique_key'] : "";
-	$server_unique_key =(isset($sugar_config['unique_key'])) ? $sugar_config['unique_key'] : "";
+    $user_unique_key = $_SESSION['unique_key'] ?? "";
+    $server_unique_key = $sugar_config['unique_key'] ?? "";
 
 	if($user_unique_key != $server_unique_key) {
 		$GLOBALS['log']->debug("JSON_SERVER: user_unique_key:".$user_unique_key."!=".$server_unique_key);

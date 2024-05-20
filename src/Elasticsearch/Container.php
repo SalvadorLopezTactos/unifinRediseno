@@ -139,7 +139,7 @@ class Container
          * rely on the ability of using the /custom framework to customize
          * this service container. See `self::getInstance`.
          */
-        $class = SugarAutoLoader::customClass('Sugarcrm\\Sugarcrm\\Elasticsearch\\Container');
+        $class = SugarAutoLoader::customClass(\Sugarcrm\Sugarcrm\Elasticsearch\Container::class);
         return new $class();
     }
 
@@ -337,12 +337,12 @@ class Container
     {
         $this->registerProvider(
             'GlobalSearch',
-            'Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\GlobalSearch'
+            \Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\GlobalSearch::class
         );
 
         $this->registerProvider(
             'Visibility',
-            'Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Visibility'
+            \Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Visibility::class
         );
     }
 

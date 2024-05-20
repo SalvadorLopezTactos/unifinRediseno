@@ -25,6 +25,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 //////////////////////////////////////////////
 function reportCriteriaWithResult(&$reporter,&$args) {
     $duplicateButtons = [];
+    $form_header = null;
 	global $current_user,$theme;
 	global $current_language;
 	global $mod_strings, $app_strings, $timedate;
@@ -39,6 +40,20 @@ function reportCriteriaWithResult(&$reporter,&$args) {
 
 
 	$smarty = new Sugar_Smarty();
+
+    $bwcToTransfer = '';
+    $bwcDisplayStyle = 'display:none;';
+    if (isset($_REQUEST['legacyBwc']) && $_REQUEST['legacyBwc'] === '1') {
+        $bwcToTransfer = '&legacyBwc=1';
+        $bwcDisplayStyle = '';
+    } else {
+        echo '<div style="height: 100%;width: 100%;position: absolute;display: flex;justify-content: center;align-items: center;">
+            <h4>' . $app_strings['LBL_LOADING'] . '</h4>
+        </div>';
+    }
+
+    $smarty->assign("bwcToTransfer", $bwcToTransfer);
+    $smarty->assign("bwcDisplayStyle", $bwcDisplayStyle);
 
 	if (isset($reporter->report_def['order_by'][0]['name']) && isset($reporter->report_def['order_by'][0]['table_key'])) {
 		$sort_by = $reporter->report_def['order_by'][0]['table_key'].":".$reporter->report_def['order_by'][0]['name'];
@@ -102,9 +117,13 @@ function reportCriteriaWithResult(&$reporter,&$args) {
         );
 	}
 	// Summation with Details
-    elseif ($report_type == 'summary' && (!empty($reporter->report_def['display_columns']) && (is_countable($reporter->report_def['display_columns']) ? count($reporter->report_def['display_columns']) : 0) > 0)) {
+    elseif ($report_type == 'summary' && (!empty($reporter->report_def['display_columns']) && (is_countable(
+        $reporter->report_def['display_columns']
+    ) ? count($reporter->report_def['display_columns']) : 0) > 0)) {
 		$canCovertToMatrix = 0;
-        if ((!empty($reporter->report_def['group_defs']) && (is_countable($reporter->report_def['group_defs']) ? count($reporter->report_def['group_defs']) : 0) <= 3)) {
+        if ((!empty($reporter->report_def['group_defs']) && (is_countable($reporter->report_def['group_defs']) ? count(
+            $reporter->report_def['group_defs']
+        ) : 0) <= 3)) {
             $canCovertToMatrix = 1;
         }
 		$duplicateButtons = array(
@@ -133,7 +152,9 @@ function reportCriteriaWithResult(&$reporter,&$args) {
 	// Summation
 	else if ($report_type == 'summary') {
 		$canCovertToMatrix = 0;
-        if ((!empty($reporter->report_def['group_defs']) && (is_countable($reporter->report_def['group_defs']) ? count($reporter->report_def['group_defs']) : 0) <= 3)) {
+        if ((!empty($reporter->report_def['group_defs']) && (is_countable($reporter->report_def['group_defs']) ? count(
+            $reporter->report_def['group_defs']
+        ) : 0) <= 3)) {
 			$canCovertToMatrix = 1;
         }
 
@@ -162,13 +183,15 @@ function reportCriteriaWithResult(&$reporter,&$args) {
 	$smarty->assign('isSaveResults', $isSaveResults);
 	$smarty->assign('report_type', $report_type);
 	$smarty->assign('reportDetailView', getReportDetailViewString($reporter,$args));
-    $form_header = get_form_header(
-        $mod_strings['LBL_TITLE'] . ": "
-            . htmlspecialchars($args['reporter']->saved_report->name, ENT_QUOTES, 'UTF-8'),
-        "",
-        false
-    );
-	$smarty->assign('form_header', $form_header);
+    if (isset($_REQUEST['legacyBwc']) && $_REQUEST['legacyBwc'] === '1') {
+        $form_header = get_form_header(
+            $mod_strings['LBL_TITLE'] . ": "
+                . htmlspecialchars($args['reporter']->saved_report->name, ENT_QUOTES, 'UTF-8'),
+            "",
+            false
+        );
+    }
+    $smarty->assign('form_header', $form_header);
 	$smarty->assign('report_offset', $reporter->report_offset);
 	$smarty->assign('sort_by', $sort_by);
 	$smarty->assign('sort_dir', $sort_dir);
@@ -188,8 +211,8 @@ function reportCriteriaWithResult(&$reporter,&$args) {
 	} // else
 
 	$smarty->assign('report_id', $report_id);
-	$smarty->assign('to_pdf', isset($_REQUEST['to_pdf']) ? $_REQUEST['to_pdf'] : "");
-	$smarty->assign('to_csv', isset($_REQUEST['to_csv']) ? $_REQUEST['to_csv'] : "");
+    $smarty->assign('to_pdf', $_REQUEST['to_pdf'] ?? "");
+    $smarty->assign('to_csv', $_REQUEST['to_csv'] ?? "");
 
 	$isAdmin = false;
 	if ($current_user->is_admin) {
@@ -445,7 +468,7 @@ EOD
 
 function hasRuntimeFilter(&$reporter) {
 	$hasRuntimeFilter = false;
-    if ((is_countable($reporter->report_def['filters_def']) ? count($reporter->report_def['filters_def']) : 0) == 0) {
+    if ((is_countable($reporter->report_def['filters_def']) ? count($reporter->report_def['filters_def']) : 0) <= 0) {
 		return false;
 	}
 	$filterDefs = $reporter->report_def['filters_def']['Filter_1'];
@@ -581,7 +604,9 @@ function hasReportFilterModified($reportId, $filtersContent) {
 				getFlatListFilterContents($filtersContent['Filter_1'], $filterContentsArray);
 				$reportCacheFilterContentsArray = array();
 				getFlatListFilterContents($reportCache->contents_array['filters_def']['Filter_1'], $reportCacheFilterContentsArray);
-            if ((is_countable($filterContentsArray) ? count($filterContentsArray) : 0) != (is_countable($reportCacheFilterContentsArray) ? count($reportCacheFilterContentsArray) : 0)) {
+            if ((is_countable($filterContentsArray) ? count($filterContentsArray) : 0) != (is_countable($reportCacheFilterContentsArray) ? count(
+                $reportCacheFilterContentsArray
+            ) : 0)) {
 					$isModified = true;
 				} else {
 					$isModified = checkFilterModified($filtersContent['Filter_1'], $isModified, $reportCache->contents_array['filters_def']['Filter_1']);
@@ -656,7 +681,9 @@ function getReportDetailViewString(&$reporter,&$args) {
 
 function reportResults(&$reporter, &$args) {
 	ob_start();
-	echo '<div id="report_results">';
+    if (!isset($_REQUEST['legacyBwc']) || $_REQUEST['legacyBwc'] !== '1') {
+        echo '<div style="display: none;" id="report_results">';
+    }
 
 	$do_chart = false;
 
@@ -708,7 +735,11 @@ function reportResults(&$reporter, &$args) {
 		} // if
 	} // if
 
-	echo "<input class=\"button\" name=\"showHideChartButton\" id=\"showHideChartButton\" title=\"{$reportChartButtonTitle}\"
+        $bwcDisplayStyle = 'display:none;';
+        if (isset($_REQUEST['legacyBwc']) && $_REQUEST['legacyBwc'] === '1') {
+            $bwcDisplayStyle = '';
+        }
+        echo "<input style=\"{$bwcDisplayStyle}\" class=\"button\" name=\"showHideChartButton\" id=\"showHideChartButton\" title=\"{$reportChartButtonTitle}\"
 	type=\"button\" value=\"{$reportChartButtonTitle}\" onclick=\"showHideChart();\"><br/><br/>";
 
 	echo "<script>function showHideChart() {
@@ -739,7 +770,7 @@ if (isset($reporter->saved_report->id) ) {
 	$report_id = InputValidation::getService()->getValidInputRequest('record', 'Assert\Guid', 'unsavedReport');
 }
 
-	echo "<div class='reportChartContainer' id='{$report_id}_div' style='{$reportChartDivStyle}'>";
+        echo "<div class='reportChartContainer' id='{$report_id}_div' style='{$bwcDisplayStyle} {$reportChartDivStyle}'>";
      $chartDisplay = new ChartDisplay();
      $chartDisplay->setReporter($reporter);
      echo "<div align='center'>".$chartDisplay->legacyDisplay(null, false)."</div>";
@@ -823,8 +854,8 @@ function template_reports_chart_options(&$smarty, &$args) {
 function juliansort($a,$b)
 {
  global $app_list_strings;
-    $a = isset($app_list_strings['moduleList'][$a]) ? $app_list_strings['moduleList'][$a] : $a;
-    $b = isset($app_list_strings['moduleList'][$b]) ? $app_list_strings['moduleList'][$b] : $b;
+    $a = $app_list_strings['moduleList'][$a] ?? $a;
+    $b = $app_list_strings['moduleList'][$b] ?? $b;
  if ($a > $b)
  {
   return 1;

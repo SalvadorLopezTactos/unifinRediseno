@@ -27,7 +27,7 @@ use Symfony\Component\Console\Input\InputArgument;
  */
 class IdmModeManageCommand extends Command implements InstanceModeInterface
 {
-    const IDM_CONFIG_FILE = 'config_idm.php';
+    public const IDM_CONFIG_FILE = 'config_idm.php';
     use ApiEndpointTrait;
 
     /**
@@ -106,6 +106,7 @@ class IdmModeManageCommand extends Command implements InstanceModeInterface
             $this->disableIdmMigration();
         }
         $output->writeln('Done!');
+        return 0;
     }
 
     /**

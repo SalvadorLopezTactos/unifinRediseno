@@ -14,7 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Pieteikumu saraksta instrumentu panelis',
     'LBL_CASES_RECORD_DASHBOARD' => 'Pieteikumu ierakstu instrumentu panelis',
-    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Informācija par pieteikumu',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Pieteikumu fokusa panelis - Konsole',
     'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Pieteikumu fokusa panelis',
 
 	'ERR_DELETE_RECORD'					=> 'Jums ir jānorāda ieraksta numurs, lai dzēstu uzņēmumu.',
@@ -162,4 +162,29 @@ Lai izveidotu {{module_name}}:
     'LBL_SLA_DETAILS' => 'Informācija par SLA',
     'LBL_HOURS' => 'Stundas',
     'LBL_WIDGET_STATUS' => 'Statuss',
+    
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizēt',
+    'LBL_CREATE_NEW' => 'Izveidot jaunu',
+    'LBL_MANAGE' => 'Pārvaldīt',
+    'LBL_SEE_DETAILS' => 'Skatīt papildu informāciju',
+    'LBL_HIDE_NEW' => 'Paslēpt',
+
+    //For Kiosk labels
+    'LBL_KIOSK_MODULE_NAME' => 'Pieteikumi',
+    'LBL_KIOSK_MODULE_NAME_SINGULAR' => 'Pieteikums',
+    'LBL_KIOSK_CREATE' => 'Izveidot pieteikumu',
+    'LBL_KIOSK_SUBJECT' => 'Temats',
+    'LBL_KIOSK_CASE_ID' => 'Pieteikuma ID',
+    'LBL_KIOSK_STATUS' => 'Statuss',
+    'LBL_KIOSK_CATEGORY' => 'Kategorija',
+    'LBL_KIOSK_SUBMITTED_BY' => 'Iesniegts {{date}}',
+    'LBL_KIOSK_PRIORITY' => 'Prioritāte',
+    'LBL_KIOSK_CREATE_CASE' => 'Sazināties ar mums',
+    'LBL_KIOSK_DESCRIPTION' => 'Apraksts',
+    'LBL_KIOSK_CREATE_SUCCESS' => 'Jūsu pieprasījumu tika veiksmīgi iesniegts.',
+    'LBL_KIOSK_ATTACHED' => 'Viss pievienotais',
+
+    // External Users Subpanel
+    'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Ārējie lietotāji',
 );

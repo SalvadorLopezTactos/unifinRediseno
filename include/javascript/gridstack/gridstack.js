@@ -1307,7 +1307,9 @@
       cellWidth = self.cellWidth();
       var strictCellHeight = self.cellHeight(); // heigh without v-margin
       // compute height with v-margin (Note: we add 1 margin as last row is missing it)
-      cellFullHeight = (self.$el.height() + self.verticalMargin()) / parseInt(self.$el.attr('data-gs-current-row'));
+      if (!cellFullHeight) {
+          setCellFullHeight();
+      }
       self.placeholder
         .attr('data-gs-x', o.attr('data-gs-x'))
         .attr('data-gs-y', o.attr('data-gs-y'))
@@ -1385,6 +1387,14 @@
       if (event.type === 'resizestop') {
         self.$el.trigger('gsresizestop', o);
       }
+    };
+
+    let setCellFullHeight = function() {
+        let $parentBlock = self.$el.closest('ul.dashlets');
+
+        $parentBlock.css('display', 'block');
+        cellFullHeight = (self.$el.height() + self.verticalMargin()) / parseInt(self.$el.attr('data-gs-current-row'));
+        $parentBlock.css('display', '');
     };
 
     this.dd

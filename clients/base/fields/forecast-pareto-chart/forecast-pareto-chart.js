@@ -525,42 +525,43 @@
             }
         });
 
-        var dataset = this.model.get('dataset'),
-            ranges = this.model.get('ranges'),
-            seriesIdx = 0,
-            barData = [],
-            lineVals = this._serverData['x-axis'].map(function(axis, i) {
+        let dataset = this.model.get('dataset');
+        let ranges = this.model.get('ranges');
+        let seriesIdx = 0;
+        let barData = [];
+        let lineVals = this._serverData['x-axis'] ?
+            this._serverData['x-axis'].map(function(axis, i) {
                 return { series: seriesIdx, x: i + 1, y: 0 };
-            }),
-            line = {
-                'key': this._serverData.labels.dataset[dataset],
-                'type': 'line',
-                'series': seriesIdx,
-                'values': [],
-                'valuesOrig': []
+            }) : {};
+        let line = {
+            'key': this._serverData.labels.dataset[dataset],
+            'type': 'line',
+            'series': seriesIdx,
+            'values': [],
+            'valuesOrig': []
+        };
+        let chartData = {
+            'properties': {
+                'name': this._serverData.title,
+                'quota': parseFloat(this._serverData.quota),
+                'yDataType': 'currency',
+                'xDataType': 'datetime',
+                'quotaLabel': app.lang.get('LBL_QUOTA', 'Forecasts'),
+                'groupData': this._serverData['x-axis'].map(function(item, i) {
+                    return {
+                        'group': i,
+                        'l': item.label,
+                        't': 0
+                    };
+                })
             },
-            chartData = {
-                'properties': {
-                    'name': this._serverData.title,
-                    'quota': parseFloat(this._serverData.quota),
-                    'yDataType': 'currency',
-                    'xDataType': 'datetime',
-                    'quotaLabel': app.lang.get('LBL_QUOTA', 'Forecasts'),
-                    'groupData': this._serverData['x-axis'].map(function(item, i) {
-                        return {
-                            'group': i,
-                            'l': item.label,
-                            't': 0
-                        };
-                    })
-                },
-                'data': []
-            },
-            records = this._serverData.data,
-            data = (!_.isEmpty(ranges)) ? records.filter(function(rec) {
-                return _.contains(ranges, rec.forecast);
-            }) : records,
-            disabledKeys = this.getDisabledChartKeys();
+            'data': []
+        };
+        let records = this._serverData.data;
+        let data = (!_.isEmpty(ranges)) ? records.filter(function(rec) {
+            return _.contains(ranges, rec.forecast);
+        }) : records;
+        let disabledKeys = this.getDisabledChartKeys();
 
         _.each(this._serverData.labels[type], function(label, value) {
             var td = data.filter(function(d) {

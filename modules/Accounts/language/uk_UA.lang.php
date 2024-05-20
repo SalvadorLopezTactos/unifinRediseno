@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Інформаційна панель списку контрагентів',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Інформаційна панель записів контрагентів',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель для контрагентів',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Відомості про контрагента',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Фокусна панель контрагентів — Консоль',
     'LBL_NEXT_RENEWAL_DATE' => 'Дата наступного поновлення',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Дата наступного поновлення',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Ім&#39;я/галузь контрагента',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'Розташування',
     'LBL_PURCHASES' => 'Покупки',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Часова шкала облікового запису',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Упорядкувати',
+    'LBL_CREATE_NEW' => 'Створити новий',
+    'LBL_MANAGE' => 'Керувати',
+    'LBL_SEE_DETAILS' => 'Переглянути деталі',
+    'LBL_HIDE_NEW' => 'Приховати',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Графіки',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. Натисніть кнопку "Зберегти", щоб завершити створення нового запису й повернутися до попередньої сторінки.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Звіти по контрагентам',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'Зовнішні користувачі',
 );

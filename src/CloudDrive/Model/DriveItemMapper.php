@@ -16,6 +16,11 @@ use Sugarcrm\Sugarcrm\CloudDrive\Constants\DriveType;
 
 class DriveItemMapper
 {
+    public $data;
+    /**
+     * @var string|mixed
+     */
+    public $type;
     /**
      * @constructor
      * @param mixed $data
@@ -43,7 +48,10 @@ class DriveItemMapper
             return DriveItem::fromGoogleDrive($data);
         } elseif ($type === DriveType::ONEDRIVE) {
             return DriveItem::fromOneDrive($data);
+        } elseif ($type === DriveType::DROPBOX) {
+            return DriveItem::fromDropboxDrive($data);
         }
+
         return null;
     }
 

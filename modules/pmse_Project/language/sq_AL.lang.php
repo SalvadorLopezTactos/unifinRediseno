@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Butonat e formës',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Aprovo/Refuzo',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Itinerari',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Dërgo te DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Opsionet e tjera të itinerarit',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Ndrysho caktimin te përdoruesi',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Grupi',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Bashkim i dokumentit',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Zgjidh...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Bashko dokumentin në PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Dërgo dokumentin e bashkuar me email',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Bashkimi i dokumentit',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Lloji i portëkalimit të mbledhësit nuk përputhet me llojin e portëkalimit të një rrjedhe hyrëse',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Portëkalimet e ndarësit i zgjerojnë proceset në disa degë. Kur përdoret një portëkalim mbledhësi për t&#39;i rimbledhur këto degë sërish në një shteg, duhet të përdoret lloji i duhur i portëkalimit të mbledhësit, në varësi të llojit të portëkalimit të ndarësit që u përdor për të krijuar degët. Për degët e krijuara me portëkalime ndarësi ekskluzive ose të bazuara në raste, përdor një portëkalim mbledhësi ekskluziv për t&#39;i rimbledhur. Për degët e krijuara me portëkalime ndarësi paralele ose përfshirëse, përdor një portëkalim mbledhësi paralel për t&#39;i rimbledhur.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Fusha e modulit',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Marrëdhënia e modulit',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Përdoruesi',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Roli',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Ekipi',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Krijo aktivitet',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Rregullat e biznesit',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Veprimet lidhur me rregullat e biznesit',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Shablloni i emailit',
 );

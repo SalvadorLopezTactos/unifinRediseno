@@ -174,7 +174,7 @@
 
   .omni-detail-wrapper {
     border: @borderWidget;
-    border-radius: 3px;
+    border-top: none;
     position: relative;
   }
 
@@ -193,23 +193,36 @@
     }
   }
 
-  .omni-cell {
+  .record-cell.omni-cell {
+    .h-auto();
+
     &:not(:last-child) {
       margin-bottom: 5px;
     }
 
-    .omni-label {
-      color: @labelColor;
+    &:not(.error) .omni-label {
+      .text-default();
     }
 
-    input,
+    input[type="text"],
     textarea {
       border: @borderWidget;
       box-shadow: none;
       box-sizing: border-box;
+      font-size: 12px;
       width: 100%;
       resize: none;
       min-height: 28px;
+    }
+
+    input[type='checkbox'] {
+      width: auto;
+    }
+
+    .error-tooltip {
+      .absolute();
+
+      right: 5px;
     }
   }
 
@@ -220,11 +233,38 @@
 
   .omni-detail-title {
     background: @secondaryContentBackground;
-    border-radius: 3px 3px 0 0;
     padding-top: 4px;
     padding-bottom: 4px;
-    font-size: 14px;
-    font-weight: 600;
+    top: 0;
+    z-index: 1;
+    border-top: @borderWidget;
+
+    .omni-detail-title-text {
+      .font-bold();
+
+      font-size: 14px;
+    }
+
+    .loading {
+      .hide();
+
+      padding-top: 2px;
+      line-height: 16px;
+
+      i {
+        .text-label();
+        .m-0();
+      }
+
+      &.saving,
+      &.saved {
+        .inline-block();
+      }
+
+      &.saved i {
+        .hide();
+      }
+    }
   }
 
   .left-column {
@@ -372,16 +412,14 @@
 
 .omni-console {
   position: fixed;
-  top: 45px;
-  bottom: 1.875rem;
+  top: @headerNavHeight;
+  bottom: 0;
   left: -320px;
   width: 320px;
   background-color: @contentBackground;
-  border-top-left-radius: @baseBorderRadius;
-  border-top-right-radius: @baseBorderRadius;
   border-top: 1px solid @borderColorFocus;
   border-right: 1px solid @borderColorFocus;
-  z-index: @zindexHeaderpane + 1;
+  z-index: @zindexFixedNavbar + 1;
   transition: 0.8s ease-in-out;
 
   .omni-header {
@@ -508,6 +546,10 @@
   }
 }
 
+.banner-shifted .omni-console {
+  top: calc(@bannerHeight ~"+" @headerNavHeight);
+}
+
 .omni-console-config {
   // Hide contents of non-record dashlets, menus that shouldn't be accessible,
   // field content in record dashlets
@@ -623,12 +665,8 @@
   width: 100%;
 
   .omnichannel-search-backdrop {
-    position: absolute;
-    height: 100%;
-    width: 100%;
     z-index: (@zindexFixedNavbar - 2);
     background-color: @gray70;
-    border-top: 4px solid @gray60;
     opacity: 0.5;
     cursor: default;
     .user-select(none);
@@ -645,17 +683,16 @@
   }
 
   .omnichannel-search-list {
-    height: 100%;
     display: flex;
     flex-direction: row;
+    .flex-grow();
 
     .omnichannel-search-filter-wrapper {
-      height: 100%;
-      width: 66%;
       background: @contentBackground;
       border-color: @borderColor;
       border-top: @borderWidget;
       border-width: 1px 0 0 1px;
+      .w-4\/12();
 
       .omnichannel-search-facet-list {
         padding-top: 10px;
@@ -682,6 +719,7 @@
       background-color: @primaryContentBackground;
       border-right: @borderWidget;
       height: 100%;
+      .w-8\/12();
 
       &.loading {
         background-color: @primaryContentActive;
@@ -743,35 +781,29 @@
 
   .typeahead-wrapper {
     .dropdown-menu {
-      top: -30px;
+      top: 47px;
       width: 600px;
       left: 50px;
-      position: relative;
+      .absolute();
 
       li.search-result {
         padding: 0;
-      }
-
-      li.no-results {
-        padding: 0 0 0 10px;
       }
     }
   }
 
   .navbar-search {
-    max-width: 600px;
-    float: none;
-    margin: 30px 0 30px 50px;
     white-space: nowrap;
-    background: @white;
+    background: @primaryContentBackground;
     border: @borderWidget;
+    box-sizing: border-box;
 
     .omnichannel-search-modulelist-wrapper {
       width: 30px;
       cursor: pointer;
       padding: 0 0 0 10px;
       z-index: @zindexFixedNavbar;
-      background: @primaryContentBackground;
+      .relative();
 
       .menu-item {
         padding: 8px 10px;
@@ -805,11 +837,10 @@
     }
 
     .omnichannel-search-bar-wrapper {
-      background: @primaryContentBackground;
+      .w-full();
     }
 
     .omnichannel-search-button-wrapper {
-      background: @primaryContentBackground;
       width: 30px;
     }
   }
@@ -823,5 +854,25 @@ body.sugar-dark-theme {
         filter: invert(101%) saturate(0%) brightness(3) grayscale(1);
       }
     }
+  }
+}
+
+.sidebar-nav-item {
+  @keyframes pulse {
+    0% {
+      background-color: @blue;
+    }
+
+    50% {
+      background-color: @green;
+    }
+
+    100% {
+      background-color: @blue;
+    }
+  }
+
+  &.omnichannel-pulse:not(:hover) {
+    animation: pulse 1s infinite;
   }
 }

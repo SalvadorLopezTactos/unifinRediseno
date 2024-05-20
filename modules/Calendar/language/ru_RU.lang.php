@@ -155,7 +155,7 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Шаблоны',
     'LBL_RECORD_OTHER_TAB' => 'Другое',
     'LBL_EVENT_START' => 'Начало',
-    'LBL_EVENT_END' => 'Дата окончания',
+    'LBL_EVENT_END' => 'Конец',
     'LBL_EVENT_END' => 'Конец',
     'LBL_DAY_EVENT_TEMPLATE' => 'Событие дня',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Событие недели',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Окт',
     'LBL_NOV' => 'Ноя',
     'LBL_DEC' => 'Дек',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Календарь уже добавлен',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} выбран',
+    'LBL_NO_USER_SELECTED' => 'Пожалуйста, выберите пользователя или команду',
+    'LBL_NO_CALENDAR_SELECTED' => 'Пожалуйста, выберите календарь',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Не удалось сохранить календари.',
 
 );
 

@@ -17,6 +17,16 @@
 class ParserPortalListView extends ParserModifyListView
 {
 
+    /**
+     * @var mixed[]
+     */
+    public $mod_strings;
+    /**
+     * @var \History|mixed
+     */
+    //@codingStandardsIgnoreStart
+    public $_history;
+    //@codingStandardsIgnoreEnd
 	var $listViewDefs = false;
 	var $defaults = array();
 	var $additional = array();
@@ -138,7 +148,7 @@ class ParserPortalListView extends ParserModifyListView
 	                $def['type'] != 'id' && (empty($def ['dbType']) || $def ['dbType'] != 'id') &&
 	                (isset($def['type']) && !in_array($def['type'], $invalidTypes)))
 					{
-						$label = (isset ( $def [ 'vname' ] )) ? $def [ 'vname' ] : (isset($def [ 'label' ]) ? $def['label'] : $def['name']) ;
+                        $label = $def ['vname'] ?? $def['label'] ?? $def['name'];
 						$this->availableFields [ $fieldName ] = array ( 'width' => '10' , 'label' => $label ) ;
 					}
 			}

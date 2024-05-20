@@ -122,7 +122,7 @@ class AdministrationViewGlobalsearchsettings extends SugarView
         if (!$engineConfig) {
             $engineConfig = array('host' => '127.0.0.1', 'port' => '9200');
         }
-        $sugar_smarty->assign("fts_host", $engineConfig['host']);
+        $sugar_smarty->assign("fts_host", encodeLocalhost($engineConfig['host']));
         $sugar_smarty->assign("fts_port", $engineConfig['port']);
 
         // Hide schedule button if no valid connection

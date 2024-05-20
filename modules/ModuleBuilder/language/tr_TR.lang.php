@@ -808,15 +808,12 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Bu alanın yerleşim planlarında gerekli olup olmadığını belirlemek için bir formül oluşturun.<br/>"
-    . "Gerekli alanlar, tarayıcı tabanlı mobil görünümde formüle uyacak, <br/>"
-    . "ancak iPhone için Sugar Mobile gibi bağımsız uygulamalardaki formüle uymayacaktır. <br/>"
-    . "Sugar Self-Service Portalındaki formüle uymayacaklar.",
-'LBL_POPHELP_READONLY'=>"Bu alanın yerleşim planlarında salt okunur olup olmadığını belirlemek için bir formül oluşturun.<br/>"
+    'LBL_POPHELP_REQUIRED'=>'Koşullu olarak gerekli olan alanlar, şu SugarBPM eylem türlerinde kullanılamaz: İlişkili Kaydı Ekle, Alanı Değiştir. Bu işlem tanımı eylemlerindeki bu alanı kullanmak için lütfen "Şu Durumda Gerekli" metnini kaldırın',
+'LBL_POPHELP_READONLY'=>"Bu alanın, yerleşim planlarında salt okunur olup olmadığını belirlemek için bir formül oluşturun.<br/>"
         . "Salt okunur alanlar, tarayıcı tabanlı mobil görünümde formüle uyacak, <br/>"
         . "ancak iPhone için Sugar Mobile gibi bağımsız uygulamalardaki formüle uymayacaktır. <br/>"
-        . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Bu modülde Global Aramayı kullanarak kayıtları ararken bu alanı kullanmak için seçin.',
+        . "Sugar Self-Service Portalındaki formüle uymayacaklar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Bu modülde Genel Aramayı kullanarak kayıtları ararken bu alanı kullanmak için seçin.',
 //Revert Module labels
 'LBL_RESET' => 'Sıfırla',
 'LBL_RESET_MODULE' => 'Modülü Sıfırla',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Ondalık',
                 'autoincrement' => 'Oto Arttırma',
                 'actionbutton' => 'Aksiyon Düğmesi',
+                'geocodestatus' => 'Coğrafi Kodlama Durumu',
 ),
 'labelTypes' => array(
     "" => "Sık kullanılan etiketler",

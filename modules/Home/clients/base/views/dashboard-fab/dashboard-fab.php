@@ -38,23 +38,6 @@ $viewdefs['Home']['base']['view']['dashboard-fab'] = [
             ],
         ],
         [
-            'name' => 'edit_module_tabs_button',
-            'type' => 'rowaction',
-            'icon' => 'sicon-edit-lg',
-            'label' => 'LBL_EDIT_MODULE_TABS_BUTTON',
-            'acl_action' => 'edit',
-            'showOn' => 'view',
-            'allowed_layouts' => [
-                [
-                    'name' => 'dashboard', // service console
-                    'id' => 'c108bb4a-775a-11e9-b570-f218983a1c3e',
-                ], [
-                    'name' => 'dashboard', // renewals console
-                    'type' => 'renewals_console',
-                ],
-            ],
-        ],
-        [
             'name' => 'duplicate_button',
             'type' => 'rowaction',
             'icon' => 'sicon-copy-lg',

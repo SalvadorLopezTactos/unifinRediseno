@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të planeve të raportit',
     'LBL_FILE_TYPE' => 'Lloji(et) e skedarëve',
+    'LBL_EMBED_REPORT' => 'Ngulit raportin në email',
+    'LBL_EMBED_REPORT_INFO' => 'Shënim: Nëse raporti tejkalon 200 rreshta, do ta bashkëngjisim raportin si skedar CVS.',
 );

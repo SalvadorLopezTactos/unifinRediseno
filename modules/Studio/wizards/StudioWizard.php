@@ -45,7 +45,7 @@ class StudioWizard{
         switch($option)
         {
             case 'SelectModuleWizard':
-                require_once('modules/Studio/wizards/'. $option . '.php');
+                require_once 'modules/Studio/wizards/' . $option . '.php';
                 $newWiz = new $option();
                 $newWiz->display();
                 break;
@@ -55,9 +55,9 @@ class StudioWizard{
                 $newWiz->display();
                 break;
             case 'RenameTabs':
-                $newWiz = new RenameModules();
-                $newWiz->process();
-                break; 
+                $script = navigateToSidecar(buildSidecarRoute('Administration', null, 'module-names-and-icons'));
+                echo "<script>$script</script>";
+                sugar_cleanup(true);
             case 'ConfigureTabs':
                 header('Location: index.php?module=Administration&action=ConfigureTabs');
                 sugar_cleanup(true);

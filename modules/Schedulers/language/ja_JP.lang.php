@@ -44,6 +44,7 @@ $mod_strings = array (
 'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => '製品定義の更新',
 'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'プロセスTime-Awareスケジュール',
 'LBL_OOTB_DATA_ARCHIVER' => 'アクティブなデータアーカイブの実行/削除',
+'LBL_OOTB_LICENSE_INSTALLER' => 'サブスクリプション資格が変更されたときに適用する',
 
 //Maps
 'LBL_SUGAR_JOB_RECORDS_GEOCODING' => 'レコードジオコーダー',
@@ -123,6 +124,7 @@ $mod_strings = array (
 'LBL_ADV_OPTIONS'		=> '拡張オプション',
 'LBL_TOGGLE_ADV' => '拡張オプション',
 'LBL_TOGGLE_BASIC' => '基本オプション',
+'LBL_UPDATEMOMENTUMCJ' => '進行中のスマートガイドの更新モメンタム',
 // Links
 'LNK_LIST_SCHEDULER' => 'スケジューラー',
 'LNK_NEW_SCHEDULER' => 'スケジューラー作成',
@@ -175,4 +177,3 @@ $mod_strings = array (
 'LBL_SUGARJOBDATAARCHIVER' => 'アクティブなデータアーカイブの実行/削除',
 'LBL_PMSEENGINECRON' => 'SugarBPM スケジューラー',
 );
-

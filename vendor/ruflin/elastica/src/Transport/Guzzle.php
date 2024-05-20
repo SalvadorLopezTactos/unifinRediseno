@@ -14,6 +14,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\StreamInterface;
 
 /**
  * Elastica Guzzle Transport object.
@@ -32,7 +34,7 @@ class Guzzle extends AbstractTransport
     /**
      * Curl resource to reuse.
      *
-     * @var Client Guzzle client to reuse
+     * @var Client|null Guzzle client to reuse
      */
     protected static $_guzzleClientConnection;
 
@@ -41,13 +43,9 @@ class Guzzle extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param array $params Host, Port, ...
-     *
      * @throws \Elastica\Exception\ConnectionException
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
-     *
-     * @return \Elastica\Response Response object
      */
     public function exec(Request $request, array $params): Response
     {
@@ -57,24 +55,18 @@ class Guzzle extends AbstractTransport
 
         $options = [
             'base_uri' => $this->_getBaseUrl($connection),
-            'headers' => [
+            RequestOptions::HEADERS => [
                 'Content-Type' => $request->getContentType(),
             ],
-            'exceptions' => false, // 4xx and 5xx is expected and NOT an exceptions in this context
+            RequestOptions::HTTP_ERRORS => false, // 4xx and 5xx is expected and NOT an exceptions in this context
         ];
+
         if ($connection->getTimeout()) {
-            $options['timeout'] = $connection->getTimeout();
+            $options[RequestOptions::TIMEOUT] = $connection->getTimeout();
         }
 
-        $proxy = $connection->getProxy();
-
-        // See: https://github.com/facebook/hhvm/issues/4875
-        if (null === $proxy && \defined('HHVM_VERSION')) {
-            $proxy = \getenv('http_proxy') ?: null;
-        }
-
-        if (null !== $proxy) {
-            $options['proxy'] = $proxy;
+        if (null !== $proxy = $connection->getProxy()) {
+            $options[RequestOptions::PROXY] = $proxy;
         }
 
         $req = $this->_createPsr7Request($request, $connection);
@@ -126,8 +118,8 @@ class Guzzle extends AbstractTransport
         );
 
         $data = $request->getData();
-        if (!empty($data) || '0' === $data) {
-            if (Request::GET == $req->getMethod()) {
+        if (!empty($data)) {
+            if (Request::GET === $req->getMethod()) {
                 $req = $req->withMethod(Request::POST);
             }
 
@@ -136,13 +128,7 @@ class Guzzle extends AbstractTransport
                 $req = $req->withMethod(Request::POST);
             }
 
-            $req = $req->withBody(
-                Psr7\stream_for(
-                    \is_array($data)
-                    ? JSON::stringify($data, JSON_UNESCAPED_UNICODE)
-                    : $data
-                )
-            );
+            $req = $req->withBody($this->streamFor($data));
         }
 
         return $req;
@@ -177,7 +163,7 @@ class Guzzle extends AbstractTransport
                 'scheme' => $this->_scheme,
                 'host' => $connection->getHost(),
                 'port' => $connection->getPort(),
-                'path' => \ltrim('/', $connection->getPath()),
+                'path' => \ltrim($connection->getPath(), '/'),
             ]);
         }
 
@@ -207,5 +193,20 @@ class Guzzle extends AbstractTransport
         }
 
         return $action;
+    }
+
+    /**
+     * @param mixed $data
+     */
+    private function streamFor($data): StreamInterface
+    {
+        if (\is_array($data)) {
+            $data = JSON::stringify($data, \JSON_UNESCAPED_UNICODE);
+        }
+
+        return \class_exists(Psr7\Utils::class)
+            ? Psr7\Utils::streamFor($data)
+            : Psr7\stream_for($data)
+        ;
     }
 }

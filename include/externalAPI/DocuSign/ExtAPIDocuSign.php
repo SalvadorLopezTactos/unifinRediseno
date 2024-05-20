@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-include_once 'vendor/docusign/autoload.php';
-
 use DocuSign\eSign as DocuSign;
 use Sugarcrm\Sugarcrm\DocuSign\DocuSignUtils;
 
@@ -20,6 +18,15 @@ use Sugarcrm\Sugarcrm\DocuSign\DocuSignUtils;
  */
 class ExtAPIDocuSign extends ExternalAPIBase
 {
+    public $baseURI;
+    /**
+     * @var bool|mixed
+     */
+    public $usesTemplates;
+    /**
+     * @var \DocuSign\eSign\Model\EnvelopeDefinition|mixed
+     */
+    public $envelopDefinition;
     public $supportedModules = ['DocuSignEnvelopes'];
     public $authMethod = 'oauth2';
     public $connector = 'ext_eapm_docusign';
@@ -33,22 +40,23 @@ class ExtAPIDocuSign extends ExternalAPIBase
     protected $demoHost = 'https://demo.docusign.net/restapi';
     protected $prodHost = 'https://docusign.net/restapi';
 
-    const APP_STRING_ERROR_PREFIX = 'ERR_DOCUSIGN_API_';
+    public const APP_STRING_ERROR_PREFIX = 'ERR_DOCUSIGN_API_';
     
-    const SCOPES_AUTHORIZE = ['signature'];
+    public const SCOPES_AUTHORIZE = ['signature'];
 
     /**
      * Returns the DocuSign client used to call the API
      *
-     * @return DocuSign\Client\ApiClient|null
+     * @return DocuSignClient|null
      */
-    public function getClient() : DocuSign\Client\ApiClient
+    public function getClient() : DocuSignClient
     {
-        if ($this->client instanceof DocuSign\Client\ApiClient) {
+        if ($this->client instanceof DocuSignClient) {
             return $this->client;
         }
 
         $configuration = new DocuSign\Configuration();
+
         $env = $this->getEnvironmentFromConfig();
         $oAuth = new DocuSign\Client\Auth\OAuth();
 
@@ -60,7 +68,7 @@ class ExtAPIDocuSign extends ExternalAPIBase
         $configuration->setHost($host);
         $oAuth->setBasePath($host);
 
-        $this->client = new DocuSign\Client\ApiClient($configuration, $oAuth);
+        $this->client = new DocuSignClient($configuration, $oAuth);
 
         return $this->client;
     }
@@ -91,6 +99,7 @@ class ExtAPIDocuSign extends ExternalAPIBase
      */
     public function authenticate($code)
     {
+        $eapmBean = null;
         global $current_user;
         // Authenticate the authorization code with DocuSign servers
         $config = DocuSignUtils::getDocuSignOauth2Config();
@@ -178,13 +187,12 @@ class ExtAPIDocuSign extends ExternalAPIBase
     /**
      * Revokes an access token for the given EAPM bean ID by deleting the bean
      *
-     * @param string $eapmId the ID of the EAPM bean to revoke access tokens for
      * @return bool true if successful; false otherwise
      */
-    public function revokeToken($eapmId = null)
+    public function revokeToken()
     {
         try {
-            $eapmBean = $this->getEAPMBean($eapmId);
+            $eapmBean = $this->getEAPMBean();
             if (empty($eapmBean->id)) {
                 $GLOBALS['log']->error('Could not log out of DocuSign. No EAPM bean found.');
                 return false;
@@ -201,16 +209,12 @@ class ExtAPIDocuSign extends ExternalAPIBase
      * Retrieves an access token from the given EAPM bean. If the access token
      * is expired (or close to it), this will automatically refresh it.
      *
-     * @param string $eapmId the ID of the EAPM bean storing the access token
      * @return string|bool The access token string if successful; false otherwise
      */
-    public function getAccessToken($eapmId = null)
+    public function getAccessToken()
     {
-        if (!isset($eapmId)) {
-            $eapmBean = $this->getEAPMBean();
-        } else {
-            $eapmBean = $this->getEAPMBean($eapmId);
-        }
+        $eapmBean = $this->getEAPMBean();
+
         parent::loadEAPM($eapmBean);
         
         if (!empty($eapmBean->id)) {
@@ -235,18 +239,22 @@ class ExtAPIDocuSign extends ExternalAPIBase
      */
     public function getApiData($eapmBean)
     {
-        return json_decode($eapmBean->api_data, true);
+        if (empty($eapmBean->api_data)) {
+            return [];
+        }
+
+        $apiDataDecoded = json_decode($eapmBean->api_data, true);
+        return is_array($apiDataDecoded) ? $apiDataDecoded : [];
     }
 
     /**
      * Uses a refresh token to refresh the token stored in the given EAPM bean
      *
-     * @param string $eapmId the ID of the EAPM bean to save the refreshed token to
      * @return string|bool The new access token string if successful; false otherwise
      */
-    protected function refreshToken($eapmId)
+    protected function refreshToken()
     {
-        $eapmBean = $this->getEAPMBean($eapmId);
+        $eapmBean = $this->getEAPMBean();
         if (!empty($eapmBean->id)) {
             $apiData = $this->getApiData($eapmBean);
             if (!empty($apiData['refreshToken'])) {
@@ -290,7 +298,7 @@ class ExtAPIDocuSign extends ExternalAPIBase
             $refreshTokenReqStatus = $refreshTokenRes[1];
             if ($refreshTokenReqStatus === 200) {
                 $oauthToken = $refreshTokenRes[0];
-                
+
                 return $oauthToken;
             }
         } catch (Exception $e) {
@@ -302,18 +310,15 @@ class ExtAPIDocuSign extends ExternalAPIBase
     /**
      * Helper function for retrieving the EAPM bean
      *
-     * @param string|null $eapmId the ID of the EAPM bean to retrieve
      * @return SugarBean|null the retrieved EAPM bean or null if none found
      */
-    protected function getEAPMBean($eapmId = null)
+    protected function getEAPMBean()
     {
-        if (isset($eapmId)) {
-            $eapm = BeanFactory::retrieveBean('EAPM', $eapmId, ['encode' => false]);
-        }
         $eapm = EAPM::getLoginInfo('DocuSign');
 
         return $eapm;
     }
+
 
     /**
      * Get User details
@@ -375,7 +380,7 @@ class ExtAPIDocuSign extends ExternalAPIBase
         $this->setClientHost($apiData);
 
         $this->setAccessTokenOnDSClient();
-        
+
         $envelopeApi = new DocuSign\Api\EnvelopesApi($this->getClient());
         
         try {
@@ -436,7 +441,7 @@ class ExtAPIDocuSign extends ExternalAPIBase
         $this->setClientHost($apiData);
 
         $this->setAccessTokenOnDSClient();
-        
+
         $envelopeApi = new DocuSign\Api\EnvelopesApi($this->getClient());
 
         $options = new DocuSign\Api\EnvelopesApi\GetDocumentOptions();
@@ -474,7 +479,6 @@ class ExtAPIDocuSign extends ExternalAPIBase
         $docusignClient = $this->getClient();
         $docusignClient->getConfig()->setHost($apiData['baseURI']);
     }
-
     /**
      * Create new envelope
      *
@@ -505,35 +509,23 @@ class ExtAPIDocuSign extends ExternalAPIBase
 
         $this->setAccessTokenOnDSClient();
 
-        $config = $this->getClient()->getConfig();
-        $config->setHost($this->demoHost);
-
         $envelopeApi = new DocuSign\Api\EnvelopesApi($this->getClient());
+
+        $this->usesTemplates = $this->isUsingTemplates($args);
 
         //Set up Document objects to be send to DocuSign
         $documents = [];
-        $documentIdx = 1;
         $firstDocumentName = '';
-        
-        foreach ($args['documents'] as $documentId) {
-            $sugarDoc = BeanFactory::retrieveBean('Documents', $documentId);
-            if (!empty($sugarDoc)) {
-                if ($firstDocumentName === '') {
-                    $firstDocumentName = $sugarDoc->document_name;
-                }
-                $documentRevisionId = $sugarDoc->document_revision_id;
-                $documentRevision = BeanFactory::getBean('DocumentRevisions', $documentRevisionId);
-                $documentName = $documentRevision->filename;
-                $document = new DocuSign\Model\Document();
-                $content = $this->getFileContent($documentRevisionId);
-    
-                $document->setDocumentBase64(base64_encode($content));
-                $document->setName($documentName);
-                $document->setDocumentId($documentIdx . '');
-                $document->setFileExtension($documentRevision->file_ext);
+        if (!$this->usesTemplates && isset($args['documents']) && is_array($args['documents'])) {
+            $documents = $this->buildDocuments($args, $firstDocumentName);
+        }
 
-                array_push($documents, $document);
-                $documentIdx++;
+        if (isset($args['recipients']) && is_array($args['recipients'])) {
+            if ($this->usesTemplates) {
+                $templateRoles = $this->buildTemplateRoles($args);
+            } else {
+                $addSignTab = count($documents) > 0;
+                $recipients = $this->buildRecipients($args, $addSignTab);
             }
         }
 
@@ -595,6 +587,17 @@ class ExtAPIDocuSign extends ExternalAPIBase
         $envelopDefinition->setDocuments($documents);
         $envelopDefinition->setEventNotification($eventNotification);
 
+        if ($this->usesTemplates) {
+            $envelopDefinition->setTemplateId($args['templateSelected']['id']);
+            if (isset($templateRoles)) {
+                $envelopDefinition->setTemplateRoles($templateRoles);
+            }
+        } else {
+            if (isset($recipients)) {
+                $envelopDefinition->setRecipients($recipients);
+            }
+        }
+
         $this->envelopDefinition = $envelopDefinition;
 
         //create the new envelope
@@ -608,6 +611,199 @@ class ExtAPIDocuSign extends ExternalAPIBase
             'id' => $createdEnvelopeId,
             'subject' => $this->envelopDefinition->getEmailSubject(),
         ];
+    }
+
+    /**
+     * Build documents
+     *
+     * @param Array $args
+     * @param string $firstDocumentName
+     * @return Array
+     */
+    public function buildDocuments(array $args, string &$firstDocumentName) : array
+    {
+        $documents = [];
+        $documentAddedIdx = 1;
+
+        for ($documentIdx = 0; $documentIdx < (is_countable($args['documents']) ? count($args['documents']) : 0); $documentIdx++) {
+            $documentId = $args['documents'][$documentIdx];
+            $sugarDoc = BeanFactory::retrieveBean('Documents', $documentId);
+            if (empty($sugarDoc)) {
+                continue;
+            }
+
+            if ($firstDocumentName === '') {
+                $firstDocumentName = $sugarDoc->document_name;
+            }
+            $documentRevisionId = $sugarDoc->document_revision_id;
+            $documentRevision = BeanFactory::getBean('DocumentRevisions', $documentRevisionId);
+            $documentName = $documentRevision->filename;
+            $document = new DocuSign\Model\Document();
+            $content = $this->getFileContent($documentRevisionId);
+
+            $document->setDocumentBase64(base64_encode($content));
+            $document->setName($documentName);
+            $document->setDocumentId(strval($documentAddedIdx++));
+            $document->setFileExtension($documentRevision->file_ext);
+
+            $documents[] = $document;
+        }
+        return $documents;
+    }
+
+    /**
+     * Build recipients object
+     *
+     * @param Array $args
+     * @param bool $addSignTab
+     * @return DocuSign\Model\Recipients
+     */
+    public function buildRecipients(array $args, bool $addSignTab) : DocuSign\Model\Recipients
+    {
+        $signers = [];
+        $carbonCopyRecipients = [];
+        $certifiedDeliveryRecipients = [];
+
+        $recipients = new DocuSign\Model\Recipients();
+
+        if ((is_countable($args['recipients']) ? count($args['recipients']) : 0) === 0) {
+            return $recipients;
+        }
+
+        $i = 1;
+        $signTagXPosition = 10;
+        foreach ($args['recipients'] as $recipientDetails) {
+            if ($recipientDetails['type'] === 'signer') {
+                $signer = new DocuSign\Model\Signer();
+                $signer = $this->setUpRecipientObject($signer, $recipientDetails, $i);
+                //add a sign tab on the first document
+                if ($addSignTab) {
+                    $signTab = new DocuSign\Model\SignHere();
+                    $signTab->setDocumentId('1');
+                    $signTab->setPageNumber(1);
+                    $signTab->setXPosition($signTagXPosition);
+                    $signTagXPosition = $signTagXPosition + 100;
+                    $signTab->setYPosition(0);
+                    $signTabs = [
+                        $signTab,
+                    ];
+                    $tabsToAdd = new DocuSign\Model\Tabs();
+                    $tabsToAdd->setSignHereTabs($signTabs);
+                    $signer->setTabs($tabsToAdd);
+                }
+                $signers[] = $signer;
+            } elseif ($recipientDetails['type'] === 'carbon_copy') {
+                $carbonCopy = new DocuSign\Model\CarbonCopy();
+                $carbonCopy = $this->setUpRecipientObject($carbonCopy, $recipientDetails, $i);
+                $carbonCopyRecipients[] = $carbonCopy;
+            } elseif ($recipientDetails['type'] === 'certified_delivery') {
+                $certifiedDelivery = new DocuSign\Model\CarbonCopy();
+                $certifiedDelivery = $this->setUpRecipientObject($certifiedDelivery, $recipientDetails, $i);
+                $certifiedDeliveryRecipients[] = $certifiedDelivery;
+            }
+            $i++;
+        }
+
+        if (count($signers) > 0) {
+            $recipients->setSigners($signers);
+        }
+        if (count($carbonCopyRecipients) > 0) {
+            $recipients->setCarbonCopies($carbonCopyRecipients);
+        }
+        if (count($certifiedDeliveryRecipients) > 0) {
+            $recipients->setCertifiedDeliveries($certifiedDeliveryRecipients);
+        }
+
+        return $recipients;
+    }
+
+    /**
+     * Sets properties on recipient objects
+     * @param Object $recipient        An DocuSign recipient model
+     * @param Array $recipientDetails  Informations to set up on model
+     * @param Integer $i               An Index to use to identify recipients
+     * @return Object $recipient      Recipient model from input, with fields set up
+     */
+    public function setUpRecipientObject($recipient, $recipientDetails, $i)
+    {
+        $recipient->setEmail($recipientDetails['email']);
+        $recipient->setName($recipientDetails['name']);
+        $recipient->setRecipientId($i . '');
+
+        return $recipient;
+    }
+
+    /**
+     * Build template roles
+     *
+     * @param Array $args
+     * @return Array
+     */
+    public function buildTemplateRoles(array $args) : Array
+    {
+        $templateRoles = [];
+
+        if ((is_countable($args['recipients']) ? count($args['recipients']) : 0) === 0) {
+            return $templateRoles;
+        }
+
+        foreach ($args['recipients'] as $recipientDetails) {
+            $templateRole = $this->setUpTemplateRoleObject($args, $recipientDetails);
+            $templateRoles[] = $templateRole;
+        }
+
+        return $templateRoles;
+    }
+
+    /**
+     * Sets properties on template role object
+     *
+     * @param Array $args              Api arguments
+     * @param Array $recipientDetails  Informations to set up on model
+     * @return DocuSign\Model\TemplateRole Recipient model from input, with fields set up
+     */
+    public function setUpTemplateRoleObject(array $args, array $recipientDetails)
+    {
+        $role = new DocuSign\Model\TemplateRole();
+        $role->setEmail($recipientDetails['email']);
+        $role->setName($recipientDetails['name']);
+        $role->setRoleName($recipientDetails['role']);
+
+        $routingOrder = $this->getRoutingOrderBasedOnRoleName($recipientDetails['role'], $args['templateSelected']);
+        if ($routingOrder !== false) {
+            $role->setRoutingOrder($routingOrder);
+        }
+
+        return $role;
+    }
+
+    /**
+     * Get routing order based on role name
+     *
+     * @param string $recipientRole
+     * @param Array $templateDetails
+     * @return mixed
+     */
+    public function getRoutingOrderBasedOnRoleName(string $recipientRole, array $templateDetails)
+    {
+        foreach (isset($templateDetails['roles']) && safeIsIterable($templateDetails['roles']) ? $templateDetails['roles'] : [] as $templateRole) {
+            if ($templateRole['name'] === $recipientRole) {
+                return $templateRole['routing_order'];
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Returns whether the envelope should use templates and roles
+     *
+     * @param  Array  $args
+     * @return bool
+     */
+    public function isUsingTemplates($args) : bool
+    {
+        return array_key_exists('templateSelected', $args) && !empty($args['templateSelected']);
     }
 
     /**
@@ -719,6 +915,7 @@ class ExtAPIDocuSign extends ExternalAPIBase
      */
     public function getEnvelopeDetails($envelopeBean)
     {
+        $envelope = null;
         global $timedate;
         $eapmBean = $this->getEAPMBean();
         if (empty($eapmBean)) {
@@ -791,7 +988,7 @@ class ExtAPIDocuSign extends ExternalAPIBase
             }
         }
 
-        $lastAudit = new SugarDateTime("now");
+        $lastAudit = new SugarDateTime('now');
         $lastAudit = $timedate->asDb($lastAudit);
         $envelopeDetails['last_audit'] = $lastAudit;
 
@@ -834,7 +1031,7 @@ class ExtAPIDocuSign extends ExternalAPIBase
                 $responseBody = $e->getResponseBody();
                 $exceptionCode = $e->getCode();
                 $exceptionMessage = $e->getMessage();
-                if ($exceptionMessage === "API_LIMIT_EXCEED") {
+                if ($exceptionMessage === 'API_LIMIT_EXCEED') {
                     $res = [
                         'status' => 'error',
                         'message' => $exceptionMessage,
@@ -854,15 +1051,7 @@ class ExtAPIDocuSign extends ExternalAPIBase
                 }
 
                 return $res;
-            } catch (Exception $e) {
-                $exceptionMessage = $e->getMessage();
-                $res = [
-                    'status' => 'error',
-                    'message' => $exceptionMessage,
-                ];
-
-                return $res;
-            } catch (Error $e) {
+            } catch (Exception|Error $e) {
                 $exceptionMessage = $e->getMessage();
                 $res = [
                     'status' => 'error',
@@ -888,7 +1077,7 @@ class ExtAPIDocuSign extends ExternalAPIBase
         $foldersApi = new DocuSign\Api\FoldersApi($this->getClient());
 
         $listItemsOptions = new DocuSign\Api\FoldersApi\ListItemsOptions();
-        $folderItemResponses = $foldersApi->listItems($accountId, "recyclebin", $listItemsOptions);
+        $folderItemResponses = $foldersApi->listItems($accountId, 'recyclebin', $listItemsOptions);
         
         $folders = $folderItemResponses->getFolders();
         foreach ($folders as $folder) {
@@ -904,5 +1093,162 @@ class ExtAPIDocuSign extends ExternalAPIBase
         }
 
         return false;
+    }
+
+    /**
+     * List templates in DocuSign
+     *
+     * @return Array
+     */
+    public function listTemplates() : array
+    {
+        global $log;
+
+        $eapmBean = $this->getEAPMBean();
+        if (empty($eapmBean)) {
+            $GLOBALS['log']->error('DocuSign error: Could not get envelope details. No EAPM bean found.');
+            return [
+                'status' => 'error',
+                'message' => 'No external API set',
+            ];
+        }
+
+        $this->setAccessTokenOnDSClient();
+
+        $apiData = $this->getApiData($eapmBean);
+        $accountId = $apiData['accountId'];
+
+        $this->setClientHost($apiData);
+
+        $res = [];
+
+        try {
+            $templateApi = new DocuSign\Api\TemplatesApi($this->getClient());
+            $envelopeTemplatesResults = $templateApi->listTemplates($accountId);
+            $templateResultsArray = $envelopeTemplatesResults->getEnvelopeTemplates();
+            foreach ($templateResultsArray as $templateResult) {
+                $templateName = trim($templateResult->getName());
+                if ($templateName === '') {
+                    continue;
+                }
+                $res[] = [
+                    'id' => $templateResult->getTemplateId(),
+                    'name' => $templateName,
+                ];
+            }
+        } catch (DocuSign\Client\ApiException $ex) {
+            $message = "Exception: {$ex->getMessage()}";
+            $responseBody = $ex->getResponseBody();
+            $res = [
+                'status' => 'error',
+                'message' => $message,
+            ];
+            $log->error($responseBody);
+        } catch (Exception $ex) {
+            $message = "Exception: {$ex->getMessage()}";
+            $res = [
+                'status' => 'error',
+                'message' => $message,
+            ];
+
+            $log->error($message);
+        }
+
+        return $res;
+    }
+
+    public function getTemplateDetails(string $templateId) : array
+    {
+        global $log;
+
+        $eapmBean = $this->getEAPMBean();
+        if (empty($eapmBean)) {
+            $GLOBALS['log']->error('DocuSign error: Could not get envelope details. No EAPM bean found.');
+            return [
+                'status' => 'error',
+                'message' => 'No external API set',
+            ];
+        }
+
+        $this->setAccessTokenOnDSClient();
+
+        $apiData = $this->getApiData($eapmBean);
+        $accountId = $apiData['accountId'];
+
+        $this->setClientHost($apiData);
+
+        $res = [];
+
+        $roles = [];
+        $predefinedRecipients = [];
+        $recipientsEntities = [];
+        try {
+            $templateApi = new DocuSign\Api\TemplatesApi($this->getClient());
+            $recipients = $templateApi->listRecipients($accountId, $templateId);
+
+            $signers = $recipients->getSigners();
+            $recipientsEntities['Signer'] = $signers;
+            $carbon = $recipients->getCarbonCopies();
+            $recipientsEntities['Carbon Copy'] = $carbon;
+            $certified = $recipients->getCertifiedDeliveries();
+            $recipientsEntities['Certified Delivery'] = $certified;
+            $agents = $recipients->getAgents();
+            $recipientsEntities['Agent'] = $agents;
+            $editors = $recipients->getEditors();
+            $recipientsEntities['Editor'] = $editors;
+            $inPerson = $recipients->getInPersonSigners();
+            $recipientsEntities['In Person'] = $inPerson;
+            $intermediaries = $recipients->getIntermediaries();
+            $recipientsEntities['Intermediar'] = $intermediaries;
+
+            foreach ($recipientsEntities as $recipientType => $recipientEntityObjects) {
+                foreach ($recipientEntityObjects as $recipientEntity) {
+                    $routingOrder = $recipientEntity->getRoutingOrder();
+                    $newRole = [];
+                    $newPredefinedRecipient = [];
+                    $roleName = $recipientEntity->getRoleName();
+
+                    if ($recipientEntity->getModelName() === 'inPersonSigner') {
+                        $recipientName = $recipientEntity->getHostName();
+                        $recipientEmail = $recipientEntity->getHostEmail();
+                    } else {
+                        $recipientName = $recipientEntity->getName();
+                        $recipientEmail = $recipientEntity->getEmail();
+                    }
+
+                    if (!empty($recipientName) && !empty($recipientEmail)) {
+                        $newPredefinedRecipient['name']  = $recipientName;
+                        $newPredefinedRecipient['email'] = $recipientEmail;
+                        if ($recipientEntity->getModelName() === 'inPersonSigner') {
+                            $newPredefinedRecipient['name']  = '(host) ' . $newPredefinedRecipient['name'];
+                            $newPredefinedRecipient['email'] = '(host) ' . $newPredefinedRecipient['email'];
+                        }
+                        $newPredefinedRecipient['role'] = $roleName;
+                        $newPredefinedRecipient['type'] = $recipientType;
+                        $predefinedRecipients[] = $newPredefinedRecipient;
+                    }
+
+                    if (!empty($roleName)) {
+                        $newRole['name'] = $recipientEntity->getRoleName();
+                        if (!empty($routingOrder)) {
+                            $newRole['routing_order'] = $routingOrder;
+                        }
+                        $roles[] = $newRole;
+                    }
+                }
+            }
+        } catch (DocuSign\Client\ApiException|Exception $ex) {
+            $message = 'Exception: ' . $ex->getMessage();
+            $res = [
+                'status' => 'error',
+                'message' => $message,
+            ];
+            $log->error($message);
+        }
+
+        $res['roles'] = $roles;
+        $res['predefined_recipients'] = $predefinedRecipients;
+
+        return $res;
     }
 }

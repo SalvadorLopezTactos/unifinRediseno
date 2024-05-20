@@ -85,7 +85,14 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 	protected function expandDate($date, $end = false)
 	{
 	    global $timedate;
+
 	    if($this->hasTime($date)) {
+            $parsed = $timedate->fromDb($date);
+            $date = $timedate->tzUser(new SugarDateTime());
+
+            $date->setDate($parsed->year, $parsed->month, $parsed->day);
+            $date->setTime($parsed->getHour(), $parsed->getMinute(), $parsed->getSecond());
+
 	        return $date;
 	    }
 
@@ -110,19 +117,17 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 	function queryFilterBefore($layout_def)
 	{
         $column = $this->_get_column_select($layout_def);
+        $after = $this->expandDate($layout_def['input_name0']);
 
-        $begin = $this->expandDate($layout_def['input_name0']);
-
-        return $this->queryDateOp($column, $begin, '<', "datetime");
+        return $this->queryDateOp($column, $after, '<', "datetime");
 	}
 
 	function queryFilterAfter($layout_def)
 	{
         $column = $this->_get_column_select($layout_def);
+        $before = $this->expandDate($layout_def['input_name0']);
 
-        $begin = $this->expandDate($layout_def['input_name0']);
-
-        return $this->queryDateOp($column, $begin, '>', "datetime");
+        return $this->queryDateOp($column, $before, '>', "datetime");
 	}
 
 	function queryFilterBetween_Dates($layout_def)
@@ -587,7 +592,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
         }elseif(substr_count($layout_def['type'], 'date') > 0){
             // if date time field
             if(substr_count($layout_def['type'], 'time') > 0 && $this->get_time_part($content)!= false){
-                $td = $timedate->to_display_date_time($content, true, false);
+                $td = $timedate->to_display_date_time($content);
                 return $td;
             }else{// if date only field
                 $td = $timedate->to_display_date($content, false); // Avoid PHP notice of returning by reference.
@@ -596,12 +601,34 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
         }
     }
 
+    /**
+     * Get datetime value for sidecar field
+     *
+     * @param array $layoutDef
+     *
+     * @return mixed
+     */
+    public function getFieldControllerData(array $layoutDef)
+    {
+        if (!empty($layoutDef['column_function'])) {
+            $func_name = 'displayList'.$layoutDef['column_function'];
+            if (method_exists($this, $func_name)) {
+                $display = $this->$func_name($layoutDef);
+                return $display;
+            }
+        }
+
+        $value = parent::displayListPlain($layoutDef);
+
+        return $value;
+    }
+
     function get_time_part($date_time_value)
     {
         global $timedate;
 
         $date_parts=$timedate->split_date_time($date_time_value);
-        if (count($date_parts) > 1) {
+        if ((is_countable($date_parts) ? count($date_parts) : 0) > 1) {
             return $date_parts[1];
         } else {
             return false;
@@ -617,7 +644,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
                 return $this-> $func_name ($layout_def);
             }
         }
-        return $this->displayListPlain($layout_def);
+        return parent :: displayListPlain($layout_def);
     }
 
 	function querySelect(& $layout_def) {

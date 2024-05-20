@@ -19,7 +19,7 @@ class HintEnrichFieldConfig extends \Basic implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    const MODULE_NAME = 'HintEnrichFieldConfigs';
+    public const MODULE_NAME = 'HintEnrichFieldConfigs';
 
     public $id;
     public $config_data;

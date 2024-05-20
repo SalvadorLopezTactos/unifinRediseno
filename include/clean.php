@@ -62,6 +62,12 @@ class SugarCleaner
         if(!is_dir(sugar_cached("htmlclean"))) {
             create_cache_directory("htmlclean/");
         }
+        $config->set('HTML.AllowedComments', [
+            'START_BUNDLE_LOOP' => true,
+            'START_PRODUCT_LOOP' => true,
+            'END_PRODUCT_LOOP' => true,
+            'END_BUNDLE_LOOP' => true,
+        ]);
         $config->set('HTML.Doctype', 'XHTML 1.0 Transitional');
         $config->set('Core.Encoding', 'UTF-8');
         $hidden_tags = array('script' => true, 'style' => true, 'title' => true, 'head' => true);
@@ -223,7 +229,7 @@ class SugarCleaner
             $cleanhtml = $html;
         } else {
             $purifier = self::getInstance()->purifier;
-            $cleanhtml = $purifier->purify($html);
+            $cleanhtml = self::getCleanhtmlWithWidthPersisntence($html, $purifier);
         }
 
         if($encoded) {
@@ -235,11 +241,47 @@ class SugarCleaner
 
     static public function stripTags($string, $encoded = true)
     {
-        if($encoded) {
+        if ($encoded) {
             $string = from_html($string);
         }
-        $string = filter_var($string, FILTER_SANITIZE_STRIPPED, FILTER_FLAG_NO_ENCODE_QUOTES);
-        return $encoded?to_html($string):$string;
+        $string = preg_replace('/\x00|<[^>]*>?/', '', $string);
+        return $encoded ? to_html($string) : $string;
+    }
+
+    private static function getCleanhtmlWithWidthPersisntence(string $html, HTMLPurifier $purifier): string
+    {
+        //If the width attribute value is in percent and is greated than 100%
+        //replace the value with 99999<original width> removing the percent sign
+        //to prevent HTMLPurifier from truncating it to 100%
+        $processedHtml = preg_replace_callback(
+            '/width\s*=\s*"(\d+)%"/',
+            function ($matches) {
+                $width = intval($matches[1]);
+                if ($width > 100) {
+                    return 'width="99999' . $width . '"';
+                } else {
+                    return $matches[0]; // No change needed
+                }
+            },
+            $html
+        );
+
+        $cleanhtml = $purifier->purify($processedHtml);
+
+        //Revert the width to the original percentage
+        $cleanhtml = preg_replace_callback(
+            '/width="99999(\d+)"/',
+            function ($matches) {
+                $width = intval($matches[1]);
+                if ($width > 100) {
+                    return 'width="' . $width . '%"';
+                } else {
+                    return $matches[0]; // No change needed
+                }
+            },
+            $cleanhtml
+        );
+        return $cleanhtml;
     }
 }
 

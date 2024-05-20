@@ -32,7 +32,7 @@ class Connection extends Param
     /**
      * Default compression.
      *
-     * @var string
+     * @var bool
      */
     public const DEFAULT_COMPRESSION = false;
 
@@ -244,9 +244,9 @@ class Connection extends Param
     /**
      * Returns an instance of the transport type.
      *
-     * @throws \Elastica\Exception\InvalidException If invalid transport type
+     * @throws InvalidException If invalid transport type
      *
-     * @return \Elastica\Transport\AbstractTransport Transport object
+     * @return AbstractTransport Transport object
      */
     public function getTransportObject()
     {
@@ -302,9 +302,9 @@ class Connection extends Param
      *
      * @param string $key Config key
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
-     * @return array|string Config value
+     * @return array|bool|int|string|null Config value
      */
     public function getConfig($key = '')
     {
@@ -321,7 +321,7 @@ class Connection extends Param
     }
 
     /**
-     * @param array|\Elastica\Connection $params Params to create a connection
+     * @param array|Connection $params Params to create a connection
      *
      * @throws Exception\InvalidException
      *
@@ -341,7 +341,7 @@ class Connection extends Param
     }
 
     /**
-     * @return string User
+     * @return string|null User
      */
     public function getUsername()
     {
@@ -349,10 +349,18 @@ class Connection extends Param
     }
 
     /**
-     * @return string Password
+     * @return string|null Password
      */
     public function getPassword()
     {
         return $this->hasParam('password') ? $this->getParam('password') : null;
+    }
+
+    /**
+     * @return string AuthType
+     */
+    public function getAuthType()
+    {
+        return $this->hasParam('auth_type') ? \strtolower($this->getParam('auth_type')) : null;
     }
 }

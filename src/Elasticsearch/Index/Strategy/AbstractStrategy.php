@@ -62,6 +62,6 @@ abstract class AbstractStrategy implements StrategyInterface
      */
     protected function getModuleConfig($module, $key, $default = null)
     {
-        return (isset($this->config[$module][$key])) ? $this->config[$module][$key] : $default;
+        return $this->config[$module][$key] ?? $default;
     }
 }

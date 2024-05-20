@@ -48,13 +48,6 @@ class SystemProcessLock
         }
     }
 
-    public function __destruct()
-    {
-        if ($this->locked) {
-            $this->unlock();
-        }
-    }
-
     /**
      * Prevent process race conditions for cache building functionality
      *
@@ -68,7 +61,7 @@ class SystemProcessLock
         callable $longRunningFunction,
         ?callable $onRefused = null
     ) {
-        if (self::$lockLevel > 0) {
+        if (self::$lockLevel > 0 || !$this->db->isAvailable) {
             return $longRunningFunction($this->lockAttemptCounter);
         }
         $returnValue = null;

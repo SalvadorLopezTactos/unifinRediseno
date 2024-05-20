@@ -45,6 +45,7 @@ $moduleList[] = 'Purchases';
 $moduleList[] = 'PurchasedLineItems';
 $moduleList[] = 'Messages';
 $moduleList[] = 'Escalations';
+$moduleList[] = 'ExternalUsers';
 
 $moduleList[] = 'Documents';
 $moduleList[] = 'Cases';
@@ -209,11 +210,14 @@ $beanList['BusinessCenters'] = 'BusinessCenter';
 $beanList['Shifts'] = 'Shift';
 $beanList['ShiftExceptions'] = 'ShiftException';
 $beanList['ChangeTimers'] = 'ChangeTimer';
+$beanList['Metrics'] = 'Metric';
 $beanList['Messages'] = 'Message';
 $beanList['MobileDevices'] = 'MobileDevice';
 $beanList['Purchases'] = 'Purchase';
 $beanList['PurchasedLineItems'] = 'PurchasedLineItem';
 $beanList['PushNotifications'] = 'PushNotification';
+$beanList['ExternalUsers'] = 'ExternalUser';
+
 $beanList['Empty'] = 'EmptyBean';
 $beanList['UpgradeHistory'] = 'UpgradeHistory';
 $beanList['OutboundEmail'] = 'OutboundEmail';
@@ -376,11 +380,13 @@ $beanFiles['BusinessCenter'] = 'modules/BusinessCenters/BusinessCenter.php';
 $beanFiles['Shift'] = 'modules/Shifts/Shift.php';
 $beanFiles['ShiftException'] = 'modules/ShiftExceptions/ShiftException.php';
 $beanFiles['ChangeTimer'] = 'modules/ChangeTimers/ChangeTimer.php';
+$beanFiles['Metric'] = 'modules/Metrics/Metric.php';
 $beanFiles['Message'] = 'modules/Messages/Message.php';
 $beanFiles['MobileDevice'] = 'modules/MobileDevices/MobileDevice.php';
 $beanFiles['Purchase'] = 'modules/Purchases/Purchase.php';
 $beanFiles['PurchasedLineItem'] = 'modules/PurchasedLineItems/PurchasedLineItem.php';
 $beanFiles['PushNotification'] = 'modules/PushNotifications/PushNotification.php';
+$beanFiles['ExternalUser'] = 'modules/ExternalUsers/ExternalUser.php';
 
 $beanFiles['Configurator']          = 'modules/Configurator/Configurator.php';
 $beanFiles['EmptyBean'] = 'data/EmptyBean.php';
@@ -469,6 +475,7 @@ $modInvisList[] = 'DataSets';
 $modInvisList[] = 'DataSet_Attribute';
 $modInvisList[] = 'ReportMaker';
 $modInvisList[] = 'ChangeTimers';
+$modInvisList[] = 'Metrics';
 $modInvisList[] = 'MobileDevices';
 
 //$modInvisList[] = 'QueryBuilder';
@@ -592,6 +599,11 @@ $beanFiles['Tag'] = 'modules/Tags/Tag.php';
 $beanList['Categories'] = 'Category';
 $beanFiles['Category'] = 'modules/Categories/Category.php';
 $modInvisList[] = 'Categories';
+
+$beanList['PubSub_ModuleEvent_PushSubs'] = 'PubSub_ModuleEvent_PushSub';
+$beanFiles['PubSub_ModuleEvent_PushSub'] = 'modules/PubSub_ModuleEvent_PushSubs/PubSub_ModuleEvent_PushSub.php';
+$modInvisList[] = 'PubSub_ModuleEvent_PushSubs';
+$adminOnlyList['PubSub_ModuleEvent_PushSubs'] = ['all' => 1];
 
 //Object list is only here to correct for modules that break
 //the bean class name == dictionary entry/object name convention
@@ -764,6 +776,35 @@ $beanFiles['Geocode'] = 'modules/Maps/Geocode/Geocode.php';
 
 $beanList['GeocodeJob'] = 'GeocodeJob';
 $beanFiles['GeocodeJob'] = 'modules/Maps/GeocodeJob/GeocodeJob.php';
+
+// module for Sugar Automate
+$moduleList[] = 'DRI_Workflows';
+$beanList['DRI_Workflows'] = 'DRI_Workflow';
+$beanFiles['DRI_Workflow'] = 'modules/DRI_Workflows/DRI_Workflow.php';
+
+$moduleList[] = 'DRI_Workflow_Task_Templates';
+$beanList['DRI_Workflow_Task_Templates'] = 'DRI_Workflow_Task_Template';
+$beanFiles['DRI_Workflow_Task_Template'] = 'modules/DRI_Workflow_Task_Templates/DRI_Workflow_Task_Template.php';
+
+$moduleList[] = 'DRI_SubWorkflows';
+$beanList['DRI_SubWorkflows'] = 'DRI_SubWorkflow';
+$beanFiles['DRI_SubWorkflow'] = 'modules/DRI_SubWorkflows/DRI_SubWorkflow.php';
+
+$moduleList[] = 'DRI_Workflow_Templates';
+$beanList['DRI_Workflow_Templates'] = 'DRI_Workflow_Template';
+$beanFiles['DRI_Workflow_Template'] = 'modules/DRI_Workflow_Templates/DRI_Workflow_Template.php';
+
+$moduleList[] = 'CJ_WebHooks';
+$beanList['CJ_WebHooks'] = 'CJ_WebHook';
+$beanFiles['CJ_WebHook'] = 'modules/CJ_WebHooks/CJ_WebHook.php';
+
+$moduleList[] = 'CJ_Forms';
+$beanList['CJ_Forms'] = 'CJ_Form';
+$beanFiles['CJ_Form'] = 'modules/CJ_Forms/CJ_Form.php';
+
+$moduleList[] = 'DRI_SubWorkflow_Templates';
+$beanList['DRI_SubWorkflow_Templates'] = 'DRI_SubWorkflow_Template';
+$beanFiles['DRI_SubWorkflow_Template'] = 'modules/DRI_SubWorkflow_Templates/DRI_SubWorkflow_Template.php';
 
 foreach(SugarAutoLoader::existing('include/modules_override.php', SugarAutoLoader::loadExtension("modules")) as $modExtFile) {
     include $modExtFile;

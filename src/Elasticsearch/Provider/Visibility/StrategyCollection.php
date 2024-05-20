@@ -25,7 +25,7 @@ class StrategyCollection extends \SplObjectStorage
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getHash($strategy)
+    public function getHash($strategy): string
     {
         if (!$strategy instanceof \SugarVisibility) {
             throw new \InvalidArgumentException('\SugarVisibility class expected');

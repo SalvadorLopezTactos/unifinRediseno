@@ -11,6 +11,8 @@ use Elastica\Exception\InvalidException;
  */
 class IpRange extends AbstractAggregation
 {
+    use Traits\KeyedTrait;
+
     /**
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
@@ -36,10 +38,10 @@ class IpRange extends AbstractAggregation
     /**
      * Add an ip range to this aggregation.
      *
-     * @param string $fromValue a valid ipv4 address. Low end of this range, exclusive (greater than)
-     * @param string $toValue   a valid ipv4 address. High end of this range, exclusive (less than)
+     * @param string|null $fromValue a valid ipv4 address. Low end of this range, exclusive (greater than)
+     * @param string|null $toValue   a valid ipv4 address. High end of this range, exclusive (less than)
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return $this
      */

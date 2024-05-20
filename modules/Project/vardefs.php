@@ -13,6 +13,8 @@
 
 $dictionary['Project'] = array(
     'table' => 'project',
+    'color' => 'army',
+    'icon' => 'sicon-projects-lg',
     'favorites' => false,
     'unified_search' => true,
     'full_text_search' => true,

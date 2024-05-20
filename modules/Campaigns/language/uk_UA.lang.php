@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'URL-адреса трекера:',
   'LBL_TRACKER_TEXT' => 'Текст посилання трекера:',
   'LBL_TRACKER_COUNT' => 'Трекер',
-  'LBL_REFER_URL' => 'Перенаправлення URL трекера:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Маркетингові кампанії',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'Email кампанії',
   'LBL_NEW_FORM_TITLE' => 'Нова маркетингова кампанія',

@@ -192,12 +192,9 @@
         if (!_.isUndefined(this.context.parent) && !_.isUndefined(this.context.parent.get('model'))) {
             if (this.context.parent.get('model').module == 'Forecasts') {
                 this.context.parent.on('button:export_button:click', function() {
-                    if (this.layout.isVisible()) {
+                    if (!this._isUserManager()) {
                         this.exportCallback();
                     }
-                }, this);
-                this.before('render', function() {
-                    return this.beforeRenderCallback()
                 }, this);
                 this.on('render', function() {
                     this.renderCallback();
@@ -212,7 +209,7 @@
                 }, this);
 
                 this.context.parent.on('forecasts:worksheet:totals', function(totals, type) {
-                    if (type == this.worksheetType && this.layout.isVisible()) {
+                    if (type == this.worksheetType && !this._isUserManager()) {
                         this.totalsTemplateObj = {
                             orderedFields: []
                         };
@@ -254,7 +251,7 @@
                  * trigger an event if dirty
                  */
                 this.dirtyModels.on('add change reset', function(){
-                    if(this.layout.isVisible()){
+                    if (!this._isUserManager()) {
                         this.context.parent.trigger('forecasts:worksheet:dirty', this.worksheetType, this.dirtyModels.length > 0);
                     }
                 }, this);
@@ -268,7 +265,7 @@
                 }, this);
 
                 this.context.parent.on('button:save_draft_button:click', function() {
-                    if (this.layout.isVisible()) {
+                    if (!this._isUserManager()) {
                         // after we save, trigger the needs_commit event
                         this.context.parent.once('forecasts:worksheet:saved', function() {
                             // clear out the current navigation message
@@ -284,7 +281,7 @@
                 }, this);
 
                 this.context.parent.on('button:commit_button:click', function() {
-                    if (this.layout.isVisible()) {
+                    if (!this._isUserManager()) {
                         this.context.parent.once('forecasts:worksheet:saved', function() {
                             this.context.parent.trigger('forecasts:worksheet:commit', this.selectedUser, this.worksheetType, this.getCommitTotals())
                         }, this);
@@ -294,7 +291,7 @@
 
                 // On cancel click, revert any unsaved changes to Opps/RLIs and reset the filtered collection
                 this.listenTo(this.context.parent, 'button:cancel_button:click', () => {
-                    if (this.layout.isVisible()) {
+                    if (!this._isUserManager()) {
                         this.collection.models.forEach(model => model.revertAttributes());
                         this.cleanUpDirtyModels();
                         this.setNavigationMessage(false, '', '');
@@ -306,7 +303,7 @@
                 });
 
                 this.context.parent.on('change:currentForecastCommitDate', function(context, changed) {
-                    if (this.layout.isVisible()) {
+                    if (!this._isUserManager()) {
                         this.checkForDraftRows(changed);
                     }
                 }, this);
@@ -390,7 +387,7 @@
                 }, this);
 
                 this.context.parent.on('forecasts:worksheet:committed', function() {
-                    if (this.layout.isVisible()) {
+                    if (!this._isUserManager()) {
                         this.setNavigationMessage(false, '', '');
                         this.cleanUpDirtyModels();
                         var ctx = this.context.parent || this.context;
@@ -464,6 +461,17 @@
         this._super('bindDataChange');
     },
 
+    /**
+     * Determines if the forecast user is a manager type
+     *
+     * @return {boolean} true if the forecast user is a manager; false otherwise
+     * @private
+     */
+    _isUserManager: function() {
+        let user = this.selectedUser || this.context.parent.get('selectedUser') || app.user.toJSON();
+        return app.utils.getForecastType(user.is_manager, user.showOpps) === 'Rollup';
+    },
+
     beforeRouteHandler: function() {
         return this.showNavigationMessage('router');
     },
@@ -495,7 +503,7 @@
             callback = this.defaultNavCallback;
         }
 
-        if (this.layout.isVisible()) {
+        if (!this._isUserManager()) {
             var canEdit = this.dirtyCanEdit || this.canEdit;
             if (canEdit && this.displayNavigationMessage) {
                 if (type == 'window') {
@@ -575,45 +583,38 @@
     },
 
     /**
-     * Callback for the before('render') event
-     * @returns {boolean}
+     * @inheritdoc
+     *
+     * Calculates worksheet totals if the selected forecast user is not a manager type
      */
-    beforeRenderCallback: function() {
-        // set the defaults to make it act like a manager so it doesn't actually render till the selected
-        // user is updated
-        var showOpps = (_.isUndefined(this.selectedUser.showOpps)) ? false : this.selectedUser.showOpps,
-            isManager = (_.isUndefined(this.selectedUser.is_manager)) ? true : this.selectedUser.is_manager;
-
-        if (!(showOpps || !isManager) && this.layout.isVisible()) {
-            this.layout.hide();
-        } else if ((showOpps || !isManager) && !this.layout.isVisible()) {
-            this.layout.once('show', this.calculateTotals, this);
-            this.layout.show();
-        }
-
-        // empty out the left columns
+    _render: function() {
+        // Empty out the left columns
         this.leftColumns = [];
 
-        return (showOpps || !isManager);
+        if (!this._isUserManager()) {
+            this.calculateTotals();
+        }
+
+        this._super('_render');
     },
 
     /**
      * Callback for the on('render') event
      */
     renderCallback: function() {
+        if (this.layout.isVisible()) {
+            this.layout.hide();
+        }
+
         var user = this.selectedUser || this.context.parent.get('selectedUser') || app.user.toJSON()
         if (user.showOpps || !user.is_manager) {
-            if (!this.layout.isVisible()) {
-                this.layout.show();
-            }
-
             if (this.filteredCollection.length == 0) {
                 var tpl = app.template.getView('recordlist.noresults', this.module);
                 this.$('tbody').html(tpl(this));
             }
 
             // insert the footer
-            if (!_.isEmpty(this.totals) && this.layout.isVisible()) {
+            if (!_.isEmpty(this.totals) && !this._isUserManager()) {
                 var tpl = app.template.getView('recordlist.totals', this.module);
                 this.$('tbody').after(tpl(this));
             }
@@ -625,10 +626,6 @@
 
             // figure out if any of the row actions need to be disabled
             this.setRowActionButtonStates();
-        } else {
-            if (this.layout.isVisible()) {
-                this.layout.hide();
-            }
         }
     },
 
@@ -665,7 +662,7 @@
         if (doFetch) {
             this.refreshData();
         } else {
-            if ((!this.selectedUser.showOpps && this.selectedUser.is_manager) && this.layout.isVisible()) {
+            if ((!this.selectedUser.showOpps && this.selectedUser.is_manager) && !this._isUserManager()) {
                 // we need to hide
                 this.layout.hide();
             }
@@ -679,7 +676,7 @@
         }
         this.selectedTimeperiod = changed;
         this.hasCheckedForDraftRecords = false;
-        if (this.layout.isVisible()) {
+        if (!this._isUserManager()) {
             this.refreshData();
         }
     },
@@ -692,8 +689,8 @@
      * @param lastCommitDate
      */
     checkForDraftRows: function(lastCommitDate) {
-        if (this.layout.isVisible() && this.canEdit && this.hasCheckedForDraftRecords === false
-            && !_.isEmpty(this.collection.models) && this.isCollectionSyncing === false) {
+        if (!this._isUserManager() && this.canEdit && this.hasCheckedForDraftRecords === false &&
+            !_.isEmpty(this.collection.models) && this.isCollectionSyncing === false) {
             this.hasCheckedForDraftRecords = true;
             if (_.isUndefined(lastCommitDate)) {
                 // we have rows but no commit, enable the commit button
@@ -709,7 +706,7 @@
                     return false;
                 }, this);
             }
-        } else if (this.layout.isVisible() === false && this.canEdit && this.hasCheckedForDraftRecords === false) {
+        } else if (this._isUserManager() && this.canEdit && this.hasCheckedForDraftRecords === false) {
             // since the layout is not visible, lets wait for it to become visible
             this.layout.once('show', function() {
                 this.checkForDraftRows(lastCommitDate);
@@ -759,7 +756,7 @@
     saveWorksheet: function(isDraft) {
         // only run the save when the worksheet is visible and it has dirty records
         var totalToSave = 0;
-        if (this.layout.isVisible()) {
+        if (!this._isUserManager()) {
             var saveCount = 0,
                 ctx = this.context.parent || this.context;
 
@@ -835,7 +832,7 @@
      */
     calculateTotals: function(reset = false) {
         // fire an event on the parent context
-        if (this.layout.isVisible() || reset) {
+        if (!this._isUserManager() || reset) {
             this.totals = this.getCommitTotals();
             var calcFields = ['worst_case', 'best_case', 'likely_case'],
                 fields = _.filter(this._fields.visible, function(field) {
@@ -858,9 +855,8 @@
 
             this.before_colspan = x;
             this.after_colspan = (this._fields.visible.length - (x + fields.length));
-
-            var ctx = this.context.parent || this.context;
-            ctx.trigger('forecasts:worksheet:totals', this.totals, this.worksheetType);
+            //TODO: SS-2847 We need to do a large rework to remove this view
+            // completely and not break forecasts.
         }
     },
 

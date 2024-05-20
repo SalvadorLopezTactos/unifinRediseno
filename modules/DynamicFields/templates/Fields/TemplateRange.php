@@ -16,6 +16,10 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class TemplateRange extends TemplateText
 {
+    /**
+     * @var mixed
+     */
+    public $enable_range_search;
 
 	/**
 	 * __construct
@@ -110,12 +114,12 @@ class TemplateRange extends TemplateText
             $module = $request->getValidInputRequest('view_module', 'Assert\ComponentName');
             if ($module !== null) {
                 if (file_exists('modules/'.$module.'/metadata/SearchFields.php')) {
-                	require('modules/'.$module.'/metadata/SearchFields.php');
+                    require 'modules/' . $module . '/metadata/SearchFields.php';
                 }
 
 			    if(file_exists('custom/modules/'.$module.'/metadata/SearchFields.php'))
 			    {
-                    require('custom/modules/'.$module.'/metadata/SearchFields.php');
+                    require 'custom/modules/' . $module . '/metadata/SearchFields.php';
 			    }
 
                 $name = $request->getValidInputRequest('name');

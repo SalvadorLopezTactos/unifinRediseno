@@ -818,15 +818,12 @@ Si se incluye Oportunidades, Cuentas debe ser requerido o eliminado del diseño 
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Crear una fórmula para determinar si este campo es obligatorio en los diseños.<br/>"
-    . "Los campos obligatorios seguirán la fórmula en la vista móvil basada en navegador, <br/>"
-    . "pero no seguirán la fórmula en las aplicaciones nativas, como Sugar Mobile para iPhone. <br/>"
-    . "No seguirán la fórmula en el Portal autoservicio de Sugar.",
-'LBL_POPHELP_READONLY'=>"Crear una fórmula para determinar si este campo es solo de lectura en los diseños.<br/>"
-        . "Los campos solo de lectura seguirán la fórmula en la vista móvil basada en navegador, <br/>"
+    'LBL_POPHELP_REQUIRED'=>'Los campos que se requieren en función de ciertas condiciones no están disponibles para su uso en los siguientes tipos de acciones SugarBPM: Añadir registro relacionado, Cambiar campo. Elimine el texto "Requerido si" para usar este campo en estas acciones de definiciones de procesos',
+'LBL_POPHELP_READONLY'=>"Cree una fórmula para determinar si este campo es obligatorio en los diseños.<br/>"
+        . "Los campos de solo lectura seguirán la fórmula en la vista móvil basada en navegador, <br/>"
         . "pero no seguirán la fórmula en las aplicaciones nativas, como Sugar Mobile para iPhone. <br/>"
         . "No seguirán la fórmula en el Portal autoservicio de Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccione esto para utilizar este campo al buscar registros con la Búsqueda global en este módulo.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Seleccione para usar este campo cuando busque registros mediante la búsqueda global de este módulo.',
 //Revert Module labels
 'LBL_RESET' => 'Restablecer',
 'LBL_RESET_MODULE' => 'Restablecer Módulo',
@@ -863,6 +860,7 @@ Si se incluye Oportunidades, Cuentas debe ser requerido o eliminado del diseño 
                 'decimal'=>'Decimal',
                 'autoincrement' => 'Autoincrementar',
                 'actionbutton' => 'Botón Acción',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Etiquetas de uso frecuente",

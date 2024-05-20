@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Geen klantgeheim ingesteld',
     'LBL_RESEND_BUTTON_LABEL' => 'Opnieuw verzenden',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Envelop ophalen',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Type cloud service',
+    'LBL_CLOUD_PATH' => 'Cloudpad',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Dashboard lijst DocuSign Enveloppen',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Recente DocuSign Enveloppen',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Focus lade DocuSign Enveloppen',
 
-    'LBL_DOCUMENT_FROM' => 'Document van ',
+    'LBL_NEW_ENVELOPE' => 'Nieuwe envelop',
     'LBL_DOCUMENT_IS_NOW' => ' is nu ',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign fout. Kon account-ID niet ophalen op basis van toegangstoken',
     'LBL_ERROR_RESEND' => 'DocuSign kon niet opnieuw worden verzonden. Status Envelop moet &#39;verzonden&#39; zijn',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Update mislukt',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign regels staan meerdere verzoeken aan dezelfde envelop binnen 15 minuten niet toe',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Er is een fout opgetreden. Envelop kon niet worden bijgewerkt. Controleer de logboeken!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Er is een fout opgetreden. Weergeven sjablonen mislukt. Controleer de logboeken!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Er is een fout opgetreden. Ophalen sjabloon mislukt. Controleer de logboeken!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Envelop niet voltooid',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Status envelop staat nu in DocuSign ',
     'LBL_OVERVIEW' => 'Overzicht',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Document toevoegen',
     'LBL_BUTTON_SEND' => 'Verzenden',
     'LBL_BUTTON_CLEAR' => 'Wissen',
-    'LBL_MISSING_OBJECT' => 'DocuSign object is niet in venster',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Gebruik sjabloon',
     'LBL_PLEASE_LOG_IN' => 'Meld eerst aan bij DocuSign!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'U kunt dit document niet downloaden. Het is aangemaakt door een andere gebruiker!',
     'LBL_SEND_NOT_ALLOWED' => 'U kunt deze envelop niet verzenden. Het is aangemaakt door een andere gebruiker!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Ondertekend',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Het document kon niet worden gedownload. Controleer de logs!',
     'LBL_DOCUMENT_COMPLETED' => 'Afgerond',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign Info',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'is nu',
+    'LBL_SETTINGS_TITLE' => 'DocuSign-instellingen',
+    'LBL_RECIPIENT_SELECTION' => 'Gedrag selectie ontvanger',
+    'LBL_RECIPIENT_NAME' => 'Naam',
+    'LBL_RECIPIENT_EMAIL' => 'E-mailadres',
+    'LBL_RECIPIENT_TYPE' => 'Type',
+    'LBL_TEMPLATE_NAME' => 'Naam',
+    'LBL_RECIPIENT_SELECT' => 'Selecteren...',
+    'LBL_RECIPIENT_ROLE' => 'Rol',
+    'LBL_SELECT_BUTTON_LABEL' => 'Selecteren',
+    'LBL_BACK_BUTTON_LABEL' => 'Terug',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Potentiële ontvangers ophalen mislukt!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Sjablonen ophalen mislukt!',
 ];

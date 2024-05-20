@@ -194,4 +194,10 @@ For at oprette en {{calls_singular_module}}:
     - Klik på "Vælg en deltager" for at tilføje en eksisterende bruger, kontaktperson, eller gå til {{calls_singular_module}}.
     - Klik på plus ikonet til højre for "Vælg en deltager" for at oprette en {{calls_singular_module}} deltager som en ny Sugar post.
 3. Klik på "Gem" for at færdiggøre den nye post, og vend tilbage til forrige side.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "Er Smart Guide-opkald",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Underordnede opgaver',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Underordnede møder',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Underordnede opkald',
 );

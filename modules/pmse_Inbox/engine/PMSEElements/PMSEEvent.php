@@ -125,13 +125,13 @@ class PMSEEvent extends PMSEShape
         if (!empty($cas_thread_parent) && !empty($cas_thread_index)) {
             //select siblings
             if ($isEventBased) {
-                $stmt = $this->dbHandler
+                $rows = $this->dbHandler
                     ->getConnection()
                     ->executeQuery(
                         'select * from pmse_bpm_thread where cas_id=? and cas_thread_parent=? and cas_thread_index !=?',
                         [$cas_id, $cas_thread_parent, $cas_thread_index]
                     );
-                foreach ($stmt as $row) {
+                foreach ($rows->iterateAssociative() as $row) {
                     $this->caseFlowHandler->closeThreadByThreadIndex($cas_id, $row['cas_thread_index']);
                     $flowBean = $this->caseFlowHandler->retrieveBean('pmse_BpmFlow');
                     $flowBean->retrieve_by_string_fields(array(

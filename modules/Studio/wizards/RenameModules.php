@@ -14,6 +14,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+use Sugarcrm\Sugarcrm\SystemProcessLock\SystemProcessLock;
 
 require_once 'modules/Administration/Common.php';
 
@@ -126,7 +127,7 @@ class RenameModules
         $authenticated_user_language = !empty($_SESSION['authenticated_user_language']) ? $_SESSION['authenticated_user_language'] : null;
 
         foreach ($selected_dropdown as $key=>$value) {
-            $singularValue = isset($selected_dropdown_singular[$key]) ? $selected_dropdown_singular[$key] : $value;
+            $singularValue = $selected_dropdown_singular[$key] ?? $value;
             if ($selected_lang != $authenticated_user_language && !empty($app_list_strings['moduleList']) && isset($app_list_strings['moduleList'][$key])) {
                 $selected_dropdown[$key] = array(
                     'lang' => $value,
@@ -171,12 +172,44 @@ class RenameModules
      */
     public function save($redirect = TRUE)
     {
-        global $locale, $current_language, $current_user;
+        global $locale;
         if (!empty($_REQUEST['dropdown_lang'])) {
             $this->selectedLanguage = $this->request->getValidInputRequest('dropdown_lang', 'Assert\Language');
         } else {
             $this->selectedLanguage = $locale->getAuthenticatedUserLanguage();
         }
+        $systemProcessLock = new SystemProcessLock(
+            __METHOD__,
+            $this->selectedLanguage,
+            ['iterations_before_fault' => 120]
+        );
+        $checkCondition = function () {
+            // always run rename function
+            return true;
+        };
+
+        $longRunningFunction = function () {
+            $this->unsafeSave();
+        };
+
+        $refuseFunction = $longRunningFunction;
+
+        $systemProcessLock->isolatedCall($checkCondition, $longRunningFunction, $refuseFunction);
+
+        //Refresh the page again so module tabs are changed as the save process happens after module tabs are already generated.
+        if ($redirect) {
+            echo "
+                <script>
+                    var app = window.parent.SUGAR.App;
+                    app.api.call('read', app.api.buildURL('ping'));
+                </script>";
+        }
+    }
+
+
+    private function unsafeSave(): void
+    {
+        global $current_language, $current_user;
 
         //Clear all relevant language caches
         $this->clearLanguageCaches();
@@ -201,16 +234,6 @@ class RenameModules
         $cacheDefsJs = sugar_cached('modules/modules_def_' . $current_language . '_' . md5($current_user->id) . '.js');
         if (file_exists($cacheDefsJs)) {
             unlink($cacheDefsJs);
-        }
-
-        //Refresh the page again so module tabs are changed as the save process happens after module tabs are already generated.
-        if($redirect) {
-            echo "
-                <script>
-                    var app = window.parent.SUGAR.App;
-                    app.api.call('read', app.api.buildURL('ping'));
-                </script>";
-
         }
     }
 
@@ -406,7 +429,7 @@ class RenameModules
                     ) {
                     $replaceKey = $subpanelMetaData['title_key'];
                     if (!isset($mod_strings[$replaceKey])) {
-                        $GLOBALS['log']->info("No module string entry defined for: {$mod_strings[$replaceKey]}");
+                        $GLOBALS['log']->info("No module string entry defined for key: {$replaceKey}");
                         continue;
                     }
                     $oldStringValue = $mod_strings[$replaceKey];
@@ -467,7 +490,7 @@ class RenameModules
             }
         }
 
-        return isset($layout_defs[$bean->module_dir]['subpanel_setup']) ? $layout_defs[$bean->module_dir]['subpanel_setup'] : $layout_defs;
+        return $layout_defs[$bean->module_dir]['subpanel_setup'] ?? $layout_defs;
     }
 
     /**
@@ -589,7 +612,7 @@ class RenameModules
     {
         $GLOBALS['log']->info("Begining to renameModuleRelatedLinks for $moduleClass\n");
         $tmp = BeanFactory::newBean($moduleName);
-        if (!method_exists($tmp, 'get_related_fields')) {
+        if (!is_object($tmp) || !method_exists($tmp, 'get_related_fields')) {
             $GLOBALS['log']->info("Unable to resolve linked fields for module $moduleClass ");
             return;
         }
@@ -603,12 +626,13 @@ class RenameModules
             foreach ($this->changedModules as $changedModuleName => $renameFields) {
                 if (isset($linkEntry['module']) && $linkEntry['module'] ==  $changedModuleName) {
                     $GLOBALS['log']->debug("Begining to rename for link field {$link}");
-                    if (!isset($mod_strings[$linkEntry['vname']])) {
+                    if (!isset($linkEntry['vname'])
+                        || (isset($linkEntry['vname']) && !isset($mod_strings[$linkEntry['vname']]))) {
                         $GLOBALS['log']->debug("No label attribute for link $link, continuing.");
                         continue;
                     }
 
-                    $replaceKey = $linkEntry['vname'];
+                    $replaceKey = $linkEntry['vname'] ?? '';
                     $oldStringValue = $mod_strings[$replaceKey];
                     // If the plural string is longer than singular fall-back to singular replacements first.
                     $pluralFirst = strlen($renameFields['prev_plural']) > strlen($renameFields['prev_singular']);
@@ -835,8 +859,8 @@ class RenameModules
         // then it's impossible to say if the old value is already updated.
         // If oldStringValue is already updated, don't re-update it.
         // Also handle the corner case where we actually DO want a repeat in the string.
-        if (strpos($search, (string) $replace) !== false
-            || strpos($oldStringValue, (string) $replace) === false
+        if (strpos($search, $replace) !== false
+            || strpos($oldStringValue, $replace) === false
             || $this->checkDefaultsForSubstring($modKey, $replace)
         ) {
             // Handle resetting routes in strings, since some modules like Forecasting
@@ -862,18 +886,18 @@ class RenameModules
     {
         $GLOBALS['log']->debug('Begining to save app string entries');
         //Save changes to the moduleList app string entry
-        DropDownHelper::saveDropDown($_REQUEST);
+        DropDownHelper::saveDropDown($_REQUEST, true);
 
         //Save changes to the moduleListSingular app string entry
         $newParams = array(
             'use_push' => true,
-            'dropdown_lang' => isset($_REQUEST['dropdown_lang']) ? $_REQUEST['dropdown_lang'] : null,
+            'dropdown_lang' => $_REQUEST['dropdown_lang'] ?? null,
         );
 
         $singularNames = array_map(function ($data) {
             return $data['singular'];
         }, $this->getAllModulesFromRequest());
-        $this->updateModuleList('moduleListSingular', $singularNames, $newParams['dropdown_lang']);
+        $this->updateModuleList('moduleListSingular', $singularNames, $newParams['dropdown_lang'], true);
 
         //Save changes to the "*type_display*" app_list_strings entry.
         global $app_list_strings;
@@ -887,7 +911,7 @@ class RenameModules
                     $newParams['dropdown_name'] = $typeDisplay;
                     DropDownHelper::saveDropDown($this->createModuleListPackage($newParams, array(
                         $moduleName => $this->changedModules[$moduleName]['singular'],
-                    )));
+                    )), true);
                  }
             }
             //save changes to moduleIconList
@@ -906,9 +930,17 @@ class RenameModules
                 $singularNames = array_map(function ($data) {
                     return $data['singular'];
                 }, $newIconList);
-                DropDownHelper::saveDropDown($this->createModuleListPackage($newParams, $singularNames));
+                DropDownHelper::saveDropDown($this->createModuleListPackage($newParams, $singularNames), true);
             }
         }
+        (new RepairAndClear())->repairAndClearAll(
+            array('rebuildExtensions'),
+            array_keys($app_list_strings['moduleList']),
+            false,
+            false,
+            '',
+            ['vardefs']
+        );
     }
 
     /**
@@ -917,8 +949,9 @@ class RenameModules
      * @param string $name List name
      * @param array $labels Module labels
      * @param string $language Language ley
+     * @param bool $postponeQRR Skips QRR inside DropDownHelper::saveDropDown and underlying calls
      */
-    public function updateModuleList($name, array $labels, $language)
+    public function updateModuleList($name, array $labels, $language, $postponeQRR = false)
     {
         $params = array(
             'dropdown_name' => $name,
@@ -926,7 +959,7 @@ class RenameModules
             'use_push' => true,
         );
         $params = $this->createModuleListPackage($params, $labels);
-        DropDownHelper::saveDropDown($params);
+        DropDownHelper::saveDropDown($params, $postponeQRR);
     }
 
     /**
@@ -990,7 +1023,7 @@ class RenameModules
             }
 
             /* remove all symbols except "safe": letters (including non-latin), numbers, dot, comma, dash, lowdash, and symbols used in html entities (&#;) */
-            list($key, $value, $svalue) = preg_replace('/[^\w\s\.\,\-\_\&\#\;]/u', '', [$key, $value, $svalue]);
+            [$key, $value, $svalue] = preg_replace('/[^\w\s\.\,\-\_\&\#\;]/u', '', [$key, $value, $svalue]);
 
             $key = trim($key);
             $value = trim($value);
@@ -1013,7 +1046,7 @@ class RenameModules
             $svalue = $e['s'];
             $pvalue = $e['p'];
             $prev_plural = $current_app_list_string['moduleList'][$k];
-            $prev_singular = isset($current_app_list_string['moduleListSingular'][$k]) ? $current_app_list_string['moduleListSingular'][$k] : $prev_plural;
+            $prev_singular = $current_app_list_string['moduleListSingular'][$k] ?? $prev_plural;
             $results[$k] = array(
                 'singular' => $svalue,
                 'plural' => $pvalue,

@@ -12,6 +12,8 @@
 
 require_once 'include/upload_file.php';
 
+use Sugarcrm\Sugarcrm\DocuSign\DocuSignUtils;
+
 class DocuSignNotificationApi extends SugarApi
 {
     public function registerApiRest()
@@ -56,17 +58,18 @@ class DocuSignNotificationApi extends SugarApi
             $envelopeId = (string) $envelopeId[0];
         }
         $newStatus = strtolower($envelopeStatusObj->Status);
-        
+
         $sugarEnvelopeId = $args['authorization'];
 
         $systemUser = BeanFactory::newBean('Users');
         $systemUser->getSystemUser();
         $GLOBALS['current_user'] = $systemUser;
         $envelopeBean = BeanFactory::retrieveBean('DocuSignEnvelopes', $sugarEnvelopeId);
-        
+
         if (!empty($envelopeBean)) {
             $GLOBALS['current_user'] = BeanFactory::getBean('Users', $envelopeBean->created_by);
-            
+
+            $oldStatus = $envelopeBean->status;
             $envelopeBean->status = $newStatus;
             $envelopeBean->save();
 
@@ -76,6 +79,42 @@ class DocuSignNotificationApi extends SugarApi
             $commentLog->save();
             $envelopeBean->load_relationship('commentlog_link');
             $envelopeBean->commentlog_link->add($commentLog);
+
+            $this->createSugarNotification($envelopeBean);
+
+            if ($oldStatus !== $newStatus &&
+                $newStatus === 'completed' &&
+                !empty($envelopeBean->cloud_service_type)) {
+                DocuSignUtils::downloadCompletedDocument($envelopeBean);
+
+                $envelopeBean->retrieve();
+                if (!empty($envelopeBean->document_id)) {
+                    DocuSignUtils::uploadDocumentInCloud($envelopeBean, $envelopeBean->document_id);
+                }
+            }
         }
+    }
+
+    /**
+     * Create notification
+     *
+     * @param SugarBean $envelopeBean
+     */
+    public function createSugarNotification(SugarBean $envelopeBean)
+    {
+        $notificationBean = BeanFactory::newBean('Notifications');
+        $notificationBean->name = ucfirst($envelopeBean->status) . ': ' . $envelopeBean->name;
+        $notificationBean->description = "DocuSign Envelope: {$envelopeBean->name} " .
+            translate('LBL_NOTIFICATION_ENVELOPE_IS_NOW', $envelopeBean->module_dir) .
+            " <a href='#DocuSignEnvelopes/{$envelopeBean->id}'>" .
+            translate('docusign_envelope_status_list', '', $envelopeBean->status) . "</a>";
+
+        $notificationBean->assigned_user_id = $envelopeBean->assigned_user_id;
+        $notificationBean->parent_id = $envelopeBean->id;
+        $notificationBean->parent_type = $envelopeBean->module_dir;
+        $notificationBean->is_read = 0;
+        $notificationBean->severity = translate('LBL_NOTIFICATION_SEVERITY', $envelopeBean->module_dir);
+
+        $notificationBean->save();
     }
 }

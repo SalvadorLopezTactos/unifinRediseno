@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Historie',
     'LBL_PMSE_LABEL_NOTES' => 'Poznámky',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Přidat poznámku',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Odeslat do DocuSign',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Vyberte...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Uživatel',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Opravdu chcete tento proces schválit?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Opravdu chcete odmítnout tento proces?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Opravdu chcete směrovat tento proces?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Opravdu chcete tento proces odeslat do DocuSign?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Proces byl úspěšně schválen',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Proces byl úspěšně zamítnut',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Proces byl úspěšně směrován',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Proces byl úspěšně odeslán do DocuSign.',
     'LBL_PA_PROCESS_CLOSED' => 'Proces, který se pokoušíte zobrazit, je uzavřen.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Proces, který se pokoušíte zobrazit, není v tomto okamžiku k dispozici.',
 

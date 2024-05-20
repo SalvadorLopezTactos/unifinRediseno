@@ -28,13 +28,13 @@ class GeoBoundingBox extends AbstractQuery
      *
      * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
      *
-     * @throws \Elastica\Exception\InvalidException If $coordinates doesn't have two elements
+     * @throws InvalidException If $coordinates doesn't have two elements
      *
      * @return $this
      */
     public function addCoordinates(string $key, array $coordinates): self
     {
-        if (!isset($coordinates[0]) || !isset($coordinates[1])) {
+        if (!isset($coordinates[0], $coordinates[1])) {
             throw new InvalidException('expected $coordinates to be an array with two elements');
         }
 

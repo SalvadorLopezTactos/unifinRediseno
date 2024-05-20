@@ -100,8 +100,7 @@ class ForecastsConfigApi extends ConfigModuleApi
         if (isset($args['show_custom_buckets_options'])) {
             $json = getJSONobj();
             $_args = array(
-                'dropdown_lang' => isset($_SESSION['authenticated_user_language']) ?
-                    $_SESSION['authenticated_user_language'] : $GLOBALS['current_language'],
+                'dropdown_lang' => $_SESSION['authenticated_user_language'] ?? $GLOBALS['current_language'],
                 'dropdown_name' => 'commit_stage_custom_dom',
                 'view_package' => 'studio',
                 'list_value' => $json->encode($args['show_custom_buckets_options']),

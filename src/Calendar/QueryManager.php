@@ -17,6 +17,30 @@ namespace Sugarcrm\Sugarcrm\Calendar;
  */
 class QueryManager extends \FilterApi
 {
+    /**
+     * @var mixed|array<string, mixed>
+     */
+    public $params;
+    /**
+     * @var \SugarBean|null|mixed
+     */
+    public $targetBean;
+    /**
+     * @var \Sugarcrm\Sugarcrm\Calendar\CalendarFilterManager|mixed
+     */
+    public $filterManager;
+    /**
+     * @var mixed[]|mixed
+     */
+    public $defaultFilters;
+    /**
+     * @var \LoggerManager|mixed
+     */
+    public $logger;
+    /**
+     * @var \SugarQuery|mixed
+     */
+    public $query;
     public $calendarBean = null;
 
     /**

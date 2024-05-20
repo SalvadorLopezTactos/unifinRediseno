@@ -189,7 +189,14 @@
         }
         this.context.editingFilter.save(obj, {
             success: function(model) {
-                self.context.trigger('filter:add', model);
+                let context = self.context;
+                if ('Home' !== self.module && self.moduleName !== self.module) {
+                    let childContext = self.context.children.find(child => child.get('module') === self.moduleName);
+                    if (!_.isUndefined(childContext)) {
+                        context = childContext;
+                    }
+                }
+                context.trigger('filter:add', model);
                 self.layout.trigger('filter:toggle:savestate', false);
             },
             showAlerts: {

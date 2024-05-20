@@ -86,6 +86,10 @@ class Geocoder
      */
     public function geocodeBeans(array $targetBeans, array $geocodeBeans): bool
     {
+        if (empty($targetBeans) || empty($geocodeBeans)) {
+            return false;
+        }
+
         $addressesData = [
             'addresses_data' => [],
         ];
@@ -224,7 +228,7 @@ class Geocoder
         $regex = '~[^\p{L}\p{N}\n]+~u';
 
         $value = $bean->{$key};
-        $value = preg_replace($regex, " ", $value);
+        $value = preg_replace($regex, " ", (string)$value);
         $value = trim($value);
 
         return $value;

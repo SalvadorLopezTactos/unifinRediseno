@@ -58,7 +58,6 @@
         this.canEdit = app.acl.hasAccessToModel('edit', model) || false;
 
         this.buttons = this.meta.buttons;
-        this.isChart = !_.isEmpty(this.buttons) && this.buttons[0].is_chart || false;
         this.adjustHeaderPaneTitle = _.bind(_.debounce(this.adjustHeaderPaneTitle, 50), this);
         $(window).on('resize.' + this.cid, this.adjustHeaderPaneTitle);
     },
@@ -173,6 +172,7 @@
         var state = !_.isUndefined(enable) ? !enable : false;
 
         _.each(this.buttons, function(button) {
+            let buttonMeta = button;
             button = this.getField(button.name);
             if (!button) {
                 return;
@@ -181,6 +181,19 @@
             var showOn = button.def && button.def.showOn;
             if (_.isUndefined(showOn) || this.currentState === showOn) {
                 button.setDisabled(state);
+            }
+
+            //disable edit button for system currency only
+            const dropdownButtonsKey = 'dropdown_buttons';
+            if (buttonMeta[dropdownButtonsKey]) {
+                _.each(buttonMeta[dropdownButtonsKey], function(dropdownButton) {
+                    if (dropdownButton.name && dropdownButton.name === 'edit_button' && this.dashletModel &&
+                        this.dashletModel.id === app.currency.getBaseCurrencyId()) {
+                        let $dropdownButton = this.getField(dropdownButton.name);
+                        $dropdownButton.setDisabled(true);
+                        this.dashletModel.set('name', app.lang.get('LBL_CURRENCY_DEFAULT', 'Currencies'));
+                    }
+                }, this);
             }
         }, this);
         this.adjustHeaderPaneTitle();

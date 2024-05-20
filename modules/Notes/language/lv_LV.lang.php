@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Piezīmju saraksta instrumentu panelis',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Piezīmju ierakstu instrumentu panelis',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Piezīmju fokusa panelis',
+    'LBL_EXTERNAL_USER' => 'Ārējais lietotājs',
+    'LBL_EXTERNAL_USER_NAME' => 'Ārējais lietotājs',
 
     'LBL_RELATED_CONTACT' => 'Saistītā kontaktpersona',
     'ERR_DELETE_RECORD' => 'Jums ir jānorāda ieraksta numurs, lai dzēstu uzņēmumu.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'E-pasta tips',
     'LBL_EMAIL_ID' => 'E-pasta ID',
     'LBL_PHONE' => 'Tālrunis:',
-    'LBL_PORTAL_FLAG' => 'Parādīt portālā?',
+    'LBL_PORTAL_FLAG' => 'Pieejams ārēji',
     'LBL_EMBED_FLAG' => 'Iekļaut e-pastā?',
     'LBL_PRODUCT_ID' => 'Produkta ID:',
     'LBL_QUOTE_ID' => 'Piedāvājuma ID:',

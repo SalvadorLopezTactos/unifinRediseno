@@ -62,6 +62,7 @@
                         type: 'GET',
                         url: this._scriptPath,
                         dataType: 'script',
+                        async: false,
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
                             console.log('[CanvasDataRenderer] Error loading file: ', errorThrown);
                         },

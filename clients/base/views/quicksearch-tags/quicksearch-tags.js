@@ -19,6 +19,8 @@
         'click .qs-tag a': 'handleTagSelection'
     },
 
+    className: 'quicksearch-tags-wrapper',
+
     initialize: function(options) {
         this._super('initialize', [options]);
 
@@ -58,6 +60,8 @@
             this.$('.active').removeClass('active');
             this.disposeKeyEvents();
         }, this);
+
+        $(window).on('resize', _.bind(_.debounce(this.resizeDropdown, 400), this));
     },
 
     /**
@@ -146,6 +150,44 @@
         this.$('.quicksearch-tags').hide();
     },
 
+    /**
+     * @inheritdoc
+     */
+    _render: function() {
+        this._super('_render');
+        this.resizeDropdown();
+    },
+
+    /**
+     * Resizes the dropdown to match width of search bar and module dropdown
+     */
+    resizeDropdown: function() {
+        if (this.$el) {
+            let quickFilterGroup = this.$el.siblings('.quicksearch-filter-group');
+            let quickSearchModuleWrapper = quickFilterGroup.find('.quicksearch-modulelist-wrapper');
+            let quickSearchTagList = quickFilterGroup.find('.quicksearch-taglist');
+            let quickSearchButtonWrapper = this.$el.siblings('.quicksearch-button-wrapper');
+            let moduleDropdown = quickSearchModuleWrapper.find('.module-wrapper');
+            let quickSearchTags = this.$('.quicksearch-tags');
+
+            if (app.lang.direction === 'rtl') {
+                quickSearchTags.css(
+                    {
+                        'left': quickSearchButtonWrapper.width() - 2,
+                        'right': quickFilterGroup.width() -  moduleDropdown.width() - quickSearchTagList.width() + 2
+                    }
+                );
+            } else {
+                quickSearchTags.css(
+                    {
+                        'left': quickFilterGroup.width() -  moduleDropdown.width() - quickSearchTagList.width() + 2,
+                        'right': quickSearchButtonWrapper.width() - 2
+                    }
+                );
+            }
+        }
+
+    },
     /**
      * Handle when the user uses their keyboard to try to navigate outside of the view. This handles both the top and
      * bottom boundaries.
@@ -241,5 +283,13 @@
     unbind: function() {
         this.disposeKeyEvents();
         this._super('unbind');
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.off(window, this.resizeDropdown);
+        this._super('_dispose');
     }
 })

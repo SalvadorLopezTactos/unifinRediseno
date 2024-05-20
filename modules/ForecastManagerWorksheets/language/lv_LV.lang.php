@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Nederīga vērtība priekš {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Vērtībai jābūt no {{min}} līdz {{max}}',
-    'LBL_HISTORY_LOG' => 'Pēdējais solījums',
+    'LBL_HISTORY_LOG' => 'Pēdējā iesniegšana',
     'LBL_NO_COMMIT' => 'Nav agrāku prognožu',
 
     'LBL_MANGER_SAVED' => 'Vadītājs saglabāts'

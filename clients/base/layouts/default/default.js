@@ -53,6 +53,13 @@
         this.HIDE_KEY = 'hide';
 
         /**
+         * Name of the last state. Specific for focus drawler
+         *
+         * @cfg {string}
+         */
+        this.HIDE_FOCUS_KEY = 'hide_focus';
+
+        /**
          * Default value for hiding the sidepane. `1` is hidden, `0` is show.
          * This is because the code which retrieves data from local storage
          * checks the value of the data and will return undefined if the result
@@ -81,6 +88,14 @@
         this._defaultHide = '0';
 
         /**
+         * Default value for hiding the sidepane. Specific for focus drawler
+         *
+         * @property {string}
+         * @protected
+         */
+        this._defaultFocusHide = '1';
+
+        /**
          * Key for storing the last state. This key is used in localstorage of the
          * browser. It is generated using `HIDE_KEY`
          *
@@ -94,12 +109,26 @@
          */
         this._hideLastStateKey = null;
 
+        /**
+         * Key for storing the last state. Specific for focus drawler
+         *
+         * @property {string}
+         * @protected
+         */
+        this._hideLastStateFocusKey = null;
+
         this._super('initialize', [options]);
         if (!_.isUndefined(this.meta.default_hide)) {
             this._defaultHide = this.meta.default_hide;
         }
+        if (!_.isUndefined(this.meta.default_focus_hide)) {
+            this._defaultFocusHide = this.meta.default_focus_hide;
+        }
         if (!_.isUndefined(this.meta.hide_key)) {
             this.HIDE_KEY = this.meta.hide_key;
+        }
+        if (!_.isUndefined(this.meta.hide_focus_key)) {
+            this.HIDE_FOCUS_KEY = this.meta.hide_focus_key;
         }
 
         this.on('sidebar:toggle', this.toggleSidePane, this);
@@ -107,6 +136,7 @@
         this.meta.last_state = this.meta.last_state || { id: 'default' };
 
         this._hideLastStateKey = app.user.lastState.key(this.HIDE_KEY, this);
+        this._hideLastStateFocusKey = app.user.lastState.key(this.HIDE_FOCUS_KEY, this);
 
         //Update the panel to be open or closed depending on how user left it last
         this._toggleVisibility(this.isSidePaneVisible());
@@ -118,8 +148,13 @@
      * @return {Boolean} `true` if visible, `false` otherwise.
      */
     isSidePaneVisible: function() {
-        var hideLastState = app.user.lastState.get(this._hideLastStateKey);
-        var hidden = hideLastState || this._defaultHide;
+        let hidden;
+        if (this.context.get('name') === 'record-drawer' && this.name === 'sidebar' && this.layout.type === 'record') {
+            hidden = app.user.lastState.get(this._hideLastStateFocusKey) || this._defaultFocusHide;
+        } else {
+            hidden = app.user.lastState.get(this._hideLastStateKey) || this._defaultHide;
+        }
+
         return !parseInt(hidden, 10);
     },
 
@@ -143,10 +178,11 @@
             return;
         }
 
-        app.user.lastState.set(
-            this._hideLastStateKey,
-            visible ? '0' : '1'
-        );
+        if (this.context.get('name') === 'record-drawer' && this.name === 'sidebar' && this.layout.type === 'record') {
+            app.user.lastState.set(this._hideLastStateFocusKey, visible ? '0' : '1');
+        } else {
+            app.user.lastState.set(this._hideLastStateKey, visible ? '0' : '1');
+        }
 
         this._toggleVisibility(visible);
     },

@@ -663,9 +663,9 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
     public function setDefDefaults($fieldName, $fieldDef, $addDefault = false)
     {
         // Set the label
-        $label = isset($fieldDef['label']) ? $fieldDef['label'] : '';
+        $label = $fieldDef['label'] ?? '';
         if (empty($label) && isset($fieldDef['name'])) {
-            $label = isset($fieldDef['vname']) ? $fieldDef['vname'] : $fieldDef['name'];
+            $label = $fieldDef['vname'] ?? $fieldDef['name'];
         }
 
         // Generate the basics of all initial def defaults

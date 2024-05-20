@@ -1,80 +1,79 @@
 <?php
-$viewdefs['Documents'] = 
-array (
-  'base' => 
+// created: 2024-05-20 10:34:39
+$viewdefs['Documents']['base']['view']['list'] = array (
+  'panels' => 
   array (
-    'view' => 
+    0 => 
     array (
-      'list' => 
+      'label' => 'LBL_PANEL_1',
+      'fields' => 
       array (
-        'panels' => 
+        0 => 
         array (
-          0 => 
-          array (
-            'label' => 'LBL_PANEL_1',
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'document_name',
-                'label' => 'LBL_LIST_DOCUMENT_NAME',
-                'enabled' => true,
-                'default' => true,
-                'link' => true,
-                'type' => 'name',
-                'width' => '20',
-              ),
-              1 => 
-              array (
-                'name' => 'filename',
-                'label' => 'LBL_LIST_FILENAME',
-                'enabled' => true,
-                'default' => true,
-                'width' => '20',
-              ),
-              2 => 
-              array (
-                'name' => 'assigned_user_name',
-                'label' => 'LBL_ASSIGNED_TO',
-                'enabled' => true,
-                'id' => 'ASSIGNED_USER_ID',
-                'link' => true,
-                'width' => '10',
-                'default' => true,
-              ),
-              3 => 
-              array (
-                'name' => 'team_name',
-                'label' => 'LBL_TEAMS',
-                'enabled' => true,
-                'id' => 'TEAM_ID',
-                'link' => true,
-                'sortable' => false,
-                'width' => '2',
-                'default' => false,
-              ),
-              4 => 
-              array (
-                'name' => 'date_entered',
-                'label' => 'LBL_DATE_ENTERED',
-                'enabled' => true,
-                'readonly' => true,
-                'width' => '10',
-                'default' => false,
-              ),
-              5 => 
-              array (
-                'name' => 'modified_by_name',
-                'label' => 'LBL_MODIFIED',
-                'enabled' => true,
-                'readonly' => true,
-                'id' => 'MODIFIED_USER_ID',
-                'link' => true,
-                'width' => '10',
-                'default' => false,
-              ),
-            ),
-          ),
+          'name' => 'document_name',
+          'label' => 'LBL_LIST_DOCUMENT_NAME',
+          'enabled' => true,
+          'default' => true,
+          'link' => true,
+          'type' => 'name',
+          'width' => '20',
+        ),
+        1 => 
+        array (
+          'name' => 'filename',
+          'label' => 'LBL_LIST_FILENAME',
+          'enabled' => true,
+          'default' => true,
+          'width' => '20',
+        ),
+        2 => 
+        array (
+          'name' => 'assigned_user_name',
+          'label' => 'LBL_ASSIGNED_TO',
+          'enabled' => true,
+          'id' => 'ASSIGNED_USER_ID',
+          'link' => true,
+          'width' => '10',
+          'default' => true,
+        ),
+        3 => 
+        array (
+          'name' => 'team_name',
+          'label' => 'LBL_TEAMS',
+          'enabled' => true,
+          'id' => 'TEAM_ID',
+          'link' => true,
+          'sortable' => false,
+          'width' => '2',
+          'default' => false,
+        ),
+        4 => 
+        array (
+          'name' => 'date_entered',
+          'label' => 'LBL_DATE_ENTERED',
+          'enabled' => true,
+          'readonly' => true,
+          'width' => '10',
+          'default' => false,
+        ),
+        5 => 
+        array (
+          'name' => 'modified_by_name',
+          'label' => 'LBL_MODIFIED',
+          'enabled' => true,
+          'readonly' => true,
+          'id' => 'MODIFIED_USER_ID',
+          'link' => true,
+          'width' => '10',
+          'default' => false,
+        ),
+        6 => 
+        array (
+          'name' => 'is_shared',
+          'label' => 'LBL_IS_SHARED',
+          'default' => false,
+          'enabled' => true,
+          'selected' => false,
         ),
       ),
     ),

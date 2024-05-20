@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'แดชบอร์ดรายการโน้ต',
     'LBL_NOTES_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกหมายเหตุ',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'หมายเหตุระบบลิ้นชัก',
+    'LBL_EXTERNAL_USER' => 'ผู้ใช้จากภายนอก',
+    'LBL_EXTERNAL_USER_NAME' => 'ผู้ใช้จากภายนอก',
 
     'LBL_RELATED_CONTACT' => 'ที่อยู่ติดต่อที่เกี่ยวข้อง',
     'ERR_DELETE_RECORD' => 'คุณต้องระบุเลขที่ระเบียนเพื่อลบบัญชี',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'ประเภทอีเมล',
     'LBL_EMAIL_ID' => 'ID อีเมล',
     'LBL_PHONE' => 'โทรศัพท์:',
-    'LBL_PORTAL_FLAG' => 'แสดงในพอร์ทัลหรือไม่',
+    'LBL_PORTAL_FLAG' => 'ใช้งานได้ภายนอก',
     'LBL_EMBED_FLAG' => 'รวมในอีเมลหรือไม่',
     'LBL_PRODUCT_ID' => 'ID รายการบรรทัดการเสนอราคา:',
     'LBL_QUOTE_ID' => 'ID การเสนอราคา:',

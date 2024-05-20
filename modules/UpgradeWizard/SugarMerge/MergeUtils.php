@@ -83,8 +83,8 @@ class MergeUtils
                 }
                 $isAssociative = array_values($new) !== $new;
                 if (is_array($old) && is_array($new)) {
-                    $del = array_udiff($old, $new, 'static::uDiffComp');
-                    $add = array_udiff($new, $old, 'static::uDiffComp');
+                    $del = array_udiff($old, $new, 'MergeUtils::uDiffComp');
+                    $add = array_udiff($new, $old, 'MergeUtils::uDiffComp');
                     $cst = static::removeDeletedElements($cst, $del);
                     $cst = static::addAdditionalElements($cst, $add, !$isAssociative);
                     if (!isset($oldDefs[$key]) || !is_array($oldDefs[$key])) {

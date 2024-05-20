@@ -15,7 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Pulpit listy możliwości',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Pulpit rekordów możliwości',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Szczegóły szansy',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Widok szczegółowy możliwości — konsola',
     'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy możliwości',
     'LBL_RENEWAL_OPPORTUNITY' => 'Możliwość odnowienia',
 
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Zadeklarowano',
     'LBL_FORECAST' => 'Uwzględnij w prognozie',
     'LBL_COMMIT_STAGE' => 'Etap wykonania',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Prognoza',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Etap prognozy',
     'LBL_WORKSHEET' => 'Arkusz',
     'LBL_PURCHASED_LINE_ITEMS' => 'Zakupione pozycje',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organizuj',
+    'LBL_CREATE_NEW' => 'Utwórz nowe',
+    'LBL_MANAGE' => 'Zarządzaj',
+    'LBL_SEE_DETAILS' => 'Wyświetl szczegóły',
+    'LBL_HIDE_NEW' => 'Ukryj',
+
     'LBL_FORECASTED_LIKELY' => 'Prognozy prawdopodobne',
+    'LBL_LOST' => 'Zakończone porażką',
     'LBL_RENEWAL' => 'Odnowienie',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Szanse odnowienia',
     'LBL_RENEWAL_PARENT' => 'Nadrzędne szanse',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Rola w szansie',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notatki',
+    'LBL_TAB_OPPORTUNITY' => 'Przegląd modułu {{module}}',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Klikając Potwierdź, usuniesz WSZYSTKIE dane Prognoz i zmienisz Widok szans. Jeśli nie było to Twoim zamiarem, kliknij anuluj, aby wrócić do poprzednich ustawień.',
@@ -214,7 +223,7 @@ $mod_strings = array(
     'LBL_HELP_RECORDS' => 'Moduł {{plural_module_name}} pozwala na śledzenie poszczególnych sprzedaży od początku do końca. Każdy rekord {{module_name}} reprezentuje potencjalną sprzedaż i obejmuje istotne dane sprzedaży, jak również dane odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. {{module_name}} będzie zazwyczaj występował w kilku Etapach sprzedaży, dopóki nie zostanie oznaczony jako „Zakończone sukcesem” lub „Zakończone porażką”. {{plural_module_name}} mogą posłużyć jeszcze w aplikacji Sugar w module {{forecasts_singular_module}} jako pomoc w zrozumieniu i przewidywaniu trendów sprzedaży oraz koncentrowaniu prac na osiąganiu norm sprzedaży.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży i powiązanych z nią pozycji od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. 
+    'LBL_HELP_RECORD' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży i powiązanych z nią pozycji od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp.
 
 - Edytuj pola tego rekordu przez kliknięcie odpowiedniego pola lub przycisku Edytuj.
 - Przeglądaj lub modyfikuj powiązania z innymi rekordami w panelach podrzędnych, przełączając widok lewego dolnego panelu na „Widok danych”.
@@ -223,11 +232,11 @@ $mod_strings = array(
 - Dodatkowe działania dostępne są na liście rozwijanej Działania po prawej stronie przycisku Edytuj.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży i powiązanych z nią pozycji od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. 
+    'LBL_HELP_CREATE' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży i powiązanych z nią pozycji od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp.
 
 Aby utworzyć rekord {{module_name}}:
 1. Wprowadź żądane wartości w polach.
- - Pola oznaczone jako „Wymagane” należy wypełnić przez zapisaniem.
+ - Pola oznaczone jako „Wymagane” należy wypełnić przed zapisaniem.
  - Kliknij pozycję „Wyświetl więcej”, aby wyświetlić dodatkowe pola w razie potrzeby.
 2. Kliknij przycisk „Zapisz”, aby zakończyć nowy rekord i wrócić na poprzednią stronę.',
 

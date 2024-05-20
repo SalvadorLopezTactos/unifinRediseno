@@ -125,9 +125,7 @@
                 });
 
                 this.once('init', _.bind(function() {
-                    if (this._fieldCheckIfCanEdit()) {
-                        this._fieldBindPluginEvents();
-                    }
+                    this._fieldBindPluginEvents();
                     this.listenTo(this, 'render', () => {
                         if (this.options.highlightChangedValues) {
                             this._highlightChanges();
@@ -166,6 +164,9 @@
              */
             _fieldOnDetach: function(component) {
                 $(document).off('mousedown.record' + this.cid);
+                this.context.off('field:editable:open');
+                this.context.off('field:editable:error');
+                this.off('render');
             },
 
             /**
@@ -266,50 +267,56 @@
              */
             _fieldBindPluginEvents: function() {
                 this.context.on('field:editable:open', function(cid) {
-                    // another CTE field has been opened
-                    if (this._fieldIsErrorState) {
-                        // I am open with an error, send the message
-                        this.context.trigger('field:editable:error', this.cid);
-                    } else {
-                        if (this._fieldIsInEdit && this.cid !== cid) {
-                            if (this.type === 'enum') {
-                                this.$('select').select2('close');
-                            }
+                    if (this._fieldCheckIfCanEdit()) {
+                        // another CTE field has been opened
+                        if (this._fieldIsErrorState) {
+                            // I am open with an error, send the message
+                            this.context.trigger('field:editable:error', this.cid);
+                        } else {
+                            if (this._fieldIsInEdit && this.cid !== cid) {
+                                if (this.type === 'enum') {
+                                    this.$('select').select2('close');
+                                }
 
-                            // for the date field, this is handled when the date field gets removed below
-                            if (this.type != 'date') {
-                                this.setMode('list');
+                                // for the date field, this is handled when the date field gets removed below
+                                if (this.type != 'date') {
+                                    this.setMode('list');
+                                }
                             }
                         }
                     }
                 }, this);
 
                 this.context.on('field:editable:error', function(cid) {
-                    if (!_.isEqual(cid, this.cid) && this.options.viewName === 'edit') {
-                        // some other field is open with an error, close this
-                        this.setMode('list');
+                    if (this._fieldCheckIfCanEdit()) {
+                        if (!_.isEqual(cid, this.cid) && this.options.viewName === 'edit') {
+                            // some other field is open with an error, close this
+                            this.setMode('list');
+                        }
                     }
                 }, this);
 
                 this.on('render', function() {
-                    var cteClass = 'clickToEdit';
-                    let el = this.$el;
-                    // Check if there is a specific element we need to wrap
-                    // the editability around
-                    if (this.cteTag) {
-                        el = this.$el.find(this.cteTag);
-                    }
+                    if (this._fieldCheckIfCanEdit()) {
+                        var cteClass = 'clickToEdit';
+                        let el = this.$el;
+                        // Check if there is a specific element we need to wrap
+                        // the editability around
+                        if (this.cteTag) {
+                            el = this.$el.find(this.cteTag);
+                        }
 
-                    if (this.action === 'edit') {
-                        cteClass += ' active';
-                        el.addClass('active');
-                    } else {
-                        el.removeClass('active');
-                    }
-                    // only add isEditable if the field is not disabled
-                    if (!el.hasClass('disabled') && !this.disableCTE) {
-                        el.addClass('isEditable');
-                        el.wrapInner('<div class="' + cteClass + '" data-cid="' + this.cid + '" />');
+                        if (this.action === 'edit') {
+                            cteClass += ' active';
+                            el.addClass('active');
+                        } else {
+                            el.removeClass('active');
+                        }
+                        // only add isEditable if the field is not disabled
+                        if (!el.hasClass('disabled') && !this.disableCTE) {
+                            el.addClass('isEditable');
+                            el.wrapInner('<div class="' + cteClass + '" data-cid="' + this.cid + '" />');
+                        }
                     }
                 }, this);
 
@@ -317,8 +324,10 @@
                     // Clears errors when navigating from the manager's forecast worksheet to the manager's RLI so that
                     // the error tooltip is not displaying when forecast worksheet is hidden.
                     this.context.parent.on('change:selectedUser', function() {
-                        if (this._fieldIsErrorState) {
-                            this.clearErrorDecoration();
+                        if (this._fieldCheckIfCanEdit()) {
+                            if (this._fieldIsErrorState) {
+                                this.clearErrorDecoration();
+                            }
                         }
                     }, this);
                 }
@@ -333,7 +342,7 @@
             _fieldCheckIfCanEdit: function() {
                 var isEnforced = (!_.isUndefined(this.def.enforced) && this.def.enforced === true),
                     isClickToEdit = (!_.isUndefined(this.def.click_to_edit) && this.def.click_to_edit === true);
-                if (!isEnforced && isClickToEdit) {
+                if (!isEnforced && isClickToEdit && !_.isUndefined(this.context)) {
                     // only worksheet owner can edit
                     // make sure we get the correct context, if we are in the forecast module
                     // its this.context.parent otherwise, its this.context

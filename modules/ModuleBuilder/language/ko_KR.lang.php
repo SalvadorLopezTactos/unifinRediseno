@@ -790,61 +790,58 @@ $mod_strings = array(
 //POPUP HELP
 'LBL_POPHELP_FIELD_DATA_TYPE'=>'필드에 입력할 데이타에 근거한 올바른 데이타유형을 선택하십시오',
 'LBL_POPHELP_FTS_FIELD_CONFIG' => '필드를 검색 가능한 전문이 되도록 환경구성합니다.',
-'LBL_POPHELP_FTS_FIELD_BOOST' => '부스팅은 record\\\'s 필드의 관련성을 향상하는 프로세스입니다.<br />검색이 수행되면 더 높은 부스트 수준이 포함된 필드들에 더 많은 가중치가 주어집니다. 검색이 수행되면, 더 많은 가중치의 필드가 포함된 레코드 일치가 검색 결과에서 더 높게 나타납니다.<br />기본값은 중립적 부스트를 나타내는 1.0을 나타냅니다. 양성 부스트를 적용하기 위해, 1보다 높은 모든 부동값이 수락됩니다. 음의 부스트에 대해서는 1보다 낮은 값을 사용합니다. 예를 들어, 1.35 값은 필드를 135%만큼 양의 부스트합니다. 0.60 값을 이용하면 음의 부스트를 적용하게 됩니다.<br />이전 버전에서는 전문 검색 재색인을 수해해야 했습니다. 이제 이러한 작업은 더 이상 필요 없습니다.',
-'LBL_POPHELP_IMPORTABLE'=>'예:필드가 작업 가져오기에 포함됩니다.<br />아니오:필드가 가져오기에 포함되지 않습니다.<br />필수:가져오기에 반드시 필드가치가 입력되어야합니다.',
-'LBL_POPHELP_PII'=>'이 필드는 감사를 위해 자동으로 표시되며 개인정보 보기에서 사용할 수 있습니다.<br>레코드가 데이터 프라이버시 삭제 요청과 관련이 있을 때 개인정보 필드를 영구적으로 지울 수도 있습니다.<br>지우기는 데이터 프라이버시 모듈을 통해 수행되며 관리자 또는 데이터 프라이버시 매니저 역할의 사용자가 실행할 수 있습니다.',
-'LBL_POPHELP_IMAGE_WIDTH'=>'pixels로 측정된 너비를 위한 숫자를 입력하십시오.<br />전송된 이미지는 이 너비에 따라 축소됩니다.',
-'LBL_POPHELP_IMAGE_HEIGHT'=>'pixels.로 측정된 높이를 위한 숫자를 입력하십시오.<br />전송된 이미지는 이 높이에 맞춰 축소됩니다.',
-'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'
-. '<br><b>In Filter</b>: The field will appear in the Merge Duplicates feature, and will also be available in the Find Duplicates feature.<br><b>Filter Only</b>: The field will not appear in the Merge Duplicates feature, but will be available in the Find Duplicates feature.<br><b>Default Selected Filter</b>: The field will be used for a filter condition by default in the Find Duplicates page, and will also appear in the Merge Duplicates feature.'
+'LBL_POPHELP_FTS_FIELD_BOOST' => '부스팅은 기록 필드의 관련성을 향상하는 프로세스입니다.<br />검색이 수행되면 더 높은 부스트 수준이 포함된 필드들에 더 많은 가중치가 주어집니다. 검색이 수행되면, 더 많은 가중치의 필드가 포함된 레코드 일치가 검색 결과에서 더 높게 나타납니다.<br />기본값은 중립적 부스트를 나타내는 1.0을 나타냅니다. 양성 부스트를 적용하기 위해, 1보다 높은 모든 부동값이 수락됩니다. 음의 부스트에 대해서는 1보다 낮은 값을 사용합니다. 예를 들어, 1.35 값은 필드를 135%만큼 양의 부스트합니다. 0.60 값을 이용하면 음의 부스트를 적용하게 됩니다.<br />이전 버전에서는 전문 검색 재색인을 수해해야 했습니다. 이제 이러한 작업은 더 이상 필요 없습니다.',
+'LBL_POPHELP_IMPORTABLE'=>'<b>예</b>: 필드가 작업 가져오기에 포함됩니다.<br /><b>아니요</b>: 필드가 가져오기에 포함되지 않습니다.<br /><b>필수</b>:가져오기에 반드시 필드 값이 입력되어야 합니다.',
+'LBL_POPHELP_PII'=>'이 필드는 감사를 위해 자동으로 표시되며 개인정보 보기에서 사용할 수 있습니다.<br>기록이 데이터 프라이버시 삭제 요청과 관련이 있을 때 개인정보 필드를 영구적으로 지울 수도 있습니다.<br>지우기는 데이터 프라이버시 모듈을 통해 수행되며 관리자 또는 데이터 프라이버시 매니저 역할의 사용자가 실행할 수 있습니다.',
+'LBL_POPHELP_IMAGE_WIDTH'=>'픽셀로 측정된 너비를 숫자로 입력하십시오.<br> 전송된 이미지는 이 너비에 따라 축소됩니다.',
+'LBL_POPHELP_IMAGE_HEIGHT'=>'픽셀로 측정된 높이를 숫자로 입력하십시오.<br> 전송된 이미지는 이 높이에 맞춰 축소됩니다.',
+'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>활성화됨</b>: 필드가 중복 병합 기능에 표시되지만 중복 항목 찾기 기능의 필터 조건에는 사용할 수 없습니다.<br><b>비활성화됨</b>: 필드가 중복 항목 병합 기능에 나타나지 않으며 중복 항목 찾기 기능의 필터 조건에도 사용할 수 없습니다.'
+. '<br><b>필터 내</b>: 필드가 중복 병합 기능에 표시되며 중복 찾기 기능에서도 사용할 수 있습니다.<br><b>필터만</b>: 필드가 중복 병합 기능에 나타나지 않지만 중복 항목 찾기 기능에서 사용할 수 있습니다.<br><b>기본 선택 필터</b>: 필드는 기본값으로 중복 항목 찾기 페이지의 필터 조건으로 사용되며, 중복 항목 병합 기능에도 표시됩니다.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Create a formula to determine the value in this field.<br>"
-   . "Workflow definitions containing an action that are set to update this field will no longer execute the action.<br>"
-   . "Fields using formulas will not be calculated in real-time in "
-   . "the Sugar Self-Service Portal or "
-   . "Mobile EditView layouts.",
+'LBL_POPHELP_CALCULATED'=>"공식을 생성하여 이 필드의 값을 결정합니다.<br>"
+   . "이 필드를 업데이트하도록 설정된 행동을 포함한 워크플로 정의가 해당 행동을 더는 실행하지 않습니다.<br>"
+   . "공식을 사용하는 필드는"
+   . "Sugar Self-Service 포털 또는"
+   . "모바일 편집 보기 레이아웃에서 실시간으로 계산되지 않습니다.",
 
-'LBL_POPHELP_DEPENDENT'=>"Create a formula to determine whether this field is visible in layouts.<br/>"
-        . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
-        . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
-        . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"이 필드가 레이아웃에서 필수인지 결정하는 공식을 생성합니다.<br/>"
-    . "브라우저 기반 모바일 보기에서 필수 필드는 이 공식을 따르지만,<br/>"
-    . "iPhone용 Sugar Mobile 등 독자적인 어플리케이션에서는 공식을 따르지 않습니다. <br/>"
-    . "Sugar Self-Service Portal에서도 공식을 따르지 않습니다.",
+'LBL_POPHELP_DEPENDENT'=>"이 필드가 레이아웃에서 표시되는지 결정하는 공식을 생성합니다."
+        . "브라우저 기반 모바일 보기에서 종속 필드는 이 종속 공식을 따르지만,<br/>"
+        . "iPhone용 Sugar Mobile 등 독자적인 어플리케이션에서는 공식을 따르지 않습니다. <br/>"
+        . "Sugar Self-Service Portal에서도 공식을 따르지 않습니다.",
+    'LBL_POPHELP_REQUIRED'=>'조건부 필수 필드는 관련 기록 추가, 필드 변경 등 SugarBPM 활동 유형에서 사용할 수 없습니다. 이 프로세스 정의 활동에 이 필드를 사용하려면 "Required If"(다음 경우 필수) 텍스트를 제거하십시오.',
 'LBL_POPHELP_READONLY'=>"이 필드가 레이아웃에서 읽기 전용인지 결정하는 공식을 생성합니다.<br/>"
         . "브라우저 기반 모바일 보기에서 읽기 전용 필드는 이 공식을 따르지만,<br/>"
         . "iPhone용 Sugar Mobile 등 독자적인 어플리케이션에서는 공식을 따르지 않습니다. <br/>"
         . "Sugar Self-Service Portal에서도 공식을 따르지 않습니다.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'이 모듈에서 글로벌 검색을 사용한 기록을 검색할때 이 필드를 선택하십시오.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'이 모듈에서 글로벌 검색을 사용한 기록을 검색할 때 이 필드를 선택하십시오.',
 //Revert Module labels
 'LBL_RESET' => '재설정',
-'LBL_RESET_MODULE' => '모듈을 재설정합니다.',
-'LBL_REMOVE_CUSTOM' => '주문제잘물을 제거합니다.',
-'LBL_CLEAR_RELATIONSHIPS' => '관계를 비우기합니다.',
-'LBL_RESET_LABELS' => '라벨을 재설정합니다.',
-'LBL_RESET_LAYOUTS' => '레이아웃 제설정',
-'LBL_REMOVE_FIELDS' => '고객필드를 제거합니다.',
-'LBL_CLEAR_EXTENSIONS' => '확장부분을 비우기합니다.',
+'LBL_RESET_MODULE' => '모듈 재설정',
+'LBL_REMOVE_CUSTOM' => '사용자 정의 삭제',
+'LBL_CLEAR_RELATIONSHIPS' => '관계 비우기',
+'LBL_RESET_LABELS' => '라벨 재설정',
+'LBL_RESET_LAYOUTS' => '레이아웃 재설정',
+'LBL_REMOVE_FIELDS' => '고객필드 삭제',
+'LBL_CLEAR_EXTENSIONS' => '확장자 비우기',
 
 'LBL_HISTORY_TIMESTAMP' => 'TimeStamp',
 'LBL_HISTORY_TITLE' => '연혁',
 
 'fieldTypes' => array(
-                'varchar'=>'본문필드',
+                'varchar'=>'TextField',
                 'int'=>'정수',
                 'float'=>'유동',
                 'bool'=>'체크박스',
-                'enum'=>'내려보기',
+                'enum'=>'드롭다운',
                 'multienum' => '복합 선택',
                 'date'=>'날짜',
-                'phone' => '전화번호:',
+                'phone' => '전화번호',
                 'currency' => '화폐',
                 'html' => 'HTML',
-                'radioenum' => '라디오광고',
+                'radioenum' => '라디오',
                 'relate' => '관련',
                 'address' => '주소',
-                'text' => '본문지역',
+                'text' => 'TextArea',
                 'url' => 'URL',
                 'iframe' => 'IFrame',
                 'image' => '이미지',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'소수',
                 'autoincrement' => '자동 증가',
                 'actionbutton' => '액션버튼',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "자주 사용되는 라벨",
@@ -861,15 +859,15 @@ $mod_strings = array(
 
 'parent' => 'Flex 관련',
 
-'LBL_ILLEGAL_FIELD_VALUE' =>"내려보기키는 견적을 포함할수 없습니다.",
-'LBL_CONFIRM_SAVE_DROPDOWN' =>"내려보기 목록에서 제거한 아이템을 선택중입니다. 이 아이템을 사용하는 내려보기목록은 더이상 가치를 전시하지 않으며 그 가치는 내려보기 필드에서 더이상 선택할수 없습니다. 계속하시겠습니까?",
-'LBL_POPHELP_VALIDATE_US_PHONE'=>"Select to validate this field for the entry of a 10-digit<br>" .
-                                 "phone number, with allowance for the country code 1, and<br>" .
-                                 "to apply a U.S. format to the phone number when the record<br>" .
-                                 "is saved. The following format will be applied: (xxx) xxx-xxxx.",
+'LBL_ILLEGAL_FIELD_VALUE' =>"드롭다운 키는 견적을 포함할수 없습니다.",
+'LBL_CONFIRM_SAVE_DROPDOWN' =>"드롭다운 목록에서 제거한 아이템을 선택중입니다. 이 아이템을 사용하는 드롭다운 목록은 더 이상 값을 표시하지 않으며 그 가치는 드롭다운 필드에서 더 이상 선택할 수 없습니다. 계속하시겠습니까?",
+'LBL_POPHELP_VALIDATE_US_PHONE'=>"선택하여 이 필드에 10자리 숫자<br>" .
+                                 "전화번호(국가번호 1 허용)를 입력하였는지 검증하여<br>" .
+                                 "기록이 저장될 때 전화번호에 미국 형식을 적용합니다.<br>" .
+                                 "(xxx) xxx-xxxx 형식이 적용될 것입니다.",
 'LBL_ALL_MODULES'=>'전체 모듈',
-'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
-'LBL_HEADER_COPY_FROM_LAYOUT' => '레이아웃에 복사',
+'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (관련 {1} ID)',
+'LBL_HEADER_COPY_FROM_LAYOUT' => '레이아웃에서 복사',
 'LBL_RELATIONSHIP_TYPE' => '관계',
 
 // Edit Labels

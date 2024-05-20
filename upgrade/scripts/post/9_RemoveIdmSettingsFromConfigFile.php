@@ -44,7 +44,7 @@ class SugarUpgradeRemoveIdmSettingsFromConfigFile extends UpgradeScript
     protected function removeSettingsFromConfigFile(): void
     {
         $configurator = $this->getConfigurator();
-        list($config, $configOverride) = $this->upgrader->readConfigFiles();
+        [$config, $configOverride] = $this->upgrader->readConfigFiles();
 
         unset($configOverride[IdMConfig::IDM_MODE_KEY]);
 

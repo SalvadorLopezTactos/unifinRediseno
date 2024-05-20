@@ -15,8 +15,8 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Opportunities List Dashboard',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Opportunities Record Dashboard',
-    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Opportunity Details',
-    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Opportunities Focus Drawer',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Opportunities Focus Dashboard - Console',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Opportunities Focus Dashboard',
     'LBL_RENEWAL_OPPORTUNITY' => 'Renewal Opportunity',
 
     'LBL_MODULE_NAME' => 'Opportunities',
@@ -144,11 +144,19 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Committed',
     'LBL_FORECAST' => 'Include in Forecast',
     'LBL_COMMIT_STAGE' => 'Commit Stage',
-    'LBL_COMMIT_STAGE_FORECAST' => 'Forecast',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Forecast Stage',
     'LBL_WORKSHEET' => 'Worksheet',
     'LBL_PURCHASED_LINE_ITEMS' => 'Purchased Line Items',
 
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'Organize',
+    'LBL_CREATE_NEW' => 'Create New',
+    'LBL_MANAGE' => 'Manage',
+    'LBL_SEE_DETAILS' => 'View Details',
+    'LBL_HIDE_NEW' => 'Hide',
+
     'LBL_FORECASTED_LIKELY' => 'Forecasted Likely',
+    'LBL_LOST' => 'Lost',
     'LBL_RENEWAL' => 'Renewal',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Renewal Opportunities',
     'LBL_RENEWAL_PARENT' => 'Parent Opportunity',
@@ -189,6 +197,7 @@ $mod_strings = array(
 
     'LBL_OPPORTUNITY_ROLE'=>'Opportunity Role',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
+    'LBL_TAB_OPPORTUNITY' => '{{module}} Review',
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. If this is not what you intended, click cancel to return to previous settings.',

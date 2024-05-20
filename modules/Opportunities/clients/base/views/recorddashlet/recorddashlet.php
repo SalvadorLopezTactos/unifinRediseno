@@ -95,11 +95,8 @@ $viewdefs['Opportunities']['base']['view']['recorddashlet'] = [
                 ],
                 [
                     'name' => 'date_closed',
-                    'type' => 'date-cascade',
-                    'label' => 'LBL_LIST_DATE_CLOSED',
-                    'disable_field' => [
-                        'total_revenue_line_items',
-                        'closed_revenue_line_items',
+                    'related_fields' => [
+                        'date_closed_timestamp',
                     ],
                 ],
                 [
@@ -155,6 +152,29 @@ $viewdefs['Opportunities']['base']['view']['recorddashlet'] = [
                     ],
                     'disable_field' => 'service_open_flex_duration_rlis',
                 ],
+                [
+                    'name' => 'commit_stage',
+                    'type' => 'enum-cascade',
+                    'disable_field' => 'closed_won_revenue_line_items',
+                    'disable_positive' => true,
+                    'related_fields' =>
+                        [
+                            0 => 'probability',
+                            1 => 'closed_won_revenue_line_items',
+                        ],
+                    'span' => 6,
+                ],
+                [
+                    'name' => 'lost',
+                    'comment' => 'Rollup of lost RLIs on the Opportunity',
+                    'readonly' => true,
+                    'related_fields' =>
+                        [
+                            0 => 'currency_id',
+                            1 => 'base_rate',
+                        ],
+                        'label' => 'LBL_LOST',
+                ],
             ],
         ],
         [
@@ -165,13 +185,13 @@ $viewdefs['Opportunities']['base']['view']['recorddashlet'] = [
             'placeholders' => true,
             'columns' => 2,
             'fields' => [
-                [
-                    'name' => 'best_case',
-                    'readonly' => true,
-                ],
                 'next_step',
-                'lead_source',
                 'opportunity_type',
+                [
+                    'name' => 'renewal_parent_name',
+                    'label' => 'LBL_RENEWAL_PARENT',
+                ],
+                'lead_source',
                 [
                     'name' => 'description',
                     'span' => 12,

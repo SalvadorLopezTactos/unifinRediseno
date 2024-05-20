@@ -14,7 +14,7 @@
  * @extends View.View
  */
 ({
-    className: 'quicksearch-modulelist-wrapper',
+    className: 'quicksearch-modulelist-wrapper flex-1',
     plugins: ['Dropdown'],
     dropdownItemSelector: '[data-action=select-module], [data-action=select-all]',
 
@@ -34,7 +34,6 @@
      */
     initialize: function(options) {
         this._super('initialize', [options]);
-        this.hide();
 
         this.collection = this.layout.collection || app.data.createMixedBeanCollection();
 
@@ -104,16 +103,30 @@
         }, this);
 
         // On expansion of quicksearch, show the module dropdown & buttons.
-        this.layout.on('quicksearch:expanded', this.show, this);
+        this.layout.on('quicksearch:expanded', this.showDropdownButton, this);
 
         // On collapse of quicksearch, hide the module dropdown & buttons.
-        this.layout.on('quicksearch:collapse', this.hide, this);
+        this.layout.on('quicksearch:collapse', this.hideDropdownButton, this);
 
         // Whenever anything happens within the quicksearch layout navigation,
         // close the module list dropdown.
         this.layout.on('navigate:next:component navigate:previous:component navigate:to:component', function() {
             this.$el.removeClass('open');
         }, this);
+    },
+
+    /**
+     * Hide the module dropdown button and icons from being displayed.
+     */
+    hideDropdownButton: function() {
+        this.$('#module-dropdown').hide();
+    },
+
+    /**
+     * Displays the module dropdown button and icons.
+     */
+    showDropdownButton: function() {
+        this.$('#module-dropdown').show();
     },
 
     /**
@@ -281,7 +294,9 @@
             // If there are more than 3 modules selected, display the
             // "Multiple Modules" icon
         } else {
-            moduleIconObj.push({multiple: true});
+            moduleIconObj.push({
+                multipleLabel: app.lang.get('LBL_COUNT_MODULES', null, {count: this.collection.selectedModules.length}),
+            });
         }
         return moduleIconObj;
     },

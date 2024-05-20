@@ -20,7 +20,7 @@ namespace Google\Service;
 use Google\Client;
 
 /**
- * Service definition for CloudFunctions (v1).
+ * Service definition for CloudFunctions (v2).
  *
  * <p>
  * Manages lightweight user-provided functions executed in response to events.</p>
@@ -34,13 +34,14 @@ use Google\Client;
  */
 class CloudFunctions extends \Google\Service
 {
-  /** See, edit, configure, and delete your Google Cloud Platform data. */
+  /** See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
-  public $operations;
   public $projects_locations;
   public $projects_locations_functions;
+  public $projects_locations_operations;
+  public $projects_locations_runtimes;
 
   /**
    * Constructs the internal representation of the CloudFunctions service.
@@ -55,50 +56,9 @@ class CloudFunctions extends \Google\Service
     $this->rootUrl = $rootUrl ?: 'https://cloudfunctions.googleapis.com/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
-    $this->version = 'v1';
+    $this->version = 'v2';
     $this->serviceName = 'cloudfunctions';
 
-    $this->operations = new CloudFunctions\Resource\Operations(
-        $this,
-        $this->serviceName,
-        'operations',
-        [
-          'methods' => [
-            'get' => [
-              'path' => 'v1/{+name}',
-              'httpMethod' => 'GET',
-              'parameters' => [
-                'name' => [
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ],
-              ],
-            ],'list' => [
-              'path' => 'v1/operations',
-              'httpMethod' => 'GET',
-              'parameters' => [
-                'filter' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-                'name' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-                'pageSize' => [
-                  'location' => 'query',
-                  'type' => 'integer',
-                ],
-                'pageToken' => [
-                  'location' => 'query',
-                  'type' => 'string',
-                ],
-              ],
-            ],
-          ]
-        ]
-    );
     $this->projects_locations = new CloudFunctions\Resource\ProjectsLocations(
         $this,
         $this->serviceName,
@@ -106,7 +66,7 @@ class CloudFunctions extends \Google\Service
         [
           'methods' => [
             'list' => [
-              'path' => 'v1/{+name}/locations',
+              'path' => 'v2/{+name}/locations',
               'httpMethod' => 'GET',
               'parameters' => [
                 'name' => [
@@ -137,28 +97,22 @@ class CloudFunctions extends \Google\Service
         'functions',
         [
           'methods' => [
-            'call' => [
-              'path' => 'v1/{+name}:call',
+            'create' => [
+              'path' => 'v2/{+parent}/functions',
               'httpMethod' => 'POST',
               'parameters' => [
-                'name' => [
+                'parent' => [
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
                 ],
-              ],
-            ],'create' => [
-              'path' => 'v1/{+location}/functions',
-              'httpMethod' => 'POST',
-              'parameters' => [
-                'location' => [
-                  'location' => 'path',
+                'functionId' => [
+                  'location' => 'query',
                   'type' => 'string',
-                  'required' => true,
                 ],
               ],
             ],'delete' => [
-              'path' => 'v1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => [
                 'name' => [
@@ -168,7 +122,7 @@ class CloudFunctions extends \Google\Service
                 ],
               ],
             ],'generateDownloadUrl' => [
-              'path' => 'v1/{+name}:generateDownloadUrl',
+              'path' => 'v2/{+name}:generateDownloadUrl',
               'httpMethod' => 'POST',
               'parameters' => [
                 'name' => [
@@ -178,7 +132,7 @@ class CloudFunctions extends \Google\Service
                 ],
               ],
             ],'generateUploadUrl' => [
-              'path' => 'v1/{+parent}/functions:generateUploadUrl',
+              'path' => 'v2/{+parent}/functions:generateUploadUrl',
               'httpMethod' => 'POST',
               'parameters' => [
                 'parent' => [
@@ -188,7 +142,7 @@ class CloudFunctions extends \Google\Service
                 ],
               ],
             ],'get' => [
-              'path' => 'v1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'GET',
               'parameters' => [
                 'name' => [
@@ -198,7 +152,7 @@ class CloudFunctions extends \Google\Service
                 ],
               ],
             ],'getIamPolicy' => [
-              'path' => 'v1/{+resource}:getIamPolicy',
+              'path' => 'v2/{+resource}:getIamPolicy',
               'httpMethod' => 'GET',
               'parameters' => [
                 'resource' => [
@@ -212,13 +166,21 @@ class CloudFunctions extends \Google\Service
                 ],
               ],
             ],'list' => [
-              'path' => 'v1/{+parent}/functions',
+              'path' => 'v2/{+parent}/functions',
               'httpMethod' => 'GET',
               'parameters' => [
                 'parent' => [
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'orderBy' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
                 'pageSize' => [
                   'location' => 'query',
@@ -230,7 +192,7 @@ class CloudFunctions extends \Google\Service
                 ],
               ],
             ],'patch' => [
-              'path' => 'v1/{+name}',
+              'path' => 'v2/{+name}',
               'httpMethod' => 'PATCH',
               'parameters' => [
                 'name' => [
@@ -244,7 +206,7 @@ class CloudFunctions extends \Google\Service
                 ],
               ],
             ],'setIamPolicy' => [
-              'path' => 'v1/{+resource}:setIamPolicy',
+              'path' => 'v2/{+resource}:setIamPolicy',
               'httpMethod' => 'POST',
               'parameters' => [
                 'resource' => [
@@ -254,13 +216,79 @@ class CloudFunctions extends \Google\Service
                 ],
               ],
             ],'testIamPermissions' => [
-              'path' => 'v1/{+resource}:testIamPermissions',
+              'path' => 'v2/{+resource}:testIamPermissions',
               'httpMethod' => 'POST',
               'parameters' => [
                 'resource' => [
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_locations_operations = new CloudFunctions\Resource\ProjectsLocationsOperations(
+        $this,
+        $this->serviceName,
+        'operations',
+        [
+          'methods' => [
+            'get' => [
+              'path' => 'v2/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'list' => [
+              'path' => 'v2/{+name}/operations',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+                'pageSize' => [
+                  'location' => 'query',
+                  'type' => 'integer',
+                ],
+                'pageToken' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],
+          ]
+        ]
+    );
+    $this->projects_locations_runtimes = new CloudFunctions\Resource\ProjectsLocationsRuntimes(
+        $this,
+        $this->serviceName,
+        'runtimes',
+        [
+          'methods' => [
+            'list' => [
+              'path' => 'v2/{+parent}/runtimes',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'filter' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],

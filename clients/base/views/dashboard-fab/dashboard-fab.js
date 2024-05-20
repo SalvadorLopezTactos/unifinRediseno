@@ -116,22 +116,33 @@
     },
 
     /**
+     * Checks if buttons inside floating action button are visible on the browser after being rendered
+     *
+     * @return {boolean} 'true' if at least one button is visible, else 'false'
+     */
+    checkButtonVisibilityOnBrowser: function() {
+        var dfabContentBtns = this.$('.dfab-button') || [];
+        return dfabContentBtns.length > 0;
+    },
+
+    /**
      * Shows/hides the main floating action button depending on
      * if there are any action buttons held inside.
      */
     toggleMainButton: function() {
         this.updateButtonVisibilities();
 
+        var visibleOnBrowser = this.checkButtonVisibilityOnBrowser();
         var hasVisibleButtons = _.any(this.buttons, function(button) {
             return button.isVisible && button.isVisible();
         });
 
-        this.$el.toggle(hasVisibleButtons);
+        this.$el.toggle(hasVisibleButtons && visibleOnBrowser);
     },
 
     /**
      * Pin top/bottom action. Clicking on the Pin to Top button will move the
-     * floatin action control button to the top.
+     * floating action control button to the top.
      */
     togglePinPosition: function() {
         var contentWrapper = this.$el.find('.dfab');

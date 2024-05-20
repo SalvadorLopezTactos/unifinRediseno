@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => '추적 URL',
   'LBL_TRACKER_TEXT' => '추적링크 텍스트',
   'LBL_TRACKER_COUNT' => '추적 개수',
-  'LBL_REFER_URL' => '추적기 전송(Redirect) URL',
   'LBL_DEFAULT_SUBPANEL_TITLE' => '캠페인',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'이메일 캠페인',
   'LBL_NEW_FORM_TITLE' => '신규 캠페인',

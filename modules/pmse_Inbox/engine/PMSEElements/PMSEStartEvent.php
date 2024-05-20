@@ -32,7 +32,7 @@ class PMSEStartEvent extends PMSEEvent
         $triggered = $registry->get($regKey, array());
 
         if (isset($flowData['evn_params']) && $flowData['evn_params'] === 'relationshipchange') {
-            $beanId = $arguments['related_id'];
+            $beanId = "{$arguments['related_id']}:{$bean->id}";
         } else {
             $beanId = $bean->id;
         }

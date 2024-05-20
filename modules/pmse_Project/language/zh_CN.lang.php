@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => '表格按钮',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => '批准/拒绝',
     'LBL_PMSE_FORM_OPTION_ROUTE' => '流转',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => '发送到DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => '其他流转选项',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => '更改分配给用户',
     'LBL_PMSE_FORM_LABEL_TEAM' => '团队',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => '文档合并',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => '选择……',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => '文档合并到 PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => '通过电子邮件发送合并的文档',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => '文档合并',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => '合并网关类型与传入流的网关类型不匹配',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => '拆分网关将流程扩展到多个分支。当使用合并网关再次将这些分支合并成一条路径时，必须使用正确的合并网关类型，具体取决于创建分支时使用的拆分网关类型。对于利用排他或基于事件的拆分网关创建的分支，则使用排他合并网关重新进行合并。对于利用并行或包容拆分网关创建的分支，则使用并行合并网关重新进行合并。',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => '模块字段',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => '模块关系',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => '用户',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => '角色',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => '团队',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => '表单活动',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => '商务规则',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => '商务规则操作',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => '电子邮件模板',
 );

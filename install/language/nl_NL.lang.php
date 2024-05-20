@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Voor een optimale ervaring met IIS / FastCGI sapi, stel fastcgi.logging op 0 in je php.ini bestand.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Niet ondersteunde PHP versie geinstalleerd: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Database niet beschikbaar',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database-ondersteuning niet gevonden. Controleer of u de nodige stuurprogramma\'s bezit voor een van de volgende ondersteunde soorten databases: MySQL, MS SQLServer, Oracle of DB2.  Mogelijk moet u de extensie van het php.ini bestand verwijderen of het opnieuw opstellen met het juiste binaire bestand, afhankelijk van uw versie van PHP. Raadpleeg uw PHP-handleiding voor meer informatie over het inschakelen van database-ondersteuning.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databaseondersteuning is niet gevonden. Zorg ervoor dat u de benodigde stuurprogramma\'s heeft voor een van de volgende ondersteunde databasetypen: MySQL, MS SQLServer, Oracle of DB2. Mogelijk moet u de extensie in het php.ini-bestand verwijderen of opnieuw compileren met het juiste binaire bestand, afhankelijk van uw versie van PHP. Raadpleeg uw PHP-handleiding voor meer informatie over het inschakelen van databaseondersteuning.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Functies behorende bij "XML Parser Libraries" benodigd door SugarCRM zijn niet gevonden. Controleer php.ini of de regels nog als commentaar zijn opgevoerd of hercompileer de binary file, afhankelijk van uw PHP versie. Raadpleeg de PHP handleiding voor meer informatie.',
     'LBL_CHECKSYS_CSPRNG' => 'Willekeurige nummergenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Functies behorende bij "Multibyte Strings PHP Extension" benodigd door SugarCRM zijn niet gevonden. N.B. Standaard wordt de module niet geinstalleerd in PHP, om deze alsnog te activeren dient deze met "--enable-mbstring" te worden meegegeven als de PHP Binary wordt opgebouwd. Raadpleeg de PHP handleiding voor meer informatie.',
@@ -561,32 +561,15 @@ Deze oproep weigeren
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Toewijzing meldingse-mails',
-        'subject' => 'SugarCRM - Toegewezen $module_name ',
-        'description' => 'Dit sjabloon wordt gebruikt als het systeem een taaktoewijzing aan een gebruiker stuurt.',
-        'body' => '<div>
-<p>$assigned_by_user heeft a&nbsp;$module_name to&nbsp;$assigned_user toegewezen.</p>
-
-<p>U kunt deze&nbsp;$module_name bekijken op:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user heeft een $module_name toegewezen aan $assigned_user.
-
-U kunt deze $module_name bekijken op:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Geplande rapporte-mails',
         'subject' => 'Gepland rapport: $report_name vanaf $report_time',
         'description' => 'Dit sjabloon wordt gebruikt als het systeem een gepland rapport naar een gebruiker stuurt.',
         'body' => '<div>
-<p>Hallo, $assigned_user,</p>
-<p>Bijgevoegd is een automatisch gegenereerd rapport dat voor u is gepland.</p>
-<p>Naam rapport: $report_name</p>
-<p>Uitvoerdatum en -tijd rapport: $report_time</p>
+<p>Hallo $assigned_user,<br></p>
+<p>Bijgevoegd is een automatisch gegenereerd rapport dat voor u is gepland.<br></p>
+<p>Naam rapport: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Uitvoerdatum en -tijd rapport: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Hallo, $assigned_user,
@@ -612,14 +595,6 @@ Uitvoerdatum en -tijd rapport: $report_time',
             Meld aan bij Sugar om de opmerking te bekijken.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Informatie nieuw account',
-        'description' => 'Dit sjabloon wordt gebruikt als de systeembeheerder een nieuw wachtwoord naar een gebruiker stuurt.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Hier is uw gebruikersnaam en tijdelijke wachtwoord:</p><p>Gebruikersnaam : $contact_user_user_name </p><p>Wachtwoord : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Als u ingelogd bent, kan u mogelijk verplicht worden om het wachtwoord te wijzigen naar een persoonlijk wachtwoord.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'Hier is uw gebruikersnaam en een tijdelijk wachtwoord:<br />Gebruikersnaam : $contact_user_user_name<br />Wachtwoord : $contact_user_user_hash<br /><br />$config_site_url<br /><br />Nadat u bent ingelogd met bovenstaand wachtwoord, kan u gevraagd worden om het wachtwoord te wijzigen naar een van uw eigen keuze.',
-        'name' => 'E-mail wachtwoord dat door het systeem is gegenereerd',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Stel wachtwoord opnieuw in',
         'description' => "This template is used to send a user a link to click to reset the user&#39;s account password.",

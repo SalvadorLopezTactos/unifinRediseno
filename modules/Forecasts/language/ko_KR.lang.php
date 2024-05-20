@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => '예측 히스토리 보기',
     'LBL_FORECAST_HISTORY' => '예측:히스토리',
     'LBL_FORECAST_HISTORY_TITLE' => '히스토리',
+    'LBL_TAB_COMMITMENT' => '기여',
+    'LBL_CURRENT' => '현재',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => '기간',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'수정자',
     'LBL_WK_VERSION' => '버전',
     'LBL_WK_REVISION' => '개정',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => '지표 API에 접근하려면 Sugar Sell Premier가 필요합니다',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => '기간',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => '커밋 금액을 확정하시겠습니까?',
     'ERR_FORECAST_AMOUNT' => '커밋 금액은 숫자여야 합니다.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => '포함된 파이프라인',
+    'LBL_UPSIDE_PIPELINE' => '업사이드 파이프라인',
+    'LBL_EXCLUDED_PIPELINE' => '제외된 파이프라인',
+    'LBL_WON' => '획득 성공',
+    'LBL_LOST' => '획득 실패',
+    'LBL_ALL' => '전체',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => '필터의 가이드',
+    'LBL_HELP_MAIN_BODY' => '모든 지표는 선택한 사용자, 기간, 적용한 추가 필터에 해당되는 영업기회만 포함합니다',
+    'LBL_FORECAST_HELP' => '획득 성공 영업기회는 포함된 {{{forecastStage}}}입니다',
+    'LBL_INCLUDED_PIPELINE_HELP' => '{{{commitStageValue}}}의 {{{forecastStage}}}인 오픈 영업기회',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => '포함된 {{{forecastStage}}}의 오픈 영업기회',
+    'LBL_UPSIDE_PIPELINE_HELP' => '{{{commitStageValue}}}의 {{{forecastStage}}}인 오픈 영업기회',
+    'LBL_EXCLUDED_PIPELINE_HELP' => '{{{commitStageValue}}}의 {{{forecastStage}}}인 오픈 영업기회',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => '제외된 {{{forecastStage}}}의 오픈 영업기회',
+    'LBL_WON_HELP' => '이미 획득 성공한 영업기회',
+    'LBL_LOST_HELP' => '이미 획득 실패한 영업기회',
+    'LBL_ALL_HELP' => '모든 영업기회',
+
+
     // js error strings
     'LBL_FC_START_DATE' => '시작일',
     'LBL_FC_USER' => '다음을 위한 일정',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => '기여',
     'LBL_TEAM_COMMITMENT' => '팀 기여',
     'LBL_FORECASTED' => '예상됨',
+    'LBL_OPPORTUNITY_FORECAST' => '영업기회 예측',
+    'LBL_REVENUELINEITEM_FORECAST' => '매출 라인 아이템 예측',
+    'LBL_LAST_COMMITMENT' => '마지막 기여',
     'LBL_ADJUSTED_TOTAL' => '조정된 합계',
     'LBL_COMMIT_STAGE' => '커밋 단계',
     'LBL_SALES_STAGE' => '단계',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(조정)',
     'LBL_SAVE_DRAFT' => '저장',
     'LBL_CHANGES_BY' => '{0}에 의한 변경사항',
-    'LBL_FORECAST_SETTINGS' => '설정',
+    'LBL_FORECAST_SETTINGS' => '예측 설정',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => '예측 설정',

@@ -213,13 +213,6 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
                     'dismiss_label' => true,
                 ),
                 array(
-                    'name' => 'follow',
-                    'label' => 'LBL_FOLLOW',
-                    'type' => 'follow',
-                    'readonly' => true,
-                    'dismiss_label' => true,
-                ),
-                array(
                     'name' => 'converted',
                     'label' => 'LBL_CONVERTED',
                     'type' => 'badge',
@@ -240,6 +233,13 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
                         'true' => 'label-success',
                     ),
                 ),
+                [
+                    'name' => 'follow',
+                    'label' => 'LBL_FOLLOW',
+                    'type' => 'follow',
+                    'readonly' => true,
+                    'dismiss_label' => true,
+                ],
             ),
         ),
         array(
@@ -416,6 +416,10 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
                         'module' => array('Shippers'),
                     ),
                 ),
+                [
+                    'name' => 'geocode_status',
+                    'licenseFilter' => ['MAPS'],
+                ],
                 'order_stage',
                 'team_name',
                 'assigned_user_name',

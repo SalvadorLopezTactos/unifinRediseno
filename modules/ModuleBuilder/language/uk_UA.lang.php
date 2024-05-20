@@ -790,39 +790,36 @@ $mod_strings = array(
 //POPUP HELP
 'LBL_POPHELP_FIELD_DATA_TYPE'=>'Виберіть відповідний тип даних залежно від типу даних, які будуть введено в поле.',
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configure the field to be full text searchable.',
-'LBL_POPHELP_FTS_FIELD_BOOST' => 'Boosting is the process of enhancing the relevancy of a record\\\'s fields.<br />Fields with a higher boost level will be given greater weight when the search is performed. When a search is performed, matching records containing fields with a greater weight will be appear higher in the search results.<br />The default value is 1.0 which stands for a neutral boost. To apply a positive boost any float value higher than 1 is accepted. For a negative boost use values lower than 1. For example a value of 1.35 will positively boost a field by 135%. Using a value of 0.60 will apply a negative boost.<br />Note that in previous versions it was required to perform a full text search reindex. This is no longer required.',
-'LBL_POPHELP_IMPORTABLE'=>'<b>Так</b>: Поле буде включене в операцію імпорту.<br><b>Ні</b>:Поле не буде включене в операцію імпорту<br><b>Необхідно</b>: Значення для поля повинно бути забезпечене в будь-якому імпорті.',
-'LBL_POPHELP_PII'=>'Це поле буде автоматично відмічено для аудиту та доступне під час перегляду особистих відомостей.<br>Також поля з особистими відомостями можна повністю видалити, якщо подано запит на видалення запису, що містить конфіденційну інформацію.<br>Видалення виконують адміністратори чи користувачі в ролі менеджера захисту даних за допомогою модуля захисту даних.',
+'LBL_POPHELP_FTS_FIELD_BOOST' => 'Підсилення — це процес підвищення відповідності полів запису.<br />Поля з вищим рівнем відповідності матимуть перевагу під час здійснення пошуку. Під час виконання пошуку в переліку результатів спочатку відображатимуться записи, що збігаються, але й містять поля з вищим рівнем відповідності.<br />За замовчуванням вибрано значення 1,0, що відповідає нейтральному рівню підсилення. Щоб збільшити рівень відповідності, значення має перевищувати 1. Для зменшення відповідності число має бути менше 1. Наприклад, значення 1,35 позитивно підвищує відповідність поля на 135%. Якщо ж використати значення 0,60, підсилення буде від’ємним.<br />Зверніть увагу, що в попередніх версіях потрібно було виконувати переіндексацію повнотекстового пошуку. Тепер у цьому немає потреби.',
+'LBL_POPHELP_IMPORTABLE'=>'<b>Так</b>: поле буде включене в операцію імпорту.<br><b>Ні</b>: поле не буде включене в операцію імпорту.<br><b>Необхідно</b>: значення для поля є обов’язковим для будь-якого імпорту.',
+'LBL_POPHELP_PII'=>'Це поле буде автоматично позначено для аудиту та доступне під час перегляду особистих відомостей.<br>Також поля з особистими відомостями можна повністю видалити, якщо подано запит на видалення запису, що містить конфіденційну інформацію.<br>Видалення виконують адміністратори чи користувачі в ролі менеджера із захисту даних за допомогою модуля захисту даних.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Введіть число для ширини, що виміряна в пікселях.<br> Завантажене зображення буде масштабуватися до цієї ширини.',
-'LBL_POPHELP_IMAGE_HEIGHT'=>'Введіть номер для висоти, виміряної в пікселях.<br> Завантажене зображення буде масштабуватися до цієї висоти.',
-'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'
-. '<br><b>In Filter</b>: The field will appear in the Merge Duplicates feature, and will also be available in the Find Duplicates feature.<br><b>Filter Only</b>: The field will not appear in the Merge Duplicates feature, but will be available in the Find Duplicates feature.<br><b>Default Selected Filter</b>: The field will be used for a filter condition by default in the Find Duplicates page, and will also appear in the Merge Duplicates feature.'
+'LBL_POPHELP_IMAGE_HEIGHT'=>'Введіть число для висоти, виміряної в пікселях.<br> Завантажене зображення буде масштабуватися до цієї висоти.',
+'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Увімкнено</b>: поле з’явиться у функції «Об&#39;єднати дублікати», але буде недоступне для використання в умовах фільтра функції «Знайти дублікати».<br><b>Вимкнено</b>: поле не з’являтиметься у функції «Об’єднати дублікати» і не буде доступне для використання в умовах фільтра функції «Знайти дублікати».'
+. '<br><b>У фільтрі</b>: поле з’явиться у функції «Об’єднати дублікати», а також буде доступне в функції «Знайти дублікати».<br><b>Фільтрувати лише</b>: поле не з’явиться у функції "Об’єднати дублікати", але буде доступне у функції «Знайти дублікати».<br><b>Вибраний фільтр за замовчуванням</b>: поле за замовчуванням буде використовуватися як умова фільтра на сторінці «Знайти дублікати», а також з’явиться у функції «Об&#39;єднати дублікати».'
 ,
-'LBL_POPHELP_CALCULATED'=>"Create a formula to determine the value in this field.<br>"
-   . "Workflow definitions containing an action that are set to update this field will no longer execute the action.<br>"
-   . "Fields using formulas will not be calculated in real-time in "
-   . "the Sugar Self-Service Portal or "
-   . "Mobile EditView layouts.",
+'LBL_POPHELP_CALCULATED'=>"Створити формулу, щоб визначити значення в цьому полі.<br>"
+   . "Визначення бізнес-процесу, що містять дію та налаштовані на оновлення цього поля, більше не виконуватимуть цю дію.<br>"
+   . "Поля, що використовують формули, не обчислюватимуться в режимі реального часу на "
+   . "порталі самообслуговування Sugar або "
+   . "в мобільних макетах EditView.",
 
-'LBL_POPHELP_DEPENDENT'=>"Create a formula to determine whether this field is visible in layouts.<br/>"
-        . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
-        . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
-        . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_REQUIRED'=>"Створіть формулу, щоб визначати, чи це поле є обов’язковим у макетах.<br/>"
-    . "Обов’язкові поля відповідатимуть формулі в мобільному поданні для браузера, <br/>"
-    . "однак не відповідатимуть формулі у власних програмах, як-от Sugar Mobile для iPhone. <br/>"
-    . "Вони не відповідатимуть формулі на порталі самообслуговування Sugar.",
-'LBL_POPHELP_READONLY'=>"Створіть формулу, щоб визначати, чи це поле доступне для читання лише в макетах.<br/>"
-        . "Поля лише для читання відповідатимуть формулі в мобільному поданні для браузера, <br/>"
-        . "однак не відповідатимуть формулі у власних програмах, як-от Sugar Mobile для iPhone. <br/>"
+'LBL_POPHELP_DEPENDENT'=>"Створити формулу, щоб визначити, чи відображається це поле в макетах.<br/>"
+        . "Залежні поля відповідатимуть формулі залежності в мобільній версії браузера, <br/>"
+        . "але не відповідатимуть формулі у власних додатках, як-от Sugar Mobile для iPhone. <br/>"
         . "Вони не відповідатимуть формулі на порталі самообслуговування Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Виберіть, щоб використовувати це поле під час пошуку записів за допомогою глобального пошуку в цьому модулі.',
+    'LBL_POPHELP_REQUIRED'=>'Умовно обов’язкові поля недоступні для використання в таких типах дій SugarBPM: «Додати пов’язаний запис», «Змінити поле». Видаліть текст «Обов’язково, якщо», щоб використовувати це поле в цих діях визначення процесу',
+'LBL_POPHELP_READONLY'=>"Створити формулу, щоб визначити, чи це поле є доступним лише для читання в макетах.<br/>"
+        . "Поля лише для читання відповідатимуть формулі в мобільній версії браузера, <br/>"
+        . "але не відповідатимуть формулі у власних додатках, як-от Sugar Mobile для iPhone. <br/>"
+        . "Вони не відповідатимуть формулі на порталі самообслуговування Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Виберіть це поле, щоб використовувати його під час пошуку записів із використанням глобального пошуку в цьому модулі.',
 //Revert Module labels
 'LBL_RESET' => 'Скинути',
-'LBL_RESET_MODULE' => 'Очистити модуль',
-'LBL_REMOVE_CUSTOM' => 'Скинути налаштування користувача',
-'LBL_CLEAR_RELATIONSHIPS' => 'Видалити зв&#39;язок',
-'LBL_RESET_LABELS' => 'Очистити мітки',
+'LBL_RESET_MODULE' => 'Скинути модуль',
+'LBL_REMOVE_CUSTOM' => 'Видалити налаштування користувача',
+'LBL_CLEAR_RELATIONSHIPS' => 'Очистити зв’язки',
+'LBL_RESET_LABELS' => 'Скинути мітки',
 'LBL_RESET_LAYOUTS' => 'Скинути налаштування візуального відображення',
 'LBL_REMOVE_FIELDS' => 'Видалити поля користувача',
 'LBL_CLEAR_EXTENSIONS' => 'Очистити розширення',
@@ -853,6 +850,7 @@ $mod_strings = array(
                 'decimal'=>'Десятковий знак',
                 'autoincrement' => 'Автоматичне зростання',
                 'actionbutton' => 'Кнопка дії',
+                'geocodestatus' => 'GeocodeStatus',
 ),
 'labelTypes' => array(
     "" => "Часто використовувані мітки",

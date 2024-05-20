@@ -17,6 +17,10 @@ use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 class SugarCronJobs
 {
     /**
+     * @var \SugarJobQueue|mixed
+     */
+    public $queue;
+    /**
      * Max number of jobs per cron run
      * @var int
      */
@@ -191,7 +195,7 @@ class SugarCronJobs
         Registry\Registry::getInstance()->drop('triggered_starts');
         $this->setTimeLimit($this->max_runtime);
         try {
-            set_error_handler([$this, "errorHandler"], E_ALL & ~E_NOTICE & ~E_STRICT);
+            set_error_handler([$this, "errorHandler"], E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
             $res = $this->job->runJob();
             restore_error_handler();
             $this->clearTimeLimit();

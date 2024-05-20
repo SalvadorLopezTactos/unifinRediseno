@@ -13,7 +13,7 @@
  * @alias SUGAR.App.view.fields.BaseIntField
  * @extends View.Fields.Base.BaseField
  */
- ({
+({
     /**
      * @inheritdoc
      *
@@ -39,6 +39,9 @@
      * Add custom min/max value validation.
      */
     initialize: function(options) {
+        if (options && options.def && options.def.link) {
+            this.plugins.push('FocusDrawer');
+        }
         this._super('initialize', [options]);
         app.error.errorName2Keys.integer = 'ERROR_INT';
 
@@ -50,6 +53,45 @@
             'is_pure_integer_validator_' + this.cid,
             _.bind(this._doValidateIntNumber, this)
         );
+    },
+
+    /**
+     * Used by the FocusDrawer plugin to get the ID of the record this field
+     * links to
+     *
+     * @return {string} the ID of the related record
+     */
+    getFocusContextModelId: function() {
+        return this.model && this.model.get('id') ? this.model.get('id') : '';
+    },
+
+    /**
+     * Used by the FocusDrawer plugin to get the name of the module this
+     * field links to
+     *
+     * @return {string} the name of the related module
+     */
+    getFocusContextModule: function() {
+        return this.model && this.model.get('_module') ? this.model.get('_module') : '';
+    },
+
+    /**
+     * Used by the FocusDrawer plugin to get the name of the record this
+     * field links to
+     *
+     * @return {string} the name of the related record
+     */
+    getFocusContextTitle: function() {
+        return this.model && this.model.get('name') ? this.model.get('name') : '';
+    },
+
+    /**
+     * Used by the FocusDrawer plugin to get field defs
+     *
+     * @return {Object} the field defs
+     */
+    getFocusContextFieldDefs: function() {
+        return this.model && this.model.fields && this.model.fields.name || this.fieldDefs;
     },
 
     /**
@@ -89,7 +131,8 @@
             return value;
         }
         if (!this.def.disable_num_format) {
-            numberGroupSeparator = app.user.getPreference('number_grouping_separator') || ',';
+            numberGroupSeparator = app.user.getPreference('number_grouping_separator');
+            numberGroupSeparator = _.isString(numberGroupSeparator) ? numberGroupSeparator : ',';
             decimalSeparator = app.user.getPreference('decimal_separator') || '.';
         }
 
@@ -110,22 +153,19 @@
      * @private
      */
     _doValidateMinMaxInt: function(fields, errors, callback) {
-        if(this.name!=""&&this.name!=undefined &&this.name!=null){
-            console.log(this.name);
-            var value = this.model.get(this.name);
-            var minValue = this._minInt;
-            var maxValue = this._maxInt;
-            if (!_.isUndefined(app.config.sugarMinInt)) {
-                minValue = Math.max(minValue, app.config.sugarMinInt);
-            }
-            if (!_.isUndefined(app.config.sugarMaxInt)) {
-                maxValue = Math.min(maxValue, app.config.sugarMaxInt);
-            }
-            if (value < minValue) {
-                errors[this.name] = {'minValue': minValue};
-            } else if (value > maxValue) {
-                errors[this.name] = {'maxValue': maxValue};
-            }
+        var value = this.model.get(this.name);
+        var minValue = this._minInt;
+        var maxValue = this._maxInt;
+        if (!_.isUndefined(app.config.sugarMinInt)) {
+            minValue = Math.max(minValue, app.config.sugarMinInt);
+        }
+        if (!_.isUndefined(app.config.sugarMaxInt)) {
+            maxValue = Math.min(maxValue, app.config.sugarMaxInt);
+        }
+        if (value < minValue) {
+            errors[this.name] = {'minValue': minValue};
+        } else if (value > maxValue) {
+            errors[this.name] = {'maxValue': maxValue};
         }
         callback(null, fields, errors);
     },

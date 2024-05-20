@@ -301,6 +301,7 @@
      * @param {Object} setting metadata
      */
     addDashlet: function(meta) {
+        const previouslyHadComponents = this._components.length !== 0;
         var component = this.setDashletMetadata(meta),
             def = component.view || component.layout || component;
 
@@ -325,6 +326,13 @@
         this.model.set('updated', true);
         this.loadData();
         this.render();
+
+        // If user edits a collapsed dashlet
+        // reinitialize the layout state to trigger all styles updates
+        if (previouslyHadComponents && this.isDashletCollapsed()) {
+            this.collapse(false);
+            this.collapse(true);
+        }
     },
 
     /**
@@ -424,6 +432,9 @@
             delete meta.context.link;
         }
 
+        let targetLayout = (this.context && this.context.parent) ? this.context.parent.get('layout') : null;
+        app.controller.context.set('targetLayout', targetLayout);
+
         app.drawer.open({
             layout: {
                 name: 'dashletconfiguration',
@@ -459,8 +470,8 @@
         var meta = app.utils.deepCopy(_.first(this.meta.components));
 
         if (meta.view && meta.view.saved_report_id) {
-            var link = app.bwc.buildRoute('Reports', meta.view.saved_report_id);
-            window.open('index.php#' + link, '_blank');
+            var link = '#' + app.router.buildRoute('Reports', meta.view.saved_report_id);
+            window.open(link, '_blank');
         }
     },
 
@@ -481,13 +492,24 @@
         }
         this.isCollapsed = collapsed;
 
+        // Set the proper dashlet styling based on the state (collapsed or expanded)
         this.$('.dashlet-toggle > i').toggleClass('sicon-chevron-down', collapsed);
         this.$('.dashlet-toggle > i').toggleClass('sicon-chevron-up', !collapsed);
         this.$(".thumbnail").toggleClass("collapsed", collapsed);
         this.$("[data-dashlet=dashlet]").toggleClass("hide", collapsed);
-
         this.$el.toggleClass('collapsed', collapsed);
-        this.layout.collapseDashlet(this);
+
+        // Notify the parent layout that the dashlet was collapsed or expanded
+        this.layout.toggleCollapseDashlet(this, collapsed);
+    },
+
+    /**
+     * Determines whether the dashlet is currently collapsed or expanded
+     *
+     * @return {bool} true if the dashlet is collapsed; false otherwise
+     */
+    isDashletCollapsed() {
+        return this.isCollapsed || false;
     },
 
     /**

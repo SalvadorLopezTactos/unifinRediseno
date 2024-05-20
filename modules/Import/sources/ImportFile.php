@@ -107,9 +107,6 @@ class ImportFile extends ImportDataSource
             return false;
         }
 
-        // turn on auto-detection of line endings to fix bug #10770
-        ini_set('auto_detect_line_endings', '1');
-
         $this->_fp         = sugar_fopen($filename,'r');
         $this->_sourcename   = $filename;
         $this->_deleteFile = $deleteFile;
@@ -273,7 +270,10 @@ class ImportFile extends ImportDataSource
      */
     public function getFieldCount()
     {
-        return is_countable($this->_currentRow) ? count($this->_currentRow) : 0;
+        if (!is_countable($this->_currentRow)) {
+            return 0;
+        }
+        return count($this->_currentRow);
     }
 
     /**
@@ -444,27 +444,29 @@ class ImportFile extends ImportDataSource
     }
 
     //Begin Implementation for SPL's Iterator interface
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->_rowsCount;
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->_currentRow;
     }
 
-    public function next()
+    public function next(): void
     {
         $this->getNextRow();
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return $this->_currentRow !== FALSE;
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->setFpAfterBOM();
         //Load our first row
@@ -490,7 +492,8 @@ class ImportFile extends ImportDataSource
         if( $this->hasHeaderRow(FALSE) )
             $this->next();
 
-        while ($this->valid() && $totalItems > (is_countable($this->_dataSet) ? count($this->_dataSet) : 0)) {
+        while( $this->valid() &&  $totalItems > count($this->_dataSet) )
+        {
             if($currentLine >= $this->_offset)
             {
                 $this->_dataSet[] = $this->_currentRow;

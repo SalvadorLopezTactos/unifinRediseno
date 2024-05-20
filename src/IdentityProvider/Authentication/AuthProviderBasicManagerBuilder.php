@@ -14,6 +14,7 @@ namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
 use GuzzleHttp\Client;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 use Sugarcrm\IdentityProvider\Authentication\UserMapping\LDAPUserMapping;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Provider\IdPAuthenticationProvider;
@@ -48,10 +49,10 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class AuthProviderBasicManagerBuilder
 {
-    const PROVIDER_KEY_LOCAL = 'SugarLocalProvider';
-    const PROVIDER_KEY_LDAP = 'SugarLdapProvider';
-    const PROVIDER_KEY_MIXED = 'SugarMixedProvider';
-    const PROVIDER_KEY_IDP = 'SugarIdPProvider';
+    public const PROVIDER_KEY_LOCAL = 'SugarLocalProvider';
+    public const PROVIDER_KEY_LDAP = 'SugarLdapProvider';
+    public const PROVIDER_KEY_MIXED = 'SugarMixedProvider';
+    public const PROVIDER_KEY_IDP = 'SugarIdPProvider';
     /**
      * Encoders config
      * @var array|null
@@ -223,7 +224,7 @@ class AuthProviderBasicManagerBuilder
             new SugarOIDCUserProvider($sugarLocalUserProvider),
             new SugarOIDCUserChecker($sugarLocalUserProvider),
             new SugarOidcUserMapping(),
-            new ServiceAccount\Checker($this->idmModeConfig, $authZ)
+            new ServiceAccount\Checker($this->idmModeConfig, $authZ, $container->get(LoggerInterface::class))
         );
     }
 

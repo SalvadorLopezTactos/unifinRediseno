@@ -30,6 +30,8 @@ use Sugarcrm\Sugarcrm\DependencyInjection\Container;
  */
 class TeamsetPruner
 {
+    public $db;
+    public $command;
     /* @var tables we don't want to search for team set id's */
     protected $blacklistedTables = [
         'team_sets',

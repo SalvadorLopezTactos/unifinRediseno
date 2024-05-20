@@ -122,7 +122,7 @@ class PMSEEvaluator
     {
         global $current_user;
         global $beanList;
-        $expression = json_decode(html_entity_decode($expression));
+        $expression = json_decode(html_entity_decode($expression, ENT_COMPAT));
         if (isset($params['replace_fields']) && !empty($params['replace_fields'])) {
             foreach ($expression as $expKey => $expVal) {
                 foreach ($expVal as $attrKey => $attrVal) {

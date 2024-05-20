@@ -94,7 +94,10 @@
         app.api.call('read', url, null, {
             success: _.bind(this._renderPaths, this),
             error: function(error) {
-
+                app.alert.show('path-load-error', {
+                    level: 'error',
+                    messages: app.lang.get('LBL_DRIVE_LOAD_PATH_ERROR'),
+                });
             },
         });
     },
@@ -123,7 +126,10 @@
         /**
          * Make sure we have one empty path at the begining
          */
-        this.paths.unshift({path: ''});
+        this.paths.unshift({
+            path: '',
+            pathDisplay: 'My files',
+        });
         this.render();
     },
 
@@ -315,7 +321,7 @@
         const path = this.$(evt.target)
             .parents('.row-fluid')
             .children('.span3')
-            .children('.recordPath').val();
+            .children('.recordPath').val() || 'My files';
 
         const url = app.api.buildURL('CloudDrive', 'path');
 
@@ -323,10 +329,11 @@
             level: 'process'
         });
 
-        const isShared = this.$(evt.target).parents('.row-fluid.path').data('isshared');
-        let folderId = this.$(evt.target).parents('.row-fluid.path').data('folderid');
-        const currentPath = this.$(evt.target).parents('.row-fluid.path').data('currentpath');
-        const driveId = this.$(evt.target).parents('.row-fluid.path').data('driveid');
+        const pathRow = this.$(evt.target).parents('.row-fluid.path');
+        const isShared = pathRow.data('isshared');
+        let folderId = pathRow.data('folderid');
+        const currentPath = pathRow.data('currentpath');
+        const driveId = pathRow.data('driveid');
 
         //reset folder id if paths do not match
         if (currentPath !== path) {

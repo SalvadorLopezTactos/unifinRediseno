@@ -19,24 +19,76 @@ namespace Google\Service\Container;
 
 class AcceleratorConfig extends \Google\Model
 {
+  /**
+   * @var string
+   */
   public $acceleratorCount;
+  /**
+   * @var string
+   */
   public $acceleratorType;
+  /**
+   * @var string
+   */
+  public $gpuPartitionSize;
+  protected $gpuSharingConfigType = GPUSharingConfig::class;
+  protected $gpuSharingConfigDataType = '';
 
+  /**
+   * @param string
+   */
   public function setAcceleratorCount($acceleratorCount)
   {
     $this->acceleratorCount = $acceleratorCount;
   }
+  /**
+   * @return string
+   */
   public function getAcceleratorCount()
   {
     return $this->acceleratorCount;
   }
+  /**
+   * @param string
+   */
   public function setAcceleratorType($acceleratorType)
   {
     $this->acceleratorType = $acceleratorType;
   }
+  /**
+   * @return string
+   */
   public function getAcceleratorType()
   {
     return $this->acceleratorType;
+  }
+  /**
+   * @param string
+   */
+  public function setGpuPartitionSize($gpuPartitionSize)
+  {
+    $this->gpuPartitionSize = $gpuPartitionSize;
+  }
+  /**
+   * @return string
+   */
+  public function getGpuPartitionSize()
+  {
+    return $this->gpuPartitionSize;
+  }
+  /**
+   * @param GPUSharingConfig
+   */
+  public function setGpuSharingConfig(GPUSharingConfig $gpuSharingConfig)
+  {
+    $this->gpuSharingConfig = $gpuSharingConfig;
+  }
+  /**
+   * @return GPUSharingConfig
+   */
+  public function getGpuSharingConfig()
+  {
+    return $this->gpuSharingConfig;
   }
 }
 

@@ -65,6 +65,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Kasutaja andmeid ei leitud',
     'ERR_USER_NAME_EXISTS'              => 'Kasutajanimi {0} on juba olemas. Topelt kasutajanimed pole lubatud. Muutke kasutajanimi kordumatuks.',
     'ERR_USER_MISSING_LICENSE_TYPE'     => 'Sugar Hinti litsents peab olema salvestatud täiendava ühilduva litsentsitüübiga',
+    'ERR_USER_LICENSE_TYPE_OFFERRED_IN_BUNDLES'     => 'See funktsioon on juba teenuses Sugar Sell Premier olemas.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'See kasutaja on Sugari rakendusest välja lukustatud ega saa oma olemasoleva parooliga sisse logida.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Vaid välise autentimisega kasutajat ei lubata Sugari mandaatidega sisse logida',
 
@@ -106,7 +107,9 @@ $mod_strings = array (
 	'LBL_CHANGE_PASSWORD_TITLE'         => 'Parool',
     'LBL_CHOOSE_A_KEY'					=> 'Valige võti oma kalendri volitamata avaldamise vältimiseks',
     'LBL_NO_KEY'                        => 'Võti on määramata. Määrake võti avaldamist lubama.',
-	'LBL_CHOOSE_WHICH'					=> 'Valige, milliste moodulite juurde pääseb ülemiselt navigeerimisribalt. Määrake järjekord, milles soovite, et moodulid kuvatakse.',
+    'LBL_CHOOSE_WHICH'                  => 'Valige, millised moodulid on külgmisel navigeerimisribal juurdepääsetavad. Määrake, mis järjestuses te soovite, et moodulid ilmuksid.',
+    'LBL_NUMBER_PINNED_MODULES'         => 'Kinnitatud moodulite arv',
+    'LBL_NUMBER_PINNED_MODULES_DESC'    => 'Kirjutage, kui palju olemasolevaid mooduleid navigeerimisriba ahendamisel kinnitatakse (näiteks, kui sisestatud on 5, kinnitatakse teie nimekirja esimesed viis moodulit). Soovitame numbrit, mis vastab teie poolt enim kasutatud moodulite arvule. Väärtusi, mis on suuremad kui 100, ei arvestata.',
 	'LBL_CITY'							=> 'Linn',
 
 	'LBL_CLEAR_BUTTON_TITLE'			=> 'Tühjenda',
@@ -545,6 +548,7 @@ Klõpsake Tühista lehelt väljumiseks ilma ühtegi kirjet ümber määramata.',
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP kasutajanimi:',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP serveri tüüp:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP serveri spetsifikatsioon',
+    'LBL_MAIL_AUTHORIZED_ACCOUNT' => 'Volitatud e-posti konto',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Vali oma e-posti teenusepakkuja:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Maili parool:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Maili ID:',
@@ -700,4 +704,9 @@ Klõpsake Tühista lehelt väljumiseks ilma ühtegi kirjet ümber määramata.',
     'LBL_UTILS_USER_TEAMS_ROLES' => 'kasutajad/meeskonnad/rollid',
     'LBL_LOADING_ITEMS' => 'Andmete laadimine...',
     // END USER UTILS STRINGS
+
+    // Sugar Automate
+    'LBL_CUSTOMER_JOURNEY_ACCESS' => 'Nutika juhise juurdepääs',
+    'LBL_CUSTOMER_JOURNEY_LAST_ACTIVE' => 'Nutika juhise viimane tegevus',
+    'LBL_FILTER_MISSING_CUSTOMER_JOURNEY_ACCESS' => 'Puuduv nutika juhise juurdepääs',
 ); // END STRINGS DEFS

@@ -49,7 +49,6 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Създадено от',
   'LBL_EDIT_LAYOUT' => 'Редактиране на подредби' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Само за администратори на системата',
-  'LBL_CURRENCY_DEFAULT' => 'Щатски долари (по подразбиране)',
-
+  'LBL_CURRENCY_DEFAULT' => 'Валута на системата (по подразбиране)',
 );
 ?>

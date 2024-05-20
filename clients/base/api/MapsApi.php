@@ -69,9 +69,31 @@ class MapsApi extends FilterApi
             'minVersion' => '11.16',
         ];
 
+        $updateGeocodeStatusEndpointDef = [
+            'reqType' => 'POST',
+            'path' => ['maps', 'updateGeocodeStatus'],
+            'pathVars' => [''],
+            'method' => 'updateGeocodeStatus',
+            'shortHelp' => 'Update the geocode status of the parent record',
+            'longHelp' => 'include/api/help/maps_update_geocode_status_post_help.html',
+            'minVersion' => '11.17',
+        ];
+
+        $mapsNearbyEndpointDef = [
+            'reqType' => 'GET',
+            'path' => ['maps', 'nearby'],
+            'pathVars' => [''],
+            'method' => 'getNearBy',
+            'shortHelp' => 'Get nearby records based on latitude, longitude and radius',
+            'longHelp' => 'include/api/help/maps_near_by_get_help.html',
+            'minVersion' => '11.18',
+        ];
+
         return [
             'getApiKey' => $keyEndpointDef,
             'generateMaps' => $generateMapEndpointDef,
+            'updateGeocodeStatus' => $updateGeocodeStatusEndpointDef,
+            'mapsNearby' => $mapsNearbyEndpointDef,
         ];
     }
 
@@ -103,6 +125,33 @@ class MapsApi extends FilterApi
         }
 
         throw new SugarApiExceptionError("{$provider} is not a valid provider.");
+    }
+
+    /**
+     * Update the geocode status of the parent record
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     *
+     * @return boolean
+     */
+    public function updateGeocodeStatus(ServiceBase $api, array $args)
+    {
+        $this->requireArgs($args, ['id', 'module', 'status', 'fieldName']);
+
+        $targetBean = BeanFactory::retrieveBean($args['module'], $args['id']);
+        if (empty($targetBean)) {
+            throw new SugarApiExceptionNotFound();
+        }
+        if (!isset($targetBean->field_defs[$args['fieldName']]) ||
+            $targetBean->field_defs[$args['fieldName']]['type'] !== 'geocodestatus'
+        ) {
+            throw new SugarApiExceptionError();
+        }
+        $targetBean->{$args['fieldName']} = $args['status'];
+        $targetBean->save();
+
+        return true;
     }
 
     /**
@@ -160,6 +209,7 @@ class MapsApi extends FilterApi
         $recordId = $filterData['recordId'];
         $recordModule = $filterData['recordModule'];
         $fields = $filterData['requiredFields'];
+        $distanceFilter = true;
         $moduleName = $q->getFromBean()->module_name;
 
         $admin = BeanFactory::getBean('Administration');
@@ -208,12 +258,13 @@ class MapsApi extends FilterApi
         $distanceSql = self::addMapsWhereClause(
             $q,
             [
-                $radius,
-                $unitType,
-                $coords,
-                $geocodeTable,
-                $recordId,
-                $recordTable,
+                'radius' => $radius,
+                'unitType' => $unitType,
+                'coords' => $coords,
+                'geocodeTable' => $geocodeTable,
+                'recordId' => $recordId,
+                'recordTable' => $recordTable,
+                'distanceFilter' => $distanceFilter,
             ]
         );
 
@@ -288,8 +339,8 @@ class MapsApi extends FilterApi
     ) {
         global $db;
 
-        $module = $targetModule ? $targetModule : $q->getFromBean()->getModuleName();
-        $table = $targetTableAlias ? $targetTableAlias : $q->getFromAlias();
+        $module = $targetModule ?: $q->getFromBean()->getModuleName();
+        $table = $targetTableAlias ?: $q->getFromAlias();
         $seed = BeanFactory::newBean($module);
 
         $fieldsMapping = self::getMapsFieldsMapping($fields, $module);
@@ -308,6 +359,63 @@ class MapsApi extends FilterApi
     }
 
     /**
+     * Get nearby records based on latitude, longitude and radius
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     *
+     * @return array
+     */
+    public function getNearBy(ServiceBase $api, array $args):array
+    {
+        $result = [];
+        if (!hasMapsLicense()) {
+            throw new SugarApiExceptionNotAuthorized(translate('LBL_MAPS_NO_LICENSE_ACCESS'));
+        }
+
+        $this->requireArgs($args, ['radius', 'latitude', 'longitude']);
+
+        $coords  = [
+            'latitude' => $args['latitude'],
+            'longitude' => $args['longitude'],
+        ];
+
+        $radius = $args['radius'];
+        $unitType = $args['unitType'];
+
+        $administration = BeanFactory::getBean('Administration');
+
+        if (empty($unitType)) {
+            if (!empty($administration->settings['maps_unitType'])) {
+                $unitType = $administration->settings['maps_unitType'];
+            }
+        }
+
+        $q = new SugarQuery();
+
+        $geocodeTable = MapsFilterUtils::getCoordsTableName();
+
+        $q->from(\BeanFactory::newBean('Geocode'), ['team_security' => false]);
+        $q->select(['parent_id', 'parent_name', 'parent_type']);
+
+        $distanceSql = self::addMapsWhereClause(
+            $q,
+            [
+                'radius' => $radius,
+                'unitType' => $unitType,
+                'coords' => $coords,
+                'geocodeTable' => $geocodeTable,
+            ]
+        );
+
+        $q->select->fieldRaw($distanceSql, 'maps_distance');
+
+        $result['records'] = $q->execute();
+
+        return $result;
+    }
+
+    /**
      * Add maps fields into query clause
      *
      * @param SugarQuery $q
@@ -315,9 +423,42 @@ class MapsApi extends FilterApi
      */
     private static function addMapsWhereClause(SugarQuery $q, array $distanceData): string
     {
+        $radius = null;
+        $unitType = null;
+        $coords = [];
+        $recordId = null;
+        $geocodeTable = null;
+        $distanceFilter = null;
+        $recordTable = null;
         global $db;
 
-        list($radius ,$unitType, $coords, $geocodeTable ,$recordId, $recordTable) = $distanceData;
+        if (array_key_exists('radius', $distanceData)) {
+            $radius = $distanceData['radius'];
+        }
+
+        if (array_key_exists('unitType', $distanceData)) {
+            $unitType = $distanceData['unitType'];
+        }
+
+        if (array_key_exists('coords', $distanceData)) {
+            $coords = $distanceData['coords'];
+        }
+
+        if (array_key_exists('geocodeTable', $distanceData)) {
+            $geocodeTable = $distanceData['geocodeTable'];
+        }
+
+        if (array_key_exists('recordId', $distanceData)) {
+            $recordId = $distanceData['recordId'];
+        }
+
+        if (array_key_exists('recordTable', $distanceData)) {
+            $recordTable = $distanceData['recordTable'];
+        }
+
+        if (array_key_exists('distanceFilter', $distanceData)) {
+            $distanceFilter = $distanceData['distanceFilter'];
+        }
 
         $earthRadiusKm = 6371;
         $pi = pi();
@@ -363,10 +504,14 @@ class MapsApi extends FilterApi
             )
         ) * $earthRadiusKm";
 
+        $whereClause = "$distanceSql < $radius";
+
+        if ($distanceFilter) {
+            $whereClause .= " AND {$recordTable}.id <> '{$recordIdQuoted}'";
+        }
+
         if ($radius) {
-            $q->whereRaw(
-                "$distanceSql < $radius AND {$recordTable}.id <> '{$recordIdQuoted}'"
-            );
+            $q->whereRaw($whereClause);
         } else {
             $q->whereRaw("{$recordTable}.id <> '{$recordIdQuoted}'");
         }
@@ -437,7 +582,7 @@ class MapsApi extends FilterApi
 
         $fetched = $seed->fetchFromQuery($q, $fields, $queryOptions);
 
-        list($beans, $rows, $distinctCompensation) = $this->parseQueryResults($fetched);
+        [$beans, $rows, $distinctCompensation] = $this->parseQueryResults($fetched);
 
         $data = [];
         $data['next_offset'] = -1;

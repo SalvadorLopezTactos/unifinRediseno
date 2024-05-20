@@ -31,6 +31,7 @@ class DownloadFile {
      * @param boolean $forceDownload force to download the file if true.
      */
     public function getFile(SugarBean $bean, $field, $forceDownload = false) {
+        $info = [];
         if ($this->validateBeanAndField($bean, $field, 'file') || $this->validateBeanAndField($bean, $field, 'image')) {
             $def = $bean->field_defs[$field];
 
@@ -436,14 +437,12 @@ class DownloadFileApi extends DownloadFile
 
         $path = $info['path'];
 
-        if (version_compare(phpversion(), '7.4.16', '>=')) {
-            if (substr($path, 0, 9) === "upload://") {
-                $fileConverter = new FilePhpEntriesConverter();
-                $path = $fileConverter->revert(UploadFile::realpath($path));
-                register_shutdown_function(function () use ($path) {
-                    unlink($path);
-                });
-            }
+        if (substr($path, 0, 9) === "upload://") {
+            $fileConverter = new FilePhpEntriesConverter();
+            $path = $fileConverter->revert(UploadFile::realpath($path));
+            register_shutdown_function(function () use ($path) {
+                unlink($path);
+            });
         }
 
         $this->api->fileResponse($path);

@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Painel de registro de etiquetas',
     'LBL_MY_TAGS' => 'Minhas etiquetas',
     'LBL_MY_FAVORITE_TAGS' => 'Minhas etiquetas favoritas',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} Marcações',
 );

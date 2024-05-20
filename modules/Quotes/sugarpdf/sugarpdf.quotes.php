@@ -15,9 +15,9 @@ class QuotesSugarpdfQuotes extends Sugarpdf{
     var $aclAction = "detail";
 
     // Defines the boundaries of the header image
-    const MAX_WIDTH = 348;
-    const MAX_HEIGHT = 60;
-    const DPI = 500;
+    public const MAX_WIDTH = 348;
+    public const MAX_HEIGHT = 60;
+    public const DPI = 500;
 
     /**
      * Override

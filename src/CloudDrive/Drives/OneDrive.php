@@ -59,30 +59,38 @@ class OneDrive extends Drive
         if ($folderName) {
             if ($driveId) {
                 $url = "/drives/{$driveId}/root/search(q='{$folderName}')";
-
-                if ($sharedWithMe) {
-                    $url = "/me/drive/search(q='{$folderName}')";
-                }
             } else {
                 // in case we are just searching for a specific folder and we only have the name
-                $url = "/me/drive/root/search(q='{$folderName}')";
+                $url = "/me/drive/search(q='{$folderName}')";
                 if ($sharedWithMe) {
-                    return $this->searchSharedFiles($folderName);
+                    try {
+                        return $this->searchSharedFiles($folderName);
+                    } catch (\Exception $e) {
+                        // retry searching on local folder
+                        $options['sharedWithMe'] = null;
+                        return $this->listFolders($options);
+                    }
                 }
             }
         }
 
         $request = $client->createCollectionRequest('GET', $url);
+
         try {
             $response = $request->execute();
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
-            if ($e->getResponse()->getStatusCode() === 400) {
+            if ($e->getResponse()->getStatusCode() === 400 || $e->getResponse()->getStatusCode() === 403) {
                 $options['driveId'] = null;
                 return $this->listFolders($options);
             }
+        } catch (\Exception $e) {
+            // try again with no drive id
+            $options['driveId'] = null;
+            return $this->listFolders($options);
         }
 
         $data = $response->getResponseAsObject(Model\DriveItem::class);
+
         $filteredData = [];
 
         foreach ($data as $item) {
@@ -95,8 +103,11 @@ class OneDrive extends Drive
                 ]);
             }
 
-            if ($item->getFolder() && $item->getName() === $folderName && $parent->name === $folderParent) {
+            // we don't need parents to match if folderParent is root
+            if ($folderParent === 'root' && is_array($parent) && $parent['success'] === false) {
                 $filteredData[] = $item;
+            } elseif ($item->getFolder() && $item->getName() === $folderName && $parent->name === $folderParent) {
+                    $filteredData[] = $item;
             }
         }
 
@@ -171,15 +182,15 @@ class OneDrive extends Drive
         global $sugar_config;
 
         $folderId = $options['folderId'] ?? 'root';
-        $sharedWithMe = $options['sharedWithMe'];
+        $sharedWithMe = $options['sharedWithMe'] ?? false;
         $driveId = $options['driveId'];
-        $sortOptions = $options['sortOptions'];
+        $sortOptions = $options['sortOptions'] ?? false;
 
         $top = $sugar_config['list_max_entries_per_page'];
 
         $url = $this->getListUrl($sharedWithMe, $driveId, $folderId);
 
-        if ($options['nextPageToken']) {
+        if (isset($options['nextPageToken']) && $options['nextPageToken']) {
             $url = $options['nextPageToken'];
             // limit result set
             $url = $this->urlHasParam($url, '$top') ? $url : $url.'&$top='.$top;
@@ -217,7 +228,6 @@ class OneDrive extends Drive
      */
     public function getFile(array $options)
     {
-        $response = null;
         $fileId = $options['fileId'];
         $driveId = $options['driveId'];
         $select = $options['select'];
@@ -248,6 +258,12 @@ class OneDrive extends Drive
                     'message' => 'LBL_MICROSOFT_PERMISSION_ERROR',
                 ];
             }
+            $errorMessage = json_decode($e->getResponse()->getBody(true));
+
+            return [
+                'success' => false,
+                'message' => $errorMessage->error->message,
+            ];
         }
 
         $data = $response->getResponseAsObject(Model\DriveItem::class);
@@ -453,7 +469,11 @@ class OneDrive extends Drive
             $data = $options['data'];
             $filePath = $data['tmp_name'];
         } else {
-            $filePath = $options['filePath'];
+            if (isset($options['filePath'])) {
+                $filePath = $options['filePath'];
+            } else {
+                $filePath = $this->getFilePath($options['documentBean']);
+            }
         }
 
         if (!$driveId) {
@@ -468,7 +488,7 @@ class OneDrive extends Drive
 
         return [
             'success' => true,
-            'message' => 'LBL_MICROSOFT_FILE_UPLOADED',
+            'message' => 'LBL_FILE_UPLOADED',
         ];
     }
 
@@ -479,7 +499,6 @@ class OneDrive extends Drive
      */
     public function uploadLargeFile($options): array
     {
-        $fileSize = null;
         $client = $this->getClient();
 
         $parentId = $options['parentId'] ?? $options['pathId'];
@@ -492,10 +511,11 @@ class OneDrive extends Drive
             $fileSize = $data['size'];
         } else {
             $filePath = $options['filePath'];
+            $fileSize = $options['fileSize'];
         }
 
         if (!$driveId) {
-            $url = "/me/drive/items/{$parentId}/createUploadSession";
+            $url = "/me/drive/items/{$parentId}:/{$fileName}:/createUploadSession";
         } else {
             $url = "/drives/{$driveId}/items/{$parentId}:/{$fileName}:/createUploadSession";
         }
@@ -526,6 +546,10 @@ class OneDrive extends Drive
      * @param string $uploadUrl
      * @param string $filePath
      * @param GraphProxy $client
+     * @param string $fileName
+     * @param null|int $fileSize
+     *
+     * @return array
      */
     protected function uploadChunks(string $uploadUrl, string $filePath, string $fileName, ?int $fileSize) : array
     {
@@ -548,7 +572,7 @@ class OneDrive extends Drive
 
         return [
             'success' => true,
-            'message' => 'LBL_MICROSOFT_LARGE_FILE_UPLOAD',
+            'message' => 'LBL_LARGE_FILE_UPLOAD',
         ];
     }
 

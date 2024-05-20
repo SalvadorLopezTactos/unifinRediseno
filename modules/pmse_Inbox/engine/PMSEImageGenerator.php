@@ -1042,7 +1042,7 @@ class PMSEImageGenerator
             $element = $this->getElementObject(true);
             return $element;
         }
-        $element = isset($this->running_elements[$id]) ? $this->running_elements[$id] : $this->getElementObject();
+        $element = $this->running_elements[$id] ?? $this->getElementObject();
         if (isset($this->running_elements[$id])) {
             $element->in_flow = true;
         }

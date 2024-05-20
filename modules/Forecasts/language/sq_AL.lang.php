@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Shiko histroinë e parashikimeve',
     'LBL_FORECAST_HISTORY' => 'Parashikimet: Historia',
     'LBL_FORECAST_HISTORY_TITLE' => 'Historia',
+    'LBL_TAB_COMMITMENT' => 'Angazhim',
+    'LBL_CURRENT' => 'Aktual',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Kohëzgjatja',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Modifikuar nga',
     'LBL_WK_VERSION' => 'Versioni',
     'LBL_WK_REVISION' => 'Revizion',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Për të pasur qasje në API-në e metrikës nevojitet Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'kohëzgjatja',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'A dëshiron të kryejsh këto sasi?',
     'ERR_FORECAST_AMOUNT' => 'Nevoitet vlera e kryer dhe patjetër duhet të jetë numër.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Tubacioni i përfshirë',
+    'LBL_UPSIDE_PIPELINE' => 'Tubacioni i përmbysur',
+    'LBL_EXCLUDED_PIPELINE' => 'Tubacioni i përjashtuar',
+    'LBL_WON' => 'Fituar',
+    'LBL_LOST' => 'Humbur',
+    'LBL_ALL' => 'Të gjitha',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Udhëzuesi për filtrat',
+    'LBL_HELP_MAIN_BODY' => 'Të gjitha metrikat përfshijnë vetëm mundësi që i përkasin përdoruesit(ve) të zgjedhur, periudhës kohore dhe çdo filtri shtesë që ke aplikuar',
+    'LBL_FORECAST_HELP' => 'Mundësitë që janë fituar tashmë ose që janë në një {{{forecastStage}}} të përfshirë',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Hap mundësitë me një {{{forecastStage}}} të {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Hap mundësitë në një {{{forecastStage}}} të përfshirë',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Hap mundësitë me një {{{forecastStage}}} të {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Hap mundësitë me një {{{forecastStage}}} të {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Hap mundësitë në një {{{forecastStage}}} të përjashtuar',
+    'LBL_WON_HELP' => 'Mundësitë që janë fituar tashmë',
+    'LBL_LOST_HELP' => 'Mundësitë që janë humbur tashmë',
+    'LBL_ALL_HELP' => 'Të gjitha mundësitë',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Data e nisjes',
     'LBL_FC_USER' => 'Caktuar për',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Konfirmimi',
     'LBL_TEAM_COMMITMENT' => 'Konfirmimi i ekipit',
     'LBL_FORECASTED' => 'Parashikuar',
+    'LBL_OPPORTUNITY_FORECAST' => 'Parashikimi i mundësisë',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Parashikimi i rreshtit të të ardhurave',
+    'LBL_LAST_COMMITMENT' => 'Angazhimi i fundit',
     'LBL_ADJUSTED_TOTAL' => 'Totali i rregulluar',
     'LBL_COMMIT_STAGE' => 'Faza e perkushtimit',
     'LBL_SALES_STAGE' => 'Faza',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => 'I rregulluar',
     'LBL_SAVE_DRAFT' => 'Ruaj',
     'LBL_CHANGES_BY' => 'Ndryshimet prej {0}',
-    'LBL_FORECAST_SETTINGS' => 'Parametra',
+    'LBL_FORECAST_SETTINGS' => 'Parametrat e parashikimit',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'konfigurimet e parashikimeve',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data e fillimit të vitit fiskal',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfiguro periudhën kohore që do të përdoret në modulin e parashikimeve. <br /><br />Ju lutem vini re se parametrat e periudhës kohore nuk mund të ndryshohen pas instalimit fillestar. <br /><br />Filloni duke zgjedhur data e fillimit e vitit tuaj fiskal. Pastaj zgjidhni llojin e afatit të parashikimit. Gama e datave për afatet do të llogaritet automatikisht bazuar në zgjedhjen tuaj. Periudha nën kohaa është baza për fletën e punës së parashikimit. <br /><br />E ardhmja mund të shikohet dhe periudhat e kaluara kohore do të përcaktojë numrin e nën-periudhave të dukshme në modulin e parashikimeve. Përdoruesit janë në gjendje për të parë dhe të redaktuar numrat e parashikimit të nën-periudhave të dukshme.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfiguro mënyrën se si dëshiron të kategorizosh {{forecastByModule}}. <br><br>Ki parasysh se cilësimet e "Intervali" nuk mund të ndryshohen pas konfirmimit të parë. Për rastet e përditësimit, cilësimi i "Intervali" është i kyçur me të dhënat ekzistuese të "Parashikimi".<br><br>Mund të zgjedhësh dy ose më shumë kategori në bazë të intervaleve të probabilitetit ose të krijosh kategori të cilat nuk bazohen te probabiliteti. <br><br>Në të majtë të kategorive të personalizuara gjenden kutitë e verifikimit; përdori për të vendosur se cilat intervale do të përfshihen në vlerën e "Parashikimi" të konfirmuar dhe të raportuar te menaxherët. <br><br>Një përdorues mund të ndryshojë kategorinë e përfshirjes/përjashtimit të statusit të {{forecastByModule}} manualisht nga fleta e punës.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfiguro mënyrën se si dëshiron të kategorizosh {{forecastByModule}}. <br><br>Ki parasysh se cilësimet e "Gama" nuk mund të ndryshohen pas konfirmimit të parë. Për rastet e përditësimit, cilësimi i "Gama" është i kyçur me të dhënat ekzistuese të "Parashikimi".<br><br>Mund të zgjedhësh dy ose më shumë kategori bazuar në diapazonin e probabilitetit ose të krijosh kategori që nuk bazohen në probabilitet. <br><br>Në të majtë të kategorive të personalizuara gjenden kutitë e zgjedhjes; përdori këto për të vendosur se cilat diapazone do të përfshihen në vlerën e parashikimit të konfirmuar dhe të raportuar te menaxherët. <br><br>Një përdorues mund të ndryshojë statusin e përfshirjes/përjashtimit dhe kategorinë e {{forecastByModule}} manualisht nga fleta e punës.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Zgjidhni kolonat ju do të donit që përdoruesit të plotësojnë për parashikimet e tyre të çdo {{forecastByModuleSingular}}. Ju lutem vini re shuma me gjasa është e lidhur me shumën e treguar në {{forecastByModule}}; për këtë arsye kolona të ngjarë nuk mund të fshihet.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Zgjidh cilat kolona që ju do të donit për të parë në modulin parashikimi. Lista e fushave do të kombinohet me fletën e punës dhe do të lejojë përdoruesit për të zgjedhur se si të konfiguroni pamjen e saj.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Unë jam një placeholder për parashikim se si të tekstoj!',

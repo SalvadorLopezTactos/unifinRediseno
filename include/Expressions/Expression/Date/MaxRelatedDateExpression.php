@@ -51,6 +51,8 @@ class MaxRelatedDateExpression extends DateExpression
                 if (is_int($bean->$relfield)) {
                     // if we have a timestamp field, just set the value
                     $value = $bean->relfield;
+                } elseif (empty($bean->$relfield)) {
+                    continue;
                 } else {
                     // more than likely this is a date field, so try and un-format based on the users preferences
                     $td = TimeDate::getInstance();

@@ -8,6 +8,8 @@
 
 // Base class and wrapper
 .navbar {
+  border-bottom: 1px solid var(--navbar-border-color);
+  height: @headerNavHeight;
   overflow: visible;
 }
 
@@ -96,7 +98,7 @@
   margin-bottom: 0;
 
   .search-query {
-    margin-bottom: 0;
+    margin-bottom: 0.375rem;
     font-size: 13px;
   }
 }
@@ -273,8 +275,9 @@
 
 .navbar {
   &.navbar-fixed-top {
-    left: 0;
+    left: @sidebarNavWidth;
     z-index: (@zindexFixedNavbar + 2);
+    width: calc(100% ~"-" @sidebarNavWidth);
   }
 
   // General layout
@@ -283,10 +286,18 @@
     min-height: 0;
   }
 
+  .logo {
+    z-index: 2;
+  }
+
   .nav-collapse {
     > div {
       display: flex;
       align-items: center;
+
+      &:nth-last-child(2) {
+        margin-left: auto;
+      }
 
       &.module-list {
         flex: 1;
@@ -674,16 +685,10 @@
         }
       }
 
-      .btn-group.open,
-      &.active .btn-group:not(.home) {
-        .active-tab();
-        .pb-1();
-      }
-
       /*Menu position and menu carets*/
       .dropdown-menu {
         /* override */
-        top: 44px;
+        top: @headerNavHeight;
       }
     }
   }

@@ -39,7 +39,7 @@
      * by tinyMCE and the tinyMCE jquery plugin to ensure we don't load from the
      * browser cache after a library upgrade.
      */
-    tinyMCEVersion: '4.9.11',
+    tinyMCEVersion: '6.2.0',
 
     /**
      * Render an editor for edit view or an iframe for others
@@ -89,7 +89,7 @@
     sanitizeContent: function(value) {
         return DOMPurify.sanitize(value, {
             ADD_TAGS: ['iframe'],
-            ADD_ATTR: ['frameborder'],
+            ADD_ATTR: ['frameborder', 'target'],
         });
     },
 
@@ -231,31 +231,32 @@
     getTinyMCEConfig: function(){
         return {
             // Location of TinyMCE script
-            script_url: 'include/javascript/tinymce4/tinymce.min.js?v=' + this.tinyMCEVersion,
+            script_url: 'include/javascript/tinymce6/tinymce.min.js?v=' + this.tinyMCEVersion,
             // Force loading of current version of tinyMCE plugin
             cache_suffix: '?v=' + this.tinyMCEVersion,
 
             // General options
-            theme: 'modern',
-            skin: app.utils.isDarkMode() ? 'sugar-dark' : 'sugar',
-            plugins: 'code,help,textcolor,insertdatetime,table,paste,charmap,' +
-                'image,link,anchor,directionality,searchreplace,hr,lists',
+            theme: 'silver',
+            skin: app.utils.isDarkMode() ? 'oxide-dark' : 'oxide',
+            content_css: app.utils.isDarkMode() ? 'dark' : 'default',
+            plugins: 'code,help,insertdatetime,table,charmap,' +
+                'image,link,anchor,directionality,searchreplace,lists',
             browser_spellcheck: true,
 
             // User Interface options
-            width: '100%',
-            height: '100%',
+            min_height: 250,
             menubar: false,
             statusbar: false,
             resize: false,
+            toolbar_mode: 'wrap',
             toolbar: 'code | bold italic underline strikethrough | alignleft aligncenter alignright ' +
-                'alignjustify | forecolor backcolor |  styleselect formatselect fontselect ' +
-                'fontsizeselect | cut copy paste pastetext | search searchreplace | bullist numlist | ' +
+                'alignjustify | forecolor backcolor | fontfamily fontsize blocks | ' +
+                'cut copy paste pastetext | search searchreplace | bullist numlist | ' +
                 'outdent indent | ltr rtl | undo redo | link unlink anchor image | subscript ' +
                 'superscript | charmap | table | hr removeformat | insertdatetime',
             // Sets the text of the Target element of the link plugin. To disable
             // this completely, set target_list: false
-            target_list: [
+            link_target_list: [
                 {
                     text: app.lang.getAppString('LBL_TINYMCE_TARGET_SAME'),
                     value: ''

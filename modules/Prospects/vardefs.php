@@ -12,6 +12,8 @@
 
 $dictionary['Prospect'] = array(
     'table' => 'prospects',
+    'color' => 'yellow',
+    'icon' => 'sicon-target-lg',
     'archive' => false,
     'audited' => true,
     'unified_search' => true,
@@ -216,6 +218,30 @@ $dictionary['Prospect'] = array(
             'len' => 100,
             'vname' => 'LBL_ASSISTANT_PHONE',
         ),
+        'geocode_status' => [
+            'studio' => hasMapsLicense() ? [
+                'editField' => true,
+                'recordview' => true,
+                'previewview' => false,
+                'recorddashletview' => false,
+                'listview' => false,
+                'wirelesseditview' => false,
+                'wirelesslistview' => false,
+                'wirelessdetailview' => false,
+                'wireless_basic_search' => false,
+                'wireless_advanced_search' => false,
+            ] : false,
+            'name' => 'geocode_status',
+            'vname' => 'LBL_MAPS_GEOCODE_STATUS',
+            'label' => 'LBL_MAPS_GEOCODE_STATUS',
+            'type' => 'geocodestatus',
+            'len' => 255,
+            'comment' => '',
+            'dbType' => 'varchar',
+            'licenseFilter' => ['MAPS'],
+            'readonly' => true,
+            'reportable' => false,
+        ],
     ),
     'indices' => array(
         array(

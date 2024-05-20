@@ -36,6 +36,7 @@ final class Scalar implements Field
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->name;

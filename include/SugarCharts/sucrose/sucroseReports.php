@@ -17,6 +17,10 @@
 class sucroseReports extends sucrose
 {
 
+    /**
+     * @var mixed[]
+     */
+    public $super_set_data;
     private $processed_report_keys = array();
 
     /**
@@ -67,7 +71,7 @@ class sucroseReports extends sucrose
         if ($first) {
             $temp_dataset = array();
             foreach ($this->super_set as $key) {
-                $temp_dataset[$key] = (isset($dataset[$key])) ? $dataset[$key] : array();
+                $temp_dataset[$key] = $dataset[$key] ?? array();
             }
             $dataset = $temp_dataset;
         }
@@ -98,7 +102,7 @@ class sucroseReports extends sucrose
             foreach ($groups as $group => $groupData) {
                 $super_set_data[$group] = $groupData;
             }
-            if (count($groups) > count($super_set)) {
+            if ((is_countable($groups) ? count($groups) : 0) > count($super_set)) {
                 $super_set = array_keys($groups);
                 foreach ($prev_super_set as $prev_group) {
                     if (!in_array($prev_group, $groups)) {
@@ -170,12 +174,7 @@ class sucroseReports extends sucrose
     {
         $a = new DateTime($this->super_set_data[$a]['raw_value']);
         $b = new DateTime($this->super_set_data[$b]['raw_value']);
-
-        if ($a == $b) {
-            return 0;
-        }
-
-        return ($a < $b) ? -1 : 1;
+        return $a <=> $b;
     }
 
     private function xmlDataReportSingleValue()
@@ -270,7 +269,7 @@ class sucroseReports extends sucrose
         $single_value = false;
 
         foreach ($this->data_set as $key => $dataset) {
-            if ((isset($dataset[$key]) && count($this->data_set[$key]) == 1)) {
+            if ((isset($dataset[$key]) && (is_countable($this->data_set[$key]) ? count($this->data_set[$key]) : 0) == 1)) {
                 $single_value = true;
             } else {
                 $single_value = false;

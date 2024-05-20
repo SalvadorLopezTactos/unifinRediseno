@@ -26,7 +26,7 @@ class ActivitiesApiHelper extends SugarBeanApiHelper
     {
         $record = parent::formatForApi($bean, $fieldList, $options);
 
-        $requestBean = isset($options['requestBean']) ? $options['requestBean'] : null;
+        $requestBean = $options['requestBean'] ?? null;
         $displayFields = $this->getDisplayModule($record, $requestBean);
         $record['display_parent_type'] = $displayFields['module'];
         $record['display_parent_id'] = $displayFields['id'];
@@ -44,8 +44,8 @@ class ActivitiesApiHelper extends SugarBeanApiHelper
     protected function getDisplayModule(array $record, SugarBean $requestBean = null)
     {
         $array = array(
-            'module' => isset($record['parent_type']) ? $record['parent_type'] : '',
-            'id' => isset($record['parent_id']) ? $record['parent_id'] : '',
+            'module' => $record['parent_type'] ?? '',
+            'id' => $record['parent_id'] ?? '',
         );
 
         if (!is_null($requestBean) && $this->isRecordLinkAction($record)) {

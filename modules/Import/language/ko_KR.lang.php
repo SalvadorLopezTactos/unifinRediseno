@@ -46,6 +46,7 @@ $mod_strings = array (
     'LBL_REQUIRED_VALUE' => '필수입력 가치가 없습니다.',
     'LBL_ERROR_SYNC_USERS' => 'Outlook과 일치화에 유효하지 않은 가치:',
     'LBL_ID_EXISTS_ALREADY' => '이미 테이블에 존재하는 ID 입니다.',
+    'LBL_SYNC_KEY_EXISTS_ALREADY' => 'SYNC_KEY 이미 테이블에 존재',
     'LBL_ASSIGNED_USER' => '사용자가 존재하지 않으면 현재 사용자를 이용하십시오.',
     'LBL_SHOW_HIDDEN' => '일반적으로 가져올수 없는 필드를 보여줍니다.',
     'LBL_UPDATE_RECORDS' => '기존 기록을 가져오는 대신 업데이트합니다.',

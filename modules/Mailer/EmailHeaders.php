@@ -18,13 +18,13 @@
 class EmailHeaders
 {
     // the non-custom header field names we support
-    const MessageId                 = "Message-ID";
-    const Priority                  = "Priority";
-    const DispositionNotificationTo = "Disposition-Notification-To";
-    const From                      = "From";
-    const ReplyTo                   = "Reply-To";
-    const Sender                    = "Sender";
-    const Subject                   = "Subject";
+    public const MessageId                 = "Message-ID";
+    public const Priority                  = "Priority";
+    public const DispositionNotificationTo = "Disposition-Notification-To";
+    public const From                      = "From";
+    public const ReplyTo                   = "Reply-To";
+    public const Sender                    = "Sender";
+    public const Subject                   = "Subject";
 
     // protected members
     protected $messageId;           // The value to be mapped to the Message-ID header.

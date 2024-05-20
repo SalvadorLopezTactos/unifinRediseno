@@ -17,7 +17,11 @@
 class UserBasedRelationship extends One2MRelationship
 {
     public $type = "user-based";
-    
+    /**
+     * @var string
+     */
+    protected $userField;
+
     public function __construct(array $def)
     {
         $this->userField = $def['user_field'];

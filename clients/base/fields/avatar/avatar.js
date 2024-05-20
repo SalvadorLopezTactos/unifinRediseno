@@ -32,23 +32,16 @@
      * @private
      */
     _render: function() {
-        var template,
-            className;
         this._super("_render");
         if (this.action !== 'edit' ||
             this.view.name === 'merge-duplicates' ||
             this.view.name === 'side-drawer-headerpane') {
             if (_.isEmpty(this.value)) {
-                className = _.isUndefined(this.MAPSIZECLASS[this.def.size]) ? this.MAPSIZECLASS['large'] : this.MAPSIZECLASS[this.def.size];
-                // replace the image field with the module icon when there is no avatar to display
-                // load the module icon template
-                template = app.template.getField(this.type, 'module-icon', this.module);
+                // Replace the image field with the module icon when there is
+                // no avatar to display
+                let template = app.template.getField(this.type, 'module-icon', this.module);
                 if (template) {
-                    this.$('.image_field').replaceWith(template({
-                        module: this.module,
-                        labelSizeClass: className,
-                        tooltipPlacement: app.lang.direction === 'ltr' ? 'right' : 'left'
-                    }));
+                    this.$('.image_field').replaceWith(template(this._getModuleIconMeta()));
                 }
             } else {
                 // add the image_rounded class to the image_field div when there is an avatar to display
@@ -56,6 +49,33 @@
             }
         }
         return this;
+    },
+
+    /**
+     * Gets the metadata to pass to the module-icon template based on the
+     * module settings
+     *
+     * @return {Object} the set of module-icon template metadata
+     * @private
+     */
+    _getModuleIconMeta: function() {
+        let moduleMeta = app.metadata.getModule(this.module);
+        let classes = `label-module-color-${moduleMeta.color}`;
+        let content = '';
+
+        if (moduleMeta.display_type === 'abbreviation') {
+            content = app.lang.getModuleIconLabel(this.module);
+        } else {
+            classes += ` sicon ${moduleMeta.icon}`;
+        }
+
+        return {
+            module: this.module,
+            labelSizeClass: this.MAPSIZECLASS[this.def.size] || this.MAPSIZECLASS.large,
+            tooltipPlacement: app.lang.direction === 'ltr' ? 'right' : 'left',
+            content: content,
+            classes: classes
+        };
     },
 
     /**

@@ -13,6 +13,12 @@
 abstract class AbstractMetaDataParser
 {
     /**
+     * @var mixed
+     */
+    //@codingStandardsIgnoreStart
+    public $_panels;
+    //@codingStandardsIgnoreEnd
+    /**
      * The client making this request for the parser. Default is empty. NOT ALL
      * PARSERS SET THIS.
      *
@@ -178,7 +184,7 @@ abstract class AbstractMetaDataParser
 		{
 			if ( !isset ($def [ 'label' ] ) )
 			{
-				$fielddefs [ $key ] [ 'label'] = ( isset ( $def [ 'vname' ] ) ) ? $def [ 'vname' ] : $key ;
+                $fielddefs [$key] ['label'] = $def ['vname'] ?? $key;
 			}
 		}
 	}

@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'Logo slike',
 	'LBL_ADMIN_WIZARD' => 'Čarobnjak za administraciju',
-	'LBL_ALLOW_USER_TABS' => 'Dozvoli korisnicima da sakriju kartice',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Sistemska podešavaja',
 	'LBL_ENABLE_MAILMERGE' => 'Omoguči email spajanje?',
 	'LBL_LOGVIEW' => 'Pregledaj Dnevnik',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => 'Koristite ovo podešavanje da odredite broj meseci pre tekućeg datuma za koje je informacija poziva i sastanaka Slobodan/Zauzet objavljena.',
     'LBL_PDFMODULE_NAME' => 'PDF Podešavanja',
     'SUGARPDF_BASIC_SETTINGS' => 'Svojstva Dokumenta',
-    'SUGARPDF_ADVANCED_SETTINGS' => 'Napredna Podešavanja',
     'SUGARPDF_LOGO_SETTINGS' => 'Slike',
-
-    'PDF_CREATOR' => 'PDF Kreator',
-    'PDF_CREATOR_INFO' => 'Definiše kreatora dokumenta. <br>Tipično, ovo je ime aplikacije koja generiše PDF.',
 
     'PDF_AUTHOR' => 'Autor',
     'PDF_AUTHOR_INFO' => 'Autor se pojavljuje u svojstvima dokumenta.',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => 'Odaberite Novu Sliku za Ponude',
     'PDF_NEW_HEADER_LOGO_INFO' => 'Format fajla može biti .jpg ili .png. (EZPDF koristi samo .jpg format)<BR>Preporučena veličina je 867x74 piksela.',
 
-    'PDF_HEADER_LOGO_WIDTH' => 'Širina slike za Ponude',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => 'Promeni razmeru učitane slike koja se pojavljuje u Ponudama PDF Dokumenata. (Samo TCPDF)',
+    'PDF_TITLE' => 'Naslov',
+    'PDF_TITLE_INFO' => 'Naslov se pojavljuje u svojstvima dokumenta.',
+
+    'PDF_SUBJECT' => 'Tema',
+    'PDF_SUBJECT_INFO' => 'Tema se pojavljuje u svojstvima dokumenta.',
 
     'PDF_SMALL_HEADER_LOGO' => 'Za Izveštaje PDF Dokumenata',
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Ova slika se pojavljuje u podrazumevanom Zaglavlju u Izveštajima PDF Dokumenata.<br> Ova slika se takođe pojavljuje u gornjem levom ćošku Sugar aplikacije.',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Odaberite Novu Sliku za Izveštaje',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Format slike može biti .jpg ili .png. formatu (EZPDF koristi samo .jpg format)<BR>Preporučena veličina je 212x40 piksela.',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Širina slike za Izveštaje',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Promeni razmeru učitane slike koja se pojavljuje u Izveštajima PDF Dokumenata. (Samo TCPDF)',
-
-
-    'PDF_HEADER_STRING' => 'String Zaglavlja',
-    'PDF_HEADER_STRING_INFO' => 'Opis Stringa Zaglavlja',
-
-    'PDF_HEADER_TITLE' => 'Naslov Zaglavlja',
-    'PDF_HEADER_TITLE_INFO' => 'String za štampanje kao naslov na zaglavlju dokumenta',
-
-    'PDF_FILENAME' => 'Podrazumeni naziv fajla',
-    'PDF_FILENAME_INFO' => 'Podrazmevani naziv fajla za genersane PDF fajlove',
-
-    'PDF_TITLE' => 'Naslov',
-    'PDF_TITLE_INFO' => 'Naslov se pojavljuje u svojstvima dokumenta.',
-
-    'PDF_SUBJECT' => 'Tema',
-    'PDF_SUBJECT_INFO' => 'Tema se pojavljuje u svojstvima dokumenta.',
-
     'PDF_KEYWORDS' => 'Ključne reči',
     'PDF_KEYWORDS_INFO' => 'Veži ključne reči sa dokumentom, obično u formatu "klljučna reč1 klljučna reč2..."',
 
-    'PDF_COMPRESSION' => 'Kompresija',
-    'PDF_COMPRESSION_INFO' => 'Aktivira ili deaktivira kompresiju stranice.<br>Kada je aktivirana, interna reprezentacija svake stranice je kompresovana, što vodi ka razmeri kompresije od oko 2 za rezultujući dokument.',
-
-    'PDF_JPEG_QUALITY' => 'Kvalitet JPEG (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => 'Podesi podrazumevani kvalitet JPEG kompresije (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF Verzija',
-    'PDF_PDF_VERSION_INFO' => 'Podesi PDF verziju (proveri PDF reference za važeće vrednosti).',
-
-    'PDF_PROTECTION' => 'Zaštita Dokumenta',
-    'PDF_PROTECTION_INFO' => 'Podesi zaštitu dokumenta <br>- kopiraj: kopiraj tekst i slike u klipbord<br>- štampaj: štampaj dokument<br>- izmeni: izmeni dokument (osim beleški i obrazaca)<br>- beleške-obrasci: dodaj beleške i obrasce<br>Napomena: zaštita protiv izmene je za korisnike koji imaju kompletan Acrobat proizviod.',
-
-    'PDF_USER_PASSWORD' => 'Korisnička Lozinka',
-    'PDF_USER_PASSWORD_INFO' => 'Ako ne podesite lozinku, dokument će se otvoriti na uobičajan način. <br>Ako podesite korisničku lozinku, PDF viewer će tražiti lozinku pre nego što prikaže dokument.<br> Ako je glavna lozinka drugačija od korisničke lozinke, može se koristiti za pun pristup.',
-
-    'PDF_OWNER_PASSWORD' => 'Lozinka vlasnika',
-    'PDF_OWNER_PASSWORD_INFO' => 'Ako ne podesite lozinku, dokument će se otvoriti na uobičajan način. <br>Ako podesite korisničku lozinku, PDF viewer će tražiti lozinku pre nego što prikaže dokument.<br> Ako je glavna lozinka drugačija od korisničke lozinke, može se koristiti za pun pristup.',
-
-    'PDF_ACL_ACCESS' => 'Kontrola pristupa',
-    'PDF_ACL_ACCESS_INFO' => 'Podrazumevana kontrola pristupa za generisanje PDF-a.',
-
-    'K_CELL_HEIGHT_RATIO' => 'Razmera Visine ćelije',
-    'K_CELL_HEIGHT_RATIO_INFO' => 'Ako je visina ćelije manja od (odnos visine fonta x visine ćelije), onda (odnos visine fonta x visina ćelije) je korišćen kao visina ćelije.<br>(odnos visine fonta x visina ćelije) je takođe korišćen kao visina ćelije kada visina nije definisana.',
-
-    'K_TITLE_MAGNIFICATION' => 'Uveličavanje Naslova',
-    'K_TITLE_MAGNIFICATION_INFO' => 'Uveličavanje naslova uzima u obzir veličinu glavnog fonta.',
-
-    'K_SMALL_RATIO' => 'Faktor za mali font',
-    'K_SMALL_RATIO_INFO' => 'Faktor smanjenja za mali font',
-
-    'HEAD_MAGNIFICATION' => 'Uveličavanje Zaglavlja',
-    'HEAD_MAGNIFICATION_INFO' => 'Faktor uveličavanja za naslove.',
-
-    'PDF_IMAGE_SCALE_RATIO' => 'Odnos razmere slike',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Razmera koja se koristi za proporcionalno smanjenje ili uvećanje slika',
-
-    'PDF_UNIT' => 'Jedinica',
-    'PDF_UNIT_INFO' => 'jedinica mere dokumenta',
 	'PDF_GD_WARNING'=>'Nemate instaliranu GD biblioteku za PHP. Bez instalirane GD biblioteke, samo logo u JPEG formatu može biti prikazan u PDF dokumentima.',
     'ERR_EZPDF_DISABLE'=>'Upozorenje: Klasa EZPDF je onemogućena u config tabeli i podešena je kao PDF klasa. Molim vas "Sačuvajte" ovaj obrazac da podesite TCPDF kao PDF Klasu i vratite je u stabilno stanje.',
     'LBL_IMG_RESIZED'=>"(promenjena veličina za prikaz)",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => 'Dodaj PDF Font',
     'LBL_PDF_PATCH' => 'Zakrpa',
-    'LBL_PDF_PATCH_INFO' => 'Prilagođena modifikacija kodiranja. Upišite PHP niz.<br>Primer :<br>ISO-8859-1 ne sadrži euro simbol. Da ga dodate na poziciji 164, upišite "array(164=>\\&#39;Euro\\&#39;)".',
     'LBL_PDF_ENCODING_TABLE' => 'Tabela kodiranja',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Naziv tabele kodiranja.<br>Ova opcija je ignorisana za TrueType Unicode, OpenType Unicode i simbolične fontove.<br>Kodiranje definiše vezu između iz koda (od 0 do 255) i karaktera sadržanih u fontu.<br>Prvih 128 su nepromenljivi i odgovaraju ASCII-u.',
     'LBL_PDF_FONT_FILE' => 'Font Fajl',

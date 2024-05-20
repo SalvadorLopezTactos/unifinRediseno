@@ -59,9 +59,9 @@ class LdapUserChecker extends SugarUserChecker
 
     /**
      * load sugar user
-     * @param User $user
+     * @param UserInterface $user
      */
-    protected function loadSugarUser(User $user)
+    protected function loadSugarUser(UserInterface $user)
     {
         try {
             $sugarUser = $this->localProvider->loadUserByUsername($user->getUsername())->getSugarUser();

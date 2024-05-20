@@ -77,7 +77,7 @@ function smarty_function_sugar_translate($params, &$smarty)
 		return '';
 	}
 
-	$module = (isset($params['module']))? $params['module']: '';
+    $module = $params['module'] ?? '';
     if(isset($params['select'])){
     	if(empty($params['select']))
 		    $value = "";

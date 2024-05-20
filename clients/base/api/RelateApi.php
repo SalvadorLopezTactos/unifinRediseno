@@ -200,7 +200,7 @@ class RelateApi extends FilterApi {
 
         $api->action = 'list';
 
-        list($args, $q, $options, $linkSeed) = $this->filterRelatedSetup($api, $args);
+        [$args, $q, $options, $linkSeed] = $this->filterRelatedSetup($api, $args);
 
         return $this->runQuery($api, $args, $q, $options, $linkSeed);
     }
@@ -210,7 +210,7 @@ class RelateApi extends FilterApi {
         $api->action = 'list';
 
         /** @var SugarQuery $q */
-        list(, $q) = $this->filterRelatedSetup($api, $args);
+        [, $q] = $this->filterRelatedSetup($api, $args);
 
         $q->select->selectReset()->setCountQuery();
         $q->limit = null;
@@ -246,7 +246,7 @@ class RelateApi extends FilterApi {
         $args['view'] = '';
 
         /** @var SugarQuery $q */
-        list(, $q) = $this->filterRelatedSetup($api, $args);
+        [, $q] = $this->filterRelatedSetup($api, $args);
         $q->orderByReset();
         $stmt = $q->compile()->execute();
         $count = count($stmt->fetchFirstColumn());

@@ -30,9 +30,7 @@
                     {{#if avatar}}
                     <img class="avatar" src="{{avatar}}" alt="{{name}}" />
                     {{else}}
-                    <span class="label label-module label-{{module}}" rel="tooltip" title="{{moduleIconToolTip module}}">
-                        {{moduleIconLabel module}}
-                    </span>
+                        {{moduleLabel module 'sm'  rel="tooltip" title=(moduleIconToolTip module)}}
                     {{/if}}
                 </div>
                 <div class="name">

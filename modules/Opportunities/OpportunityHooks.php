@@ -191,30 +191,30 @@ class OpportunityHooks extends AbstractForecastHooks
             $closed_won = static::$settings['sales_stage_won'];
             $closed_lost = static::$settings['sales_stage_lost'];
 
-            $wonBeans = $bean->get_linked_beans(
-                    'revenuelineitems',
-                    'RevenueLineItems',
-                    array(),
-                    0,
-                    -1,
-                    0,
-                "sales_stage in ('" . implode("', '", $closed_won) . "')"
+            $linked_beans_won = $bean->get_linked_beans(
+                'revenuelineitems',
+                'RevenueLineItems',
+                array(),
+                0,
+                -1,
+                0,
+                "sales_stage in ('" . join("', '", $closed_won) . "')"
             );
-            $won_rlis = is_countable($wonBeans) ? count($wonBeans) : 0;
+            $won_rlis = is_countable($linked_beans_won) ? count($linked_beans_won) : 0;
 
-            $lostBeans = $bean->get_linked_beans(
-                    'revenuelineitems',
-                    'RevenueLineItems',
-                    array(),
-                    0,
-                    -1,
-                    0,
-                "sales_stage in ('" . implode("', '", $closed_lost) . "')"
+            $linked_beans_lost = $bean->get_linked_beans(
+                'revenuelineitems',
+                'RevenueLineItems',
+                array(),
+                0,
+                -1,
+                0,
+                "sales_stage in ('" . join("', '", $closed_lost) . "')"
             );
-            $lost_rlis = is_countable($lostBeans) ? count($lostBeans) : 0;
+            $lost_rlis = is_countable($linked_beans_lost) ? count($linked_beans_lost) : 0;
 
-            $totalBeans = $bean->get_linked_beans('revenuelineitems', 'RevenueLineItems');
-            $total_rlis = is_countable($totalBeans) ? count($totalBeans) : 0;
+            $linked_beans = $bean->get_linked_beans('revenuelineitems', 'RevenueLineItems');
+            $total_rlis = is_countable($linked_beans) ? count($linked_beans) : 0;
 
             if ($total_rlis > ($won_rlis + $lost_rlis)) {
                 // still in progress

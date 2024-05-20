@@ -18,7 +18,7 @@
  ********************************************************************************/
 
 
-$tabs_def = urldecode(isset($_REQUEST['display_tabs_def']) ? $_REQUEST['display_tabs_def'] : '');
+$tabs_def = urldecode($_REQUEST['display_tabs_def'] ?? '');
 $DISPLAY_ARR = array();
 parse_str($tabs_def,$DISPLAY_ARR);
 

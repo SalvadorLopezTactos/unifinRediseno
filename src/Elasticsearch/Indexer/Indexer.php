@@ -29,7 +29,7 @@ class Indexer
      * the max size of text can be indexed by elastic search
      * see: https://www.elastic.co/guide/en/elasticsearch/reference/current/ignore-above.html
      */
-    const MAX_SIZE_OF_TEXT = 32766;
+    public const MAX_SIZE_OF_TEXT = 32766;
 
     /**
      * @var \Sugarcrm\Sugarcrm\Elasticsearch\Container

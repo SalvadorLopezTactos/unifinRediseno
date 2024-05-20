@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => 'Ajalugu',
     'LBL_PMSE_LABEL_NOTES' => 'Show Notes',
     'LBL_PMSE_LABEL_ADD_NOTES' => 'Kuva märkused',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'Saada DocuSigni',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => 'Valige ...',
     'LBL_PMSE_FORM_LABEL_USER' => 'Kasutaja',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => 'Kas olete kindel, et soovite selle protsessi kinnitada?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => 'Kas olete kindel, et soovite seda protsessi hüljata?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => 'Kas olete kindel, et soovite selle protsessi suunata?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => 'Kas olete kindel, et soovite selle protsessi DocuSigni saata?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => 'Protsess on edukalt kinnitatud',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => 'Protsess on edukalt hüljatud',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => 'Protsess on edukalt marsruuditud',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => 'Protsessi saatmine DocuSigni õnnestus',
     'LBL_PA_PROCESS_CLOSED' => 'Protsess, mida püüate vaadata, on suletud.',
     'LBL_PA_PROCESS_UNAVAILABLE' => 'Protsess, mida püüate vaadata, pole hetkel saadaval.',
 

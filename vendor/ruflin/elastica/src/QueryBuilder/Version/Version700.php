@@ -51,6 +51,7 @@ class Version700 extends Version
         'span_term',
         'term',
         'terms',
+        'terms_set',
         'wildcard',
         'exists',
         'percolate',
@@ -63,16 +64,21 @@ class Version700 extends Version
         'sum_bucket',
         'avg',
         'avg_bucket',
+        'derivative',
         'stats',
+        'stats_bucket',
         'extended_stats',
         'value_count',
         'percentiles',
+        'percentiles_bucket',
         // 'percentile_ranks', // Not implemented
         'cardinality',
+        'cumulative_sum',
         'geo_bounds',
         'top_hits',
         'scripted_metric',
-        'global_agg', // original: global
+        'global',
+        'global_agg', // Deprecated
         'filter',
         'filters',
         'missing',
@@ -90,6 +96,9 @@ class Version700 extends Version
         'geohash_grid',
         'bucket_script',
         'serial_diff',
+        'weighted_avg',
+        'composite',
+        'normalize',
     ];
 
     protected $suggesters = [

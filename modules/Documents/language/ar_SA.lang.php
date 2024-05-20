@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'قالب؟ :',
     'LBL_DET_TEMPLATE_TYPE'=>'نوع المستند:',
     'LBL_TEAM'=> 'الفريق:',
+    'LBL_IS_SHARED' => 'متاح خارجيًا:',
     'LBL_DOC_DESCRIPTION'=>'الوصف:',
     'LBL_DOC_ACTIVE_DATE'=> 'تاريخ النشر:',
     'LBL_DOC_EXP_DATE'=> 'تاريخ انتهاء الصلاحية:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'إرسال إلى DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'مزامنة مع Google Drive',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'مزامنة الكل مع Google Drive',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'مزامنة الكل مع OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'مزامنة مع OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'مزامنة الكل مع Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'مزامنة مع Dropbox',
 );

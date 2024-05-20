@@ -109,7 +109,8 @@ class Employee extends Person {
 		return TRUE;
 	}
 
-	function get_list_view_data(){
+    public function get_list_view_data($filter_fields = [])
+    {
 
         $user_fields = parent::get_list_view_data();
 

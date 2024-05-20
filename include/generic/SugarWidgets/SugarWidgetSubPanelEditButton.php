@@ -12,6 +12,10 @@
 
 class SugarWidgetSubPanelEditButton extends SugarWidgetField
 {
+    /**
+     * @var mixed|\SugarBean|null
+     */
+    public $bean;
     protected static $defs = array();
     protected static $edit_icon_html;
 

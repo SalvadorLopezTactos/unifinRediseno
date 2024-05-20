@@ -641,32 +641,15 @@ Decline this call
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
-        'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
-
-<p>You may review this&nbsp;$module_name at:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
-
-You may review this $module_name at:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'Scheduled Report Emails',
         'subject' => 'Scheduled Report: $report_name as of $report_time',
         'description' => 'This template is used when the System sends a scheduled report to a user.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Hello $assigned_user,<br></p>
+<p>Attached is an auto generated report that has been scheduled for you.<br></p>
+<p>Report Name: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Report Run Date and Time: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Hello $assigned_user,
@@ -695,21 +678,6 @@ You may review this record at: <$record_url>
 Please log in to Sugar to view the comment.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'New account information',
-        'description' => 'This template is used when the System Administrator sends a new password to a user.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Here is your account username and temporary password:</p><p>Username : $contact_user_user_name </p><p>Password : $contact_user_user_hash </p><br><p><a href="$config_site_url">$config_site_url</a></p><br><p>After you log in using the above password, you may be required to reset the password to one of your own choice.</p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
-        'txt_body' =>
-'
-Here is your account username and temporary password:
-Username : $contact_user_user_name
-Password : $contact_user_user_hash
-
-$config_site_url
-
-After you log in using the above password, you may be required to reset the password to one of your own choice.',
-        'name' => 'System-generated password email',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Reset your account password',
         'description' => "This template is used to send a user a link to click to reset the user's account password.",

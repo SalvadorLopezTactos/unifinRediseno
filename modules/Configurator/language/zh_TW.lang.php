@@ -41,7 +41,6 @@ $mod_strings = array (
 	'EXPORT_DELIMITER' => 'Export Delimiter',*/
 	'IMAGES'=>'標誌',
 	'LBL_ADMIN_WIZARD' => '管理員精靈',
-	'LBL_ALLOW_USER_TABS' => '允許使用者隱藏標籤',
 	'LBL_CONFIGURE_SETTINGS_TITLE' => '系統設定',
 	'LBL_ENABLE_MAILMERGE' => '啟用電子郵件合併？',
 	'LBL_LOGVIEW' => '檢視記錄',
@@ -216,11 +215,7 @@ $mod_strings = array (
 	'vCAL_HELP' => '使用此設定確定在發布通話和會議閒/忙資訊當前日期之前的時間段。<BR>如需關閉閒/忙資訊發布，請輸入「0」，最小值為 1 個月；最大值為 12 個月。',
     'LBL_PDFMODULE_NAME' => '報表 PDF 範本',
     'SUGARPDF_BASIC_SETTINGS' => '文件屬性',
-    'SUGARPDF_ADVANCED_SETTINGS' => '進階設定',
     'SUGARPDF_LOGO_SETTINGS' => '圖像',
-
-    'PDF_CREATOR' => 'PDF 建立者',
-    'PDF_CREATOR_INFO' => '定義文件的建立者。<br>通常為產生該 PDF 文件應用程式的名稱。',
 
     'PDF_AUTHOR' => '作者',
     'PDF_AUTHOR_INFO' => '文件屬性中顯示作者。',
@@ -231,8 +226,11 @@ $mod_strings = array (
     'PDF_NEW_HEADER_LOGO' => '為報價單選取圖像',
     'PDF_NEW_HEADER_LOGO_INFO' => '檔案格式可以為 .jpg 或 .png（EZPDF 只能為 .jpg）<BR>建議大小為 867x60 px。',
 
-    'PDF_HEADER_LOGO_WIDTH' => '報價單圖像寬度',
-    'PDF_HEADER_LOGO_WIDTH_INFO' => '變更上載圖像在報價單 PDF 文件中的顯示比例（僅限 TCPDF）',
+    'PDF_TITLE' => '標題',
+    'PDF_TITLE_INFO' => '標題將在文件屬性中顯示。',
+
+    'PDF_SUBJECT' => '主題',
+    'PDF_SUBJECT_INFO' => '主題將在文件屬性中顯示。',
 
     'PDF_SMALL_HEADER_LOGO' => '當前圖像',
     'PDF_SMALL_HEADER_LOGO_INFO' => '此圖像顯示在 PDF 文件頁面的頁首',
@@ -240,66 +238,9 @@ $mod_strings = array (
     'PDF_NEW_SMALL_HEADER_LOGO' => '選取新圖像',
     'PDF_NEW_SMALL_HEADER_LOGO_INFO' => '選擇一張圖像替換當前圖像。檔案格式可以為 .jpg 或 .png（EZPDF 只能為 .jpg）。建議大小為 212x40 px。',
 
-    'PDF_SMALL_HEADER_LOGO_WIDTH' => '報表圖像寬度',
-    'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => '變更上載圖像在報表 PDF 文件中的顯示比例（僅限 TCPDF）',
-
-
-    'PDF_HEADER_STRING' => '頁首字串',
-    'PDF_HEADER_STRING_INFO' => '頁首描述字串',
-
-    'PDF_HEADER_TITLE' => '標頭標題',
-    'PDF_HEADER_TITLE_INFO' => '文件頁首作為標題打印的字串',
-
-    'PDF_FILENAME' => '預設檔案名',
-    'PDF_FILENAME_INFO' => '已產生 PDF 檔案的預設檔案名',
-
-    'PDF_TITLE' => '標題',
-    'PDF_TITLE_INFO' => '標題將在文件屬性中顯示。',
-
-    'PDF_SUBJECT' => '主題',
-    'PDF_SUBJECT_INFO' => '主題將在文件屬性中顯示。',
-
     'PDF_KEYWORDS' => '關鍵字',
     'PDF_KEYWORDS_INFO' => '關聯「關鍵字」與文件（通常採用「關鍵字 1 關鍵字 2...」的格式）',
 
-    'PDF_COMPRESSION' => '壓縮',
-    'PDF_COMPRESSION_INFO' => '啟用或停用頁面壓縮。<br>啟用時，每個頁面的內部表達均被壓縮，所產生文檔的壓縮比率為 2。',
-
-    'PDF_JPEG_QUALITY' => 'JPEG 品質 (1-100)',
-    'PDF_JPEG_QUALITY_INFO' => '設定預設 JPEG 壓縮品質 (1-100)',
-
-    'PDF_PDF_VERSION' => 'PDF 版本',
-    'PDF_PDF_VERSION_INFO' => '設定 PDF 版本（參閱 PDF 手冊了解有效值）。',
-
-    'PDF_PROTECTION' => '文件保護',
-    'PDF_PROTECTION_INFO' => '設定文件保護<br>- 副本：將文字和圖像複製到剪貼簿<br>- 列印：列印文件<br>- 修改：修改文件（註釋和表單除外）<br>註釋表單：新增註釋和表單<br>注意：文件保護主要針對擁有 Acrobat 產品完整版權的使用者做出的修改。',
-
-    'PDF_USER_PASSWORD' => '使用者密碼',
-    'PDF_USER_PASSWORD_INFO' => '如未設定密碼，文件將正常打開。<br>如設定使用者密碼，PDF 檢視器將在顯示文件之前詢問密碼。<br>如果與使用者密碼不一致，主密碼可用來獲取全部存取權限。',
-
-    'PDF_OWNER_PASSWORD' => '擁有者密碼',
-    'PDF_OWNER_PASSWORD_INFO' => '如未設定密碼，文件將正常打開。<br>如設定使用者密碼，PDF 檢視器將在顯示文件之前詢問密碼。<br>如果與使用者密碼不一致，主密碼可用來獲取全部存取權限。',
-
-    'PDF_ACL_ACCESS' => '存取控制',
-    'PDF_ACL_ACCESS_INFO' => '產生 PDF 的預設存取控制。',
-
-    'K_CELL_HEIGHT_RATIO' => '儲存格高度比',
-    'K_CELL_HEIGHT_RATIO_INFO' => '如果儲存格高度低於（字體高度 x 儲存格高度比），則（字體高度 x 儲存格高度比）將作為儲存格高度。<br>如未設定儲存格高度，（字體高度 x 儲存格高度比）亦可作為儲存格高度。',
-
-    'K_TITLE_MAGNIFICATION' => '標題放大',
-    'K_TITLE_MAGNIFICATION_INFO' => '標題放大僅針對主字型大小。',
-
-    'K_SMALL_RATIO' => '小字型因數',
-    'K_SMALL_RATIO_INFO' => '小字型縮減因數',
-
-    'HEAD_MAGNIFICATION' => '頁首放大',
-    'HEAD_MAGNIFICATION_INFO' => '標題放大因數。',
-
-    'PDF_IMAGE_SCALE_RATIO' => '圖像縮放比例',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => '用於縮放圖像的比例',
-
-    'PDF_UNIT' => '單位',
-    'PDF_UNIT_INFO' => '文件測量單位',
 	'PDF_GD_WARNING'=>'您沒有為 PHP 安裝 GD 庫。沒有 GD 庫的支援，只有 JPEG 格式的標誌可在 PDF 文件正確顯示。',
     'ERR_EZPDF_DISABLE'=>'警告：EZPDF 類別已在配置表中被停用並已設置為 PDF 類別。請保存此表格，將 TCPDF 設定為 PDF 類別，並返回穩定狀態。',
     'LBL_IMG_RESIZED'=>"（按照顯示器重新調整）",
@@ -358,7 +299,6 @@ $mod_strings = array (
 
     'LBL_ADDFONT_TITLE' => '新增 PDF 字型',
     'LBL_PDF_PATCH' => '修補',
-    'LBL_PDF_PATCH_INFO' => '自訂編碼修改。編寫 PHP 陣列。<br>範例：<br>ISO-8859-1 不包含歐元符號。寫入 "array(164=>\\\'Euro\\\')" 將其新增至位置 164。',
     'LBL_PDF_ENCODING_TABLE' => '編碼表',
     'LBL_PDF_ENCODING_TABLE_INFO' => '編碼表名稱。<br>TrueType Unicode、OpenType Unicode 和 Symbolic 字型將忽略此選項。<br>編碼定義了編碼（從 0 到 255）和字型所包含的字元之間的關聯。<br>前 128 位是固定的，與 ASCII 對應。',
     'LBL_PDF_FONT_FILE' => '字型檔案',

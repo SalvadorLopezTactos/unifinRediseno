@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
- * @coversDefaultClass Sugarcrm\IdentityProvider\Authentication\Provider\MixedAuthenticationProvider
+ * @coversDefaultClass \Sugarcrm\IdentityProvider\Authentication\Provider\MixedAuthenticationProvider
  */
 class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -135,7 +135,7 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateWithoutAnySuitableToken()
     {
-        $this->localToken->method('getProviderKey')->willReturn('providerKey');
+        $this->localToken->method('getFirewallName')->willReturn('providerKey');
         $this->mixedToken->setAttribute('mixedAuthTokens', [$this->localToken]);
         $this->provider->authenticate($this->mixedToken);
     }
@@ -146,11 +146,11 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
     public function testSuccessAuthenticateThroughProvider()
     {
         $resultToken = $this->createMock(UsernamePasswordToken::class);
-        $this->localToken->method('getProviderKey')
+        $this->localToken->method('getFirewallName')
                          ->willReturn(Providers::PROVIDER_KEY_LOCAL);
         $this->localProvider->method('supports')->with($this->localToken)->willReturn(true);
         $this->localProvider->expects($this->once())
-                            ->method('authenticate')
+                                ->method('authenticate')
                             ->with($this->localToken)
                             ->willReturn($resultToken);
 
@@ -165,7 +165,7 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testFailedAuthenticateThroughProvider()
     {
-        $this->localToken->method('getProviderKey')
+        $this->localToken->method('getFirewallName')
                          ->willReturn(Providers::PROVIDER_KEY_LOCAL);
         $this->localProvider->method('supports')->with($this->localToken)->willReturn(true);
         $this->localProvider->expects($this->once())
@@ -184,9 +184,9 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
     {
         $resultToken = $this->createMock(UsernamePasswordToken::class);
 
-        $this->localToken->method('getProviderKey')
+        $this->localToken->method('getFirewallName')
             ->willReturn(Providers::PROVIDER_KEY_LOCAL);
-        $this->ldapToken->method('getProviderKey')
+        $this->ldapToken->method('getFirewallName')
             ->willReturn(Providers::PROVIDER_KEY_LDAP);
 
         $this->localProvider->method('supports')->willReturnMap(
@@ -222,9 +222,9 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testSuccessAuthenticateWithFirstTokenWin()
     {
-        $this->localToken->method('getProviderKey')
+        $this->localToken->method('getFirewallName')
             ->willReturn(Providers::PROVIDER_KEY_LOCAL);
-        $this->ldapToken->method('getProviderKey')
+        $this->ldapToken->method('getFirewallName')
             ->willReturn(Providers::PROVIDER_KEY_LDAP);
 
         $this->localProvider->method('supports')->willReturnMap(

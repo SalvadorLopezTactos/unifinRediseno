@@ -134,6 +134,7 @@ class ExplainCommand extends Command implements InstanceModeInterface
 
         $output->writeln($query);
         $output->writeln($result);
+        return 0;
     }
 
     /**

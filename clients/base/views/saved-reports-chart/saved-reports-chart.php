@@ -25,6 +25,7 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
                 'blacklist' => [
                     'module' => 'Administration',
                 ],
+                'view' => 'DEPRECATED_DASHLET',
             ],
         )
     ),
@@ -36,9 +37,9 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
                 "icon" => "sicon-chevron-up",
                 "action" => "toggleMinify",
                 "tooltip" => "LBL_DASHLET_TOGGLE",
-                "is_chart" => true,
             ),
             array(
+                'alwaysOnDisplay' => true,
                 'dropdown_buttons' => array(
                     array(
                         'type' => 'dashletaction',
@@ -49,13 +50,13 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
                         'type' => 'dashletaction',
                         'action' => 'viewReportClicked',
                         'label' => 'LBL_DASHLET_CONFIG_VIEW_REPORT',
-                        'review' => true,
+                        'alwaysOnDisplay' => true,
                     ),
                     array(
                         'type' => 'dashletaction',
                         'action' => 'refreshClicked',
                         'label' => 'LBL_DASHLET_REFRESH_LABEL',
-                        'review' => true,
+                        'alwaysOnDisplay' => true,
                     ),
                     array(
                         'type' => 'dashletaction',

@@ -80,7 +80,7 @@ class DataPrivacyHooks
         $stmt = $conn->executeQuery($sql, [$jobName, $queued, $executePending]);
         while ($jobInfo = $stmt->fetchAssociative()) {
             $exDateTime = $jobInfo['execute_time'];
-            $data = json_decode(html_entity_decode($jobInfo['data']), true);
+            $data = json_decode(html_entity_decode($jobInfo['data'], ENT_COMPAT), true);
             $dataPrivacyIds = $data['dataPrivacyIds'];
             if ((is_countable($dataPrivacyIds) ? count($dataPrivacyIds) : 0) < $maxDataPrivacyRecordsPerJob) {
                 $dataPrivacyIds[] = $dp->id;

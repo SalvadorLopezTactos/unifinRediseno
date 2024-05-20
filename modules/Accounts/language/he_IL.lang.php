@@ -30,13 +30,20 @@ $mod_strings = array (
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת חשבונות',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת חשבונות',
     'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס חשבונות',
-    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'פרטי חשבון',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'לוח מחוונים של פוקוס חשבונות - מסוף',
     'LBL_NEXT_RENEWAL_DATE' => 'תאריך החידוש הבא',
     'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'תאריך החידוש הבא',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'שם חשבון/ענף',
     'LBL_RENEWALS_CONSOLE_LOCATION' => 'מיקום',
     'LBL_PURCHASES' => 'רכישות',
     'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ציר הזמן בחשבון',
+
+    // KPI Metrics
+    'LBL_ORGANIZE' => 'ארגון',
+    'LBL_CREATE_NEW' => 'צור חדש',
+    'LBL_MANAGE' => 'ניהול',
+    'LBL_SEE_DETAILS' => 'צפה בפרטים',
+    'LBL_HIDE_NEW' => 'הסתר',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'טבלאות',
@@ -207,4 +214,7 @@ $mod_strings = array (
 2. לחץ על "שמור" כדי לסיים את הרשומה החדשה ולחזור לעמוד הקודם.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'דוחות לחשבון',
+
+// External Users Subpanel
+'LBL_EXTERNAL_USERS_SUBPANEL_TITLE' => 'משתמשים חיצוניים',
 );

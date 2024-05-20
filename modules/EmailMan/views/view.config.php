@@ -137,8 +137,8 @@ class ViewConfig extends SugarView
         );
         $this->ss->assign("notify_fromname", $focus->settings['notify_fromname']);
         $this->ss->assign("notify_allow_default_outbound_on", (!empty($focus->settings['notify_allow_default_outbound']) && $focus->settings['notify_allow_default_outbound']) ? "checked='checked'" : "");
-        $this->ss->assign("eapm_id", isset($focus->settings['eapm_id']) ? $focus->settings['eapm_id'] : '');
-        $this->ss->assign("authorized_account", isset($focus->settings['authorized_account']) ? $focus->settings['authorized_account'] : '');
+        $this->ss->assign("eapm_id", $focus->settings['eapm_id'] ?? '');
+        $this->ss->assign("authorized_account", $focus->settings['authorized_account'] ?? '');
         $this->ss->assign("mail_authtype", $focus->settings['mail_authtype']);
         $this->ss->assign("mail_smtptype", $focus->settings['mail_smtptype']);
         $this->ss->assign("mail_smtpserver", $focus->settings['mail_smtpserver']);

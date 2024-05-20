@@ -62,7 +62,7 @@ class One2OneBeanRelationship extends One2MBeanRelationship
         $targetTable = $linkIsLHS ? $this->def['rhs_table'] : $this->def['lhs_table'];
         $targetTableWithAlias = $targetTable;
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
-        $join_type= isset($params['join_type']) ? $params['join_type'] : ' INNER JOIN ';
+        $join_type= $params['join_type'] ?? ' INNER JOIN ';
 
         $join = '';
 
@@ -114,7 +114,7 @@ class One2OneBeanRelationship extends One2MBeanRelationship
             $linkIsLHS = !$linkIsLHS;
         }
 
-        $startingTable = isset($options['myAlias']) ? $options['myAlias'] : '';
+        $startingTable = $options['myAlias'] ?? '';
         if (empty($startingTable)) {
             $startingTable = $linkIsLHS ? $this->def['lhs_table'] : $this->def['rhs_table'];
         }
@@ -125,7 +125,7 @@ class One2OneBeanRelationship extends One2MBeanRelationship
         $targetKey = $linkIsLHS ? $this->def['rhs_key'] : $this->def['lhs_key'];
         $targetModule = $linkIsLHS ? $this->def['rhs_module'] : $this->def['lhs_module'];
 
-        $join_type= isset($options['joinType']) ? $options['joinType'] : 'INNER';
+        $join_type= $options['joinType'] ?? 'INNER';
 
         $joinParams = array(
             'joinType' => $join_type,

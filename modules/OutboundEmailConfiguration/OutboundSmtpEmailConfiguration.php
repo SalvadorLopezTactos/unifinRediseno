@@ -20,9 +20,9 @@
 class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
 {
     // constants used for documenting which security protocol configurations are valid
-    const SecurityProtocolNone = "";
-    const SecurityProtocolSsl  = "ssl";
-    const SecurityProtocolTls  = "tls";
+    public const SecurityProtocolNone = "";
+    public const SecurityProtocolSsl  = "ssl";
+    public const SecurityProtocolTls  = "tls";
 
     // private members
     private $host;             // the hostname of the SMTP server to use
@@ -86,7 +86,7 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
             );
         }
 
-        $this->host = trim($host);
+        $this->host = trim((string)$host);
     }
 
     /**
@@ -255,7 +255,7 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
             );
         }
 
-        $this->authType = trim($authType);
+        $this->authType = trim((string)$authType);
     }
 
     /**
@@ -284,7 +284,7 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
             );
         }
 
-        $this->eapmId = trim($eapmId);
+        $this->eapmId = trim((string)$eapmId);
     }
 
     /**

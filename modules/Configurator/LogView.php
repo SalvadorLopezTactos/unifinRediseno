@@ -32,16 +32,16 @@ set_time_limit(180);
 <input type="hidden" name="action" value="LogView">
 <input type="hidden" name="module" value="Configurator">
 <input type="hidden" name="doaction" value="">
-<input type="button" onclick="document.logview.doaction.value='all';document.logview.submit()" name="all" value="<?= htmlspecialchars($mod_strings['LBL_ALL'])?>">
-<input type="button" onclick="document.logview.doaction.value='mark';document.logview.submit()" name="mark" value="<?= htmlspecialchars($mod_strings['LBL_MARK_POINT'])?>">
-<input type="submit" name="display" value="<?= htmlspecialchars($mod_strings['LBL_REFRESH_FROM_MARK'])?>">
-<input type="button" onclick="document.logview.doaction.value='next';document.logview.submit()" name="next" value="<?= htmlspecialchars($mod_strings['LBL_NEXT_'])?>">
+<input type="button" onclick="document.logview.doaction.value='all';document.logview.submit()" name="all" value="<?= htmlspecialchars($mod_strings['LBL_ALL'], ENT_COMPAT)?>">
+<input type="button" onclick="document.logview.doaction.value='mark';document.logview.submit()" name="mark" value="<?= htmlspecialchars($mod_strings['LBL_MARK_POINT'], ENT_COMPAT)?>">
+<input type="submit" name="display" value="<?= htmlspecialchars($mod_strings['LBL_REFRESH_FROM_MARK'], ENT_COMPAT)?>">
+<input type="button" onclick="document.logview.doaction.value='next';document.logview.submit()" name="next" value="<?= htmlspecialchars($mod_strings['LBL_NEXT_'], ENT_COMPAT)?>">
 <br><br>
-    <?= htmlspecialchars($mod_strings['LBL_SEARCH']) ?><input type="text" name="filter" value="<?= htmlspecialchars($filter) ?>">&nbsp;
+    <?= htmlspecialchars($mod_strings['LBL_SEARCH'], ENT_COMPAT) ?><input type="text" name="filter" value="<?= htmlspecialchars($filter, ENT_COMPAT) ?>">&nbsp;
     <?php //@codingStandardsIgnoreStart ?>
-    <?= htmlspecialchars($mod_strings['LBL_REG_EXP']) ?><input type="checkbox" name="reg_ex"<?php if ($reg_ex) :?> checked="checked"<?php endif; ?>>
+    <?= htmlspecialchars($mod_strings['LBL_REG_EXP'], ENT_COMPAT) ?><input type="checkbox" name="reg_ex"<?php if ($reg_ex) :?> checked="checked"<?php endif; ?>>
     <br>
-    <?= htmlspecialchars($mod_strings['LBL_IGNORE_SELF']) ?> <input type="checkbox" name="ignore_self"<?php if ($ignore_self) :?> checked="checked"><?php endif; ?>>
+    <?= htmlspecialchars($mod_strings['LBL_IGNORE_SELF'], ENT_COMPAT) ?> <input type="checkbox" name="ignore_self"<?php if ($ignore_self) :?> checked="checked"><?php endif; ?>>
     <?php //@codingStandardsIgnoreEnd ?>
 </form>
 <?php
@@ -72,7 +72,7 @@ $doaction =(!empty($_REQUEST['doaction']))?$_REQUEST['doaction']:'';
 
 switch($doaction){
 	case 'mark':
-        echo '<h3>' . htmlspecialchars($mod_strings['LBL_MARKING_WHERE_START_LOGGING']) . '</h3><br>';
+        echo '<h3>' . htmlspecialchars($mod_strings['LBL_MARKING_WHERE_START_LOGGING'], ENT_COMPAT) . '</h3><br>';
 		$_SESSION['log_file_size'] = filesize($logFile);
 		break;
 	case 'next':
@@ -91,13 +91,13 @@ switch($doaction){
 
 
 if (!empty ($_REQUEST['display'])) {
-    echo '<h3>' . htmlspecialchars($mod_strings['LBL_DISPLAYING_LOG']) . '</h3>';
+    echo '<h3>' . htmlspecialchars($mod_strings['LBL_DISPLAYING_LOG'], ENT_COMPAT) . '</h3>';
 	$process_id =  getmypid();
 
-    echo htmlspecialchars($mod_strings['LBL_YOUR_PROCESS_ID'] . ' [' . $process_id . ']');
-    echo '<br>' . htmlspecialchars($mod_strings['LBL_YOUR_IP_ADDRESS'] . ' ' . $_SERVER['REMOTE_ADDR']);
+    echo htmlspecialchars($mod_strings['LBL_YOUR_PROCESS_ID'] . ' [' . $process_id . ']', ENT_COMPAT);
+    echo '<br>' . htmlspecialchars($mod_strings['LBL_YOUR_IP_ADDRESS'] . ' ' . $_SERVER['REMOTE_ADDR'], ENT_COMPAT);
 	if($ignore_self){
-        echo htmlspecialchars($mod_strings['LBL_IT_WILL_BE_IGNORED']);
+        echo htmlspecialchars($mod_strings['LBL_IT_WILL_BE_IGNORED'], ENT_COMPAT);
 	}
 	if (empty ($_SESSION['log_file_size'])) {
 		$_SESSION['log_file_size'] = 0;
@@ -109,7 +109,7 @@ if (!empty ($_REQUEST['display'])) {
 		$pos = $_SESSION['log_file_size'] - $cur_size;
 	}
 	if($_SESSION['log_file_size'] == $cur_size){
-        echo '<br>' . htmlspecialchars($mod_strings['LBL_LOG_NOT_CHANGED']) . '<br>';
+        echo '<br>' . htmlspecialchars($mod_strings['LBL_LOG_NOT_CHANGED'], ENT_COMPAT) . '<br>';
 	}else{
 		$fp = sugar_fopen($logFile, 'r');
 		fseek($fp, $pos , SEEK_END);

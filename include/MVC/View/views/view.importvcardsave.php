@@ -26,6 +26,7 @@ class ViewImportvcardsave extends SugarView
      */
     public function display()
     {
+        $record = null;
         $redirect = "index.php?action=Importvcard&module={$_REQUEST['module']}";
 
         if (!empty($_FILES['vcard'])

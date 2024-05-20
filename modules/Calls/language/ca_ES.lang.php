@@ -194,4 +194,10 @@ Per crear un {{calls_singular_module}}:
     - Feu clic a "Selecciona un convidat" per afegir un usuari, contacte o client potencial al {{calls_singular_module}}.
     - Feu clic a la icona "més" a la dreta de "Selecciona un convidat" per crear un convidat de {{calls_singular_module}} com a nou registre de Sugar.
 3. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => "És una trucada Smart Guide",
+    'LBL_PARENT_CALL_OF_TASK_REL' => 'Tasques secundàries',
+    'LBL_PARENT_CALL_OF_MEETING_REL' => 'Reunions secundàries',
+    'LBL_PARENT_CALL_OF_CALL_REL' => 'Trucades secundàries',
 );

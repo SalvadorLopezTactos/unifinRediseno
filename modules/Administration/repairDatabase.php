@@ -119,7 +119,7 @@ HTML;
                     // repair table indices only in case if the table previously existed, otherwise the table
                     // has already been created with indices despite skip_index_rebuild
                     if ($tableExists) {
-                        $compareIndices = isset($indices[$tableName]) ? $indices[$tableName] : array();
+                        $compareIndices = $indices[$tableName] ?? array();
                         $statement = $db->alterTableIndices(
                             $tableName,
                             $focus->getFieldDefinitions(),

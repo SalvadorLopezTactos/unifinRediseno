@@ -60,7 +60,7 @@ class PdfManager extends Basic
         return false;
     }
 
-    public function get_list_view_data() 
+    public function get_list_view_data($filter_fields = [])
     {
         $the_array = parent::get_list_view_data();
         $the_array['BASE_MODULE'] = PdfManagerHelper::getModuleName($this->base_module);

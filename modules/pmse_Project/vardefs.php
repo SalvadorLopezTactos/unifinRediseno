@@ -13,6 +13,8 @@
 
 $dictionary['pmse_Project'] = array(
     'table' => 'pmse_project',
+    'color' => 'orange',
+    'icon' => 'sicon-process-definitions-lg',
     'archive' => false,
     'audited' => false,
     'activity_enabled' => true,
@@ -271,6 +273,21 @@ $dictionary['pmse_Project'] = array(
             'calculated' => false,
             'studio' => 'visible',
             'min' => '1',
+        ),
+    ),
+    'duplicate_check' => array(
+        'enabled' => true,
+        'FilterDuplicateCheck' => array(
+            'filter_template' => array(
+                array(
+                    '$or' => array(
+                        array('name' => array('$equals' => '$name')),
+                    ),
+                ),
+            ),
+            'ranking_fields' => array(
+                array('in_field_name' => 'name', 'dupe_field_name' => 'name'),
+            ),
         ),
     ),
     'relationships' => array(),

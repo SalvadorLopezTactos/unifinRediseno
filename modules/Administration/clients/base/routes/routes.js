@@ -32,6 +32,27 @@
                 }
             },
             {
+                name: 'module-names-and-icons',
+                route: ':Administration/module-names-and-icons',
+                callback: function(module) {
+                    let prevLayout = app.controller.context.get('layout');
+                    if (prevLayout && !_.contains(['login', 'bwc'], prevLayout)) {
+                        app.drawer.open({
+                            layout: 'module-names-and-icons-drawer',
+                            context: {
+                                module: module,
+                                fromRouter: true
+                            }
+                        });
+                        return;
+                    }
+                    app.controller.loadView({
+                        layout: 'module-names-and-icons-drawer',
+                        module: module
+                    });
+                }
+            },
+            {
                 // route for Config Framework
                 name: 'admin-config',
                 route: ':Administration/config/:category',

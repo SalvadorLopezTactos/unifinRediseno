@@ -155,7 +155,7 @@ $mod_strings = array (
     'LBL_RECORD_TEMPLATES_TAB' => 'Şablonlar',
     'LBL_RECORD_OTHER_TAB' => 'Diğer',
     'LBL_EVENT_START' => 'Başlat',
-    'LBL_EVENT_END' => 'Bitiş',
+    'LBL_EVENT_END' => 'Bitir',
     'LBL_EVENT_END' => 'Bitir',
     'LBL_DAY_EVENT_TEMPLATE' => 'Günlük etkinlik',
     'LBL_WEEK_EVENT_TEMPLATE' => 'Haftalık etkinlik',
@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Şubat',
     'LBL_MARCH' => 'Mart',
     'LBL_APRIL' => 'Nisan',
-    'LBL_MAY' => 'May',
+    'LBL_MAY' => 'Mayıs',
     'LBL_JUNE' => 'Haziran',
     'LBL_JULY' => 'Temmuz',
     'LBL_AUGUST' => 'Ağustos',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Eki',
     'LBL_NOV' => 'Kas',
     'LBL_DEC' => 'Ara',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'Takvim zaten eklenmiş',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} seçili',
+    'LBL_NO_USER_SELECTED' => 'Lütfen bir Kullanıcı veya Ekip seçin',
+    'LBL_NO_CALENDAR_SELECTED' => 'Lütfen bir takvim seçin',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Takvimler kaydedilemedi.',
 
 );
 

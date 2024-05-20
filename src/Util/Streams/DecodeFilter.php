@@ -17,16 +17,20 @@ use php_user_filter;
 
 class DecodeFilter extends php_user_filter
 {
+    /**
+     * @var \stdClass|mixed
+     */
+    public $bucket;
     private $data;
     private static $token = '~!#@&';
 
-    public function onCreate()
+    public function onCreate(): bool
     {
         $this->data = '';
         return true;
     }
 
-    public function filter($in, $out, &$consumed, $closing)
+    public function filter($in, $out, &$consumed, $closing): int
     {
         while ($bucket = stream_bucket_make_writeable($in)) {
             $this->data .= $bucket->data;

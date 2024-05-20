@@ -35,9 +35,9 @@ class OIDCUserProviderTest extends \PHPUnit_Framework_TestCase
     public function testLoadUserByUsername(): void
     {
         $provider = new OIDCUserProvider();
-        $user = $provider->loadUserByUsername('username');
+        $user = $provider->loadUserByIdentifier('username');
         $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals('username', $user->getUsername());
+        $this->assertEquals('username', $user->getUserIdentifier());
     }
 
     /**
@@ -49,6 +49,6 @@ class OIDCUserProviderTest extends \PHPUnit_Framework_TestCase
         $user = new User('username');
         $user = $provider->refreshUser($user);
         $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals('username', $user->getUsername());
+        $this->assertEquals('username', $user->getUserIdentifier());
     }
 }

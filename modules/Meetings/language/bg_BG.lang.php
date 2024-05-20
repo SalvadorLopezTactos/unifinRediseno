@@ -218,4 +218,10 @@ $mod_strings = array (
 - Натиснете "Изберете участник", за да добавите съществуващ потребител, контакт или потенциален клиент към {{meetings_singular_module}} то. 
 - Натиснете бутона „плюс“ в дясно от „Изберете участник“, за да създадете участник в {{meetings_singular_module}} то като нов запис в  Sugar. 
 3. Натиснете "Съхрани", за да запазите новия запис и да се върнете на предишната страница.',
+
+    // Sugar Automate
+    'LBL_IS_CUSTOMER_JOURNEY_ACTIVITY' => 'Е среща на интелигентно ръководство',
+    'LBL_PARENT_MEETING_OF_TASK_REL' => 'Задачи на деца',
+    'LBL_PARENT_MEETING_OF_CALL_REL' => 'Повиквания на деца',
+    'LBL_PARENT_MEETING_OF_MEETING_REL' => 'Срещи на деца',
 );

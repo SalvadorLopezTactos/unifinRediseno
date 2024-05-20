@@ -55,7 +55,7 @@
      * @inheritdoc
      */
     _render: function() {
-        let calendarsSaved = app.cache.get(this.keyToStoreCalendarConfigurations);
+        let calendarsSaved = app.user.lastState.get(this.keyToStoreCalendarConfigurations);
         if (typeof calendarsSaved == 'undefined') {
             this.selectMyCalendars();
         }
@@ -113,6 +113,10 @@
      * Load mini calendar
      */
     loadMiniCalendar: function() {
+        const userDatePref = app.Calendar.utils.getKendoDateMapping(
+            app.user.getPreference('datepref'), 'fullVerboseMonth'
+        );
+
         this.$('[data-content=mini-calendar]').kendoCalendar({
             change: _.bind(function changeMiniCalendar() {
                 let schedulerView = this.layout.getComponent('scheduler');
@@ -137,7 +141,8 @@
                 if (loadedEventsStart > dateSelected || loadedEventsEnd < dateSelected) {
                     schedulerView.trigger('calendar:reload');
                 }
-            }, this)
+            }, this),
+            footer: kendo.format(`{0: dddd, ${userDatePref}}`,  new Date())
         });
 
         this.$('.k-icon.k-i-arrow-60-right')
@@ -214,7 +219,7 @@
                     return;
                 }
 
-                const calendarsInLS = app.cache.get(this.keyToStoreCalendarConfigurations);
+                const calendarsInLS = app.user.lastState.get(this.keyToStoreCalendarConfigurations);
                 if (typeof (calendarsInLS) !== 'undefined' && typeof calendarsInLS.otherCalendars !== 'undefined') {
                     let calendarAlreadyAdded = false;
                     _.each(calendarsInLS.otherCalendars, function searchCalendar(calendarInLS) {
@@ -239,7 +244,7 @@
                 let otherCalendarsList = this.model.get('otherCalendars');
                 otherCalendarsList.push(calendar);
 
-                app.cache.set(this.keyToStoreCalendarConfigurations, {
+                app.user.lastState.set(this.keyToStoreCalendarConfigurations, {
                     myCalendars: this.model.get('myCalendars'),
                     otherCalendars: this.model.get('otherCalendars')
                 });

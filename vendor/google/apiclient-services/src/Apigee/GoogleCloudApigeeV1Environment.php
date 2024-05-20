@@ -19,54 +19,172 @@ namespace Google\Service\Apigee;
 
 class GoogleCloudApigeeV1Environment extends \Google\Model
 {
+  /**
+   * @var string
+   */
+  public $apiProxyType;
+  /**
+   * @var string
+   */
   public $createdAt;
+  /**
+   * @var string
+   */
+  public $deploymentType;
+  /**
+   * @var string
+   */
   public $description;
+  /**
+   * @var string
+   */
   public $displayName;
+  /**
+   * @var string
+   */
+  public $forwardProxyUri;
+  /**
+   * @var string
+   */
   public $lastModifiedAt;
+  /**
+   * @var string
+   */
   public $name;
+  protected $nodeConfigType = GoogleCloudApigeeV1NodeConfig::class;
+  protected $nodeConfigDataType = '';
   protected $propertiesType = GoogleCloudApigeeV1Properties::class;
   protected $propertiesDataType = '';
+  /**
+   * @var string
+   */
   public $state;
 
+  /**
+   * @param string
+   */
+  public function setApiProxyType($apiProxyType)
+  {
+    $this->apiProxyType = $apiProxyType;
+  }
+  /**
+   * @return string
+   */
+  public function getApiProxyType()
+  {
+    return $this->apiProxyType;
+  }
+  /**
+   * @param string
+   */
   public function setCreatedAt($createdAt)
   {
     $this->createdAt = $createdAt;
   }
+  /**
+   * @return string
+   */
   public function getCreatedAt()
   {
     return $this->createdAt;
   }
+  /**
+   * @param string
+   */
+  public function setDeploymentType($deploymentType)
+  {
+    $this->deploymentType = $deploymentType;
+  }
+  /**
+   * @return string
+   */
+  public function getDeploymentType()
+  {
+    return $this->deploymentType;
+  }
+  /**
+   * @param string
+   */
   public function setDescription($description)
   {
     $this->description = $description;
   }
+  /**
+   * @return string
+   */
   public function getDescription()
   {
     return $this->description;
   }
+  /**
+   * @param string
+   */
   public function setDisplayName($displayName)
   {
     $this->displayName = $displayName;
   }
+  /**
+   * @return string
+   */
   public function getDisplayName()
   {
     return $this->displayName;
   }
+  /**
+   * @param string
+   */
+  public function setForwardProxyUri($forwardProxyUri)
+  {
+    $this->forwardProxyUri = $forwardProxyUri;
+  }
+  /**
+   * @return string
+   */
+  public function getForwardProxyUri()
+  {
+    return $this->forwardProxyUri;
+  }
+  /**
+   * @param string
+   */
   public function setLastModifiedAt($lastModifiedAt)
   {
     $this->lastModifiedAt = $lastModifiedAt;
   }
+  /**
+   * @return string
+   */
   public function getLastModifiedAt()
   {
     return $this->lastModifiedAt;
   }
+  /**
+   * @param string
+   */
   public function setName($name)
   {
     $this->name = $name;
   }
+  /**
+   * @return string
+   */
   public function getName()
   {
     return $this->name;
+  }
+  /**
+   * @param GoogleCloudApigeeV1NodeConfig
+   */
+  public function setNodeConfig(GoogleCloudApigeeV1NodeConfig $nodeConfig)
+  {
+    $this->nodeConfig = $nodeConfig;
+  }
+  /**
+   * @return GoogleCloudApigeeV1NodeConfig
+   */
+  public function getNodeConfig()
+  {
+    return $this->nodeConfig;
   }
   /**
    * @param GoogleCloudApigeeV1Properties
@@ -82,10 +200,16 @@ class GoogleCloudApigeeV1Environment extends \Google\Model
   {
     return $this->properties;
   }
+  /**
+   * @param string
+   */
   public function setState($state)
   {
     $this->state = $state;
   }
+  /**
+   * @return string
+   */
   public function getState()
   {
     return $this->state;

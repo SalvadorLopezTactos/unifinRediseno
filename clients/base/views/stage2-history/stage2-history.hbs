@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class='hint-preview-history'>
+<div class='hint-preview-history rounded-b-md'>
 {{#if isHintRequestLoading}}
     <div class='loading'> <span> {{str 'LBL_HINT_LOADING'}} </span></div>
 {{else}}
@@ -18,21 +18,27 @@
 <ul class='unstyled hint-preview-history-list'>
     {{#each collection.models}}
         <li class='hint-preview-history-item item {{this.attributes._icon}}{{#if attributes._highlight}} highlight{{/if}}'>
-            <i class='fa fa-2x fa-{{this.attributes._icon}}'></i>
+            <div class="iconContainer rounded-b-md">
+                <i class='label-module label-module-size-sm label-module-color-ocean sicon sicon-{{this.attributes._icon}}'></i>
+            </div>
 
-            <span class='ellipsis_inline' title="{{this.attributes.name}}">
-                <a href="{{this.attributes._link}}">{{this.attributes.name}}</a>
-            </span>
-
-            <div class='details' title="{{this.attributes.description}}">
-                <span class='hint-preview-history-item-status'>
-                    {{toUpperCase this.attributes.status}}
+            <div class="historyContainer">
+                <span class='ellipsis_inline mt-2 mb-2' title="{{this.attributes.name}}">
+                    <a href="{{this.attributes._link}}">{{this.attributes.name}}</a>
                 </span>
-                {{#if this.attributes.description}}
-                    <span class='hint-preview-history-item-description ellipsis_inline'>
-                        - {{this.attributes.description}}
-                    </span>
-                {{/if}}
+
+                <span class='hint-preview-history-item-status font-semibold'>
+                        {{toUpperCase this.attributes.status}}
+                </span>
+
+                <div class='details' title="{{this.attributes.description}}">
+                    {{#if this.attributes.description}}
+                        <span class='hint-preview-history-item-description ellipsis_inline mt-1 mb-1'>
+                            {{this.attributes.description}}
+                        </span>
+                    {{/if}}
+                </div>
+
                 <span class='hint-preview-history-item-date' title="{{attributes._date_record}}">
                     {{relativeTime attributes._date_record class='date'}}
                 </span>
@@ -41,7 +47,7 @@
     {{/each}}
     {{#unless collection.models}}
         <li class='hint-preview-history-item item'>
-            <span>{{str 'LBL_HINT_HISTORY_NONE'}}</span>
+            <span class="no-history p-2">{{str 'LBL_HINT_HISTORY_NONE'}}</span>
         </li>
     {{/unless}}
 </ul>

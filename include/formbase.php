@@ -38,6 +38,12 @@ function checkRequired($prefix, $required)
 	return true;
 }
 
+/**
+ * @param string $prefix
+ * @param SugarBean $focus
+ * @param bool $skipRetrieve
+ * @return SugarBean
+ */
 function populateFromPost($prefix, &$focus, $skipRetrieve=false) {
 	global $current_user;
 

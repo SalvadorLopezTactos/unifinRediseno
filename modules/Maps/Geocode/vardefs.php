@@ -274,6 +274,12 @@ $dictionary['Geocode'] = [
           'duplicate_on_record_copy' => 'yes',
           'comment' => '',
         ],
+        'error_message' => [
+            'name' => 'error_message',
+            'vname' => 'LBL_ERROR_MESSAGE',
+            'type' => 'text',
+            'help' => 'Geocode Error Message',
+        ],
     ],
     'indices' => [
         'id' => [

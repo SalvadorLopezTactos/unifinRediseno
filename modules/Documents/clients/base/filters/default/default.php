@@ -35,6 +35,7 @@ $viewdefs['Documents']['base']['filter']['default'] = array(
         'date_modified' => array(),
         'assigned_user_name' => array(),
         'team_name' => array(),
+        'is_shared' => array(),
         '$owner' => array(
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',

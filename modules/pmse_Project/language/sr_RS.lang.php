@@ -177,6 +177,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RESPONSE_BUTTONS' => 'Forma dugmadi',
     'LBL_PMSE_FORM_OPTION_APPROVE_REJECT' => 'Odobriti/odbaciti',
     'LBL_PMSE_FORM_OPTION_ROUTE' => 'Put',
+    'LBL_PMSE_FORM_OPTION_SEND_TO_DOCUSING' => 'Pošalji u DocuSign',
     'LBL_PMSE_FORM_LABEL_OTHER_DERIVATION_OPTIONS' => 'Ostale usmerene opcije',
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Promeni dodeljeno korisniku',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Tim',
@@ -206,6 +207,7 @@ $mod_strings = array (
     'LBL_PMSE_FORM_TITLE_DOCUMENT_MERGE' => 'Spajanje dok.',
     'LBL_PMSE_FORM_LABEL_DOCUMENT_MERGE_HELP_TEXT' => 'Izaberi...',
     'LBL_PMSE_FORM_LABEL_CONVERT_TO_PDF' => 'Spajanje dokumenata u PDF',
+    'LBL_PMSE_FORM_LABEL_SEND_VIA_EMAIL' => 'Pošalji objedinjeni dokument pomoću e-poruke',
     // Document Merge BPM Context Menu
     'LBL_PMSE_CONTEXT_MENU_DOCUMENT_MERGE' => 'Spajanje dok.',
 
@@ -493,4 +495,14 @@ $mod_strings = array (
 
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH' => 'Konvergentna vrsta mrežnog prolaza ne odgovara vrsti mrežnog prolaza dolaznog toka',
     'LBL_PMSE_ERROR_GATEWAY_CONVERGING_TYPE_MISMATCH_INFO' => 'Divergentni mrežni prolazi razvijaju procese u više grana. Kada koristite konvergentne mrežne prolaze da ove grane ponovo vratite u jednu putanju, mora se koristiti ispravna vrsta konvergentnog mrežnog prolaza u zavisnosti od vrste divergentnog mrežnog prolaza koji se koristio za kreiranje grana. Za grane koje su kreirane sa isključivim mrežnim prolazima ili divigertnim mrežnim prolazima koji se baziraju na događajima – koristite isklučiv konvergentni mrežni prolaz da biste grane vratili u jednu putanju. Za grane koje su kreirane pomoću paralelnih mrežnih prolaza ili uključivih divergentnih mrežnih prolaza – koristite paralelne konvergentne mrežne prolaze da biste ih vratili u jednu putanju.',
+
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_FIELD' => 'Polje modula',
+    'LBL_PMSE_CRITERIA_TYPE_MODULE_RELATIONSHIP' => 'Odnos modula',
+    'LBL_PMSE_CRITERIA_TYPE_USER' => 'Korisnik',
+    'LBL_PMSE_CRITERIA_TYPE_ROLE' => 'Uloga',
+    'LBL_PMSE_CRITERIA_TYPE_TEAM' => 'Tim',
+    'LBL_PMSE_CRITERIA_TYPE_FORM_ACTIVITY' => 'Formiraj aktivnost',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE' => 'Poslovna uloga',
+    'LBL_PMSE_CRITERIA_TYPE_BUSINESS_RULE_ACTION' => 'Radnja poslovne uloge',
+    'LBL_PMSE_CRITERIA_TYPE_EMAIL_TEMPLATE' => 'Šablon imejla',
 );

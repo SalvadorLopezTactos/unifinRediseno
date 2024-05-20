@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'View Forecast History',
     'LBL_FORECAST_HISTORY' => 'Forecasts: History',
     'LBL_FORECAST_HISTORY_TITLE' => 'History',
+    'LBL_TAB_COMMITMENT' => 'Commitment',
+    'LBL_CURRENT' => 'Current',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Time Period',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Modified By',
     'LBL_WK_VERSION' => 'Version',
     'LBL_WK_REVISION' => 'Revision',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Access to the metrics API requires Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Time Period:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Do you want to commit these amounts?',
     'ERR_FORECAST_AMOUNT' => 'Commit amount is required and must be a number.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Included Pipeline',
+    'LBL_UPSIDE_PIPELINE' => 'Upside Pipeline',
+    'LBL_EXCLUDED_PIPELINE' => 'Excluded Pipeline',
+    'LBL_WON' => 'Won',
+    'LBL_LOST' => 'Lost',
+    'LBL_ALL' => 'All',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Guide on Filters',
+    'LBL_HELP_MAIN_BODY' => 'All metrics only include Opportunities belonging to the selected user(s), time period, and any additional filters you have applied',
+    'LBL_FORECAST_HELP' => 'Opportunities that have already been won or are in an included {{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Open Opportunities with a {{{forecastStage}}} of {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Open Opportunities in an included {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Open Opportunities with a {{{forecastStage}}} of {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Open Opportunities with a {{{forecastStage}}} of {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Open Opportunities in an excluded {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Opportunities that have already been won',
+    'LBL_LOST_HELP' => 'Opportunities that have already been lost',
+    'LBL_ALL_HELP' => 'All Opportunities',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Start Date',
     'LBL_FC_USER' => 'Schedule For',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Commitment',
     'LBL_TEAM_COMMITMENT' => 'Team Commitment',
     'LBL_FORECASTED' => 'Forecasted',
+    'LBL_OPPORTUNITY_FORECAST' => 'Opportunity Forecast',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Revenue Line Item Forecast',
+    'LBL_LAST_COMMITMENT' => 'Last Commitment',
     'LBL_ADJUSTED_TOTAL' => 'Adjusted Total',
     'LBL_COMMIT_STAGE' => 'Commit Stage',
     'LBL_SALES_STAGE' => 'Stage',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => ' (Adjusted)',
     'LBL_SAVE_DRAFT' => 'Save',
     'LBL_CHANGES_BY' => 'Changes by {0}',
-    'LBL_FORECAST_SETTINGS' => 'Settings',
+    'LBL_FORECAST_SETTINGS' => 'Forecast Settings',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Forecasts Setup',

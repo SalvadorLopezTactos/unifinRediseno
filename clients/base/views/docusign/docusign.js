@@ -33,13 +33,11 @@
     initialize: function(options) {
         this._super('initialize', [options]);
 
-        this.listenTo(app.events, 'docusign:reload', _.bind(function() {
-            this.initDashlet();
-        }, this));
+        this.listenTo(app.events, 'docusign:reload', this.initDashlet, this);
 
-        this.on('chart:clicked', this.chartClickHandler, this);
-
-        this.listenTo(this.context, 'sendDocumentsToDocuSign', _.bind(this.sendToDocuSign, this));
+        this.listenTo(this, 'chart:clicked', this.chartClickHandler, this);
+        this.listenTo(this.context, 'sendDocumentsToDocuSign', this.sendToDocuSign, this);
+        this.listenTo(this.context, 'selectTemplate', this.selectTemplate, this);
     },
 
     /**
@@ -555,11 +553,6 @@
             return;
         }
 
-        app.alert.show('load-tab-for-sending', {
-            level: 'process',
-            title: app.lang.get('LBL_LOADING')
-        });
-
         var controllerCtx = app.controller.context;
         var controllerModel = controllerCtx.get('model');
         var module = controllerModel.get('_module');
@@ -575,10 +568,41 @@
             documents: documents
         };
 
-        var docusignPageURL = app.api.buildURL('DocuSign', 'loadPage');
-        var docusignTab = window.open(docusignPageURL);//makes the browser consider the action as user not script made
+        app.events.trigger('docusign:send:initiate', data);
+    },
 
-        this._sendEnvelope(data, docusignTab);
+    /**
+     * Select template from DocuSign
+     */
+    selectTemplate: function() {
+        if (!this.userIsConfigured) {
+            app.alert.show('warn-docusign-user-not-logged-in', {
+                level: 'warning',
+                messages: app.lang.get('LBL_PLEASE_LOG_IN', 'DocuSignEnvelopes'),
+                autoClose: true,
+                autoCloseDelay: '10000'
+            });
+
+            return;
+        }
+
+        const controllerCtx = app.controller.context;
+        const controllerModel = controllerCtx.get('model');
+        const module = controllerModel.get('_module');
+        const modelId = controllerModel.get('id');
+        const documents = _.pluck(this.documentCollection.models, 'id');
+
+        const data = {
+            returnUrlParams: {
+                parentRecord: module,
+                parentId: modelId,
+                token: app.api.getOAuthToken()
+            },
+            documents: documents
+        };
+
+        const step = 'selectTemplate';
+        app.events.trigger('docusign:send:initiate', data, step);
     },
 
     /**
@@ -668,11 +692,6 @@
 
         var draftId = model.get('envelope_id');
 
-        app.alert.show('load-tab-for-sending', {
-            level: 'process',
-            title: app.lang.get('LBL_LOADING')
-        });
-
         var data = {
             returnUrlParams: {
                 parentRecord: module,
@@ -684,75 +703,7 @@
             documents: documents
         };
 
-        var docusignPageURL = app.api.buildURL('DocuSign', 'loadPage');
-        var docusignTab = window.open(docusignPageURL);//makes the browser consider the action as user not script made
-
-        this._sendEnvelope(data, docusignTab);
-    },
-
-    /**
-     * Send envelope
-     *
-     * @param {Object} data
-     * @param {Object} docusignTab
-     */
-    _sendEnvelope: function(data, docusignTab) {
-        app.api.call('create', app.api.buildURL('DocuSign/send'), data, {
-            success: _.bind(function viewLoaded(res) {
-                if ((res.status && res.status === 'error') || res.envelopeStatus === 'deleted') {
-                    var minifiedErrorMessage = res.message.toLowerCase();
-                    if (minifiedErrorMessage === 'cancel') {
-                        // do nothing
-                    } else if (/envelope status in docusign is now/.test(minifiedErrorMessage)) {
-                        if (res.envelopeStatus === 'deleted') {
-                            this.confirmDelete(res);
-                        } else {
-                            this.confirmEnvelopeStatusUpdate(res);
-                        }
-                    } else {
-                        if (!_.isEmpty(res.message)) {
-                            app.alert.show('ds_error', {
-                                level: 'error',
-                                messages: res.message,
-                                autoClose: false
-                            });
-                        }
-                    }
-                    docusignTab.close();
-                    return;
-                }
-
-                docusignTab.location.href = res.url;
-
-                $(window).on('storage.docusignAction', function checkDocuSignActionOnStorageChange(e) {
-                    if (e.originalEvent.key !== 'docusignAction') {
-                        return;
-                    }
-                    var action = e.originalEvent.newValue;
-                    if (!action) {
-                        return;
-                    }
-
-                    $(window).off('storage.docusignAction');
-
-                    if (app.controller.context.attributes.module === 'pmse_Inbox' &&
-                        app.controller.layout.name === 'show-case') {
-                        app.router.goBack();
-                    } else {
-                        app.events.trigger('docusign:reload');
-                    }
-                });
-            }, this),
-            error: function(error) {
-                app.alert.show('error-loading-tab', {
-                    level: 'error',
-                    messages: error.message
-                });
-            },
-            complete: function() {
-                app.alert.dismiss('load-tab-for-sending');
-            }
-        });
+        app.events.trigger('docusign:send:initiate', data);
     },
 
     /**
@@ -802,113 +753,6 @@
         }
 
         return modelId;
-    },
-
-    /**
-     * Creates a confirmation alert and ask for permission to delete the draft
-     *
-     * @param {Object} data
-     */
-    confirmDelete: function(data) {
-        app.alert.show('draft-does-not-exist', {
-            level: 'confirmation',
-            messages: app.lang.get('LBL_DRAFT_DELETED_CONFIRMATION', 'DocuSignEnvelopes'),
-            autoClose: false,
-            onConfirm: function() {
-                app.api.call(
-                    'create',
-                    app.api.buildURL('DocuSign/removeEnvelope'), {
-                        envelopeId: data.envelopeId
-                    }, {
-                        success: function(res) {
-                            if (res) {
-                                app.alert.show('sugar-envelope-delete', {
-                                    level: 'success',
-                                    messages: app.lang.get('LBL_DRAFT_DELETE_SUCCESS', 'DocuSignEnvelopes'),
-                                    autoClose: true
-                                });
-                                app.events.trigger('docusign:reload');
-                            } else {
-                                app.alert.show('sugar-envelope-delete', {
-                                    level: 'error',
-                                    messages: app.lang.get('LBL_DRAFT_DELETE_ERROR', 'DocuSignEnvelopes'),
-                                    autoClose: true,
-                                    autoCloseDelay: '10000'
-                                });
-                            }
-                        },
-                        error: function(error) {
-                            app.alert.show('error-removing-envelope', {
-                                level: 'error',
-                                messages: error.message
-                            });
-                        },
-                        complete: function() {
-                            app.alert.dismiss('envelope-loading');
-                        }
-                    }
-                );
-                app.alert.show('envelope-loading', {
-                    level: 'process',
-                    title: app.lang.get('LBL_LOADING')
-                });
-            },
-            onCancel: function() {}
-        });
-    },
-
-    /**
-     * Confirm envelope status update
-     *
-     * @param {Object} data
-     */
-    confirmEnvelopeStatusUpdate: function(data) {
-        app.alert.show('draft-does-not-exist', {
-            level: 'confirmation',
-            messages: app.lang.get('LBL_DRAFT_CHANGED_CONFIRM', 'DocuSignEnvelopes', {status: data.status}),
-            autoClose: false,
-            onConfirm: function() {
-                app.api.call(
-                    'create',
-                    app.api.buildURL('DocuSign/docusignUpdateBean'), {
-                        envelopeId: data.envelopeId
-                    }, {
-                        success: function(res) {
-                            if (res) {
-                                app.alert.show('sugar-envelope-update-success', {
-                                    level: 'success',
-                                    messages: app.lang.get('LBL_DRAFT_CHANGED_SUCCESS', 'DocuSignEnvelopes'),
-                                    autoClose: true
-                                });
-                                app.events.trigger('docusign:reload');
-                            } else {
-                                app.alert.show('sugar-envelope-update-error', {
-                                    level: 'error',
-                                    messages: app.lang.get('LBL_DRAFT_CHANGED_ERROR', 'DocuSignEnvelopes'),
-                                    autoClose: true,
-                                    autoCloseDelay: '10000'
-                                });
-                            }
-                        },
-                        error: function(error) {
-                            app.alert.show('error-updating-bean', {
-                                level: 'error',
-                                messages: error.message
-                            });
-                        },
-                        complete: function() {
-                            app.alert.dismiss('envelope-loading');
-                        }
-                    }
-                );
-
-                app.alert.show('envelope-loading', {
-                    level: 'process',
-                    title: app.lang.get('LBL_LOADING')
-                });
-            },
-            onCancel: function() {}
-        });
     },
 
     /**

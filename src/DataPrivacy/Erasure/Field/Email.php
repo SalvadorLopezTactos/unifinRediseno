@@ -39,6 +39,7 @@ final class Email implements Field
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

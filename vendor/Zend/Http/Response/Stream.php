@@ -208,6 +208,7 @@ class Zend_Http_Response_Stream extends Zend_Http_Response
      */
     protected function readStream()
     {
+        $headers = [];
         if(!is_resource($this->stream)) {
             return '';
         }

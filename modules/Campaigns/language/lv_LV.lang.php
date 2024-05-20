@@ -82,7 +82,6 @@ $mod_strings = array (
   'LBL_TRACKER_URL' => 'Sekotāja URL:',
   'LBL_TRACKER_TEXT' => 'Atsekošanas saites teksts:',
   'LBL_TRACKER_COUNT' => 'Sekotāju skaits:',
-  'LBL_REFER_URL' => 'Sekotāja pāradresācijas URL:',
   'LBL_DEFAULT_SUBPANEL_TITLE' => 'Mārketings',
   'LBL_EMAIL_CAMPAIGNS_TITLE' =>'E-pasta kampaņas',
   'LBL_NEW_FORM_TITLE' => 'Jauna kampaņa',

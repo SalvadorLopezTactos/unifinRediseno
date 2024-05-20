@@ -796,9 +796,7 @@
                 id: newGroupModelId,
                 link: linkName,
                 relatedId: itemModelId,
-                related: {
-                    position: newPos
-                }
+                position: newPos
             }
         };
 
@@ -1675,9 +1673,7 @@
                             id: groupId,
                             link: linkName,
                             relatedId: model.id,
-                            related: {
-                                position: posStart
-                            }
+                            position: posStart
                         }
                     });
                 }, this, defaultGroup.model.id, bulkRequests, positionStart));

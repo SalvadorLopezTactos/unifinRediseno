@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Шаблон? :',
     'LBL_DET_TEMPLATE_TYPE'=>'Тип на документа:',
     'LBL_TEAM'=> 'Екип:',
+    'LBL_IS_SHARED' => 'Налични външно:',
     'LBL_DOC_DESCRIPTION'=>'Описание:',
     'LBL_DOC_ACTIVE_DATE'=> 'Публикуван на:',
     'LBL_DOC_EXP_DATE'=> 'Валиден до:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'Изпращане към DocuSign',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Синхронизиране с Google Drive',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Синхронизиране на всичко с Google Drive',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Синхронизиране на всичко с OneDrive',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Синхронизиране с OneDrive',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Синхронизиране на всичко с Dropbox',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Синхронизиране с Dropbox',
 );

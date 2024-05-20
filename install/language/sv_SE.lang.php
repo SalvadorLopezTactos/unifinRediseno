@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'För en optimal upplevelse använd IIS/FastCGI sapi, sätt fastcgi.loggin till 0 i din php.ini fil.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Den installerade PHP-versionen stöds inte: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Databasen otillgänglig',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databasstöd hittades inte.  Se till att du har de drivrutiner som krävs för en av följande databastyper som stöds: MySQL, MS SQLServer, Oracle, or DB2.  Du kan behöva avkommentera tillägget i php.ini-filen, eller omkompilera det med rätt binär fil, beroende på din version av PHP.  Se PHP-manualen för mer information om hur du aktiverar databasstöd.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databas-support hittades inte. Se till att du har nödvändiga drivrutiner för en av följande databastyper som stöds: MySQL, MS SQLServer, Oracle, eller DB2. Du kan behöva avkommentera tillägget i php.ini-filen, eller kompilera med rätt binär fil, beroende på din PHP-version. Se din PHP-manual för mer information om hur du aktiverar databas-support.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funktioner som hör till XML Parser Libraries som Sugar behöver hittades inte. Du kanske behöver avkommentera ändelsen i php.ini eller kompilera om med rätt binärfil beroende på din PHP-version. Se PHP-manualen för mer information.',
     'LBL_CHECKSYS_CSPRNG' => 'Slumptalsgenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Funktioner som hör till Multibyte Strings PHP-tillägget (mbstring) som Sugar behöver hittades inte. <br/><br/>I allmänhet är modulen mbstring inte aktiverat som standard i PHP, utan den måste aktiveras med --enable-mbstring när du bygger PHP. Se PHP-manualen för mer information om hur mbstring-stöd aktiveras.',
@@ -562,32 +562,15 @@ Avböj detta samtal:
 <$decline_link>',
     ),
 
-    'assigned_notification_email' => array(
-        'name' => 'E-post med uppgiftsavisering',
-        'subject' => 'SugarCRM - Tilldelade $module_name ',
-        'description' => 'Denna mall används när systemet skickar en uppgiftstilldelning till en användare.',
-        'body' => '<div>
-<p>$assigned_by_user har tilldelat en&nbsp;$module_name till&nbsp;$assigned_user.</p>
-
-<p>Du kan granska denna&nbsp;$module_name på:<br/>
-	<<a href="$module_link">$module_link</a>></p>
-</div>',
-        'txt_body' =>
-            '$assigned_by_user har tilldelat en $module_name till $assigned_user.
-
-Du kan granska $module_name på:
-<$module_link>',
-    ),
-
     'scheduled_report_email' => array(
         'name' => 'E-post med schemalagd rapport',
         'subject' => 'Schemalagd rapport: $report_name från den $report_time',
         'description' => 'Denna mall används när systemet skickar en schemalagd rapport till en användare.',
         'body' => '<div>
-<p>Hej $assigned_user,</p>
-<p>En automatiskt genererad rapport som har schemalagts för dig finns bifogad.</p>
-<p>Rapportens namn: $report_name</p>
-<p>Rapportens löpdatum och -tid: $report_time</p>
+<p>Hej $assigned_user,<br></p>
+<p>En automatiskt genererad rapport som har schemalagts för dig finns bifogad.<br></p>
+<p>Rapportens namn: <a href="$site_url/#Reports/$report_id">$report_name</a><br></p>
+<p>Rapportens löpdatum och -tid: $report_time<br></p>
 </div>',
         'txt_body' =>
             'Hej $assigned_user,
@@ -613,14 +596,6 @@ Rapportens löpdatum och -tid: $report_time',
             Logga in på Sugar för att visa kommentaren.',
     ],
 
-    'advanced_password_new_account_email' => array(
-        'subject' => 'Ny kontoinformation',
-        'description' => 'Den här mallen används när System Administratören skickar ett nytt lösenord till en användare.',
-        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Här är ditt användarnamn och ditt tillfälliga lösenord:</p><p>Användarnamn : $contact_user_user_name </p><p>Lösenord : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Efter att du loggat in med ovanstående lösenord, kommer du behöva ändra lösenordet till ett eget.</p>   </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
-        'txt_body' =>
-'är är ditt användarnamn och ditt tillfälliga lösenord: <br />Användarnamn : $contact_user_user_name<br />Lösenord : $contact_user_user_hash<br /><br />$config_site_url<br /><br />After you log in using the above password, you may be required to reset the password to one of your own choice.',
-        'name' => 'Systemgenererat lösenordsemail',
-        ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Återställ ditt kontos lösenord',
         'description' => "Den här mallen används för att skicka en användare en länk att klicka på för att återställa användarens kontos lösenord.",

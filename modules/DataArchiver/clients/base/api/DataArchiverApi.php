@@ -57,7 +57,7 @@ class DataArchiverApi extends ModuleApi
      * @param array $args
      * @return bool
      * @throws SugarQueryException
-     * @throws UniqueConstraintViolationException
+     * @throws DriverException
      * @throws SugarApiExceptionNotAuthorized
      * @throws SugarApiExceptionNotFound
      * @throws SugarApiExceptionInvalidParameter
@@ -89,7 +89,7 @@ class DataArchiverApi extends ModuleApi
             return $this->createArchiveRunAfterProcess($bean, $returnedIds);
         } catch (DriverException $e) {
             $this->archiver->removeArchivedRows();
-            throw new UniqueConstraintViolationException('Failed to complete the archival process', $e);
+            throw $e;
         }
     }
 
@@ -151,7 +151,7 @@ class DataArchiverApi extends ModuleApi
             foreach ($filter as $f) {
                 $filterKeys[] = array_keys($f)[0];
             }
-            
+
             foreach ($this->moduleRequirements[$module] as $req) {
                 if (!array_key_exists($req, array_flip($filterKeys))) {
                     throw new SugarApiExceptionInvalidParameter($req, null, null, 0, 'ModuleReqError');

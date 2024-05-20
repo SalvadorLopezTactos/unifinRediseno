@@ -92,6 +92,7 @@ $mod_strings = array (
     'ERR_UW_PACKAGE_NEWER_VERSION_EXISTS'       => 'Er bestaat een nieuwere versie van het pakket: {0}, verwijder deze eerst voordat u probeert een nieuwe te uploaden.',
     'ERR_UW_PACKAGE_ALREADY_INSTALLED'          => 'Pakket is reeds geïnstalleerd.',
     'ERR_UW_PACKAGE_NOT_INSTALLED'              => 'Pakket is niet geïnstalleerd.',
+    'ERR_UW_PACKAGE_INSTALLED_WITH_ERROR'       => 'Pakketinstallatie leidde tot fout. Behoudt veranderingen',
     'ERR_UW_PACKAGE_IS_UNINSTALLABLE'           => 'Pakket kan niet worden geïnstalleerd. De installatie kan niet ongedaan worden gemaakt.',
     'ERR_UW_PACKAGE_ALREADY_ENABLED'            => 'Pakket is reeds ingeschakeld.',
     'ERR_UW_PACKAGE_ALREADY_DISABLED'           => 'Pakket is reeds uitgeschakeld.',
@@ -130,7 +131,12 @@ $mod_strings = array (
     'LBL_ADMIN_WIZARD' => 'Configureer uw SugarCRM systeem in een paar stappen.',
     'LBL_ADMINISTRATION_HOME_TITLE' => 'Systeembeheer',
     'LBL_ADMINISTRATION_HOME_DESC' =>'Configureer de systeeminstellingen gericht op uw organisatie. Gebruikers kunnen een aantal standaardinstellingen zelf wijzigen via Mijn Account.',
-    'LBL_ALLOW_USER_TABS' => 'Sta gebruikers toe om tabs te configureren',
+    'LBL_ALLOW_USERS_PINNED_MODULES' => 'Gebruikers toestaan om het aantal vastgezette modules in te stellen',
+    'LBL_ALLOW_USERS_AVAILABLE_MODULES' => 'Gebruikers toestaan om uit beschikbare modules te selecteren',
+    'LBL_NUMBER_PINNED_MODULES' => 'Aantal vastgezette modules',
+    'LBL_NUMBER_PINNED_MODULES_TOOLTIP' => 'We raden aan om een realistisch aantal in te stellen van de meest gebruikte modules ' .
+        'omdat een groot aantal in de meeste browsers niet weergegeven zal worden. Waarden groter dan ' .
+        '100 worden niet gerespecteerd',
     'LBL_ALREADY_RUNNING'                  => 'Deze server draait als een Offline Client.',
     'LBL_APPLY_DST_FIX_DESC' => 'Deze verplichte stap werkt de tijdfuncties bij. (Alleen MYSQL).',
     'LBL_APPLY_DST_FIX' => 'Voer Zomertijd update uit.',
@@ -145,7 +151,7 @@ $mod_strings = array (
     'LBL_IMPORT_METADATA_BUTTON_TITLE' => 'IdP metadatabestand importeren',
     'LBL_IMPORT_METADATA_BUTTON_LABEL' => 'IdP metadatabestand importeren',
     'LBL_CAT_VIEW'            => 'Categorieën',
-    'LBL_CHANGE_NAME_MODULES'=>'Wijzig de namen van de modules in de applicatie',
+    'LBL_CHANGE_NAME_MODULES'=> 'Wijzig de namen van de modules in de applicatie',
     'LBL_CHECK_FOR_UPDATES'  => 'Controleer of er updates zijn',
     'LBL_CHECK_NOW_LABEL' =>'Check nu',
     'LBL_CHECK_NOW_TITLE' =>'Check nu',
@@ -171,17 +177,20 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'Verwijderd het cache-bestand dat gebruikt wordt om PDF fonts data op te slaan.',
     'LBL_CONFIG_CHECK' =>'Beheer Controle',
     'LBL_CONFIG_FTS' => 'Configureer Full Text Search Engine',
-    'LBL_CONFIG_TABS'=>'Toon modules en subpanels',
-	'LBL_CONFIG_TABS_DESC'=>'Versleep de namen van de modules die u wilt weergeven of verbergen (in de navigatiebalk of subpanelen) naar de desbetreffende gebieden. Om toegang tot de modules te beheren, maak gebruik van <a href="?module=ACLRoles&action=index">rollen & rechten.</a>',
-	'LBL_CONFIG_LANGS_DESC'=>'Sleep de namen van de talen hieronder naar de juiste kolom om ze aan of uit te zetten.',
-	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'Selecteer deze optie zodat gebruikers zelf kunnen kiezen welke modules ze zien. Gebruikers kunnen dit configureren in hun eigen gebruikersinstellingen.',
-	'LBL_CONFIGURATOR_DESC'=>'Config.php instellen',
+    'LBL_CONFIG_TABS'=>'Navigatiebalk en subpanelen',
+    'LBL_CONFIG_TABS_DESC_BRIEFLY'=>'Selecteer welke modules beschikbaar zijn voor gebruikers in de navigatiebalk en als subpanelen. Gebruik <a href="?module=ACLRoles&action=index">Rolbeheer</a> om de toegang van gebruikers tot modules te beheren.',
+    'LBL_CONFIG_TABS_DESC_DETAILED'=>'Sleep modules om ze als beschikbaar of als verborgen in te stellen in de navigatiebalk. <br>
+        Het veld Aaantal vastgezette modules bepaalt hoeveel van de beschikbare modules worden weergegeven als de navigatiebalk
+        ingeklapt is (bijvoorbeeld: als u 5 invoert, dan worden de eerste vijf modules op de lijst vastgezet). Als de selectievakjes
+        ingeschakeld zijn, kunnen gebruikers de instellingen van hun navigatiebalk aanpassen via hun Gebruikersprofiel.',
+    'LBL_CONFIG_LANGS_DESC'=>'Sleep de namen van de talen hieronder naar de juiste kolom om ze aan of uit te zetten.',
+    'LBL_CONFIGURATOR_DESC'=>'Config.php instellen',
     'LBL_CONFIGURATOR_TITLE'=>'Configureerder',
     'LBL_CONFIGURE_GROUP_TABS_DESC' => 'Create and edit groupings of tabs',
     'LBL_CONFIGURE_GROUP_TABS' => 'Menufilters module configureren',
     'LBL_CONFIGURE_SETTINGS_TITLE' => 'Systeeminstellingen',
     'LBL_CONFIGURE_SETTINGS' => 'Globale instellingen',
-    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Modules en Subpanels tonen',
+    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Navigatiebalk en subpanelen',
     'LBL_CONFIGURE_UPDATER'=>'Configureer Sugar Updates',
     'LBL_CONTRACT_TITLE'=>'Contracten',
     'LBL_CONTRACT_DESC'=>'Definieer contractsoorten voor de Contractenmodule. Als gebruikers een contract opstellen zijn de contracttypen terug te vinden in de typen drop-down.',
@@ -226,6 +235,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_GETMYSQLTS' => 'MySQL schema',
     'LBL_DIAGNOSTIC_GETPHPINFO' => 'Uitlezen phpinfo()',
     'LBL_DIAGNOSTIC_GETSUGARLOG' => 'Uitlezen sugarcrm.log',
+    'LBL_DIAGNOSTIC_GETMLPLOG' => 'Package_install.log krijgen',
     'LBL_DIAGNOSTIC_GETTING' => 'Uitlezen...',
     'LBL_DIAGNOSTIC_MD5'=>'MD5 informatie',
     'LBL_DIAGNOSTIC_MYSQLDUMPS'=>'MySQL - Configuratie Tabel',
@@ -234,6 +244,7 @@ $mod_strings = array (
     'LBL_DIAGNOSTIC_NO_MYSQL' => 'Er is geen MySQL. De MySQL functies zijn uitgezet.',
     'LBL_DIAGNOSTIC_PHPINFO'=>'phpinfo()',
     'LBL_DIAGNOSTIC_SUGARLOG'=>'SugarCRM Log Bestand',
+    'LBL_DIAGNOSTIC_MLPLOG'=>'Logbestand van installeerpakket',
     'LBL_DIAGNOSTIC_TITLE'=>'Diagnostische Tool',
     'LBL_DIAGNOSTIC_VARDEFS'=>'Sugar schema-output (VARDEFS)',
 	'LBL_DISABLED' => 'Uitgeschakeld',
@@ -361,11 +372,11 @@ $mod_strings = array (
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'For Binding the LDAP User<br>Examples: <b>AD:</b> userPrincipalName, <b>openLDAP:</b> userPrincipalName, <b>Mac OS X:</b> uid',
     'LBL_LDAP_LOGIN_ATTRIBUTE_DESC'=>'For searching for the LDAP User<br>Examples:<b>AD:</b> userPrincipalName, <b>openLDAP:</b> dn, <b>Mac OS X:</b> dn',
     'LBL_LDAP_ENCRYPTION_TYPE_DESC'=> 'Type codering beïnvloedt of uw verbinding met de LDAP-server ' .
-        'veilig is of niet. Gebruik Geen voor een reguliere, niet-beveiligde verbinding. Gebruik TLS om uw reguliere ' .
-        'verbinding te beveiligen. Gebruik SSL voor een veilige verbinding via LDAPS://',
+        'veilig is of niet. Gebruik Geen voor een reguliere, niet-beveiligde verbinding. Gebruik StartTLS om uw reguliere ' .
+        'verbinding te beveiligen. Gebruik LDAPS voor een veilige verbinding via ldaps://',
     'LBL_LDAP_SERVER_HOSTNAME_DESC'=> 'Voer alleen de LDAP-hostnaam van het IP-adres in. ' .
         'Voorbeeld: ldap.voorbeeld.nl, 10.11.45.75',
-    'LBL_LDAP_SERVER_PORT_DESC'=>'Voorbeeld: 389 voor niet-beveiligd en TLS. 636 voor SSL',
+    'LBL_LDAP_SERVER_PORT_DESC'=>'Voorbeeld: 389 voor niet-beveiligd en StartTLS. 636 voor LDAPS',
     'LBL_LDAP_GROUP_NAME'=>'Groepsnaam:',
 	'LBL_LDAP_GROUP_NAME_DESC'=>'Voorbeeld cn=sugarcrm',
     'LBL_LDAP_USER_DN_DESC'=>'Voorbeeld: ou=people,dc=example,dc=com',
@@ -472,6 +483,8 @@ $mod_strings = array (
     'LBL_MANAGE_RELATE_DENORMALIZATION_PRE_CHECK_RESULTS' => 'Voorcontrole resultaten',
     'LBL_MANAGE_RELATE_DENORMALIZATION_FIELDS_FOR' => 'Velden voor',
     'LBL_MANAGE_RELATE_DENORMALIZATION_JOB_TITLE' => 'Geplande taak',
+    'LBL_SUGAR_OUTFITTER' => 'SugarOutfitters',
+    'LBL_SUGAR_OUTFITTER_TOOLTIP' => 'Browse SugarOutfitters, de marktplaats van SugarCRM, voor add-ons die nieuwe mogelijkheden aan uw Sugar-instantie toevoegen',
 
     'LBL_MANUAL_VALIDATION_TXT' => 'Handmatige Validatie',
     'LBL_MANUAL_VALIDATION'=>'Als u problemen blijft ondervinden met automatische validatie, controleer dan uw proxy instellingen in de <a href="index.php?module=Configurator&action=EditView">Systeem instellingen</a> op de beheer pagina.<br />Als uw omgeving niet in staat is via internet met de validatieserver  te communiceren, kun u gebruik mkaen van de <a href="javascript:void(0)" onclick="toggleDisplay(&#39;mainbody&#39;);toggleDisplay(&#39;manualbody&#39;);">Handmatige validatie</a>.',
@@ -552,6 +565,9 @@ $mod_strings = array (
     'LBL_MODULE_LICENSE'                        => 'Lees a.u.b. deze licentie overeenkomst:',
     'LBL_MODULE_LOADER_TITLE' => 'Module lader',
     'LBL_MODULE_LOADER' => 'Installeer of verwijder Sugar modules, thema&#39;s, taalmodules en andere uitbreidingen.',
+    'LBL_MODULE_LOADER_LICENSE_WARNING' => 'De mogelijkheid om aangepaste bestandspakketten te <a href="{0}">uploaden</a> is niet '
+        . 'beschikbaar voor {1}. Om te zien welke soorten licenties de functie Modulelader bevat, raadpleegt u de '
+        . '<a href="{2}">Licentietypematrix</a>.',
     'LBL_MODULE_NAME' => 'Beheer',
     'LBL_MODULE_NAME_SINGULAR' => 'Beheer',
     'LBL_MODULE_TITLE' => 'Beheer: Start',
@@ -666,8 +682,6 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Herbouw JS Grouping Files',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Overschrijft bestaande groupsbestanden met de laatste versies van de groepsbestanden',
-    'LBL_REPAIR_JS_FILES_TITLE' => 'Javascript bestanden repareren',
-    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'JS bestanden repareren',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Bezig met verwerken bestanden. Dit kan een paar minuten duren. Weg navigeren van deze pagina zal het proces niet onderbreken, dus u kunt gerust verder gaan of wacht op bevestiging...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Klaar met verwerken van Bestanden.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Herstel velden met niet-kleine-letters',
@@ -909,7 +923,7 @@ $mod_strings = array (
     'LBL_VALIDATION_FILE'=>'Validatiesleutel Bestand',
     'LBL_VALIDATION_SUCCESS_DATE'=>'Laatste succesvolle validatie :',
 	'LBL_VISIBLE_PANELS'=>'Getoonde subpanels',
-    'LBL_VISIBLE_TABS'=>'Displayed Tabs',
+    'LBL_AVAILABLE_MODULES' => 'Beschikbare modules',
     'LBL_WORKFLOW_DESC'                     => 'Beheer workflowcondities, waarschuwingen en acties',
     'LBL_WORKFLOW_TITLE'                    => 'Workflow Management',
     'LBL_WORKBENCH' => 'Werkbank',
@@ -954,12 +968,10 @@ $mod_strings = array (
     'WARN_LICENSE_SEATS'=>  "<b>Waarschuwing:</b>Er zijn ",
     'WARN_LICENSE_SEATS2' => " actieve gebruikers, maar uw abonnement voorziet er slechts in ",
     'WARN_LICENSE_SEATS3' =>
-        ". <p class=\"error\">Deactiveer enkele gebruikers, neem contact op met uw partner of vertegenwoordiger"
-        . " of stuur een e-mail naar <a href='mailto:sales@sugarcrm.com'>sales@sugarcrm.com</a>.</p>"
-        . "<p class=\"error\">Zie voor meer informatie die "
-        . "<a target=\"_blank\" "
-        . "href=\"https://support.sugarcrm.com/Knowledge_Base/License/User_Types_and_Sugar_Licenses/index.html\">"
-        . "</a>artikel Soorten gebruikers en Sugar-licenties begrijpen.</p>",
+        ". <p class=\"error\">Deactiveer enkele gebruikers of <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>neem contact op</a> om meer licenties toe te voegen.</p>",
+    'WARN_LICENSE_SEATS3_IDM' =>
+        ". <p class=\"error\">Deactiveer enkele gebruikers in <a target=\"_blank\" href='%s'>SugarCloud Instellingen</a> "
+        . "of <a target=\"_blank\" href='https://support.sugarcrm.com/Resources/Contacting_SugarCRM/'>contact us</a> om meer licenties toe te voegen.</p>",
     'WARN_LICENSE_SEATS_MAXED'=>  "<b>Waarschuwing:</b> Het maximum aantal actieve gebruikers is reeds bereikt:",
     'WARN_LICENSE_SEATS_EDIT_USER'=>  "<b>Waarschuwing:</b> U kunt geen actieve gebruikers meer aanmaken."
         . " Schaf meer abonnementen aan.",
@@ -967,7 +979,7 @@ $mod_strings = array (
     'WARN_LICENSE_TYPE_SEATS_EDIT_MAXED' => 'U kunt niet nog %s extra gebruikers aanmaken. Schaf meer abonnementen aan.',
     'WARN_LICENSE_SEATS_USER_CREATE'=>"<b>Waarschuwing:</b> U kunt geen actieve gebruikers meer aanmaken."
         . " Schaf meer abonnementen aan.",
-    'WARN_REPAIR_CONFIG' => '<b>Waarschuwing:</b> Het config.php bestand moet worden gerepareerd. Gebruik het script <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Configuratiebestand opnieuw opbouwen/a> op de pagina Reparatie in het deel Beheer om het configuratiebestand te repareren.',
+    'WARN_REPAIR_CONFIG' => '<b>Waarschuwing:</b> Het config.php-bestand moet gerepareerd worden.  Gebruik het script <a href=&#39;index.php?module=Administration&action=RebuildConfig&#39;>Configureer-bestand herbouwen</a> op de pagina Repareren in het gedeelte Beheren om het configureerbestand te repareren.',
     'WARN_UPGRADE_APP'=> "Een bijgewerkte versie van de applicatie in nu beschikbaar.",
     'WARN_UPGRADE' => 'Waarschuwing: Upgrade het systeem',
     'WARN_UPGRADENOTE' => 'Opmerking:',
@@ -1041,11 +1053,11 @@ $mod_strings = array (
 
 'ML_PACKAGE_SCANNING'=> '{PACKAGE} scannen',
 'ML_INSTALLATION_FAILED'=> 'Installatie mislukt!',
-'ML_PACKAGE_NOT_CONFIRM'=> 'Het pakket dat u probeert te installeren voldoet niet aan het beleid dat is vastgesteld binnen de Sugar Open Cloud of door uw systeembeheerder.',
+    'ML_PACKAGE_NOT_CONFIRM' => 'Het pakket dat u probeert te installeren voldoet niet aan het beleid dat is vastgesteld door SugarCloud of door uw systeembeheerder.',
 'ML_TO_RESOLVE'=>'Om dit probleem op te lossen:',
-'ML_OBTAIN_NEW_PACKAGE'=>'Klanten van Sugar Open Cloud hebben een nieuw pakket nodig van de pakketaanbieder waarmee de onderstaande problemen worden aangepakt.',
+    'ML_OBTAIN_NEW_PACKAGE' => 'Klanten van SugarCloud hebben een nieuw pakket nodig van de pakketaanbieder waarmee de onderstaande problemen worden aangepakt.',
 'ML_RELAX_LOCAL'=>'Als u Sugar lokaal gebruikt kunt u de beperkingen van Module lader wat versoepelen zodat u het pakket kunt installeren.',
-'ML_SUGAR_LOADING_POLICY'=>'Het laadbeleid van het Sugar Open Cloud pakket is uiteengezet in de',
+    'ML_SUGAR_LOADING_POLICY'=>'Het beleid van SugarCloud wordt uiteengezet in de',
 'ML_SUGAR_KB'=>'SugarCRM Knowledge Base',
 'ML_SUGAR_DZ'=>'SugarCRM Developer Zone',
 'ML_PKG_SCAN_GUIDE'=>'Scanbeleid pakketen',
@@ -1249,6 +1261,7 @@ Eventuele integraties die afhankelijk zijn van dit platform, zullen dan niet lan
     'LBL_ASYNC_CALL_FAILED' => 'Asynchronous Call Failed',
     'LBL_REPAIRXSSEXECUTE_FAILED' => 'Mislukt: Bean of ID niet gedefinieerd',
     'LBL_DIAGNOSTICS_ERROR_SUGARLOG' => 'Kon sugarcrm.log niet kopiëren naar {0}<br>',
+    'LBL_DIAGNOSTICS_ERROR_MLPLOG' => 'Kan package_install.log niet kopiëren naar {0}<br>',
     'LBL_DIAGNOSTICS_ERROR_PHPINFO' => 'Kon niet schrijven naar bestand {0}phpinfo.html<br>',
     'LBL_DIAGNOSTICS_ERROR_LISTBEANFILES' => 'Kon niet schrijven naar bestand {0}beanFiles.html<br>',
     'LBL_DIAGNOSTICS_ERROR_MD5' => 'Kon bestand files.md5 niet kopiëren naar {0}<br>md5 checks worden overgeslagen.<br>',
@@ -1360,10 +1373,28 @@ Eventuele integraties die afhankelijk zijn van dit platform, zullen dan niet lan
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT' => 'Deze instellingen vertegenwoordigen de standaardmappen van het Content Security Policy (CSP) die door webbrowsers wordt gebruikt om te bedienen welke hulpbronnen mogen worden geladen op een webpagina. Raadpleeg voor meer informatie over aanvaardbare veldwaarden en formaten de <a href={{linkToDocumentation}} target="_blank">Systeemdocumentatie</a>. Zodra de CSP-instellingen zijn bijgewerkt, moeten gebruikers hun browser vernieuwen om de veranderingen door te voeren.',
     'LBL_CSP_SETTING_HELP_TEXT_CONTENT_ADVANCED' => 'Deze instellingen zijn bedoeld voor gebruikers met een geavanceerd begrip van de individuele mappen van het Content Security Policy (CSP). De map &#39;img-src&#39; is in Sugar standaard gedefinieerd en biedt de mogelijkheid om alle afbeeldingen te laden via HTTP of HTTPS. Raadpleeg voor meer informatie over aanvaardbare veldwaarden en formaten de <a href={{linkToDocumentation}} target="_blank">Systeemdocumentatie</a>. Zodra de CSP-instellingen zijn bijgewerkt, moeten gebruikers hun browser vernieuwen om de veranderingen door te voeren.',
     //Maps
+    'LBL_MAPS_LOGGER_START_DATE' => 'Aanvangsdatum logs:',
+    'LBL_MAPS_LOGGER_DETAILED_LOGS' => 'Gedetailleerde logs',
+    'LBL_MAPS_LOGGER_NO_LOGS_AVAILABLE' => 'Geen logs beschikbaar.',
+    'LBL_MAPS_LOGGER_ENABLE_MODULES_FOR_LOG' => 'Logs voor modules inschakelen:',
+    'LBL_MAPS_LOGGER_LOG_LEVEL' => 'Logboekniveau selecteren...',
+    'LBL_MAPS_LOGGER_LOG_TYPE' => 'Logniveau:',
+    'LBL_MAPS_LOGGER_LOG_ALL_MESSAGES' => 'Alle Berichten',
+    'LBL_MAPS_LOGGER_LOG_ERROR' => 'Fouten',
+    'LBL_MAPS_LOGGER_LOG_SUCCESS' => 'Geslaagd',
+    'LBL_MAPS_LOGGER_LBL_MODULE' => 'Module',
+    'LBL_MAPS_LOGGER_LBL_NAME' => 'Naam',
+    'LBL_MAPS_LOGGER_LBL_STATUS' => 'Status',
+    'LBL_MAPS_LOGGER_LBL_GEOCODE' => 'Geocodering',
+    'LBL_MAPS_LOGGER_YES' => 'Ja',
+    'LBL_MAPS_LOGGER_NO' => 'Nee',
+    'LBL_MAPS_LOGGER_OF' => 'van',
     'LBL_MAPS_ADMIN_CONFIG_TITLE' => 'Kaarten',
+    'LBL_MAPS_ADMIN_LOG_VIEWER' => 'Log Viewer',
     'LBL_MAPS_ADD_NEW_MODULE_TO_GEOCODE' => 'Voeg een nieuwe module toe voor geocodering',
     'LBL_MAPS_SELECT_NEW_MODULE_TO_GEOCODE' => 'Selecteer een module...',
     'LBL_MAPS_ADMIN_CONFIG_DESCRIPTION' => 'Kaarten configureren',
+    'LBL_MAPS_ADMIN_CONFIG_LOG_VIEWER_DESCRIPTION' => 'Open de Geocoding Logs',
     'LBL_MAPS_LOG_LEVEL_TITLE' => 'Logniveau',
     'LBL_MAPS_LOG_LVL_FATAL' => 'Fataal',
     'LBL_MAPS_LOG_LVL_DEBUG' => 'Debuggen',
@@ -1425,9 +1456,12 @@ Eventuele integraties die afhankelijk zijn van dit platform, zullen dan niet lan
     'LBL_CLOUD_DRIVE_DESCRIPTION' => 'Configureer de standaard padinstellingen voor de cloud drives.',
     'LBL_GOOGLE_DRIVE_NAME' => 'Google Drive',
     'LBL_GOOGLE_DRIVE_TOOLTIP' => 'Configureer standaardpaden Google Drive',
+    'LBL_DROPBOX_DRIVE' => 'Dropbox Drive',
+    'LBL_DROPBOX_DRIVE_TOOLTIP' => 'Configureer standaardpaden Dropbox Drive',
     'LBL_GOOGLE_DRIVE_SAVE_BUTTON' => 'Opslaan',
     'LBL_SELECT_ROOT_PATH' => 'Origineel pad selecteren',
     'LBL_REMOVE_ROOT_PATH' => 'Origineel pad verwijderen',
+    'LBL_ROOT_PATH_REMOVED' => 'Het oorspronkelijke pad is verwijderd.',
     'LBL_VALIDATE_ROOT_PATH' => 'Origineel pad controleren',
     'LBL_PATHS_FOR_RECORD_VIEW' => 'Paden voor weergave record',
     'LBL_DEFAULT_STARTING_PATH' => 'Standaard startpad',
@@ -1441,14 +1475,16 @@ Eventuele integraties die afhankelijk zijn van dit platform, zullen dan niet lan
     'LBL_MICROSOFT_ONEDRIVE_TOOLTIP' => 'Configureer standaardpaden Microsoft OneDrive',
     'LBL_DRIVE_PATH_CONFIG' => 'Config. pad drive',
     'LBL_DRIVE_ROOT_PATH' => 'Origineel pad',
+    'LBL_FIELDS_VARIABLE' => 'Variabele velden',
+    'LBL_UNABLE_TO_RETRIEVE_ROOT_PATH' => 'Oorspronkelijk pad ophalen mislukt',
     'LBL_HINT_NAME' => 'Hintvelden',
     'LBL_HINT_DESCRIPTION' => 'Configureer welke velden worden getoond in het paneel Hint en worden verrijkt door Hint.',
-    'LBL_HINT_SECTION_HEADER' => 'Hint',
-    'LBL_HINT_SECTION_DESCRIPTION' => 'Configureer instellingen voor Hint',
+    'LBL_HINT_SECTION_HEADER' => 'Sugar Hint',
+    'LBL_HINT_SECTION_DESCRIPTION' => 'Configureer instellingen voor Sugar Hint',
 
-    'LBL_HINT_CONFIG' => 'Hints-configuratie',
+    'LBL_HINT_CONFIG' => 'Configuratie Sugar Hint',
     'LBL_HINT_CONFIG_NAME' => 'Hint-configuratie',
-    'LBL_HINT_CONFIG_SAVED' => 'Instellingen Hint-configuratie zijn opgeslagen.',
+    'LBL_HINT_CONFIG_SAVED' => 'Instellingen Sugar Hint-configuratie zijn opgeslagen.',
     'LBL_HINT_CONFIG_DESCRIPTION' => 'Hint-instellingen bijwerken.',
     'LBL_HINT_CONFIG_LOGGER_SECTION_HEADER' => 'Hintlogger',
 
@@ -1456,7 +1492,24 @@ Eventuele integraties die afhankelijk zijn van dit platform, zullen dan niet lan
     'LBL_HINT_RESYNC_DESCRIPTION' => 'Opnieuw synchroniseren met Hint Insights- service om problemen te verhelpen met meldingen, waaronder wijzigingen van voorkeuren en e-mailadressen die niet worden doorgevoerd.',
 
     'LBL_HINT_UNINSTALL' => 'De-installeer',
-    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Deïnstalleer Hint, met inbegrip van uitschakeling van meldingen van Hint Insights.',
+    'LBL_HINT_UNINSTALL_DESCRIPTION' => 'Deïnstalleer Sugar Hint, met inbegrip van uitschakeling van meldingen van Sugar Hint Insights.',
 
     'LBL_HINT_CONFIG_NOTIFICATIONS_HEADER' => 'Notificaties',
+
+    'LBL_DOCUSIGN_GROUP' => 'DocuSign',
+    'LBL_DOCUSIGN_NAME' => 'Instellingen',
+    'LBL_DOCUSIGN_TOOLTIP' => 'Configuratie DocuSign',
+    'LBL_DOCUSIGN_DESCRIPTION' => 'DocuSign-functies configureren',
+    'LBL_SUGAR_MAPS' => 'Sugar-kaarten',
+    'LBL_CLOUD_DRIVE' => 'Cloud Drive',
+
+    // Sugar Automate
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_TITLE' => 'Instellingen van Sugar Automate',
+    'LBL_DRI_CUSTOMER_JOURNEY_SETTINGS_DESC' => 'Configuratie voor het pakket Sugar Automate',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'Sjablonen',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'Sjablonen beheren',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_NAME' => 'Modules configureren',
+    'LBL_DRI_CUSTOMER_JOURNEY_CONFIGURE_MODULES_LINK_DESC' => 'Ingeschakelde modules configureren',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_NAME' => 'Sjablonen',
+    'LBL_DRI_CUSTOMER_JOURNEY_TEMPLATES_LINK_DESC' => 'Sjablonen beheren',
 );

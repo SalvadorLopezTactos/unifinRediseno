@@ -47,4 +47,5 @@ $mod_strings = array(
     'LBL_TAGS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Ετικετών',
     'LBL_MY_TAGS' => 'Οι ετικέτες μου',
     'LBL_MY_FAVORITE_TAGS' => 'Οι αγαπημένες μου ετικέτες',
+    'LBL_MORE_TAGS' => '{{tagsNumber}} Ετικέτες',
 );

@@ -667,7 +667,10 @@ li.tab.tab-badgeable {
 
   .label {
     margin: 0 2px;
-    display: inline;
+
+    &:not(.label-module) {
+      display: inline;
+    }
   }
 
   .case-expired {
@@ -716,3 +719,46 @@ li.tab.tab-badgeable {
   }
 }
 
+.forecasts-main {
+  .nav-tabs {
+    border-bottom-color: var(--border-color-focus);
+
+    > li {
+      margin: 0;
+      text-align: center;
+      max-width: 165px;
+
+      > a {
+        color: @labelColor;
+        outline: none;
+        padding: 6px 12px 3px;
+        .font-semibold();
+        .text-center();
+      }
+
+      &:hover {
+        .bg-tab-background-hover-color();
+      }
+
+      &.active {
+        .active-tab();
+
+        > a {
+          color: @linkColor;
+        }
+      }
+
+      &:not(.active) {
+        > a {
+          &:hover {
+            color: @textColorHover;
+          }
+        }
+
+        &:hover {
+          height: 31px;
+        }
+      }
+    }
+  }
+}

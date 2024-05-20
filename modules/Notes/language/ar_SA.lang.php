@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الملاحظات',
     'LBL_NOTES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الملاحظات',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم الملاحظات',
+    'LBL_EXTERNAL_USER' => 'المستخدم الخارجي',
+    'LBL_EXTERNAL_USER_NAME' => 'المستخدم الخارجي',
 
     'LBL_RELATED_CONTACT' => 'جهة الاتصال ذات الصلة',
     'ERR_DELETE_RECORD' => 'يجب تحديد رقم السجل لحذف الحساب.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'نوع البريد الإلكتروني',
     'LBL_EMAIL_ID' => 'معرف البريد الإلكتروني',
     'LBL_PHONE' => 'الهاتف:',
-    'LBL_PORTAL_FLAG' => 'العرض في الموقع المدخلي؟',
+    'LBL_PORTAL_FLAG' => 'متاح خارجيًا',
     'LBL_EMBED_FLAG' => 'تضمين في البريد الإلكتروني؟',
     'LBL_PRODUCT_ID' => 'معرّف بند العرض:',
     'LBL_QUOTE_ID' => 'معرّف العرض:',

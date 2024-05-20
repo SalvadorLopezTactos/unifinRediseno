@@ -19,6 +19,7 @@ use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use Sugarcrm\IdentityProvider\League\OAuth2\Client\Provider\HttpBasicAuth\HttpBasicAuthOptionProviderUrlEncoded;
 use Sugarcrm\Sugarcrm\League\OAuth2\Client\Grant\JwtBearer;
 use Sugarcrm\IdentityProvider\Utils\RetryHttpClientBuilder;
 
@@ -95,20 +96,8 @@ class IdmProvider extends BasicGenericProvider
         if (!array_key_exists('httpClient', $collaborators)) {
             $collaborators['httpClient'] = $this->createHttpClient($options);
         }
+        $collaborators['optionProvider'] = new HttpBasicAuthOptionProviderUrlEncoded();
         parent::__construct($options, $collaborators);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function getAccessTokenOptions(array $params)
-    {
-        unset($params['client_id'], $params['client_secret']);
-
-        $options = parent::getAccessTokenOptions($params);
-        $options['headers']['Authorization'] = $this->getHttpBasicAuthHeader();
-
-        return $options;
     }
 
     /**
@@ -143,7 +132,10 @@ class IdmProvider extends BasicGenericProvider
      */
     protected function getAllowedClientOptions(array $options)
     {
-        return array_merge(parent::getAllowedClientOptions($options), ['handler', 'verify']);
+        return array_merge(
+            parent::getAllowedClientOptions($options),
+            ['handler', 'verify', 'headers']
+        );
     }
 
     /**
@@ -329,9 +321,7 @@ class IdmProvider extends BasicGenericProvider
         if (isset($config['http_client']['retry_count'])) {
             $options['retry_count'] = (int) $config['http_client']['retry_count'];
         }
-        $options['delay_strategy'] = isset($config['http_client']['delay_strategy'])
-            ? $config['http_client']['delay_strategy']
-            : RetryHttpClientBuilder::DELAY_STRATEGY_LINEAR;
+        $options['delay_strategy'] = $config['http_client']['delay_strategy'] ?? RetryHttpClientBuilder::DELAY_STRATEGY_LINEAR;
 
         $proxyConfig = $this->getHTTPClientProxy();
         if (!empty($proxyConfig)) {
@@ -340,6 +330,10 @@ class IdmProvider extends BasicGenericProvider
 
         if (isset($config['http_client']['verify'])) {
             $options['verify'] = $config['http_client']['verify'];
+        }
+
+        if (isset($config['http_client']['headers'])) {
+            $options['headers'] = array_merge($options['headers'] ?? [], $config['http_client']['headers']);
         }
 
         return RetryHttpClientBuilder::getClient(

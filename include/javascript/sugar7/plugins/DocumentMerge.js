@@ -116,19 +116,21 @@
             mergeTemplate: function(mergeType, model) {
                 this.mergeType = this._processMergeType(mergeType);
 
-                let collectionFilter = {
-                    filter: [{
+                let collectionOptions = {
+                    persistentFilter: {
                         template_module: this.module,
-                    }]
+                    }
                 };
 
                 if (this._isMultiMerge()) {
                     this.selectedModels = this.context.get('mass_collection').models;
-                    collectionFilter.filter[0].file_ext = 'docx';
+                    collectionOptions.persistentFilter.file_ext = 'docx';
                 }
 
                 //create collection with filter for the current module
-                let filterCollection = app.data.createBeanCollection(this.templatesModule, null, collectionFilter);
+                let filterCollection = app.data.createBeanCollection(this.templatesModule, null, collectionOptions);
+
+                filterCollection.setOption('endpoint', this.documentTemplatesCollectionEndpoint);
 
                 //open drawer with document templates
                 app.drawer.open(
@@ -143,6 +145,46 @@
                     },
                     _.bind(this._templateSelectedCallback, this, model)
                 );
+            },
+
+            /**
+             * Document tempokates collection endpoint
+             *
+             * @param {string} method
+             * @param {Array} collection
+             * @param {Object} options
+             * @param {Object} callbacks
+             * @return {HttpRequest}
+             */
+            documentTemplatesCollectionEndpoint: function(method, collection, options, callbacks) {
+                const ctxCollection = this.context.get('collection');
+                const templateModule = ctxCollection._persistentOptions.persistentFilter.template_module;
+                if (!_.isUndefined(templateModule)) {
+                    if (!options.params.filter) {
+                        options.params.filter = [];
+                    }
+                    options.params.filter.push({'template_module': {
+                        '$starts': templateModule
+                    }});
+                }
+
+                const fileExt = ctxCollection._persistentOptions.persistentFilter.file_ext;
+                if (!_.isUndefined(fileExt)) {
+                    if (!options.params.filter) {
+                        options.params.filter = [];
+                    }
+                    options.params.filter.push({'file_ext': {
+                        '$equals': fileExt
+                    }});
+                }
+                var url = app.api.buildURL(
+                    this.context.get('module'),
+                    null,
+                    {},
+                    options.params
+                );
+
+                return app.api.call('read', url, null, callbacks);
             },
 
             /**

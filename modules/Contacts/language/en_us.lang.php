@@ -21,7 +21,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Contacts List Dashboard',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Contacts Record Dashboard',
-    'LBL_CONTACTS_FOCUS_DRAWER_DASHBOARD' => 'Contacts Focus Drawer',
+    'LBL_CONTACTS_FOCUS_DRAWER_DASHBOARD' => 'Contacts Focus Dashboard',
     'LBL_SITE_USER_ID' => 'Hash of site_url and contact id',
     'LBL_COOKIE_CONSENT' => 'Cookie Consent',
     'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookie Consent Received On',

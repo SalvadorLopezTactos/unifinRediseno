@@ -73,6 +73,13 @@ $viewdefs['Documents']['base']['view']['list'] = array(
                     'enabled' => true,
                     'default' => true,
                 ),
+                array(
+                    'name' => 'is_shared',
+                    'label' => 'LBL_IS_SHARED',
+                    'default' => false,
+                    'enabled' => true,
+                    'selected' => false,
+                ),
             ),
         ),
     ),

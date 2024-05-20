@@ -13,6 +13,18 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 class ViewSugarFieldCollection{
+    /**
+     * @var mixed
+     */
+    public $edit_tpl_path;
+    /**
+     * @var mixed
+     */
+    public $detail_tpl_path;
+    /**
+     * @var mixed[]|mixed
+     */
+    public $type;
     var $ss; // Sugar Smarty Object
     var $bean;
     var $bean_id;
@@ -37,8 +49,8 @@ class ViewSugarFieldCollection{
     {
     	$this->json = getJSONobj();
     	if($fill_data){
-	        $this->displayParams = $this->json->decode(html_entity_decode($_REQUEST['displayParams']));
-	        $this->vardef = $this->json->decode(html_entity_decode($_REQUEST['vardef']));
+            $this->displayParams = $this->json->decode(html_entity_decode($_REQUEST['displayParams'], ENT_COMPAT));
+            $this->vardef = $this->json->decode(html_entity_decode($_REQUEST['vardef'], ENT_COMPAT));
             $this->module_dir = InputValidation::getService()->getValidInputRequest(
                 'module_dir',
                 'Assert\Mvc\ModuleName'
@@ -306,8 +318,7 @@ FRA;
         if(!$this->checkTemplate($cacheRowFile)){
             $dir = dirname($cacheRowFile);
             if(!file_exists($dir)) {
-
-               mkdir_recursive($dir, null, true);
+                mkdir_recursive($dir, null);
             }
             $cacheRow = $this->ss->fetch($this->findTemplate('CollectionEditViewRow'));
             file_put_contents($cacheRowFile, $cacheRow);
@@ -359,9 +370,9 @@ FRA;
                  //billing/shippingKey value (i.e. 'billingKey' => 'primary' in Contacts will populate
                  //primary_XXX fields with the Account's billing address values).
                  //addtionalFields are key/value pair of fields to fill from Accounts(key) to Contacts(value)
-                    $billingKey = isset($this->displayParams['billingKey']) ? $this->displayParams['billingKey'] : null;
-                    $shippingKey = isset($this->displayParams['shippingKey']) ? $this->displayParams['shippingKey'] : null;
-                    $additionalFields = isset($this->displayParams['additionalFields']) ? $this->displayParams['additionalFields'] : null;
+                    $billingKey = $this->displayParams['billingKey'] ?? null;
+                    $shippingKey = $this->displayParams['shippingKey'] ?? null;
+                    $additionalFields = $this->displayParams['additionalFields'] ?? null;
                     $sqs_objects[$name1] = $qsd->getQSAccount($nameKey, $idKey, $billingKey, $shippingKey, $additionalFields);
                 } else if($matches[0] == 'Contacts'){
                     $sqs_objects[$name1] = $qsd->getQSContact($name1, "id_".$name1);

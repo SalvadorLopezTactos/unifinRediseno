@@ -54,7 +54,7 @@ class ImportViewStep3 extends ImportView
             if (isset($mapping_file->delimiter))
                 $_REQUEST['custom_delimiter'] = $mapping_file->delimiter;
             if (isset($mapping_file->enclosure))
-                $_REQUEST['custom_enclosure'] = htmlentities($mapping_file->enclosure);
+                $_REQUEST['custom_enclosure'] = htmlentities($mapping_file->enclosure, ENT_COMPAT);
             $field_map = $mapping_file->getMapping();
             //print_r($field_map);die();
 			$default_values = $mapping_file->getDefaultValues();
@@ -86,7 +86,7 @@ class ImportViewStep3 extends ImportView
         $delimiters = $this->getDelimitersFromRequest();
         $this->ss->assign("CUSTOM_DELIMITER", $delimiters['custom']);
         $this->ss->assign("CUSTOM_DELIMITER_OTHER", $delimiters['other']);
-        $this->ss->assign("CUSTOM_ENCLOSURE", htmlentities($customEnclosure));
+        $this->ss->assign("CUSTOM_ENCLOSURE", htmlentities($customEnclosure, ENT_COMPAT));
 
        //populate import locale  values from import mapping if available, these values will be used througout the rest of the code path
 
@@ -265,7 +265,7 @@ class ImportViewStep3 extends ImportView
                         && isset($mod_strings['LBL_IMPORT_FIELDDEF_' . strtoupper($properties['type'])]) )
                     $fieldtype = ' [' . $mod_strings['LBL_IMPORT_FIELDDEF_' . strtoupper($properties['type'])] . '] ';
 
-                $comment = isset($properties['comments']) ? $properties['comments'] : (isset($properties['comment']) ? $properties['comment'] : '');
+                $comment = $properties['comments'] ?? $properties['comment'] ?? '';
                 if (!empty($comment)) {
                     $fieldtype .= ' - ' . $comment;
                 }
@@ -286,7 +286,7 @@ class ImportViewStep3 extends ImportView
                     $import_module,
                     $defaultField,
                     $fields[$defaultField],
-                    ( isset($default_values[$defaultField]) ? $default_values[$defaultField] : '' ),
+                    ( $default_values[$defaultField] ?? '' ),
                     array('idName' => "default_value_$defaultField")
                 );
             }
@@ -297,9 +297,9 @@ class ImportViewStep3 extends ImportView
             // Bug 27046 - Sort the column name picker alphabetically
             ksort($options);
 
-            $cellOneData = isset($rows[0][$field_count]) ? $rows[0][$field_count] : '';
-            $cellTwoData = isset($rows[1][$field_count]) ? $rows[1][$field_count] : '';
-            $cellThreeData = isset($rows[2][$field_count]) ? $rows[2][$field_count] : '';
+            $cellOneData = $rows[0][$field_count] ?? '';
+            $cellTwoData = $rows[1][$field_count] ?? '';
+            $cellThreeData = $rows[2][$field_count] ?? '';
             $columns[] = array(
                 'field_choices' => implode('',$options),
                 'default_field' => $defaultFieldHTML,
@@ -347,7 +347,7 @@ class ImportViewStep3 extends ImportView
                             && isset($mod_strings['LBL_IMPORT_FIELDDEF_' . strtoupper($properties['type'])]) )
                         $fieldtype = ' [' . $mod_strings['LBL_IMPORT_FIELDDEF_' . strtoupper($properties['type'])] . '] ';
 
-                    $comment = isset($properties['comments']) ? $properties['comments'] : (isset($properties['comment']) ? $properties['comment'] : '');
+                    $comment = $properties['comments'] ?? $properties['comment'] ?? '';
                     if (!empty($comment)) {
                         $fieldtype .= ' - ' . $comment;
                     }

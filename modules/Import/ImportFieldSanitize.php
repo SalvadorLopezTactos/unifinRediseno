@@ -273,7 +273,7 @@ class ImportFieldSanitize
      */
     public function getField($type)
     {
-        return $this->sfh->getSugarField(ucfirst($type));
+        return $this->sfh->getSugarField($type);
     }
 
     /**

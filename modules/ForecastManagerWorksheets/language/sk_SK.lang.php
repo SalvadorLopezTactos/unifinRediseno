@@ -146,7 +146,7 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Neplatná hodnota pre {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Hodnota musí byť medzi  {{min}} a {{max}}',
-    'LBL_HISTORY_LOG' => 'Posledné schválenie',
+    'LBL_HISTORY_LOG' => 'Posledný záväzok',
     'LBL_NO_COMMIT' => 'Žiadne predchádzajúce schválenie',
 
     'LBL_MANGER_SAVED' => 'Manager Saved'

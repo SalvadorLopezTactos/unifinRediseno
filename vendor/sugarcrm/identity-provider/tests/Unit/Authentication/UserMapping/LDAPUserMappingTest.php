@@ -41,7 +41,7 @@ class LDAPUserMappingTest extends \PHPUnit_Framework_TestCase
     {
         $user = new User('Jim', '', ['middle-name' => 'Boyer']);
         $mapper = new LDAPUserMapping([]);
-        $this->assertEquals($user->getUsername(), $mapper->getIdentityValue($user));
+        $this->assertEquals($user->getUserIdentifier(), $mapper->getIdentityValue($user));
     }
 
     /**
@@ -57,14 +57,14 @@ class LDAPUserMappingTest extends \PHPUnit_Framework_TestCase
             ],
             'Empty mapping, nonempty Entry' => [
                 [],
-                new Entry('foo', ['cn' => 'Foo']),
+                new Entry('foo', ['cn' => ['Foo']]),
                 [],
             ],
             'Mapping has no entry value' => [
                 [
                     'sn' => 'last_name'
                 ],
-                new Entry('foo', ['cn' => 'Foo']),
+                new Entry('foo', ['cn' => ['Foo']]),
                 [],
             ],
             'Mapping has entry value' => [
@@ -72,7 +72,7 @@ class LDAPUserMappingTest extends \PHPUnit_Framework_TestCase
                     'sn' => 'last_name',
                     'cn' => 'first_name',
                 ],
-                new Entry('foo', ['sn' => 'Bobby']),
+                new Entry('foo', ['sn' => ['Bobby']]),
                 [
                     'last_name' => 'Bobby',
                 ],
@@ -82,7 +82,7 @@ class LDAPUserMappingTest extends \PHPUnit_Framework_TestCase
                     'sn' => 'last_name',
                     'cn' => 'first_name',
                 ],
-                new Entry('foo', ['cn' => 'Foo', 'sn' => 'Bobby']),
+                new Entry('foo', ['cn' => ['Foo'], 'sn' => ['Bobby']]),
                 [
                     'last_name' => 'Bobby',
                     'first_name' => 'Foo',
@@ -94,7 +94,7 @@ class LDAPUserMappingTest extends \PHPUnit_Framework_TestCase
                     'sn' => 'attr.last_name',
                     'cn' => 'attr.first_name',
                 ],
-                new Entry('foo', ['cn' => 'Foo', 'sn' => 'Bobby', 'l' => 'New York']),
+                new Entry('foo', ['cn' => ['Foo'], 'sn' => ['Bobby'], 'l' => ['New York']]),
                 [
                     'attr' => [
                         'last_name' => 'Bobby',
@@ -114,11 +114,11 @@ class LDAPUserMappingTest extends \PHPUnit_Framework_TestCase
                 new Entry(
                     'foo',
                     [
-                        'cn' => 'Foo',
-                        'sn' => 'Bobby',
-                        'l' => 'New York',
-                        'title' => 'Senior Account Rep',
-                        'customAddr' => 'Wall Street',
+                        'cn' => ['Foo'],
+                        'sn' => ['Bobby'],
+                        'l' => ['New York'],
+                        'title' => ['Senior Account Rep'],
+                        'customAddr' => ['Wall Street'],
                     ]
                 ),
                 [

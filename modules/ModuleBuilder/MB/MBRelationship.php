@@ -20,6 +20,15 @@
 class MBRelationship
 {
     
+    /**
+     * @var \UndeployedRelationships|mixed
+     */
+    public $implementation;
+    /**
+     * @var mixed
+     */
+    public $moduleName;
+    public $path;
     public $relatableModules = array ( ) ; // required by MBModule
     public $relationships = array ( ) ; // required by view.relationships.php; must be kept in sync with the implementation
 

@@ -204,6 +204,7 @@ class FontManager{
      * @return boolean true if font files have been found
      */
     private function parseFolder(){
+        $result = [];
         if(!file_exists(K_PATH_FONTS) || !is_dir(K_PATH_FONTS)){
             array_push($this->errors, translate("ERR_NO_FONT_PATH","Configurator"));
             return false;
@@ -233,7 +234,7 @@ class FontManager{
     public function listFontFiles(){
         $this->fontList=array();
         if(file_exists($cachedfile = sugar_cached("Sugarpdf/cachedFontList.php"))) {
-            require $cachedfile;
+            include $cachedfile;
             $this->fontList=$cachedFontList;
             return true;
         }else{
@@ -375,5 +376,3 @@ class FontManager{
         return $this->loadFontFile();
     }
 }
-
-?>

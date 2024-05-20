@@ -27,4 +27,6 @@ $mod_strings = array(
     //Dashboards
     'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Instrumentpanel för rapportschemaposter',
     'LBL_FILE_TYPE' => 'Filtyp(er)',
+    'LBL_EMBED_REPORT' => 'Bädda in rapport i e-post',
+    'LBL_EMBED_REPORT_INFO' => 'OBS! Om rapporten överstiger 200 rader bifogar vi rapporten som CSV-fil.',
 );

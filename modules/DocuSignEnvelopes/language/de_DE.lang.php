@@ -61,6 +61,8 @@ $mod_strings = [
     'LBL_NO_CLIENT_SECRET' => 'Kein Kundengeheimnis festgelegt',
     'LBL_RESEND_BUTTON_LABEL' => 'Erneut senden',
     'LBL_FETCH_ENVELOPE_BUTTON_LABEL' => 'Umschlag abrufen',
+    'LBL_CLOUD_SERVICE_TYPE' => 'Cloud-Servicetyp',
+    'LBL_CLOUD_PATH' => 'Cloud-Pfad',
 
     // Dashboards
     'LBL_DOCUSIGN_ENVELOPES_LIST_DASHBOARD' => 'Dashbord mit den DocuSign Umschläge-Listen',
@@ -68,7 +70,7 @@ $mod_strings = [
     'LBL_RECENTLY_CREATED_DOCUSIGN_ENVELOPES_DASHLET' => 'Neuliche DocuSign Umschläge',
     'LBL_DOCUSIGN_ENVELOPES_FOCUS_DRAWER_DASHBOARD' => 'Focus Drawer für DocuSign Umschläge',
 
-    'LBL_DOCUMENT_FROM' => 'Dokument von',
+    'LBL_NEW_ENVELOPE' => 'Neuer Umschlag',
     'LBL_DOCUMENT_IS_NOW' => 'ist jetzt',
     'LBL_ERROR_ACCOUNT_ID_NOT_FOUND' => 'DocuSign-Fehler. Die Konto-ID konnte anhand des Zugriffstokens nicht ermittelt werden',
     'LBL_ERROR_RESEND' => 'DocuSign konnte nicht erneut gesendet werden. Envelope-Status muss &#39;gesendet&#39; sein',
@@ -77,6 +79,8 @@ $mod_strings = [
     'LBL_UPDATE_FAILED' => 'Update fehlgeschlagen',
     'LBL_ERROR_FETCH_TIME' => 'DocuSign-Regeln erlauben keine mehrfachen Anfragen an denselben Envelope innerhalb von 15 Minuten',
     'LBL_ERROR_UPDATING_ENVLOPE' => 'Es ist ein Fehler aufgetreten. Envelope konnte nicht aktualisiert werden. Bitte prüfen Sie die Protokolle!',
+    'LBL_ERROR_LISTING_TEMPLATES' => 'Es ist ein Fehler aufgetreten. Vorlagen konnten nicht aufgelistet werden. Bitte prüfen Sie die Protokolle!',
+    'LBL_ERROR_FETCHING_TEMPLATE' => 'Es ist ein Fehler aufgetreten. Vorlage konnte nicht abgerufen werden. Bitte prüfen Sie die Protokolle!',
     'LBL_ERROR_ENVELOPE_NOT_COMPLETED' => 'Envelope nicht abgeschlossen',
     'LBL_ERROR_ENVELOPE_IS_NOW' => 'Envelope-Status in DocuSign ist jetzt',
     'LBL_OVERVIEW' => 'Überblick',
@@ -89,7 +93,7 @@ $mod_strings = [
     'LBL_BUTTON_ADD_DOCUMENT' => 'Dokument hinzufügen',
     'LBL_BUTTON_SEND' => 'Senden',
     'LBL_BUTTON_CLEAR' => 'Leeren',
-    'LBL_MISSING_OBJECT' => 'DocuSign-Objekt ist nicht im Fenster',
+    'LBL_BUTTON_SELECT_TEMPLATE' => 'Vorlage verwenden',
     'LBL_PLEASE_LOG_IN' => 'Bitte melden Sie sich zuerst bei DocuSign an!',
     'LBL_DOWNLOAD_NOT_ALLOWED' => 'Sie können dieses Dokument nicht herunterladen. Es wurde von einem anderen Benutzer erstellt!',
     'LBL_SEND_NOT_ALLOWED' => 'Sie können diesen Envelope nicht versenden. Er wurde von einem anderen Benutzer erstellt!',
@@ -112,4 +116,20 @@ $mod_strings = [
     'LBL_ENVELOPE_STATUS_SIGNED' => 'Unterzeichnet',
     'LBL_ERROR_DOWNLOADING_DOCUMENT' => 'Das Dokument konnte nicht heruntergeladen werden. Bitte prüfen Sie die Protokolle!',
     'LBL_DOCUMENT_COMPLETED' => 'Abgeschlossen',
+
+    'LBL_NOTIFICATION_SEVERITY' => 'DocuSign Info',
+    'LBL_NOTIFICATION_ENVELOPE_IS_NOW' => 'ist jetzt',
+    'LBL_SETTINGS_TITLE' => 'DocuSign-Einstellungen',
+    'LBL_RECIPIENT_SELECTION' => 'Empfängerauswahl-Verhalten',
+    'LBL_RECIPIENT_NAME' => 'Name',
+    'LBL_RECIPIENT_EMAIL' => 'E-Mail',
+    'LBL_RECIPIENT_TYPE' => 'Typ',
+    'LBL_TEMPLATE_NAME' => 'Name',
+    'LBL_RECIPIENT_SELECT' => 'Auswählen...',
+    'LBL_RECIPIENT_ROLE' => 'Rolle',
+    'LBL_SELECT_BUTTON_LABEL' => 'Auswählen',
+    'LBL_BACK_BUTTON_LABEL' => 'Zurück',
+
+    'LBL_FAILED_FETCH_RECIPIENTS' => 'Potenzielle Empfänger konnten nicht abgerufen werden!',
+    'LBL_FAILED_FETCH_TEMPLATES' => 'Vorlagen konnten nicht abgerufen werden!',
 ];

@@ -21,4 +21,5 @@ $mod_strings = [
     'LBL_LATITUDE' => 'Laiuskraad',
     'LBL_LONGITUDE' => 'Pikkuskraad',
     'LBL_GEOCODED' => 'Geokodeeritud',
+    'LBL_ERROR_MESSAGE' => 'Geokoodi tõrketeade',
 ];

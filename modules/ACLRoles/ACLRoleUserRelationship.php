@@ -9,6 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\ACL\Cache as AclCacheInterface;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
 /**
  * Relationship between ACL Roles and Users which maintains ACL Role Sets
@@ -42,7 +44,9 @@ class ACLRoleUserRelationship extends M2MRelationship
         if ($result) {
             $this->registerUserAclRoles($rhs);
         }
-
+        if ($rhs instanceof User && !empty($rhs->id)) {
+            Container::getInstance()->get(AclCacheInterface::class)->clearByUser($rhs->id);
+        }
         return $result;
     }
 

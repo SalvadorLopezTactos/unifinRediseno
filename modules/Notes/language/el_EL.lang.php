@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_NOTES_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Σημειώσεων',
     'LBL_NOTES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Σημειώσεων',
     'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης σημειώσεων',
+    'LBL_EXTERNAL_USER' => 'Εξωτερικός Χρήστης',
+    'LBL_EXTERNAL_USER_NAME' => 'Εξωτερικός Χρήστης',
 
     'LBL_RELATED_CONTACT' => 'Σχετική Επαφή',
     'ERR_DELETE_RECORD' => 'Πρέπει να προσδιορίσετε αριθμό εγγραφής για να διαγράψετε τον λογαριασμό.',
@@ -66,7 +68,7 @@ $mod_strings = array(
     'LBL_EMAIL_TYPE' => 'Τύπος Email',
     'LBL_EMAIL_ID' => 'Ταυτότητα Email',
     'LBL_PHONE' => 'Τηλέφωνο:',
-    'LBL_PORTAL_FLAG' => 'Εμφάνιση στο Portal;',
+    'LBL_PORTAL_FLAG' => 'Διατίθεται Εξωτερικά',
     'LBL_EMBED_FLAG' => 'Ενσωμάτωση στο email;',
     'LBL_PRODUCT_ID' => 'Ταυτότητα Προϊόντος:',
     'LBL_QUOTE_ID' => 'Ταυτότητα Προσφοράς:',

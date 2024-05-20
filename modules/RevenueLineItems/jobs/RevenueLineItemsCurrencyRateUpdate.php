@@ -26,7 +26,7 @@ class RevenueLineItemsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
      * @const CHUNK_SIZE
      * number of SQL queries to group together for SQLRunner
      */
-    const CHUNK_SIZE = 100;
+    public const CHUNK_SIZE = 100;
 
     /**
      * constructor
@@ -151,14 +151,14 @@ INNER JOIN (
 GROUP BY T1.opportunity_id
 SQL;
 
-            $stmt = $conn->executeQuery(
+            $rows = $conn->executeQuery(
                 $selectQuery,
                 [$this->currencyId, $stages],
                 [null, Connection::PARAM_STR_ARRAY],
             );
 
             $queryParams = [];
-            foreach ($stmt as $row) {
+            foreach ($rows->iterateAssociative() as $row) {
                 $queryParams[] = [
                     $row['likely'],
                     $row['best'],

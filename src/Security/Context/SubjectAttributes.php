@@ -75,6 +75,7 @@ class SubjectAttributes implements JsonSerializable
     /**
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $data = ['subject' => $this->subject->jsonSerialize()];

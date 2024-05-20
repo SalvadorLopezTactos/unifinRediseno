@@ -23,6 +23,10 @@
  */
 class MailerFactory
 {
+    protected static $strategies = [
+        OutboundEmailConfigurationPeer::MODE_SMTP => "SmtpMailer",
+    ];
+
     /**
      * This retrieves the System Default Outbound Mail configuration.
      *
@@ -170,9 +174,7 @@ class MailerFactory
      */
     protected static function getStrategies()
     {
-        return array(
-            OutboundEmailConfigurationPeer::MODE_SMTP => "SmtpMailer",
-        );
+        return self::$strategies;
     }
 
     /**

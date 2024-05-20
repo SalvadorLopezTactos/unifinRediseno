@@ -72,6 +72,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_HISTORY' => '연혁',
     'LBL_PMSE_LABEL_NOTES' => '참고 보기',
     'LBL_PMSE_LABEL_ADD_NOTES' => '메모 추가',
+    'LBL_PMSE_LABEL_SEND_TO_DOCUSIGN' => 'DocuSign에 전송',
 
     'LBL_PMSE_FORM_OPTION_SELECT' => '선택합니다.',
     'LBL_PMSE_FORM_LABEL_USER' => '사용자',
@@ -151,9 +152,11 @@ $mod_strings = array (
     'LBL_PA_PROCESS_APPROVE_QUESTION' => '정말 이 프로세스를 승인하시겠습니까?',
     'LBL_PA_PROCESS_REJECT_QUESTION' => '정말 이 프로세스를 거절하시겠습니까?',
     'LBL_PA_PROCESS_ROUTE_QUESTION' => '정말 이 프로세스를 경유하시겠습니까?',
+    'LBL_PA_PROCESS_SEND_DOCUSIGN_QUESTION' => '이 프로세스를 DocuSign에 전송하시겠습니까?',
     'LBL_PA_PROCESS_APPROVED_SUCCESS' => '프로세스를 성공적으로 승인하였습니다',
     'LBL_PA_PROCESS_REJECTED_SUCCESS' => '프로세스를 성공적으로 거절하였습니다',
     'LBL_PA_PROCESS_ROUTED_SUCCESS' => '프로세스를 성공적으로 경유하였습니다',
+    'LBL_PA_PROCESS_SEND_DOCUSIGNED_SUCCESS' => '프로세스가 DocuSign으로 전송되었습니다',
     'LBL_PA_PROCESS_CLOSED' => '보려는 프로세스가 닫혔습니다.',
     'LBL_PA_PROCESS_UNAVAILABLE' => '보려는 프로세스를 현재 사용할 수 없습니다.',
 

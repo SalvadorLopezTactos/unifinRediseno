@@ -68,6 +68,7 @@ class PasswordConfigCommand extends Command implements InstanceModeInterface
 
         $output->writeln(array('', 'Hashing Configuration:'));
         $this->showHashingInfo($output);
+        return 0;
     }
 
     /**
@@ -80,7 +81,7 @@ class PasswordConfigCommand extends Command implements InstanceModeInterface
         $table = new Table($output);
 
         foreach ($this->pwdRules as $key => $label) {
-            $value = isset($config[$key]) ? $config[$key] : 'unknown';
+            $value = $config[$key] ?? 'unknown';
             if (is_bool($value)) {
                 $value = $value ? 'yes' : 'no';
             }

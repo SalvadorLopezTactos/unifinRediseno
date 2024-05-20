@@ -29,8 +29,8 @@ class TestUpgrader extends UpgradeDriver
         $this->context = array(
             "admin" => $admin->user_name,
             "log" => "cache/upgrade.log",
-            "source_dir" => realpath(dirname(__FILE__)."/../../"),
-            'new_source_dir' => realpath(dirname(__FILE__)."/../../"),
+            "source_dir" => realpath(__DIR__."/../../"),
+            'new_source_dir' => realpath(__DIR__."/../../"),
             "zip" => "UNITTEST",
         );
         parent::__construct();
@@ -40,7 +40,7 @@ class TestUpgrader extends UpgradeDriver
 
     public function start()
     {
-        list($version, $build) = static::getVersion();
+        [$version, $build] = static::getVersion();
         $this->log("TestUpgrader v.$version (build $build) starting");
     }
 

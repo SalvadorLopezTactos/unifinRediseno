@@ -307,13 +307,13 @@ class Contract extends SugarBean
         return $list_form;
     }
 
-    function get_list_view_data()
+    public function get_list_view_data($filter_fields = [])
     {
         $fields = $this->get_list_view_array();
 
         //$fields['TOTAL_CONTRACT_VALUE']= format_number($fields['TOTAL_CONTRACT_VALUE']);
         $this->contract_types = getContractTypesDropDown();
-        $fields['TYPE'] = isset($this->contract_types[$fields['TYPE']]) ? $this->contract_types[$fields['TYPE']] : $fields['TYPE'];
+        $fields['TYPE'] = $this->contract_types[$fields['TYPE']] ?? $fields['TYPE'];
         return $fields;
     }
 

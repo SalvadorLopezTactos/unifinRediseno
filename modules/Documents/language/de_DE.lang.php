@@ -85,6 +85,7 @@ $mod_strings = array (
     'LBL_DET_IS_TEMPLATE'=>'Vorlage?:',
     'LBL_DET_TEMPLATE_TYPE'=>'Dokumenttyp:',
     'LBL_TEAM'=> 'Team:',
+    'LBL_IS_SHARED' => 'Extern verfügbar:',
     'LBL_DOC_DESCRIPTION'=>'Beschreibung:',
     'LBL_DOC_ACTIVE_DATE'=> 'Veröffentlichungsdatum:',
     'LBL_DOC_EXP_DATE'=> 'Ablaufdatum:',
@@ -173,4 +174,13 @@ $mod_strings = array (
 
     // Subpanels
     'LBL_SEND_TO_DOCUSIGN_BUTTON' => 'An DocuSign senden',
+
+    // Cloud Drive
+
+    'LBL_SYNC_TO_GOOGLE_BUTTON_LABEL' => 'Mit Google Drive synchronisieren',
+    'LBL_SYNC_ALL_TO_GOOGLE_BUTTON_LABEL' => 'Alle mit Google Drive synchronisieren',
+    'LBL_SYNC_ALL_TO_ONEDRIVE_BUTTON_LABEL' => 'Alle mit OneDrive synchronisieren',
+    'LBL_SYNC_TO_ONEDRIVE_BUTTON_LABEL' => 'Mit OneDrive synchronisieren',
+    'LBL_SYNC_ALL_TO_DROPBOX_BUTTON_LABEL' => 'Alle mit Dropbox synchronisieren',
+    'LBL_SYNC_TO_DROPBOX_BUTTON_LABEL' => 'Mit Dropbox synchronisieren',
 );

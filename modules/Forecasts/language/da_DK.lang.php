@@ -27,6 +27,8 @@ $mod_strings = array (
     'LNK_FORECAST_LIST' => 'Foreløbig historik',
     'LBL_FORECAST_HISTORY' => 'Prognoser: historik',
     'LBL_FORECAST_HISTORY_TITLE' => 'Prognoser: historik',
+    'LBL_TAB_COMMITMENT' => 'Forpligtelse',
+    'LBL_CURRENT' => 'Nuværende',
 
     //var defs
     'LBL_TIMEPERIOD_NAME' => 'Tidsperiode',
@@ -52,6 +54,9 @@ $mod_strings = array (
     'LBL_MODIFIED_USER_ID'=>'Ændret af',
     'LBL_WK_VERSION' => 'Version',
     'LBL_WK_REVISION' => 'Revision',
+
+    // API message labels
+    'LBL_METRICS_API_NO_ACCESS' => 'Adgang til metrik-API&#39;en kræver Sugar Sell Premier',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Tidsperiode:',
@@ -122,6 +127,28 @@ $mod_strings = array (
     'LBL_COMMIT_MESSAGE' => 'Vil du forpligte disse beløb?',
     'ERR_FORECAST_AMOUNT' => 'Forpligt beløb er obligatorisk og skal være et tal.',
 
+    //list view metrics
+    'LBL_INCLUDED_PIPELINE' => 'Inkluderet pipeline',
+    'LBL_UPSIDE_PIPELINE' => 'Upside-pipeline',
+    'LBL_EXCLUDED_PIPELINE' => 'Udelukket pipeline',
+    'LBL_WON' => 'Vundet',
+    'LBL_LOST' => 'Mistet',
+    'LBL_ALL' => 'Alle',
+
+    // Guide to Filters
+    'LBL_FILTER_GUIDE_TITLE' => 'Guide om filtre',
+    'LBL_HELP_MAIN_BODY' => 'Alle målinger omfatter kun salgsmuligheder, der tilhører den/de valgte bruger/brugere, tidsperiode og eventuelle yderligere filtre, du har anvendt',
+    'LBL_FORECAST_HELP' => 'Salgsmuligheder, der allerede er blevet vundet eller er i et inkluderet {{{{forecastStage}}}',
+    'LBL_INCLUDED_PIPELINE_HELP' => 'Åbn salgsmuligheder med et {{{forecastStage}}} af {{{commitStageValue}}}',
+    'LBL_INCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Åbne salgsmuligheder i en inkluderet {{{forecastStage}}}',
+    'LBL_UPSIDE_PIPELINE_HELP' => 'Åbn salgsmuligheder med et {{{forecastStage}}} af {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP' => 'Åbn salgsmuligheder med et {{{forecastStage}}} af {{{commitStageValue}}}',
+    'LBL_EXCLUDED_PIPELINE_HELP_CUSTOM_RANGE' => 'Åbne salgsmuligheder i et udelukket {{{forecastStage}}}',
+    'LBL_WON_HELP' => 'Salgsmuligheder, der allerede er blevet vundet',
+    'LBL_LOST_HELP' => 'Salgsmuligheder, der allerede er blevet mistet',
+    'LBL_ALL_HELP' => 'Alle salgsmuligheder',
+
+
     // js error strings
     'LBL_FC_START_DATE' => 'Startdato',
     'LBL_FC_USER' => 'Tidsplan for',
@@ -189,6 +216,9 @@ $mod_strings = array (
     'LBL_COMMITMENT' => 'Forpligtelse',
     'LBL_TEAM_COMMITMENT' => 'Teamforpligtelse',
     'LBL_FORECASTED' => 'Forudset',
+    'LBL_OPPORTUNITY_FORECAST' => 'Prognose for salgsmulighed',
+    'LBL_REVENUELINEITEM_FORECAST' => 'Prognose for indtægts linjeelementer',
+    'LBL_LAST_COMMITMENT' => 'Seneste forpligtelse',
     'LBL_ADJUSTED_TOTAL' => 'Justeret total',
     'LBL_COMMIT_STAGE' => 'Forpligtet fase',
     'LBL_SALES_STAGE' => 'Fase',
@@ -290,7 +320,7 @@ $mod_strings = array (
     'LBL_CHART_ADJUSTED' => '(Korrigeret)',
     'LBL_SAVE_DRAFT' => 'Gem',
     'LBL_CHANGES_BY' => 'Ændringer af {0}',
-    'LBL_FORECAST_SETTINGS' => 'Indstillinger',
+    'LBL_FORECAST_SETTINGS' => 'Indstillinger for prognose',
 
     // config panels strings
     'LBL_FORECASTS_CONFIG_TITLE' => 'Prognoser Opsætninger',
@@ -322,7 +352,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Finansår startdato:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurer den tidsperiode, der skal bruges i prognose modulet.<br><br>Bemærk, at tidsperiode indstillingerne ikke kan ændres efter første opsætning.<br><br>Start med at vælge startdato for dit regnskabsår. Vælg derefter type tidsperiode for prognose. Datointervallet for tidsperioder vil automatisk blive beregnet baseret på dine valg. Sub-tidsperiode er grundlaget for Prognoseregnearket.<br><br>Den synlige fremtid og tidligere tidsperioder vil bestemme antallet af synlige sub-tidsperioder i prognosemodulet. Brugerne er i stand til at se og redigere prognosetal i de synlige delperioder.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurér, hvordan du vil kategorisere {{forecastByModule}}. <br><br>Læg mærke til, at indstillingerne for Interval ikke kan ændres efter den første forpligtelse. For opgraderede instanser er indstillingen for Interval låst med eksisterende data for Prognose.<br><br>Du kan vælge to eller flere kategorier baseret på sandsynlighedsintervaller eller oprette kategorier, som ikke er baseret på sandsynlighed. <br><br>Der er afkrydsningsfelter til venstre for dine brugerdefinerede kategorier. Brug disse til at beslutte, hvilke intervaller der omfattes i det forudsete beløb, der er forpligtet og rapporteret til ledere. <br><br>En bruger kan manuelt ændre statussen for inkludér/ekskludér og kategorien for {{forecastByModule}} fra deres regneark.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurer hvordan du gerne vil kategorisere {{forecastByModule}}. <br><br>Bemærk venligst, at indstillingerne for Interval ikke kan ændres efter den første tildeling. For opgraderede hændelser er indstillingen for Interval låst inde med eksisterende prognose-data.<br><br>Du kan vælge to eller flere kategorier baseret på sandsynlighedsintervaller, eller oprette kategorier, som ikke er baseret på sandsynlighed. <br><br>Der er afkrydsningsfelter til venstre for dine brugerdefinerede kategorier; brug disse til at beslutte, hvilke intervaller der skal inkluderes i den tildelte prognosmængde, som er rapporteret til ledelsen. <br><br>En bruger kan ændre statusssen inkluder/eksluder og kategorien for {{forecastByModule}} manuelt fra deres arbejdsark.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Vælg de kolonner, du ønsker at brugeren skal udfylde med sine prognoser for hver {{forecastByModuleSingular}}. Bemærk venligst at sandsynlige beløb er bundet til beløbet i {{forecastByModule}}; af denne grund kan Sandsynlig kolonne ikke skjules.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Vælg hvilke kolonner, du gerne vil se i Prognosemodulet. Listen over felter vil kombinere regnearket og giver brugeren mulighed for at vælge, hvordan konfigurationen skal vises.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Jeg er en pladsholder for prognosen ved how-to tekst!',

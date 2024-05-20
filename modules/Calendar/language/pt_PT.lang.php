@@ -304,7 +304,7 @@ $mod_strings = array (
     'LBL_FEBRUARY' => 'Fevereiro',
     'LBL_MARCH' => 'Março',
     'LBL_APRIL' => 'Abril',
-    'LBL_MAY' => 'Mai',
+    'LBL_MAY' => 'Maio',
     'LBL_JUNE' => 'Junho',
     'LBL_JULY' => 'Julho',
     'LBL_AUGUST' => 'Agosto',
@@ -326,6 +326,13 @@ $mod_strings = array (
     'LBL_OCT' => 'Out',
     'LBL_NOV' => 'Nov',
     'LBL_DEC' => 'Dez',
+
+    // Mobile
+    'LBL_CALENDAR_ALREADY_ADDED' => 'O Calendário já foi adicionado',
+    'LBL_CALENDAR_IS_SELECTED' => '{{calendar}} está seleccionado',
+    'LBL_NO_USER_SELECTED' => 'Selecione um Utilizador ou Equipa',
+    'LBL_NO_CALENDAR_SELECTED' => 'Seleccione um calendário',
+    'LBL_SAVE_USER_CALENDARS_ERROR' => 'Ocorreu uma falha ao guardar Calendários.',
 
 );
 
